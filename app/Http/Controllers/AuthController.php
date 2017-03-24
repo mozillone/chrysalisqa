@@ -5,12 +5,13 @@ use Mail;
 use Session;
 use Response;
 use App\User;
+use App\Helpers\Site_model;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Redirect;
 use Socialite;
-use App\Helpers\SendGridApp;
+use URL;
 
 class AuthController extends Controller {
 
@@ -18,7 +19,6 @@ class AuthController extends Controller {
 	
 	public function __construct(Guard $auth)
 	{
-		$this->sendGrid = new SendGridApp(); 
 		$this->auth = $auth;
 		 		
 	}
@@ -28,7 +28,7 @@ class AuthController extends Controller {
         {
         	   return Redirect::route('dashboard');
         }
-		return view('auth.login');		
+        return view('auth.login');		
  	}
    public function getSignin()
    {   
@@ -37,7 +37,7 @@ class AuthController extends Controller {
    public function postLogin(Request $request)
    {
    	$req = $request->all();
-  	$rule  =  array(  
+   	$rule  =  array(  
 	              'email' => 'required|email',
                   'password' => 'required',
                  );
@@ -105,7 +105,7 @@ class AuthController extends Controller {
 		}
 	    $rand=md5(uniqid(rand(), true));
 	    if(count(Session::get('social_data'))){ $active="1";}else{ $active="0";}
-	   $users = User::create([	'first_name'      => $req['first_name'],
+	   $users = User::create([ 'first_name'      => $req['first_name'],
 			                   'last_name'       => $req['last_name'],
 			                   'display_name'    => trim($req['first_name']).' '.trim($req['last_name']),
 			                   'email'           => $req['email'],
@@ -119,23 +119,25 @@ class AuthController extends Controller {
   			if($active){
   				Session::flash('success', 'Registration completed successfully.Login with your credentials');
   			}else{
-  				$data['name']=trim($req['first_name']).' '.trim($req['last_name']);
-  				$activation_link=URL::to('/').'/verification/'.$rand;
-				$message=array('*|FIRSTNAME|*'=>array($req['first_name']),'*|ACTIVATIONLINK|*'=>array($activation_link));
-		 		$sent=$this->sendGrid->mail('GENERAL_LINK',$req['email'],'Registration Information',$message);
-		 		Session::flash('success', 'Registration completed successfully. Activation Link has sent to your registered email, Please Activate it');	
+  				$email['name']=trim($req['first_name']).' '.trim($req['last_name']);
+  				$email['activation_link']=URL::to('/').'/verification/'.$rand;
+				$sent=Mail::send('emails.activation_email',array("email"=>$email), function ($m) {
+					$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+					$m->to($admin_settings[0]->email, $admin_settings[0]->display_name);
+				    $m->subject('Activation Link');
+				});
+				if($sent){
+		 			Session::flash('success', 'Registration completed successfully. Activation Link has sent to your registered email, Please Activate it');	
+		 		}
+		 		else{
+		 			Session::flash('error', 'Registration completed successfully but activation Link has not sent due to error');		
+		 		}
   			}
 		}
 		else
 		{
 			 Session::flash('error', 'Registration completed successfully.Due database error');
 		}
-		$customerData = [
-				'firstName' => $req['first_name'],
-				'lastName' => $req['last_name'],
-				'email' => $req['email'],
-		];
-		$this->braintreeApi->createCustomer($customerData,$users);
 		return Redirect::to('login'); 
 	}
     public function redirectToProvider($provider)

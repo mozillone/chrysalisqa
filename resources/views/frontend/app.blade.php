@@ -19,6 +19,7 @@
 	</head>
 	<body ng-app="app">
 		@include('frontend.partials.header')
+		@include('frontend.partials.menu')
 		@yield('content')
 		@include('frontend.partials.footer')
       		
@@ -29,6 +30,8 @@
 		<script src="{{ asset('/vendors/datatables/jquery.dataTables.min.js') }}"></script>
 		<script src="{{ asset('angular/lib/angular-datatables.min.js') }}"></script>
 		<script src="{{ asset('/angular/app.js')}}"></script>
+		<script src="{{ asset('/js/jquery.validate.min.js')}}"></script>
+		<script src="{{ asset('/assets/frontend/js/custom.js')}}"></script>
 		
 		
 		@yield('footer_scripts')

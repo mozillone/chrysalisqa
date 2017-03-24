@@ -1,0 +1,188 @@
+<?php namespace App\Http\Controllers\Admin;
+
+use Auth;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Redirect;
+use App\User;
+use Datatables;
+use DB;
+use Session;
+use App\Helpers\SiteHelper;
+use App\BraintreeApp;
+use Hash;
+use Response;
+
+class UserController extends Controller
+{
+    protected $messageBag = null;
+    
+
+    public function __construct()
+    {
+      $this->sitehelper = new SiteHelper();
+      $this->braintreeApi = new BraintreeApp();
+      $this->middleware(function ($request, $next) {
+          if(!Auth::check()){
+            return Redirect::to('/admin/login')->send();
+          }
+          else{
+               return $next($request);
+          }
+      });
+    }
+    public function customersList()
+    {
+      $title="Customers List";
+      return view('admin.usermanagemnt.customers_list')->with('title',$title);
+    }
+    public function customersListData(Request $request)
+    {
+        $req=$request->all();
+        $where='role_id!="1"';
+        if(!empty($req['search'])){
+          if(!empty($req['search']['id']) ){
+            $where.=' AND user.id ='.$req['search']['id'];
+          }
+          if(!empty($req['search']['name']) ){
+            $where.=' AND user.display_name LIKE "%'.$req['search']['name'].'%"';
+          }
+          if(!empty($req['search']['email']) ){
+            $where.=' AND user.email LIKE "%'.$req['search']['email'].'%"';
+          }
+          if(isset($req['search']['status'])){
+            if($req['search']['status']==""){
+              $where.=' AND  user.active in("0","1")';
+            }
+            if($req['search']['status']!=""){
+              $where.=' AND  user.active="'.$req['search']['status'].'"';
+            }
+          }
+        }
+        $users = DB::select('SELECT user.id,user.display_name as name,user.email,user.active,DATE_FORMAT(user.created_at,"%m/%d/%y %h:%i %p") as date FROM `iv_users` as user where '.$where.' ORDER BY user.created_at DESC');
+        return response()->success(compact('users'));
+  
+    }
+ 	public function customerAdd(Request $request)
+    {
+		$req=$request->all(); 
+		if(empty($req)){
+			return view('admin.usermanagemnt.customer_create');
+		}
+		if(isset($req['avatar'])){ 
+			$file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();  
+			$source_image_path=public_path('profile_img');
+			$thumb_image_path1=public_path('profile_img');
+			$thumb_image_path2=public_path('profile_img/thumbs');
+			$req['avatar']->move($source_image_path, $file_name);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+		}
+		else{
+			$file_name="";
+		}
+			$user = new User();
+			$user->first_name    = $req['first_name'];
+			$user->last_name     = $req['last_name'];
+			$user->display_name          = $user->first_name." ".$user->last_name;
+			$user->email         = $req['email'];
+			$user->password      = Hash::make($req['password']);
+			$user->active        = "1";
+			$user->user_img =$file_name;
+			
+			if($user->save()){
+				$customerData = [
+						'firstName' => $req['first_name'],
+						'lastName' => $req['last_name'],
+						'email' => $req['email'],
+				];
+				$this->braintreeApi->createCustomer($customerData,$user->id);
+				Session::flash('success', 'Customer is created successfully');
+					return Redirect::to('customers-list');
+				}else{
+					$message = array();
+					Session::flash('error', 'Customer not created successfully.Database error');
+					return Redirect::back();
+				} 
+	}
+	public function customerEdit($id){
+		$user = User::find($id);
+		return view('admin.usermanagemnt.customer_edit')->with('user_id',$id)->with('user', $user);
+	}
+	public function customerUpdated(Request $request){
+		$req=$request->all();
+		$name = User::find($req['user_id']);
+		if(isset($req['avatar'])){
+			$file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
+			$source_image_path=public_path('profile_img');
+			$thumb_image_path1=public_path('profile_img');
+			$thumb_image_path2=public_path('profile_img/thumbs');
+			$req['avatar']->move($source_image_path, $file_name);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+	
+		}
+		else if(isset($req['is_removed'])){
+			$file_name="";
+		}
+		else{
+			$file_name=$name->avatar;
+		}
+		$userData = [
+				'first_name' => $req['first_name'],
+				'last_name' => $req['last_name'],
+				'display_name' =>  $req['first_name']." ".$req['last_name'],
+				'email'=>$req['email'],
+				'user_img' =>$file_name
+		];
+		if(!empty($req['password'])){
+			$userData['password'] =  Hash::make($req['password']);
+		}
+		$affectedRows = User::where('id', '=', $req['user_id'])->update($userData);
+		Session::flash('success', 'Customet is upadated successfully');
+		return Redirect::to('customers-list');
+	
+	
+	}
+    public function customerDelete($id)
+    {
+      $data=User::find($id)->toArray();
+      $apiId=$data['api_customer_id'];
+      $res = User::where('id',$id)->delete();
+      if($res){
+      	$this->braintreeApi->deleteCustomer($apiId);
+        Session::flash('success', 'Customer is deleted Successfully');
+        return Redirect::back();
+      }else{
+        Session::flash('error', 'Customer is deleted.Database error occured');
+        return Redirect::back();
+      }
+        
+    }
+    public function changeUserStatus(Request $request)
+    {
+    	$req = $request->all();
+    	$user = User::where('id', $req['data']['id'])->update(['active'=>$req['data']['status']]);
+    	//$users = DB::select('SELECT user.id,user.display_name as name,user.email,user.active,DATE_FORMAT(user.created_at,"%m/%d/%y %h:%i %p") as date FROM `iv_users` as user where role_id!="1" ORDER BY user.created_at DESC');
+        return response()->success(true);
+    }
+    public function EmailNameCheck(Request $request)
+    {
+    	$req=$request->all();
+    	if(!isset($req['user_id'])){
+    		$email=User::where('email', '=', $req['email']) ->count();
+    	}
+    	else{
+    
+    		$email=User::where('email', '=', $req['email'])->where('id',"!=",$req['user_id'])->count();
+    	}
+    	if($email){
+    		return Response::JSON(false);
+    	}
+    	else{
+    		return Response::JSON(true);
+    	}
+    }
+ 
+}

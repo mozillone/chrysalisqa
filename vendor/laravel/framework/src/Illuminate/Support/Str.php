@@ -133,17 +133,6 @@ class Str
     }
 
     /**
-     * Convert a string to kebab case.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public static function kebab($value)
-    {
-        return static::snake($value, '-');
-    }
-
-    /**
      * Return the length of the given string.
      *
      * @param  string  $value
@@ -205,10 +194,10 @@ class Str
      * Parse a Class@method style callback into class and method.
      *
      * @param  string  $callback
-     * @param  string|null  $default
+     * @param  string  $default
      * @return array
      */
-    public static function parseCallback($callback, $default = null)
+    public static function parseCallback($callback, $default)
     {
         return static::contains($callback, '@') ? explode('@', $callback, 2) : [$callback, $default];
     }

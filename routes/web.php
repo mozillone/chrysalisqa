@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Auth::routes();
+    
 Route::get('/', ['as' => 'login','uses'=>'HomePageController@index']);
 Route::get('/login', ['as' => 'login','uses'=>'AuthController@getSignin']);
 Route::post('/login', ['as' => 'login.post','uses'=>'AuthController@postLogin']);
@@ -26,3 +27,5 @@ Route::any('/password/change/{verification?}', ['as' => 'forgotpassword.change',
 Route::any('/emailValidation', array('as' => '','uses' => 'AuthController@EmailNameCheck'));
 Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthController@forgorpasswordEmailCheck'));
 Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
+
+

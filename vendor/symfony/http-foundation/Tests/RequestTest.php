@@ -11,12 +11,11 @@
 
 namespace Symfony\Component\HttpFoundation\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 
-class RequestTest extends TestCase
+class RequestTest extends \PHPUnit_Framework_TestCase
 {
     public function testInitialize()
     {
@@ -1437,11 +1436,6 @@ class RequestTest extends TestCase
         $request = new Request();
         $this->assertEquals('html', $request->getRequestFormat());
 
-        // Ensure that setting different default values over time is possible,
-        // aka. setRequestFormat determines the state.
-        $this->assertEquals('json', $request->getRequestFormat('json'));
-        $this->assertEquals('html', $request->getRequestFormat('html'));
-
         $request = new Request();
         $this->assertNull($request->getRequestFormat(null));
 
@@ -1941,13 +1935,7 @@ class RequestTest extends TestCase
                 $this->assertSame($expectedPort, $request->getPort());
             }
         } else {
-            if (method_exists($this, 'expectException')) {
-                $this->expectException('UnexpectedValueException');
-                $this->expectExceptionMessage('Invalid Host');
-            } else {
-                $this->setExpectedException('UnexpectedValueException', 'Invalid Host');
-            }
-
+            $this->setExpectedException('UnexpectedValueException', 'Invalid Host');
             $request->getHost();
         }
     }
@@ -1970,32 +1958,6 @@ class RequestTest extends TestCase
         return array(
             array('a'.str_repeat('.a', 40000)),
             array(str_repeat(':', 101)),
-        );
-    }
-
-    /**
-     * @dataProvider methodIdempotentProvider
-     */
-    public function testMethodIdempotent($method, $idempotent)
-    {
-        $request = new Request();
-        $request->setMethod($method);
-        $this->assertEquals($idempotent, $request->isMethodIdempotent());
-    }
-
-    public function methodIdempotentProvider()
-    {
-        return array(
-            array('HEAD', true),
-            array('GET', true),
-            array('POST', false),
-            array('PUT', true),
-            array('PATCH', false),
-            array('DELETE', true),
-            array('PURGE', true),
-            array('OPTIONS', true),
-            array('TRACE', true),
-            array('CONNECT', false),
         );
     }
 
@@ -2025,10 +1987,6 @@ class RequestTest extends TestCase
         );
     }
 
-    /**
-     * @group legacy
-     * @expectedDeprecation Checking only for cacheable HTTP methods with Symfony\Component\HttpFoundation\Request::isMethodSafe() is deprecated since version 3.2 and will throw an exception in 4.0. Disable checking only for cacheable methods by calling the method with `false` as first argument or use the Request::isMethodCacheable() instead.
-     */
     public function testMethodSafeChecksCacheable()
     {
         $request = new Request();

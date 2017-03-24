@@ -479,9 +479,6 @@ class Table
                 foreach ($unmergedRows as $unmergedRowKey => $unmergedRow) {
                     $value = isset($lines[$unmergedRowKey - $line]) ? $lines[$unmergedRowKey - $line] : '';
                     $unmergedRows[$unmergedRowKey][$column] = new TableCell($value, array('colspan' => $cell->getColspan()));
-                    if ($nbLines === $unmergedRowKey - $line) {
-                        break;
-                    }
                 }
             }
         }
@@ -602,7 +599,7 @@ class Table
 
                 foreach ($row as $i => $cell) {
                     if ($cell instanceof TableCell) {
-                        $textLength = Helper::strlenWithoutDecoration($this->output->getFormatter(), $cell);
+                        $textLength = strlen($cell);
                         if ($textLength > 0) {
                             $contentColumns = str_split($cell, ceil($textLength / $cell->getColspan()));
                             foreach ($contentColumns as $position => $content) {

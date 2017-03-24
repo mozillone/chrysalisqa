@@ -11,7 +11,6 @@
 
 namespace Symfony\Component\Process\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\Exception\LogicException;
 use Symfony\Component\Process\Exception\ProcessTimedOutException;
 use Symfony\Component\Process\Exception\RuntimeException;
@@ -23,7 +22,7 @@ use Symfony\Component\Process\Process;
 /**
  * @author Robert Schönthal <seroscho@googlemail.com>
  */
-class ProcessTest extends TestCase
+class ProcessTest extends \PHPUnit_Framework_TestCase
 {
     private static $phpBin;
     private static $process;
@@ -944,14 +943,7 @@ class ProcessTest extends TestCase
     public function testMethodsThatNeedARunningProcess($method)
     {
         $process = $this->getProcess('foo');
-
-        if (method_exists($this, 'expectException')) {
-            $this->expectException('Symfony\Component\Process\Exception\LogicException');
-            $this->expectExceptionMessage(sprintf('Process must be started before calling %s.', $method));
-        } else {
-            $this->setExpectedException('Symfony\Component\Process\Exception\LogicException', sprintf('Process must be started before calling %s.', $method));
-        }
-
+        $this->setExpectedException('Symfony\Component\Process\Exception\LogicException', sprintf('Process must be started before calling %s.', $method));
         $process->{$method}();
     }
 
@@ -1391,52 +1383,6 @@ class ProcessTest extends TestCase
         $this->assertSame('456', $p2->getOutput());
     }
 
-    public function testSetBadEnv()
-    {
-        $process = $this->getProcess('echo hello');
-        $process->setEnv(array('bad%%' => '123'));
-        $process->inheritEnvironmentVariables(true);
-
-        $process->run();
-
-        $this->assertSame('hello'.PHP_EOL, $process->getOutput());
-        $this->assertSame('', $process->getErrorOutput());
-    }
-
-    public function testInheritEnvEnabled()
-    {
-        $process = $this->getProcess(self::$phpBin.' -r '.escapeshellarg('echo serialize($_SERVER);'), null, array('BAR' => 'BAZ'));
-
-        putenv('FOO=BAR');
-
-        $this->assertSame($process, $process->inheritEnvironmentVariables(1));
-        $this->assertTrue($process->areEnvironmentVariablesInherited());
-
-        $process->run();
-
-        $expected = array('BAR' => 'BAZ', 'FOO' => 'BAR');
-        $env = array_intersect_key(unserialize($process->getOutput()), $expected);
-
-        $this->assertEquals($expected, $env);
-    }
-
-    public function testInheritEnvDisabled()
-    {
-        $process = $this->getProcess(self::$phpBin.' -r '.escapeshellarg('echo serialize($_SERVER);'), null, array('BAR' => 'BAZ'));
-
-        putenv('FOO=BAR');
-
-        $this->assertFalse($process->areEnvironmentVariablesInherited());
-
-        $process->run();
-
-        $expected = array('BAR' => 'BAZ', 'FOO' => 'BAR');
-        $env = array_intersect_key(unserialize($process->getOutput()), $expected);
-        unset($expected['FOO']);
-
-        $this->assertSame($expected, $env);
-    }
-
     /**
      * @param string      $commandline
      * @param null|string $cwd
@@ -1479,12 +1425,7 @@ class ProcessTest extends TestCase
             if (!$expectException) {
                 $this->markTestSkipped('PHP is compiled with --enable-sigchild.');
             } elseif (self::$notEnhancedSigchild) {
-                if (method_exists($this, 'expectException')) {
-                    $this->expectException('Symfony\Component\Process\Exception\RuntimeException');
-                    $this->expectExceptionMessage('This PHP has been compiled with --enable-sigchild.');
-                } else {
-                    $this->setExpectedException('Symfony\Component\Process\Exception\RuntimeException', 'This PHP has been compiled with --enable-sigchild.');
-                }
+                $this->setExpectedException('Symfony\Component\Process\Exception\RuntimeException', 'This PHP has been compiled with --enable-sigchild.');
             }
         }
     }

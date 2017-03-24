@@ -34,13 +34,11 @@ class Command
     private $processTitle;
     private $aliases = array();
     private $definition;
-    private $hidden = false;
     private $help;
     private $description;
     private $ignoreValidationErrors = false;
     private $applicationDefinitionMerged = false;
     private $applicationDefinitionMergedWithArgs = false;
-    private $inputBound = false;
     private $code;
     private $synopsis = array();
     private $usages = array();
@@ -217,13 +215,11 @@ class Command
         $this->mergeApplicationDefinition();
 
         // bind the input against the command specific arguments/options
-        if (!$this->inputBound) {
-            try {
-                $input->bind($this->definition);
-            } catch (ExceptionInterface $e) {
-                if (!$this->ignoreValidationErrors) {
-                    throw $e;
-                }
+        try {
+            $input->bind($this->definition);
+        } catch (ExceptionInterface $e) {
+            if (!$this->ignoreValidationErrors) {
+                throw $e;
             }
         }
 
@@ -464,26 +460,6 @@ class Command
     }
 
     /**
-     * @param bool $hidden Whether or not the command should be hidden from the list of commands
-     *
-     * @return Command The current instance
-     */
-    public function setHidden($hidden)
-    {
-        $this->hidden = (bool) $hidden;
-
-        return $this;
-    }
-
-    /**
-     * @return bool Whether the command should be publicly shown or not.
-     */
-    public function isHidden()
-    {
-        return $this->hidden;
-    }
-
-    /**
      * Sets the description for the command.
      *
      * @param string $description The description for the command
@@ -650,14 +626,6 @@ class Command
         }
 
         return $this->helperSet->get($name);
-    }
-
-    /**
-     * @internal
-     */
-    public function setInputBound($inputBound)
-    {
-        $this->inputBound = $inputBound;
     }
 
     /**
