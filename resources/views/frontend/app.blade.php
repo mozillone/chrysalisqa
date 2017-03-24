@@ -18,8 +18,12 @@
 		@yield('styles')
 	</head>
 	<body ng-app="app">
+		<section class="main_header">
 		@include('frontend.partials.header')
-		@include('frontend.partials.menu')
+		@if(!Request::is('login'))
+			@include('frontend.partials.menu')
+		@endif
+		</section>
 		@yield('content')
 		@include('frontend.partials.footer')
       		

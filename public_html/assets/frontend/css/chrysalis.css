@@ -401,3 +401,106 @@ form#register-newsletter input[type="text"] {
 .mega-dropdown-menu .form-group {
     margin-bottom: 3px;
 }
+/* login-register page start here */
+
+.login-register .nav-tabs>li a {
+color: #000;
+}
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover {
+    background-color: #f9c51c;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.login-register .nav-tabs>li.active a {
+color: #34b9ea;
+}
+p.error {
+color: red;
+font-family: Montserrat;
+font-weight: 200;
+font-size: 12px;
+}
+.login-register .nav-tabs>li {
+display: inline-block;
+float: none;
+}
+.login-register ul {
+text-align: center;
+border-bottom: 0px;
+}
+.login-register {
+width: 550px;
+padding-top: 50px;
+margin: 0 auto;
+}
+.login-register p.divider {
+border-top: 1px solid #ccc;
+margin-top: 10px;
+}
+.divider-div {
+margin-top: 30px;
+text-transform: uppercase;
+}
+.login-register .form-group input {
+height: 40px;
+box-shadow: none;
+}
+.login-social a {
+width: 100%;
+}
+.login-register button.btn.btn-primary {
+font-size: 18px;
+background: #0099ff;
+margin-top: 50px;
+border: 1px solid #0099ff;
+}
+.login-social {
+text-align: center;
+margin: 30px 0px;
+}
+.login-social .social-google-plus {
+background: #fff;
+border: 1px solid #999;
+color: #3d3d3d;
+}
+.login-social .social-google-plus img {
+float: left;
+}
+.login-social .social-facebook {
+background: #39579a;
+}
+.billing-cnt-box img {
+    max-width: 140px;
+}
+.login-social .social-facebook i {
+text-align: left;
+float: left;
+padding-top: 3px;
+}
+.login-register .nav-tabs>li>a {
+font-size: 18px;
+text-transform: uppercase;
+font-family: Montserrat;
+font-weight: 600;
+}
+.login-register li a:hover {
+background: none;
+border: 1px solid #fff;
+}
+.login-register .nav>li>a:focus .nav>li>a:hover {
+text-decoration: none;
+background: none;
+outline: none;
+border: 1px solid #fff;
+;
+}
+.login-register .nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+border: 1px solid #fff;
+background: none;
+}
+.login-register .nav-tabs>li.active {
+border-bottom: 2px solid #34b9ea;
+}
+/* login-register page End here */
