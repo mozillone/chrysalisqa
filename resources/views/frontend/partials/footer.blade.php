@@ -30,7 +30,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 col-sm-4 co-xs-12 ft-logo">
-						<img class="img-responsive" src="../assets/frontend/img/brand.png">
+						<img class="img-responsive" src="{{asset('/img/brand.png')}}">
 						<h3>OUR MISSION</h3>
 						<P>Revolutionize the costume industry, by giving people access to more affordable, environmentally friendly costumes. More on our mission here.</P>
 					</div>
