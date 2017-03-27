@@ -10,7 +10,6 @@ use Datatables;
 use DB;
 use Session;
 use App\Helpers\SiteHelper;
-use App\BraintreeApp;
 use Hash;
 use Response;
 
@@ -22,7 +21,6 @@ class UserController extends Controller
     public function __construct()
     {
       $this->sitehelper = new SiteHelper();
-      $this->braintreeApi = new BraintreeApp();
       $this->middleware(function ($request, $next) {
           if(!Auth::check()){
             return Redirect::to('/admin/login')->send();
@@ -31,6 +29,45 @@ class UserController extends Controller
                return $next($request);
           }
       });
+    }
+    public function adminProfile()
+    {
+      $title=Auth::user()->display_name." Edit";
+      return view('admin.profile_edit')->with('title',$title);
+    }
+    public function adminProfileUpdate(Request $request)
+    {
+      $req=$request->all();
+      $name = User::find(Auth::user()->id);
+      if(isset($req['avatar'])){
+        $file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
+        $source_image_path=public_path('profile_img');
+        $thumb_image_path1=public_path('profile_img');
+        $thumb_image_path2=public_path('profile_img/thumbs');
+        $req['avatar']->move($source_image_path, $file_name);
+        $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+        $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+    
+      }
+      else if(isset($req['is_removed'])){
+        $file_name="";
+      }
+      else{
+        $file_name=$name->avatar;
+      }
+      $userData = [
+          'first_name' => $req['first_name'],
+          'last_name' => $req['last_name'],
+          'display_name' =>  $req['first_name']." ".$req['last_name'],
+          'email'=>$req['email'],
+          'user_img' =>$file_name
+      ];
+      if(!empty($req['password'])){
+        $userData['password'] =  Hash::make($req['password']);
+      }
+      $affectedRows = User::where('id', '=', Auth::user()->id)->update($userData);
+      Session::flash('success', 'Your profile is upadated successfully');
+      return Redirect::back();
     }
     public function customersList()
     {
@@ -60,7 +97,7 @@ class UserController extends Controller
             }
           }
         }
-        $users = DB::select('SELECT user.id,user.display_name as name,user.email,user.active,DATE_FORMAT(user.created_at,"%m/%d/%y %h:%i %p") as date FROM `iv_users` as user where '.$where.' ORDER BY user.created_at DESC');
+        $users = DB::select('SELECT user.id,user.display_name as name,user.email,user.active,DATE_FORMAT(user.created_at,"%m/%d/%y %h:%i %p") as date FROM `cs_users` as user where '.$where.' ORDER BY user.created_at DESC');
         return response()->success(compact('users'));
   
     }
@@ -92,12 +129,6 @@ class UserController extends Controller
 			$user->user_img =$file_name;
 			
 			if($user->save()){
-				$customerData = [
-						'firstName' => $req['first_name'],
-						'lastName' => $req['last_name'],
-						'email' => $req['email'],
-				];
-				$this->braintreeApi->createCustomer($customerData,$user->id);
 				Session::flash('success', 'Customer is created successfully');
 					return Redirect::to('customers-list');
 				}else{
@@ -151,8 +182,7 @@ class UserController extends Controller
       $apiId=$data['api_customer_id'];
       $res = User::where('id',$id)->delete();
       if($res){
-      	$this->braintreeApi->deleteCustomer($apiId);
-        Session::flash('success', 'Customer is deleted Successfully');
+      	Session::flash('success', 'Customer is deleted Successfully');
         return Redirect::back();
       }else{
         Session::flash('error', 'Customer is deleted.Database error occured');

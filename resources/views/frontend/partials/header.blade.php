@@ -17,6 +17,8 @@
                               </a>
                                <div class="dropdown-menu dropdown-menu-right with-arrow drp">
                                 <ul class="head-list">
+                                      <li><a href="{{ URL::to('dashboard') }}"> <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard </a></li>
+                                     <li><a href="{{ route('edit-profile') }}"> <i class="fa fa-user" aria-hidden="true"></i> Edit Profle </a></li>
                                      <li><a href="{{ URL::to('logout') }}"> <i class="fa fa-sign-out fa-fw"></i> Logout </a></li>
                                 </ul>
                             </div>
@@ -47,7 +49,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><img class="img-responsive" src="../assets/frontend/img/brand.png"></a>
+          <a class="navbar-brand" href="#"><img class="img-responsive" src="/img/brand.png"></a>
 
         </div>
         <div id="navbar" class="navbar-collapse collapse main_menu_in">

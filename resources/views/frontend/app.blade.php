@@ -10,7 +10,7 @@
             |Chrysalis
         	@show
    		 </title>
-		<link rel="icon" type="image/png" href="{{ asset('/assets/img/favicon.png') }}">
+		<link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
 		<link rel="stylesheet" href="{{ asset('/vendors/bootstrap/dist/css/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/css/chrysalis.css')}}">
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900" rel="stylesheet">

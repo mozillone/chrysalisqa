@@ -185,7 +185,7 @@ class AuthController extends Controller {
     			return Redirect::to('/admin');
     		}
     	}
-       return View('admin.login');
+     return View('admin.login');
     }
     //check admin login details
      

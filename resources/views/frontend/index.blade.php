@@ -1,5 +1,7 @@
 @extends('/frontend/app')
-
+@section('title')
+	Home@parent
+@endsection
 @section('styles')
 @endsection
 
