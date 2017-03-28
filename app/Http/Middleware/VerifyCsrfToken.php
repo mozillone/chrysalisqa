@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Closure;
+use Redirect;
+use Session;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
 class VerifyCsrfToken extends BaseVerifier
@@ -14,4 +16,17 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = ['/emailValidation','/forgot/emailVerification','/customer/emailValidation','/search','/searching','/amenitiesValidation','/styleValidation','/listingNameValidation','/planValidation'
         //
     ];
+    public function handle( $request, Closure $next )
+    {
+        if (
+            $this->isReading($request) ||
+            $this->runningUnitTests() ||
+            $this->shouldPassThrough($request) ||
+            $this->tokensMatch($request)
+        ) {
+            return $this->addCookieToResponse($request, $next($request));
+        }
+        Session::flash('error', "Opps! Seems you couldn't submit form for a longtime. Please try again");
+        return Redirect::back();
+    }
 }

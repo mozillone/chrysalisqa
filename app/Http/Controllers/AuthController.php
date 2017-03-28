@@ -258,25 +258,43 @@ class AuthController extends Controller {
 			if(count($email))
 	      		{ 
 		     		if($email[0]['active']==1)
-		     		{   
+		     		{  
 		     			$activation_link=URL::to('/').'/password/change/'.$rand;
-						Session::flash('success', 'Your forgot password activation link sent to your mail');
-				    	$to=array(array('email' => $req['email'],'display_name' => $email[0]['display_name'] ));
-						$message=array('*|FIRSTNAME|*'=>array($email[0]['first_name']),'*|ACTIVATION_LINK|*'=>array($activation_link));
-						$sent=$this->sendGrid->mail('FORGOT_PASSWORD',$req['email'],'Forgot Password',$message); 
+				 		$data['name']=$email[0]['display_name'];
+						$data['activation_link']=$activation_link;
+						$sent=Mail::send('emails.forget_email',array("data"=>$data), function ($m) {
+							$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+							$m->to($admin_settings[0]->email, $admin_settings[0]->display_name);
+						    $m->subject('Forgot Password');
+						});
 						User::where('email', '=', $email[0]['email'])->update(array('reset_hash'=>$rand));
-		     			return Redirect::to("/login");
+		     			if($sent){
+				 			Session::flash('success', 'Your forgot password activation link sent to your mail');
+				 		}
+				 		else{
+				 			Session::flash('error', 'Your forgot password activation link not sent to your mail due to error');		
+				 		}
+				 		return Redirect::to("/login");
 			 		}
 					else
 					 {
 				    	$activation_link=URL::to('/').'/verification/'.$rand;
 						User::where('email', '=',$req['email'])->update(array('activate_hash'=> $rand));
-				    	Session::flash('success', 'Your account not been activated yet.New verification code is sent your mail');
-				    	$to=array(array('email' => $req['email'],'display_name' => $email[0]['display_name'] ));
-						$message=array('*|FIRSTNAME|*'=>array($email[0]['display_name']),'*|ACTIVATION_LINK|*'=>array($activation_link));
-						$this->sendGrid->mail('GENERAL_LINK',$req['email'],'Activation Link',$message); 
+				 		$email['name']=$email[0]['display_name'];
+		  				$email['activation_link']=$activation_link;
+						$sent=Mail::send('emails.activation_email',array("email"=>$email), function ($m) {
+							$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+							$m->to($admin_settings[0]->email, $admin_settings[0]->display_name);
+						    $m->subject('Activation Link');
+						});
 						User::where('email', '=', $req['email'])->update(array('reset_hash'=> $rand));
-    					return Redirect::to("/login");
+    					if($sent){
+				 			Session::flash('success', 'Your account not been activated yet.New verification code is sent your mail');
+				 		}
+				 		else{
+				 			Session::flash('error', 'New verification code is not sent due to error');		
+				 		}
+						return Redirect::to("/login");
 					 }  
 		      }
 	      else{ 
@@ -306,7 +324,7 @@ class AuthController extends Controller {
 			return Redirect::to("/login");
 		}else{
 			$data=User::where("reset_hash","=",$verification)->get()->toArray();
-	    	return view('auth.change_password')->with('id',$data[0]['id']);
+			return view('auth.change_password')->with('id',$data[0]['id']);
 		}
 		
 	}

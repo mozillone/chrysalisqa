@@ -7,6 +7,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use Auth;
 
 class Handler extends ExceptionHandler
 {
@@ -51,7 +52,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
    {
           session()->flash('error',$e->getMessage());
-          return parent::render($request, $e);
+          return Redirect::back();
    }
 
     /**

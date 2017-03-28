@@ -12,7 +12,7 @@
 */
 //Auth::routes();
     
-Route::get('/', ['as' => 'login','uses'=>'HomePageController@index']);
+Route::get('/', ['as' => '','uses'=>'HomePageController@index']);
 Route::get('/login', ['as' => 'login','uses'=>'AuthController@getSignin']);
 Route::post('/login', ['as' => 'login.post','uses'=>'AuthController@postLogin']);
 Route::post('/register', ['as' => 'register','uses'=>'AuthController@postRegisterUser']);

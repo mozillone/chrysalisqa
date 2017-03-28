@@ -10,3 +10,4 @@ Homestead.json
 npm-debug.log
 /storage
 /config/database.php
+/public_html/profile_img

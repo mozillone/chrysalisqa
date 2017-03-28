@@ -14,10 +14,10 @@
 					</div>
 					<div class="col-md-8 social-img">
 					<div class="social-icons">
-						<a href=""><img class="img-responsive" src="../assets/frontend/img/fb-icon.png"></a>
-						<a href=""><img class="img-responsive" src="../assets/frontend/img/twit-icon.png"></a>
-						<a href=""><img class="img-responsive" src="../assets/frontend/img/insta-icon.png"></a>
-						<a href=""><img class="img-responsive" src="../assets/frontend/img/youtube-icon.png"></a>
+						<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/fb-icon.png')}}"></a>
+						<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/twit-icon.png')}}"></a>
+						<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/insta-icon.png')}}"></a>
+						<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/youtube-icon.png')}}"></a>
 					</div>
 					</div>
 					</div>
@@ -50,7 +50,7 @@
 						</ul>
 					</div>
 					<div class="col-md-4 co-sm-4 co-xs-12 app_img">
-						<img class="img-responsive" src="../assets/frontend/img/app-img.png">
+						<img class="img-responsive" src="{{asset('/assets/frontend/img/app-img.png')}}">
 					</div>
 				</div>
 			</div>

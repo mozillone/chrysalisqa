@@ -1,4 +1,4 @@
-@extends('app')
+@extends('/frontend/app')
 
 @section('styles')
 
@@ -41,6 +41,6 @@
 @endsection
 {{-- page level scripts --}}
 @section('footer_scripts')
-	<script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
-	<script src="{{asset('assets/js/pages/change_password.js')}}"></script>
+	<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
+	<script src="{{asset('/assets/frontend/js/pages/change_password.js')}}"></script>
 @stop
