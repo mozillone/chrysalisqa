@@ -1,0 +1,13 @@
+/vendor
+/node_modules
+Homestead.yaml
+Homestead.json
+.env
+/.metadata
+/.buildpath
+/.settings
+/.project
+npm-debug.log
+/storage
+/config/database.php
+/public_html/profile_img
