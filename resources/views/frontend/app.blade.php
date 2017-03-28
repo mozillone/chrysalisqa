@@ -7,7 +7,7 @@
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<title>
         	@section('title')
-            |Chrysalis
+            |Chrysalis test
         	@show
    		 </title>
 		<link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
