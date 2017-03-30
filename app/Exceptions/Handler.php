@@ -53,6 +53,7 @@ class Handler extends ExceptionHandler
    {
           session()->flash('error',$e->getMessage());
           return Redirect::back();
+          //return parent::render($request, $e);
    }
 
     /**

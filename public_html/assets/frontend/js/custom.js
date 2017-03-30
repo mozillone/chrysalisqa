@@ -25,6 +25,28 @@ $(function(){
 	remote: "This email is already taken."
 	  }});
 	
+    $(".mobile-plus").click(function(){
+	$(this).toggleClass("mobile-minus");	
+    $(this).parent("li").find(".responsive-inner").toggleClass("none-rm");
+    });
+	
+    $(".icon-rm .toggle-btn").click(function(){
+	$(this).parent(".icon-rm").toggleClass("btn-cross");	
+	$(".mobile-rm").toggleClass("toggle");	
+    });	
+
+
+
+   if ($(window).width() < 767) {
+	   $(".footer_head ul").slideUp('fast');   
+
+	   $('#footer-middle .footer_head').find('h5').click(function(){ 
+		   $(this).parent().parent(".col-md-4").toggleClass('active').siblings().removeClass('active'); 
+		   $(this).next().slideToggle('fast'); //Hide the other panels 
+		   $(".footer_head ul").not($(this).next()).slideUp('fast');
+	   });
+   }
+    
 
 
 })
