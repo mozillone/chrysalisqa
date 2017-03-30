@@ -6,8 +6,19 @@ use Auth;
 class SiteHelper  {
 
 	public static function getMenus(){
-		$getMenuList=Site_model::Fetch_all_data('menu','*');
-		return $getMenuList;
+		$menus_list=[];
+		$cond=array("parent_id"=>"0");
+		$getTopMenuList=Site_model::Fetch_data('menu','*',$cond);
+		foreach($getTopMenuList as $menus){
+			$cond=array('parent_id'=>$menus->menu_id);
+			$getSubMenus=Site_model::Fetch_data('menu','*',$cond);
+			$menus_list[$menus->name][]="None";
+			foreach ($getSubMenus as $subMenus) {
+				$menus_list[$menus->name][]=$subMenus->name;
+			}
+			
+		}
+		return $menus_list;
 	}
 	public static function generate_image_thumbnail($source_image_path, $thumbnail_image_path,$thumbnail_with,$thumbnail_height) {
    	//dd($source_image_path);

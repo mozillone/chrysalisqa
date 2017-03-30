@@ -52,8 +52,8 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
    {
           session()->flash('error',$e->getMessage());
-          return Redirect::back();
-          //return parent::render($request, $e);
+          //return Redirect::back();
+          return parent::render($request, $e);
    }
 
     /**
