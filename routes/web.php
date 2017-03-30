@@ -29,6 +29,10 @@ Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthControll
 Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
 Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@EditProfile']);
 
+/** Products list page start here **/
+Route::any('{slug}/{slug2?}', array('as' => '','uses' => 'ProductsListingController@productsLstings'));
+/** Products list page end here **/
+
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	  	Route::get('/admin/dashboard', 'DashboardController@dashboard');
 	  	Route::get('/admin/profile', 'UserController@adminProfile');
@@ -43,6 +47,5 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	    Route::any('/status/change', 'UserController@changeUserStatus');
 	    Route::any('/customer/emailValidation', array('as' => '','uses' => 'UserController@EmailNameCheck'));
 	    /****************User Management End Here***************************/
-    
 });
 
