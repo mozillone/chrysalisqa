@@ -67,7 +67,7 @@
 								<li class="col-sm-6">
 									<ul>
 										@for($i=1;$i<count($value);$i++)
-											<li><a href="#">{{$value[$i]}}</a></li>
+											<li><a href="/{{$key}}/{{$value[$i]}}">{{$value[$i]}}</a></li>
 										@endfor
 									</ul>
 								</li>
