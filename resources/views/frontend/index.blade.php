@@ -30,7 +30,7 @@
 			</div>
 				<div class="col-md-4">
 		<div class="media"> 
-			<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="../assets/frontend/img/step_1_icon.png" data-holder-rendered="true" > </a> 
+			<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="../assets/frontend/img/step_2_icon.png" data-holder-rendered="true" > </a> 
 			</div> 
 			<div class="media-body"> <h4 class="media-heading">STEP 2</h4>
 			<p>Get Cash or Store Credit</p> 
@@ -39,7 +39,7 @@
 			</div>
 				<div class="col-md-4">
 		<div class="media"> 
-			<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="../assets/frontend/img/step_1_icon.png" data-holder-rendered="true" > </a> 
+			<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="../assets/frontend/img/step_3_icon.png" data-holder-rendered="true" > </a> 
 			</div> 
 			<div class="media-body"> <h4 class="media-heading">STEP 3</h4>
 			<p>Buy another costume!</p> 

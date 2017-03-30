@@ -1,26 +1,84 @@
-body{color:#666666;font-size:14px;line-height:1.42857;font-family:'Lato',sans-serif;margin:0px;padding:0px;}
+body{color:#666666;font-size:14px;line-height:1.42857;	font-family: Proxima-Nova-A-Regular;margin:0px;padding:0px;}
 section.top_nav span{color:#60c5ac;}
 
 /***************Fonts Start **************/
 
-@font-face {
-    font-family: ProximaNova-Bold;
-    src: url('http://www.myfonts.com/fonts/marksimonson/proxima-nova/a-bold/');
+/*@font-face {
+	font-family: Proxima-Nova-A-Regular;
+	src: url('../fonts/proxima_nova_a-webfont.woff2');
 }
 
+@font-face {
+	font-family: Proxima-Nova-A-Semibold;
+	src: url('../fonts/proxima_nova_a_semibold-webfont.woff2');
+}
+
+@font-face {
+	font-family: Proxima-Nova-A-Bold;
+	src: url('../fonts/proxima_nova_a_bold-webfont.woff2');
+}
+
+@font-face {
+	font-family: Proxima-Nova-A-Extrabold;
+	src: url('../fonts/proxima_nova_a_extrabold-webfont.woff2');
+}*/
+
+/* */
+@font-face {
+	font-family: Proxima-Nova-Regular;
+	src: url('../fonts/proxima_nova-webfont.woff2');
+}
+
+@font-face {
+	font-family: Proxima-Nova-Semibold;
+	src: url('../fonts/proxima_nova_semibold-webfont.woff2');
+}
+
+@font-face {
+	font-family: Proxima-Nova-Bold;
+	src: url('../fonts/proxima_nova_bold-webfont.woff2');
+}
+
+@font-face {
+	font-family: Proxima-Nova-Extrabold;
+	src: url('../fonts/proxima_nova_extrabold-webfont.woff2');
+}
+/* */
+
+
+/* */
+@font-face {
+	font-family: Proxima-Nova-S-Regular;
+	src: url('../fonts/proxima_nova_s-webfont.woff2');
+}
+
+@font-face {
+	font-family: Proxima-Nova-S-Semibold;
+	src: url('../fonts/proxima_nova_s_semibold-webfont.woff2');
+}
+
+@font-face {
+	font-family: Proxima-Nova-S-Bold;
+	src: url('../fonts/proxima_nova_s_bold-webfont.woff2');
+}
+
+@font-face {
+	font-family: Proxima-Nova-S-Extrabold;
+	src: url('../fonts/proxima_nova_s_extrabold-webfont.woff2');
+}
 
 
 
 
 /***************Fonts End **************/
 
-.top_nav_div p{margin:0px;}
+.top_nav_div p{margin:0px;font-family:Proxima-Nova-Semibold; }
 .top_nav_div{background:#323031;color:#fff;padding:10px 0;font-size:16px;}
 .top_nav li{display:inline;margin-right:12px;}
 .top_nav li:last-child{margin-right:-0px!important;}
 .top_nav li.dropdown .fa{padding-left:8px;}
 .top_nav ul{padding-left:0px;}
-.top_nav ul li a{color:#fff;}
+.top_nav ul li a{color:#fff;font-family: Proxima-Nova-Regular; font-size:16px}
 .top_nav{text-align:right;}
 .top_nav ul li a:hover{text-decoration:none;color:#fff;}
 
@@ -76,8 +134,8 @@ section.top_nav span{color:#60c5ac;}
 ul.nav.navbar-nav.mid_nav li.active a{background:none;}
 .main_header nav.navbar.navbar-default.navbar-static-top{background:none;margin-bottom:0px;padding-bottom:7px;}
 .container.main_menu ul li:first-child.dropdown.mega-dropdown:before{background:none;}
-ul.nav.navbar-nav.mid_nav li a{font-size:22px;color:#323031;font-weight:800;}
-ul.nav.navbar-nav.mid_nav li a.sell-btn{background:#EE4266;border-radius:3px;color:#fff;padding:10px 45px;font-size:18px;}
+ul.nav.navbar-nav.mid_nav li a{font-size:22px;color:#323031;font-family:Proxima-Nova-Bold;padding: 10px 16px;}
+ul.nav.navbar-nav.mid_nav li a.sell-btn{    font-family: Proxima-Nova-Extrabold;background:#EE4266;border-radius:3px;color:#fff;padding:10px 45px;font-size:18px;}
 .top_nav_div p span{color:#60c5ac;}
 .main_menu_in{float:right;}
 .main_navigation nav.navbar.navbar-default{margin-bottom:0px;background:none;border:none;}
@@ -100,13 +158,13 @@ ul.nav.navbar-nav.mid_nav li a.sell-btn{background:#EE4266;border-radius:3px;col
 .main_banner .jumb-bnr img{min-height:375px;}
 .jumb-smll a:nth-child(1) img{margin-bottom:15px;}
 .jumb-smll a img{max-height:180px;padding-right:8px;width:100%;}
-.icon_lins.text-right ul li .btn{font-size:13px;margin-right:15px;margin-left:15px;}
+.icon_lins.text-right ul li .btn{font-size:13px;margin-right:15px;margin-left:15px;font-family:Proxima-Nova-Semibold; color: #323031;}
 .icon_lins.text-right ul li .btn:focus{outline:none;box-shadow:none;background:none;}
 .icon_lins.text-right ul li .btn:hover{background:none;outline:none;box-shadow:none;}
 .home_product_slider .slider_cnt{text-align:center;padding:10px 35px;}
 .main_banner .jumb-bnr{max-height:375px;overflow:hidden;}
 section.main_banner{background:#f7f9fc;}
-.home_product_slider .slider_cnt p{color:#000;font-size:15px;font-weight:600;}
+.home_product_slider .slider_cnt p{color:#000;font-size:15px;font-family:Proxima-Nova-Extrabold;}
 .home-adds .add1{max-height:185px;overflow:hidden;padding-right:7px;}
 .home-adds .add1 img{min-height:185px;}
 .home-adds .add2{max-height:185px;overflow:hidden;padding-left:7px;}
@@ -119,7 +177,7 @@ section.main_banner{background:#f7f9fc;}
 .icon_lins.text-right ul li .btn{padding:0px;border:none;color:#656465;}
 .icon_lins.text-right{float:right;padding:15px 0px;}
 .icon_lins.text-right ul li:last-child{border-right:0px;margin-right:-15px;}
-.container.main_menu ul li a.dropdown-toggle{font-size:18px;font-weight:800;color:#010101;padding-left:25px;padding-right:25px;font-family: ProximaNova-Bold;}
+.container.main_menu ul li a.dropdown-toggle{font-size:18px;color:#010101;padding-left:25px;padding-right:25px;font-family: Proxima-Nova-Bold;}
 .container.main_menu ul li{position:relative;}
 .main_menu .navbar-default .navbar-nav>.open>a,.navbar-default .navbar-nav>.open>a:focus,.navbar-default .navbar-nav>.open>a:hover{background:none;}
 li.dropdown.mega-dropdown.open ul.dropdown-menu.mega-dropdown-menu.row{border-top:3px solid #60c5ac;}
@@ -127,9 +185,9 @@ li.dropdown.mega-dropdown.open ul.dropdown-menu.mega-dropdown-menu.row{border-to
 .icon_lins.text-right ul li{float:left;display:inline;padding-left:5px;color:#323031;border-right:1px solid #ccc;}
 #newsletter-container h3{font-size:25px;line-height:46px;color:#444b4c;text-transform:uppercase;margin:0;float:left;}
 #newsletter-container input[type=text]{height:46px;width:300px;vertical-align:top;margin-right:5px;border-radius:4px;border:3px solid #84bb26;background:#CFCECE;line-height:20px;padding:5px 10px 5px 20px;color:#727b7c;}
-.newsletter-container h3{margin:0px;float:left;color:#000;margin-top:14px;font-weight:800;font-size:16px;text-transform:uppercase;margin-right:15px;}
+.newsletter-container h3{margin:0px;float:left;color:#000;margin-top:14px;font-family:Proxima-Nova-Extrabold;font-size:16px;text-transform:uppercase;margin-right:15px;}
 section.newsletter-container{background:#f0f0f0;padding:21px 0px;}
-form#register-newsletter input.btn.btn-custom-3{font-size:16px;background:#60c3ab;color:#fff;padding:8px 15px;font-weight:800;margin-top: -5px;}
+form#register-newsletter input.btn.btn-custom-3{letter-spacing: 0.3px;font-size:19px;background:#60c3ab;color:#fff;padding:8px 15px;font-weight:800;margin-top: -5px;font-family: Proxima-Nova-Extrabold}
 input[type="text"]:focus{outline:none;}
 a.sell-btn .fa.fa-tag{font-size:14px;padding-right:5px;}
 .mid_nav form.navbar-form.navbar-left{margin-top:0px;position:relative;padding-left:25px;padding-right:0px;}
@@ -142,35 +200,35 @@ color:#323031;font-size:18px;font-weight:600;}
 .mid_nav form.navbar-form.navbar-left input:-moz-placeholder{ /* Firefox 18- */
 color:#323031;font-size:18px;font-weight:600;}
 .icon_lins.text-right ul li .fa{font-size:18px;}
-.mid_nav form.navbar-form.navbar-left input{height:40px;padding-left:33px;border:1px solid #e6e6e6;}
+.mid_nav form.navbar-form.navbar-left input{font-family:Proxima-Nova-Semibold;height:40px;padding-left:33px;border:1px solid #e6e6e6;}
 .mid_nav form.navbar-form.navbar-left i.fa.fa-search{position:absolute;margin-left:12px;top:12px;}
 .social-fallow{padding-right:0px;padding-left:30px;}
 input.btn.btn-custom-3:focus{outline:none;}
-form#register-newsletter input[type="text"]{width:355px;border-radius:2px;font-weight:600;box-shadow:none;height:40px;padding-left:15px;border:1px solid #b7b7b7;}
+form#register-newsletter input[type="text"]{width:355px;border-radius:2px;font-family:Proxima-Nova-Regular; font-size:15px;box-shadow:none;height:40px;padding-left:15px;border:1px solid #b7b7b7;}
 .social-icons a img{width:50px;}
 .social-fallow h3{margin:0px;line-height:45px;}
 .social-img{padding-left:0px;}
 .btm-footer{background:#323031;}
+section.footer h3 {    font-family: Proxima-Nova-Extrabold;    color: #000;    font-size: 16px;}
 .social-icons a{float:left;padding-left:5px;position:relative;padding-right: 5px;}
 .footer h5{color:#000;font-size:16px;font-weight:800;}
 .quick_links{margin-top:5px;}
-.quick_links ul li{font-weight:600;}
-.quick_links ul li{margin-bottom:8px;}
-.ft-logo p{font-weight:600;color:#020202;font-size:16px;padding-right:20px;}
+.quick_links ul li{margin-bottom:8px;font-family:Proxima-Nova-Semibold;color: #020202;font-size: 16px;}
+.ft-logo p{font-family:Proxima-Nova-Semibold;color:#020202;font-size:16px;padding-right:20px;}
 .quick_links:after{width:2px;height:190px;background:#f0f0f0;position:absolute;content:"";right:32px;top:0px;}
-.btm-footer p{font-size:14px;text-align:center;padding:15px;margin:0px;color:#fff;}
+.btm-footer p{font-size:14px;text-align:center;padding:15px;margin:0px;color:#fff;font-family: Proxima-Nova-Regular;}
 .quick_links h3{font-weight:800;font-size:16px;color:#020202;margin-bottom:30px;}
 .footer{margin-top:30px;}
 .quick_links ul{float:left;padding-left:0px;list-style-type:none;color:#020202;font-size:16px;}
-.home_product_slider h2{text-align:center;margin:30px 0px;font-size:24px;font-weight:800;color:#323031;}
+.home_product_slider h2{text-align:center;margin:30px 0px;font-size:24px;font-family: Proxima-Nova-Bold;color:#323031;}
 .home_product_slider .slider_cnt{text-align:center;}
-.home_product_slider .slider_cnt h4{color:#323031;font-size:15px;}
-.home_steps .media-body p{font-size:22px;line-height:22px;font-weight:600;color:#000;}
+.home_product_slider .slider_cnt h4{color:#323031;font-size:15px;font-family: Proxima-Nova-Semibold;}
+.home_steps .media-body p{font-size:22px;line-height:22px;font-family: Proxima-Nova-Bold;color:#000;}
 .steps-slider-div .media-body p{font-weight:800;color: #000;}
 .steps-slider-div.hidden-sm.hidden-md.hidden-lg{padding: 20px 0px;}
 .home_steps{padding:30px;}
 .steps-slider-div .media-body h4.media-heading{font-weight:600;font-size:14px;}
-.home_steps .media-body h4{font-size:18px;color:#50514f;font-weight:600;}
+.home_steps .media-body h4{font-size:18px;color:#50514f;color:#50514f; font-family: Proxima-Nova-Bold;}
 .main_menu .mega-dropdown-menu{padding:20px 0px;width:auto;box-shadow:none;-webkit-box-shadow:none;float:right;left:inherit;}
 .container.main_menu ul li{width:auto;}
 .mega-dropdown-menu > li > ul{padding:0;margin:0;}
