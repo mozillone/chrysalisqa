@@ -1,69 +1,82 @@
- <section class="newsletter-container">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-sm-8 col-xs-12"><h3>SIGN UP FOR OUR NEWSLETTER</h3>
-                <form id="register-newsletter">
-                    <input type="text" name="newsletter" required="" placeholder="Enter your email address">
-                        <input type="submit" class="btn btn-custom-3" value="Subscribe">
-                </form>
-				</div>
+<section class="newsletter-container">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-sm-8 col-xs-12"><h3>SIGN UP FOR OUR NEWSLETTER</h3>
+						<form id="register-newsletter">
+							<input type="text" name="newsletter" required="" placeholder="Enter your email address">
+							<input type="submit" class="btn btn-custom-3" value="Subscribe">
+						</form>
+					</div>
 					<div class="col-md-4 col-sm-4 col-xs-12 social-media">
-					<div class="row">
-					<div class="col-md-4 social-fallow">
-					<h3>FALLOW US</h3>
-					</div>
-					<div class="col-md-8 social-img">
-					<div class="social-icons">
-						<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/fb-icon.png')}}"></a>
-						<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/twit-icon.png')}}"></a>
-						<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/insta-icon.png')}}"></a>
-						<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/youtube-icon.png')}}"></a>
-					</div>
-					</div>
+						<div class="row">
+							<div class="col-md-4 col-sm-4 col-xs-12 social-fallow">
+								<h3>FALLOW US</h3>
+							</div>
+							<div class="col-md-8 col-sm-8 col-xs-12 social-img">
+								<div class="social-icons">
+									<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/fb-icon.png')}}"></a>
+									<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/twit-icon.png')}}"></a>
+									<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/insta-icon.png')}}"></a>
+									<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/youtube-icon.png')}}"></a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	 </section>
-	 
-	 	<section class="footer">
+		</section>
+		<section class="footer">
 			<div class="container">
 				<div class="row">
+				<div class="footer_links" id="footer-middle">
 					<div class="col-md-4 col-sm-4 co-xs-12 ft-logo">
-						<img class="img-responsive" src="{{asset('/img/brand.png')}}">
-						<h3>OUR MISSION</h3>
-						<P>Revolutionize the costume industry, by giving people access to more affordable, environmentally friendly costumes. More on our mission here.</P>
+					<div class="footer_head ">
+						
+						<img class="img-responsive" src="{{asset('/assets/frontend/img/brand.png')}}">
+						<h5>OUR MISSION <i class="fa fa-plus pull-right hidden-lg hidden-sm hidden-md"></i></h5>
+						<p style="display: none;">Revolutionize the costume industry, by giving people access to more affordable, environmentally friendly costumes. More on our mission here.</p>
+						
 					</div>
+					</div>
+
 					<div class="col-md-4 co-sm-4 co-xs-12 quick_links">
-						<h3>QUICK LINKS</h3>
+					<div class="footer_head ">
+						<h5>QUICK LINKS <i class="fa fa-plus pull-right hidden-lg hidden-sm hidden-md"></i></h5>
 						<ul class="col-md-6 col-sm-6 col-xs-12">
 							<li>About</li>
 							<li>How It Works</li>
 							<li>Support & Contact</li>
 							<li>Events</li>
 						</ul>
-							<ul class="col-md-6 col-sm-6 col-xs-12">
+						<ul class="col-md-6 col-sm-6 col-xs-12">
 							<li>Blog</li>
 							<li>Press</li>
 							<li>Jobs</li>
 							<li>Giving Back</li>
 						</ul>
 					</div>
+					</div>
+
 					<div class="col-md-4 co-sm-4 co-xs-12 app_img">
+					<div class="footer_head ">
+						<h5><span class="hidden-lg hidden-sm hidden-md">THE CHRYSALIS APP</span> <i class="fa fa-plus pull-right hidden-lg hidden-sm hidden-md"></i></h5>
 						<img class="img-responsive" src="{{asset('/assets/frontend/img/app-img.png')}}">
+						</div>
+						</div>
+					</div>
 					</div>
 				</div>
 			</div>
 		</section>
-<section class="btm-footer">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<p>© 2016 CHRYSALIS. ALL RIGHTS RESERVED​​​​​​​ |  TERMS OF USE  |  PRIVACY POLICY</p>
+		<section class="btm-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p>© 2016 CHRYSALIS. ALL RIGHTS RESERVED​​​​​​​ | TERMS OF USE | PRIVACY POLICY</p>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-</section>
+		</section>
 <div class="modal fade window-popup" id="signup_popup">
 
 	<div class="modal-dialog">
