@@ -5,48 +5,21 @@ use App\Helpers\Site_model;
 use Auth;
 class SiteHelper  {
 
-	public static function hasPermission($permissions){
-        $count=0;
-        $userPermssions=Site_model::userPermissions(Auth::user()->id);
-        if(!empty($userPermssions)){
-        for($i=0;$i<count($permissions);$i++){
-            foreach($userPermssions as $data){
-                
-                if($data->slug==$permissions[$i]){
-                    $count++;
-                }
-            }
-        }
-        if($count>=1){
-            return true;
-        }
-        else{
-            return false;    
-        }
-    }
-    else{
-        return false;
-    }
-    }
-
-     public static function restrictPermission($permisions)
-    {
-        $count=0;
-        $userPermsiosn=Site_model::userPermissions(Auth::user()->id);
-            for($i=0;$i<count($permisions);$i++){
-            foreach($userPermsiosn as $data){
-                if($data->slug==$permisions[$i]){
-                    $count++;
-                }
-            }
-        }
-        if(!$count>=1){
-            Session::flash('error', 'You don \'t have permission to access this page');
-            return Redirect::to('/home')->send();
-        }
-        
-    }
-
+	public static function getMenus(){
+		$menus_list=[];
+		$cond=array("parent_id"=>"0");
+		$getTopMenuList=Site_model::Fetch_data('menu','*',$cond);
+		foreach($getTopMenuList as $menus){
+			$cond=array('parent_id'=>$menus->menu_id);
+			$getSubMenus=Site_model::Fetch_data('menu','*',$cond);
+			$menus_list[$menus->name][]="None";
+			foreach ($getSubMenus as $subMenus) {
+				$menus_list[$menus->name][]=$subMenus->name;
+			}
+			
+		}
+		return $menus_list;
+	}
 	public static function generate_image_thumbnail($source_image_path, $thumbnail_image_path,$thumbnail_with,$thumbnail_height) {
    	//dd($source_image_path);
 		list($source_image_width, $source_image_height, $source_image_type) = getimagesize($source_image_path);
@@ -83,21 +56,7 @@ class SiteHelper  {
 		imagedestroy($thumbnail_gd_image);
 		return true;
 	}
-	public static function getLatitudeValue($address)
-	{
-		$address = urlencode($address);
-		$json = file_get_contents("http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false");
-		
-		$decoded = json_decode($json);
-		if($decoded->status=="OK")
-		{
-			return array('lat'=>$decoded->results[0]->geometry->location->lat,'lng'=>$decoded->results[0]->geometry->location->lng);
-		}
-		else
-		{
-			return "No";
-		}
-	}
+	
 	
 	
 }

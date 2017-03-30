@@ -146,7 +146,7 @@ ul.nav.navbar-nav.mid_nav li a.sell-btn{    font-family: Proxima-Nova-Extrabold;
 .mega-dropdown-menu:before{content:"";border-bottom:12px solid #60c5ac;border-right:10px solid transparent;border-left:10px solid transparent;position:absolute;top:-15px;left:23px;z-index:10;}
 .mega-dropdown-menu:after{content:"";border-bottom:12px solid #60c5ac;border-right:10px solid transparent;border-left:10px solid transparent;position:absolute;top:-15px;left:21px;z-index:8;}
 .quick_links:before{width:2px;height:190px;background:#f0f0f0;position:absolute;content:"";left:-18px;}
-.main_menu li.dropdown.mega-dropdown.open ul.dropdown-menu.mega-dropdown-menu.row li a{font-weight:600;margin-bottom:5px;}
+.main_menu li.dropdown.mega-dropdown.open ul.dropdown-menu.mega-dropdown-menu.row li a{	font-family: Proxima-Nova-Semibold;margin-bottom:5px; font-size:16px; color:#020202;}
 .container.main_menu ul li:last-child.dropdown.mega-dropdown.open ul.dropdown-menu.mega-dropdown-menu:before{right:113px!important;left:inherit;}
 .container.main_menu ul li:last-child.dropdown.mega-dropdown.open ul.dropdown-menu.mega-dropdown-menu:after{right:113px!important;left:inherit;}
 .container.main_menu ul li:last-child.dropdown.mega-dropdown.open ul.dropdown-menu.mega-dropdown-menu.row{float:right!important;right:0px!important;}
@@ -233,7 +233,7 @@ section.footer h3 {    font-family: Proxima-Nova-Extrabold;    color: #000;    f
 .container.main_menu ul li{width:auto;}
 .mega-dropdown-menu > li > ul{padding:0;margin:0;}
 .mega-dropdown-menu > li > ul > li{list-style:none;}
-.mega-dropdown-menu > li > ul > li > a{display:block;padding:3px 20px;clear:both;font-weight:normal;line-height:1.428571429;color:#999;white-space:normal;}
+.mega-dropdown-menu > li > ul > li > a{display:block;padding:2px 20px;clear:both;font-weight:normal;line-height:1.428571429;color:#999;white-space:normal;}
 .mega-dropdown-menu > li ul > li > a:hover,.mega-dropdown-menu > li ul > li > a:focus{text-decoration:none;color:#444;background-color:#f5f5f5;}
 .mega-dropdown-menu .dropdown-header{color:#428bca;font-size:18px;font-weight:bold;}
 .mega-dropdown-menu form{margin:3px 20px;}
