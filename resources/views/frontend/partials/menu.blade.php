@@ -77,6 +77,7 @@
 								<li class="col-sm-6">
 									<ul>
 										@for($i=1;$i<$menu1;$i++)
+
 											<li><a href="/shop/{{$key}}/{{$value[$i]}}">{{$value[$i]}}</a></li>
 										@endfor
 									</ul>
