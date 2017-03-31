@@ -37,7 +37,7 @@ $(function(){
 
 
 
-   if ($(window).width() < 767) {
+   if ($(window).width() < 1024) {
 	   $(".footer_head ul").slideUp('fast');   
 
 	   $('#footer-middle .footer_head').find('h5').click(function(){ 

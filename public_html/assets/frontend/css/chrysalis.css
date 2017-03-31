@@ -248,13 +248,13 @@ section.footer h3 {    font-family: Proxima-Nova-Extrabold;    color: #000;    f
 .list-box-rm{width:100%; float:left; border: 1px solid #e1e1e1; padding: 20px; font-family: Proxima-Nova-A-Regular; margin: 15px 0 0;}
 .list-box-rma{border-top: 2px solid #11a89e;}
 .list-box-head{width:100%; float:left; font-size: 16px; font-family: Proxima-Nova-Extrabold; border-bottom: 1px solid #e1e1e1; padding-bottom: 15px; margin: 0px; color: #323031;}
-.box-list1{width: 100%; float:left; list-style: none; margin: 15px 0 0;}
+.box-list1{width: 100%; float:left; list-style: none; margin: 15px 0 0;    padding-left: 0px;}
 
 
-.box-list1 li{width: 100%; float:left; font-family: Proxima-Nova-Semibold; font-size: 16px; color: #323031; cursor: pointer; margin: 5px 0 0;}
+.box-list1 li{width: 100%; float:left; font-family: Proxima-Nova-Semibold; font-size: 18px; color: #323031; cursor: pointer; margin: 5px 0 0;}
 .box-list1 li:hover,.box-list1 li.active{font-family: Proxima-Nova-Extrabold;} 
 
-.list-box-subhead{width: 100%; float:left; font-size: 16px; font-family: Proxima-Nova-Bold; margin: 25px 0 0px;}
+.list-box-subhead{width: 100%; float:left; font-size: 18px; font-family: Proxima-Nova-Extrabold; margin: 25px 0 0px;color: #323031;}
 .list-box-texti{width: 100%; float:left; font-size: 14px; font-style: italic; font-family: Proxima-Nova-Semibold;}
 .list-box-search{width: 100%; float:left; position: relative;}
 .list-box-search input{width: 100%; float:left; height: 40px; border: 1px solid #e1e1e1; color:#323031; padding: 0 45px 0 15px;}
@@ -264,12 +264,12 @@ section.footer h3 {    font-family: Proxima-Nova-Extrabold;    color: #000;    f
 .list-box-search input::-ms-input-placeholder {color: #323031; font-family: Proxima-Nova-Semibold;}
 
 
-.box-list2{width: 100%; float:left; list-style: none; margin: 10px 0 0;}
+.box-list2{width: 100%; float:left; list-style: none; margin: 10px 0 0;padding-left: 0px;}
 .box-list2 li{width: 50%; float:left; font-family: Proxima-Nova-Semibold; font-size: 16px; color: #323031; cursor: pointer; margin: 5px 0;}
 .box-list2 li input{float:left; margin: 4px 4px 0 0;}
 
 
-.box-list3{width: 100%; float:left; list-style: none; margin: 10px 0 0;}
+.box-list3{width: 100%; float:left; list-style: none; margin: 10px 0 0;padding-left: 0px;}
 .box-list3 li{width: 30%; float:left; font-family: Proxima-Nova-Semibold; font-size: 16px; color: #323031; cursor: pointer; margin: 5px 0; background: #e1e1e1; height: 40px; line-height: 40px; text-align: center;}
 .box-list3 li.middle{margin: 5px 5%;}
 
@@ -278,10 +278,84 @@ section.footer h3 {    font-family: Proxima-Nova-Extrabold;    color: #000;    f
 .list-sec-rm2{float:right; margin: 0px;}
 .list-sec-rm2 span{font-size: 18px; line-height: 30px; font-family: Proxima-Nova-Semibold; color: #323031; margin-right: 10px;}
 .list-sec-rm2 select{width: 180px; height: 30px; line-height: 30px; font-size: 16px; padding: 0 10px; border: 1px solid #e1e1e1; font-family: Proxima-Nova-Semibold; color: #323031;}
+.prodcut_list_page {margin-bottom: 50px;}
+.list-box-rm .checkbox label, .radio label {min-height: 20px;padding-left: 20px;margin-bottom: 0;font-weight: 400;cursor: pointer;font-family: Proxima-Nova-Semibold;font-size: 18px;color: #323031;}
+h2.list-box-head.filter {margin-top: 30px;}
+.box-list1.narrow .checkbox {margin-bottom: 15px;}
+h2.list-box-head.narrow-head {margin-top: 30px;}
+.prod_box {
+    text-align: center;margin-bottom: 30px;
+}
+.prod_box .slider_cnt h4 {
+    color: #323031;
+    font-size: 15px;
+    font-family: Proxima-Nova-Semibold;
+}
+.prod_box  .slider_cnt p {
+    color: #000;
+    font-size: 15px;
+    font-family: Proxima-Nova-Extrabold;
+}
+.list_products {
+    clear: both;
+    padding-top: 30px;
+}
+p.hover_crt {
+background: rgba(17, 168, 158, 0.66);
+    padding: 7px;font-family: Proxima-Nova-Bold;
+    color: #fff; font-size: 12px
+}
+.hover_box {
+    position: absolute;
+    width: 100%;
+    bottom: 0px; display:none;
+}
+.img_layer {
+    position: relative;cursor: pointer;
+}
+.prod_box:hover .hover_box p {
+    margin-bottom: 0px;border-left: 1px solid #ccc;
+}
+.prod_box:hover .hover_box {
+    display: block;    background: #fff;
+}
+p.like_fav {
+    background: #fff;
+    height: 30px;
+}
+p.like_fav span {
+    width: 50%;
+    float: left;
+    line-height: 30px;
+}
+p.like_fav span {
+    width: 50%;
+    float: left;color: #000;
+    line-height: 30px;
+    border-right: 1px solid #ccc;
+}
+p.like_fav 0
+    border-top: 1px solid #ccc;
+     border-left: 1px solid #ccc; 
+     border-right: 1px solid #ccc; 
+     border-bottom: 1px solid #ccc; 
+}
+p.like_fav span i.fa.fa-heart-o {
+    color: #ef4066;
+}
+p.like_fav span i.fa.fa-heart-o {
+    color: #ef4c70 !important;
+}
 /* List page CSS E */
 
-
-
+/*Login page  start css*/
+#signup_popup .modal-dialog {
+    width: 500px;
+}
+div#signup_popup div#myTabContent {
+    padding: 40px;
+}
+/*Login page end css*/
 
 
 
@@ -320,6 +394,10 @@ button.navbar-toggle.respnsive-ser-rm.sell{background:#ef4066!important;color:#f
 }
 
 @media screen and (max-width:1023px){
+	.prod_box .img_layer img {margin: 0 auto;    width: 100% !important;}
+	section.content.create_section_page {
+    margin-top: 63px;
+}
 	.quick_links {
 		margin:25px 0px;
     clear: both;
@@ -330,6 +408,18 @@ button.navbar-toggle.respnsive-ser-rm.sell{background:#ef4066!important;color:#f
 .t-cnt{display:none;}
 }
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
+	.box-list2 li {
+    width: 50%;
+    float: left;
+    font-family: Proxima-Nova-Semibold;
+    font-size: 13px;
+    color: #323031;
+    cursor: pointer;
+    margin: 5px 0;
+}
+	.top_nav_div{display: none;}
+	.box-list1 li{font-size: 13px;}
+	.list-box-rm .checkbox label, .radio label{font-size: 13px;}
 	.social-icons a {
     float: none;
     display: inline-block;
@@ -360,14 +450,14 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
-
-
-
+.l_more.text-center a{color:#60c3ab; text-decoration: underline;}
+.l_more.text-center {font-size: 18px;font-family: Proxima-Nova-Bold; color:#60c3ab; text-decoration: underline;}
+.top_nav_div{display: none;}
 .home_product_slider .owl-carousel .owl-item{margin-right:5px;margin-left:5px;}
 .footer_head img{display:none;}
 .footer_links .col-md-4.active .footer_head .fa-plus:before{content:"\f068";}
 .responsive-menu .respnsive-ser-rm:nth-child(1){margin-right:0px;}
-.responsive-menu button.navbar-toggle.respnsive-ser-rm{padding:5px 10px;}
+.responsive-menu button.navbar-toggle.respnsive-ser-rm{padding:5px 10px;font-family: Proxima-Nova-Bold;}
 .steps-slider-div .carousel-control{width:5%;}
 div#steps-sldier .carousel-inner{width:80%;margin:0 auto;}
 .home_steps .media-body p{font-size:18px;}
@@ -375,9 +465,9 @@ div#steps-sldier .carousel-inner{width:80%;margin:0 auto;}
 .ft-logo img{display:none;}
 .social-fallow{padding-right:15px;padding-left:15px;}
 .social-icons{text-align:center;}
-form#register-newsletter input[type="text"]{float:left;width:66%;margin-right:10px;}
+form#register-newsletter input[type="text"]{float:left;width:66%;margin-right:5px;}
 .social-icons a{float:inherit;display:inline-block;padding-left:10px;}
-form#register-newsletter input.btn.btn-custom-3{float:left;width:30%;}
+form#register-newsletter input.btn.btn-custom-3 {float: left;width: 30%;font-size: 16px;margin-top: 0px;height: 40px;}
 .newsletter-container h3{float:none;text-align:center;margin-bottom:15px;}
 .home-adds .add1 img{min-height:auto;}
 .home-adds .add2 img{min-height:auto;}
@@ -397,6 +487,7 @@ form#register-newsletter input.btn.btn-custom-3{float:left;width:30%;}
 and (min-device-width:768px) 
 and (max-device-width:1024px) 
 and (orientation:landscape){
+
 .main_banner{margin-top:0px !IMPORTANT;}
 .responsive-rm{padding-left:0px;}
 .container.main_menu ul li a.dropdown-toggle{font-size:16px;}
@@ -404,6 +495,7 @@ and (orientation:landscape){
 ul.nav.navbar-nav.mid_nav li a{padding: 10px;font-size:16px!important;color:#323031;font-weight:800;}
 ul.nav.navbar-nav.mid_nav li a.sell-btn{padding:10px 10px;font-size:16px!important;}
 }
+
 @media only screen and (min-device-width:480px) 
 and (max-device-width:736px) 
 and (orientation:landscape){

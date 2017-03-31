@@ -125,22 +125,22 @@
 							<input type="text" id="popup_email" name="email" placeholder="Email Address *" class="form-control">
 						</div>
 						<div class="row sinup-pswrd"> 
-							<div class="col-md-6 "> 
+							<div class="col-md-12 col-sm-12 col-xs-12 "> 
 								<div class="form-group">
 									<input type="password" id="popup_password" name="password" placeholder="Create Password *" class="form-control">
 								</div>
 							</div>
-							<div class="col-md-6"> 
+							<div class="col-md-12 col-sm-12 col-xs-12 "> 
 								<div class="form-group">
 									<input type="password" id="pop_cpassword"  name="cpassword" placeholder="Confirm Password *" class="form-control">
 								</div>
 							</div>
 						</div> 
 						<div class="row"> 
-							<div class="col-md-12"> 
+							<div class="col-md-12 col-sm-12 col-xs-12 "> 
 								<div class="form-group">
 									<div class="text-center">
-										<button class="btn btn-primary">Sign Up</button>
+										<button class="btn btn-primary">Create Account!</button>
 									</div>
 								</div>
 							</div>
@@ -162,7 +162,7 @@
 							</div>
 						</form>             
 					</div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
 								<p>Or</p>
 				</div>
 				<div class="row">
