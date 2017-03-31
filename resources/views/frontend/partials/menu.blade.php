@@ -67,7 +67,7 @@
 								<li class="col-sm-6">
 									<ul>
 										@for($i=1;$i<count($value);$i++)
-											<li><a href="/{{$key}}/{{$value[$i]}}">{{$value[$i]}}</a></li>
+											<li><a href="/shop/{{$key}}/{{$value[$i]}}">{{$value[$i]}}</a></li>
 										@endfor
 									</ul>
 								</li>
@@ -77,14 +77,14 @@
 								<li class="col-sm-6">
 									<ul>
 										@for($i=1;$i<$menu1;$i++)
-											<li><a href="#">{{$value[$i]}}</a></li>
+											<li><a href="/shop/{{$key}}/{{$value[$i]}}">{{$value[$i]}}</a></li>
 										@endfor
 									</ul>
 								</li>
 								<li class="col-sm-6">
 									<ul>
 										@for($j=$menu1;$j<$menu2;$j++)
-											<li><a href="#">{{$value[$j]}}</a></li>
+											<li><a href="/shop/{{$key}}/{{$value[$i]}}">{{$value[$j]}}</a></li>
 										@endfor
 									</ul>
 								</li>
