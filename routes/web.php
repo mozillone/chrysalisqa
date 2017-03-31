@@ -30,7 +30,8 @@ Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashb
 Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@EditProfile']);
 
 /** Products list page start here **/
-Route::any('/shop/{slug1}/{slug2?}', array('as' => '','uses' => 'ProductsListingController@productsLstings'));
+Route::any('/shop/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
+Route::any('/shop/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
 /** Products list page end here **/
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {

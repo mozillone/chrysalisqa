@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Session;
 use Hash;
-class ProductsListingController extends Controller {
+class CostumesController extends Controller {
 
 	protected $messageBag = null;
 	protected $auth;
@@ -18,8 +18,12 @@ class ProductsListingController extends Controller {
 		$this->sitehelper = new SiteHelper();
 	
 	}
-	public function productsLstings()
+	public function costumeListings()
 	{
-		return view('frontend.products.products_list');
+		return view('frontend.costumes.costumes_list');
+	}
+	public function costumeSingleView()
+	{
+		return view('frontend.costumes.costumes_single_view');
 	}
 }
