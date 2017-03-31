@@ -353,7 +353,118 @@ p.like_fav span i.fa.fa-heart-o {
     width: 500px;
 }
 div#signup_popup div#myTabContent {
-    padding: 40px;
+    padding: 30px 70px;
+}
+
+
+.login-register ul.nav.nav-tabs li {
+    width: 50%;
+}
+.login-register .nav-tabs {
+    border-bottom: 0px solid #ddd;   margin-bottom: 10px; 
+   
+}
+.form-group.loign-adtnl.forgot a {
+    font-size: 14px;
+    color: #000;font-family: Proxima-Nova-Semibold;
+    text-decoration: underline;
+}
+div#signup_popup div#myTabContent input {
+    height: 40px;    border-radius: 3px;	font-family: Proxima-Nova-Regular;
+        box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.08);
+        -webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,.08);
+        border: 1px solid #e5e4e4;
+}
+div#signup_popup div#myTabContent label {
+    font-size: 18px;
+    color: #000;	font-family: Proxima-Nova-Semibold;
+}
+.login-btn button {
+    height: 45px;
+    background: #60c5ac;width: 100%;
+    border: 1px solid #60c5ac;
+    font-size: 20px;font-family: Proxima-Nova-Extrabold;
+}
+#signup_popup .modal-content{border-radius: 0px;}
+.login-register .nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background: none;
+}
+.top_nav ul li a:focus {
+    outline: none;
+    text-decoration: none;
+}
+.close_icon button {
+    font-size: 18px;
+    font-family: Proxima-Nova-Regular;
+    margin-top: 20px;
+}
+.form-group.socil-btn a {
+    width: 100%;
+    height: 50px;
+    line-height: 35px;
+}
+.form-group.socil-btn a {
+    width: 100%;font-size: 20px;background: #3a55a0;
+    font-family: Proxima-Nova-Extrabold;
+}
+.login-register ul.nav.nav-tabs li.active {
+    padding-left: 50px;
+}
+.login-register ul.nav.nav-tabs li {
+    padding-left: 70px;    border-right: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;  padding-top: 10px;
+}
+.form-group.or {
+    margin-bottom: 0px;
+}
+.text-center.creat_btn button {
+    height: 45px;
+    background: #60c5ac;
+    width: 100%;
+    border: 1px solid #60c5ac;
+    font-size: 20px;
+    font-family: Proxima-Nova-Extrabold;
+}
+.rect_pswrd button{    height: 45px;
+    background: #60c5ac;margin-top: 10px;
+    width: 100%;
+    border: 1px solid #60c5ac;
+    font-size: 20px;
+    font-family: Proxima-Nova-Extrabold;}
+.creat_btn {
+    margin-top: 10px;
+}
+.login-register ul.nav.nav-tabs li.active a{color:#000 !important;}
+.login-register ul.nav.nav-tabs li.active {
+    padding-left: 70px;
+    border-top: 5px solid #60c5ac;
+    border-left: 0px;     border-right: 0px;
+    border-bottom: 0px;
+}
+.form-group.or.text-center p {
+    color: #000;
+    font-size: 18px;font-family: Proxima-Nova-Semibold;
+    text-transform: uppercase;
+}
+.login-register ul.nav.nav-tabs li a {
+    color: #848282 !important;
+}
+.login-register ul.nav.nav-tabs li:nth-child(2) {
+    border-right: 0px;
+}
+.login-register ul.nav.nav-tabs li:nth-child(1).active {
+    border-right: none;
+}
+.login-register ul.nav.nav-tabs li a {
+    font-size: 24px;
+    border: none;
+    color: #000;font-family: Proxima-Nova-Extrabold;
+}
+.close_icon button {
+    float: inherit;opacity: 0.9;
 }
 /*Login page end css*/
 
@@ -450,6 +561,14 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+	.login-register ul.nav.nav-tabs li.active{ padding-left: 20px;}
+	.text-center.creat_btn button{font-size: 16px;}
+	div#signup_popup div#myTabContent {    padding: 20px;}
+.form-group.socil-btn a{font-size: 16px;}
+	.login-register ul.nav.nav-tabs li{padding-left: 20px;}
+	#signup_popup .modal-dialog {
+    width: auto;margin-top: 70px;
+}
 .l_more.text-center a{color:#60c3ab; text-decoration: underline;}
 .l_more.text-center {font-size: 18px;font-family: Proxima-Nova-Bold; color:#60c3ab; text-decoration: underline;}
 .top_nav_div{display: none;}
