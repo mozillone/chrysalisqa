@@ -7,7 +7,13 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="list-banner"><img class="img-responsive" src="{{asset('/assets/frontend/img/list-banner.jpg')}}"></div>
+			<div class="list-banner">
+			@if(empty($data['sub_cat_info'][0]->banner_image))
+			<img class="img-responsive" src="/category_images/df_img.jpg">
+			@else
+			<img class="img-responsive" src="/category_images/{{$data['sub_cat_info'][0]->banner_image}}">
+			@endif
+			</div>
 		</div>
 	</div>
 </div>
@@ -38,14 +44,9 @@
 <div class="list-box-rm">
 <h2 class="list-box-head">THEMES</h2>
 <ul class="box-list1">
-<li>Animals & Insects</li>
-<li class="active">TV & Movie</li>
-<li>Superheroes & Villians</li>
-<li>Horror</li>
-<li>Storybook & Fairytale</li>
-<li>History</li>
-<li>Miscellaneous</li>
-<li>Groups & Couples</li>
+@foreach($data['sub_cats_list'] as $sub_cats_list)
+<li @if($sub_cats_list->category_id==$data['sub_cat_info'][0]->category_id) class="active" @endif><a href="/shop/{{$sub_cats_list->category_id}}/{{$parent_cat_name}}/{{$sub_cats_list->name}}">{{$sub_cats_list->name}}</a></li>
+@endforeach
 </ul>
 <h2 class="list-box-head narrow-head">NARROW BY</h2>
 <div class="box-list1 narrow">
@@ -87,7 +88,7 @@
 <div class="col-md-9 col-sm-8">
 
 <div class="list-sec-rm">
-<p class="list-sec-rm1">TV & MOVIE</p>
+<p class="list-sec-rm1">{{$data['sub_cat_info'][0]->name}}</p>
 <p class="list-sec-rm2"><span>Sort By</span> <select><option>Newest<option><option>Oldest<option></select></p>
 
 </div>

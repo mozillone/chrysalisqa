@@ -67,7 +67,8 @@
 								<li class="col-sm-6">
 									<ul>
 										@for($i=1;$i<count($value);$i++)
-											<li><a href="/shop/{{$key}}/{{$value[$i]}}">{{$value[$i]}}</a></li>
+											<?php $res=explode("_", $value[$i]);?>
+											<li><a href="/shop/{{$res[0]}}/{{$key}}/{{$res[1]}}">{{$res[1]}}</a></li>
 										@endfor
 									</ul>
 								</li>
@@ -77,15 +78,16 @@
 								<li class="col-sm-6">
 									<ul>
 										@for($i=1;$i<$menu1;$i++)
-
-											<li><a href="/shop/{{$key}}/{{$value[$i]}}">{{$value[$i]}}</a></li>
+											<?php $res=explode("_", $value[$i]);?>
+											<li><a href="/shop/{{$res[0]}}/{{$key}}/{{$res[1]}}">{{$res[1]}}</a></li>
 										@endfor
 									</ul>
 								</li>
 								<li class="col-sm-6">
 									<ul>
 										@for($j=$menu1;$j<$menu2;$j++)
-											<li><a href="/shop/{{$key}}/{{$value[$i]}}">{{$value[$j]}}</a></li>
+											<?php $res=explode("_", $value[$j]);?>
+											<li><a href="/shop/{{$res[0]}}/{{$key}}/{{$res[1]}}">{{$res[1]}}</a></li>
 										@endfor
 									</ul>
 								</li>
