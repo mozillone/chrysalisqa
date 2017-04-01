@@ -14,7 +14,7 @@ class SiteHelper  {
 			$getSubCategories=Site_model::Fetch_data('category','*',$cond);
 			$categories_list[$menus->name][]="None";
 			foreach ($getSubCategories as $subCat) {
-				$categories_list[$menus->name][]=$subCat->name;
+				$categories_list[$menus->name][]=$subCat->category_id.'_'.$subCat->name;
 			}
 			
 		}

@@ -20,7 +20,7 @@
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 								</button>
-								<a class="navbar-brand" href="#"><img class="img-responsive" src="../assets/frontend/img/brand.png"></a>
+								<a class="navbar-brand" href="/"><img class="img-responsive" src="{{asset('/img/brand.png')}}"></a>
 							</div>
 							<div id="navbar" class="navbar-collapse collapse main_menu_in">
 								<ul class="nav navbar-nav mid_nav">
@@ -67,7 +67,8 @@
 								<li class="col-sm-6">
 									<ul>
 										@for($i=1;$i<count($value);$i++)
-											<li><a href="/shop/{{$key}}/{{$value[$i]}}">{{$value[$i]}}</a></li>
+											<?php $res=explode("_", $value[$i]);?>
+											<li><a href="/shop/{{$res[0]}}/{{$key}}/{{$res[1]}}">{{$res[1]}}</a></li>
 										@endfor
 									</ul>
 								</li>
@@ -77,15 +78,16 @@
 								<li class="col-sm-6">
 									<ul>
 										@for($i=1;$i<$menu1;$i++)
-
-											<li><a href="/shop/{{$key}}/{{$value[$i]}}">{{$value[$i]}}</a></li>
+											<?php $res=explode("_", $value[$i]);?>
+											<li><a href="/shop/{{$res[0]}}/{{$key}}/{{$res[1]}}">{{$res[1]}}</a></li>
 										@endfor
 									</ul>
 								</li>
 								<li class="col-sm-6">
 									<ul>
 										@for($j=$menu1;$j<$menu2;$j++)
-											<li><a href="/shop/{{$key}}/{{$value[$i]}}">{{$value[$j]}}</a></li>
+											<?php $res=explode("_", $value[$j]);?>
+											<li><a href="/shop/{{$res[0]}}/{{$key}}/{{$res[1]}}">{{$res[1]}}</a></li>
 										@endfor
 									</ul>
 								</li>
@@ -115,7 +117,7 @@
 							<span class="btn-line"></span>
 						</span></div>
 						<div class="mobile_menu_logo">
-							<a href=""><img class="img-responsive" src="../assets/frontend/img/brand.png"></a>
+							<a href="/"><img class="img-responsive" src="{{asset('img/brand.png')}}"></a>
 						</div>
 					</div>
 					<div class="col-xs-7">

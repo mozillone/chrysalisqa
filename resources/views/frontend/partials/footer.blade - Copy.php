@@ -82,11 +82,11 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12">
 			<div class="login-register" id="loginModal">
 				<ul class="nav nav-tabs">
-                    <li class="active"><a href="#login_tab1" data-toggle="tab">Sign In</a></li>
-                    <li><a href="#signup_tab1" data-toggle="tab">Register</a></li>
+                    <li class="active"><a href="#login_tab1" data-toggle="tab">Login</a></li>
+                    <li><a href="#signup_tab1" data-toggle="tab">Signup</a></li>
                     <li class="hide"><a href="#forget_password1" data-toggle="tab">Reset Password</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
@@ -95,59 +95,51 @@
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<input type="hidden" name="plan_id" value="">
 							<div class="form-group">
-							<label>Email</label>
 								<input type="text" id="loginpopup_email" name="email" placeholder="Email *" class="form-control">
 								<p class="error">{{ $errors->first('email') }}</p>
 							</div>
 							<div class="form-group">
-							<label>Password</label>
 								<input type="password" id="loginopup_password" name="password" placeholder="Password *" class="form-control">
 								<p class="error">{{ $errors->first('password') }}</p>
 							</div>
-							<div class=" form-group loign-adtnl forgot"> 
-								<label><a href="#forget_password1" data-toggle="tab">Help! I forgot my password</a></label>
-							</div>
 							<div class="form-group">
-								<div class="login-btn">
+								<div class="text-center">
 									<button class="btn btn-primary">Log In</button>
 								</div>
 							</div>
-							
+							<div class="col-md-12 loign-adtnl"> 
+								<label><a href="#forget_password1" data-toggle="tab">Forgot Password?</a></label>
+							</div>
 					</form>                  
 					</div>
                     <div class="tab-pane fade" id="signup_tab1">
 						<form role="form" action="{{route('register')}}" method="POST" id="signup_pop">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group">
-						<label>First Name</label>
-			                <input type="text" name="first_name" id="pop_first_name" class="form-control " >
+			                <input type="text" name="first_name" id="pop_first_name" class="form-control " placeholder="First Name *">
 						</div>
 						<div class="form-group">
-							<label>Last Name</label>
-							<input type="text" name="last_name" id="pop_last_name" class="form-control " >
+							<input type="text" name="last_name" id="pop_last_name" class="form-control " placeholder="Last Name *">
 						</div>
 						<div class="form-group">
-							<label>Email</label>
-							<input type="text" id="popup_email" name="email"  class="form-control">
+							<input type="text" id="popup_email" name="email" placeholder="Email Address *" class="form-control">
 						</div>
 						<div class="row sinup-pswrd"> 
 							<div class="col-md-12 col-sm-12 col-xs-12 "> 
 								<div class="form-group">
-									<label>Password</label>
-									<input type="password" id="popup_password" name="password" class="form-control">
+									<input type="password" id="popup_password" name="password" placeholder="Create Password *" class="form-control">
 								</div>
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12 "> 
 								<div class="form-group">
-								<label>Confirm Password</label>
-									<input type="password" id="pop_cpassword"  name="cpassword"  class="form-control">
+									<input type="password" id="pop_cpassword"  name="cpassword" placeholder="Confirm Password *" class="form-control">
 								</div>
 							</div>
 						</div> 
 						<div class="row"> 
 							<div class="col-md-12 col-sm-12 col-xs-12 "> 
 								<div class="form-group">
-									<div class="text-center creat_btn">
+									<div class="text-center">
 										<button class="btn btn-primary">Create Account!</button>
 									</div>
 								</div>
@@ -164,22 +156,19 @@
 								<p class="error">{{ $errors->first('email') }}</p>
 							</div>
 							<div class="form-group">
-								<div class="text-center rect_pswrd">
+								<div class="text-center">
 									<button class="btn btn-primary">Reset Password</button>
 								</div>
 							</div>
 						</form>             
 					</div>
-                    <div class="form-group or text-center">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
 								<p>Or</p>
 				</div>
-				<div class="social-login">
-					<div class="form-group socil-btn">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
 						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
 					</div>
-				</div>
-				<div class="text-center close_icon">
-				<button type="button" class="close" data-dismiss="modal">&times; Close</button>
 				</div>
 				</div>
 				
