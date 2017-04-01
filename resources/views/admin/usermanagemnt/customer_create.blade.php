@@ -65,6 +65,20 @@
 											<p class="error">{{ $errors->first('last_name') }}</p>
 										</div>
 									</div>
+									<div class="col-md-12">
+										<div class="form-group" >
+											<label for="inputEmail3" class="control-label">Phone #<span class="req-field" >*</span></label>
+											<input type="text" class="form-control" name="phone_number" placeholder="123-456-7890" maxlength="10" id="phone_number" required>
+											<p class="error">{{ $errors->first('phone_num') }}</p>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group" >
+											<label for="inputEmail3" class="control-label">Email Address<span class="req-field" >*</span></label>
+											<input type="text" class="form-control" name="email" placeholder="my@email.com" id="email" required>
+											<p class="error">{{ $errors->first('last_name') }}</p>
+										</div>
+									</div>
 									
 								</div>
 								
@@ -75,9 +89,9 @@
 							<h2 class="heading-agent">Login Info</h2>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
-									<label for="inputEmail3" class="control-label">Email<span class="req-field" >*</span></label>
+									<label for="inputEmail3" class="control-label">Username<span class="req-field" >*</span></label>
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Email"  name="email" id="email">
+										<input type="text" class="form-control" placeholder="Username"  name="user_name" id="user_name">
 										<span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon2" style="position:static;"></span>
 									</div>
 									<p class="error">{{ $errors->first('email') }}</p> 

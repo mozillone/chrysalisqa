@@ -4,38 +4,57 @@
 @section('title') @parent
 @endsection
 
-{{-- page level styles --}}
 @section('header_styles')
-<link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
-<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+<link rel="stylesheet" href="{{ asset('/assets/admin/vendors/sweetalert/dist/sweetalert.css')}}">
 @stop
 
 {{-- Page content --}}
 @section('content')
- <section class="content-header">
-    <h1>Customers</h1>
-    <ol class="breadcrumb">
-    <li>
-        <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
-    </li>
-    <li class="active">Customers List</li>
-  </ol>
+
+<section class="content-header">
+	<h1>Customers</h1>
+	<ol class="breadcrumb">
+		<li>
+			<a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
+		</li>
+		<li>
+			<a href="{{url('customers-list')}}">Customets Lists</a>
+		</li>
+		<li class="active"> Edit</li>
+	</ol>
+	
 </section>
 <section class="content" ng-controller="UsersController">
-    <div class="row">
-        <div class="col-md-12">
-         @if (Session::has('error'))
-                <div class="alert alert-danger alert-dismissable">
-                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        {{ Session::get('error') }}
-                </div>
-                @elseif(Session::has('success'))
-                 <div class="alert alert-success alert-dismissable">
-                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                       {{ Session::get('success') }}
-                </div>
-        @endif
-            <div class="box box-info">
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title heading-agent col-md-12">View Customer - </h3>
+				</div>
+				<!--Tabs code starts here-->
+				 <ul class="nav nav-tabs">
+  <li><a href="/customer-edit/{{Request::segment(3)}}">Profile</a></li>
+  <li><a  href="/user-costumes-list">Costumes</a></li>
+  <li><a  href="#menu2">Costumes Sold</a></li>
+  <li><a  href="#menu2">Recent Orders</a></li>
+  <li class="active"><a data-toggle="tab" href="#menu2">Credit History</a></li>
+  <li><a data-toggle="tab" href="#menu2">Payement Profiles</a></li>
+</ul>
+<!--Tab code ends here-->
+				
+				<div class="box-body">
+					@if (Session::has('error'))
+					<div class="alert alert-danger alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						{{ Session::get('error') }}
+					</div>
+					@elseif(Session::has('success'))
+					<div class="alert alert-success alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						{{ Session::get('success') }}
+					</div>
+					@endif 
+					<fiv class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">Customers List</h3>
                     <div class="box-tools pull-right" style="display:inline-flex">
@@ -85,7 +104,7 @@
           </div>
                 </div>
             </div>
-        </div>
+			</div>
     </div>
 </section>
 @stop
@@ -98,33 +117,3 @@
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 
 @stop
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -22,25 +22,14 @@
 		</li>
 		<li class="active">{{$user->display_name}} Edit</li>
 	</ol>
-	
 </section>
 <section class="content">
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title heading-agent col-md-12">View Customer - {{$user->display_name}}</h3>
+					<h3 class="box-title heading-agent col-md-12">Edit Customer</h3>
 				</div>
-				<!--Tabs code starts here-->
-				 <ul class="nav nav-tabs">
-  <li class="active"><a  href="/customer-edit/{{$user->id}}">Profile</a></li>
-  <li><a href="/user-costumes-list/{{$user->id}}">Costumes</a></li>
-  <li><a href="/user-costumessold-list/{{$user->id}}">Costumes Sold</a></li>
-  <li><a  href="/user-recentorders-list/{{$user->id}}">Recent Orders</a></li>
-  <li><a  href="/user-credithistory-list/{{$user->id}}">Credit History</a></li>
-  <li><a  href="/user-payementprofiles-list/{{$user->id}}">Payement Profiles</a></li>
-</ul>
-<!--Tab code ends here-->
 				
 				<div class="box-body">
 					@if (Session::has('error'))

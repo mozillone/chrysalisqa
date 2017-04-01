@@ -77,28 +77,40 @@ class UserController extends Controller
     public function customersListData(Request $request)
     {
         $req=$request->all();
-        $where='role_id!="1"';
-        if(!empty($req['search'])){
-          if(!empty($req['search']['id']) ){
-            $where.=' AND user.id ='.$req['search']['id'];
-          }
-          if(!empty($req['search']['name']) ){
-            $where.=' AND user.display_name LIKE "%'.$req['search']['name'].'%"';
-          }
-          if(!empty($req['search']['email']) ){
-            $where.=' AND user.email LIKE "%'.$req['search']['email'].'%"';
-          }
-          if(isset($req['search']['status'])){
+		
+    
+		$userslist=DB::table('users as user')
+		->leftJoin('costumes', 'costumes.created_by', '=', 'user.id')
+		->select('user.id','user.display_name','user.phone_number','user.email','user.active',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i") as date_format'),DB::raw("ifnull(count('costumes.costume_id'),0) as count"))
+		->groupby('user.id','user.display_name','user.phone_number','user.email','user.active')
+		->orderby('user.created_at','DESC')
+		->where('user.role_id','!=','1');
+		if(!empty($req['search'])){
+		
+		if(!empty($req['search']['name']) ){
+		$userslist->where('user.display_name', 'LIKE', "%".$req['search']['name']."%");
+		 }
+		 if(!empty($req['search']['email']) ){
+		$userslist->where('user.email',$req['search']['email']);
+		 }
+		 if(!empty($req['search']['phone']) ){
+		$userslist->where('user.phone_number',$req['search']['phone']);
+		 }
+		 if(isset($req['search']['status'])){
             if($req['search']['status']==""){
-              $where.=' AND  user.active in("0","1")';
-            }
+			$userslist->whereIn('user.active',array('0','1'));
+             }
             if($req['search']['status']!=""){
-              $where.=' AND  user.active="'.$req['search']['status'].'"';
+              $userslist->where('user.active',$req['search']['status']);
             }
           }
-        }
-        $users = DB::select('SELECT user.id,user.display_name as name,user.email,user.active,DATE_FORMAT(user.created_at,"%m/%d/%y %h:%i %p") as date FROM `cs_users` as user where '.$where.' ORDER BY user.created_at DESC');
-        return response()->success(compact('users'));
+		  }
+		 $users=$userslist->get();
+		//->where('users.role_id','!=',1);
+		//$users=$userslist->get();
+		//$userslist=DB::table('users')->select('users.*')->order_by('users.created_at','DESC')->get();
+       // $users = DB::select('SELECT user.id,user.display_name as name,user.phone_number,user.email,user.active,DATE_FORMAT(user.created_at,"%m/%d/%y %h:%i %p") as date, FROM `cc_users` as user where '.$where.' ORDER BY user.created_at DESC');
+        return response()->success(compact('users','credit'));
   
     }
  	public function customerAdd(Request $request)
@@ -122,7 +134,9 @@ class UserController extends Controller
 			$user = new User();
 			$user->first_name    = $req['first_name'];
 			$user->last_name     = $req['last_name'];
-			$user->display_name          = $user->first_name." ".$user->last_name;
+			$user->display_name  = $req['user_name'];
+			$user->phone_number	 = $req['phone_number'];
+			//$user->display_name  = $user->first_name." ".$user->last_name;
 			$user->email         = $req['email'];
 			$user->password      = Hash::make($req['password']);
 			$user->active        = "1";
@@ -214,5 +228,30 @@ class UserController extends Controller
     		return Response::JSON(true);
     	}
     }
+	/*****user costumes list fetching code starts here***/
+	public function userCostumes(){
+	 $title=Auth::user()->display_name."Costumes";
+	 return view('admin.usermanagemnt.user_customes_list')->with('title',$title);
+	}
+	/****user sold costumes code starts here************/
+	public function userSoldcostumes(){
+	$title=Auth::user()->display_name."Costumes Sold";
+	return view('admin.usermanagemnt.user_customessold_list')->with('title',$title);
+	}
+	/****User Recent Orders Code Starts Here****/
+	public function recentOrders(){
+	$title=Auth::user()->display_name."Recent Orders";
+	return view('admin.usermanagemnt.user_recentorders')->with('title',$title);
+	}
+	/****User Credit history code starts here***/
+	public function creditHistory(){
+	$title=Auth::user()->display_name."Credit History";
+	return view('admin.usermanagemnt.user_credit_history')->with('title',$title);
+	}
+	/****Payement Profiles Code starts here***/
+	public function payementProfiles(){
+	$title=Auth::user()->display_name."Payement Profiles";
+	return view('admin.usermanagemnt.user_payement_profiles')->with('title',$title);
+	}
  
 }

@@ -13,12 +13,12 @@
 {{-- Page content --}}
 @section('content')
  <section class="content-header">
-    <h1>Customers</h1>
+    <h1>Customes</h1>
     <ol class="breadcrumb">
     <li>
         <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
     </li>
-    <li class="active">Customers List</li>
+    <li class="active">Customes List</li>
   </ol>
 </section>
 <section class="content" ng-controller="UsersController">
@@ -37,7 +37,7 @@
         @endif
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Customers List</h3>
+                    <h3 class="box-title">Customes List</h3>
                     <div class="box-tools pull-right" style="display:inline-flex">
                     <a href="customer-add" class="btn btn-block btn-success btn-xs"><i class="fa fa-plus"></i> Add Customer</a>
                     </div>
@@ -46,28 +46,19 @@
         <div class="table-responsive">
                 <table class="table table-striped table-bordered user-list-table">
                   <thead>
-                    <th>Customer Name</th>
-					<th>Email</th>
-					<th>Phone No.</th>
-                    <th>Is Seller?</th>
-                    <th>Status</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Active</th>
                     <th></th>
                   </thead>
                   <tbody>
                     <tr>
                       <input type="hidden" class="form-control token"  name="csrf-token" value="{{ csrf_token() }}">
-                      <!--<td><input type="text" class="form-control" ng-model="search.id" name="id" placeholder=""></td>-->
-                      <td><input type="text" class="form-control" ng-model="search.name" name="name" placeholder=""></td>
-					  <td><input type="text" class="form-control" ng-model="search.email" name="email" placeholder=""></td>
-					  <td><input type="text" class="form-control" ng-model="search.phone" name="phone" placeholder=""></td>
+                      <td><input type="text" class="form-control" ng-model="search.id" name="id" placeholder="Customer ID"></td>
+                      <td><input type="text" class="form-control" ng-model="search.name" name="name" placeholder="User Name"></td>
+                      <td><input type="text" class="form-control" ng-model="search.email" name="email" placeholder="Email"></td>
                       <td>
-                        <select name="count" class="form-control" id="count" ng-model="search.count" >
-                          <option value=""> All </option>  
-                          <option value="1">Yes</option>
-						  <option value="2">No</option>
-                        </select>
-                      </td>
-					   <td>
                         <select name="mySelect" class="form-control" id="mySelect" ng-model="search.status">
                           <option value=""> All </option>  
                           <option ng-repeat="option in status" value="@{{option.value}}">@{{option.name}}</option>
