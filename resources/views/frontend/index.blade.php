@@ -228,4 +228,5 @@
 @section('footer_scripts')
 <script src="{{ asset('/assets/frontend/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/home.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
 @stop

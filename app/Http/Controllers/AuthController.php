@@ -28,11 +28,17 @@ class AuthController extends Controller {
         {
         	   return Redirect::route('dashboard');
         }
+        Session::put('is_loginPage');
         return view('auth.login');		
  	}
    public function getSignin()
    {   
-    	return View('auth.login');
+    	Session::put('is_loginPage');
+    	if(Auth::check()){
+    		return Redirect::to('/dashboard');
+    	}else{
+    		return View('auth.login');
+    	}	
    }
    public function postLogin(Request $request)
    {
@@ -71,10 +77,10 @@ class AuthController extends Controller {
 					return Redirect::to('/subscription/'.$req['plan_id']);
 				}
 				
-				if(Session::has('is_listingPage')){
-					return Redirect::back();
-				}else{
+				if(Session::has('is_loginPage')){
 					return Redirect::to('/dashboard');
+				}else{
+					return Redirect::back();
 				}
 			}
 			else 
