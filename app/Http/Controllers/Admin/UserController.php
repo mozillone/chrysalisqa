@@ -58,7 +58,7 @@ class UserController extends Controller
       $userData = [
           'first_name' => $req['first_name'],
           'last_name' => $req['last_name'],
-          'display_name' =>  $req['first_name']." ".$req['last_name'],
+		  'display_name'=>$req['user_name'],
           'email'=>$req['email'],
           'user_img' =>$file_name
       ];
@@ -77,12 +77,10 @@ class UserController extends Controller
     public function customersListData(Request $request)
     {
         $req=$request->all();
-		
-    
 		$userslist=DB::table('users as user')
 		->leftJoin('costumes', 'costumes.created_by', '=', 'user.id')
-		->select('user.id','user.display_name','user.phone_number','user.email','user.active',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i") as date_format'),DB::raw("ifnull(count('costumes.costume_id'),0) as count"))
-		->groupby('user.id','user.display_name','user.phone_number','user.email','user.active')
+		->select('user.id','user.display_name','user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i") as date_format'),DB::raw("ifnull(count('costumes.costume_id'),0) as count"))
+		->groupby('user.id','user.display_name','user.phone_number','user.email','user.active','user.deleted')
 		->orderby('user.created_at','DESC')
 		->where('user.role_id','!=','1');
 		if(!empty($req['search'])){
@@ -104,6 +102,15 @@ class UserController extends Controller
               $userslist->where('user.active',$req['search']['status']);
             }
           }
+		 if(isset($req['search']['count'])){
+            if($req['search']['count']==""){
+			$userslist->whereIn('user.deleted',array('0','1'));
+             }
+            if($req['search']['count']!=""){
+              $userslist->where('user.deleted',$req['search']['count']);
+            }
+          }
+
 		  }
 		 $users=$userslist->get();
 		//->where('users.role_id','!=',1);
@@ -143,7 +150,7 @@ class UserController extends Controller
 			$user->user_img =$file_name;
 			
 			if($user->save()){
-				Session::flash('success', 'Customer is created successfully');
+				Session::flash('success', 'Customer created successfully');
 					return Redirect::to('customers-list');
 				}else{
 					$message = array();
@@ -158,8 +165,9 @@ class UserController extends Controller
 	public function customerUpdated(Request $request){
 		$req=$request->all();
 		$name = User::find($req['user_id']);
-		if(isset($req['avatar'])){
-			$file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
+		if(!empty($request->avatar))
+        {
+	        $file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
 			$source_image_path=public_path('profile_img');
 			$thumb_image_path1=public_path('profile_img');
 			$thumb_image_path2=public_path('profile_img/thumbs');
@@ -168,11 +176,8 @@ class UserController extends Controller
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
 	
 		}
-		else if(isset($req['is_removed'])){
-			$file_name="";
-		}
 		else{
-			$file_name=$name->avatar;
+			$file_name=$name->user_img;
 		}
 		$userData = [
 				'first_name' => $req['first_name'],
@@ -185,7 +190,7 @@ class UserController extends Controller
 			$userData['password'] =  Hash::make($req['password']);
 		}
 		$affectedRows = User::where('id', '=', $req['user_id'])->update($userData);
-		Session::flash('success', 'Customet is upadated successfully');
+		Session::flash('success', 'Customer Updated  successfully');
 		return Redirect::to('customers-list');
 	
 	
@@ -196,7 +201,7 @@ class UserController extends Controller
       $apiId=$data['api_customer_id'];
       $res = User::where('id',$id)->delete();
       if($res){
-      	Session::flash('success', 'Customer is deleted Successfully');
+      	Session::flash('success', 'Customer Deleted Successfully');
         return Redirect::back();
       }else{
         Session::flash('error', 'Customer is deleted.Database error occured');
@@ -229,29 +234,42 @@ class UserController extends Controller
     	}
     }
 	/*****user costumes list fetching code starts here***/
-	public function userCostumes(){
-	 $title=Auth::user()->display_name."Costumes";
-	 return view('admin.usermanagemnt.user_customes_list')->with('title',$title);
+	public function userCostumes($id){
+	
+	$title=Auth::user()->display_name."Costumes";
+	$userid=$id;
+	//$costumes=DB::table('costumes')->
+	//select('costume_id as id','name as costume_name',
+	//'users.display_name as username','condition as condition',
+	//DB::Raw('DATE_FORMAT(cc_users.created_at,"%m/%d/%y %h:%i") as date_format','status as active'))
+	//->leftJoin('users','costumes.created_by','=','users.id')
+	//->where('created_by','=',8)
+	//->get();
+	return view('admin.usermanagemnt.user_customes_list',compact('title','userid'));
 	}
 	/****user sold costumes code starts here************/
-	public function userSoldcostumes(){
+	public function userSoldcostumes($id){
+	$userid=$id;
 	$title=Auth::user()->display_name."Costumes Sold";
-	return view('admin.usermanagemnt.user_customessold_list')->with('title',$title);
+	return view('admin.usermanagemnt.user_customessold_list',compact('title','userid'));
 	}
 	/****User Recent Orders Code Starts Here****/
-	public function recentOrders(){
+	public function recentOrders($id){
+	$userid=$id;
 	$title=Auth::user()->display_name."Recent Orders";
-	return view('admin.usermanagemnt.user_recentorders')->with('title',$title);
+	return view('admin.usermanagemnt.user_recentorders',compact('title','userid'));
 	}
 	/****User Credit history code starts here***/
-	public function creditHistory(){
+	public function creditHistory($id){
+	$userid=$id;
 	$title=Auth::user()->display_name."Credit History";
-	return view('admin.usermanagemnt.user_credit_history')->with('title',$title);
+	return view('admin.usermanagemnt.user_credit_history',compact('title','userid'));
 	}
 	/****Payement Profiles Code starts here***/
-	public function payementProfiles(){
+	public function payementProfiles($id){
+	$userid=$id;
 	$title=Auth::user()->display_name."Payement Profiles";
-	return view('admin.usermanagemnt.user_payement_profiles')->with('title',$title);
+	return view('admin.usermanagemnt.user_payement_profiles',compact('title','userid'));
 	}
  
 }

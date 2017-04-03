@@ -18,12 +18,12 @@
 			<a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="{{url('customers-list')}}">Customers List</a>
+			<a href="{{url('customers-list')}}">Costumers List</a>
 		</li>
 		<li class="active">
-			Costumes List
+			Costumes Sold
 		</li>
-		
+
 	</ol>
 	
 </section>
@@ -41,8 +41,8 @@
 				<!--Tabs code starts here-->
 				  <ul class="nav nav-tabs">
   <li ><a  href="/customer-edit/{{$userid}}">Profile</a></li>
-  <li class="active" ><a href="/user-costumes-list/{{$userid}}">Costumes</a></li>
-  <li><a href="/user-costumessold-list/{{$userid}}">Costumes Sold</a></li>
+  <li><a href="/user-costumes-list/{{$userid}}">Costumes</a></li>
+  <li class="active"><a href="/user-costumessold-list/{{$userid}}">Costumes Sold</a></li>
   <li><a  href="/user-recentorders-list/{{$userid}}">Recent Orders</a></li>
   <li><a  href="/user-credithistory-list/{{$userid}}">Credit History</a></li>
   <li><a  href="/user-payementprofiles-list/{{$userid}}">Payement Profiles</a></li>
@@ -63,7 +63,7 @@
 					@endif 
 					<fiv class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Costumers List</h3>
+                    <h3 class="box-title">Customes Sold</h3>
                     <div class="box-tools pull-right" style="display:inline-flex">
                    
                     </div>
@@ -74,13 +74,12 @@
           <table datatable dt-options="dtOptions" dt-columns="dtColumns"
                         class="table table-bordered table-hover table-striped" id="dtTable">
 						<tr>
-						<th>Costume Name</th>
-						<th>Catgeory</th>
-						<th>Condition</th>
-						<th>Qty. Available</th>
-						<th>Created Date</th>
+						<th>Orders</th>
+						<th>Buyer</th>
+						<th>Price</th>
 						<th>Status</th>
-						<th>Actions</th>
+						<th>Ordered Date</th>
+						<th>View Order</th>
 						</tr>
 						<tr>
 						<td>No Data Avialable..!!</td>

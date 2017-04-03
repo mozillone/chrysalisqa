@@ -20,19 +20,7 @@
           </li>
         </ul>
       </li>
-	  <li {{ (Request::is('user-lists') ? 'class=active' : '') }}  {{ (Request::is('agent-list') ? 'class=active' : '') }} {{ (Request::is('user-edit/*') ? 'class=active' : '') }} {{ (Request::is('agent-edit/*') ? 'class=active' : '') }} {{ (Request::is('user-add') ? 'class=active' : '') }} {{ (Request::is('agent-add') ? 'class=active' : '') }}>
-        <a href="javascript:void(0)">
-            <i class="fa fa-users "></i> <span>Costumes</span> <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu menu">
-          <li {{ (Request::is('costumes-list') ? 'class=active' : '') }}>
-            <a href="{{route('costumes-list')}}">
-              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Customes List</span>
-            </a>
-          </li>
-		 
-        </ul>
-      </li>
+	 
     </ul>
   </section> 
 </aside>

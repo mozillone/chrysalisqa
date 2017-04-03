@@ -41,11 +41,9 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
 	 return '$25.00';
 	}
 	function isseller(data){
-	 if(data.count=="0"){
+	
 		 return "No";
-	 }else{
-		 return "yes";
-	 }
+	 
 	}
 
    
@@ -96,22 +94,22 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
 	var vm = this;
     $scope.dtOptions = DTOptionsBuilder.newOptions()
       .withOption('ajax', {
-        url: '/user-costumes-list/{id}',
+        url: '/user-costumes-list',
         type: 'GET'
       })
-      .withDataProp('data.users')
+      .withDataProp('data.costumes')
       .withOption('createdRow', createdRow)
       .withOption('order', [ ])
       .withOption('responsive', true)
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-                      DTColumnBuilder.newColumn('display_name').withTitle('Customer Name'),
-                      DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
-					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
+                      DTColumnBuilder.newColumn('username').withTitle('Customer Name'),
+                      DTColumnBuilder.newColumn('username').withTitle('Email').notSortable(),
+					  DTColumnBuilder.newColumn('username').withTitle('Phone #').notSortable(),
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
-					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
-					  DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
+					//  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
+					 // DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
 					  DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
                       DTColumnBuilder.newColumn(null).withTitle('Status').notSortable().renderWith(activeHtml),,
                       DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
@@ -134,7 +132,7 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
 	 return '$25.00';
 	}
 	function isseller(data){
-	 if(data.count=="0"){
+	 if(data.deleted=="0"){
 		 return "No";
 	 }else{
 		 return "yes";
@@ -168,9 +166,9 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
             .withOption('lengthChange', false);
              $scope.dtColumns = [
                             DTColumnBuilder.newColumn('display_name').withTitle('Customer Name'),
-                      DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
-					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
-					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
+							DTColumnBuilder.newColumn('phone_number').withTitle('Phone No.').notSortable(),
+                           DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
+						 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
 					  DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
 					  DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
@@ -183,7 +181,7 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
           });
         } 
 
-});
+}); 
  $(document).on('click', '.delete', function(){ 
       var id=$(this).attr('data-id');
       swal({   

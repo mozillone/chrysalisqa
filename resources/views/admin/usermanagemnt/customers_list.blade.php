@@ -64,7 +64,7 @@
                         <select name="count" class="form-control" id="count" ng-model="search.count" >
                           <option value=""> All </option>  
                           <option value="1">Yes</option>
-						  <option value="2">No</option>
+						  <option value="0">No</option>
                         </select>
                       </td>
 					   <td>
@@ -93,6 +93,7 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts') 
+
 <script src="{{ asset('angular/Admin/UserManagement/Controllers/users-lists.js') }}"></script>
 <script src="{{ asset('angular/Admin/UserManagement/Services/user_management.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>

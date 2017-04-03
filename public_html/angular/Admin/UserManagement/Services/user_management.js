@@ -1,4 +1,3 @@
-//display roles list
 app.factory('UserManagement', function($http){
 	 var fac={};
 	 fac.getCustomerslist=function(){

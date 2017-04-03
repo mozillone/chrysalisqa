@@ -6,6 +6,16 @@ a:hover, a.active {font-style:none}
   width: 54px;
   height: 28px;
 }
+/**/
+.skin-blue .main-header .logo:hover, .skin-blue .main-header .logo{background-color: #fff;}
+span.logo-lg {width: 57%;    margin: 0 auto;}
+.skin-blue .main-header .navbar {background-color: #60c5ac;}
+.skin-blue .main-header li.user-header{background-color: #549e8c;}
+.skin-blue .main-header .navbar .nav>li>a:hover, .skin-blue .main-header .navbar .nav>li>a:active, .skin-blue .main-header .navbar .nav>li>a:focus, .skin-blue .main-header .navbar .nav .open>a, .skin-blue .main-header .navbar .nav .open>a:hover, .skin-blue .main-header .navbar .nav .open>a:focus, .skin-blue .main-header .navbar .nav>.active>a{background-color: #60c5ac;}
+
+
+/**/
+
 .login-logo img {
     margin: 0 auto !important;
 }
@@ -34,7 +44,7 @@ a:hover, a.active {font-style:none}
     border-color: #f9c721;
 }
 .skin-blue .main-header .navbar .nav>li>a:hover, .skin-blue .main-header .navbar .nav>li>a:active, .skin-blue .main-header .navbar .nav>li>a:focus, .skin-blue .main-header .navbar .nav .open>a, .skin-blue .main-header .navbar .nav .open>a:hover, .skin-blue .main-header .navbar .nav .open>a:focus, .skin-blue .main-header .navbar .nav>.active>a {
-    background: rgb(60, 141, 188);
+    background:#60c5ac;
     color: #f6f6f6;
 }
 .form-group.spaces-admin span {
@@ -135,8 +145,6 @@ h3.box-title{width:100%; float:left;}
 .sidebar-collapse .sidebar-menu .treeview-menu{padding-left: 0px !important;}
 .login-box-body form .btn.btn-flat, .login-box-body form .form-control{border-radius: 2px;}
 
-.main-header .logo img{margin: 7px 0 0 0px;}
-.main-header .logo{padding: 0 7px !important;}
 
 .ticket-view .ticket-head{text-align:right}
 .ticket-view p{width:100%; float:left;}

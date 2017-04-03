@@ -18,7 +18,7 @@
 			<a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="{{url('customers-list')}}">Customets Lists</a>
+			<a href="{{url('customers-list')}}">Customers Lists</a>
 		</li>
 		<li class="active">{{$user->display_name}} Edit</li>
 	</ol>
@@ -31,6 +31,7 @@
 				<div class="box-header">
 					<h3 class="box-title heading-agent col-md-12">View Customer - {{$user->display_name}}</h3>
 				</div>
+				<div class="box-body">
 				<!--Tabs code starts here-->
 				 <ul class="nav nav-tabs">
   <li class="active"><a  href="/customer-edit/{{$user->id}}">Profile</a></li>
@@ -42,7 +43,7 @@
 </ul>
 <!--Tab code ends here-->
 				
-				<div class="box-body">
+				
 					@if (Session::has('error'))
 					<div class="alert alert-danger alert-dismissable">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -54,7 +55,8 @@
 						{{ Session::get('success') }}
 					</div>
 					@endif 
-					<form  id="edit_customer" class="form-horizontal defult-form" action="/customer-update" method="POST" novalidate enctype="multipart/form-data" >
+					<form id="customer_edit" class="form-horizontal defult-form" name="userForm" action="/customer-update" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+					
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" name="user_id" value="{{$user->id}}">
 						<div class="col-md-6">
@@ -76,6 +78,20 @@
 											<p class="error">{{ $errors->first('last_name') }}</p>
 										</div>
 									</div>
+									<div class="col-md-12">
+										<div class="form-group" >
+											<label for="inputEmail3" class="control-label">Phone #<span class="req-field" >*</span></label>
+											<input type="text" class="form-control" name="phone_number" value="{{$user->phone_number}}" placeholder="123-456-7890" maxlength="10" id="phone_number" required>
+											<p class="error">{{ $errors->first('phone_num') }}</p>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group" >
+											<label for="inputEmail3" class="control-label">Email Address<span class="req-field" >*</span></label>
+											<input type="text" class="form-control" name="email" placeholder="my@email.com" value="{{$user->email}}" id="email" required>
+											<p class="error">{{ $errors->first('last_name') }}</p>
+										</div>
+									</div>
 								</div>
 								</div> 
 							</div>
@@ -83,10 +99,10 @@
 						<div class="col-md-6">
 							<h2 class="heading-agent">Login Info</h2>
 							<div class="col-md-12">
-								<div class="form-group has-feedback" >
-									<label for="inputEmail3" class="control-label">Email<span class="req-field" >*</span></label>
+									<div class="form-group has-feedback" >
+									<label for="inputEmail3" class="control-label">Username<span class="req-field" >*</span></label>
 									<div class="input-group">
-										<input type="text" value="{{$user->email}}" class="form-control" placeholder="Email" name="email" id="email">
+										<input type="text" class="form-control" placeholder="Username"  name="user_name" id="user_name" value="{{$user->display_name}}">
 										<span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon2" style="position:static;"></span>
 									</div>
 									<p class="error">{{ $errors->first('email') }}</p> 

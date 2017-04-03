@@ -73,33 +73,72 @@ $(function(){
 			errorElement: 'span',
        		errorClass: 'error',
 		});
-	 $("#edit_customer").validate({
+	 $("#customer_edit").validate({
+        	onfocusout: function(element) { $(element).valid(); },
 			rules: {
 				first_name:{
 					 	required: true,
 						maxlength: 50,
-						alpha:true
-					},
+				},
 				last_name:{
 					 	required: true,
 						maxlength: 50,
-						alpha:true
-					},
-				
-				 email: {
+				}, 
+				phone_number:{
+					required: true,
+					number:true,
+					maxlength: 10,
+					//remote: {url: "/customer/emailValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
+				},
+				user_name:{
+					required: true,
+					maxlength: 50,
+				},
+				email: {
       				required: true,
       				email: true,
       				remote: {url: "/customer/emailValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
 	   				},
+				
 			},
+			highlight: function(element) {
+          	 $(element).closest('.form-control').addClass('error');
+	      	},
+	       	errorPlacement: function(error, element) {
+	           if(element.parent('.input-group').length) {
+	               error.insertAfter($(element).parents('div.input-group'));
+	           }else{
+	               error.insertAfter(element);
+	           }
+	       	},
 			messages: {
+			   first_name:
+			   {
+			    required: "Enter First Name",
+			   },
+			   last_name:
+			   {
+			    required: "Enter Last Name",
+			   },
+			   user_name:
+			   {
+			    required: "Enter Username",
+			   },
+			   
 				email:
                  {
-                    required: "Enter a valid  user email",
+                    required: "Enter Email Address",
                     email: "Please enter a valid email address.",
                     remote: "This email is already taken."
                  },
-			}
+				 phone_number:
+				 {
+					required: "Enter Phone Number"
+                   
+				 },
+			},
+			errorElement: 'span',
+       		errorClass: 'error',
 		});
 
 	   $("#profile_logo").on('change', function(){
