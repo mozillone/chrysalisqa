@@ -82,6 +82,16 @@ section.top_nav span{color:#60c5ac;}
 .top_nav ul li a{color:#fff;font-family: Proxima-Nova-Regular; font-size:16px}
 .top_nav{text-align:right;}
 .top_nav ul li a:hover{text-decoration:none;color:#fff;}
+.top_nav ul.dropdown-menu li {
+    padding-bottom: 0px;
+    margin-right: 0px;
+}
+.top_nav ul.dropdown-menu li a {
+    color: #000;
+}
+.top_nav .open>.dropdown-menu {
+    z-index: 9999;
+}
 
 /* Mobile Menu Css S */
 .none-rm{display:none;}
@@ -296,7 +306,7 @@ ul.box-list3.sizes li.active {
     text-decoration: none;
 }
 p.like_fav span.active i {
-    margin-right: 5px;
+    margin-right: 5px;color: #62c5bf;
 }
 p.like_fav span {
 font-family: Proxima-Nova-Semibold;
