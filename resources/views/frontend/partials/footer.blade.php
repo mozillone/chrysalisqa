@@ -96,16 +96,16 @@
 							<input type="hidden" name="plan_id" value="">
 							<div class="form-group">
 							<label>Email</label>
-								<input type="text" id="loginpopup_email" name="email" placeholder="Email *" class="form-control">
+								<input type="text" id="loginpopup_email" name="email" class="form-control">
 								<p class="error">{{ $errors->first('email') }}</p>
 							</div>
 							<div class="form-group">
 							<label>Password</label>
-								<input type="password" id="loginopup_password" name="password" placeholder="Password *" class="form-control">
+								<input type="password" id="loginopup_password" name="password"  class="form-control">
 								<p class="error">{{ $errors->first('password') }}</p>
 							</div>
 							<div class=" form-group loign-adtnl forgot"> 
-								<label><a href="#forget_password1" data-toggle="tab">Help! I forgot my password</a></label>
+								<label><a href="#forget_password1" data-toggle="tab">Help! I forgot my password.</a></label>
 							</div>
 							<div class="form-group">
 								<div class="login-btn">
@@ -175,11 +175,11 @@
 				</div>
 				<div class="social-login">
 					<div class="form-group socil-btn">
-						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
+						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> &nbsp;Log In With Facebook</a>
 					</div>
 				</div>
 				<div class="text-center close_icon">
-				<button type="button" class="close" data-dismiss="modal">&times; Close</button>
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span> Close</button>
 				</div>
 				</div>
 				
