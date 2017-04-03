@@ -14,12 +14,13 @@
         </a>
         <ul class="treeview-menu menu">
           <li {{ (Request::is('customers-list') ? 'class=active' : '') }}>
-            <a href='{{route('customers-list')}}'>
+            <a href="{{route('customers-list')}}">
               <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Customers List</span>
             </a>
           </li>
         </ul>
       </li>
+	 
     </ul>
   </section> 
 </aside>

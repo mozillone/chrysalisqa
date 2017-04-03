@@ -30,11 +30,15 @@ Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashb
 Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@EditProfile']);
 
 /** Products list page start here **/
-
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
 /** Products list page end here **/
+
+/** Costume Like page start here **/
+Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
+/** Costume Like page end here **/
+
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	  	Route::get('/admin/dashboard', 'DashboardController@dashboard');
@@ -43,12 +47,20 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	   /****************User Management Start Here***************************/
 	    Route::get('customers-list', ['as' => 'customers-list','uses'=>'UserController@customersList']);
 	    Route::any('/customers/list', 'UserController@customersListData');
-	    Route::any('/customer-add', ['as' => 'customer-create','uses'=>'UserController@customerAdd']);
+		Route::get('/user-costumes-list/{id}', ['as' => 'user-costumes-list','uses'=>'UserController@userCostumes']);
+		Route::get('/user-costumessold-list/{id}', ['as' => 'user-costumessold-list','uses'=>'UserController@userSoldcostumes']);
+		Route::get('/user-recentorders-list/{id}', ['as' => 'user-recentorders-list','uses'=>'UserController@recentOrders']);
+	    Route::get('/user-credithistory-list/{id}', ['as' => 'user-credithistory-list','uses'=>'UserController@creditHistory']);
+		Route::get('/user-payementprofiles-list/{id}', ['as' => 'user-payement_profiles-list','uses'=>'UserController@payementProfiles']);
+		Route::any('/customer-add', ['as' => 'customer-create','uses'=>'UserController@customerAdd']);
 	    Route::any('/customer-edit/{id}', ['as' => '','uses'=>'UserController@customerEdit']);
 	    Route::any('/customer-update', ['as' => 'customer-update','uses'=>'UserController@customerUpdated']);
 	    Route::any('/customer-delete/{id}', 'UserController@customerDelete');
 	    Route::any('/status/change', 'UserController@changeUserStatus');
 	    Route::any('/customer/emailValidation', array('as' => '','uses' => 'UserController@EmailNameCheck'));
 	    /****************User Management End Here***************************/
+		/****************Costumes Management Code Starts Here*********************/
+		Route::get('costumes-list', ['as' => 'costumes-list','uses'=>'CostumeController@costumesList']);
+		/****************Costumes Managemnet Code Ends Here***********************/
 });
 

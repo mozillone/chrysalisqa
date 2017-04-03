@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use DB;
+use App\Helpers\Site_model;
 
 class Costumes extends Authenticatable
 {
@@ -28,7 +29,19 @@ class Costumes extends Authenticatable
         return $data;
         
     }
-    protected function getCostumesList(){
-        
+    protected function costumeLike($costume_id,$user_id){
+        $res=DB::Select('SELECT count(id) as count FROM `cc_costumes_like` where useer_id='.$user_id.' and costume_id='.$costume_id.'');
+        if(count($res[0]->count)==0){
+            $data=array('user_id'=>$user_id,
+                        'costume_id'=>$costume_id,
+                        'date_added'=>date('Y-m-d H:i:s'));
+            Site_model::insert_data('costumes_like',$data);
+        }else{
+            $cond=array('user_id'=>$user_id,
+                        'costume_id'=>$costume_id);
+            Site_model::delete_single('costumes_like',$cond);
+        }
+        return true;
     }
+
 }
