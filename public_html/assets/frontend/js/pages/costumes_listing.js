@@ -71,6 +71,10 @@ $(document).on('change','.sort_by',function(){
 function searching(search=null){
 	var filter=$('#search_list').serializeArray();
 	var res="";
+	var cat_id=$('input[name="cat_id"]').val();
+	var parent_cat_name=$('input[name="parent_cat_name"]').val();
+	var sub_cat_name=$('input[name="sub_cat_name"]').val();
+	var is_login=$('input[name="is_login"]').val();
 	$("#itemContainer").html("");
 	$("#itemContainer").addClass("search_icn_load");
 	if(search!=null){
@@ -90,7 +94,12 @@ function searching(search=null){
 					}else{
 						var src="/costumers_images/default-placeholder.jpg";
 					}
-					res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><img class=img-responsive src='+src+'><div class=hover_box><p class=like_fav><span><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span> <span><i aria-hidden=true class="fa fa-heart-o"></i></span><p class=hover_crt><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4>'+value.name+'</h4><p>'+value.price+'</div></div></div>';
+					if(is_login){
+						var like='<a href=""><span><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span></a>';
+					}else{
+						var like='<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span></a>';
+					}
+					res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/shop/'+cat_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+'<span><i aria-hidden=true class="fa fa-heart-o"></i></span><p class=hover_crt><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4>'+value.name+'</h4><p>'+value.price+'</div></div></div>';
                 });
 				$(".pagination").show();
 				$("#itemContainer").append(res);

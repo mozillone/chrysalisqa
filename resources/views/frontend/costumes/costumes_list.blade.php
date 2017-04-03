@@ -25,6 +25,10 @@
 <div class="prodcut_list_page">
 <div class="container">
 	<div class="row">
+	<input type="hidden" name="parent_cat_name" value="{{$parent_cat_name}}"/>
+	<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
+	<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
+	<input type="hidden" name="is_login" value="{{Auth::check()}}"/>
 	<form id="search_list">
 	<input type="hidden" name="cat_id" value="{{$data['sub_cat_info'][0]->category_id}}"/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
