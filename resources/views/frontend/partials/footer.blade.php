@@ -96,16 +96,16 @@
 							<input type="hidden" name="plan_id" value="">
 							<div class="form-group">
 							<label>Email</label>
-								<input type="text" id="loginpopup_email" name="email" placeholder="Email *" class="form-control">
+								<input type="text" id="loginpopup_email" name="email" class="form-control">
 								<p class="error">{{ $errors->first('email') }}</p>
 							</div>
 							<div class="form-group">
 							<label>Password</label>
-								<input type="password" id="loginopup_password" name="password" placeholder="Password *" class="form-control">
+								<input type="password" id="loginopup_password" name="password"  class="form-control">
 								<p class="error">{{ $errors->first('password') }}</p>
 							</div>
 							<div class=" form-group loign-adtnl forgot"> 
-								<label><a href="#forget_password1" data-toggle="tab">Help! I forgot my password</a></label>
+								<label><a href="#forget_password1" data-toggle="tab">Help! I forgot my password.</a></label>
 							</div>
 							<div class="form-group">
 								<div class="login-btn">
@@ -175,12 +175,71 @@
 				</div>
 				<div class="social-login">
 					<div class="form-group socil-btn">
-						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
+						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> &nbsp;Log In With Facebook</a>
 					</div>
 				</div>
 				<div class="text-center close_icon">
-				<button type="button" class="close" data-dismiss="modal">&times; Close</button>
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span> Close</button>
 				</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade window-popup" id="login_popup">
+	<div class="modal-dialog">
+		<div class="modal-content">
+				<div class=" modal-header indi_close_icons">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+			<div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="login-register" id="loginModal">
+			
+				<div id="myTabContent" class="tab-content">
+			
+					<div class="tab-pane active in" id="login_tab1">
+						<h2>Sign In To Your Account</h2>
+						<form class="" action="{{route('login.post')}}" method="POST" id="loginpopup">   
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<input type="hidden" name="plan_id" value="">
+							<div class="form-group">
+							<label>Email or Username</label>
+								<input type="text" id="loginpopup_email" name="email" placeholder="Email *" class="form-control">
+								<p class="error">{{ $errors->first('email') }}</p>
+							</div>
+							<div class="form-group">
+							<label>Password</label>
+								<input type="password" id="loginopup_password" name="password" placeholder="Password *" class="form-control">
+								<p class="error">{{ $errors->first('password') }}</p>
+							</div>
+							<div class=" form-group loign-adtnl forgot"> 
+								<label><a href="#forget_password1" data-toggle="tab">Help! I forgot my password</a></label>
+							</div>
+							<div class="form-group">
+								<div class="login-btn">
+									<button class="btn btn-primary">Log In</button>
+								</div>
+							</div>
+							
+							
+					</form>                  
+					</div>
+           
+                    <div class="form-group or text-center">
+								<p>Or</p>
+				</div>
+				<div class="social-login">
+					<div class="form-group socil-btn">
+						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
+					</div>
+				</div>
+				<div class="form-group agn_regstr">
+								<p>Don't have an account with us? <span>Regsiter!</span></p>
+							</div>
 				</div>
 				
 			</div>

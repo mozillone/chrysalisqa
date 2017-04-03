@@ -4,6 +4,7 @@
 @endsection
 @section('content')
  	<section class="content create_section_page">
+ 	<div id="ohsnap"></div>
 <!--  	list-banner container html start here -->
 <div class="container">
 	<div class="row">
@@ -25,6 +26,10 @@
 <div class="prodcut_list_page">
 <div class="container">
 	<div class="row">
+	<input type="hidden" name="parent_cat_name" value="{{$parent_cat_name}}"/>
+	<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
+	<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
+	<input type="hidden" name="is_login" value="{{Auth::check()}}"/>
 	<form id="search_list">
 	<input type="hidden" name="cat_id" value="{{$data['sub_cat_info'][0]->category_id}}"/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -141,6 +146,7 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="{{ asset('/js/ohsnap.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
 @stop

@@ -55,7 +55,7 @@ class CostumesController extends Controller {
 			if(!empty($req['search']['sizes'])){
 				$where.=' AND cst.size in('.$req['search']['sizes'].')';
 			}
-			if(!empty($req['search']['sort_by']) ){
+			if(!empty($req['search']['sort_by'])){
 				if($req['search']['sort_by']=="price_high"){
 					$order_by='order by cst.price DESC';
 				}
@@ -76,5 +76,10 @@ class CostumesController extends Controller {
 	public function costumeSingleView()
 	{
 		return view('frontend.costumes.costumes_single_view');
+	}
+	public function costumeLike(Request $request){
+		$req=$request->all();
+		Costumes::costumeLike($req['costume_id'],Auth::user()->id);
+		return response()->success(compact('costumes'));
 	}
 }

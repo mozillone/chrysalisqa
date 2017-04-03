@@ -46,7 +46,4 @@ $(function(){
 		   $(".footer_head ul").not($(this).next()).slideUp('fast');
 	   });
    }
-    
-
-
 })
