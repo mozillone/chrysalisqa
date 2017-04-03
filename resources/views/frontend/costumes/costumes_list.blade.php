@@ -4,6 +4,7 @@
 @endsection
 @section('content')
  	<section class="content create_section_page">
+ 	<div id="ohsnap"></div>
 <!--  	list-banner container html start here -->
 <div class="container">
 	<div class="row">
@@ -145,6 +146,7 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="{{ asset('/js/ohsnap.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
 @stop
