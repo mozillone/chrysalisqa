@@ -352,11 +352,69 @@ p.like_fav span i.fa.fa-heart-o {
 #signup_popup .modal-dialog {
     width: 500px;
 }
+div#login_popup .modal-dialog{    width: 500px;}
 div#signup_popup div#myTabContent {
     padding: 30px 70px;
 }
 
-
+div#login_popup div#myTabContent {
+    padding: 30px 70px;
+}
+#login_popup div#myTabContent {
+    padding-top: 0px !important;
+}
+div#login_popup div#myTabContent input {
+    height: 40px;
+    border-radius: 3px;
+    font-family: Proxima-Nova-Regular;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.08);
+    -webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,.08);
+    border: 1px solid #e5e4e4;
+}
+.modal-header.indi_close_icons {
+    border: none;
+    padding-bottom: 0px;
+}
+.modal-header.indi_close_icons button.close {
+    color: #000;
+    opacity: 0.9;
+    font-size: 34px;
+    margin-bottom: -15px;
+}
+.form-group.agn_regstr span {
+    text-decoration: underline;
+}
+.form-group.agn_regstr {
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    font-family: Proxima-Nova-Semibold;
+    border-top: 2px solid #ccc;
+    margin-top: 25px;
+    padding-top: 15px;
+}
+.form-group.agn_regstr {
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    font-family: Proxima-Nova-Semibold;
+}
+div#login_popup div#myTabContent label {
+    font-size: 18px;
+    color: #000;
+    font-family: Proxima-Nova-Semibold;
+}
+.login-register ul.nav.nav-tabs li a {
+    font-size: 24px;
+    border: none;
+    color: #000;
+    font-family: Proxima-Nova-Extrabold;
+}
+#login_popup h2{    font-size: 24px;
+    border: none;
+    color: #000;
+    font-family: Proxima-Nova-Extrabold;border-bottom: 2px solid #ccc;
+    padding-bottom: 10px; text-align:center;    margin-bottom: 20px;}
 .login-register ul.nav.nav-tabs li {
     width: 50%;
 }
@@ -466,7 +524,173 @@ div#signup_popup div#myTabContent label {
 .close_icon button {
     float: inherit;opacity: 0.9;
 }
+
+.login-register-main ul.nav.nav-tabs li {
+    float: none;
+    display: inline-block;
+}
+.login-register-main ul.nav.nav-tabs {
+    text-align: center;
+}
+.login-register-main .social-facebook {
+      height: 45px;
+    background: #3a55a0;   
+    width: 100%;
+    border: 1px solid #3a55a0;
+    font-size: 20px;
+    font-family: Proxima-Nova-Extrabold;}
+    .login-register-main {
+    width: 500px;
+    margin: 40px auto;
+}
+label.error {
+    color: red !important;
+    font-size: 14px !important;
+}
+.login-register-main ul.nav.nav-tabs li a {
+    font-size: 22px;font-family: Proxima-Nova-Extrabold;border: none;color: #848282;
+}
+.login-register-main input {
+   height: 40px;    border-radius: 3px;	font-family: Proxima-Nova-Regular;
+        box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.08);
+        -webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,.08);
+        border: 1px solid #e5e4e4;
+}
+.login-register-main ul.nav.nav-tabs {
+    margin-bottom: 30px;
+}
+.login-register-main p{font-family: Proxima-Nova-Extrabold; text-transform: capitalize;font-size: 18px;}
+.login-register-main .form-group.or {
+    clear: both;
+    margin: 20px 0px;
+}
+.login-register-main button {
+  height: 45px;
+    background: #60c5ac;   
+    width: 100%;
+    border: 1px solid #60c5ac;
+    font-size: 20px;
+    font-family: Proxima-Nova-Extrabold;}
+    .text-right.rect_pswrd a{    font-size: 14px;
+    color: #000;
+    font-family: Proxima-Nova-Semibold;
+    text-decoration: underline;}
+        .login-register-main ul.nav.nav-tabs li.active a{color: #000;}
+    .login-register-main ul.nav.nav-tabs li.active {
+    border-bottom: 3px solid #60c5ac;margin-bottom: -1px !important;
+}
+.login-register-main label{
+    font-size: 18px;
+    color: #000;
+    font-family: Proxima-Nova-Semibold;}
+    .login-register-main button:hover{background: #60c5ac;border: 1px solid #60c5ac;}
+    .cnt_with {
+    margin-bottom: 30px;
+}
+.close_icon button {
+    position: relative;
+}
+.close_icon button:focus {
+    outline: none;
+}
+.close_icon button span {
+    font-size: 27px;
+    left: -19px;
+    position: absolute;
+    top: -5px;
+}
+.login-register-main button:focus:active {
+    background: #60c3ab;
+    border: 1px solid #60c3ab;
+    outline: none;
+    box-shadow: none;
+}
+.login-register-main button:focus {
+    background: #60c3ab;border: 1px solid #60c3ab;
+}
+.alert-danger{font-family: Proxima-Nova-Regular;padding: 10px;}
+#login_tab .alert-danger {
+    color: #a94442;
+    background-color: #f2dede;font-family: Proxima-Nova-Regular;
+    border-color: #ebccd1;
+    padding-right: 15px;
+}
+#login_tab .alert.alert-danger.alert-dismissable button {
+    width: auto;
+    background: none;
+    border: none;
+    position: inherit;
+    height: auto;
+}
 /*Login page end css*/
+
+
+
+
+
+/* Product View page CSS S */
+.product_view_rm{width:100%; float:left; margin: 40px 0;}
+.product_view_rm h1{width:100%; float:left; font-size: 24px; font-family: Proxima-Nova-Extrabold; border-bottom: 1px solid #e1e1e1; padding-bottom: 15px; margin: 0px; color: #000000;}
+
+.priceview_rm{width:100%; float:left; margin: 20px 0;}
+.priceview_rm h2{width:100%; float:left; font-size: 30px; font-family: Proxima-Nova-Extrabold;  margin: 5px 0 0; color: #000000;}
+.ystrip-rm{width:100%; float:left; margin: 10px 0 5px; }
+.ystrip-rm span{float:left; background: #ffd23f; font-size: 16px; padding: 5px 10px; border-radius: 5px; font-family: Proxima-Nova-Semibold;}
+.ystrip-rm span img{margin-top: 2px;margin-right: 5px;float: left;}
+
+.iCondition-rm{width:100%; float:left; margin: 5px 0 0; font-size: 18px; font-family: Proxima-Nova-Semibold; color: #323031;}
+.iCondition-rm .iBold-rm{font-family: Proxima-Nova-Extrabold;}
+
+.viewBtn_rm button{width: 180px; height: 45px; float: right; line-height: 45px; color: #fff; font-size: 20px; font-family: Proxima-Nova-Extrabold; margin: 0 0 10px; background: #60c4ab; border: none; outline: none; border-radius: 5px;}
+.viewBtn_rm button i{margin-right: 10px;}
+.viewBtn_rm button.buynow-rm{background: #ee4266;}
+
+.shipping_rm{width: 100%; float:left; background: #f4f6fa; padding: 25px 20px; color: #010101;}
+.shipp-rm{width: 100%; float:left; font-size: 18px; font-family: Proxima-Nova-Bold; margin: 0px;}
+.shipp-rm label{font-family: Proxima-Nova-Semibold; margin: 0px;}
+.shipp-rm-20{margin-top: 20px;}
+.shipp-rm a{color: #010101; text-decoration: underline !important;}
+.shipp-rm1{width: 100%; float:left; font-size: 14px; font-family: Proxima-Nova-Semibold; padding-left: 82px;margin: 0px;}
+.shipp-rm i{color: #8e8c8e; margin-left: 5px;}
+.returns-rm{width: 100%; float:left; font-size: 18px; font-family: Proxima-Nova-Semibold; margin: 20px 0;}
+.returns-rm span{font-family: Proxima-Nova-Extrabold;}
+
+.viewTabs_rm{width: 100%; float:left; border: 1px solid #e1e1e1;}
+
+.nav-tabs.viewTabs{border: none !important;}
+.nav-tabs.viewTabs>li{width: 33.33%;}
+.nav-tabs.viewTabs>li>a{font-size: 18px; font-weight: bold; color: #323031; border: none; border-radius: 0px; padding: 25px 15px; margin: 0px; background: #fff !important; border: 1px solid #e1e1e1; text-align: center; font-family: Proxima-Nova-Semibold;}
+.nav-tabs.viewTabs>li.active>a, .nav-tabs.viewTabs>li.active>a:hover, .nav-tabs.viewTabs>li.active>a:focus{color: #323031; border: none; border-top: 3px solid #999999; background: #fff; border-radius: 0px; font-family: Proxima-Nova-Extrabold;}
+.nav-tabs.viewTabs>li>a:hover{background: #fff; color: #323031; border: none; border-top: 3px solid #999999; font-family: Proxima-Nova-Extrabold;}
+
+.viewTabs-text{width: 100%; float:left; color: #323031; font-size: 16px; margin: 25px 0 10px;}
+.viewTabs-content{width: 100%; float:left; background: #fff; padding: 10px 25px; font-family: Proxima-Nova-Semibold;}
+.viewBtn_rm{float: right !important;}
+
+.likeview-rm{width: 100%; float:left; margin: 20px 0 0;}
+.likeview-rm1{float:left; color: #000; font-family: Proxima-Nova-Semibold; font-size: 16px; line-height: 40px;}
+.likeview-rm1 span{float:left;}
+.likeview-rm1 .like-span{width: auto; float:left; height: 40px; line-height: 40px; border: 2px solid #60c4ab; color: #60c4ab; font-size: 16px; padding: 0 20px; margin: 0 15px;}
+.likeview-rm1 .like-span1{color: #60c4ab;}
+
+.likeview-rm2{float: right; font-size: 16px;}
+.likeview-rm2 a{color: #000000; border-bottom: 1px solid #bfbfbf; font-family: Proxima-Nova-Semibold;}
+.viewHead-rm{width: 100%; float:left; color: #323031; font-family: Proxima-Nova-Bold; font-size: 24px; border-bottom: 1px solid #e1e1e1; padding-bottom: 15px;}
+/* Product View page CSS E */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -480,6 +704,7 @@ div#signup_popup div#myTabContent label {
 }
 
 @media screen and (max-width:1024px){
+	.nav-tabs.viewTabs>li>a {font-size: 16px; padding: 20px 10px;}	
 	.home_product_slider h2{line-height: 35px;text-align:left;margin:10px 0px;font-size:18px;font-weight:800;color:#323031;margin-top:40px;border-bottom:1px solid #ccc;padding-bottom:5px;margin-bottom:15px;}
 .ft-logo {
     margin-bottom: 25px;
@@ -561,6 +786,10 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+	.login-register-main {
+    width: auto;
+    margin: 40px auto;
+}
 	.login-register ul.nav.nav-tabs li.active{ padding-left: 20px;}
 	.text-center.creat_btn button{font-size: 16px;}
 	div#signup_popup div#myTabContent {    padding: 20px;}
@@ -614,7 +843,16 @@ and (orientation:landscape){
 ul.nav.navbar-nav.mid_nav li a{padding: 10px;font-size:16px!important;color:#323031;font-weight:800;}
 ul.nav.navbar-nav.mid_nav li a.sell-btn{padding:10px 10px;font-size:16px!important;}
 }
-
+@media (max-width: 480px){
+.nav-tabs.viewTabs>li>a {font-size: 14px; padding: 10px 5px;}
+.viewTabs-content{padding: 10px 15px;}
+.viewTabs-text{margin: 10px 0 5px;}
+.product_view_rm h1{font-size: 20px;}
+.viewpr_rm{width: 100% !important; float:left;}
+.viewBtn_rm{width: 100% !important; float:left !important; margin: 20px 0 0;}
+.viewBtn_rm button{float: left;}
+.shipp-rm1{padding-left: 0px;}
+}
 @media only screen and (min-device-width:480px) 
 and (max-device-width:736px) 
 and (orientation:landscape){
