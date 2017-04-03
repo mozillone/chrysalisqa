@@ -9,6 +9,7 @@ use App\Costumes;
 use Session;
 use Hash;
 use DB;
+use Response;
 class CostumesController extends Controller {
 
 	protected $messageBag = null;
@@ -70,7 +71,7 @@ class CostumesController extends Controller {
 				}
 			}
 		}
-		$costumes = DB::select('SELECT  cst.costume_id,cst.name,CONCAT("$",FORMAT(cst.price,2)) as price,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id=cst.created_by and  wsh_lst.	costume_id=cst.costume_id )>=1,true,false) as is_fav,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.sort_order="0" '.$where.' '.$order_by.'');
+		$costumes = DB::select('SELECT  cst.costume_id,cst.name,CONCAT("$",FORMAT(cst.price,2)) as price,if((select count(*) from cc_costumes_like as likes where likes.user_id=cst.created_by and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id=cst.created_by and  wsh_lst.	costume_id=cst.costume_id )>=1,true,false) as is_fav,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.sort_order="0"'.$where.' '.$order_by.'');
 		return response()->success(compact('costumes'));
 	}
 	public function costumeSingleView()
@@ -79,7 +80,12 @@ class CostumesController extends Controller {
 	}
 	public function costumeLike(Request $request){
 		$req=$request->all();
-		Costumes::costumeLike($req['costume_id'],Auth::user()->id);
-		return response()->success(compact('costumes'));
+		$res=Costumes::costumeLike($req['costume_id'],Auth::user()->id);
+		return Response::JSON($res);
+	}
+	public function costumeFavourite(Request $request){
+		$req=$request->all();
+		$res=Costumes::costumeLike($req['costume_id'],Auth::user()->id);
+		return Response::JSON($res);
 	}
 }

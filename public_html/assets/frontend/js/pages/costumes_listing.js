@@ -94,12 +94,29 @@ function searching(search=null){
 						}else{
 							var src="/costumers_images/default-placeholder.jpg";
 						}
+
+						if(value.is_like){
+							var is_like='class="active"';
+						}else{
+							var is_like=' ';
+						}
+						if(value.is_fav){
+							var is_fav='class="active"';
+							var icon='<i aria-hidden=true class="fa fa-heart"></i>';
+						}else{
+							var is_fav=' ';
+							var icon='<i aria-hidden=true class="fa fa-heart-o"></i>';
+						}
+
 						if(is_login){
-							var like='<a href="javascript::void(0)" class="like_costume" data-costume-id='+value.id+'><span><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span></a>';
+							var like='<a href="#" onclick="return false;" class="like_costume" data-costume-id='+value.costume_id+'><span '+is_like+'><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span></a>';
+							var fav='<a href="#" onclick="return false;" class="fav_costume" data-costume-id='+value.costume_id+'><span '+is_fav+'>'+icon+'</span></a>';
 						}else{
 							var like='<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span></a>';
+							var fav='<a data-toggle="modal" data-target="#login_popup"><span '+is_fav+'>'+icon+'</span></a>';
 						}
-						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/shop/'+cat_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+'<span><i aria-hidden=true class="fa fa-heart-o"></i></span><p class=hover_crt><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4>'+value.name+'</h4><p>'+value.price+'</div></div></div>';
+
+						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/shop/'+cat_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+'<p class=hover_crt><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4>'+value.name+'</h4><p>'+value.price+'</div></div></div>';
 				    });
 					$(".pagination").show();
 					$("#itemContainer").append(res);
@@ -120,14 +137,37 @@ function searching(search=null){
 }
 $(document).on('click','.like_costume',function(){
 	var costume_id=$(this).attr('data-costume-id');
+	var token=$('input[name="_token"]').val();
 	$.ajax({
 			type: 'POST',
 			url: '/costume/like',
-			data: {costume_id:costume_id},
+			data: {costume_id:costume_id,_token:token},
+			context: this,
 			success: function(response){
-				var search=$('#search_list').serializeArray();
-				searching(search);
-				ohSnap('Oh Snap! You can\'t access this page!', {'color':'red'});
+				if(response.is_user_like){
+					$(this).find('span').addClass('active');
+				}else{
+					$(this).find('span').removeClass('active');
+				}
+				$(this).find('span').html('<i aria-hidden="true" class="fa fa-thumbs-up"></i>'+response.count);
+			},
+		     complete: function(jqXHR, textStatus) {
+		    	 $("#itemContainer").removeClass("search_icn_load");
+		      },
+
+		});
+})
+
+$(document).on('click','.fav_costume',function(){
+	var costume_id=$(this).attr('data-costume-id');
+	var token=$('input[name="_token"]').val();
+	$.ajax({
+			type: 'POST',
+			url: '/costume/favourite',
+			data: {costume_id:costume_id,_token:token},
+			context: this,
+			success: function(response){
+				
 			},
 		     complete: function(jqXHR, textStatus) {
 		    	 $("#itemContainer").removeClass("search_icn_load");

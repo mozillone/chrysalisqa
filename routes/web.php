@@ -39,6 +39,10 @@ Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@ge
 Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
 /** Costume Like page end here **/
 
+/** Costume Like page start here **/
+Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
+/** Costume Like page end here **/
+
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	  	Route::get('/admin/dashboard', 'DashboardController@dashboard');

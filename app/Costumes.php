@@ -30,8 +30,8 @@ class Costumes extends Authenticatable
         
     }
     protected function costumeLike($costume_id,$user_id){
-        $res=DB::Select('SELECT count(id) as count FROM `cc_costumes_like` where useer_id='.$user_id.' and costume_id='.$costume_id.'');
-        if(count($res[0]->count)==0){
+        $res=DB::Select('SELECT count(id) as count FROM `cc_costumes_like` where user_id='.$user_id.' and costume_id='.$costume_id.'');
+        if($res[0]->count=="0"){
             $data=array('user_id'=>$user_id,
                         'costume_id'=>$costume_id,
                         'date_added'=>date('Y-m-d H:i:s'));
@@ -41,7 +41,8 @@ class Costumes extends Authenticatable
                         'costume_id'=>$costume_id);
             Site_model::delete_single('costumes_like',$cond);
         }
-        return true;
+        $result=DB::Select('SELECT count(id) as count,if((select count(id) from cc_costumes_like where user_id='.$user_id.' and costume_id='.$costume_id.')>0,true,false) as is_user_like FROM `cc_costumes_like` where costume_id='.$costume_id.'');
+        return array('count'=>$result[0]->count,'is_user_like'=>$result[0]->is_user_like);
     }
 
 }

@@ -1,7 +1,8 @@
 @extends('/frontend/app')
 @section('styles')
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-@endsection
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
+ @endsection
 @section('content')
  	<section class="content create_section_page">
  	<div id="ohsnap"></div>
