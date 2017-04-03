@@ -51,12 +51,20 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	   /****************User Management Start Here***************************/
 	    Route::get('customers-list', ['as' => 'customers-list','uses'=>'UserController@customersList']);
 	    Route::any('/customers/list', 'UserController@customersListData');
-	    Route::any('/customer-add', ['as' => 'customer-create','uses'=>'UserController@customerAdd']);
+		Route::get('/user-costumes-list/{id}', ['as' => 'user-costumes-list','uses'=>'UserController@userCostumes']);
+		Route::get('/user-costumessold-list/{id}', ['as' => 'user-costumessold-list','uses'=>'UserController@userSoldcostumes']);
+		Route::get('/user-recentorders-list/{id}', ['as' => 'user-recentorders-list','uses'=>'UserController@recentOrders']);
+	    Route::get('/user-credithistory-list/{id}', ['as' => 'user-credithistory-list','uses'=>'UserController@creditHistory']);
+		Route::get('/user-payementprofiles-list/{id}', ['as' => 'user-payement_profiles-list','uses'=>'UserController@payementProfiles']);
+		Route::any('/customer-add', ['as' => 'customer-create','uses'=>'UserController@customerAdd']);
 	    Route::any('/customer-edit/{id}', ['as' => '','uses'=>'UserController@customerEdit']);
 	    Route::any('/customer-update', ['as' => 'customer-update','uses'=>'UserController@customerUpdated']);
 	    Route::any('/customer-delete/{id}', 'UserController@customerDelete');
 	    Route::any('/status/change', 'UserController@changeUserStatus');
 	    Route::any('/customer/emailValidation', array('as' => '','uses' => 'UserController@EmailNameCheck'));
 	    /****************User Management End Here***************************/
+		/****************Costumes Management Code Starts Here*********************/
+		Route::get('costumes-list', ['as' => 'costumes-list','uses'=>'CostumeController@costumesList']);
+		/****************Costumes Managemnet Code Ends Here***********************/
 });
 

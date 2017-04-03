@@ -1,18 +1,27 @@
 $(function(){
+	
         $("#customer_create").validate({
+        	onfocusout: function(element) { $(element).valid(); },
 			rules: {
 				first_name:{
 					 	required: true,
 						maxlength: 50,
-						alpha:true
-					},
+				},
 				last_name:{
 					 	required: true,
 						maxlength: 50,
-						alpha:true
-					},
-				
-				 email: {
+				}, 
+				phone_number:{
+					required: true,
+					number:true,
+					maxlength: 10,
+					//remote: {url: "/customer/emailValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
+				},
+				user_name:{
+					required: true,
+					maxlength: 50,
+				},
+				email: {
       				required: true,
       				email: true,
       				remote: {url: "/customer/emailValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
@@ -23,114 +32,175 @@ $(function(){
 					maxlength: 15,
 				},
 			},
+			highlight: function(element) {
+          	 $(element).closest('.form-control').addClass('error');
+	      	},
+	       	errorPlacement: function(error, element) {
+	           if(element.parent('.input-group').length) {
+	               error.insertAfter($(element).parents('div.input-group'));
+	           }else{
+	               error.insertAfter(element);
+	           }
+	       	},
 			messages: {
+			   first_name:
+			   {
+			    required: "Enter First Name",
+			   },
+			   last_name:
+			   {
+			    required: "Enter Last Name",
+			   },
+			   user_name:
+			   {
+			    required: "Enter Username",
+			   },
+			   password:{
+			   required: "Enter Password",
+			   },
 				email:
                  {
-                    required: "Enter a valid  user email",
+                    required: "Enter Email Address",
                     email: "Please enter a valid email address.",
                     remote: "This email is already taken."
                  },
-			}
+				 phone_number:
+				 {
+					required: "Enter Phone Number"
+                   
+				 },
+			},
+			errorElement: 'span',
+       		errorClass: 'error',
 		});
-	  $("#edit_customer").validate({
+	 $("#customer_edit").validate({
+        	onfocusout: function(element) { $(element).valid(); },
 			rules: {
 				first_name:{
 					 	required: true,
 						maxlength: 50,
-						alpha:true
-					},
+				},
 				last_name:{
 					 	required: true,
 						maxlength: 50,
-						alpha:true
-					},
-				
-				 email: {
+				}, 
+				phone_number:{
+					required: true,
+					number:true,
+					maxlength: 10,
+					//remote: {url: "/customer/emailValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
+				},
+				user_name:{
+					required: true,
+					maxlength: 50,
+				},
+				email: {
       				required: true,
       				email: true,
       				remote: {url: "/customer/emailValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
 	   				},
+				
 			},
+			highlight: function(element) {
+          	 $(element).closest('.form-control').addClass('error');
+	      	},
+	       	errorPlacement: function(error, element) {
+	           if(element.parent('.input-group').length) {
+	               error.insertAfter($(element).parents('div.input-group'));
+	           }else{
+	               error.insertAfter(element);
+	           }
+	       	},
 			messages: {
+			   first_name:
+			   {
+			    required: "Enter First Name",
+			   },
+			   last_name:
+			   {
+			    required: "Enter Last Name",
+			   },
+			   user_name:
+			   {
+			    required: "Enter Username",
+			   },
+			   
 				email:
                  {
-                    required: "Enter a valid  user email",
+                    required: "Enter Email Address",
                     email: "Please enter a valid email address.",
                     remote: "This email is already taken."
                  },
-			}
+				 phone_number:
+				 {
+					required: "Enter Phone Number"
+                   
+				 },
+			},
+			errorElement: 'span',
+       		errorClass: 'error',
 		});
 
-	  $("#profile_logo").on('change', function() {
-		 	var countFiles = $(this)[0].files.length;
-			var imgPath = $(this)[0].value;
-			var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-			var image_holder = $("#img-chan");
-			//image_holder.empty();
-			if (extn == "jpg" || extn == "jpeg" || extn == "png") {
-				if (typeof(FileReader) != "undefined") {
-					//loop for each file selected for uploaded.
-					for (var i = 0; i < countFiles; i++) 
-					{
-						if($(this)[0].files[i].size>=2997447){
-								swal({   
-								title: "Size limit exceeded",   
-								text: "Upload image size less than 3Mb",   
-								type: "warning",   
-								showCancelButton: false,
-								fieldset:false,
-								confirmButtonColor: "#DD6B55",   
-								confirmButtonText: "Ok",   
-							closeOnConfirm: true 
-							});
-						}else{
-							var reader = new FileReader();
-							reader.readAsDataURL($(this)[0].files[i]);
-							reader.onload = function(e) {
-								$('#img-chan').attr('src',e.target.result);
-							}
-							image_holder.show();
-						}
+	   $("#profile_logo").on('change', function(){
+		//Get count of selected files
+		var countFiles = $(this)[0].files.length;
+		var imgPath = $(this)[0].value;
+		var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+		var image_holder = $("#img-chan");
+		image_holder.empty();
+		var size = parseFloat($("#profile_logo")[0].files[0].size / 1024).toFixed(2);
+		if (extn == "jpg" || extn == "jpeg" || extn == "png") {
+			if(size<10000)
+            {
+			if (typeof(FileReader) != "undefined") {
+			
+				for (var i = 0; i < countFiles; i++) 
+				{
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						
+						$('#img-chan').attr('src',e.target.result);
 					}
-					} else {
-					swal("This browser does not support FileReader.");
+					image_holder.show();
+					reader.readAsDataURL($(this)[0].files[i]);
 				}
 				} else {
-				swal({   
-					title: "File doesn't Support",   
-					text: "Upload .JPG, .JPEG, .PNG Images only.!",   
-					type: "warning",   
-					showCancelButton: false,
-					fieldset:false,
-					confirmButtonColor: "#DD6B55",   
-					confirmButtonText: "Ok",   
-				closeOnConfirm: true 
-				});
+				swal("This browser does not support FileReader.");
 			}
-		});
-$(".remove_pic").on("click",function(){
-	$('#img-chan').attr('src',"/profile_img/default.jpg");
-	$('input[type="file"]').val('');
-	$('input[name="is_removed"]').val("1");
-  });
-$("#pwd_shw").click(function(){
-            var passwordField = $('#password');
-            showHidePassword(passwordField, $(this));
-   });
-function showHidePassword(passwordField, obj){
-
-            var passwordFieldType = passwordField.attr('type');
-
-            if(passwordFieldType == 'password')
-            {
-                passwordField.attr('type', 'text');
-                obj.find('span').attr('class', 'glyphicon glyphicon-eye-close');
-
+			
             } else {
-                passwordField.attr('type', 'password');
-                obj.find('span').attr('class', 'glyphicon glyphicon-eye-open');
-            }
-    }
-   
-})
 
+                  
+                    $("#profile_logo").val("");
+                    swal({   
+                        title: "File doesn't Support",   
+                        text: "Upload Below 10MB Size Only",   
+                        type: "warning",   
+                        showCancelButton: false,
+                        fieldset:false,
+                        confirmButtonColor: "#DD6B55 ",   
+                        confirmButtonText: "Ok",   
+                    closeOnConfirm: true });
+                }
+			} else {
+			//swal("");
+			swal({   
+				title: "File doesn't Support",   
+				text: "Upload .JPG, .JPEG, .PNG Images only.!",   
+				type: "warning",   
+				showCancelButton: false,
+				fieldset:false,
+				confirmButtonColor: "#DD6B55",   
+				confirmButtonText: "Ok",   
+			closeOnConfirm: true });
+			$('input[type="file"]').val('');
+		   	$('input[name="avatar"]').val("1");
+			}
+		 }); 
+	$(".remove_pic").on("click",function(){
+		$('#img-chan').attr('src',"/profile_img/default.jpg");
+		$('input[type="file"]').val('');
+		$('input[name="is_removed"]').val("1");
+	  });
+
+});

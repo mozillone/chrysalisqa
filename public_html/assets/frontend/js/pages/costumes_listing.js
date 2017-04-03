@@ -19,7 +19,7 @@ function pagination()
 {
   $("ul.holder").jPages({
         containerID  : "itemContainer",
-        perPage      : 12,
+        perPage      : 4,
         startPage    : 1,
         startRange   : 1,
         midRange     : 5,

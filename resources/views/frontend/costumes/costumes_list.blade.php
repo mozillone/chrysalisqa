@@ -91,7 +91,7 @@
 	</ul>
 	<h3 class="list-box-subhead">Price</h3>
 <div class="list-stl row">
-						<div class="col-sm-9 rng">	
+						<div class="col-sm-12 rng">	
 								
 								<input type="hidden" id="amount2"   name="search[price]" readonly style="border:0; color:#f6931f; font-weight:bold;" value="" class="form-control">
 								
@@ -130,7 +130,7 @@
 	<div class="row" id="itemContainer">
 	</div>
 </div>
-<ul class="holder"></ul>
+<ul class="holder list_pagination"></ul>
 
 
 	</div>
