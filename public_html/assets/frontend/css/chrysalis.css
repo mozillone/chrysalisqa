@@ -352,11 +352,69 @@ p.like_fav span i.fa.fa-heart-o {
 #signup_popup .modal-dialog {
     width: 500px;
 }
+div#login_popup .modal-dialog{    width: 500px;}
 div#signup_popup div#myTabContent {
     padding: 30px 70px;
 }
 
-
+div#login_popup div#myTabContent {
+    padding: 30px 70px;
+}
+#login_popup div#myTabContent {
+    padding-top: 0px !important;
+}
+div#login_popup div#myTabContent input {
+    height: 40px;
+    border-radius: 3px;
+    font-family: Proxima-Nova-Regular;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.08);
+    -webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,.08);
+    border: 1px solid #e5e4e4;
+}
+.modal-header.indi_close_icons {
+    border: none;
+    padding-bottom: 0px;
+}
+.modal-header.indi_close_icons button.close {
+    color: #000;
+    opacity: 0.9;
+    font-size: 34px;
+    margin-bottom: -15px;
+}
+.form-group.agn_regstr span {
+    text-decoration: underline;
+}
+.form-group.agn_regstr {
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    font-family: Proxima-Nova-Semibold;
+    border-top: 2px solid #ccc;
+    margin-top: 25px;
+    padding-top: 15px;
+}
+.form-group.agn_regstr {
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    font-family: Proxima-Nova-Semibold;
+}
+div#login_popup div#myTabContent label {
+    font-size: 18px;
+    color: #000;
+    font-family: Proxima-Nova-Semibold;
+}
+.login-register ul.nav.nav-tabs li a {
+    font-size: 24px;
+    border: none;
+    color: #000;
+    font-family: Proxima-Nova-Extrabold;
+}
+#login_popup h2{    font-size: 24px;
+    border: none;
+    color: #000;
+    font-family: Proxima-Nova-Extrabold;border-bottom: 2px solid #ccc;
+    padding-bottom: 10px; text-align:center;    margin-bottom: 20px;}
 .login-register ul.nav.nav-tabs li {
     width: 50%;
 }
