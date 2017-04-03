@@ -85,7 +85,7 @@ class CostumesController extends Controller {
 	}
 	public function costumeFavourite(Request $request){
 		$req=$request->all();
-		$res=Costumes::costumeLike($req['costume_id'],Auth::user()->id);
+		$res=Costumes::costumeFavourite($req['costume_id'],Auth::user()->id);
 		return Response::JSON($res);
 	}
 }
