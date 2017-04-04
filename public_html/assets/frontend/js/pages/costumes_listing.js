@@ -170,11 +170,11 @@ $(document).on('click','.fav_costume',function(){
 				if(response.is_user_fav){
 					$(this).find('span').addClass('active');
 					$(this).find('span').html('<i aria-hidden=true class="fa fa-heart"></i>');
-					ohSnap('Costume is successfully added into your wishlist', 'green');
+					//ohSnap('Costume is successfully added into your wishlist', 'green');
 				}else{
 					$(this).find('span').removeClass('active');
 					$(this).find('span').html('<i aria-hidden=true class="fa fa-heart-o"></i>');
-					ohSnap('Costume is removed successfully from your wishlist', 'red');
+					//ohSnap('Costume is removed successfully from your wishlist', 'red');
 				}
 				
 			},
