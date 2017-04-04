@@ -11,24 +11,18 @@
 				  		 @if(!count(Auth::user()))
 					     <li class="dropdown"><a href="javascript::void(0);" data-toggle="modal" data-target="#signup_popup">| <i class="fa fa-user" aria-hidden="true"></i> Sign In</a></li>
 					     @else
-						   <!--<li id="dropdown-user" class="normal-user dropdown">
-					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							        <div class="username">| <i class="fa fa-user" aria-hidden="true"></i> My Account<i class="fa fa-sort-desc" aria-hidden="true"></i></div>
-                              </a>
-                             
-                                <ul class="head-list dropdown-menu">
-                                      <li><a href="{{ URL::to('dashboard') }}"> <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard </a></li>
-                                     <li><a href="{{ route('edit-profile') }}"> <i class="fa fa-user" aria-hidden="true"></i> Edit Profle </a></li>
-                                     <li><a href="{{ URL::to('logout') }}"> <i class="fa fa-sign-out fa-fw"></i> Logout </a></li>
-                                </ul>
-                           
-                            </li>-->
 								<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">| <i class="fa fa-user" aria-hidden="true"></i> Sign In <!-- <span class="caret"></span> --></a>
+								 @if(!count(Auth::user()))
+							     	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">| <i class="fa fa-user" aria-hidden="true"></i> Sign In</a>
+							     @else
+							     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							        | <i class="fa fa-user" aria-hidden="true"></i> My Account<i class="fa fa-sort-desc" aria-hidden="true"></i>
+                              </a>
+							     @endif
 									   <ul class="dropdown-menu">
-										<li><a href="#">Dashboard</a></li>
-										<li><a href="#">Edit Profle</a></li>
-										<li><a href="#">Logout</a></li>
+										<li><a href="{{ URL::to('dashboard') }}">Dashboard</a></li>
+										<li><a href="{{ route('edit-profile') }}">Edit Profle</a></li>
+										<li><a href="{{ URL::to('logout') }}">Logout</a></li>
 									</ul>
 								</li>
 					
