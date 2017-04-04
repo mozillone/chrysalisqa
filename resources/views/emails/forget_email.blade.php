@@ -8,7 +8,7 @@
 	<tbody>
 		<tr>
 			<td colspan="4" style="border-collapse:collapse;border:0;margin:0;padding:0;color:#333;font-family:Arial,sans-serif;font-size:16px;line-height:26px;background-color:#fff;border-bottom:1px solid #fff" valign="top">
-			<h1 style="margin:10px 35px;color:#333;font-size:25px;font-weight:normal"><span contenteditable="false" tabindex="-1"><span class="sg-image" data-imagelibrary="%7B%22width%22%3A%22206%22%2C%22height%22%3A%2228%22%2C%22alignment%22%3A%22%22%2C%22src%22%3A%22http%3A//ivanzipop.dotcomweavers.net/assets/img/brand-logo.png%22%2C%22alt_text%22%3A%22%22%2C%22link%22%3A%22%22%2C%22classes%22%3A%7B%22sg-image%22%3A1%7D%7D" data-widget="sgimage"><img height="28" src="http://ivanzipop.dotcomweavers.net/assets/img/brand-logo.png" style="width: 206px; height: 28px;" width="206" /></span></span></h1>
+			<h1 style="margin:10px 35px;color:#333;font-size:25px;font-weight:normal"><img height="28" src="{{asset('assets/frontend/img/brand.png')}}" style="width: 206px; height: 28px;" width="206" /></span></h1>
 			<a style="text-decoration:none!important"> </a></td>
 		</tr>
 		<tr>
@@ -20,7 +20,7 @@
 						<h1 style="color:#333;font-size:16px;font-weight:bold;line-height:24px">Hi {{$data['name']}},<br />
 						Welcome to IVANZIPOP .</h1>
 
-						<p style="font-size:16px;color:#333;font-weight:normal;line-height:20px;margin-bottom:20px">Please click the link below to access your Ivanzipop account.</p>
+						<p style="font-size:16px;color:#333;font-weight:normal;line-height:20px;margin-bottom:20px">Please click the link below to access your Chrysalis account.</p>
 						</td>
 					</tr>
 				</tbody>
