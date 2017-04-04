@@ -18,7 +18,7 @@
 					<tr>
 						<td style="border-collapse:collapse;border:0;margin:0;padding:18px;color:#333;font-family:Arial,sans-serif;font-size:16px;line-height:24px;background-color:#eeeeee;">
 						<h1 style="color:#333;font-size:16px;font-weight:bold;line-height:24px">Hi {{$data['name']}},<br />
-						Welcome to IVANZIPOP .</h1>
+						Welcome to Chrysalis .</h1>
 
 						<p style="font-size:16px;color:#333;font-weight:normal;line-height:20px;margin-bottom:20px">Please click the link below to access your Chrysalis account.</p>
 						</td>
@@ -29,7 +29,7 @@
 			<table style="width:100%">
 				<tbody>
 					<tr>
-						<td style="width:100%;border-collapse:collapse;border:0;margin:0;padding:0 18px;color:#555559;font-family:Arial,sans-serif;font-size:16px;line-height:24px;background-color:#eeeeee"><a href="{{$data['activation_link']}}*" style="background-color: #35bbed;
+						<td style="width:100%;border-collapse:collapse;border:0;margin:0;padding:0 18px;color:#555559;font-family:Arial,sans-serif;font-size:16px;line-height:24px;background-color:#eeeeee"><a href="{{$data['activation_link']}}" style="background-color: #35bbed;
     border-radius: 3px;
     text-decoration: none;
     font-weight: bold;
