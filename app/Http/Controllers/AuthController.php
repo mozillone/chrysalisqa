@@ -70,7 +70,7 @@ class AuthController extends Controller {
 	
 				if($activation){
 					Auth::logout();
-					Session::flash('error', 'Your activation code is not activated yet.Please check your email'); 
+					Session::flash('error', 'Your account is not activated yet. Please check your email.'); 
 					return Redirect::to('/login')->withInput($request->except('password'));	
 				}
 				if (!empty($req['plan_id'])){
@@ -123,7 +123,7 @@ class AuthController extends Controller {
   		if($users){
   			Session::flush();
   			if($active){
-  				Session::flash('success', 'Registration completed successfully.Login with your credentials');
+  				Session::flash('success', 'Your account has been activated. You can login into your account now.');
   			}else{
   				$email['name']=trim($req['first_name']).' '.trim($req['last_name']);
   				$email['activation_link']=URL::to('/').'/verification/'.$rand;
@@ -132,7 +132,7 @@ class AuthController extends Controller {
 					$m->to($req['email'], trim($req['first_name']).' '.trim($req['last_name']));
 				    $m->subject('Activation Link');
 				});
-				Session::flash('success', 'Registration completed successfully. Activation Link has sent to your registered email, Please Activate it');	
+				Session::flash('success', 'Registration is completed successfully. Activation Link is sent to your registered email.');	
 		 	}
 		}
 		else
