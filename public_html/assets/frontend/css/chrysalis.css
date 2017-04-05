@@ -115,7 +115,7 @@ section.top_nav span{color:#60c5ac;}
 .icon-rm.btn-cross .btn-line:nth-child(2){-webkit-transform:scale(0);-moz-transform:scale(0);transform:scale(0);}
 .icon-rm.btn-cross .btn-line{background:#fff;}
 .icon-rm.btn-cross .btn-line:last-child{-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);transform:rotate(-45deg);}
-
+.alert-dismissable .close, .alert-dismissible .close{right: -5px;}
 /* Mobile Menu Css E */
 
 /* ACCOUNT SECTION Css S */
