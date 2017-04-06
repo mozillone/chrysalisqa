@@ -1,4 +1,4 @@
-body{color:#666666;font-size:14px;line-height:1.42857;	font-family: Proxima-Nova-A-Regular;margin:0px;padding:0px;}
+body{color:#666666;font-size:14px;line-height:1.42857;	font-family: Proxima-Nova-Regular;;margin:0px;padding:0px;}
 section.top_nav span{color:#60c5ac;}
 
 /***************Fonts Start **************/
@@ -766,7 +766,8 @@ height: auto;
 
 
 /* checkout and cart page start css */
-
+p.price_right span a {    cursor: pointer;}
+p.f_quality {    background: #ffd23f;    font-size: 16px;    padding: 5px 10px;    border-radius: 5px;    font-family: Proxima-Nova-Semibold !important;    display: inline-block;}
 .cart_page_vew h1{width:100%;float:left;font-size:24px;font-family:Proxima-Nova-Extrabold;border-bottom:1px solid #e1e1e1;padding-bottom:15px;margin:0px;color:#000000;}
 .shipping_date span.shi_date_right{float:right;}
 .cart_page_vew .well{background:none;box-shadow:none;border-radius:0px;}
@@ -776,9 +777,12 @@ inspector-stylesheet:3
 .cart_page_vew .media-left{max-height:150px;overflow:hidden;min-height:150px;}
 .cart_page_vew .media-body .media-heading{margin-top:0;margin-bottom:5px;width:100%;float:left;font-size:24px;font-family:Proxima-Nova-Extrabold;padding-bottom:5px;margin:0px;color:#000000;}
 .cart_page_vew p.upload_id span{color:#60c5ac;}
-.cart_page_vew p.price_right span.check_price{font-size:24px;font-family:Proxima-Nova-Extrabold;}
+.cart_page_vew p.price_right span.check_price{font-size:24px;font-family:Proxima-Nova-Extrabold;color: #000;}
 .cart_page_vew p.price_right span i{font-size:24px;margin-left:25px;color:#000;}
-.cart_page_vew .media-body p{margin-bottom:5px;}
+.cart_page_vew .media-body p b {    font-family: Proxima-Nova-Extrabold ;   font-weight: 600;    font-size: 16px;}
+.checkout_review_box .media-body p b {    font-family: Proxima-Nova-Extrabold;    font-weight: 600;    font-size: 16px; color:#323031;}
+.checkout_review_box .media-body p {    margin-bottom: 5px;    color: #323031;    font-family: Proxima-Nova-Regular;    font-weight: 600;}
+.cart_page_vew .media-body p {margin-bottom: 5px;color: #323031;font-family: Proxima-Nova-Regular;    font-weight: 600;}
 .cart_page_right .well{background:none;box-shadow:none;margin-top:15px;border-top:3px solid #60c5ac;border-radius:0px;text-align:center;padding-top:0px;}
 .cart_page_right p.store_price{font-size:24px;font-family:Proxima-Nova-Extrabold;color:#000;}
 .store_credit h3{text-align:left;margin-bottom:15px;font-size:18px;font-family:Proxima-Nova-Extrabold;border-bottom:2px solid #ccc;padding-bottom:15px;color:#000;}
@@ -796,7 +800,7 @@ inspector-stylesheet:3
 .order_summery a{width:100%;background:#ef4066;border:2px solid #ef4066;font-size:18px;font-family:Proxima-Nova-Extrabold;color:#fff;}
 .order_summery a:hover{background:#ef4066;border:2px solid #ef4066;}
 .order_summery a:active:hover{background:#ef4066;border:2px solid #ef4066;font-family:Proxima-Nova-Extrabold;color:#fff;}
-.order_summery p.sub-all{text-align:left;font-family:Proxima-Nova-Semibold;color:#000;margin-bottom:30px;}
+.order_summery p.sub-all {    text-align: left;    font-family: Proxima-Nova-Regular;    color: #000;    margin-bottom: 30px;    font-weight: 600;    font-size: 16px;}
 .order_summery span.sub-price em{display:block;font-style:inherit;font-size:12px;}
 span.sub-price{text-align:right;float:right;}
 .s_credit span.sub-price{color:#ef4066;}
@@ -809,18 +813,18 @@ p.sub-all.total_price{border-bottom:2px solid #ccc;border-top:2px solid #ccc;pad
 .check_out_page_left .methods{clear:both;padding:20px 0px;border-bottom:2px solid #ccc;width:95%;display:inline-block;margin:0 auto;margin-left:15px;}
 .check_out_page_left p.cehck_edit{text-align:right;}
 .check_out_page_left p a{color:#000;text-decoration:underline!important;font-family:Proxima-Nova-Bold;}
-.methods h4{font-family:Proxima-Nova-Bold;font-size:18px;}
+.methods h4{font-family:Proxima-Nova-Extrabold;font-size:18px;color:#000;}
 .check_out_page_left .media-left img{max-height:150px;}
 .check_out_page_left p.price_right span i{font-size:24px;margin-left:25px;color:#000;}
 .check_out_page_left .media-body p{margin-bottom:5px;}
-.check_out_page_left p.price_right span.check_price{font-size:20px;font-family:Proxima-Nova-Extrabold;}
+.check_out_page_left p.price_right span.check_price{font-size:20px;font-family:Proxima-Nova-Extrabold;color:#000;}
 .check_out_page_left .media-body .media-heading{margin-top:0;margin-bottom:5px;width:100%;float:left;font-size:24px;font-family:Proxima-Nova-Extrabold;padding-bottom:5px;margin:0px;color:#000000;}
 .checkout_review_box{margin-top:70px;}
-.well .shipping_date span{font-family:Proxima-Nova-Extrabold;color:#000;}
+.well .shipping_date span{font-family:Proxima-Nova-Extrabold;color:#000;font-size: 16px;}
 .well .shipping_date span .in_prc{font-family:Proxima-Nova-Extrabold;color:#ef4066;}
 .check_out_page_right h3{text-align:left;margin-bottom:15px;font-size:18px;font-family:Proxima-Nova-Extrabold;border-bottom:2px solid #ccc;padding-bottom:15px;margin-top:0px;color:#000;}
 .check_out_page_right .order_summery{border-top:3px solid #60c5ac;}
-.methods p{font-family:Proxima-Nova-Semibold;}
+.methods p{	font-family: Proxima-Nova-Bold; font-size:16px; color:#000;}
 .check_out_page_left .methods:last-child{border:none;}
 .check_out_page_right .btn-primary:active{background-color:#ef456f;boder-color:#ef456f;}
 .check_out_page_right .btn-primary:focus{background-color:#ef456f;boder-color:#ef456f;}
