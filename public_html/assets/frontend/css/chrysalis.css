@@ -765,9 +765,69 @@ height: auto;
 
 
 
+/* checkout and cart page start css */
+
+.cart_page_vew h1{width:100%;float:left;font-size:24px;font-family:Proxima-Nova-Extrabold;border-bottom:1px solid #e1e1e1;padding-bottom:15px;margin:0px;color:#000000;}
+.shipping_date span.shi_date_right{float:right;}
+.cart_page_vew .well{background:none;box-shadow:none;border-radius:0px;}
+.well .shipping_date{background:#f5f7fb;padding:10px;margin-bottom:20px;}
+.cart_page_vew .media-left img{max-height:150px;}
+inspector-stylesheet:3
+.cart_page_vew .media-left{max-height:150px;overflow:hidden;min-height:150px;}
+.cart_page_vew .media-body .media-heading{margin-top:0;margin-bottom:5px;width:100%;float:left;font-size:24px;font-family:Proxima-Nova-Extrabold;padding-bottom:5px;margin:0px;color:#000000;}
+.cart_page_vew p.upload_id span{color:#60c5ac;}
+.cart_page_vew p.price_right span.check_price{font-size:24px;font-family:Proxima-Nova-Extrabold;}
+.cart_page_vew p.price_right span i{font-size:24px;margin-left:25px;color:#000;}
+.cart_page_vew .media-body p{margin-bottom:5px;}
+.cart_page_right .well{background:none;box-shadow:none;margin-top:15px;border-top:3px solid #60c5ac;border-radius:0px;text-align:center;padding-top:0px;}
+.cart_page_right p.store_price{font-size:24px;font-family:Proxima-Nova-Extrabold;color:#000;}
+.store_credit h3{text-align:left;margin-bottom:15px;font-size:18px;font-family:Proxima-Nova-Extrabold;border-bottom:2px solid #ccc;padding-bottom:15px;color:#000;}
+.store_credit a{width:100%;background:none;border:2px solid #60c5ac;font-size:18px;font-family:Proxima-Nova-Extrabold;color:#61c5ac;}
+.coupn_code  a{width:100%;background:none;border:2px solid #60c5ac;font-size:18px;font-family:Proxima-Nova-Extrabold;color:#61c5ac;}
+.coupn_code  a:hover{background:none;border:2px solid #60c5ac;color:#61c5ac;}
+.store_credit a:hover{background:none;border:2px solid #60c5ac;color:#61c5ac;}
+.store_credit a:active:hover{background:none;border:2px solid #60c5ac;color:#61c5ac;}
+.coupn_code a:active:hover{background:none;border:2px solid #60c5ac;color:#61c5ac;}
+.coupn_code h3{text-align:left;font-size:18px;font-family:Proxima-Nova-Extrabold;border-bottom:2px solid #ccc;padding-bottom:15px;color:#000;margin-bottom:15px;}
+.coupn_code input{margin-bottom:15px;}
+.cart_page_right h3{text-align:left;margin-bottom:15px;font-size:18px;font-family:Proxima-Nova-Extrabold;border-bottom:2px solid #ccc;padding-bottom:15px;color:#000;}
+.coupn_code .well{border-top:1px solid #e3e3e3;}
+.order_summery .well{border-top:1px solid #e3e3e3;}
+.order_summery a{width:100%;background:#ef4066;border:2px solid #ef4066;font-size:18px;font-family:Proxima-Nova-Extrabold;color:#fff;}
+.order_summery a:hover{background:#ef4066;border:2px solid #ef4066;}
+.order_summery a:active:hover{background:#ef4066;border:2px solid #ef4066;font-family:Proxima-Nova-Extrabold;color:#fff;}
+.order_summery p.sub-all{text-align:left;font-family:Proxima-Nova-Semibold;color:#000;margin-bottom:30px;}
+.order_summery span.sub-price em{display:block;font-style:inherit;font-size:12px;}
+span.sub-price{text-align:right;float:right;}
+.s_credit span.sub-price{color:#ef4066;}
+.order_summery p.s_credit{padding-bottom:5px;margin-bottom:10px;}
+.cart_page_total h1{font-size:24px;font-family:Proxima-Nova-Extrabold;color:#000000;border-bottom:2px solid #ccc;text-transform:uppercase;padding-bottom:10px;margin-bottom:20px;}
+p.sub-all.total_price{border-bottom:2px solid #ccc;border-top:2px solid #ccc;padding:10px 0px;}
+.checkout_page_total h1{font-size:24px;font-family:Proxima-Nova-Extrabold;color:#000000;border-bottom:2px solid #ccc;text-transform:uppercase;padding-bottom:10px;margin-bottom:20px;}
+.check_out_page_left h2{margin-top:0px;margin-bottom:5px;font-size:22px;font-family:Proxima-Nova-Extrabold;padding-bottom:5px;margin:0px;color:#000000;}
+.checkout_page_total .well{background:none;box-shadow:none;border-radius:0px;}
+.check_out_page_left .methods{clear:both;padding:20px 0px;border-bottom:2px solid #ccc;width:95%;display:inline-block;margin:0 auto;margin-left:15px;}
+.check_out_page_left p.cehck_edit{text-align:right;}
+.check_out_page_left p a{color:#000;text-decoration:underline!important;font-family:Proxima-Nova-Bold;}
+.methods h4{font-family:Proxima-Nova-Bold;font-size:18px;}
+.check_out_page_left .media-left img{max-height:150px;}
+.check_out_page_left p.price_right span i{font-size:24px;margin-left:25px;color:#000;}
+.check_out_page_left .media-body p{margin-bottom:5px;}
+.check_out_page_left p.price_right span.check_price{font-size:20px;font-family:Proxima-Nova-Extrabold;}
+.check_out_page_left .media-body .media-heading{margin-top:0;margin-bottom:5px;width:100%;float:left;font-size:24px;font-family:Proxima-Nova-Extrabold;padding-bottom:5px;margin:0px;color:#000000;}
+.checkout_review_box{margin-top:70px;}
+.well .shipping_date span{font-family:Proxima-Nova-Extrabold;color:#000;}
+.well .shipping_date span .in_prc{font-family:Proxima-Nova-Extrabold;color:#ef4066;}
+.check_out_page_right h3{text-align:left;margin-bottom:15px;font-size:18px;font-family:Proxima-Nova-Extrabold;border-bottom:2px solid #ccc;padding-bottom:15px;margin-top:0px;color:#000;}
+.check_out_page_right .order_summery{border-top:3px solid #60c5ac;}
+.methods p{font-family:Proxima-Nova-Semibold;}
+.check_out_page_left .methods:last-child{border:none;}
+.check_out_page_right .btn-primary:active{background-color:#ef456f;boder-color:#ef456f;}
+.check_out_page_right .btn-primary:focus{background-color:#ef456f;boder-color:#ef456f;}
 
 
 
+/* checkout and cart page css End here */
 
 
 
@@ -832,6 +892,10 @@ display: none;
 .t-cnt{display:none;}
 }
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
+	.order_summery p.s_credit {
+    padding-bottom: 5px;
+    margin-bottom: inherit;
+}
 	.box-list2 li {
 width: 50%;
 float: left;
@@ -874,6 +938,18 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+	.well .shipping_date{display: inline-block;}
+.shipping_date span.shi_date_right {
+    float: left !important;
+    text-align: left;    margin-top: 15px;}
+	.check_out_page_left .media-body .media-heading{font-size:16px;}
+	.check_out_page_left h2{font-size:18px}
+	.checkout_page_total .well{padding: 5px;}
+	.check_out_page_left .methods{margin-left: 15px;
+    margin-right: 15px;    width: auto;}
+	.checkout_review_box {
+    margin-top: 30px;
+}
 	.login-register-main {
 width: auto;
 margin: 40px auto;
