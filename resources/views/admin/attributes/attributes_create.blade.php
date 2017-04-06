@@ -75,7 +75,7 @@ Attribute create@parent
                     </div> 
                     <div class="box-footer">
                         <div class="pull-right">
-                            <a href="/amenities" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
+                            <a href="/attributes" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
                             <button type="submit" class="btn btn-primary pull-right">Create</button>
                         </div>
                     </div>
