@@ -14,7 +14,7 @@
 			@if(empty($data['sub_cat_info'][0]->banner_image))
 			<img class="img-responsive" src="/category_images/df_img.jpg">
 			@else
-			<img class="img-responsive" src="/category_images/{{$data['sub_cat_info'][0]->banner_image}}">
+			<img class="img-responsive" src="/category_images/Banner/{{$data['sub_cat_info'][0]->banner_image}}">
 			@endif
 			</div>
 		</div>

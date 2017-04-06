@@ -81,5 +81,15 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	    Route::any('/attributes/values', ['as' => 'attributes-values-list','uses'=>'AttributeController@attributesValuesList']);
 	    Route::any('/attributes-values-list', ['as' => '','uses'=>'AttributeController@attributesValuesData']);
 		/****************Attributes Management Ends Here***********************/
+
+
+		/****************Categories Management Starts Here*********************/
+		Route::any('/category/create', ['as' => 'categories-create','uses'=>'CategoriesController@createCategories']);
+	    Route::any('/category/edit/{id?}', ['as' => 'categories-edit','uses'=>'CategoriesController@editCategories']);
+	    Route::any('/categories-delete/{id}', ['as' => '','uses'=>'CategoriesController@deleteCategories']);
+	    Route::any('/categories', ['as' => 'attributes-list','uses'=>'CategoriesController@categoriesList']);
+	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
+	    Route::any('/getCostumesList', ['as' => '','uses'=>'CategoriesController@getCostumesList']);
+		/****************Categories Management Ends Here***********************/
 });
 

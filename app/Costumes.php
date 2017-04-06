@@ -59,5 +59,9 @@ class Costumes extends Authenticatable
         $result=DB::Select('select count(id) as is_user_fav from cc_customer_wishlist where user_id='.$user_id.' and costume_id='.$costume_id.'');
         return array('is_user_fav'=>$result[0]->is_user_fav);
     }
+    protected function getCostumesList(){
+        $costumes_list=DB::Select('SELECT costume_id,name FROM `cc_costumes` ORDER BY `name` ASC');
+        return $costumes_list;
+    }
 
 }
