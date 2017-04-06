@@ -1,13 +1,5 @@
 @extends('/frontend/app')
 @section('styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css" rel="stylesheet">
-<style>
-	.owl-controls.clickable {
-		display: none;
-	}
-
-</style>
 @endsection
 @section('content')
 <section class="product_Details_page">
@@ -110,63 +102,8 @@
 </div>
 </div>
 
-<div class="col-md-12 detailes_view_slider">
+<div class="col-md-12">
 <h2 class="viewHead-rm">People Also Viewing</h2>
-<div class="home_product_slider">
-			<div class="container">
-				<div class="row">
-						<div class="col-xs-12">
-					<div class="owl-carousel owl-theme">
-						<div class="item">
-							<div class="img_layer">
-								<img class="img-responsive" src="{{asset('/assets/frontend/img/captain-1.png')}}">
-							</div>
-							<div class="slider_cnt">
-								<h4>Boy’s Handmade Pirate Costume</h4>
-								<p>$50.00</p>
-							</div>
-						</div>
-						<div class="item">
-							<div class="img_layer">
-								<img class="img-responsive" src="{{asset('/assets/frontend/img/rey-1.png')}}">
-							</div>
-							<div class="slider_cnt">
-								<h4>Boy’s Handmade Pirate Costume</h4>
-								<p>$50.00</p>
-							</div>
-						</div>
-						<div class="item">
-							<div class="img_layer">
-								<img class="img-responsive" src="{{asset('/assets/frontend/img/wendy-1.png')}}">
-							</div>
-							<div class="slider_cnt">
-								<h4>Boy’s Handmade Pirate Costume</h4>
-								<p>$50.00</p>
-							</div>
-						</div>
-						<div class="item">
-							<div class="img_layer">
-								<img class="img-responsive" src="{{asset('/assets/frontend/img/jasmine-1.png')}}">
-							</div>
-							<div class="slider_cnt">
-								<h4>Boy’s Handmade Pirate Costume</h4>
-								<p>$50.00</p>
-							</div>
-						</div>
-						<div class="item">
-							<div class="img_layer">
-								<img class="img-responsive" src="{{asset('/assets/frontend/img/wendy-1.png')}}">
-							</div>
-							<div class="slider_cnt">
-								<h4>Boy’s Handmade Pirate Costume</h4>
-								<p>$50.00</p>
-							</div>
-						</div>
-					</div>
-					</div>
-				</div>
-			</div>
-		</div>
 </div>
 
 
@@ -176,6 +113,4 @@
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
-<script src="{{ asset('/assets/frontend/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('/assets/frontend/js/pages/home.js') }}"></script>
 @stop
