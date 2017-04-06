@@ -8,7 +8,7 @@
 	<tbody>
 		<tr>
 			<td colspan="4" style="border-collapse:collapse;border:0;margin:0;padding:0;color:#333;font-family:Arial,sans-serif;font-size:16px;line-height:26px;background-color:#fff;border-bottom:1px solid #fff" valign="top">
-			<h1 style="margin:10px 35px;color:#333;font-size:25px;font-weight:normal"><img height="28" src="{{asset('assets/frontend/img/brand.png')}}" style="width: 206px; height: 28px;" width="206" /></span></h1>
+			<h1 style="margin:10px 35px;color:#333;font-size:25px;font-weight:normal"><img src="{{asset('assets/frontend/img/brand.png')}}" style="width: 206px;" /></span></h1>
 			<a style="text-decoration:none!important"> </a></td>
 		</tr>
 		<tr>
