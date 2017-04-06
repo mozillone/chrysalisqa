@@ -63,8 +63,33 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	    Route::any('/status/change', 'UserController@changeUserStatus');
 	    Route::any('/customer/emailValidation', array('as' => '','uses' => 'UserController@EmailNameCheck'));
 	    /****************User Management End Here***************************/
+
 		/****************Costumes Management Code Starts Here*********************/
 		Route::get('costumes-list', ['as' => 'costumes-list','uses'=>'CostumeController@costumesList']);
 		/****************Costumes Managemnet Code Ends Here***********************/
+
+		/****************Attributes Management Starts Here*********************/
+		Route::any('/attributes/create', ['as' => 'attributes-create','uses'=>'AttributeController@createAttributes']);
+	    Route::any('/attribute/edit/{id?}', ['as' => 'attribute-edit','uses'=>'AttributeController@editAttribute']);
+	    Route::any('/attribute-delete/{id}', ['as' => '','uses'=>'AttributeController@deleteAttributes']);
+	    Route::any('/attributes', ['as' => 'attributes-list','uses'=>'AttributeController@attributesList']);
+	    Route::any('/attributes-list', ['as' => '','uses'=>'AttributeController@attributesData']);
+	
+		Route::any('/attributes/value/create', ['as' => 'attribute-value-create','uses'=>'AttributeController@createAttributesValue']);
+	    Route::any('/attribute/value/edit/{id?}', ['as' => 'attribute-value-edit','uses'=>'AttributeController@editAttributeValue']);
+	    Route::any('/attribute-value-delete/{id}', ['as' => '','uses'=>'AttributeController@deleteAttributesValue']);
+	    Route::any('/attributes/values', ['as' => 'attributes-values-list','uses'=>'AttributeController@attributesValuesList']);
+	    Route::any('/attributes-values-list', ['as' => '','uses'=>'AttributeController@attributesValuesData']);
+		/****************Attributes Management Ends Here***********************/
+
+
+		/****************Categories Management Starts Here*********************/
+		Route::any('/category/create', ['as' => 'categories-create','uses'=>'CategoriesController@createCategories']);
+	    Route::any('/category/edit/{id?}', ['as' => 'categories-edit','uses'=>'CategoriesController@editCategories']);
+	    Route::any('/categories-delete/{id}', ['as' => '','uses'=>'CategoriesController@deleteCategories']);
+	    Route::any('/categories', ['as' => 'attributes-list','uses'=>'CategoriesController@categoriesList']);
+	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
+	    Route::any('/getCostumesList', ['as' => '','uses'=>'CategoriesController@getCostumesList']);
+		/****************Categories Management Ends Here***********************/
 });
 

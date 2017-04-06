@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
     <title>@section('title')
-           {{!empty($title) ? $title.' |' : ''}} Chrysalis
+           {{!empty($title) ? $title.' |' : ''}} | Chrysalis
        @show</title>
 
   <!-- Tell the browser to be responsive to screen width -->

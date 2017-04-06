@@ -79,6 +79,5 @@ class CostumeController extends Controller
 	public function searchCostume(){
 	
 	}
-	
 
 }
