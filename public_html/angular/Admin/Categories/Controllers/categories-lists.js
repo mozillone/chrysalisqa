@@ -43,15 +43,15 @@ app.controller('CategoriesController', function($scope,DTOptionsBuilder, DTColum
  $(document).on('click', '.delete', function(){ 
       var id=$(this).attr('data-id');
       swal({   
-              title: "Are you sure want to delete this Attribute?",   
-                        text: "You will not be able to recover this Attribute",   
+              title: "Are you sure want to delete this Category?",   
+                        text: "You will not be able to recover this Category",   
                         showCancelButton: true,   
                         confirmButtonColor: "#DD6B55",   
                         confirmButtonText: "Yes, delete",   
                         closeOnConfirm: false
                       }, 
                       function(){   
-                        document.location = "/attribute-delete/"+id;
+                        document.location = "/category-delete/"+id;
                       }); 
          
     });
