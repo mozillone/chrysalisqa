@@ -2,6 +2,7 @@
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">
 <style>
 	.owl-controls.clickable {
 		display: none;
@@ -13,7 +14,25 @@
 <section class="product_Details_page">
 	<div class="container">
 <div class="row">
-<div class="col-md-5">
+<div class="col-md-5 bxslider-strt">
+
+<ul class="bxslider">
+  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr1.jpg')}}"></li>
+  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr2.jpg')}}"></li>
+  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr3.jpg')}}"></li>
+  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr4.jpg')}}"></li>
+  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr5.jpg')}}"></li>
+  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr6.jpg')}}"></li>  
+</ul>
+
+<div id="bx-pager" class="bxslider-rm">
+  <a data-slide-index="0" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr1.jpg')}}"></a>
+  <a data-slide-index="1" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr2.jpg')}}"></a>
+  <a data-slide-index="2" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr3.jpg')}}"></a>
+  <a data-slide-index="3" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr4.jpg')}}"></a>
+  <a data-slide-index="4" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr5.jpg')}}"></a>
+  <a data-slide-index="5" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr6.jpg')}}"></a>  
+</div>
 
 </div>
 
@@ -178,4 +197,34 @@
 @section('footer_scripts')
 <script src="{{ asset('/assets/frontend/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/home.js') }}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
+<script>
+$(document).ready(function(){
+
+$('.bxslider').bxSlider({
+  pagerCustom: '#bx-pager',
+  controls: false
+});
+
+$('.bxslider-rm').bxSlider({
+minSlides: 3,
+  maxSlides: 5,
+  slideWidth: 170,
+  slideMargin: 10,
+
+});
+$(".bxslider-rm").parent().parent(".bx-wrapper").addClass("bx-wrapper-rm");
+	
+    $(".mobile-plus").click(function(){
+	$(this).toggleClass("mobile-minus");	
+    $(this).parent("li").find(".responsive-inner").toggleClass("none-rm");
+    });
+	
+    $(".icon-rm .toggle-btn").click(function(){
+	$(this).parent(".icon-rm").toggleClass("btn-cross");	
+	$(".mobile-rm").toggleClass("toggle");	
+    });	
+	
+});
+</script>
 @stop

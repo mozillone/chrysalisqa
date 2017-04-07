@@ -762,7 +762,13 @@ height: auto;
 /* Product View page CSS E */
 
 
-
+/* box slider */
+.bxslider-strt{margin: 20px 0 0;}
+#bx-pager a{width: 20%; float:left;}
+#bx-pager a img{width: 100%; float:left;}
+.bx-wrapper{width: 100%; border: none !important; box-shadow: none !important; padding: 0px !important;}
+.bx-wrapper.bx-wrapper-rm .bx-pager.bx-default-pager{display: none;}
+/* box slide Carousal code E*/
 
 
 /* checkout and cart page start css */
