@@ -80,6 +80,16 @@ class Costumes extends Authenticatable
         $costumeSellerInfo=DB::Select('select display_name,email,phone_number from cc_users where id='.$user_id);
         return $costumeSellerInfo;
     }
-
+    protected function costumeReport($req){
+        $data=array('costume_id'=>$req['costume_id'],
+                    'name'=>$req['name'],
+                    'phn_no'=>$req['phone'],
+                    'email'=>$req['email'],
+                    'reason'=>$req['reason'],
+                    'created_at'=>date('Y-m-d H:i:s'),
+            );
+        $res=Site_model::insert_data('reported_costumes',$data);
+        return $res;
+    }
 
 }

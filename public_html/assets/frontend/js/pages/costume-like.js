@@ -36,7 +36,7 @@ $(document).on('click','.like_costume_view',function(){
         }else{
            $('.like-span1').removeClass('active');
         }
-         $('.like-span1').html('<i aria-hidden="true" class="fa fa-thumbs-up"></i>'+response.count);
+         $('.like-span1').html('<i aria-hidden="true" class="fa fa-thumbs-up"></i> '+response.count);
       },
          complete: function(jqXHR, textStatus) {
            $("#itemContainer").removeClass("search_icn_load");
