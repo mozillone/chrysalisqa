@@ -64,14 +64,22 @@ class Costumes extends Authenticatable
         return $costumes_list;
     }
     protected function getCostumeDetails($costume_id){
-        $data=DB::Select('SELECT cats.category_id,cats.name as cat_name,cats.description,cst.costume_id,cst.name,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,size FROM `cc_costume_to_category` as cat JOIN cc_costumes as cst on cst.costume_id=cat.costume_id JOIN cc_category  as cats on cats.category_id=cat.category_id where cat.costume_id='.$costume_id.' group by cat.costume_id');
+        $data=DB::Select('SELECT cats.category_id,cats.name as cat_name,cats.description,cst.costume_id,cst.name,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by FROM `cc_costume_to_category` as cat JOIN cc_costumes as cst on cst.costume_id=cat.costume_id JOIN cc_category  as cats on cats.category_id=cat.category_id where cat.costume_id='.$costume_id.' group by cat.costume_id');
         return $data;
 
     }
-     protected function getRandomCategoyCostumesList($cat_id){
+    protected function getRandomCategoyCostumesList($cat_id){
         $data=DB::Select('SELECT cst.costume_id,cat.category_id,name,price,img.image FROM `cc_costume_to_category` as cat LEFT JOIN cc_costumes as cst on cst.costume_id=cat.costume_id LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.sort_order="0" where cat.category_id='.$cat_id.' ORDER BY RAND() LIMIT 10');
         return $data;
-
     }
+    protected function getCostumeImages($costume_id){
+        $costume_images=DB::Select('SELECT * FROM `cc_costume_image` where costume_id='.$costume_id);
+        return $costume_images;
+    }
+    protected function costumeSellerInfo($user_id){
+        $costumeSellerInfo=DB::Select('select display_name,email,phone_number from cc_users where id='.$user_id);
+        return $costumeSellerInfo;
+    }
+
 
 }

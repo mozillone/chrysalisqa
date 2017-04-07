@@ -17,21 +17,17 @@
 <div class="col-md-5 bxslider-strt">
 
 <ul class="bxslider">
-  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr1.jpg')}}"></li>
-  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr2.jpg')}}"></li>
-  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr3.jpg')}}"></li>
-  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr4.jpg')}}"></li>
-  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr5.jpg')}}"></li>
-  <li><img class="img-responsive" src="{{asset('assets/frontend/img/bannr6.jpg')}}"></li>  
-</ul>
+@foreach($data['images'] as $images)
+  <li><img class="img-responsive" src="{{asset('/costumers_images/Medium')}}/<?= $images->image?>"></li>
+@endforeach
+ </ul>
 
 <div id="bx-pager" class="bxslider-rm">
-  <a data-slide-index="0" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr1.jpg')}}"></a>
-  <a data-slide-index="1" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr2.jpg')}}"></a>
-  <a data-slide-index="2" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr3.jpg')}}"></a>
-  <a data-slide-index="3" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr4.jpg')}}"></a>
-  <a data-slide-index="4" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr5.jpg')}}"></a>
-  <a data-slide-index="5" href=""><img class="img-responsive" src="{{asset('assets/frontend/img/bannr6.jpg')}}"></a>  
+  <?php $count=0;?>
+  @foreach($data['images'] as $images)
+  <a data-slide-index="{{$count}}" href=""><img class="img-responsive" src="{{asset('/costumers_images/Medium')}}/<?= $images->image?>"></a>
+  <?php $count++;?>
+  @endforeach
 </div>
 
 </div>
@@ -107,12 +103,7 @@
 
 		
 		<div class="tab-pane" id="viewTabs3">
-<!-- tab content starts -->
-
-		<p class="viewTabs-text">Included in this set is a cream colored pirate shirt with the puffy, over-sized sleeves and lace up front. The lined vest is made from a weathered looking blue cotton that shows he's been having fun adventuring out to sea. A sash and head bandanna finish the look perfectly. All parts of this costume are made in cotton and are machine washable. Line dry to avoid shrinking.</p>				
-
-<!-- tab content End -->			
-			
+		<p class="viewTabs-text">@if(!empty($data['seller_info'])) <p>Name: <span>{{$data['seller_info'][0]->display_name}}</span></p><p>Email: <span>{{$data['seller_info'][0]->email}}</span><p>Phone: <span>{{$data['seller_info'][0]->phone_number}}<span></p></p> @else <h3>No data found</h3> @endif</p>				
 		</div>
 		
 		  </div>
@@ -135,10 +126,9 @@
 				<div class="row">
 						<div class="col-xs-12">
 					<div class="owl-carousel owl-theme">
-					{{$parent_cat_name}}
 					@foreach($data['random_costumes'] as $rand)
 						<div class="item">
-						<a href="/shop/{{$rand->costume_id}}/">
+						<a href="/shop/{{$rand->costume_id}}/{{$parent_cat_name}}/{{$data[0]->cat_name}}/{{$rand->name}}">
 							<div class="img_layer">
 								<img class="img-responsive" @if($rand->image!=null) src="/costumers_images/Medium/{{$rand->image}}" @else src="{{asset('/costumers_images/default-placeholder.jpg')}}" @endif >
 							</div>

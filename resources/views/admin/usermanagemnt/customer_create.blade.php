@@ -48,7 +48,7 @@
 					<form id="customer_create" class="form-horizontal defult-form" name="userForm" action="{{route('customer-create')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 						<div class="col-md-6">
-							<h2 class="heading-agent">Personal Info</h2>
+							<h2 class="heading-agent">User Info</h2>
 							<div class="col-md-12">
 								<div class="row">
 									<div class="col-md-6">
@@ -86,7 +86,8 @@
 						</div>
 						
 						<div class="col-md-6">
-							<h2 class="heading-agent">Login Info</h2>
+							<h2 class="heading-agent" style="display:none">Login Info</h2> 
+							<br><br><br>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
 									<label for="inputEmail3" class="control-label">Username<span class="req-field" >*</span></label>
