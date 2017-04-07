@@ -19,11 +19,10 @@ class CostumesController extends Controller {
 	{
 		$this->sitehelper = new SiteHelper();
 	}
-	public function costumeListings($sub_cat_id)
+	public function costumeListings($sub_cat_id,$parent_cat_name)
 	{
 		$data['sub_cat_info']=Costumes::getCategoryInfo($sub_cat_id);
 		$parent_cat_id=$data['sub_cat_info'][0]->parent_id;
-		$parent_cat_name=$data['sub_cat_info'][0]->name;
 		$data['sub_cats_list']=Costumes::getParentCategories($parent_cat_id);
 		return view('frontend.costumes.costumes_list',compact('data',$data))->with('parent_cat_name',$parent_cat_name);
 	}
@@ -74,9 +73,16 @@ class CostumesController extends Controller {
 		$costumes = DB::select('SELECT  cst.costume_id,cst.name,CONCAT("$",FORMAT(cst.price,2)) as price,if((select count(*) from cc_costumes_like as likes where likes.user_id=cst.created_by and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id=cst.created_by and  wsh_lst.	costume_id=cst.costume_id )>=1,true,false) as is_fav,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.sort_order="0"'.$where.' '.$order_by.'');
 		return response()->success(compact('costumes'));
 	}
-	public function costumeSingleView()
+	public function costumeSingleView($costume_id,$parent_cat_name)
 	{
-		return view('frontend.costumes.costumes_single_view');
+		$data=Costumes::getCostumeDetails($costume_id);
+		if(count($data)){
+			$data['random_costumes']=Costumes::getRandomCategoyCostumesList($data[0]->category_id);
+			return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$parent_cat_name);
+		}else{
+	      Session::flash('error', 'Costume information not found..');
+          return Redirect::back();
+		}
 	}
 	public function costumeLike(Request $request){
 		$req=$request->all();

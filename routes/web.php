@@ -29,11 +29,16 @@ Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthControll
 Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
 Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@EditProfile']);
 
-/** Products list page start here **/
+/** Costumes Controller starts here **/
+
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
-Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
-/** Products list page end here **/
+
+Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
+
+
+/** Costumes Controller startsend here **/
+
 
 /** Costume Like page start here **/
 Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));

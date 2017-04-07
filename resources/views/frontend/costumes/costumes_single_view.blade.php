@@ -19,17 +19,16 @@
 
 <div class="col-md-7">
 <div class="product_view_rm">
-<h1>Captain Jack Sparrow, Pirates of the Carribean</h1>
-
+<h1>{{$data[0]->name}}</h1>
 <!---Price section start -->
 	<div class="row">
 	<div class="priceview_rm">
 	<div class="col-xs-6 col-sm-8 viewpr_rm">
-	<h2>$59.00</h2>
+	<h2>${{number_format($data[0]->price,2, '.', ',')}}</h2>
 
 	<p class="ystrip-rm"><span><img class="img-responsive" src="{{asset('assets/frontend/img/film.png')}}"> Film Quality</span></p>
-	<p class="iCondition-rm"><span class="iBold-rm">Item Condition:</span> Like New</p>
-	<p class="iCondition-rm"><span class="iBold-rm">Size:</span> Boys small</p>
+	<p class="iCondition-rm"><span class="iBold-rm">Item Condition:</span>  @if($data[0]->condition=="brand_new") Brand New @elseif($data[0]->condition=="like_new") Like New @else {{ucfirst($data[0]->condition)}} @endif </p>
+	<p class="iCondition-rm"><span class="iBold-rm">Size:</span> {{ucfirst($data[0]->gender)}} @if($data[0]->size=="s") small @elseif($data[0]->size=="m") medium @elseif($data[0]->size=="l") large @else {{strtoupper($data[0]->size)}} @endif</p>
 	</div>
 
 	<div class="col-xs-6 col-sm-4 viewBtn_rm">
@@ -40,11 +39,11 @@
 	</div>
 	</div>
 <!---Price section End -->
-	<div class="shipping_rm">
+	<!-- <div class="shipping_rm">
 	<p class="shipp-rm"><label>Shipping:</label> $11.00 Expedited Shipping | <a href="javascript:void(0);">See Details</a></p>
 	<p class="shipp-rm1">Item location: Brooklyn, NY USA <br/>Ships to: United States</p>
 	<p class="shipp-rm shipp-rm-20"><label>Delivery:</label> Estimated between Wed. Oct. 5 and Sat. Oct. 8 <i class="fa fa-info-circle" aria-hidden="true"></i></p>
-	</div>
+	</div> -->
 	<p class="returns-rm">Returns: <span>Seller does not offer returns</span></p>
 
 
@@ -117,51 +116,20 @@
 				<div class="row">
 						<div class="col-xs-12">
 					<div class="owl-carousel owl-theme">
+					{{$parent_cat_name}}
+					@foreach($data['random_costumes'] as $rand)
 						<div class="item">
+						<a href="/shop/{{$rand->costume_id}}/">
 							<div class="img_layer">
-								<img class="img-responsive" src="{{asset('/assets/frontend/img/captain-1.png')}}">
+								<img class="img-responsive" @if($rand->image!=null) src="/costumers_images/Medium/{{$rand->image}}" @else src="{{asset('/costumers_images/default-placeholder.jpg')}}" @endif >
 							</div>
 							<div class="slider_cnt">
-								<h4>Boy’s Handmade Pirate Costume</h4>
-								<p>$50.00</p>
+								<h4>{{$rand->name}}</h4>
+								<p>${{$rand->price}}</p>
 							</div>
+						</a>
 						</div>
-						<div class="item">
-							<div class="img_layer">
-								<img class="img-responsive" src="{{asset('/assets/frontend/img/rey-1.png')}}">
-							</div>
-							<div class="slider_cnt">
-								<h4>Boy’s Handmade Pirate Costume</h4>
-								<p>$50.00</p>
-							</div>
-						</div>
-						<div class="item">
-							<div class="img_layer">
-								<img class="img-responsive" src="{{asset('/assets/frontend/img/wendy-1.png')}}">
-							</div>
-							<div class="slider_cnt">
-								<h4>Boy’s Handmade Pirate Costume</h4>
-								<p>$50.00</p>
-							</div>
-						</div>
-						<div class="item">
-							<div class="img_layer">
-								<img class="img-responsive" src="{{asset('/assets/frontend/img/jasmine-1.png')}}">
-							</div>
-							<div class="slider_cnt">
-								<h4>Boy’s Handmade Pirate Costume</h4>
-								<p>$50.00</p>
-							</div>
-						</div>
-						<div class="item">
-							<div class="img_layer">
-								<img class="img-responsive" src="{{asset('/assets/frontend/img/wendy-1.png')}}">
-							</div>
-							<div class="slider_cnt">
-								<h4>Boy’s Handmade Pirate Costume</h4>
-								<p>$50.00</p>
-							</div>
-						</div>
+					@endforeach
 					</div>
 					</div>
 				</div>
