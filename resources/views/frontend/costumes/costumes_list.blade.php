@@ -150,4 +150,7 @@
 <script src="{{ asset('/js/ohsnap.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
+
 @stop

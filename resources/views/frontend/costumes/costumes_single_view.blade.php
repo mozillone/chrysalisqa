@@ -2,7 +2,7 @@
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.css') }}">
 <style>
 	.owl-controls.clickable {
 		display: none;
@@ -112,7 +112,17 @@
 	</div>			
 			
 	<div class="likeview-rm">
-	<p class="likeview-rm1"><span>Like this costume?</span> <span class="like-span">Vote Up! <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span> <span class="like-span1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 43</span></p>
+	<p class="likeview-rm1">
+		<span>Like this costume?</span>
+		 @if(Auth::check())
+		 <a href="#" onclick="return false;" class="like_costume_view" data-costume-id='{{$data[0]->costume_id}}'>
+		 @else 
+		 <a data-toggle="modal" data-target="#login_popup">
+		 @endif <span class="like-span">
+		 	Vote Up!</span></a>
+		 </span>
+		  <span class="like-span1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{$data[0]->like_count}}</span>
+	</p>
 	<p class="likeview-rm2"><a href="javascript:void(0);"><i class="fa fa-flag" aria-hidden="true"></i> Report Item</a></p>
 	</div>
 
@@ -154,35 +164,12 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
 <script src="{{ asset('/assets/frontend/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costumes_view.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/home.js') }}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
+<script src="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.js') }}"></script>
 <script>
-$(document).ready(function(){
 
-$('.bxslider').bxSlider({
-  pagerCustom: '#bx-pager',
-  controls: false
-});
-
-$('.bxslider-rm').bxSlider({
-minSlides: 3,
-  maxSlides: 5,
-  slideWidth: 170,
-  slideMargin: 10,
-
-});
-$(".bxslider-rm").parent().parent(".bx-wrapper").addClass("bx-wrapper-rm");
-	
-    $(".mobile-plus").click(function(){
-	$(this).toggleClass("mobile-minus");	
-    $(this).parent("li").find(".responsive-inner").toggleClass("none-rm");
-    });
-	
-    $(".icon-rm .toggle-btn").click(function(){
-	$(this).parent(".icon-rm").toggleClass("btn-cross");	
-	$(".mobile-rm").toggleClass("toggle");	
-    });	
-	
-});
 </script>
 @stop
