@@ -29,11 +29,16 @@ Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthControll
 Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
 Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@EditProfile']);
 
-/** Products list page start here **/
+/** Costumes Controller starts here **/
+
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
-Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
-/** Products list page end here **/
+
+Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
+
+
+/** Costumes Controller startsend here **/
+
 
 /** Costume Like page start here **/
 Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
@@ -87,7 +92,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 		Route::any('/category/create', ['as' => 'categories-create','uses'=>'CategoriesController@createCategories']);
 	    Route::any('/category/edit/{id?}', ['as' => 'categories-edit','uses'=>'CategoriesController@editCategories']);
 	    Route::any('/category-delete/{id}', ['as' => '','uses'=>'CategoriesController@deleteCategory']);
-	    Route::any('/categories', ['as' => 'attributes-list','uses'=>'CategoriesController@categoriesList']);
+	    Route::any('/categories', ['as' => 'categories-list','uses'=>'CategoriesController@categoriesList']);
 	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
 	    Route::any('/getCostumesList', ['as' => '','uses'=>'CategoriesController@getCostumesList']);
 		/****************Categories Management Ends Here***********************/

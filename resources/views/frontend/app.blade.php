@@ -20,9 +20,7 @@
 	<body ng-app="app">
 		<section class="main_header">
 		@include('frontend.partials.header')
-		@if(!Request::is('login'))
-			@include('frontend.partials.menu')
-		@endif
+		@include('frontend.partials.menu')
 		</section>
 		@yield('content')
 		@include('frontend.partials.footer')

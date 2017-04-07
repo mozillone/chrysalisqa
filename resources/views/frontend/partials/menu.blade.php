@@ -44,6 +44,7 @@
 					</div>
 				</div>
 			</nav>
+			@if(!Request::is('login'))
 			<div class="main_navigation">
 				<div class="container main_menu">
 					<nav class="navbar navbar-default">
@@ -198,3 +199,4 @@
 		</section>
 
 		<!-- responsive header End here -->
+		@endif
