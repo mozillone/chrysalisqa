@@ -41,12 +41,24 @@
       </li>
       <li {{ (Request::is('categories') ? 'class=active' : '') }}  {{ (Request::is('category/create') ? 'class=active' : '') }} {{ (Request::is('category/edit/*') ? 'class=active' : '') }} >
         <a href="javascript:void(0)">
-             <i class="fa fa-hourglass-start" aria-hidden="true"></i> <span>category Management</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-tags" aria-hidden="true"></i> <span>category Management</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu menu">
           <li {{ (Request::is('categories') ? 'class=active' : '') }} {{ (Request::is('category/create') ? 'class=active' : '') }} {{ (Request::is('category/edit/*') ? 'class=active' : '') }}>
             <a href="{{route('categories-list')}}">
               <i class="fa fa-circle-o" aria-hidden="true"></i> <span> categories</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+       <li {{ (Request::is('eported/costumes') ? 'class=active' : '') }}>
+        <a href="javascript:void(0)">
+            <i class="fa fa-tasks" aria-hidden="true"></i> <span>Costumes</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu">
+          <li {{ (Request::is('reported/costumes') ? 'class=active' : '') }} >
+            <a href="{{route('reported-costumes-list')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Reported Costumes</span>
             </a>
           </li>
         </ul>

@@ -45,13 +45,20 @@
 	{{ Session::get('success') }}
 </div>
 @endif
-<h1>{{$data[0]->name}}</h1>
+<h1>{{$data[0]->name}}
+@if(Auth::check())
+	<a href="#" onclick="return false;" class="fav_costume" data-costume-id='{{$data[0]->costume_id}}'>
+@else
+	<a data-toggle="modal" data-target="#login_popup">
+@endif
+<span @if($data[0]->is_fav)  class="active" @endif>@if($data[0]->is_fav)<i aria-hidden=true class="fa fa-heart"></i> @else <i aria-hidden=true class="fa fa-heart-o"></i>@endif</span></a>
+	</h1>
+
 <!---Price section start -->
 	<div class="row">
 	<div class="priceview_rm">
 	<div class="col-xs-6 col-sm-8 viewpr_rm">
 	<h2>${{number_format($data[0]->price,2, '.', ',')}}</h2>
-
 	<p class="ystrip-rm"><span><img class="img-responsive" src="{{asset('assets/frontend/img/film.png')}}"> Film Quality</span></p>
 	<p class="iCondition-rm"><span class="iBold-rm">Item Condition:</span>  @if($data[0]->condition=="brand_new") Brand New @elseif($data[0]->condition=="like_new") Like New @else {{ucfirst($data[0]->condition)}} @endif </p>
 	<p class="iCondition-rm"><span class="iBold-rm">Size:</span> {{ucfirst($data[0]->gender)}} @if($data[0]->size=="s") small @elseif($data[0]->size=="m") medium @elseif($data[0]->size=="l") large @else {{strtoupper($data[0]->size)}} @endif</p>
@@ -64,12 +71,6 @@
 
 	</div>
 	</div>
-<!---Price section End -->
-	<!-- <div class="shipping_rm">
-	<p class="shipp-rm"><label>Shipping:</label> $11.00 Expedited Shipping | <a href="javascript:void(0);">See Details</a></p>
-	<p class="shipp-rm1">Item location: Brooklyn, NY USA <br/>Ships to: United States</p>
-	<p class="shipp-rm shipp-rm-20"><label>Delivery:</label> Estimated between Wed. Oct. 5 and Sat. Oct. 8 <i class="fa fa-info-circle" aria-hidden="true"></i></p>
-	</div> -->
 	<p class="returns-rm">Returns: <span>Seller does not offer returns</span></p>
 
 

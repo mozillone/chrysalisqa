@@ -49,6 +49,11 @@ Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costu
 Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
 /** Costume Like page end here **/
 
+Route::get('/wishlist', ['as' => 'wishlist','uses'=>'WishlistCostumesController@myWishlistList']);
+Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostumesController@removeWishlistCostume']);
+
+
+
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	  	Route::get('/admin/dashboard', 'DashboardController@dashboard');

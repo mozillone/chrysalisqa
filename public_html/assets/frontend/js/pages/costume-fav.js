@@ -24,3 +24,20 @@ $(document).on('click','.fav_costume',function(){
 
     });
 })
+
+
+ $(document).on('click', '.delete', function(){ 
+      var id=$(this).attr('data-costume-id');
+      swal({   
+              title: "Are you sure want to remove this costume from your Wishlist?",   
+                        text: "You will not be able to recover this costume",   
+                        showCancelButton: true,   
+                        confirmButtonColor: "#DD6B55",   
+                        confirmButtonText: "Yes, delete",   
+                        closeOnConfirm: false
+                      }, 
+                      function(){   
+                        document.location = "/remove/wishlist/"+id;
+                      }); 
+         
+    });
