@@ -64,7 +64,7 @@ class Costumes extends Authenticatable
         return $costumes_list;
     }
     protected function getCostumeDetails($costume_id){
-        $data=DB::Select('SELECT cats.category_id,cats.name as cat_name,cats.description,cst.costume_id,cst.name,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by FROM `cc_costume_to_category` as cat JOIN cc_costumes as cst on cst.costume_id=cat.costume_id JOIN cc_category  as cats on cats.category_id=cat.category_id where cat.costume_id='.$costume_id.' group by cat.costume_id');
+        $data=DB::Select('SELECT cats.category_id,cats.name as cat_name,cats.description,cst.costume_id,cst.name,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,if((select count(*) from cc_costumes_like as likes where likes.user_id=cst.created_by and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id=cst.created_by and  wsh_lst.    costume_id=cst.costume_id )>=1,true,false) as is_fav,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count FROM `cc_costume_to_category` as cat JOIN cc_costumes as cst on cst.costume_id=cat.costume_id JOIN cc_category  as cats on cats.category_id=cat.category_id where cat.costume_id='.$costume_id.' group by cat.costume_id');
         return $data;
 
     }
@@ -80,6 +80,16 @@ class Costumes extends Authenticatable
         $costumeSellerInfo=DB::Select('select display_name,email,phone_number from cc_users where id='.$user_id);
         return $costumeSellerInfo;
     }
-
+    protected function costumeReport($req){
+        $data=array('costume_id'=>$req['costume_id'],
+                    'name'=>$req['name'],
+                    'phn_no'=>$req['phone'],
+                    'email'=>$req['email'],
+                    'reason'=>$req['reason'],
+                    'created_at'=>date('Y-m-d H:i:s'),
+            );
+        $res=Site_model::insert_data('reported_costumes',$data);
+        return $res;
+    }
 
 }

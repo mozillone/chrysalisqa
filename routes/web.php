@@ -35,6 +35,7 @@ Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'Costum
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
 
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
+Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesController@costumeReport'));
 
 
 /** Costumes Controller startsend here **/
@@ -71,6 +72,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 
 		/****************Costumes Management Code Starts Here*********************/
 		Route::get('costumes-list', ['as' => 'costumes-list','uses'=>'CostumeController@costumesList']);
+		Route::get('/reported/costumes', ['as' => 'reported-costumes-list','uses'=>'CostumeController@getReportedCostumes']);
+		Route::any('/costume-reports-list', ['as' => '','uses'=>'CostumeController@getReportedCostumesData']);
 		/****************Costumes Managemnet Code Ends Here***********************/
 
 		/****************Attributes Management Starts Here*********************/
@@ -96,5 +99,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
 	    Route::any('/getCostumesList', ['as' => '','uses'=>'CategoriesController@getCostumesList']);
 		/****************Categories Management Ends Here***********************/
+
+
+
 });
 

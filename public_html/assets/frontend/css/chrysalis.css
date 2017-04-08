@@ -451,6 +451,24 @@ box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.08);
 -webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,.08);
 border: 1px solid #e5e4e4;
 }
+
+/********JITHU****************/
+div#report_item .modal-dialog{width: 500px;}
+div#report_item div#myTabContent {
+padding: 30px 70px;
+}
+#report_item div#myTabContent {
+padding-top: 0px !important;
+}
+div#report_item div#myTabContent input {
+height: 40px;
+border-radius: 3px;
+font-family: Proxima-Nova-Regular;
+box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.08);
+-webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,.08);
+border: 1px solid #e5e4e4;
+}
+/*****************************/
 #search_list .slider_cnt {
 min-height: 65px;
 }
