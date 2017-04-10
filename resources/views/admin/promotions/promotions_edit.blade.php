@@ -48,8 +48,9 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                     </div>
                     @endif
                     <!-- <form class="form-horizontal" ng-submit="save(userForm.$valid, data)" name="userForm" > --> 
-                    <form id="promotions-create" class="form-horizontal defult-form" name="userForm" action="{{route('promotion-create')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+                    <form id="promotions-create" class="form-horizontal defult-form" name="userForm" action="{{route('promotion-edit')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+                        <input type="hidden" name="coupon_id" value="{{$data['basic'][0]->coupon_id}}"> 
                         <div class="col-md-12">
                             <h4>Basic Information</h4>
                             <hr>
@@ -73,7 +74,7 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                                     </div>
                                     <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Discount <span class="req-field" >*</span></label>
-                                            <input type="text" class="form-control" placeholder="Enter discount"  name="discount" id="discount" value="{{$data['basic'][0]->discount}}">
+                                            <input type="text" class="form-control" placeholder="Enter discount"  name="discount" id="discount" value="{{(int)$data['basic'][0]->discount}}">
                                     </div>
                                     <div class="form-group has-feedback">
                                         <label for="inputEmail3" class="control-label">Applied From <span class="req-field" >*</span></label>
@@ -111,6 +112,10 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                                      <div class="form-group has-feedback">
                                         <label for="inputEmail3" class="control-label">Selected Categories</label>
                                          <select multiple class="form-control"  name="cats[]" id="cats_list">
+                                        @foreach($data['promo_cats'] as $cats)
+                                        <option value="{{$cats->category_id}}" selected>{{$cats->parent_cat}}-{{$cats->sub_cat}}</option>
+                                        @endforeach
+                                        </select>
                                         </select>
                                         <a href="javascript::void(0);" class="remove_cat btn btn-danger">-Remove</a>
                                         <br>
@@ -134,6 +139,9 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                                      <div class="form-group has-feedback">
                                         <label for="inputEmail3" class="control-label">Selected Products</label>
                                         <select multiple class="form-control" name="costumes[]" id="costumes">
+                                        @foreach($data['promo_costumes'] as $csts)
+                                        <option value="{{$csts->costume_id}}" selected>{{$csts->sku_no}}-{{$csts->name}}</option>
+                                        @endforeach
                                         </select>
                                         <a href="javascript::void(0);" class="remove_product btn btn-danger">-Remove</a>
                                         <br>
@@ -146,7 +154,7 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                     <div class="box-footer">
                         <div class="pull-right">
                             <a href="/promotions" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
-                            <a  href="javascript::void(0);" class="btn btn-primary pull-right submit">Create</a>
+                            <a  href="javascript::void(0);" class="btn btn-primary pull-right submit">Update</a>
                         </div>
                     </div>
                 </form>

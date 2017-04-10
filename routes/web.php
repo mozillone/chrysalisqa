@@ -107,10 +107,11 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 
 		/****************Promotions Management Starts Here*********************/
 		Route::any('/promotion/create', ['as' => 'promotion-create','uses'=>'PromotionsController@createPromotions']);
-	    Route::any('/promotion/edit/{id?}', ['as' => 'categories-edit','uses'=>'PromotionsController@editPromotions']);
+	    Route::any('/promotion/edit/{id?}', ['as' => 'promotion-edit','uses'=>'PromotionsController@editPromotions']);
 	    Route::any('/promotion-delete/{id}', ['as' => '','uses'=>'PromotionsController@deletePromotion']);
 	    Route::any('/promotions', ['as' => 'promotions-list','uses'=>'PromotionsController@promotionsList']);
 	    Route::any('/promotions-list', ['as' => '','uses'=>'PromotionsController@promotionsData']);
+	    Route::any('/promotion/status/change', ['as' => '','uses'=>'PromotionsController@changePromotionStatus']);
 	    Route::any('/getSelectedCategories/{cat_id}', ['as' => '','uses'=>'PromotionsController@getSelectedCategories']);
     
 	   /****************Promotions Management Ends Here***********************/

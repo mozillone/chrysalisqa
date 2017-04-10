@@ -57,14 +57,18 @@ class PromotionsController extends Controller
               $where.=' AND  prom.date_end  <= "'.date('Y-m-d 23:59:59',strtotime($req['search']['date_end'])).'"';
           }
           if(!empty($req['search']['cats'])){
-              $having.=' AND cats in ('.$req['search']['cats'].')';
+              $res=Category::getCategoryInfo($req['search']['cats']);
+              if($res=="0"){
+                $having.=' AND FIND_IN_SET('.$req['search']['cats'].',cats)> 0';
+              }else{
+                  $having.=' AND cats in('.$res[0]->cat_id.')';
+              }
           }
           if(!empty($req['search']['costumes'])){
-              $having.=' AND costumes in ('.$req['search']['costumes'].')';
+              $having.=' AND FIND_IN_SET('.$req['search']['costumes'].',costumes)> 0';
           }
-
-         }
-        $promotions = DB::select("SELECT prom.coupon_id, prom.name, prom.code, prom.type, prom.discount, DATE_FORMAT(prom.date_start,'%m/%d/%Y %h:%i %p') as datestart,DATE_FORMAT(prom.date_end,'%m/%d/%Y %h:%i %p') as dateend , prom.uses_total,prom.status,GROUP_CONCAT(DISTINCT(coup.costume_id) SEPARATOR ',') as costumes,GROUP_CONCAT(DISTINCT(cats.category_id) SEPARATOR ',') as cats FROM cc_promotion_coupon as prom LEFT JOIN cc_coupon_costumes as coup on coup.coupon_id=prom.coupon_id LEFT JOIN cc_coupon_category as cats on cats.coupon_id=prom.coupon_id ".$where." group by prom.coupon_id ".$having."");
+        }
+         $promotions = DB::select("SELECT prom.coupon_id, prom.name, prom.code, prom.type, prom.discount, DATE_FORMAT(prom.date_start,'%m/%d/%Y %h:%i %p') as datestart,DATE_FORMAT(prom.date_end,'%m/%d/%Y %h:%i %p') as dateend , prom.uses_total,prom.status,GROUP_CONCAT(DISTINCT(coup.costume_id) SEPARATOR ',') as costumes,GROUP_CONCAT(DISTINCT(cats.category_id) SEPARATOR ',') as cats FROM cc_promotion_coupon as prom LEFT JOIN cc_coupon_costumes as coup on coup.coupon_id=prom.coupon_id LEFT JOIN cc_coupon_category as cats on cats.coupon_id=prom.coupon_id ".$where." group by prom.coupon_id ".$having."");
         return response()->success(compact('promotions'));
    }
    public function createPromotions(Request $request)
@@ -140,5 +144,13 @@ class PromotionsController extends Controller
        $res=Promotions::getSelectedCategories($cat_id);
        return Response::JSON($res);
    }
+   public function changePromotionStatus(Request $request)
+  {
+    $req = $request->all(); 
+    $data=array('status'=>$req['data']['status']);
+    $cond=array('coupon_id'=>$req['data']['id']);
+    Site_model::update_data('promotion_coupon',$data,$cond);
+    return Response::JSON(true);
+  }
 
 }
