@@ -60,6 +60,10 @@ class Category extends Authenticatable
         $parent_cats=DB::Select('SELECT *  FROM `cc_category` WHERE `parent_id` = 0');
         return $parent_cats;
     }
+    protected function getCategories(){
+        $cats_list=DB::Select('SELECT *  FROM `cc_category`');
+        return $cats_list;
+    }
     protected function getCatCostumesList($cat_id){
         $costumes_list=DB::Select('SELECT cst.costume_id,cst.name as cst_name,concat(cst.sku_no,"-",cst.name) as name,cst.sku_no,cst.price FROM `cc_costume_to_category` as cat LEFT JOIN cc_costumes as cst on cat.costume_id=cst.costume_id where cat.category_id='.$cat_id);
         return $costumes_list;
