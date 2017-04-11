@@ -15,7 +15,7 @@
         <ul class="treeview-menu menu">
           <li {{ (Request::is('customers-list') ? 'class=active' : '') }}>
             <a href="{{route('customers-list')}}">
-              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Customers List</span>
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Users List</span>
             </a>
           </li>
         </ul>
@@ -51,6 +51,7 @@
           </li>
         </ul>
       </li>
+
        <li {{ (Request::is('reported/costumes') ? 'class=active' : '') }}>
         <a href="javascript:void(0)">
             <i class="fa fa-tasks" aria-hidden="true"></i> <span>Costumes</span> <i class="fa fa-angle-left pull-right"></i>
@@ -59,6 +60,11 @@
           <li {{ (Request::is('reported/costumes') ? 'class=active' : '') }} >
             <a href="{{route('reported-costumes-list')}}">
               <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Reported Costumes</span>
+            </a>
+          </li>
+		   <li {{ (Request::is('reported/costumes') ? 'class=active' : '') }} >
+            <a href="/costumes/create">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Create Costume</span>
             </a>
           </li>
         </ul>
@@ -71,6 +77,7 @@
           <li {{ (Request::is('promotions') ? 'class=active' : '') }}>
             <a href="{{route('promotions-list')}}">
               <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Promotion List</span>
+
             </a>
           </li>
         </ul>

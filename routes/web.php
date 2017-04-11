@@ -29,12 +29,13 @@ Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthControll
 Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
 Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@EditProfile']);
 
-/** Costumes Controller starts here **/
-
+/** Products list page start here **/
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
-Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
-
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
+
+Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
+/** Products list page end here **/
+
 Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesController@costumeReport'));
 
 
@@ -76,6 +77,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	    /****************User Management End Here***************************/
 
 		/****************Costumes Management Code Starts Here*********************/
+		Route::any('/costumes/create', ['as' => 'costumes-create','uses'=>'CostumeController@createCostume']);
 		Route::get('costumes-list', ['as' => 'costumes-list','uses'=>'CostumeController@costumesList']);
 		Route::get('/reported/costumes', ['as' => 'reported-costumes-list','uses'=>'CostumeController@getReportedCostumes']);
 		Route::any('/costume-reports-list', ['as' => '','uses'=>'CostumeController@getReportedCostumesData']);

@@ -12,15 +12,15 @@
 @section('content')
 
 <section class="content-header">
-	<h1>Customers</h1>
+	<h1>Users</h1>
 	<ol class="breadcrumb">
 		<li>
 			<a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="{{url('customers-list')}}">Customers List</a>
+			<a href="{{url('Users-list')}}">Users List</a>
 		</li>
-		<li class="active"> Payement Profiles</li>
+		<li class="active"> Payment Profiles</li>
 	</ol>
 	
 </section>
@@ -32,7 +32,7 @@
 		<div class="col-sm-12 col-md-12">
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title heading-agent col-md-12">Customers</h3>
+					<h3 class="box-title heading-agent col-md-12">Users</h3>
 				</div>
 				<div class="box-body">
 				<!--Tabs code starts here-->
@@ -42,7 +42,7 @@
   <li><a href="/user-costumessold-list/{{$userid}}">Costumes Sold</a></li>
   <li><a  href="/user-recentorders-list/{{$userid}}">Recent Orders</a></li>
   <li><a  href="/user-credithistory-list/{{$userid}}">Credit History</a></li>
-  <li class="active"><a  href="/user-payementprofiles-list/{{$userid}}">Payement Profiles</a></li>
+  <li class="active"><a  href="/user-payementprofiles-list/{{$userid}}">Payment Profiles</a></li>
 </ul>
 <!--Tab code ends here-->
 				
@@ -60,7 +60,7 @@
 					@endif 
 					<fiv class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Payement Profiles</h3>
+                    <h3 class="box-title">Payment Profiles</h3>
                     <div class="box-tools pull-right" style="display:inline-flex">
                    
                     </div>
@@ -73,7 +73,7 @@
 						<tr>
 						<th>Card Holder Name
 </th>
-						<th>Card No,
+						<th>Card No
 </th>
 						<th>Card Type
 </th>
@@ -85,7 +85,7 @@
 						<th>Status</th>
 						</tr>
 						<tr>
-						<td>No Data Avialable..!!</td>
+						<td colspan="7"><center>No Data Avialable..!!</center></td>
 						</tr>
           </table>
           </div>

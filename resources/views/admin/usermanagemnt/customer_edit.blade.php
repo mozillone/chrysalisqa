@@ -8,11 +8,18 @@
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/sweetalert/dist/sweetalert.css')}}">
 <link href="{{ asset('/assets/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('/assets/vendors/datetimepicker/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="{{ asset('/assets/vendors/datetimepicker/css/bootstrap-datetimepicker.min.css')}}">
+<link rel="stylesheet" href="{{ asset('/assets/admin/css/jquery.datetimepicker.css')}}">
+
+       
 @stop
 
 {{-- Page content --}}
 @section('content')
+<style>
+.fileupload-new .btn-file {
+   margin: 10px 0 0 20px;
+}
+</style>
 
 <section class="content-header">
 	<h1>Users</h1>
@@ -84,7 +91,7 @@
 									<div class="col-md-12">
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">Phone #<span class="req-field" >*</span></label>
-											<input type="text" class="form-control" name="phone_number" value="{{$user->phone_number}}" placeholder="123-456-7890" maxlength="10" id="phone_number" required>
+											<input type="text" class="form-control" name="phone_number" value="{{$user->phone_number}}" placeholder="123-456-7890"  id="phone_number" required>
 											<p class="error">{{ $errors->first('phone_num') }}</p>
 										</div>
 									</div>
@@ -95,28 +102,57 @@
 											<p class="error">{{ $errors->first('last_name') }}</p>
 										</div>
 									</div>
+									<?php
+											$status=$user->vacation_status;
+											if($status==1){?>
+											<div class="col-md-12">
+										<div class="form-group" >
+											
+											
+											<input type="checkbox" checked onclick="show()" name="vacationstatus" id="vacationstatus"  value="1" id="email" required> &nbsp; &nbsp;&nbsp;In Vacation
+											
+										</div>
+									</div>
+									<div class="col-md-6" id="fromdatevactaion" >
+									<div class="form-group" >
+										<label for="inputEmail3" class="control-label">From  Date<span class="req-field" >*</span></label>
+                    <input type="text" class="form-control iconcal" id="date_timepicker_end_ticket" value="{{$user->vacation_from}}" placeholder="Select From Date" name="date_timepicker_end_ticket"   autocomplete="off" maxlength="50">
+											
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-6" id="todatevaction" >
+										<div class="form-group" >
+											<label for="inputEmail3" class="control-label">To Date<span class="req-field" >*</span></label>
+											<input type="text" class="form-control iconcal" value="{{$user->vacation_to}}" placeholder="Select To Date" name="date_timepicker_end1_ticket" id="date_timepicker_end1_ticket"   autocomplete="off" maxlength="50">
+											
+										</div>
+									</div>
+												
+										<?php	} else {
+											?>
 									<div class="col-md-12">
 										<div class="form-group" >
 											
-											<input type="checkbox"  onclick="show()" "name="email" placeholder="my@email.com"  id="email" required> &nbsp; &nbsp;&nbsp;In Vacation
+											
+											<input type="checkbox"  onclick="show()" name="vacationstatus" id="vacationstatus"  value="1" id="email" required> &nbsp; &nbsp;&nbsp;In Vacation
 											
 										</div>
 									</div>
 									<div class="col-md-6" id="fromdatevactaion" style="display:none">
-										<input type="hidden" ng-model="data.id">
-										<div class="form-group">
-											<label for="inputEmail3" class="control-label">From Date<span class="req-field" >*</span></label>
-											<input autofocus="autofocus" type="text" class="form-control"  name="from_date"  id="first_name">
+									<div class="form-group" >
+										<label for="inputEmail3" class="control-label">From  Date<span class="req-field" ></span></label>
+                    <input type="text" class="form-control iconcal" id="date_timepicker_end_ticket"  name="date_timepicker_end_ticket"   placeholder="Select From Date" autocomplete="off" maxlength="50">
 											
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-6" id="todatevaction" style="display:none">
 										<div class="form-group" >
-											<label for="inputEmail3" class="control-label">To Date<span class="req-field" >*</span></label>
-											<input type="text" class="form-control"  name="from_date"  id="to_date">
+											<label for="inputEmail3" class="control-label">To Date<span class="req-field" ></span></label>
+											<input type="text" class="form-control iconcal"  name="date_timepicker_end1_ticket" id="date_timepicker_end1_ticket"  placeholder="Select To Date" autocomplete="off" maxlength="50">
 											
 										</div>
 									</div>
+										<?php } ?>
 								</div>
 								</div> 
 							</div>
@@ -129,7 +165,7 @@
 									<label for="inputEmail3" class="control-label">Username<span class="req-field" >*</span></label>
 									<div class="input-group">
 										<input type="text" class="form-control" placeholder="Username"  name="user_name" id="user_name" value="{{$user->display_name}}">
-										<span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon2" style="position:static;"></span>
+										<span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon2" style="position:static;"></span>
 									</div>
 									<p class="error">{{ $errors->first('email') }}</p> 
 								</div>
@@ -165,7 +201,7 @@
 											<input id="profile_logo" name="avatar" type="file" placeholder="Profile Image" class="form-control">
 											<input type="hidden" name="is_removed"/>
 										</span> 
-										<p class="noteices-text">Note: The file could not be exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
+										<p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
 										<span class="fileupload-preview"></span>
 										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
 									</div>
@@ -200,10 +236,58 @@ function show(){
 }
 </script>
 
+
 	@stop
 	{{-- page level scripts --}}
 	@section('footer_scripts')
 	<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 	<script src="{{ asset('/assets/admin/js/pages/customers.js') }}"></script>
+	<script src="{{ asset('/assets/admin/js/jquery.datetimepicker.js') }}"></script>
 	<script src="{{ asset('/assets/admin/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+	<script src="{{asset('/assets/vendors/moment/js/moment.min.js')}}"></script>
+    <script src="{{asset('/assets/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<script type="text/javascript">
+$(function() {
+
+/*$('input[name="created_on"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+          cancelLabel: 'Clear'
+      }
+});*/
+
+$('input[name="created_on"]').daterangepicker();
+$('input[name="expiry_on"]').daterangepicker();
+$('input[name="created_on"]').val('');
+$('input[name="expiry_on"]').val('');
+});
+ jQuery('#date_timepicker_end_ticket').datetimepicker({
+        format: 'Y-m-d',
+        onShow: function (ct) {
+            this.setOptions({
+                closeOnDateSelect:true,
+                 minDate: new Date($('#date_timepicker_start').val()),
+                 maxDate: new Date($('#date_timepicker_end').val()),
+               // minDate: jQuery('#date_timepicker_start_ticket').val() ? jQuery('#date_timepicker_start_ticket').val() : false
+            })
+        },
+        timepicker: false
+    });
+	jQuery('#date_timepicker_end1_ticket').datetimepicker({
+        format: 'Y-m-d',
+        onShow: function (ct) {
+            this.setOptions({
+                closeOnDateSelect:true,
+                 minDate: new Date($('#date_timepicker_start').val()),
+                 maxDate: new Date($('#date_timepicker_end1').val()),
+               // minDate: jQuery('#date_timepicker_start_ticket').val() ? jQuery('#date_timepicker_start_ticket').val() : false
+            })
+        },
+        timepicker: false
+    });
+
+</script>
 	@stop
