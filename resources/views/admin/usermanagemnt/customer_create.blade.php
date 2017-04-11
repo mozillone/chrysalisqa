@@ -12,14 +12,19 @@
 
 {{-- Page content --}}
 @section('content')
+<style>
+.fileupload-new .btn-file {
+   margin: 10px 0 0 20px;
+}
+</style>
 <section class="content-header">
-	<h1>Customers</h1>
+	<h1>Users</h1>
 	<ol class="breadcrumb">
 		<li>
 			<a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="{{url('customers-list')}}">Customers Lists</a>
+			<a href="{{url('customers-list')}}">Users Lists</a>
 		</li>
 		
 		<li class="active">Add User</li>
@@ -30,7 +35,7 @@
 		<div class="col-sm-12 col-md-12">
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title col-md-12 heading-agent">Add Customer</h3>
+					<h3 class="box-title col-md-12 heading-agent">Add User</h3>
 				</div>
 				<div class="box-body">
 					@if (Session::has('error'))
@@ -48,7 +53,7 @@
 					<form id="customer_create" class="form-horizontal defult-form" name="userForm" action="{{route('customer-create')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 						<div class="col-md-6">
-							<h2 class="heading-agent">Personal Info</h2>
+							<h2 class="heading-agent">User Info</h2>
 							<div class="col-md-12">
 								<div class="row">
 									<div class="col-md-6">
@@ -68,7 +73,7 @@
 									<div class="col-md-12">
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">Phone #<span class="req-field" >*</span></label>
-											<input type="text" class="form-control" name="phone_number" placeholder="123-456-7890" maxlength="10" id="phone_number" required>
+											<input type="text" class="form-control" name="phone_number" placeholder="123-456-7890"  id="phone_number" required>
 											<p class="error">{{ $errors->first('phone_num') }}</p>
 										</div>
 									</div>
@@ -86,13 +91,14 @@
 						</div>
 						
 						<div class="col-md-6">
-							<h2 class="heading-agent">Login Info</h2>
+							<h2 class="heading-agent" style="display:none">Login Info</h2> 
+							<br><br><br>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
 									<label for="inputEmail3" class="control-label">Username<span class="req-field" >*</span></label>
 									<div class="input-group">
 										<input type="text" class="form-control" placeholder="Username"  name="user_name" id="user_name">
-										<span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon2" style="position:static;"></span>
+										<span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon2" style="position:static;"></span>
 									</div>
 									<p class="error">{{ $errors->first('email') }}</p> 
 								</div>
@@ -114,6 +120,7 @@
 						<div class="col-md-6">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Profile Image</h2>
 							<div class="col-md-12">
+							
 								<div class="form-group"> 
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									<div class="fileupload fileupload-new" data-provides="fileupload"> 
@@ -122,11 +129,11 @@
 											<i class="fa fa-times-circle" aria-hidden="true"></i>
 										</span>
 										<span class="btn btn-default btn-file">
-											<span class="fileupload-new">Upload Photo</span>
+											<span class="fileupload-new" style="float:right">Upload Photo</span>
 											<span class="fileupload-exists"></span>     
 											<input id="profile_logo" name="avatar" type="file" placeholder="Profile Image" class="form-control">
 										</span>
-										<p class="noteices-text">Note: The file could not be exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
+										<p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
 										<span class="fileupload-preview"></span>
 										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
 									</div> 
@@ -138,7 +145,7 @@
 					<div class="box-footer">
 						<div class="pull-right">
 							<a href="/customers-list" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
-							<button type="submit" class="btn btn-primary pull-right">Add New</button>
+							<button type="submit" class="btn btn-primary pull-right">Submit</button>
 						</div>
 					</div>
 				</form>

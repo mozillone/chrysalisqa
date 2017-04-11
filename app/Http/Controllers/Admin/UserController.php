@@ -78,9 +78,7 @@ class UserController extends Controller
     {
         $req=$request->all();
 		$userslist=DB::table('users as user')
-		->leftJoin('costumes', 'costumes.created_by', '=', 'user.id')
-		->select('user.id','user.display_name','user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i") as date_format'),DB::raw("ifnull(count('costumes.costume_id'),0) as count"))
-		->groupby('user.id','user.display_name','user.phone_number','user.email','user.active','user.deleted')
+		->select('user.id','user.display_name','user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as date_format'),DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as lastlogin'))
 		->orderby('user.created_at','DESC')
 		->where('user.role_id','!=','1');
 		if(!empty($req['search'])){
@@ -113,6 +111,7 @@ class UserController extends Controller
 
 		  }
 		 $users=$userslist->get();
+		
 		//->where('users.role_id','!=',1);
 		//$users=$userslist->get();
 		//$userslist=DB::table('users')->select('users.*')->order_by('users.created_at','DESC')->get();
@@ -123,6 +122,7 @@ class UserController extends Controller
  	public function customerAdd(Request $request)
     {
 		$req=$request->all(); 
+		//print_r($req); exit;
 		if(empty($req)){
 			return view('admin.usermanagemnt.customer_create');
 		}
@@ -148,6 +148,7 @@ class UserController extends Controller
 			$user->password      = Hash::make($req['password']);
 			$user->active        = "1";
 			$user->user_img =$file_name;
+			
 			
 			if($user->save()){
 				Session::flash('success', 'Customer created successfully');
@@ -182,9 +183,14 @@ class UserController extends Controller
 		$userData = [
 				'first_name' => $req['first_name'],
 				'last_name' => $req['last_name'],
+				'phone_number'=>$req['phone_number'],
 				'display_name' =>  $req['first_name']." ".$req['last_name'],
 				'email'=>$req['email'],
-				'user_img' =>$file_name
+				'user_img' =>$file_name,
+				'vacation_status'=>$req['vacationstatus'],
+				'vacation_from'=>$req['date_timepicker_end_ticket'],
+				'vacation_to'=>$req['date_timepicker_end1_ticket'],
+				
 		];
 		if(!empty($req['password'])){
 			$userData['password'] =  Hash::make($req['password']);
@@ -197,6 +203,7 @@ class UserController extends Controller
 	}
     public function customerDelete($id)
     {
+
       $data=User::find($id)->toArray();
       $apiId=$data['api_customer_id'];
       $res = User::where('id',$id)->delete();
@@ -235,7 +242,6 @@ class UserController extends Controller
     }
 	/*****user costumes list fetching code starts here***/
 	public function userCostumes($id){
-	
 	$title=Auth::user()->display_name."Costumes";
 	$userid=$id;
 	//$costumes=DB::table('costumes')->

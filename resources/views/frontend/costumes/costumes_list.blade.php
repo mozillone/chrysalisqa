@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="list-banner">
-			@if(empty($data['sub_cat_info'][0]->banner_image))
+			@if(empty($data['sub_cat_info'][0]->banner_image) || !file_exists('/category_images/Banner/{{$data["sub_cat_info"][0]->banner_image}}'))
 			<img class="img-responsive" src="/category_images/df_img.jpg">
 			@else
 			<img class="img-responsive" src="/category_images/Banner/{{$data['sub_cat_info'][0]->banner_image}}">
@@ -150,4 +150,7 @@
 <script src="{{ asset('/js/ohsnap.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
+
 @stop

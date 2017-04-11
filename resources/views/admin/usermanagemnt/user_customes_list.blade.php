@@ -12,13 +12,13 @@
 @section('content')
 
 <section class="content-header">
-	<h1>Customers</h1>
+	<h1>Users</h1>
 	<ol class="breadcrumb">
 		<li>
 			<a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="{{url('customers-list')}}">Customers List</a>
+			<a href="{{url('Users-list')}}">Users List</a>
 		</li>
 		<li class="active">
 			Costumes List
@@ -35,7 +35,7 @@
 		<div class="col-sm-12 col-md-12">
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title heading-agent col-md-12">Customers</h3>
+					<h3 class="box-title heading-agent col-md-12">Users</h3>
 				</div>
 				<div class="box-body">
 				<!--Tabs code starts here-->
@@ -63,7 +63,7 @@
 					@endif 
 					<fiv class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Costumers List</h3>
+                    <h3 class="box-title">Users List</h3>
                     <div class="box-tools pull-right" style="display:inline-flex">
                    
                     </div>
@@ -83,7 +83,7 @@
 						<th>Actions</th>
 						</tr>
 						<tr>
-						<td>No Data Avialable..!!</td>
+						<td colspan="7"><center>No Data Avialable..!!</center></td>
 						</tr>
           </table>
           </div>

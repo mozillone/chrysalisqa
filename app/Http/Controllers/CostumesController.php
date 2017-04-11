@@ -78,6 +78,8 @@ class CostumesController extends Controller {
 		$data=Costumes::getCostumeDetails($costume_id);
 		if(count($data)){
 			$data['random_costumes']=Costumes::getRandomCategoyCostumesList($data[0]->category_id);
+			$data['images']=Costumes::getCostumeImages($costume_id);
+			$data['seller_info']=Costumes::costumeSellerInfo($data[0]->created_by);
 			return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$parent_cat_name);
 		}else{
 	      Session::flash('error', 'Costume information not found..');
@@ -93,5 +95,12 @@ class CostumesController extends Controller {
 		$req=$request->all();
 		$res=Costumes::costumeFavourite($req['costume_id'],Auth::user()->id);
 		return Response::JSON($res);
+	}
+	public function costumeReport(Request $request){
+		$req=$request->all();
+		$res=Costumes::costumeReport($req);
+		Session::flash('success', 'Your report is sent to admin.');
+        return Redirect::back();
+
 	}
 }

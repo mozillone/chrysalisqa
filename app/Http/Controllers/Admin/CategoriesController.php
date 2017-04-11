@@ -62,7 +62,7 @@ class CategoriesController extends Controller
             else
               { 
                   Category::createCategory($req);
-                  Session::flash('success', 'Categories is created successfully');
+                  Session::flash('success', 'Category is created successfully');
                   return Redirect::back();
               }
          }
@@ -88,7 +88,7 @@ class CategoriesController extends Controller
               { 
                   
                   Category::updateCategory($req);
-                  Session::flash('success', 'Categories is updated successfully');
+                  Session::flash('success', 'Category is updated successfully');
                   return Redirect::to('categories');
               }
          }

@@ -9,7 +9,7 @@
 							<div class="icon_lins text-right">
 								<ul>
 									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-envelope-open" aria-hidden="true"></i><br>Messages</button></li>
-									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-heart" aria-hidden="true"></i><br>Favorites</button></li>
+									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-heart" aria-hidden="true"></i><span>@if(Auth::check()){{helper::getMyWishlistCount()}} @endif</span><br>@if(Auth::check())<a href="{{route('wishlist')}}">Favorites</a> @else <a data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </button></li>
 									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart</button></li>
 								</ul>
 							</div>
