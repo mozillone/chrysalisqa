@@ -10,7 +10,7 @@
 					<div class="col-md-4 col-sm-4 col-xs-12 social-media">
 						<div class="row">
 							<div class="col-md-4 col-sm-4 col-xs-12 social-fallow">
-								<h3>FALLOW US</h3>
+								<h3>FOLLOW US</h3>
 							</div>
 							<div class="col-md-8 col-sm-8 col-xs-12 social-img">
 								<div class="social-icons">

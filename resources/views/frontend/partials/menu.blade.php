@@ -127,7 +127,7 @@
 							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 						</button>
 						<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
-							<i class="fa fa-user" aria-hidden="true"></i>
+							<a data-toggle="modal" data-target="#login_popup"><i class="fa fa-user" aria-hidden="true"></i></a>
 						</button>
 						<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 							<i class="fa fa-search"></i>

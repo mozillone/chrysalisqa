@@ -862,6 +862,9 @@ min-height: 360px;
 }
 
 @media screen and (max-width:1024px){
+	.responsive-menu button.navbar-toggle.respnsive-ser-rm a {
+    color: #fff;
+}
 	.nav-tabs.viewTabs>li>a {font-size: 16px; padding: 20px 10px;}	
 	.home_product_slider h2{line-height: 35px;text-align:left;margin:10px 0px;font-size:18px;font-weight:800;color:#323031;margin-top:40px;border-bottom:1px solid #ccc;padding-bottom:5px;margin-bottom:15px;}
 .ft-logo {
@@ -948,6 +951,34 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+	div#login_popup .modal-dialog {
+    width: auto;    margin: 52px auto;    border-top: 3px solid #60c5ac;
+}
+#login_popup h2 {
+    font-size: 16px;
+    border: none;
+    color: #000;
+    font-family: Proxima-Nova-Extrabold;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    text-align: left;
+}
+div#login_popup div#myTabContent input{box-shadow: none;}
+#login_popup div#myTabContent label {
+    display: none;
+}
+div#login_popup div#myTabContent {
+    padding: 30px 30px;
+}
+#login_popup .modal-header.indi_close_icons button.close {
+    color: #868686;
+    opacity: 0.9;
+    font-size: 26px;
+    margin-bottom: -15px;
+}
+#login_popup .modal-content{border-radius:0px;    border: none;}
 	.well .shipping_date{display: inline-block;}
 .shipping_date span.shi_date_right {
     float: left !important;
@@ -969,8 +1000,15 @@ margin: 40px auto;
 	div#signup_popup div#myTabContent {padding: 20px;}
 .form-group.socil-btn a{font-size: 16px;}
 	.login-register ul.nav.nav-tabs li{padding-left: 20px;}
-	#signup_popup .modal-dialog {
-width: auto;margin-top: 70px;
+div#signup_popup .modal-dialog {
+    margin: 52px auto;    width: auto;
+}
+.login-register ul.nav.nav-tabs li:nth-child(2) {
+    border-right: 0px;
+    display: none;
+}
+.login-register ul.nav.nav-tabs li:nth-child(1) {
+    width: 100%;
 }
 .l_more.text-center a{color:#60c3ab; text-decoration: underline;}
 .l_more.text-center {font-size: 18px;font-family: Proxima-Nova-Bold; color:#60c3ab; text-decoration: underline;}
