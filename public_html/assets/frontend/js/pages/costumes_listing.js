@@ -87,6 +87,7 @@ function searching(search=null){
 			url: '/getCostumesData',
 			data: filter,
 			success: function(response){
+				console.log(now());
 				if(response.data.costumes.length!=0){
 					　$.each(response.data.costumes,function(index, value) {
 						if(value.image!=null){
@@ -107,7 +108,14 @@ function searching(search=null){
 							var is_fav=' ';
 							var icon='<i aria-hidden=true class="fa fa-heart-o"></i>';
 						}
-
+						if(value.created_user_group=="admin" && value.discount!=null && value.uses_customer<value.uses_total && now()>=value.date_start && now()<=value.date_end){
+							var discount=(value.price/100)*value.discount;
+							var new_price=value.price-discount;
+							var price='<p><span class="old-price"><strike>$'+parseFloat(value.price).toFixed(2)+'</strike></span> <span class="new-price">$'+parseFloat(new_price).toFixed(2)+'</span></p>';
+					
+						}else{
+							var price='<p><span class="new-price">$'+parseFloat(value.price).toFixed(2)+'</span></p>';
+						}
 						if(is_login){
 							var like='<a href="#" onclick="return false;" class="like_costume" data-costume-id='+value.costume_id+'><span '+is_like+'><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span></a>';
 							var fav='<a href="#" onclick="return false;" class="fav_costume" data-costume-id='+value.costume_id+'><span '+is_fav+'>'+icon+'</span></a>';
@@ -116,7 +124,7 @@ function searching(search=null){
 							var fav='<a data-toggle="modal" data-target="#login_popup"><span '+is_fav+'>'+icon+'</span></a>';
 						}
 
-						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+'<p class=hover_crt><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'">'+value.name+'</a></h4><p>'+value.price+'</div></div></div>';
+						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+'<p class=hover_crt><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'">'+value.name+'</a></h4><p>'+price+'</div></div></div>';
 				    });
 					$(".pagination").show();
 					$("#itemContainer").append(res);
@@ -135,5 +143,14 @@ function searching(search=null){
 
 		});
 }
+function now()
+{
+  var d = new Date();
+  var month = d.getMonth()+1;
+  var day = d.getDate();
 
+  var output = d.getFullYear()+'-'+(month<10 ? '0' : '') + month +"-"+(day<10 ? '0' : '') + day;
+
+  return output;
+}
 });
