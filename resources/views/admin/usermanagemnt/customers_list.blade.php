@@ -46,7 +46,7 @@
         <div class="table-responsive">
                 <table class="table table-striped table-bordered user-list-table">
                   <thead>
-                    <th>Customer Name</th>
+                    <th>User Name</th>
 					<th>Email</th>
 					<th>Phone No.</th>
                     <th>Is Seller?</th>

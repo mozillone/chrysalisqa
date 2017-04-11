@@ -78,7 +78,7 @@ class UserController extends Controller
     {
         $req=$request->all();
 		$userslist=DB::table('users as user')
-		->select('user.id','user.display_name','user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i A") as date_format'),DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i A") as lastlogin'))
+		->select('user.id','user.display_name','user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as date_format'),DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as lastlogin'))
 		->orderby('user.created_at','DESC')
 		->where('user.role_id','!=','1');
 		if(!empty($req['search'])){
@@ -122,6 +122,7 @@ class UserController extends Controller
  	public function customerAdd(Request $request)
     {
 		$req=$request->all(); 
+		//print_r($req); exit;
 		if(empty($req)){
 			return view('admin.usermanagemnt.customer_create');
 		}
@@ -147,6 +148,7 @@ class UserController extends Controller
 			$user->password      = Hash::make($req['password']);
 			$user->active        = "1";
 			$user->user_img =$file_name;
+			
 			
 			if($user->save()){
 				Session::flash('success', 'Customer created successfully');
@@ -184,7 +186,11 @@ class UserController extends Controller
 				'phone_number'=>$req['phone_number'],
 				'display_name' =>  $req['first_name']." ".$req['last_name'],
 				'email'=>$req['email'],
-				'user_img' =>$file_name
+				'user_img' =>$file_name,
+				'vacation_status'=>$req['vacationstatus'],
+				'vacation_from'=>$req['date_timepicker_end_ticket'],
+				'vacation_to'=>$req['date_timepicker_end1_ticket'],
+				
 		];
 		if(!empty($req['password'])){
 			$userData['password'] =  Hash::make($req['password']);

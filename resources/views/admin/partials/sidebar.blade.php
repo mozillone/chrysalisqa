@@ -15,7 +15,7 @@
         <ul class="treeview-menu menu">
           <li {{ (Request::is('customers-list') ? 'class=active' : '') }}>
             <a href="{{route('customers-list')}}">
-              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Customers List</span>
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Users List</span>
             </a>
           </li>
         </ul>
@@ -47,6 +47,18 @@
           <li {{ (Request::is('categories') ? 'class=active' : '') }} {{ (Request::is('category/create') ? 'class=active' : '') }} {{ (Request::is('category/edit/*') ? 'class=active' : '') }}>
             <a href="{{route('categories-list')}}">
               <i class="fa fa-circle-o" aria-hidden="true"></i> <span> categories</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+	  <li {{ (Request::is('categories') ? 'class=active' : '') }}  {{ (Request::is('category/create') ? 'class=active' : '') }} {{ (Request::is('category/edit/*') ? 'class=active' : '') }} >
+        <a href="javascript:void(0)">
+             <i class="fa fa-hourglass-start" aria-hidden="true"></i> <span>Costume</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu">
+          <li {{ (Request::is('categories') ? 'class=active' : '') }} {{ (Request::is('category/create') ? 'class=active' : '') }} {{ (Request::is('category/edit/*') ? 'class=active' : '') }}>
+            <a href="/costumes/create">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span> Create Costume</span>
             </a>
           </li>
         </ul>

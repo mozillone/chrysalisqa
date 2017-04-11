@@ -13,11 +13,13 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-                      DTColumnBuilder.newColumn('display_name').withTitle('Customer Name'),
+                      DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
+					//  DTColumnBuilder.newColumn(null).withTitle('testing').notSortable().renderWith(phone),,
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
+					   DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login'),
 					  DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
 					  DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
                       DTColumnBuilder.newColumn(null).withTitle('Status').notSortable().renderWith(activeHtml),,
@@ -38,14 +40,15 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
       }
     }
 	function credit(){
-	 return '$25.00';
+	 return '$0.00';
 	}
 	function isseller(data){
 	
 		 return "No";
 	 
 	}
-
+	
+	
    
     function createdRow(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
@@ -72,11 +75,12 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
             .withOption('bFilter', false)
             .withOption('lengthChange', false);
              $scope.dtColumns = [
-                            DTColumnBuilder.newColumn('display_name').withTitle('Customer Name'),
+                            DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
+					  DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login'),
 					  DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
 					  DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
                       DTColumnBuilder.newColumn(null).withTitle('Status').notSortable().renderWith(activeHtml),,
@@ -129,7 +133,7 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
       }
     }
 	function credit(){
-	 return '$25.00';
+	 return '$0.00';
 	}
 	function isseller(data){
 	 if(data.deleted=="0"){
@@ -170,6 +174,7 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
                            DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 						 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
+					  DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login'),
 					  DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
 					  DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
                       DTColumnBuilder.newColumn(null).withTitle('Status').notSortable().renderWith(activeHtml),,
