@@ -3,6 +3,7 @@ use Session;
 use Redirect;
 use App\Helpers\Site_model;
 use Auth;
+use App\Wishlist;
 class SiteHelper  {
 
 	public static function getMenus(){
@@ -19,6 +20,10 @@ class SiteHelper  {
 			
 		}
 		return $categories_list;
+	}
+	public static function getMyWishlistCount(){
+		$count=Wishlist::getMyWishlistCount(Auth::user()->id)[0]->count;
+		return $count;
 	}
 	public static function generate_image_thumbnail($source_image_path, $thumbnail_image_path,$thumbnail_with,$thumbnail_height) {
    	//dd($source_image_path);

@@ -2,7 +2,7 @@
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.css') }}">
 <style>
 	.owl-controls.clickable {
 		display: none;
@@ -34,13 +34,31 @@
 
 <div class="col-md-7">
 <div class="product_view_rm">
-<h1>{{$data[0]->name}}</h1>
+@if (Session::has('error'))
+<div class="alert alert-danger alert-dismissable">
+	<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+	{{ Session::get('error') }}
+</div>
+@elseif(Session::has('success'))
+<div class="alert alert-success alert-dismissable">
+	<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+	{{ Session::get('success') }}
+</div>
+@endif
+<h1>{{$data[0]->name}}
+@if(Auth::check())
+	<a href="#" onclick="return false;" class="fav_costume" data-costume-id='{{$data[0]->costume_id}}'>
+@else
+	<a data-toggle="modal" data-target="#login_popup">
+@endif
+<span @if($data[0]->is_fav)  class="active" @endif>@if($data[0]->is_fav)<i aria-hidden=true class="fa fa-heart"></i> @else <i aria-hidden=true class="fa fa-heart-o"></i>@endif</span></a>
+	</h1>
+
 <!---Price section start -->
 	<div class="row">
 	<div class="priceview_rm">
 	<div class="col-xs-6 col-sm-8 viewpr_rm">
 	<h2>${{number_format($data[0]->price,2, '.', ',')}}</h2>
-
 	<p class="ystrip-rm"><span><img class="img-responsive" src="{{asset('assets/frontend/img/film.png')}}"> Film Quality</span></p>
 	<p class="iCondition-rm"><span class="iBold-rm">Item Condition:</span>  @if($data[0]->condition=="brand_new") Brand New @elseif($data[0]->condition=="like_new") Like New @else {{ucfirst($data[0]->condition)}} @endif </p>
 	<p class="iCondition-rm"><span class="iBold-rm">Size:</span> {{ucfirst($data[0]->gender)}} @if($data[0]->size=="s") small @elseif($data[0]->size=="m") medium @elseif($data[0]->size=="l") large @else {{strtoupper($data[0]->size)}} @endif</p>
@@ -53,12 +71,6 @@
 
 	</div>
 	</div>
-<!---Price section End -->
-	<!-- <div class="shipping_rm">
-	<p class="shipp-rm"><label>Shipping:</label> $11.00 Expedited Shipping | <a href="javascript:void(0);">See Details</a></p>
-	<p class="shipp-rm1">Item location: Brooklyn, NY USA <br/>Ships to: United States</p>
-	<p class="shipp-rm shipp-rm-20"><label>Delivery:</label> Estimated between Wed. Oct. 5 and Sat. Oct. 8 <i class="fa fa-info-circle" aria-hidden="true"></i></p>
-	</div> -->
 	<p class="returns-rm">Returns: <span>Seller does not offer returns</span></p>
 
 
@@ -112,8 +124,18 @@
 	</div>			
 			
 	<div class="likeview-rm">
-	<p class="likeview-rm1"><span>Like this costume?</span> <span class="like-span">Vote Up! <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span> <span class="like-span1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 43</span></p>
-	<p class="likeview-rm2"><a href="javascript:void(0);"><i class="fa fa-flag" aria-hidden="true"></i> Report Item</a></p>
+	<p class="likeview-rm1">
+		<span>Like this costume?</span>
+		 @if(Auth::check())
+		 <a href="#" onclick="return false;" class="like_costume_view" data-costume-id='{{$data[0]->costume_id}}'>
+		 @else 
+		 <a data-toggle="modal" data-target="#login_popup">
+		 @endif <span class="like-span">
+		 	Vote Up!</span></a>
+		 </span>
+		  <span class="like-span1 @if($data[0]->is_like)active @endif"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{$data[0]->like_count}}</span>
+	</p>
+	<p class="likeview-rm2"><a href="javascript:void(0);"  data-toggle="modal" data-target="#report_item"><i class="fa fa-flag" aria-hidden="true"></i> Report Item</a></p>
 	</div>
 
 </div>
@@ -149,40 +171,75 @@
 
 </div>
 </div>
+<div class="modal fade window-popup" id="report_item">
+	<div class="modal-dialog">
+		<div class="modal-content">
+				<div class=" modal-header indi_close_icons">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+			<div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="login-register" id="loginModal">
+			
+				<div id="myTabContent" class="tab-content">
+			
+					<div class="tab-pane active in" id="login_tab1">
+						<form class="" action="{{route('report.post')}}" method="POST" id="report">   
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<input type="hidden" name="costume_id" value="{{$data[0]->costume_id}}">
+							<div class="form-group">
+							<label>Name</label>
+								<input type="text"  name="name" placeholder="Enter your name" class="form-control" @if(Auth::check()) value="{{Auth::user()->display_name}}" @endif>
+								<p class="error">{{ $errors->first('name') }}</p>
+							</div>
+							<div class="form-group">
+							<label>Email</label>
+								<input type="text"  name="email" placeholder="Enter your email" class="form-control" @if(Auth::check()) value="{{Auth::user()->email}}" @endif>
+								<p class="error">{{ $errors->first('email') }}</p>
+							</div>
+							<div class="form-group">
+							<label>Phone</label>
+								<input type="text" name="phone" placeholder="Enter phone number" class="form-control" @if(Auth::check()) value="{{Auth::user()->phone_number}}" @endif>
+								<p class="error">{{ $errors->first('phone') }}</p>
+							</div>
+							<div class="form-group">
+							<label>Reason</label>
+								<select class="form-control" name="reason">
+								    <option value="">--Select--</option>
+								    <option value="Technical issue">Technical issue</option>
+								    <option value="Site issue">Site issue</option>
+								</select>
+								<p class="error">{{ $errors->first('password') }}</p>
+							</div>
+							<div class="form-group">
+								<div class="login-btn">
+									<button class="btn btn-primary">Submit</button>
+								</div>
+							</div>
+							
+							
+					</form>                  
+					</div>
+       		</div>
+				
+			</div>
+		</div>
+	</div>
+		</div>
+	</div>
+</div>
 </section>
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
+<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costumes_view.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/home.js') }}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.js"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
+<script src="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.js') }}"></script>
 <script>
-$(document).ready(function(){
 
-$('.bxslider').bxSlider({
-  pagerCustom: '#bx-pager',
-  controls: false
-});
-
-$('.bxslider-rm').bxSlider({
-minSlides: 3,
-  maxSlides: 5,
-  slideWidth: 170,
-  slideMargin: 10,
-
-});
-$(".bxslider-rm").parent().parent(".bx-wrapper").addClass("bx-wrapper-rm");
-	
-    $(".mobile-plus").click(function(){
-	$(this).toggleClass("mobile-minus");	
-    $(this).parent("li").find(".responsive-inner").toggleClass("none-rm");
-    });
-	
-    $(".icon-rm .toggle-btn").click(function(){
-	$(this).parent(".icon-rm").toggleClass("btn-cross");	
-	$(".mobile-rm").toggleClass("toggle");	
-    });	
-	
-});
 </script>
 @stop

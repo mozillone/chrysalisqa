@@ -1,7 +1,8 @@
 @extends('admin.app')
 
 {{-- Web site Title --}}
-@section('title') @parent
+@section('title') 
+Reported Costumes List @parent
 @endsection
 
 {{-- page level styles --}}
@@ -13,15 +14,15 @@
 {{-- Page content --}}
 @section('content')
  <section class="content-header">
-    <h1>Users</h1>
+    <h1>Reported Costumes</h1>
     <ol class="breadcrumb">
     <li>
         <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
     </li>
-    <li class="active">Users List</li>
+    <li class="active">Reported Costumes</li>
   </ol>
 </section>
-<section class="content" ng-controller="UsersController">
+<section class="content" ng-controller="CostumeReportsController">
     <div class="row">
         <div class="col-md-12">
          @if (Session::has('error'))
@@ -37,42 +38,26 @@
         @endif
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Users List</h3>
+                    <h3 class="box-title">Reported Costumes</h3>
                     <div class="box-tools pull-right" style="display:inline-flex">
-                    <a href="customer-add" class="btn btn-block btn-success btn-xs"><i class="fa fa-plus"></i> Add User</a>
                     </div>
                 </div>
                 <div class="box-body">
         <div class="table-responsive">
                 <table class="table table-striped table-bordered user-list-table">
                   <thead>
-                    <th>Customer Name</th>
-					<th>Email</th>
-					<th>Phone No.</th>
-                    <th>Is Seller?</th>
-                    <th>Status</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Active</th>
                     <th></th>
                   </thead>
                   <tbody>
                     <tr>
                       <input type="hidden" class="form-control token"  name="csrf-token" value="{{ csrf_token() }}">
-                      <!--<td><input type="text" class="form-control" ng-model="search.id" name="id" placeholder=""></td>-->
-                      <td><input type="text" class="form-control" ng-model="search.name" name="name" placeholder=""></td>
-					  <td><input type="text" class="form-control" ng-model="search.email" name="email" placeholder=""></td>
-					  <td><input type="text" class="form-control" ng-model="search.phone" name="phone" placeholder=""></td>
-                      <td>
-                        <select name="count" class="form-control" id="count" ng-model="search.count" >
-                          <option value=""> All </option>  
-                          <option value="1">Yes</option>
-						  <option value="0">No</option>
-                        </select>
-                      </td>
-					   <td>
-                        <select name="mySelect" class="form-control" id="mySelect" ng-model="search.status">
-                          <option value=""> All </option>  
-                          <option ng-repeat="option in status" value="@{{option.value}}">@{{option.name}}</option>
-                        </select>
-                      </td>
+                      <td><input type="text" class="form-control" ng-model="search.sku_no" name="sku_no" placeholder="SKU #"></td>
+                      <td><input type="text" class="form-control" ng-model="search.cst_name" name="cst_name" placeholder="Costume Name"></td>
+                      <td><input type="text" class="form-control" ng-model="search.user_name" name="user_name" placeholder="Reporter Name"></td>
                       <td><button class="btn btn-primary user-list-search" ng-click="seachUsers(search)">Search</button></td>
                     </tr>
                   </tbody>
@@ -93,9 +78,9 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts') 
-
-<script src="{{ asset('angular/Admin/UserManagement/Controllers/users-lists.js') }}"></script>
-<script src="{{ asset('angular/Admin/UserManagement/Services/user_management.js') }}"></script>
+<script src="{{ asset('angular/Admin/Costumes/Controllers/costume-reports-lists.js') }}"></script>
+<script src="{{ asset('angular/Admin/Costumes/Services/reports.js') }}"></script>
+<script src="{{ asset('angular/Admin/ExportCsv/Services/ExportCsv.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 
 @stop

@@ -32,8 +32,16 @@ Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@Edit
 /** Products list page start here **/
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
+<<<<<<< HEAD
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
 /** Products list page end here **/
+=======
+Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesController@costumeReport'));
+
+
+/** Costumes Controller startsend here **/
+
+>>>>>>> adff829ad6367fb75508aaabca1895a8aeede12c
 
 /** Costume Like page start here **/
 Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
@@ -42,6 +50,11 @@ Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costu
 /** Costume Like page start here **/
 Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
 /** Costume Like page end here **/
+
+Route::get('/wishlist', ['as' => 'wishlist','uses'=>'WishlistCostumesController@myWishlistList']);
+Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostumesController@removeWishlistCostume']);
+
+
 
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
@@ -67,6 +80,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 		/****************Costumes Management Code Starts Here*********************/
 		Route::any('/costumes/create', ['as' => 'costumes-create','uses'=>'CostumeController@createCostume']);
 		Route::get('costumes-list', ['as' => 'costumes-list','uses'=>'CostumeController@costumesList']);
+		Route::get('/reported/costumes', ['as' => 'reported-costumes-list','uses'=>'CostumeController@getReportedCostumes']);
+		Route::any('/costume-reports-list', ['as' => '','uses'=>'CostumeController@getReportedCostumesData']);
 		/****************Costumes Managemnet Code Ends Here***********************/
 
 		/****************Attributes Management Starts Here*********************/
@@ -92,5 +107,20 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
 	    Route::any('/getCostumesList', ['as' => '','uses'=>'CategoriesController@getCostumesList']);
 		/****************Categories Management Ends Here***********************/
+
+		/****************Promotions Management Starts Here*********************/
+		Route::any('/promotion/create', ['as' => 'promotion-create','uses'=>'PromotionsController@createPromotions']);
+	    Route::any('/promotion/edit/{id?}', ['as' => 'promotion-edit','uses'=>'PromotionsController@editPromotions']);
+	    Route::any('/promotion-delete/{id}', ['as' => '','uses'=>'PromotionsController@deletePromotion']);
+	    Route::any('/promotions', ['as' => 'promotions-list','uses'=>'PromotionsController@promotionsList']);
+	    Route::any('/promotions-list', ['as' => '','uses'=>'PromotionsController@promotionsData']);
+	    Route::any('/promotion/status/change', ['as' => '','uses'=>'PromotionsController@changePromotionStatus']);
+	    Route::any('/getSelectedCategories/{cat_id}', ['as' => '','uses'=>'PromotionsController@getSelectedCategories']);
+    
+	   /****************Promotions Management Ends Here***********************/
+
+
+
+
 });
 

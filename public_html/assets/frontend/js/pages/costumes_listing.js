@@ -116,7 +116,7 @@ function searching(search=null){
 							var fav='<a data-toggle="modal" data-target="#login_popup"><span '+is_fav+'>'+icon+'</span></a>';
 						}
 
-						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+'<p class=hover_crt><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4>'+value.name+'</h4><p>'+value.price+'</div></div></div>';
+						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+'<p class=hover_crt><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'">'+value.name+'</a></h4><p>'+value.price+'</div></div></div>';
 				    });
 					$(".pagination").show();
 					$("#itemContainer").append(res);
@@ -135,54 +135,5 @@ function searching(search=null){
 
 		});
 }
-$(document).on('click','.like_costume',function(){
-	var costume_id=$(this).attr('data-costume-id');
-	var token=$('input[name="_token"]').val();
-	$.ajax({
-			type: 'POST',
-			url: '/costume/like',
-			data: {costume_id:costume_id,_token:token},
-			context: this,
-			success: function(response){
-				if(response.is_user_like){
-					$(this).find('span').addClass('active');
-				}else{
-					$(this).find('span').removeClass('active');
-				}
-				$(this).find('span').html('<i aria-hidden="true" class="fa fa-thumbs-up"></i>'+response.count);
-			},
-		     complete: function(jqXHR, textStatus) {
-		    	 $("#itemContainer").removeClass("search_icn_load");
-		      },
-
-		});
-})
-
-$(document).on('click','.fav_costume',function(){
-	var costume_id=$(this).attr('data-costume-id');
-	var token=$('input[name="_token"]').val();
-	$.ajax({
-			type: 'POST',
-			url: '/costume/favourite',
-			data: {costume_id:costume_id,_token:token},
-			context: this,
-			success: function(response){
-				if(response.is_user_fav){
-					$(this).find('span').addClass('active');
-					$(this).find('span').html('<i aria-hidden=true class="fa fa-heart"></i>');
-					//ohSnap('Costume is successfully added into your wishlist', 'green');
-				}else{
-					$(this).find('span').removeClass('active');
-					$(this).find('span').html('<i aria-hidden=true class="fa fa-heart-o"></i>');
-					//ohSnap('Costume is removed successfully from your wishlist', 'red');
-				}
-				
-			},
-		     complete: function(jqXHR, textStatus) {
-		    	 $("#itemContainer").removeClass("search_icn_load");
-		      },
-
-		});
-})
 
 });

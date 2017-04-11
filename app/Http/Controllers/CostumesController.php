@@ -96,4 +96,11 @@ class CostumesController extends Controller {
 		$res=Costumes::costumeFavourite($req['costume_id'],Auth::user()->id);
 		return Response::JSON($res);
 	}
+	public function costumeReport(Request $request){
+		$req=$request->all();
+		$res=Costumes::costumeReport($req);
+		Session::flash('success', 'Your report is sent to admin.');
+        return Redirect::back();
+
+	}
 }
