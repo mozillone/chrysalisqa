@@ -113,8 +113,17 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	    Route::any('/promotions-list', ['as' => '','uses'=>'PromotionsController@promotionsData']);
 	    Route::any('/promotion/status/change', ['as' => '','uses'=>'PromotionsController@changePromotionStatus']);
 	    Route::any('/getSelectedCategories/{cat_id}', ['as' => '','uses'=>'PromotionsController@getSelectedCategories']);
-    
-	   /****************Promotions Management Ends Here***********************/
+       /****************Promotions Management Ends Here***********************/
+
+
+       	/****************Charities Management Starts Here*********************/
+		Route::any('/charity/create', ['as' => 'charity-create','uses'=>'CharitiesController@createCharity']);
+	    Route::any('/charity/edit', ['as' => 'charity-edit','uses'=>'CharitiesController@editCharity']);
+	    Route::any('/charity-delete/{id}', ['as' => '','uses'=>'CharitiesController@deleteCharity']);
+	    Route::any('/charities', ['as' => 'charities-list','uses'=>'CharitiesController@charitiesList']);
+	    Route::any('/charities-list', ['as' => '','uses'=>'CharitiesController@charitiesData']);
+	    Route::any('/charity/status/change', ['as' => '','uses'=>'CharitiesController@changeCharityStatus']);
+	   /****************Charities Management Ends Here***********************/
 
 
 
