@@ -32,16 +32,15 @@ Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@Edit
 /** Products list page start here **/
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
 Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
-<<<<<<< HEAD
+
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
 /** Products list page end here **/
-=======
+
 Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesController@costumeReport'));
 
 
 /** Costumes Controller startsend here **/
 
->>>>>>> adff829ad6367fb75508aaabca1895a8aeede12c
 
 /** Costume Like page start here **/
 Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
