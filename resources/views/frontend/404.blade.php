@@ -1,0 +1,11 @@
+@extends('/frontend/app')
+@section('title')
+	Home@parent
+@endsection
+@section('styles')
+@endsection
+@section('content')
+			404
+@endsection
+@section('footer_scripts')
+@stop

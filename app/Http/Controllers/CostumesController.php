@@ -6,6 +6,7 @@ use Illuminate\Support\MessageBag;
 use App\Helpers\SiteHelper;
 use Illuminate\Http\Request;
 use App\Costumes;
+use App\Category;
 use Session;
 use Hash;
 use DB;
@@ -19,12 +20,22 @@ class CostumesController extends Controller {
 	{
 		$this->sitehelper = new SiteHelper();
 	}
-	public function costumeListings($sub_cat_id,$parent_cat_name)
+	//public function costumeListings($sub_cat_id,$parent_cat_name)
+	public function costumeListings($slug1,$slug2)
 	{
-		$data['sub_cat_info']=Costumes::getCategoryInfo($sub_cat_id);
-		$parent_cat_id=$data['sub_cat_info'][0]->parent_id;
-		$data['sub_cats_list']=Costumes::getParentCategories($parent_cat_id);
-		return view('frontend.costumes.costumes_list',compact('data',$data))->with('parent_cat_name',$parent_cat_name);
+		$key_url='/'.$slug1.'/'.$slug2;
+		$cat_info=Category::getUrlCategoryId($key_url);
+		if(count($cat_info)){
+			$sub_cat_id=$cat_info[0]->url_offset;
+			$data['sub_cat_info']=Costumes::getCategoryInfo($sub_cat_id);
+			$parent_cat_id=$data['sub_cat_info'][0]->parent_id;
+			$data['sub_cats_list']=Costumes::getParentCategories($parent_cat_id);
+			return view('frontend.costumes.costumes_list',compact('data',$data))->with('parent_cat_name',$slug1);
+		}
+		else{
+			return view('frontend.404');
+			
+		}
 	}
 	public function getCostumesData(Request $request)
 	{

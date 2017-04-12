@@ -4,6 +4,7 @@ use Redirect;
 use App\Helpers\Site_model;
 use Auth;
 use App\Wishlist;
+use App\Category;
 class SiteHelper  {
 
 	public static function getMenus(){
@@ -15,7 +16,9 @@ class SiteHelper  {
 			$getSubCategories=Site_model::Fetch_data('category','*',$cond);
 			$categories_list[$menus->name][]="None";
 			foreach ($getSubCategories as $subCat) {
-				$categories_list[$menus->name][]=$subCat->category_id.'_'.$subCat->name;
+				$link=Category::getUrlLinks($subCat->category_id);
+				$categories_list[$menus->name][]=$link.'_'.$subCat->name;
+				//$categories_list[$menus->name][]=$subCat->category_id.'_'.$subCat->name;
 			}
 			
 		}
@@ -61,6 +64,7 @@ class SiteHelper  {
 		imagedestroy($thumbnail_gd_image);
 		return true;
 	}
+
 	
 	
 	
