@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+@extends('/frontend/app')
+@section('styles')
+   <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
+ @endsection
+@section('content')
+ 	<section class="content create_section_page">
+ 	<div id="ohsnap"></div>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -31,7 +38,7 @@
 								<img class="img-responsive" src="../assets/frontend/img/upload-icon.png">
 									<h2>Upload Your Costume!</h2>
 									<p>Tell us why your costume is so<br> special? Sell it Yourself!</p>
-									<a href="">UPLOAD MY COSTUME</a>
+									<a href="/costume/createone">UPLOAD MY COSTUME</a>
 								</div>
 								
 							</div>
@@ -108,22 +115,24 @@
                 </div>
             </div>
         </div>
-		        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingFour">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                    04. How do I ship my bag?
+		<div class="panel panel-default">
+           <div class="panel-heading" role="tab" id="headingFour">
+               <h4 class="panel-title">
+                   <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                     
+                   04. How do I ship my bag?
 <i class="more-less glyphicon glyphicon-triangle-bottom"></i>
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                   </a>
+               </h4>
+           </div>
+           <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+               <div class="panel-body">
+                   Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+               </div>
+           </div>
+       </div>
+	
 
-                <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-            </div>
-        </div>
 
     </div><!-- panel-group -->
     
@@ -147,4 +156,8 @@ $('.panel-group').on('shown.bs.collapse', toggleIcon);
 				
 
 			</body>
-		</html>										
+		</html>		
+		@stop
+{{-- page level scripts --}}
+@section('footer_scripts')
+@stop

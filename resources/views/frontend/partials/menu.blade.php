@@ -28,7 +28,7 @@
 									<li><a href="#about">How it Works</a></li>
 									<li><a href="#contact">Events</a></li>
 									<li><a href="#contact">Blog</a></li>
-									<li><a href="#contact" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
+									<li><a href="costume/sell-a-costume" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
 									<li>
 										<form class="navbar-form navbar-left" role="search">
 											<div class="form-group">
@@ -69,7 +69,7 @@
 									<ul>
 										@for($i=1;$i<count($value);$i++)
 											<?php $res=explode("_", $value[$i]);?>
-											<li><a href="/shop/{{$res[0]}}/{{$key}}/{{$res[1]}}">{{$res[1]}}</a></li>
+											<li><a href="/category{{$res[0]}}">{{$res[1]}}</a></li>
 										@endfor
 									</ul>
 								</li>
@@ -80,7 +80,7 @@
 									<ul>
 										@for($i=1;$i<$menu1;$i++)
 											<?php $res=explode("_", $value[$i]);?>
-											<li><a href="/shop/{{$res[0]}}/{{$key}}/{{$res[1]}}">{{$res[1]}}</a></li>
+											<li><a href="/category{{$res[0]}}">{{$res[1]}}</a></li>
 										@endfor
 									</ul>
 								</li>
@@ -88,7 +88,7 @@
 									<ul>
 										@for($j=$menu1;$j<$menu2;$j++)
 											<?php $res=explode("_", $value[$j]);?>
-											<li><a href="/shop/{{$res[0]}}/{{$key}}/{{$res[1]}}">{{$res[1]}}</a></li>
+											<li><a href="/category{{$res[0]}}">{{$res[1]}}</a></li>
 										@endfor
 									</ul>
 								</li>

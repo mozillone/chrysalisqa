@@ -87,9 +87,9 @@ $('.add-prod').click(function(){
 	}
 });
 $(document).on('click','.remove_cost',function(){
-	var product_id=$(this).attr('data-cost-id');
-	products.splice( $.inArray(product_id, products), 1 );
-	$(this).parent().remove();
+	var productid=$(this).attr('data-cost-id');
+  products.splice( $.inArray(productid, products), 1 );
+	$(this).closest('tr').remove();
 })
 $( "#reorder" ).sortable({
 	items: "tr",
@@ -113,28 +113,7 @@ $( "#reorder" ).sortable({
            	});
       }
 });
-// $("#reorder").sortable({items: "tr",
-// 	cursor: 'move',
-//     opacity: 0.6,
-//     start: function(event, ui) {
-//         ui.item.startPos = ui.item.index();
-//     },
-//     stop: function(event, ui) {
-//     	var new_position=ui.item.index();
-// 	   	var old_position= ui.item.startPos;
-// 	   	var task_id=$(ui.item).attr('data-task-id');
-// 	   	var limit=$('input[name="type"]').val();
-// 		$.ajax({
-//            	        url: "/ticket/task/position/update",
-//            	        method:"POST",
-//            	        data:{new_position:new_position,old_position:old_position,oservice_id:oservice_id,task_id:task_id,limit:limit,_token:_token},
-//            	 		async: true,
-//            	        success: function( response ) {
-//            	        	tasks_success_ajax(response);
-//            	        }
-//            	});
-//       }
-// });
+
 $(document).on('change','#parent_id',function(){
 	if($(this).val()){
 		$('.costumes').removeClass('hide');
