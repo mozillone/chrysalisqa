@@ -84,4 +84,12 @@ class CreateCostumeController  extends Controller {
 		$charities=DB::table('charities')->select('id as id','name as name')->get();
 		return view('frontend.costumes.costume_create_four',compact('handlingtime','returnpolicy','charities'));
 	}
+	/****Sell a costume code starts here***/
+	public function sellCostume(){
+	  return view('frontend.costumes.sellacostume');
+	}
+	/****create costume step 1 code starts her***/
+	public function createCostumestep1(){
+	 return view('frontend.costumes.costume_create_one');
+	}
 }
