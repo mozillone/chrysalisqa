@@ -45,6 +45,12 @@ Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesCon
 /** Costume Like page start here **/
 Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
 /** Costume Like page end here **/
+/****costume create page 2 routes starts here***/
+Route::any('/costume/createtwo', array('as' => '','uses' => 'CreateCostumeController@createCostumestep2'));
+Route::any('/costume/createthree', array('as' => '','uses' => 'CreateCostumeController@createCostumestep3'));
+Route::any('/costume/createfour', array('as' => '','uses' => 'CreateCostumeController@createCostumestep4'));
+Route::any('/costume/ajaxsubcategory', array('as' => '','uses' => 'CreateCostumeController@ajaxSubCategory'));
+/****costume create page 2 code ends here***/
 
 /** Costume Like page start here **/
 Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
@@ -78,7 +84,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 
 		/****************Costumes Management Code Starts Here*********************/
 		Route::any('/costumes/create', ['as' => 'costumes-create','uses'=>'CostumeController@createCostume']);
+		Route::post('/upload', ['as' => 'image.store' , 'uses' => 'CostumeController@post_upload']);
 		Route::get('costumes-list', ['as' => 'costumes-list','uses'=>'CostumeController@costumesList']);
+		Route::any('costumes-insert', ['as' => 'costumes-insert','uses'=>'CostumeController@insertCostume']);
 		Route::get('/reported/costumes', ['as' => 'reported-costumes-list','uses'=>'CostumeController@getReportedCostumes']);
 		Route::any('/costume-reports-list', ['as' => '','uses'=>'CostumeController@getReportedCostumesData']);
 		/****************Costumes Managemnet Code Ends Here***********************/
@@ -115,8 +123,17 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	    Route::any('/promotions-list', ['as' => '','uses'=>'PromotionsController@promotionsData']);
 	    Route::any('/promotion/status/change', ['as' => '','uses'=>'PromotionsController@changePromotionStatus']);
 	    Route::any('/getSelectedCategories/{cat_id}', ['as' => '','uses'=>'PromotionsController@getSelectedCategories']);
-    
-	   /****************Promotions Management Ends Here***********************/
+       /****************Promotions Management Ends Here***********************/
+
+
+       	/****************Charities Management Starts Here*********************/
+		Route::any('/charity/create', ['as' => 'charity-create','uses'=>'CharitiesController@createCharity']);
+	    Route::any('/charity/edit', ['as' => 'charity-edit','uses'=>'CharitiesController@editCharity']);
+	    Route::any('/charity-delete/{id}', ['as' => '','uses'=>'CharitiesController@deleteCharity']);
+	    Route::any('/charities', ['as' => 'charities-list','uses'=>'CharitiesController@charitiesList']);
+	    Route::any('/charities-list', ['as' => '','uses'=>'CharitiesController@charitiesData']);
+	    Route::any('/charity/status/change', ['as' => '','uses'=>'CharitiesController@changeCharityStatus']);
+	   /****************Charities Management Ends Here***********************/
 
 
 
