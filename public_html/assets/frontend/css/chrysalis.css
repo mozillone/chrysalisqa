@@ -966,17 +966,81 @@ p.sub-all.total_price{border-bottom:2px solid #ccc;border-top:2px solid #ccc;pad
 
 
 .upload_castume-blog {
-    background: url(http://ivanzipop.local.dotcomweavers.net/assets/img/Find-space-image.jpg);
+    background: url(../../frontend/img/upload-bg.png);
     background-size: cover;
-    background-position: 50%;min-height: 300px; background:#7e4d89;    text-align: center;    color: #fff;padding-top: 20%;
+    background-position: 50%;min-height: 300px;     text-align: center;    color: #fff;padding-top: 10%;    cursor: pointer;
 }
-.upload_castume-blog h2 {    margin: 0px;}
-.see-page-headings {    text-align: center;}
+.Ship_castume-blog {
+    background: url(../../frontend/img/shipus-bg.png);
+    background-size: cover;
+    background-position: 50%;min-height: 300px;     text-align: center;    color: #fff;padding-top: 10%;
+}
+.upload_acrdins {
+    margin-top: 35px;
+}
+.upload_page_accordians .panel-default>.panel-heading {
+    background: none;
+    border: none;
+}
+.upload_page_accordians h4.panel-title a {
+    font-family: Proxima-Nova-Regular;
+    font-weight: bold;
+    font-size: 18px;
+    color: #323031;text-decoration: none;
+}
+.upload_page_accordians .panel-group .panel {
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid #E1E1E1;
+    border-radius: 0px;
+    padding: 15px 0px;
+}
+.upload_castume-blog img {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.upload_castume-blog h2 {
+    margin: 0px;
+    font-size: 26px;
+    color: #fff;
+    font-family: Proxima-Nova-Extrabold;
+}
+.upload_castume-blog p {
+    margin: 0px;
+    font-size: 20px;    line-height: 22px;
+    color: #fff;
+   font-family: Proxima-Nova-Semibold;
+}
+.see-page-headings {    text-align: center;    margin-bottom: 30px;}
+.see-page-headings h1 {
+    font-size: 24px;   color: #323031;	font-family: Proxima-Nova-Extrabold;    margin-bottom: 0px;
+}
+.see-page-headings p {
+font-family: Proxima-Nova-Semibold;
+    font-size: 24px;    color: #323031;
+}
+.upload_castume-blog a {
+    text-transform: uppercase;
+    font-family: Proxima-Nova-Extrabold;
+    color: #FFD23F;    font-size: 16px;text-decoration: underline;
+    padding-top: 25px;
+    display: inline-block;
+}
 
+.upload_page_accordians .panel-default>.panel-heading+.panel-collapse>.panel-body {
+border-top-color: #fff;
+    font-family: Proxima-Nova-Regular;
+    font-size: 18px;
+    color: #323031;
+    padding: 15px 40px;
+}
 
-
-
-
+.upload_page_accordians i.more-less {
+    text-align: right;
+    float: right;
+    font-size: 14px;
+}
 
 
 
@@ -992,6 +1056,10 @@ p.sub-all.total_price{border-bottom:2px solid #ccc;border-top:2px solid #ccc;pad
 
 /********************************************************************Media start here********************************************************************/
 @media screen and (min-width:1025px){
+	.sell_page_total {
+    width: 1000px;
+    margin: 0 auto;
+}
 	.prod_box {
 text-align: center;
 margin-bottom: 30px;
@@ -1092,6 +1160,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+	.Ship_castume-blog{margin-top:10px;}
 	div#login_popup .modal-dialog {
     width: auto;    margin: 52px auto;    border-top: 3px solid #60c5ac;
 }

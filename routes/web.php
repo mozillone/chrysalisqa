@@ -46,6 +46,8 @@ Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesCon
 Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
 /** Costume Like page end here **/
 /****costume create page 2 routes starts here***/
+Route::any('/costume/sell-a-costume', array('as' => '','uses' => 'CreateCostumeController@sellCostume'));
+Route::any('/costume/createone', array('as' => '','uses' => 'CreateCostumeController@createCostumestep1'));
 Route::any('/costume/createtwo', array('as' => '','uses' => 'CreateCostumeController@createCostumestep2'));
 Route::any('/costume/createthree', array('as' => '','uses' => 'CreateCostumeController@createCostumestep3'));
 Route::any('/costume/createfour', array('as' => '','uses' => 'CreateCostumeController@createCostumestep4'));
