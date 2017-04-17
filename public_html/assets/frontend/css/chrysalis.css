@@ -849,6 +849,147 @@ p.sub-all.total_price{border-bottom:2px solid #ccc;border-top:2px solid #ccc;pad
 
 
 
+/* ProgressBar CSS S */
+.progressbar_main{width: 100%; float:left; margin: 30px 0 50px; border: 1px solid #ccc; padding: 15px;}
+.progressbar_main h2{width:100%; float:left; font-size: 16px; font-family: Proxima-Nova-Extrabold;  margin: 0px 0 30px; color: #323031;}
+#progressbar {width: 100%; float: left; counter-reset: step; clear: both;}
+.progressbar_rm {text-align: center;margin: 30px 0 0px !important; clear: both;}
+#progressbar li {
+	list-style-type: none;
+	color: rgb(0,0,0);
+	font-size: 15px;
+	width: 25%;
+	text-align: center;
+	float: left;
+	position: relative;
+	font-family: Proxima-Nova-Semibold;	
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	display: block;
+	font-size: 0;
+	color: #333;
+	background: #fff;
+	border-radius: 10px;
+	margin: 0 auto 5px auto;
+	border: 1px solid #e0e0e0;
+}
+
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 6px;
+	background: #dadada;
+	position: absolute;
+	left: -50%;
+	top: 5px;
+	z-index: -1;
+
+}
+#progressbar li:first-child:after {content: none; }
+
+#progressbar li .s-head{position: absolute; top: -30px; left:0; right:0; color: #323031; font-family: Proxima-Nova-Bold;}
+
+
+
+
+#progressbar li.active:before,  #progressbar li.active:after{background: #60c5ac; color: #323031;
+/*	border: 1px solid #60c5ac;
+	box-shadow: inset 0px 0px 0px 4px rgba(255,255,255,1);*/
+}
+#progressbar li.active:after{box-shadow: none;}
+#progressbar li.active{color: #323031;}
+
+.prog-txt{width: 100%; float:left; font-size: 16px; font-family: Proxima-Nova-Semibold; color: #323031; margin: 0 0 30px;}
+.prog-txt span{font-family: Proxima-Nova-Extrabold;}
+
+.prog-head{width:100%; float:left; font-size: 24px; font-family: Proxima-Nova-Extrabold; border-bottom: 1px solid #e1e1e1; padding-bottom: 20px; margin: 0px; color: #000;}
+
+.form-rms{width: 100%; float:left; margin: 10px 0; padding-left: 33px}
+.form-rms-que{width: 100%; float:left; font-size: 18px; color: #000; font-family: Proxima-Nova-Extrabold; margin: 20px 0; text-indent: -32px;}
+.form-rms-input input{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
+.form-rms-input select{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
+.form-rms-input textarea{width: 100%; float:left; height: 120px; border: 1px solid #e1e1e1; padding: 15px 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
+.form-rms-input{width: 100%; float:left;}
+.form-rms-small{width: 100%; float:left; font-size: 14px; font-family: Proxima-Nova-Semibold; margin: 10px 0 0;}
+.form-rms-small span{font-family: Proxima-Nova-Extrabold;}
+.form-rms-input .full-rms{width: 100%; float:left; margin: 5px 0; font-size: 16px;  font-family: Proxima-Nova-Semibold;}
+.form-rms-input .full-rms input{width: 15px; margin: 0px; height: 22px; margin-right: 10px;}
+.form-rms-sm1{width: 100%; float: right; font-size: 10px; text-align: right; font-family: Proxima-Nova-Semibold;}
+.form-rms-que1{font-family: Proxima-Nova-Semibold;}
+.form-rms-que1 span{font-family: Proxima-Nova-Extrabold;}
+.form-rms-btn{width: 100%; float:right; margin: 30px 0 0;}
+.form-rms-btn button{width: auto; padding: 0px 40px; height: 35px; line-height: 35px; float: right; margin-left: 20px; font-family: Proxima-Nova-Extrabold; font-size: 16px; background: #60c4ac; color: #fff; border: none; outline: none; border-radius: 2px;}
+.form-rms-btn button.btn-rm-back{background: none; border: none; padding: 0px; color: #60c4ac; margin: 0 10px 0 0;}
+.form-rms-btn button.btn-rm-back span{border-bottom: 1px solid #efefef;}
+.form-rms-dim{width: 17%; float:left; font-family: Proxima-Nova-Semibold; color: #323031;}
+.form-rms-dim .form-rms-he1 input{width: 40px; margin: 10px 8px 0 0; height: 30px;}
+.form-rms-dim .form-rms-he1 span{float:left; margin: 20px 0 0;}
+.form-rms-he{width: 30%;}
+.form-rms-dim .form-rms-he1 .form-rms-dt{margin-left: 10px;}
+.prog-form-rm{width: 100%; float:left; margin: 0 0 30px;}
+
+/* ProgressBar second page CSS S */
+
+
+.form-rms-input input.input-rm100{width: 100%;}
+.form-rms-input .form-rms-rel{width: 100px; position: relative; float:left;}
+.form-rms-input .form-rms-rel .form-rms-abs{position: absolute; left: 15px; line-height: 30px; color: #000;}
+.cst2-textl2{width: auto; float:left; line-height: 30px; margin-left: 10px; color: #323031;}
+.form-rms-input select.cst2-select50{width: 60px;}
+.form-rms-que i.fa-info-circle{text-indent: 0px; line-height: 20px;}
+.form-rms-small1{width: 100%; float:left; font-size: 16px; font-family: Proxima-Nova-Semibold; margin: 10px 0 0;}
+.cst2-rms-chck{width: 100%; float:left; margin: 10px 0 0; font-size: 18px; color: #000; font-family: Proxima-Nova-Semibold;}
+.cst2-rms-chck input{float:left; margin: 6px 5px 0 0px !important;}
+.fa-info-rm{color: #60c4ac;}
+.ct3-rms-text{width: 100%; float:left; margin: 10px 0; font-size: 16px; font-family: Proxima-Nova-Semibold;}
+.ct3-rms-head{width:100%; float:left; font-size: 16px; font-family: Proxima-Nova-Extrabold; margin: 20px 0 10px; color: #323031;}
+.cst2-select80{width: 80px !important;}
+.form-rms-input .form-rms-rel1{width: 80px; position: relative; float:left;}
+.cst3-textl2{width: auto; float:left; line-height: 30px; margin-left: 15px; color: #60c4ac;}
+.ct3-list{width: 100%; float:left; list-style: none;}
+.ct3-list li{width: 16.66%; float:left; padding: 0 5px;}
+.ct3-list li img{width: 100%; float:left; margin: 10px auto;}
+.ct3-list li input{margin: 10px auto 0; display: block;}
+.ct1-rms-rel input.input-rm100{width: 100px; float:left;}
+.ct1-rms-rel{width: 100%; float:left; line-height: auto; font-size: 14px; font-family: Proxima-Nova-Semibold; margin: 10px 0 0;}
+.ct1-rms-rel span{margin: 5px 0 0 5px; float:left; }
+/* ProgressBar second page CSS E */
+
+/* ProgressBar CSS E */
+
+
+
+
+.upload_castume-blog {
+    background: url(http://ivanzipop.local.dotcomweavers.net/assets/img/Find-space-image.jpg);
+    background-size: cover;
+    background-position: 50%;min-height: 300px; background:#7e4d89;    text-align: center;    color: #fff;padding-top: 20%;
+}
+.upload_castume-blog h2 {    margin: 0px;}
+.see-page-headings {    text-align: center;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /********************************************************************Media start here********************************************************************/
 @media screen and (min-width:1025px){
 	.prod_box {
