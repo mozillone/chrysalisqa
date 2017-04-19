@@ -742,11 +742,7 @@ height: 120px;
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Details/Accessories</h2>
 							<div class="col-md-12">
 							
-								<div class="form-group"> 
-									<label for="inputEmail3" class="control-label image-label">Upload</label>
-									 <input class="form-control" type="file" id="file" name="files[]" multiple="multiple" accept="image/*" />
-									<p class="error">{{ $errors->first('avatar') }}</p> 
-								</div> 		
+										
 								
 							</div>   
 					</div> 

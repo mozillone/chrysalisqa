@@ -234,15 +234,6 @@ $(function(){
 				avatar1:{
 				  required: true,
 				},
-				file:{
-				  required: true,
-				},
-				
-				
-				
-				
-				
-				
 			},
 			highlight: function(element) {
           	 $(element).closest('.form-control').addClass('error');

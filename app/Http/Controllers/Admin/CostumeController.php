@@ -176,10 +176,10 @@ class CostumeController extends Controller
 	  $cosplay=$req['cosplay'];
 	  $fashion=$req['fashion'];
 	  $activity=$req['activity'];
-	  $makecostume=$req['make-costume'];
+	  $makecostume=$req['make_costume'];
 	  $filmquality=$req['fimquality'];
 	  $costumedesc=$req['costume_desc'];
-	  $funfact=$req['fun-fact'];
+	  $funfact=$req['fun_fact'];
 	  $faq=$req['faq'];
 	  $price=$req['price'];
 	  $quantity=$req['quantity'];
@@ -190,12 +190,12 @@ class CostumeController extends Controller
 	  $type=$req['type'];
 	  $service=$req['service'];
 	  $zipcode=$req['zipcode'];
-	  $handlingtime=$req['handling-time'];
-	  $returnpolicy=$req['return-policy'];
+	  $handlingtime=$req['handling_time'];
+	  $returnpolicy=$req['return_policy'];
 	  $packageitems=$req['weight_package_items'];
 	 $frontview=$req['avatar'];
 	  $backview=$req['avatar1'];
-	  $multiplefiles=$req['files'];
+	 // $multiplefiles=$req['files'];
 	  //Generating sku number for a costume code starts here code format should be (CS(five zeros)incrementing the number form 0 Ex:CS0000012)*****/
 	  $sku_no=DB::table('costumes')->select('*')->get();
 	  $count=count($sku_no);
@@ -471,13 +471,14 @@ class CostumeController extends Controller
 			$file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();  
 			$source_image_path=public_path('costumers_images');
 			$thumb_image_path1=public_path('costumers_images/Original');
+			$thumb_image_path1=public_path('costumers_images/Medium');
 			$thumb_image_path2=public_path('costumers_images/Small');
 			$req['avatar']->move($source_image_path, $file_name);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
 			$data1=array(
 			'costume_id'=>$costume_id,
-			'image'=>$req['avatar'],
+			'image'=>$file_name,
 			'type'=>"1");
 			$image1_insert=DB::table('costume_image')->insert($data1);
 			
@@ -491,13 +492,14 @@ class CostumeController extends Controller
 			$file_name = str_random(10).'.'.$req['avatar1']->getClientOriginalExtension();  
 			$source_image_path=public_path('costumers_images');
 			$thumb_image_path1=public_path('costumers_images/Original');
+			$thumb_image_path1=public_path('costumers_images/Medium');
 			$thumb_image_path2=public_path('costumers_images/Small');
 			$req['avatar1']->move($source_image_path, $file_name);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
 			$data2=array(
 			'costume_id'=>$costume_id,
-			'image'=>$req['avatar1'],
+			'image'=>$file_name,
 			'type'=>"2");
 			$image1_insert=DB::table('costume_image')->insert($data2);
 		}
@@ -507,33 +509,31 @@ class CostumeController extends Controller
 	|@image 
 	*/
 		
-		if(isset($req['files'])){ 
-		$count=count($req['files']); 
-		if($count > 0){
-		 for($i=0;$i<$count[$i];$i++){
-			$file_name = str_random(10).'.'.$req['files'][$i]->getClientOriginalExtension();  
-			$source_image_path=public_path('costumers_images');
-			$thumb_image_path1=public_path('costumers_images/Original');
-			$thumb_image_path2=public_path('costumers_images/Small');
-			$req['files'][$i]->move($source_image_path, $file_name);
-			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
-			$data3=array(
-			'costume_id'=>$costume_id,
-			'image'=>$req['files'][$i],
-			'type'=>"3");
-			$image1_insert=DB::table('costume_image')->insert($data3);
-		}
-	}
+	//	if(isset($req['files'])){ 
+		//$count=count($req['files']); 
+		//if($count > 0){
+		// for($i=0;$i<$count[$i];$i++){
+		//	$file_name = str_random(10).'.'.$req['files'][$i]->getClientOriginalExtension();  
+		//	$source_image_path=public_path('costumers_images');
+		//	$thumb_image_path1=public_path('costumers_images/Original');
+		//	$thumb_image_path2=public_path('costumers_images/Small');
+		//	$req['files'][$i]->move($source_image_path, $file_name);
+		//	$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+		//	$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+		//	$data3=array(
+		//	'costume_id'=>$costume_id,
+		//	'image'=>$req['files'][$i],
+		//	'type'=>"3");
+		//	$image1_insert=DB::table('costume_image')->insert($data3);
+		//}
+	//}
 		
 			
-		}
+		//}
 		
 		}
-		$response['code']='200';
-		$response['message']='success';
-		$response['description']='Video Uploaded Successfully';
-		echo json_encode($response);
+		 Session::flash('success', 'Costume Created Successfully');
+          return Redirect::back();
 
 		
 	}
