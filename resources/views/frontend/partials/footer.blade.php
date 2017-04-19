@@ -234,7 +234,7 @@
 				</div>
 				<div class="social-login">
 					<div class="form-group socil-btn">
-						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
+						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Log In with Facebook</a>
 					</div>
 				</div>
 				<div class="form-group agn_regstr">
