@@ -6,6 +6,7 @@ use Illuminate\Support\MessageBag;
 use App\Helpers\SiteHelper;
 use Illuminate\Http\Request;
 use App\Costumes;
+use App\Category;
 use Session;
 use Hash;
 use DB;
@@ -19,12 +20,22 @@ class CostumesController extends Controller {
 	{
 		$this->sitehelper = new SiteHelper();
 	}
-	public function costumeListings($sub_cat_id,$parent_cat_name)
+	//public function costumeListings($sub_cat_id,$parent_cat_name)
+	public function costumeListings($slug1,$slug2)
 	{
-		$data['sub_cat_info']=Costumes::getCategoryInfo($sub_cat_id);
-		$parent_cat_id=$data['sub_cat_info'][0]->parent_id;
-		$data['sub_cats_list']=Costumes::getParentCategories($parent_cat_id);
-		return view('frontend.costumes.costumes_list',compact('data',$data))->with('parent_cat_name',$parent_cat_name);
+		$key_url='/'.$slug1.'/'.$slug2;
+		$cat_info=Category::getUrlCategoryId($key_url);
+		if(count($cat_info)){
+			$sub_cat_id=$cat_info[0]->url_offset;
+			$data['sub_cat_info']=Costumes::getCategoryInfo($sub_cat_id);
+			$parent_cat_id=$data['sub_cat_info'][0]->parent_id;
+			$data['sub_cats_list']=Costumes::getParentCategories($parent_cat_id);
+			return view('frontend.costumes.costumes_list',compact('data',$data))->with('parent_cat_name',$slug1);
+		}
+		else{
+			return view('frontend.404');
+			
+		}
 	}
 	public function getCostumesData(Request $request)
 	{
@@ -70,7 +81,7 @@ class CostumesController extends Controller {
 				}
 			}
 		}
-		$costumes = DB::select('SELECT  cst.costume_id,cst.name,CONCAT("$",FORMAT(cst.price,2)) as price,if((select count(*) from cc_costumes_like as likes where likes.user_id=cst.created_by and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id=cst.created_by and  wsh_lst.	costume_id=cst.costume_id )>=1,true,false) as is_fav,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.sort_order="0"'.$where.' '.$order_by.'');
+		$costumes = DB::select('SELECT  cst.costume_id,cst.name,cst.price as price,if((select count(*) from cc_costumes_like as likes where likes.user_id=cst.created_by and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id=cst.created_by and  wsh_lst.	costume_id=cst.costume_id )>=1,true,false) as is_fav,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,cst.created_user_group,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.sort_order="0" LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id '.$where.' group by cst.costume_id '.$order_by.' ');
 		return response()->success(compact('costumes'));
 	}
 	public function costumeSingleView($costume_id,$parent_cat_name)

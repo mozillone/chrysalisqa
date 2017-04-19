@@ -58,7 +58,15 @@
 	<div class="row">
 	<div class="priceview_rm">
 	<div class="col-xs-6 col-sm-8 viewpr_rm">
-	<h2>${{number_format($data[0]->price,2, '.', ',')}}</h2>
+	<h2>@if($data[0]->created_user_group=="admin" && $data[0]->discount!=null && $data[0]->uses_customer<$data[0]->uses_total && date('Y-m-d',strtotime("now"))>=date('Y-m-d',strtotime($data[0]->date_start)) && date('Y-m-d',strtotime("now"))<=date('Y-m-d',strtotime($data[0]->date_end)))
+		<?php $discount=($data[0]->price/100)*($data[0]->discount);
+			  $new_price=$data[0]->price-$discount;
+		?>
+		<p><span class="old-price"><strike>${{number_format($data[0]->price,2, '.', ',')}}</strike></span> <span class="new-price">${{number_format($new_price,2, '.', ',')}}</span></p>
+		@else
+		<p><span class="new-price">${{number_format($data[0]->price,2, '.', ',')}}</span></p>
+		@endif
+		</h2>
 	<p class="ystrip-rm"><span><img class="img-responsive" src="{{asset('assets/frontend/img/film.png')}}"> Film Quality</span></p>
 	<p class="iCondition-rm"><span class="iBold-rm">Item Condition:</span>  @if($data[0]->condition=="brand_new") Brand New @elseif($data[0]->condition=="like_new") Like New @else {{ucfirst($data[0]->condition)}} @endif </p>
 	<p class="iCondition-rm"><span class="iBold-rm">Size:</span> {{ucfirst($data[0]->gender)}} @if($data[0]->size=="s") small @elseif($data[0]->size=="m") medium @elseif($data[0]->size=="l") large @else {{strtoupper($data[0]->size)}} @endif</p>

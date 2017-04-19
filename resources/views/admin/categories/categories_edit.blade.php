@@ -48,10 +48,10 @@ Category edit@parent
                                     </div>
                                     <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Parent Category</label>
-                                            <select class="form-control" id="sel1" name="parent_id">
+                                            <select class="form-control" id="parent_id" name="parent_id">
                                                 <option value="">--Select--</option>
                                                 @foreach($parent_cats as $cats)
-                                                <option value="{{$cats->category_id}}" @if($cats->parent_id==$cats->parent_id) selected @endif>{{$cats->name}}</option>
+                                                <option value="{{$cats->category_id}}" @if($cats->category_id==$cat_data[0]->parent_id && $cat_data[0]->parent_id!="0") selected @endif>{{$cats->name}}</option>
                                                 @endforeach
                                            </select>
                                         <p class="error">{{ $errors->first('parent_id') }}</p> 
@@ -68,7 +68,7 @@ Category edit@parent
                                         <label for="inputEmail3" class="control-label">Category Image <span class="req-field" >*</span></label>
                                             <input type="file" class="form-control" name="cat_image" id="cat_image">
                                             <div class="col-md-12">
-                                                 <img src="/category_images/Normal/{{$cat_data[0]->thumb_image}}" class="img-responsive"/>
+                                                 <img @if(file_exists( public_path('category_images/Normal/'.$cat_data[0]->thumb_image)))) src="/category_images/Normal/{{$cat_data[0]->thumb_image}}" @else  src="/category_images/df_img.jpg" @endif class="img-responsive"/>
                                             </div>
                                         <p class="error">{{ $errors->first('cat_image') }}</p> 
                                     </div>
@@ -76,14 +76,14 @@ Category edit@parent
                                         <label for="inputEmail3" class="control-label">Category Banner Image <span class="req-field" >*</span></label>
                                             <input type="file" class="form-control" name="banner_image" id="banner_image">
                                             <div class="col-md-12">
-                                                 <img src="/category_images/Banner/{{$cat_data[0]->     banner_image}}" class="img-responsive"/>
+                                                 <img @if(file_exists( public_path('category_images/Banner/'.$cat_data[0]->banner_image)))) src="/category_images/Banner/{{$cat_data[0]->banner_image}}" @else  src="/category_images/df_img.jpg" @endif class="img-responsive"/>
                                             </div>
                                         <p class="error">{{ $errors->first('banner_image') }}</p> 
                                     </div>
                                 </div> 
                             </div>
                     </div> 
-                     <div class="col-md-12">
+                     <div class="col-md-12 costumes @if($cat_data[0]->parent_id=='0')hide @endif ">
                             <h4>Category Costumes</h4>
                             <hr>
                             <div class="col-md-8">

@@ -82,6 +82,18 @@
           </li>
         </ul>
       </li>
+        <li {{ (Request::is('charities') ? 'class=active' : '') }}>
+        <a href="javascript:void(0)">
+           <i class="fa fa-home" aria-hidden="true"></i> <span>Charities</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu">
+          <li {{ (Request::is('charities') ? 'class=active' : '') }}>
+            <a href="{{route('charities-list')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Manage Charities</span>
+            </a>
+          </li>
+        </ul>
+      </li>
 	 
     </ul>
   </section> 

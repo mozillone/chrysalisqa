@@ -6,24 +6,6 @@
 @section('content')
  	<section class="content create_section_page">
  	<div id="ohsnap"></div>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Chrysalis</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- css links Start -->
-<link href="css/styles.css" rel="stylesheet">
-<link href="css/font-awesome.min.css" rel="stylesheet">
-<link href="css/bootstrap.min.css" rel="stylesheet"> 
-<link href="https://fonts.googleapis.com/css?family=Karla|Lato:300,400,700,900|Open+Sans:300,400,600,700" rel="stylesheet">
-	
-<!-- Script links Start -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/custom.js"></script>
-</head>
-<body>
 
 
 <div class="container">
@@ -44,7 +26,48 @@
 <!--- progressbar section End -->
 
 <p class="prog-txt">Please upload the  <span>the minimum required photos</span> of your costume in front,back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
-<h2 class="prog-head">Review Your Preferences</h2>
+	<div class="upload-photo-blogs">
+		<h2 class="prog-head">Upload Photos</h2>
+		<div class="threeblogs">
+		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
+			<p>Tip Respect your costume’s  integrity with crisp, clear photos.Placing them in settings that correspond with their theme can encourage a sale.</p>
+		</div>
+		<div class="col-md-3 col-sm-3 col-xs-12 ">
+		<h4>01.Front View</h4>
+		<div class=" up-blog">
+			
+		</div>
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-12 ">
+			<h4>02.Back View</h4>
+			<div class=" up-blog">
+			
+		</div>
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-12 ">
+			<h4>03.Detail/Accessories</h4>
+			<div class=" up-blog">
+			
+		</div>
+			</div>
+		
+			</div>
+				<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
+				
+				<form>
+				<span id="fileselector">
+					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
+						<input id="upload-file-selector" type="file">
+						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> Up load More
+					</label>
+				</span>
+			</form>
+					</div>
+						<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
+				<a href="#" class=" upload_sub_btn btn btn-default">Next Step</a>
+			</div>
+			</div>
+	</div>	
 </div>	
 
 
@@ -52,8 +75,7 @@
 </div>	
 </div>	
 	
-	</body>
-</html>
+
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
