@@ -19,6 +19,7 @@ class CostumesController extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->sitehelper = new SiteHelper();
+		
 	}
 	//public function costumeListings($sub_cat_id,$parent_cat_name)
 	public function costumeListings($slug1,$slug2)

@@ -152,5 +152,6 @@
 <script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
 
 @stop

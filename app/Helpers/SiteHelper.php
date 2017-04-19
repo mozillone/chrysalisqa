@@ -5,6 +5,7 @@ use App\Helpers\Site_model;
 use Auth;
 use App\Wishlist;
 use App\Category;
+use App\Cart;
 class SiteHelper  {
 
 	public static function getMenus(){
@@ -63,6 +64,9 @@ class SiteHelper  {
 		imagedestroy($source_gd_image);
 		imagedestroy($thumbnail_gd_image);
 		return true;
+	}
+	public static function getCartCount(){
+	//	Cart::getCartCount();
 	}
 
 	
