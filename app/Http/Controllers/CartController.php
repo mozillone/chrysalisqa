@@ -21,29 +21,56 @@ class CartController extends Controller {
 	}
 	public function addToCart(Request $request){
 		$req=$request->all();
-		dd($this->getCookieAllProducts());
 		//Cart::addToCart($req);
 		$verify=$this->verifieCookie();
              if($verify){
              	$result=$this->getCookieAllProducts();
-             	// foreach($result as $value){
-             	// 	print_r($value);
-             	// }
-             	$result=$req['costume_id'];
-                 return response('')->cookie($this->productsAddToCookie($result));
-             
+             	//dd($result);
+             	 foreach($result as $value){
+             	 	$costume_id=$req['costume_id'];
+             	 	$cookie_id=$this->currentCookieKey();
+             	 	$cart_id=Cart::verifyCostumeCart($costume_id,$cookie_id);
+             	 	if($cart_id){
+             	 		$qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
+             	 		$res=Cart::verifyCostumeQuantity($costume_id,$qty);
+             	 		if(count($res)){
+	             	 		Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
+	             	 		$res=$this->updateCartDetails($costume_id,$qty+1);
+	             	 		return response('')->cookie($res);
+             	 		}else{
+	             	 		return response('out of stock');
+
+             	 		}
+             	 	}else{
+             	 		 $cookie_id=$this->currentCookieKey();
+			             $costume_id=$req['costume_id'];
+			             $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
+			             $res=Cart::verifyCostumeQuantity($costume_id,$qty);
+             	 		 if(count($res)){
+				             $product[$cookie_id][]=array($req['costume_id']=>$qty);
+				             Cart::addToCart($req,$cookie_id,$qty);
+				             $reslt=$this->productsAddToCookie($product);
+				             return response('')->cookie($reslt);
+				         }else{
+				         	return response('out of stock');
+				         }
+             	 	}
+            	 }
+            	
+		
+                
              }else{
-               $product[$this->cookieKeyGenarater()]=$req['costume_id'];
+               $cookie_id=$this->cookieKeyGenarater();
+               $costume_id=$req['costume_id'];
+               $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
+               $product[$cookie_id]=array($req['costume_id']=>$qty);
+               Cart::addToCart($req,$cookie_id,$qty);
                $res=$this->productsAddToCookie($product);
                return response('')->cookie($res);
              }
 		
 	}
 	
-    private function verifyCookie($cookie_id){
-        dd($cookie_id);
-
-    }
     private function getCookieAllProducts(){
         $cookie = cookie::get('min-cart');
         return $cookie;
@@ -55,12 +82,12 @@ class CartController extends Controller {
        return $cookie;
 
     }
-    private function productsUpdateToCookie(){
+    private function updateCartDetails($costume_id,$qnty){
       $cart_list=$this->getCookieAllProducts();
-      foreach ($cart_list as $key => $value) {
-        echo $value;
-      }
-      return true;
+      $cookie_id=$this->currentCookieKey();
+      $cart_list[$cookie_id][$costume_id]=$qnty;
+      $res=$this->productsAddToCookie($cart_list);
+      return $res;
 
     }
     private function cookieKeyGenarater(){
