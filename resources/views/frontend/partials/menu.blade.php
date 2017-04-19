@@ -133,7 +133,7 @@
 							<i class="fa fa-search"></i>
 						</button>
 						<button type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
-							<i class="fa fa-tag" aria-hidden="true">Sell</i>
+							<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
 						</button>
 					</div>
 					<div class="mobile-rm">	

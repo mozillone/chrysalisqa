@@ -211,14 +211,16 @@
 		<div class="home-adds">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 add1">
+					<div class="col-md-8  add1">
 						<a href="#">
-							<img class="img-responsive" src="{{asset('/assets/frontend/img/add11.png')}}">
+							<img class="img-responsive hidden-sm hidden-xs" src="{{asset('/assets/frontend/img/add11.png')}}">
+							<img class="img-responsive hidden-md hidden-lg" src="{{asset('/assets/frontend/img/home-mini1.png')}}">
 						</a>
 					</div>
 					<div class="col-md-4 add2">
 						<a href="#">
-							<img class="img-responsive" src="{{asset('/assets/frontend/img/add22.png')}}">
+							<img class="img-responsive hidden-sm hidden-xs" src="{{asset('/assets/frontend/img/add22.png')}}">
+							<img class="img-responsive hidden-md hidden-lg" src="{{asset('/assets/frontend/img/home-mini2.png')}}">
 						</a>
 					</div>
 				</div>

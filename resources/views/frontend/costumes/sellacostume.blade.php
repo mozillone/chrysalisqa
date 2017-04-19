@@ -6,24 +6,7 @@
 @section('content')
  	<section class="content create_section_page">
  	<div id="ohsnap"></div>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Chrysalis</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<link rel="icon" href="../assets/frontend/img/favicon.png">
-		<!-- css links Start -->
-		<link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../assets/frontend/css/chrysalis.css" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-		<!-- Script links Start -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		
-		<script src="http://chrysalisqa.local.dotcomweavers.net/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/custom.js"></script>
-	</head>
-	<body>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -154,9 +137,7 @@ $('.panel-group').on('shown.bs.collapse', toggleIcon);
 				</script>
 				
 				
-
-			</body>
-		</html>		
+	
 		@stop
 {{-- page level scripts --}}
 @section('footer_scripts')
