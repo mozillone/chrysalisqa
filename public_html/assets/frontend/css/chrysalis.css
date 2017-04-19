@@ -1091,20 +1091,30 @@ border-top-color: #fff;
 
 /********************************************************************Media start here********************************************************************/
 @media screen and (min-width:1025px){
+	.icon_lins.text-right ul li .btn a {
+    color: #656465;
+}
+	.icon_lins.text-right ul li .btn{position:relative;}
+.icon_lins.text-right ul li .btn span {
+    background: #60c5ac;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    border-radius: 50%;
+    vertical-align: middle;
+    text-align: center;
+    color: #fff;
+    top: -7px;
+    line-height: 15px;
+    font-size: 10px;
+}
+.sell_bxz_div div {    padding-left: 8px;    padding-right: 8px;}
 	form#register-newsletter input.btn.btn-custom-3{margin-left: 9px;}
 	.home-adds .add2{max-height:185px;overflow:hidden;padding-left:7px;}
 	.home-adds .add1{max-height:185px;overflow:hidden;padding-right:7px;}
-	.sell_page_total {
-    width: 1000px;
-    margin: 0 auto;
-}
-	.prod_box {
-text-align: center;
-margin-bottom: 30px;
-min-height: 360px;
-}
+	.sell_page_total {    width: 1000px;      margin-top: 60px !important;  margin: 0 auto;}
+	.prod_box {text-align: center;margin-bottom: 30px;min-height: 360px;}
 .home_product_slider .img_layer img{margin:0 auto;}
-
 .footer_head p {display: block !important;}
 }
 
@@ -1161,6 +1171,7 @@ display: none;
 .t-cnt{display:none;}
 }
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
+		.see-page-headings h1{margin-top:40px;}
 	.form-group.agn_regstr p {
     font-size: 18px;
     font-family: Proxima-Nova-Bold;
@@ -1237,6 +1248,16 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+#progressbar{padding-left:0px;}
+	.see-page-headings h1 {
+    font-size: 18px;
+    color: #323031;
+    font-family: Proxima-Nova-Extrabold;}
+	.see-page-headings p {
+    font-family: Proxima-Nova-Semibold;
+    font-size: 18px;
+    color: #323031;
+}
 .responsive-inner>li{	font-family: Proxima-Nova-Regular;}
 		.responsive-rm>li{	font-family: Proxima-Nova-Extrabold;font-size: 14px;}
 	form#register-newsletter {
