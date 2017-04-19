@@ -1,18 +1,18 @@
 <section class="newsletter-container">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12"><h3>SIGN UP FOR OUR NEWSLETTER</h3>
+					<div class="col-md-8 col-sm-12 col-xs-12"><h3>SIGN UP FOR OUR NEWSLETTER</h3>
 						<form id="register-newsletter">
 							<input type="text" name="newsletter" required="" placeholder="Enter your email address">
 							<input type="submit" class="btn btn-custom-3" value="Subscribe">
 						</form>
 					</div>
-					<div class="col-md-4 col-sm-4 col-xs-12 social-media">
+					<div class="col-md-4 col-sm-12 col-xs-12 social-media">
 						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-12 social-fallow">
+							<div class="col-md-4 col-sm-12 col-xs-12 social-fallow">
 								<h3>FOLLOW US</h3>
 							</div>
-							<div class="col-md-8 col-sm-8 col-xs-12 social-img">
+							<div class="col-md-8 col-sm-12 col-xs-12 social-img">
 								<div class="social-icons">
 									<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/fb-icon.png')}}"></a>
 									<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/twit-icon.png')}}"></a>
@@ -40,7 +40,7 @@
 					</div>
 
 					<div class="col-md-4 co-sm-4 co-xs-12 quick_links">
-					<div class="footer_head ">
+					<div class="footer_head mid_ft ">
 						<h5>QUICK LINKS <i class="fa fa-plus pull-right hidden-lg hidden-sm hidden-md"></i></h5>
 						<ul class="col-md-6 col-sm-6 col-xs-12">
 							<li>About</li>
