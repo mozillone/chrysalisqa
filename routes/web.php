@@ -66,7 +66,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 
 
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
+	Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	  	Route::get('/admin/dashboard', 'DashboardController@dashboard');
 	  	Route::get('/admin/profile', 'UserController@adminProfile');
 	  	Route::post('/admin/profile/post', ['as' => 'admin-profile-update','uses'=>'UserController@adminProfileUpdate']);
