@@ -77,7 +77,7 @@
 				</div>
 			</div>
 		</section>
-<div class="modal fade window-popup" id="signup_popup">
+<div class="modal fade window-popup" id="signup_popup" tabindex="-1">
 
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -189,7 +189,7 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade window-popup" id="login_popup">
+<div class="modal fade window-popup" id="login_popup" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
 				<div class=" modal-header indi_close_icons">
@@ -238,7 +238,80 @@
 					</div>
 				</div>
 				<div class="form-group agn_regstr">
-								<p>Don't have an account with us? <span>Regsiter!</span></p>
+								<p>Don't have an account with us? <span><a data-toggle="modal" data-target="#single_signup_popup" data-dismiss="modal">Regsiter!</a></span></p>
+							</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade window-popup" id="single_signup_popup" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+				<div class=" modal-header indi_close_icons">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+			<div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="login-register" id="loginModal">
+			
+				<div id="myTabContent" class="tab-content">
+			
+					<div class="tab-pane active in" id="login_tab1">
+						<form role="form" action="{{route('register')}}" method="POST" id="signup_pop1">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<div class="form-group">
+						<label>First Name</label>
+			                <input type="text" name="first_name" id="pop_first_name" class="form-control " >
+						</div>
+						<div class="form-group">
+							<label>Last Name</label>
+							<input type="text" name="last_name" id="pop_last_name" class="form-control " >
+						</div>
+						<div class="form-group">
+							<label>Email</label>
+							<input type="text" id="popup_email" name="email"  class="form-control">
+						</div>
+						<div class="row sinup-pswrd"> 
+							<div class="col-md-12 col-sm-12 col-xs-12 "> 
+								<div class="form-group">
+									<label>Password</label>
+									<input type="password" id="popup_password" name="password" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 "> 
+								<div class="form-group">
+								<label>Confirm Password</label>
+									<input type="password" id="pop_cpassword"  name="cpassword"  class="form-control">
+								</div>
+							</div>
+						</div> 
+						<div class="row"> 
+							<div class="col-md-12 col-sm-12 col-xs-12 "> 
+								<div class="form-group">
+									<div class="text-center creat_btn">
+										<button class="btn btn-primary">Create Account!</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</form>   
+					</div>
+           
+                    <div class="form-group or text-center">
+								<p>Or</p>
+				</div>
+				<div class="social-login">
+					<div class="form-group socil-btn">
+						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Log In with Facebook</a>
+					</div>
+				</div>
+				<div class="form-group agn_regstr">
+								<p><a data-toggle="modal" data-target="#login_popup" data-dismiss="modal">Login</a></p>
 							</div>
 				</div>
 				
