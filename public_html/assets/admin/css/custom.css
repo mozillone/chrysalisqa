@@ -31,7 +31,7 @@ span.logo-lg {width: 57%;    margin: 0 auto;}
 }
 .defult-form .fileupload.fileupload-new {
     max-height: 90px;
-    overflow: hidden;
+ 
 }
 .text-left.add_btn {
     margin-top: 25px !important;
@@ -49,6 +49,11 @@ a.btn.btn-primary.pull-right.add-prod {
     color: #fff;
     background-color: #60c5ac;
     border-color: #60c5ac;
+}
+span.remove_pic_banner {
+    position: absolute;
+    top: -7px;    color: red;
+    right: 0px;
 }
 .btn-warning.active.focus, .btn-warning.active:focus, .btn-warning.active:hover, .btn-warning:active.focus, .btn-warning:active:focus, .btn-warning:active:hover, .open>.dropdown-toggle.btn-warning.focus, .open>.dropdown-toggle.btn-warning:focus, .open>.dropdown-toggle.btn-warning:hover {
     color: #fff;
