@@ -2,6 +2,7 @@
 @section('styles')
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
  @endsection
 @section('content')
  	<section class="content create_section_page">
@@ -152,5 +153,7 @@
 <script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
+<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
 
 @stop

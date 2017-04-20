@@ -21,7 +21,7 @@ app.controller('CategoriesController', function($scope,DTOptionsBuilder, DTColum
                     ], 
     $scope.displayTable = true;
     function actionsHtml(data, type, full, meta) {
-         var records='<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="left" title="" href="/category/edit/'+data.category_id+'" data-original-title="Edit"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;<a class="btn btn-xs btn-warning delete" data-toggle="tooltip" data-placement="top" title="" href="javascript:void(0);" data-original-title="Delete" data-id="'+data.category_id+'"><i class="fa fa-trash"></i></a>';
+         var records='<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="left" title="" href="/categories/edit/'+data.category_id+'" data-original-title="Edit"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;<a class="btn btn-xs btn-warning delete" data-toggle="tooltip" data-placement="top" title="" href="javascript:void(0);" data-original-title="Delete" data-id="'+data.category_id+'"><i class="fa fa-trash"></i></a>';
          return records;
     }
     function mainCat(data, type, full, meta) {
@@ -29,7 +29,7 @@ app.controller('CategoriesController', function($scope,DTOptionsBuilder, DTColum
      }
     function subCat(data, type, full, meta) {
          if(full.parent_id=="0"){
-            return 'N/A';
+            return ' ';
          }else{
             return full.name;
          }

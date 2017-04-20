@@ -9,8 +9,8 @@
 							<div class="icon_lins text-right">
 								<ul>
 									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-envelope-open" aria-hidden="true"></i><br>Messages</button></li>
-									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-heart" aria-hidden="true"></i><span>@if(Auth::check()){{helper::getMyWishlistCount()}} @endif</span><br>@if(Auth::check())<a href="{{route('wishlist')}}">Favorites</a> @else <a data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </button></li>
-									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart</button></li>
+									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-heart" aria-hidden="true"></i>@if(Auth::check())<span>{{helper::getMyWishlistCount()}}</span>@endif<br>@if(Auth::check())<a href="{{route('wishlist')}}">Favorites</a> @else <a data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </button></li>
+									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart<!-- <span>{{helper::getCartCount()}}</span> --></button></li>
 								</ul>
 							</div>
 							<div class="navbar-header">
@@ -127,7 +127,7 @@
 							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 						</button>
 						<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
-							<a data-toggle="modal" data-target="#login_popup"><i class="fa fa-user" aria-hidden="true"></i></a>
+							<a data-toggle="modal" @if(!Auth::check()) data-target="#login_popup" @endif><i class="fa fa-user" aria-hidden="true"></i></a>
 						</button>
 						<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 							<i class="fa fa-search"></i>
@@ -137,11 +137,11 @@
 						</button>
 					</div>
 					<div class="mobile-rm">	
-						<ul class="nav nav-tabs mobile-tabs">
+						<ul class="nav nav-tabs mobile-tabs @if(!Auth::check()) is_login @endif">
 							<li class="active">
 								<a  href="#category1" data-toggle="tab">Menu</a>
 							</li>
-							<li><a href="#category2" data-toggle="tab">Account</a>
+							@if(Auth::check())<li><a href="#category2" data-toggle="tab">Account</a>@endif
 							</li>
 							<li><a href="#category3" data-toggle="tab">Support</a>
 							</li>
@@ -168,16 +168,18 @@
 									</ul>			
 									<!-- tab content End -->			
 								</div>
+								@if(Auth::check())
 								<div class="tab-pane" id="category2">
 									<!-- tab content starts -->			  
 									<div class="head-acc-form">
-										<p class="acc-form-rm"><input type="text" placeholder="LAUREN'S ACCOUNT"> <span class="acc-form-icn"><i class="fa fa-user" aria-hidden="true"></i></span></p>
-										<p class="acc-form-rm"><input type="text" placeholder="FAVORITES"> <span class="acc-form-icn"><i class="fa fa-heart" aria-hidden="true"></i> 2</span></p>			
+										<p class="acc-form-rm"><a href="javascript::void(0);"><input type="text" placeholder="{{Auth::user()->display_name}}"></a><span class="acc-form-icn"><i class="fa fa-user" aria-hidden="true"></i></span></p>
+										<p class="acc-form-rm"><a href="{{route('wishlist')}}"><input type="text" placeholder="FAVORITES"></a><span class="acc-form-icn"><i class="fa fa-heart" aria-hidden="true"></i>{{helper::getMyWishlistCount()}}</span></p>			
 										<p class="acc-form-rm"><input type="text" placeholder="MESSAGES"> <span class="acc-form-icn"><i class="fa fa-envelope" aria-hidden="true"></i> 4</span></p>						
-										<p class="acc-form-rm"><input type="text" placeholder="SIGN OUT"> <span class="acc-form-icn"><i class="fa fa-sign-out" aria-hidden="true"></i></span></p>			
+										<p class="acc-form-rm"><a href="{{route('logout')}}"><input type="text" placeholder="SIGN OUT"> </a><span class="acc-form-icn"><i class="fa fa-sign-out" aria-hidden="true"></i></span></p>			
 									</div>
 									<!-- tab content End -->			
 								</div>
+								@endif
 								<div class="tab-pane" id="category3">
 									<!-- tab content starts -->
 									<div class="head-support">

@@ -124,7 +124,7 @@ class Category extends Authenticatable
         return $costumes_list;
     }
      protected function updateCategory($req){
-        if(!empty($req['parent_id'])){$parent_id=$req['parent_id'];}else{$parent_id="0";}
+         if(!empty($req['parent_id'])){$parent_id=$req['parent_id'];}else{$parent_id="0";}
         if(isset($req['cat_image']) && !isset($req['banner_image'])){
             $cat_image_path=public_path('category_images/Normal');
             $cat_file_name=$this->fileUploading($cat_image_path,$req['cat_image']);
@@ -133,6 +133,7 @@ class Category extends Authenticatable
                             'parent_id'=>$parent_id,
                             'thumb_image'=>$cat_file_name,
                             'updated_at'=>date('Y-m-d H:i:s'));
+            
         }
         else if(isset($req['banner_image']) && !isset($req['cat_image'])){
             $cat_banner_image=public_path('category_images/Banner');
