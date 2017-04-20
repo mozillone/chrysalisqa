@@ -1217,6 +1217,35 @@ display: none;
 .t-cnt{display:none;}
 }
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
+	#single_signup_popup .modal-content {
+    border-radius: 0px;
+    border: none;
+}
+#single_signup_popup .modal-dialog {
+    width: 500px !important;
+}
+#single_signup_popup .modal-dialog {
+    margin: 200px auto !important;
+}
+#single_signup_popup div#myTabContent {
+    padding: 30px 30px;padding-top: 0px;
+}
+#single_signup_popup .modal-dialog {
+    width: auto;
+    margin: 52px auto;
+
+}
+#single_signup_popup h2 {
+    font-size: 16px;margin-top: 0px;
+    border: none;
+    color: #000;
+    font-family: Proxima-Nova-Extrabold;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    text-align: left;
+}
 	.owl-wrapper .img_layer {
     position: relative;
     cursor: pointer;
