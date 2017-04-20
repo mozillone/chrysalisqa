@@ -207,3 +207,28 @@ $(".remove_pic").on("click",function(){
   $('input[type="file"]').val('');
   $('input[name="is_removed"]').val("1");
   });
+$("#charity-create").validate({
+            rules: {
+                name:{
+                        required: true,
+                        maxlength: 50
+                    },
+                image:{
+                        required: true,
+                        extension: "png,jpg"
+                    },
+                }
+  
+        });
+$("#charity-edit").validate({
+            rules: {
+                charity_name:{
+                        required: true,
+                        maxlength: 50
+                    },
+                image:{
+                        extension: "png,jpg"
+                    },
+                }
+  
+        });
