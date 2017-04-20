@@ -13,7 +13,7 @@ app.controller('CategoriesController', function($scope,DTOptionsBuilder, DTColum
       .withOption('bFilter', true)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-                      DTColumnBuilder.newColumn('category_id').withTitle('#'),
+                      DTColumnBuilder.newColumn('category_id').withTitle('#').notSortable(),
                       DTColumnBuilder.newColumn(null).withTitle('Main Category').renderWith(mainCat),
                       DTColumnBuilder.newColumn(null).withTitle('Sub Category').renderWith(subCat),
                       DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
