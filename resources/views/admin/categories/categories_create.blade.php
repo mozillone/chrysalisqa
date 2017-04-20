@@ -7,9 +7,9 @@ Category create@parent
 
 {{-- page level styles --}}
 @section('header_styles')
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <link rel="stylesheet" href="{{ asset('/vendors/jquery-ui/themes/base/jquery-ui.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/jquery-ui/themes/base/sortable.css')}}">
+<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
 
 @stop
 
@@ -76,19 +76,61 @@ Category create@parent
                                     </div>
                                 </div> 
                             <div class="col-md-6">
-                             <div class="col-md-12">
-                                    <div class="form-group has-feedback" >
-                                        <label for="inputEmail3" class="control-label">Category Image <span class="req-field" >*</span></label>
-                                            <input type="file" class="form-control" name="cat_image" id="cat_image">
-                                        <p class="error">{{ $errors->first('cat_image') }}</p> 
+                            <label for="inputEmail3" class="control-label">Category Image <span class="req-field" >*</span></label>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                      <div class="row upload_bx col-md-6 col-sm-6 col-xs-12">
+                                          <div class="">
+                                            <div class=" upload_btns">
+                                                      <span class=" btn-file">
+                                                        <span class="fileupload-exists"></span>     
+                                                        <input id="cat_image" name="cat_image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
+                                                        <input type="hidden" name="is_removed"/>
+                                              </span> 
+                                              </div>
+                                            </div>
+                                      </div>
+                                      <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload"> 
+                                          <img src="{{asset('/category_images/df_img.jpg')}}" class="img-responsive"  id="img-chan1">
+                                        <span class="remove_pic_cat">
+                                          <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                        </span>
+                         
+                                        <span class="fileupload-preview"></span>
+                                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+                                      </div>
                                     </div>
-                                     <div class="form-group has-feedback" >
-                                        <label for="inputEmail3" class="control-label">Category Banner Image <span class="req-field" >*</span></label>
-                                            <input type="file" class="form-control" name="banner_image" id="banner_image">
-                                        <p class="error">{{ $errors->first('banner_image') }}</p> 
+                            </div>  
+                        </div>
+                          <div class="col-md-6">
+                            <label for="inputEmail3" class="control-label">Category Banner Image <span class="req-field" >*</span></label>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                      <div class="row upload_bx col-md-6 col-sm-6 col-xs-12">
+                                          <div class="">
+                                            <div class=" upload_btns">
+                                                      <span class=" btn-file">
+                                                        <span class="fileupload-exists"></span>     
+                                                        <input id="banner_image" name="banner_image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
+                                                        <input type="hidden" name="is_removed"/>
+                                              </span> 
+                                              </div>
+                                            </div>
+                                      </div>
+                                      <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload"> 
+                                          <img src="{{asset('/category_images/df_img.jpg')}}" class="img-responsive"  id="img-chan2">
+                                        <span class="remove_pic_banner">
+                                          <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                        </span>
+                         
+                                        <span class="fileupload-preview"></span>
+                                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+                                      </div>
                                     </div>
-                                </div> 
-                            </div>
+                            </div>  
+                        </div>
                     </div> 
                      <div class="col-md-12 costumes hide">
                             <h4>Category Costumes</h4>
@@ -145,5 +187,6 @@ Category create@parent
 <script src ="{{ asset('/vendors/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{ asset('/assets/admin/js/pages/category.js') }}"></script>
 <script src="{{ asset('/js/validator-addtional-methods.js')}}"></script>
+<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 
 @stop

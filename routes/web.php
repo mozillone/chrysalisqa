@@ -115,7 +115,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 
 		/****************Categories Management Starts Here*********************/
 		Route::any('/category/create', ['as' => 'categories-create','uses'=>'CategoriesController@createCategories']);
-	    Route::any('/category/edit/{id?}', ['as' => 'categories-edit','uses'=>'CategoriesController@editCategories']);
+	    Route::any('/categories/edit/{id?}', ['as' => 'categories-edit','uses'=>'CategoriesController@editCategories']);
 	    Route::any('/category-delete/{id}', ['as' => '','uses'=>'CategoriesController@deleteCategory']);
 	    Route::any('/categories', ['as' => 'categories-list','uses'=>'CategoriesController@categoriesList']);
 	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
