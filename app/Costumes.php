@@ -60,7 +60,7 @@ class Costumes extends Authenticatable
         return array('is_user_fav'=>$result[0]->is_user_fav);
     }
     protected function getCostumesList(){
-        $costumes_list=DB::Select('SELECT costume_id,name as cst_name,concat(sku_no,"-",name) as name,sku_no,price FROM `cc_costumes` ORDER BY `name` ASC');
+        $costumes_list=DB::Select('SELECT cst.costume_id,dsr.name as cst_name,concat(cst.sku_no,"-",dsr.name) as name,cst.sku_no,cst.price FROM `cc_costumes` as cst LEFT JOIN  cc_costume_description as dsr on dsr.costume_id=cst.costume_id ORDER BY `name` ASC');
         return $costumes_list;
     }
     protected function getCostumeDetails($costume_id){

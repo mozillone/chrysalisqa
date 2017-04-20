@@ -120,7 +120,7 @@ class Category extends Authenticatable
       }  
     }
     protected function getCatCostumesList($cat_id){
-        $costumes_list=DB::Select('SELECT cst.costume_id,cst.name as cst_name,concat(cst.sku_no,"-",cst.name) as name,cst.sku_no,cst.price FROM `cc_costume_to_category` as cat LEFT JOIN cc_costumes as cst on cat.costume_id=cst.costume_id where cat.category_id='.$cat_id);
+        $costumes_list=DB::Select('SELECT cst.costume_id,dsr.name as cst_name,concat(cst.sku_no,"-",dsr.name) as name,cst.sku_no,cst.price FROM `cc_costume_to_category` as cat LEFT JOIN cc_costumes as cst on cat.costume_id=cst.costume_id  LEFT JOIN  cc_costume_description as dsr on dst.costume_id=cst.costume_id where cat.category_id='.$cat_id);
         return $costumes_list;
     }
      protected function updateCategory($req){

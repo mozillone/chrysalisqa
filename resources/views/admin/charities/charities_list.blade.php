@@ -118,11 +118,7 @@ Charities@parent
                           </div>
                           <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload"> 
                             <img src="{{asset('/charities_images/default-placeholder.jpg')}}" class="img-pview img-responsive" id="img-chan" name="img-chan">
-                            <span class="remove_pic">
-                              <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </span>
-             
-                            <span class="fileupload-preview"></span>
+                             <span class="fileupload-preview"></span>
                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                           </div>
                         </div>
@@ -173,17 +169,15 @@ Charities@parent
                                 <div class=" upload_btns">
                                           <span class=" btn-file">
                                             <span class="fileupload-exists"></span>     
-                                            <input id="edit_img_pic" name="image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
+                                            <input id="edit_img_pic" name="image" type="file" placeholder="Profile Image" class="img-responsivel">
                                             <input type="hidden" name="is_removed"/>
                                   </span> 
                                   </div>
                                 </div>
                           </div>
                           <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload"> 
-                            <img src="{{asset('/charities_images/default-placeholder.jpg')}}" class="img-responsive"  id="img-chan1">
-                            <span class="remove_pic">
-                              <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </span>
+                            <img src="{{asset('/charities_images/default-placeholder.jpg')}}" class="img-pview img-responsive"  id="img-chan1">
+                           
              
                             <span class="fileupload-preview"></span>
                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
