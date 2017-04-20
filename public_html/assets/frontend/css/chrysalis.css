@@ -24,6 +24,27 @@ section.top_nav span{color:#60c5ac;}
 }*/
 
 /* */
+
+@font-face {
+    font-family: 'manustrialregular';
+    src: url('../fonts/mns_trial-webfont.woff2') format('woff2'),
+         url('../fonts/mns_trial-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'manustrialmanustrial';
+    src: url('../fonts/mns_trial-webfont.woff2') format('woff2'),
+         url('../fonts/mns_trial-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
 @font-face {
 	font-family: Proxima-Nova-Regular;
 	src: url('../fonts/proxima_nova-webfont.woff2');
@@ -964,7 +985,7 @@ p.right_heading span.my_msg { font-weight: 800; }
 }
 .upload-photo-blogs .up-blog {
     background: #ccc;
-    height: 350px;    cursor: pointer;
+    height: 295px;    cursor: pointer;
 }
 .upload_hint{position:relative;}
 
@@ -1078,7 +1099,11 @@ border-top-color: #fff;
 }
 
 
-
+span.up_tip {
+    font-family: manustrialregular;
+    font-size: 30px;
+    display: block;
+}
 
 
 
@@ -1091,6 +1116,17 @@ border-top-color: #fff;
 
 /********************************************************************Media start here********************************************************************/
 @media screen and (min-width:1025px){
+	.img_layer {
+    position: relative;
+    cursor: pointer;
+    max-height: 351px;
+    overflow: hidden;
+}
+
+	.img_layer a img {
+    min-height: 276px;
+}
+		.icon_lins.text-right ul li .btn a:hover {text-decoration:none;}
 	.icon_lins.text-right ul li .btn a {
     color: #656465;
 }
@@ -1171,6 +1207,22 @@ display: none;
 .t-cnt{display:none;}
 }
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
+	.owl-wrapper .img_layer {
+    position: relative;
+    cursor: pointer;
+    max-height: inherit;
+    overflow: hidden;
+}
+	.img_layer {
+    position: relative;
+    cursor: pointer;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+	.img_layer a img {
+    min-height: 200px;
+}
 		.see-page-headings h1{margin-top:40px;}
 	.form-group.agn_regstr p {
     font-size: 18px;
@@ -1226,28 +1278,49 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 }
 
 @media screen and (min-width:768px){
-	.img_layer a img {
-    min-height: 276px;
-}
-.img_layer {
+		.upload_hint p {
     position: relative;
-    cursor: pointer;
-    max-height: 351px;
-    overflow: hidden;
 }
 .upload_hint p {
-    font-size: 14px;
+    font-size: 14px;font-family: Proxima-Nova-Semibold;
     color: #EF4A6C;
     position: absolute;
-    bottom: 0px;
+    bottom: 0px;    text-align: center;
     height: 100%;
-    top: 260px;
+    top: 80px;
 }
+.upload_hint p:after {
+    width: 140px;
+    height: 187px;
+    position: absolute;
+    content: "";
+    background: url(../../frontend/img/tip-arrow.png);
+    background-repeat: no-repeat;
+    right: -40px;
+    top: 140px;
+}
+
+
 	
 }
 
 
 @media screen and (max-width:767px){
+	.img_layer a img {
+    min-height: 180px;
+}
+.img_layer {
+    position: relative;
+    cursor: pointer;
+    max-height: 180px;
+    overflow: hidden;
+}
+	.progressbar_main{    margin: 30px 0 20px;}
+	.prog-txt{text-align:center}
+	#fileselector {
+    margin: 0;
+}
+
 #progressbar{padding-left:0px;}
 	.see-page-headings h1 {
     font-size: 18px;
@@ -1285,9 +1358,9 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
     margin-right: 0px;
 }
 	.upload_hint p {
-    font-size: 14px;
+    font-size: 14px;font-family: Proxima-Nova-Semibold;
     color: #EF4A6C;
-    height: 100%;
+    height: 100%;text-align: center;
     top: 260px;
 }
 	.upload-photo-blogs .threeblogs {
@@ -1443,6 +1516,13 @@ and (orientation:landscape){
 and (min-device-width:320px) 
 and (max-device-width:568px) 
 and (orientation:portrait){
+	.upload_hint {
+    margin-top: 25px;
+}
+.prog-txt{text-align:center}
+	a.upload_sub_btn.btn.btn-default{    margin-top: 10px;}
+	label.btn.btn-default.upload_more_btn{width:100%;}
+	.up_btns_tl a{width:100%}
 div#main-banner{margin-top:65px;max-height:194px;overflow:hidden;}
 div#main-banner img{min-height:164px;width:100%;}
 .responsive-inner{padding-left:0px;}

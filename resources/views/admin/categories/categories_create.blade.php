@@ -93,22 +93,30 @@ Category create@parent
                      <div class="col-md-12 costumes hide">
                             <h4>Category Costumes</h4>
                             <hr>
-                            <div class="col-md-8">
+                            
                                 <div class="col-md-6">
-                                        <div class="form-group has-feedback" >
-                                            <label for="inputEmail3" class="control-label">Product</label>
-                                                <input type="text" class="form-control" placeholder="Enter category name"  name="products_list" id="products_list">
-                                                <input type="hidden"  id="cst_name">
-                                                <input type="hidden"  id="products_id">
-                                                <input type="hidden"  id="sku_no">
-                                                <input type="hidden"  id="price">
-                                                <span>Note: Type the product name to autopopulate</span>
-                                        </div>
+									<div class=" c_ctmes-admin ">
+											<div class="form-group has-feedback col-md-10" >
+												<label for="inputEmail3" class="control-label">Product</label>
+													<input type="text" class="form-control" placeholder="Enter category name"  name="products_list" id="products_list">
+													<input type="hidden"  id="cst_name">
+													<input type="hidden"  id="products_id">
+													<input type="hidden"  id="sku_no">
+													<input type="hidden"  id="price">
+													<span>Note: Type the product name to autopopulate</span>
+										
+											</div>
+															<div class="form-group col-md-1 text-left add_btn">
+												
+											 <a class="btn btn-primary pull-right add-prod">+Add</a>
+											 </div>
+									</div>
+								
                                 </div> 
                             <div class="col-md-2">
-                                <a class="btn btn-primary pull-right add-prod">+Add</a>
+                               
                             </div>
-                            </div>
+                     
                             <div class="col-md-12">
                                 <h4>Assigned Products</h4>
                                 <table class="table table-inverse">
