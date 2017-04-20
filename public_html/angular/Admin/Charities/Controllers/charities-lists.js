@@ -8,7 +8,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
       })
       .withDataProp('data.charities')
       .withOption('createdRow', createdRow)
-      .withOption('order', [ ])
+      .withOption('order', [3])
       .withOption('responsive', true)
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
