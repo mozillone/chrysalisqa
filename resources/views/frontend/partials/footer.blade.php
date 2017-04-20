@@ -261,6 +261,7 @@
 				<div id="myTabContent" class="tab-content">
 			
 					<div class="tab-pane active in" id="login_tab1">
+					<h2>Register Your Account</h2>
 						<form role="form" action="{{route('register')}}" method="POST" id="signup_pop1">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group">
