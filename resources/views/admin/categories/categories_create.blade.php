@@ -91,16 +91,17 @@ Category create@parent
                                               </div>
                                             </div>
                                       </div>
-                                      <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload"> 
+									  <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <div class=" fileupload fileupload-new" data-provides="fileupload"> 
                                           <img src="{{asset('/category_images/df_img.jpg')}}" class="img-responsive"  id="img-chan1">
-                                        <span class="remove_pic_cat">
-                                          <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                        </span>
-                         
                                         <span class="fileupload-preview"></span>
                                         <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                       </div>
+									    <span class="remove_pic_cat">
+                                          <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                        </span>
                                     </div>
+									 </div>
                             </div>  
                         </div>
                           <div class="col-md-6">
@@ -119,15 +120,18 @@ Category create@parent
                                               </div>
                                             </div>
                                       </div>
-                                      <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload"> 
+									   <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <div class=" fileupload fileupload-new" data-provides="fileupload"> 
                                           <img src="{{asset('/category_images/df_img.jpg')}}" class="img-responsive"  id="img-chan2">
-                                        <span class="remove_pic_banner">
-                                          <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                        </span>
+                                    
                          
                                         <span class="fileupload-preview"></span>
                                         <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                       </div>
+									      <span class="remove_pic_banner">
+                                          <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                        </span>
+									     </div>
                                     </div>
                             </div>  
                         </div>

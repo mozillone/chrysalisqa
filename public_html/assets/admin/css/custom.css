@@ -26,6 +26,13 @@ span.logo-lg {width: 57%;    margin: 0 auto;}
 .c_ctmes-admin .form-group.has-feedback {
     padding-left: 0px;
 }
+.defult-form .fileupload.fileupload-new img {
+    width: 100%;
+}
+.defult-form .fileupload.fileupload-new {
+    max-height: 90px;
+    overflow: hidden;
+}
 .text-left.add_btn {
     margin-top: 25px !important;
     padding-bottom: 0px;

@@ -82,8 +82,7 @@ class CharitiesController extends Controller
    public function editCharity(Request $request)
    {
          $req=$request->all();
-         $rule  = array('name' => 'required|max:50',
-                        'image' => 'required',
+         $rule  = array('charity_name' => 'required|max:50',
                         );
          $validator = Validator::make($req,$rule);
          if ($validator->fails())
