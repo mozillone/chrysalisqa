@@ -13,7 +13,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-                      DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml),
+                      DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml).notSortable(),
                       DTColumnBuilder.newColumn('name').withTitle('Charity Name'),
                       DTColumnBuilder.newColumn('user_name').withTitle('Suggested By'),
                       DTColumnBuilder.newColumn('date').withTitle('Created Date'),
@@ -62,7 +62,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
             .withOption('bFilter', false)
             .withOption('lengthChange', false);
              $scope.dtColumns = [
-                       DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml),
+                       DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml).notSortable(),
                       DTColumnBuilder.newColumn('name').withTitle('Charity Name'),
                       DTColumnBuilder.newColumn('user_name').withTitle('Suggested By'),
                       DTColumnBuilder.newColumn('date').withTitle('Created Date'),
@@ -203,7 +203,7 @@ $("#edit_img_pic").on('change', function() {
       }
     });
 $(".remove_pic").on("click",function(){
-  $('#img-chan').attr('src',"/img/default.png");
+  $('#img-chan').attr('src',"/charities_images/default-placeholder.jpg");
   $('input[type="file"]').val('');
   $('input[name="is_removed"]').val("1");
   });

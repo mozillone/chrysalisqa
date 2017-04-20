@@ -31,7 +31,17 @@ span.logo-lg {width: 57%;    margin: 0 auto;}
 }
 .defult-form .fileupload.fileupload-new {
     max-height: 90px;
-    overflow: hidden;
+     overflow: hidden;
+}
+.upload_bx {
+    padding-left: 0px;
+    margin-top: 5px;
+}
+input#cat_image {
+    color: transparent;
+}
+input#banner_image {
+    color: transparent;
 }
 .text-left.add_btn {
     margin-top: 25px !important;
@@ -45,10 +55,30 @@ a.btn.btn-primary.pull-right.add-prod {
 .btn-warning:hover, .btn-warning:active, .btn-warning.hover {
     background-color: #60c5ac;    border-color: #60c5ac;
 }
+a.add_cat.btn.btn-primary {
+    margin-top: 20px; float:right;
+}
+a.remove_cat.btn.btn-danger {
+    margin-top: 20px;float:right;
+}
+a.add-prod.btn.btn-primary {
+    margin-top: 20px;float:right;
+}
+a.remove_product.btn.btn-danger {
+    margin-top: 20px;float:right;
+}
+.row_pregt {
+    margin-left: 5px;
+}
 .btn-warning.focus, .btn-warning:focus {
     color: #fff;
     background-color: #60c5ac;
     border-color: #60c5ac;
+}
+span.remove_pic_banner {
+    position: absolute;
+    top: -7px;    color: red;
+    right: 0px;
 }
 .btn-warning.active.focus, .btn-warning.active:focus, .btn-warning.active:hover, .btn-warning:active.focus, .btn-warning:active:focus, .btn-warning:active:hover, .open>.dropdown-toggle.btn-warning.focus, .open>.dropdown-toggle.btn-warning:focus, .open>.dropdown-toggle.btn-warning:hover {
     color: #fff;
@@ -61,7 +91,7 @@ a.btn.btn-primary.pull-right.add-prod {
     margin: 0 auto !important;
 }
 .main-header .logo img {
-    width: 150px !important;
+
     margin-top: 0;
 }
 .btn-primary {
@@ -69,6 +99,7 @@ a.btn.btn-primary.pull-right.add-prod {
     border-color: #60c5ac;
     color: #000;
 }
+ul.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front{max-height:150px; overflow-y:auto;}
 .btn-primary:hover {
     background-color: #60c5ac;
     border-color: #60c5ac;
@@ -133,7 +164,7 @@ a.btn.btn-primary.pull-right.add-prod {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #60c5ac;
 }
 
 input:focus + .slider {
@@ -145,7 +176,21 @@ input:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-
+.btn-success {
+    background-color: #00a65a;
+    border-color: #008d4c;
+    border-radius: 2px;
+    padding: 3px 15px;
+}
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+    background-color: #222d32;
+}
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
+    color: #fff;
+    background: #1e282c;
+    border-left-color: #60c5ac;
+}
+.main-header .logo{    height: 60px;}
 /* Rounded sliders */
 .slider.round {
   border-radius: 34px;
@@ -181,7 +226,7 @@ h3.box-title{width:100%; float:left;}
 #agent_edit_from .form-group{margin-right:0px; margin-left:0px;}
 #agent_edit_from input, #agent_edit_from select{border:1px solid #ccc;}
 #agent_edit_from p{margin:0;font-size:11px}
-
+span.remove_pic_cat {    position: absolute;    top: -7px;    color: red;    right: 0px;}
 .sidebar-menu .treeview-menu{padding-left: 25px !important;}
 .sidebar-collapse .sidebar-menu .treeview-menu{padding-left: 0px !important;}
 .login-box-body form .btn.btn-flat, .login-box-body form .form-control{border-radius: 2px;}
@@ -233,7 +278,12 @@ h3.box-title{width:100%; float:left;}
 .status-view-ticket{padding: 4px 15px; background: red; color: #fff; border-radius: 2px; width: 100%; float: left; text-align: center;
     font-size: 15px;}
 .ticket-view-task img, .ticket-view-more img{width: 50px; height: 50px; border: 1px solid #ccc; border-radius: 100%; float:left; margin:0 15px 0 0;}
-
+span.remove_pic {
+    cursor: pointer;
+}
+.costumes .form-group.has-feedback {
+    margin-left: -15px;
+}
 
 .ticket-view-approvals, .ticket-view-discussions, .ticket-view-task, .ticket-view-more{width:100%; float:left;margin:0 0 40px; padding:0 0px;}
 .ticket-view-document a, .ticket-view-discussions a, .ticket-view-task a{font-size:16px;}
@@ -328,7 +378,34 @@ ul.status-dashboard li{display: -webkit-inline-box; padding: 0 0 0 10px;}
 /*6-jan-2017*/
 #pwd_shw{cursor: pointer;}
 /***************/
-
+input#profile_logo {
+    color: transparent;
+}
+#charity_edit_popup .modal-footer {
+    border-top-color: #f4f4f4;
+    clear: left;
+}
+#charity_edit_popup span.remove_pic {
+    position: absolute;
+    top: -4px;
+    color: red;
+    right: 0px;
+}
+#charity_edit_popup .upload_bx {
+    padding-left: 5px;
+    margin-top: 5px;
+}
+#charity_edit_popup .upload_btns {
+    padding-left: 10px;
+}
+input#edit_img_pic {
+    color: transparent;
+}
+#charity_edit_popup .fileupload.fileupload-new {
+    position: relative;
+    max-height: 100px;
+    overflow: hidden;
+}
 
 .defult-form .image-label{width:100%; float:left; text-align:left !important;}
 .defult-form .fileupload.fileupload-new {position:relative !important;}
@@ -353,10 +430,24 @@ ul.status-dashboard li{display: -webkit-inline-box; padding: 0 0 0 10px;}
 
 .ticket-view-task .tasks_list td:nth-child(2) a{float:left}
 .ticket-view-more .tasks_completed_list td:first-child{text-align:left;}
-
+.btn-file input#profile_logo {
+    border: none;
+}
+#charity-create span.remove_pic {
+    position: absolute;
+    top: 2px;
+    color: red;
+    left: 130px;
+}
+.fileupload.fileupload-new {
+	position:relative
+}
 
 .comments_list tr td:first-child{width:70px;}
-
+#charity_create_popup .modal-footer {
+    border-top-color: #f4f4f4;
+    clear: left;
+}
 .ticket-view-task .tasks_list .task_status{margin:5px 10px 0 0; float: left;}
 .ticket-view-more .tasks_completed_list .task_status{margin:5px 10px 0 0; float: left;}
 .ticket-view-task .table-responsive{overflow-x:inherit !important; }
@@ -465,7 +556,12 @@ body .loading img{width:10%;}
 
 
 
-
+@media only screen and (min-width : 1300px) {
+	
+		.row_pregt .radio {
+    width: 15%;
+}
+}
 
 
 @media only screen and (max-width : 1280px) {
@@ -480,13 +576,42 @@ body .loading img{width:10%;}
 }
 
 
+@media only screen and (min-device-width:768px) and (max-device-width:1024px){
+.cupn_catries {
+    padding-left: 0px;
+}
+.defult-form .fileupload.fileupload-new {
+    max-height: 50px;
+    overflow: hidden;
+}
+}
+
+
 @media only screen and (min-width : 768px) {
+
 .main-header .logo .logo-sm{display:none;}}
 
+
+
 @media only screen and (max-width : 767px) {
+	#charity_edit_popup .fileupload.fileupload-new {
+    position: relative;
+    max-height: 100px;
+    overflow: hidden;
+    margin-left: -15px;
+    margin-top: 10px;
+}
+	#charity-create .fileupload.fileupload-new{padding-left:0px;}
+	.defult-form .fileupload.fileupload-new{
+		margin-left: -30px;
+    margin-top: 7px;
+	}
+	.cupn_catries {
+    padding-left: 0px;padding-right: 0px;
+}
 	
 	.main-header .logo .logo-lg{display:none;}
-.main-header .logo img{margin:0px; width:300px; margin:0 auto;}
+.main-header .logo img {    width: 130px;      margin-top: 5px;}
 .skin-blue .main-header .logo{background-color: #fff;}
 .main-footer .pull-right{width:100%; float:left; text-align:center;}
 .main-footer{text-align:center;}
