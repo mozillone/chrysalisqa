@@ -65,10 +65,16 @@ Add Promotion@parent
                                     </div>
                                     <div class="form-group has-feedback">
                                         <label for="inputEmail3" class="control-label">Discount Type <span class="req-field" >*</span></label>
-                                            <div class="radio">
+										<div class="row_pregt">
+                                            <div class="radio col-md-4">
                                                 <input type="radio" value="percentage" name="type" checked>Percentage</label>
+                                              
+                                            </div>
+											  <div class="radio col-md-4">
+                                                
                                                 <input type="radio" value="flat"  name="type">Flat Amount</label>
                                             </div>
+											    </div>
                                           <p class="error">{{ $errors->first('type') }}</p> 
                                     </div>
                                     <div class="form-group has-feedback" >
@@ -95,7 +101,7 @@ Add Promotion@parent
                                     </div>
                                 </div> 
                             <div class="col-md-6">
-                             <div class="col-md-12">
+                             <div class="col-md-12 cupn_catries">
                                 <h4>Coupon Categories</h4>
                                     <hr>
                                      <div class="form-group has-feedback">
@@ -112,12 +118,14 @@ Add Promotion@parent
                                         <label for="inputEmail3" class="control-label">Selected Categories</label>
                                          <select multiple class="form-control"  name="cats[]" id="cats_list">
                                         </select>
-                                        <a href="javascript::void(0);" class="remove_cat btn btn-danger">-Remove</a>
-                                        <br>
+                                       
+                                     
                                         <span>Note: Select the category and click on Remove button to remove the category from the list</span>
+										   <br>
+										 <a href="javascript::void(0);" class="remove_cat btn btn-danger">-Remove</a>
                                     </div>
                                 </div>
-                                  <div class="col-md-12">
+                                  <div class="col-md-12 cupn_catries">
                                 <h4>Coupon Products</h4>
                                     <hr>
                                     <div class="form-group has-feedback" >
@@ -126,18 +134,21 @@ Add Promotion@parent
                                         <input type="hidden"  id="cst_name">
                                         <input type="hidden"  id="products_id">
                                         <input type="hidden"  id="sku_no">
-                                        <a href="javascript::void(0);" class="add-prod btn btn-primary">+Add</a>
-                                        <br>
+                                       
+                                      
                                         <span>Note: Type the product name to autopopulate</span>
+										  <br>
+										 <a href="javascript::void(0);" class="add-prod btn btn-primary">+Add</a>
                                     </div>
 
                                      <div class="form-group has-feedback">
                                         <label for="inputEmail3" class="control-label">Selected Products</label>
                                         <select multiple class="form-control" name="costumes[]" id="costumes">
                                         </select>
-                                        <a href="javascript::void(0);" class="remove_product btn btn-danger">-Remove</a>
-                                        <br>
+                                       
+                                     
                                         <span>Note: Select the product and click on Remove button to remove the product from the list</span>
+										 <a href="javascript::void(0);" class="remove_product btn btn-danger">-Remove</a>
                                     </div>
                                 </div>
                                 </div> 

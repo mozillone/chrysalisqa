@@ -99,14 +99,14 @@ Charities@parent
                 <form class="form-horizontal" role="form" method="POST" id="charity-create" action="{{route('charity-create')}}" enctype='multipart/form-data'>
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <div class="form-group">
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <input type="text" name="name" class="form-control" id="name" placeholder="Charity Name"/>
                     </div>
                   </div>
                   <div class="col-md-12">
                         <div class="form-group">
-                          <div class="row upload_bx col-md-6 col-sm-6 col-xs-12">
-                              <div class="">
+                          <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
+                              <div class="col-md-12 ">
                                 <div class=" upload_btns">
                                           <span class=" btn-file">
                                             <span class="fileupload-exists"></span>     
@@ -162,13 +162,13 @@ Charities@parent
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="charity_id" value="">
                   <div class="form-group">
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <input type="text" name="charity_name" class="form-control" id="charity_name" placeholder="Charity Name" />
                     </div>
                   </div>
                   <div class="col-md-12">
                         <div class="form-group">
-                          <div class="row upload_bx col-md-6 col-sm-6 col-xs-12">
+                          <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
                               <div class="">
                                 <div class=" upload_btns">
                                           <span class=" btn-file">
