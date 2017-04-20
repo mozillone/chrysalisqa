@@ -99,17 +99,14 @@ Category edit@parent
                                             </div>
                                       </div>
 									  <div class="col-md-6 col-sm-6 col-xs-12 ">
-                                      <div class="fileupload fileupload-new" data-provides="fileupload"> 
+                                      <div class="cat_img fileupload fileupload-new" data-provides="fileupload"> 
                                           <img @if(file_exists( public_path('category_images/Normal/'.$cat_data[0]->thumb_image)))) src="/category_images/Normal/{{$cat_data[0]->thumb_image}}" @else  src="/category_images/df_img.jpg" @endif  class="img-responsive"  id="img-chan1">
                                       
                          
                                         <span class="fileupload-preview"></span>
                                         <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                       </div>
-									    <span class="remove_pic_cat">
-                                          <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                        </span>
-									   </div>
+												   </div>
                                     </div>
                             </div>  
                         </div>
@@ -130,17 +127,14 @@ Category edit@parent
                                             </div>
                                       </div>
 									  <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <div class=" fileupload fileupload-new" data-provides="fileupload"> 
+                                      <div class="ban_img fileupload fileupload-new" data-provides="fileupload"> 
                                           <img @if(file_exists( public_path('category_images/Banner/'.$cat_data[0]->banner_image)))) src="/category_images/Banner/{{$cat_data[0]->banner_image}}" @else  src="/category_images/df_img.jpg" @endif class="img-responsive"  id="img-chan2">
                                  
                          
                                         <span class="fileupload-preview"></span>
                                         <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                       </div>
-									         <span class="remove_pic_banner">
-                                          <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                        </span>
-									    </div>
+										    </div>
                                     </div>
                             </div>  
                         </div>
