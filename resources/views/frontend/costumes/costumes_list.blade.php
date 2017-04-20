@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="list-banner">
-			@if(empty($data['sub_cat_info'][0]->banner_image) || !file_exists('/category_images/Banner/{{$data["sub_cat_info"][0]->banner_image}}'))
+			@if(empty($data['sub_cat_info'][0]->banner_image) || !file_exists(public_path('category_images/Banner/'.$data["sub_cat_info"][0]->banner_image.'')))
 			<img class="img-responsive" src="/category_images/df_img.jpg">
 			@else
 			<img class="img-responsive" src="/category_images/Banner/{{$data['sub_cat_info'][0]->banner_image}}">
