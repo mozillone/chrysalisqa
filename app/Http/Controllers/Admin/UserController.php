@@ -180,6 +180,7 @@ class UserController extends Controller
 		else{
 			$file_name=$name->user_img;
 		}
+		if(!empty($req['vacationstatus'])){$vacationstatus=$req['vacationstatus'];}else{$vacationstatus="0";}
 		$userData = [
 				'first_name' => $req['first_name'],
 				'last_name' => $req['last_name'],
@@ -187,7 +188,7 @@ class UserController extends Controller
 				'display_name' =>  $req['first_name']." ".$req['last_name'],
 				'email'=>$req['email'],
 				'user_img' =>$file_name,
-				'vacation_status'=>$req['vacationstatus'],
+				'vacation_status'=>$vacationstatus,
 				'vacation_from'=>$req['date_timepicker_end_ticket'],
 				'vacation_to'=>$req['date_timepicker_end1_ticket'],
 				
