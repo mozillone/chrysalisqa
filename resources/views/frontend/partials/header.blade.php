@@ -21,7 +21,6 @@
 							     @endif
 									   <ul class="dropdown-menu">
 										<li><a href="{{ URL::to('dashboard') }}">Dashboard</a></li>
-										<li><a href="{{ route('edit-profile') }}">Edit Profle</a></li>
 										<li><a href="{{ URL::to('logout') }}">Logout</a></li>
 									</ul>
 								</li>
