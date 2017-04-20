@@ -66,10 +66,18 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                                     </div>
                                     <div class="form-group has-feedback">
                                         <label for="inputEmail3" class="control-label">Discount Type <span class="req-field" >*</span></label>
-                                            <div class="radio">
+										<div class="row_pregt">
+                                            <div class="radio col-md-4">
                                                 <input type="radio" value="percentage" name="type" @if($data['basic'][0]->type=="percentage") checked @endif>Percentage</label>
+                               
+                                            </div>
+											  <div class="radio col-md-4">
+                                              
                                                 <input type="radio" value="flat"  name="type" @if($data['basic'][0]->type=="flat") checked @endif>Flat Amount</label>
                                             </div>
+											  </div>
+											
+									
                                           <p class="error">{{ $errors->first('type') }}</p> 
                                     </div>
                                     <div class="form-group has-feedback" >
@@ -96,8 +104,9 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                                     </div>
                                 </div> 
                             <div class="col-md-6">
-                             <div class="col-md-12">
+                             <div class="col-md-12 cupn_catries">
                                 <h4>Coupon Categories</h4>
+						
                                     <hr>
                                      <div class="form-group has-feedback">
                                         <label for="inputEmail3" class="control-label">Category List</label>
@@ -117,10 +126,12 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                                         @endforeach
                                         </select>
                                         </select>
+										            
+                                        <span>Note: Select the category and click on Remove button to remove the category from the list</span><br>
                                         <a href="javascript::void(0);" class="remove_cat btn btn-danger">-Remove</a>
-                                        <br>
-                                        <span>Note: Select the category and click on Remove button to remove the category from the list</span>
+                            
                                     </div>
+								
                                 </div>
                                   <div class="col-md-12">
                                 <h4>Coupon Products</h4>
@@ -131,9 +142,11 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                                         <input type="hidden"  id="cst_name">
                                         <input type="hidden"  id="products_id">
                                         <input type="hidden"  id="sku_no">
+										<span>Note: Type the product name to autopopulate</span>
+										     <br>
                                         <a href="javascript::void(0);" class="add-prod btn btn-primary">+Add</a>
-                                        <br>
-                                        <span>Note: Type the product name to autopopulate</span>
+                                   
+                                        
                                     </div>
 
                                      <div class="form-group has-feedback">
@@ -144,7 +157,7 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                                         @endforeach
                                         </select>
                                         <a href="javascript::void(0);" class="remove_product btn btn-danger">-Remove</a>
-                                        <br>
+                                    
                                         <span>Note: Select the product and click on Remove button to remove the product from the list</span>
                                     </div>
                                 </div>

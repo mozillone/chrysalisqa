@@ -45,6 +45,21 @@ a.btn.btn-primary.pull-right.add-prod {
 .btn-warning:hover, .btn-warning:active, .btn-warning.hover {
     background-color: #60c5ac;    border-color: #60c5ac;
 }
+a.add_cat.btn.btn-primary {
+    margin-top: 20px; float:right;
+}
+a.remove_cat.btn.btn-danger {
+    margin-top: 20px;float:right;
+}
+a.add-prod.btn.btn-primary {
+    margin-top: 20px;float:right;
+}
+a.remove_product.btn.btn-danger {
+    margin-top: 20px;float:right;
+}
+.row_pregt {
+    margin-left: 5px;
+}
 .btn-warning.focus, .btn-warning:focus {
     color: #fff;
     background-color: #60c5ac;
@@ -470,7 +485,12 @@ body .loading img{width:10%;}
 
 
 
-
+@media only screen and (min-width : 1300px) {
+	
+		.row_pregt .radio {
+    width: 15%;
+}
+}
 
 
 @media only screen and (max-width : 1280px) {
@@ -485,10 +505,23 @@ body .loading img{width:10%;}
 }
 
 
+@media only screen and (min-device-width:768px) and (max-device-width:1024px){
+.cupn_catries {
+    padding-left: 0px;
+}
+}
+
+
 @media only screen and (min-width : 768px) {
+
 .main-header .logo .logo-sm{display:none;}}
 
+
+
 @media only screen and (max-width : 767px) {
+	.cupn_catries {
+    padding-left: 0px;padding-right: 0px;
+}
 	
 	.main-header .logo .logo-lg{display:none;}
 .main-header .logo img{margin:0px; width:300px; margin:0 auto;}
