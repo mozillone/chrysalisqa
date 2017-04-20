@@ -430,6 +430,16 @@ p.like_fav {
 background: #fff;
 height: 30px;
 }
+.list-banner {
+    max-height: 300px;
+    overflow: hidden;
+    width: 100%;
+    max-height: 560px;
+    overflow: hidden;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
 p.like_fav span {
 width: 50%;
 float: left;
