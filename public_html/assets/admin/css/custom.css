@@ -281,9 +281,7 @@ span.remove_pic_cat {    position: absolute;    top: -7px;    color: red;    rig
 span.remove_pic {
     cursor: pointer;
 }
-.costumes .form-group.has-feedback {
-    margin-left: -15px;
-}
+
 
 .ticket-view-approvals, .ticket-view-discussions, .ticket-view-task, .ticket-view-more{width:100%; float:left;margin:0 0 40px; padding:0 0px;}
 .ticket-view-document a, .ticket-view-discussions a, .ticket-view-task a{font-size:16px;}
