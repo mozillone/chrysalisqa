@@ -70,7 +70,7 @@ class CategoriesController extends Controller
          {
             $parent_cats=Category::getParentCategories();
             $costumes_list=Costumes::getCostumesList();
-            return view('admin.categories.categories_create',compact('parent_cats',$parent_cats))->with('costumes_list',$costumes_list);
+             return view('admin.categories.categories_create',compact('parent_cats',$parent_cats))->with('costumes_list',$costumes_list);
          }
    }
    public function editCategories(Request $request,$cat_id=null)
