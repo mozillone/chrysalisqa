@@ -1235,6 +1235,7 @@ display: none;
     margin: 52px auto;
 
 }
+
 #single_signup_popup h2 {
     font-size: 16px;margin-top: 0px;
     border: none;
@@ -1345,6 +1346,10 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+		div#single_signup_popup {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 	.img_layer a img {
     min-height: 180px;
 }
