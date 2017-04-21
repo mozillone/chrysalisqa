@@ -876,7 +876,7 @@ $(document).ready(function()
 		}
 		if (str == true) {
 			$.ajax({
-			 url: "{{URL::to('costume/costumepreferences')}}",
+			 url: "{{URL::to('costume/costumecreate')}}",
 			 type: "POST",
 			 data: new FormData($('#costume_total_form')[0]),
 			 contentType:false,

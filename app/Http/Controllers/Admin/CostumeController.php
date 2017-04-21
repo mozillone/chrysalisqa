@@ -159,6 +159,9 @@ class CostumeController extends Controller
 	*/
 	public function insertCostume(Request $request){
 	  /****Inserting costume codes starts here***/
+	  /*echo "<pre>";
+	  print_r($request->all());
+	  die;*/
 	  $response=array();
 	  $req=$request->all();
 	  $userid=Auth::user()->id;
@@ -195,6 +198,7 @@ class CostumeController extends Controller
 	  $packageitems=$req['weight_package_items'];
 	 $frontview=$req['avatar'];
 	  $backview=$req['avatar1'];
+	  $details_accessories=$req['avatar2'];
 	 // $multiplefiles=$req['files'];
 	  //Generating sku number for a costume code starts here code format should be (CS(five zeros)incrementing the number form 0 Ex:CS0000012)*****/
 	  $sku_no=DB::table('costumes')->select('*')->get();
@@ -503,33 +507,54 @@ class CostumeController extends Controller
 			'type'=>"2");
 			$image1_insert=DB::table('costume_image')->insert($data2);
 		}
-	/*
+		/*
 	|Table:costume_image
-	|Multiple iamges(Details/Accessories)
+	|Costume iamges(Details/Accessories)
 	|@image 
 	*/
-		
-	//	if(isset($req['files'])){ 
-		//$count=count($req['files']); 
-		//if($count > 0){
-		// for($i=0;$i<$count[$i];$i++){
-		//	$file_name = str_random(10).'.'.$req['files'][$i]->getClientOriginalExtension();  
-		//	$source_image_path=public_path('costumers_images');
-		//	$thumb_image_path1=public_path('costumers_images/Original');
-		//	$thumb_image_path2=public_path('costumers_images/Small');
-		//	$req['files'][$i]->move($source_image_path, $file_name);
-		//	$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-		//	$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
-		//	$data3=array(
-		//	'costume_id'=>$costume_id,
-		//	'image'=>$req['files'][$i],
-		//	'type'=>"3");
-		//	$image1_insert=DB::table('costume_image')->insert($data3);
-		//}
-	//}
-		
-			
-		//}
+		if(isset($req['avatar2'])){ 
+			$file_name = str_random(10).'.'.$req['avatar2']->getClientOriginalExtension();  
+			$source_image_path=public_path('costumers_images');
+			$thumb_image_path1=public_path('costumers_images/Original');
+			$thumb_image_path1=public_path('costumers_images/Medium');
+			$thumb_image_path2=public_path('costumers_images/Small');
+			$req['avatar2']->move($source_image_path, $file_name);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+			$data2=array(
+			'costume_id'=>$costume_id,
+			'image'=>$file_name,
+			'type'=>"3");
+			$image1_insert=DB::table('costume_image')->insert($data2);
+		}
+	/*
+	|Table:costume_image
+	|Multiple iamges
+	|@image 
+	*/
+
+		//moving extra images
+	            if (isset($req['files']) && !empty($req['files'])) {
+	            	foreach ($req['files'] as $file4) {
+	            		$file_name = str_random(10).'.'.$file4->getClientOriginalExtension();
+	            		$source_image_path=public_path('costumers_images');
+	            		$thumb_image_path1=public_path('costumers_images/Original');
+	            		$thumb_image_path2=public_path('costumers_images/Medium');
+	            		$thumb_image_path3=public_path('costumers_images/Small');
+	            		//file3 moving to folder
+			            $file4->move($source_image_path, $file_name);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,198,295);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path3.'/'.$file_name,30,30);
+			            //inserting in db
+	            		$file_db_array4 = array('costume_id'=>$costume_id,
+	            			'image'=>$file_name,
+	            			'type'=>4,
+	            			'sort_order'=>0,
+	            		);
+	            		$file_db=DB::table('costume_image')->insert($file_db_array4);
+	            	}
+	            }
 		
 		}
 		 Session::flash('success', 'Costume Created Successfully');

@@ -598,16 +598,36 @@
 							</div> 
 					
 						</div>
+						<div class="col-md-6 ">
+							<h2 class="box-title col-md-12 heading-agent pro-imgs">Details/Accessories</h2>
+							<div class="col-md-12">
+							
+								<div class="form-group"> 
+									<label for="inputEmail3" class="control-label image-label">Upload</label>
+									<div class="fileupload fileupload-new frnt_view_img" data-provides="fileupload"> 
+										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan2" name="img-chan2" >
+										<span class="remove_pic2">
+											<i class="fa fa-times-circle" aria-hidden="true"></i>
+										</span>
+										<span class="btn btn-default btn-file">
+											<span class="fileupload-new" style="float:right">Upload Photo</span>
+											<span class="fileupload-exists"></span>     
+											<input id="profile_logo2" name="avatar2" type="file" placeholder="Profile Image" class="form-control">
+										</span>
+										<p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
+										<span class="fileupload-preview"></span>
+										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+									</div> 
+									<p class="error">{{ $errors->first('avatar') }}</p> 
+								</div> 					
+							</div>   
+					</div>
 						</div>
 						<div class="col-md-12">
 						<h2 class="heading-agent">Multi Image Uploading</h2>
 						<div class="col-md-6">
-							<h2 class="box-title col-md-12 heading-agent pro-imgs">Details/Accessories</h2>
-							<div class="col-md-12">
 							
-										
-								
-							</div>   
+						<input id="upload-file-selector" name="files[]" multiple="" type="file">  
 					</div> 
 						
 						</div>
