@@ -202,7 +202,7 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
                       }); 
          
     });
-$("#phone").on("keyup paste", function() {
+$("#phone_number").on("keyup paste", function() {
     // Remove invalid chars from the input
     var input = this.value.replace(/[^0-9\(\)\s\-]/g, "");
     var inputlen = input.length;
