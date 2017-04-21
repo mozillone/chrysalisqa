@@ -13,155 +13,14 @@
 <script src="{{ asset('/assets/admin/js/fileinput.js') }}"></script>
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
 
-    <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
+ <!--   <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
 
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>-->
 
 <style>
-#create_costume .has-feedback {
 
-   position: relative;
-
-   clear: left;
-
-}
-body
-{
- width:100%;
- margin:0 auto;
- padding:0px;
- font-family:helvetica;
- background-color:#084B8A;
-}
-#wrapper
-{
- text-align:center;
- margin:0 auto;
- padding:0px;
- width:995px;
-}
-#drop-area
-{
- margin-top:20px;
- margin-left:220px;
- width:550px;
- height:200px;
- background-color:white;
- border:3px dashed grey;
-}
-.drop-text
-{
- margin-top:70px;
- color:grey;
- font-size:25px;
- font-weight:bold;
-}
-#drop-area img
-{
- max-width:200px;
-}
-<style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-  
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-    <style>
-      #locationField, #controls {
-        position: relative;
-        width: 100%;
-      }
-      #autocomplete {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-      }
-      .label {
-        text-align: right;
-        font-weight: bold;
-        width: 100px;
-        color: #303030;
-      }
-      #address {
-        border: 1px solid #000090;
-        background-color: #f0f0ff;
-        width: 480px;
-        padding-right: 2px;
-      }
-      #address td {
-        font-size: 10pt;
-      }
-      .field {
-        width: 99%;
-      }
-      .slimField {
-        width: 80px;
-      }
-      .wideField {
-        width: 200px;
-      }
-      #locationField {
-        height: 20px;
-        margin-bottom: 2px;
-      }
-   
-
-#formdiv {
-  text-align: center;
-}
-#file {
-  color: green;
-  padding: 5px;
-  border: 1px dashed #123456;
-  background-color: #f9ffe5;
-}
-#img {
-  width: 17px;
-  border: none;
-  height: 17px;
-  margin-left: -20px;
-  margin-bottom: 191px;
-}
-.upload {
-  width: 100%;
-  height: 30px;
-}
-.abcd {
-height: 120px;
-  width:120px;
-}
-.abcd img {
-  height:120px;
-  width:120px;
-  padding: 5px;
-  border: 1px solid rgb(232, 222, 189);
-}
-.delete {position: absolute;
-    font-size: 12px;
-    background:#655f5d;
-    color: #fff;
-    padding: 3px;
-    right: -9px;
-    bottom: 6px;cursor:pointer;
-} .delete:hover{background:#f30;color:#fff;}
-.fileupload-new .btn-file {
-   margin: 10px 0 0 20px;
-}
-
-#customer_edit1 .form-group.has-feedback {
-    clear: both;
-}
       </style>
 @stop
 
@@ -200,7 +59,7 @@ height: 120px;
 					</div>
 					
 					<!-- <form class="form-horizontal" ng-submit="save(userForm.$valid, data)" name="userForm" > --> 
-					<form id="customer_edit1" class="form-horizontal defult-form" name="userForm" action="{{route('costumes-insert')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+					<form id="customer_edit1" class="form-horizontal defult-form costume_creates_pages" name="userForm" action="{{route('costumes-insert')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
 					
 						<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 						<div class="col-md-6">
@@ -262,7 +121,8 @@ height: 120px;
 										<span id="costumeconditionerror" style="color:red"></span>
 						       </div>
 							   <h4>Body Dimensions</h4></hr>
-
+<div class="row" >
+<div class="col-md-6" >
 								<div class="form-group has-feedback" >
 								<?php
 									$height=$bd_height->label;
@@ -279,6 +139,8 @@ height: 120px;
 									<span id="heightfterror" style="color:red"></span>
 									
 								</div>
+								</div>
+								<div class="col-md-6" >
 								<div class="form-group has-feedback" >
 								<?php
 									$height1=$bd_height_in->label;
@@ -293,7 +155,8 @@ height: 120px;
 									</div>
 									<span id="heightinerror" style="color:red"></span>
 									
-								</div>
+								</div></div>
+									</div>
 								<div class="form-group has-feedback" >
 								<?php
 									$height2=$bd_weight->label;
@@ -682,15 +545,15 @@ height: 120px;
 								
 							</div> 
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-12 frnt_back_view">
 						<h2 class="heading-agent">Upload Images</h2>
-						<div class="col-md-6">
+						<div class="col-md-6 ">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Front View</h2>
 							<div class="col-md-12">
 							
 								<div class="form-group"> 
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
-									<div class="fileupload fileupload-new" data-provides="fileupload"> 
+									<div class="fileupload fileupload-new frnt_view_img" data-provides="fileupload"> 
 										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan" name="img-chan" >
 										<span class="remove_pic">
 											<i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -710,13 +573,13 @@ height: 120px;
 					</div> 
 						<div class="col-md-6">
 							
-							<div class="col-md-6">
+					
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Back View</h2>
 							<div class="col-md-12">
 							
 								<div class="form-group"> 
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
-									<div class="fileupload fileupload-new" data-provides="fileupload"> 
+									<div class="fileupload fileupload-new bk_viws_pge" data-provides="fileupload"> 
 										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan1" name="img-chan1" >
 										<span class="remove_pic1">
 											<i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -733,7 +596,7 @@ height: 120px;
 									<p class="error">{{ $errors->first('avatar') }}</p> 
 								</div> 					
 							</div> 
-						</div>
+					
 						</div>
 						</div>
 						<div class="col-md-12">

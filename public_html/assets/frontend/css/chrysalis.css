@@ -230,7 +230,7 @@ color:#323031;font-size:18px;font-weight:600;}
 .mid_nav form.navbar-form.navbar-left i.fa.fa-search{position:absolute;margin-left:12px;top:12px;}
 .social-fallow{padding-right:0px;padding-left:30px;}
 input.btn.btn-custom-3:focus{outline:none;}
-form#register-newsletter input[type="text"]{width:355px;border-radius:2px;font-family:Proxima-Nova-Regular; font-size:15px;box-shadow:none;height:40px;padding-left:15px;border:1px solid #b7b7b7;}
+form#register-newsletter input[type="text"]{width:355px;border-radius:2px;font-family:Proxima-Nova-Regular; font-size:14px;box-shadow:none;height:40px;padding-left:15px;border:1px solid #b7b7b7;}
 .social-icons a img{width:50px;}
 .social-fallow h3{margin:0px;line-height:45px;}
 .social-img{padding-left:0px;}
@@ -1034,12 +1034,12 @@ a.upload_sub_btn.btn.btn-default{ background: #60C4AB; color:#fff;    margin-top
 .upload_castume-blog {
     background: url(../../frontend/img/upload-bg.png);
     background-size: cover;
-    background-position: 50%;min-height: 300px;     text-align: center;    color: #fff;padding-top: 10%;    cursor: pointer;
+    background-position: 50%;min-height: 300px;     text-align: center;    color: #fff;padding-top: 13%;    cursor: pointer;
 }
 .Ship_castume-blog {
     background: url(../../frontend/img/shipus-bg.png);
     background-size: cover;
-    background-position: 50%;min-height: 300px;     text-align: center;    color: #fff;padding-top: 10%;
+    background-position: 50%;min-height: 300px;     text-align: center;    color: #fff;padding-top: 13%;
 }
 .upload_acrdins {
     margin-top: 35px;
