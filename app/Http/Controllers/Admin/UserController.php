@@ -71,7 +71,7 @@ class UserController extends Controller
     }
     public function customersList()
     {
-      $title="Customers List";
+      $title="Users List";
       return view('admin.usermanagemnt.customers_list')->with('title',$title);
     }
     public function customersListData(Request $request)
@@ -90,7 +90,7 @@ class UserController extends Controller
 		$userslist->where('user.email',$req['search']['email']);
 		 }
 		 if(!empty($req['search']['phone']) ){
-		$userslist->where('user.phone_number',$req['search']['phone']);
+		$userslist->where('user.phone_number', 'like','%'.$req['search']['phone'] .'%');
 		 }
 		 if(isset($req['search']['status'])){
             if($req['search']['status']==""){

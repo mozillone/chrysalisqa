@@ -18,6 +18,28 @@ $(function(){
 	$("#pop_cpassword").rules("add", {required:true,equalTo:"#popup_password",messages: {
 		equalTo: "Enter same as password"
 	  }});
+	$("#signup_pop1").validate({
+            rules: {
+                first_name:{
+                        required: true,
+                        maxlength: 50
+                    },
+                last_name:{
+                        required: true,
+                          maxlength: 50,
+                    },
+                email:{
+                       required:true,
+                       email: true,
+                       remote: {url: "/emailValidation",type: "post"},messages: {
+						email: "Enter a valid  user email",
+						remote: "This email is already taken."
+					  }
+                    },
+                    }
+       
+        });
+
 	
 	$("#forgetpopup_password").validate();
 	$("#forgotpop_email").rules("add", {required:true,email: true,remote: {url: "/forgot/emailVerification",type: "post"},messages: {
