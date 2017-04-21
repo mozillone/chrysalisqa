@@ -266,27 +266,27 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group">
 						<label>First Name</label>
-			                <input type="text" name="first_name" id="pop_first_name" class="form-control " >
+			                <input type="text" name="first_name" id="first_name" class="form-control " >
 						</div>
 						<div class="form-group">
 							<label>Last Name</label>
-							<input type="text" name="last_name" id="pop_last_name" class="form-control " >
+							<input type="text" name="last_name" id="last_name" class="form-control " >
 						</div>
 						<div class="form-group">
 							<label>Email</label>
-							<input type="text" id="popup_email" name="email"  class="form-control">
+							<input type="text" id="email" name="email"  class="form-control">
 						</div>
 						<div class="row sinup-pswrd"> 
 							<div class="col-md-12 col-sm-12 col-xs-12 "> 
 								<div class="form-group">
 									<label>Password</label>
-									<input type="password" id="popup_password" name="password" class="form-control">
+									<input type="password" id="password1" name="password" class="form-control">
 								</div>
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12 "> 
 								<div class="form-group">
 								<label>Confirm Password</label>
-									<input type="password" id="pop_cpassword"  name="cpassword"  class="form-control">
+									<input type="password" id="cpassword1"  name="cpassword"  class="form-control">
 								</div>
 							</div>
 						</div> 
