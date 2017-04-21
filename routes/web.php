@@ -54,6 +54,8 @@ Route::any('/costume/createtwo', array('as' => '','uses' => 'CreateCostumeContro
 Route::any('/costume/createthree', array('as' => '','uses' => 'CreateCostumeController@createCostumestep3'));
 Route::any('/costume/createfour', array('as' => '','uses' => 'CreateCostumeController@createCostumestep4'));
 Route::any('/costume/ajaxsubcategory', array('as' => '','uses' => 'CreateCostumeController@ajaxSubCategory'));
+
+Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeController@Costumecreate'));
 /****costume create page 2 code ends here***/
 
 /** Costume Like page start here **/
