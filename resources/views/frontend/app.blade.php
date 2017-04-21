@@ -26,6 +26,7 @@
 		@include('frontend.partials.footer')
       		
 		<script src="{{ asset('/js/jquery-2.2.4.js')}}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 		<script src="{{ asset('/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 		<script src="{{ asset('/angular/lib/angular.js')}}"></script>
 		<script src="{{ asset('/angular/lib/angular-datatables.min.js') }}"></script>

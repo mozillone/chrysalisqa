@@ -111,7 +111,7 @@
 
 							<div class="item">
 								<div class="media"> 
-									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a> 
+									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_2_icon.png')}}" data-holder-rendered="true" > </a> 
 									</div> 
 									<div class="media-body"> <h4 class="media-heading">STEP 1</h4>
 										<p>Sell those old costumes with Chrysalis</p> 
@@ -121,7 +121,7 @@
 
 							<div class="item">
 								<div class="media"> 
-									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a> 
+									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_3_icon.png')}}" data-holder-rendered="true" > </a> 
 									</div> 
 									<div class="media-body"> <h4 class="media-heading">STEP 1</h4>
 										<p>Sell those old costumes with Chrysalis</p> 
@@ -230,5 +230,4 @@
 @section('footer_scripts')
 <script src="{{ asset('/assets/frontend/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/home.js') }}"></script>
-<script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
 @stop

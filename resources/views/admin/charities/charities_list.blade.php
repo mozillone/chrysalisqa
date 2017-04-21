@@ -99,14 +99,14 @@ Charities@parent
                 <form class="form-horizontal" role="form" method="POST" id="charity-create" action="{{route('charity-create')}}" enctype='multipart/form-data'>
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="Charity Name"/>
+                    <div class="col-sm-12">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Charity Name"/>
                     </div>
                   </div>
                   <div class="col-md-12">
                         <div class="form-group">
-                          <div class="row upload_bx col-md-6 col-sm-6 col-xs-12">
-                              <div class="">
+                          <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
+                              <div class="col-md-12 ">
                                 <div class=" upload_btns">
                                           <span class=" btn-file">
                                             <span class="fileupload-exists"></span>     
@@ -117,12 +117,8 @@ Charities@parent
                                 </div>
                           </div>
                           <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload"> 
-                            <img src="{{asset('/img/default.png')}}" class="img-pview img-responsive" id="img-chan" name="img-chan">
-                            <span class="remove_pic">
-                              <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </span>
-             
-                            <span class="fileupload-preview"></span>
+                            <img src="{{asset('/charities_images/default-placeholder.jpg')}}" class="img-pview img-responsive" id="img-chan" name="img-chan">
+                             <span class="fileupload-preview"></span>
                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                           </div>
                         </div>
@@ -158,32 +154,30 @@ Charities@parent
             <!-- Modal Body -->
             <div class="modal-body">
                 
-                <form class="form-horizontal" role="form" method="POST" id="charity-create" action="{{route('charity-edit')}}" enctype='multipart/form-data'>
+                <form class="form-horizontal" role="form" method="POST" id="charity-edit" action="{{route('charity-edit')}}" enctype='multipart/form-data'>
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="charity_id" value="">
                   <div class="form-group">
-                    <div class="col-sm-10">
-                        <input type="text" name="name" class="form-control" id="charity_name" placeholder="Charity Name" />
+                    <div class="col-sm-12">
+                        <input type="text" name="charity_name" class="form-control" id="charity_name" placeholder="Charity Name" />
                     </div>
                   </div>
                   <div class="col-md-12">
                         <div class="form-group">
-                          <div class="row upload_bx col-md-6 col-sm-6 col-xs-12">
+                          <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
                               <div class="">
                                 <div class=" upload_btns">
                                           <span class=" btn-file">
                                             <span class="fileupload-exists"></span>     
-                                            <input id="edit_img_pic" name="image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
+                                            <input id="edit_img_pic" name="image" type="file" placeholder="Profile Image" class="img-responsivel">
                                             <input type="hidden" name="is_removed"/>
                                   </span> 
                                   </div>
                                 </div>
                           </div>
                           <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload"> 
-                            <img src="{{asset('/img/default.png')}}" class="img-responsive"  id="img-chan1">
-                            <span class="remove_pic">
-                              <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </span>
+                            <img src="{{asset('/charities_images/default-placeholder.jpg')}}" class="img-pview img-responsive"  id="img-chan1">
+                           
              
                             <span class="fileupload-preview"></span>
                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
@@ -208,6 +202,7 @@ Charities@parent
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts') 
+<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('/angular/Admin/Charities/Controllers/charities-lists.js') }}"></script>
 <script src="{{ asset('/angular/Admin/Charities/Services/charities.js') }}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>

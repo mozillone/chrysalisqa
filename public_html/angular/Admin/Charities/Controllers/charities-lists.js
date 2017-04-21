@@ -8,12 +8,12 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
       })
       .withDataProp('data.charities')
       .withOption('createdRow', createdRow)
-      .withOption('order', [ ])
+      .withOption('order', [3])
       .withOption('responsive', true)
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-                      DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml),
+                      DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml).notSortable(),
                       DTColumnBuilder.newColumn('name').withTitle('Charity Name'),
                       DTColumnBuilder.newColumn('user_name').withTitle('Suggested By'),
                       DTColumnBuilder.newColumn('date').withTitle('Created Date'),
@@ -62,7 +62,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
             .withOption('bFilter', false)
             .withOption('lengthChange', false);
              $scope.dtColumns = [
-                       DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml),
+                       DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml).notSortable(),
                       DTColumnBuilder.newColumn('name').withTitle('Charity Name'),
                       DTColumnBuilder.newColumn('user_name').withTitle('Suggested By'),
                       DTColumnBuilder.newColumn('date').withTitle('Created Date'),
@@ -134,6 +134,8 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
               reader.readAsDataURL($(this)[0].files[i]);
               reader.onload = function(e) {
                 $('#img-chan').attr('src',e.target.result);
+                $('.img-pview').after('<span class="remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
+           
               }
               image_holder.show();
             }
@@ -180,8 +182,8 @@ $("#edit_img_pic").on('change', function() {
               var reader = new FileReader();
               reader.readAsDataURL($(this)[0].files[i]);
               reader.onload = function(e) {
-                alert(e.target.result);
                 $('#img-chan1').attr('src',e.target.result);
+           
               }
               image_holder.show();
             }
@@ -202,8 +204,33 @@ $("#edit_img_pic").on('change', function() {
         });
       }
     });
-$(".remove_pic").on("click",function(){
-  $('#img-chan').attr('src',"/img/default.png");
+$(document).on("click",".remove_pic",function(){
+  $('#img-chan').attr('src',"/charities_images/default-placeholder.jpg");
   $('input[type="file"]').val('');
   $('input[name="is_removed"]').val("1");
   });
+$("#charity-create").validate({
+            rules: {
+                name:{
+                        required: true,
+                        maxlength: 50
+                    },
+                image:{
+                        required: true,
+                        extension: "png,jpg"
+                    },
+                }
+  
+        });
+$("#charity-edit").validate({
+            rules: {
+                charity_name:{
+                        required: true,
+                        maxlength: 50
+                    },
+                image:{
+                        extension: "png,jpg"
+                    },
+                }
+  
+        });
