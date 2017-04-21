@@ -1,7 +1,7 @@
 @extends('/frontend/app')
 @section('styles')
    <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
-   <link rel="stylesheet" href="http://ivanzipop.local.dotcomweavers.net/assets/css/drop_uploader.css">
+   <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
  @endsection
 @section('content')
