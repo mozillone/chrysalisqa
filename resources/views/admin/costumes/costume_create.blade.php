@@ -27,13 +27,13 @@
 {{-- Page content --}}
 @section('content')
 <section class="content-header">
-	<h1>Custome</h1>
+	<h1>Costume</h1>
 	<ol class="breadcrumb">
 		<li>
 			<a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="{{url('customers-list')}}">Costumes Lists</a>
+			<a href="{{url('customers-list')}}">Costumes</a>
 		</li>
 		
 		<li class="active">Add Costume</li>
@@ -127,7 +127,7 @@
 										</div>
 										<span id="costumeconditionerror" style="color:red"></span>
 						       </div>
-							   <h4>Body Dimensions</h4></hr>
+							   <h4>Body & Dimensions</h4></hr>
 <div class="row" >
 <div class="col-md-6" >
 								<div class="form-group has-feedback" >
@@ -378,7 +378,7 @@
 									</div>
                                 </div>
 								<div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">Qunaity<span class="req-field" ></span></label>
+                                    <label for="inputEmail3" class="control-label">Quantity<span class="req-field" ></span></label>
                                         <select class="form-control" name="quantity" id="quantity">
 										<option value="">Select Quantity</option>
 										<option value="1">1</option>
@@ -519,7 +519,7 @@
 							<h2 class="heading-agent">Donation Info</h2>
 							<div class="col-md-12">
 							<div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">Donation To Charity<span class="req-field" ></span></label>
+                                    <label for="inputEmail3" class="control-label">Donation to Charity<span class="req-field" ></span></label>
                                        <div class="input-group">
 									   <span class="input-group-addon">$</span>
   <input type="text" class="form-control"  autocomplete="off"  name="charity_amount" id="charity_amount">
