@@ -333,6 +333,22 @@ ul.box-list3.sizes li.active {
 background: #60c5ac;
 color: #fff;
 }
+/* .text_wrapper:after {
+    content: "\f030";
+    font-family: 'FontAwesome';
+    text-align: center;
+    font-size: 46px;
+       padding: 195px 0px;
+    left: 0;
+    right: 0px;
+}
+.drop_uploader.drop_zone .text a.button.button-primary.file_browse {
+    color: transparent;padding: 105px 0px;
+} */
+.drop_uploader.drop_zone ul.files.thumb{    padding-left: 27px;}
+.drop_uploader.drop_zone ul.files.thumb li div.thumbnail{border-radius:0px !important; border:none !Important}
+.drop_uploader.drop_zone .text{color:transparent !important}
+.drop_uploader.drop_zone{border:none !important}
 .box-list1 li a:hover {
 text-decoration: none;
 }

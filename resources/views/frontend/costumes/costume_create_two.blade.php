@@ -71,7 +71,9 @@
 				</span>
 			<!-- </form> -->
 					</div>
-				<button type="button" id="upload_next" class="btn-rm-nxt">Next</button>		
+					<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
+				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next</a>
+</div>				
 			</div>
 	 
 <!--- progressbar section End -->
