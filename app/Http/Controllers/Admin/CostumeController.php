@@ -196,9 +196,9 @@ class CostumeController extends Controller
 	  $handlingtime=$req['handling_time'];
 	  $returnpolicy=$req['return_policy'];
 	  $packageitems=$req['weight_package_items'];
-	 $frontview=$req['avatar'];
-	  $backview=$req['avatar1'];
-	  $details_accessories=$req['avatar2'];
+	 $frontview=$req['img-chan'];
+	  $backview=$req['img-chan1'];
+	  $details_accessories=$req['img-chan2'];
 	 // $multiplefiles=$req['files'];
 	  //Generating sku number for a costume code starts here code format should be (CS(five zeros)incrementing the number form 0 Ex:CS0000012)*****/
 	  $sku_no=DB::table('costumes')->select('*')->get();
@@ -471,13 +471,13 @@ class CostumeController extends Controller
 	|Costume iamges(Front view)
 	|@image 
 	*/
-		if(isset($req['avatar'])){ 
-			$file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();  
+		if(isset($req['img-chan2'])){ 
+			$file_name = str_random(10).'.'.$req['img-chan2']->getClientOriginalExtension();  
 			$source_image_path=public_path('costumers_images');
 			$thumb_image_path1=public_path('costumers_images/Original');
 			$thumb_image_path1=public_path('costumers_images/Medium');
 			$thumb_image_path2=public_path('costumers_images/Small');
-			$req['avatar']->move($source_image_path, $file_name);
+			$req['img-chan2']->move($source_image_path, $file_name);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
 			$data1=array(
@@ -492,13 +492,13 @@ class CostumeController extends Controller
 	|Costume iamges(Back view)
 	|@image 
 	*/
-		if(isset($req['avatar1'])){ 
-			$file_name = str_random(10).'.'.$req['avatar1']->getClientOriginalExtension();  
+		if(isset($req['img-chan'])){ 
+			$file_name = str_random(10).'.'.$req['img-chan']->getClientOriginalExtension();  
 			$source_image_path=public_path('costumers_images');
 			$thumb_image_path1=public_path('costumers_images/Original');
 			$thumb_image_path1=public_path('costumers_images/Medium');
 			$thumb_image_path2=public_path('costumers_images/Small');
-			$req['avatar1']->move($source_image_path, $file_name);
+			$req['img-chan']->move($source_image_path, $file_name);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
 			$data2=array(
@@ -512,13 +512,13 @@ class CostumeController extends Controller
 	|Costume iamges(Details/Accessories)
 	|@image 
 	*/
-		if(isset($req['avatar2'])){ 
-			$file_name = str_random(10).'.'.$req['avatar2']->getClientOriginalExtension();  
+		if(isset($req['img-chan1'])){ 
+			$file_name = str_random(10).'.'.$req['img-chan1']->getClientOriginalExtension();  
 			$source_image_path=public_path('costumers_images');
 			$thumb_image_path1=public_path('costumers_images/Original');
 			$thumb_image_path1=public_path('costumers_images/Medium');
 			$thumb_image_path2=public_path('costumers_images/Small');
-			$req['avatar2']->move($source_image_path, $file_name);
+			$req['img-chan1']->move($source_image_path, $file_name);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
 			$data2=array(

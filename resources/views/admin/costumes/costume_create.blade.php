@@ -15,7 +15,9 @@
 
 
 <style>
-
+#customer_edit1 .form-group.has-feedback {
+    clear: left;
+}
       </style>
 @stop
 
