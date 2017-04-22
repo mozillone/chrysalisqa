@@ -9,15 +9,10 @@
 @section('header_styles')
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
 <link rel="stylesheet" href="{{ asset('/assets/admin/css/select2.min.css')}}">
-
+<link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
 <script src="{{ asset('/assets/admin/js/fileinput.js') }}"></script>
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
 
- <!--   <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
-
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>-->
 
 <style>
 
@@ -547,8 +542,8 @@
 						<div class="col-md-6 ">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Front View</h2>
 							<div class="col-md-12">
-							
-								<div class="form-group"> 
+							<input type="file" name="img-chan" id="img-chan">
+								<!-- <div class="form-group"> 
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									<div class="fileupload fileupload-new frnt_view_img" data-provides="fileupload"> 
 										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan" name="img-chan" >
@@ -565,7 +560,7 @@
 										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
 									</div> 
 									<p class="error">{{ $errors->first('avatar') }}</p> 
-								</div> 					
+								</div> --> 					
 							</div>   
 					</div> 
 						<div class="col-md-6">
@@ -573,8 +568,8 @@
 					
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Back View</h2>
 							<div class="col-md-12">
-							
-								<div class="form-group"> 
+								<input type="file" name="img-chan1" id="img-chan1">
+								<!-- <div class="form-group"> 
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									<div class="fileupload fileupload-new bk_viws_pge" data-provides="fileupload"> 
 										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan1" name="img-chan1" >
@@ -591,15 +586,15 @@
 										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
 									</div> 
 									<p class="error">{{ $errors->first('avatar') }}</p> 
-								</div> 					
+								</div> --> 					
 							</div> 
 					
 						</div>
 						<div class="col-md-6 ">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Details/Accessories</h2>
 							<div class="col-md-12">
-							
-								<div class="form-group"> 
+							<input type="file" name="img-chan2" id="img-chan2">
+								<!-- <div class="form-group"> 
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									<div class="fileupload fileupload-new frnt_view_img" data-provides="fileupload"> 
 										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan2" name="img-chan2" >
@@ -616,7 +611,7 @@
 										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
 									</div> 
 									<p class="error">{{ $errors->first('avatar') }}</p> 
-								</div> 					
+								</div>  -->					
 							</div>   
 					</div>
 						</div>
@@ -656,12 +651,27 @@
 	<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 	<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 	<script src="{{ asset('/assets/admin/js/pages/customers.js') }}"></script>
-
+	<script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
 	
 	<script type="text/javascript">
 	$(document).ready(function () {
 	//$(".sony").select2();
-	}); 
+
+	$('#img-chan,#img-chan2,#img-chan1').drop_uploader({
+                uploader_text: 'Drop files to upload, or',
+                browse_text: 'Browse',
+                browse_css_class: 'button button-primary',
+                browse_css_selector: 'file_browse',
+                uploader_icon: '<i class="pe-7s-cloud-upload"></i>',
+                file_icon: '<i class="pe-7s-file"></i>',
+                time_show_errors: 5,
+                layout: 'thumbnails',
+                method: 'normal',
+                url: 'ajax_upload.php',
+                delete_url: 'ajax_delete.php',
+            });
+        });
+	
 	
 	</script>
 	<script> 
