@@ -68,6 +68,7 @@
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Customer<span class="req-field" >*</span></label>
                                         <select class="form-control sony" data-live-search="true" id="customer_name" name="customer_name" >
+                                        <option value="">Select Customer Name</option>
 										<option value="0">None</option>
 										@foreach($customers as $index=>$customer)
                                          <option value="{{$customer->id}}">{{$customer->username}}</option>
@@ -668,23 +669,6 @@
 	
 	</script>
 	<script> 
-      var placeSearch, autocomplete;
-      var componentForm = {
-        street_number: 'short_name',
-        route: 'long_name',
-        locality: 'long_name',
-        administrative_area_level_1: 'short_name',
-        country: 'long_name',
-        postal_code: 'short_name', 
-      };
-	          Dropzone.options.imageUpload = {
-
-            maxFilesize         :       1,
-
-            acceptedFiles: ".jpeg,.jpg,.png,.gif"
-
-        };
-
       function initAutocomplete() {
         // Create the autocomplete object, restricting the search to geographical
         // location types.
@@ -888,7 +872,7 @@
 	});
 	</script>-->
 	<script type="text/javascript">
-	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#price,#charity_amount").on("keyup", function(){
+	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#price,#charity_amount,#dimensions").on("keyup", function(){
 	    var valid = /^\d{0,3}(\.\d{0,3})?$/.test(this.value),
 	        val = this.value;
 	    
