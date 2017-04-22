@@ -544,10 +544,10 @@ $(document).ready(function()
     });
 
 
-	$('#upload_div').css('display','none');
+	$('#upload_div').css('display','block');
 	$('#costume_description').css('display','none');
 	$('#pricing_div').css('display','none');
-	$('#preferences_div').css('display','block');
+	$('#preferences_div').css('display','none');
 
 	$( "#upload_next" ).click(function(a) {
 
