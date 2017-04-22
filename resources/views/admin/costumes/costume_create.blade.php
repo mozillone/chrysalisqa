@@ -57,6 +57,12 @@
 						<span id="successmessage"></span>
 						
 					</div>
+					@if(Session::has('success'))
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        {{ Session::get('success') }}
+                    </div>
+                    @endif
 					
 					<!-- <form class="form-horizontal" ng-submit="save(userForm.$valid, data)" name="userForm" > --> 
 					<form id="customer_edit1" class="form-horizontal defult-form costume_creates_pages" name="userForm" action="{{route('costumes-insert')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
@@ -524,17 +530,7 @@
                                 </div>
 								
 								<div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">{{$returnpolicy->label}}<span class="req-field" ></span></label>
-                                        <select class="form-control"  autocomplete="off" name="charity_name" id="charity_name">
-										<option value="">Select Charity Name</option>
-										@foreach($charities as $index=>$charity)
-										<option value="{{$charity->id}}">{{$charity->name}}</option>
-										@endforeach
-										</select>
-                                    <p class="error">{{ $errors->first('charity_name') }}</p> 
-                               </div>
-							   <div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">{{$returnpolicy->label}}<span class="req-field" ></span></label>
+                                    <label for="inputEmail3" class="control-label">Charity Name<span class="req-field" ></span></label>
                                         <select class="form-control"  autocomplete="off" name="charity_name" id="charity_name">
 										<option value="">Select Charity Name</option>
 										@foreach($charities as $index=>$charity)

@@ -144,6 +144,10 @@ $(function(){
 		$("#customer_edit1").validate({
         	onfocusout: function(element) { $(element).valid(); },
 			rules: {
+				customer_name:{
+						required: true,
+						maxlength: 50,
+				},
 				costume_name:{
 					 	required: true,
 						maxlength: 50,
@@ -249,6 +253,9 @@ $(function(){
 	           }
 	       	},
 			messages: {
+				customer_name:{
+					required: "Select Customer Name",
+				},
 			   costume_name:
 			   {
 			    required: "Enter Costume Name",
