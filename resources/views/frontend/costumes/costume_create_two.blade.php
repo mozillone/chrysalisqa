@@ -470,7 +470,7 @@ $heading_value=$headingexplode[1];
 <p class="ct3-rms-head">Donate to</p>
 <ul class="ct3-list">
 @foreach($charities as $index=>$charity)
-<li><img src="images/cst3.png" alt="{{$charity->name}}" /><input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
+<li><img width="68px" height="68px" src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" /><input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
 @endforeach
 </ul>
 <span id="charity_nameerror" style="color:red"></span>
@@ -544,10 +544,10 @@ $(document).ready(function()
     });
 
 
-	$('#upload_div').css('display','block');
+	$('#upload_div').css('display','none');
 	$('#costume_description').css('display','none');
 	$('#pricing_div').css('display','none');
-	$('#preferences_div').css('display','none');
+	$('#preferences_div').css('display','block');
 
 	$( "#upload_next" ).click(function(a) {
 
