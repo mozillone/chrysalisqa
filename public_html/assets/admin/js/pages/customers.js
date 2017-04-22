@@ -217,7 +217,7 @@ $(function(){
 				service:{
 				  required: true,
 				},
-				autocomplete:{
+				location:{
 				  required: true,
 				},
 				handling_time:{
@@ -268,7 +268,9 @@ $(function(){
 			   {
 			    required: "Enter Username",
 			   },
-			   
+			   autocomplete:{
+				  required: "Enter Item Location",
+				},
 				email:
                  {
                     required: "Enter Email Address",

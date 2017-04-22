@@ -478,7 +478,7 @@
 									<div id="locationField">
                                         <input type="text" class="form-control" placeholder="Enter Location"  name="location" id="autocomplete" onFocus="geolocate()" >
                                    </div>
-								   <span id="costumename_error" style="color:red"></span>
+								   <span id="autocomplete_error" style="color:red"></span>
                                 </div>
 								<div class="form-group has-feedback" >
 								  
@@ -660,7 +660,7 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function () {
-	$(".sony").select2();
+	//$(".sony").select2();
 	}); 
 	
 	</script>
@@ -719,154 +719,7 @@
     </script> 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
         async defer></script>
-	<!--<script type="text/javascript">
-	$('#create_costume').on('submit',function(ps){
-		 ps.preventDefault();
-		 str=true;
-		 alert();
-		$('#customer_name,#costume_name,#gender,#category,#costume-desc,#size,#price,#quantity,#heightft,#heightin,#weightlbs,#chestin,#waistlbs').css('border','');
-		$('#costumename_error,#gendererror,#categoryerror,#sizeerror,#costume-desc-error,#priceerror,#quantityerror,#heightfterror,#heightinerror,#weightlbserror,#chestinerror,#waistlbserror').html('');
-		var customer_name=$('#customer_name').val();
-		var costume_name=$('#costume_name').val();
-		var category=$('#category').val();
-		var costume_desc=$('#costume-desc').val();
-		var price=$('#price').val();
-		var quantity=$('#quantity').val();
-		var heightft=$('#heightft').val();
-		var heightin=$('#heightin').val();
-		var weightlbs=$('#weightlbs').val();
-		var chestin=$('#chestin').val();
-		var waistlbs=$('#waistlbs').val();
-		var size=$('#size').val();
-		var costumecondition="";
-		var gender="";
-		if(document.getElementById('unisex').checked){
-			gender = document.getElementById('unisex').value;
-		}
-		if(document.getElementById('pet').checked){
-			gender = document.getElementById('pet').value;
-		}
-		if (document.getElementById('male').checked) {
-			gender = document.getElementById('male').value;
-        }
-	   if(document.getElementById('female').checked) {
-			gender = document.getElementById('female').value;
-		}
-		if(document.getElementById('excellent').checked){
-			costumecondition = document.getElementById('excellent').value;
-		}
-		if(document.getElementById('brandnew').checked){
-			costumecondition = document.getElementById('brandnew').value;
-		}
-		if (document.getElementById('good').checked) {
-			costumecondition = document.getElementById('good').value;
-        }
-	   if(document.getElementById('likenew').checked) {
-			costumecondition = document.getElementById('likenew').value;
-		}
-		if(gender == "" | gender == null ){
-			$('#gendererror').html('Select Gender');
-		}
-		if(costumecondition == "" | costumecondition == null ){
-			$('#costumeconditionerror').html('Select Costume Condition');
-		}
-		if(customer_name==''){
-			$('#customer_name').css('border','1px solid red');
-			$('#customername_error').html('Select Customer Name');
-			str=false;
-		}
-		if(costume_name==''){
-			$('#costume_name').css('border','1px solid red');
-			$('#costumename_error').html('Enter Costume Name');
-			str=false;
-		}
-		if(category==''){
-			$('#category').css('border','1px solid red');
-			$('#categoryerror').html('Select Category');
-			str=false;
-		}
-		if(costume_desc==''){
-			$('#costume-desc').css('border','1px solid red');
-			$('#costume-desc-error').html('Enter Costume Description');
-			str=false;
-		}
-		if(price==''){
-			$('#price').css('border','1px solid red');
-
-			$('#priceerror').html('Enter Price');
-			str=false;
-		}
-		if(quantity==''){
-			$('#quantity').css('border','1px solid red');
-			$('#quantityerror').html('Select Quantity');
-			str=false;
-		}
-		if(heightft==''){
-			$('#heightft').css('border','1px solid red');
-			$('#heightfterror').html('Enter Height In Ft');
-			str=false;
-		}
-		if(heightin==''){
-			$('#heightin').css('border','1px solid red');
-			$('#heightinerror').html('Enter Height In in');
-			str=false;
-		}
-		if(weightlbs==''){
-			$('#weightlbs').css('border','1px solid red');
-			$('#weightlbserror').html('Enter weight In lbs');
-			str=false;
-		}
-		if(chestin==''){
-			$('#chestin').css('border','1px solid red');
-			$('#chestinerror').html('Enter Chest In in');
-			str=false;
-		}
-		if(waistlbs==''){
-			$('#waistlbs').css('border','1px solid red');
-			$('#waistlbserror').html('Enter Waist In lbs');
-			str=false;
-		}
-		if(size==''){
-			$('#size').css('border','1px solid red');
-			$('#sizeerror').html('Select Size');
-			str=false;
-		
-		}
-		if(str==true)
-    {
-         $.ajax({
-            dataType:"JSON",
-            type:"POST",
-            data :new FormData(this),
-            url:"/costumes-insert",
-            contentType:false,
-            cache:false,
-            processData:false,
-            success:function(u){
-                console.log(u);
-				
-                if(u.code=='200'){
-				$('#sonay').show();
-				$('#successmessage').html(u.description);
-				//setTimeout(function() {window.location="/costumes/create";},2500);
-				}
-				
-                if(u.code=='204'){
-				$('#sonay').show();
-				$('#successmessage').html(u.description);
-			//	setTimeout(function() {window.location="/costumes/create";},2500);
-			}
-				
-            },
-            error:function(er){
-                console.log(er);
-            }
-        });
-    }
 	
-		return str;
-	});
-	</script>-->
 	<script type="text/javascript">
 	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#price,#charity_amount,#dimensions").on("keyup", function(){
 	    var valid = /^\d{0,3}(\.\d{0,3})?$/.test(this.value),
