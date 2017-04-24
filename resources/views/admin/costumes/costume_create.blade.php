@@ -733,7 +733,7 @@
         async defer></script>
 	
 	<script type="text/javascript">
-	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#charity_amount,#dimensions").on("keyup", function(){
+	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensions").on("keyup", function(){
 	    var valid = /^\d{0,3}(\.\d{0,3})?$/.test(this.value),
 	        val = this.value;
 	    
@@ -742,7 +742,7 @@
 	        this.value = val.substring(0, val.length - 1);
 	    }
 	});
-	$("#price").on("keyup", function(){
+	$("#price,#charity_amount").on("keyup", function(){
 	    var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
 	        val = this.value;
 	    
