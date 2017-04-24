@@ -13,7 +13,7 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-                      DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
+                      DTColumnBuilder.newColumn('display_name').withTitle('Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),

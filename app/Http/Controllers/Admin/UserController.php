@@ -78,7 +78,7 @@ class UserController extends Controller
     {
         $req=$request->all();
 		$userslist=DB::table('users as user')
-		->select('user.id','user.display_name','user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as date_format'),DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as lastlogin'))
+		->select('user.id',DB::Raw("CONCAT(cc_user.first_name,' ',cc_user.last_name) as display_name")  ,'user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as date_format'),DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as lastlogin'))
 		->orderby('user.created_at','DESC')
 		->where('user.role_id','!=','1');
 		if(!empty($req['search'])){
