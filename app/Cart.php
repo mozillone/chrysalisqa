@@ -9,6 +9,7 @@ use App\Helpers\Site_model;
 use Auth;
 use Cookie;
 use Session;
+use Cookie;
 
 class Cart extends Authenticatable
 {
@@ -70,9 +71,12 @@ class Cart extends Authenticatable
        }
     }
 
-     protected function verifyCostumeQuantity($costume_id,$qnt){
+    protected function verifyCostumeQuantity($costume_id,$qnt){
         $res=DB::Select('SELECT quantity FROM `cc_costumes` WHERE costume_id='.$costume_id.' having quantity>='.$qnt.'');
         return $res;
+    }
+    protected function getCartCount(){
+        $cookie=cookie::get('min-cart');
     }
    
 }
