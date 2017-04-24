@@ -15,7 +15,6 @@ class DashboardController extends Controller {
 	
 	public function __construct(Guard $auth)
 	{
-		  dd(Session::get('cart_values.val'));
 		  $this->sitehelper = new SiteHelper();
 		$this->middleware(function ($request, $next) {
               if(!Auth::check() && !$request->is('coming-soon') && !$request->is('find-your-space') && !$request->is('list-your-space')){
