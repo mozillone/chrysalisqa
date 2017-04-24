@@ -65,4 +65,13 @@ $(function(){
 		   $(".footer_head ul").not($(this).next()).slideUp('fast');
 	   });
    }
+    $(document).on('click','.signup_popup', function(){
+   		  $('#loginpopup')[0].reset();
+   		  $('#signup_pop')[0].reset();
+   		  $('label.error').remove();
+   		  $('.tab-pane').removeClass('active');
+   		  $('#login_tab1').addClass('active');
+   		  $('.first_active').trigger('click');
+   		  $('#signup_popup').modal('show');
+        });
 })
