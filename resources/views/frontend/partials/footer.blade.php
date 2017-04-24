@@ -85,7 +85,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="login-register" id="loginModal">
 				<ul class="nav nav-tabs">
-                    <li class="active"><a href="#login_tab1" data-toggle="tab">Sign In</a></li>
+                    <li class="active"><a href="#login_tab1" data-toggle="tab" class="first_active">Sign In</a></li>
                     <li><a href="#signup_tab1" data-toggle="tab">Register</a></li>
                     <li class="hide"><a href="#forget_password1" data-toggle="tab">Reset Password</a></li>
 				</ul>
