@@ -39,7 +39,7 @@
 		<div class="col-sm-12 col-md-12">
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title heading-agent col-md-12">View User - {{$user->display_name}}</h3>
+					<h3 class="box-title heading-agent col-md-12">View User - {{$user->first_name}}  {{$user->last_name}}</h3>
 				</div>
 				<div class="box-body">
 				<!--Tabs code starts here-->
@@ -210,7 +210,7 @@
 							</div>
 						</div>
 						<div class="col-md-12">
-						<h2 class="heading-agent">{{$user->display_name}} Reviews </h2>
+						<h2 class="heading-agent">{{$user->first_name}}  {{$user->last_name}} Reviews </h2>
 						<span> No Reviews Found </span>
 						<!--sony adding rating stars--->
 						
