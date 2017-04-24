@@ -68,7 +68,7 @@
     min-width: 100px;
     display: inline-block;
     float: left;
-    font-family: "Raleway";
+	font-family: Proxima-Nova-Regular;
     font-size: 18px;
     color: #000000;
     background-color: transparent;
@@ -78,7 +78,7 @@
     text-align: center;
 }
 
-.drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
+/* .drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
     width: 100px;
     height: 100px;
     border-radius: 8px 8px 8px 8px;
@@ -87,6 +87,21 @@
     background-size: cover;
     margin: 0 auto;
     border: 1px solid #e1e1e1;
+} */
+.drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
+    width: 195px;
+    height: 295px;
+    border-radius: 8px 8px 8px 8px;
+    -moz-border-radius: 8px 8px 8px 8px;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    background-size: cover;
+    margin: 0 auto;
+    border: 1px solid #e1e1e1;
+    top: 57px !important;
+    position: absolute;
+    left: 1px;
+    bottom: 0px;
+    right: 0px;
 }
 
 .drop_uploader.drop_zone ul.files.thumb li div.thumbnail .du_hover_layer {

@@ -61,7 +61,7 @@
 				<span id="fileselector">
 					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
 						<input id="upload-file-selector" type="file">
-						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> Up load More
+						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> Upload More
 					</label>
 				</span>
 			</form>
