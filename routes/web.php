@@ -92,6 +92,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	    Route::any('/customer-delete/{id}', 'UserController@customerDelete');
 	    Route::any('/status/change', 'UserController@changeUserStatus');
 	    Route::any('/customer/emailValidation', array('as' => '','uses' => 'UserController@EmailNameCheck'));
+	    Route::post('user/csvExport', array('as' => '','uses' => 'UserController@userCsvExport'));
 	    /****************User Management End Here***************************/
 
 		/****************Costumes Management Code Starts Here*********************/
