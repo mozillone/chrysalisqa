@@ -113,8 +113,8 @@
 								<div class="media"> 
 									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_2_icon.png')}}" data-holder-rendered="true" > </a> 
 									</div> 
-									<div class="media-body"> <h4 class="media-heading">STEP 1</h4>
-										<p>Sell those old costumes with Chrysalis</p> 
+									<div class="media-body"> <h4 class="media-heading">STEP 2</h4>
+										<p>Get Cash or Store Credit</p> 
 									</div> 
 								</div>
 							</div>
@@ -123,8 +123,8 @@
 								<div class="media"> 
 									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_3_icon.png')}}" data-holder-rendered="true" > </a> 
 									</div> 
-									<div class="media-body"> <h4 class="media-heading">STEP 1</h4>
-										<p>Sell those old costumes with Chrysalis</p> 
+									<div class="media-body"> <h4 class="media-heading">STEP 3</h4>
+										<p>Buy another costume!</p> 
 									</div> 
 								</div>
 							</div> 

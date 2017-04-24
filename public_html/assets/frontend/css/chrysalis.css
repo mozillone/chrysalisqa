@@ -169,8 +169,8 @@ ul.nav.navbar-nav.mid_nav li a.sell-btn{font-family: Proxima-Nova-Extrabold;back
 .mega-dropdown{position:static!important;width:100%;}
 .mega-dropdown-menu{padding:20px 0px;width:auto;left:inherit;box-shadow:none;-webkit-box-shadow:none;}
 .steps-slider-div .carousel-control{color:#a0a0a0;font-weight:100;text-shadow:none;}
-.mega-dropdown-menu:before{content:"";border-bottom:12px solid #60c5ac;border-right:10px solid transparent;border-left:10px solid transparent;position:absolute;top:-15px;left:23px;z-index:10;}
-.mega-dropdown-menu:after{content:"";border-bottom:12px solid #60c5ac;border-right:10px solid transparent;border-left:10px solid transparent;position:absolute;top:-15px;left:21px;z-index:8;}
+.mega-dropdown-menu:before{content:"";border-bottom:12px solid #60c5ac;border-right:10px solid transparent;border-left:10px solid transparent;position:absolute;top:-15px;left:50%;z-index:10;}
+.mega-dropdown-menu:after{content:"";border-bottom:12px solid #60c5ac;border-right:10px solid transparent;border-left:10px solid transparent;position:absolute;top:-15px;left:50%;z-index:8;}
 .quick_links:before{width:2px;height:190px;background:#f0f0f0;position:absolute;content:"";left:-18px;}
 .main_menu li.dropdown.mega-dropdown.open ul.dropdown-menu.mega-dropdown-menu.row li a{	font-family: Proxima-Nova-Semibold;margin-bottom:5px; font-size:16px; color:#020202;}
 .container.main_menu ul li:last-child.dropdown.mega-dropdown.open ul.dropdown-menu.mega-dropdown-menu:before{right:113px!important;left:inherit;}
@@ -240,8 +240,8 @@ section.footer h3 {font-family: Proxima-Nova-Extrabold;color: #000;font-size: 16
 .footer h5{color:#020202;font-size:16px;font-family: Proxima-Nova-Extrabold;  }
 .footer_head.mid_ft h5 {    margin-bottom: 28px;}
 .quick_links{margin-top:5px;}
-.quick_links ul li{margin-bottom:8px;font-family:Proxima-Nova-Regular;color: #020202;font-size: 16px; font-weight:600;}
-.ft-logo p{font-family:Proxima-Nova-Regular;color:#020202;font-size:16px;padding-right:20px; font-weight:600;}
+.quick_links ul li{margin-bottom:8px;font-family:Proxima-Nova-Regular;color: #020202;font-size: 15px; font-weight:600;}
+.ft-logo p{font-family:Proxima-Nova-Regular;color:#020202;font-size:15px;padding-right:20px; font-weight:600;}
 .quick_links:after{width:2px;height:190px;background:#f0f0f0;position:absolute;content:"";right:32px;top:0px;}
 .btm-footer p{font-size:14px;text-align:center;padding:15px;margin:0px;color:#fff;font-family: Proxima-Nova-Regular;}
 .quick_links h3{font-weight:800;font-size:16px;color:#020202;margin-bottom:30px;}
@@ -930,7 +930,7 @@ p.right_heading span.my_msg { font-weight: 800; }
 .progressbar_main h2 { width: 100%; float: left; font-size: 16px; font-family: Proxima-Nova-Extrabold; margin: 0px 0 30px; color: #323031; }
 #progressbar { width: 100%; float: left; counter-reset: step; clear: both; }
 .progressbar_rm { text-align: center; margin: 30px 0 0px !important; clear: both; }
-#progressbar li { list-style-type: none; color: rgb(0, 0, 0); font-size: 15px; width: 25%; text-align: center; float: left; position: relative; font-family: Proxima-Nova-Semibold; }
+#progressbar li { list-style-type: none; color: rgb(0, 0, 0); font-size: 16px; width: 25%; text-align: center; float: left; position: relative; font-family: Proxima-Nova-Semibold; }
 #progressbar li:before { content: counter(step); counter-increment: step; width: 16px; height: 16px; line-height: 16px; display: block; font-size: 0; color: #333; background: #fff; border-radius: 10px; margin: 0 auto 5px auto; border: 1px solid #e0e0e0; }
 #progressbar li:after { content: ''; width: 100%; height: 6px; background: #dadada; position: absolute; left: -50%; top: 5px; z-index: -1; }
 #progressbar li:first-child:after { content: none; }
@@ -1194,7 +1194,7 @@ span.up_tip {
     color: #fff;
 }
 	.nav-tabs.viewTabs>li>a {font-size: 16px; padding: 20px 10px;}	
-	.home_product_slider h2{line-height: 35px;text-align:left;margin:10px 0px;font-size:18px;font-weight:800;color:#323031;margin-top:40px;border-bottom:1px solid #ccc;padding-bottom:5px;margin-bottom:15px;}
+	.home_product_slider h2{    font-family: Proxima-Nova-Bold;line-height: 35px;text-align:left;margin:10px 0px;font-size:18px;font-weight:800;color:#323031;margin-top:40px;border-bottom:1px solid #ccc;padding-bottom:5px;margin-bottom:15px;}
 .ft-logo {
 margin-bottom: 25px;
 }
@@ -1233,6 +1233,9 @@ display: none;
 .t-cnt{display:none;}
 }
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
+	.footer_head {
+    clear: left;
+}
 	#single_signup_popup .modal-content {
     border-radius: 0px;
     border: none;
@@ -1334,16 +1337,14 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 }
 
 @media screen and (min-width:768px){
-		.upload_hint p {
-    position: relative;
-}
+
 .upload_hint p {
-    font-size: 14px;font-family: Proxima-Nova-Semibold;
+    font-size: 15px;font-family: Proxima-Nova-Semibold;
     color: #EF4A6C;
     position: absolute;
     bottom: 0px;    text-align: center;
-    height: 100%;
-    top: 80px;
+    height: 100%; position: relative;
+    top: 70px;
 }
 .upload_hint p:after {
     width: 140px;
@@ -1352,8 +1353,8 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
     content: "";
     background: url(../../frontend/img/tip-arrow.png);
     background-repeat: no-repeat;
-    right: -40px;
-    top: 140px;
+    right: -57px;
+    top: 170px;
 }
 
 

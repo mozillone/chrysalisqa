@@ -27,11 +27,11 @@
 <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_total_form" id="costume_total_form" method="post">
 <!--Create costume image code starts here-->
 	<div class="upload-photo-blogs" id="upload_div">
-	<p class="prog-txt">Please upload the  <span>the minimum required photos</span> of your costume in front,back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+	<p class="prog-txt">Please upload the  <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
 		<h2 class="prog-head">Upload Photos</h2>
 		<div class="threeblogs">
 		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
-			<p>Tip Respect your costume’s  integrity with crisp, clear photos.Placing them in settings that correspond with their theme can encourage a sale.</p>
+			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos.Placing them in settings that correspond with their theme can encourage a sale.</p>
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-12 ">
 		<h4>01.Front View</h4>
@@ -66,7 +66,7 @@
 				<span id="fileselector">
 					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
 						<input id="upload-file-selector" type="file" name="file4[]" multiple>
-						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> Up load More
+						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> Upload More
 					</label>
 				</span>
 			<!-- </form> -->

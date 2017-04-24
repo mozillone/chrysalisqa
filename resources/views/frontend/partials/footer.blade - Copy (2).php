@@ -29,19 +29,19 @@
 			<div class="container">
 				<div class="row">
 				<div class="footer_links" id="footer-middle">
-					<div class="col-md-4 col-sm-12 co-xs-12 ft-logo">
+					<div class="col-md-4 col-sm-4 co-xs-12 ft-logo">
 					<div class="footer_head ">
 						
 						<img class="img-responsive" src="{{asset('/assets/frontend/img/brand.png')}}">
-						<h5>OUR MISSION <i class="fa fa-plus pull-right hidden-lg  hidden-md"></i></h5>
+						<h5>OUR MISSION <i class="fa fa-plus pull-right hidden-lg hidden-sm hidden-md"></i></h5>
 						<p style="display: none;">Revolutionize the costume industry, by giving people access to more affordable, environmentally friendly costumes. More on our mission here.</p>
 						
 					</div>
 					</div>
 
-					<div class="col-md-4 co-sm-12 co-xs-12 quick_links">
+					<div class="col-md-4 co-sm-4 co-xs-12 quick_links">
 					<div class="footer_head mid_ft ">
-						<h5>QUICK LINKS <i class="fa fa-plus pull-right hidden-lg hidden-md"></i></h5>
+						<h5>QUICK LINKS <i class="fa fa-plus pull-right hidden-lg hidden-sm hidden-md"></i></h5>
 						<ul class="col-md-6 col-sm-6 col-xs-12">
 							<li>About</li>
 							<li>How It Works</li>
@@ -57,9 +57,9 @@
 					</div>
 					</div>
 
-					<div class="col-md-4 co-sm-12 co-xs-12 app_img">
+					<div class="col-md-4 co-sm-4 co-xs-12 app_img">
 					<div class="footer_head ">
-						<h5><span class="hidden-lg hidden-md">THE CHRYSALIS APP</span> <i class="fa fa-plus pull-right hidden-lg  hidden-md"></i></h5>
+						<h5><span class="hidden-lg hidden-sm hidden-md">THE CHRYSALIS APP</span> <i class="fa fa-plus pull-right hidden-lg hidden-sm hidden-md"></i></h5>
 						<img class="img-responsive" src="{{asset('/assets/frontend/img/app-img.png')}}">
 						</div>
 						</div>
