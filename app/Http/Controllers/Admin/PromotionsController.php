@@ -51,10 +51,10 @@ class PromotionsController extends Controller
             $where.=' AND prom.name LIKE "%'.$req['search']['name'].'%"';
           }
           if(!empty($req['search']['from_date']) ){
-            $where.=' AND  prom.date_start >="'.date('Y-m-d 00:00:01',strtotime($req['search']['from_date'])).'"';
+            $where.=' AND  prom.date_start >="'.date('Y-m-d',strtotime($req['search']['from_date'])).'"';
           }
           if(!empty($req['search']['date_end']) ){
-              $where.=' AND  prom.date_end  <= "'.date('Y-m-d 23:59:59',strtotime($req['search']['date_end'])).'"';
+              $where.=' AND  prom.date_end  <= "'.date('Y-m-d',strtotime($req['search']['date_end'])).'"';
           }
           if(!empty($req['search']['cats'])){
               $res=Category::getCategoryInfo($req['search']['cats']);
@@ -67,8 +67,8 @@ class PromotionsController extends Controller
           if(!empty($req['search']['costumes'])){
               $having.=' AND FIND_IN_SET('.$req['search']['costumes'].',costumes)> 0';
           }
-        }
-         $promotions = DB::select("SELECT prom.coupon_id, prom.name, prom.code, prom.type, prom.discount, DATE_FORMAT(prom.date_start,'%m/%d/%Y %h:%i %p') as datestart,DATE_FORMAT(prom.date_end,'%m/%d/%Y %h:%i %p') as dateend , prom.uses_total,prom.status,GROUP_CONCAT(DISTINCT(coup.costume_id) SEPARATOR ',') as costumes,GROUP_CONCAT(DISTINCT(cats.category_id) SEPARATOR ',') as cats FROM cc_promotion_coupon as prom LEFT JOIN cc_coupon_costumes as coup on coup.coupon_id=prom.coupon_id LEFT JOIN cc_coupon_category as cats on cats.coupon_id=prom.coupon_id ".$where." group by prom.coupon_id ".$having."");
+          }
+         $promotions = DB::select("SELECT prom.coupon_id, prom.name, prom.code, prom.type, prom.discount, DATE_FORMAT(prom.date_start,'%m/%d/%Y') as datestart,DATE_FORMAT(prom.date_end,'%m/%d/%Y') as dateend , prom.uses_total,prom.status,GROUP_CONCAT(DISTINCT(coup.costume_id) SEPARATOR ',') as costumes,GROUP_CONCAT(DISTINCT(cats.category_id) SEPARATOR ',') as cats FROM cc_promotion_coupon as prom LEFT JOIN cc_coupon_costumes as coup on coup.coupon_id=prom.coupon_id LEFT JOIN cc_coupon_category as cats on cats.coupon_id=prom.coupon_id ".$where." group by prom.coupon_id ".$having."");
         return response()->success(compact('promotions'));
    }
    public function createPromotions(Request $request)
