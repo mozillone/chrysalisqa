@@ -42,10 +42,7 @@ $(function(){
 
 	
 	$("#forgetpopup_password").validate();
-	$("#forgotpop_email").rules("add", {required:true,email: true,remote: {url: "/forgot/emailVerification",type: "post"},messages: {
-		email: "Enter a valid  user email",
-	remote: "This email is already taken."
-	  }});
+	$("#forgotpop_email").rules("add", {required:true,email: true});
 	
     $(".mobile-plus").click(function(){
 	$(this).toggleClass("mobile-minus");	
