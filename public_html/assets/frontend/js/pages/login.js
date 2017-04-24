@@ -26,10 +26,7 @@ if (url.match('#')) {
 	  }});
 	
 	$("#forgotpassword").validate();
-	$("#forgot_email").rules("add", {required:true,email: true,remote: {url: "/forgot/emailVerification",type: "post"},messages: {
-		email: "Enter a valid  user email",
-		remote: "This email is already taken."
-	  }});
+	$("#forgot_email").rules("add", {required:true,email: true});
 
 
 
