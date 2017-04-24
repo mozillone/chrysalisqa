@@ -21,7 +21,7 @@
 								<img class="img-responsive" src="../assets/frontend/img/upload-icon.png">
 									<h2>Upload Your Costume!</h2>
 									<p>Tell us why your costume is so<br> special? Sell it Yourself!</p>
-									<a href="/costume/createone">UPLOAD MY COSTUME</a>
+									<a href="/costume/createtwo">UPLOAD MY COSTUME</a>
 								</div>
 								
 							</div>

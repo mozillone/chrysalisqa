@@ -230,7 +230,7 @@ color:#323031;font-size:18px;font-weight:600;}
 .mid_nav form.navbar-form.navbar-left i.fa.fa-search{position:absolute;margin-left:12px;top:12px;}
 .social-fallow{padding-right:0px;padding-left:30px;}
 input.btn.btn-custom-3:focus{outline:none;}
-form#register-newsletter input[type="text"]{width:355px;border-radius:2px;font-family:Proxima-Nova-Regular; font-size:15px;box-shadow:none;height:40px;padding-left:15px;border:1px solid #b7b7b7;}
+form#register-newsletter input[type="text"]{width:355px;border-radius:2px;font-family:Proxima-Nova-Regular; font-size:14px;box-shadow:none;height:40px;padding-left:15px;border:1px solid #b7b7b7;}
 .social-icons a img{width:50px;}
 .social-fallow h3{margin:0px;line-height:45px;}
 .social-img{padding-left:0px;}
@@ -333,6 +333,22 @@ ul.box-list3.sizes li.active {
 background: #60c5ac;
 color: #fff;
 }
+/* .text_wrapper:after {
+    content: "\f030";
+    font-family: 'FontAwesome';
+    text-align: center;
+    font-size: 46px;
+       padding: 195px 0px;
+    left: 0;
+    right: 0px;
+}
+.drop_uploader.drop_zone .text a.button.button-primary.file_browse {
+    color: transparent;padding: 105px 0px;
+} */
+.drop_uploader.drop_zone ul.files.thumb{    padding-left: 27px;}
+.drop_uploader.drop_zone ul.files.thumb li div.thumbnail{border-radius:0px !important; border:none !Important}
+.drop_uploader.drop_zone .text{color:transparent !important}
+.drop_uploader.drop_zone{border:none !important}
 .box-list1 li a:hover {
 text-decoration: none;
 }
@@ -1034,12 +1050,12 @@ a.upload_sub_btn.btn.btn-default{ background: #60C4AB; color:#fff;    margin-top
 .upload_castume-blog {
     background: url(../../frontend/img/upload-bg.png);
     background-size: cover;
-    background-position: 50%;min-height: 300px;     text-align: center;    color: #fff;padding-top: 10%;    cursor: pointer;
+    background-position: 50%;min-height: 300px;     text-align: center;    color: #fff;padding-top: 13%;    cursor: pointer;
 }
 .Ship_castume-blog {
     background: url(../../frontend/img/shipus-bg.png);
     background-size: cover;
-    background-position: 50%;min-height: 300px;     text-align: center;    color: #fff;padding-top: 10%;
+    background-position: 50%;min-height: 300px;     text-align: center;    color: #fff;padding-top: 13%;
 }
 .upload_acrdins {
     margin-top: 35px;
@@ -1235,6 +1251,7 @@ display: none;
     margin: 52px auto;
 
 }
+
 #single_signup_popup h2 {
     font-size: 16px;margin-top: 0px;
     border: none;
@@ -1345,6 +1362,10 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+		div#single_signup_popup {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 	.img_layer a img {
     min-height: 180px;
 }
