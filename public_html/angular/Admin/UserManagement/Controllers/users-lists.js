@@ -19,7 +19,7 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					//  DTColumnBuilder.newColumn(null).withTitle('testing').notSortable().renderWith(phone),,
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
-					   DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login'),
+					   DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login Time'),
 					  DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
 					  DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
                       DTColumnBuilder.newColumn(null).withTitle('Status').notSortable().renderWith(activeHtml),,
