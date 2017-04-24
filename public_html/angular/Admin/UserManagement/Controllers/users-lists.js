@@ -13,13 +13,13 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-                      DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
+                      DTColumnBuilder.newColumn('display_name').withTitle('Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					//  DTColumnBuilder.newColumn(null).withTitle('testing').notSortable().renderWith(phone),,
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
-					   DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login'),
+					   DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login Time'),
 					  DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
 					  DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
                       DTColumnBuilder.newColumn(null).withTitle('Status').notSortable().renderWith(activeHtml),,

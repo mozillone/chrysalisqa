@@ -78,7 +78,7 @@ class UserController extends Controller
     {
         $req=$request->all();
 		$userslist=DB::table('users as user')
-		->select('user.id','user.display_name','user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as date_format'),DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as lastlogin'))
+		->select('user.id',DB::Raw("CONCAT(cc_user.first_name,' ',cc_user.last_name) as display_name")  ,'user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as date_format'),DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as lastlogin'))
 		->orderby('user.created_at','DESC')
 		->where('user.role_id','!=','1');
 		if(!empty($req['search'])){
@@ -151,11 +151,11 @@ class UserController extends Controller
 			
 			
 			if($user->save()){
-				Session::flash('success', 'Customer created successfully');
+				Session::flash('success', 'User created successfully');
 					return Redirect::to('customers-list');
 				}else{
 					$message = array();
-					Session::flash('error', 'Customer not created successfully.Database error');
+					Session::flash('error', 'User not created successfully.Database error');
 					return Redirect::back();
 				} 
 	}
@@ -197,7 +197,7 @@ class UserController extends Controller
 			$userData['password'] =  Hash::make($req['password']);
 		}
 		$affectedRows = User::where('id', '=', $req['user_id'])->update($userData);
-		Session::flash('success', 'Customer Updated  successfully');
+		Session::flash('success', 'User is updated  successfully');
 		return Redirect::to('customers-list');
 	
 	
@@ -209,10 +209,10 @@ class UserController extends Controller
       $apiId=$data['api_customer_id'];
       $res = User::where('id',$id)->delete();
       if($res){
-      	Session::flash('success', 'Customer Deleted Successfully');
+      	Session::flash('success', 'User is Deleted Successfully');
         return Redirect::back();
       }else{
-        Session::flash('error', 'Customer is deleted.Database error occured');
+        Session::flash('error', 'User is deleted.Database error occured');
         return Redirect::back();
       }
         
