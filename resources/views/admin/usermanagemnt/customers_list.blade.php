@@ -59,7 +59,7 @@
                       <!--<td><input type="text" class="form-control" ng-model="search.id" name="id" placeholder=""></td>-->
                       <td><input type="text" class="form-control" ng-model="search.name" name="name" placeholder=""></td>
 					  <td><input type="text" class="form-control" ng-model="search.email" name="email" placeholder=""></td>
-					  <td><input type="text" class="form-control" ng-model="search.phone" name="phone" placeholder="" id="phone"></td>
+					  <td><input type="text" class="form-control" ng-model="search.phone" name="phone" placeholder="" id="phone_number"></td>
                       <td>
                         <select name="count" class="form-control" id="count" ng-model="search.count" >
                           <option value=""> All </option>  
