@@ -82,7 +82,7 @@
 <!-- </div> -->
 <div id="costume_description">
 
-<p class="prog-txt">please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
+<p class="prog-txt">Please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
 <h2 class="prog-head">Costume Description</h2>
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_description_form" id="costume_description_form" method="post"> -->	
 
