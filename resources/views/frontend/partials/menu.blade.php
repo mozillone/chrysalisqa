@@ -34,6 +34,7 @@
 									if (isset(Auth::user()->id) && !empty(Auth::user()->id)) { ?>
 									<li><a href="{{URL::to('costume/sell-a-costume')}}" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
 
+						
 									<?php }  else{ ?>
 									<li><a href="{{URL::to('login')}}" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
 									<?php }?>
