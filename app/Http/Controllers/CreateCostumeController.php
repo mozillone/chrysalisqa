@@ -63,7 +63,7 @@ class CreateCostumeController  extends Controller {
 		->where('attribute_id','=','14')->get();
 		$returnpolicy=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','15')->get();
-		$charities=DB::table('charities')->select('id as id','name as name','image as image')->get();
+		$charities=DB::table('charities')->select('id as id','name as name','image as image')->where('status','1')->get();
 		return view('frontend.costumes.costume_create_two',compact('categories','bodyanddimensions','bodydimensions_val','body_height_ft',
 		'body_height_in','body_weight_lbs','body_chest_in','body_waist_lbs','cosplayone','cosplaytwo','cosplaythree','cosplayfour',
 		'cosplayfive','cosplayone_values','cosplaytwo_values','cosplaythree_values','cosplayfour_values','cosplayfive_values',
@@ -381,8 +381,8 @@ class CreateCostumeController  extends Controller {
 		  	$fashion=$req['fashion'];
 		  	$activity=$req['activity'];
 		  	$makecostume=$req['make_costume'];
-		  	$filmquality=$req['fimquality'];
-		  	$makecostumetime = $req['make-costume-time'];
+		  	//$filmquality=$req['fimquality'];
+		  	//$makecostumetime = $req['make-costume-time'];
 		  	$description = $req['description'];
 		  	$funfacts = $req['funfcats'];
 		  	$faq = $req['faq'];
@@ -522,6 +522,73 @@ class CreateCostumeController  extends Controller {
 		/*****************************Attributes insertion code starts here****/
 		/*
 		|Table:costume_attribute_options
+		|Make a costume if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->make_costume_time) && !empty($request->make_costume_time)) {
+			$make_costume_time=array('costume_id'=>$insert_costume,
+			'attribute_id'=>'29',
+			'attribute_option_value_id'=>"0",
+			'attribute_option_value'=>$request->make_costume_time,
+			);
+			$make_costume_timeinsert=DB::table('costume_attribute_options')->insert($make_costume_time);
+		}
+		/*
+		|Table:costume_attribute_options
+		|Cosplay if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->cosplayplay_yes_opt) && !empty($request->cosplayplay_yes_opt)) {
+			$get_attr_opt_value_id = DB::table('attribute_options')->where('option_value',$request->cosplayplay_yes_opt)->first(['option_id']);
+			$cosplay_yes=array('costume_id'=>$insert_costume,
+			'attribute_id'=>'25',
+			'attribute_option_value_id'=>$get_attr_opt_value_id->option_id,
+			'attribute_option_value'=>$request->cosplayplay_yes_opt,
+			);
+			$cosplay_yes_insert=DB::table('costume_attribute_options')->insert($cosplay_yes);
+		}
+		/*
+		|Table:costume_attribute_options
+		|Unique fashion if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->uniquefashion_yes_opt) && !empty($request->uniquefashion_yes_opt)) {
+			$get_attr_opt_value_id = DB::table('attribute_options')->where('option_value',$request->uniquefashion_yes_opt)->first(['option_id']);
+			$uniquefashion_yes=array('costume_id'=>$insert_costume,
+			'attribute_id'=>'26',
+			'attribute_option_value_id'=>$get_attr_opt_value_id->option_id,
+			'attribute_option_value'=>$request->uniquefashion_yes_opt,
+			);
+			$uniquefashion_insert=DB::table('costume_attribute_options')->insert($uniquefashion_yes);
+		}
+		/*
+		|Table:costume_attribute_options
+		|Activity fashion if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->activity_yes_opt) && !empty($request->activity_yes_opt)) {
+			$get_attr_opt_value_id = DB::table('attribute_options')->where('option_value',$request->activity_yes_opt)->first(['option_id']);
+			$activity_yes=array('costume_id'=>$insert_costume,
+			'attribute_id'=>'28',
+			'attribute_option_value_id'=>$get_attr_opt_value_id->option_id,
+			'attribute_option_value'=>$request->activity_yes_opt,
+			);
+			$uniquefashion_insert=DB::table('costume_attribute_options')->insert($activity_yes);
+		}
+		/*
+		|Table:costume_attribute_options
 		|Body dimensions (height-ft,height-in,ewight-lbs,waist-lbs,chest-in)
 		|@costume_id
 		|@attribute_id
@@ -603,14 +670,14 @@ class CreateCostumeController  extends Controller {
 			'attribute_option_value'=>$makecostume_value,
 			);
 			$user_costume_insert=DB::table('costume_attribute_options')->insert($user_costume);
-			//film Quality
+			/*//film Quality
 			switch($filmquality){ case '32': $filmquality_value="yes"; break; case '33': $filmquality_value="No"; break; }
 			$film_quality=array('costume_id'=>$insert_costume,
 			'attribute_id'=>'21',
 			'attribute_option_value_id'=>$filmquality,
 			'attribute_option_value'=>$filmquality_value,
 			);
-			$filmquality_insert=DB::table('costume_attribute_options')->insert($film_quality);
+			$filmquality_insert=DB::table('costume_attribute_options')->insert($film_quality);*/
 
 			/*
 		|Table:costume_attribute_options
@@ -699,20 +766,22 @@ class CreateCostumeController  extends Controller {
 				'attribute_option_value_id'=>0,
 				'attribute_option_value'=>$length,
 				);
+			$length_db=DB::table('costume_attribute_options')->insert($length);
 			//width
 			$width=array('costume_id'=>$costume_id,
 				'attribute_id'=>'23',
 				'attribute_option_value_id'=>0,
 				'attribute_option_value'=>$width,
 				);
+			$width_db=DB::table('costume_attribute_options')->insert($width);
 			//height
 			$height=array('costume_id'=>$costume_id,
 				'attribute_id'=>'24',
 				'attribute_option_value_id'=>0,
 				'attribute_option_value'=>$height,
 				);
+			$width_db=DB::table('costume_attribute_options')->insert($height);
 				
-			$shipping_quality=DB::table('costume_attribute_options')->insert($shipping_val);
 
 			//Type
 			switch($type){ case '22': $typevl="Postage (for thin envelope)"; break; case '23': $typevl="Postage (for thick envelope)"; break; }
@@ -786,6 +855,7 @@ class CreateCostumeController  extends Controller {
 				$organzation_name=$req['organzation_name'];
 				$arrayName = array('name' => $organzation_name,
 					'suggested_by'=>$userid,
+					'status'=>'0',
 					'created_at'=>date('y-m-d H:i:s'),
 					'updated_at'=>date('y-m-d H:i:s'),
 					 );
