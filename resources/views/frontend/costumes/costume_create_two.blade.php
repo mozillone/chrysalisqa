@@ -93,7 +93,7 @@
 <p class="form-rms-que">01. Name Your Costume!*</p>
 <p class="form-rms-input"><input type="text" name="costume_name" id="costume_name" autocomplete="off" tab-index="1" placeholder=""></p>
 <span id="costumename_error" style="color:red"></span>
-<p class="form-rms-small"><span>Give Your listing a descriptive title</span> <br/>Example: "Men's Medium Spiderman<br/>Costume in Red</p>
+<p class="form-rms-small"><span>Give Your listing a descriptive title.</span> <br/>Example: "Men's Medium Spiderman<br/>Costume in Red"</p>
 </div>
 <!--costume name ends starts here-->
 <!--Catgeory code starts here-->
@@ -197,9 +197,9 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <p class="form-rms-dim form-rms-he"><?php echo ucfirst($heading); ?> <br/> <span class="form-rms-he1">
  <input type="{{$bodyanddimensions->code}}" name="{{$body_height_ft->value}}" id="{{$body_height_ft->value}}"> <span><?php echo $heading_value;?></span>
  <input type="{{$bodyanddimensions->code}}" class="form-rms-dt" name="{{$body_height_in->value}}" id="{{$body_height_in->value}}" > <span><?php echo $heading_value_in; ?></span></span></p>
-<p class="form-rms-dim"><?php echo $heading_weight_value; ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}"> <span><?php echo $heading_weight_value_lbs;?></span></span></p>
-<p class="form-rms-dim"><?php echo $heading_chest_value; ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" > <span><?php echo $heading_chest_value_in; ?> </span></span></p>
-<p class="form-rms-dim"><?php echo $heading_waist_value; ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_waist_lbs->value}}" id="{{$body_waist_lbs->value}}"> <span><?php echo $heading_waist_value_lbs; ?></span></span></p>
+<p class="form-rms-dim"><?php echo ucfirst($heading_weight_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}"> <span><?php echo $heading_weight_value_lbs;?></span></span></p>
+<p class="form-rms-dim"><?php echo ucfirst($heading_chest_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" > <span><?php echo $heading_chest_value_in; ?> </span></span></p>
+<p class="form-rms-dim"><?php echo ucfirst($heading_waist_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_waist_lbs->value}}" id="{{$body_waist_lbs->value}}"> <span><?php echo $heading_waist_value_lbs; ?></span></span></p>
 <span id="bodydimensionerror"  style="color:red"></span>
 </div>
 </div>
@@ -361,7 +361,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 @endforeach
 
 
-<p class="form-rms-small" id="mention_hours" style="display:none" >If Yes,how long did it take?</p>
+<p class="form-rms-small" id="mention_hours" style="display:none" >If Yes, how long did it take?</p>
 <p class="ct1-rms-rel" id="mention_hours_input" style="display:none"><input type="text" name="make_costume_time" class="input-rm100"> <span>hours<span>
 </p>
 <span id="usercostumeerror" style="color:red"></span>
@@ -573,6 +573,7 @@ $heading_value=$headingexplode[1];
 
 <div class="col-md-6">
 <div class="form-rms">
+
 <p class="form-rms-que form-rms-que1">04. Donate a Portion to Charity</p>
 <p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However, if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
 <p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis Terms & Conditions.</p>
