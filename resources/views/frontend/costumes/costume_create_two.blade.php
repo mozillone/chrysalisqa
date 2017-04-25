@@ -530,7 +530,7 @@ $heading_value=$headingexplode[1];
 </div>
 <div class="prog-form-rm" id="preferences_div">
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
-<p class="prog-txt">you're almost done! just a Few more quetions.</p>
+<p class="prog-txt">You're almost done! just a Few more quetions.</p>
 <h2 class="prog-head">Review Your Preferences</h2>
 <div class="col-md-6">
 
@@ -774,7 +774,7 @@ $(document).ready(function()
 			$('#costumename_error').html('Enter Costume Name');
 			str=false;
 		}
-		if(heightft==''){
+		/*if(heightft==''){
 			$('#height-ft').css('border','1px solid red');
 			$('#bodydimensionerror').html('Enter Body & Dimensions');
 			str=false;
@@ -798,7 +798,7 @@ $(document).ready(function()
 			$('#waist-lbs').css('border','1px solid red');
 			$('#bodydimensionerror').html('Enter Body & Dimensions');
 			str=false;
-		}
+		}*/
 		if(category==''){
 			$('#categoryname').css('border','1px solid red');
 			$('#categoryerror').html('Select Category');
