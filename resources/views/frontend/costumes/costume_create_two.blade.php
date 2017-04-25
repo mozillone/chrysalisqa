@@ -381,6 +381,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="form-rms">
 <p class="form-rms-que form-rms-que1"><span>12. Describe your Costume:</span> Including accessories*</p>
 <p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="description" id="description" maxlength="600" ></textarea></p>
+<span id="max_length_char"></span>
 <span id="descriptionerror" style="color:red"></span>
 <p class="form-rms-sm1">(600 max characters)</p>
 </div>
@@ -388,6 +389,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="form-rms">
 <p class="form-rms-que form-rms-que1"><span>13. Fun Fact:</span> A little backstory to your costume and the adventures it has experienced*</p>
 <p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="funfcats" id="funfacts" maxlength="600" ></textarea></p>
+<span id="max_length_char"></span>
 <span id="facterror" style="color:red"></span>
 <p class="form-rms-sm1">(600 max characters)</p>
 </div>
@@ -395,6 +397,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="form-rms">
 <p class="form-rms-que form-rms-que1"><span>14. FAQ </span>Create your own costume Frequently Asked Questions to avoid an overload of questions in your inbox!*</p>
 <p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="faq" id="faq" maxlength="600" ></textarea></p>
+<span id="max_length_char"></span>
 <span id="faqerror" style="color:red"></span>
 <p class="form-rms-sm1">(600 max characters)</p>
 </div>
@@ -675,8 +678,12 @@ $(document).ready(function()
             this.value = val.substring(0, val.length - 1);
         }
     });
+	$('#description,#funfacts,#faq').on('keyup',function(){
+	      var input = $(this);
+	      $('#max_length_char').text(input.val().length + " chars");
+	});
 	$('#upload_div').css('display','block');
-	$('#costume_description').css('display','none');
+	$('#costume_description').css('display','block');
 	$('#pricing_div').css('display','none');
 	$('#preferences_div').css('display','none');
 	$( "#7" ).click(function() {
