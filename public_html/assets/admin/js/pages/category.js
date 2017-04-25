@@ -82,11 +82,17 @@ $('.add-prod').click(function(){
 	var product_id=$('#products_id').val();
 	if(jQuery.inArray(product_id,products)==-1 || products.length==0){
 	products.push(product_id);
-  $('#products_list').append('<input type="text" value="'+product_id+'" name="costume_list" id="costume_list"/>');
-	$('.assigned-products').append('<tr><td>'+product_name+'</td><td>'+sku_no+'</td><td>$'+price+'</td><td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='+product_id+'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>')
+ 	$('.assigned-products').append('<tr><td>'+product_name+'</td><td>'+sku_no+'</td><td>$'+price+'</td><td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='+product_id+'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>')
 	$('#products_list').val("");
 	}
 });
+$('form').submit(function(eventObj) {
+       $.each(products,function(i,value){
+     $('form').append('<input type="hidden" value="'+value+'" name="costume_list[]"/> ');
+   });
+    return true;
+});
+
 $(document).on('click','.remove_cost',function(){
 	var productid=$(this).attr('data-cost-id');
   products.splice( $.inArray(productid, products), 1 );

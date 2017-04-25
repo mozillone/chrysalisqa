@@ -168,8 +168,8 @@ class Category extends Authenticatable
         Site_model::update_data('category',$category,$cond);
         $this->urlRewrites($req['category_id'],"update");
         if(isset($req['costume_list']) && $parent_id!="0"){
-            Site_model::delete_single('costume_to_category',$cond);
-            foreach($req['costume_list'] as $key=>$value){
+             Site_model::delete_single('costume_to_category',$cond);
+            foreach(array_unique($req['costume_list']) as $key=>$value){
                 $category_coustume=array('costume_id'=>$value,
                        'category_id'=>$req['category_id'],
                        'sort_no'=>$key,
