@@ -392,7 +392,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 </div>
 
 <div class="form-rms">
-<p class="form-rms-que form-rms-que1"><span>14. FAQ & </span>Create your own costume Frequently Asked Questions to avoid an overload of questions in your inbox!*</p>
+<p class="form-rms-que form-rms-que1"><span>14. FAQ </span>Create your own costume Frequently Asked Questions to avoid an overload of questions in your inbox!*</p>
 <p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="faq" id="faq" maxlength="600" ></textarea></p>
 <span id="faqerror" style="color:red"></span>
 <p class="form-rms-sm1">(600 max characters)</p>

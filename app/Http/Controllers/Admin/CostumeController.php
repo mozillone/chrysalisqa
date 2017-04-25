@@ -159,9 +159,9 @@ class CostumeController extends Controller
 	*/
 	public function insertCostume(Request $request){
 	  /****Inserting costume codes starts here***/
-	  /*echo "<pre>";
-	  print_r($request->all());
-	  die;*/
+		  /*echo "<pre>";
+		  print_r($request->all());
+		  die;*/
 	  $response=array();
 	  $req=$request->all();
 	  $userid=Auth::user()->id;
@@ -327,6 +327,22 @@ class CostumeController extends Controller
 			'attribute_option_value'=>$request->activity_yes_opt,
 			);
 			$uniquefashion_insert=DB::table('costume_attribute_options')->insert($activity_yes);
+		}
+		/*
+		|Table:costume_attribute_options
+		|Make a costume if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->make_costume_time) && !empty($request->make_costume_time)) {
+			$make_costume_time=array('costume_id'=>$costume_id,
+			'attribute_id'=>'29',
+			'attribute_option_value_id'=>"0",
+			'attribute_option_value'=>$request->make_costume_time,
+			);
+			$make_costume_timeinsert=DB::table('costume_attribute_options')->insert($make_costume_time);
 		}
 	/*
 	|Table:costume_attribute_options

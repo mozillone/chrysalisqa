@@ -414,9 +414,12 @@
 <span class="req-field" ></span></label>
 											<br><br>
 											@foreach($cosplay_four_value as $index=>$cosplayfourvalues)
-											<input type="{{$cosplay_four->type}}"  <?php if($cosplayfourvalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}"  required>&nbsp;{{$cosplayfourvalues->option_value}}&nbsp;
+											<input type="{{$cosplay_four->type}}"  <?php if($cosplayfourvalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}" onclick="make_costume_yes({{$cosplayfourvalues->option_id}})"  required>&nbsp;{{$cosplayfourvalues->option_value}}&nbsp;
 											
 											@endforeach
+											<p class="form-rms-small" id="mention_hours" style="display:none" >If Yes,how long did it take?</p>
+											<p class="ct1-rms-rel" id="mention_hours_input" style="display:none"><input type="text" name="make_costume_time" class="input-rm100"> <span>hours<span>
+											</p>
 										</div>
 						       </div>
 							   <div class="form-group has-feedback" >
@@ -492,7 +495,7 @@
 									</div>
                                 </div>
 								<div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">Quantity<span class="req-field" ></span></label>
+                                    <label for="inputEmail3" class="control-label">Quantity*<span class="req-field" ></span></label>
                                         <select class="form-control" name="quantity" id="quantity">
 										<option value="">Select Quantity</option>
 										<option value="1">1</option>
@@ -772,6 +775,16 @@
 			$('#activity_yes_div').css('display','block');
 		}else{
 			$('#activity_yes_div').css('display','none');
+		}
+	}
+	function make_costume_yes(id){
+		if (id == 30) {
+			$('#mention_hours').css('display','block');
+			$('#mention_hours_input').css('display','block');
+		}else{
+			$('#mention_hours').css('display','none');
+			$('#mention_hours_input').css('display','none');
+			$('#mention_hours_input').val('');
 		}
 	}
 	
