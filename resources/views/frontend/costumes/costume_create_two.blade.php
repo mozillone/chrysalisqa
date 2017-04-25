@@ -81,7 +81,11 @@
 
 <!-- </div> -->
 <div id="costume_description">
+<<<<<<< HEAD
 <p class="prog-txt">Please fill in the following fields  <span>as accurate as possible</span> to prevent disputes.</p>
+=======
+<p class="prog-txt">please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
+>>>>>>> 337a616814ec0c43d5b654ec7639d62e55be244c
 <h2 class="prog-head">Costume Description</h2>
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_description_form" id="costume_description_form" method="post"> -->	
 
@@ -170,7 +174,7 @@
 
 
 <div class="form-rms">
-<p class="form-rms-que">07. {{$bodyanddimensions->label}}*</p>
+<p class="form-rms-que">07. {{$bodyanddimensions->label}} (Optional)</p>
 <div class="form-rms-input">
 <?php
 $value_height=$body_height_ft->value;
@@ -212,6 +216,43 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 @endforeach
 </p>
 <span id="cosplayerror" style="color:red"></span>
+<div class="row" id="cosplayplay_yes_div" style="display: none;">
+ <div class="col-md-12" >
+      <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Anime/Manga">Anime/Manga</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Sci-Fi">Sci-Fi</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Cosmic/Superhero">Cosmic/Superhero</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Video Games">Video Games</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Furries">Furries</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Other">Other</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Film & Tv">Film & Tv</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Mecha">Mecha</label>
+   </div>
+   </div>
+   <span id="cosplay_yeserror" style="color:red"></span>
+</div>
 </div>
 
 <div class="form-rms">
@@ -222,6 +263,49 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 @endforeach
 </p>
 <span id="uniquefashionerror" style="color:red"></span>
+<div class="row" id="uniquefashion_yes_div" style="display: none;">
+ <div class="col-md-12" >
+      <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Cyberpunk">Cyberpunk</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Lolita">Lolita</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Dystopain">Dystopain</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Mori kei">Mori kei</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Goth">Goth</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Fari kei">Fari kei</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Steampunk">Steampunk</label>
+   </div>
+   <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Visual kei">Visual kei</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Streetwear">Streetwear</label>
+   </div>
+   <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Other">Other</label>
+   </div>
+   </div>
+   <span id="uniquefashion_yeserror" style="color:red"></span>
+</div>
 </div>
 
 </div>
@@ -236,6 +320,40 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 @endforeach
 </p>
 <span id="activityerror" style="color:red"></span>
+<div class="row" id="activity_yes_div" style="display: none;">
+ <div class="col-md-12" >
+      <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Circus">Circus</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Theatre">Theatre</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Historical Reenactments">Historical Reenactments</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Music Videos">Music Videos</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="LARP">LARP</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Masquerade">Masquerade</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Medieval/Renaissance Fairs">Medieval/Renaissance Fairs</label>
+   </div>
+   </div>
+   <span id="activity_yeserror" style="color:red"></span>
+</div>
 </div>
 
 <div class="form-rms">
@@ -246,13 +364,13 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 @endforeach
 
 
-<p class="form-rms-small" id="mention_hours" >If Yes,how long did it take?</p>
-<p class="ct1-rms-rel" id="mention_hours_input" style="display:none"><input type="text" name="make-costume-time" class="input-rm100"> <span>hours<span>
+<p class="form-rms-small" id="mention_hours" style="display:none" >If Yes,how long did it take?</p>
+<p class="ct1-rms-rel" id="mention_hours_input" style="display:none"><input type="text" name="make_costume_time" class="input-rm100"> <span>hours<span>
 </p>
 <span id="usercostumeerror" style="color:red"></span>
 
 </div>
-<div class="form-rms">
+<!-- <div class="form-rms">
 <p class="form-rms-que">12. {{$cosplayfive->label}}*</p>
 <p class="form-rms-input">
 @foreach($cosplayfive_values as $index=>$cosplayfive_val)
@@ -260,28 +378,28 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 @endforeach
 </p>
 <span id="qualityerror" style="color:red"></span>
-</div>
+</div> -->
 
 
 <div class="form-rms">
-<p class="form-rms-que form-rms-que1"><span>13. Describe Your Costume:</span> Including Accessories*</p>
-<p class="form-rms-input"><textarea placeholder="please be as detailed as possible!" name="description" id="description"></textarea></p>
+<p class="form-rms-que form-rms-que1"><span>12. Describe your Costume:</span> Including Accessories*</p>
+<p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="description" id="description" maxlength="600" ></textarea></p>
 <span id="descriptionerror" style="color:red"></span>
-<p class="form-rms-sm1">(xxx max characters)</p>
+<p class="form-rms-sm1">(600 max characters)</p>
 </div>
 
 <div class="form-rms">
-<p class="form-rms-que form-rms-que1"><span>14. Fun Fact:</span> A little backstory to your costume and the adventures it has experienced*</p>
-<p class="form-rms-input"><textarea placeholder="please be as detailed as possible!" name="funfcats" id="funfacts"></textarea></p>
+<p class="form-rms-que form-rms-que1"><span>13. Fun Fact:</span> A little backstory to your costume and the adventures it has experienced*</p>
+<p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="funfcats" id="funfacts" maxlength="600" ></textarea></p>
 <span id="facterror" style="color:red"></span>
-<p class="form-rms-sm1">(xxx max characters)</p>
+<p class="form-rms-sm1">(600 max characters)</p>
 </div>
 
 <div class="form-rms">
-<p class="form-rms-que form-rms-que1"><span>15. FAQ</span>Create your own costume Frequently Asked Questions to avoid an overload of questions in your inbox!*</p>
-<p class="form-rms-input"><textarea placeholder="please be as detailed as possible!" name="faq" id="faq"></textarea></p>
+<p class="form-rms-que form-rms-que1"><span>14. FAQ </span>Create your own costume Frequently Asked Questions to avoid an overload of questions in your inbox!*</p>
+<p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="faq" id="faq" maxlength="600" ></textarea></p>
 <span id="faqerror" style="color:red"></span>
-<p class="form-rms-sm1">(xxx max characters)</p>
+<p class="form-rms-sm1">(600 max characters)</p>
 </div>
 
 <!--costume three code starts here-->
@@ -348,7 +466,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="col-md-6">
 <h2 class="prog-head">Package Information</h2>
 <div class="form-rms">
-<p class="form-rms-que">01. Weight Of Packaged Item</p>
+<p class="form-rms-que">01. Weight of Packaged Item</p>
 <p class="form-rms-input">
 <select name="packageditems" id="packageditems" >
 <option value="">Select Weight Of Packaged Item</option>
@@ -362,7 +480,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 </div>
 
 <div class="form-rms">
-<p class="form-rms-que">02. Lorem Ipsum is simply dummy</p>
+<p class="form-rms-que">02. Dimensions</p>
 <div class="form-rms-input">
 @foreach($dimensions as $index=>$dimensions)
 <?php
@@ -459,8 +577,8 @@ $heading_value=$headingexplode[1];
 <div class="col-md-6">
 <div class="form-rms">
 <p class="form-rms-que form-rms-que1">04. Donate a Portion to Charity</p>
-<p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However,if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
-<p class="ct3-rms-text">By Choosing to donate,I agree and accept Chrysalis Terms & Conditions.</p>
+<p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However, if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
+<p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis Terms & Conditions.</p>
 <p class="ct3-rms-head">Donation Amount</p>
 <div class="form-rms-input">
 <p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option>10%</option><option>20%</option><option>30%</option></select></p>
@@ -514,6 +632,7 @@ $heading_value=$headingexplode[1];
 <!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
 <script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
 	<!--Getting subcategory list by oonchange-->
+
 	 <script type="text/javascript">
 $('#categoryname').on('change',function(){
 	
@@ -533,7 +652,7 @@ $('#categoryname').on('change',function(){
 $(document).ready(function()
 {
 	//numeric condition
-	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#price,#charity_amount").on("keyup", function(){
+	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height").on("keyup", function(){
         var valid = /^\d{0,3}(\.\d{0,3})?$/.test(this.value),
             val = this.value;
         
@@ -543,12 +662,47 @@ $(document).ready(function()
         }
     });
 
-
+	$("#price,#charity_amount").on("keyup", function(){
+        var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
+            val = this.value;
+        
+        if(!valid){
+            console.log("Invalid input!");
+            this.value = val.substring(0, val.length - 1);
+        }
+    });
 	$('#upload_div').css('display','block');
 	$('#costume_description').css('display','none');
 	$('#pricing_div').css('display','none');
 	$('#preferences_div').css('display','none');
-
+	$( "#7" ).click(function() {
+		$('#cosplayplay_yes_div').css('display','block');
+	});
+	$( "#8" ).click(function() {
+		$('#cosplayplay_yes_div').css('display','none');
+	});
+	$('#9').click(function(){
+		$('#uniquefashion_yes_div').css('display','block');
+	});
+	$('#10').click(function(){
+		$('#uniquefashion_yes_div').css('display','none');
+	});
+	$('#11').click(function(){
+		$('#activity_yes_div').css('display','block');
+	});
+	$('#12').click(function(){
+		$('#activity_yes_div').css('display','none');
+	});
+	$('#30').click(function(){
+		$('#mention_hours').css('display','block');
+		$('#mention_hours_input').css('display','block');
+	});
+	$('#31').click(function(){
+		$('#mention_hours').css('display','none');
+		$('#mention_hours_input').css('display','none');
+		$('#mention_hours_input').val('');
+	});
+	
 	$( "#upload_next" ).click(function(a) {
 
 		a.preventDefault();
@@ -682,11 +836,11 @@ $(document).ready(function()
 			str=false;
 			
 		}
-		if($('input[name=fimquality]:checked').length<=0){
+		/*if($('input[name=fimquality]:checked').length<=0){
 			$('#qualityerror').html('Select Costume Fit For Film Quality OR Not');
 			str=false;
 			
-		}
+		}*/
 		if($('input[name=make_costume]:checked').length<=0){
 			$('#usercostumeerror').html('Select User Make The Costume Or Not');
 			str=false;
@@ -702,7 +856,34 @@ $(document).ready(function()
 			$('#cosplayerror').html('Select Is The Costume Used For Cosplay Or Not');
 			str=false;
 			
-		}	
+		}
+		if ($('input[name=cosplay]:checked').val() == 7) {
+			if ($('input[name=cosplayplay_yes_opt]:checked').length<=0) {
+
+			$('#cosplay_yeserror').html('Select Is The Cosplay Option');
+			str=false;
+			}
+		}
+		if ($('input[name=fashion]:checked').val() == 9) {
+			if ($('input[name=uniquefashion_yes_opt]:checked').length<=0) {
+
+			$('#uniquefashion_yeserror').html('Select Is The Fashion Option');
+			str=false;
+			}
+		}
+		if ($('input[name=activity]:checked').val() == 11) {
+			if ($('input[name=activity_yes_opt]:checked').length<=0) {
+
+			$('#activity_yeserror').html('Select Is The Activity Option');
+			str=false;
+			}
+		}
+		if ($('input[name=make_costume1]:checked').val() == 30) {
+
+			$('#usercostumeerror').html('Enter time');
+			str=false;
+			
+		}
 		if($('input[name=fashion]:checked').length<=0){
 			$('#uniquefashionerror').html('Select Is The Costume Used For Uniquefashion Or Not');
 			str=false;

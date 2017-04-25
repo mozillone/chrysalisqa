@@ -347,6 +347,7 @@ $(function(){
 					reader.onload = function(e) {
 						
 						$('#img-chan').attr('src',e.target.result);
+						$('.pic').after('<span class="remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
 					}
 					image_holder.show();
 					reader.readAsDataURL($(this)[0].files[i]);
@@ -403,6 +404,7 @@ $(function(){
 					reader.onload = function(e) {
 						
 						$('#img-chan1').attr('src',e.target.result);
+
 					}
 					image_holder.show();
 					reader.readAsDataURL($(this)[0].files[i]);
@@ -459,6 +461,7 @@ $(function(){
 					reader.onload = function(e) {
 						
 						$('#img-chan2').attr('src',e.target.result);
+
 					}
 					image_holder.show();
 					reader.readAsDataURL($(this)[0].files[i]);
@@ -496,7 +499,7 @@ $(function(){
 		   	$('input[name="avatar2"]').val("1");
 			}
 		 }); 
-		$(".remove_pic").on("click",function(){
+		$(document).on("click",".remove_pic",function(){
 		$('#img-chan').attr('src',"/img/default.png");
 		$('input[type="file"]').val('');
 		$('input[name="is_removed"]').val("1");

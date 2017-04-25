@@ -8,6 +8,7 @@
 @section('header_styles')
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+
 @stop
 
 {{-- Page content --}}
@@ -78,6 +79,13 @@
                   </tbody>
               </table>
         </div>
+        <div class="row">
+                    <div class="col-md-12">
+                      <div class="pull-right user-list">
+                        <a href="javascript:void(0);" class="btn btn-xs btn-success" id="export" ng-click="usersExportCSV()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download"><i class="fa fa-download"></i></a>
+                       </div>
+                    </div>
+                  </div>
           <div class="table-responsive">
           <table datatable dt-options="dtOptions" dt-columns="dtColumns"
                         class="table table-bordered table-hover table-striped" id="dtTable">
@@ -96,6 +104,7 @@
 
 <script src="{{ asset('angular/Admin/UserManagement/Controllers/users-lists.js') }}"></script>
 <script src="{{ asset('angular/Admin/UserManagement/Services/user_management.js') }}"></script>
+<script src="{{ asset('angular/Admin/ExportCsv/Services/ExportCsv.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 
 @stop

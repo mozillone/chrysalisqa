@@ -232,7 +232,7 @@ class AuthController extends Controller {
     	$data=User::where('activate_hash', '=', $verification) ->get();
     	if(count($data)){
 				User::where('activate_hash', '=', $verification)->update(array('activate_hash' => "",'active' => '1'));
-    			Session::flash('success', 'Your account has been activated, Please login valid details');
+    			Session::flash('success', 'Your account has been activated. You can login into your account now.');
     			return Redirect::to('/login');
     	}
 		else{

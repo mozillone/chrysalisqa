@@ -121,7 +121,7 @@ Charities@parent
                              <span class="fileupload-preview"></span>
                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                           </div>
-                        </div>
+                        </div>  
                 </div>
             </div>
             

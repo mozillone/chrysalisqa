@@ -1,4 +1,4 @@
-app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,UserManagement) 
+app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,UserManagement,Exports) 
 {
 	var vm = this;
     $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -13,7 +13,8 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-                      DTColumnBuilder.newColumn('display_name').withTitle('Name'),
+               DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+                             DTColumnBuilder.newColumn('display_name').withTitle('Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
@@ -27,6 +28,10 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
                       .renderWith(actionsHtml)
                     ], 
     $scope.displayTable = true;
+     function getCheckboxes(data) {
+       return '<input type="checkbox" class="rowsChecked" name="user_checkboxes" value='+data.id+' checked>' 
+    }
+
     function actionsHtml(data, type, full, meta) {
          var records='<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="left" title="" href="/customer-edit/'+data.id+'" data-original-title="Edit"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;<a class="btn btn-xs btn-warning delete" data-toggle="tooltip" data-placement="top" title="" href="javascript:void(0);" data-original-title="Delete" data-id="'+data.id+'"><i class="fa fa-trash"></i></a>';
          return records;
@@ -65,6 +70,35 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
     });
   }
     $scope.status = [{'name':"Active",'value':"1"},{'name':"Inactive",'value':"0"}];
+       $scope.usersExportCSV = function(){
+          
+          var checkboxes = document.getElementsByName("user_checkboxes");
+          
+          var checkboxesChecked = []; 
+          for (var i=0; i<checkboxes.length; i++) { 
+            if (checkboxes[i].checked) {
+              checkboxes[i].value
+              checkboxesChecked.push(checkboxes[i].value); 
+              
+            } 
+          } 
+       
+          Exports.userExportCSV(checkboxesChecked).then(function(response){
+            
+            var fileName = "Users_list.csv";
+              var a = document.createElement("a");
+              document.body.appendChild(a);
+              a.style = "display: none";
+            var file = new Blob([response.data], {type: 'application/csv'});
+            console.log(file);
+              var fileURL = window.URL.createObjectURL(file);
+              
+              a.href = fileURL;
+              a.download = fileName;
+              a.click(); 
+             
+           }); 
+    }
     	$scope.seachUsers= function(search){
         	UserManagement.getCustomersSearchlist(search).then(function(response){
         	$scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -75,7 +109,8 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
             .withOption('bFilter', false)
             .withOption('lengthChange', false);
              $scope.dtColumns = [
-                            DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
+                 DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+                         DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
@@ -190,8 +225,8 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
  $(document).on('click', '.delete', function(){ 
       var id=$(this).attr('data-id');
       swal({   
-              title: "Are you sure want to delete this Customer?",   
-                        text: "You will not be able to recover this Customer",   
+              title: "Are you sure want to delete this User?",   
+                        text: "You will not be able to recover this User",   
                         showCancelButton: true,   
                         confirmButtonColor: "#DD6B55",   
                         confirmButtonText: "Yes, delete",   

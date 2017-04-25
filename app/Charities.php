@@ -35,7 +35,7 @@ class Charities extends Authenticatable
             $path=public_path('charities_images');
             if(isset($req['image'])){
                 $file_name=$this->fileUploading($path,$req['image']);
-                $data=array('name'=>$req['charity_name '],
+                $data=array('name'=>$req['charity_name'],
                             'image'=>$file_name,
                             'updated_at'=>date('y-m-d'));
             }else{

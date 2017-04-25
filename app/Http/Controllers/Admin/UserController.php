@@ -10,6 +10,7 @@ use Datatables;
 use DB;
 use Session;
 use App\Helpers\SiteHelper;
+use App\Helpers\ExportFile;
 use Hash;
 use Response;
 
@@ -20,6 +21,7 @@ class UserController extends Controller
 
     public function __construct()
     {
+      $this->csv = new ExportFile();
       $this->sitehelper = new SiteHelper();
       $this->middleware(function ($request, $next) {
           if(!Auth::check()){
@@ -119,6 +121,19 @@ class UserController extends Controller
         return response()->success(compact('users','credit'));
   
     }
+    public function userCsvExport(Request $request){
+	
+		$req = $request->all();
+		if(!empty($req['data'])){
+			$data = User::whereIn('id',$req['data'])->selectRaw("id as ID, display_name as Name, email as Email, phone_number as Phone, if(active='1', 'Active','InActive') as status,  DATE_FORMAT(created_at,'%m/%d/%Y %h:%i %p') as 'Created At'")->get();
+		 	$this->csv->csvExportFile($data);
+		}
+		else{
+			$result = DB::select("SELECT id as ID, display_name as Name,phone_number as Phone, if(active='1', 'Active','InActive') as status,  DATE_FORMAT(created_at,'%m/%d/%Y %h:%i %p') as 'Created At' FROM `vmd_users` where role_id NOT IN ('1')");
+			$data = json_decode(json_encode($result), true);
+			$this->csv->csvExportFile($data);
+		}
+	}
  	public function customerAdd(Request $request)
     {
 		$req=$request->all(); 

@@ -30,7 +30,7 @@
 		<li>
 			<a href="{{url('customers-list')}}">Users</a>
 		</li>
-		<li class="active"> Edit User</li>
+		<li class="active"> Edit {{$user->first_name}}  {{$user->last_name}}</li>
 	</ol>
 	
 </section>
@@ -191,10 +191,8 @@
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									
 									<div class="fileupload fileupload-new" data-provides="fileupload"> 
-										<img  @if(empty($user->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/{{$user->user_img}}" @endif class="img-pview img-responsive" id="img-chan" name="img-chan">
-										<span class="remove_pic">
-											<i class="fa fa-times-circle" aria-hidden="true"></i>
-										</span>
+										<img  @if(empty($user->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/{{$user->user_img}}" @endif class="img-pview img-responsive img-circle pic" id="img-chan" name="img-chan">
+										
 										<span class="btn btn-default btn-file">
 											<span class="fileupload-new">Upload Photo</span>
 											<span class="fileupload-exists"></span>     

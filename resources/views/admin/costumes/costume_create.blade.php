@@ -244,11 +244,48 @@
 											<br><br>
 											@foreach($cosplay_one_value as $index=>$cosplayonevalues)
 											<?php if($cosplayonevalues->option_value=="yes") { ?>
-											<input type="{{$cosplay_one->type}}"  checked name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}"  required>&nbsp;{{$cosplayonevalues->option_value}}&nbsp;
+											<input type="{{$cosplay_one->type}}"  checked name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" required>&nbsp;{{$cosplayonevalues->option_value}}&nbsp;
 											<?php } else { ?>
-											<input type="{{$cosplay_one->type}}"   name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}"  required>&nbsp;{{$cosplayonevalues->option_value}}&nbsp;
+											<input type="{{$cosplay_one->type}}"   name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" onclick="cosplay_yes(<?php echo $cosplayonevalues->option_id ?>)"  required>&nbsp;{{$cosplayonevalues->option_value}}&nbsp;
 											<?php } ?>
 											@endforeach
+											<div class="row" id="cosplayplay_yes_div" style="display: none;">
+ <div class="col-md-12" >
+      <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Anime/Manga">Anime/Manga</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Sci-Fi">Sci-Fi</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Cosmic/Superhero">Cosmic/Superhero</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Video Games">Video Games</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Furries">Furries</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Other">Other</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Film & Tv">Film & Tv</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Mecha">Mecha</label>
+   </div>
+   </div>
+   <span id="cosplay_yeserror" style="color:red"></span>
+</div>
 										</div>
 						       </div>
 							    <div class="form-group has-feedback" >
@@ -263,9 +300,54 @@
 <span class="req-field" ></span></label>
 											<br><br>
 											@foreach($cosplay_two_value as $index=>$cosplaytwovalues)
-											<input type="{{$cosplay_two->type}}"  <?php if($cosplaytwovalues->option_value=="yes") { ?> checked <?php } ?>  name="{{$cosplay_two->code}}" id="{{$cosplay_two->code}}"  value="{{$cosplaytwovalues->option_id}}"  required>&nbsp;{{$cosplaytwovalues->option_value}}&nbsp;
+											<input type="{{$cosplay_two->type}}"  <?php if($cosplaytwovalues->option_value=="yes") { ?> checked <?php } ?>  name="{{$cosplay_two->code}}" id="{{$cosplay_two->code}}"  value="{{$cosplaytwovalues->option_id}}" onclick="uniquefashion_yes({{$cosplaytwovalues->option_id}})"  required>&nbsp;{{$cosplaytwovalues->option_value}}&nbsp;
 											
 											@endforeach
+
+											<div class="row" id="uniquefashion_yes_div" style="display: none;">
+ <div class="col-md-12" >
+      <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Cyberpunk">Cyberpunk</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Lolita">Lolita</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Dystopain">Dystopain</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Mori kei">Mori kei</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Goth">Goth</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Fari kei">Fari kei</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Steampunk">Steampunk</label>
+   </div>
+   <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Visual kei">Visual kei</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Streetwear">Streetwear</label>
+   </div>
+   <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Other">Other</label>
+   </div>
+   </div>
+   <span id="uniquefashion_yeserror" style="color:red"></span>
+</div>
+
 										</div>
 						       </div>
 								 <div class="form-group has-feedback" >
@@ -280,9 +362,44 @@
 <span class="req-field" ></span></label>
 											<br><br>
 											@foreach($cosplay_three_value as $index=>$cosplaythreevalues)
-											<input type="{{$cosplay_three->type}}" <?php if($cosplaythreevalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_three->code}}" id="{{$cosplay_three->code}}"  value="{{$cosplaythreevalues->option_id}}"  required>&nbsp;{{$cosplaythreevalues->option_value}}&nbsp;
+											<input type="{{$cosplay_three->type}}" <?php if($cosplaythreevalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_three->code}}" id="{{$cosplay_three->code}}" onclick="activity_yes({{$cosplaythreevalues->option_id}})"  value="{{$cosplaythreevalues->option_id}}"  required>&nbsp;{{$cosplaythreevalues->option_value}}&nbsp;
 											
 											@endforeach
+
+											<div class="row" id="activity_yes_div" style="display: none;">
+ <div class="col-md-12" >
+      <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Circus">Circus</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Theatre">Theatre</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Historical Reenactments">Historical Reenactments</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Music Videos">Music Videos</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="LARP">LARP</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Masquerade">Masquerade</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Medieval/Renaissance Fairs">Medieval/Renaissance Fairs</label>
+   </div>
+   </div>
+   <span id="activity_yeserror" style="color:red"></span>
+</div>
 										</div>
 						       </div>
 							   <div class="form-group has-feedback" >
@@ -297,9 +414,12 @@
 <span class="req-field" ></span></label>
 											<br><br>
 											@foreach($cosplay_four_value as $index=>$cosplayfourvalues)
-											<input type="{{$cosplay_four->type}}"  <?php if($cosplayfourvalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}"  required>&nbsp;{{$cosplayfourvalues->option_value}}&nbsp;
+											<input type="{{$cosplay_four->type}}"  <?php if($cosplayfourvalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}" onclick="make_costume_yes({{$cosplayfourvalues->option_id}})"  required>&nbsp;{{$cosplayfourvalues->option_value}}&nbsp;
 											
 											@endforeach
+											<p class="form-rms-small" id="mention_hours" style="display:none" >If Yes,how long did it take?</p>
+											<p class="ct1-rms-rel" id="mention_hours_input" style="display:none"><input type="text" name="make_costume_time" class="input-rm100"> <span>hours<span>
+											</p>
 										</div>
 						       </div>
 							   <div class="form-group has-feedback" >
@@ -375,7 +495,7 @@
 									</div>
                                 </div>
 								<div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">Quantity<span class="req-field" ></span></label>
+                                    <label for="inputEmail3" class="control-label">Quantity*<span class="req-field" ></span></label>
                                         <select class="form-control" name="quantity" id="quantity">
 										<option value="">Select Quantity</option>
 										<option value="1">1</option>
@@ -545,24 +665,7 @@
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Front View</h2>
 							<div class="col-md-12">
 							<input type="file" name="img-chan" id="img-chan">
-								<!-- <div class="form-group"> 
-									<label for="inputEmail3" class="control-label image-label">Upload</label>
-									<div class="fileupload fileupload-new frnt_view_img" data-provides="fileupload"> 
-										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan" name="img-chan" >
-										<span class="remove_pic">
-											<i class="fa fa-times-circle" aria-hidden="true"></i>
-										</span>
-										<span class="btn btn-default btn-file">
-											<span class="fileupload-new" style="float:right">Upload Photo</span>
-											<span class="fileupload-exists"></span>     
-											<input id="profile_logo" name="avatar" type="file" placeholder="Profile Image" class="form-control">
-										</span>
-										<p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
-										<span class="fileupload-preview"></span>
-										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
-									</div> 
-									<p class="error">{{ $errors->first('avatar') }}</p> 
-								</div> --> 					
+								 					
 							</div>   
 					</div> 
 						<div class="col-md-6">
@@ -571,49 +674,14 @@
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Back View</h2>
 							<div class="col-md-12">
 								<input type="file" name="img-chan1" id="img-chan1">
-								<!-- <div class="form-group"> 
-									<label for="inputEmail3" class="control-label image-label">Upload</label>
-									<div class="fileupload fileupload-new bk_viws_pge" data-provides="fileupload"> 
-										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan1" name="img-chan1" >
-										<span class="remove_pic1">
-											<i class="fa fa-times-circle" aria-hidden="true"></i>
-										</span>
-										<span class="btn btn-default btn-file">
-											<span class="fileupload-new" style="float:right">Upload Photo</span>
-											<span class="fileupload-exists"></span>     
-											<input id="profile_logo1" name="avatar1" type="file" placeholder="Profile Image" class="form-control">
-										</span>
-										<p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
-										<span class="fileupload-preview"></span>
-										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
-									</div> 
-									<p class="error">{{ $errors->first('avatar') }}</p> 
-								</div> --> 					
+								 					
 							</div> 
 					
 						</div>
 						<div class="col-md-6 ">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Details/Accessories</h2>
 							<div class="col-md-12">
-							<input type="file" name="img-chan2" id="img-chan2">
-								<!-- <div class="form-group"> 
-									<label for="inputEmail3" class="control-label image-label">Upload</label>
-									<div class="fileupload fileupload-new frnt_view_img" data-provides="fileupload"> 
-										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan2" name="img-chan2" >
-										<span class="remove_pic2">
-											<i class="fa fa-times-circle" aria-hidden="true"></i>
-										</span>
-										<span class="btn btn-default btn-file">
-											<span class="fileupload-new" style="float:right">Upload Photo</span>
-											<span class="fileupload-exists"></span>     
-											<input id="profile_logo2" name="avatar2" type="file" placeholder="Profile Image" class="form-control">
-										</span>
-										<p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
-										<span class="fileupload-preview"></span>
-										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
-									</div> 
-									<p class="error">{{ $errors->first('avatar') }}</p> 
-								</div>  -->					
+							<input type="file" name="img-chan2" id="img-chan2">												
 							</div>   
 					</div>
 						</div>
@@ -671,8 +739,55 @@
                 method: 'normal',
                 url: 'ajax_upload.php',
                 delete_url: 'ajax_delete.php',
-            });
+            });	
+	/*$( "#submit" ).click(function(a) {
+
+		a.preventDefault();
+		str=true;
+		$('#cosplay_yeserror').html('');
+		var cosplay=$('#cosplay').val();
+		var file2=$('input[name=file2]').val();
+		var file3=$('input[name=file3]').val();
+
+		if(cosplay ==7){
+			$('#cosplay_yeserror').html('Select Cosplay Options');
+			str=false;
+		}
+		return str;
+	});*/
         });
+	function cosplay_yes(id){
+		if (id == 7) {
+			$('#cosplayplay_yes_div').css('display','block');
+		}else{
+			$('#cosplayplay_yes_div').css('display','none');
+		}
+	}
+	function uniquefashion_yes(id){
+		if (id == 9) {
+			$('#uniquefashion_yes_div').css('display','block');
+		}else{
+			$('#uniquefashion_yes_div').css('display','none');
+		}
+	}
+	function activity_yes(id){
+		if (id == 11) {
+			$('#activity_yes_div').css('display','block');
+		}else{
+			$('#activity_yes_div').css('display','none');
+		}
+	}
+	function make_costume_yes(id){
+		if (id == 30) {
+			$('#mention_hours').css('display','block');
+			$('#mention_hours_input').css('display','block');
+		}else{
+			$('#mention_hours').css('display','none');
+			$('#mention_hours_input').css('display','none');
+			$('#mention_hours_input').val('');
+		}
+	}
+	
 	
 	
 	</script>

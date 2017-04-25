@@ -134,7 +134,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
               reader.readAsDataURL($(this)[0].files[i]);
               reader.onload = function(e) {
                 $('#img-chan').attr('src',e.target.result);
-                $('.img-pview').after('<span class="remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
+                 $('.img-pview').after('<span class="remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
            
               }
               image_holder.show();
@@ -183,6 +183,8 @@ $("#edit_img_pic").on('change', function() {
               reader.readAsDataURL($(this)[0].files[i]);
               reader.onload = function(e) {
                 $('#img-chan1').attr('src',e.target.result);
+                $('.edit_remove_pic').remove();
+                  $('.img-pview').after('<span class="edit_remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
            
               }
               image_holder.show();
@@ -206,6 +208,11 @@ $("#edit_img_pic").on('change', function() {
     });
 $(document).on("click",".remove_pic",function(){
   $('#img-chan').attr('src',"/charities_images/default-placeholder.jpg");
+  $('input[type="file"]').val('');
+  $('input[name="is_removed"]').val("1");
+  });
+$(document).on("click",".edit_remove_pic",function(){
+  $('#img-chan1').attr('src',"/charities_images/default-placeholder.jpg");
   $('input[type="file"]').val('');
   $('input[name="is_removed"]').val("1");
   });

@@ -93,8 +93,7 @@ Category edit@parent
                                                       <span class=" btn-file">
                                                         <span class="fileupload-exists"></span>     
                                                         <input id="cat_image" name="cat_image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
-                                                        <input type="hidden" name="is_removed"/>
-                                              </span> 
+                                               </span> 
                                               </div>
                                             </div>
                                       </div>
