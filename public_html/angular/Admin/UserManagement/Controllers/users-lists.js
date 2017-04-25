@@ -225,8 +225,8 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
  $(document).on('click', '.delete', function(){ 
       var id=$(this).attr('data-id');
       swal({   
-              title: "Are you sure want to delete this Customer?",   
-                        text: "You will not be able to recover this Customer",   
+              title: "Are you sure want to delete this User?",   
+                        text: "You will not be able to recover this User",   
                         showCancelButton: true,   
                         confirmButtonColor: "#DD6B55",   
                         confirmButtonText: "Yes, delete",   

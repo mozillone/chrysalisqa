@@ -71,7 +71,7 @@ app.controller('PromotionsController', function($scope,DTOptionsBuilder, DTColum
                       DTColumnBuilder.newColumn('datestart').withTitle('Applied From'),
                       DTColumnBuilder.newColumn('dateend').withTitle('Applied To'),
                       DTColumnBuilder.newColumn('uses_total').withTitle('No.of uses'),
-                      DTColumnBuilder.newColumn('status').withTitle('Status'),
+                      DTColumnBuilder.newColumn('status').withTitle('Status').renderWith(activeHtml),
                       DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
                       .renderWith(actionsHtml)
                           ],
