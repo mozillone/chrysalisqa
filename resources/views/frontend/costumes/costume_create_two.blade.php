@@ -81,11 +81,8 @@
 
 <!-- </div> -->
 <div id="costume_description">
-<<<<<<< HEAD
-<p class="prog-txt">Please fill in the following fields  <span>as accurate as possible</span> to prevent disputes.</p>
-=======
+
 <p class="prog-txt">please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
->>>>>>> 337a616814ec0c43d5b654ec7639d62e55be244c
 <h2 class="prog-head">Costume Description</h2>
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_description_form" id="costume_description_form" method="post"> -->	
 
