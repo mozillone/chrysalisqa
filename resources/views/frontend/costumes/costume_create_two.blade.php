@@ -206,7 +206,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 
 
 <div class="form-rms">
-<p class="form-rms-que">08. {{$cosplayone->label}}*</p>
+<p class="form-rms-que">08. {{$cosplayone->label}}</p>
 <p class="form-rms-input">
 @foreach($cosplayone_values as $index=>$cosplayone_val)
 <span class="full-rms"><input type="{{$cosplayone->type}}" name="{{$cosplayone->code}}" id="{{$cosplayone_val->optionid}}" value="{{$cosplayone_val->optionid}}"> {{$cosplayone_val->value}}</span>
@@ -253,7 +253,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 </div>
 
 <div class="form-rms">
-<p class="form-rms-que">09. {{$cosplaytwo->label}}*</p>
+<p class="form-rms-que">09. {{$cosplaytwo->label}}</p>
 <p class="form-rms-input">
 @foreach($cosplaytwo_values as $index=>$cosplaytwo_val)
 <span class="full-rms"><input type="{{$cosplaytwo->type}}" name="{{$cosplaytwo->code}}" id="{{$cosplaytwo_val->optionid}}" value="{{$cosplaytwo_val->optionid}}"> {{$cosplaytwo_val->value}}</span>
@@ -310,7 +310,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="col-md-6">
 
 <div class="form-rms">
-<p class="form-rms-que">10. {{$cosplaythree->label}}*</p>
+<p class="form-rms-que">10. {{$cosplaythree->label}}</p>
 <p class="form-rms-input">
 @foreach($cosplaythree_values as $index=>$cosplaythree_val)
 <span class="full-rms"><input type="{{$cosplaythree->type}}" name="{{$cosplaythree->code}}" id="{{$cosplaythree_val->optionid}}" value="{{$cosplaythree_val->optionid}}"> {{$cosplaythree_val->value}}</span>
@@ -354,7 +354,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 </div>
 
 <div class="form-rms">
-<p class="form-rms-que">11. {{$cosplayfour->label}}*</p>
+<p class="form-rms-que">11. {{$cosplayfour->label}}</p>
 <p class="form-rms-input">
 @foreach($cosplayfour_values as $index=>$cosplayfour_val)
 <span class="full-rms"><input type="{{$cosplayfour->type}}" name="{{$cosplayfour->code}}" id="{{$cosplayfour_val->optionid}}" value="{{$cosplayfour_val->optionid}}"> {{$cosplayfour_val->value}}</span>
