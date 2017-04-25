@@ -626,6 +626,11 @@ body .loading img{width:10%;}
 
 
 @media only screen and (max-width : 767px) {
+	.create-admin_pagess label.radio-inline {
+    width: 47%;
+    float: left;
+    margin-left: 0px;
+}
 #category-create .cat_img.fileupload.fileupload-new{margin-left: -30px;
     margin-top: 15px;}
 	#category-create .ban_img.fileupload.fileupload-new{margin-left: -30px;

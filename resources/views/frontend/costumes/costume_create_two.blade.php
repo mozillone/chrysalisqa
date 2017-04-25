@@ -27,7 +27,7 @@
 <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_total_form" id="costume_total_form" method="post">
 <!--Create costume image code starts here-->
 	<div class="upload-photo-blogs" id="upload_div">
-	<p class="prog-txt">Please upload the  <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+	<p class="prog-txt">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
 		<h2 class="prog-head">Upload Photos</h2>
 		<div class="threeblogs">
 		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
@@ -81,7 +81,7 @@
 
 <!-- </div> -->
 <div id="costume_description">
-<p class="prog-txt">please fill in the following fields  <span>as accurate as possible</span> to prevent disputes.</p>
+<p class="prog-txt">Please fill in the following fields  <span>as accurate as possible</span> to prevent disputes.</p>
 <h2 class="prog-head">Costume Description</h2>
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_description_form" id="costume_description_form" method="post"> -->	
 
@@ -415,7 +415,7 @@ $heading_value=$headingexplode[1];
 </div>
 <div class="prog-form-rm" id="preferences_div">
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
-<p class="prog-txt">Lorem Ipsum is simply dummy text of <span>the printing and typesetting</span> industry.</p>
+<p class="prog-txt">you're almost done! just a Few more quetions.</p>
 <h2 class="prog-head">Review Your Preferences</h2>
 <div class="col-md-6">
 
