@@ -378,7 +378,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 
 
 <div class="form-rms">
-<p class="form-rms-que form-rms-que1"><span>12. Describe your Costume:</span> Including Accessories*</p>
+<p class="form-rms-que form-rms-que1"><span>12. Describe your Costume:</span> Including accessories*</p>
 <p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="description" id="description" maxlength="600" ></textarea></p>
 <span id="descriptionerror" style="color:red"></span>
 <p class="form-rms-sm1">(600 max characters)</p>
