@@ -276,6 +276,58 @@ class CostumeController extends Controller
 		'category_id'=>$category);
 		$insert_costume_category=DB::table('costume_to_category')->insert($costume_category);
 	/*****************************Attributes insertion code starts here****/
+
+	/*
+		|Table:costume_attribute_options
+		|Cosplay if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->cosplayplay_yes_opt) && !empty($request->cosplayplay_yes_opt)) {
+			$get_attr_opt_value_id = DB::table('attribute_options')->where('option_value',$request->cosplayplay_yes_opt)->first(['option_id']);
+			$cosplay_yes=array('costume_id'=>$costume_id,
+			'attribute_id'=>'25',
+			'attribute_option_value_id'=>$get_attr_opt_value_id->option_id,
+			'attribute_option_value'=>$request->cosplayplay_yes_opt,
+			);
+			$cosplay_yes_insert=DB::table('costume_attribute_options')->insert($cosplay_yes);
+		}
+		/*
+		|Table:costume_attribute_options
+		|Unique fashion if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->uniquefashion_yes_opt) && !empty($request->uniquefashion_yes_opt)) {
+			$get_attr_opt_value_id = DB::table('attribute_options')->where('option_value',$request->uniquefashion_yes_opt)->first(['option_id']);
+			$uniquefashion_yes=array('costume_id'=>$costume_id,
+			'attribute_id'=>'26',
+			'attribute_option_value_id'=>$get_attr_opt_value_id->option_id,
+			'attribute_option_value'=>$request->uniquefashion_yes_opt,
+			);
+			$uniquefashion_insert=DB::table('costume_attribute_options')->insert($uniquefashion_yes);
+		}
+		/*
+		|Table:costume_attribute_options
+		|Activity fashion if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->activity_yes_opt) && !empty($request->activity_yes_opt)) {
+			$get_attr_opt_value_id = DB::table('attribute_options')->where('option_value',$request->activity_yes_opt)->first(['option_id']);
+			$activity_yes=array('costume_id'=>$costume_id,
+			'attribute_id'=>'28',
+			'attribute_option_value_id'=>$get_attr_opt_value_id->option_id,
+			'attribute_option_value'=>$request->activity_yes_opt,
+			);
+			$uniquefashion_insert=DB::table('costume_attribute_options')->insert($activity_yes);
+		}
 	/*
 	|Table:costume_attribute_options
 	|Body dimensions (height-ft,height-in,ewight-lbs,waist-lbs,chest-in)
