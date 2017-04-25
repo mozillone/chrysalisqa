@@ -113,14 +113,14 @@
  </select>
                                    <span id="categoryerror" style="color:red"></span>
                                 </div>
-								<div class="form-group has-feedback" >
+								<div class="form-group has-feedback create-admin_pagess" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">Condition <span class="req-field" >*</span></label>
-											<br><br>
-											<input type="radio"  name="costumecondition" id="excellent"   value="excellent"  checked> &nbsp;Excellent&nbsp;
-											<input type="radio"  name="costumecondition" id="brandnew"  value="brand_new"> &nbsp;Brand New&nbsp;
-											<input type="radio"  name="costumecondition" id="good"  value="good">&nbsp;Good&nbsp;
-											<input type="radio"  name="costumecondition" id="likenew"  value="like_new">&nbsp;Like New&nbsp;
+												<br>
+											<label class="radio-inline"><input type="radio"  name="costumecondition" id="excellent"   value="excellent"  checked> &nbsp;Excellent&nbsp;</label>
+											<label class="radio-inline"><input type="radio"  name="costumecondition" id="brandnew"  value="brand_new"> &nbsp;Brand New&nbsp;</label>
+											<label class="radio-inline"><input type="radio"  name="costumecondition" id="good"  value="good">&nbsp;Good&nbsp;</label>
+											<label class="radio-inline"><input type="radio"  name="costumecondition" id="likenew"  value="like_new">&nbsp;Like New&nbsp;</label>
 										</div>
 										<span id="costumeconditionerror" style="color:red"></span>
 						       </div>

@@ -14,7 +14,7 @@
 }
 
 .drop_uploader.drop_zone .text_wrapper {
-    margin-top: 30px;
+    margin-top: 30px;    padding-bottom: 189px;
 }
 
 .drop_uploader.drop_zone .text_wrapper i {
