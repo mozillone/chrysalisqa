@@ -31,7 +31,7 @@
 									<?php 
 
 									if (isset(Auth::user()->id) && !empty(Auth::user()->id)) { ?>
-									<li><a href="costume/sell-a-costume" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
+									<li><a href="{{URL::to('costume/sell-a-costume')}}" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
 
 									<?php }  else{ ?>
 									<li><a href="/login" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
