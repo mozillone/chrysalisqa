@@ -210,13 +210,13 @@
                                         <select name="size" id="size" class="form-control">
 										<option value="">Select Size</option>
 										<option value="1sz">1sz</option>
-										<option value="xxs">xxs</option>
-										<option value="xs">xs</option>
-										<option value="xs">s</option>
-										<option value="m">m</option>
-										<option value="l">l</option>
-										<option value="xl">xl</option>
-										<option value="xxl">xxl</option>
+										<option value="xxs">Xxs</option>
+										<option value="xs">Xs</option>
+										<option value="xs">S</option>
+										<option value="m">M</option>
+										<option value="l">L</option>
+										<option value="xl">Xl</option>
+										<option value="xxl">Xxl</option>
 										</select>
                                   <span id="size_error" style="color:red"></span>
                                 </div>
