@@ -419,6 +419,7 @@ class CreateCostumeController  extends Controller {
 			'condition'=>$costume_condition,
 			'created_user_group'=>$customer_group,
 			'size'=>$size,
+			'item_location'=>$request->zipcode,
 			'created_by'=>$userid,
 			'created_at'=>date('y-m-d H:i:s'),
 			'updated_at'=>date('y-m-d H:i:s'),

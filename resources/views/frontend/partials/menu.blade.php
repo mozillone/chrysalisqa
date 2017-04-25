@@ -28,6 +28,7 @@
 									<li><a href="#about">How it Works</a></li>
 									<li><a href="#contact">Events</a></li>
 									<li><a href="#contact">Blog</a></li>
+									
 									<?php 
 
 									if (isset(Auth::user()->id) && !empty(Auth::user()->id)) { ?>

@@ -124,7 +124,7 @@
 										</div>
 										<span id="costumeconditionerror" style="color:red"></span>
 						       </div>
-							   <h4>Body & Dimensions</h4></hr>
+							   <h4>Body & Dimensions (Optional)</h4></hr>
 <div class="row" >
 <div class="col-md-6" >
 								<div class="form-group has-feedback" >
@@ -792,6 +792,16 @@
 	
 	</script>
 	<script> 
+      var placeSearch, autocomplete;
+      var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name', 
+      };
+
       function initAutocomplete() {
         // Create the autocomplete object, restricting the search to geographical
         // location types.
@@ -841,11 +851,10 @@
           });
         }
       }
-	
-
     </script> 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
         async defer></script>
+	
 	
 	<script type="text/javascript">
 	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensions").on("keyup", function(){
