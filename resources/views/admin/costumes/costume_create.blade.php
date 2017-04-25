@@ -209,14 +209,14 @@
                                     <label for="inputEmail3" class="control-label">Size<span class="req-field" >*</span></label>
                                         <select name="size" id="size" class="form-control">
 										<option value="">Select Size</option>
-										<option value="1sz">1sz</option>
-										<option value="xxs">Xxs</option>
-										<option value="xs">Xs</option>
+										<option value="1sz">1SZ</option>
+										<option value="xxs">XXS</option>
+										<option value="xs">XS</option>
 										<option value="xs">S</option>
 										<option value="m">M</option>
 										<option value="l">L</option>
-										<option value="xl">Xl</option>
-										<option value="xxl">Xxl</option>
+										<option value="xl">XL</option>
+										<option value="xxl">XXL</option>
 										</select>
                                   <span id="size_error" style="color:red"></span>
                                 </div>
