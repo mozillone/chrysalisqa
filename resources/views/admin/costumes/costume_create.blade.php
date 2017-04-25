@@ -100,17 +100,19 @@
                                         <select class="form-control sony" name="category" id="category">
 										<option value="">Select Category</option>
 										<?php
-		$features_req=$categories['modules_result'];
-		foreach($features_req as $features_res)
-		{
-			//print_r($features_res);
-		?>
-			    <optgroup label="<?php echo ucfirst($features_res['name']);?>">
-				<?php  foreach($features_res['submodule_result'] as $feature_val_res){ ?>
-                        <option value="<?php echo $feature_val_res['subcategoryid'];?>"><?php echo ucfirst($feature_val_res['subcategoryname']);?></option>
-					</optgroup>
-		<?php } } ?>
- </select>
+											$features_req=$categories['modules_result'];
+											foreach($features_req as $features_res)
+											{
+												//print_r($features_res);
+											?>
+												    <optgroup label="<?php echo ucfirst($features_res['name']);?>">
+													<?php  foreach($features_res['submodule_result'] as $feature_val_res){ ?>
+									                        <option value="<?php echo $feature_val_res['subcategoryid'];?>"><?php echo ucfirst($feature_val_res['subcategoryname']);?></option>
+											<?php } ?> 
+														</optgroup>
+											
+											<?php } ?>
+									 </select>
                                    <span id="categoryerror" style="color:red"></span>
                                 </div>
 								<div class="form-group has-feedback create-admin_pagess" >

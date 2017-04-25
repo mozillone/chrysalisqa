@@ -381,7 +381,7 @@ class CreateCostumeController  extends Controller {
 		  	$fashion=$req['fashion'];
 		  	$activity=$req['activity'];
 		  	$makecostume=$req['make_costume'];
-		  	//$filmquality=$req['fimquality'];
+		  	$filmquality=$req['fimquality'];
 		  	//$makecostumetime = $req['make-costume-time'];
 		  	$description = $req['description'];
 		  	$funfacts = $req['funfcats'];
@@ -671,14 +671,14 @@ class CreateCostumeController  extends Controller {
 			'attribute_option_value'=>$makecostume_value,
 			);
 			$user_costume_insert=DB::table('costume_attribute_options')->insert($user_costume);
-			/*//film Quality
+			//film Quality
 			switch($filmquality){ case '32': $filmquality_value="yes"; break; case '33': $filmquality_value="No"; break; }
 			$film_quality=array('costume_id'=>$insert_costume,
 			'attribute_id'=>'21',
 			'attribute_option_value_id'=>$filmquality,
 			'attribute_option_value'=>$filmquality_value,
 			);
-			$filmquality_insert=DB::table('costume_attribute_options')->insert($film_quality);*/
+			$filmquality_insert=DB::table('costume_attribute_options')->insert($film_quality);
 
 			/*
 		|Table:costume_attribute_options

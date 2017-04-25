@@ -367,7 +367,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <span id="usercostumeerror" style="color:red"></span>
 
 </div>
-<!-- <div class="form-rms">
+<div class="form-rms">
 <p class="form-rms-que">12. {{$cosplayfive->label}}*</p>
 <p class="form-rms-input">
 @foreach($cosplayfive_values as $index=>$cosplayfive_val)
@@ -375,7 +375,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 @endforeach
 </p>
 <span id="qualityerror" style="color:red"></span>
-</div> -->
+</div>
 
 
 <div class="form-rms">
@@ -428,7 +428,6 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="form-rms">
 <p class="form-rms-que">02. Quantity</p>
 <p class="form-rms-input"><select  name="quantity" id="quantity" class="cst2-select50">
-<option value="">Select Quantity</option>
 <option>1</option>
 <option>2</option>
 <option>3</option>
@@ -531,7 +530,7 @@ $heading_value=$headingexplode[1];
 </div>
 <div class="prog-form-rm" id="preferences_div">
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
-<p class="prog-txt">You're almost done! just a Few more quetions.</p>
+<p class="prog-txt">You're almost done! just a Few more questions.</p>
 <h2 class="prog-head">Review Your Preferences</h2>
 <div class="col-md-6">
 
@@ -853,11 +852,11 @@ $(document).ready(function()
 			str=false;
 			
 		}
-		/*if($('input[name=fimquality]:checked').length<=0){
+		if($('input[name=fimquality]:checked').length<=0){
 			$('#qualityerror').html('Select Costume Fit For Film Quality OR Not');
 			str=false;
 			
-		}*/
+		}
 		if($('input[name=make_costume]:checked').length<=0){
 			$('#usercostumeerror').html('Select User Make The Costume Or Not');
 			str=false;
@@ -958,11 +957,11 @@ $(document).ready(function()
 			$('#priceerror').html('Enter Price');
 			str=false;
 		}
-		if (quantity == "") {
+		/*if (quantity == "") {
 			$('#quantity').css('border','1px solid red');
 			$('#quantityerror').html('Select Quantity');
 			str=false;
-		}
+		}*/
 		if (shipping == "") {
 			$('#shipping').css('border','1px solid red');
 			$('#shippingerror').html('Select Shipping');
