@@ -78,6 +78,7 @@ class CategoriesController extends Controller
          $req=$request->all();
          if(count($req))
          {
+         	dd($req);
            $rule  = array('name' => 'required|max:50','desc' => 'required|max:200');
            $validator = Validator::make($req,$rule);
             if ($validator->fails())
