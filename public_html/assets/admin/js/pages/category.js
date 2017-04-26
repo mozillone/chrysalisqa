@@ -227,12 +227,12 @@ $("#banner_image").on('change', function() {
     });
 $(document).on("click",".remove_pic_cat",function(){
   $('#img-chan1').attr('src',"/category_images/df_img.jpg");
-  $('input[type="file"]').val('');
+  $('input[name="cat_image"]').val('');
   $('input[name="is_removed"]').val("1");
   });
 $(document).on("click",".remove_pic_banner",function(){
   $('#img-chan2').attr('src',"/category_images/df_img.jpg");
-  $('input[type="file"]').val('');
+  $('input[name="banner_image"]').val('');
   $('input[name="is_removed"]').val("1");
   });
     
