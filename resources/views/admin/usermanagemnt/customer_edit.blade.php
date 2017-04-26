@@ -1,7 +1,8 @@
 @extends('admin.app')
 
 {{-- Web site Title --}}
-@section('title') @parent
+@section('title')
+View User |@parent
 @endsection
 
 @section('header_styles')
