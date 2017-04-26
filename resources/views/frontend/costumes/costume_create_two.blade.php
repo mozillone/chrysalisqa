@@ -182,7 +182,7 @@
 
 
 <div class="form-rms">
-<p class="form-rms-que">06. Condition</p>
+<p class="form-rms-que">06. Condition*</p>
 <p class="form-rms-input">
 <span class="full-rms"><input type="radio" name="condition" value="excellent" id="excellent"> Excellent</span>
  <span class="full-rms"><input type="radio" name="condition" value="brandnew" id="brandnew"> Brand New</span> 
@@ -238,28 +238,35 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <span id="cosplayerror" style="color:red"></span>
 <div class="row" id="cosplayplay_yes_div" style="display: none;">
  <div class="col-md-12" >
-      <div class="radio-inline">
+  <p class="slt_act_all">Select all that apply</p>
+		<div class="fity_hlf">
+      <div class="radio-inline ">
      <label><input type="radio" name="cosplayplay_yes_opt" value="Anime/Manga">Anime/Manga</label>
    </div>
-  <div class="radio-inline">
+  <div class="radio-inline ">
      <label><input type="radio" name="cosplayplay_yes_opt" value="Sci-Fi">Sci-Fi</label>
    </div>
    </div>
+      </div>
    <div class="col-md-12">
+   	<div class="fity_hlf">
   <div class="radio-inline">
      <label><input type="radio" name="cosplayplay_yes_opt" value="Cosmic/Superhero">Cosmic/Superhero</label>
    </div>
   <div class="radio-inline">
      <label><input type="radio" name="cosplayplay_yes_opt" value="Video Games">Video Games</label>
    </div>
+      </div>
    </div>
    <div class="col-md-12">
+      	<div class="fity_hlf">
   <div class="radio-inline">
      <label><input type="radio" name="cosplayplay_yes_opt" value="Furries">Furries</label>
    </div>
   <div class="radio-inline">
      <label><input type="radio" name="cosplayplay_yes_opt" value="Other">Other</label>
    </div>
+    </div>
    </div>
    <div class="col-md-12">
   <div class="radio-inline">
@@ -285,14 +292,16 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <span id="uniquefashionerror" style="color:red"></span>
 <div class="row" id="uniquefashion_yes_div" style="display: none;">
  <div class="col-md-12" >
+ <p class="slt_act_all">Select all that apply</p>
+ <div class="fity_hlf">
       <div class="radio-inline">
      <label><input type="radio" name="uniquefashion_yes_opt" value="Cyberpunk">Cyberpunk</label>
    </div>
   <div class="radio-inline">
      <label><input type="radio" name="uniquefashion_yes_opt" value="Lolita">Lolita</label>
    </div>
-   </div>
-   <div class="col-md-12">
+    </div>
+   <div class="fity_hlf">
   <div class="radio-inline">
      <label><input type="radio" name="uniquefashion_yes_opt" value="Dystopain">Dystopain</label>
    </div>
@@ -300,7 +309,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
      <label><input type="radio" name="uniquefashion_yes_opt" value="Mori kei">Mori kei</label>
    </div>
    </div>
-   <div class="col-md-12">
+   <div class="fity_hlf">
   <div class="radio-inline">
      <label><input type="radio" name="uniquefashion_yes_opt" value="Goth">Goth</label>
    </div>
@@ -308,7 +317,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
      <label><input type="radio" name="uniquefashion_yes_opt" value="Fari kei">Fari kei</label>
    </div>
    </div>
-   <div class="col-md-12">
+   <div class="fity_hlf">
   <div class="radio-inline">
      <label><input type="radio" name="uniquefashion_yes_opt" value="Steampunk">Steampunk</label>
    </div>
@@ -316,7 +325,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
      <label><input type="radio" name="uniquefashion_yes_opt" value="Visual kei">Visual kei</label>
    </div>
    </div>
-   <div class="col-md-12">
+   <div class="fity_hlf">
   <div class="radio-inline">
      <label><input type="radio" name="uniquefashion_yes_opt" value="Streetwear">Streetwear</label>
    </div>
@@ -324,6 +333,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
      <label><input type="radio" name="uniquefashion_yes_opt" value="Other">Other</label>
    </div>
    </div>
+    </div>
    <span id="uniquefashion_yeserror" style="color:red"></span>
 </div>
 </div>
@@ -385,7 +395,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 @endforeach
 
 
-<p class="form-rms-small" id="mention_hours" style="display:none" >If Yes, how long did it take?</p>
+<p class="form-rms-small" id="mention_hours" style="display:none" >If yes, how long did it take?</p>
 <p class="ct1-rms-rel" id="mention_hours_input" style="display:none"><input type="text" name="make_costume_time" class="input-rm100"> <span>hours<span>
 </p>
 <span id="usercostumeerror" style="color:red"></span>
@@ -504,7 +514,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 
 <div class="form-rms">
 <p class="form-rms-que">02. Dimensions</p>
-<div class="form-rms-input">
+<div class="form-rms-input dimensions-two dimensions-two-pk_info">
 @foreach($dimensions as $index=>$dimensions)
 <?php
 $value=$dimensions->value;
@@ -544,7 +554,7 @@ $heading_value=$headingexplode[1];
 </p>
 <span id="serviceerror" style="color:red"></span>
 
-<p class="form-rms-small1">Estimated Shipping Cost:$6.80 -$12.40(varies by buyer's location)</p>
+<p class="form-rms-small1">Estimated Shipping Cost: $6.80 - $12.40 (varies by buyer's location)</p>
 <p class="cst2-rms-chck"><input id="free_shipping" type="checkbox"> Offer free shipping</p>
 </div>
 
@@ -558,7 +568,7 @@ $heading_value=$headingexplode[1];
 </div>
 <div class="prog-form-rm" id="preferences_div">
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
-<p class="prog-txt">You're almost done! just a Few more questions.</p>
+<p class="prog-txt">You're almost done! Just a few more questions.</p>
 <h2 class="prog-head">Review Your Preferences</h2>
 <div class="col-md-6">
 

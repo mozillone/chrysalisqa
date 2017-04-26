@@ -242,7 +242,7 @@ section.footer h3 {font-family: Proxima-Nova-Extrabold;color: #000;font-size: 16
 .quick_links{margin-top:5px;}
 p.slt_act_all {
     text-align: left;
-    padding-left: 19px;
+    padding-left: 0px;
     font-family: Proxima-Nova-Bold;
 }
 .quick_links ul li{margin-bottom:8px;font-family:Proxima-Nova-Regular;color: #020202;font-size: 15px; font-weight:600;}
@@ -963,7 +963,7 @@ a#pricing_next {    float: right;}
 .form-rms-input select{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
 .form-rms-input textarea{width: 100%; float:left; height: 120px; border: 1px solid #e1e1e1; padding: 15px 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
 .form-rms-input{width: 100%; float:left;}
-.form-rms-small{width: 100%; float:left; font-size: 14px; font-family: Proxima-Nova-Semibold; margin: 10px 0 0;}
+.form-rms-small{width: 100%; float:left; font-size: 16px; font-family: Proxima-Nova-Semibold; margin: 10px 0 0;}
 .form-rms-small span{font-family: Proxima-Nova-Extrabold;}
 .form-rms-input .full-rms{width: 100%; float:left; margin: 5px 0; font-size: 16px;  font-family: Proxima-Nova-Semibold;}
 .form-rms-input .full-rms input{width: 15px; margin: 0px; height: 22px; margin-right: 10px;}
@@ -985,7 +985,7 @@ a#preferences_finished {
 .form-rms-dim .form-rms-he1 span{float:left; margin: 20px 0 0;}
 .form-rms-he{width: 30%;}
 .form-rms-dim .form-rms-he1 .form-rms-dt{margin-left: 10px;}
-.prog-form-rm{width: 100%; float:left; margin: 0 0 30px;}
+.prog-form-rm{width: 100%; float:left; margin: 0 0 30px;font-size: 16px;}
 
 /* ProgressBar second page CSS S */
 
@@ -1009,9 +1009,13 @@ a#preferences_finished {
 .ct3-list li{width: 16.66%; float:left; padding: 0 5px;}
 .ct3-list li img{width: 100%; float:left; margin: 10px auto;}
 .ct3-list li input{margin: 10px auto 0; display: block;}
-.ct1-rms-rel input.input-rm100{width: 100px; float:left;}
+.ct1-rms-rel input.input-rm100 {
+    width: 75px;
+    float: left;
+    height: 30px;
+}
 .ct1-rms-rel{width: 100%; float:left; line-height: auto; font-size: 14px; font-family: Proxima-Nova-Semibold; margin: 10px 0 0;}
-.ct1-rms-rel span{margin: 5px 0 0 5px; float:left; }
+.ct1-rms-rel span{margin: 12px 0 0 5px; float:left;font-size: 16px; }
 /* ProgressBar second page CSS E */
 
 
@@ -1051,7 +1055,7 @@ a.btn-rm-ret {    cursor: pointer;    line-height: 38px;    font-family: Proxima
 
 .upload_hint{position:relative;}
 
-.upload-photo-blogs .threeblogs{    width: 80%;display: inline-block;    margin-bottom: 30px;}
+.upload-photo-blogs .threeblogs{    width: 80%;display: inline-block;    margin-bottom: 30px;    text-align: center;}
 .upload-photo-blogs {
     margin-bottom: 30px;
     clear: both;
@@ -1079,6 +1083,18 @@ a.upload_sub_btn.btn.btn-default{ background: #60C4AB; color:#fff;    margin-top
 .up_btns_tl a {
 
     text-align: center;
+}
+#cosplayplay_yes_div .radio-inline {
+    float: left;
+    width: 100%;
+    text-align: left;
+    margin-left: 0px;
+    padding-left: 15px;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+div#cosplayplay_yes_div p {
+    padding-left: 0px;
 }
 .upload-photo-blogs h4 {text-align: center;
     font-size: 16px;	font-family: Proxima-Nova-Extrabold; color:#000;    margin-bottom: 20px;
@@ -1405,6 +1421,17 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 }
 
 @media screen and (min-width:768px){
+	.fity_hlf .radio-inline {
+    width: 40% !important;
+    float: left;
+}
+	div#activity_yes_div .radio-inline {
+    float: left;
+    width: 100%;
+    text-align: left;
+    margin-left: 0px;
+    padding-left: 40px;
+}
 .mobile-pro-text{display:none;}
 
 .upload_hint p:after {
@@ -1415,7 +1442,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
     background: url(../../frontend/img/tip-arrow.png);
     background-repeat: no-repeat;
     right: -57px;
-    top: 218px;
+    top: 185px;
 }
 
 
@@ -1424,6 +1451,25 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+	.form-rms-input.dimensions-two.dimensions-two-pk_info input {
+    width: 50%;
+}
+.fity_hlf .radio-inline {
+    width: 100% !important;
+    float: left;
+    text-align: left;
+    margin-left: 0px;
+    padding-left: 40px;
+}
+	#cosplayplay_yes_div .radio-inline{    padding-left: 40px;}
+	.ct1-rms-rel{padding-left:20px;}
+	.prog-head{    margin-top: 20px;}
+	.form-rms-input.dimensions-two input {
+    width: 50%;
+}
+.form-rms-small1{text-align:left;    padding-left: 20px;}
+.cst2-rms-chck{text-align:left; padding-left: 20px;    margin-bottom: 30px;}
+
 	div#activity_yes_div .radio-inline {
     float: left;
     width: 100%;
@@ -1463,7 +1509,11 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 	.prog-txt{margin-bottom:20px;}
 	.form-rms-que{    margin: 10px 0;    font-size: 14px;}
 	.form-rms-que{    text-indent: inherit;    text-align: left;}
-	.form-rms-small{text-align:left}
+.form-rms-small {
+    text-align: left;
+    padding-left: 20px;
+    font-size: 14px;
+}
 	.form-rms{padding-left:0px;}
 	div#total_forms_div {
     text-align: center;
@@ -1479,7 +1529,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
     font-size: 16px;
 }
 	h2.prog-stepss {
-    text-align: center;
+  text-align: center;
     color: #000;
     text-transform: uppercase;
     font-size: 20px;    margin-bottom: 5px;
