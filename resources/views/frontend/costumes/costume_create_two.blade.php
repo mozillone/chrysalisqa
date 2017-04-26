@@ -14,21 +14,42 @@
 <div class="col-md-12">
 	
 <!--- progressbar section starts -->
-<div class="progressbar_main">
+<div class="progressbar_main " >
 <h2>UPLOAD A COSTUME</h2>
-<ul id="progressbar" class="progressbar_rm">  
+<ul id="progressbar" class="progressbar_rm hidden-xs">  
 	 <li class="active" id="step1"><span class="s-head">Step 1</span> <span>Upload <br/>Photos</span></li> 
 	 <li id="step2"><span class="s-head">Step 2</span> <span>Fill in Costume <br/>Description</span></li>
      <li id="step3"><span class="s-head">Step 3</span> <span>Pricing & <br/>Shipping</span></li>
      <li id="step4"><span class="s-head">Step 4</span> <span>Review <br/>Preferences</span></li>	 
      </ul>
 </div>	
+
+<!---mobile progressbar section starts -->
+
+<div class="progressbar_main hidden-sm hidden-md hidden-lg" style="display:none;">
+<h2>UPLOAD A COSTUME</h2>
+<ul id="progressbar" class="progressbar_rm" style="display:none;">  
+	 <li class="active" id="step1"><span class="s-head">Step 1</span> <span>Upload <br/>Photos</span></li> 
+	 <li id="step2"><span class="s-head">Step 2</span> <span>Fill in Costume <br/>Description</span></li>
+     <li id="step3"><span class="s-head">Step 3</span> <span>Pricing & <br/>Shipping</span></li>
+     <li id="step4"><span class="s-head">Step 4</span> <span>Review <br/>Preferences</span></li>	 
+     </ul>
+</div>	
+<!--- mobile progressbar section end here -->
+
 <div id="total_forms_div">
 <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_total_form" id="costume_total_form" method="post">
 <!--Create costume image code starts here-->
 	<div class="upload-photo-blogs" id="upload_div">
-	<p class="prog-txt">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
-		<h2 class="prog-head">Upload Photos</h2>
+	<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+			<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 1</h2>
+		<h2 class="prog-head ">Upload Photos</h2>
+		
+		<!--- mobile heaindgs section end here -->
+
+		<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+		
+		<!--- mobile heaindgs section end here -->
 		<div class="threeblogs">
 		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
 			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos.Placing them in settings that correspond with their theme can encourage a sale.</p>
@@ -82,8 +103,10 @@
 <!-- </div> -->
 <div id="costume_description">
 
-<p class="prog-txt">Please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
+<p class="prog-txt desk-pro-text">Please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
+<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">step 2</h2>
 <h2 class="prog-head">Costume Description</h2>
+<p class="prog-txt mobile-pro-text">Please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_description_form" id="costume_description_form" method="post"> -->	
 
 <div class="prog-form-rm">
@@ -197,9 +220,9 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <p class="form-rms-dim form-rms-he"><?php echo ucfirst($heading); ?> <br/> <span class="form-rms-he1">
  <input type="{{$bodyanddimensions->code}}" name="{{$body_height_ft->value}}" id="{{$body_height_ft->value}}"> <span><?php echo $heading_value;?></span>
  <input type="{{$bodyanddimensions->code}}" class="form-rms-dt" name="{{$body_height_in->value}}" id="{{$body_height_in->value}}" > <span><?php echo $heading_value_in; ?></span></span></p>
-<p class="form-rms-dim"><?php echo ucfirst($heading_weight_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}"> <span><?php echo $heading_weight_value_lbs;?></span></span></p>
-<p class="form-rms-dim"><?php echo ucfirst($heading_chest_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" > <span><?php echo $heading_chest_value_in; ?> </span></span></p>
-<p class="form-rms-dim"><?php echo ucfirst($heading_waist_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_waist_lbs->value}}" id="{{$body_waist_lbs->value}}"> <span><?php echo $heading_waist_value_lbs; ?></span></span></p>
+<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_weight_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}"> <span><?php echo $heading_weight_value_lbs;?></span></span></p>
+<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_chest_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" > <span><?php echo $heading_chest_value_in; ?> </span></span></p>
+<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_waist_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_waist_lbs->value}}" id="{{$body_waist_lbs->value}}"> <span><?php echo $heading_waist_value_lbs; ?></span></span></p>
 <span id="bodydimensionerror"  style="color:red"></span>
 </div>
 </div>
@@ -319,6 +342,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <span id="activityerror" style="color:red"></span>
 <div class="row" id="activity_yes_div" style="display: none;">
  <div class="col-md-12" >
+ <p class="slt_act_all">Select all that apply</p>
       <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Circus">Circus</label>
    </div>
@@ -407,17 +431,19 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <!--costume three code ends here-->
 </div>
 </div>
-<button type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></button>
+<div class="form-rms-btn">
+<a type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></a>
 
 <!-- </form> -->
-<button type="button" id="costume_description_next" class="btn-rm-nxt">Next</button>
+<a type="button" id="costume_description_next" class="btn-rm-nxt">Next Step</a>
+</div>
 </div>
 <div class="prog-form-rm" id="pricing_div">
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_pricing_form" id="costume_pricing_form" method="post"> -->
 <p class="prog-txt">Please fill in the following field <span>as accurately</span> as you can.</p>
 <div class="col-md-6">
 <h2 class="prog-head">Pricing</h2>
-<div class="form-rms">
+<div class="form-rms pricess">
 <p class="form-rms-que">01. Price</p>
 <div class="form-rms-input">
 <p class="form-rms-rel"><input type="text" class="input-rm100" name="price" id="price" ><span class="form-rms-abs"><i class="fa fa-usd" aria-hidden="true"></i></span></p>
@@ -523,9 +549,11 @@ $heading_value=$headingexplode[1];
 </div>
 
 </div>
-<button type="button" id="pricing_back" class="btn-rm-back"><span>Back</span></button>
+<div class="form-rms-btn">
+<a type="button" id="pricing_back" class="btn-rm-back"><span>Back</span></a>
 
-<button type="button" id="pricing_next" class="btn-rm-nxt">Next</button>
+<a type="button" id="pricing_next" class="btn-rm-nxt">Next Step</a>
+</div>
 <!-- </form> -->
 </div>
 <div class="prog-form-rm" id="preferences_div">
@@ -612,8 +640,8 @@ $heading_value=$headingexplode[1];
 
 
 <div class="form-rms-btn">
-<button type="button" id="preferences_finished" class="btn-rm-nxt">I'm Finished!</button>
-<button type="button" id="preferences_back" class="btn-rm-back"><span>Back</span></button>
+<a type="button" id="preferences_finished" class="btn-rm-nxt">I'm Finished!</a>
+<a type="button" id="preferences_back" class="btn-rm-back"><span>Back</span></a>
 </div>
 </div>
 <!-- </form> -->
@@ -621,7 +649,19 @@ $heading_value=$headingexplode[1];
 </form>
 </div><!-- id='total_forms_div' -->
 <div id="success_page" style="display: none;">
-	Your coustume has sucessfully created.
+	<div class="col-md-12">
+		<div class="row">
+	<div class="success_page_final">
+	
+<img class="img-responsive" src="{{URL::asset('assets/frontend/img/chrysalis-meme.png')}}">
+	<h2>Success!</h2>
+		<p>Thank You for listing your costume with Chrysalis!<br>
+Your costume has successfully been uploaded.</p>
+<a type="button" id="" class="btn-rm-ret">Return Home</a><br>
+<a type="button" id="" class="btn-rm-view-finl"> <span>View My Listing!<span></a>
+	</div>
+		</div>
+		</div>
 </div>
 <!-- </div> -->
 <!-- </div> -->	
