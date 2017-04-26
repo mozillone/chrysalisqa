@@ -430,7 +430,7 @@ input#edit_img_pic {
 }
 #charity_edit_popup .fileupload.fileupload-new {
     position: relative;
-    max-height: 100px;
+    max-height: 200px;
     overflow: hidden;
 }
 
