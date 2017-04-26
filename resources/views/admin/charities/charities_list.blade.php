@@ -10,6 +10,14 @@ Charities@parent
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}">
+<style type="text/css">
+#dtTable tr>th:first-child{
+display: none;
+}
+#dtTable tr>td:first-child{
+display: none;
+}
+</style>
 @stop
 
 {{-- Page content --}}
@@ -70,6 +78,13 @@ Charities@parent
                     </tr>
                   </tbody>
               </table>
+               <div class="row">
+                    <div class="col-md-12">
+                      <div class="pull-right user-list">
+                        <a href="javascript:void(0);" class="btn btn-xs btn-success" id="export" ng-click="charitiesExportCSV()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download"><i class="fa fa-download"></i></a>
+                       </div>
+                    </div>
+                  </div>
           					<table datatable dt-options="dtOptions" dt-columns="dtColumns"
                            				class="table table-bordered table-hover table-striped" id="dtTable">
           					</table>
@@ -205,6 +220,7 @@ Charities@parent
 <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('/angular/Admin/Charities/Controllers/charities-lists.js') }}"></script>
 <script src="{{ asset('/angular/Admin/Charities/Services/charities.js') }}"></script>
+<script src="{{ asset('angular/Admin/ExportCsv/Services/ExportCsv.js') }}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
 <script src="{{ asset('/angular/Admin/directives/datepicker.js') }}"></script>

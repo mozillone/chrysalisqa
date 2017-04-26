@@ -8,6 +8,13 @@ app.factory('Exports', function($http){
 	          data:{data:data}   
 	       })
 	     }  
+   fac.charitiesExportCSV=function(data){ 
+	     return  $http({
+	          method: 'POST',
+	          url: '/charities/csvExport',
+	          data:{data:data}   
+	       })
+	     }  
 	
 
   return fac;

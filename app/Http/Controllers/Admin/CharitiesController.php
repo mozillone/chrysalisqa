@@ -14,6 +14,7 @@ use Response;
 use Validator;
 use App\Charities;
 use App\Helpers\Site_model;
+use App\Helpers\ExportFile;
 
 class CharitiesController extends Controller
 {
@@ -22,7 +23,8 @@ class CharitiesController extends Controller
 
     public function __construct()
     {
-      $this->middleware(function ($request, $next) {
+       $this->csv = new ExportFile();
+       $this->middleware(function ($request, $next) {
           if(!Auth::check()){
             return Redirect::to('/admin/login')->send();
           }
@@ -61,6 +63,12 @@ class CharitiesController extends Controller
         $charities = DB::select('SELECT cht.id,cht.name,cht.image,cht.status,if(usr.role_id!="1",usr.display_name,"") as user_name,DATE_FORMAT(cht.created_at,"%m/%d/%Y %h:%i %p") as date FROM cc_charities as cht LEFT JOIN cc_users as usr on cht.suggested_by=usr.id '.$where.'');
         return response()->success(compact('charities'));
    }
+   public function charitiesCsvExport(Request $request){
+     $req = $request->all();
+        $result = DB::select('SELECT cht.id,cht.name,if(cht.status="1","Active","Inactive") as Status,if(usr.role_id!="1",usr.display_name,"") as user_name,DATE_FORMAT(cht.created_at,"%m/%d/%Y %h:%i %p") as Date FROM cc_charities as cht LEFT JOIN cc_users as usr on cht.suggested_by=usr.id');
+        $data = json_decode(json_encode($result), true);
+        $this->csv->csvExportFile($data);
+  }
    public function createCharity(Request $request)
    {
          $req=$request->all();

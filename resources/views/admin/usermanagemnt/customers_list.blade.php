@@ -8,7 +8,14 @@
 @section('header_styles')
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
-
+<style type="text/css">
+#dtTable tr>th:first-child{
+display: none;
+}
+#dtTable tr>td:first-child{
+display: none;
+}
+</style>
 @stop
 
 {{-- Page content --}}
