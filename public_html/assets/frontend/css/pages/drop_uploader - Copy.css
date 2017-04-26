@@ -13,9 +13,9 @@
     border: 3px dashed #4A90E2;
 }
 
-/* .drop_uploader.drop_zone .text_wrapper {
+.drop_uploader.drop_zone .text_wrapper {
     margin-top: 30px;    padding-bottom: 189px;
-} */
+}
 
 .drop_uploader.drop_zone .text_wrapper i {
     font-size: 50px;
@@ -30,26 +30,7 @@
     font-size: 24px;
     color: #9B9B9B;
 }
-span.text a {
-    color: transparent;
-    background: none;
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    text-align: center;
 
-    height: 298px;
-    top: 0px;
-}
-.drop_uploader.drop_zone .text a:after {
-    content: "\f030";
-    font-family: 'FontAwesome';
-    color: #fff;display: block; margin-top:50%;
-}
-.upload-photo-blogs .up-blog {
-    background: #ccc;
-    height: 295px;    cursor: pointer; position:relative;
-}
 .drop_uploader.drop_zone ul.files {
     width: 90%;
     margin: 0 auto;
@@ -116,7 +97,7 @@ span.text a {
     background-size: cover;
     margin: 0 auto;
     border: 1px solid #e1e1e1;
-    top: 0px !important;
+    top: 57px !important;
     position: absolute;
     left: 1px;
     bottom: 0px;
@@ -222,21 +203,14 @@ span.text a {
     transition: opacity 0.1s ease-in;
 }
 
-/* .drop_uploader.drop_zone ul.files.thumb li span.title {
+.drop_uploader.drop_zone ul.files.thumb li span.title {
     width: 100px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block;
 }
- */
-.drop_uploader.drop_zone ul.files.thumb li span.title {
-    width: 100px;
-    white-space: nowrap;
-    overflow: hidden; display:none !important;
-    text-overflow: ellipsis;
-    display: inline-block;
-}
+
 .drop_uploader.drop_zone ul.files li:nth-child(even) {
     background-color: transparent;
 }
@@ -256,19 +230,4 @@ span.text a {
     display: none;
     opacity: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-}
-
-
-
-
-
-@media screen and (max-width:767px){
-	.drop_uploader.drop_zone .text_wrapper {
-    margin-top: 30%;
-    padding-bottom: 189px;
-}
-.upload-photo-blogs .up-blog{max-height:420px; overflow:hidden;height: auto;}
-.drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
-    width: 100%;
-    height: auto;
 }
