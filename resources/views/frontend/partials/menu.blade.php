@@ -28,13 +28,15 @@
 									<li><a href="#about">How it Works</a></li>
 									<li><a href="#contact">Events</a></li>
 									<li><a href="#contact">Blog</a></li>
+
 									<?php 
 
 									if (isset(Auth::user()->id) && !empty(Auth::user()->id)) { ?>
-									<li><a href="costume/sell-a-costume" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
+									<li><a href="{{URL::to('costume/sell-a-costume')}}" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
 
+						
 									<?php }  else{ ?>
-									<li><a href="/login" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
+									<li><a href="{{URL::to('login')}}" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
 									<?php }?>
 									<li>
 										<form class="navbar-form navbar-left" role="search">
@@ -139,9 +141,17 @@
 						<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 							<i class="fa fa-search"></i>
 						</button>
-						<a href="costume/sell-a-costume"type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+						<?php 
+
+									if (isset(Auth::user()->id) && !empty(Auth::user()->id)) { ?>
+						<a href="{{URL::to('costume/sell-a-costume')}}"type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 							<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
 						</a>
+						<?php }  else{ ?>
+						<a href="{{URL::to('login')}}"type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+							<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
+						</a>
+						<?php }?>
 					</div>
 					<div class="mobile-rm">	
 						<ul class="nav nav-tabs mobile-tabs @if(!Auth::check()) is_login @endif">

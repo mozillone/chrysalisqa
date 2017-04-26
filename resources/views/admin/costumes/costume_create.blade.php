@@ -100,17 +100,19 @@
                                         <select class="form-control sony" name="category" id="category">
 										<option value="">Select Category</option>
 										<?php
-		$features_req=$categories['modules_result'];
-		foreach($features_req as $features_res)
-		{
-			//print_r($features_res);
-		?>
-			    <optgroup label="<?php echo ucfirst($features_res['name']);?>">
-				<?php  foreach($features_res['submodule_result'] as $feature_val_res){ ?>
-                        <option value="<?php echo $feature_val_res['subcategoryid'];?>"><?php echo ucfirst($feature_val_res['subcategoryname']);?></option>
-					</optgroup>
-		<?php } } ?>
- </select>
+											$features_req=$categories['modules_result'];
+											foreach($features_req as $features_res)
+											{
+												//print_r($features_res);
+											?>
+												    <optgroup label="<?php echo ucfirst($features_res['name']);?>">
+													<?php  foreach($features_res['submodule_result'] as $feature_val_res){ ?>
+									                        <option value="<?php echo $feature_val_res['subcategoryid'];?>"><?php echo ucfirst($feature_val_res['subcategoryname']);?></option>
+											<?php } ?> 
+														</optgroup>
+											
+											<?php } ?>
+									 </select>
                                    <span id="categoryerror" style="color:red"></span>
                                 </div>
 								<div class="form-group has-feedback create-admin_pagess" >
@@ -124,7 +126,7 @@
 										</div>
 										<span id="costumeconditionerror" style="color:red"></span>
 						       </div>
-							   <h4>Body & Dimensions</h4></hr>
+							   <h4>Body & Dimensions (Optional)</h4></hr>
 <div class="row" >
 <div class="col-md-6" >
 								<div class="form-group has-feedback" >
@@ -209,14 +211,14 @@
                                     <label for="inputEmail3" class="control-label">Size<span class="req-field" >*</span></label>
                                         <select name="size" id="size" class="form-control">
 										<option value="">Select Size</option>
-										<option value="1sz">1sz</option>
-										<option value="xxs">xxs</option>
-										<option value="xs">xs</option>
-										<option value="xs">s</option>
-										<option value="m">m</option>
-										<option value="l">l</option>
-										<option value="xl">xl</option>
-										<option value="xxl">xxl</option>
+										<option value="1sz">1SZ</option>
+										<option value="xxs">XXS</option>
+										<option value="xs">XS</option>
+										<option value="xs">S</option>
+										<option value="m">M</option>
+										<option value="l">L</option>
+										<option value="xl">XL</option>
+										<option value="xxl">XXL</option>
 										</select>
                                   <span id="size_error" style="color:red"></span>
                                 </div>
@@ -792,6 +794,16 @@
 	
 	</script>
 	<script> 
+      var placeSearch, autocomplete;
+      var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name', 
+      };
+
       function initAutocomplete() {
         // Create the autocomplete object, restricting the search to geographical
         // location types.
@@ -841,11 +853,10 @@
           });
         }
       }
-	
-
     </script> 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
         async defer></script>
+	
 	
 	<script type="text/javascript">
 	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensions").on("keyup", function(){

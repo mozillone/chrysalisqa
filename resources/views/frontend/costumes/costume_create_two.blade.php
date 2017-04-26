@@ -81,11 +81,8 @@
 
 <!-- </div> -->
 <div id="costume_description">
-<<<<<<< HEAD
-<p class="prog-txt">Please fill in the following fields  <span>as accurate as possible</span> to prevent disputes.</p>
-=======
-<p class="prog-txt">please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
->>>>>>> 337a616814ec0c43d5b654ec7639d62e55be244c
+
+<p class="prog-txt">Please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
 <h2 class="prog-head">Costume Description</h2>
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_description_form" id="costume_description_form" method="post"> -->	
 
@@ -96,7 +93,7 @@
 <p class="form-rms-que">01. Name Your Costume!*</p>
 <p class="form-rms-input"><input type="text" name="costume_name" id="costume_name" autocomplete="off" tab-index="1" placeholder=""></p>
 <span id="costumename_error" style="color:red"></span>
-<p class="form-rms-small"><span>Give Your listing a descriptive title</span> <br/>Example: "Men's Medium Spiderman<br/>Costume in Red</p>
+<p class="form-rms-small"><span>Give Your listing a descriptive title.</span> <br/>Example: "Men's Medium Spiderman<br/>Costume in Red"</p>
 </div>
 <!--costume name ends starts here-->
 <!--Catgeory code starts here-->
@@ -135,14 +132,14 @@
 <p class="form-rms-input">
 <select name="size" id="size">
 <option value="">Select Size</option>
-<option value="1sz">1sz</option>
-<option value="xxs">xxs</option>
-<option value="xs">xs</option>
-<option value="xs">s</option>
-<option value="m">m</option>
-<option value="l">l</option>
-<option value="xl">xl</option>
-<option value="xxl">xxl</option>
+<option value="1sz">1SZ</option>
+<option value="xxs">XXS</option>
+<option value="xs">XS</option>
+<option value="xs">S</option>
+<option value="m">M</option>
+<option value="l">L</option>
+<option value="xl">XL</option>
+<option value="xxl">XXL</option>
 </select>
 </p>
 <span id="sizeerror" style="color:red"></span>
@@ -200,16 +197,16 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <p class="form-rms-dim form-rms-he"><?php echo ucfirst($heading); ?> <br/> <span class="form-rms-he1">
  <input type="{{$bodyanddimensions->code}}" name="{{$body_height_ft->value}}" id="{{$body_height_ft->value}}"> <span><?php echo $heading_value;?></span>
  <input type="{{$bodyanddimensions->code}}" class="form-rms-dt" name="{{$body_height_in->value}}" id="{{$body_height_in->value}}" > <span><?php echo $heading_value_in; ?></span></span></p>
-<p class="form-rms-dim"><?php echo $heading_weight_value; ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}"> <span><?php echo $heading_weight_value_lbs;?></span></span></p>
-<p class="form-rms-dim"><?php echo $heading_chest_value; ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" > <span><?php echo $heading_chest_value_in; ?> </span></span></p>
-<p class="form-rms-dim"><?php echo $heading_waist_value; ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_waist_lbs->value}}" id="{{$body_waist_lbs->value}}"> <span><?php echo $heading_waist_value_lbs; ?></span></span></p>
+<p class="form-rms-dim"><?php echo ucfirst($heading_weight_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}"> <span><?php echo $heading_weight_value_lbs;?></span></span></p>
+<p class="form-rms-dim"><?php echo ucfirst($heading_chest_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" > <span><?php echo $heading_chest_value_in; ?> </span></span></p>
+<p class="form-rms-dim"><?php echo ucfirst($heading_waist_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_waist_lbs->value}}" id="{{$body_waist_lbs->value}}"> <span><?php echo $heading_waist_value_lbs; ?></span></span></p>
 <span id="bodydimensionerror"  style="color:red"></span>
 </div>
 </div>
 
 
 <div class="form-rms">
-<p class="form-rms-que">08. {{$cosplayone->label}}*</p>
+<p class="form-rms-que">08. {{$cosplayone->label}}</p>
 <p class="form-rms-input">
 @foreach($cosplayone_values as $index=>$cosplayone_val)
 <span class="full-rms"><input type="{{$cosplayone->type}}" name="{{$cosplayone->code}}" id="{{$cosplayone_val->optionid}}" value="{{$cosplayone_val->optionid}}"> {{$cosplayone_val->value}}</span>
@@ -256,7 +253,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 </div>
 
 <div class="form-rms">
-<p class="form-rms-que">09. {{$cosplaytwo->label}}*</p>
+<p class="form-rms-que">09. {{$cosplaytwo->label}}</p>
 <p class="form-rms-input">
 @foreach($cosplaytwo_values as $index=>$cosplaytwo_val)
 <span class="full-rms"><input type="{{$cosplaytwo->type}}" name="{{$cosplaytwo->code}}" id="{{$cosplaytwo_val->optionid}}" value="{{$cosplaytwo_val->optionid}}"> {{$cosplaytwo_val->value}}</span>
@@ -313,7 +310,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="col-md-6">
 
 <div class="form-rms">
-<p class="form-rms-que">10. {{$cosplaythree->label}}*</p>
+<p class="form-rms-que">10. {{$cosplaythree->label}}</p>
 <p class="form-rms-input">
 @foreach($cosplaythree_values as $index=>$cosplaythree_val)
 <span class="full-rms"><input type="{{$cosplaythree->type}}" name="{{$cosplaythree->code}}" id="{{$cosplaythree_val->optionid}}" value="{{$cosplaythree_val->optionid}}"> {{$cosplaythree_val->value}}</span>
@@ -357,20 +354,20 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 </div>
 
 <div class="form-rms">
-<p class="form-rms-que">11. {{$cosplayfour->label}}*</p>
+<p class="form-rms-que">11. {{$cosplayfour->label}}</p>
 <p class="form-rms-input">
 @foreach($cosplayfour_values as $index=>$cosplayfour_val)
 <span class="full-rms"><input type="{{$cosplayfour->type}}" name="{{$cosplayfour->code}}" id="{{$cosplayfour_val->optionid}}" value="{{$cosplayfour_val->optionid}}"> {{$cosplayfour_val->value}}</span>
 @endforeach
 
 
-<p class="form-rms-small" id="mention_hours" style="display:none" >If Yes,how long did it take?</p>
+<p class="form-rms-small" id="mention_hours" style="display:none" >If Yes, how long did it take?</p>
 <p class="ct1-rms-rel" id="mention_hours_input" style="display:none"><input type="text" name="make_costume_time" class="input-rm100"> <span>hours<span>
 </p>
 <span id="usercostumeerror" style="color:red"></span>
 
 </div>
-<!-- <div class="form-rms">
+<div class="form-rms">
 <p class="form-rms-que">12. {{$cosplayfive->label}}*</p>
 <p class="form-rms-input">
 @foreach($cosplayfive_values as $index=>$cosplayfive_val)
@@ -378,28 +375,29 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 @endforeach
 </p>
 <span id="qualityerror" style="color:red"></span>
-</div> -->
+</div>
 
 
 <div class="form-rms">
-<p class="form-rms-que form-rms-que1"><span>12. Describe your Costume:</span> Including Accessories*</p>
+<p class="form-rms-que form-rms-que1"><span>13. Describe your Costume:</span> Including accessories*</p>
 <p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="description" id="description" maxlength="600" ></textarea></p>
+
 <span id="descriptionerror" style="color:red"></span>
-<p class="form-rms-sm1">(600 max characters)</p>
+<p class="form-rms-sm1">( <span id="max_length_char1"></span> 600 characters)</p>
 </div>
 
 <div class="form-rms">
-<p class="form-rms-que form-rms-que1"><span>13. Fun Fact:</span> A little backstory to your costume and the adventures it has experienced*</p>
+<p class="form-rms-que form-rms-que1"><span>14. Fun Fact:</span> A little backstory to your costume and the adventures it has experienced*</p>
 <p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="funfcats" id="funfacts" maxlength="600" ></textarea></p>
 <span id="facterror" style="color:red"></span>
-<p class="form-rms-sm1">(600 max characters)</p>
+<p class="form-rms-sm1">( <span id="max_length_char2"></span> 600 characters)</p>
 </div>
 
 <div class="form-rms">
-<p class="form-rms-que form-rms-que1"><span>14. FAQ </span>Create your own costume Frequently Asked Questions to avoid an overload of questions in your inbox!*</p>
+<p class="form-rms-que form-rms-que1"><span>15. FAQ </span>Create your own costume Frequently Asked Questions to avoid an overload of questions in your inbox!*</p>
 <p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="faq" id="faq" maxlength="600" ></textarea></p>
 <span id="faqerror" style="color:red"></span>
-<p class="form-rms-sm1">(600 max characters)</p>
+<p class="form-rms-sm1">( <span id="max_length_char3"></span> 600 characters)</p>
 </div>
 
 <!--costume three code starts here-->
@@ -430,7 +428,6 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="form-rms">
 <p class="form-rms-que">02. Quantity</p>
 <p class="form-rms-input"><select  name="quantity" id="quantity" class="cst2-select50">
-<option value="">Select Quantity</option>
 <option>1</option>
 <option>2</option>
 <option>3</option>
@@ -533,13 +530,19 @@ $heading_value=$headingexplode[1];
 </div>
 <div class="prog-form-rm" id="preferences_div">
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
-<p class="prog-txt">you're almost done! just a Few more quetions.</p>
+<p class="prog-txt">You're almost done! just a Few more questions.</p>
 <h2 class="prog-head">Review Your Preferences</h2>
 <div class="col-md-6">
 
 <div class="form-rms">
 <p class="form-rms-que">01. Item Location</p>
-<p class="form-rms-input"><input type="text" id="item_location" name="item_location"></p>
+<p class="form-rms-input"><input type="text" id="item_location" onFocus="geolocate()" name="item_location">
+<input type="hidden" class="field form-control" id="street_number" name="address1" disable="true"required></input>
+								<input type="hidden" class="field form-control" name="address2" id="route" required></input></td>
+									<input type="hidden" class="field form-control" id="locality" name="city" required>
+									<input type="hidden" class="field form-control" id="administrative_area_level_1" name="state"></input>
+									<input type="hidden" class="field form-control" id="postal_code" name="zipcode">
+									<input type="hidden" class="field form-control" id="country" name="country" required></input></p>
 <span id="item_locationerror" style="color:red"></span>
 </div>
 
@@ -576,6 +579,7 @@ $heading_value=$headingexplode[1];
 
 <div class="col-md-6">
 <div class="form-rms">
+
 <p class="form-rms-que form-rms-que1">04. Donate a Portion to Charity</p>
 <p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However, if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
 <p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis Terms & Conditions.</p>
@@ -671,6 +675,18 @@ $(document).ready(function()
             this.value = val.substring(0, val.length - 1);
         }
     });
+	$('#description').on('keyup',function(){
+	      var input = $(this);
+	      $('#max_length_char1').text(input.val().length + " of");
+	});
+	$('#funfacts').on('keyup',function(){
+	      var input = $(this);
+	      $('#max_length_char2').text(input.val().length + " of");
+	});
+	$('#faq').on('keyup',function(){
+	      var input = $(this);
+	      $('#max_length_char3').text(input.val().length + " of");
+	});
 	$('#upload_div').css('display','block');
 	$('#costume_description').css('display','none');
 	$('#pricing_div').css('display','none');
@@ -770,7 +786,7 @@ $(document).ready(function()
 			$('#costumename_error').html('Enter Costume Name');
 			str=false;
 		}
-		if(heightft==''){
+		/*if(heightft==''){
 			$('#height-ft').css('border','1px solid red');
 			$('#bodydimensionerror').html('Enter Body & Dimensions');
 			str=false;
@@ -794,7 +810,7 @@ $(document).ready(function()
 			$('#waist-lbs').css('border','1px solid red');
 			$('#bodydimensionerror').html('Enter Body & Dimensions');
 			str=false;
-		}
+		}*/
 		if(category==''){
 			$('#categoryname').css('border','1px solid red');
 			$('#categoryerror').html('Select Category');
@@ -836,11 +852,11 @@ $(document).ready(function()
 			str=false;
 			
 		}
-		/*if($('input[name=fimquality]:checked').length<=0){
+		if($('input[name=fimquality]:checked').length<=0){
 			$('#qualityerror').html('Select Costume Fit For Film Quality OR Not');
 			str=false;
 			
-		}*/
+		}
 		if($('input[name=make_costume]:checked').length<=0){
 			$('#usercostumeerror').html('Select User Make The Costume Or Not');
 			str=false;
@@ -941,11 +957,11 @@ $(document).ready(function()
 			$('#priceerror').html('Enter Price');
 			str=false;
 		}
-		if (quantity == "") {
+		/*if (quantity == "") {
 			$('#quantity').css('border','1px solid red');
 			$('#quantityerror').html('Select Quantity');
 			str=false;
-		}
+		}*/
 		if (shipping == "") {
 			$('#shipping').css('border','1px solid red');
 			$('#shippingerror').html('Select Shipping');
@@ -1092,4 +1108,68 @@ $(document).ready(function()
             });
         });
 </script> 
+<script> 
+var placeSearch, autocomplete;
+      var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name', 
+      };
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('item_location')),
+            {types: ['geocode']});
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+      }
+
+      function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+          document.getElementById(component).value = '';
+          document.getElementById(component).disabled = false;
+        }
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+      }
+
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+	
+
+    </script> 
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
+        async defer></script>
 @stop
