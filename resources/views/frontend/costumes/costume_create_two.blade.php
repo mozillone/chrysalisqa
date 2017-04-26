@@ -449,14 +449,18 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 </div>
 </div>
 <div class="prog-form-rm" id="pricing_div">
+
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_pricing_form" id="costume_pricing_form" method="post"> -->
-<p class="prog-txt">Please fill in the following field <span>as accurately</span> as you can.</p>
+<p class="prog-txt hidden-md hidden-lg hidden-sm hidden-xs  ">Please fill in the following field <span>as accurately</span> as you can.</p>
 <div class="col-md-6">
+<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 3</h2>
 <h2 class="prog-head">Pricing</h2>
-<div class="form-rms pricess">
+
+<p class="prog-txt hidden-md hidden-lg hidden-sm ">Please fill in the following field <span>as accurately</span> as you can.</p>
+<div class="form-rms pricess pric_tag_three">
 <p class="form-rms-que">01. Price</p>
 <div class="form-rms-input">
-<p class="form-rms-rel"><input type="text" class="input-rm100" name="price" id="price" ><span class="form-rms-abs"><i class="fa fa-usd" aria-hidden="true"></i></span></p>
+<p class="form-rms-rel "><input type="text" class="input-rm100" name="price" id="price" ><span class="form-rms-abs"><i class="fa fa-usd" aria-hidden="true"></i></span></p>
 <p class="cst2-textl2">Not Sure? <i class="fa fa-info-circle" aria-hidden="true"></i></p></div>
 <span id="priceerror" style="color:red"></span>
 </div>
@@ -497,7 +501,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 </div>
 
 <div class="col-md-6">
-<h2 class="prog-head">Package Information</h2>
+<h2 class="prog-head snd-hdng">Package Information</h2>
 <div class="form-rms">
 <p class="form-rms-que">01. Weight of Packaged Item</p>
 <p class="form-rms-input">
@@ -568,10 +572,12 @@ $heading_value=$headingexplode[1];
 </div>
 <div class="prog-form-rm" id="preferences_div">
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
-<p class="prog-txt">You're almost done! Just a few more questions.</p>
+<p class="prog-txt hidden-md hidden-lg hidden-sm hidden-xs">You're almost done! Just a few more questions.</p>
+<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">step 3</h2>
 <h2 class="prog-head">Review Your Preferences</h2>
-<div class="col-md-6">
 
+<div class="col-md-6">
+<p class="prog-txt hidden-md hidden-lg hidden-sm ">You're almost done! Just a few more questions.</p>
 <div class="form-rms">
 <p class="form-rms-que">01. Item Location</p>
 <p class="form-rms-input"><input type="text" id="item_location" onFocus="geolocate()" name="item_location">
@@ -616,9 +622,9 @@ $heading_value=$headingexplode[1];
 </div>
 
 <div class="col-md-6">
-<div class="form-rms">
+<div class="form-rms lst-stp">
 
-<p class="form-rms-que form-rms-que1">04. Donate a Portion to Charity</p>
+<p class="form-rms-que form-rms-que1 dnt_br">04. Donate a Portion to Charity</p>
 <p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However, if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
 <p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis Terms & Conditions.</p>
 <p class="ct3-rms-head">Donation Amount</p>

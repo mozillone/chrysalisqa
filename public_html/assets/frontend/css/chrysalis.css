@@ -1430,7 +1430,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
     width: 100%;
     text-align: left;
     margin-left: 0px;
-    padding-left: 40px;
+    padding-left: 20px;
 }
 .mobile-pro-text{display:none;}
 
@@ -1451,6 +1451,27 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+	.dnt_br{border-bottom:1px solid #000}
+	#preferences_div p.form-rms-que.form-rms-que1 {
+    font-family: Proxima-Nova-Extrabold;
+
+    padding-bottom: 5px;
+    font-size: 18px;
+}
+#preferences_div p.ct3-rms-head{  font-family: Proxima-Nova-Extrabold;
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+    font-size: 18px; text-align:left}
+.snd-hdng{text-align:left !important;}
+	.ct3-rms-text{text-align:left}
+	.form-rms.pricess.pric_tag_three .form-rms-input .form-rms-rel {
+    width: 100%;
+    position: relative;
+    float: left;
+}
+	.form-rms-input select.cst2-select50 {
+    width: 100%;
+}
 	.form-rms-input.dimensions-two.dimensions-two-pk_info input {
     width: 50%;
 }
@@ -1529,7 +1550,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
     font-size: 16px;
 }
 	h2.prog-stepss {
-  text-align: center;
+  text-align: center;    margin-top: 0px;
     color: #000;
     text-transform: uppercase;
     font-size: 20px;    margin-bottom: 5px;
