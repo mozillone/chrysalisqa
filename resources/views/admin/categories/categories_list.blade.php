@@ -9,6 +9,7 @@ Categories List@parent
 @section('header_styles')
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+
 @stop
 
 {{-- Page content --}}

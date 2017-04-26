@@ -17,13 +17,13 @@ span.logo-lg {width: 57%;    margin: 0 auto;}
     border-color: #60c5ac;
 }
 /*Jithu 24042017 *******/
-#dtTable tr>th:first-child{
+/*#dtTable tr>th:first-child{
 display: none;
 }
 #dtTable tr>td:first-child{
 display: none;
 }
-
+*/
 /*******************/
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     z-index: 3;

@@ -1,4 +1,4 @@
-app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,Charities) 
+app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,Charities,Exports) 
 {
 	var vm = this;
     $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -13,6 +13,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
+                      DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
                       DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml).notSortable(),
                       DTColumnBuilder.newColumn('name').withTitle('Charity Name'),
                       DTColumnBuilder.newColumn('user_name').withTitle('Suggested By'),
@@ -22,6 +23,39 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
                       .renderWith(actionsHtml)
                     ], 
     $scope.displayTable = true;
+      function getCheckboxes(data) {
+       return '<input type="checkbox" class="rowsChecked" name="user_checkboxes" value='+data.id+' checked>' 
+    }
+
+           $scope.charitiesExportCSV = function(){
+          
+          var checkboxes = document.getElementsByName("user_checkboxes");
+          
+          var checkboxesChecked = []; 
+          for (var i=0; i<checkboxes.length; i++) { 
+            if (checkboxes[i].checked) {
+              checkboxes[i].value
+              checkboxesChecked.push(checkboxes[i].value); 
+              
+            } 
+          } 
+       
+          Exports.charitiesExportCSV(checkboxesChecked).then(function(response){
+            
+            var fileName = "Charities_list.csv";
+              var a = document.createElement("a");
+              document.body.appendChild(a);
+              a.style = "display: none";
+            var file = new Blob([response.data], {type: 'application/csv'});
+            console.log(file);
+              var fileURL = window.URL.createObjectURL(file);
+              
+              a.href = fileURL;
+              a.download = fileName;
+              a.click(); 
+             
+           }); 
+    }
     function imageHtml(data, type, full, meta) {
         if(data!=null){
             return '<img  class="img-responsive"  src="/charities_images/'+data+'" width="50px">'
@@ -62,7 +96,8 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
             .withOption('bFilter', false)
             .withOption('lengthChange', false);
              $scope.dtColumns = [
-                       DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml).notSortable(),
+                      DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+                      DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml).notSortable(),
                       DTColumnBuilder.newColumn('name').withTitle('Charity Name'),
                       DTColumnBuilder.newColumn('user_name').withTitle('Suggested By'),
                       DTColumnBuilder.newColumn('date').withTitle('Created Date'),

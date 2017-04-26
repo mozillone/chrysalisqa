@@ -146,6 +146,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	    Route::any('/charities', ['as' => 'charities-list','uses'=>'CharitiesController@charitiesList']);
 	    Route::any('/charities-list', ['as' => '','uses'=>'CharitiesController@charitiesData']);
 	    Route::any('/charity/status/change', ['as' => '','uses'=>'CharitiesController@changeCharityStatus']);
+	    Route::post('/charities/csvExport', array('as' => '','uses' => 'CharitiesController@charitiesCsvExport'));
 	   /****************Charities Management Ends Here***********************/
 
 
