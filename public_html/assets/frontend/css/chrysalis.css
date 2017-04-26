@@ -1451,6 +1451,9 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+	.up-blog .text_wrapper {
+    padding-bottom: 96%;
+}
 	.dnt_br{border-bottom:1px solid #000}
 	#preferences_div p.form-rms-que.form-rms-que1 {
     font-family: Proxima-Nova-Extrabold;
