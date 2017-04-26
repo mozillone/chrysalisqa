@@ -8,11 +8,12 @@ app.controller('PromotionsController', function($scope,DTOptionsBuilder, DTColum
       })
       .withDataProp('data.promotions')
       .withOption('createdRow', createdRow)
-      .withOption('order', [ ])
+      .withOption('order', [0, 'desc'])
       .withOption('responsive', true)
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
+                      DTColumnBuilder.newColumn('coupon_id').withTitle('#').notVisible(),
                       DTColumnBuilder.newColumn('name').withTitle('Coupon Name'),
                       DTColumnBuilder.newColumn('code').withTitle('Coupon Code'),
                       DTColumnBuilder.newColumn('discount').withTitle('Discount').renderWith(discount),
@@ -60,23 +61,23 @@ app.controller('PromotionsController', function($scope,DTOptionsBuilder, DTColum
           $scope.dtOptions = DTOptionsBuilder.newOptions()
           .withOption('data',response.data.data.promotions)
           .withOption('createdRow', createdRow)
-            .withOption('order', [ ])
+           .withOption('order', [0, 'desc'])
             .withOption('responsive', true)
             .withOption('bFilter', false)
             .withOption('lengthChange', false);
              $scope.dtColumns = [
+                            DTColumnBuilder.newColumn('coupon_id').withTitle('#').notVisible(),
                             DTColumnBuilder.newColumn('name').withTitle('Coupon Name'),
-                      DTColumnBuilder.newColumn('code').withTitle('Coupon Code'),
-                      DTColumnBuilder.newColumn('discount').withTitle('Discount').renderWith(discount),
-                      DTColumnBuilder.newColumn('datestart').withTitle('Applied From'),
-                      DTColumnBuilder.newColumn('dateend').withTitle('Applied To'),
-                      DTColumnBuilder.newColumn('uses_total').withTitle('No.of uses'),
-                      DTColumnBuilder.newColumn('status').withTitle('Status').renderWith(activeHtml),
-                      DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
-                      .renderWith(actionsHtml)
+                            DTColumnBuilder.newColumn('code').withTitle('Coupon Code'),
+                            DTColumnBuilder.newColumn('discount').withTitle('Discount').renderWith(discount),
+                            DTColumnBuilder.newColumn('datestart').withTitle('Applied From'),
+                            DTColumnBuilder.newColumn('dateend').withTitle('Applied To'),
+                            DTColumnBuilder.newColumn('uses_total').withTitle('No.of uses'),
+                            DTColumnBuilder.newColumn('status').withTitle('Status').renderWith(activeHtml),
+                            DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
+                            .renderWith(actionsHtml)
                           ],
           $scope.displayTable = true;
-    
           });
         } 
 }); 
