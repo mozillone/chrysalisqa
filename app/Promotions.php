@@ -51,9 +51,18 @@ class Promotions extends Authenticatable
             $this->updatePromotionsInfo($data,$req['coupon_id']);
             if(!empty($req['cats'])){
                  $this->updateCouponCategories($req['cats'],$req['coupon_id']);
+            }else{
+                $cond=array('coupon_id'=>$req['coupon_id']);
+                Site_model::delete_single('coupon_category',$cond);
+
+                $cond=array('coupon_id'=>$req['coupon_id']);
+                Site_model::delete_single('coupon_costumes',$cond);
             }
             if(!empty($req['costumes'])){
                 $this->updateCouponCostumes($req['costumes'],$req['coupon_id']);
+            }else{
+                $cond=array('coupon_id'=>$req['coupon_id']);
+                Site_model::delete_single('coupon_costumes',$cond);
             }
             return true;
     }
