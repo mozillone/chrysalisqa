@@ -91,6 +91,8 @@
 					</label>
 				</span>
 			<!-- </form> -->
+			<p id="other_thumbnails">
+			</p>
 					</div>
 					<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next Step</a>
@@ -650,8 +652,8 @@ $heading_value=$headingexplode[1];
 
 <p class="cst2-rms-chck"><input type="checkbox" id="another_charity" name="another_charity"> I would like to suggest another charity organization</p>
 </div>
-
-<div class="form-rms">
+ 
+<div class="form-rms" id="other_organzation_check" style="display: none;">
 <p class="ct3-rms-head chartiy_spcy">Please Specify:</p>
 <p class="form-rms-input org_nme"><input type="text"  name="organzation_name" id="organzation_name" autocomplete="off" placeholder="Organization Name"  class="form-control"></p>
 <span id="organzation_nameerror" style="color:red"></span>
@@ -719,6 +721,22 @@ $('#categoryname').on('change',function(){
 });
 $(document).ready(function()
 {
+
+
+var inputLocalFont = document.getElementById("upload-file-selector");
+inputLocalFont.addEventListener("change",previewImages,false);
+
+function previewImages(){
+    var fileList = this.files;
+
+    var anyWindow = window.URL || window.webkitURL;
+
+        for(var i = 0; i < fileList.length; i++){
+          var objectUrl = anyWindow.createObjectURL(fileList[i]);
+          $('#other_thumbnails').append('<img src="' + objectUrl + '" />');
+          window.URL.revokeObjectURL(fileList[i]);
+        }       
+}
 	//numeric condition
 	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height").on("keyup", function(){
         var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
@@ -782,6 +800,22 @@ $(document).ready(function()
 		$('#mention_hours_input').css('display','none');
 		$('#mention_hours_input').val('');
 	});
+	$('#another_charity').click(function(){
+
+    if($(this).prop("checked") == true){
+
+        $('#other_organzation_check').css('display','block');
+
+    }
+
+    else if($(this).prop("checked") == false){
+
+        $('#other_organzation_check').css('display','none');
+
+    }
+
+});
+
 	
 	$( "#upload_next" ).click(function(a) {
 
