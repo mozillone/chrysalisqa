@@ -66,7 +66,7 @@
 					
 						<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 						<div class="col-md-6">
-							<h2 class="heading-agent">Custome Information</h2>
+							<h2 class="heading-agent">Costume Information</h2>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Customer<span class="req-field" >*</span></label>
@@ -154,7 +154,7 @@
 									$attribute1=ucfirst($heightattributes1[0]);
 									$attributevalue1=$heightattributes1[1];
 									?>
-							     <label for="inputEmail3" class="control-label">Height<span class="req-field" >*</span></label>
+							     <label for="inputEmail3" class="control-label"></label>
 									<div class="input-group">
 										<input type="{{$bd_height_in->type}}"  class="form-control"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
 										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1; ?></span>
@@ -860,7 +860,7 @@
 	
 	<script type="text/javascript">
 	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensions").on("keyup", function(){
-	    var valid = /^\d{0,3}(\.\d{0,3})?$/.test(this.value),
+	    var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
 	        val = this.value;
 	    
 	    if(!valid){
