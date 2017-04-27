@@ -658,8 +658,8 @@
                                        <div class="input-group">
 									   <!-- <span class="input-group-addon">$</span> -->
   <!-- <input type="text" class="form-control"  autocomplete="off"  name="charity_amount" id="charity_amount"> -->
-  <select class="form-control" name="charity_amount" id="charity_amount"><option value="">Donate Amount</option><option>10%</option><option>20%</option><option>30%</option></select>
-  <p class="cst3-textl2"><i class="fa fa-usd" aria-hidden="true"></i>5.90</p>
+  <select class="form-control" name="charity_amount" id="charity_amount"><option value="">Donate Amount</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select>
+  <p class="cst3-textl2" id="dynamic_percent_amount"><i class="fa fa-usd" aria-hidden="true"></i>0.00</p>
                                     <p class="error">{{ $errors->first('charity_amount') }}</p> 
   
                                     <span id="priceerror" style="color:red">
@@ -745,6 +745,14 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function () {
+
+	//donate amount percentage calculation
+	$('#charity_amount').change(function(){
+		var donate_percent = $(this).val();
+		var price = $('#price').val();
+		var total = (price*donate_percent)/100;
+		$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total));
+	});
 	//$(".sony").select2();
 
 	$('#img_chan,#img_chan2,#img_chan1').drop_uploader({

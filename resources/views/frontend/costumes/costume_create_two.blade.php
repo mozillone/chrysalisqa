@@ -637,8 +637,8 @@ $heading_value=$headingexplode[1];
 <p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis Terms & Conditions.</p>
 <p class="ct3-rms-head">Donation Amount</p>
 <div class="form-rms-input">
-<p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option>10%</option><option>20%</option><option>30%</option></select></p>
-<p class="cst3-textl2"><i class="fa fa-usd" aria-hidden="true"></i>5.90</p>
+<p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></p>
+<p class="cst3-textl2" id="dynamic_percent_amount"><i class="fa fa-usd" aria-hidden="true"></i>0.00</p>
 <span id="donate_charityerror" style="color:red"></span>
 </div>
 <p class="ct3-rms-head">Donate to</p>
@@ -740,7 +740,10 @@ function previewImages(){
 
 //donate amount percentage calculation
 $('#donate_charity').change(function(){
-	//alert($(this).val());
+	var donate_percent = $(this).val();
+	var price = $('#price').val();
+	var total = (price*donate_percent)/100;
+	$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total));
 });
 	//numeric condition
 	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height").on("keyup", function(){
