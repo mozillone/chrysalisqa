@@ -703,6 +703,7 @@ $('#categoryname').on('change',function(){
 			console.log(data);
 			var model = $('#subcategory').html('Select Subcategory');    //keeping subcategory field empty before
 					model.empty();
+			model.append("<option value=''>Select Subcategory</option>");
 					$.each(data, function(index, element) {
 						model.append("<option value='"+ element.subcategoryid +"'>" + element.subcategoryname + "</option>");
 			        });
@@ -744,7 +745,7 @@ $(document).ready(function()
 	      $('#max_length_char3').text(input.val().length + " of");
 	});
 	$('#upload_div').css('display','block');
-	$('#costume_description').css('display','none');
+	$('#costume_description').css('display','block');
 	$('#pricing_div').css('display','none');
 	$('#preferences_div').css('display','none');
 	$( "#7" ).click(function() {
