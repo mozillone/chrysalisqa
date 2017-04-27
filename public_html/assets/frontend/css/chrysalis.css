@@ -1196,6 +1196,14 @@ span.up_tip {
 
 
 /********************************************************************Media start here********************************************************************/
+
+@media screen and (min-width:1280px){
+
+.mid_nav form.navbar-form.navbar-left input{font-family:Proxima-Nova-Semibold;height:40px;padding-left:55px;border:1px solid #e6e6e6;}
+
+}
+
+
 @media screen and (min-width:1025px){
 	.charity_rigt .form-rms-que {
     text-indent: 0px;
@@ -1317,7 +1325,19 @@ display: none;
 .t-cnt{display:none;}
 }
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
-
+.icon_lins.text-right ul li .btn span {
+    background: #60c5ac;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    border-radius: 50%;
+    vertical-align: middle;
+    text-align: center;
+    color: #fff;
+    top: 8px;
+    line-height: 15px;
+    font-size: 10px;
+}
 	.upload_hint p {
     font-size: 15px;font-family: Proxima-Nova-Semibold;
     color: #EF4A6C;
@@ -1408,7 +1428,7 @@ color: #323031;
 cursor: pointer;
 margin: 5px 0;
 }
-	.top_nav_div{display: none;}
+
 	.box-list1 li{font-size: 13px;}
 	.list-box-rm .checkbox label, .radio label{font-size: 13px;}
 	.social-icons a {
@@ -1475,6 +1495,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+		.top_nav_div{display: none;}
 	.form-group.loign-adtnl.forgot.mbl-frgt_sign label {
     display: block !important;
 }
