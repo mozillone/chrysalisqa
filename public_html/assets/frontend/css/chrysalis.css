@@ -1072,7 +1072,7 @@ div#cosplayplay_yes_div p {
 }
 
 .upload-photo-blogs h4 {text-align: center;
-    font-size: 16px;	font-family: Proxima-Nova-Extrabold; color:#000;    margin-bottom: 20px;
+    font-size: 16px;	font-family: Proxima-Nova-Extrabold; color:#323031;    margin-bottom: 20px;
 }
 .upload_castume-blog {
     background: url(../../frontend/img/upload-bg.png);
@@ -1303,6 +1303,7 @@ display: none;
 	div#navbar ul {
     margin: 0px;
 }
+.upload_hint p:after{    top: 150px !important;}
 .icon_lins.text-right ul li .btn span {
     background: #60c5ac;
     width: 15px;
@@ -1322,7 +1323,7 @@ display: none;
     position: absolute;
     bottom: 0px;    text-align: center;
     height: 100%; position: relative;
-    top: 30px;
+    top: 90px;
 }
 	.upload-photo-blogs .threeblogs {
     width: 100%;
