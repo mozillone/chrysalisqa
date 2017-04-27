@@ -258,9 +258,15 @@ span.text a {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 
+@media only screen and (min-device-width:768px) and (max-device-width:1024px){
 
-
-
+.drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
+    width: 150px;
+    height: 295px;
+    background-size: cover;
+    background-position: 50%;
+}
+}
 
 @media screen and (max-width:767px){
 	.drop_uploader.drop_zone .text_wrapper {

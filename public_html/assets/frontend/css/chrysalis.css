@@ -989,7 +989,7 @@ a#pricing_next:hover{text-decoration:none;}
 .form-rms-he{width: 30%;}
 .form-rms-dim .form-rms-he1 .form-rms-dt{margin-left: 10px;}
 .prog-form-rm{width: 100%; float:left; margin: 0 0 30px;font-size: 16px;}
-
+a#preferences_finished:hover{text-decoration:none}
 /* ProgressBar second page CSS S */
 
 
@@ -1008,15 +1008,11 @@ a#pricing_next:hover{text-decoration:none;}
 .cst2-select80{width: 80px !important;}
 .form-rms-input .form-rms-rel1{width: 80px; position: relative; float:left;}
 .cst3-textl2{width: auto; float:left; line-height: 30px; margin-left: 15px; color: #60c4ac;    font-family: Proxima-Nova-Semibold;}
-.ct3-list{width: 80px; height:80px; float:left; list-style: none;}
-.ct3-list li{width: 16.66%; float:left; padding: 0 5px;}
-.ct3-list li img{width: 100%; float:left; margin: 10px auto;}
+.ct3-list{float:left; list-style: none;}
+.ct3-list li {    float: left;    padding: 0 5px;    max-width: 100px;    min-height: 80px;    max-height: 40px;margin-bottom: 30px;    margin-left: -4px;}
+.ct3-list li img {    float: left;    width: 80px;    min-height: 80px;    margin-bottom: 5px;}
 .ct3-list li input{margin: 10px auto 0; display: block;}
-.ct1-rms-rel input.input-rm100 {
-    width: 75px;
-    float: left;
-    height: 30px;
-}
+.ct1-rms-rel input.input-rm100 {    width: 75px;    float: left;    height: 30px;}
 .ct1-rms-rel{width: 100%; float:left; line-height: auto; font-size: 14px; font-family: Proxima-Nova-Semibold; margin: 10px 0 0;}
 .ct1-rms-rel span{margin: 12px 0 0 5px; float:left;font-size: 16px; }
 /* ProgressBar second page CSS E */
@@ -1039,7 +1035,9 @@ a.btn-rm-view-finl:hover {    text-decoration: none;}
 .success_page_final p {    font-family: Proxima-Nova-Semibold;    color: #323031;    font-size: 18px;}
 a.btn-rm-ret {    cursor: pointer;    line-height: 38px;    font-family: Proxima-Nova-Extrabold;    font-size: 18px;    background: #60c4ac;   color: #fff;    border: none;    outline: none;    border-radius: 2px;
     display: block;    width: 200px;    text-align: center;    margin: 0 auto;    margin-bottom: 10px;    margin-top: 20px;}
-
+a.upload_sub_btn.btn.btn-default:hover {
+    border: 2px solid #60C4AB;
+}
 /* final cosutme end page */
 
 
@@ -1079,7 +1077,7 @@ label.btn.btn-default.upload_more_btn{    text-align: center;
     font-size: 18px;
     margin-bottom: 15px; color:#60C4AB;
     width: 200px;font-family: Proxima-Nova-Extrabold;}
-a.upload_sub_btn.btn.btn-default{ background: #60C4AB; color:#fff;    margin-top: 30px;}
+a.upload_sub_btn.btn.btn-default{ background: #60C4AB; color:#fff;    margin-top: 30px;margin-bottom: 50px;}
 .up_btns_tl {
     text-align: center;
 }
@@ -1099,6 +1097,7 @@ a.upload_sub_btn.btn.btn-default{ background: #60C4AB; color:#fff;    margin-top
 div#cosplayplay_yes_div p {
     padding-left: 0px;
 }
+
 .upload-photo-blogs h4 {text-align: center;
     font-size: 16px;	font-family: Proxima-Nova-Extrabold; color:#000;    margin-bottom: 20px;
 }
@@ -1184,7 +1183,7 @@ border-top-color: #fff;
 span.up_tip {
     font-family: manustrialregular;
     font-size: 30px;
-    display: block;
+    display: block;    line-height: 15px;
 }
 
 
@@ -1198,6 +1197,9 @@ span.up_tip {
 
 /********************************************************************Media start here********************************************************************/
 @media screen and (min-width:1025px){
+	.charity_rigt .form-rms-que {
+    text-indent: 0px;
+}
 	.upload_hint p:after {
     width: 140px;
     height: 187px;
@@ -1215,7 +1217,7 @@ span.up_tip {
     position: absolute;
     bottom: 0px;    text-align: center;
     height: 100%; position: relative;
-    top: 70px;
+    top: 100px;    line-height: 18px;
 }
 	.img_layer {
     position: relative;
@@ -1256,6 +1258,13 @@ span.up_tip {
 }
 
 @media screen and (max-width:1024px){
+	.responsive-menu .navbar-toggle {
+    padding: 5px 6px!important;
+}
+	a.navbar-toggle.respnsive-ser-rm.sell span {
+    font-family: Proxima-Nova-Bold;
+    padding-left: 4px;
+}
 		button.navbar-toggle.respnsive-ser-rm.sell span {
     font-family: Proxima-Nova-Extrabold;
     padding-left: 4px;
@@ -1289,7 +1298,7 @@ div#main-banner{margin-top:65px;}
 .mobile_menu_logo{margin-left:35px;margin-top:7px;}
 .mobile_menu_logo  img{max-width:90px;}
 .responsive-menu .navbar-toggle{margin-right:6px;}
-a.navbar-toggle.respnsive-ser-rm.sell{background:#ef4066!important;color:#fff;font-weight:600;display: block;}
+a.navbar-toggle.respnsive-ser-rm.sell{background:#ef4066!important;color:#fff;display: block;}
 .responsive-menu button.navbar-toggle.respnsive-ser-rm{background:#60c5ac;color:#fff; display:block}
 }
 
@@ -1308,6 +1317,7 @@ display: none;
 .t-cnt{display:none;}
 }
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
+
 	.upload_hint p {
     font-size: 15px;font-family: Proxima-Nova-Semibold;
     color: #EF4A6C;
@@ -1425,6 +1435,13 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 }
 
 @media screen and (min-width:768px){
+	p.form-rms-input.org_nme input {
+    height: 40px;
+    width: 90%;
+}
+.upload_hint {
+    padding-right: 0px;
+}
 	.form-rms-que1 {
     font-family: Proxima-Nova-Extrabold;
 }
@@ -1449,7 +1466,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
     background: url(../../frontend/img/tip-arrow.png);
     background-repeat: no-repeat;
     right: -57px;
-    top: 185px;
+    top: 125px;
 }
 
 
@@ -1458,6 +1475,8 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+	p.ct3-rms-head.chartiy_spcy{color:#666;    font-size: 16px; margin-bottom:0px;}
+	.ct3-list li{    margin-bottom: 50px;}
 	a.navbar-toggle.respnsive-ser-rm.sell span {
     font-family: Proxima-Nova-Bold;
     padding-left: 4px;
@@ -1493,25 +1512,25 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
     float: left;
     text-align: left;
     margin-left: 0px;
-    padding-left: 40px;
+    padding-left: 20px;
 }
-	#cosplayplay_yes_div .radio-inline{    padding-left: 40px;}
+	#cosplayplay_yes_div .radio-inline{    padding-left: 20px;}
 	.ct1-rms-rel{padding-left:20px;}
 	.prog-head{    margin-top: 20px;}
 	.form-rms-input.dimensions-two input {
     width: 50%;
 }
-.form-rms-small1{text-align:left;    padding-left: 20px;}
-.cst2-rms-chck{text-align:left; padding-left: 20px;    margin-bottom: 30px;}
+.form-rms-small1{text-align:left;    padding-left: 20px;font-size: 16px;    color: #323031;}
+.cst2-rms-chck{text-align:left; padding-left: 20px;    margin-bottom: 10px;}
 
 	div#activity_yes_div .radio-inline {
     float: left;
     width: 100%;
     text-align: left;
     margin-left: 0px;
-    padding-left: 40px;
+    padding-left: 20px;
 }
-	.form-rms-input{    padding-left: 20px;}
+	.form-rms-input{    padding-left: 0px;}
 	.prog-form-rm {
     width: 100%;
     float: left;

@@ -52,7 +52,7 @@
 		<!--- mobile heaindgs section end here -->
 		<div class="threeblogs">
 		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
-			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos.Placing them in settings that correspond with their theme can encourage a sale.</p>
+			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos. Placing them in settings that correspond with their theme can encourage a sale.</p>
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-12 ">
 		<h4>01.Front View</h4>
@@ -93,7 +93,7 @@
 			<!-- </form> -->
 					</div>
 					<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
-				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next</a>
+				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next Step</a>
 </div>				
 			</div>
 	 
@@ -574,7 +574,7 @@ $heading_value=$headingexplode[1];
 </div>
 <div class="prog-form-rm" id="preferences_div">
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
-<p class="prog-txt hidden-md hidden-lg hidden-sm hidden-xs">You're almost done! Just a few more questions.</p>
+<p class="prog-txt  hidden-xs">You're almost done! Just a few more questions.</p>
 <h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">step 3</h2>
 <h2 class="prog-head">Review Your Preferences</h2>
 
@@ -623,7 +623,7 @@ $heading_value=$headingexplode[1];
 
 </div>
 
-<div class="col-md-6">
+<div class="col-md-6 charity_rigt">
 <div class="form-rms lst-stp">
 
 <p class="form-rms-que form-rms-que1 dnt_br">04. Donate a Portion to Charity</p>
@@ -647,8 +647,8 @@ $heading_value=$headingexplode[1];
 </div>
 
 <div class="form-rms">
-<p class="ct3-rms-head">Please Specify:</p>
-<p class="form-rms-input"><input type="text"  name="organzation_name" id="organzation_name" autocomplete="off" placeholder="Organization Name"></p>
+<p class="ct3-rms-head chartiy_spcy">Please Specify:</p>
+<p class="form-rms-input org_nme"><input type="text"  name="organzation_name" id="organzation_name" autocomplete="off" placeholder="Organization Name"  class="form-control"></p>
 <span id="organzation_nameerror" style="color:red"></span>
 
 </div>
