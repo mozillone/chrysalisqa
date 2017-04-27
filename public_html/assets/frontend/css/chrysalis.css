@@ -3,48 +3,7 @@ section.top_nav span{color:#60c5ac;}
 
 /***************Fonts Start **************/
 
-/*@font-face {
-	font-family: Proxima-Nova-A-Regular;
-	src: url('../fonts/proxima_nova_a-webfont.woff2');
-}
 
-@font-face {
-	font-family: Proxima-Nova-A-Semibold;
-	src: url('../fonts/proxima_nova_a_semibold-webfont.woff2');
-}
-
-@font-face {
-	font-family: Proxima-Nova-A-Bold;
-	src: url('../fonts/proxima_nova_a_bold-webfont.woff2');
-}
-
-@font-face {
-	font-family: Proxima-Nova-A-Extrabold;
-	src: url('../fonts/proxima_nova_a_extrabold-webfont.woff2');
-}*/
-
-/* */
-
-@font-face {
-    font-family: 'manustrialregular';
-    src: url('../fonts/mns_trial-webfont.woff2') format('woff2'),
-         url('../fonts/mns_trial-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-
-
-
-@font-face {
-    font-family: 'manustrialmanustrial';
-    src: url('../fonts/mns_trial-webfont.woff2') format('woff2'),
-         url('../fonts/mns_trial-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
 @font-face {
 	font-family: Proxima-Nova-Regular;
 	src: url('../fonts/proxima_nova-webfont.woff2');
@@ -64,31 +23,25 @@ section.top_nav span{color:#60c5ac;}
 	font-family: Proxima-Nova-Extrabold;
 	src: url('../fonts/proxima_nova_extrabold-webfont.woff2');
 }
-/* */
-
-
-/* */
-@font-face {
-	font-family: Proxima-Nova-S-Regular;
-	src: url('../fonts/proxima_nova_s-webfont.woff2');
-}
 
 @font-face {
-	font-family: Proxima-Nova-S-Semibold;
-	src: url('../fonts/proxima_nova_s_semibold-webfont.woff2');
-}
+    font-family: 'manustrialregular';
+    src: url('../fonts/mns_trial-webfont.woff2') format('woff2'),
+         url('../fonts/mns_trial-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 
-@font-face {
-	font-family: Proxima-Nova-S-Bold;
-	src: url('../fonts/proxima_nova_s_bold-webfont.woff2');
-}
-
-@font-face {
-	font-family: Proxima-Nova-S-Extrabold;
-	src: url('../fonts/proxima_nova_s_extrabold-webfont.woff2');
 }
 
 
+@font-face {
+    font-family: 'manustrialmanustrial';
+    src: url('../fonts/mns_trial-webfont.woff2') format('woff2'),
+         url('../fonts/mns_trial-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
 
 
 /***************Fonts End **************/
