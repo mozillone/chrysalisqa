@@ -1451,10 +1451,6 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
-	a.navbar-toggle.respnsive-ser-rm.sell span {
-    font-family: Proxima-Nova-Bold;
-    padding-left: 4px;
-}
 	.up-blog .text_wrapper {
     padding-bottom: 96%;
 }
@@ -1825,14 +1821,6 @@ ul.nav.navbar-nav.mid_nav li a.sell-btn{padding:10px 10px;font-size:16px!importa
 @media only screen and (min-device-width:480px) 
 and (max-device-width:736px) 
 and (orientation:landscape){
-	div#main-banner {
-    margin-top: 60px;
-}
-	#main-banner .carousel-inner>.item>a>img, .carousel-inner>.item>img {
-    width: 100%!important;
-min-height: 365px !important;
-    max-height: 365px !important;
-}
 	.form-rms-dim {
     text-align: left;
     padding-left: 0px;
@@ -1848,14 +1836,6 @@ min-height: 365px !important;
 .home_product_slider .owl-buttons .owl-next{top: -14%;}
 #main-banner .carousel-inner>.item>a>img,.carousel-inner>.item>img{width:100%!important;min-height:215px;max-height:215px;}
 }
-
-@media screen and (device-aspect-ratio: 40/71) {
-	div#main-banner img {
-    min-height: 150px !important;
-    width: 100%;
-}
-	
-}
 @media only screen 
 and (min-device-width:320px) 
 and (max-device-width:568px) 
@@ -1869,7 +1849,7 @@ and (orientation:portrait){
 	label.btn.btn-default.upload_more_btn{width:100%;}
 	.up_btns_tl a{width:100%}
 div#main-banner{margin-top:65px;max-height:194px;overflow:hidden;}
-div#main-banner img{min-height:200px;width:100%;}
+div#main-banner img{min-height:164px;width:100%;}
 .responsive-inner{padding-left:0px;}
 .icon-rm.btn-cross{left:89%!important;top: 6px;}
 .mobile-rm{width:88.5%!important}
