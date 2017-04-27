@@ -603,12 +603,12 @@
 								  
                                     
 								<!--<input id="autocomplete" onFocus="geolocate()" type="text" class="form-control" name="location" required></input>-->
-								<input type="hidden" class="field form-control" id="street_number" name="address1" disable="true"required></input>
-								<input type="hidden" class="field form-control" name="address2" id="route" required></input></td>
-									<input type="hidden" class="field form-control" id="locality" name="city" required>
-									<input type="hidden" class="field form-control" id="administrative_area_level_1" name="state"></input>
-									<input type="hidden" class="field form-control" id="postal_code" name="zipcode">
-									<input type="hidden" class="field form-control" id="country" name="country" required></input>
+								<input type="text" class="field form-control" id="street_number" name="address1" disable="true"required></input>
+								<input type="text" class="field form-control" name="address2" id="route" required></input></td>
+									<input type="text" class="field form-control" id="locality" name="city" required>
+									<input type="text" class="field form-control" id="administrative_area_level_1" name="state"></input>
+									<input type="text" class="field form-control" id="postal_code" name="zipcode">
+									<input type="text" class="field form-control" id="country" name="country" required></input>
 							
                                 </div>
 								<div class="form-group has-feedback" >
