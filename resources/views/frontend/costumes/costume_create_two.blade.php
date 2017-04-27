@@ -353,19 +353,23 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="row" id="activity_yes_div" style="display: none;">
  <div class="col-md-12" >
  <p class="slt_act_all">Select all that apply</p>
+   <div class="fity_hlf">
       <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Circus">Circus</label>
    </div>
   <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Theatre">Theatre</label>
    </div>
+      </div>
    </div>
    <div class="col-md-12">
+      <div class="fity_hlf">
   <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Historical Reenactments">Historical Reenactments</label>
    </div>
   <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Music Videos">Music Videos</label>
+   </div>
    </div>
    </div>
    <div class="col-md-12">
@@ -451,7 +455,8 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="prog-form-rm" id="pricing_div">
 
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_pricing_form" id="costume_pricing_form" method="post"> -->
-<p class="prog-txt hidden-md hidden-lg hidden-sm hidden-xs  ">Please fill in the following field <span>as accurately</span> as you can.</p>
+<p class="prog-txt hidden-xs  ">Please fill in the following field <span>as accurately</span> as you can.</p>
+<div class="row">
 <div class="col-md-6">
 <h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 3</h2>
 <h2 class="prog-head">Pricing</h2>
@@ -563,6 +568,7 @@ $heading_value=$headingexplode[1];
 </div>
 
 </div>
+</div>
 <div class="form-rms-btn">
 <a type="button" id="pricing_back" class="btn-rm-back"><span>Back</span></a>
 
@@ -636,7 +642,7 @@ $heading_value=$headingexplode[1];
 <p class="ct3-rms-head">Donate to</p>
 <ul class="ct3-list">
 @foreach($charities as $index=>$charity)
-<li><img width="68px" height="68px" src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" /><input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
+<li><img src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" /><input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
 @endforeach
 </ul>
 <span id="charity_nameerror" style="color:red"></span>
@@ -644,15 +650,9 @@ $heading_value=$headingexplode[1];
 <p class="cst2-rms-chck"><input type="checkbox" id="another_charity" name="another_charity"> I would like to suggest another charity organization</p>
 </div>
 
-<<<<<<< HEAD
 <div class="form-rms">
 <p class="ct3-rms-head chartiy_spcy">Please Specify:</p>
 <p class="form-rms-input org_nme"><input type="text"  name="organzation_name" id="organzation_name" autocomplete="off" placeholder="Organization Name"  class="form-control"></p>
-=======
-<div class="form-rms" id="other_organzation_check" style="display: none;">
-<p class="ct3-rms-head">Please Specify:</p>
-<p class="form-rms-input"><input type="text"  name="organzation_name" id="organzation_name" autocomplete="off" placeholder="Organization Name"></p>
->>>>>>> c8ea152e7c44e0303b6218b1992f320e6fbbec56
 <span id="organzation_nameerror" style="color:red"></span>
 
 </div>
@@ -709,7 +709,6 @@ $('#categoryname').on('change',function(){
 			console.log(data);
 			var model = $('#subcategory').html('Select Subcategory');    //keeping subcategory field empty before
 					model.empty();
-			model.append("<option value=''>Select Subcategory</option>");
 					$.each(data, function(index, element) {
 						model.append("<option value='"+ element.subcategoryid +"'>" + element.subcategoryname + "</option>");
 			        });
@@ -753,7 +752,7 @@ $(document).ready(function()
 	$('#upload_div').css('display','block');
 	$('#costume_description').css('display','none');
 	$('#pricing_div').css('display','none');
-	$('#preferences_div').css('display','block');
+	$('#preferences_div').css('display','none');
 	$( "#7" ).click(function() {
 		$('#cosplayplay_yes_div').css('display','block');
 	});
@@ -781,23 +780,6 @@ $(document).ready(function()
 		$('#mention_hours_input').css('display','none');
 		$('#mention_hours_input').val('');
 	});
-	
-    $('#another_charity').click(function(){
-
-    if($(this).prop("checked") == true){
-
-        $('#other_organzation_check').css('display','block');
-
-    }
-
-    else if($(this).prop("checked") == false){
-
-        $('#other_organzation_check').css('display','none');
-
-    }
-
-});
-	
 	
 	$( "#upload_next" ).click(function(a) {
 
@@ -1144,10 +1126,8 @@ $(document).ready(function()
 			
 		}
 		if (atLeastOneIsChecked == true) {
-			$('#other_organzation_check').css('display','block');
 			$('#organzation_name').css('border','1px solid red');
 			$('#organzation_nameerror').html('Enter Organization Name');
-
 			str=false;
 			if (organzation_name != '') {
 				$('#organzation_name').css('border','');

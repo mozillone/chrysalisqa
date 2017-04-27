@@ -216,7 +216,7 @@
 								<input type="password" id="loginopup_password" name="password" placeholder="Password *" class="form-control">
 								<p class="error">{{ $errors->first('password') }}</p>
 							</div>
-							<div class=" form-group loign-adtnl forgot"> 
+							<div class=" form-group loign-adtnl forgot mbl-frgt_sign"> 
 								<label><a href="#forget_password1" data-toggle="tab">Help! I forgot my password</a></label>
 							</div>
 							<div class="form-group">

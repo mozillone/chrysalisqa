@@ -226,7 +226,7 @@ color:#323031;font-size:18px;font-weight:600;}
 .mid_nav form.navbar-form.navbar-left input:-moz-placeholder{ /* Firefox 18- */
 color:#323031;font-size:18px;font-weight:600;}
 .icon_lins.text-right ul li .fa{font-size:18px;}
-.mid_nav form.navbar-form.navbar-left input{font-family:Proxima-Nova-Semibold;height:40px;padding-left:55px;border:1px solid #e6e6e6;}
+.mid_nav form.navbar-form.navbar-left input{font-family:Proxima-Nova-Semibold;height:40px;padding-left:34px;border:1px solid #e6e6e6;}
 .mid_nav form.navbar-form.navbar-left i.fa.fa-search{position:absolute;margin-left:12px;top:12px;}
 .social-fallow{padding-right:0px;padding-left:30px;}
 input.btn.btn-custom-3:focus{outline:none;}
@@ -1446,7 +1446,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
     font-family: Proxima-Nova-Extrabold;
 }
 	.fity_hlf .radio-inline {
-    width: 40% !important;
+    width: 45% !important;
     float: left;
 }
 	div#activity_yes_div .radio-inline {
@@ -1475,6 +1475,9 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
+	.form-group.loign-adtnl.forgot.mbl-frgt_sign label {
+    display: block !important;
+}
 	p.ct3-rms-head.chartiy_spcy{color:#666;    font-size: 16px; margin-bottom:0px;}
 	.ct3-list li{    margin-bottom: 50px;}
 	a.navbar-toggle.respnsive-ser-rm.sell span {
