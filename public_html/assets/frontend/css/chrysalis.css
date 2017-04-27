@@ -191,7 +191,16 @@ ul.nav.navbar-nav.mid_nav li a.sell-btn{font-family: Proxima-Nova-Bold;backgroun
 .main_banner .jumb-bnr{max-height:375px;overflow:hidden;}
 section.main_banner{background:#f7f9fc;}
 .home_product_slider .slider_cnt p{color:#000;font-size:15px;font-family:Proxima-Nova-Extrabold;}
-
+p.form-rms-que i {    color: #666;}
+.ct3-list li p {
+    font-size: 12px;
+    text-align: center;
+    overflow: hidden;
+    display: inline-block;    width: 100%;
+    margin-bottom: 0px;
+    max-height: 35px;
+    min-height: 30px;
+}
 .home-adds .add1 img{min-height:185px;}
 .upload_page_accordians {    margin-bottom: 100px;}
 .home-adds{margin:40px 0px;}
@@ -929,7 +938,7 @@ p.right_heading span.my_msg { font-weight: 800; }
 .rencemt_order_table .table>thead>tr>th { border: none; }
 .rencemt_order_table .table.table-striped tbody tr td:last-child:hover { text-decoration: underline; }
 .form-rms.lst-stp .ct3-list {
-    padding-left: 0px;
+    padding-left: 0px;    margin-bottom: 40px;
 }
 /* dashboard css End here */
 
@@ -1009,7 +1018,18 @@ a#preferences_finished:hover{text-decoration:none}
 .form-rms-input .form-rms-rel1{width: 80px; position: relative; float:left;}
 .cst3-textl2{width: auto; float:left; line-height: 30px; margin-left: 15px; color: #60c4ac;    font-family: Proxima-Nova-Semibold;}
 .ct3-list{float:left; list-style: none;}
-.ct3-list li {    float: left;    padding: 0 5px;    max-width: 100px;    min-height: 80px;    max-height: 40px;margin-bottom: 30px;    margin-left: -4px;}
+.ct3-list li {
+    float: left;
+    padding: 0 10px;
+    max-width: 100px;
+    min-height: 100px;
+    max-height: 40px;
+    margin-bottom: 40px;
+    margin-left: -4px;
+    text-align: center;
+    margin: 0 auto;
+    padding-left: 0px;
+}
 .ct3-list li img {    float: left;    width: 80px;    min-height: 80px;    margin-bottom: 5px;}
 .ct3-list li input{margin: 10px auto 0; display: block;}
 .ct1-rms-rel input.input-rm100 {    width: 75px;    float: left;    height: 30px;}
@@ -1326,6 +1346,9 @@ display: none;
 .t-cnt{display:none;}
 }
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
+	div#navbar ul {
+    margin: 0px;
+}
 .icon_lins.text-right ul li .btn span {
     background: #60c5ac;
     width: 15px;
