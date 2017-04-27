@@ -356,7 +356,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
    <div class="fity_hlf">
       <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Circus">Circus</label>
-   </div>
+   </div> 
   <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Theatre">Theatre</label>
    </div>
