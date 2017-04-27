@@ -98,7 +98,7 @@ class Cart extends Authenticatable
         }else{
         	$where="where crt.cookie_id='".$currentCookieKeyID."'";
         }
-	   	$cart_products=DB::Select('SELECT itms.*,img.image,cst.condition,cst.size,concat(usr.first_name," ",usr.last_name) as user_name,cstopt.attribute_option_value  as is_film,sum(itms.price) as total_price FROM `cc_cart` as crt LEFT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id LEFT JOIN cc_costume_image as img on img.costume_image_id=itms.costume_id and img.type="1" LEFT JOIN cc_costumes as cst on cst.costume_id=itms.costume_id LEFT JOIN cc_users as usr on usr.id=cst.created_by LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="21" '.$where.'');
+	   	$cart_products=DB::Select('SELECT itms.*,img.image,cst.condition,cst.size,concat(usr.first_name," ",usr.last_name) as user_name,cstopt.attribute_option_value  as is_film,sum(itms.price) as total_price FROM `cc_cart` as crt LEFT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id LEFT JOIN cc_costume_image as img on img.costume_image_id=itms.costume_id and img.type="1" LEFT JOIN cc_costumes as cst on cst.costume_id=itms.costume_id LEFT JOIN cc_users as usr on usr.id=cst.created_by LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="21" '.$where.' group by crt.cart_id');
 	   	return $cart_products;
     }
 

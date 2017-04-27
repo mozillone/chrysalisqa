@@ -70,7 +70,9 @@ class CartController extends Controller {
                $product[$cookie_id]=array($req['costume_id']=>$qty);
                Cart::addToCart($req,$cookie_id,$qty);
                $res=$this->productsAddToCookie($product);
-               return response('')->cookie($res);
+               $reslt=$this->productsAddToCookie($product);
+               $count=Cart::getCartCount();
+               return response($count)->cookie($res);
              }
 		
 	}
