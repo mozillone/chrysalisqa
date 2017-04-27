@@ -666,7 +666,7 @@
 						<div class="col-md-6 ">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Front View</h2>
 							<div class="col-md-12">
-							<input type="file" name="img-chan" id="img-chan">
+							<input type="file" name="img_chan" id="img_chan">
 								 					
 							</div>   
 					</div> 
@@ -675,7 +675,7 @@
 					
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Back View</h2>
 							<div class="col-md-12">
-								<input type="file" name="img-chan1" id="img-chan1">
+								<input type="file" name="img_chan1" id="img_chan1">
 								 					
 							</div> 
 					
@@ -683,7 +683,7 @@
 						<div class="col-md-6 ">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Details/Accessories</h2>
 							<div class="col-md-12">
-							<input type="file" name="img-chan2" id="img-chan2">												
+							<input type="file" name="img_chan2" id="img_chan2">												
 							</div>   
 					</div>
 						</div>
@@ -729,7 +729,7 @@
 	$(document).ready(function () {
 	//$(".sony").select2();
 
-	$('#img-chan,#img-chan2,#img-chan1').drop_uploader({
+	$('#img_chan,#img_chan2,#img_chan1').drop_uploader({
                 uploader_text: 'Drop files to upload, or',
                 browse_text: 'Browse',
                 browse_css_class: 'button button-primary',
