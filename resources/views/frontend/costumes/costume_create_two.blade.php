@@ -737,6 +737,11 @@ function previewImages(){
           window.URL.revokeObjectURL(fileList[i]);
         }       
 }*/
+
+//donate amount percentage calculation
+$('#donate_charity').change(function(){
+	alert($(this).val())
+});
 	//numeric condition
 	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height").on("keyup", function(){
         var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
@@ -772,7 +777,7 @@ function previewImages(){
 	$('#upload_div').css('display','block');
 	$('#costume_description').css('display','none');
 	$('#pricing_div').css('display','none');
-	$('#preferences_div').css('display','none');
+	$('#preferences_div').css('display','block');
 	$( "#7" ).click(function() {
 		$('#cosplayplay_yes_div').css('display','block');
 	});
