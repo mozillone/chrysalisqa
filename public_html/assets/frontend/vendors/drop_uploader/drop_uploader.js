@@ -191,7 +191,7 @@
                 for (var i = 0; i < files.length; i++) {
                     if(layout == "thumbnails") {
                         // Add file to list
-                        $('#' + uploader_id + ' .files.thumb').append('<li id="selected_file_' + files_index + '"><div class="thumbnail"></div><span class="title" title="' + files[i].name + '"> ' + files[i].name + ' </span></li>');
+                        $('#' + uploader_id + ' .files.thumb').append('<li id="selected_file_' + files_index + '"><div class="thumbnail"></div></li>');
                         // Thumbnail
                         preview_file(files[i],files_index);
                     } else {

@@ -640,8 +640,10 @@
 							<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Donation to Charity<span class="req-field" ></span></label>
                                        <div class="input-group">
-									   <span class="input-group-addon">$</span>
-  <input type="text" class="form-control"  autocomplete="off"  name="charity_amount" id="charity_amount">
+									   <!-- <span class="input-group-addon">$</span> -->
+  <!-- <input type="text" class="form-control"  autocomplete="off"  name="charity_amount" id="charity_amount"> -->
+  <select class="form-control" name="charity_amount" id="charity_amount"><option value="">Donate Amount</option><option>10%</option><option>20%</option><option>30%</option></select>
+  <p class="cst3-textl2"><i class="fa fa-usd" aria-hidden="true"></i>5.90</p>
                                     <p class="error">{{ $errors->first('charity_amount') }}</p> 
   
                                     <span id="priceerror" style="color:red">
