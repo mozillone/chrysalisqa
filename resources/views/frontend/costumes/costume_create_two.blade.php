@@ -91,8 +91,8 @@
 					</label>
 				</span>
 			<!-- </form> -->
-			<p id="other_thumbnails">
-			</p>
+			<!-- <p id="other_thumbnails">
+			</p> -->
 					</div>
 					<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next Step</a>
@@ -723,7 +723,7 @@ $(document).ready(function()
 {
 
 
-var inputLocalFont = document.getElementById("upload-file-selector");
+/*var inputLocalFont = document.getElementById("upload-file-selector");
 inputLocalFont.addEventListener("change",previewImages,false);
 
 function previewImages(){
@@ -736,7 +736,7 @@ function previewImages(){
           $('#other_thumbnails').append('<img src="' + objectUrl + '" />');
           window.URL.revokeObjectURL(fileList[i]);
         }       
-}
+}*/
 	//numeric condition
 	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height").on("keyup", function(){
         var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
