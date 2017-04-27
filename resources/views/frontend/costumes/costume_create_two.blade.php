@@ -745,7 +745,7 @@ $(document).ready(function()
 	      $('#max_length_char3').text(input.val().length + " of");
 	});
 	$('#upload_div').css('display','block');
-	$('#costume_description').css('display','block');
+	$('#costume_description').css('display','none');
 	$('#pricing_div').css('display','none');
 	$('#preferences_div').css('display','none');
 	$( "#7" ).click(function() {
