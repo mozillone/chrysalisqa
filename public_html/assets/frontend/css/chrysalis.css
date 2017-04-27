@@ -147,7 +147,7 @@ section.main_banner{background:#f7f9fc;}
 p.form-rms-que i {    color: #666;}
 .ct3-list li p {
     font-size: 12px;
-    text-align: center;
+    text-align: center;	font-family: Proxima-Nova-Bold;
     overflow: hidden;
     display: inline-block;    width: 100%;
     margin-bottom: 0px;
@@ -975,7 +975,7 @@ a#preferences_finished:hover{text-decoration:none}
     float: left;
     padding: 0 10px;
     max-width: 100px;
-    min-height: 100px;
+    min-height: 155px;
     max-height: 40px;
     margin-bottom: 40px;
     margin-left: -4px;
@@ -983,7 +983,7 @@ a#preferences_finished:hover{text-decoration:none}
     margin: 0 auto;
     padding-left: 0px;
 }
-.ct3-list li img {    float: left;    width: 80px;    min-height: 80px;    margin-bottom: 5px;}
+.ct3-list li img {    float: left;    width: 80px;    min-height: 80px;    margin-bottom: 5px;max-height: 80px;}
 .ct3-list li input{margin: 10px auto 0; display: block;}
 .ct1-rms-rel input.input-rm100 {    width: 75px;    float: left;    height: 30px;}
 .ct1-rms-rel{width: 100%; float:left; line-height: auto; font-size: 14px; font-family: Proxima-Nova-Semibold; margin: 10px 0 0;}

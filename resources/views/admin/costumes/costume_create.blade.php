@@ -87,7 +87,7 @@
 								<div class="form-group has-feedback" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">Costume For<span class="req-field" >*</span></label>
-											<br><br>
+											<br>
 											<input type="radio"   name="gender" id="male"  value="male" checked >&nbsp;Male&nbsp;
 											<input type="radio"   name="gender" id="female"  value="female"  >&nbsp;Female&nbsp;
 											<input type="radio"   name="gender" id="unisex"  value="unisex" >&nbsp;Unisex&nbsp;
@@ -129,7 +129,7 @@
 							   <h4>Body & Dimensions (Optional)</h4></hr>
 <div class="row" >
 <div class="col-md-6" >
-								<div class="form-group has-feedback" >
+								<div class="form-group has-feedback " >
 								<?php
 									$height=$bd_height->label;
 									$heightattributes=explode('-',$height);
@@ -146,7 +146,7 @@
 									
 								</div>
 								</div>
-								<div class="col-md-6" >
+								<div class="col-md-6 dimsn-bknd" >
 								<div class="form-group has-feedback" >
 								<?php
 									$height1=$bd_height_in->label;
@@ -161,8 +161,9 @@
 									</div>
 									<span id="heightinerror" style="color:red"></span>
 									
-								</div></div>
-									</div>
+								</div></div></div>
+								<div class="row">
+									<div class="col-md-12" >
 								<div class="form-group has-feedback" >
 								<?php
 									$height2=$bd_weight->label;
@@ -178,7 +179,8 @@
 									<span id="weightlbserror" style="color:red"></span>
 									
 								</div>
-								
+									</div>
+										<div class="col-md-12" >
 								<div class="form-group has-feedback" >
 								<?php
 									$height3=$bd_chest->label;
@@ -193,6 +195,8 @@
 									</div>
 									<span id="chestinerror" style="color:red"></span>
 								</div>
+										</div>
+										<div class="col-md-12" >
 								<div class="form-group has-feedback" >
 								<?php
 									$height=$bd_waist->label;
@@ -207,6 +211,8 @@
 									</div>
 									<span id="waistlbserror" style="color:red"></span>
 								</div>
+								</div>
+									<div class="col-md-12" >
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Size<span class="req-field" >*</span></label>
                                         <select name="size" id="size" class="form-control">
@@ -222,15 +228,16 @@
 										</select>
                                   <span id="size_error" style="color:red"></span>
                                 </div>
+								   </div>
 								
-								
+								 </div>
 							   
 								
 							</div> 
 						</div>
 						
 						
-						<div class="col-md-6">
+						<div class="col-md-6 crt_right_alng">
 							<h2 class="heading-agent">Costume FAQ</h2>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
@@ -243,7 +250,7 @@
 
 											<?php echo $cosplay_one->label;?>
 <span class="req-field" ></span></label>
-											<br><br>
+											<br>
 											@foreach($cosplay_one_value as $index=>$cosplayonevalues)
 											<?php if($cosplayonevalues->option_value=="yes") { ?>
 											<input type="{{$cosplay_one->type}}"  checked name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" required>&nbsp;{{$cosplayonevalues->option_value}}&nbsp;
@@ -300,7 +307,7 @@
 
 											<?php echo $cosplay_two->label;?>
 <span class="req-field" ></span></label>
-											<br><br>
+											<br>
 											@foreach($cosplay_two_value as $index=>$cosplaytwovalues)
 											<input type="{{$cosplay_two->type}}"  <?php if($cosplaytwovalues->option_value=="yes") { ?> checked <?php } ?>  name="{{$cosplay_two->code}}" id="{{$cosplay_two->code}}"  value="{{$cosplaytwovalues->option_id}}" onclick="uniquefashion_yes({{$cosplaytwovalues->option_id}})"  required>&nbsp;{{$cosplaytwovalues->option_value}}&nbsp;
 											
@@ -355,14 +362,10 @@
 								 <div class="form-group has-feedback" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">
-										
-											
-											
-											
 
 											<?php echo $cosplay_three->label;?>
 <span class="req-field" ></span></label>
-											<br><br>
+											<br>
 											@foreach($cosplay_three_value as $index=>$cosplaythreevalues)
 											<input type="{{$cosplay_three->type}}" <?php if($cosplaythreevalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_three->code}}" id="{{$cosplay_three->code}}" onclick="activity_yes({{$cosplaythreevalues->option_id}})"  value="{{$cosplaythreevalues->option_id}}"  required>&nbsp;{{$cosplaythreevalues->option_value}}&nbsp;
 											
@@ -414,7 +417,7 @@
 
 											<?php echo $cosplay_four->label;?>
 <span class="req-field" ></span></label>
-											<br><br>
+											<br>
 											@foreach($cosplay_four_value as $index=>$cosplayfourvalues)
 											<input type="{{$cosplay_four->type}}"  <?php if($cosplayfourvalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}" onclick="make_costume_yes({{$cosplayfourvalues->option_id}})"  required>&nbsp;{{$cosplayfourvalues->option_value}}&nbsp;
 											
@@ -434,7 +437,7 @@
 
 											<?php echo $cosplay_five->label;?>
 <span class="req-field" ></span></label>
-											<br><br>
+											<br>
 											@foreach($cosplay_five_value as $index=>$cosplayfivevalues)
 											<input type="{{$cosplay_five->type}}"  <?php if($cosplayfivevalues->option_value=="yes") { ?> checked <?php } ?>  name="{{$cosplay_five->code}}" id="{{$cosplay_five->code}}"  value="{{$cosplayfivevalues->option_id}}"  required>&nbsp;{{$cosplayfivevalues->option_value}}&nbsp;
 											
@@ -487,6 +490,8 @@
 						<div class="col-md-6">
 							<h2 class="heading-agent">Pricing</h2>
 							<div class="col-md-12">
+							<div class="row">
+							<div class="col-md-4">
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Price<span class="req-field" ></span></label>
                                        <div class="input-group">
@@ -496,6 +501,10 @@
                                     <span id="priceerror" style="color:red">
 									</div>
                                 </div>
+								    </div>
+								</div>
+								<div class="row">
+								<div class="col-md-4">
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Quantity*<span class="req-field" ></span></label>
                                         <select class="form-control" name="quantity" id="quantity">
@@ -513,6 +522,10 @@
 										</select>
                                    <span id="quantityerror" style="color:red"></span>
                                 </div>
+								     </div>
+									  </div>
+									  	<div class="row">
+									 <div class="col-md-4">
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">{{$shippingoptions->label}} <span class="req-field" ></span></label>
                                         <select class="form-control" name="{{$shippingoptions->code}}" id="{{$shippingoptions->code}}">
@@ -521,9 +534,12 @@
 										</select>
                                     <p class="error">{{ $errors->first('name') }}</p> 
                                 </div>
+								  </div>
+								  </div>
+								  
 							</div> 
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6 pckg_right">
 							<h2 class="heading-agent">Package Information</h2>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
@@ -543,7 +559,7 @@
 
 									{{$dimensions->label}}
 <span class="req-field" ></span></label>
-								<div class="form-group has-feedback" >
+								<div class="form-group has-feedback dmns_rigts" >
                                    
 		@foreach($dimensions_values as $index=>$dimensionval)
 		<?php

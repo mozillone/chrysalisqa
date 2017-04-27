@@ -134,7 +134,7 @@ span.text a {
     border: 1px solid #e1e1e1;
     top: 0px !important;
     position: absolute;
-    left: 1px;
+    left: 0px;
     bottom: 0px;	
     right: 0px;
     background-size: 100% 100%;
