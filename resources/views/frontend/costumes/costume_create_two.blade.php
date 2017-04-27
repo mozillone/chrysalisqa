@@ -709,6 +709,7 @@ $('#categoryname').on('change',function(){
 			console.log(data);
 			var model = $('#subcategory').html('Select Subcategory');    //keeping subcategory field empty before
 					model.empty();
+					model.append("<option value=''>Select Subcategory</option>");
 					$.each(data, function(index, element) {
 						model.append("<option value='"+ element.subcategoryid +"'>" + element.subcategoryname + "</option>");
 			        });
