@@ -642,7 +642,8 @@ $heading_value=$headingexplode[1];
 <p class="ct3-rms-head">Donate to</p>
 <ul class="ct3-list">
 @foreach($charities as $index=>$charity)
-<li><img src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" /><input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
+<li><img src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" />
+<p>{{$charity->name}}</p><input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
 @endforeach
 </ul>
 <span id="charity_nameerror" style="color:red"></span>
@@ -720,7 +721,7 @@ $(document).ready(function()
 {
 	//numeric condition
 	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height").on("keyup", function(){
-        var valid = /^\d{0,3}(\.\d{0,3})?$/.test(this.value),
+        var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
             val = this.value;
         
         if(!valid){
@@ -753,7 +754,7 @@ $(document).ready(function()
 	$('#upload_div').css('display','block');
 	$('#costume_description').css('display','none');
 	$('#pricing_div').css('display','none');
-	$('#preferences_div').css('display','none');
+	$('#preferences_div').css('display','block');
 	$( "#7" ).click(function() {
 		$('#cosplayplay_yes_div').css('display','block');
 	});
