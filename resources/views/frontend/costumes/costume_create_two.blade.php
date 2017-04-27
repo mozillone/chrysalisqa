@@ -644,15 +644,10 @@ $heading_value=$headingexplode[1];
 <p class="cst2-rms-chck"><input type="checkbox" id="another_charity" name="another_charity"> I would like to suggest another charity organization</p>
 </div>
 
-<<<<<<< HEAD
-<div class="form-rms">
-<p class="ct3-rms-head chartiy_spcy">Please Specify:</p>
-<p class="form-rms-input org_nme"><input type="text"  name="organzation_name" id="organzation_name" autocomplete="off" placeholder="Organization Name"  class="form-control"></p>
-=======
+
 <div class="form-rms" id="other_organzation_check" style="display: none;">
 <p class="ct3-rms-head">Please Specify:</p>
 <p class="form-rms-input"><input type="text"  name="organzation_name" id="organzation_name" autocomplete="off" placeholder="Organization Name"></p>
->>>>>>> c8ea152e7c44e0303b6218b1992f320e6fbbec56
 <span id="organzation_nameerror" style="color:red"></span>
 
 </div>
