@@ -161,7 +161,7 @@ ul.nav.navbar-nav.mid_nav li.active a{background:none;}
 .main_header nav.navbar.navbar-default.navbar-static-top{background:none;margin-bottom:0px;padding-bottom:7px;}
 .container.main_menu ul li:first-child.dropdown.mega-dropdown:before{background:none;}
 ul.nav.navbar-nav.mid_nav li a{font-size:22px;color:#323031;font-family:Proxima-Nova-Bold;padding: 10px 16px;}
-ul.nav.navbar-nav.mid_nav li a.sell-btn{font-family: Proxima-Nova-Extrabold;background:#EE4266;border-radius:3px;color:#fff;padding:10px 35px;font-size:18px;}
+ul.nav.navbar-nav.mid_nav li a.sell-btn{font-family: Proxima-Nova-Bold;background:#EE4266;border-radius:3px;color:#fff;padding:10px 35px;font-size:18px;}
 .top_nav_div p span{color:#60c5ac;}
 .main_menu_in{float:right;}
 .main_navigation nav.navbar.navbar-default{margin-bottom:0px;background:none;border:none;}
@@ -193,7 +193,7 @@ section.main_banner{background:#f7f9fc;}
 .home_product_slider .slider_cnt p{color:#000;font-size:15px;font-family:Proxima-Nova-Extrabold;}
 
 .home-adds .add1 img{min-height:185px;}
-
+.upload_page_accordians {    margin-bottom: 100px;}
 .home-adds{margin:40px 0px;}
 .home_product_slider{position:relative;}
 .home-adds .add2 img{min-height:185px;}
@@ -610,7 +610,7 @@ line-height: 35px;
 }
 .form-group.socil-btn a {
 width: 100%;font-size: 20px;background: #3a55a0;
-font-family: Proxima-Nova-Extrabold;
+font-family: Proxima-Nova-Bold;
 }
 .login-register ul.nav.nav-tabs li.active {
 padding-left: 50px;
@@ -630,7 +630,7 @@ background: #60c5ac;
 width: 100%;
 border: 1px solid #60c5ac;
 font-size: 20px;
-font-family: Proxima-Nova-Extrabold;
+font-family:Proxima-Nova-Bold;
 }
 .rect_pswrd button{height: 45px;
 background: #60c5ac;margin-top: 10px;
@@ -665,7 +665,7 @@ border-right: none;
 .login-register ul.nav.nav-tabs li a {
 font-size: 24px;
 border: none;
-color: #000;font-family: Proxima-Nova-Extrabold;
+color: #000;font-family:Proxima-Nova-Bold;
 }
 .close_icon button {
 float: inherit;opacity: 0.9;
@@ -684,7 +684,7 @@ background: #3a55a0;
 width: 100%;
 border: 1px solid #3a55a0;
 font-size: 20px;
-font-family: Proxima-Nova-Extrabold;}
+font-family: Proxima-Nova-Bold;}
 .login-register-main {
 width: 500px;
 margin: 40px auto;
@@ -928,6 +928,9 @@ p.right_heading span.my_msg { font-weight: 800; }
 .rencemt_order_table .table>tbody>tr>td { border: none; }
 .rencemt_order_table .table>thead>tr>th { border: none; }
 .rencemt_order_table .table.table-striped tbody tr td:last-child:hover { text-decoration: underline; }
+.form-rms.lst-stp .ct3-list {
+    padding-left: 0px;
+}
 /* dashboard css End here */
 
 
@@ -955,10 +958,10 @@ p.right_heading span.my_msg { font-weight: 800; }
 .prog-txt{width: 100%; float:left; font-size: 18px; font-family: Proxima-Nova-Semibold; color: #323031; margin: 0 0 30px;}
 .prog-txt span{font-family: Proxima-Nova-Extrabold;}
 
-.prog-head{width:100%; float:left; font-size: 24px; font-family: Proxima-Nova-Extrabold; border-bottom: 2px solid #e1e1e1; padding-bottom: 10px; margin: 0px; color: #000;margin-bottom: 50px;}
+.prog-head{width:100%; float:left; font-size: 24px; font-family: Proxima-Nova-Extrabold; border-bottom: 2px solid #e1e1e1; padding-bottom: 10px; margin: 0px; color: #323031;margin-bottom: 20px;}
 a#pricing_next {    float: right;}
 .form-rms{width: 100%; float:left; margin: 10px 0; padding-left: 33px}
-.form-rms-que{width: 100%; float:left; font-size: 18px; color: #000; font-family: Proxima-Nova-Extrabold; margin: 20px 0; text-indent: -32px;}
+.form-rms-que{width: 100%; float:left; font-size: 18px; color: #323031; font-family: Proxima-Nova-Extrabold; margin: 15px 0; text-indent: -32px;}
 .form-rms-input input{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
 .form-rms-input select{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
 .form-rms-input textarea{width: 100%; float:left; height: 120px; border: 1px solid #e1e1e1; padding: 15px 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
@@ -976,13 +979,13 @@ a#pricing_next {    float: right;}
 .form-rms-btn a.btn-rm-back{background: none; border: none; padding: 0px; color: #60c4ac; margin: 0 10px 0 0;}
 .form-rms-btn a.btn-rm-back span{border-bottom: 1px solid #efefef;}
 a#costume_description_next {    float: right;}
-a#preferences_finished {
-    float: right;
-}
+a#preferences_finished {    float: right;}
+a#costume_description_next:hover {    text-decoration: none;}
 .form-rms.pricess .form-rms-input input {    padding-left: 25px;}
-.form-rms-dim{width: 17%; float:left; font-family: Proxima-Nova-Semibold; color: #323031;}
+.form-rms-dim{width: 19%; float:left; font-family: Proxima-Nova-Semibold; color: #323031;}
 .form-rms-dim .form-rms-he1 input{width: 50px; margin: 10px 8px 0 0; height: 30px;}
-.form-rms-dim .form-rms-he1 span{float:left; margin: 20px 0 0;}
+.form-rms-dim .form-rms-he1 span{float:left; margin: 20px 0 0;word-spacing: 10px;}
+a#pricing_next:hover{text-decoration:none;}
 .form-rms-he{width: 30%;}
 .form-rms-dim .form-rms-he1 .form-rms-dt{margin-left: 10px;}
 .prog-form-rm{width: 100%; float:left; margin: 0 0 30px;font-size: 16px;}
@@ -997,15 +1000,15 @@ a#preferences_finished {
 .form-rms-input select.cst2-select50{width: 60px;}
 .form-rms-que i.fa-info-circle{text-indent: 0px; line-height: 20px;}
 .form-rms-small1{width: 100%; float:left; font-size: 16px; font-family: Proxima-Nova-Semibold; margin: 10px 0 0;}
-.cst2-rms-chck{width: 100%; float:left; margin: 10px 0 0; font-size: 18px; color: #000; font-family: Proxima-Nova-Semibold;}
+.cst2-rms-chck{width: 100%; float:left; margin: 10px 0 0; font-size: 18px; color: #666; font-family: Proxima-Nova-Semibold;}
 .cst2-rms-chck input{float:left; margin: 6px 5px 0 0px !important;}
 .fa-info-rm{color: #60c4ac;}
 .ct3-rms-text{width: 100%; float:left; margin: 10px 0; font-size: 16px; font-family: Proxima-Nova-Semibold;}
 .ct3-rms-head{width:100%; float:left; font-size: 16px; font-family: Proxima-Nova-Extrabold; margin: 20px 0 10px; color: #323031;}
 .cst2-select80{width: 80px !important;}
 .form-rms-input .form-rms-rel1{width: 80px; position: relative; float:left;}
-.cst3-textl2{width: auto; float:left; line-height: 30px; margin-left: 15px; color: #60c4ac;}
-.ct3-list{width: 100%; float:left; list-style: none;}
+.cst3-textl2{width: auto; float:left; line-height: 30px; margin-left: 15px; color: #60c4ac;    font-family: Proxima-Nova-Semibold;}
+.ct3-list{width: 80px; height:80px; float:left; list-style: none;}
 .ct3-list li{width: 16.66%; float:left; padding: 0 5px;}
 .ct3-list li img{width: 100%; float:left; margin: 10px auto;}
 .ct3-list li input{margin: 10px auto 0; display: block;}
@@ -1115,6 +1118,7 @@ div#cosplayplay_yes_div p {
 .upload_page_accordians .panel-default>.panel-heading {
     background: none;
     border: none;
+    padding: 10px 0px;
 }
 .upload_page_accordians h4.panel-title a {
     font-family: Proxima-Nova-Regular;
@@ -1138,7 +1142,7 @@ div#cosplayplay_yes_div p {
     margin: 0px;
     font-size: 26px;
     color: #fff;
-    font-family: Proxima-Nova-Extrabold;
+    font-family: Proxima-Nova-Bold;
 }
 .upload_castume-blog p {
     margin: 0px;
@@ -1421,6 +1425,9 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 }
 
 @media screen and (min-width:768px){
+	.form-rms-que1 {
+    font-family: Proxima-Nova-Extrabold;
+}
 	.fity_hlf .radio-inline {
     width: 40% !important;
     float: left;

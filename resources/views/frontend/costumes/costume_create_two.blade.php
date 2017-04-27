@@ -451,7 +451,8 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="prog-form-rm" id="pricing_div">
 
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_pricing_form" id="costume_pricing_form" method="post"> -->
-<p class="prog-txt hidden-md hidden-lg hidden-sm hidden-xs  ">Please fill in the following field <span>as accurately</span> as you can.</p>
+<p class="prog-txt hidden-xs  ">Please fill in the following field <span>as accurately</span> as you can.</p>
+<div class="row">
 <div class="col-md-6">
 <h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 3</h2>
 <h2 class="prog-head">Pricing</h2>
@@ -563,6 +564,7 @@ $heading_value=$headingexplode[1];
 </div>
 
 </div>
+</div>
 <div class="form-rms-btn">
 <a type="button" id="pricing_back" class="btn-rm-back"><span>Back</span></a>
 
@@ -636,7 +638,7 @@ $heading_value=$headingexplode[1];
 <p class="ct3-rms-head">Donate to</p>
 <ul class="ct3-list">
 @foreach($charities as $index=>$charity)
-<li><img width="68px" height="68px" src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" /><input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
+<li><img src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" /><input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
 @endforeach
 </ul>
 <span id="charity_nameerror" style="color:red"></span>
