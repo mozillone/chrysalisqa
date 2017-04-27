@@ -5,7 +5,9 @@ use Mail;
 use Session;
 use Response;
 use App\User;
+use App\Cart;
 use App\Helpers\Site_model;
+use App\Helpers\SiteHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
@@ -76,7 +78,10 @@ class AuthController extends Controller {
 				if (!empty($req['plan_id'])){
 					return Redirect::to('/subscription/'.$req['plan_id']);
 				}
-				
+				  $currentCookieKeyID=SiteHelper::currentCookieKey();
+				  if($currentCookieKeyID!="0"){
+				  	Cart::updateCartToUser();
+				  }
 				if(Session::has('is_loginPage')){
 					return Redirect::to('/dashboard');
 				}else{

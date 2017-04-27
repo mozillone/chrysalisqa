@@ -64,10 +64,7 @@ section.top_nav span{color:#60c5ac;}
 	font-family: Proxima-Nova-Extrabold;
 	src: url('../fonts/proxima_nova_extrabold-webfont.woff2');
 }
-/* */
 
-
-/* */
 @font-face {
 	font-family: Proxima-Nova-S-Regular;
 	src: url('../fonts/proxima_nova_s-webfont.woff2');
@@ -202,7 +199,7 @@ section.main_banner{background:#f7f9fc;}
 .main_navigation{background:#f7f9fc;}
 .icon_lins.text-right ul li .btn{padding:0px;border:none;color:#656465;}
 .icon_lins.text-right{float:right;padding:15px 0px;}
-.icon_lins.text-right ul li:last-child{border-right:0px;margin-right:-15px;}
+.icon_lins.text-right ul li:last-child{border-right:0px;margin-right:-15px;position: relative;}
 .container.main_menu ul li a.dropdown-toggle{font-size:18px;color:#010101;padding-left:25px;padding-right:25px;font-family: Proxima-Nova-Bold;}
 .container.main_menu ul li{position:relative;}
 .main_menu .navbar-default .navbar-nav>.open>a,.navbar-default .navbar-nav>.open>a:focus,.navbar-default .navbar-nav>.open>a:hover{background:none;}
@@ -1832,3 +1829,40 @@ div#main-banner img{min-height:164px;width:100%;}
 .mobile-rm{width:88.5%!important}
 .responsive-menu .navbar-toggle{padding:5px 6px!important;}
 }
+
+
+
+/* Jithender Css */
+.icon_lins .dropdown-menu.cart-products {
+    left: -200px;
+}
+.dropdown-menu.cart-products {
+    max-height: 250px;
+    overflow-y: auto;
+}
+.icon_lins .dropdown-menu.cart-products .media-body .media-heading {
+    color: #000000;
+    float: left;
+    font-family: Proxima-Nova-Extrabold;
+    font-size: 14px;
+    margin: 0;
+    padding-bottom: 5px;
+    width: 100%;
+}
+.icon_lins .dropdown-menu.cart-products .media-body p b {
+    font-family: Proxima-Nova-Extrabold;
+    font-size: 12px;
+    font-weight: 600;
+}
+.btn.btn-primary.item-update {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    color: #60c5ac;
+    margin-left: 0;
+    padding-left: 0;
+    text-align: center;
+}
+.items{
+	margin-top:-12px;
+}
+/* */
