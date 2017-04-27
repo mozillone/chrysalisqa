@@ -44,6 +44,11 @@ Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesCon
 
 /*******************Car Functionality stat here *********/
 Route::any('/addToCart', array('as' => 'report.post','uses' => 'CartController@addToCart'));
+Route::any('/cart', array('as' => '','uses' => 'CartController@cart'));
+Route::any('/updateCart', array('as' => 'Update.Cart','uses' => 'CartController@updateCart'));
+Route::any('/cart/delete/{cart_id}', array('as' => '','uses' => 'CartController@productRemoveFromCart'));
+Route::get('/getMiniCartProducts', array('as' => '','uses' => 'CartController@getMiniCartProducts'));
+
 /*******************Car Functionality end here *********/
 
 

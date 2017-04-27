@@ -422,7 +422,7 @@
 											<input type="{{$cosplay_four->type}}"  <?php if($cosplayfourvalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}" onclick="make_costume_yes({{$cosplayfourvalues->option_id}})"  required>&nbsp;{{$cosplayfourvalues->option_value}}&nbsp;
 											
 											@endforeach
-											<p class="form-rms-small" id="mention_hours" style="display:none" >If Yes,how long did it take?</p>
+											<p class="form-rms-small" id="mention_hours" style="display:none" >If yes, how long did it take?</p>
 											<p class="ct1-rms-rel" id="mention_hours_input" style="display:none"><input type="text" name="make_costume_time" class="input-rm100"> <span>hours<span>
 											</p>
 										</div>
@@ -748,7 +748,7 @@
 	//$(".sony").select2();
 
 	$('#img_chan,#img_chan2,#img_chan1').drop_uploader({
-                uploader_text: 'Drop files to upload, or',
+                uploader_text: 'Drop files to upload, or Browse',
                 browse_text: 'Browse',
                 browse_css_class: 'button button-primary',
                 browse_css_selector: 'file_browse',

@@ -737,6 +737,11 @@ function previewImages(){
           window.URL.revokeObjectURL(fileList[i]);
         }       
 }*/
+
+//donate amount percentage calculation
+$('#donate_charity').change(function(){
+	//alert($(this).val());
+});
 	//numeric condition
 	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height").on("keyup", function(){
         var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
@@ -881,7 +886,7 @@ function previewImages(){
 		
 		if(costumename==''){
 			$('#costume_name').css('border','1px solid red');
-			$('#costumename_error').html('Enter Costume Name');
+			$('#costumename_error').html('This field is required.');
 			str=false;
 		}
 		/*if(heightft==''){
@@ -911,95 +916,95 @@ function previewImages(){
 		}*/
 		if(category==''){
 			$('#categoryname').css('border','1px solid red');
-			$('#categoryerror').html('Select Category');
+			$('#categoryerror').html('This field is required.');
 			str=false;
 		}
 		if(gender==''){
 			$('#gender').css('border','1px solid red');
-			$('#gendererror').html('Select Gender');
+			$('#gendererror').html('This field is required.');
 			str=false;
 		}
 		if(size==''){
 			$('#size').css('border','1px solid red');
-			$('#sizeerror').html('Select Size');
+			$('#sizeerror').html('This field is required.');
 			str=false;
 		}
 		if(subcategory==''){
 			$('#subcategory').css('border','1px solid red');
-			$('#subcategoryerror').html('Select Subcategory');
+			$('#subcategoryerror').html('This field is required.');
 			str=false;
 		}
 		if(description==""){
 			$('#description').css('border','1px solid red');
-			$('#descriptionerror').html('Enter Costume Description');
+			$('#descriptionerror').html('This field is required.');
 			str=false;
 		}
 		if(funfact=='')
 		{
 			$('#funfacts').css('border','1px solid red');
-			$('#facterror').html('Enter FunFact');
+			$('#facterror').html('This field is required.');
 			str=false;
 		}
 		if(faq==""){
 			$('#faq').css('border','1px solid red');
-			$('#faqerror').html('Enter Faq');
+			$('#faqerror').html('This field is required.');
 			str=false;
 		}
 		if($('input[name=condition]:checked').length<=0){
-			$('#costumeconditionerror').html('Select Costume Condition');
+			$('#costumeconditionerror').html('This field is required.');
 			str=false;
 			
 		}
 		if($('input[name=fimquality]:checked').length<=0){
-			$('#qualityerror').html('Select Costume Fit For Film Quality OR Not');
+			$('#qualityerror').html('This field is required.');
 			str=false;
 			
 		}
 		if($('input[name=make_costume]:checked').length<=0){
-			$('#usercostumeerror').html('Select User Make The Costume Or Not');
+			$('#usercostumeerror').html('This field is required.');
 			str=false;
 			
 		}
 		if($('input[name=activity]:checked').length<=0)
 		{
-			$('#activityerror').html('Select Is The Costume Used For An Activity Or Not');
+			$('#activityerror').html('This field is required.');
 			str=false;
 			
 		}
 		if($('input[name=cosplay]:checked').length<=0){
-			$('#cosplayerror').html('Select Is The Costume Used For Cosplay Or Not');
+			$('#cosplayerror').html('This field is required.');
 			str=false;
 			
 		}
 		if ($('input[name=cosplay]:checked').val() == 7) {
 			if ($('input[name=cosplayplay_yes_opt]:checked').length<=0) {
 
-			$('#cosplay_yeserror').html('Select Is The Cosplay Option');
+			$('#cosplay_yeserror').html('This field is required.');
 			str=false;
 			}
 		}
 		if ($('input[name=fashion]:checked').val() == 9) {
 			if ($('input[name=uniquefashion_yes_opt]:checked').length<=0) {
 
-			$('#uniquefashion_yeserror').html('Select Is The Fashion Option');
+			$('#uniquefashion_yeserror').html('This field is required.');
 			str=false;
 			}
 		}
 		if ($('input[name=activity]:checked').val() == 11) {
 			if ($('input[name=activity_yes_opt]:checked').length<=0) {
 
-			$('#activity_yeserror').html('Select Is The Activity Option');
+			$('#activity_yeserror').html('This field is required.');
 			str=false;
 			}
 		}
 		if ($('input[name=make_costume1]:checked').val() == 30) {
 
-			$('#usercostumeerror').html('Enter time');
+			$('#usercostumeerror').html('This field is required.');
 			str=false;
 			
 		}
 		if($('input[name=fashion]:checked').length<=0){
-			$('#uniquefashionerror').html('Select Is The Costume Used For Uniquefashion Or Not');
+			$('#uniquefashionerror').html('This field is required.');
 			str=false;
 		}
 		if (str == true) {
@@ -1052,7 +1057,7 @@ function previewImages(){
 		var service = $('#service').val();
 		if (price == "") {
 			$('#price').css('border','1px solid red');
-			$('#priceerror').html('Enter Price');
+			$('#priceerror').html('This field is required.');
 			str=false;
 		}
 		/*if (quantity == "") {
@@ -1062,29 +1067,29 @@ function previewImages(){
 		}*/
 		if (shipping == "") {
 			$('#shipping').css('border','1px solid red');
-			$('#shippingerror').html('Select Shipping');
+			$('#shippingerror').html('This field is required.');
 			str=false;
 		}
 		if (packageditems == "") {
 			$('#packageditems').css('border','1px solid red');
-			$('#packageditemserror').html('Select Weight Of Packaged Item');
+			$('#packageditemserror').html('This field is required.');
 			str=false;
 		}
 		if (Length == "" && Height == "" && Width == "") {
 			$('#Length').css('border','1px solid red');
 			$('#Height').css('border','1px solid red');
 			$('#Width').css('border','1px solid red');
-			$('#dimensionserror').html('Enter Length,Width,Height.');
+			$('#dimensionserror').html('This field is required.');
 			str=false;
 		}
 		if (type == "") {
 			$('#type').css('border','1px solid red');
-			$('#typeserror').html('Select Type');
+			$('#typeserror').html('This field is required.');
 			str=false;
 		}
 		if (service == "") {
 			$('#service').css('border','1px solid red');
-			$('#serviceerror').html('Select Service');
+			$('#serviceerror').html('This field is required.');
 			str=false;
 		}
 		if (str == true) {
@@ -1137,33 +1142,33 @@ function previewImages(){
 		var organzation_name = $('#organzation_name').val();
 		if (item_location == "") {
 			$('#item_location').css('border','1px solid red');
-			$('#item_locationerror').html('Enter Item Location');
+			$('#item_locationerror').html('This field is required.');
 			str=false;
 		}
 		if (handlingtime == "") {
 			$('#handlingtime').css('border','1px solid red');
-			$('#handlingtimeerror').html('Select Handling Time');
+			$('#handlingtimeerror').html('This field is required.');
 			str=false;
 		}
 		if (returnpolicy == "") {
 			$('#returnpolicy').css('border','1px solid red');
-			$('#returnpolicyerror').html('Select Return Policy');
+			$('#returnpolicyerror').html('This field is required.');
 			str=false;
 		}
-		if (donate_charity == "") {
+		/*if (donate_charity == "") {
 			$('#donate_charity').css('border','1px solid red');
 			$('#donate_charityerror').html('Select Donate Amount');
 			str=false;
-		}
-		if($('input[name=charity_name]:checked').length<=0){
+		}*/
+		/*if($('input[name=charity_name]:checked').length<=0){
 			$('#charity_name').css('border','1px solid red');
 			$('#charity_nameerror').html('Select Donate to');
 			str=false;
 			
-		}
+		}*/
 		if (atLeastOneIsChecked == true) {
 			$('#organzation_name').css('border','1px solid red');
-			$('#organzation_nameerror').html('Enter Organization Name');
+			$('#organzation_nameerror').html('This field is required.');
 			str=false;
 			if (organzation_name != '') {
 				$('#organzation_name').css('border','');

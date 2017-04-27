@@ -74,4 +74,39 @@ $(function(){
    		  $('.first_active').trigger('click');
    		  $('#signup_popup').modal('show');
         });
+     $(document).on('click','.mini-cart', function(){
+   		 	$.ajax({
+			type: 'GET',
+			url: '/getMiniCartProducts',
+			success: function(response){
+				if(response.length){
+					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date"><span>'+response.length+' Item Added</span><span class="shi_date_right text-right right">Subtotal $'+response[0].total_price+'</span></div><div class="row">';
+				$.each(response,function(i,value){
+					var path='/costumers_images/Medium/'+value.image+'';
+					if(fileExists(src)){
+						var src=path;
+					}else{
+						var src='/costumers_images/default-placeholder.jpg';
+					}
+					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" height="65px" width="50px"></div><div class="media-body"><h4 class="media-heading">'+value.costume_name+'</h4><p><b>Item Condition:</b>'+value.condition+'</p><p><b>Size:</b>'+value.size+'</p></div></div></div>'
+				});
+				cart+='</div></div></div>';
+				}else{
+					var cart="<div class='empty-cart'>You have no items in your shopping cart.</div>";
+				}
+				$('.cart-products').html(cart);
+			}
+			});	
+        });
+     function fileExists(url) {
+	    if(url){
+	        var req = new XMLHttpRequest();
+	        req.open('GET', url, false);
+	        req.send();
+	        return req.status==200;
+	    } else {
+	        return false;
+	    }
+	}
+    
 })

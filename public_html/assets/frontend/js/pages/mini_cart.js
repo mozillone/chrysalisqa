@@ -18,6 +18,8 @@ $(function(){
                     title: 'Out Of Stock',
                     msg: 'This is costume is Out of Stock '
                 });
+				}else{
+					$('span.mini_cart').html(response);
 				}
 			
 			}
