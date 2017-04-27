@@ -52,7 +52,7 @@
 		<!--- mobile heaindgs section end here -->
 		<div class="threeblogs">
 		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
-			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos.Placing them in settings that correspond with their theme can encourage a sale.</p>
+			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos. Placing them in settings that correspond with their theme can encourage a sale.</p>
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-12 ">
 		<h4>01.Front View</h4>
@@ -91,9 +91,11 @@
 					</label>
 				</span>
 			<!-- </form> -->
+			<!-- <p id="other_thumbnails">
+			</p> -->
 					</div>
 					<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
-				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next</a>
+				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next Step</a>
 </div>				
 			</div>
 	 
@@ -353,19 +355,23 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <div class="row" id="activity_yes_div" style="display: none;">
  <div class="col-md-12" >
  <p class="slt_act_all">Select all that apply</p>
+   <div class="fity_hlf">
       <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Circus">Circus</label>
-   </div>
+   </div> 
   <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Theatre">Theatre</label>
    </div>
+      </div>
    </div>
    <div class="col-md-12">
+      <div class="fity_hlf">
   <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Historical Reenactments">Historical Reenactments</label>
    </div>
   <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Music Videos">Music Videos</label>
+   </div>
    </div>
    </div>
    <div class="col-md-12">
@@ -449,14 +455,19 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 </div>
 </div>
 <div class="prog-form-rm" id="pricing_div">
+
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_pricing_form" id="costume_pricing_form" method="post"> -->
-<p class="prog-txt">Please fill in the following field <span>as accurately</span> as you can.</p>
+<p class="prog-txt hidden-xs  ">Please fill in the following field <span>as accurately</span> as you can.</p>
+<div class="row">
 <div class="col-md-6">
+<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 3</h2>
 <h2 class="prog-head">Pricing</h2>
-<div class="form-rms pricess">
+
+<p class="prog-txt hidden-md hidden-lg hidden-sm ">Please fill in the following field <span>as accurately</span> as you can.</p>
+<div class="form-rms pricess pric_tag_three">
 <p class="form-rms-que">01. Price</p>
 <div class="form-rms-input">
-<p class="form-rms-rel"><input type="text" class="input-rm100" name="price" id="price" ><span class="form-rms-abs"><i class="fa fa-usd" aria-hidden="true"></i></span></p>
+<p class="form-rms-rel "><input type="text" class="input-rm100" name="price" id="price" ><span class="form-rms-abs"><i class="fa fa-usd" aria-hidden="true"></i></span></p>
 <p class="cst2-textl2">Not Sure? <i class="fa fa-info-circle" aria-hidden="true"></i></p></div>
 <span id="priceerror" style="color:red"></span>
 </div>
@@ -497,7 +508,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 </div>
 
 <div class="col-md-6">
-<h2 class="prog-head">Package Information</h2>
+<h2 class="prog-head snd-hdng">Package Information</h2>
 <div class="form-rms">
 <p class="form-rms-que">01. Weight of Packaged Item</p>
 <p class="form-rms-input">
@@ -559,6 +570,7 @@ $heading_value=$headingexplode[1];
 </div>
 
 </div>
+</div>
 <div class="form-rms-btn">
 <a type="button" id="pricing_back" class="btn-rm-back"><span>Back</span></a>
 
@@ -568,10 +580,12 @@ $heading_value=$headingexplode[1];
 </div>
 <div class="prog-form-rm" id="preferences_div">
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
-<p class="prog-txt">You're almost done! Just a few more questions.</p>
+<p class="prog-txt  hidden-xs">You're almost done! Just a few more questions.</p>
+<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">step 3</h2>
 <h2 class="prog-head">Review Your Preferences</h2>
-<div class="col-md-6">
 
+<div class="col-md-6">
+<p class="prog-txt hidden-md hidden-lg hidden-sm ">You're almost done! Just a few more questions.</p>
 <div class="form-rms">
 <p class="form-rms-que">01. Item Location</p>
 <p class="form-rms-input"><input type="text" id="item_location" onFocus="geolocate()" name="item_location">
@@ -615,10 +629,10 @@ $heading_value=$headingexplode[1];
 
 </div>
 
-<div class="col-md-6">
-<div class="form-rms">
+<div class="col-md-6 charity_rigt">
+<div class="form-rms lst-stp">
 
-<p class="form-rms-que form-rms-que1">04. Donate a Portion to Charity</p>
+<p class="form-rms-que form-rms-que1 dnt_br">04. Donate a Portion to Charity</p>
 <p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However, if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
 <p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis Terms & Conditions.</p>
 <p class="ct3-rms-head">Donation Amount</p>
@@ -630,17 +644,18 @@ $heading_value=$headingexplode[1];
 <p class="ct3-rms-head">Donate to</p>
 <ul class="ct3-list">
 @foreach($charities as $index=>$charity)
-<li><img width="68px" height="68px" src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" /><input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
+<li><img src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" />
+<p>{{$charity->name}}</p><input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
 @endforeach
 </ul>
 <span id="charity_nameerror" style="color:red"></span>
 
 <p class="cst2-rms-chck"><input type="checkbox" id="another_charity" name="another_charity"> I would like to suggest another charity organization</p>
 </div>
-
-<div class="form-rms">
-<p class="ct3-rms-head">Please Specify:</p>
-<p class="form-rms-input"><input type="text"  name="organzation_name" id="organzation_name" autocomplete="off" placeholder="Organization Name"></p>
+ 
+<div class="form-rms" id="other_organzation_check" style="display: none;">
+<p class="ct3-rms-head chartiy_spcy">Please Specify:</p>
+<p class="form-rms-input org_nme"><input type="text"  name="organzation_name" id="organzation_name" autocomplete="off" placeholder="Organization Name"  class="form-control"></p>
 <span id="organzation_nameerror" style="color:red"></span>
 
 </div>
@@ -697,6 +712,7 @@ $('#categoryname').on('change',function(){
 			console.log(data);
 			var model = $('#subcategory').html('Select Subcategory');    //keeping subcategory field empty before
 					model.empty();
+					model.append("<option value=''>Select Subcategory</option>");
 					$.each(data, function(index, element) {
 						model.append("<option value='"+ element.subcategoryid +"'>" + element.subcategoryname + "</option>");
 			        });
@@ -705,9 +721,30 @@ $('#categoryname').on('change',function(){
 });
 $(document).ready(function()
 {
+
+
+/*var inputLocalFont = document.getElementById("upload-file-selector");
+inputLocalFont.addEventListener("change",previewImages,false);
+
+function previewImages(){
+    var fileList = this.files;
+
+    var anyWindow = window.URL || window.webkitURL;
+
+        for(var i = 0; i < fileList.length; i++){
+          var objectUrl = anyWindow.createObjectURL(fileList[i]);
+          $('#other_thumbnails').append('<img src="' + objectUrl + '" />');
+          window.URL.revokeObjectURL(fileList[i]);
+        }       
+}*/
+
+//donate amount percentage calculation
+$('#donate_charity').change(function(){
+	//alert($(this).val());
+});
 	//numeric condition
 	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height").on("keyup", function(){
-        var valid = /^\d{0,3}(\.\d{0,3})?$/.test(this.value),
+        var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
             val = this.value;
         
         if(!valid){
@@ -768,6 +805,22 @@ $(document).ready(function()
 		$('#mention_hours_input').css('display','none');
 		$('#mention_hours_input').val('');
 	});
+	$('#another_charity').click(function(){
+
+    if($(this).prop("checked") == true){
+
+        $('#other_organzation_check').css('display','block');
+
+    }
+
+    else if($(this).prop("checked") == false){
+
+        $('#other_organzation_check').css('display','none');
+
+    }
+
+});
+
 	
 	$( "#upload_next" ).click(function(a) {
 
@@ -833,7 +886,7 @@ $(document).ready(function()
 		
 		if(costumename==''){
 			$('#costume_name').css('border','1px solid red');
-			$('#costumename_error').html('Enter Costume Name');
+			$('#costumename_error').html('This field is required.');
 			str=false;
 		}
 		/*if(heightft==''){
@@ -863,95 +916,95 @@ $(document).ready(function()
 		}*/
 		if(category==''){
 			$('#categoryname').css('border','1px solid red');
-			$('#categoryerror').html('Select Category');
+			$('#categoryerror').html('This field is required.');
 			str=false;
 		}
 		if(gender==''){
 			$('#gender').css('border','1px solid red');
-			$('#gendererror').html('Select Gender');
+			$('#gendererror').html('This field is required.');
 			str=false;
 		}
 		if(size==''){
 			$('#size').css('border','1px solid red');
-			$('#sizeerror').html('Select Size');
+			$('#sizeerror').html('This field is required.');
 			str=false;
 		}
 		if(subcategory==''){
 			$('#subcategory').css('border','1px solid red');
-			$('#subcategoryerror').html('Select Subcategory');
+			$('#subcategoryerror').html('This field is required.');
 			str=false;
 		}
 		if(description==""){
 			$('#description').css('border','1px solid red');
-			$('#descriptionerror').html('Enter Costume Description');
+			$('#descriptionerror').html('This field is required.');
 			str=false;
 		}
 		if(funfact=='')
 		{
 			$('#funfacts').css('border','1px solid red');
-			$('#facterror').html('Enter FunFact');
+			$('#facterror').html('This field is required.');
 			str=false;
 		}
 		if(faq==""){
 			$('#faq').css('border','1px solid red');
-			$('#faqerror').html('Enter Faq');
+			$('#faqerror').html('This field is required.');
 			str=false;
 		}
 		if($('input[name=condition]:checked').length<=0){
-			$('#costumeconditionerror').html('Select Costume Condition');
+			$('#costumeconditionerror').html('This field is required.');
 			str=false;
 			
 		}
 		if($('input[name=fimquality]:checked').length<=0){
-			$('#qualityerror').html('Select Costume Fit For Film Quality OR Not');
+			$('#qualityerror').html('This field is required.');
 			str=false;
 			
 		}
 		if($('input[name=make_costume]:checked').length<=0){
-			$('#usercostumeerror').html('Select User Make The Costume Or Not');
+			$('#usercostumeerror').html('This field is required.');
 			str=false;
 			
 		}
 		if($('input[name=activity]:checked').length<=0)
 		{
-			$('#activityerror').html('Select Is The Costume Used For An Activity Or Not');
+			$('#activityerror').html('This field is required.');
 			str=false;
 			
 		}
 		if($('input[name=cosplay]:checked').length<=0){
-			$('#cosplayerror').html('Select Is The Costume Used For Cosplay Or Not');
+			$('#cosplayerror').html('This field is required.');
 			str=false;
 			
 		}
 		if ($('input[name=cosplay]:checked').val() == 7) {
 			if ($('input[name=cosplayplay_yes_opt]:checked').length<=0) {
 
-			$('#cosplay_yeserror').html('Select Is The Cosplay Option');
+			$('#cosplay_yeserror').html('This field is required.');
 			str=false;
 			}
 		}
 		if ($('input[name=fashion]:checked').val() == 9) {
 			if ($('input[name=uniquefashion_yes_opt]:checked').length<=0) {
 
-			$('#uniquefashion_yeserror').html('Select Is The Fashion Option');
+			$('#uniquefashion_yeserror').html('This field is required.');
 			str=false;
 			}
 		}
 		if ($('input[name=activity]:checked').val() == 11) {
 			if ($('input[name=activity_yes_opt]:checked').length<=0) {
 
-			$('#activity_yeserror').html('Select Is The Activity Option');
+			$('#activity_yeserror').html('This field is required.');
 			str=false;
 			}
 		}
 		if ($('input[name=make_costume1]:checked').val() == 30) {
 
-			$('#usercostumeerror').html('Enter time');
+			$('#usercostumeerror').html('This field is required.');
 			str=false;
 			
 		}
 		if($('input[name=fashion]:checked').length<=0){
-			$('#uniquefashionerror').html('Select Is The Costume Used For Uniquefashion Or Not');
+			$('#uniquefashionerror').html('This field is required.');
 			str=false;
 		}
 		if (str == true) {
@@ -1004,7 +1057,7 @@ $(document).ready(function()
 		var service = $('#service').val();
 		if (price == "") {
 			$('#price').css('border','1px solid red');
-			$('#priceerror').html('Enter Price');
+			$('#priceerror').html('This field is required.');
 			str=false;
 		}
 		/*if (quantity == "") {
@@ -1014,29 +1067,29 @@ $(document).ready(function()
 		}*/
 		if (shipping == "") {
 			$('#shipping').css('border','1px solid red');
-			$('#shippingerror').html('Select Shipping');
+			$('#shippingerror').html('This field is required.');
 			str=false;
 		}
 		if (packageditems == "") {
 			$('#packageditems').css('border','1px solid red');
-			$('#packageditemserror').html('Select Weight Of Packaged Item');
+			$('#packageditemserror').html('This field is required.');
 			str=false;
 		}
 		if (Length == "" && Height == "" && Width == "") {
 			$('#Length').css('border','1px solid red');
 			$('#Height').css('border','1px solid red');
 			$('#Width').css('border','1px solid red');
-			$('#dimensionserror').html('Enter Length,Width,Height.');
+			$('#dimensionserror').html('This field is required.');
 			str=false;
 		}
 		if (type == "") {
 			$('#type').css('border','1px solid red');
-			$('#typeserror').html('Select Type');
+			$('#typeserror').html('This field is required.');
 			str=false;
 		}
 		if (service == "") {
 			$('#service').css('border','1px solid red');
-			$('#serviceerror').html('Select Service');
+			$('#serviceerror').html('This field is required.');
 			str=false;
 		}
 		if (str == true) {
@@ -1089,33 +1142,33 @@ $(document).ready(function()
 		var organzation_name = $('#organzation_name').val();
 		if (item_location == "") {
 			$('#item_location').css('border','1px solid red');
-			$('#item_locationerror').html('Enter Item Location');
+			$('#item_locationerror').html('This field is required.');
 			str=false;
 		}
 		if (handlingtime == "") {
 			$('#handlingtime').css('border','1px solid red');
-			$('#handlingtimeerror').html('Select Handling Time');
+			$('#handlingtimeerror').html('This field is required.');
 			str=false;
 		}
 		if (returnpolicy == "") {
 			$('#returnpolicy').css('border','1px solid red');
-			$('#returnpolicyerror').html('Select Return Policy');
+			$('#returnpolicyerror').html('This field is required.');
 			str=false;
 		}
-		if (donate_charity == "") {
+		/*if (donate_charity == "") {
 			$('#donate_charity').css('border','1px solid red');
 			$('#donate_charityerror').html('Select Donate Amount');
 			str=false;
-		}
-		if($('input[name=charity_name]:checked').length<=0){
+		}*/
+		/*if($('input[name=charity_name]:checked').length<=0){
 			$('#charity_name').css('border','1px solid red');
 			$('#charity_nameerror').html('Select Donate to');
 			str=false;
 			
-		}
+		}*/
 		if (atLeastOneIsChecked == true) {
 			$('#organzation_name').css('border','1px solid red');
-			$('#organzation_nameerror').html('Enter Organization Name');
+			$('#organzation_nameerror').html('This field is required.');
 			str=false;
 			if (organzation_name != '') {
 				$('#organzation_name').css('border','');

@@ -107,7 +107,7 @@ span.text a {
     margin: 0 auto;
     border: 1px solid #e1e1e1;
 } */
-.drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
+/* .drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
     width: 196px;
     height: 295px;
     border-radius: 8px 8px 8px 8px;
@@ -121,8 +121,26 @@ span.text a {
     left: 1px;
     bottom: 0px;
     right: 0px;
-}
+} */
 
+.drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
+    width: 196px;
+    height: 295px;
+    border-radius: 8px 8px 8px 8px;
+    -moz-border-radius: 8px 8px 8px 8px;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    background-size: cover;
+    margin: 0 auto;
+    border: 1px solid #e1e1e1;
+    top: 0px !important;
+    position: absolute;
+    left: 1px;
+    bottom: 0px;	
+    right: 0px;
+    background-size: 100% 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+}
 .drop_uploader.drop_zone ul.files.thumb li div.thumbnail .du_hover_layer {
     width: 100px;
     height: 100px;
@@ -258,9 +276,15 @@ span.text a {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 
+@media only screen and (min-device-width:768px) and (max-device-width:1024px){
 
-
-
+.drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
+    width: 150px;
+    height: 295px;
+    background-size: cover;
+    background-position: 50%;
+}
+}
 
 @media screen and (max-width:767px){
 	.drop_uploader.drop_zone .text_wrapper {
