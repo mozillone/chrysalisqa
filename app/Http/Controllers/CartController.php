@@ -19,13 +19,15 @@ class CartController extends Controller {
 	{
 		$this->sitehelper = new SiteHelper();
 	}
+  public function cart(Request $request){
+    $data=Cart::getCartProducts();
+    return view('frontend.costumes.cart.cart_list',compact('data',$data));
+  }
 	public function addToCart(Request $request){
 		$req=$request->all();
-		//Cart::addToCart($req);
 		$verify=$this->verifieCookie();
              if($verify){
              	$result=$this->getCookieAllProducts();
-             	//dd($result);
              	 foreach($result as $value){
              	 	$costume_id=$req['costume_id'];
              	 	$cookie_id=$this->currentCookieKey();
@@ -36,7 +38,8 @@ class CartController extends Controller {
              	 		if(count($res)){
 	             	 		Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
 	             	 		$res=$this->updateCartDetails($costume_id,$qty+1);
-	             	 		return response('')->cookie($res);
+                    $count=Cart::getCartCount();
+	             	 		return response($count)->cookie($res);
              	 		}else{
 	             	 		return response('out of stock');
 
@@ -50,7 +53,8 @@ class CartController extends Controller {
 				             $product[$cookie_id][]=array($req['costume_id']=>$qty);
 				             Cart::addToCart($req,$cookie_id,$qty);
 				             $reslt=$this->productsAddToCookie($product);
-				             return response('')->cookie($reslt);
+                     $count=Cart::getCartCount();
+				             return response($count)->cookie($reslt);
 				         }else{
 				         	return response('out of stock');
 				         }
@@ -66,7 +70,9 @@ class CartController extends Controller {
                $product[$cookie_id]=array($req['costume_id']=>$qty);
                Cart::addToCart($req,$cookie_id,$qty);
                $res=$this->productsAddToCookie($product);
-               return response('')->cookie($res);
+               $reslt=$this->productsAddToCookie($product);
+               $count=Cart::getCartCount();
+               return response($count)->cookie($res);
              }
 		
 	}
@@ -105,5 +111,23 @@ class CartController extends Controller {
     private function currentCookieKey(){
         $cookie=cookie::get('min-cart');
         return key($cookie);
+    }
+    public function updateCart(Request $request){
+        $req=$request->all();
+        $verify=Cart::verifyCostumeQuantity($req['costume_id'],$req['qty']);
+        if(count($verify)){
+          Cart::updateCartDetails($req['costume_id'],$req['cart_id'],$req['qty']);
+        }else{
+          Session::flash('error','The requested quantity for \'"'.$req['costume_name'].'"\' is not available.');
+        }
+        return Redirect::to('cart');
+    }
+    public function productRemoveFromCart($cart_id){
+      Cart::productRemoveFromCart($cart_id);
+      return Redirect::to('cart');
+    }
+    public function getMiniCartProducts(){
+      $cart_list=Cart::getCartProducts();
+      return Response::JSON($cart_list);
     }
 }

@@ -25,6 +25,15 @@ display: none;
 }
 */
 /*******************/
+.col-md-6.dimsn-bknd {
+    margin-top: 6px;
+}
+.crt_right_alng label.control-label {
+    margin-bottom: 8px !important;
+}
+.dmns_rigts .col-md-4 {
+    padding-left: 0px;
+}
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     z-index: 3;
     color: #fff;
