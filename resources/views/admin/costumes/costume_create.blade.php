@@ -66,7 +66,7 @@
 					
 						<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 						<div class="col-md-6">
-							<h2 class="heading-agent">Custome Information</h2>
+							<h2 class="heading-agent">Costume Information</h2>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Customer<span class="req-field" >*</span></label>
@@ -154,7 +154,7 @@
 									$attribute1=ucfirst($heightattributes1[0]);
 									$attributevalue1=$heightattributes1[1];
 									?>
-							     <label for="inputEmail3" class="control-label">Height<span class="req-field" >*</span></label>
+							     <label for="inputEmail3" class="control-label"></label>
 									<div class="input-group">
 										<input type="{{$bd_height_in->type}}"  class="form-control"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
 										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1; ?></span>
@@ -666,7 +666,7 @@
 						<div class="col-md-6 ">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Front View</h2>
 							<div class="col-md-12">
-							<input type="file" name="img-chan" id="img-chan">
+							<input type="file" name="img_chan" id="img_chan">
 								 					
 							</div>   
 					</div> 
@@ -675,7 +675,7 @@
 					
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Back View</h2>
 							<div class="col-md-12">
-								<input type="file" name="img-chan1" id="img-chan1">
+								<input type="file" name="img_chan1" id="img_chan1">
 								 					
 							</div> 
 					
@@ -683,7 +683,7 @@
 						<div class="col-md-6 ">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Details/Accessories</h2>
 							<div class="col-md-12">
-							<input type="file" name="img-chan2" id="img-chan2">												
+							<input type="file" name="img_chan2" id="img_chan2">												
 							</div>   
 					</div>
 						</div>
@@ -729,7 +729,7 @@
 	$(document).ready(function () {
 	//$(".sony").select2();
 
-	$('#img-chan,#img-chan2,#img-chan1').drop_uploader({
+	$('#img_chan,#img_chan2,#img_chan1').drop_uploader({
                 uploader_text: 'Drop files to upload, or',
                 browse_text: 'Browse',
                 browse_css_class: 'button button-primary',
@@ -860,7 +860,7 @@
 	
 	<script type="text/javascript">
 	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensions").on("keyup", function(){
-	    var valid = /^\d{0,3}(\.\d{0,3})?$/.test(this.value),
+	    var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
 	        val = this.value;
 	    
 	    if(!valid){

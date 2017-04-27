@@ -232,13 +232,13 @@ $(function(){
 				charity_name:{
 				  required: true,
 				},
-				avatar:{
+				img_chan:{
 				  required: true,
 				},
-				avatar1:{
+				img_chan1:{
 				  required: true,
 				},
-				avatar2:{
+				img_chan2:{
 				  required: true,
 				},
 			},
