@@ -100,6 +100,9 @@
 			</p>
 			</div>
 					<!-- <form> -->
+										<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
+				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default nxt">Next Step</a>
+</div>
 				<span id="fileselector">
 					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
 						<input id="upload-file-selector" type="file" name="file4[]" multiple>
@@ -109,9 +112,7 @@
 			<!-- </form> -->
 			</div>
 					</div>
-					<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
-				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next Step</a>
-</div>				
+				
 			</div>
 	 
 <!--- progressbar section End -->
@@ -466,7 +467,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <a type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></a>
 
 <!-- </form> -->
-<a type="button" id="costume_description_next" class="btn-rm-nxt">Next Step</a>
+<a type="button" id="costume_description_next" class="btn-rm-nxt nxt">Next Step</a>
 </div>
 </div>
 <div class="prog-form-rm" id="pricing_div">
@@ -589,7 +590,7 @@ $heading_value=$headingexplode[1];
 <div class="form-rms-btn">
 <a type="button" id="pricing_back" class="btn-rm-back"><span>Back</span></a>
 
-<a type="button" id="pricing_next" class="btn-rm-nxt">Next Step</a>
+<a type="button" id="pricing_next" class="btn-rm-nxt nxt">Next Step</a>
 </div>
 <!-- </form> -->
 </div>
@@ -767,9 +768,9 @@ function previewImages(){
         var fileReader = new FileReader();
         fileReader.onload = (function(e) {
           var file = e.target;
-          $('#other_thumbnails').append("<span class=\"pip\">" +
-            "<img width=\"60px\" height=\"60px\" class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-            "<br/><span class=\"remove\">Remove image</span>" +
+          $('#other_thumbnails').append("<span class=\"pip col-md-3\">" +
+            "<img  class=\"imageThumb img-responsive\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\">Remove image </span>" +
             "</span>");
           /*$("<span class=\"pip\">" +
             "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
@@ -1355,7 +1356,10 @@ var placeSearch, autocomplete;
         }
       }
 	
-
+$(document).on('click','.nxt',function() {
+  $("html, body").animate({ scrollTop: 0 }, "slow");
+  return false;
+});
     </script> 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
         async defer></script>
