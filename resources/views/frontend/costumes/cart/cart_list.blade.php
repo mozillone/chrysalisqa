@@ -64,6 +64,7 @@
 									@endif
 										</div>
 									</div>
+									@if(count($data))
 									<div class="col-md-3 col-sm-3 col-xs-12">
 										<div class="cart_page_right">
 											<div class="well">
@@ -83,15 +84,16 @@
 											<div class="order_summery">
 												<div class="well">
 													<h3>Order Summary  </h3> 
-													<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">$159.00 <em>(2 Items)</em></span></p>
-													<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$1.00 <em>(2 Items)</em></span></p>
-													<p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$19.00 </span></p>
-													<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">$160.00 </span></p>
+													<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format(helper::getCartSubtotalPrice(), 2, '.', ',')}} <em>({{count($data)}} Items)</em></span></p>
+													<!-- <p class="sub-all"><span>Shipping: </span> <span class="sub-price">$1.00 <em>(2 Items)</em></span></p>
+													<p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$19.00 </span></p> -->
+													<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">${{number_format(helper::getCartSubtotalPrice(), 2, '.', ',')}}</span></p>
 													<a class="btn btn-primary">Continue to Checkout</a>
 												</div>
 											</div>
 										</div>
 									</div>
+									@endif
 								</div>
 							</div>
 						</div>
