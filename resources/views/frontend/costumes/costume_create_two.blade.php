@@ -57,26 +57,35 @@
 		<div class="col-md-3 col-sm-3 col-xs-12 ">
 		<h4>01.Front View</h4>
 		<div class=" up-blog">
+			<span class="remove_pic" id="drag_n_drop_1" style="display: none;">
+				<i class="fa fa-times-circle" aria-hidden="true"></i>					
+			</span>
 			<input type="file" name="file1" id="file1">
 		</div>
-<span id="file1_error" style="color:red"></span>
+		<span id="file1_error" style="color:red"></span>
 
 			</div>
 			<div class="col-md-3 col-sm-3 col-xs-12 ">
 			<h4>02.Back View</h4>
 			<div class=" up-blog">
+			<span class="remove_pic" id="drag_n_drop_2" style="display: none;">
+				<i class="fa fa-times-circle" aria-hidden="true"></i>					
+			</span>
 			<input type="file" name="file2" id="file2">
 			
 		</div>
-<span id="file2_error" style="color:red"></span>
+		<span id="file2_error" style="color:red"></span>
 
 			</div>
 			<div class="col-md-3 col-sm-3 col-xs-12 ">
 			<h4>03.Detail/Accessories</h4>
 			<div class=" up-blog">
+			<span class="remove_pic" id="drag_n_drop_3" style="display: none;">
+				<i class="fa fa-times-circle" aria-hidden="true"></i>					
+			</span>
 			<input type="file" name="file3" id="file3">
 		</div>
-<span id="file3_error" style="color:red"></span>
+		<span id="file3_error" style="color:red"></span>
 
 			</div>
 		
@@ -240,7 +249,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <span id="cosplayerror" style="color:red"></span>
 <div class="row" id="cosplayplay_yes_div" style="display: none;">
  <div class="col-md-12" >
-  <p class="slt_act_all">Select all that apply</p>
+  <p class="slt_act_all">Select all that apply:</p>
 		<div class="fity_hlf">
       <div class="radio-inline ">
      <label><input type="radio" name="cosplayplay_yes_opt" value="Anime/Manga">Anime/Manga</label>
@@ -294,7 +303,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <span id="uniquefashionerror" style="color:red"></span>
 <div class="row" id="uniquefashion_yes_div" style="display: none;">
  <div class="col-md-12" >
- <p class="slt_act_all">Select all that apply</p>
+ <p class="slt_act_all">Select all that apply:</p>
  <div class="fity_hlf">
       <div class="radio-inline">
      <label><input type="radio" name="uniquefashion_yes_opt" value="Cyberpunk">Cyberpunk</label>
@@ -354,7 +363,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <span id="activityerror" style="color:red"></span>
 <div class="row" id="activity_yes_div" style="display: none;">
  <div class="col-md-12" >
- <p class="slt_act_all">Select all that apply</p>
+ <p class="slt_act_all">Select all that apply:</p>
    <div class="fity_hlf">
       <div class="radio-inline">
      <label><input type="radio" name="activity_yes_opt" value="Circus">Circus</label>
@@ -565,7 +574,7 @@ $heading_value=$headingexplode[1];
 </p>
 <span id="serviceerror" style="color:red"></span>
 
-<p class="form-rms-small1">Estimated Shipping Cost: $6.80 - $12.40 (varies by buyer's location)</p>
+<p class="form-rms-small1">Estimated Shipping cost: $6.80 - $12.40 (varies by buyer's location)</p>
 <p class="cst2-rms-chck"><input id="free_shipping" type="checkbox"> Offer free shipping</p>
 </div>
 
@@ -634,7 +643,7 @@ $heading_value=$headingexplode[1];
 
 <p class="form-rms-que form-rms-que1 dnt_br">04. Donate a Portion to Charity</p>
 <p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However, if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
-<p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis Terms & Conditions.</p>
+<p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis' Terms & Conditions.</p>
 <p class="ct3-rms-head">Donation Amount</p>
 <div class="form-rms-input">
 <p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></p>
@@ -737,7 +746,9 @@ function previewImages(){
           window.URL.revokeObjectURL(fileList[i]);
         }       
 }*/
-
+	/*$( "[id^='drag_n_drop_']" ).click(function() {
+		alert($(this))
+	});*/
 //donate amount percentage calculation
 $('#donate_charity').change(function(){
 	var donate_percent = $(this).val();
