@@ -93,6 +93,10 @@
 			</div>
 				<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 				
+			<p id="other_thumbnails"></p>
+			<p id="remove_more">
+				
+			</p>
 				<!-- <form> -->
 				<span id="fileselector">
 					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
@@ -100,9 +104,8 @@
 						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> Upload More
 					</label>
 				</span>
+				
 			<!-- </form> -->
-			<p id="other_thumbnails">
-			</p>
 					</div>
 					<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next Step</a>
@@ -733,7 +736,7 @@ $(document).ready(function()
 {
 
 
-var inputLocalFont = document.getElementById("upload-file-selector");
+/*var inputLocalFont = document.getElementById("upload-file-selector");
 inputLocalFont.addEventListener("change",previewImages,false);
 
 function previewImages(){
@@ -742,11 +745,54 @@ function previewImages(){
     var anyWindow = window.URL || window.webkitURL;
 
         for(var i = 0; i < fileList.length; i++){
+          $('#remove_more').append('<span class="remove_pic" id="upload_remove_'+i+'"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
           var objectUrl = anyWindow.createObjectURL(fileList[i]);
-          $('#other_thumbnails').append('<img src="' + objectUrl + '" />');
+          $('#other_thumbnails').append('<img id="img_more_'+i+'" src="' + objectUrl + '" width="60px" height="60px" />');
           window.URL.revokeObjectURL(fileList[i]);
         }       
 }
+	$("#upload_remove_0").click(function(){
+		alert($(this));
+	});*/
+
+
+	if (window.File && window.FileList && window.FileReader) {
+    $("#upload-file-selector").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+          $('#other_thumbnails').append("<span class=\"pip\">" +
+            "<img width=\"60px\" height=\"60px\" class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\">Remove image</span>" +
+            "</span>");
+          /*$("<span class=\"pip\">" +
+            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\">Remove image</span>" +
+            "</span>").insertAfter("#upload-file-selector");*/
+          $(".remove").click(function(){
+            $(this).parent(".pip").remove();
+          });
+          
+          // Old code here
+          /*$("<img></img>", {
+            class: "imageThumb",
+            src: e.target.result,
+            title: file.name + " | Click to remove"
+          }).insertAfter("#files").click(function(){$(this).remove();});*/
+          
+        });
+        fileReader.readAsDataURL(f);
+      }
+    });
+  } else {
+    alert("Your browser doesn't support to File API")
+  }
+
+
 
 	$('input[name=file1]').change(function(){
 		$('#drag_n_drop_1').css('display','block');
