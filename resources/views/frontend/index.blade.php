@@ -20,9 +20,13 @@
     min-height: 215px;
     max-height: 215px;
 }
+
 div#main-banner {
     margin-top: 60px;
 }
+
+
+
     }
 </style>
 @endsection
@@ -75,30 +79,30 @@ div#main-banner {
 				<!-- steps content div start here-->
 				<div class="row home_steps hidden-xs">
 					<div class="col-md-4 col-sm-4 col-xs-12">
-						<div class="media"> 
-							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a> 
-							</div> 
+						<div class="media">
+							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a>
+							</div>
 							<div class="media-body"> <h4 class="media-heading">STEP 1</h4>
-								<p>Sell those old costumes with Chrysalis</p> 
-							</div> 
+								<p>Sell those old costumes with Chrysalis</p>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-12">
-						<div class="media"> 
-							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_2_icon.png')}}" data-holder-rendered="true" > </a> 
-							</div> 
+						<div class="media">
+							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_2_icon.png')}}" data-holder-rendered="true" > </a>
+							</div>
 							<div class="media-body"> <h4 class="media-heading">STEP 2</h4>
-								<p>Get Cash or Store Credit</p> 
-							</div> 
+								<p>Get Cash or Store Credit</p>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-12">
-						<div class="media"> 
-							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_3_icon.png')}}" data-holder-rendered="true" > </a> 
-							</div> 
+						<div class="media">
+							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_3_icon.png')}}" data-holder-rendered="true" > </a>
+							</div>
 							<div class="media-body"> <h4 class="media-heading">STEP 3</h4>
-								<p>Buy another costume!</p> 
-							</div> 
+								<p>Buy another costume!</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -114,34 +118,34 @@ div#main-banner {
 						<div class="carousel-inner" role="listbox">
 
 							<div class="item active">
-								<div class="media"> 
-									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a> 
-									</div> 
+								<div class="media">
+									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a>
+									</div>
 									<div class="media-body"> <h4 class="media-heading">STEP 1</h4>
-										<p>Sell those old costumes with Chrysalis</p> 
-									</div> 
+										<p>Sell those old costumes with Chrysalis</p>
+									</div>
 								</div>
 							</div>
 
 							<div class="item">
-								<div class="media"> 
-									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_2_icon.png')}}" data-holder-rendered="true" > </a> 
-									</div> 
+								<div class="media">
+									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_2_icon.png')}}" data-holder-rendered="true" > </a>
+									</div>
 									<div class="media-body"> <h4 class="media-heading">STEP 2</h4>
-										<p>Get Cash or Store Credit</p> 
-									</div> 
+										<p>Get Cash or Store Credit</p>
+									</div>
 								</div>
 							</div>
 
 							<div class="item">
-								<div class="media"> 
-									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_3_icon.png')}}" data-holder-rendered="true" > </a> 
-									</div> 
+								<div class="media">
+									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_3_icon.png')}}" data-holder-rendered="true" > </a>
+									</div>
 									<div class="media-body"> <h4 class="media-heading">STEP 3</h4>
-										<p>Buy another costume!</p> 
-									</div> 
+										<p>Buy another costume!</p>
+									</div>
 								</div>
-							</div> 
+							</div>
 
 
 
@@ -163,7 +167,7 @@ div#main-banner {
 
 
 			</div>
-		</section> 
+		</section>
 		<div class="container">
 		</div>
 		<div class="home_product_slider">
