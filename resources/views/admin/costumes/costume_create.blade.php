@@ -66,7 +66,7 @@
 					
 						<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 						<div class="col-md-6">
-							<h2 class="heading-agent">Costume Information</h2>
+							<h2 class="heading-agent">*Costume Information</h2>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Customer<span class="req-field" >*</span></label>
