@@ -254,7 +254,7 @@ h3.box-title{width:100%; float:left;}
 .editrole-permission td{width:10%;}
 .editrole-permission td:first-child(1){text-align:left !important;}
 .user-list{margin:10px 4px 10px 0; }
-.req-field{color: red;}
+.req-field{color: red;} 
 #agent_edit_from .form-group{margin-right:0px; margin-left:0px;}
 #agent_edit_from input, #agent_edit_from select{border:1px solid #ccc;}
 #agent_edit_from p{margin:0;font-size:11px}
@@ -313,23 +313,6 @@ span.remove_pic_cat {    position: absolute;    top: -7px;    color: red;    rig
 span.remove_pic {
     cursor: pointer;
 }
-
-/*28-04-17 crate dharma*/
-.drop_uploader.drop_zone {
-    border: none !important;
-}
-.frnt_back_view .up-blog { background: #ccc; height: 295px; cursor: pointer; position: relative; }
-.frnt_back_view .drop_uploader.drop_zone .text { color:transparent;  }
-.frnt_back_view .drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 100% 50%;
-    background-color: #e1e1e1;
-}
-.input-btn{ margin:0 auto; }
-.d-amount{float: left; position: absolute; left:173px; width: 80px; top: 9px;}
-
-
 
 
 .ticket-view-approvals, .ticket-view-discussions, .ticket-view-task, .ticket-view-more{width:100%; float:left;margin:0 0 40px; padding:0 0px;}
@@ -414,7 +397,7 @@ ul.status-dashboard li{display: -webkit-inline-box; padding: 0 0 0 10px;}
 .fileupload-new .btn-file{margin: 10px 0 0 0px !important;}
 .input-group{position:relative}
 .input-group label.error{position:absolute; top: 35px; left: 0;}
-#charity_create_popup .fileupload-new .img-pview{width: 150px;height: 150px; margin-top:10px; border:1px solid #ccc}
+#charity_create_popup .fileupload-new .img-pview{width: 150px;height: 150px; margin-top:10px; border-radius:100%; border:1px solid #ccc}
 .heading-agent{font-size:17px;border-bottom: 1px solid #f4f4f4; padding: 0 0 10px 0px;}
 .modal-body.status_body .table thead td{font-weight:bold;}
 .breadcrumb > .active{color: #3c8dbc  !important; font-weight: 700 !important;}
@@ -487,10 +470,10 @@ input#edit_img_pic {
     border: none;
 }
 #charity-create span.remove_pic {
-   position: absolute;
-top: -4px;
-color: red;
-left: 162px;
+    position: absolute;
+    top: 2px;
+    color: red;
+    left: 130px;
 }
 .fileupload.fileupload-new {
 	position:relative
@@ -522,7 +505,7 @@ left: 162px;
 .ticket-view  .ticket-view-task td a.btn{float:left;margin: 0 10px 0 0}
 .ticket-view  .ticket-view-task td .dropdown .dropdown-toggle{float:right;margin: 0 0px 0 0}
 .ticket-view  .ticket-view-task td a i{color:#fff;padding:0px;}
-.task-view-headings{float:right; font-size:14px !important;}
+.task-view-headings{float:right; font-size:14px !important;} 
 .tasks_list td span.img-text-task{margin:10px 0 0 0;font-size:15px; float:left;text-align:left;width:200px;}
 .tasks_completed_list td span.img-text-task{margin:10px 0 0 0;font-size:15px; float:left;}
 .ticket-view-task .priority_task{float: left; width: auto;}
@@ -610,7 +593,7 @@ body .loading img{width:10%;}
 
 
 @media only screen and (min-width : 1300px) {
-
+	
 		.row_pregt .radio {
     width: 15%;
 }
@@ -647,7 +630,7 @@ body .loading img{width:10%;}
 .costume_creates_pages .fileupload.fileupload-new {
     min-width: 150px;
     min-height: 150px;
-    overflow: hidden;
+    overflow: hidden;   
 }
 
 .costume_creates_pages .fileupload.fileupload-new img {
@@ -685,7 +668,7 @@ body .loading img{width:10%;}
 	.cupn_catries {
     padding-left: 0px;padding-right: 0px;
 }
-
+	
 	.main-header .logo .logo-lg{display:none;}
 .main-header .logo img {    width: 130px;      margin-top: 5px;}
 .skin-blue .main-header .logo{background-color: #fff;}
@@ -703,9 +686,4 @@ body .loading img{width:10%;}
 
 @media only screen and (max-width : 320px) {
   .tag.label.label-info{font-family: 11px;}
-}
-
-/*28-04-17 dharma */
-@media only screen and (max-width : 991px) {
- .skin-blue .input-group{ margin-bottom: 10px; }
 }

@@ -551,7 +551,7 @@ class CostumeController extends Controller
 			$data1=array(
 			'costume_id'=>$costume_id,
 			'image'=>$file_name,
-			'type'=>"1");
+			'type'=>"3");
 			$image1_insert=DB::table('costume_image')->insert($data1);
 			
 		}
@@ -572,7 +572,7 @@ class CostumeController extends Controller
 			$data2=array(
 			'costume_id'=>$costume_id,
 			'image'=>$file_name,
-			'type'=>"2");
+			'type'=>"1");
 			$image1_insert=DB::table('costume_image')->insert($data2);
 		}
 		/*
@@ -592,7 +592,7 @@ class CostumeController extends Controller
 			$data2=array(
 			'costume_id'=>$costume_id,
 			'image'=>$file_name,
-			'type'=>"3");
+			'type'=>"2");
 			$image1_insert=DB::table('costume_image')->insert($data2);
 		}
 	/*
