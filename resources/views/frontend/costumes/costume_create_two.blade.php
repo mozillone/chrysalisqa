@@ -51,10 +51,10 @@
 		
 		<!--- mobile heaindgs section end here -->
 		<div class="threeblogs">
-		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
+		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint r">
 			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos. Placing them in settings that correspond with their theme can encourage a sale.</p>
 		</div>
-		<div class="col-md-3 col-sm-3 col-xs-12 " id="front_view">
+		<div class="col-md-3 col-sm-3 col-xs-12  c_pic " id="front_view">
 		<h4>01.Front View</h4>
 			<span class="remove_pic" id="drag_n_drop_1" style="display: none;" >
 				<i class="fa fa-times-circle" aria-hidden="true"></i>				
@@ -65,7 +65,7 @@
 		<span id="file1_error" style="color:red"></span>
 
 			</div>
-			<div class="col-md-3 col-sm-3 col-xs-12 " id="back_view">
+			<div class="col-md-3 col-sm-3 col-xs-12 rc_pic" id="back_view">
 			<h4>02.Back View</h4>
 			<span class="remove_pic" id="drag_n_drop_2" style="display: none;" >
 				<i class="fa fa-times-circle" aria-hidden="true"></i>				
@@ -78,7 +78,7 @@
 		<span id="file2_error" style="color:red"></span>
 
 			</div>
-			<div class="col-md-3 col-sm-3 col-xs-12 " id="details_view">
+			<div class="col-md-3 col-sm-3 col-xs-12 rc_pic " id="details_view">
 			<h4>03.Detail/Accessories</h4>
 			<span class="remove_pic" id="drag_n_drop_3" style="display: none;">
 				<i class="fa fa-times-circle" aria-hidden="true"></i>					
@@ -93,7 +93,13 @@
 			</div>
 				<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 				
-				<!-- <form> -->
+		
+			<div class="col-md-12 col-sm-12 col-xs-12 ">
+			<p id="other_thumbnails">
+			<div class="col-md-3 col-sm-3 col-xs-12"></div>
+			</p>
+			</div>
+					<!-- <form> -->
 				<span id="fileselector">
 					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
 						<input id="upload-file-selector" type="file" name="file4[]" multiple>
@@ -101,9 +107,7 @@
 					</label>
 				</span>
 			<!-- </form> -->
-			<p id="other_thumbnails">
-			</p>
-					</div>
+			</div>
 					<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next Step</a>
 </div>				

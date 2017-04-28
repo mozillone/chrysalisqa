@@ -122,19 +122,7 @@
 				</div>
 			</div>
 				</div>
-				<script>
-					$(document).ready(function(){
-						$('[data-toggle="tooltip"]').tooltip(); 
-					});
-									function toggleIcon(e) {
-    $(e.target)
-        .prev('.panel-heading')
-        .find(".more-less")
-        .toggleClass('glyphicon-triangle-bottom glyphicon-triangle-top');
-}
-$('.panel-group').on('hidden.bs.collapse', toggleIcon);
-$('.panel-group').on('shown.bs.collapse', toggleIcon);
-				</script>
+
 				
 				
 	
