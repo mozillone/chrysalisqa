@@ -20,7 +20,9 @@
     min-height: 215px;
     max-height: 215px;
 }
-
+div#main-banner {
+    margin-top: 60px;
+}
     }
 </style>
 @endsection
