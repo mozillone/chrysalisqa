@@ -92,7 +92,12 @@ function searching(search=null){
 					　$.each(response.data.costumes,function(index, value) {
 						
 						if(value.image!=null){
-							var src="/costumers_images/Medium/"+value.image;
+							var path='/costumers_images/Medium/'+value.image;
+							if(fileExists(path)){
+								var src=path;
+							}else{
+								var src="/costumers_images/default-placeholder.jpg";
+							}
 						}else{
 							var src="/costumers_images/default-placeholder.jpg";
 						}
@@ -154,4 +159,14 @@ function now()
 
   return output;
 }
+  function fileExists(url) {
+	    if(url){
+	        var req = new XMLHttpRequest();
+	        req.open('GET', url, false);
+	        req.send();
+	        return req.status==200;
+	    } else {
+	        return false;
+	    }
+	}
 });
