@@ -80,7 +80,7 @@ $(function(){
 			url: '/getMiniCartProducts',
 			success: function(response){
 				if(response.length){
-					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date"><span>'+response.length+' Item Added</span><a href="/cart">View & Edit Cart</a><span class="shi_date_right text-right right">Subtotal $'+response[0].total_price+'</span></div><div class="row">';
+					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date"><span>'+response.length+' Item Added</span><a href="/cart">View & Edit Cart</a><span class="shi_date_right text-right right"><span classs="subtl">Subtotal</span> $'+response[0].total_price+'</span></div><div class="row scels">';
 				$.each(response,function(i,value){
 					var path='/costumers_images/Medium/'+value.image+'';
 					if(fileExists(src)){
@@ -90,7 +90,7 @@ $(function(){
 					}
 					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" height="65px" width="50px"></div><div class="media-body"><h4 class="media-heading">'+value.costume_name+'</h4><p><b>Item Condition:</b>'+value.condition+'</p><p><b>Size:</b>'+value.size+'</p></div></div></div>'
 				});
-				cart+='</div></div></div>';
+				cart+='<div class="chk-out">Proceed to Checkout</div></div></div></div>';
 				}else{
 					var cart="<div class='empty-cart'>You have no items in your shopping cart.</div>";
 				}
@@ -108,5 +108,14 @@ $(function(){
 	        return false;
 	    }
 	}
+	  $(document).on('show','.accordion', function (e) {
+         //$('.accordion-heading i').toggleClass(' ');
+         $(e.target).prev('.accordion-heading').addClass('accordion-opened');
+    });
+    
+    $(document).on('hide','.accordion', function (e) {
+        $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
+        //$('.accordion-heading i').toggleClass('fa-chevron-right fa-chevron-down');
+    });
     
 })
