@@ -897,46 +897,12 @@ p.right_heading span.my_msg { font-weight: 800; }
 
 
 
-/* Jithender Css */
-.icon_lins .dropdown-menu.cart-products {
-    left: -200px;
-}
-.dropdown-menu.cart-products {
-    max-height: 250px;
-    overflow-y: auto;
-}
-.icon_lins .dropdown-menu.cart-products .media-body .media-heading {
-    color: #000000;
-    float: left;
-    font-family: Proxima-Nova-Extrabold;
-    font-size: 14px;
-    margin: 0;
-    padding-bottom: 5px;
-    width: 100%;
-}
-.icon_lins .dropdown-menu.cart-products .media-body p b {
-    font-family: Proxima-Nova-Extrabold;
-    font-size: 12px;
-    font-weight: 600;
-}
-.btn.btn-primary.item-update {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border: medium none;
-    color: #60c5ac;
-    margin-left: 0;
-    padding-left: 0;
-    text-align: center;
-}
-.items{
-    margin-top:-12px;
-}
-/* */
 
 
 /* ProgressBar CSS S */
 .progressbar_main { width: 100%; float: left; margin: 30px 0 50px; border: 1px solid #ccc; padding: 15px; border-top: 3px solid #60c5ac; }
 .progressbar_main h2 { width: 100%; float: left; font-size: 16px; font-family: Proxima-Nova-Extrabold; margin: 0px 0 30px; color: #323031; }
-#progressbar { width: 100%; float: left; counter-reset: step; clear: both; }
+#progressbar { width: 100%; float: left; counter-reset: step; clear: both;padding-left:0px; }
 .progressbar_rm { text-align: center; margin: 30px 0 0px !important; clear: both; }
 #progressbar li { list-style-type: none; color: rgb(0, 0, 0); font-size: 16px; width: 25%; text-align: center; float: left; position: relative; font-family: Proxima-Nova-Semibold; }
 #progressbar li:before { content: counter(step); counter-increment: step; width: 16px; height: 16px; line-height: 16px; display: block; font-size: 0; color: #333; background: #fff; border-radius: 10px; margin: 0 auto 5px auto; border: 1px solid #e0e0e0; }
@@ -1191,6 +1157,57 @@ span.up_tip {
     font-size: 30px;
     display: block;    line-height: 15px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.dropdown-menu.cart-products {
+    max-height: 250px;
+    overflow-y: auto;
+}
+.icon_lins .dropdown-menu.cart-products .media-body .media-heading {
+    color: #000000 ;
+    float: left;
+    font-family: Proxima-Nova-Extrabold;
+    font-size: 14px;
+    margin: 0;
+    padding-bottom: 5px;
+    width: 100%;
+}
+.icon_lins .dropdown-menu.cart-products .media-body p b {
+    font-family: Proxima-Nova-Extrabold;
+    font-size: 12px;
+    font-weight: 600;
+}
+.btn.btn-primary.item-update {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    color: #60c5ac ;
+    margin-left: 0;
+    padding-left: 0;
+    text-align: center;
+}
+.items{
+margin-top:-12px}
+
+ul.dropdown-menu.cart-products {
+    right: 0px !important;
+    width: 250px;border-radius: 0px;
+    left: inherit;    top: 50px;
+}
+
+
+
+
+
 
 
 

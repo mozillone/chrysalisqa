@@ -681,28 +681,34 @@
 						</div>
 						<div class="col-md-12 frnt_back_view">
 						<h2 class="heading-agent">Upload Images</h2>
-						<div class="col-md-6 ">
+						<div class="row">
+						<div class="col-md-4 ">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Front View</h2>
 							<div class="col-md-12">
+							<div class=" up-blog">
 							<input type="file" name="img_chan" id="img_chan">
-								 					
+								 		</div>			
 							</div>   
 					</div> 
-						<div class="col-md-6">
+						<div class="col-md-4">
 							
 					
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Back View</h2>
 							<div class="col-md-12">
+							<div class=" up-blog">
 								<input type="file" name="img_chan1" id="img_chan1">
-								 					
+								 	</div>				
 							</div> 
 					
 						</div>
-						<div class="col-md-6 ">
+						<div class="col-md-4 ">
 							<h2 class="box-title col-md-12 heading-agent pro-imgs">Details/Accessories</h2>
 							<div class="col-md-12">
+							<div class=" up-blog">
 							<input type="file" name="img_chan2" id="img_chan2">												
 							</div>   
+							</div>   
+					</div>
 					</div>
 						</div>
 						<div class="col-md-12">
