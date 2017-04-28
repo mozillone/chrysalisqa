@@ -1286,7 +1286,17 @@ ul.dropdown-menu.cart-products .well {
     font-family: Proxima-Nova-Semibold;
 }
 
-
+span.pip span.remove:after {
+    content: "\f057";
+    font-family: 'FontAwesome';
+    position: absolute;
+    top: -20px;
+    right: 0px;
+}
+span.pip span.remove {
+    cursor: pointer;
+    color: red;
+}
 .row.scels {
     max-height: 250px;
     overflow-y: auto;
