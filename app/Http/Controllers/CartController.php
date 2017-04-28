@@ -31,11 +31,11 @@ class CartController extends Controller {
              	 foreach($result as $value){
              	 	$costume_id=$req['costume_id'];
              	 	$cookie_id=$this->currentCookieKey();
-             	 	$cart_id=Cart::verifyCostumeCart($costume_id,$cookie_id);
+             	 	$cart_id=Cart::verifyCostumeCart($cookie_id);
              	 	if($cart_id){
-             	 		$qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
+                	$qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
              	 		$res=Cart::verifyCostumeQuantity($costume_id,$qty);
-             	 		if(count($res)){
+                  if(count($res)){
 	             	 		Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
 	             	 		$res=$this->updateCartDetails($costume_id,$qty+1);
                     $count=Cart::getCartCount();
@@ -102,6 +102,7 @@ class CartController extends Controller {
     }
     private function verifieCookie(){
         $res=$this->getCookieAllProducts();
+        dd($res);
         if($res!=null){
             return true;
         }else{
@@ -122,8 +123,8 @@ class CartController extends Controller {
         }
         return Redirect::to('cart');
     }
-    public function productRemoveFromCart($cart_id){
-      Cart::productRemoveFromCart($cart_id);
+    public function productRemoveFromCart($cart_item_id){
+      Cart::productRemoveFromCart($cart_item_id);
       return Redirect::to('cart');
     }
     public function getMiniCartProducts(){

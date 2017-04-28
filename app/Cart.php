@@ -27,6 +27,7 @@ class Cart extends Authenticatable
              if(Auth::check()){$user_id=Auth::user()->id;}else{$user_id="0";}
              $data=array('user_id'=>$user_id,
                         'cookie_id'=>$cookie_id,
+                        'created_at'=>date('Y-m-d h:i:s'),
                         'modified_at'=>date('Y-m-d h:i:s')
                         );
 
@@ -36,11 +37,22 @@ class Cart extends Authenticatable
              return true;
     }
     protected function updateCartDetails($costume_id,$cart_id,$qty){
-            $res=DB::Update('UPDATE `cc_cart_items` SET qty='.$qty.' WHERE cart_id='.$cart_id.' and  costume_id='.$costume_id.'');
-            return $res;
+            $result=$this->verifieItemExists($costume_id,$cart_id);
+             if($result=="1"){
+                $res=DB::Update('UPDATE `cc_cart_items` SET qty='.$qty.' WHERE cart_id='.$cart_id.' and  costume_id='.$costume_id.'');
+            }else{
+             $costume_info=$this->getCostumeInfo($costume_id);
+             $res=$this->addItemToCart($cart_id,$qty,$costume_info[0]);
+            }
+            $total=$this->getCartSubtotalPrice();
+            $data=array('total'=>$total,'modified_at'=>date('Y-m-d h:i:s'));
+            $cond=array('cart_id'=>$cart_id,);
+            Site_model::update_data('cart',$data,$cond);
+            return true;
+          
+            
     }
-	
- private function addItemToCart($cart_id,$qty,$costume_info){
+	private function addItemToCart($cart_id,$qty,$costume_info){
             $data=array('cart_id'=>$cart_id,
                         'costume_id'=>$costume_info->costume_id,
                         'sku'=>$costume_info->sku_no,
@@ -50,6 +62,10 @@ class Cart extends Authenticatable
             Site_model::insert_data('cart_items',$data);
             return true;
 
+    }
+    private function verifieItemExists($costume_id,$cart_id){
+        $data=DB::Select('SELECT if(count(*)>=1,"1","0") as is_exists  FROM `cc_cart_items` WHERE `costume_id` = '.$costume_id.' AND `cart_id` = '.$cart_id.'');
+        return $data[0]->is_exists;
     }
     protected function getCostumeInfo($costume_id){
        $data=DB::Select('SELECT cst.costume_id,dsr.name,cst.sku_no,cst.quantity,cst.price FROM cc_costumes as cst LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id WHERE cst.costume_id='.$costume_id);
@@ -63,8 +79,17 @@ class Cart extends Authenticatable
                  return "1";
        }
     }
-     protected function verifyCostumeCart($costume_id,$cookie_id){
-       $data=DB::Select('SELECT crt.cart_id  FROM `cc_cart_items` as items LEFT JOIN cc_cart as crt on crt.cart_id=items.cart_id where crt.cookie_id="'.$cookie_id.'" and items.costume_id='.$costume_id.'');
+    //  protected function verifyCostumeCart($costume_id,$cookie_id){
+    //    $data=DB::Select('SELECT crt.cart_id  FROM `cc_cart_items` as items LEFT JOIN cc_cart as crt on crt.cart_id=items.cart_id where crt.cookie_id="'.$cookie_id.'" and items.costume_id='.$costume_id.'');
+    //     if(!empty($data)){
+    //             return $data[0]->cart_id;
+    //    }else{
+    //              return false;
+    //    }
+    // }
+
+     protected function verifyCostumeCart($cookie_id){
+       $data=DB::Select('SELECT crt.cart_id  FROM `cc_cart_items` as items LEFT JOIN cc_cart as crt on crt.cart_id=items.cart_id where crt.cookie_id="'.$cookie_id.'" ');
         if(!empty($data)){
                 return $data[0]->cart_id;
        }else{
@@ -79,11 +104,11 @@ class Cart extends Authenticatable
     protected function getCartCount(){
         $currentCookieKeyID=SiteHelper::currentCookieKey();
         if(Auth::check()){
-        	$where="where user_id=".Auth::user()->id.' or cookie_id="'.$currentCookieKeyID.'"';
+        	$where="where crt.user_id=".Auth::user()->id.' or crt.cookie_id="'.$currentCookieKeyID.'"';
         }else{
-        	$where="where cookie_id='".$currentCookieKeyID."'";
+        	$where="where crt.cookie_id='".$currentCookieKeyID."'";
         }
-        $res=DB::Select('SELECT count(cart_id) as mini_count  FROM cc_cart '.$where.'');
+        $res=DB::Select('select count(itms.cart_item_id) as mini_count from cc_cart_items as itms LEFT JOIN cc_cart as crt on crt.cart_id=itms.cart_id '.$where.'');
         return $res[0]->mini_count;
 
     }
@@ -98,7 +123,7 @@ class Cart extends Authenticatable
         }else{
         	$where="where crt.cookie_id='".$currentCookieKeyID."'";
         }
-	   	$cart_products=DB::Select('SELECT itms.*,img.image,cst.condition,cst.size,concat(usr.first_name," ",usr.last_name) as user_name,cstopt.attribute_option_value  as is_film,sum(itms.price) as total_price FROM `cc_cart` as crt LEFT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id LEFT JOIN cc_costume_image as img on img.costume_image_id=itms.costume_id and img.type="1" LEFT JOIN cc_costumes as cst on cst.costume_id=itms.costume_id LEFT JOIN cc_users as usr on usr.id=cst.created_by LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="21" '.$where.' group by crt.cart_id');
+	   	$cart_products=DB::Select('SELECT itms.*,img.image,cst.condition,cst.size,concat(usr.first_name," ",usr.last_name) as user_name,cstopt.attribute_option_value  as is_film,crt.total FROM `cc_cart` as crt LEFT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id LEFT JOIN cc_costume_image as img on img.costume_id=itms.costume_id and img.type="1" LEFT JOIN cc_costumes as cst on cst.costume_id=itms.costume_id LEFT JOIN cc_users as usr on usr.id=cst.created_by LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="21" '.$where.' group by itms.cart_item_id');
 	   	return $cart_products;
     }
 
@@ -112,9 +137,9 @@ class Cart extends Authenticatable
 	   	$cart_products=DB::Select('SELECT sum(itms.price) as price FROM `cc_cart` as crt LEFT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id LEFT JOIN cc_costume_image as img on img.costume_image_id=itms.costume_id and img.type="1" '.$where.'');
 	   	return $cart_products[0]->price;
     }
-    protected function productRemoveFromCart($cart_id){
-    	$cond=array('cart_id'=>$cart_id);
-    	Site_model::delete_single('cart',$cond);
+    protected function productRemoveFromCart($cart_item_id){
+    	$cond=array('cart_item_id'=>$cart_item_id);
+    	Site_model::delete_single('cart_items',$cond);
     	return true;
     }
    

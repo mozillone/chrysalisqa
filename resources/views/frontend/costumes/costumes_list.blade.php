@@ -144,12 +144,12 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<!-- <script src="{{ asset('/js/ohsnap.js') }}"></script>
+<script src="{{ asset('/js/ohsnap.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
-<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script> -->
+<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
 
 @stop

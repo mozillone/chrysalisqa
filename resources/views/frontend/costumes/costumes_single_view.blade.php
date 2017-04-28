@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.css') }}">
+ <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
 <style>
 	.owl-controls.clickable {
 		display: none;
@@ -73,7 +74,7 @@
 	</div>
 
 	<div class="col-xs-6 col-sm-4 viewBtn_rm">
-	<button type="button" class="addtocart-rm"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
+	<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
 	<button type="button" class="buynow-rm">Buy it Now!</button>
 	</div>
 
@@ -247,7 +248,6 @@
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
 <script src="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.js') }}"></script>
-<script>
-
-</script>
+<script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
+<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
 @stop

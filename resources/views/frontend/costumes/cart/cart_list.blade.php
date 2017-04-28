@@ -31,7 +31,8 @@
 												<div class="col-md-6 col-sm-6 col-xs-12">
 													<div class="media">
 														<div class="media-left">
-															<img src="http://chrysalis.local.dotcomweavers.net/assets/frontend/img/captain-1.png" class="media-object">
+														@if($cart->image!=null && file_exists(public_path('/costumers_images/Medium/'.$cart->image)))<img src="costumers_images/Medium/{{$cart->image}}" class="media-object"> @else <img src="costumers_images/default-placeholder.jpg" class="media-object"> @endif
+
 														</div>
 														<div class="media-body">
 															<h4 class="media-heading">{{$cart->costume_name}}</h4>
@@ -50,7 +51,7 @@
 													</div>
 													<div class="col-md-3 col-sm-3 col-xs-12">
 														<p class="price_right text-right"><span class="check_price">${{number_format(($cart->qty)*($cart->price), 2, '.', ',')}}</span> 
-														<span><a href="/cart/delete/{{$cart->cart_id}}"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
+														<span><a href="/cart/delete/{{$cart->cart_item_id}}"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
 													</div>
 												</div>
 											</div>
@@ -70,7 +71,7 @@
 											<div class="well">
 												<div class="store_credit">
 													<h3>My Store Credit</h3> 
-													<p class="store_price">$10.00</p>
+													<p class="store_price">$0.00</p>
 													<a class="btn btn-primary">Apply Credit</a>
 												</div>
 											</div>
