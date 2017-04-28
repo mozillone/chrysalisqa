@@ -897,7 +897,40 @@ p.right_heading span.my_msg { font-weight: 800; }
 
 
 
-
+/* Jithender Css */
+.icon_lins .dropdown-menu.cart-products {
+    left: -200px;
+}
+.dropdown-menu.cart-products {
+    max-height: 250px;
+    overflow-y: auto;
+}
+.icon_lins .dropdown-menu.cart-products .media-body .media-heading {
+    color: #000000;
+    float: left;
+    font-family: Proxima-Nova-Extrabold;
+    font-size: 14px;
+    margin: 0;
+    padding-bottom: 5px;
+    width: 100%;
+}
+.icon_lins .dropdown-menu.cart-products .media-body p b {
+    font-family: Proxima-Nova-Extrabold;
+    font-size: 12px;
+    font-weight: 600;
+}
+.btn.btn-primary.item-update {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    color: #60c5ac;
+    margin-left: 0;
+    padding-left: 0;
+    text-align: center;
+}
+.items{
+    margin-top:-12px;
+}
+/* */
 
 
 /* ProgressBar CSS S */
