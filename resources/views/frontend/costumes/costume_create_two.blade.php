@@ -54,35 +54,36 @@
 		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
 			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos. Placing them in settings that correspond with their theme can encourage a sale.</p>
 		</div>
-		<div class="col-md-3 col-sm-3 col-xs-12 ">
+		<div class="col-md-3 col-sm-3 col-xs-12 " id="front_view">
 		<h4>01.Front View</h4>
-		<div class=" up-blog">
-			<span class="remove_pic" id="drag_n_drop_1" style="display: none;">
-				<i class="fa fa-times-circle" aria-hidden="true"></i>					
+			<span class="remove_pic" id="drag_n_drop_1" style="display: none;" >
+				<i class="fa fa-times-circle" aria-hidden="true"></i>				
 			</span>
-			<input type="file" name="file1" id="file1">
-		</div>
+			<div class=" up-blog">
+				<input type="file" name="file1" id="file1">
+			</div>
 		<span id="file1_error" style="color:red"></span>
 
 			</div>
-			<div class="col-md-3 col-sm-3 col-xs-12 ">
+			<div class="col-md-3 col-sm-3 col-xs-12 " id="back_view">
 			<h4>02.Back View</h4>
-			<div class=" up-blog">
-			<span class="remove_pic" id="drag_n_drop_2" style="display: none;">
-				<i class="fa fa-times-circle" aria-hidden="true"></i>					
+			<span class="remove_pic" id="drag_n_drop_2" style="display: none;" >
+				<i class="fa fa-times-circle" aria-hidden="true"></i>				
 			</span>
+			<div class=" up-blog">
+			
 			<input type="file" name="file2" id="file2">
 			
 		</div>
 		<span id="file2_error" style="color:red"></span>
 
 			</div>
-			<div class="col-md-3 col-sm-3 col-xs-12 ">
+			<div class="col-md-3 col-sm-3 col-xs-12 " id="details_view">
 			<h4>03.Detail/Accessories</h4>
-			<div class=" up-blog">
 			<span class="remove_pic" id="drag_n_drop_3" style="display: none;">
 				<i class="fa fa-times-circle" aria-hidden="true"></i>					
 			</span>
+			<div class=" up-blog">
 			<input type="file" name="file3" id="file3">
 		</div>
 		<span id="file3_error" style="color:red"></span>
@@ -100,8 +101,8 @@
 					</label>
 				</span>
 			<!-- </form> -->
-			<!-- <p id="other_thumbnails">
-			</p> -->
+			<p id="other_thumbnails">
+			</p>
 					</div>
 					<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next Step</a>
@@ -732,7 +733,7 @@ $(document).ready(function()
 {
 
 
-/*var inputLocalFont = document.getElementById("upload-file-selector");
+var inputLocalFont = document.getElementById("upload-file-selector");
 inputLocalFont.addEventListener("change",previewImages,false);
 
 function previewImages(){
@@ -745,10 +746,31 @@ function previewImages(){
           $('#other_thumbnails').append('<img src="' + objectUrl + '" />');
           window.URL.revokeObjectURL(fileList[i]);
         }       
-}*/
-	/*$( "[id^='drag_n_drop_']" ).click(function() {
-		alert($(this))
-	});*/
+}
+
+	$('input[name=file1]').change(function(){
+		$('#drag_n_drop_1').css('display','block');
+	});
+	$('#drag_n_drop_1').click(function(){
+		$('#front_view').find('li').remove();
+		$('#drag_n_drop_1').css('display','none');
+	});
+
+	$('input[name=file2]').change(function(){
+		$('#drag_n_drop_2').css('display','block');
+	});
+	$('#drag_n_drop_2').click(function(){
+		$('#back_view').find('li').remove();
+		$('#drag_n_drop_2').css('display','none');
+	});
+
+	$('input[name=file3]').change(function(){
+		$('#drag_n_drop_3').css('display','block');
+	});
+	$('#drag_n_drop_3').click(function(){
+		$('#details_view').find('li').remove();
+		$('#drag_n_drop_3').css('display','none');
+	});
 //donate amount percentage calculation
 $('#donate_charity').change(function(){
 	var donate_percent = $(this).val();
