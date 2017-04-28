@@ -9,9 +9,24 @@
 	.owl-controls.clickable {
 		display: none;
 	}
+@media only screen
+    and (min-device-width : 414px)
+    and (max-device-width : 736px)
+    and (orientation : landscape)
+    and (-webkit-min-device-pixel-ratio : 3)
+    {
+#main-banner .carousel-inner>.item>a>img, .carousel-inner>.item>img {
+    width: 100%!important;
+    min-height: 215px;
+    max-height: 215px;
+}
+
+<<<<<<< HEAD
 
 
-
+=======
+    }
+>>>>>>> eb4b16501630a156a8df28927a556185a452a0f2
 </style>
 @endsection
 

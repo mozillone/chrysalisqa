@@ -51,38 +51,39 @@
 		
 		<!--- mobile heaindgs section end here -->
 		<div class="threeblogs">
-		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
+		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint r">
 			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos. Placing them in settings that correspond with their theme can encourage a sale.</p>
 		</div>
-		<div class="col-md-3 col-sm-3 col-xs-12 ">
+		<div class="col-md-3 col-sm-3 col-xs-12  c_pic " id="front_view">
 		<h4>01.Front View</h4>
-		<div class=" up-blog">
-			<span class="remove_pic" id="drag_n_drop_1" style="display: none;">
-				<i class="fa fa-times-circle" aria-hidden="true"></i>					
+			<span class="remove_pic" id="drag_n_drop_1" style="display: none;" >
+				<i class="fa fa-times-circle" aria-hidden="true"></i>				
 			</span>
-			<input type="file" name="file1" id="file1">
-		</div>
+			<div class=" up-blog">
+				<input type="file" name="file1" id="file1">
+			</div>
 		<span id="file1_error" style="color:red"></span>
 
 			</div>
-			<div class="col-md-3 col-sm-3 col-xs-12 ">
+			<div class="col-md-3 col-sm-3 col-xs-12 rc_pic" id="back_view">
 			<h4>02.Back View</h4>
-			<div class=" up-blog">
-			<span class="remove_pic" id="drag_n_drop_2" style="display: none;">
-				<i class="fa fa-times-circle" aria-hidden="true"></i>					
+			<span class="remove_pic" id="drag_n_drop_2" style="display: none;" >
+				<i class="fa fa-times-circle" aria-hidden="true"></i>				
 			</span>
+			<div class=" up-blog">
+			
 			<input type="file" name="file2" id="file2">
 			
 		</div>
 		<span id="file2_error" style="color:red"></span>
 
 			</div>
-			<div class="col-md-3 col-sm-3 col-xs-12 ">
+			<div class="col-md-3 col-sm-3 col-xs-12 rc_pic " id="details_view">
 			<h4>03.Detail/Accessories</h4>
-			<div class=" up-blog">
 			<span class="remove_pic" id="drag_n_drop_3" style="display: none;">
 				<i class="fa fa-times-circle" aria-hidden="true"></i>					
 			</span>
+			<div class=" up-blog">
 			<input type="file" name="file3" id="file3">
 		</div>
 		<span id="file3_error" style="color:red"></span>
@@ -92,7 +93,16 @@
 			</div>
 				<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 				
-				<!-- <form> -->
+		
+			<div class="col-md-12 col-sm-12 col-xs-12 ">
+			<p id="other_thumbnails">
+			<div class="col-md-3 col-sm-3 col-xs-12"></div>
+			</p>
+			</div>
+					<!-- <form> -->
+										<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
+				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default nxt">Next Step</a>
+</div>
 				<span id="fileselector">
 					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
 						<input id="upload-file-selector" type="file" name="file4[]" multiple>
@@ -100,12 +110,9 @@
 					</label>
 				</span>
 			<!-- </form> -->
-			<!-- <p id="other_thumbnails">
-			</p> -->
+			</div>
 					</div>
-					<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
-				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default">Next Step</a>
-</div>				
+				
 			</div>
 	 
 <!--- progressbar section End -->
@@ -460,7 +467,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <a type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></a>
 
 <!-- </form> -->
-<a type="button" id="costume_description_next" class="btn-rm-nxt">Next Step</a>
+<a type="button" id="costume_description_next" class="btn-rm-nxt nxt">Next Step</a>
 </div>
 </div>
 <div class="prog-form-rm" id="pricing_div">
@@ -583,7 +590,7 @@ $heading_value=$headingexplode[1];
 <div class="form-rms-btn">
 <a type="button" id="pricing_back" class="btn-rm-back"><span>Back</span></a>
 
-<a type="button" id="pricing_next" class="btn-rm-nxt">Next Step</a>
+<a type="button" id="pricing_next" class="btn-rm-nxt nxt">Next Step</a>
 </div>
 <!-- </form> -->
 </div>
@@ -741,14 +748,78 @@ function previewImages(){
     var anyWindow = window.URL || window.webkitURL;
 
         for(var i = 0; i < fileList.length; i++){
+          $('#remove_more').append('<span class="remove_pic" id="upload_remove_'+i+'"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
           var objectUrl = anyWindow.createObjectURL(fileList[i]);
-          $('#other_thumbnails').append('<img src="' + objectUrl + '" />');
+          $('#other_thumbnails').append('<img id="img_more_'+i+'" src="' + objectUrl + '" width="60px" height="60px" />');
           window.URL.revokeObjectURL(fileList[i]);
         }       
-}*/
-	/*$( "[id^='drag_n_drop_']" ).click(function() {
-		alert($(this))
+}
+	$("#upload_remove_0").click(function(){
+		alert($(this));
 	});*/
+
+
+	if (window.File && window.FileList && window.FileReader) {
+    $("#upload-file-selector").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+          $('#other_thumbnails').append("<span class=\"pip col-md-3\">" +
+            "<img  class=\"imageThumb img-responsive\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\"></span>" +
+            "</span>");
+          /*$("<span class=\"pip\">" +
+            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\">Remove image</span>" +
+            "</span>").insertAfter("#upload-file-selector");*/
+          $(".remove").click(function(){
+            $(this).parent(".pip").remove();
+          });
+          
+          // Old code here
+          /*$("<img></img>", {
+            class: "imageThumb",
+            src: e.target.result,
+            title: file.name + " | Click to remove"
+          }).insertAfter("#files").click(function(){$(this).remove();});*/
+          
+        });
+        fileReader.readAsDataURL(f);
+      }
+    });
+  } else {
+    alert("Your browser doesn't support to File API")
+  }
+
+
+
+	$('input[name=file1]').change(function(){
+		$('#drag_n_drop_1').css('display','block');
+	});
+	$('#drag_n_drop_1').click(function(){
+		$('#front_view').find('li').remove();
+		$('#drag_n_drop_1').css('display','none');
+	});
+
+	$('input[name=file2]').change(function(){
+		$('#drag_n_drop_2').css('display','block');
+	});
+	$('#drag_n_drop_2').click(function(){
+		$('#back_view').find('li').remove();
+		$('#drag_n_drop_2').css('display','none');
+	});
+
+	$('input[name=file3]').change(function(){
+		$('#drag_n_drop_3').css('display','block');
+	});
+	$('#drag_n_drop_3').click(function(){
+		$('#details_view').find('li').remove();
+		$('#drag_n_drop_3').css('display','none');
+	});
 //donate amount percentage calculation
 $('#donate_charity').change(function(){
 	var donate_percent = $(this).val();
@@ -1285,7 +1356,10 @@ var placeSearch, autocomplete;
         }
       }
 	
-
+$(document).on('click','.nxt',function() {
+  $("html, body").animate({ scrollTop: 0 }, "slow");
+  return false;
+});
     </script> 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
         async defer></script>

@@ -16,15 +16,16 @@
 						<p>Choose from the following options.</p>
 						</div>
 						<div class="row">
+						<a href="/costume/createtwo">
 							<div class="col-md-6 col-sm-6 col-xs-12" >
 								<div class="upload_castume-blog">
-								<img class="img-responsive" src="../assets/frontend/img/upload-icon.png">
+								<img class="img-responsive" src="../assets/frontend/img/upload-icon.png"/>
 									<h2>Upload Your Costume!</h2>
 									<p>Tell us why your costume is so<br> special? Sell it Yourself!</p>
-									<a href="/costume/createtwo">UPLOAD MY COSTUME</a>
+									<span class="acnhr-link">UPLOAD MY COSTUME</span>
 								</div>
 								
-							</div>
+							</div></a>
 							<div class="col-md-6 col-sm-6 col-xs-12 ">
 							<div class="Ship_castume-blog upload_castume-blog" >
 								<img class="img-responsive" src="../assets/frontend/img/open-box-icon.png">
@@ -51,10 +52,10 @@
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="clps">
                        
                        01. Which option should I pick?
-					  <i class="more-less glyphicon glyphicon-triangle-top"></i>
+					 <span class="more-expnd"><i class="more-less glyphicon glyphicon-triangle-top"></i></span>
                     </a>
                 </h4>
             </div>
@@ -68,10 +69,10 @@
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingTwo">
                 <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <a class="collapsed clps" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                       
                         02. How do I get my items back?
-						  <i class="more-less glyphicon glyphicon-triangle-bottom"></i>
+						  <span class="more-expnd"><i class="more-less glyphicon glyphicon-triangle-bottom"></i></span>
                     </a>
                 </h4>
             </div>
@@ -85,14 +86,14 @@
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingThree">
                 <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <a class="clps" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                       
                        03. What can I send?
-					    <i class="more-less glyphicon glyphicon-triangle-bottom"></i>
+					    <span class="more-expnd"><i class="more-less glyphicon glyphicon-triangle-bottom"></i></span>
                     </a>
                 </h4>
             </div>
-            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div id="collapseThree" class="panel-collapse collapse clps" role="tabpanel" aria-labelledby="headingThree">
                 <div class="panel-body">
                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                 </div>
@@ -101,10 +102,10 @@
 		<div class="panel panel-default">
            <div class="panel-heading" role="tab" id="headingFour">
                <h4 class="panel-title">
-                   <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                   <a class="collapsed clps" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                      
                    04. How do I ship my bag?
-<i class="more-less glyphicon glyphicon-triangle-bottom"></i>
+					<span class="more-expnd"><i class="more-less glyphicon glyphicon-triangle-bottom"></i></span>
                    </a>
                </h4>
            </div>
@@ -122,23 +123,20 @@
 				</div>
 			</div>
 				</div>
-				<script>
-					$(document).ready(function(){
-						$('[data-toggle="tooltip"]').tooltip(); 
-					});
-									function toggleIcon(e) {
-    $(e.target)
-        .prev('.panel-heading')
-        .find(".more-less")
-        .toggleClass('glyphicon-triangle-bottom glyphicon-triangle-top');
-}
-$('.panel-group').on('hidden.bs.collapse', toggleIcon);
-$('.panel-group').on('shown.bs.collapse', toggleIcon);
-				</script>
+
 				
 				
 	
 		@stop
 {{-- page level scripts --}}
 @section('footer_scripts')
+<script>
+$(document).on('click','.clps',function(){
+	if($(this).hasClass('collapsed')){
+		$('.more-expnd').html('<i class="more-less glyphicon glyphicon-triangle-bottom"></i>');
+	}else{
+		$(this).find('.more-expnd').html('<i class="more-less glyphicon glyphicon-triangle-top"></i>');
+	}
+	
+})</script>
 @stop
