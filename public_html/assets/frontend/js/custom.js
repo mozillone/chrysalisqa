@@ -80,7 +80,7 @@ $(function(){
 			url: '/getMiniCartProducts',
 			success: function(response){
 				if(response.length){
-					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date"><span>'+response.length+' Item Added</span><span class="shi_date_right text-right right">Subtotal $'+response[0].total_price+'</span></div><div class="row">';
+					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date"><span>'+response.length+' Item Added</span><a href="/cart">View & Edit Cart</a><span class="shi_date_right text-right right">Subtotal $'+response[0].total_price+'</span></div><div class="row">';
 				$.each(response,function(i,value){
 					var path='/costumers_images/Medium/'+value.image+'';
 					if(fileExists(src)){
