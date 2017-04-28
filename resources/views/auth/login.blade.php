@@ -1,6 +1,6 @@
 	@extends('/frontend/app')
 	@section('title')
-		Login   
+		Login
 	    @parent
 	@stop
 
@@ -22,8 +22,8 @@
 								<div class="col-md-12 col-sm-12 col-xs-12">
 									<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Log In With Facebook</a>
 								</div>
-						
-						
+
+
 		<div class="clearfix">
 		</div>
 							<div class="form-group or text-center">
@@ -47,7 +47,7 @@
 								{{ Session::get('success') }}
 							</div>
 							@endif
-							<form  action="{{route('login.post')}}" method="POST" id="login">   
+							<form  action="{{route('login.post')}}" method="POST" id="login">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="form-group">
 								<label>Email</label>
@@ -69,7 +69,7 @@
 										<button class="btn btn-primary">Log In</button>
 									</div>
 								</div>
-							</form>                
+							</form>
 						</div>
 	                    <div class="tab-pane fade" id="signup_tab">
 							<form role="form" action="{{route('register')}}" method="POST" id="signup">
@@ -78,14 +78,14 @@
 				    				<div class="col-xs-6 col-sm-6 col-md-6">
 				    					<div class="form-group">
 				    					<label>First Name </label>
-				                			<input type="text" name="first_name" id="first_name" class="form-control input-sm"   @if(!empty(Session::get('social_data'))) value="<?= explode(" ",Session::get('social_data')['name'])[0];?>" @endif>
+				                			<input type="text" name="first_name" id="first_name" class="form-control input-sm"   @if(!empty(Session::get('social_data'))) value="<?=explode(" ", Session::get('social_data')['name'])[0];?>" @endif>
 				                			<p class="error">{{ $errors->first('first_name') }}</p>
 										</div>
 									</div>
 				    				<div class="col-xs-6 col-sm-6 col-md-6">
 				    					<div class="form-group">
 				    					<label>Last Name </label>
-				    						<input type="text" name="last_name" id="last_name" class="form-control input-sm"  @if(!empty(Session::get('social_data'))) value="<?= explode(" ",Session::get('social_data')['name'])[1];?>" @endif>
+				    						<input type="text" name="last_name" id="last_name" class="form-control input-sm"  @if(!empty(Session::get('social_data'))) value="<?=explode(" ", Session::get('social_data')['name'])[1];?>" @endif>
 				    						<p class="error">{{ $errors->first('last_name') }}</p>
 										</div>
 									</div>
@@ -120,16 +120,16 @@
 	                    <div class="tab-pane fade" id="forget_password">
 							@if (Session::has('error'))
 				            <div class="alert alert-danger alert-dismissable">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
 								{{ Session::get('error') }}
 							</div>
 				            @elseif(Session::has('success'))
 							<div class="alert alert-success alert-dismissable">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
 								{{ Session::get('success') }}
 							</div>
 							@endif
-							<form class="" action="{{route('forgotpassword.post')}}" method="POST" id="forgotpassword">   
+							<form class="" action="{{route('forgotpassword.post')}}" method="POST" id="forgotpassword">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="form-group">
 									<input type="text" id="forgot_email" name="email" placeholder="Email" class="form-control">
@@ -140,7 +140,7 @@
 										<button class="btn btn-primary">Reset Password</button>
 									</div>
 								</div>
-							</form>              
+							</form>
 						</div>
 					</div>
 				</div>

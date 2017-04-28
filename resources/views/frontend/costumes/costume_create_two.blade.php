@@ -770,7 +770,7 @@ function previewImages(){
           var file = e.target;
           $('#other_thumbnails').append("<span class=\"pip col-md-3\">" +
             "<img  class=\"imageThumb img-responsive\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-            "<br/><span class=\"remove\">Remove image </span>" +
+            "<br/><span class=\"remove\"></span>" +
             "</span>");
           /*$("<span class=\"pip\">" +
             "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
