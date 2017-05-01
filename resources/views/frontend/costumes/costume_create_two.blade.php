@@ -55,7 +55,7 @@
 			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos. Placing them in settings that correspond with their theme can encourage a sale.</p>
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-12  c_pic " id="front_view">
-		<h4>01.Front View</h4>
+		<h4>01. Front View</h4>
 			<span class="remove_pic" id="drag_n_drop_1" style="display: none;" >
 				<i class="fa fa-times-circle" aria-hidden="true"></i>				
 			</span>
@@ -66,7 +66,7 @@
 
 			</div>
 			<div class="col-md-3 col-sm-3 col-xs-12 rc_pic" id="back_view">
-			<h4>02.Back View</h4>
+			<h4>02. Back View</h4>
 			<span class="remove_pic" id="drag_n_drop_2" style="display: none;" >
 				<i class="fa fa-times-circle" aria-hidden="true"></i>				
 			</span>
@@ -79,7 +79,7 @@
 
 			</div>
 			<div class="col-md-3 col-sm-3 col-xs-12 rc_pic " id="details_view">
-			<h4>03.Detail/Accessories</h4>
+			<h4>03. Detail/Accessories</h4>
 			<span class="remove_pic" id="drag_n_drop_3" style="display: none;">
 				<i class="fa fa-times-circle" aria-hidden="true"></i>					
 			</span>
@@ -106,7 +106,7 @@
 				<span id="fileselector">
 					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
 						<input id="upload-file-selector" type="file" name="file4[]" multiple>
-						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> Upload More
+						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Upload More
 					</label>
 				</span>
 			<!-- </form> -->

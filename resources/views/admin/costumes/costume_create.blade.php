@@ -84,18 +84,22 @@
                                         <input type="text" class="form-control" placeholder="Enter Costume name"  name="costume_name" id="costume_name">
                                    <span id="costumename_error" style="color:red"></span>
                                 </div>
-								<div class="form-group has-feedback" >
+								<div class="form-group has-feedback cosutme-fr" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">Costume For<span class="req-field" >*</span></label>
 											<br>
-											<input type="radio"   name="gender" id="male"  value="male" checked >&nbsp;
-Male&nbsp;
-											<input type="radio"   name="gender" id="female"  value="female"  >&nbsp;
-Female&nbsp;
-											<input type="radio"   name="gender" id="unisex"  value="unisex" >&nbsp;
-Unisex&nbsp;
-											<input type="radio"   name="gender" id="pet"  value="pet"  >&nbsp;
-Pet&nbsp;
+											<label class="radio-inline">
+											<input type="radio"   name="gender" id="male"  value="male" checked >Male</label>
+
+											<label class="radio-inline">
+											<input type="radio"   name="gender" id="female"  value="female"  >Female</label>
+
+											<label class="radio-inline">
+											<input type="radio"   name="gender" id="unisex"  value="unisex" >Unisex</label>
+
+											<label class="radio-inline">
+											<input type="radio"   name="gender" id="pet"  value="pet"  >Pet</label>
+
 										</div>
 										<span id="gendererror" style="color:red"></span>
 						       </div>

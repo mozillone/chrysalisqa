@@ -21,12 +21,13 @@
     max-height: 215px;
 }
 
-<<<<<<< HEAD
+div#main-banner {
+    margin-top: 60px;
+}
 
 
-=======
+
     }
->>>>>>> eb4b16501630a156a8df28927a556185a452a0f2
 </style>
 @endsection
 

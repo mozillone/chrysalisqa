@@ -130,13 +130,17 @@
 		@stop
 {{-- page level scripts --}}
 @section('footer_scripts')
-<script>
-$(document).on('click','.clps',function(){
-	if($(this).hasClass('collapsed')){
-		$('.more-expnd').html('<i class="more-less glyphicon glyphicon-triangle-bottom"></i>');
-	}else{
-		$(this).find('.more-expnd').html('<i class="more-less glyphicon glyphicon-triangle-top"></i>');
-	}
-	
-})</script>
+				<script>
+					$(document).ready(function(){
+						$('[data-toggle="tooltip"]').tooltip(); 
+					});
+									function toggleIcon(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find(".more-less")
+        .toggleClass('glyphicon-triangle-bottom glyphicon-triangle-top');
+}
+$('.panel-group').on('hidden.bs.collapse', toggleIcon);
+$('.panel-group').on('shown.bs.collapse', toggleIcon);
+				</script>
 @stop
