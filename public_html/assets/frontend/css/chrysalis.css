@@ -1667,7 +1667,10 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
-
+	p.support-rm.support-rm2.mobile_adrss{	font-family: Proxima-Nova-Semibold;}
+.head-support p {
+    	font-family: Proxima-Nova-Extrabold;
+}
 .responsive-inner{padding-left:0px;}
 	.form-group.loign-adtnl.forgot.mbl-frgt_sign label {
     display: block !important;

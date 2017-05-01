@@ -205,9 +205,7 @@
 									<div class="head-support">
 										<p class="support-rm support-rm1">SUPPORT & CONTACT</p>
 										<p class="support-rm support-rm1">CHRYSALIS</p>			
-										<p class="support-rm support-rm2">100 Main St</p>			
-										<p class="support-rm support-rm2">Suite 200</p>			
-										<p class="support-rm support-rm2">New York, NY 10001</p>						
+										<p class="support-rm support-rm2 mobile_adrss">100 Main St <br>	Suite 200<br> New York, NY 10001</p>	
 										<p class="support-rm support-rm3">732.618.8533</p>			
 									</div>
 									<!-- tab content End -->			
