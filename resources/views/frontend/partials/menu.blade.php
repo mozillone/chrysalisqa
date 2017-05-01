@@ -184,7 +184,7 @@
 										<li>HOW IT WORKS</li>		
 										<li>EVENTS</li>		
 										<li>BLOG</li>		
-										<li>FOOTER</li>		
+										<li>FOOTER <span class="mobile-plus"><i class="fa fa-plus" aria-hidden="true"></i></span></li>		
 									</ul>			
 									<!-- tab content End -->			
 								</div>

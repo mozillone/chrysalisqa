@@ -16,7 +16,9 @@
 /* .drop_uploader.drop_zone .text_wrapper {
     margin-top: 30px;    padding-bottom: 189px;
 } */
-
+.drop_uploader.drop_zone .text_wrapper {
+    padding-top: 30px;
+} 
 .drop_uploader.drop_zone .text_wrapper i {
     font-size: 50px;
     color: #9B9B9B;

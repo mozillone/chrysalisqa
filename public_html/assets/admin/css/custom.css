@@ -34,6 +34,9 @@ display: none;
 .dmns_rigts .col-md-4 {
     padding-left: 0px;
 }
+.drop_uploader.drop_zone .text a:after {
+    margin-top: 30% !important;
+}
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     z-index: 3;
     color: #fff;
@@ -661,6 +664,11 @@ body .loading img{width:10%;}
 
 
 @media only screen and (max-width : 767px) {
+		.form-group.has-feedback.cosutme-fr label.radio-inline {
+    width: 40%;
+    float: left;
+    margin-left: 0px;
+}
 	.create-admin_pagess label.radio-inline {
     width: 47%;
     float: left;
