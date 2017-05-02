@@ -35,7 +35,7 @@
 
 														</div>
 														<div class="media-body">
-															<h4 class="media-heading">{{$cart->costume_name}}</h4>
+															<h4 class="media-heading"><a href="/product{{$cart->url_key}}">{{$cart->costume_name}}</a></h4>
 															@if($cart->is_film=="yes")<p class="f_quality">Film Quality</p> @else  @endif
 															<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
 															<p><b>Size:</b> {{ucfirst($cart->size)}}</p>

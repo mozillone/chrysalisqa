@@ -20,6 +20,8 @@ class CreateCostumeController  extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->sitehelper = new SiteHelper();
+			
+
 	}
 	public function costumeListings($sub_cat_id,$parent_cat_name)
 	{
@@ -426,6 +428,10 @@ class CreateCostumeController  extends Controller {
 			);
 
 			$insert_costume=DB::table('costumes')->insertGetId($costume);
+			
+			
+
+
 			 Session::put('session_costume_id', $insert_costume);
 			 $costume_id = $insert_costume;
 
@@ -519,6 +525,10 @@ class CreateCostumeController  extends Controller {
 			$costume_category=array('costume_id'=>$insert_costume,
 			'category_id'=>$subcategory);
 			$insert_costume_category=DB::table('costume_to_category')->insertGetId($costume_category);
+			/**** Url create start here ***/
+			Costumes::urlRewrites($insert_costume,'insert');
+			/**** Url create end here ***/
+			
 
 		/*****************************Attributes insertion code starts here****/
 		/*
@@ -865,4 +875,5 @@ class CreateCostumeController  extends Controller {
 			return "success";
 
 		}
+
 }
