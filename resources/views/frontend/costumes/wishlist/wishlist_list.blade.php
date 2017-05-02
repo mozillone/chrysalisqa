@@ -6,6 +6,7 @@
  	<section class="content create_section_page">
 		<div class="prodcut_list_page">
 			<div class="container">
+			<div class="row">
 				<div class="col-md-12 col-sm-12">
 					<div class="list-sec-rm">
 						<div class="col-md-6">
@@ -16,7 +17,7 @@
 						</div>
 
 					</div>
-
+					</div>
 				</div>
 			<div class="list_products">
 				<div class="row">
