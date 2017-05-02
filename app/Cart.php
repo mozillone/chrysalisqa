@@ -24,14 +24,25 @@ class Cart extends Authenticatable
          'cart_id', 'user_id','cookie_id', 'firstname', 'lastname', 'email', 'phone_no', 'pay_firstname', 'pay_lastname', 'pay_address_1', 'pay_address_2', 'pay_city', 'pay_zipcode', 'pay_country', 'payment_method', 'payment_code','shipping_firstname', 'shipping_lastname','shipping_address_1','shipping_address_2','shipping_city','shipping_postcode','shipping_country','shipping_method','shipping_code','comment','total','affiliate_id','commission','created_at','modified_at'
     ];
     protected function addToCart($req,$cookie_id,$qty){
-             if(Auth::check()){$user_id=Auth::user()->id;}else{$user_id="0";}
-             $data=array('user_id'=>$user_id,
+             if(Auth::check()){
+                $user_id=Auth::user()->id;
+                $data=array('user_id'=>$user_id,
                         'cookie_id'=>$cookie_id,
                         'created_at'=>date('Y-m-d h:i:s'),
                         'modified_at'=>date('Y-m-d h:i:s')
                         );
+                $cart_id=$this->userCartVerify(Auth::user()->id);
 
-             $cart_id=Site_model::insert_get_id('cart',$data);
+            }else{
+                $user_id="0";
+                $data=array('user_id'=>$user_id,
+                        'cookie_id'=>$cookie_id,
+                        'created_at'=>date('Y-m-d h:i:s'),
+                        'modified_at'=>date('Y-m-d h:i:s')
+                        );
+                $cart_id=Site_model::insert_get_id('cart',$data);
+            }
+           
              $costume_info=$this->getCostumeInfo($req['costume_id']);
              $res=$this->addItemToCart($cart_id,$qty,$costume_info[0]);
              return true;
@@ -51,6 +62,10 @@ class Cart extends Authenticatable
             return true;
           
             
+    }
+    private function userCartVerify($user_id){
+        $data=DB::Select('SELECT cart_id FROM `cc_cart` WHERE user_id= '.$user_id.'');
+        return $data[0]->cart_id;
     }
 	private function addItemToCart($cart_id,$qty,$costume_info){
             $data=array('cart_id'=>$cart_id,
