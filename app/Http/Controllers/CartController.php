@@ -102,7 +102,6 @@ class CartController extends Controller {
     }
     private function verifieCookie(){
         $res=$this->getCookieAllProducts();
-        dd($res);
         if($res!=null){
             return true;
         }else{
