@@ -15,6 +15,7 @@ use Response;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
+use App\Costumes;
 
 class CostumeController extends Controller
 {
@@ -275,6 +276,11 @@ class CostumeController extends Controller
 		$costume_category=array('costume_id'=>$costume_id,
 		'category_id'=>$category);
 		$insert_costume_category=DB::table('costume_to_category')->insert($costume_category);
+		
+		/**** Url create start here ***/
+			Costumes::urlRewrites($costume_id,'insert');
+	    /**** Url create end here ***/
+			
 	/*****************************Attributes insertion code starts here****/
 
 	/*

@@ -82,21 +82,30 @@ class CostumesController extends Controller {
 				}
 			}
 		}
-		$costumes = DB::select('SELECT  cst.costume_id,dsr.name,cst.price as price,if((select count(*) from cc_costumes_like as likes where likes.user_id=cst.created_by and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id=cst.created_by and  wsh_lst.	costume_id=cst.costume_id )>=1,true,false) as is_fav,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,cst.created_user_group,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.sort_order="0" LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id '.$where.' group by cst.costume_id '.$order_by.' ');
+		$costumes = DB::select('SELECT  cst.costume_id,dsr.name,cst.price as price,if((select count(*) from cc_costumes_like as likes where likes.user_id=cst.created_by and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id=cst.created_by and  wsh_lst.	costume_id=cst.costume_id )>=1,true,false) as is_fav,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,cst.created_user_group,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,link.url_key FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.sort_order="0" LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" '.$where.' group by cst.costume_id '.$order_by.' ');
 		return response()->success(compact('costumes'));
 	}
-	public function costumeSingleView($costume_id,$parent_cat_name)
+	public function costumeSingleView($slug1=null,$slug2=null,$slug3=null)
 	{
-		$data=Costumes::getCostumeDetails($costume_id);
-		if(count($data)){
-			$data['random_costumes']=Costumes::getRandomCategoyCostumesList($data[0]->category_id);
-			$data['images']=Costumes::getCostumeImages($costume_id);
-			$data['seller_info']=Costumes::costumeSellerInfo($data[0]->created_by);
-			return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$parent_cat_name);
-		}else{
-	      Session::flash('error', 'Costume information not found..');
-          return Redirect::back();
+		$key_url='/'.$slug1.'/'.$slug2.'/'.$slug3;
+		$cat_info=Category::getUrlCategoryId($key_url);
+		if(count($cat_info)){
+			$costume_id=$cat_info[0]->url_offset;
+			$data=Costumes::getCostumeDetails($costume_id);
+			if(count($data)){
+				$data['random_costumes']=Costumes::getRandomCategoyCostumesList($data[0]->category_id);
+				$data['images']=Costumes::getCostumeImages($costume_id);
+				$data['seller_info']=Costumes::costumeSellerInfo($data[0]->created_by);
+				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1);
+			}else{
+		     	return view('frontend.404');
+			}
 		}
+		else{
+			return view('frontend.404');
+			
+		}
+		
 	}
 	public function costumeLike(Request $request){
 		$req=$request->all();

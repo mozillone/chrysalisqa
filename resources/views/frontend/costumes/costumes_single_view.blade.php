@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.css') }}">
+ <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
 <style>
 	.owl-controls.clickable {
 		display: none;
@@ -73,7 +74,7 @@
 	</div>
 
 	<div class="col-xs-6 col-sm-4 viewBtn_rm">
-	<button type="button" class="addtocart-rm"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
+	<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
 	<button type="button" class="buynow-rm">Buy it Now!</button>
 	</div>
 
@@ -96,29 +97,10 @@
 			<div class="tab-content viewTabs-content">
 			
 		<div class="tab-pane active" id="viewTabs1">
-
-<!-- tab content starts -->
-				
-		<p class="viewTabs-text">Meet Captain Jack Sparrow, Pirate from the Pirates of the Caribbean.</p>
-
-		<p class="viewTabs-text">Why should girls have all the fun? Boys love to dress up to and this is a great costume for them. Whether it's a trip to Disney, Halloween, or just because he wants to be Captain Jack for the day this is a fun costume.</p>
-
-		<p class="viewTabs-text">Included in this set is a cream colored pirate shirt with the puffy, over-sized sleeves and lace up front. The lined vest is made from a weathered looking blue cotton that shows he's been having fun adventuring out to sea. A sash and head bandanna finish the look perfectly. All parts of this costume are made in cotton and are machine washable. Line dry to avoid shrinking.</p>
-
-<!-- tab content End -->			
-			
+		<p class="viewTabs-text">{{$data[0]->description}}</p>
 		</div>
-		
 		<div class="tab-pane" id="viewTabs2">
-
-<!-- tab content starts -->
-				
-		<p class="viewTabs-text">Why should girls have all the fun? Boys love to dress up to and this is a great costume for them. Whether it's a trip to Disney, Halloween, or just because he wants to be Captain Jack for the day this is a fun costume.</p>
-
-		<p class="viewTabs-text">Included in this set is a cream colored pirate shirt with the puffy, over-sized sleeves and lace up front. The lined vest is made from a weathered looking blue cotton that shows he's been having fun adventuring out to sea. A sash and head bandanna finish the look perfectly. All parts of this costume are made in cotton and are machine washable. Line dry to avoid shrinking.</p>			
-
-<!-- tab content End -->			
-			
+		<p class="viewTabs-text">@if(count($data['faq'])) {{$data['faq'][0]->attribute_option_value}} @else <span>No FAQ found</span> @endif</p>			
 		</div>
 
 		
@@ -158,7 +140,7 @@
 					<div class="owl-carousel owl-theme">
 					@foreach($data['random_costumes'] as $rand)
 						<div class="item">
-						<a href="/shop/{{$rand->costume_id}}/{{$parent_cat_name}}/{{$data[0]->cat_name}}/{{$rand->name}}">
+						<a href="/product{{$rand->url_key}}">
 							<div class="img_layer">
 								<img class="img-responsive" @if($rand->image!=null) src="/costumers_images/Medium/{{$rand->image}}" @else src="{{asset('/costumers_images/default-placeholder.jpg')}}" @endif >
 							</div>
@@ -247,7 +229,6 @@
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
 <script src="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.js') }}"></script>
-<script>
-
-</script>
+<script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
+<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
 @stop
