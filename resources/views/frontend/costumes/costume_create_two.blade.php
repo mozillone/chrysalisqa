@@ -60,7 +60,7 @@
 				<i class="fa fa-times-circle" aria-hidden="true"></i>				
 			</span>
 			<div class=" up-blog">
-				<input type="file" name="file1" id="file1">
+				<input type="file" name="file1" accept="image/*" id="file1">
 			</div>
 		<span id="file1_error" style="color:red"></span>
 
@@ -72,7 +72,7 @@
 			</span>
 			<div class=" up-blog">
 			
-			<input type="file" name="file2" id="file2">
+			<input type="file" name="file2" accept="image/*" id="file2">
 			
 		</div>
 		<span id="file2_error" style="color:red"></span>
@@ -84,7 +84,7 @@
 				<i class="fa fa-times-circle" aria-hidden="true"></i>					
 			</span>
 			<div class=" up-blog">
-			<input type="file" name="file3" id="file3">
+			<input type="file" name="file3" accept="image/*" id="file3">
 		</div>
 		<span id="file3_error" style="color:red"></span>
 
@@ -100,15 +100,15 @@
 			</p>
 			</div>
 					<!-- <form> -->
-										<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
-				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default nxt">Next Step</a>
-</div>
 				<span id="fileselector">
 					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
-						<input id="upload-file-selector" type="file" name="file4[]" multiple>
+						<input id="upload-file-selector" accept="image/*" type="file" name="file4[]" multiple>
 						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Upload More
 					</label>
 				</span>
+										<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
+				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default nxt">Next Step</a>
+</div>
 			<!-- </form> -->
 			</div>
 					</div>
