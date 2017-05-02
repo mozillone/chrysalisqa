@@ -1218,7 +1218,7 @@ $('#donate_charity').change(function(){
 		$('#step4').removeClass('active');
 		$('#upload_div').css('display','none');
 		$('#costume_description').css('display','none');
-		$('#pricing_div').css('display','block');
+		$('#pricing_div').css('display','none');
 		$('#preferences_div').css('display','none');
 	});
 	
