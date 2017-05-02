@@ -825,7 +825,7 @@ $('#donate_charity').change(function(){
 	var donate_percent = $(this).val();
 	var price = $('#price').val();
 	var total = (price*donate_percent)/100;
-	$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total));
+	$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
 });
 	//numeric condition
 	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height").on("keyup", function(){
