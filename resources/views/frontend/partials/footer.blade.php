@@ -72,7 +72,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<p>© 2016 CHRYSALIS. ALL RIGHTS RESERVED​​​​​​​ | TERMS OF USE | PRIVACY POLICY</p>
+						<p>© 2017 CHRYSALIS. ALL RIGHTS RESERVED​​​​​​​ | TERMS OF USE | PRIVACY POLICY</p>
 					</div>
 				</div>
 			</div>
