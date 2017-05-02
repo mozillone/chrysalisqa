@@ -811,7 +811,7 @@ class CreateCostumeController  extends Controller {
 		  	$handlingtime=$req['handlingtime'];
 		  	$returnpolicy=$req['returnpolicy'];
 		  	$donate_charity=$req['donate_charity'];
-		  	$charity_name=$req['charity_name'];
+		  	//$charity_name=$req['charity_name'];
 			/*
 			|Table:costume_attribute_options
 			|Preferences
@@ -844,12 +844,15 @@ class CreateCostumeController  extends Controller {
 		 
 		 	*/
 			//Check whether the costume inserted by admin or not if the user is selected insert the user id else insert the admin as costumer
+			if (isset($req['charity_name']) && !empty($req['charity_name'])) {
+				
 			$costume=array('charity_id'=>$donate_charity,
-			'donation_amount'=>$charity_name,
+			'donation_amount'=>$req['charity_name'],
 			'updated_at'=>date('y-m-d H:i:s'),
 			);
 
 			$update_costume = DB::table('costumes')->where('costume_id',$costume_id)->update($costume);
+			}
 
 			//charites
 			if (isset($req['organzation_name']) && !empty($req['organzation_name'])) {
