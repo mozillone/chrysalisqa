@@ -15,6 +15,7 @@ use Response;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
+use App\Costumes;
 
 class CostumeController extends Controller
 {
@@ -275,6 +276,11 @@ class CostumeController extends Controller
 		$costume_category=array('costume_id'=>$costume_id,
 		'category_id'=>$category);
 		$insert_costume_category=DB::table('costume_to_category')->insert($costume_category);
+		
+		/**** Url create start here ***/
+			Costumes::urlRewrites($costume_id,'insert');
+	    /**** Url create end here ***/
+			
 	/*****************************Attributes insertion code starts here****/
 
 	/*
@@ -541,13 +547,13 @@ class CostumeController extends Controller
 	*/
 		if(isset($req['img_chan2'])){ 
 			$file_name = str_random(10).'.'.$req['img_chan2']->getClientOriginalExtension();  
-			$source_image_path=public_path('costumers_images');
-			$thumb_image_path1=public_path('costumers_images/Original');
+			$source_image_path=public_path('costumers_images/Original');
+			//$thumb_image_path1=public_path('costumers_images/Original');
 			$thumb_image_path1=public_path('costumers_images/Medium');
 			$thumb_image_path2=public_path('costumers_images/Small');
 			$req['img_chan2']->move($source_image_path, $file_name);
-			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,475,650);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,150,150);
 			$data1=array(
 			'costume_id'=>$costume_id,
 			'image'=>$file_name,
@@ -562,13 +568,13 @@ class CostumeController extends Controller
 	*/
 		if(isset($req['img_chan'])){ 
 			$file_name = str_random(10).'.'.$req['img_chan']->getClientOriginalExtension();  
-			$source_image_path=public_path('costumers_images');
-			$thumb_image_path1=public_path('costumers_images/Original');
+			$source_image_path=public_path('costumers_images/Original');
+			//$thumb_image_path1=public_path('costumers_images/Original');
 			$thumb_image_path1=public_path('costumers_images/Medium');
 			$thumb_image_path2=public_path('costumers_images/Small');
 			$req['img_chan']->move($source_image_path, $file_name);
-			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,475,650);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,150,150);
 			$data2=array(
 			'costume_id'=>$costume_id,
 			'image'=>$file_name,
@@ -582,13 +588,13 @@ class CostumeController extends Controller
 	*/
 		if(isset($req['img_chan1'])){ 
 			$file_name = str_random(10).'.'.$req['img_chan1']->getClientOriginalExtension();  
-			$source_image_path=public_path('costumers_images');
-			$thumb_image_path1=public_path('costumers_images/Original');
+			$source_image_path=public_path('costumers_images/Original');
+			//$thumb_image_path1=public_path('costumers_images/Original');
 			$thumb_image_path1=public_path('costumers_images/Medium');
 			$thumb_image_path2=public_path('costumers_images/Small');
 			$req['img_chan1']->move($source_image_path, $file_name);
-			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,475,650);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,150,150);
 			$data2=array(
 			'costume_id'=>$costume_id,
 			'image'=>$file_name,
@@ -605,15 +611,15 @@ class CostumeController extends Controller
 	            if (isset($req['files']) && !empty($req['files'])) {
 	            	foreach ($req['files'] as $file4) {
 	            		$file_name = str_random(10).'.'.$file4->getClientOriginalExtension();
-	            		$source_image_path=public_path('costumers_images');
-	            		$thumb_image_path1=public_path('costumers_images/Original');
+	            		$source_image_path=public_path('costumers_images/Original');
+	            		//$thumb_image_path1=public_path('costumers_images/Original');
 	            		$thumb_image_path2=public_path('costumers_images/Medium');
 	            		$thumb_image_path3=public_path('costumers_images/Small');
 	            		//file3 moving to folder
 			            $file4->move($source_image_path, $file_name);
-			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,198,295);
-			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path3.'/'.$file_name,30,30);
+			            // $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,475,650);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path3.'/'.$file_name,150,150);
 			            //inserting in db
 	            		$file_db_array4 = array('costume_id'=>$costume_id,
 	            			'image'=>$file_name,

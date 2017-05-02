@@ -20,6 +20,8 @@ class CreateCostumeController  extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->sitehelper = new SiteHelper();
+			
+
 	}
 	public function costumeListings($sub_cat_id,$parent_cat_name)
 	{
@@ -478,15 +480,15 @@ class CreateCostumeController  extends Controller {
 	            if (isset($request['file4']) && !empty($request['file4'])) {
 	            	foreach ($request['file4'] as $file4) {
 	            		$file_name = str_random(10).'.'.$file4->getClientOriginalExtension();
-	            		$source_image_path=public_path('costumers_images');
-	            		$thumb_image_path1=public_path('costumers_images/Original');
+	            		$source_image_path=public_path('costumers_images/Original');
+	            		//$thumb_image_path1=public_path('costumers_images/Original');
 	            		$thumb_image_path2=public_path('costumers_images/Medium');
 	            		$thumb_image_path3=public_path('costumers_images/Small');
 	            		//file3 moving to folder
 			            $file4->move($source_image_path, $file_name);
-			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,198,295);
-			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path3.'/'.$file_name,30,30);
+			            //$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,475,650);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path3.'/'.$file_name,150,150);
 			            //inserting in db
 	            		$file_db_array4 = array('costume_id'=>$costume_id,
 	            			'image'=>$file_name,
@@ -519,6 +521,10 @@ class CreateCostumeController  extends Controller {
 			$costume_category=array('costume_id'=>$insert_costume,
 			'category_id'=>$subcategory);
 			$insert_costume_category=DB::table('costume_to_category')->insertGetId($costume_category);
+			/**** Url create start here ***/
+			Costumes::urlRewrites($insert_costume,'insert');
+			/**** Url create end here ***/
+			
 
 		/*****************************Attributes insertion code starts here****/
 		/*
