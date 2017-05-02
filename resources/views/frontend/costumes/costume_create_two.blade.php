@@ -60,7 +60,7 @@
 				<i class="fa fa-times-circle" aria-hidden="true"></i>				
 			</span>
 			<div class=" up-blog">
-				<input type="file" name="file1" id="file1">
+				<input type="file" name="file1" accept="image/*" id="file1">
 			</div>
 		<span id="file1_error" style="color:red"></span>
 
@@ -72,7 +72,7 @@
 			</span>
 			<div class=" up-blog">
 			
-			<input type="file" name="file2" id="file2">
+			<input type="file" name="file2" accept="image/*" id="file2">
 			
 		</div>
 		<span id="file2_error" style="color:red"></span>
@@ -84,7 +84,7 @@
 				<i class="fa fa-times-circle" aria-hidden="true"></i>					
 			</span>
 			<div class=" up-blog">
-			<input type="file" name="file3" id="file3">
+			<input type="file" name="file3" accept="image/*" id="file3">
 		</div>
 		<span id="file3_error" style="color:red"></span>
 
@@ -100,15 +100,15 @@
 			</p>
 			</div>
 					<!-- <form> -->
-										<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
-				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default nxt">Next Step</a>
-</div>
 				<span id="fileselector">
 					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
-						<input id="upload-file-selector" type="file" name="file4[]" multiple>
+						<input id="upload-file-selector" accept="image/*" type="file" name="file4[]" multiple>
 						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Upload More
 					</label>
 				</span>
+										<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
+				<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default nxt">Next Step</a>
+</div>
 			<!-- </form> -->
 			</div>
 					</div>
@@ -653,7 +653,7 @@ $heading_value=$headingexplode[1];
 <p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis' Terms & Conditions.</p>
 <p class="ct3-rms-head">Donation Amount</p>
 <div class="form-rms-input">
-<p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></p>
+<p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option value="none">None</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></p>
 <p class="cst3-textl2" id="dynamic_percent_amount"><i class="fa fa-usd" aria-hidden="true"></i>0.00</p>
 <span id="donate_charityerror" style="color:red"></span>
 </div>
@@ -796,6 +796,17 @@ function previewImages(){
   }
 
 
+  	$('#donate_charity').change(function(){
+		if ($(this).val() == "none") {
+			$('input[name=charity_name]').prop('checked', false);
+		}
+	});
+
+  	$('#another_charity').change(function(){
+  		if ($(this).prop("checked") == true) {
+  			$('input[name=charity_name]').prop('checked', false);
+  		}
+  	});
 
 	$('input[name=file1]').change(function(){
 		$('#drag_n_drop_1').css('display','block');
@@ -803,6 +814,7 @@ function previewImages(){
 	$('#drag_n_drop_1').click(function(){
 		$('#front_view').find('li').remove();
 		$('#drag_n_drop_1').css('display','none');
+		$('input[name=file1]').val('');
 	});
 
 	$('input[name=file2]').change(function(){
@@ -811,6 +823,7 @@ function previewImages(){
 	$('#drag_n_drop_2').click(function(){
 		$('#back_view').find('li').remove();
 		$('#drag_n_drop_2').css('display','none');
+		$('input[name=file2]').val('');
 	});
 
 	$('input[name=file3]').change(function(){
@@ -819,13 +832,17 @@ function previewImages(){
 	$('#drag_n_drop_3').click(function(){
 		$('#details_view').find('li').remove();
 		$('#drag_n_drop_3').css('display','none');
+		$('input[name=file3]').val('');
 	});
 //donate amount percentage calculation
 $('#donate_charity').change(function(){
 	var donate_percent = $(this).val();
 	var price = $('#price').val();
 	var total = (price*donate_percent)/100;
-	$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total));
+	if (total = "NaN") {
+		var total = 0.00;
+	}
+	$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
 });
 	//numeric condition
 	$("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height").on("keyup", function(){
@@ -890,21 +907,15 @@ $('#donate_charity').change(function(){
 		$('#mention_hours_input').css('display','none');
 		$('#mention_hours_input').val('');
 	});
+
 	$('#another_charity').click(function(){
-
-    if($(this).prop("checked") == true){
-
-        $('#other_organzation_check').css('display','block');
-
-    }
-
-    else if($(this).prop("checked") == false){
-
-        $('#other_organzation_check').css('display','none');
-
-    }
-
-});
+	    if($(this).prop("checked") == true){
+	        $('#other_organzation_check').css('display','block');
+	    }
+	    else if($(this).prop("checked") == false){
+	        $('#other_organzation_check').css('display','none');
+	    }
+	});
 
 	
 	$( "#upload_next" ).click(function(a) {
@@ -1210,13 +1221,14 @@ $('#donate_charity').change(function(){
 		$('#step4').removeClass('active');
 		$('#upload_div').css('display','none');
 		$('#costume_description').css('display','none');
-		$('#pricing_div').css('display','block');
+		$('#pricing_div').css('display','none');
 		$('#preferences_div').css('display','none');
 	});
 	
 	$('#preferences_finished').click(function(a){
 		a.preventDefault();
 		str=true;
+
 		$('#item_location,#handlingtime,#returnpolicy,#donate_charity,#charity_name,#organzation_name').css('border','');
 		$('#item_locationerror,#handlingtimeerror,#returnpolicyerror,#donate_charityerror,#charity_nameerror,#organzation_nameerror').html('');
 		var item_location = $('#item_location').val();
@@ -1240,11 +1252,11 @@ $('#donate_charity').change(function(){
 			$('#returnpolicyerror').html('This field is required.');
 			str=false;
 		}
-		/*if (donate_charity == "") {
+		if (donate_charity == "") {
 			$('#donate_charity').css('border','1px solid red');
 			$('#donate_charityerror').html('Select Donate Amount');
 			str=false;
-		}*/
+		}
 		/*if($('input[name=charity_name]:checked').length<=0){
 			$('#charity_name').css('border','1px solid red');
 			$('#charity_nameerror').html('Select Donate to');
@@ -1262,6 +1274,8 @@ $('#donate_charity').change(function(){
 			}
 		}
 		if (str == true) {
+			$('#preferences_finished').html("Submitting");
+			$('#preferences_finished').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
 			$.ajax({
 			 url: "{{URL::to('costume/costumecreate')}}",
 			 type: "POST",
@@ -1271,6 +1285,7 @@ $('#donate_charity').change(function(){
 			 processData: false,
 			 success: function(data){
 			 	if (data == "success") {
+			 		$('#ajax_loader').remove();
 			 		$('#success_page').css('display','block');
 			 		$('#upload_div').css('display','none');
 					$('#costume_description').css('display','none');
