@@ -653,7 +653,7 @@ $heading_value=$headingexplode[1];
 <p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis' Terms & Conditions.</p>
 <p class="ct3-rms-head">Donation Amount</p>
 <div class="form-rms-input">
-<p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></p>
+<p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option value="none">None</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></p>
 <p class="cst3-textl2" id="dynamic_percent_amount"><i class="fa fa-usd" aria-hidden="true"></i>0.00</p>
 <span id="donate_charityerror" style="color:red"></span>
 </div>
@@ -796,6 +796,17 @@ function previewImages(){
   }
 
 
+  	$('#donate_charity').change(function(){
+		if ($(this).val() == "none") {
+			$('input[name=charity_name]').prop('checked', false);
+		}
+	});
+
+  	$('#another_charity').change(function(){
+  		if ($(this).prop("checked") == true) {
+  			$('input[name=charity_name]').prop('checked', false);
+  		}
+  	});
 
 	$('input[name=file1]').change(function(){
 		$('#drag_n_drop_1').css('display','block');
@@ -825,6 +836,9 @@ $('#donate_charity').change(function(){
 	var donate_percent = $(this).val();
 	var price = $('#price').val();
 	var total = (price*donate_percent)/100;
+	if (total = "NaN") {
+		var total = 0.00;
+	}
 	$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
 });
 	//numeric condition
@@ -862,7 +876,7 @@ $('#donate_charity').change(function(){
 	$('#upload_div').css('display','block');
 	$('#costume_description').css('display','none');
 	$('#pricing_div').css('display','none');
-	$('#preferences_div').css('display','none');
+	$('#preferences_div').css('display','block');
 	$( "#7" ).click(function() {
 		$('#cosplayplay_yes_div').css('display','block');
 	});
@@ -890,21 +904,15 @@ $('#donate_charity').change(function(){
 		$('#mention_hours_input').css('display','none');
 		$('#mention_hours_input').val('');
 	});
+
 	$('#another_charity').click(function(){
-
-    if($(this).prop("checked") == true){
-
-        $('#other_organzation_check').css('display','block');
-
-    }
-
-    else if($(this).prop("checked") == false){
-
-        $('#other_organzation_check').css('display','none');
-
-    }
-
-});
+	    if($(this).prop("checked") == true){
+	        $('#other_organzation_check').css('display','block');
+	    }
+	    else if($(this).prop("checked") == false){
+	        $('#other_organzation_check').css('display','none');
+	    }
+	});
 
 	
 	$( "#upload_next" ).click(function(a) {
@@ -1217,6 +1225,7 @@ $('#donate_charity').change(function(){
 	$('#preferences_finished').click(function(a){
 		a.preventDefault();
 		str=true;
+
 		$('#item_location,#handlingtime,#returnpolicy,#donate_charity,#charity_name,#organzation_name').css('border','');
 		$('#item_locationerror,#handlingtimeerror,#returnpolicyerror,#donate_charityerror,#charity_nameerror,#organzation_nameerror').html('');
 		var item_location = $('#item_location').val();
@@ -1262,6 +1271,8 @@ $('#donate_charity').change(function(){
 			}
 		}
 		if (str == true) {
+			$('#preferences_finished').html("Submitting");
+			$('#preferences_finished').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
 			$.ajax({
 			 url: "{{URL::to('costume/costumecreate')}}",
 			 type: "POST",
@@ -1271,6 +1282,7 @@ $('#donate_charity').change(function(){
 			 processData: false,
 			 success: function(data){
 			 	if (data == "success") {
+			 		$('#ajax_loader').remove();
 			 		$('#success_page').css('display','block');
 			 		$('#upload_div').css('display','none');
 					$('#costume_description').css('display','none');
