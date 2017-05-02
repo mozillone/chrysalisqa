@@ -69,6 +69,10 @@ Route::any('/costume/ajaxsubcategory', array('as' => '','uses' => 'CreateCostume
 Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeController@Costumecreate'));
 /****costume create page 2 code ends here***/
 
+/* Request a bag starts here*/
+Route::any('/costume/request-a-bag', array('as' => '','uses' => 'CreateCostumeController@requestaBag'));
+/* Request a bag ends here*/
+
 /** Costume Like page start here **/
 Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
 /** Costume Like page end here **/

@@ -868,4 +868,7 @@ class CreateCostumeController  extends Controller {
 			return "success";
 
 		}
+	public function requestaBag(){
+	  return view('frontend.costumes.requestabag');
+	}
 }
