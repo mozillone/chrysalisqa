@@ -253,12 +253,12 @@ $('#categoryname').on('change',function(){
 	
     var id=$(this).val();//catgeory id
 	alert(id);
-	 $.get("{{ url('/costume/ajaxSubcategory')}}", //This is the url defined in routes 
+	 $.get("{{ url('/costume/ajaxsubcategory')}}", //This is the url defined in routes 
          { categoryid: id  },  
 		 function(data) {
 			console.log(data);
 			var model = $('#subcategory').html('Select Subcategory');    //keeping subcategory field empty before
-					model.empty();
+			model.empty();
 					$.each(data, function(index, element) {
 			            model.append("<option value='"+ element.subcategoryid +"'>" + element.subcategoryname + "</option>");
 			        });

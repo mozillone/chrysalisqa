@@ -28,9 +28,9 @@
 			<a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="{{url('customers-list')}}">Users Lists</a>
+			<a href="{{url('customers-list')}}">Users</a>
 		</li>
-		<li class="active">{{$user->display_name}} Edit</li>
+		<li class="active"> Edit User</li>
 	</ol>
 	
 </section>

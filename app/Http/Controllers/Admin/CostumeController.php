@@ -471,11 +471,12 @@ class CostumeController extends Controller
 			$file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();  
 			$source_image_path=public_path('costumers_images');
 			$thumb_image_path1=public_path('costumers_images/Original');
-			$thumb_image_path1=public_path('costumers_images/Medium');
-			$thumb_image_path2=public_path('costumers_images/Small');
+			$thumb_image_path2=public_path('costumers_images/Medium');
+			$thumb_image_path3=public_path('costumers_images/Small');
 			$req['avatar']->move($source_image_path, $file_name);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,150,150);
 			$data1=array(
 			'costume_id'=>$costume_id,
 			'image'=>$file_name,
@@ -492,11 +493,12 @@ class CostumeController extends Controller
 			$file_name = str_random(10).'.'.$req['avatar1']->getClientOriginalExtension();  
 			$source_image_path=public_path('costumers_images');
 			$thumb_image_path1=public_path('costumers_images/Original');
-			$thumb_image_path1=public_path('costumers_images/Medium');
-			$thumb_image_path2=public_path('costumers_images/Small');
+			$thumb_image_path2=public_path('costumers_images/Medium');
+			$thumb_image_path3=public_path('costumers_images/Small');
 			$req['avatar1']->move($source_image_path, $file_name);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,150,150);
 			$data2=array(
 			'costume_id'=>$costume_id,
 			'image'=>$file_name,

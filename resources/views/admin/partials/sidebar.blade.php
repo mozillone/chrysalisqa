@@ -67,6 +67,11 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Create Costume</span>
             </a>
           </li>
+		 <li {{ (Request::is('customes-list') ? 'class=active' : '') }}>
+            <a href="{{route('customes-list')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Costumes List</span>
+            </a>
+          </li>
         </ul>
       </li>
        <li {{ (Request::is('promotions') ? 'class=active' : '') }} {{ (Request::is('promotion/create') ? 'class=active' : '') }} {{ (Request::is('promotion/edit/*') ? 'class=active' : '') }}>

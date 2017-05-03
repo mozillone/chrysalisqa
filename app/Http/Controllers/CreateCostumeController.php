@@ -49,9 +49,25 @@ class CreateCostumeController  extends Controller {
 		$cosplayfive=DB::table('attributes')->select('attribute_id as attributeid','code as code','label as label','type as type')->where('attribute_id','21')->first();
 		$cosplayfive_values=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('attribute_id','21')->get();
 		$categories=DB::table('category')->select('category_id as categoryid','name as categoryname')->where('status','=','1')->where('parent_id','=','0')->get();
+		$shippingoptions=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
+		->where('attribute_id','=','9')->get();
+		$packageditems=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
+		->where('attribute_id','=','10')->get();
+		$type=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
+		->where('attribute_id','=','12')->get();
+		$service=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
+		->where('attribute_id','=','13')->get();
+		$dimensions=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
+		->where('attribute_id','=','11')->get();
+		$handlingtime=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
+		->where('attribute_id','=','14')->get();
+		$returnpolicy=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
+		->where('attribute_id','=','15')->get();
+		$charities=DB::table('charities')->select('id as id','name as name')->get();
 		return view('frontend.costumes.costume_create_two',compact('categories','bodyanddimensions','bodydimensions_val','body_height_ft',
 		'body_height_in','body_weight_lbs','body_chest_in','body_waist_lbs','cosplayone','cosplaytwo','cosplaythree','cosplayfour',
-		'cosplayfive','cosplayone_values','cosplaytwo_values','cosplaythree_values','cosplayfour_values','cosplayfive_values'));
+		'cosplayfive','cosplayone_values','cosplaytwo_values','cosplaythree_values','cosplayfour_values','cosplayfive_values',
+		'shippingoptions','packageditems','type','dimensions','service','handlingtime','returnpolicy','charities'));
 		
 	}
 	/****Fetching sub category values based on category code starts here***/
