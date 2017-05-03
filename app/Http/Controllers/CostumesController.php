@@ -27,11 +27,17 @@ class CostumesController extends Controller {
 		$key_url='/'.$slug1.'/'.$slug2;
 		$cat_info=Category::getUrlCategoryId($key_url);
 		if(count($cat_info)){
+			$categories_list=[];
 			$sub_cat_id=$cat_info[0]->url_offset;
 			$data['sub_cat_info']=Costumes::getCategoryInfo($sub_cat_id);
 			$parent_cat_id=$data['sub_cat_info'][0]->parent_id;
-			$data['sub_cats_list']=Costumes::getParentCategories($parent_cat_id);
-			return view('frontend.costumes.costumes_list',compact('data',$data))->with('parent_cat_name',$slug1);
+			$sub_cats_list=Costumes::getParentCategories($parent_cat_id);
+			$categories_list[$sub_cats_list[0]->name][]="None";
+			foreach ($sub_cats_list as $subCat) {
+				$link=Category::getUrlLinks($subCat->category_id);
+				$categories_list[$subCat->name]=$link;
+			}
+			return view('frontend.costumes.costumes_list',compact('data',$data))->with('parent_cat_name',$slug1)->with('categories_list',$categories_list);
 		}
 		else{
 			return view('frontend.404');

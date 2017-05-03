@@ -508,6 +508,12 @@ box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.08);
 -webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,.08);
 border: 1px solid #e5e4e4;
 }
+ul.bxslider{height: 100%;}
+ul.bxslider li{    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100% !important;background: #e1e1e1;}
 #search_list .slider_cnt {
 min-height: 65px;
 }
@@ -1392,7 +1398,7 @@ span.acnhr-link {
 }
 
 	.img_layer a img {
-    min-height: 276px;
+    min-height: 276px;margin: 0 auto;width: 100%;
 }
 		.icon_lins.text-right ul li .btn a:hover {text-decoration:none;}
 	.icon_lins.text-right ul li .btn a {
