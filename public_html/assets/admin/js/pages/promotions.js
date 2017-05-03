@@ -15,6 +15,10 @@ $("#promotions-create").validate({
                       number:true,
                       maxlength:10,
                 },
+                uses_total:{
+                   number:true,
+                   maxlength:10,
+                },
                 date_start:{
                     required:true,
                 },

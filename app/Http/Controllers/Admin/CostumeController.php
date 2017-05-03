@@ -15,6 +15,7 @@ use Response;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
+use App\Costumes;
 
 class CostumeController extends Controller
 {
@@ -159,6 +160,9 @@ class CostumeController extends Controller
 	*/
 	public function insertCostume(Request $request){
 	  /****Inserting costume codes starts here***/
+		  /*echo "<pre>";
+		  print_r($request->all());
+		  die;*/
 	  $response=array();
 	  $req=$request->all();
 	  $userid=Auth::user()->id;
@@ -193,8 +197,9 @@ class CostumeController extends Controller
 	  $handlingtime=$req['handling_time'];
 	  $returnpolicy=$req['return_policy'];
 	  $packageitems=$req['weight_package_items'];
-	 $frontview=$req['avatar'];
-	  $backview=$req['avatar1'];
+	 $frontview=$req['img_chan'];
+	  $backview=$req['img_chan1'];
+	  $details_accessories=$req['img_chan2'];
 	 // $multiplefiles=$req['files'];
 	  //Generating sku number for a costume code starts here code format should be (CS(five zeros)incrementing the number form 0 Ex:CS0000012)*****/
 	  $sku_no=DB::table('costumes')->select('*')->get();
@@ -271,7 +276,80 @@ class CostumeController extends Controller
 		$costume_category=array('costume_id'=>$costume_id,
 		'category_id'=>$category);
 		$insert_costume_category=DB::table('costume_to_category')->insert($costume_category);
+		
+		/**** Url create start here ***/
+			Costumes::urlRewrites($costume_id,'insert');
+	    /**** Url create end here ***/
+			
 	/*****************************Attributes insertion code starts here****/
+
+	/*
+		|Table:costume_attribute_options
+		|Cosplay if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->cosplayplay_yes_opt) && !empty($request->cosplayplay_yes_opt)) {
+			$get_attr_opt_value_id = DB::table('attribute_options')->where('option_value',$request->cosplayplay_yes_opt)->first(['option_id']);
+			$cosplay_yes=array('costume_id'=>$costume_id,
+			'attribute_id'=>'25',
+			'attribute_option_value_id'=>$get_attr_opt_value_id->option_id,
+			'attribute_option_value'=>$request->cosplayplay_yes_opt,
+			);
+			$cosplay_yes_insert=DB::table('costume_attribute_options')->insert($cosplay_yes);
+		}
+		/*
+		|Table:costume_attribute_options
+		|Unique fashion if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->uniquefashion_yes_opt) && !empty($request->uniquefashion_yes_opt)) {
+			$get_attr_opt_value_id = DB::table('attribute_options')->where('option_value',$request->uniquefashion_yes_opt)->first(['option_id']);
+			$uniquefashion_yes=array('costume_id'=>$costume_id,
+			'attribute_id'=>'26',
+			'attribute_option_value_id'=>$get_attr_opt_value_id->option_id,
+			'attribute_option_value'=>$request->uniquefashion_yes_opt,
+			);
+			$uniquefashion_insert=DB::table('costume_attribute_options')->insert($uniquefashion_yes);
+		}
+		/*
+		|Table:costume_attribute_options
+		|Activity fashion if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->activity_yes_opt) && !empty($request->activity_yes_opt)) {
+			$get_attr_opt_value_id = DB::table('attribute_options')->where('option_value',$request->activity_yes_opt)->first(['option_id']);
+			$activity_yes=array('costume_id'=>$costume_id,
+			'attribute_id'=>'28',
+			'attribute_option_value_id'=>$get_attr_opt_value_id->option_id,
+			'attribute_option_value'=>$request->activity_yes_opt,
+			);
+			$uniquefashion_insert=DB::table('costume_attribute_options')->insert($activity_yes);
+		}
+		/*
+		|Table:costume_attribute_options
+		|Make a costume if yes 
+		|@costume_id
+		|@attribute_id
+		|@attribute_option_value_id
+		|@attribute_option_value
+		*/
+		if (isset($request->make_costume_time) && !empty($request->make_costume_time)) {
+			$make_costume_time=array('costume_id'=>$costume_id,
+			'attribute_id'=>'29',
+			'attribute_option_value_id'=>"0",
+			'attribute_option_value'=>$request->make_costume_time,
+			);
+			$make_costume_timeinsert=DB::table('costume_attribute_options')->insert($make_costume_time);
+		}
 	/*
 	|Table:costume_attribute_options
 	|Body dimensions (height-ft,height-in,ewight-lbs,waist-lbs,chest-in)
@@ -467,6 +545,7 @@ class CostumeController extends Controller
 	|Costume iamges(Front view)
 	|@image 
 	*/
+<<<<<<< HEAD
 		if(isset($req['avatar'])){ 
 			$file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();  
 			$source_image_path=public_path('costumers_images');
@@ -476,11 +555,21 @@ class CostumeController extends Controller
 			$req['avatar']->move($source_image_path, $file_name);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+=======
+		if(isset($req['img_chan2'])){ 
+			$file_name = str_random(10).'.'.$req['img_chan2']->getClientOriginalExtension();  
+			$source_image_path=public_path('costumers_images/Original');
+			//$thumb_image_path1=public_path('costumers_images/Original');
+			$thumb_image_path1=public_path('costumers_images/Medium');
+			$thumb_image_path2=public_path('costumers_images/Small');
+			$req['img_chan2']->move($source_image_path, $file_name);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,475,650);
+>>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,150,150);
 			$data1=array(
 			'costume_id'=>$costume_id,
 			'image'=>$file_name,
-			'type'=>"1");
+			'type'=>"3");
 			$image1_insert=DB::table('costume_image')->insert($data1);
 			
 		}
@@ -489,6 +578,7 @@ class CostumeController extends Controller
 	|Costume iamges(Back view)
 	|@image 
 	*/
+<<<<<<< HEAD
 		if(isset($req['avatar1'])){ 
 			$file_name = str_random(10).'.'.$req['avatar1']->getClientOriginalExtension();  
 			$source_image_path=public_path('costumers_images');
@@ -498,6 +588,36 @@ class CostumeController extends Controller
 			$req['avatar1']->move($source_image_path, $file_name);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+=======
+		if(isset($req['img_chan'])){ 
+			$file_name = str_random(10).'.'.$req['img_chan']->getClientOriginalExtension();  
+			$source_image_path=public_path('costumers_images/Original');
+			//$thumb_image_path1=public_path('costumers_images/Original');
+			$thumb_image_path1=public_path('costumers_images/Medium');
+			$thumb_image_path2=public_path('costumers_images/Small');
+			$req['img_chan']->move($source_image_path, $file_name);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,475,650);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,150,150);
+			$data2=array(
+			'costume_id'=>$costume_id,
+			'image'=>$file_name,
+			'type'=>"1");
+			$image1_insert=DB::table('costume_image')->insert($data2);
+		}
+		/*
+	|Table:costume_image
+	|Costume iamges(Details/Accessories)
+	|@image 
+	*/
+		if(isset($req['img_chan1'])){ 
+			$file_name = str_random(10).'.'.$req['img_chan1']->getClientOriginalExtension();  
+			$source_image_path=public_path('costumers_images/Original');
+			//$thumb_image_path1=public_path('costumers_images/Original');
+			$thumb_image_path1=public_path('costumers_images/Medium');
+			$thumb_image_path2=public_path('costumers_images/Small');
+			$req['img_chan1']->move($source_image_path, $file_name);
+			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,475,650);
+>>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,150,150);
 			$data2=array(
 			'costume_id'=>$costume_id,
@@ -507,31 +627,32 @@ class CostumeController extends Controller
 		}
 	/*
 	|Table:costume_image
-	|Multiple iamges(Details/Accessories)
+	|Multiple iamges
 	|@image 
 	*/
-		
-	//	if(isset($req['files'])){ 
-		//$count=count($req['files']); 
-		//if($count > 0){
-		// for($i=0;$i<$count[$i];$i++){
-		//	$file_name = str_random(10).'.'.$req['files'][$i]->getClientOriginalExtension();  
-		//	$source_image_path=public_path('costumers_images');
-		//	$thumb_image_path1=public_path('costumers_images/Original');
-		//	$thumb_image_path2=public_path('costumers_images/Small');
-		//	$req['files'][$i]->move($source_image_path, $file_name);
-		//	$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-		//	$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
-		//	$data3=array(
-		//	'costume_id'=>$costume_id,
-		//	'image'=>$req['files'][$i],
-		//	'type'=>"3");
-		//	$image1_insert=DB::table('costume_image')->insert($data3);
-		//}
-	//}
-		
-			
-		//}
+
+		//moving extra images
+	            if (isset($req['files']) && !empty($req['files'])) {
+	            	foreach ($req['files'] as $file4) {
+	            		$file_name = str_random(10).'.'.$file4->getClientOriginalExtension();
+	            		$source_image_path=public_path('costumers_images/Original');
+	            		//$thumb_image_path1=public_path('costumers_images/Original');
+	            		$thumb_image_path2=public_path('costumers_images/Medium');
+	            		$thumb_image_path3=public_path('costumers_images/Small');
+	            		//file3 moving to folder
+			            $file4->move($source_image_path, $file_name);
+			            // $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,475,650);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path3.'/'.$file_name,150,150);
+			            //inserting in db
+	            		$file_db_array4 = array('costume_id'=>$costume_id,
+	            			'image'=>$file_name,
+	            			'type'=>4,
+	            			'sort_order'=>0,
+	            		);
+	            		$file_db=DB::table('costume_image')->insert($file_db_array4);
+	            	}
+	            }
 		
 		}
 		 Session::flash('success', 'Costume Created Successfully');

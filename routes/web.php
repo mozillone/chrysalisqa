@@ -23,7 +23,10 @@ Route::get('social/login/{provider}', 'AuthController@handleProviderCallback');
 Route::get('/logout', ['as' => 'logout','uses'=>'AuthController@logout']);
 Route::get('/verification/{verification}', ['as' => '','uses'=>'AuthController@verification']);
 Route::any('/forgetPassword', ['as' => 'forgotpassword.post','uses'=>'AuthController@forgotPassword']);
+Route::get('/admin/forgotpassword', ['as' => 'admin.forgotpassword','uses'=>'AuthController@adminForgotPassword']);
+Route::post('/admin/forgotpassword', ['as' => 'admin.forgotpassword.post','uses'=>'AuthController@adminForgotPasswordPost']);
 Route::any('/password/change/{verification?}', ['as' => 'forgotpassword.change','uses'=>'AuthController@forgotPasswordChange']);
+Route::any('/admin/password/change/{verification?}', ['as' => 'admin.forgotpassword.change','uses'=>'AuthController@adminForgotPasswordChange']);
 Route::any('/emailValidation', array('as' => '','uses' => 'AuthController@EmailNameCheck'));
 Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthController@forgorpasswordEmailCheck'));
 Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
@@ -33,12 +36,20 @@ Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@Edit
 //Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
 //Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
 Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesController@costumeListings'))->where('name', '[A-Za-z]+');;
-Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
-
+Route::any('/product/{slug1?}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
 /** Products list page end here **/
 
 Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesController@costumeReport'));
+
+/*******************Car Functionality stat here *********/
+Route::any('/addToCart', array('as' => 'report.post','uses' => 'CartController@addToCart'));
+Route::any('/cart', array('as' => '','uses' => 'CartController@cart'));
+Route::any('/updateCart', array('as' => 'Update.Cart','uses' => 'CartController@updateCart'));
+Route::any('/cart/delete/{cart_id}', array('as' => '','uses' => 'CartController@productRemoveFromCart'));
+Route::get('/getMiniCartProducts', array('as' => '','uses' => 'CartController@getMiniCartProducts'));
+
+/*******************Car Functionality end here *********/
 
 
 /** Costumes Controller startsend here **/
@@ -54,7 +65,13 @@ Route::any('/costume/createtwo', array('as' => '','uses' => 'CreateCostumeContro
 Route::any('/costume/createthree', array('as' => '','uses' => 'CreateCostumeController@createCostumestep3'));
 Route::any('/costume/createfour', array('as' => '','uses' => 'CreateCostumeController@createCostumestep4'));
 Route::any('/costume/ajaxsubcategory', array('as' => '','uses' => 'CreateCostumeController@ajaxSubCategory'));
+
+Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeController@Costumecreate'));
 /****costume create page 2 code ends here***/
+
+/* Request a bag starts here*/
+Route::any('/costume/request-a-bag', array('as' => '','uses' => 'CreateCostumeController@requestaBag'));
+/* Request a bag ends here*/
 
 /** Costume Like page start here **/
 Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
@@ -85,6 +102,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	    Route::any('/customer-delete/{id}', 'UserController@customerDelete');
 	    Route::any('/status/change', 'UserController@changeUserStatus');
 	    Route::any('/customer/emailValidation', array('as' => '','uses' => 'UserController@EmailNameCheck'));
+	    Route::post('user/csvExport', array('as' => '','uses' => 'UserController@userCsvExport'));
 	    /****************User Management End Here***************************/
 
 		/****************Costumes Management Code Starts Here*********************/
@@ -113,7 +131,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 
 		/****************Categories Management Starts Here*********************/
 		Route::any('/category/create', ['as' => 'categories-create','uses'=>'CategoriesController@createCategories']);
-	    Route::any('/category/edit/{id?}', ['as' => 'categories-edit','uses'=>'CategoriesController@editCategories']);
+	    Route::any('/categories/edit/{id?}', ['as' => 'categories-edit','uses'=>'CategoriesController@editCategories']);
 	    Route::any('/category-delete/{id}', ['as' => '','uses'=>'CategoriesController@deleteCategory']);
 	    Route::any('/categories', ['as' => 'categories-list','uses'=>'CategoriesController@categoriesList']);
 	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
@@ -138,6 +156,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	    Route::any('/charities', ['as' => 'charities-list','uses'=>'CharitiesController@charitiesList']);
 	    Route::any('/charities-list', ['as' => '','uses'=>'CharitiesController@charitiesData']);
 	    Route::any('/charity/status/change', ['as' => '','uses'=>'CharitiesController@changeCharityStatus']);
+	    Route::post('/charities/csvExport', array('as' => '','uses' => 'CharitiesController@charitiesCsvExport'));
 	   /****************Charities Management Ends Here***********************/
 
 

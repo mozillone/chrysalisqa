@@ -10,6 +10,7 @@ use Datatables;
 use DB;
 use Session;
 use App\Helpers\SiteHelper;
+use App\Helpers\ExportFile;
 use Hash;
 use Response;
 
@@ -20,6 +21,7 @@ class UserController extends Controller
 
     public function __construct()
     {
+      $this->csv = new ExportFile();
       $this->sitehelper = new SiteHelper();
       $this->middleware(function ($request, $next) {
           if(!Auth::check()){
@@ -84,7 +86,7 @@ class UserController extends Controller
     {
         $req=$request->all();
 		$userslist=DB::table('users as user')
-		->select('user.id','user.display_name','user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as date_format'),DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as lastlogin'))
+		->select('user.id',DB::Raw("CONCAT(cc_user.first_name,' ',cc_user.last_name) as display_name")  ,'user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as date_format'),DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as lastlogin'))
 		->orderby('user.created_at','DESC')
 		->where('user.role_id','!=','1');
 		if(!empty($req['search'])){
@@ -96,7 +98,7 @@ class UserController extends Controller
 		$userslist->where('user.email',$req['search']['email']);
 		 }
 		 if(!empty($req['search']['phone']) ){
-		$userslist->where('user.phone_number',$req['search']['phone']);
+		$userslist->where('user.phone_number', 'like','%'.$req['search']['phone'] .'%');
 		 }
 		 if(isset($req['search']['status'])){
             if($req['search']['status']==""){
@@ -125,6 +127,7 @@ class UserController extends Controller
         return response()->success(compact('users','credit'));
   
     }
+<<<<<<< HEAD
 	public function customesListData(Request $request)
     {
         $req=$request->all();
@@ -174,6 +177,21 @@ class UserController extends Controller
         return response()->success(compact('users','credit'));
   
     }
+=======
+    public function userCsvExport(Request $request){
+	
+		$req = $request->all();
+		if(!empty($req['data'])){
+			$data = User::whereIn('id',$req['data'])->selectRaw("id as ID, display_name as Name, email as Email, phone_number as Phone, if(active='1', 'Active','InActive') as status,  DATE_FORMAT(created_at,'%m/%d/%Y %h:%i %p') as 'Created At'")->get();
+		 	$this->csv->csvExportFile($data);
+		}
+		else{
+			$result = DB::select("SELECT id as ID, display_name as Name,phone_number as Phone, if(active='1', 'Active','InActive') as status,  DATE_FORMAT(created_at,'%m/%d/%Y %h:%i %p') as 'Created At' FROM `vmd_users` where role_id NOT IN ('1')");
+			$data = json_decode(json_encode($result), true);
+			$this->csv->csvExportFile($data);
+		}
+	}
+>>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
  	public function customerAdd(Request $request)
     {
 		$req=$request->all(); 
@@ -210,7 +228,7 @@ class UserController extends Controller
 					return Redirect::to('customers-list');
 				}else{
 					$message = array();
-					Session::flash('error', 'Customer not created successfully.Database error');
+					Session::flash('error', 'User not created successfully.Database error');
 					return Redirect::back();
 				} 
 	}
@@ -236,6 +254,7 @@ class UserController extends Controller
 		else{
 			$file_name=$name->user_img;
 		}
+		if(!empty($req['vacationstatus'])){$vacationstatus=$req['vacationstatus'];}else{$vacationstatus="0";}
 		$userData = [
 				'first_name' => $req['first_name'],
 				'last_name' => $req['last_name'],
@@ -243,7 +262,7 @@ class UserController extends Controller
 				'display_name' =>  $req['first_name']." ".$req['last_name'],
 				'email'=>$req['email'],
 				'user_img' =>$file_name,
-				'vacation_status'=>$req['vacationstatus'],
+				'vacation_status'=>$vacationstatus,
 				'vacation_from'=>$req['date_timepicker_end_ticket'],
 				'vacation_to'=>$req['date_timepicker_end1_ticket'],
 				
@@ -252,7 +271,7 @@ class UserController extends Controller
 			$userData['password'] =  Hash::make($req['password']);
 		}
 		$affectedRows = User::where('id', '=', $req['user_id'])->update($userData);
-		Session::flash('success', 'Customer Updated  successfully');
+		Session::flash('success', 'User is updated  successfully');
 		return Redirect::to('customers-list');
 	
 	
@@ -264,10 +283,10 @@ class UserController extends Controller
       $apiId=$data['api_customer_id'];
       $res = User::where('id',$id)->delete();
       if($res){
-      	Session::flash('success', 'Customer Deleted Successfully');
+      	Session::flash('success', 'User is Deleted Successfully');
         return Redirect::back();
       }else{
-        Session::flash('error', 'Customer is deleted.Database error occured');
+        Session::flash('error', 'User is deleted.Database error occured');
         return Redirect::back();
       }
         

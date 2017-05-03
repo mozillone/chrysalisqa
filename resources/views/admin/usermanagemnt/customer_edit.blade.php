@@ -1,7 +1,8 @@
 @extends('admin.app')
 
 {{-- Web site Title --}}
-@section('title') @parent
+@section('title')
+View User |@parent
 @endsection
 
 @section('header_styles')
@@ -30,7 +31,11 @@
 		<li>
 			<a href="{{url('customers-list')}}">Users</a>
 		</li>
+<<<<<<< HEAD
 		<li class="active"> Edit User</li>
+=======
+		<li class="active"> Edit {{$user->first_name}}  {{$user->last_name}}</li>
+>>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 	</ol>
 	
 </section>
@@ -39,7 +44,7 @@
 		<div class="col-sm-12 col-md-12">
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title heading-agent col-md-12">View User - {{$user->display_name}}</h3>
+					<h3 class="box-title heading-agent col-md-12">View User - {{$user->first_name}}  {{$user->last_name}}</h3>
 				</div>
 				<div class="box-body">
 				<!--Tabs code starts here-->
@@ -191,10 +196,8 @@
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									
 									<div class="fileupload fileupload-new" data-provides="fileupload"> 
-										<img  @if(empty($user->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/{{$user->user_img}}" @endif class="img-pview img-responsive" id="img-chan" name="img-chan">
-										<span class="remove_pic">
-											<i class="fa fa-times-circle" aria-hidden="true"></i>
-										</span>
+										<img  @if(empty($user->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/{{$user->user_img}}" @endif class="img-pview img-responsive img-circle pic" id="img-chan" name="img-chan">
+										
 										<span class="btn btn-default btn-file">
 											<span class="fileupload-new">Upload Photo</span>
 											<span class="fileupload-exists"></span>     
@@ -210,7 +213,7 @@
 							</div>
 						</div>
 						<div class="col-md-12">
-						<h2 class="heading-agent">{{$user->display_name}} Reviews </h2>
+						<h2 class="heading-agent">{{$user->first_name}}  {{$user->last_name}} Reviews </h2>
 						<span> No Reviews Found </span>
 						<!--sony adding rating stars--->
 						

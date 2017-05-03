@@ -1,18 +1,18 @@
 <section class="newsletter-container">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12"><h3>SIGN UP FOR OUR NEWSLETTER</h3>
+					<div class="col-md-8 col-sm-12 col-xs-12"><h3>SIGN UP FOR OUR NEWSLETTER</h3>
 						<form id="register-newsletter">
 							<input type="text" name="newsletter" required="" placeholder="Enter your email address">
 							<input type="submit" class="btn btn-custom-3" value="Subscribe">
 						</form>
 					</div>
-					<div class="col-md-4 col-sm-4 col-xs-12 social-media">
+					<div class="col-md-4 col-sm-12 col-xs-12 social-media">
 						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-12 social-fallow">
+							<div class="col-md-4 col-sm-12 col-xs-12 social-fallow">
 								<h3>FOLLOW US</h3>
 							</div>
-							<div class="col-md-8 col-sm-8 col-xs-12 social-img">
+							<div class="col-md-8 col-sm-12 col-xs-12 social-img">
 								<div class="social-icons">
 									<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/fb-icon.png')}}"></a>
 									<a href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/twit-icon.png')}}"></a>
@@ -29,19 +29,19 @@
 			<div class="container">
 				<div class="row">
 				<div class="footer_links" id="footer-middle">
-					<div class="col-md-4 col-sm-4 co-xs-12 ft-logo">
+					<div class="col-md-4 col-sm-12 co-xs-12 ft-logo">
 					<div class="footer_head ">
 						
 						<img class="img-responsive" src="{{asset('/assets/frontend/img/brand.png')}}">
-						<h5>OUR MISSION <i class="fa fa-plus pull-right hidden-lg hidden-sm hidden-md"></i></h5>
+						<h5>OUR MISSION <i class="fa fa-plus pull-right hidden-lg  hidden-md"></i></h5>
 						<p style="display: none;">Revolutionize the costume industry, by giving people access to more affordable, environmentally friendly costumes. More on our mission here.</p>
 						
 					</div>
 					</div>
 
-					<div class="col-md-4 co-sm-4 co-xs-12 quick_links">
-					<div class="footer_head ">
-						<h5>QUICK LINKS <i class="fa fa-plus pull-right hidden-lg hidden-sm hidden-md"></i></h5>
+					<div class="col-md-4 co-sm-12 co-xs-12 quick_links">
+					<div class="footer_head mid_ft ">
+						<h5>QUICK LINKS <i class="fa fa-plus pull-right hidden-lg hidden-md"></i></h5>
 						<ul class="col-md-6 col-sm-6 col-xs-12">
 							<li>About</li>
 							<li>How It Works</li>
@@ -57,9 +57,9 @@
 					</div>
 					</div>
 
-					<div class="col-md-4 co-sm-4 co-xs-12 app_img">
+					<div class="col-md-4 co-sm-12 co-xs-12 app_img">
 					<div class="footer_head ">
-						<h5><span class="hidden-lg hidden-sm hidden-md">THE CHRYSALIS APP</span> <i class="fa fa-plus pull-right hidden-lg hidden-sm hidden-md"></i></h5>
+						<h5><span class="hidden-lg hidden-md">THE CHRYSALIS APP</span> <i class="fa fa-plus pull-right hidden-lg  hidden-md"></i></h5>
 						<img class="img-responsive" src="{{asset('/assets/frontend/img/app-img.png')}}">
 						</div>
 						</div>
@@ -72,12 +72,12 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<p>© 2016 CHRYSALIS. ALL RIGHTS RESERVED​​​​​​​ | TERMS OF USE | PRIVACY POLICY</p>
+						<p>© 2017 CHRYSALIS. ALL RIGHTS RESERVED​​​​​​​ | TERMS OF USE | PRIVACY POLICY</p>
 					</div>
 				</div>
 			</div>
 		</section>
-<div class="modal fade window-popup" id="signup_popup">
+<div class="modal fade window-popup" id="signup_popup" tabindex="-1">
 
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -85,7 +85,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="login-register" id="loginModal">
 				<ul class="nav nav-tabs">
-                    <li class="active"><a href="#login_tab1" data-toggle="tab">Sign In</a></li>
+                    <li class="active"><a href="#login_tab1" data-toggle="tab" class="first_active">Sign In</a></li>
                     <li><a href="#signup_tab1" data-toggle="tab">Register</a></li>
                     <li class="hide"><a href="#forget_password1" data-toggle="tab">Reset Password</a></li>
 				</ul>
@@ -189,7 +189,7 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade window-popup" id="login_popup">
+<div class="modal fade window-popup" id="login_popup" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
 				<div class=" modal-header indi_close_icons">
@@ -216,7 +216,7 @@
 								<input type="password" id="loginopup_password" name="password" placeholder="Password *" class="form-control">
 								<p class="error">{{ $errors->first('password') }}</p>
 							</div>
-							<div class=" form-group loign-adtnl forgot"> 
+							<div class=" form-group loign-adtnl forgot mbl-frgt_sign"> 
 								<label><a href="#forget_password1" data-toggle="tab">Help! I forgot my password</a></label>
 							</div>
 							<div class="form-group">
@@ -234,11 +234,85 @@
 				</div>
 				<div class="social-login">
 					<div class="form-group socil-btn">
-						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Continue with Facebook</a>
+						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Log In with Facebook</a>
 					</div>
 				</div>
 				<div class="form-group agn_regstr">
-								<p>Don't have an account with us? <span>Regsiter!</span></p>
+								<p>Don't have an account with us? <span><a data-toggle="modal" data-target="#single_signup_popup" data-dismiss="modal">Regsiter!</a></span></p>
+							</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade window-popup" id="single_signup_popup" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+				<div class=" modal-header indi_close_icons">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+			<div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="login-register" id="loginModal">
+			
+				<div id="myTabContent" class="tab-content">
+			
+					<div class="tab-pane active in" id="login_tab1">
+					<h2>Register Your Account</h2>
+						<form role="form" action="{{route('register')}}" method="POST" id="signup_pop1">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<div class="form-group">
+						<label>First Name</label>
+			                <input type="text" name="first_name" id="first_name" class="form-control " >
+						</div>
+						<div class="form-group">
+							<label>Last Name</label>
+							<input type="text" name="last_name" id="last_name" class="form-control " >
+						</div>
+						<div class="form-group">
+							<label>Email</label>
+							<input type="text" id="email" name="email"  class="form-control">
+						</div>
+						<div class="row sinup-pswrd"> 
+							<div class="col-md-12 col-sm-12 col-xs-12 "> 
+								<div class="form-group">
+									<label>Password</label>
+									<input type="password" id="password1" name="password" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 "> 
+								<div class="form-group">
+								<label>Confirm Password</label>
+									<input type="password" id="cpassword1"  name="cpassword"  class="form-control">
+								</div>
+							</div>
+						</div> 
+						<div class="row"> 
+							<div class="col-md-12 col-sm-12 col-xs-12 "> 
+								<div class="form-group">
+									<div class="text-center creat_btn">
+										<button class="btn btn-primary">Create Account!</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</form>   
+					</div>
+           
+                    <div class="form-group or text-center">
+								<p>Or</p>
+				</div>
+				<div class="social-login">
+					<div class="form-group socil-btn">
+						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> Log In with Facebook</a>
+					</div>
+				</div>
+				<div class="form-group agn_regstr">
+								<p><a data-toggle="modal" data-target="#login_popup" data-dismiss="modal">Login</a></p>
 							</div>
 				</div>
 				

@@ -29,8 +29,8 @@
 	<div class="upload-photo-blogs">
 		<h2 class="prog-head">Upload Photos</h2>
 		<div class="threeblogs">
-		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
-			<p>Tip Respect your costume’s  integrity with crisp, clear photos.Placing them in settings that correspond with their theme can encourage a sale.</p>
+		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint hidden-xs ">
+			<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos.Placing them in settings that correspond with their theme can encourage a sale.</p>
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-12 ">
 		<h4>01.Front View</h4>
@@ -38,6 +38,9 @@
 			
 		</div>
 			</div>
+	<div class="hidden-lg hidden-md col-sm-4 col-xs-12 upload_hint ">
+			<p>Tip Respect your costume’s  integrity with crisp, clear photos.Placing them in settings that correspond with their theme can encourage a sale.</p>
+		</div>
 			<div class="col-md-3 col-sm-3 col-xs-12 ">
 			<h4>02.Back View</h4>
 			<div class=" up-blog">
@@ -58,7 +61,7 @@
 				<span id="fileselector">
 					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
 						<input id="upload-file-selector" type="file">
-						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> Up load More
+						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> Upload More
 					</label>
 				</span>
 			</form>

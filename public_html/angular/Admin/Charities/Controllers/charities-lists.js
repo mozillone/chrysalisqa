@@ -1,4 +1,4 @@
-app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,Charities) 
+app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,Charities,Exports) 
 {
 	var vm = this;
     $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -8,12 +8,13 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
       })
       .withDataProp('data.charities')
       .withOption('createdRow', createdRow)
-      .withOption('order', [ ])
+      .withOption('order', [3])
       .withOption('responsive', true)
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-                      DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml),
+                      DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+                      DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml).notSortable(),
                       DTColumnBuilder.newColumn('name').withTitle('Charity Name'),
                       DTColumnBuilder.newColumn('user_name').withTitle('Suggested By'),
                       DTColumnBuilder.newColumn('date').withTitle('Created Date'),
@@ -22,6 +23,39 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
                       .renderWith(actionsHtml)
                     ], 
     $scope.displayTable = true;
+      function getCheckboxes(data) {
+       return '<input type="checkbox" class="rowsChecked" name="user_checkboxes" value='+data.id+' checked>' 
+    }
+
+           $scope.charitiesExportCSV = function(){
+          
+          var checkboxes = document.getElementsByName("user_checkboxes");
+          
+          var checkboxesChecked = []; 
+          for (var i=0; i<checkboxes.length; i++) { 
+            if (checkboxes[i].checked) {
+              checkboxes[i].value
+              checkboxesChecked.push(checkboxes[i].value); 
+              
+            } 
+          } 
+       
+          Exports.charitiesExportCSV(checkboxesChecked).then(function(response){
+            
+            var fileName = "Charities_list.csv";
+              var a = document.createElement("a");
+              document.body.appendChild(a);
+              a.style = "display: none";
+            var file = new Blob([response.data], {type: 'application/csv'});
+            console.log(file);
+              var fileURL = window.URL.createObjectURL(file);
+              
+              a.href = fileURL;
+              a.download = fileName;
+              a.click(); 
+             
+           }); 
+    }
     function imageHtml(data, type, full, meta) {
         if(data!=null){
             return '<img  class="img-responsive"  src="/charities_images/'+data+'" width="50px">'
@@ -62,7 +96,8 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
             .withOption('bFilter', false)
             .withOption('lengthChange', false);
              $scope.dtColumns = [
-                       DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml),
+                      DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+                      DTColumnBuilder.newColumn('image').withTitle('').renderWith(imageHtml).notSortable(),
                       DTColumnBuilder.newColumn('name').withTitle('Charity Name'),
                       DTColumnBuilder.newColumn('user_name').withTitle('Suggested By'),
                       DTColumnBuilder.newColumn('date').withTitle('Created Date'),
@@ -134,6 +169,8 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
               reader.readAsDataURL($(this)[0].files[i]);
               reader.onload = function(e) {
                 $('#img-chan').attr('src',e.target.result);
+                 $('.img-pview').after('<span class="remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
+           
               }
               image_holder.show();
             }
@@ -180,8 +217,10 @@ $("#edit_img_pic").on('change', function() {
               var reader = new FileReader();
               reader.readAsDataURL($(this)[0].files[i]);
               reader.onload = function(e) {
-                alert(e.target.result);
                 $('#img-chan1').attr('src',e.target.result);
+                $('.edit_remove_pic').remove();
+                  $('.img-pview').after('<span class="edit_remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
+           
               }
               image_holder.show();
             }
@@ -202,8 +241,38 @@ $("#edit_img_pic").on('change', function() {
         });
       }
     });
-$(".remove_pic").on("click",function(){
-  $('#img-chan').attr('src',"/img/default.png");
+$(document).on("click",".remove_pic",function(){
+  $('#img-chan').attr('src',"/charities_images/default-placeholder.jpg");
   $('input[type="file"]').val('');
   $('input[name="is_removed"]').val("1");
   });
+$(document).on("click",".edit_remove_pic",function(){
+  $('#img-chan1').attr('src',"/charities_images/default-placeholder.jpg");
+  $('input[type="file"]').val('');
+  $('input[name="is_removed"]').val("1");
+  });
+$("#charity-create").validate({
+            rules: {
+                name:{
+                        required: true,
+                        maxlength: 50
+                    },
+                image:{
+                        required: true,
+                        extension: "png,jpg"
+                    },
+                }
+  
+        });
+$("#charity-edit").validate({
+            rules: {
+                charity_name:{
+                        required: true,
+                        maxlength: 50
+                    },
+                image:{
+                        extension: "png,jpg"
+                    },
+                }
+  
+        });

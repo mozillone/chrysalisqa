@@ -5,6 +5,8 @@ use App\Helpers\Site_model;
 use Auth;
 use App\Wishlist;
 use App\Category;
+use App\Cart;
+use Cookie;
 class SiteHelper  {
 
 	public static function getMenus(){
@@ -64,8 +66,33 @@ class SiteHelper  {
 		imagedestroy($thumbnail_gd_image);
 		return true;
 	}
-
-	
-	
+	public static function getCartCount(){
+		$count=Cart::getCartCount();
+		return $count;
+	}
+	public static function currentCookieKey(){
+        $cookie=cookie::get('min-cart');
+        if(is_array($cookie)){
+        	return key($cookie);
+        }else{
+        	return 0;
+        }
+    }
+    public static function getCartProducts(){
+        $cookie=cookie::get('min-cart');
+        if(is_array($cookie)){
+        	return key($cookie);
+        }else{
+        	return 0;
+        }
+    }
+	public static function getMiniCartProducts(){
+		$cart_products=Cart::getMiniCartProducts();
+		return $cart_products;
+	}
+	public static function getCartSubtotalPrice(){
+		$SubtotalPrice=Cart::getCartSubtotalPrice();
+		return $SubtotalPrice;
+	}
 	
 }

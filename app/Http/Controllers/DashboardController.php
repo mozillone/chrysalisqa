@@ -15,7 +15,7 @@ class DashboardController extends Controller {
 	
 	public function __construct(Guard $auth)
 	{
-		$this->sitehelper = new SiteHelper();
+		  $this->sitehelper = new SiteHelper();
 		$this->middleware(function ($request, $next) {
               if(!Auth::check() && !$request->is('coming-soon') && !$request->is('find-your-space') && !$request->is('list-your-space')){
                 return Redirect::to('/login')->send();

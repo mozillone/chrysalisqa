@@ -60,7 +60,9 @@
               <button type="submit" class="btn btn-primary btn-block btn-flat">
                 Login
               </button>
+               <a href="/admin/forgotpassword">Forgot Password?</a>
             </div>
+
           </div>    
        </form>
       </div>

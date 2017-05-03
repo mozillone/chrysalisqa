@@ -5,7 +5,9 @@ use Mail;
 use Session;
 use Response;
 use App\User;
+use App\Cart;
 use App\Helpers\Site_model;
+use App\Helpers\SiteHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
@@ -76,7 +78,10 @@ class AuthController extends Controller {
 				if (!empty($req['plan_id'])){
 					return Redirect::to('/subscription/'.$req['plan_id']);
 				}
-				
+				  $currentCookieKeyID=SiteHelper::currentCookieKey();
+				  if($currentCookieKeyID!="0"){
+				  	Cart::updateCartToUser();
+				  }
 				if(Session::has('is_loginPage')){
 					return Redirect::to('/dashboard');
 				}else{
@@ -232,7 +237,7 @@ class AuthController extends Controller {
     	$data=User::where('activate_hash', '=', $verification) ->get();
     	if(count($data)){
 				User::where('activate_hash', '=', $verification)->update(array('activate_hash' => "",'active' => '1'));
-    			Session::flash('success', 'Your account has been activated, Please login valid details');
+    			Session::flash('success', 'Your account has been activated. You can login into your account now.');
     			return Redirect::to('/login');
     	}
 		else{
@@ -269,6 +274,7 @@ class AuthController extends Controller {
 						});
 						User::where('email', '=', $email[0]['email'])->update(array('reset_hash'=>$rand));
 		     			Session::flash('success', 'Your forgot password activation link sent to your mail');
+				 		
 				 		return Redirect::to("/login");
 			 		}
 					else
@@ -298,6 +304,47 @@ class AuthController extends Controller {
 
 		}
 	}
+	public function adminForgotPassword()
+	{   
+			return View('admin.forgotpassowrd');
+	}
+	 public function adminForgotPasswordPost(Request $request)
+	{   
+		$req = $request->all();
+		$rule  =  array(
+		                  'email' => 'required|email|max:255'
+		             );
+		$validator = Validator::make($req,$rule);
+		if ($validator->fails())
+			{
+				 return Redirect::to('admin/forgotpassword')->withErrors($validator->messages())->withInput();
+			}
+		else
+		{
+			$email=User::where("email","=",$req['email'])->where('role_id','=',"1")->get()->toArray();
+	    	$rand=md5(uniqid(rand(), true));
+			if(count($email))
+	      		{ 
+		     		$activation_link=URL::to('/').'/admin/password/change/'.$rand;
+				 		$data['name']=$email[0]['display_name'];
+						$data['activation_link']=$activation_link;
+						$sent=Mail::send('emails.forget_email',array("data"=>$data), function ($m) use($email){
+							$m->to($email[0]['email'], $email[0]['display_name']);
+						    $m->subject('Forgot Password');
+						});
+						User::where('email', '=', $email[0]['email'])->where('role_id','=',"1")->update(array('reset_hash'=>$rand));
+		     			Session::flash('success', 'Your forgot password activation link sent to your mail');
+				 		
+				 		return Redirect::back();
+			 		
+		      }
+	      else{ 
+	      	   	Session::flash('error', "Email id doesn't exists");
+	      	   	return Redirect::back();
+	           }
+
+		}
+	}
 	public function forgotPasswordChange(Request $request,$verification=null){
 		$req = $request->all();
 		if(count($req)){
@@ -319,6 +366,35 @@ class AuthController extends Controller {
 		}else{
 			$data=User::where("reset_hash","=",$verification)->get()->toArray();
 			return view('auth.change_password')->with('id',$data[0]['id']);
+		}
+		
+	}
+	public function adminForgotPasswordChange(Request $request,$verification=null){
+		$req = $request->all();
+		if(count($req)){
+			$rule  =  array(
+		                  'password' => 'required|max:50'
+		             );
+			$validator = Validator::make($req,$rule);
+			if ($validator->fails())
+				{
+					 return Redirect::back()->withErrors($validator->messages())->withInput();
+				}
+			$data=User::where('id', '=', $req['user_id'])->update(['password' => bcrypt($req['password']),"reset_hash"=>""]);
+			Session::flash('success', 'Your Password is changed successfully.');
+			return Redirect::to("/admin");
+		}
+		if($verification==null){
+			Session::flash('error', 'Verification code is invalid.');
+			return Redirect::to("/admin");
+		}else{
+			$data=User::where("reset_hash","=",$verification)->get()->toArray();
+			if(count($data)){
+				return view('admin.change_password')->with('id',$data[0]['id']);
+			}else{
+				Session::flash('error', 'Verification code is invalid.');
+				return Redirect::to("/admin");
+			}
 		}
 		
 	}

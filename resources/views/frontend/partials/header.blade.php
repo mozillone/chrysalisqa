@@ -9,7 +9,7 @@
 					<ul>
 				  		<li><a href="#">Support & Contact </a></li>
 				  		 @if(!count(Auth::user()))
-					     <li class="dropdown"><a href="javascript::void(0);" data-toggle="modal" data-target="#signup_popup">| <i class="fa fa-user" aria-hidden="true"></i> Sign In</a></li>
+					     <li class="dropdown"><a href="javascript::void(0);" class="signup_popup">| <i class="fa fa-user" aria-hidden="true"></i> Sign In</a></li>
 					     @else
 								<li class="dropdown">
 								 @if(!count(Auth::user()))
@@ -21,8 +21,7 @@
 							     @endif
 									   <ul class="dropdown-menu">
 										<li><a href="{{ URL::to('dashboard') }}">Dashboard</a></li>
-										<li><a href="{{ route('edit-profile') }}">Edit Profle</a></li>
-										<li><a href="{{ URL::to('logout') }}">Logout</a></li>
+									<li><a href="{{ URL::to('logout') }}">Logout</a></li>
 									</ul>
 								</li>
 					

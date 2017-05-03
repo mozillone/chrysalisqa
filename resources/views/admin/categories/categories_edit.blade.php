@@ -62,7 +62,7 @@ Category edit@parent
                                         <p class="error">{{ $errors->first('desc') }}</p> 
                                     </div>
                                 </div> 
-                            <div class="col-md-6">
+                           <!--  <div class="col-md-6">
                              <div class="col-md-12">
                                     <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Category Image <span class="req-field" >*</span></label>
@@ -81,7 +81,63 @@ Category edit@parent
                                         <p class="error">{{ $errors->first('banner_image') }}</p> 
                                     </div>
                                 </div> 
-                            </div>
+                            </div> -->
+                             <div class="col-md-6">
+                            <label for="inputEmail3" class="control-label">Category Image <span class="req-field" >*</span></label>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                      <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
+                                          <div class="">
+                                            <div class=" upload_btns">
+                                                      <span class=" btn-file">
+                                                        <span class="fileupload-exists"></span>     
+                                                        <input id="cat_image" name="cat_image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
+                                               </span> 
+                                              </div>
+                                            </div>
+                                      </div>
+									  <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                      <div class="cat_img fileupload fileupload-new" data-provides="fileupload"> 
+                                          <img @if(file_exists( public_path('category_images/Normal/'.$cat_data[0]->thumb_image)))) src="/category_images/Normal/{{$cat_data[0]->thumb_image}}" @else  src="/category_images/df_img.jpg" @endif  class="img-responsive"  id="img-chan1">
+                                      
+                         
+                                        <span class="fileupload-preview"></span>
+                                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+                                      </div>
+												   </div>
+                                    </div>
+                            </div>  
+                        </div>
+                          <div class="col-md-6">
+                            <label for="inputEmail3" class="control-label">Category Banner Image <span class="req-field" >*</span></label>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                      <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
+                                          <div class="">
+                                            <div class=" upload_btns">
+                                                      <span class=" btn-file">
+                                                        <span class="fileupload-exists"></span>     
+                                                        <input id="banner_image" name="banner_image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
+                                                        <input type="hidden" name="is_removed"/>
+                                              </span> 
+                                              </div>
+                                            </div>
+                                      </div>
+									  <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <div class="ban_img fileupload fileupload-new" data-provides="fileupload"> 
+                                          <img @if(file_exists( public_path('category_images/Banner/'.$cat_data[0]->banner_image)))) src="/category_images/Banner/{{$cat_data[0]->banner_image}}" @else  src="/category_images/df_img.jpg" @endif class="img-responsive"  id="img-chan2">
+                                 
+                         
+                                        <span class="fileupload-preview"></span>
+                                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+                                      </div>
+										    </div>
+                                    </div>
+                            </div>  
+                        </div>
+                    </div> 
                     </div> 
                      <div class="col-md-12 costumes @if($cat_data[0]->parent_id=='0')hide @endif ">
                             <h4>Category Costumes</h4>

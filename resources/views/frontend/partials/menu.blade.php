@@ -9,8 +9,11 @@
 							<div class="icon_lins text-right">
 								<ul>
 									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-envelope-open" aria-hidden="true"></i><br>Messages</button></li>
-									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-heart" aria-hidden="true"></i><span>@if(Auth::check()){{helper::getMyWishlistCount()}} @endif</span><br>@if(Auth::check())<a href="{{route('wishlist')}}">Favorites</a> @else <a data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </button></li>
-									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart</button></li>
+									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-heart" aria-hidden="true"></i>@if(Auth::check())<span>{{helper::getMyWishlistCount()}}</span>@endif<br>@if(Auth::check())<a href="{{route('wishlist')}}">Favorites</a> @else <a data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </button></li>
+									<li><button type="button" class="dropdown-toggle btn btn-default btn-lg text-center mini-cart" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart <span class="mini_cart">{{helper::getCartCount()}}</span></button>
+										<ul class="dropdown-menu cart-products">
+										</ul>
+									</li>
 								</ul>
 							</div>
 							<div class="navbar-header">
@@ -28,7 +31,16 @@
 									<li><a href="#about">How it Works</a></li>
 									<li><a href="#contact">Events</a></li>
 									<li><a href="#contact">Blog</a></li>
-									<li><a href="costume/sell-a-costume" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
+
+									<?php 
+
+									if (isset(Auth::user()->id) && !empty(Auth::user()->id)) { ?>
+									<li><a href="{{URL::to('costume/sell-a-costume')}}" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
+
+						
+									<?php }  else{ ?>
+									<li><a href="{{URL::to('login')}}" class="sell-btn"><i class="fa fa-tag" aria-hidden="true"></i> Sell a Costume</a></li>
+									<?php }?>
 									<li>
 										<form class="navbar-form navbar-left" role="search">
 											<div class="form-group">
@@ -127,21 +139,29 @@
 							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 						</button>
 						<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
-							<a data-toggle="modal" data-target="#login_popup"><i class="fa fa-user" aria-hidden="true"></i></a>
+							<a data-toggle="modal" @if(!Auth::check()) data-target="#login_popup" @endif><i class="fa fa-user" aria-hidden="true"></i></a>
 						</button>
 						<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 							<i class="fa fa-search"></i>
 						</button>
-						<button type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
-							<i class="fa fa-tag" aria-hidden="true">Sell</i>
-						</button>
+						<?php 
+
+									if (isset(Auth::user()->id) && !empty(Auth::user()->id)) { ?>
+						<a href="{{URL::to('costume/sell-a-costume')}}"type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+							<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
+						</a>
+						<?php }  else{ ?>
+						<a href="{{URL::to('login')}}"type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+							<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
+						</a>
+						<?php }?>
 					</div>
 					<div class="mobile-rm">	
-						<ul class="nav nav-tabs mobile-tabs">
+						<ul class="nav nav-tabs mobile-tabs @if(!Auth::check()) is_login @endif">
 							<li class="active">
 								<a  href="#category1" data-toggle="tab">Menu</a>
 							</li>
-							<li><a href="#category2" data-toggle="tab">Account</a>
+							@if(Auth::check())<li><a href="#category2" data-toggle="tab">Account</a>@endif
 							</li>
 							<li><a href="#category3" data-toggle="tab">Support</a>
 							</li>
@@ -164,28 +184,28 @@
 										<li>HOW IT WORKS</li>		
 										<li>EVENTS</li>		
 										<li>BLOG</li>		
-										<li>FOOTER</li>		
+										<li>FOOTER <span class="mobile-plus"><i class="fa fa-plus" aria-hidden="true"></i></span></li>		
 									</ul>			
 									<!-- tab content End -->			
 								</div>
+								@if(Auth::check())
 								<div class="tab-pane" id="category2">
 									<!-- tab content starts -->			  
 									<div class="head-acc-form">
-										<p class="acc-form-rm"><input type="text" placeholder="LAUREN'S ACCOUNT"> <span class="acc-form-icn"><i class="fa fa-user" aria-hidden="true"></i></span></p>
-										<p class="acc-form-rm"><input type="text" placeholder="FAVORITES"> <span class="acc-form-icn"><i class="fa fa-heart" aria-hidden="true"></i> 2</span></p>			
+										<p class="acc-form-rm"><a href="javascript::void(0);"><input type="text" placeholder="{{Auth::user()->display_name}}"></a><span class="acc-form-icn"><i class="fa fa-user" aria-hidden="true"></i></span></p>
+										<p class="acc-form-rm"><a href="{{route('wishlist')}}"><input type="text" placeholder="FAVORITES"></a><span class="acc-form-icn"><i class="fa fa-heart" aria-hidden="true"></i>{{helper::getMyWishlistCount()}}</span></p>			
 										<p class="acc-form-rm"><input type="text" placeholder="MESSAGES"> <span class="acc-form-icn"><i class="fa fa-envelope" aria-hidden="true"></i> 4</span></p>						
-										<p class="acc-form-rm"><input type="text" placeholder="SIGN OUT"> <span class="acc-form-icn"><i class="fa fa-sign-out" aria-hidden="true"></i></span></p>			
+										<p class="acc-form-rm"><a href="{{route('logout')}}"><input type="text" placeholder="SIGN OUT"> </a><span class="acc-form-icn"><i class="fa fa-sign-out" aria-hidden="true"></i></span></p>			
 									</div>
 									<!-- tab content End -->			
 								</div>
+								@endif
 								<div class="tab-pane" id="category3">
 									<!-- tab content starts -->
 									<div class="head-support">
 										<p class="support-rm support-rm1">SUPPORT & CONTACT</p>
 										<p class="support-rm support-rm1">CHRYSALIS</p>			
-										<p class="support-rm support-rm2">100 Main St</p>			
-										<p class="support-rm support-rm2">Suite 200</p>			
-										<p class="support-rm support-rm2">New York, NY 10001</p>						
+										<p class="support-rm support-rm2 mobile_adrss">100 Main St <br>	Suite 200<br> New York, NY 10001</p>	
 										<p class="support-rm support-rm3">732.618.8533</p>			
 									</div>
 									<!-- tab content End -->			

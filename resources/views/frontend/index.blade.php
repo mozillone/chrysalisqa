@@ -9,7 +9,25 @@
 	.owl-controls.clickable {
 		display: none;
 	}
+@media only screen
+    and (min-device-width : 414px)
+    and (max-device-width : 736px)
+    and (orientation : landscape)
+    and (-webkit-min-device-pixel-ratio : 3)
+    {
+#main-banner .carousel-inner>.item>a>img, .carousel-inner>.item>img {
+    width: 100%!important;
+    min-height: 215px;
+    max-height: 215px;
+}
 
+div#main-banner {
+    margin-top: 60px;
+}
+
+
+
+    }
 </style>
 @endsection
 
@@ -19,9 +37,9 @@
 			<div id="main-banner" class="carousel slide" data-ride="carousel">
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
+					<li data-target="#main-banner" data-slide-to="0" class="active"></li>
+					<li data-target="#main-banner" data-slide-to="1"></li>
+					<li data-target="#main-banner" data-slide-to="2"></li>
 				</ol>
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
@@ -61,30 +79,30 @@
 				<!-- steps content div start here-->
 				<div class="row home_steps hidden-xs">
 					<div class="col-md-4 col-sm-4 col-xs-12">
-						<div class="media"> 
-							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a> 
-							</div> 
+						<div class="media">
+							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a>
+							</div>
 							<div class="media-body"> <h4 class="media-heading">STEP 1</h4>
-								<p>Sell those old costumes with Chrysalis</p> 
-							</div> 
+								<p>Sell those old costumes with Chrysalis</p>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-12">
-						<div class="media"> 
-							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_2_icon.png')}}" data-holder-rendered="true" > </a> 
-							</div> 
+						<div class="media">
+							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_2_icon.png')}}" data-holder-rendered="true" > </a>
+							</div>
 							<div class="media-body"> <h4 class="media-heading">STEP 2</h4>
-								<p>Get Cash or Store Credit</p> 
-							</div> 
+								<p>Get Cash or Store Credit</p>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-12">
-						<div class="media"> 
-							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_3_icon.png')}}" data-holder-rendered="true" > </a> 
-							</div> 
+						<div class="media">
+							<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_3_icon.png')}}" data-holder-rendered="true" > </a>
+							</div>
 							<div class="media-body"> <h4 class="media-heading">STEP 3</h4>
-								<p>Buy another costume!</p> 
-							</div> 
+								<p>Buy another costume!</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -100,34 +118,34 @@
 						<div class="carousel-inner" role="listbox">
 
 							<div class="item active">
-								<div class="media"> 
-									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a> 
-									</div> 
+								<div class="media">
+									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a>
+									</div>
 									<div class="media-body"> <h4 class="media-heading">STEP 1</h4>
-										<p>Sell those old costumes with Chrysalis</p> 
-									</div> 
+										<p>Sell those old costumes with Chrysalis</p>
+									</div>
 								</div>
 							</div>
 
 							<div class="item">
-								<div class="media"> 
-									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a> 
-									</div> 
-									<div class="media-body"> <h4 class="media-heading">STEP 1</h4>
-										<p>Sell those old costumes with Chrysalis</p> 
-									</div> 
+								<div class="media">
+									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_2_icon.png')}}" data-holder-rendered="true" > </a>
+									</div>
+									<div class="media-body"> <h4 class="media-heading">STEP 2</h4>
+										<p>Get Cash or Store Credit</p>
+									</div>
 								</div>
 							</div>
 
 							<div class="item">
-								<div class="media"> 
-									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_1_icon.png')}}" data-holder-rendered="true" > </a> 
-									</div> 
-									<div class="media-body"> <h4 class="media-heading">STEP 1</h4>
-										<p>Sell those old costumes with Chrysalis</p> 
-									</div> 
+								<div class="media">
+									<div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="{{asset('/assets/frontend/img/step_3_icon.png')}}" data-holder-rendered="true" > </a>
+									</div>
+									<div class="media-body"> <h4 class="media-heading">STEP 3</h4>
+										<p>Buy another costume!</p>
+									</div>
 								</div>
-							</div> 
+							</div>
 
 
 
@@ -149,7 +167,7 @@
 
 
 			</div>
-		</section> 
+		</section>
 		<div class="container">
 		</div>
 		<div class="home_product_slider">
@@ -211,14 +229,16 @@
 		<div class="home-adds">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 add1">
+					<div class="col-md-8  add1">
 						<a href="#">
-							<img class="img-responsive" src="{{asset('/assets/frontend/img/add11.png')}}">
+							<img class="img-responsive hidden-sm hidden-xs" src="{{asset('/assets/frontend/img/add11.png')}}">
+							<img class="img-responsive hidden-md hidden-lg" src="{{asset('/assets/frontend/img/home-mini1.png')}}">
 						</a>
 					</div>
 					<div class="col-md-4 add2">
 						<a href="#">
-							<img class="img-responsive" src="{{asset('/assets/frontend/img/add22.png')}}">
+							<img class="img-responsive hidden-sm hidden-xs" src="{{asset('/assets/frontend/img/add22.png')}}">
+							<img class="img-responsive hidden-md hidden-lg" src="{{asset('/assets/frontend/img/home-mini2.png')}}">
 						</a>
 					</div>
 				</div>
@@ -228,5 +248,4 @@
 @section('footer_scripts')
 <script src="{{ asset('/assets/frontend/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/home.js') }}"></script>
-<script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
 @stop

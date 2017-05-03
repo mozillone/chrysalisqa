@@ -24,6 +24,6 @@ class DashboardController extends Controller {
     public function dashboard()
     {
         $title="Dashboard";
-        return view('admin.dashboard.index')->with('title',$title);
+     return view('admin.dashboard.index')->with('title',$title);
     }
 }

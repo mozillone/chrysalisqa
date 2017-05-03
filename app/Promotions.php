@@ -51,9 +51,18 @@ class Promotions extends Authenticatable
             $this->updatePromotionsInfo($data,$req['coupon_id']);
             if(!empty($req['cats'])){
                  $this->updateCouponCategories($req['cats'],$req['coupon_id']);
+            }else{
+                $cond=array('coupon_id'=>$req['coupon_id']);
+                Site_model::delete_single('coupon_category',$cond);
+
+                $cond=array('coupon_id'=>$req['coupon_id']);
+                Site_model::delete_single('coupon_costumes',$cond);
             }
             if(!empty($req['costumes'])){
                 $this->updateCouponCostumes($req['costumes'],$req['coupon_id']);
+            }else{
+                $cond=array('coupon_id'=>$req['coupon_id']);
+                Site_model::delete_single('coupon_costumes',$cond);
             }
             return true;
     }
@@ -66,13 +75,13 @@ class Promotions extends Authenticatable
         return $coupon_id;
     }
     private function insertCouponCategories($cats,$coupon_id){
-        foreach ($cats as $key => $category_id) {
+       foreach ($cats as $key => $category_id) {
             $data=array('coupon_id'=>$coupon_id,'category_id'=>$category_id);
-            $coupon_id=Site_model::insert_data('coupon_category',$data);
+            Site_model::insert_data('coupon_category',$data);
             $costumes_list=$this->getCostumesByCategory($category_id);
             foreach($costumes_list as $cst){
                $data=array('coupon_id'=>$coupon_id,'costume_id'=>$cst->costume_id);
-               $coupon_id=Site_model::insert_data('coupon_costumes',$data);
+               Site_model::insert_data('coupon_costumes',$data);
             }
         }
         return true;
@@ -86,11 +95,11 @@ class Promotions extends Authenticatable
  
         foreach ($cats as $key => $category_id) {
             $data=array('coupon_id'=>$coupon_id,'category_id'=>$category_id);
-            $coupon_id=Site_model::insert_data('coupon_category',$data);
+            Site_model::insert_data('coupon_category',$data);
             $costumes_list=$this->getCostumesByCategory($category_id);
             foreach($costumes_list as $cst){
                $data=array('coupon_id'=>$coupon_id,'costume_id'=>$cst->costume_id);
-               $coupon_id=Site_model::insert_data('coupon_costumes',$data);
+               Site_model::insert_data('coupon_costumes',$data);
             }
         }
         return true;
@@ -98,7 +107,7 @@ class Promotions extends Authenticatable
     private function insertCouponCostumes($costumes,$coupon_id){
         foreach ($costumes as $key => $costume_id) {
             $data=array('coupon_id'=>$coupon_id,'costume_id'=>$costume_id);
-            $coupon_id=Site_model::insert_data('coupon_costumes',$data);
+            Site_model::insert_data('coupon_costumes',$data);
         }
         return true;
     }
@@ -107,7 +116,7 @@ class Promotions extends Authenticatable
         Site_model::delete_single('coupon_costumes',$cond);
          foreach ($costumes as $key => $costume_id) {
             $data=array('coupon_id'=>$coupon_id,'costume_id'=>$costume_id);
-            $coupon_id=Site_model::insert_data('coupon_costumes',$data);
+            Site_model::insert_data('coupon_costumes',$data);
         }
         return true;
     }
@@ -126,7 +135,7 @@ class Promotions extends Authenticatable
     }
     protected function getPromotionInfo($coupon_id){
         $data['basic']=DB::Select('SELECT prom.coupon_id, prom.name, prom.code, prom.type, prom.discount, DATE_FORMAT(prom.date_start,"%m/%d/%Y %h:%i %p") as datestart,DATE_FORMAT(prom.date_end,"%m/%d/%Y %h:%i %p") as dateend , prom.uses_total,prom.status FROM cc_promotion_coupon as prom where coupon_id='.$coupon_id);
-        $data['promo_costumes']=DB::Select('SELECT cst.costume_id,cst.name,cst.sku_no FROM `cc_coupon_costumes` as cupn LEFT JOIN cc_costumes as cst on cst.costume_id=cupn.costume_id where                                cupn.coupon_id='.$coupon_id.' group by cst.costume_id');
+        $data['promo_costumes']=DB::Select('SELECT cst.costume_id,dsr.name,cst.sku_no FROM `cc_coupon_costumes` as cupn LEFT JOIN cc_costumes as cst on cst.costume_id=cupn.costume_id LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id where cupn.coupon_id='.$coupon_id.' group by cst.costume_id');
         $data['promo_cats']=DB::Select('SELECT cat1.category_id,cat1.parent_id,cat2.name as parent_cat,cat1.name as sub_cat  FROM cc_category as cat1 INNER JOIN cc_category as cat2 on cat2.category_id=cat1.parent_id LEFT JOIN cc_coupon_category as cupn on cupn.category_id=cat1.category_id where  cupn.coupon_id='.$coupon_id);
         return $data;
     }

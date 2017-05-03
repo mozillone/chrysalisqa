@@ -120,11 +120,11 @@ class Category extends Authenticatable
       }  
     }
     protected function getCatCostumesList($cat_id){
-        $costumes_list=DB::Select('SELECT cst.costume_id,cst.name as cst_name,concat(cst.sku_no,"-",cst.name) as name,cst.sku_no,cst.price FROM `cc_costume_to_category` as cat LEFT JOIN cc_costumes as cst on cat.costume_id=cst.costume_id where cat.category_id='.$cat_id);
+        $costumes_list=DB::Select('SELECT cst.costume_id,dsr.name as cst_name,concat(cst.sku_no,"-",dsr.name) as name,cst.sku_no,cst.price FROM `cc_costume_to_category` as cat LEFT JOIN cc_costumes as cst on cat.costume_id=cst.costume_id  LEFT JOIN  cc_costume_description as dsr on dsr.costume_id=cst.costume_id where cat.category_id='.$cat_id);
         return $costumes_list;
     }
      protected function updateCategory($req){
-        if(!empty($req['parent_id'])){$parent_id=$req['parent_id'];}else{$parent_id="0";}
+         if(!empty($req['parent_id'])){$parent_id=$req['parent_id'];}else{$parent_id="0";}
         if(isset($req['cat_image']) && !isset($req['banner_image'])){
             $cat_image_path=public_path('category_images/Normal');
             $cat_file_name=$this->fileUploading($cat_image_path,$req['cat_image']);
@@ -133,6 +133,7 @@ class Category extends Authenticatable
                             'parent_id'=>$parent_id,
                             'thumb_image'=>$cat_file_name,
                             'updated_at'=>date('Y-m-d H:i:s'));
+            
         }
         else if(isset($req['banner_image']) && !isset($req['cat_image'])){
             $cat_banner_image=public_path('category_images/Banner');
@@ -167,8 +168,8 @@ class Category extends Authenticatable
         Site_model::update_data('category',$category,$cond);
         $this->urlRewrites($req['category_id'],"update");
         if(isset($req['costume_list']) && $parent_id!="0"){
-            Site_model::delete_single('costume_to_category',$cond);
-            foreach($req['costume_list'] as $key=>$value){
+             Site_model::delete_single('costume_to_category',$cond);
+            foreach(array_unique($req['costume_list']) as $key=>$value){
                 $category_coustume=array('costume_id'=>$value,
                        'category_id'=>$req['category_id'],
                        'sort_no'=>$key,

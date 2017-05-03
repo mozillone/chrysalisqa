@@ -9,158 +9,14 @@
 @section('header_styles')
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
 <link rel="stylesheet" href="{{ asset('/assets/admin/css/select2.min.css')}}">
-
+<link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
 <script src="{{ asset('/assets/admin/js/fileinput.js') }}"></script>
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
 
-    <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
-
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
 
 <style>
-#create_costume .has-feedback {
-
-   position: relative;
-
-   clear: left;
-
-}
-body
-{
- width:100%;
- margin:0 auto;
- padding:0px;
- font-family:helvetica;
- background-color:#084B8A;
-}
-#wrapper
-{
- text-align:center;
- margin:0 auto;
- padding:0px;
- width:995px;
-}
-#drop-area
-{
- margin-top:20px;
- margin-left:220px;
- width:550px;
- height:200px;
- background-color:white;
- border:3px dashed grey;
-}
-.drop-text
-{
- margin-top:70px;
- color:grey;
- font-size:25px;
- font-weight:bold;
-}
-#drop-area img
-{
- max-width:200px;
-}
-<style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-  
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-    <style>
-      #locationField, #controls {
-        position: relative;
-        width: 100%;
-      }
-      #autocomplete {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-      }
-      .label {
-        text-align: right;
-        font-weight: bold;
-        width: 100px;
-        color: #303030;
-      }
-      #address {
-        border: 1px solid #000090;
-        background-color: #f0f0ff;
-        width: 480px;
-        padding-right: 2px;
-      }
-      #address td {
-        font-size: 10pt;
-      }
-      .field {
-        width: 99%;
-      }
-      .slimField {
-        width: 80px;
-      }
-      .wideField {
-        width: 200px;
-      }
-      #locationField {
-        height: 20px;
-        margin-bottom: 2px;
-      }
-   
-
-#formdiv {
-  text-align: center;
-}
-#file {
-  color: green;
-  padding: 5px;
-  border: 1px dashed #123456;
-  background-color: #f9ffe5;
-}
-#img {
-  width: 17px;
-  border: none;
-  height: 17px;
-  margin-left: -20px;
-  margin-bottom: 191px;
-}
-.upload {
-  width: 100%;
-  height: 30px;
-}
-.abcd {
-height: 120px;
-  width:120px;
-}
-.abcd img {
-  height:120px;
-  width:120px;
-  padding: 5px;
-  border: 1px solid rgb(232, 222, 189);
-}
-.delete {position: absolute;
-    font-size: 12px;
-    background:#655f5d;
-    color: #fff;
-    padding: 3px;
-    right: -9px;
-    bottom: 6px;cursor:pointer;
-} .delete:hover{background:#f30;color:#fff;}
-.fileupload-new .btn-file {
-   margin: 10px 0 0 20px;
-}
-
 #customer_edit1 .form-group.has-feedback {
-    clear: both;
+    clear: left;
 }
       </style>
 @stop
@@ -168,15 +24,15 @@ height: 120px;
 {{-- Page content --}}
 @section('content')
 <section class="content-header">
-	<h1>Custome</h1>
+	<h1>Costume</h1>
 	<ol class="breadcrumb">
 		<li>
 			<a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="{{url('customers-list')}}">Costumes Lists</a>
+			<a href="{{url('customers-list')}}">Costumes</a>
 		</li>
-		
+
 		<li class="active">Add Costume</li>
 	</ol>
 </section>
@@ -189,6 +45,7 @@ height: 120px;
 				</div>
 				
 				<div class="box-body">
+<<<<<<< HEAD
 				@if (Session::has('error'))
                     <div class="alert alert-danger alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -201,26 +58,36 @@ height: 120px;
                     </div>
                     @endif
 					
+=======
+
+>>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 		            <div class="alert alert-danger alert-dismissable" style="display:none" >
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
-		           
+
 					<div class="alert alert-success alert-dismissable" id="sonay"  style="display:none" >
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 						<span id="successmessage"></span>
-						
+
 					</div>
-					
-					<!-- <form class="form-horizontal" ng-submit="save(userForm.$valid, data)" name="userForm" > --> 
-					<form id="customer_edit1" class="form-horizontal defult-form" name="userForm" action="{{route('costumes-insert')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
-					
-						<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+					@if(Session::has('success'))
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        {{ Session::get('success') }}
+                    </div>
+                    @endif
+
+					<!-- <form class="form-horizontal" ng-submit="save(userForm.$valid, data)" name="userForm" > -->
+					<form id="customer_edit1" class="form-horizontal defult-form costume_creates_pages" name="userForm" action="{{route('costumes-insert')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="col-md-6">
-							<h2 class="heading-agent">Custome Information</h2>
+							<h2 class="heading-agent">*Costume Information</h2>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Customer<span class="req-field" >*</span></label>
                                         <select class="form-control sony" data-live-search="true" id="customer_name" name="customer_name" >
+                                        <option value="">Select Customer Name</option>
 										<option value="0">None</option>
 										@foreach($customers as $index=>$customer)
                                          <option value="{{$customer->id}}">{{$customer->username}}</option>
@@ -233,14 +100,22 @@ height: 120px;
                                         <input type="text" class="form-control" placeholder="Enter Costume name"  name="costume_name" id="costume_name">
                                    <span id="costumename_error" style="color:red"></span>
                                 </div>
-								<div class="form-group has-feedback" >
+								<div class="form-group has-feedback cosutme-fr" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">Costume For<span class="req-field" >*</span></label>
-											<br><br>
-											<input type="radio"   name="gender" id="male"  value="male" checked >&nbsp;Male&nbsp;
-											<input type="radio"   name="gender" id="female"  value="female"  >&nbsp;Female&nbsp;
-											<input type="radio"   name="gender" id="unisex"  value="unisex" >&nbsp;Unisex&nbsp;
-											<input type="radio"   name="gender" id="pet"  value="pet"  >&nbsp;Pet&nbsp;
+											<br>
+											<label class="radio-inline">
+											<input type="radio"   name="gender" id="male"  value="male" checked >Male</label>
+
+											<label class="radio-inline">
+											<input type="radio"   name="gender" id="female"  value="female"  >Female</label>
+
+											<label class="radio-inline">
+											<input type="radio"   name="gender" id="unisex"  value="unisex" >Unisex</label>
+
+											<label class="radio-inline">
+											<input type="radio"   name="gender" id="pet"  value="pet"  >Pet</label>
+
 										</div>
 										<span id="gendererror" style="color:red"></span>
 						       </div>
@@ -248,279 +123,429 @@ height: 120px;
                                     <label for="inputEmail3" class="control-label">Catgeory<span class="req-field" >*</span></label>
                                         <select class="form-control sony" name="category" id="category">
 										<option value="">Select Category</option>
-										<?php
-		$features_req=$categories['modules_result'];
-		foreach($features_req as $features_res)
-		{
-			//print_r($features_res);
+<?php
+$features_req = $categories['modules_result'];
+foreach ($features_req as $features_res) {
+	//print_r($features_res);
+	?>
+																																																																													    <optgroup label="<?php echo ucfirst($features_res['name']);?>">
+	<?php foreach ($features_res['submodule_result'] as $feature_val_res) {
 		?>
-			    <optgroup label="<?php echo ucfirst($features_res['name']);?>">
-				<?php  foreach($features_res['submodule_result'] as $feature_val_res){ ?>
-                        <option value="<?php echo $feature_val_res['subcategoryid'];?>"><?php echo ucfirst($feature_val_res['subcategoryname']);?></option>
-					</optgroup>
-		<?php } } ?>
- </select>
+																																																																																																																																											                        <option value="<?php echo $feature_val_res['subcategoryid'];?>"><?php echo ucfirst($feature_val_res['subcategoryname']);
+		?></option>
+		<?php }?>
+	</optgroup>
+
+	<?php }?>
+</select>
                                    <span id="categoryerror" style="color:red"></span>
                                 </div>
-								<div class="form-group has-feedback" >
+								<div class="form-group has-feedback create-admin_pagess" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">Condition <span class="req-field" >*</span></label>
-											<br><br>
-											<input type="radio"  name="costumecondition" id="excellent"   value="excellent"  checked> &nbsp;Excellent&nbsp;
-											<input type="radio"  name="costumecondition" id="brandnew"  value="brand_new"> &nbsp;Brand New&nbsp;
-											<input type="radio"  name="costumecondition" id="good"  value="good">&nbsp;Good&nbsp;
-											<input type="radio"  name="costumecondition" id="likenew"  value="like_new">&nbsp;Like New&nbsp;
+												<br>
+											<label class="radio-inline"><input type="radio"  name="costumecondition" id="excellent"   value="excellent"  checked> &nbsp;
+Excellent&nbsp;
+</label>
+											<label class="radio-inline"><input type="radio"  name="costumecondition" id="brandnew"  value="brand_new"> &nbsp;
+Brand New&nbsp;
+</label>
+											<label class="radio-inline"><input type="radio"  name="costumecondition" id="good"  value="good">&nbsp;
+Good&nbsp;
+</label>
+											<label class="radio-inline"><input type="radio"  name="costumecondition" id="likenew"  value="like_new">&nbsp;
+Like New&nbsp;
+</label>
 										</div>
 										<span id="costumeconditionerror" style="color:red"></span>
 						       </div>
-							   <h4>Body Dimensions</h4></hr>
-
-								<div class="form-group has-feedback" >
-								<?php
-									$height=$bd_height->label;
-									$heightattributes=explode('-',$height);
-									$attribute=ucfirst($heightattributes[0]);
-									$attributevalue=$heightattributes[1];
-									?>
+							   <h4>Body & Dimensions (Optional)</h4></hr>
+<div class="row" >
+<div class="col-md-6" >
+								<div class="form-group has-feedback " >
+<?php
+$height           = $bd_height->label;
+$heightattributes = explode('-', $height);
+$attribute        = ucfirst($heightattributes[0]);
+$attributevalue   = $heightattributes[1];
+?>
 									<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field">*</span></label>
-									
+
 									<div class="input-group">
 										<input type="{{$bd_height->type}}" class="form-control"   name="{{$bd_height->code}}" id="{{$bd_height->code}}">
-										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue; ?></span>
+										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
 									</div>
 									<span id="heightfterror" style="color:red"></span>
-									
+
 								</div>
+								</div>
+								<div class="col-md-6 dimsn-bknd" >
 								<div class="form-group has-feedback" >
-								<?php
-									$height1=$bd_height_in->label;
-									$heightattributes1=explode('-',$height1);
-									$attribute1=ucfirst($heightattributes1[0]);
-									$attributevalue1=$heightattributes1[1];
-									?>
-							     <label for="inputEmail3" class="control-label">Height<span class="req-field" >*</span></label>
+<?php
+$height1           = $bd_height_in->label;
+$heightattributes1 = explode('-', $height1);
+$attribute1        = ucfirst($heightattributes1[0]);
+$attributevalue1   = $heightattributes1[1];
+?>
+							     <label for="inputEmail3" class="control-label"></label>
 									<div class="input-group">
 										<input type="{{$bd_height_in->type}}"  class="form-control"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
-										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1; ?></span>
+										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1;?></span>
 									</div>
 									<span id="heightinerror" style="color:red"></span>
-									
-								</div>
+
+								</div></div></div>
+								<div class="row">
+									<div class="col-md-12" >
 								<div class="form-group has-feedback" >
-								<?php
-									$height2=$bd_weight->label;
-									$heightattributes2=explode('-',$height2);
-									$attribute2=ucfirst($heightattributes2[0]);
-									$attributevalue2=$heightattributes2[1];
-									?>
+<?php
+$height2           = $bd_weight->label;
+$heightattributes2 = explode('-', $height2);
+$attribute2        = ucfirst($heightattributes2[0]);
+$attributevalue2   = $heightattributes2[1];
+?>
 									<label for="inputEmail3" class="control-label"><?php echo $attribute2;?><span class="req-field" >*</span></label>
 									<div class="input-group">
 										<input type="{{$bd_weight->type}}" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
-										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue2; ?></span>
+										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue2;?></span>
 									</div>
 									<span id="weightlbserror" style="color:red"></span>
-									
+
 								</div>
-								
+									</div>
+										<div class="col-md-12" >
 								<div class="form-group has-feedback" >
-								<?php
-									$height3=$bd_chest->label;
-									$heightattributes3=explode('-',$height3);
-									$attribute3=ucfirst($heightattributes3[0]);
-									$attributevalue3=$heightattributes3[1];
-									?>
+<?php
+$height3           = $bd_chest->label;
+$heightattributes3 = explode('-', $height3);
+$attribute3        = ucfirst($heightattributes3[0]);
+$attributevalue3   = $heightattributes3[1];
+?>
 									<label for="inputEmail3" class="control-label"><?php echo $attribute3;?><span class="req-field" >*</span></label>
 									<div class="input-group">
 										<input type="{{$bd_chest->type}}" class="form-control"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
-										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue3; ?></span>
+										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue3;?></span>
 									</div>
 									<span id="chestinerror" style="color:red"></span>
 								</div>
+										</div>
+										<div class="col-md-12" >
 								<div class="form-group has-feedback" >
-								<?php
-									$height=$bd_waist->label;
-									$heightattributes=explode('-',$height);
-									$attribute=ucfirst($heightattributes[0]);
-									$attributevalue=$heightattributes[1];
-									?>
+<?php
+$height           = $bd_waist->label;
+$heightattributes = explode('-', $height);
+$attribute        = ucfirst($heightattributes[0]);
+$attributevalue   = $heightattributes[1];
+?>
 									<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field" >*</span></label>
 									<div class="input-group">
 										<input type="{{$bd_waist->type}}" class="form-control" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
-										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue; ?></span>
+										<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
 									</div>
 									<span id="waistlbserror" style="color:red"></span>
 								</div>
+								</div>
+									<div class="col-md-12" >
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Size<span class="req-field" >*</span></label>
                                         <select name="size" id="size" class="form-control">
 										<option value="">Select Size</option>
-										<option value="1sz">1sz</option>
-										<option value="xxs">xxs</option>
-										<option value="xs">xs</option>
-										<option value="xs">s</option>
-										<option value="m">m</option>
-										<option value="l">l</option>
-										<option value="xl">xl</option>
-										<option value="xxl">xxl</option>
+										<option value="1sz">1SZ</option>
+										<option value="xxs">XXS</option>
+										<option value="xs">XS</option>
+										<option value="xs">S</option>
+										<option value="m">M</option>
+										<option value="l">L</option>
+										<option value="xl">XL</option>
+										<option value="xxl">XXL</option>
 										</select>
                                   <span id="size_error" style="color:red"></span>
                                 </div>
-								
-								
-							   
-								
-							</div> 
+								   </div>
+
+								 </div>
+
+
+							</div>
 						</div>
-						
-						
-						<div class="col-md-6">
+
+
+						<div class="col-md-6 crt_right_alng">
 							<h2 class="heading-agent">Costume FAQ</h2>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">
-										
-											
-											
-											
 
-											<?php echo $cosplay_one->label;?>
+
+
+
+
+<?php echo $cosplay_one->label;?>
 <span class="req-field" ></span></label>
-											<br><br>
+											<br>
 											@foreach($cosplay_one_value as $index=>$cosplayonevalues)
-											<?php if($cosplayonevalues->option_value=="yes") { ?>
-											<input type="{{$cosplay_one->type}}"  checked name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}"  required>&nbsp;{{$cosplayonevalues->option_value}}&nbsp;
-											<?php } else { ?>
-											<input type="{{$cosplay_one->type}}"   name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}"  required>&nbsp;{{$cosplayonevalues->option_value}}&nbsp;
-											<?php } ?>
-											@endforeach
+<?php if ($cosplayonevalues->option_value == "yes") {?>
+	<input type="{{$cosplay_one->type}}"  checked name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" required>&nbsp;
+																																																																	{{$cosplayonevalues->option_value}}&nbsp;
+	<?php } else {?>
+																																																																												<input type="{{$cosplay_one->type}}"   name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" onclick="cosplay_yes(<?php echo $cosplayonevalues->option_id?>)"  required>&nbsp;
+																																																																	{{$cosplayonevalues->option_value}}&nbsp;
+	<?php }?>
+@endforeach
+											<div class="row" id="cosplayplay_yes_div" style="display: none;">
+ <div class="col-md-12" >
+      <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Anime/Manga">Anime/Manga</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Sci-Fi">Sci-Fi</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Cosmic/Superhero">Cosmic/Superhero</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Video Games">Video Games</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Furries">Furries</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Other">Other</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Film & Tv">Film & Tv</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="cosplayplay_yes_opt" value="Mecha">Mecha</label>
+   </div>
+   </div>
+   <span id="cosplay_yeserror" style="color:red"></span>
+</div>
 										</div>
 						       </div>
 							    <div class="form-group has-feedback" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">
-										
-											
-											
-											
 
-											<?php echo $cosplay_two->label;?>
+
+
+
+
+<?php echo $cosplay_two->label;?>
 <span class="req-field" ></span></label>
-											<br><br>
+											<br>
 											@foreach($cosplay_two_value as $index=>$cosplaytwovalues)
-											<input type="{{$cosplay_two->type}}"  <?php if($cosplaytwovalues->option_value=="yes") { ?> checked <?php } ?>  name="{{$cosplay_two->code}}" id="{{$cosplay_two->code}}"  value="{{$cosplaytwovalues->option_id}}"  required>&nbsp;{{$cosplaytwovalues->option_value}}&nbsp;
-											
+											<input type="{{$cosplay_two->type}}"  <?php if ($cosplaytwovalues->option_value == "yes") {?> checked <?php }?>name="{{$cosplay_two->code}}" id="{{$cosplay_two->code}}"  value="{{$cosplaytwovalues->option_id}}" onclick="uniquefashion_yes({{$cosplaytwovalues->option_id}})"  required>&nbsp;
+{{$cosplaytwovalues->option_value}}&nbsp;
+
 											@endforeach
+
+											<div class="row" id="uniquefashion_yes_div" style="display: none;">
+ <div class="col-md-12" >
+      <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Cyberpunk">Cyberpunk</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Lolita">Lolita</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Dystopain">Dystopain</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Mori kei">Mori kei</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Goth">Goth</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Fari kei">Fari kei</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Steampunk">Steampunk</label>
+   </div>
+   <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Visual kei">Visual kei</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Streetwear">Streetwear</label>
+   </div>
+   <div class="radio-inline">
+     <label><input type="radio" name="uniquefashion_yes_opt" value="Other">Other</label>
+   </div>
+   </div>
+   <span id="uniquefashion_yeserror" style="color:red"></span>
+</div>
+
 										</div>
 						       </div>
 								 <div class="form-group has-feedback" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">
-										
-											
-											
-											
 
-											<?php echo $cosplay_three->label;?>
+<?php echo $cosplay_three->label;?>
 <span class="req-field" ></span></label>
-											<br><br>
+											<br>
 											@foreach($cosplay_three_value as $index=>$cosplaythreevalues)
-											<input type="{{$cosplay_three->type}}" <?php if($cosplaythreevalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_three->code}}" id="{{$cosplay_three->code}}"  value="{{$cosplaythreevalues->option_id}}"  required>&nbsp;{{$cosplaythreevalues->option_value}}&nbsp;
-											
+											<input type="{{$cosplay_three->type}}" <?php if ($cosplaythreevalues->option_value == "yes") {?> checked <?php }?>name="{{$cosplay_three->code}}" id="{{$cosplay_three->code}}" onclick="activity_yes({{$cosplaythreevalues->option_id}})"  value="{{$cosplaythreevalues->option_id}}"  required>&nbsp;
+{{$cosplaythreevalues->option_value}}&nbsp;
+
 											@endforeach
+
+											<div class="row" id="activity_yes_div" style="display: none;">
+ <div class="col-md-12" >
+      <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Circus">Circus</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Theatre">Theatre</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Historical Reenactments">Historical Reenactments</label>
+   </div>
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Music Videos">Music Videos</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="LARP">LARP</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Masquerade">Masquerade</label>
+   </div>
+   </div>
+   <div class="col-md-12">
+  <div class="radio-inline">
+     <label><input type="radio" name="activity_yes_opt" value="Medieval/Renaissance Fairs">Medieval/Renaissance Fairs</label>
+   </div>
+   </div>
+   <span id="activity_yeserror" style="color:red"></span>
+</div>
 										</div>
 						       </div>
 							   <div class="form-group has-feedback" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">
-										
-											
-											
-											
 
-											<?php echo $cosplay_four->label;?>
+
+
+
+
+<?php echo $cosplay_four->label;?>
 <span class="req-field" ></span></label>
-											<br><br>
+											<br>
 											@foreach($cosplay_four_value as $index=>$cosplayfourvalues)
-											<input type="{{$cosplay_four->type}}"  <?php if($cosplayfourvalues->option_value=="yes") { ?> checked <?php } ?> name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}"  required>&nbsp;{{$cosplayfourvalues->option_value}}&nbsp;
-											
+											<input type="{{$cosplay_four->type}}"  <?php if ($cosplayfourvalues->option_value == "yes") {?> checked <?php }?>name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}" onclick="make_costume_yes({{$cosplayfourvalues->option_id}})"  required>&nbsp;
+{{$cosplayfourvalues->option_value}}&nbsp;
+
 											@endforeach
+											<p class="form-rms-small" id="mention_hours" style="display:none" >If yes, how long did it take?</p>
+											<p class="ct1-rms-rel" id="mention_hours_input" style="display:none"><input type="text" name="make_costume_time" class="input-rm100"> <span>hours<span>
+											</p>
 										</div>
 						       </div>
 							   <div class="form-group has-feedback" >
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">
-										
-											
-											
-											
 
-											<?php echo $cosplay_five->label;?>
+
+
+
+
+<?php echo $cosplay_five->label;?>
 <span class="req-field" ></span></label>
-											<br><br>
+											<br>
 											@foreach($cosplay_five_value as $index=>$cosplayfivevalues)
-											<input type="{{$cosplay_five->type}}"  <?php if($cosplayfivevalues->option_value=="yes") { ?> checked <?php } ?>  name="{{$cosplay_five->code}}" id="{{$cosplay_five->code}}"  value="{{$cosplayfivevalues->option_id}}"  required>&nbsp;{{$cosplayfivevalues->option_value}}&nbsp;
-											
+											<input type="{{$cosplay_five->type}}"  <?php if ($cosplayfivevalues->option_value == "yes") {?> checked <?php }?>name="{{$cosplay_five->code}}" id="{{$cosplay_five->code}}"  value="{{$cosplayfivevalues->option_id}}"  required>&nbsp;
+{{$cosplayfivevalues->option_value}}&nbsp;
+
 											@endforeach
 										</div>
 						       </div>
-							   
-							   
-							  
-							</div> 
+
+
+
+							</div>
 							<div class="form-group has-feedback" >
-							
-							
+
+
 									<label for="inputEmail3" class="control-label">{{$description->label}}<span class="req-field" ></span></label>
 									<div class="input-group">
 										<textarea type="{{$description->type}}" rows="6" cols="63" class="form-control"   name="{{$description->code}}" id="{{$description->code}}"></textarea>
-										
+
 									</div>
-									
+
 									<span id="costume-desc-error" style="color:red"></span>
-									
+
 								</div>
 								<div class="form-group has-feedback" >
-							
-							
+
+
 									<label for="inputEmail3" class="control-label">{{$funfacts->label}}<span class="req-field" ></span></label>
 									<div class="input-group">
 										<textarea type="{{$funfacts->type}}" rows="6" cols="63" class="form-control"   name="{{$funfacts->code}}" id="{{$funfacts->code}}"></textarea>
-										
+
 									</div>
-									
+
 									<span id="funfact-error" style="color:red"></span>
-									
+
 								</div>
 								<div class="form-group has-feedback" >
-							
-							
+
+
 									<label for="inputEmail3" class="control-label">{{$faq->label}}<span class="req-field" ></span></label>
 									<div class="input-group">
 										<textarea type="{{$faq->type}}" rows="6" cols="63" class="form-control"   name="{{$faq->code}}" id="{{$faq->code}}"></textarea>
-										
+
 									</div>
-									
+
 									<span id="faq-error" style="color:red"></span>
-									
+
 								</div>
-							
+
 						</div>
-					
+
 						<div class="col-md-6">
 							<h2 class="heading-agent">Pricing</h2>
 							<div class="col-md-12">
+							<div class="row">
+							<div class="col-md-5">
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Price<span class="req-field" ></span></label>
                                        <div class="input-group">
 									   <span class="input-group-addon">$</span>
   <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="price" id="price" >
-  
+
                                     <span id="priceerror" style="color:red">
 									</div>
                                 </div>
+								    </div>
+								</div>
+								<div class="row">
+								<div class="col-md-5">
 								<div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">Qunaity<span class="req-field" ></span></label>
+                                    <label for="inputEmail3" class="control-label">Quantity*<span class="req-field" ></span></label>
                                         <select class="form-control" name="quantity" id="quantity">
 										<option value="">Select Quantity</option>
 										<option value="1">1</option>
@@ -536,17 +561,24 @@ height: 120px;
 										</select>
                                    <span id="quantityerror" style="color:red"></span>
                                 </div>
+								     </div>
+									  </div>
+									  	<div class="row">
+									 <div class="col-md-5">
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">{{$shippingoptions->label}} <span class="req-field" ></span></label>
                                         <select class="form-control" name="{{$shippingoptions->code}}" id="{{$shippingoptions->code}}">
 										<option value="">Select Shipping Options</option>
 										<option value="{{$shippingoptions->option_id}}">{{$shippingoptions->option_value}}</option>
 										</select>
-                                    <p class="error">{{ $errors->first('name') }}</p> 
+                                    <p class="error">{{ $errors->first('name') }}</p>
                                 </div>
-							</div> 
+								  </div>
+								  </div>
+
+							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6 pckg_right">
 							<h2 class="heading-agent">Package Information</h2>
 							<div class="col-md-12">
 								<div class="form-group has-feedback" >
@@ -560,34 +592,34 @@ height: 120px;
 										<option value="{{$packagevalues->option_id}}">{{$packagevalues->option_value}}</option>
 										@endforeach
 										</select>
-                                    <p class="error">{{ $errors->first('name') }}</p> 
+                                    <p class="error">{{ $errors->first('name') }}</p>
                                 </div>
 								 <label for="inputEmail3" class="control-label">
 
 									{{$dimensions->label}}
 <span class="req-field" ></span></label>
-								<div class="form-group has-feedback" >
-                                   
-		@foreach($dimensions_values as $index=>$dimensionval)
-		<?php
-									$dimension_height=$dimensionval->option_value;
+								<div class="form-group has-feedback dmns_rigts" >
 
-									$heightattributes=explode('-',$dimension_height);
-									$dimensionattribute=ucfirst($heightattributes[0]);
-									$dimensionvalue=$heightattributes[1];
-		
-		?>
-                                        
+		@foreach($dimensions_values as $index=>$dimensionval)
+<?php
+$dimension_height = $dimensionval->option_value;
+
+$heightattributes   = explode('-', $dimension_height);
+$dimensionattribute = ucfirst($heightattributes[0]);
+$dimensionvalue     = $heightattributes[1];
+
+?>
+
 										<div class="col-md-4">
 								       	<div class="input-group">
-										
-										<input type="{{$dimensions->type}}" class="form-control" placeholder="<?php echo $dimensionattribute; ?>" name="{{$dimensions->code}}" id="{{$dimensions->code}}">
-										<span class="input-group-addon" id="basic-addon2"><?php echo $dimensionvalue; ?></span>
+
+										<input type="{{$dimensions->type}}" class="form-control" placeholder="<?php echo $dimensionattribute;?>" name="{{$dimensions->code}}" id="{{$dimensions->code}}">
+										<span class="input-group-addon" id="basic-addon2"><?php echo $dimensionvalue;?></span>
 										</div>
 									</div>
-							
+
                           @endforeach
-						
+
                                 </div>
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">{{$type->label}}<span class="req-field" ></span></label>
@@ -597,7 +629,7 @@ height: 120px;
 										<option value="{{$typeval->option_id}}">{{$typeval->option_value}}</option>
 										@endforeach
 										</select>
-                                    <p class="error">{{ $errors->first('name') }}</p> 
+                                    <p class="error">{{ $errors->first('name') }}</p>
                                 </div>
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">{{$service->label}}<span class="req-field" ></span></label>
@@ -607,24 +639,24 @@ height: 120px;
 										<option value="{{$serviceval->option_id}}">{{$serviceval->option_value}}</option>
 										@endforeach
 										</select>
-                                    <p class="error">{{ $errors->first('name') }}</p> 
+                                    <p class="error">{{ $errors->first('name') }}</p>
                                 </div>
-							</div> 
+							</div>
 						</div>
 						<div class="col-md-6">
 							<h2 class="heading-agent">Preferences</h2>
 							<div class="col-md-12">
 							  <label for="inputEmail3" class="control-label">Item Location<span class="req-field" >*</span></label>
 							<div class="form-group has-feedback" >
-                                  
+
 									<div id="locationField">
                                         <input type="text" class="form-control" placeholder="Enter Location"  name="location" id="autocomplete" onFocus="geolocate()" >
                                    </div>
-								   <span id="costumename_error" style="color:red"></span>
+								   <span id="autocomplete_error" style="color:red"></span>
                                 </div>
 								<div class="form-group has-feedback" >
-								  
-                                    
+
+
 								<!--<input id="autocomplete" onFocus="geolocate()" type="text" class="form-control" name="location" required></input>-->
 								<input type="hidden" class="field form-control" id="street_number" name="address1" disable="true"required></input>
 								<input type="hidden" class="field form-control" name="address2" id="route" required></input></td>
@@ -632,7 +664,7 @@ height: 120px;
 									<input type="hidden" class="field form-control" id="administrative_area_level_1" name="state"></input>
 									<input type="hidden" class="field form-control" id="postal_code" name="zipcode">
 									<input type="hidden" class="field form-control" id="country" name="country" required></input>
-							
+
                                 </div>
 								<div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">{{$handling->label}}<span class="req-field" ></span></label>
@@ -642,7 +674,7 @@ height: 120px;
 										<option value="{{$handlingval->option_id}}">{{$handlingval->option_value}}</option>
 										@endforeach
 										</select>
-                                    <p class="error">{{ $errors->first('name') }}</p> 
+                                    <p class="error">{{ $errors->first('name') }}</p>
                                 </div>
 								<div class="form-group has-feedback"  style="disply:none">
                                     <label for="inputEmail3" class="control-label">{{$returnpolicy->label}}<span class="req-field" ></span></label>
@@ -652,131 +684,99 @@ height: 120px;
 										<option value="{{$returnpolicyval->option_id}}">{{$returnpolicyval->option_value}}</option>
 										@endforeach
 										</select>
-                                    <p class="error">{{ $errors->first('name') }}</p> 
+                                    <p class="error">{{ $errors->first('name') }}</p>
                                 </div>
-								
-							</div> 
+
+							</div>
 						</div>
 						<div class="col-md-6">
 							<h2 class="heading-agent">Donation Info</h2>
 							<div class="col-md-12">
 							<div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">Donation To Charity<span class="req-field" ></span></label>
+                                    <label for="inputEmail3" class="control-label">Donation to Charity<span class="req-field" ></span></label>
                                        <div class="input-group">
-									   <span class="input-group-addon">$</span>
-  <input type="text" class="form-control"  autocomplete="off"  name="charity_amount" id="charity_amount">
-                                    <p class="error">{{ $errors->first('charity_amount') }}</p> 
-  
+									   <!-- <span class="input-group-addon">$</span> -->
+  <!-- <input type="text" class="form-control"  autocomplete="off"  name="charity_amount" id="charity_amount"> -->
+  <select class="form-control" name="charity_amount" id="charity_amount"><option value="">Donate Amount</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select>
+  <p class="cst3-textl2 d-amount"  id="dynamic_percent_amount"><i class="fa fa-usd" aria-hidden="true"></i>0.00</p>
+                                    <p class="error">{{ $errors->first('charity_amount') }}</p>
+
                                     <span id="priceerror" style="color:red">
 									</div>
                                 </div>
-								
+
 								<div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">{{$returnpolicy->label}}<span class="req-field" ></span></label>
+                                    <label for="inputEmail3" class="control-label">Charity Name<span class="req-field" ></span></label>
                                         <select class="form-control"  autocomplete="off" name="charity_name" id="charity_name">
 										<option value="">Select Charity Name</option>
 										@foreach($charities as $index=>$charity)
 										<option value="{{$charity->id}}">{{$charity->name}}</option>
 										@endforeach
 										</select>
-                                    <p class="error">{{ $errors->first('charity_name') }}</p> 
+                                    <p class="error">{{ $errors->first('charity_name') }}</p>
                                </div>
-							   <div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">{{$returnpolicy->label}}<span class="req-field" ></span></label>
-                                        <select class="form-control"  autocomplete="off" name="charity_name" id="charity_name">
-										<option value="">Select Charity Name</option>
-										@foreach($charities as $index=>$charity)
-										<option value="{{$charity->id}}">{{$charity->name}}</option>
-										@endforeach
-										</select>
-                                    <p class="error">{{ $errors->first('charity_name') }}</p> 
-                               </div>
-								
-							</div> 
+
+							</div>
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-12 frnt_back_view">
 						<h2 class="heading-agent">Upload Images</h2>
-						<div class="col-md-6">
-							<h2 class="box-title col-md-12 heading-agent pro-imgs">Front View</h2>
+						<div class="row">
+						<div class="col-md-3  col-md-offset-1">
+							<h2 class="box-title col-md-12 heading-agent pro-imgs text-center">Front View</h2>
 							<div class="col-md-12">
-							
-								<div class="form-group"> 
-									<label for="inputEmail3" class="control-label image-label">Upload</label>
-									<div class="fileupload fileupload-new" data-provides="fileupload"> 
-										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan" name="img-chan" >
-										<span class="remove_pic">
-											<i class="fa fa-times-circle" aria-hidden="true"></i>
-										</span>
-										<span class="btn btn-default btn-file">
-											<span class="fileupload-new" style="float:right">Upload Photo</span>
-											<span class="fileupload-exists"></span>     
-											<input id="profile_logo" name="avatar" type="file" placeholder="Profile Image" class="form-control">
-										</span>
-										<p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
-										<span class="fileupload-preview"></span>
-										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
-									</div> 
-									<p class="error">{{ $errors->first('avatar') }}</p> 
-								</div> 					
-							</div>   
-					</div> 
-						<div class="col-md-6">
-							
-							<div class="col-md-6">
-							<h2 class="box-title col-md-12 heading-agent pro-imgs">Back View</h2>
+							<div class=" up-blog">
+							<input type="file" name="img_chan" id="img_chan">
+								 		</div>
+							</div>
+					</div>
+						<div class="col-md-3 ">
+
+
+							<h2 class="box-title col-md-12 heading-agent pro-imgs text-center">Back View</h2>
 							<div class="col-md-12">
-							
-								<div class="form-group"> 
-									<label for="inputEmail3" class="control-label image-label">Upload</label>
-									<div class="fileupload fileupload-new" data-provides="fileupload"> 
-										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan1" name="img-chan1" >
-										<span class="remove_pic1">
-											<i class="fa fa-times-circle" aria-hidden="true"></i>
-										</span>
-										<span class="btn btn-default btn-file">
-											<span class="fileupload-new" style="float:right">Upload Photo</span>
-											<span class="fileupload-exists"></span>     
-											<input id="profile_logo1" name="avatar1" type="file" placeholder="Profile Image" class="form-control">
-										</span>
-										<p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
-										<span class="fileupload-preview"></span>
-										<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
-									</div> 
-									<p class="error">{{ $errors->first('avatar') }}</p> 
-								</div> 					
-							</div> 
+							<div class=" up-blog">
+								<input type="file" name="img_chan1" id="img_chan1">
+								 	</div>
+							</div>
+
 						</div>
-						</div>
+						<div class="col-md-3 ">
+							<h2 class="box-title col-md-12 heading-agent pro-imgs text-center">Details/Accessories</h2>
+							<div class="col-md-12">
+							<div class=" up-blog">
+							<input type="file" name="img_chan2" id="img_chan2">
+							</div>
+							</div>
+					</div>
+					</div>
 						</div>
 						<div class="col-md-12">
 						<h2 class="heading-agent">Multi Image Uploading</h2>
-						<div class="col-md-6">
-							<h2 class="box-title col-md-12 heading-agent pro-imgs">Details/Accessories</h2>
-							<div class="col-md-12">
-							
-										
-								
-							</div>   
-					</div> 
-						
+						<div class="col-md-12">
+
+						<input class="input-btn" id="upload-file-selector" name="files[]" multiple="" type="file">
+
+
+					</div>
+
 						</div>
-						
-						
-		 
 
 
 
 
-						
-						 
-					</div> 
+
+
+
+
+
+					</div>
 					<div class="box-footer">
 						<div class="pull-right">
 							<a href="/customers-list" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
 							<button type="submit" id="submit" name="submit"  class="btn btn-info pull-right">Submit</button>
 						</div>
 					</div>
-				
+
 			</div>
 			</div>
 			</form>
@@ -788,15 +788,85 @@ height: 120px;
 	<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 	<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 	<script src="{{ asset('/assets/admin/js/pages/customers.js') }}"></script>
+	<script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
 
-	
 	<script type="text/javascript">
 	$(document).ready(function () {
-	$(".sony").select2();
-	}); 
-	
+
+	//donate amount percentage calculation
+	$('#charity_amount').change(function(){
+		var donate_percent = $(this).val();
+		var price = $('#price').val();
+		var total = (price*donate_percent)/100;
+		$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total));
+	});
+	//$(".sony").select2();
+
+	$('#img_chan,#img_chan2,#img_chan1').drop_uploader({
+                uploader_text: 'Drop files to upload, or Browse',
+                browse_text: 'Browse',
+                browse_css_class: 'button button-primary',
+                browse_css_selector: 'file_browse',
+                uploader_icon: '<i class="pe-7s-cloud-upload"></i>',
+                file_icon: '<i class="pe-7s-file"></i>',
+                time_show_errors: 5,
+                layout: 'thumbnails',
+                method: 'normal',
+                url: 'ajax_upload.php',
+                delete_url: 'ajax_delete.php',
+            });
+	/*$( "#submit" ).click(function(a) {
+
+		a.preventDefault();
+		str=true;
+		$('#cosplay_yeserror').html('');
+		var cosplay=$('#cosplay').val();
+		var file2=$('input[name=file2]').val();
+		var file3=$('input[name=file3]').val();
+
+		if(cosplay ==7){
+			$('#cosplay_yeserror').html('Select Cosplay Options');
+			str=false;
+		}
+		return str;
+	});*/
+        });
+	function cosplay_yes(id){
+		if (id == 7) {
+			$('#cosplayplay_yes_div').css('display','block');
+		}else{
+			$('#cosplayplay_yes_div').css('display','none');
+		}
+	}
+	function uniquefashion_yes(id){
+		if (id == 9) {
+			$('#uniquefashion_yes_div').css('display','block');
+		}else{
+			$('#uniquefashion_yes_div').css('display','none');
+		}
+	}
+	function activity_yes(id){
+		if (id == 11) {
+			$('#activity_yes_div').css('display','block');
+		}else{
+			$('#activity_yes_div').css('display','none');
+		}
+	}
+	function make_costume_yes(id){
+		if (id == 30) {
+			$('#mention_hours').css('display','block');
+			$('#mention_hours_input').css('display','block');
+		}else{
+			$('#mention_hours').css('display','none');
+			$('#mention_hours_input').css('display','none');
+			$('#mention_hours_input').val('');
+		}
+	}
+
+
+
 	</script>
-	<script> 
+	<script>
       var placeSearch, autocomplete;
       var componentForm = {
         street_number: 'short_name',
@@ -804,15 +874,8 @@ height: 120px;
         locality: 'long_name',
         administrative_area_level_1: 'short_name',
         country: 'long_name',
-        postal_code: 'short_name', 
+        postal_code: 'short_name',
       };
-	          Dropzone.options.imageUpload = {
-
-            maxFilesize         :       1,
-
-            acceptedFiles: ".jpeg,.jpg,.png,.gif"
-
-        };
 
       function initAutocomplete() {
         // Create the autocomplete object, restricting the search to geographical
@@ -863,171 +926,32 @@ height: 120px;
           });
         }
       }
-	
-
-    </script> 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
+    </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
         async defer></script>
-	<!--<script type="text/javascript">
-	$('#create_costume').on('submit',function(ps){
-		 ps.preventDefault();
-		 str=true;
-		 alert();
-		$('#customer_name,#costume_name,#gender,#category,#costume-desc,#size,#price,#quantity,#heightft,#heightin,#weightlbs,#chestin,#waistlbs').css('border','');
-		$('#costumename_error,#gendererror,#categoryerror,#sizeerror,#costume-desc-error,#priceerror,#quantityerror,#heightfterror,#heightinerror,#weightlbserror,#chestinerror,#waistlbserror').html('');
-		var customer_name=$('#customer_name').val();
-		var costume_name=$('#costume_name').val();
-		var category=$('#category').val();
-		var costume_desc=$('#costume-desc').val();
-		var price=$('#price').val();
-		var quantity=$('#quantity').val();
-		var heightft=$('#heightft').val();
-		var heightin=$('#heightin').val();
-		var weightlbs=$('#weightlbs').val();
-		var chestin=$('#chestin').val();
-		var waistlbs=$('#waistlbs').val();
-		var size=$('#size').val();
-		var costumecondition="";
-		var gender="";
-		if(document.getElementById('unisex').checked){
-			gender = document.getElementById('unisex').value;
-		}
-		if(document.getElementById('pet').checked){
-			gender = document.getElementById('pet').value;
-		}
-		if (document.getElementById('male').checked) {
-			gender = document.getElementById('male').value;
-        }
-	   if(document.getElementById('female').checked) {
-			gender = document.getElementById('female').value;
-		}
-		if(document.getElementById('excellent').checked){
-			costumecondition = document.getElementById('excellent').value;
-		}
-		if(document.getElementById('brandnew').checked){
-			costumecondition = document.getElementById('brandnew').value;
-		}
-		if (document.getElementById('good').checked) {
-			costumecondition = document.getElementById('good').value;
-        }
-	   if(document.getElementById('likenew').checked) {
-			costumecondition = document.getElementById('likenew').value;
-		}
-		if(gender == "" | gender == null ){
-			$('#gendererror').html('Select Gender');
-		}
-		if(costumecondition == "" | costumecondition == null ){
-			$('#costumeconditionerror').html('Select Costume Condition');
-		}
-		if(customer_name==''){
-			$('#customer_name').css('border','1px solid red');
-			$('#customername_error').html('Select Customer Name');
-			str=false;
-		}
-		if(costume_name==''){
-			$('#costume_name').css('border','1px solid red');
-			$('#costumename_error').html('Enter Costume Name');
-			str=false;
-		}
-		if(category==''){
-			$('#category').css('border','1px solid red');
-			$('#categoryerror').html('Select Category');
-			str=false;
-		}
-		if(costume_desc==''){
-			$('#costume-desc').css('border','1px solid red');
-			$('#costume-desc-error').html('Enter Costume Description');
-			str=false;
-		}
-		if(price==''){
-			$('#price').css('border','1px solid red');
 
-			$('#priceerror').html('Enter Price');
-			str=false;
-		}
-		if(quantity==''){
-			$('#quantity').css('border','1px solid red');
-			$('#quantityerror').html('Select Quantity');
-			str=false;
-		}
-		if(heightft==''){
-			$('#heightft').css('border','1px solid red');
-			$('#heightfterror').html('Enter Height In Ft');
-			str=false;
-		}
-		if(heightin==''){
-			$('#heightin').css('border','1px solid red');
-			$('#heightinerror').html('Enter Height In in');
-			str=false;
-		}
-		if(weightlbs==''){
-			$('#weightlbs').css('border','1px solid red');
-			$('#weightlbserror').html('Enter weight In lbs');
-			str=false;
-		}
-		if(chestin==''){
-			$('#chestin').css('border','1px solid red');
-			$('#chestinerror').html('Enter Chest In in');
-			str=false;
-		}
-		if(waistlbs==''){
-			$('#waistlbs').css('border','1px solid red');
-			$('#waistlbserror').html('Enter Waist In lbs');
-			str=false;
-		}
-		if(size==''){
-			$('#size').css('border','1px solid red');
-			$('#sizeerror').html('Select Size');
-			str=false;
-		
-		}
-		if(str==true)
-    {
-         $.ajax({
-            dataType:"JSON",
-            type:"POST",
-            data :new FormData(this),
-            url:"/costumes-insert",
-            contentType:false,
-            cache:false,
-            processData:false,
-            success:function(u){
-                console.log(u);
-				
-                if(u.code=='200'){
-				$('#sonay').show();
-				$('#successmessage').html(u.description);
-				//setTimeout(function() {window.location="/costumes/create";},2500);
-				}
-				
-                if(u.code=='204'){
-				$('#sonay').show();
-				$('#successmessage').html(u.description);
-			//	setTimeout(function() {window.location="/costumes/create";},2500);
-			}
-				
-            },
-            error:function(er){
-                console.log(er);
-            }
-        });
-    }
-	
-		return str;
-	});
-	</script>-->
+
 	<script type="text/javascript">
-	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#price,#charity_amount").on("keyup", function(){
-	    var valid = /^\d{0,3}(\.\d{0,3})?$/.test(this.value),
+	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensions").on("keyup", function(){
+	    var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
 	        val = this.value;
-	    
+
+	    if(!valid){
+	        console.log("Invalid input!");
+	        this.value = val.substring(0, val.length - 1);
+	    }
+	});
+	$("#price,#charity_amount").on("keyup", function(){
+	    var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
+	        val = this.value;
+
 	    if(!valid){
 	        console.log("Invalid input!");
 	        this.value = val.substring(0, val.length - 1);
 	    }
 	});
 	</script>
-	
 
-	
+
+
 	@stop

@@ -46,7 +46,7 @@
         <ul class="treeview-menu menu">
           <li {{ (Request::is('categories') ? 'class=active' : '') }} {{ (Request::is('category/create') ? 'class=active' : '') }} {{ (Request::is('category/edit/*') ? 'class=active' : '') }}>
             <a href="{{route('categories-list')}}">
-              <i class="fa fa-circle-o" aria-hidden="true"></i> <span> categories</span>
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span> Categories</span>
             </a>
           </li>
         </ul>

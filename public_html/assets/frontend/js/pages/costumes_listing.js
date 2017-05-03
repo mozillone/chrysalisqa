@@ -92,11 +92,20 @@ function searching(search=null){
 					　$.each(response.data.costumes,function(index, value) {
 						
 						if(value.image!=null){
-							var src="/costumers_images/Medium/"+value.image;
+							var path='/costumers_images/Medium/'+value.image;
+							if(fileExists(path)){
+								var src=path;
+							}else{
+								var src="/costumers_images/default-placeholder.jpg";
+							}
 						}else{
 							var src="/costumers_images/default-placeholder.jpg";
 						}
-
+						if(value.url_key!=null){
+							var link=value.url_key;
+						}else{
+							var link="";
+						}
 						if(value.is_like){
 							var is_like='class="active"';
 						}else{
@@ -125,7 +134,7 @@ function searching(search=null){
 							var fav='<a data-toggle="modal" data-target="#login_popup"><span '+is_fav+'>'+icon+'</span></a>';
 						}
 
-						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+'<p class=hover_crt><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'">'+value.name+'</a></h4><p>'+price+'</div></div></div>';
+						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/product'+link+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+'<p class="hover_crt add-cart" data-costume-id="'+value.costume_id+'"><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'">'+value.name+'</a></h4><p>'+price+'</div></div></div>';
 				    });
 					$(".pagination").show();
 					$("#itemContainer").append(res);
@@ -150,8 +159,18 @@ function now()
   var month = d.getMonth()+1;
   var day = d.getDate();
 
-  var output = d.getFullYear()+'-'+(month<10 ? '0' : '') + month +"-"+(day<10 ? '0' : '') + day;
+  var output =	 d.getFullYear()+'-'+(month<10 ? '0' : '') + month +"-"+(day<10 ? '0' : '') + day;
 
   return output;
 }
+  function fileExists(url) {
+	    if(url){
+	        var req = new XMLHttpRequest();
+	        req.open('GET', url, false);
+	        req.send();
+	        return req.status==200;
+	    } else {
+	        return false;
+	    }
+	}
 });
