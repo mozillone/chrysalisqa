@@ -139,6 +139,10 @@ class Promotions extends Authenticatable
         $data['promo_cats']=DB::Select('SELECT cat1.category_id,cat1.parent_id,cat2.name as parent_cat,cat1.name as sub_cat  FROM cc_category as cat1 INNER JOIN cc_category as cat2 on cat2.category_id=cat1.parent_id LEFT JOIN cc_coupon_category as cupn on cupn.category_id=cat1.category_id where  cupn.coupon_id='.$coupon_id);
         return $data;
     }
-   
+   protected function verifyCoupanCode($code){
+       $res=DB::Select('SELECT if(count(*)>=1,true,false) as is_exists  FROM `cc_promotion_coupon` WHERE code="'.$code.'"');        
+       return $res[0]->is_exists;
+
+   }
 
 }

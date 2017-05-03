@@ -9,6 +9,7 @@ use Session;
 use Hash;
 use Response;
 use App\Cart;
+use App\Promotions;
 use Cookie;
 class CartController extends Controller {
 
@@ -20,7 +21,19 @@ class CartController extends Controller {
 		$this->sitehelper = new SiteHelper();
 	}
   public function cart(Request $request){
-    $data=Cart::getCartProducts();
+    $req=$request->all();
+    if(count($req)){
+      $res=Promotions::verifyCoupanCode($req['coupan_code']);
+      if(!$res){
+         Session::flash('error','The coupan code is not invalid.');
+         return Redirect::back();
+      }else{
+        $data=Cart::getCartProductswithCoupan($req['coupan_code']);
+        dd("testing");
+      }
+    }else{
+      $data=Cart::getCartProducts();
+    }
     return view('frontend.costumes.cart.cart_list',compact('data',$data));
   }
 	public function addToCart(Request $request){
@@ -122,9 +135,9 @@ class CartController extends Controller {
         }
         return Redirect::to('cart');
     }
-    public function productRemoveFromCart($cart_item_id){
-      Cart::productRemoveFromCart($cart_item_id);
-      return Redirect::to('cart');
+    public function productRemoveFromCart($cart_item_id,$cart_id){
+      Cart::productRemoveFromCart($cart_item_id,$cart_id);
+      return Redirect::back();
     }
     public function getMiniCartProducts(){
       $cart_list=Cart::getCartProducts();

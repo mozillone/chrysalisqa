@@ -44,12 +44,18 @@ Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesCon
 
 /*******************Car Functionality stat here *********/
 Route::any('/addToCart', array('as' => 'report.post','uses' => 'CartController@addToCart'));
-Route::any('/cart', array('as' => '','uses' => 'CartController@cart'));
+Route::any('/cart', array('as' => 'cart','uses' => 'CartController@cart'));
 Route::any('/updateCart', array('as' => 'Update.Cart','uses' => 'CartController@updateCart'));
-Route::any('/cart/delete/{cart_id}', array('as' => '','uses' => 'CartController@productRemoveFromCart'));
+Route::any('/cart/delete/{cart_item_id}/{cart_id}', array('as' => '','uses' => 'CartController@productRemoveFromCart'));
 Route::get('/getMiniCartProducts', array('as' => '','uses' => 'CartController@getMiniCartProducts'));
 
 /*******************Car Functionality end here *********/
+
+/*******************Checkout Functionality stat here *********/
+Route::any('checkout', array('as' => '','uses' => 'CheckoutController@checkout'));
+Route::post('/add/credit-card', array('as' => 'add-credit-card','uses' => 'CheckoutController@addCreditCard'));
+/*******************Checkout Functionality end here *********/
+
 
 
 /** Costumes Controller startsend here **/
