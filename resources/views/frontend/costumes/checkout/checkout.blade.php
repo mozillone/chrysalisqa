@@ -35,133 +35,72 @@
 									<div class="well">
 										<div class="row">
 											<div class="shipping_div methods">
-												<div class="">
+												<div class="col-md-4 col-sm-4 col-xs-12">
 													<h4>Shipping Adress:</h4>
 												</div>
-												<div class="col-md-12 col-sm-12 col-xs-12">
-													<div class="chek-out">
-																<div class="form-group">
-																	<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="shipping_firstname" value="{{Auth::user()->first_name}}">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="shipping_lastname" value="{{Auth::user()->last_name}}">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="shipping_address_1" placeholder="Address1 *" name="shipping_address_1">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="shipping_address_2">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="shipping_city" placeholder="City *" name="shipping_city">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="shipping_postcode" placeholder="Zipcode *" name="shipping_postcode">
-																</div>
-																<div class="form-group">
-																<select class="form-control" name="shipping_country" id="shipping_country">
-																		<option value="" selected> Select</option>
-																		@foreach($countries as $cnt)
-																		<option value="{{$cnt->id}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
-																		@endforeach
-																</select>
-																</div>
-																	
-																
-														</div>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													@if(count($data['shipping_address']))
+														<p>Lauren Harvey,<br>
+														261,West 35th st, Ste 1002<br>
+														New York, NY 10001 <br>
+														862.223.9136</p>
+													@else
+														<span class="shipping-empty">No Shipping Address Found</span>
+													@endif
+													
+												</div>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+													@if(count($data['shipping_address']))
+														<p class="cehck_edit"><a href="#" data-toggle="modal" data-target="#shipping_popup">Edit</a></p>
+													@else
+														<p class="cehck_edit" data-toggle="modal" data-target="#shipping_popup"><a href="#">New</a></p>
+													@endif
 												</div>
 											</div>
 											<div class="billing_div methods">
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<h4>Billing Adress:</h4>
 												</div>
-												<div class="col-md-12 col-sm-12 col-xs-12">
-													<div class="chek-out">
-																<div class="form-group">
-																	<input type="text" class="form-control" id="pay_firstname" placeholder="First Name *" name="pay_firstname" value="{{Auth::user()->first_name}}">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="pay_lastname" placeholder="Last Name" name="pay_lastname" value="{{Auth::user()->last_name}}">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="pay_address_1" placeholder="Address1 *" name="pay_address_1">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="pay_address_2" placeholder="Address2" name="pay_address_2">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="pay_city" placeholder="City *" name="pay_city">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="pay_zipcode" placeholder="Zipcode *" name="pay_zipcode">
-																</div>
-																<div class="form-group">
-																<select class="form-control" name="pay_country" id="pay_country">
-																		<option value="" selected> Select</option>
-																		@foreach($countries as $cnt)
-																		<option value="{{$cnt->id}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
-																		@endforeach
-																</select>
-																</div>
-																	
-																
-														</div>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+												@if(count($data['billing_address']))
+														<p>Lauren Harvey,<br>
+														261,West 35th st, Ste 1002<br>
+														New York, NY 10001 <br>
+														862.223.9136</p>
+												@else
+													<span class="shipping-empty">No Billing Address Found</span>
+												</div>
+												@endif
+												<div class="col-md-4 col-sm-4 col-xs-12">
+												@if(count($data['billing_address']))
+													<p class="cehck_edit"><a href="#" data-toggle="modal" data-target="#billing_popup">Edit</a></p>
+												@else
+													<p class="cehck_edit"><a href="#" data-toggle="modal" data-target="#billing_popup">New</a></p>
+												@endif
 												</div>
 											</div>
 											<div class="payment_div methods">
 											<div class="col-md-4 col-sm-4 col-xs-12">
 													<h4>Payment Method:</h4>
 												</div>
-												<div class="col-md-12 col-sm-12 col-xs-12">
-													<div class="chek-out">
-																<div class="form-group">
-																	<input type="text" class="form-control" id="cardholder_name" name="cardholder_name" placeholder="Full Name On Card">
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="cc_number" name="cc_number" placeholder="Card Number">
-																</div>
-																<div class="form-group">
-																<div class="col-md-4">
-																		<select class="form-control" name="exp_month" id="exp_month">
-											                                    <option value="">MM</option>
-											                                    <option value="01">Jan</option>
-																				<option value="02">Feb</option>
-																				<option value="03">Mar</option>
-																				<option value="04">Apr</option>
-																				<option value="05">May</option>
-																				<option value="06">Jun</option>
-																				<option value="07">Jul</option>
-																				<option value="08">Aug</option>
-																				<option value="09">Sep</option>
-																				<option value="10">Oct</option>
-																				<option value="11">Nov</option>
-																				<option value="12">Dec</option>
-											                           </select>
-											                     </div>
-											                    <div class="col-md-4">
-											                           <select class="form-control" name="exp_year" id="exp_year">
-											                                    <option value="">YYYY</option>
-											                                    @for($i=0;$i<=30;$i++)
-											                                    <option value="{{date('Y',strtotime('now'))+$i}}">{{date('Y',strtotime('now'))+$i}}</option>
-																				@endfor
-											                           </select>
-
-																</div>
-																</div>
-																<div class="form-group">
-																	<input type="text" class="form-control" id="cc_cvn" name="cc_cvn" placeholder="CVN Code">
-																</div>
-																<div class="form-group">
-																	
-																</div>
-														</div>
+												<div class="col-md-4 col-sm-4 col-xs-12">
+												@if(count($data['cc_details']))
+														<p>Ending in 2891</p>
+												@else
+													<span class="shipping-empty">No Payment Method Found</span>
+												@endif
 												</div>
+												@if(count($data['billing_address']))
+													<p class="cehck_edit"><a href="#" data-toggle="modal" data-target="#cc_popup">Edit</a></p>
+												@else
+													<p class="cehck_edit"><a href="#" data-toggle="modal" data-target="#cc_popup">New</a></p>
+												@endif
 											</div>
 										</div>
 									</div>
 									<div class="checkout_review_box">
 										<h2>Review Shipping & Delivery Time</h2>
-										@foreach($data as $cart)
+										@foreach($data['basic'] as $cart)
 										<div class="well">
 											 <div class="shipping_date">
 												<span>Free Shipping from Chrysalis, NY <span class="in_prc">($0.00)</span></span><span class="shi_date_right text-right right"> Estimated Shipping from Brooklyn, NY <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i></span>
@@ -196,10 +135,10 @@
 									<div class="order_summery">
 										<div class="well">
 											<h3>Order Summary  </h3> 
-											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data[0]->total, 2, '.', ',')}} <em>({{count($data)}} Items)</em></span></p>
+											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic'][0]->total, 2, '.', ',')}} <em>({{count($data)}} Items)</em></span></p>
 											<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$0.00 <em>(0 Items)</em></span></p>
 											<p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$0.00 </span></p>
-											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">${{number_format($data[0]->total, 2, '.', ',')}} </span></p>
+											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">${{number_format($data['basic'][0]->total, 2, '.', ',')}} </span></p>
 											<button class="btn btn-primary">Place Order</button>
 										</div>
 									</div>
@@ -211,6 +150,72 @@
 				</div>
 			</div>
 		</div>
+<div class="modal fade window-popup" id="shipping_popup" tabindex="-1">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Shipping Address</h4>
+	      </div>
+	      <div class="modal-body">
+	       <form class="" action="{{route('shipping_address.post')}}" method="POST" id="shipping_address">   
+	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="chek-out">
+								<div class="col-md-12 col-sm-12 col-xs-12">
+											<label for="">Choose Saved</label>
+											<select class="form-control" name="address_id" id="address_id">
+													<option value="new" selected="">New</option>
+													@foreach($data['shipping_address'] as $shipping_address)
+													<option value="{{$shipping_address->address_id}}">{{$shipping_address->address1}},{{$shipping_address->city}},{{$shipping_address->country}}</option>
+													@endforeach
+											</select>
+								</div>
+
+								<div class="form-group">
+									<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="shipping_firstname" value="{{Auth::user()->first_name}}">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="shipping_lastname" value="{{Auth::user()->last_name}}">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="shipping_address_1" placeholder="Address1 *" name="shipping_address_1">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="shipping_address_2">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="shipping_city" placeholder="City *" name="shipping_city">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="shipping_postcode" placeholder="Zipcode *" name="shipping_postcode">
+								</div>
+								<div class="form-group">
+								<select class="form-control" name="shipping_country" id="shipping_country">
+										<option value="" selected> Select</option>
+										@foreach($countries as $cnt)
+										<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
+										@endforeach
+								</select>
+								</div>
+								<div class="form-group">
+									<input type="checkbox" class="form-control" id="is_billing" name="is_billing"><label for="billing:use_for_shipping_yes">Ship to this address</label>
+								</div>
+								<button class="btn btn-primary">Submit</button>
+			
+									
+								
+						</div>
+					</div>
+				</form>  
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	</div>
+</div>
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')

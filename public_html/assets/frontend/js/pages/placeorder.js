@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-    $("#placeorder").validate({
+    $("#shipping_address").validate({
         	rules: {
 				shipping_firstname:{
 					 	required: true,
@@ -26,6 +26,10 @@ $(document).ready(function() {
 				shipping_country:{
 					required: true,
 				},
+		}
+	});
+	    $("#billing_address").validate({
+        	rules: {
 				pay_firstname:{
 					 	required: true,
 						maxlength: 50,
@@ -50,6 +54,10 @@ $(document).ready(function() {
 				pay_country:{
 					required: true,
 				},
+		}
+	});
+    $("#billing_address").validate({
+    	rules: {
 				cardholder_name:{
 					required: true,
 	               	maxlength: 50,
