@@ -75,7 +75,7 @@
 
 	<div class="col-xs-6 col-sm-4 viewBtn_rm">
 	<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
-	<button type="button" class="buynow-rm">Buy it Now!</button>
+	<button type="button" class="buynow-rm">@if(!Auth::check())<a data-toggle="modal" data-target="#login_popup" class="buynow-rm">Buy it Now!</a>  @else <a href="/checkout" class="buynow-rm">Buy it Now!</a>@endif</button>
 	</div>
 
 	</div>
