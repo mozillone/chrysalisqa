@@ -77,6 +77,8 @@ Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeCo
 
 /* Request a bag starts here*/
 Route::any('/costume/request-a-bag', array('as' => '','uses' => 'CreateCostumeController@requestaBag'));
+Route::any('/costume/postrequestabag', array('as' => '','uses' => 'CreateCostumeController@Postrequestabag'));
+
 /* Request a bag ends here*/
 
 /** Costume Like page start here **/
@@ -165,7 +167,11 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	   /****************Charities Management Ends Here***********************/
 
 
-
+	   /*****************************Request a bag starts here ***********************/
+	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
+	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
+	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
+	   /*****************************Request a bag ends here ***********************/
 
 });
 
