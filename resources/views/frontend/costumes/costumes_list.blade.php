@@ -49,8 +49,8 @@
 	<div class="list-box-rm">
 	<h2 class="list-box-head">THEMES</h2>
 	<ul class="box-list1">
-	@foreach($data['sub_cats_list'] as $sub_cats_list)
-	<li @if($sub_cats_list->category_id==$data['sub_cat_info'][0]->category_id) class="active" @endif><a href="/shop/{{$sub_cats_list->category_id}}/{{$parent_cat_name}}/{{$sub_cats_list->name}}">{{$sub_cats_list->name}}</a></li>
+	@foreach($categories_list as $key=>$sub_cats_list)
+	<li @if(Request::url()==URL::to("category".$sub_cats_list)) class="active" @endif ><a href="/category{{$sub_cats_list}}">{{$key}}</a></li>
 	@endforeach
 	</ul>
 	<h2 class="list-box-head narrow-head">NARROW BY</h2>

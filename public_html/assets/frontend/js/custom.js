@@ -83,14 +83,14 @@ $(function(){
 					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date"><span>'+response.length+' Item Added</span><a href="/cart">View & Edit Cart</a><span class="shi_date_right text-right right"><span classs="subtl">Subtotal</span><span class="ctr-tl-price"> $'+response[0].total+'</span></span></div><div class="row scels">';
 				$.each(response,function(i,value){
 					var path='/costumers_images/Medium/'+value.image+'';
-					if(fileExists(src)){
+					if(fileExists(path)){
 						var src=path;
 					}else{
 						var src='/costumers_images/default-placeholder.jpg';
 					}
 					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" height="65px" width="50px"></div><div class="media-body"><h4 class="media-heading">'+value.costume_name+'</h4><p><b>Item Condition:</b>'+value.condition+'</p><p><b>Size:</b>'+value.size+'</p></div></div></div>'
 				});
-				cart+='</div></div><div class="chk-out"><a href="#">Proceed to Checkout</a></div></div>';
+				cart+='</div></div><div class="chk-out"><a href="/checkout">Proceed to Checkout</a></div></div>';
 				}else{
 					var cart="<div class='empty-cart'>You have no items in your shopping cart.</div>";
 				}
