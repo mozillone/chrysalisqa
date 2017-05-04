@@ -58,6 +58,10 @@ class Cart extends Authenticatable
            
              $costume_info=$this->getCostumeInfo($req['costume_id']);
              $res=$this->addItemToCart($cart_id,$qty,$costume_info[0]);
+             $total=$this->getCartSubtotalPrice($cart_id);
+             $data=array('total'=>$total,'modified_at'=>date('Y-m-d h:i:s'));
+             $cond=array('cart_id'=>$cart_id,);
+             Site_model::update_data('cart',$data,$cond);
              return true;
     }
     protected function updateCartDetails($costume_id,$cart_id,$qty){

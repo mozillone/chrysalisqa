@@ -11,6 +11,7 @@ use Hash;
 use Response;
 use App\Cart;
 use App\Creditcard;
+use App\Order;
 class CheckoutController extends Controller {
 
   protected $auth;
@@ -28,16 +29,19 @@ class CheckoutController extends Controller {
         });
 	}
   public function checkout(Request $request){
-    $req=$request->all();
-    if(count($req)){
-      Creditcard:Creditcard();
-      
-    }else{
-       $data=Cart::getCartProducts();
-    }
+    $data=Cart::getCartProducts();
     $countries   = Site_model::Fetch_all_data('countries', '*');
     return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries);
   }
+  public function placeOrder(Request $request){
+    $req=$request->all();
+    $result=Order::placeOrder($req);
+    if($result['result']=="0"){
+       Session::flash('error',$result['message']);
+       return Redirect::back();
+
+    }
+    }
   public function addCreditCard(Request $request){
     $req=$request->all();
     Creditcard:Creditcard();

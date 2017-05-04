@@ -53,6 +53,7 @@ Route::get('/getMiniCartProducts', array('as' => '','uses' => 'CartController@ge
 
 /*******************Checkout Functionality stat here *********/
 Route::any('checkout', array('as' => '','uses' => 'CheckoutController@checkout'));
+Route::any('/checkout/placeorder', array('as' => 'place-order','uses' => 'CheckoutController@placeOrder'));
 Route::post('/add/credit-card', array('as' => 'add-credit-card','uses' => 'CheckoutController@addCreditCard'));
 /*******************Checkout Functionality end here *********/
 

@@ -6,6 +6,7 @@
     float: left;
     margin-right: 20px;
 }
+
 </style>
   @endsection
 @section('content')
@@ -14,7 +15,19 @@
 				<div class="col-md-12">
 					<div class="checkout_page_total">
 						<h1>Checkout</h1>
+						@if (Session::has('error'))
+			            <div class="alert alert-danger alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							{{ Session::get('error') }}
+						</div>
+			            @elseif(Session::has('success'))
+						<div class="alert alert-success alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							{{ Session::get('success') }}
+						</div>
+						@endif
 						<form action="/checkout/placeorder" method="POST" id="placeorder">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="row">
 							<div class="col-md-9 col-sm-8 col-xs-12">
 								<div class="check_out_page_left">
@@ -28,10 +41,10 @@
 												<div class="col-md-12 col-sm-12 col-xs-12">
 													<div class="chek-out">
 																<div class="form-group">
-																	<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="shipping_firstname">
+																	<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="shipping_firstname" value="{{Auth::user()->first_name}}">
 																</div>
 																<div class="form-group">
-																	<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="shipping_lastname">
+																	<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="shipping_lastname" value="{{Auth::user()->last_name}}">
 																</div>
 																<div class="form-group">
 																	<input type="text" class="form-control" id="shipping_address_1" placeholder="Address1 *" name="shipping_address_1">
@@ -65,10 +78,10 @@
 												<div class="col-md-12 col-sm-12 col-xs-12">
 													<div class="chek-out">
 																<div class="form-group">
-																	<input type="text" class="form-control" id="pay_firstname" placeholder="First Name *" name="pay_firstname">
+																	<input type="text" class="form-control" id="pay_firstname" placeholder="First Name *" name="pay_firstname" value="{{Auth::user()->first_name}}">
 																</div>
 																<div class="form-group">
-																	<input type="text" class="form-control" id="pay_lastname" placeholder="Last Name" name="pay_lastname">
+																	<input type="text" class="form-control" id="pay_lastname" placeholder="Last Name" name="pay_lastname" value="{{Auth::user()->last_name}}">
 																</div>
 																<div class="form-group">
 																	<input type="text" class="form-control" id="pay_address_1" placeholder="Address1 *" name="pay_address_1">
@@ -100,32 +113,47 @@
 													<h4>Payment Method:</h4>
 												</div>
 												<div class="col-md-12 col-sm-12 col-xs-12">
-													<div class="">
-																<div class="col-md-6 col-sm-6 col-xs-12">
+													<div class="chek-out">
 																<div class="form-group">
-																	<label for="title">Full Name On Card</label>
-																	<input type="text" class="form-control" id="cardholder_name" name="cardholder_name">
+																	<input type="text" class="form-control" id="cardholder_name" name="cardholder_name" placeholder="Full Name On Card">
 																</div>
 																<div class="form-group">
-																	<label for="pwd">Expiration Date</label>
-																	<input type="text" class="form-control" id="cc_exp" name="cc_exp">
-																</div>
-																</div>
-																<div class="col-md-6 col-sm-6 col-xs-12">
-																<div class="form-group">
-																	<label for="text">Card Number</label>
-																	<input type="text" class="form-control" id="cc_number" name="cc_number">
+																	<input type="text" class="form-control" id="cc_number" name="cc_number" placeholder="Card Number">
 																</div>
 																<div class="form-group">
-																	<label for="pwd">CVN Code</label>
-																	<input type="text" class="form-control" id="cc_cvn" name="cc_cvn">
+																<div class="col-md-4">
+																		<select class="form-control" name="exp_month" id="exp_month">
+											                                    <option value="">MM</option>
+											                                    <option value="01">Jan</option>
+																				<option value="02">Feb</option>
+																				<option value="03">Mar</option>
+																				<option value="04">Apr</option>
+																				<option value="05">May</option>
+																				<option value="06">Jun</option>
+																				<option value="07">Jul</option>
+																				<option value="08">Aug</option>
+																				<option value="09">Sep</option>
+																				<option value="10">Oct</option>
+																				<option value="11">Nov</option>
+																				<option value="12">Dec</option>
+											                           </select>
+											                     </div>
+											                    <div class="col-md-4">
+											                           <select class="form-control" name="exp_year" id="exp_year">
+											                                    <option value="">YYYY</option>
+											                                    @for($i=0;$i<=30;$i++)
+											                                    <option value="{{date('Y',strtotime('now'))+$i}}">{{date('Y',strtotime('now'))+$i}}</option>
+																				@endfor
+											                           </select>
+
+																</div>
+																</div>
+																<div class="form-group">
+																	<input type="text" class="form-control" id="cc_cvn" name="cc_cvn" placeholder="CVN Code">
 																</div>
 																<div class="form-group">
 																	
 																</div>
-																
-																</div>
-																
 														</div>
 												</div>
 											</div>
@@ -188,5 +216,6 @@
 @section('footer_scripts')
 <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/placeorder.js') }}"></script>
+<script src="{{ asset('/js/credit-card-validation.js') }}"></script>
 
 @stop
