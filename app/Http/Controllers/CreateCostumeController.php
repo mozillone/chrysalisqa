@@ -915,9 +915,16 @@ class CreateCostumeController  extends Controller {
 		//echo $ref_no;die;
 		$addres_insert=DB::table('address_master')->insertGetId($addres_array);
 
+		$conversation_array = array('user_one'=>$userid,
+			'user_two'=>'1',
+			'status'=>'active',
+			'created_at'=>date('y-m-d H:i:s'));
+		$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
+
 		$requestabag_array = array('user_id'=>$userid,
 			'ref_no'=>$ref_no,
 			'addres_id'=>$addres_insert,
+			'conversation_id'=>$conversation_insert,
 			'is_payout'=>$is_payout,
 			'is_return'=>$is_return,
 			'is_recycle'=>$is_recycle,
@@ -929,6 +936,8 @@ class CreateCostumeController  extends Controller {
 			);
 
 		$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
+
+
 		return "success";
 
 	}
