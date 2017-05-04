@@ -3,24 +3,7 @@
 @section('styles')
 
 	<style type="text/css">
-		.change_passwords {
-    width: 500px;
-    margin: 40px auto;
-}
-.change_passwords h1 {
-    font-size: 22px;
-    font-family: Proxima-Nova-Extrabold;
-    border: none;
-    color: #000;    text-align: center;    margin-bottom: 30px;
-}
-.change_passwords button {
-    height: 45px;
-    background: #60c5ac;
-    width: 100%;
-    border: 1px solid #60c5ac;
-    font-size: 20px;
-    font-family: Proxima-Nova-Extrabold;
-}
+		
 	</style>
 
 @endsection
@@ -28,7 +11,7 @@
 	<div class="container">
 	<div class="row">
         <div class="col-md-12">
-           <div class="change_passwords" id="loginModal">
+           <div class="login-register" id="loginModal">
                   <div id="myTabContent" class="tab-content">
 				    <div>
                   	 <h1 class="chng_ps">Change Password</h1>
@@ -43,7 +26,7 @@
                               <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password" class="form-control">
                 	   </div>
                       	<div class="form-group">
-                            <div class="text-center chnge-subt-btn">
+                            <div class="text-center">
                               <button class="btn btn-primary">Submit</button>
                             </div>
                        </div>
