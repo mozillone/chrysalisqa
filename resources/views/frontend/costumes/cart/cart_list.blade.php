@@ -51,7 +51,7 @@
 													</div>
 													<div class="col-md-3 col-sm-3 col-xs-12">
 														<p class="price_right text-right"><span class="check_price">${{number_format(($cart->qty)*($cart->price), 2, '.', ',')}}</span> 
-														<span><a href="/cart/delete/{{$cart->cart_item_id}}"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
+														<span><a href="/cart/delete/{{$cart->cart_item_id}}/{{$cart->cart_id}}"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
 													</div>
 												</div>
 											</div>
@@ -78,18 +78,21 @@
 											<div class="coupn_code">
 												<div class="well">
 													<h3>Have a Promotional Code? </h3> 
-													<input type"text" class="form-control"> 
-													<a class="btn btn-primary">Apply Code</a>
+													<form action="/cart" method="post">
+													<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+														<input type="text" class="form-control" name="coupan_code"> 
+														<button class="btn btn-primary">Apply Code</button>
+													</form>
 												</div>
 											</div>
 											<div class="order_summery">
 												<div class="well">
 													<h3>Order Summary  </h3> 
-													<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format(helper::getCartSubtotalPrice(), 2, '.', ',')}} <em>({{count($data)}} Items)</em></span></p>
+													<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data[0]->total, 2, '.', ',')}} <em>({{count($data)}} Items)</em></span></p>
 													<!-- <p class="sub-all"><span>Shipping: </span> <span class="sub-price">$1.00 <em>(2 Items)</em></span></p>
 													<p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$19.00 </span></p> -->
-													<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">${{number_format(helper::getCartSubtotalPrice(), 2, '.', ',')}}</span></p>
-													<a class="btn btn-primary">Continue to Checkout</a>
+													<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">${{number_format($data[0]->total, 2, '.', ',')}}</span></p>
+													@if(!Auth::check())<a data-toggle="modal" data-target="#login_popup" class="btn btn-primary">Continue to Checkout</a>  @else <a href="/checkout" class="btn btn-primary">Continue to Checkout</a>@endif
 												</div>
 											</div>
 										</div>

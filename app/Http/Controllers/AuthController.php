@@ -14,7 +14,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Redirect;
 use Socialite;
 use URL;
-
+use Cookie;
 class AuthController extends Controller {
 
 	protected $auth;
@@ -80,12 +80,13 @@ class AuthController extends Controller {
 				}
 				  $currentCookieKeyID=SiteHelper::currentCookieKey();
 				  if($currentCookieKeyID!="0"){
-				  	Cart::updateCartToUser();
+				   	Cart::updateCartToUser();
 				  }
-				if(Session::has('is_loginPage')){
-					return Redirect::to('/dashboard');
-				}else{
-					return Redirect::back();
+				 $cookie = \Cookie::forget('min-cart');
+				 if(Session::has('is_loginPage')){
+					return Redirect::to('/dashboard')->withCookie($cookie);
+				 }else{
+						return Redirect::back()->withCookie($cookie);
 				}
 			}
 			else 
