@@ -182,5 +182,10 @@ class Cart extends Authenticatable
         Site_model::update_data('cart',$data,$cond);
         return true;
      }
+     protected function cartMetaInfo($cart_id){
+        $cart_meta=DB::Select('SELECT *  FROM `cc_cart` WHERE `cart_id` ='.$cart_id);
+        return $cart_meta;
+     }
+    
    
 }

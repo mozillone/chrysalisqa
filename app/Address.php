@@ -23,37 +23,107 @@ class Address extends Authenticatable
          'address_id', 'fname','lname','address1','address2', 'city', 'state', 'country', 'zip_code', 'address_type', 'user_id','created_on'];
     protected function addBillingAddress($req){
                 $user_id=Auth::user()->id;
-                dd($req);
-                $billing_address=array('fname'=>$req['pay_firstname'],
-                                       'lname'=>$req['pay_lastname'],
-                                       'address1'=>$req['pay_address_1'],
-                                       'address2'=>$req['pay_address_2'],
-                                       'city'=>$req['pay_city'],
-                                       'country'=>$req['pay_country'],
-                                       'zip_code'=>$req['pay_postcode'],
+                $billing_address=array('fname'=>$req['firstname'],
+                                       'lname'=>$req['lastname'],
+                                       'address1'=>$req['address_1'],
+                                       'address2'=>$req['address_2'],
+                                       'city'=>$req['city'],
+                                       'country'=>$req['country'],
+                                       'zip_code'=>$req['postcode'],
                                        'address_type'=>'billing',
                                        'user_id'=>Auth::user()->id,
                                        'created_on'=>date('Y-m-d h:i:s')
                                         );
-               Site_model::insert_get_id('address_master',$billing_address);
+               $address_id=Site_model::insert_get_id('address_master',$billing_address);
+              
+               if(isset($req['is_shipping'])){
+                    $this->addShippingAddress($req);
+                    $this->updateCartOrderAddress($req);
+               }else{
+                    $this->updateCartOrderInfo($req,'billing');
+               }
+               return $address_id;
     }
      protected function addShippingAddress($req){
                 $user_id=Auth::user()->id;
-                $billing_address=array('fname'=>$req['shipping_firstname'],
-                                       'lname'=>$req['shipping_lastname'],
-                                       'address1'=>$req['shipping_address_1'],
-                                       'address2'=>$req['shipping_address_2'],
-                                       'city'=>$req['shipping_city'],
-                                       'country'=>$req['shipping_country'],
-                                       'zip_code'=>$req['shipping_postcode'],
+                $billing_address=array('fname'=>$req['firstname'],
+                                       'lname'=>$req['lastname'],
+                                       'address1'=>$req['address_1'],
+                                       'address2'=>$req['address_2'],
+                                       'city'=>$req['city'],
+                                       'country'=>$req['country'],
+                                       'zip_code'=>$req['postcode'],
                                        'address_type'=>'shipping',
                                        'user_id'=>Auth::user()->id,
                                        'created_on'=>date('Y-m-d h:i:s')
                                         );
-               Site_model::insert_get_id('address_master',$billing_address);
+               $address_id=Site_model::insert_get_id('address_master',$billing_address);
+               if(isset($req['is_billing'])){
+                    $this->addBillingAddress($req);
+                    $this->updateCartOrderAddress($req);
+               }else{
+                    $this->updateCartOrderInfo($req,'shipping');
+              
+               }
+               return $address_id;
     }
-    protected function getAddressinfo($user_id,$type){
-        $address_info=DB::Select('select * from cc_address_master where user_id="'.Auth::user()->id.'" and address_type="'.$type.'"');
+    protected function getAddressinfo($type,$latest=null,$address_id=null){
+        
+        if($latest==null && $address_id==null){
+             $where=' where user_id="'.Auth::user()->id.'" and address_type="'.$type.'"';
+        }
+        if($latest!=null && $address_id==null){
+               $where=' where user_id="'.Auth::user()->id.'" and address_type="'.$type.'" order by address_id desc LIMIT 0,1';
+        }
+        if($latest==null && $address_id!=null){
+            $where=' where address_id="'.$address_id.'"';
+
+        }
+        $address_info=DB::Select('select * from cc_address_master '.$where.'');
         return $address_info;
     }
+    private function updateCartOrderInfo($req,$type){
+          if($type=="billing"){
+          $data=array('pay_firstname'=>$req['firstname'],
+                      'pay_lastname'=>$req['lastname'],
+                      'pay_address_1'=>$req['address_1'],
+                      'pay_address_2'=>$req['address_2'],
+                      'pay_city'=>$req['city'],
+                      'pay_zipcode'=>$req['country'],
+                      'pay_country'=>$req['postcode'],
+                       );
+          }else{
+           $data=array('shipping_firstname'=>$req['firstname'],
+                      'shipping_lastname'=>$req['lastname'],
+                      'shipping_address_1'=>$req['address_1'],
+                      'shipping_address_2'=>$req['address_2'],
+                      'shipping_city'=>$req['city'],
+                      'shipping_postcode'=>$req['country'],
+                      'shipping_country'=>$req['postcode'],
+                       );
+          }
+         $cond=array('cart_id'=>$req['cart_id']);
+         Site_model::update_data('cart',$data,$cond);
+        return true;    
+     }
+     private function updateCartOrderAddress($req){
+         $data=array('pay_firstname'=>$req['firstname'],
+                      'pay_lastname'=>$req['lastname'],
+                      'pay_address_1'=>$req['address_1'],
+                      'pay_address_2'=>$req['address_2'],
+                      'pay_city'=>$req['city'],
+                      'pay_zipcode'=>$req['country'],
+                      'pay_country'=>$req['postcode'],
+                      'shipping_firstname'=>$req['firstname'],
+                      'shipping_lastname'=>$req['lastname'],
+                      'shipping_address_1'=>$req['address_1'],
+                      'shipping_address_2'=>$req['address_2'],
+                      'shipping_city'=>$req['city'],
+                      'shipping_postcode'=>$req['country'],
+                      'shipping_country'=>$req['postcode'],
+                       );
+        $cond=array('cart_id'=>$req['cart_id']);
+        Site_model::update_data('cart',$data,$cond);
+        return true;   
+     }
 }
