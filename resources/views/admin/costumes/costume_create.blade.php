@@ -43,8 +43,24 @@
 				<div class="box-header">
 					<h3 class="box-title col-md-12 heading-agent">Add Costume</h3>
 				</div>
+				
 				<div class="box-body">
+<<<<<<< HEAD
+				@if (Session::has('error'))
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        {{ Session::get('error') }}
+                    </div>
+                    @elseif(Session::has('success'))
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        {{ Session::get('success') }}
+                    </div>
+                    @endif
+					
+=======
 
+>>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 		            <div class="alert alert-danger alert-dismissable" style="display:none" >
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>

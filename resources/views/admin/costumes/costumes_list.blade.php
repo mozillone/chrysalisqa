@@ -21,7 +21,7 @@
     <li class="active">Customes List</li>
   </ol>
 </section>
-<section class="content" ng-controller="UsersController">
+<section class="content" ng-controller="CostumesController">
     <div class="row">
         <div class="col-md-12">
          @if (Session::has('error'))

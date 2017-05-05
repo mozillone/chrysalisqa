@@ -67,6 +67,7 @@ class CreateCostumeController  extends Controller {
 		->where('attribute_id','=','14')->get();
 		$returnpolicy=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','15')->get();
+
 		$charities=DB::table('charities')->select('id as id','name as name','image as image')->where('status','1')->get();
 		return view('frontend.costumes.costume_create_two',compact('categories','bodyanddimensions','bodydimensions_val','body_height_ft',
 		'body_height_in','body_weight_lbs','body_chest_in','body_waist_lbs','cosplayone','cosplaytwo','cosplaythree','cosplayfour',
@@ -877,8 +878,15 @@ class CreateCostumeController  extends Controller {
 
 		}
 	public function requestaBag(){
-		$state_table = DB::table('states')->get(['name','abbrev']);
-	  return view('frontend.costumes.requestabag')->with('states',$state_table);
+		$this->data = array();
+		$this->data['state_table'] = DB::table('states')->get(['name','abbrev']);
+		if (Auth::check()){
+			$userid 		= Auth::user()->id;
+			$this->data['get_details']    = DB::table('users')->where('id',$userid)->first();
+			$this->data['basic_address']  = Db::table('address_master')->where('user_id',$userid)->where('address_type','basic')->first();
+
+		}
+	  return view('frontend.costumes.requestabag')->with('total_data',$this->data);
 	}
 
 	public function Postrequestabag(Request $request){
