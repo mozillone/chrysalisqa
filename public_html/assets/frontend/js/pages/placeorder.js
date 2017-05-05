@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-    $("#placeorder").validate({
+    $("#shipping_address").validate({
         	rules: {
 				shipping_firstname:{
 					 	required: true,
@@ -26,6 +26,10 @@ $(document).ready(function() {
 				shipping_country:{
 					required: true,
 				},
+		}
+	});
+	    $("#billing_address").validate({
+        	rules: {
 				pay_firstname:{
 					 	required: true,
 						maxlength: 50,
@@ -50,6 +54,10 @@ $(document).ready(function() {
 				pay_country:{
 					required: true,
 				},
+		}
+	});
+    $("#billing_address").validate({
+    	rules: {
 				cardholder_name:{
 					required: true,
 	               	maxlength: 50,
@@ -129,5 +137,27 @@ $(document).ready(function() {
 
 
 		}, 	 $.validator.messages.cc_chk);
+    $(document).on('click','.shipping_popup',function(){
+    	$('#shipping_popup').modal('show');
+    		$.ajax({
+			type: 'GET',
+			url: '/get/shipping-adress',
+			uccess: function(response){
+					console.log(response);
+				}
+			});	
+    });
+    $(document).on('submit','#shipping_address',function(){
+		var data=$(this).serializeArray();
+		$.ajax({
+			type: 'POST',
+			url: '/add/shipping-adress',
+			data: data,
+			success: function(response){
+					alert("test");
+				}
+			});	
+
+	 });
 
 })
