@@ -76,6 +76,12 @@ class UserController extends Controller
       $title="Users List";
       return view('admin.usermanagemnt.customers_list')->with('title',$title);
     }
+	/****costumes list coding starts here***/
+	public function customesList()
+    {
+      $title="Costumes List";
+      return view('admin.costumes.costumes_list')->with('title',$title);
+    }
     public function customersListData(Request $request)
     {
         $req=$request->all();
@@ -121,6 +127,57 @@ class UserController extends Controller
         return response()->success(compact('users','credit'));
   
     }
+<<<<<<< HEAD
+	public function customesListData(Request $request)
+    {
+        $req=$request->all();
+		$userslist=DB::table('costumes as costume')
+		->leftJoin('users as user','users.id','=','costume.created_by')
+		->select('costume.id as costumeid','costume.name as costumename','costume.name as costumename','user.display_name as customername',
+		'user.email','user.active','user.deleted',
+		DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as date_format'),
+		DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as lastlogin'))
+		->orderby('user.created_at','DESC')
+		->where('user.role_id','!=','1');
+		if(!empty($req['search'])){
+		
+		if(!empty($req['search']['name']) ){
+		$userslist->where('user.display_name', 'LIKE', "%".$req['search']['name']."%");
+		 }
+		 if(!empty($req['search']['email']) ){
+		$userslist->where('user.email',$req['search']['email']);
+		 }
+		 if(!empty($req['search']['phone']) ){
+		$userslist->where('user.phone_number',$req['search']['phone']);
+		 }
+		 if(isset($req['search']['status'])){
+            if($req['search']['status']==""){
+			$userslist->whereIn('user.active',array('0','1'));
+             }
+            if($req['search']['status']!=""){
+              $userslist->where('user.active',$req['search']['status']);
+            }
+          }
+		 if(isset($req['search']['count'])){
+            if($req['search']['count']==""){
+			$userslist->whereIn('user.deleted',array('0','1'));
+             }
+            if($req['search']['count']!=""){
+              $userslist->where('user.deleted',$req['search']['count']);
+            }
+          }
+
+		  }
+		 $users=$userslist->get();
+		
+		//->where('users.role_id','!=',1);
+		//$users=$userslist->get();
+		//$userslist=DB::table('users')->select('users.*')->order_by('users.created_at','DESC')->get();
+       // $users = DB::select('SELECT user.id,user.display_name as name,user.phone_number,user.email,user.active,DATE_FORMAT(user.created_at,"%m/%d/%y %h:%i %p") as date, FROM `cc_users` as user where '.$where.' ORDER BY user.created_at DESC');
+        return response()->success(compact('users','credit'));
+  
+    }
+=======
     public function userCsvExport(Request $request){
 	
 		$req = $request->all();
@@ -134,6 +191,7 @@ class UserController extends Controller
 			$this->csv->csvExportFile($data);
 		}
 	}
+>>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
  	public function customerAdd(Request $request)
     {
 		$req=$request->all(); 
@@ -175,8 +233,9 @@ class UserController extends Controller
 				} 
 	}
 	public function customerEdit($id){
+	$title="Users List";
 		$user = User::find($id);
-		return view('admin.usermanagemnt.customer_edit')->with('user_id',$id)->with('user', $user);
+		return view('admin.usermanagemnt.customer_edit')->with('user_id',$id)->with('user', $user)->with('title',$title);
 	}
 	public function customerUpdated(Request $request){
 		$req=$request->all();

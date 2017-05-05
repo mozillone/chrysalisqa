@@ -44,7 +44,6 @@
 <!--- progressbar section End -->
 
 <p class="prog-txt">Please fill in the following field <span>as accurately</span> as you can.</p>
-
 </div>	
 
 <div class="prog-form-rm">
