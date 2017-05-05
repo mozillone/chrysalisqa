@@ -929,6 +929,7 @@ class CreateCostumeController  extends Controller {
 					'state'=>$request->state,
 					'zip_code'=>$request->zipcode,
 					'phone'=>$cus_phone,
+					'user_id'=>$userid,
 					'address_type'=>'request_a_bag','created_on'=>date('y-m-d H:i:s'));
 				$ref_no = mt_rand(10000, 99999);
 				//echo $ref_no;die;
