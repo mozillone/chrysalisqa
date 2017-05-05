@@ -10,14 +10,7 @@
 
 <section class="content">
   <div class="box box-default">
-    <div class="box-header with-border">
-      <h3 class="box-title">@section('heading')@show</h3>
-      <div class="box-tools pull-right">
-              <a href="/admin/countries/create" type="button" class="btn btn-xs btn-block btn-success">@section('create')
-           
-       @show</a>
-      </div>
-    </div>
+    
     <!-- /.box-header -->
     <div class="box-body ">
       <!-- <div>&nbsp;</div> -->
