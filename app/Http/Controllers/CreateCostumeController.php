@@ -67,11 +67,8 @@ class CreateCostumeController  extends Controller {
 		->where('attribute_id','=','14')->get();
 		$returnpolicy=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','15')->get();
-<<<<<<< HEAD
-		$charities=DB::table('charities')->select('id as id','name as name')->get();
-=======
+
 		$charities=DB::table('charities')->select('id as id','name as name','image as image')->where('status','1')->get();
->>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 		return view('frontend.costumes.costume_create_two',compact('categories','bodyanddimensions','bodydimensions_val','body_height_ft',
 		'body_height_in','body_weight_lbs','body_chest_in','body_waist_lbs','cosplayone','cosplaytwo','cosplaythree','cosplayfour',
 		'cosplayfive','cosplayone_values','cosplaytwo_values','cosplaythree_values','cosplayfour_values','cosplayfive_values',

@@ -35,33 +35,6 @@
      <li id="step4"><span class="s-head">Step 4</span> <span>Review <br/>Preferences</span></li>	 
      </ul>
 </div>	
-<<<<<<< HEAD
-<!--Create costume image code starts here-->
-<p class="prog-txt">Please upload the  <span>the minimum required photos</span> of your costume in front,back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
-	<div class="upload-photo-blogs">
-		<h2 class="prog-head">Upload Photos</h2>
-		<div class="threeblogs">
-		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint ">
-			<p>Tip Respect your costume’s  integrity with crisp, clear photos.Placing them in settings that correspond with their theme can encourage a sale.</p>
-		</div>
-		<div class="col-md-3 col-sm-3 col-xs-12 ">
-		<h4>01.Front View</h4>
-		<div class=" up-blog">
-			
-		</div>
-			</div>
-			<div class="col-md-3 col-sm-3 col-xs-12 ">
-			<h4>02.Back View</h4>
-			<div class=" up-blog">
-			
-		</div>
-			</div>
-			<div class="col-md-3 col-sm-3 col-xs-12 ">
-			<h4>03.Detail/Accessories</h4>
-			<div class=" up-blog">
-			
-		</div>
-=======
 <!--- mobile progressbar section end here -->
 
 <div id="total_forms_div">
@@ -115,24 +88,11 @@
 		</div>
 		<span id="file3_error" style="color:red"></span>
 
->>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 			</div>
 		
 			</div>
 				<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 				
-<<<<<<< HEAD
-				<form>
-				<span id="fileselector">
-					<label class="btn btn-default upload_more_btn" for="upload-file-selector">
-						<input id="upload-file-selector" type="file">
-						<i class="fa_icon icon-upload-alt margin-correction"></i> <i class="fa fa-plus" aria-hidden="true"></i> Up load More
-					</label>
-				</span>
-			</form>
-					</div>
-						
-=======
 		
 			<div class="col-md-12 col-sm-12 col-xs-12 ">
 			<p id="other_thumbnails">
@@ -153,29 +113,19 @@
 			</div>
 					</div>
 				
->>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 			</div>
 	 
 <!--- progressbar section End -->
 <!--Second div code starts here-->
-<<<<<<< HEAD
-=======
 
 <!-- </div> -->
 <div id="costume_description">
->>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 
 <p class="prog-txt desk-pro-text">Please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
 <h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">step 2</h2>
 <h2 class="prog-head">Costume Description</h2>
-<<<<<<< HEAD
-</div>
-<div>
-<form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="createcostumetwo" id="createcostumetwo" method="post">	
-=======
 <p class="prog-txt mobile-pro-text">Please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_description_form" id="costume_description_form" method="post"> -->	
->>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 
 <div class="prog-form-rm">
 <div class="col-md-6">
@@ -511,180 +461,6 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 
 
 <!--costume three code ends here-->
-<<<<<<< HEAD
-<p class="prog-txt">Please fill in the following field <span>as accurately</span> as you can.</p>
-</div>
-</div>
-<div class="prog-form-rm">
-<div class="col-md-6">
-<h2 class="prog-head">Pricing</h2>
-<div class="form-rms">
-<p class="form-rms-que">01. Price</p>
-<div class="form-rms-input">
-<p class="form-rms-rel"><input type="text" class="input-rm100" name="price" id="price" value="$"><span class="form-rms-abs"><i class="fa fa-usd" aria-hidden="true"></i></span></p>
-<p class="cst2-textl2">Not Sure? <i class="fa fa-info-circle" aria-hidden="true"></i></p></div>
-
-</div>
-
-<div class="form-rms">
-<p class="form-rms-que">02. Quantity</p>
-<p class="form-rms-input"><select  name="quantity" id="quantity" class="cst2-select50">
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-</select></p>
-</div>
-
-
-<div class="form-rms">
-<p class="form-rms-que">03. Shipping Option <i class="fa fa-info-circle" aria-hidden="true"></i></p>
-<p class="form-rms-input"><select name="shipping" id="shipping">
-<option value="">Select Shipping Options</option>
-@foreach($shippingoptions as $index=>$shipping)
-<option value="{{$shipping->optionid}}">{{$shipping->value}}</option>
-@endforeach
-
-</select></p>
-</div>
-
-
-
-
-</div>
-
-<div class="col-md-6">
-<h2 class="prog-head">Package Information</h2>
-<div class="form-rms">
-<p class="form-rms-que">01. Weight Of Packaged Item</p>
-<p class="form-rms-input">
-<select name="packageditems" id="packageditems" >
-<option value="">Select Weight Of Packaged Item</option>
-@foreach($packageditems as $index=>$packageitems)
-<option value="{{$packageitems->optionid}}">{{$packageitems->value}}</option>
-@endforeach
-</select>
-</p>
-</div>
-
-<div class="form-rms">
-<p class="form-rms-que">02. Lorem Ipsum is simply dummy</p>
-<div class="form-rms-input">
-@foreach($dimensions as $index=>$dimensions)
-<?php
-$value=$dimensions->value;
-$headingexplode=explode('-',$value);
-$heading=$headingexplode[0];
-$heading_value=$headingexplode[1];
-?>
-<p class="form-rms-dim"><?php echo ucfirst($heading); ?> <br/> <span class="form-rms-he1"><input type="text"> <span><?php echo $heading_value; ?> x</span></span></p>
-@endforeach
-</div>
-</div>
-
-<div class="form-rms">
-<p class="form-rms-que">03. Type</p>
-<p class="form-rms-input">
-<select>
-<option value="">Select Type</option>
-@foreach($type as $index=>$type)
-<option value="{{$type->optionid}}">{{$type->value}}</option>
-@endforeach
-</select>
-</p>
-
-</div>
-<div class="form-rms">
-<p class="form-rms-que">04. Service</p>
-<p class="form-rms-input">
-<select>
-<option value="">Select Service</option>
-@foreach($service as $index=>$service)
-<option value="{{$service->optionid}}">{{$service->value}}</option>
-@endforeach
-</select>
-</p>
-<p class="form-rms-small1">Estimated Shipping Cost:$6.80 -$12.40(varies by buyer's location)</p>
-<p class="cst2-rms-chck"><input type="checkbox"> Offer free shipping</p>
-</div>
-
-
-
-</div>
-<p class="prog-txt">Lorem Ipsum is simply dummy text of <span>the printing and typesetting</span> industry.</p>
-<h2 class="prog-head">Review Your Preferences</h2>
-<div class="prog-form-rm">
-<div class="col-md-6">
-
-<div class="form-rms">
-<p class="form-rms-que">01. Item Location</p>
-<p class="form-rms-input"><input type="text"></p>
-</div>
-
-<div class="form-rms">
-<p class="form-rms-que">02. Handling Time <i class="fa fa-info-circle fa-info-rm" aria-hidden="true"></i></p>
-<p class="form-rms-input">
-<select name="handlingtime" id="handlingtime">
-<option value="">Select Handling Time</option>
-@foreach($handlingtime as $index=>$handlingtime)
-<option value="{{$handlingtime->optionid}}">{{$handlingtime->value}}</option>
-@endforeach
-</select>
-</p>
-</div>
-
-
-<div class="form-rms">
-<p class="form-rms-que">03. Return Policy</p>
-<p class="form-rms-input">
-<select name="returnpolicy" id="returnpolicy" >
-<option value="">Select Return Policy</option>
-@foreach($returnpolicy as $index=>$returnpolicy)
-<option value="{{$returnpolicy->optionid}}">{{$returnpolicy->value}}</option>
-@endforeach
-</select>
-</p>
-</div>
-
-</div>
-
-<div class="col-md-6">
-<div class="form-rms">
-<p class="form-rms-que form-rms-que1">04. Donate a Portion to Charity</p>
-<p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However,if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
-<p class="ct3-rms-text">By Choosing to donate,I agree and accept Chrysalis Terms & Conditions.</p>
-<p class="ct3-rms-head">Donation Amount</p>
-<div class="form-rms-input">
-<p class="form-rms-rel1"><select class="cst2-select80"><option>10%</option><option>20%</option><option>30%</option></select></p>
-<p class="cst3-textl2"><i class="fa fa-usd" aria-hidden="true"></i>5.90</p></div>
-<p class="ct3-rms-head">Donate to</p>
-<ul class="ct3-list">
-@foreach($charities as $index=>$charity)
-<li><img src="images/cst3.png" alt="{{$charity->name}}" /><input type="radio" name="{{$charity->name}}" /></li>
-@endforeach
-</ul>
-<p class="cst2-rms-chck"><input type="checkbox"> I would like to suggest another charity organization</p>
-</div>
-
-<div class="form-rms">
-<p class="ct3-rms-head">Please Specify:</p>
-<p class="form-rms-input"><input type="text"  name="organzation_name" id="organzation_name" autocomplete="off" placeholder="Organization Name"></p>
-</div>
-
-
-
-
-
-<div class="form-rms-btn">
-<button type="button" class="btn-rm-nxt">I'm Finished!</button>
-<button type="button" class="btn-rm-back"><span>Back</span></button>
-=======
 </div>
 </div>
 <div class="form-rms-btn">
@@ -692,7 +468,6 @@ $heading_value=$headingexplode[1];
 
 <!-- </form> -->
 <a type="button" id="costume_description_next" class="btn-rm-nxt nxt">Next Step</a>
->>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 </div>
 </div>
 <div class="prog-form-rm" id="pricing_div">
@@ -712,16 +487,6 @@ $heading_value=$headingexplode[1];
 <p class="cst2-textl2">Not Sure? <i class="fa fa-info-circle" aria-hidden="true"></i></p></div>
 <span id="priceerror" style="color:red"></span>
 </div>
-<<<<<<< HEAD
-</div>
-</div>	
-</div>	
-	</form>
-<!---Second div code ends here-->
-	
-	</body>
-</html>
-=======
 
 <div class="form-rms">
 <p class="form-rms-que">02. Quantity</p>
@@ -946,7 +711,6 @@ Your costume has successfully been uploaded.</p>
 <!---Second div code ends here-->
 	
 
->>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
