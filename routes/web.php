@@ -53,6 +53,7 @@ Route::get('/getMiniCartProducts', array('as' => '','uses' => 'CartController@ge
 
 /*******************Checkout Functionality stat here *********/
 Route::any('checkout', array('as' => '','uses' => 'CheckoutController@checkout'));
+Route::any('/checkout/placeorder', array('as' => 'place-order','uses' => 'CheckoutController@placeOrder'));
 Route::post('/add/credit-card', array('as' => 'add-credit-card','uses' => 'CheckoutController@addCreditCard'));
 /*******************Checkout Functionality end here *********/
 
@@ -78,6 +79,7 @@ Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeCo
 /* Request a bag starts here*/
 Route::any('/costume/request-a-bag', array('as' => '','uses' => 'CreateCostumeController@requestaBag'));
 Route::any('/costume/postrequestabag', array('as' => '','uses' => 'CreateCostumeController@Postrequestabag'));
+Route::post('/postrequestabaglogin', ['as' => 'requestabaglogin.post','uses'=>'AuthController@postrequestabagLogin']);
 
 /* Request a bag ends here*/
 

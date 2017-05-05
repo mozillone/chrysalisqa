@@ -50,7 +50,84 @@ $(document).ready(function() {
 				pay_country:{
 					required: true,
 				},
+				cardholder_name:{
+					required: true,
+	               	maxlength: 50,
+				},
+				cc_number:{
+	                required: true,
+	                number:true,
+	                cc_chk:true,
+	            },  
+                exp_month:{
+                    required: true,
+                },
+                exp_year:{
+                    required: true,
+                },
+                cc_cvn:{
+                    required: true,  
+                    number:true,
+                    minlength:3,
+                    maxlength: 4,
+                }                    
+            
 			},
-			errorClass: 'error',
+			messages: 
+            {
+             cc_cvn: 
+                {    
+                     number:'Please enter valid CVV',   
+                     minlength:'Please enter valid CVV',
+                     maxlength:'Please enter valid CVV',
+              },
+             cc_number: 
+                {
+                     maxlength:'Please enter valid CC',
+                     minlength:'Please enter valid CC',
+                     number:'Please enter valid CC',
+                     required:'Please enter valid CC',
+                 },
+          },
+          errorClass: 'error',
 		});
+    jQuery.validator.addMethod("cc_chk", function(value, element) 
+		{
+
+		 	result = $('#cc_number').validateCreditCard();
+
+			 if(result.valid  == true)
+			 {
+					
+					var name 		= result.card_type.name
+
+					if(name == 'amex')
+					{
+						name = 'American Express';	
+					}
+					else if(name == 'visa')
+					{
+						name = 'Visa';	
+					}
+					else if(name == 'mastercard')
+					{
+						name = 'MasterCard';	
+					}		
+					
+				 
+			   return true;
+			 }
+			 else
+			{
+				 $.validator.messages.cc_chk =  "Please enter valid credit card.";
+
+				return false;
+			 }
+
+			 
+			 
+
+
+		}, 	 $.validator.messages.cc_chk);
+
 })

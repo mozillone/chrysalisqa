@@ -11,6 +11,8 @@ use Hash;
 use DB;
 use Response;
 use Illuminate\Support\Facades\Input;
+use Validator;
+use App\User;
 
 class CreateCostumeController  extends Controller {
 
@@ -434,15 +436,15 @@ class CreateCostumeController  extends Controller {
 			$file_name1 = str_random(10).'.'.$request->file1->getClientOriginalExtension();
 			$file_name2 = str_random(10).'.'.$request->file2->getClientOriginalExtension();
 			$file_name3 = str_random(10).'.'.$request->file3->getClientOriginalExtension(); 
-				$source_image_path=public_path('costumers_images');
-	            $thumb_image_path1=public_path('costumers_images/Original');
+				$source_image_path=public_path('costumers_images/Original');
+	           // $thumb_image_path1=public_path('costumers_images/Original');
 	            $thumb_image_path2=public_path('costumers_images/Medium');
 	            $thumb_image_path3=public_path('costumers_images/Small');
 	            //file1 moving to folder
 	            $request['file1']->move($source_image_path, $file_name1);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path1.'/'.$file_name1,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path2.'/'.$file_name1,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path3.'/'.$file_name1,30,30);
+	            //$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path1.'/'.$file_name1,150,150);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path2.'/'.$file_name1,475,650);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path3.'/'.$file_name1,150,150);
 	            //inserting in db
 	            $file_db_array1 = array('costume_id'=>$costume_id,
 	            	'image'=>$file_name1,
@@ -452,9 +454,9 @@ class CreateCostumeController  extends Controller {
 	            $file_db=DB::table('costume_image')->insert($file_db_array1);
 	            //file2 moving to folder
 	            $request['file2']->move($source_image_path, $file_name2);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path1.'/'.$file_name2,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path2.'/'.$file_name2,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path3.'/'.$file_name2,30,30);
+	            //$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path1.'/'.$file_name2,150,150);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path2.'/'.$file_name2,475,650);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path3.'/'.$file_name2,150,150);
 	            //inserting in db
 	            $file_db_array2 = array('costume_id'=>$costume_id,
 	            	'image'=>$file_name2,
@@ -464,9 +466,9 @@ class CreateCostumeController  extends Controller {
 	            $file_db=DB::table('costume_image')->insert($file_db_array2);
 	            //file3 moving to folder
 	            $request['file3']->move($source_image_path, $file_name3);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path1.'/'.$file_name3,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path2.'/'.$file_name3,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path3.'/'.$file_name3,30,30);
+	           // $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path1.'/'.$file_name3,150,150);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path2.'/'.$file_name3,475,650);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path3.'/'.$file_name3,150,150);
 
 	            //inserting in db
 	            $file_db_array3 = array('costume_id'=>$costume_id,
@@ -882,63 +884,81 @@ class CreateCostumeController  extends Controller {
 	public function Postrequestabag(Request $request){
 		/*echo "<pre>";
 		print_r($request->all());die;*/
-		$userid 		=Auth::user()->id;
-		$is_payout 		= $request->is_payout;
-		$cus_name  		= $request->full_name;
-		$cus_email 		= $request->email_address;
-		$cus_phone 		= $request->phone_number;
+
 		
-		if (isset($request->is_return) && !empty($request->is_return)) {
-			$is_return 		= $request->is_return;
+		$cus_email 		= $request->email_address;
+		$email_check    = DB::table('users')->where('email',$cus_email)->count();
+		//echo "<pre>";print_r($email_check);die;
+		if ($email_check == 1) {
+			$req_bag_session = Session::get('auth_user_id_req_bag');
+			
+			if (Auth::check() || isset($req_bag_session) && !empty($req_bag_session)) {
+				$userid 		= Auth::user()->id;
+				$is_payout 		= $request->is_payout;
+				$cus_name  		= $request->full_name;
+				$cus_email 		= $request->email_address;
+				$cus_phone 		= $request->phone_number;
+				
+				if (isset($request->is_return) && !empty($request->is_return)) {
+					$is_return 		= $request->is_return;
+				}else{
+					$is_return 		= "0";
+				}
+				if (isset($request->is_recycle) && !empty($request->is_recycle)) {
+					$is_recycle 		= $request->is_recycle;
+				}else{
+					$is_recycle 		= "0";
+				}
+				if (isset($request->address2) && !empty($request->address2)) {
+					$address2 		= $request->address2;
+				}else{
+					$address2 		= "";
+				}
+				$addres_array = array('fname'=>$cus_name,
+					'address1'=>$request->address1,
+					'address2'=>$address2,
+					'city'=>$request->city,
+					'state'=>$request->state,
+					'zip_code'=>$request->zipcode,
+					'phone'=>$cus_phone,
+					'address_type'=>'request_a_bag','created_on'=>date('y-m-d H:i:s'));
+				$ref_no = mt_rand(10000, 99999);
+				//echo $ref_no;die;
+				$addres_insert=DB::table('address_master')->insertGetId($addres_array);
+
+				$conversation_array = array('user_one'=>$userid,
+					'user_two'=>'1',
+					'status'=>'active',
+					'created_at'=>date('y-m-d H:i:s'));
+				$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
+
+				$requestabag_array = array('user_id'=>$userid,
+					'ref_no'=>$ref_no,
+					'addres_id'=>$addres_insert,
+					'conversation_id'=>$conversation_insert,
+					'is_payout'=>$is_payout,
+					'is_return'=>$is_return,
+					'is_recycle'=>$is_recycle,
+					'status'=>'requested',
+					'cus_name'=>$cus_name,
+					'cus_email'=>$cus_email,
+					'cus_phone'=>$cus_phone,
+					'created_at'=>date('y-m-d H:i:s'),
+					);
+
+				$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
+
+
+				return "success";
+
+			}else{
+
+				return "login";
+			}
 		}else{
-			$is_return 		= "0";
+			return "register";
 		}
-		if (isset($request->is_recycle) && !empty($request->is_recycle)) {
-			$is_recycle 		= $request->is_recycle;
-		}else{
-			$is_recycle 		= "0";
-		}
-		if (isset($request->address2) && !empty($request->address2)) {
-			$address2 		= $request->address2;
-		}else{
-			$address2 		= "";
-		}
-		$addres_array = array('fname'=>$cus_name,
-			'address1'=>$request->address1,
-			'address2'=>$address2,
-			'city'=>$request->city,
-			'state'=>$request->state,
-			'zip_code'=>$request->zipcode,
-			'phone'=>$cus_phone,
-			'address_type'=>'request_a_bag','created_on'=>date('y-m-d H:i:s'));
-		$ref_no = mt_rand(10000, 99999);
-		//echo $ref_no;die;
-		$addres_insert=DB::table('address_master')->insertGetId($addres_array);
-
-		$conversation_array = array('user_one'=>$userid,
-			'user_two'=>'1',
-			'status'=>'active',
-			'created_at'=>date('y-m-d H:i:s'));
-		$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
-
-		$requestabag_array = array('user_id'=>$userid,
-			'ref_no'=>$ref_no,
-			'addres_id'=>$addres_insert,
-			'conversation_id'=>$conversation_insert,
-			'is_payout'=>$is_payout,
-			'is_return'=>$is_return,
-			'is_recycle'=>$is_recycle,
-			'status'=>'requested',
-			'cus_name'=>$cus_name,
-			'cus_email'=>$cus_email,
-			'cus_phone'=>$cus_phone,
-			'created_at'=>date('y-m-d H:i:s'),
-			);
-
-		$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
-
-
-		return "success";
-
 	}
+
+	
 }
