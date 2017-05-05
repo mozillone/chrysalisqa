@@ -1,11 +1,46 @@
 @extends('/frontend/app')
 @section('styles')
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+<style>
+.list_products.wish_lists .col-md-3.col-sm-4.col-xs-6 {
+    width: 20%;
+}
+p.list-sec-rm1.fav_costume {
+    text-transform: uppercase;
+}
+p.list-sec-rm1.fav_costume i {
+    color: #ee4266;
+}
+p.list-sec-rm1.fav_costume sapn.active {
+    margin-right: 5px;
+}
+.fav_social a i {
+    color: #60c5ac;
+    margin-right: 10px;    font-size: 16px;
+}
+.wish_lists .prod_box .slider_cnt p {
+    color: #000;
+    font-size: 14px;
+    font-family: Proxima-Nova-Regular;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+.wish_lists .prod_box .slider_cnt p.fav-drs-size {
+    font-size: 13px;
+    color: #b2b2b2;
+    font-family: Proxima-Nova-Semibold;
+    margin: 3px 0px 10px 0px;
+}
+.fav_social {
+    margin-top: 15px;
+}
+</style>
  @endsection
 @section('content')
  	<section class="content create_section_page">
 		<div class="prodcut_list_page">
 			<div class="container">
+			<div class="row">
 				<div class="col-md-12 col-sm-12">
 					<div class="list-sec-rm">
 						<div class="col-md-6">
@@ -16,9 +51,9 @@
 						</div>
 
 					</div>
-
+					</div>
 				</div>
-			<div class="list_products">
+			<div class="list_products wish_lists">
 				<div class="row">
 				@if (Session::has('error'))
 				            <div class="alert alert-danger alert-dismissable">
@@ -51,9 +86,17 @@
 					            </div>
 					        </div>
 					        <div class="slider_cnt">
-					            <h4><a href="/shop/{{$wish->costume_id}}/{{$wish->parent_cat_name}}/{{$wish->cat_name}}/{{$wish->name}}">{{$wish->name}}</a></h4>
+					            <h4><a href="/shop/{{$wish->costume_id}}/{{$wish->parent_cat_name}}/{{$wish->cat_name}}/{{$wish->name}}"></a></h4>
+								<p>Capten jack Superheroes & Villains</p>
+								<p class="fav-drs-size">Boys Small</p>
 					            <p>{{$wish->price}}</p>
+								<div class="fav_social">
+								 <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook fa-1x social"></i></a>
+								<a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter fa-1x social"></i></a>
+								<a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-envelope fa-1x social"></i></a>
+								
 					        </div>
+							</div>
 					    </div>
 					</div>
 				@endforeach

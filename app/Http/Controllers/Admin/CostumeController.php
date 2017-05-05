@@ -231,7 +231,7 @@ class CostumeController extends Controller
 		//Check whether the costume inserted by admin or not if the user is selected insert the user id else insert the admin as costumer
 		if($customer_name!=0){
 		$customerid=$customer_name;
-		$customer_group="user";
+		$customer_group="admin";
 		}else{
 		$customerid="1";
 		$customer_group="admin";

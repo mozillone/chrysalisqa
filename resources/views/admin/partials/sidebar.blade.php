@@ -99,6 +99,20 @@
           </li>
         </ul>
       </li>
+
+      <li {{ (Request::is('requestabag') ? 'class=active' : '') }}>
+        <a href="javascript:void(0)">
+           <i class="fa fa-home" aria-hidden="true"></i> <span>Request a Bag</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu">
+          <li {{ (Request::is('requestabag') ? 'class=active' : '') }}>
+            <a href="{{route('manage-bags')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Manage Bags</span>
+            </a>
+          </li>
+        </ul>
+        <!--  -->
+      </li>
 	 
     </ul>
   </section> 

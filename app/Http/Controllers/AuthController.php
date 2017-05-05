@@ -14,7 +14,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Redirect;
 use Socialite;
 use URL;
-
+use Cookie;
 class AuthController extends Controller {
 
 	protected $auth;
@@ -80,12 +80,13 @@ class AuthController extends Controller {
 				}
 				  $currentCookieKeyID=SiteHelper::currentCookieKey();
 				  if($currentCookieKeyID!="0"){
-				  	Cart::updateCartToUser();
+				   	Cart::updateCartToUser();
 				  }
-				if(Session::has('is_loginPage')){
-					return Redirect::to('/dashboard');
-				}else{
-					return Redirect::back();
+				 $cookie = \Cookie::forget('min-cart');
+				 if(Session::has('is_loginPage')){
+					return Redirect::to('/dashboard')->withCookie($cookie);
+				 }else{
+						return Redirect::back()->withCookie($cookie);
 				}
 			}
 			else 
@@ -431,5 +432,64 @@ class AuthController extends Controller {
 		Session::flush();
 		Auth::logout();
 		return Redirect::to('/');
+	}
+
+	public function postrequestabagLogin(Request $request){
+		$req = $request->all();
+   	$rule  =  array(  
+	              'email' => 'required|email',
+                  'password' => 'required',
+                 );
+    $validator = Validator::make($req,$rule);
+    if ($validator->fails()) {
+		return Redirect::to('/login')
+		->withErrors($validator)
+		->withInput()->send();
+	}
+
+	 if (!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) === false) {
+		  $field='email';
+		} else {
+		   Session::flash('Invalid Email address'); 
+		}
+	 	$request->merge([$field => $request->input('email')]);
+ 		$credentials = $request->only($field,'password');
+		$user=User::where("email","=", $request->input('email'))->where('role_id','!=',"1")->count();
+		if($user){
+			if ($this->auth->attempt($credentials, $request->has('remember')))
+			{
+				
+				$activation=User::where("email","=", $request->input('email'))->where("active","=", "0")->count();
+	
+				if($activation){
+					Auth::logout();
+					Session::flash('error', 'Your account is not activated yet. Please check your email.'); 
+					return Redirect::to('/login')->withInput($request->except('password'));	
+				}
+				if (!empty($req['plan_id'])){
+					return Redirect::to('/subscription/'.$req['plan_id']);
+				}
+				  $currentCookieKeyID=SiteHelper::currentCookieKey();
+				  if($currentCookieKeyID!="0"){
+				   	Cart::updateCartToUser();
+				  }
+				 $cookie = \Cookie::forget('min-cart');
+				 if(Session::has('is_loginPage')){
+					return Redirect::to('/dashboard')->withCookie($cookie);
+				 }else{
+						Session::set('auth_user_id_req_bag', 'request_a_bag_login');
+						return "login_sucess";
+				}
+			}
+			else 
+			{ 
+				Session::flash('error', 'Invalid Email or Password'); 
+				return Redirect::to('/login');	
+			}
+		}
+		else{
+			Session::flash('error', 'Invalid Email or Password');
+			return Redirect::to('/login');
+		}
 	}
 }
