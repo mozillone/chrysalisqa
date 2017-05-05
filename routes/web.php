@@ -85,6 +85,7 @@ Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeCo
 /* Request a bag starts here*/
 Route::any('/costume/request-a-bag', array('as' => '','uses' => 'CreateCostumeController@requestaBag'));
 Route::any('/costume/postrequestabag', array('as' => '','uses' => 'CreateCostumeController@Postrequestabag'));
+Route::post('/postrequestabaglogin', ['as' => 'requestabaglogin.post','uses'=>'AuthController@postrequestabagLogin']);
 
 /* Request a bag ends here*/
 
@@ -104,6 +105,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	  	Route::post('/admin/profile/post', ['as' => 'admin-profile-update','uses'=>'UserController@adminProfileUpdate']);
 	   /****************User Management Start Here***************************/
 	    Route::get('customers-list', ['as' => 'customers-list','uses'=>'UserController@customersList']);
+		Route::get('customes-list', ['as' => 'customes-list','uses'=>'UserController@customesList']);
 	    Route::any('/customers/list', 'UserController@customersListData');
 		Route::get('/user-costumes-list/{id}', ['as' => 'user-costumes-list','uses'=>'UserController@userCostumes']);
 		Route::get('/user-costumessold-list/{id}', ['as' => 'user-costumessold-list','uses'=>'UserController@userSoldcostumes']);
