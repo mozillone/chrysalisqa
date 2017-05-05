@@ -878,8 +878,15 @@ class CreateCostumeController  extends Controller {
 
 		}
 	public function requestaBag(){
-		$state_table = DB::table('states')->get(['name','abbrev']);
-	  return view('frontend.costumes.requestabag')->with('states',$state_table);
+		$this->data = array();
+		$this->data['state_table'] = DB::table('states')->get(['name','abbrev']);
+		if (Auth::check()){
+			$userid 		= Auth::user()->id;
+			$this->data['get_details']    = DB::table('users')->where('id',$userid)->first();
+			$this->data['basic_address']  = Db::table('address_master')->where('user_id',$userid)->where('address_type','basic')->first();
+
+		}
+	  return view('frontend.costumes.requestabag')->with('total_data',$this->data);
 	}
 
 	public function Postrequestabag(Request $request){
