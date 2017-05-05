@@ -312,19 +312,19 @@ if (isset($total_data) && !empty($total_data)) {
                         <!-- </form> -->
 						<div class="condition-option">
                             <p><input class="condition-check" type="checkbox" name="quality_standards" value="">All items meet our Quality Standards
-                            <span id="quality_standards_error" style="color:red"></span>
+                            <span id="quality_standards_error" style="color:red; display: block;"></span>
                             </p>
                             <p><input type="checkbox" name="reject_terms" value="">I agree with Chrysalis' Reject Terms
-							<span id="reject_terms_error" style="color:red"></span>
+							<span id="reject_terms_error" style="color:red; display: block;"></span>
                             </p>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<h4>What would you like to do with unaccepted items?</h4>
 						<div class="unaccepted-option">
-                            <p class="cst2-rms-chck"><input type="checkbox" name="return_accurance" value="">Please opt me into Return Assurance and return my unaccepted items for an additional $9.99* (I understand that up to $19.98 could be deduted from mybag earnings). </p>
+                            <p class="cst2-rms-chck"><input type="checkbox" name="is_return" value="1">Please opt me into Return Assurance and return my unaccepted items for an additional $9.99* (I understand that up to $19.98 could be deduted from mybag earnings). </p>
                             <p class="cst2-rms-chck">*Fee will be deduted from your earnings once your bag is processed.</p>
-                            <p class="cst2-rms-chck"><input type="checkbox" name="recycle_items" value="">Please responsibly recycle my unaccepted items</p>
+                            <p class="cst2-rms-chck"><input type="checkbox" name="is_recycle" value="1">Please responsibly recycle my unaccepted items</p>
 						</div>
 						<h4>Have you registerd yet? Add your email!</h4>
                         <!-- <form> -->
