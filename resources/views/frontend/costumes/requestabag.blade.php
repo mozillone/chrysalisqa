@@ -625,6 +625,17 @@ $(document).ready(function()
 			});
 		}
 	});
+
+	//numeric condition
+	$("#zipcode,#phone_number").on("keyup", function(){
+        var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
+            val = this.value;
+        
+        if(!valid){
+            console.log("Invalid input!");
+            this.value = val.substring(0, val.length - 1);
+        }
+    });
 });
 </script>
 @stop
