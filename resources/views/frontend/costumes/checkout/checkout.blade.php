@@ -51,9 +51,9 @@
 												</div>
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													@if(count($data['shipping_address']))
-														<p class="cehck_edit"><a href="#" data-toggle="modal" data-target="#shipping_popup">Edit</a></p>
+														<p class="cehck_edit"><a href="javascript::void(0);" class="shipping_popup">Edit</a></p>
 													@else
-														<p class="cehck_edit" data-toggle="modal" data-target="#shipping_popup"><a href="#">New</a></p>
+														<p class="cehck_edit" data-toggle="modal" data-target="#shipping_popup"><a href="javascript::void(0);" class="shipping_popup">New</a></p>
 													@endif
 												</div>
 											</div>
@@ -158,17 +158,13 @@
 	        <h4 class="modal-title">Shipping Address</h4>
 	      </div>
 	      <div class="modal-body">
-	       <form class="" action="{{route('shipping_address.post')}}" method="POST" id="shipping_address">   
+	       <form class="" action="javascript::void(0);" method="POST" id="shipping_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
 								<div class="col-md-12 col-sm-12 col-xs-12">
 											<label for="">Choose Saved</label>
 											<select class="form-control" name="address_id" id="address_id">
-													<option value="new" selected="">New</option>
-													@foreach($data['shipping_address'] as $shipping_address)
-													<option value="{{$shipping_address->address_id}}">{{$shipping_address->address1}},{{$shipping_address->city}},{{$shipping_address->country}}</option>
-													@endforeach
 											</select>
 								</div>
 
