@@ -1601,7 +1601,7 @@ span.acnhr-link {
     padding-left: 0;
     margin: 0;
 }
-/*style end may 3, 2017*/
+
 .request-address-sec h4 {
     font-family: Proxima-Nova-Extrabold;
     color: #000;
@@ -1661,6 +1661,15 @@ span.acnhr-link {
 }
 #send_my_bag_div {
     margin-bottom: 60px;
+}
+#request_bag_signup_popup .modal-dialog{
+    width: 500px;
+}
+#request_bag_signup_popup .login-register ul.nav.nav-tabs li.active {
+    border-top: 0;
+}
+#request_bag_signup_popup .tab-content {
+    padding: 30px 70px;
 }
 
 /********************************************************************Media start here********************************************************************/
