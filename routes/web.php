@@ -86,6 +86,7 @@ Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeCo
 /* Request a bag starts here*/
 Route::any('/costume/request-a-bag', array('as' => '','uses' => 'CreateCostumeController@requestaBag'));
 Route::any('/costume/postrequestabag', array('as' => '','uses' => 'CreateCostumeController@Postrequestabag'));
+Route::post('/postrequestabaglogin', ['as' => 'requestabaglogin.post','uses'=>'AuthController@postrequestabagLogin']);
 
 /* Request a bag ends here*/
 
