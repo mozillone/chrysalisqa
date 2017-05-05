@@ -81,9 +81,9 @@ if (isset($total_data) && !empty($total_data)) {
         <div class="col-md-10 col-md-offset-1">
         <h4>Choose an option of how you would like to receive your Bag and payout.</h4>
              <div id="choose_an_option_for_bag_div">
-                					<p class="cst2-rms-chck"><input type="radio" name="is_payout" value="0">Don't send me a payout. I want to support Chrysalis' waste reduction and charitable donation program.</p>
+                					<p class="cst2-rms-chck"><input type="radio" name="is_payout" id="is_payout" value="0">Don't send me a payout. I want to support Chrysalis' waste reduction and charitable donation program.</p>
                 					<p class="notes">*Note: At this time, Chrysalis does NOT issue tax receipts. </p>
-                					<p class="cst2-rms-chck"><input type="radio" name="is_payout" value="1">I want to pay a $9.99 Shipping & Handling fee to receive my bag (fee deducted after bag has been processed).</p>
+                					<p class="cst2-rms-chck"><input type="radio" name="is_payout" value="1" id="is_payout">I want to pay a $9.99 Shipping & Handling fee to receive my bag (fee deducted after bag has been processed).</p>
                 					<span id="is_payout_error" style="color:red"></span>
                 					<div class="form-rms-btn">
                 						<a type="button" id="choose_an_option_for_bag_next" class="btn-rm-nxt nxt">
@@ -480,7 +480,7 @@ $(document).ready(function()
 		if (str == true) {
 			$('#choose_an_option_for_bag_div').css('display','none');
 			$('#process_bar_hide').css('display','none');
-			$('#h4_tag_hide').remove();
+			$('#h4_tag_hide').css('display','none');
 			$('#average_payouts_div').css('display','block');
 			$('#send_my_bag_div').css('display','none');
 			$('#your_bag_on_itsway').css('display','none');			 	
@@ -492,7 +492,7 @@ $(document).ready(function()
 	$('#average_payouts_next').click(function(){
 		$('#choose_an_option_for_bag_div').css('display','none');
 		$('#process_bar_hide').css('display','none');
-		$('#h4_tag_hide').remove();
+		$('#h4_tag_hide').css('display','none');
 		$('#average_payouts_div').css('display','none');
 		$('#send_my_bag_div').css('display','block');
 		$('#your_bag_on_itsway').css('display','none');		
@@ -591,7 +591,7 @@ $(document).ready(function()
 			 	if (data == "success") {
 			 		$('#ajax_loader').remove();
 			 		$('#process_bar_hide').css('display','none');
-			 		$('#h4_tag_hide').remove();
+			 		$('#h4_tag_hide').css('display','none');
 			 		$('#choose_an_option_for_bag_div').css('display','none');
 					$('#average_payouts_div').css('display','none');
 					$('#send_my_bag_div').css('display','none');
