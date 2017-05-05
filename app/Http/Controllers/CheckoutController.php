@@ -12,6 +12,7 @@ use Response;
 use App\Cart;
 use App\Creditcard;
 use App\Order;
+use App\Address;
 class CheckoutController extends Controller {
 
   protected $auth;
@@ -29,8 +30,11 @@ class CheckoutController extends Controller {
         });
 	}
   public function checkout(Request $request){
-    $data=Cart::getCartProducts();
+    $data['basic']=Cart::getCartProducts();
     $countries   = Site_model::Fetch_all_data('countries', '*');
+    $data['shipping_address']=Address::getAddressinfo(Auth::user()->id,'shipping');
+    $data['billing_address']=Address::getAddressinfo(Auth::user()->id,'biling');
+    $data['cc_details']=Creditcard::getCCList(Auth::user()->id);
     return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries);
   }
   public function placeOrder(Request $request){
@@ -42,9 +46,23 @@ class CheckoutController extends Controller {
 
     }
     }
+  public function addShippingAddress(Request $request){
+    $req=$request->all();
+    Address::addShippingAddress($req);
+  }
+  public function addBillingAddress(Request $request){
+    $req=$request->all();
+    dd($req);
+    Address::addBillingAddress($req);
+  }
   public function addCreditCard(Request $request){
     $req=$request->all();
     Creditcard:Creditcard();
+  }
+  public function getShippingAddress(){
+    $shipping_address=Address::getAddressinfo(Auth::user()->id,'shipping');
+    return Response::JSON($shipping_address);
+    
   }
 	
 }

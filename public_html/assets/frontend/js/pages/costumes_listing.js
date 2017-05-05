@@ -31,10 +31,6 @@ function pagination()
 }
 var search=$('#search_list').serializeArray();
 searching(search);
-$(document).on('change','.search',function(){
-	var search=$('#search_list').serializeArray();
-	searching(search);
-})
 $(document).on('click','.gender > li',function(){
 	$('.gender li').removeClass('active');
 	$(this).addClass('active');
