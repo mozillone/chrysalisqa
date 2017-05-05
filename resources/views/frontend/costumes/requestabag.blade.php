@@ -311,10 +311,12 @@ if (isset($total_data) && !empty($total_data)) {
                             </div>
                         <!-- </form> -->
 						<div class="condition-option">
-                            <p><input class="condition-check" type="checkbox" name="quality_standards" value="">All items meet our Quality Standards</p>
+                            <p><input class="condition-check" type="checkbox" name="quality_standards" value="">All items meet our Quality Standards
                             <span id="quality_standards_error" style="color:red"></span>
-                            <p><input type="checkbox" name="reject_terms" value="">I agree with Chrysalis' Reject Terms</p>
+                            </p>
+                            <p><input type="checkbox" name="reject_terms" value="">I agree with Chrysalis' Reject Terms
 							<span id="reject_terms_error" style="color:red"></span>
+                            </p>
 						</div>
 					</div>
 					<div class="col-md-6">
