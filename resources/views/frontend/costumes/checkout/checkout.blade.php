@@ -180,7 +180,7 @@
 			</div>
 		</div>
 <div class="modal fade window-popup" id="shipping_popup" tabindex="-1">
-	<div class="modal-dialog">
+	<div class="modal-dialog shopping-address-modal">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -192,46 +192,67 @@
 	       <input type="hidden" name="cart_id" value="{{ $data['basic'][0]->cart_id}}">
 						
 							<div class="col-md-12 col-sm-12 col-xs-12">
-					<div class="chek-out">
-								<div class="col-md-12 col-sm-12 col-xs-12">
-											<label for="">Choose Saved</label>
-											<select class="form-control"  name="address_id" id="shipping">
+								<div class="chek-out">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<label for="">Choose Saved</label>
+											<select class="form-control shpng-adr-mdl-seletor"  name="address_id" id="shipping">
 											</select>
-								</div>
+									</div>
 								<div class="new_address">
 								<div class="text-center">
 									<p>Or</p>
 								</div>
-									<div class="form-group">
-									<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+								<div class="address-form">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" id="shipping_address_1" placeholder="Address1 *" name="address_1">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="address_2">
+									</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" id="shipping_city" placeholder="City *" name="city">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" id="shipping_postcode" placeholder="Zipcode *" name="postcode">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<select class="form-control" name="country" id="shipping_country">
+													<option value="" selected> Select</option>
+													@foreach($countries as $cnt)
+													<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
+													@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group checkbox-align">
+											<input type="checkbox" class="form-control" id="is_billing" name="is_billing"><label for="billing:use_for_shipping_yes">Bill to this address</label>
+										</div>
+									</div>
+									<div class="col-md-12">
+											<button class="btn btn-primary submit-btn">Submit</button>
+									</div>			
+								
 								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="shipping_address_1" placeholder="Address1 *" name="address_1">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="address_2">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="shipping_city" placeholder="City *" name="city">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="shipping_postcode" placeholder="Zipcode *" name="postcode">
-								</div>
-								<div class="form-group">
-								<select class="form-control" name="country" id="shipping_country">
-										<option value="" selected> Select</option>
-										@foreach($countries as $cnt)
-										<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
-										@endforeach
-								</select>
-								</div>
-								<div class="form-group">
-									<input type="checkbox" class="form-control" id="is_billing" name="is_billing"><label for="billing:use_for_shipping_yes">Bill to this address</label>
-								</div>
-								<button class="btn btn-primary">Submit</button>
 								</div>
 			
 									
@@ -241,14 +262,14 @@
 				</form>  
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="close close-btn" data-dismiss="modal"><span>×</span> Close</button>
 	      </div>
 	    </div>
 
 	</div>
 </div>
 <div class="modal fade window-popup" id="billing_popup" tabindex="-1">
-	<div class="modal-dialog">
+	<div class="modal-dialog shopping-address-modal">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -262,43 +283,66 @@
 					<div class="chek-out">
 								<div class="col-md-12 col-sm-12 col-xs-12">
 											<label for="">Choose Saved</label>
-											<select class="form-control" id="billing">
+											<select class="form-control shpng-adr-mdl-seletor" id="billing">
 											</select>
 								</div>
 								<div class="new_address">
-								<div class="text-center">
-									<p>Or</p>
-								</div>
-									<div class="form-group">
-									<input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="billing_address_1" placeholder="Address1 *" name="address_1">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="billing_address_2" placeholder="Address2" name="address_2">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="billing_city" placeholder="City *" name="city">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode">
-								</div>
-								<div class="form-group">
-								<select class="form-control" name="country" id="billing_country">
-										<option value="" selected> Select</option>
-										@foreach($countries as $cnt)
-										<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
-										@endforeach
-								</select>
-								</div>
-								<div class="form-group">
-									<input type="checkbox" class="form-control" id="is_shipping" name="is_shipping"><label for="billing:use_for_shipping_yes">Ship to this address</label>
-								</div>
-								<button class="btn btn-primary">Submit</button>
+									<div class="text-center">
+										<p>Or</p>
+									</div>
+									
+									<div class="address-form">
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_address_1" placeholder="Address1 *" name="address_1">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_address_2" placeholder="Address2" name="address_2">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_city" placeholder="City *" name="city">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<select class="form-control" name="country" id="billing_country">
+														<option value="" selected> Select</option>
+														@foreach($countries as $cnt)
+														<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
+														@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group checkbox-align">
+												<input type="checkbox" class="form-control" id="is_shipping" name="is_shipping"><label for="billing:use_for_shipping_yes">Ship to this address</label>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<button class="btn btn-primary submit-btn">Submit</button>
+										</div>
+									
+										
+									</div>
 								</div>
 			
 									
@@ -308,14 +352,14 @@
 				</form>  
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="close close-btn" data-dismiss="modal"><span>×</span> Close</button>
 	      </div>
 	    </div>
 
 	</div>
 </div>
 <div class="modal fade window-popup" id="cc_popup" tabindex="-1">
-	<div class="modal-dialog">
+	<div class="modal-dialog  shopping-address-modal">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -329,51 +373,67 @@
 					<div class="chek-out">
 								<div class="col-md-12 col-sm-12 col-xs-12">
 											<label for="">Choose Saved</label>
-											<select class="form-control" id="cc_list">
+											<select class="form-control shpng-adr-mdl-seletor" id="cc_list">
 											</select>
 								</div>
 								<div class="new_cc">
 								<div class="text-center">
 									<p>Or</p>
 								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="cardholder_name" placeholder="Full Name on Card *" name="cardholder_name">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="cc_number" placeholder="Card Number *" name="cc_number">
+								<div class="address-form">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" id="cardholder_name" placeholder="Full Name on Card *" name="cardholder_name">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" id="cc_number" placeholder="Card Number *" name="cc_number">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-6 field-align-xs">
+											<select name="exp_month" class="form-control" id="exp_month">
+												<option value="">MM</option>
+												<option value="01">Jan</option>
+												<option value="02">Feb</option>
+												<option value="03">Mar</option>
+												<option value="04">Apr</option>
+												<option value="05">May</option>
+												<option value="06">Jun</option>
+												<option value="07">Jul</option>
+												<option value="08">Aug</option>
+												<option value="09">Sep</option>
+												<option value="10">Oct</option>
+												<option value="11">Nov</option>
+												<option value="12">Dec</option>
+											 </select>
+										</div>
+										<div class="col-md-6">
+											 <select name="exp_year" class="form-control" id="exp_year">
+												<option value="">YYYY</option>
+												@for($i=0;$i<=30;$i++)
+												<option value="{{date('Y',strtotime('now'))+$i}}">{{date('Y',strtotime('now'))+$i}}</option>
+												 @endfor
+											 </select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" class="form-control" id="cvn_pin" placeholder="CVN Code*" name="cvn_pin">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<button class="btn btn-primary submit-btn">Submit</button>
+									</div>
+									
 								</div>
 								
-								<div class="form-group">
-								<div class="col-md-6">
-									<select name="exp_month" class="form-control" id="exp_month">
-	                                    <option value="">MM</option>
-	                                    <option value="01">Jan</option>
-										<option value="02">Feb</option>
-										<option value="03">Mar</option>
-										<option value="04">Apr</option>
-										<option value="05">May</option>
-										<option value="06">Jun</option>
-										<option value="07">Jul</option>
-										<option value="08">Aug</option>
-										<option value="09">Sep</option>
-										<option value="10">Oct</option>
-										<option value="11">Nov</option>
-										<option value="12">Dec</option>
-                               		 </select>
-                               	</div>
-                               	<div class="col-md-6">
-                               		 <select name="exp_year" class="form-control" id="exp_year">
-	                                    <option value="">YYYY</option>
-	                                    @for($i=0;$i<=30;$i++)
-	                                    <option value="{{date('Y',strtotime('now'))+$i}}">{{date('Y',strtotime('now'))+$i}}</option>
-	                                     @endfor
-									 </select>
-                               	</div>
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="cvn_pin" placeholder="CVN Code*" name="cvn_pin">
-								</div>
-								<button class="btn btn-primary">Submit</button>
+								
+								
+								
+								
+								
 								</div>
 			
 									
@@ -383,7 +443,7 @@
 				</form>  
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="close close-btn" data-dismiss="modal"><span>×</span> Close</button>
 	      </div>
 	    </div>
 
