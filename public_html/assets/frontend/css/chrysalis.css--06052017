@@ -980,7 +980,7 @@ p.right_heading span.my_msg { font-weight: 800; }
 a#pricing_next {    float: right;}
 .form-rms{width: 100%; float:left; margin: 10px 0; padding-left: 33px}
 .form-rms-que{width: 100%; float:left; font-size: 18px; color: #323031; font-family: Proxima-Nova-Extrabold; margin: 15px 0; text-indent: -32px;}
-.form-rms-input input{width: 400px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
+.form-rms-input input{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
 .form-rms-input select{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
 .form-rms-input textarea{width: 100%; float:left; height: 120px; border: 1px solid #e1e1e1; padding: 15px 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
 .form-rms-input{width: 100%; float:left;}
@@ -992,7 +992,7 @@ a#pricing_next {    float: right;}
 .form-rms-que1{font-family: Proxima-Nova-Semibold;}
 .form-rms-que1 span{font-family: Proxima-Nova-Extrabold;}
 .form-rms-btn{width: 100%; float:right; margin: 30px 0 0;text-align: right;margin-bottom: 30px;}
-.form-rms-btn a {    padding: 0px 40px;    cursor: pointer;    height: 40px;    line-height: 38px;    text-align: right;    margin-left: 20px;    font-family: Proxima-Nova-Extrabold;    font-size: 16px;    background: #60c4ac;  text-decoration: none;
+.form-rms-btn a {    padding: 0px 40px;    cursor: pointer;    height: 40px;    line-height: 38px;    text-align: right;    margin-left: 20px;    font-family: Proxima-Nova-Extrabold;    font-size: 16px;    background: #60c4ac;
     color: #fff;    border: none;    outline: none;    border-radius: 2px;    width: 200px;    text-align: center;}
 .form-rms-btn a.btn-rm-back{background: none; border: none; padding: 0px; color: #60c4ac; margin: 0 10px 0 0;}
 .form-rms-btn a.btn-rm-back span{border-bottom: 1px solid #efefef;}
@@ -1622,7 +1622,7 @@ span.acnhr-link {
 .request-address-sec .form-rms-btn a {
     padding: 6px 85px;
     text-decoration: none;
-    margin-left: 14%;
+    margin-left: 0;
 }
 .request-address-sec .form-rms-input {
     float: none;
@@ -1673,102 +1673,6 @@ span.acnhr-link {
     padding: 30px 70px;
 }
 
-/* sprint3 changes*/
-.shopping-address-modal h4{
-	font-size: 24px;
-    color: #000;
-    font-family: Proxima-Nova-Bold;
-	padding-left: 30px;
-    padding-top: 20px;
-}
-.shopping-address-modal .modal-header {
-	border-bottom: 0;
-}
-.shopping-address-modal label {
-	font-size: 18px;
-    color: #000;
-    font-family: Proxima-Nova-Semibold;
-}
-.shopping-address-modal .modal-footer {
-	border-top: 0;
-}
-.shopping-address-modal p {
-	margin-top: 10px;
-    color: #000;
-    font-size: 18px;
-    font-family: Proxima-Nova-Semibold;
-    text-transform: uppercase;
-}
-.shopping-address-modal .chek-out .form-group {
-	margin-right: 0;
-	width:100%;
-}
-.shopping-address-modal .shpng-adr-mdl-seletor {
-	margin-bottom: 10px;
-}
-.shopping-address-modal .submit-btn {
-	height: 45px;
-    background: #60c5ac;
-    width: 100%;
-    border: 1px solid #60c5ac;
-    font-size: 20px;
-    font-family: Proxima-Nova-Extrabold;
-}
-.modal-dialog.shopping-address-modal{
-	width: 500px;
-}
-.modal-dialog.shopping-address-modal .close-btn {
-    font-size: 18px;
-    font-family: Proxima-Nova-Regular;
-    margin-top: 30px;
-    color: #000;
-    position: relative;
-    right: 43%;
-    opacity: 1;
-    margin-bottom: 20px;
-}
-.modal-dialog.shopping-address-modal .close-btn:hover {
-	opacity: 0.5;
-}
-.check_out_page_right .order_summery button{
-	font-family: Proxima-Nova-Bold;
-    background: #EE4266;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 18px;
-    width: 100%;
-    border-color: #EE4266;
-	height: 45px;
-}
-.checkbox-align{
-	display: flex;
-    align-items: center;
-    padding-top: 8px;
-}
-input[type=checkbox]#is_shipping, input[type=checkbox]#is_billing {
-    width: auto;
-    margin: 0;
-    height: auto;
-    margin-right: 10px;
-	margin-bottom: 5px;
-}
-.checkbox-align label{
-	color: #000;
-    font-family: Proxima-Nova-Semibold;
-	font-size: 16px;
-}
-.check_out_page_left .media-body .media-heading a {
-	color: #000;
-	text-decoration: none;
-}
-<<<<<<< HEAD
-.viewBtn_rm button.buynow-rm a {
-    text-decoration: none;
-    color: white;
-}
-
-=======
->>>>>>> 4f1cc5f7fb659df60513a129e56d41836a0b57de
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){
@@ -2580,22 +2484,8 @@ div#main-banner img{min-height:200px;width:100%;}
         text-align: center;
         margin-bottom: 0;
     }
-	.modal-dialog.shopping-address-modal {
-		width: auto;
-	}
-	.field-align-xs {
-		margin-bottom: 15px;
-	}
-<<<<<<< HEAD
-	.request-address-sec .form-rms-btn a {
-		margin-left: 0;
-	}
-}
-@media only screen and (min-width: 769px) {
-=======
 }
 @media only screen and (min-width: 768px) {
->>>>>>> 4f1cc5f7fb659df60513a129e56d41836a0b57de
     .costumes-carousel {
         display: none;
     }
@@ -2621,32 +2511,3 @@ div#main-banner img{min-height:200px;width:100%;}
         margin-left: -15px;
     }
 }
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.request-address-sec .form-rms-btn a {
-		    margin-right: 17%;
-	}
-    
-}
-@media only screen and (min-width: 991px) and (max-width: 1199px){
-	.request-address-sec .form-rms-btn a {
-			margin-left: 42%;
-	}	
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

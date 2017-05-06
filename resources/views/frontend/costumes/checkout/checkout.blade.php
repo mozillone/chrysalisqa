@@ -126,7 +126,7 @@
 												</div>
 										</div>
 									</div>
-									</div>
+									</div>	
 									<div class="checkout_review_box">
 										<h2>Review Shipping & Delivery Time</h2>
 										@foreach($data['basic'] as $cart)
