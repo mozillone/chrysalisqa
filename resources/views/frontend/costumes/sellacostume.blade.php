@@ -41,16 +41,18 @@
                 
               </div></a>
               <?php }?>
+				<a href="{{URL::to('costume/request-a-bag')}}">
 							<div class="col-md-6 col-sm-6 col-xs-12 ">
-              <a href="{{URL::to('costume/request-a-bag')}}">
+              
 							<div class="Ship_castume-blog upload_castume-blog" >
 								<img class="img-responsive" src="../assets/frontend/img/open-box-icon.png">
 									<h2>Ship Us Your Costume!</h2>
 									<p>Have a pile of old costumes taking <br>up space? Let us take care of it.</p>
 									REQUEST A BAG
 								</div>
-              </a>
-              </div>
+              
+							</div>
+				</a>
 						</div>
 					</div>
 				</div>
