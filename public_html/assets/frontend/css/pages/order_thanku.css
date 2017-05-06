@@ -1,0 +1,23 @@
+/* Thank you page css S*/
+.thankyou-rm{width: 100%; float:left; padding: 50px 0;}
+.thankyou-text{width: 100%; float:left; margin: 30px 0 0; color: #000; font-size: 18px; font-family: Proxima-Nova-Semibold;}
+.thankyou-bold{font-family: Proxima-Nova-Bold;}
+
+.thankyou-socio{width: 100%; float:left; display: inline-block; margin: 40px 0 20px;}
+.thankyou-socio li{width: 55px; height: 55px; float:left; display: inline-block; border: 2px solid #60C3AB; padding: 3px; border-radius: 100px; margin-right: 25px;}
+.thankyou-socio li img{width: 100%; float:left;}
+.thankyou-rms{width: 100%;float:left;margin: 10px 0;padding-left: 0px;}
+
+.thankyou-rms-head{width: 100%; float:left; font-size: 18px; margin: 30px 0 10px; color: #323031;}
+.cst2-select80{width: 80px !important;}
+.thankyou-rms-head input{width: 70%; float:left; height: 40px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 18px; border-radius: 5px;}
+.thankyou-rms-head span{width: 30%; float:left; line-height: 40px; padding-left: 20px; font-family: Proxima-Nova-Regular; color: #323031;}
+.thankyou-do{width:100%; float:left; font-size: 24px; font-family: Proxima-Nova-Extrabold; border-bottom: 1px solid #e1e1e1; padding-bottom: 20px; margin: 50px 0 0; color: #000; text-align: center;}
+.thankyou-textC{width: 100%; float:left; margin: 30px 0 0; color: #000; font-size: 18px; font-family: Proxima-Nova-Semibold; text-align: center;}
+.thankyou-textR{font-family: Proxima-Nova-Regular;}
+.thankyou-donate{width: 100%; float:left; text-align: center; color: #000; font-size: 18px; font-family: Proxima-Nova-Regular; margin: 40px 0;}
+.thankyou-donate span{font-family: Proxima-Nova-Bold;}
+.thankyou-btn{width: 250px; background-color: #EE4266 !important; color: #fff; text-align: center; margin: 0 auto; display: block; height: 40px; line-height: 40px; border: none; outline: none; border-radius: 5px; font-size: 18px; }
+.thankyou-do-img{width: 100%; float:left; margin: 0 auto; display: block;}
+.thankyou-do-img img{width: auto; margin: 40px auto 0; display: block;}
+.thankyou-doeven{width: 100%; float:left;}
