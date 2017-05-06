@@ -72,7 +72,7 @@ p.list-sec-rm1.fav_costume sapn.active {
 				<div class="col-md-3 col-sm-4 col-xs-6" >
 					    <div class="prod_box">
 					        <div class="img_layer">
-					            <a href="/shop/{{$wish->costume_id}}/{{$wish->parent_cat_name}}/{{$wish->cat_name}}/{{$wish->name}}"><img class="img-responsive" @if($wish->image!=null && file_exists('costumers_images/{{$wish->image}}')) src="/costumers_images/{{$wish->image}}" @else src="/costumers_images/default-placeholder.jpg" @endif/></a>
+					            <a href="/product{{$wish->url_key}}"><img class="img-responsive" @if($wish->image!=null && file_exists('costumers_images/{{$wish->image}}')) src="/costumers_images/{{$wish->image}}" @else src="/costumers_images/default-placeholder.jpg" @endif/></a>
 					            <div class="hover_box">
 					                <p class="like_fav">
 					                	<a href="#" onclick="return false;" class="like_costume" data-costume-id="{{$wish->costume_id}}">
@@ -86,9 +86,9 @@ p.list-sec-rm1.fav_costume sapn.active {
 					            </div>
 					        </div>
 					        <div class="slider_cnt">
-					            <h4><a href="/shop/{{$wish->costume_id}}/{{$wish->parent_cat_name}}/{{$wish->cat_name}}/{{$wish->name}}"></a></h4>
-								<p>Capten jack Superheroes & Villains</p>
-								<p class="fav-drs-size">Boys Small</p>
+					            <h4><a href="/product{{$wish->url_key}}"></a></h4>
+								<p>{{$wish->name}}</p>
+								<p class="fav-drs-size">{{ucfirst($wish->gender)}} @if($wish->condition=="brand_new") Brand New @elseif($wish->condition=="like_new") Like New @else {{ucfirst($data[0]->condition)}} @endif</p>
 					            <p>{{$wish->price}}</p>
 								<div class="fav_social">
 								 <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook fa-1x social"></i></a>
