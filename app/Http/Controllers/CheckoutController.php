@@ -58,12 +58,15 @@ class CheckoutController extends Controller {
   }
   public function placeOrder(Request $request){
     $req=$request->all();
-    $result=Order::placeOrder($req);
+     dd($req);
+  
+     $result=Order::placeOrder($req);
     if($result['result']=="0"){
        Session::flash('error',$result['message']);
        return Redirect::back();
 
     }else{
+
       $charities_list=Order::getCharitiesList();
       return view('frontend.costumes.checkout.order_thanku')->with('order_id',$result['message'])->with('charities_list',$charities_list);
     }
