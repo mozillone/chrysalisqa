@@ -146,7 +146,30 @@ class Cart extends Authenticatable
     }
     protected function updateCartToUser(){
        $currentCookieKeyID=SiteHelper::currentCookieKey();
-       DB::Update('UPDATE `cc_cart` SET `user_id`='.Auth::user()->id.' WHERE cookie_id="'.$currentCookieKeyID.'"');
+       $carts_list=DB::Select('Select itms.* FROM `cc_cart` as crt LEFT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id WHERE crt.cookie_id="'.$currentCookieKeyID.'"');
+      $user_cart=DB::Select('Select cart_id FROM `cc_cart` WHERE user_id="'.Auth::user()->id.'"');
+      if(count($user_cart)){
+      foreach ($carts_list as $key => $carts) {
+            $check_cart=DB::Select('Select if(count(*)>0,true,false)  as is_exits,cart_id,costume_id,sku,costume_name,qty,price from  cc_cart_items where cart_id='.$user_cart[0]->cart_id.' and costume_id='.$carts->costume_id.'');
+            if($check_cart[0]->is_exits){
+                DB::Update('update cc_cart_items set qty=qty+'.$carts->qty.' where cart_id='.$user_cart[0]->cart_id.' and costume_id='.$carts->costume_id.'');
+            }else{
+                $data=array('cart_id'=>$check_cart[0]->cart_id,
+                        'costume_id'=>$check_cart[0]->costume_id,
+                        'sku'=>$check_cart[0]->sku,
+                        'costume_name'=>$check_cart[0]->costume_name,
+                        'qty'=>$check_cart[0]->qty,
+                        'price'=>$check_cart[0]->price);
+            Site_model::insert_data('cart_items',$data);
+            }
+            //DB::Update('update cc_cart_items set qty=qty+'.$carts->qty.' where cart_id='.$user_cart[0]->cart_id.' and costume_id='.$carts->costume_id.'');
+      }
+      $cond=array('cookie_id'=> $currentCookieKeyID);
+      Site_model::delete_single('cart',$cond);
+    }else{
+        DB::Update('UPDATE `cc_cart` SET `user_id`='.Auth::user()->id.' WHERE cookie_id="'.$currentCookieKeyID.'"');
+    }
+       
     }
     protected function getCartProducts(){
     	$currentCookieKeyID=SiteHelper::currentCookieKey();
