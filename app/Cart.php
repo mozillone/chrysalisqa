@@ -66,7 +66,7 @@ class Cart extends Authenticatable
     }
     protected function updateCartDetails($costume_id,$cart_id,$qty){
             $result=$this->verifieItemExists($costume_id,$cart_id);
-             if($result=="1"){
+              if($result=="1"){
                 $res=DB::Update('UPDATE `cc_cart_items` SET qty='.$qty.' WHERE cart_id='.$cart_id.' and  costume_id='.$costume_id.'');
             }else{
              $costume_info=$this->getCostumeInfo($costume_id);
@@ -104,7 +104,13 @@ class Cart extends Authenticatable
        return $data;
     }
     protected function verifyCostumeCartQuantity($costume_id,$cookie_id){
-       $data=DB::Select('SELECT items.qty  FROM `cc_cart_items` as items LEFT JOIN cc_cart as crt on crt.cart_id=items.cart_id where crt.cookie_id="'.$cookie_id.'" and items.costume_id='.$costume_id.'');
+        $currentCookieKeyID=$cookie_id;
+        if(Auth::check()){
+            $where="where crt.user_id=".Auth::user()->id.' or crt.cookie_id="'.$currentCookieKeyID.'" and items.costume_id='.$costume_id.'';
+        }else{
+            $where="where crt.cookie_id='".$currentCookieKeyID."' and items.costume_id=".$costume_id."";
+        }
+       $data=DB::Select('SELECT items.qty  FROM `cc_cart_items` as items LEFT JOIN cc_cart as crt on crt.cart_id=items.cart_id '.$where.' ');
         if(!empty($data)){
                 return $data[0]->qty;
        }else{
@@ -120,8 +126,14 @@ class Cart extends Authenticatable
     //    }
     // }
 
-     protected function verifyCostumeCart($cookie_id){
-       $data=DB::Select('SELECT crt.cart_id  FROM `cc_cart_items` as items LEFT JOIN cc_cart as crt on crt.cart_id=items.cart_id where crt.cookie_id="'.$cookie_id.'" ');
+     protected function verifyCostumeCart($costume_id,$cookie_id){
+        $currentCookieKeyID=$cookie_id;
+        if(Auth::check()){
+            $where="where crt.user_id=".Auth::user()->id.' or crt.cookie_id="'.$currentCookieKeyID.'" and items.costume_id='.$costume_id.'';
+        }else{
+            $where="where crt.cookie_id='".$currentCookieKeyID."' and items.costume_id=".$costume_id."";
+        }
+       $data=DB::Select('SELECT crt.cart_id  FROM `cc_cart_items` as items LEFT JOIN cc_cart as crt on crt.cart_id=items.cart_id '.$where.'');
         if(!empty($data)){
                 return $data[0]->cart_id;
        }else{
@@ -212,3 +224,4 @@ class Cart extends Authenticatable
     
    
 }
+
