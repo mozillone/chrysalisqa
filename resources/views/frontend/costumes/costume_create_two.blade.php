@@ -454,6 +454,12 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="faq" id="faq" maxlength="600" ></textarea></p>
 <span id="faqerror" style="color:red"></span>
 <p class="form-rms-sm1">( <span id="max_length_char3"></span> 600 characters)</p>
+<div class="form-rms-btn">
+<a type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></a>
+
+<!-- </form> -->
+<a type="button" id="costume_description_next" class="btn-rm-nxt nxt">Next Step</a>
+</div>
 </div>
 
 <!--costume three code starts here-->
@@ -463,12 +469,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <!--costume three code ends here-->
 </div>
 </div>
-<div class="form-rms-btn">
-<a type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></a>
 
-<!-- </form> -->
-<a type="button" id="costume_description_next" class="btn-rm-nxt nxt">Next Step</a>
-</div>
 </div>
 <div class="prog-form-rm" id="pricing_div">
 

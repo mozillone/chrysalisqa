@@ -48,7 +48,8 @@
 								<img class="img-responsive" src="../assets/frontend/img/open-box-icon.png">
 									<h2>Ship Us Your Costume!</h2>
 									<p>Have a pile of old costumes taking <br>up space? Let us take care of it.</p>
-									REQUEST A BAG
+									<span class="acnhr-link">REQUEST A BAG</span>
+									
 								</div>
               
 							</div>
