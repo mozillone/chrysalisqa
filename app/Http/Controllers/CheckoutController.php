@@ -52,11 +52,9 @@ class CheckoutController extends Controller {
              $data['cc_details']=Creditcard::getCCList(Auth::user()->id);
          }
     }else{
-        $data['shipping_address']=Address::getAddressinfo('shipping',"latest"); 
-        $data['billing_address']=Address::getAddressinfo('billing',"latest");
-        $data['cc_details']=Creditcard::getCCList(Auth::user()->id);
+       return Redirect::to('/');
    }
- return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries);
+  return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries);
   }
   public function placeOrder(Request $request){
     $req=$request->all();
@@ -65,6 +63,9 @@ class CheckoutController extends Controller {
        Session::flash('error',$result['message']);
        return Redirect::back();
 
+    }else{
+      $charities_list=Order::getCharitiesList();
+      return view('frontend.costumes.checkout.order_thanku')->with('order_id',$result['message'])->with('charities_list',$charities_list);
     }
     }
   public function addShippingAddress(Request $request){
