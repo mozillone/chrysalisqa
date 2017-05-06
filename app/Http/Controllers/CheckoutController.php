@@ -58,8 +58,6 @@ class CheckoutController extends Controller {
   }
   public function placeOrder(Request $request){
     $req=$request->all();
-     dd($req);
-  
      $result=Order::placeOrder($req);
     if($result['result']=="0"){
        Session::flash('error',$result['message']);
