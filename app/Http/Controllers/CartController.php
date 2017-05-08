@@ -29,11 +29,10 @@ class CartController extends Controller {
          return Redirect::back();
       }else{
         $data=Cart::getCartProductswithCoupan($req['coupan_code']);
-        dd("testing");
-      }
+       }
     }else{
       $data=Cart::getCartProducts();
-    }
+     }
     return view('frontend.costumes.cart.cart_list',compact('data',$data));
   }
   public function addToCart(Request $request){
