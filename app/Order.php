@@ -20,8 +20,8 @@ class Order extends Authenticatable
     ];
     protected function placeOrder($req){
         $data=Cart::getCartProducts();
-        if(count($data)){
-            $cart_info=Cart::cartMetaInfo($data[0]->cart_id);
+        if(count($data['basic'])){
+            $cart_info=Cart::cartMetaInfo($data['basic'][0]->cart_id);
             $order_info=array('user_id'=>Auth::user()->id, 
                                'firstname'=>Auth::user()->first_name, 
                                'lastname'=>Auth::user()->last_name, 
@@ -41,11 +41,11 @@ class Order extends Authenticatable
                                'shipping_city'=>$cart_info[0]->shipping_city,
                                'shipping_postcode'=>$cart_info[0]->shipping_postcode,
                                'shipping_country'=>$cart_info[0]->shipping_country,
-                               'total'=>$data[0]->total,
+                               'total'=>$data['basic'][0]->total,
                                'created_at'=>date('Y-m-d h:i:s'),
                             );
              $order_id=Site_model::insert_get_id('order',$order_info);
-             foreach($data as $cart){
+             foreach($data['basic'] as $cart){
                   $costume_info=array('costume_id'=>$cart->costume_id, 
                              'sku'=>$cart->sku, 
                              'costume_name'=>$cart->costume_name, 
@@ -59,10 +59,10 @@ class Order extends Authenticatable
              $order_total=array('order_id'=>$order_id,
                                 'code'=>"",
                                 'title'=>"Total",
-                                'value'=>$data[0]->total,
+                                'value'=>$data['basic'][0]->total,
                         );
              Site_model::insert_get_id('order_total',$order_total);
-             Site_model::delete_single('cart',array('cart_id'=>$data[0]->cart_id));
+             Site_model::delete_single('cart',array('cart_id'=>$data['basic'][0]->cart_id));
              $result=array('result'=>1,'message'=>$order_id);
              return $result;
          }else{

@@ -43,14 +43,14 @@
 														<div class="shipping_add">
 															<p>{{$data['cart_shipping_address'][0]->shipping_address_1}},<br>
 															{{$data['cart_shipping_address'][0]->shipping_address_2	}}<br>
-															{{$data['cart_shipping_address'][0]->shipping_city	}},{{$data['cart_shipping_address'][0]->shipping_postcode}},{{$data['cart_shipping_address'][0]->shipping_country}} <br></p>
+															{{$data['cart_shipping_address'][0]->shipping_city	}},{{$data['cart_shipping_address'][0]->shipping_state}},{{$data['cart_shipping_address'][0]->shipping_postcode}},{{$data['cart_shipping_address'][0]->shipping_country}} <br></p>
 														</div>
 													@else
 													@if(!empty($data['shipping_address']))
 														<div class="shipping_add">
 															<p>{{$data['shipping_address'][0]->address1}},<br>
 															{{$data['shipping_address'][0]->address2}}<br>
-															{{$data['shipping_address'][0]->city}},{{$data['shipping_address'][0]->zip_code}},{{$data['shipping_address'][0]->country}} <br></p>
+															{{$data['shipping_address'][0]->city}},{{$data['shipping_address'][0]->state}},{{$data['shipping_address'][0]->zip_code}},{{$data['shipping_address'][0]->country}} <br></p>
 														</div>
 													@else
 														<div class="shipping_add"></div>
@@ -76,7 +76,7 @@
 													<div class="billing_add">
 														<p>{{$data['cart_billing_address'][0]->pay_address_1}},<br>
 														{{$data['cart_billing_address'][0]->pay_address_2}}<br>
-														{{$data['cart_billing_address'][0]->pay_city}},{{$data['cart_billing_address'][0]->pay_zipcode}},{{$data['cart_billing_address'][0]->pay_country}} <br>
+														{{$data['cart_billing_address'][0]->pay_city}},{{$data['cart_billing_address'][0]->pay_state}},{{$data['cart_billing_address'][0]->pay_zipcode}},{{$data['cart_billing_address'][0]->pay_country}} <br>
 														</p>
 													</div>
 												@else
@@ -84,7 +84,7 @@
 													<div class="billing_add">
 														<p>{{$data['billing_address'][0]->address1}},<br>
 														{{$data['billing_address'][0]->address2}}<br>
-														{{$data['billing_address'][0]->zip_code}},{{$data['billing_address'][0]->country}} <br>
+														{{$data['billing_address'][0]->city}},{{$data['billing_address'][0]->state}},{{$data['billing_address'][0]->zip_code}},{{$data['billing_address'][0]->country}} <br>
 														</p>
 													</div>
 												@else
@@ -129,7 +129,7 @@
 									</div>	
 									<div class="checkout_review_box">
 										<h2>Review Shipping & Delivery Time</h2>
-										@foreach($data['basic'] as $cart)
+										@foreach($data['basic']['basic'] as $cart)
 										<div class="well">
 											 <div class="shipping_date">
 												<span>Free Shipping from Chrysalis, NY <span class="in_prc">($0.00)</span></span><span class="shi_date_right text-right right"> Estimated Shipping from Brooklyn, NY <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i></span>
@@ -150,7 +150,14 @@
 													</div>
 												</div>
 												<div class="col-md-3 col-sm-3 col-xs-12">
-													<p class="price_right text-right"><span class="check_price">${{number_format(($cart->qty)*($cart->price), 2, '.', ',')}}</span>
+													<p class="price_right text-right"><span class="check_price">@if($cart->created_user_group=="admin" && $cart->discount!=null && $cart->uses_customer<$cart->uses_total && date('Y-m-d H:i:s')>=$cart->date_start && date('Y-m-d H:i:s')<=$cart->date_end)
+														<?php $discount=($cart->price/100)*$cart->discount;
+															   $new_price=$cart->price-$discount;
+													    ?>
+													  @else
+															 <?php $new_price=$cart->price;?>
+													@endif
+													${{number_format(($cart->qty)*($new_price), 2, '.', ',')}}</span>
 													<span><a href="/cart/delete/{{$cart->cart_item_id}}/{{$cart->cart_id}}"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
 												</div>
 											</div>
@@ -164,10 +171,10 @@
 									<div class="order_summery">
 										<div class="well">
 											<h3>Order Summary  </h3> 
-											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic'][0]->total, 2, '.', ',')}} <em>({{count($data)}} Items)</em></span></p>
-											<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$0.00 <em>(0 Items)</em></span></p>
-											<p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$0.00 </span></p>
-											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">${{number_format($data['basic'][0]->total, 2, '.', ',')}} </span></p>
+											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}} <em>({{count($data['basic'])}} Items)</em></span></p>
+											@if(!empty($data['basic']['dis_count'])) <p class="sub-all"><span>Shipping: </span> <span class="sub-price">-${{$data['basic']['dis_total']}} <em>({{$data['basic']['dis_count']}} Items)</em></span></p>@endif
+											<!-- <p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$0.00 </span></p> -->
+											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">@if(!empty($data['basic']['dis_count']))${{number_format($data['basic']['basic'][0]->total-$data['basic']['dis_total'], 2, '.', ',')}} @else ${{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}}@endif </span></p>
 											<button class="btn btn-primary">Place Order</button>
 										</div>
 									</div>
@@ -189,7 +196,7 @@
 	      <div class="modal-body">
 	       <form class="" action="javascript::void(0);" method="POST" id="shipping_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	       <input type="hidden" name="cart_id" value="{{ $data['basic'][0]->cart_id}}">
+	       <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
 						
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="chek-out">
@@ -233,6 +240,11 @@
 											<input type="text" class="form-control" id="shipping_postcode" placeholder="Zipcode *" name="postcode">
 										</div>
 									</div>
+									<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="shipping_state" placeholder="State *" name="state">
+											</div>
+										</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<select class="form-control" name="country" id="shipping_country">
@@ -278,7 +290,7 @@
 	      <div class="modal-body">
 	       <form class="" action="javascript::void(0);" method="POST" id="billing_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-		   <input type="hidden" name="cart_id" value="{{ $data['basic'][0]->cart_id}}">
+		   <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
 								<div class="col-md-12 col-sm-12 col-xs-12">
@@ -320,6 +332,11 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_state" placeholder="State *" name="state">
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -368,7 +385,7 @@
 	      <div class="modal-body">
 	       <form class="" action="javascript::void(0);" method="POST" id="cc_form">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-		   <input type="hidden" name="cart_id" value="{{ $data['basic'][0]->cart_id}}">
+		   <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
 		   	<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
 								<div class="col-md-12 col-sm-12 col-xs-12">
