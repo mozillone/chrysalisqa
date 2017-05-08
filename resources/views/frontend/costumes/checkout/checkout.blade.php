@@ -84,7 +84,7 @@
 													<div class="billing_add">
 														<p>{{$data['billing_address'][0]->address1}},<br>
 														{{$data['billing_address'][0]->address2}}<br>
-														{{$data['cart_billing_address'][0]->city}},{{$data['cart_billing_address'][0]->state}},{{$data['billing_address'][0]->zip_code}},{{$data['billing_address'][0]->country}} <br>
+														{{$data['billing_address'][0]->city}},{{$data['billing_address'][0]->state}},{{$data['billing_address'][0]->zip_code}},{{$data['billing_address'][0]->country}} <br>
 														</p>
 													</div>
 												@else
