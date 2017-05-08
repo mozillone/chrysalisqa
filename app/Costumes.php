@@ -58,7 +58,9 @@ class Costumes extends Authenticatable
             Site_model::delete_single('customer_wishlist',$cond);
         }
         $result=DB::Select('select count(id) as is_user_fav from cc_customer_wishlist where user_id='.$user_id.' and costume_id='.$costume_id.'');
-        return array('is_user_fav'=>$result[0]->is_user_fav);
+        $fav_count=DB::Select('select count(id) as fav_count from cc_customer_wishlist where user_id='.$user_id.'')[0]->fav_count;
+
+        return array('is_user_fav'=>$result[0]->is_user_fav,'fav_count'=>$fav_count);
     }
     protected function getCostumesList(){
         $costumes_list=DB::Select('SELECT cst.costume_id,dsr.name as cst_name,concat(cst.sku_no,"-",dsr.name) as name,cst.sku_no,cst.price FROM `cc_costumes` as cst LEFT JOIN  cc_costume_description as dsr on dsr.costume_id=cst.costume_id ORDER BY `name` ASC');
