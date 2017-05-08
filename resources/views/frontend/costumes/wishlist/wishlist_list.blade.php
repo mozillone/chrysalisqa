@@ -72,7 +72,6 @@ p.list-sec-rm1.fav_costume sapn.active {
 				<div class="col-md-3 col-sm-4 col-xs-6" >
 					    <div class="prod_box">
 					        <div class="img_layer">
-					        {{public_path('costumers_images/'.$wish->image.'')}}
 					            <a href="/product{{$wish->url_key}}"><img class="img-responsive" @if($wish->image!=null && file_exists(public_path
 					            ('costumers_images/'.$wish->image.''))) src="/costumers_images/Medium/{{$wish->image}}" @else src="/costumers_images/default-placeholder.jpg" @endif/></a>
 					            <div class="hover_box">
