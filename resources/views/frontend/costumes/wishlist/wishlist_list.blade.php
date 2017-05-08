@@ -1,6 +1,8 @@
 @extends('/frontend/app')
 @section('styles')
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+ <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
+  <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
 <style>
 .list_products.wish_lists .col-md-3.col-sm-4.col-xs-6 {
     width: 20%;
@@ -38,6 +40,7 @@ p.list-sec-rm1.fav_costume sapn.active {
  @endsection
 @section('content')
  	<section class="content create_section_page">
+ 	 	<div id="ohsnap"></div>
 		<div class="prodcut_list_page">
 			<div class="container">
 			<div class="row">
@@ -83,7 +86,7 @@ p.list-sec-rm1.fav_costume sapn.active {
 					                		<span class="active"><i aria-hidden="true" class="fa fa-heart"></i></span>
 					                	</a>
 					                </p>
-					                <p class="hover_crt"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
+					                <p class="hover_crt add-cart" data-costume-id="{{$wish->costume_id}}"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
 					            </div>
 					        </div>
 					        <div class="slider_cnt">
@@ -115,8 +118,12 @@ p.list-sec-rm1.fav_costume sapn.active {
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="{{ asset('/js/ohsnap.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
+<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
 
 @stop
