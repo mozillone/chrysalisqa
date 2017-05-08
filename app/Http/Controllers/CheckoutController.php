@@ -14,6 +14,7 @@ use App\Creditcard;
 use App\Order;
 use App\Address;
 use Validator;
+use cookie;
 class CheckoutController extends Controller {
 
   protected $auth;
@@ -132,16 +133,50 @@ class CheckoutController extends Controller {
         $cookie_id=SiteHelper::currentCookieKey();
         $cart_id=Cart::verifyCostumeCart($req['costume_id'],$cookie_id);
         if($cart_id){
-          $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
-          $res=Cart::verifyCostumeQuantity($costume_id,$qty);
-          if(count($res)){
-            Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
-            $res=$this->updateCartDetails($costume_id,$qty+1);
+          $qty=Cart::verifyCostumeCartQuantity($req['costume_id'],$cookie_id);
+          $res=Cart::verifyCostumeQuantity($req['costume_id'],$qty);
+         if(count($res)){
+            Cart::updateCartDetails($req['costume_id'],$cart_id,$qty+1);
+            $res=$this->updateCartDetails($req['costume_id'],$qty+1);
             return Redirect::to('/checkout');
           }else{
             return Redirect::back();
           }
         }
       }
-	
+	  private function getCookieAllProducts(){
+        $cookie = cookie::get('min-cart');
+        return $cookie;
+
+    }
+    private function productsAddToCookie($product){
+ 
+       $cookie=cookie('min-cart',$product, 5*60);
+       return $cookie;
+
+    }
+    private function updateCartDetails($costume_id,$qnty){
+      $cart_list=$this->getCookieAllProducts();
+      $cookie_id=$this->currentCookieKey();
+      $cart_list[$cookie_id][$costume_id]=$qnty;
+      $res=$this->productsAddToCookie($cart_list);
+      return $res;
+
+    }
+    private function cookieKeyGenarater(){
+        $key=str_random(64);
+        return $key;
+    }
+    private function verifieCookie(){
+        $res=$this->getCookieAllProducts();
+        if($res!=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    private function currentCookieKey(){
+        $cookie=cookie::get('min-cart');
+        return key($cookie);
+    }
 }
