@@ -49,7 +49,7 @@ p.list-sec-rm1.fav_costume sapn.active {
 						<div class="col-md-6">
 							<p class="list-sec-rm1 fav_costume"><sapn class="active"><i aria-hidden=true class="fa fa-heart-o"></i></sapn> My Favorties ({{helper::getMyWishlistCount()}})</p>
 						</div>
-						<div class="col-md-6 text-right pull-right">
+						<div class="col-md-6 text-right pull-right back-link">
 							<a href="/dashboard">Back to My Account</a>
 						</div>
 
