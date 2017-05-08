@@ -1842,7 +1842,7 @@ input[type=checkbox]#is_shipping, input[type=checkbox]#is_billing {
 button.btn.btn-primary.item-update {
 	box-shadow: none;
 }
-.costumes-desktop .cart-img  {
+.costumes-desktop .cart-img, .carousel-inner   .carousel-cart-img{ 
 	position: relative;
 }
 .costumes-desktop .price-tag {
@@ -1861,6 +1861,48 @@ button.btn.btn-primary.item-update {
 }
 a:hover {
 	text-decoration: none !important;
+}
+.carousel-cart-img  .price-tag {
+	position: absolute;
+    right: 30px;
+    bottom: 3px;
+    display: inline-grid;
+    font-size: 10px;
+    font-family: Proxima-Nova-Extrabold;
+    color: #000;
+}
+.carousel-cart-img .price-doller {
+	font-size: 16px;
+	text-align: center;
+}
+.average-payout-sec .carousel-inner>.item  .carousel-cart-img img {
+	width: 80%;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0 auto;
+}
+input.addtocart-rm { 
+    width: 180px;
+    height: 45px;
+    float: right;
+    line-height: 45px;
+    color: #fff;
+    font-size: 20px;
+    font-family: Proxima-Nova-Extrabold;
+    margin: 0 0 10px;
+    background: #ee4266 ;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.back-link a{
+	color: #000000;
+    border-bottom: 1px solid #bfbfbf;
+    font-family: Proxima-Nova-Semibold;
+    display: inline-block;
+    padding-top: 3px;
+    font-size: 16px;
 }
 /********************************************************************Media start here********************************************************************/
 
