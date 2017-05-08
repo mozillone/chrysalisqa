@@ -28,6 +28,7 @@ class Address extends Authenticatable
                                        'address1'=>$req['address_1'],
                                        'address2'=>$req['address_2'],
                                        'city'=>$req['city'],
+                                       'state'=>$req['state'],
                                        'country'=>$req['country'],
                                        'zip_code'=>$req['postcode'],
                                        'address_type'=>'billing',
@@ -51,6 +52,7 @@ class Address extends Authenticatable
                                        'address1'=>$req['address_1'],
                                        'address2'=>$req['address_2'],
                                        'city'=>$req['city'],
+                                       'state'=>$req['state'],
                                        'country'=>$req['country'],
                                        'zip_code'=>$req['postcode'],
                                        'address_type'=>'shipping',
@@ -89,6 +91,7 @@ class Address extends Authenticatable
                       'pay_address_1'=>$req['address_1'],
                       'pay_address_2'=>$req['address_2'],
                       'pay_city'=>$req['city'],
+                      'pay_state'=>$req['state'],
                       'pay_zipcode'=>$req['country'],
                       'pay_country'=>$req['postcode'],
                        );
@@ -98,6 +101,7 @@ class Address extends Authenticatable
                       'shipping_address_1'=>$req['address_1'],
                       'shipping_address_2'=>$req['address_2'],
                       'shipping_city'=>$req['city'],
+                      'shipping_state'=>$req['state'],
                       'shipping_postcode'=>$req['country'],
                       'shipping_country'=>$req['postcode'],
                        );
@@ -112,6 +116,7 @@ class Address extends Authenticatable
                       'pay_address_1'=>$req['address_1'],
                       'pay_address_2'=>$req['address_2'],
                       'pay_city'=>$req['city'],
+                      'pay_state'=>$req['state'],
                       'pay_zipcode'=>$req['country'],
                       'pay_country'=>$req['postcode'],
                       'shipping_firstname'=>$req['firstname'],
@@ -119,6 +124,7 @@ class Address extends Authenticatable
                       'shipping_address_1'=>$req['address_1'],
                       'shipping_address_2'=>$req['address_2'],
                       'shipping_city'=>$req['city'],
+                      'shipping_state'=>$req['state'],
                       'shipping_postcode'=>$req['country'],
                       'shipping_country'=>$req['postcode'],
                        );
