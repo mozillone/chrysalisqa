@@ -13,6 +13,7 @@ use App\Cart;
 use App\Creditcard;
 use App\Order;
 use App\Address;
+use Validator;
 class CheckoutController extends Controller {
 
   protected $auth;
@@ -29,15 +30,15 @@ class CheckoutController extends Controller {
             }
         });
 	}
-  public function checkout(Request $request){
-    $coupan_code=Cart::verifyCoupanCode();
+  public function checkout(){
+     $coupan_code=Cart::verifyCoupanCode();
     if(!$coupan_code){
       $data['basic']=Cart::getCartProducts();
     }else{
       $data['basic']=Cart::getCartProductswithCoupan($coupan_code);
      }
     $countries   = Site_model::Fetch_all_data('countries', '*');
-    if(count($data['basic'])){
+    if(count($data['basic']['basic'])){
          $cart_info=Cart::cartMetaInfo($data['basic']['basic'][0]->cart_id);
          if(!empty($cart_info[0]->shipping_address_1)){
              $data['cart_shipping_address']=$cart_info;
@@ -63,7 +64,19 @@ class CheckoutController extends Controller {
   }
   public function placeOrder(Request $request){
     $req=$request->all();
-     $result=Order::placeOrder($req);
+    $rule  =  array(  
+                'shipping_address_1' => 'required',
+                'pay_address_1' => 'required',
+                'card_id' => 'required',
+                 );
+    $validator = Validator::make($req,$rule);
+    if ($validator->fails()) {
+      return Redirect::back()
+      ->withErrors($validator)
+      ->withInput()->send();
+    }
+
+    $result=Order::placeOrder($req);
     if($result['result']=="0"){
        Session::flash('error',$result['message']);
        return Redirect::back();
@@ -114,5 +127,21 @@ class CheckoutController extends Controller {
     }
 
   }
+  public function buyItNow(Request $request){
+        $req=$request->all();
+        $cookie_id=SiteHelper::currentCookieKey();
+        $cart_id=Cart::verifyCostumeCart($req['costume_id'],$cookie_id);
+        if($cart_id){
+          $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
+          $res=Cart::verifyCostumeQuantity($costume_id,$qty);
+          if(count($res)){
+            Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
+            $res=$this->updateCartDetails($costume_id,$qty+1);
+            return Redirect::to('/checkout');
+          }else{
+            return Redirect::back();
+          }
+        }
+      }
 	
 }

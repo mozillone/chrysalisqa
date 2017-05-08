@@ -74,8 +74,18 @@
 	</div>
 
 	<div class="col-xs-6 col-sm-4 viewBtn_rm">
-	<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
-	<button type="button" class="buynow-rm">@if(!Auth::check())<a data-toggle="modal" data-target="#login_popup" class="buynow-rm">Buy it Now!</a>  @else <a href="/checkout" class="buynow-rm">Buy it Now!</a>@endif</button>
+	@if($data[0]->quantity>0)
+		<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
+		@if(!Auth::check())
+		<button type="button" class="buynow-rm"><a data-toggle="modal" data-target="#login_popup" class="buynow-rm">Buy it Now!</a> </button>
+		 @else
+			 <form action="{{route('buy-it-now')}}" method="POST"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="costume_id" value="{{ $data[0]->costume_id }}">
+									 <input type="submit" class="addtocart-rm" value="Buy it Now!">
+			</form>
+		@endif
+	 @else
+		 <button type="button" class="addtocart-rm" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> Out of stock</button>
+	@endif
 	</div>
 
 	</div>

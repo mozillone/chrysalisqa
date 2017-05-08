@@ -114,7 +114,6 @@ $(document).ready(function() {
 						getShippingSelectedAdress('shipping',response);
 			
 					}
-					$('.shipping-empty').remove();
 					$('.shipping_popup').html('Edit');
 					$('#shipping_popup').modal('hide');
 				}
@@ -168,8 +167,6 @@ $(document).ready(function() {
 						getBillingSelectedAdress('billing',response);
 			
 					}
-					$('.billing-empty').remove();
-					$('.billing_popup').html('Edit');
 					$('#billing_popup').modal('hide');
 				}
 			});	
@@ -215,7 +212,6 @@ $(document).ready(function() {
 			data: data,
 			success: function(response){
 					getSelectedCreditCard(response);
-					$('.payment-empty').remove();
 					$('.cc_popup').html('Edit');
 					$('#cc_popup').modal('hide');
 				}
@@ -228,6 +224,8 @@ $(document).ready(function() {
     	$.ajax({
 			url: '/get-adress/'+type+'/'+address_id+'',
 			success: function(response){
+				$('input[name="shipping_address_1"]').val(response);
+				$('.shipping-empty,.error').remove();
 				if(!is_billing){
 					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				}
@@ -244,7 +242,10 @@ $(document).ready(function() {
     	$.ajax({
 			url: '/get-adress/'+type+'/'+address_id+'',
 			success: function(response){
-				if(!is_shipping){
+				$('input[name="billing_address_1"]').val(response);
+				$('.billing-empty,.error').remove();
+				$('.billing_popup').html('Edit');
+					if(!is_shipping){
 					$('.billing_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				}
 				else{
@@ -259,6 +260,8 @@ $(document).ready(function() {
     	$.ajax({
 			url: '/get/credit-card/'+card_id,
 			success: function(response){
+					$('input[name="card_id"]').val(response);
+					$('.payment-empty,.error').remove();
 					$('.card_exp').html('Ending in '+response[0].exp_year);
 			}
 			});

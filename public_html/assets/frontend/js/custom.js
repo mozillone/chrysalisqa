@@ -1,4 +1,5 @@
 $(function(){
+
 	$("#loginpopup").validate();
 	$("#loginpopup_email").rules("add", {required:true,email: true,messages: {
 		email: "Enter a valid  user email"
