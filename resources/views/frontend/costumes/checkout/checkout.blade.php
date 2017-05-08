@@ -43,14 +43,14 @@
 														<div class="shipping_add">
 															<p>{{$data['cart_shipping_address'][0]->shipping_address_1}},<br>
 															{{$data['cart_shipping_address'][0]->shipping_address_2	}}<br>
-															{{$data['cart_shipping_address'][0]->shipping_city	}},{{$data['cart_shipping_address'][0]->shipping_postcode}},{{$data['cart_shipping_address'][0]->shipping_country}} <br></p>
+															{{$data['cart_shipping_address'][0]->shipping_city	}},{{$data['cart_shipping_address'][0]->shipping_state}},{{$data['cart_shipping_address'][0]->shipping_postcode}},{{$data['cart_shipping_address'][0]->shipping_country}} <br></p>
 														</div>
 													@else
 													@if(!empty($data['shipping_address']))
 														<div class="shipping_add">
 															<p>{{$data['shipping_address'][0]->address1}},<br>
 															{{$data['shipping_address'][0]->address2}}<br>
-															{{$data['shipping_address'][0]->city}},{{$data['shipping_address'][0]->zip_code}},{{$data['shipping_address'][0]->country}} <br></p>
+															{{$data['shipping_address'][0]->city}},{{$data['shipping_address'][0]->state}},{{$data['shipping_address'][0]->zip_code}},{{$data['shipping_address'][0]->country}} <br></p>
 														</div>
 													@else
 														<div class="shipping_add"></div>
@@ -76,7 +76,7 @@
 													<div class="billing_add">
 														<p>{{$data['cart_billing_address'][0]->pay_address_1}},<br>
 														{{$data['cart_billing_address'][0]->pay_address_2}}<br>
-														{{$data['cart_billing_address'][0]->pay_city}},{{$data['cart_billing_address'][0]->pay_zipcode}},{{$data['cart_billing_address'][0]->pay_country}} <br>
+														{{$data['cart_billing_address'][0]->pay_city}},{{$data['cart_billing_address'][0]->pay_state}},{{$data['cart_billing_address'][0]->pay_zipcode}},{{$data['cart_billing_address'][0]->pay_country}} <br>
 														</p>
 													</div>
 												@else
@@ -84,7 +84,7 @@
 													<div class="billing_add">
 														<p>{{$data['billing_address'][0]->address1}},<br>
 														{{$data['billing_address'][0]->address2}}<br>
-														{{$data['billing_address'][0]->zip_code}},{{$data['billing_address'][0]->country}} <br>
+														{{$data['cart_billing_address'][0]->city}},{{$data['cart_billing_address'][0]->state}},{{$data['billing_address'][0]->zip_code}},{{$data['billing_address'][0]->country}} <br>
 														</p>
 													</div>
 												@else
@@ -241,6 +241,11 @@
 										</div>
 									</div>
 									<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="shipping_state" placeholder="State *" name="state">
+											</div>
+										</div>
+									<div class="col-md-6">
 										<div class="form-group">
 											<select class="form-control" name="country" id="shipping_country">
 													<option value="" selected> Select</option>
@@ -327,6 +332,11 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_state" placeholder="State *" name="state">
 											</div>
 										</div>
 										<div class="col-md-6">
