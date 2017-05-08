@@ -181,6 +181,10 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
 	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
+	   	Route::any('/generatelables', array('as' => '','uses' => 'RequestabagController@Generatelables'));
+	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
+	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
+	   	Route::any('/closerequest', array('as' => '','uses' => 'RequestabagController@Closerequest'));
 	   /*****************************Request a bag ends here ***********************/
 
 });
