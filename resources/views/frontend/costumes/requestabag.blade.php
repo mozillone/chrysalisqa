@@ -328,7 +328,7 @@ if (isset($total_data) && !empty($total_data)) {
 						</div>
 						<h4>Have you registerd yet? Add your email!</h4>
                         <!-- <form> -->
-                            <div class="form-rms" style="margin-bottom: 30px">
+                            <div class="form-rms" style="margin-bottom: 18px">
                                 <p class="form-rms-que">Email Address</p>
                                 <p class="form-rms-input"><input type="text" name="email_address" id="email_address" value="<?php if (isset($all_details['get_details']->email) && !empty($all_details['get_details']->email)) { echo $all_details['get_details']->email; } ?>" <?php if (isset($all_details['get_details']->email) && !empty($all_details['get_details']->email)) {  ?> readonly <?php } ?> tab-index="1" ></p>
                                 <span id="email_address_error" style="color:red"></span>
