@@ -116,18 +116,33 @@ if (isset($total_data) && !empty($total_data)) {
                 <div class="row costumes">
                     <div class="costumes-desktop">
                         <div class="col-md-4 col-sm-4">
-                            <img  src="{{URL::asset('assets/frontend/img/Item-2.1.png')}}">
+							<div class="cart-img">
+								<img  src="{{URL::asset('assets/frontend/img/Item-2.1.png')}}">
+								<span class="price-tag">
+									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>4</span>
+								</span>
+							</div>
                         </div>
                         <div class="col-md-4 col-sm-4">
-                            <img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
+							<div class="cart-img">
+								<img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
+								<span class="price-tag">
+									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>2</span>
+								</span>
+							</div>
                         </div>
                         <div class="col-md-4 col-sm-4">
-                            <img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
+							<div class="cart-img">
+								<img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
+								<span class="price-tag">
+									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>5</span>
+								</span>
+							</div>
                         </div>
                     </div>
                  </div>
 
-             <div id="myCarousel" class="carousel costumes-carousel slide" data-ride="carousel">
+             <div id="myCarousel" data-interval="false" class="carousel costumes-carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                   <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -138,15 +153,30 @@ if (isset($total_data) && !empty($total_data)) {
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                   <div class="item active">
-                    <img  src="{{URL::asset('assets/frontend/img/Item-2.1.png')}}">
+                    <div class="carousel-cart-img">
+						<img  src="{{URL::asset('assets/frontend/img/Item-2.1.png')}}">
+						<span class="price-tag">
+									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>12</span>
+						</span>
+					</div>
                   </div>
 
                   <div class="item">
+				  <div class="carousel-cart-img">
                     <img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
+					<span class="price-tag">
+									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>4</span>
+						</span>
+						</div>
                   </div>
 
                   <div class="item">
+				  <div class="carousel-cart-img">
                     <img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
+					<span class="price-tag">
+									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>5</span>
+						</span>
+						</div>
                   </div>
                 </div>
 
@@ -173,13 +203,28 @@ if (isset($total_data) && !empty($total_data)) {
             <div class="row costumes">
                 <div class="costumes-desktop">
                     <div class="col-md-4 col-sm-4">
-                        <img  src="{{URL::asset('assets/frontend/img/Item-3.png')}}">
+						<div class="cart-img">
+							<img  src="{{URL::asset('assets/frontend/img/Item-3.png')}}">
+							<span class="price-tag">
+									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>6</span>
+							</span>
+						</div>
                     </div>
                     <div class="col-md-4 col-sm-4">
+						<div class="cart-img">
                         <img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
+						<span class="price-tag">
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>7</span>
+							</span>
+							</div>
                     </div>
                     <div class="col-md-4 col-sm-4">
+					<div class="cart-img">
                         <img  src="{{URL::asset('assets/frontend/img/Item-3.1.png')}}">
+						<span class="price-tag">
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>9</span>
+							</span>
+							</div>
                     </div>
                 </div>
             </div>
@@ -194,15 +239,37 @@ if (isset($total_data) && !empty($total_data)) {
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                               <div class="item active">
+							  <div class="carousel-cart-img">
+							  
                                 <img  src="{{URL::asset('assets/frontend/img/Item-2.1.png')}}">
+								<span class="price-tag">
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>9</span>
+							</span>
+							</div>
+							
+							
                               </div>
 
                               <div class="item">
-                                <img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
+							  <div class="carousel-cart-img">
+									<img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
+									<span class="price-tag">
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>15</span>
+							</span>
+							</div>
+						
+							
                               </div>
 
                               <div class="item">
+							  <div class="carousel-cart-img">
                                 <img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
+								<span class="price-tag">
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>6</span>
+							</span>
+							</div>
+								
+							
                               </div>
                             </div>
 
@@ -226,13 +293,28 @@ if (isset($total_data) && !empty($total_data)) {
                 </div>
                 <div class="row costumes">
                     <div class="col-md-4 col-sm-4">
+					<div class="cart-img">
                         <img  src="{{URL::asset('assets/frontend/img/Item-3.png')}}">
+						<span class="price-tag">
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>10</span>
+							</span>
+							</div>
                     </div>
                     <div class="col-md-4 col-sm-4">
+					<div class="cart-img">
                         <img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
+						<span class="price-tag">
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>11</span>
+							</span>
+							</div>
                     </div>
                     <div class="col-md-4 col-sm-4">
+					<div class="cart-img">
                         <img  src="{{URL::asset('assets/frontend/img/Item-3.1.png')}}">
+						<span class="price-tag">
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>15</span>
+							</span>
+							</div>
                     </div>
                 </div>
             </div>
@@ -289,7 +371,7 @@ if (isset($total_data) && !empty($total_data)) {
                                 	$db_state = $all_details['basic_address']->state;
 									} ?>
 										<select name="state" id="state">
-											<option value="">Select s State</option>
+											<option value="">Select a State</option>
 												@foreach($all_details['state_table'] as $state)
 											<option <?php if (!empty($db_state) == $state->abbrev): ?>
 												selected="selected"
