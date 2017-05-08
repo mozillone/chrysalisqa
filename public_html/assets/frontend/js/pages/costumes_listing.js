@@ -134,7 +134,7 @@ function searching(search=null){
 							var stock='<p class="hover_crt"><i aria-hidden=true class="fa fa-shopping-cart"></i> Out of stock</p>';
 						}
 
-						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/product'+link+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+' '+stock+'</div></div><div class=slider_cnt><h4><a href="/product'+link+'"</a></h4><p>'+price+'</div></div></div>';
+						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/product'+link+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+' '+stock+'</div></div><div class=slider_cnt><h4><a href="/product'+link+'"</a>'+value.name+'</h4><p>'+price+'</div></div></div>';
 				    });
 					$(".pagination").show();
 					$("#itemContainer").append(res);

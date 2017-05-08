@@ -30,6 +30,7 @@ class CheckoutController extends Controller {
         });
 	}
   public function checkout(Request $request){
+    dd($req);
     $coupan_code=Cart::verifyCoupanCode();
     if(!$coupan_code){
       $data['basic']=Cart::getCartProducts();
