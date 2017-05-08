@@ -9,6 +9,7 @@ $(document).ready(function() {
 	$("#shipping_address_1").rules("add", {required:true,maxlength: 100});
 	$("#shipping_city").rules("add", {required:true});
 	$("#shipping_postcode").rules("add", {required:true,number:true});
+	$("#shipping_state").rules("add", {required:true,maxlength:100});
 	$("#shipping_country").rules("add", {required:true});
 
 	$("#billing_firstname").rules("add", {required:true,maxlength: 100});
@@ -16,6 +17,7 @@ $(document).ready(function() {
 	$("#billing_address_1").rules("add", {required:true,maxlength: 100});
 	$("#billing_city").rules("add", {required:true});
 	$("#billing_postcode").rules("add", {required:true,number:true});
+	$("#billing_state").rules("add", {required:true,maxlength:100});
 	$("#billing_country").rules("add", {required:true});
 
 	$("#cardholder_name").rules("add", {required:true,maxlength: 50});
@@ -113,6 +115,7 @@ $(document).ready(function() {
 			
 					}
 					$('.shipping-empty').remove();
+					$('.shipping_popup').html('Edit');
 					$('#shipping_popup').modal('hide');
 				}
 			});	
@@ -166,6 +169,7 @@ $(document).ready(function() {
 			
 					}
 					$('.billing-empty').remove();
+					$('.billing_popup').html('Edit');
 					$('#billing_popup').modal('hide');
 				}
 			});	
@@ -212,6 +216,7 @@ $(document).ready(function() {
 			success: function(response){
 					getSelectedCreditCard(response);
 					$('.payment-empty').remove();
+					$('.cc_popup').html('Edit');
 					$('#cc_popup').modal('hide');
 				}
 			});	
@@ -224,11 +229,11 @@ $(document).ready(function() {
 			url: '/get-adress/'+type+'/'+address_id+'',
 			success: function(response){
 				if(!is_billing){
-					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				}
 				else{
-					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].zip_code+','+response[0].country+'<br></p>');
-					$('.billing_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.billing_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				
 				}
 			}
@@ -240,11 +245,11 @@ $(document).ready(function() {
 			url: '/get-adress/'+type+'/'+address_id+'',
 			success: function(response){
 				if(!is_shipping){
-					$('.billing_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.billing_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				}
 				else{
-					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].zip_code+','+response[0].country+'<br></p>');
-					$('.billing_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.billing_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				
 				}
 			}
