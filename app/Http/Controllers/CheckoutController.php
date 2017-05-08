@@ -30,10 +30,15 @@ class CheckoutController extends Controller {
         });
 	}
   public function checkout(Request $request){
-    $data['basic']=Cart::getCartProducts();
+    $coupan_code=Cart::verifyCoupanCode();
+    if(!$coupan_code){
+      $data['basic']=Cart::getCartProducts();
+    }else{
+      $data['basic']=Cart::getCartProductswithCoupan($coupan_code);
+     }
     $countries   = Site_model::Fetch_all_data('countries', '*');
     if(count($data['basic'])){
-         $cart_info=Cart::cartMetaInfo($data['basic'][0]->cart_id);
+         $cart_info=Cart::cartMetaInfo($data['basic']['basic'][0]->cart_id);
          if(!empty($cart_info[0]->shipping_address_1)){
              $data['cart_shipping_address']=$cart_info;
          }else{

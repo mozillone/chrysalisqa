@@ -992,7 +992,7 @@ a#pricing_next {    float: right;}
 .form-rms-que1{font-family: Proxima-Nova-Semibold;}
 .form-rms-que1 span{font-family: Proxima-Nova-Extrabold;}
 .form-rms-btn{width: 100%; float:right; margin: 30px 0 0;text-align: right;margin-bottom: 30px;}
-.form-rms-btn a {    padding: 0px 40px;    cursor: pointer;    height: 40px;    line-height: 38px;    text-align: right;    margin-left: 20px;    font-family: Proxima-Nova-Extrabold;    font-size: 16px;    background: #60c4ac;
+.form-rms-btn a {    padding: 0px 40px;    cursor: pointer;    height: 40px;    line-height: 38px;    text-align: right;    margin-left: 20px;    font-family: Proxima-Nova-Extrabold;    font-size: 16px;    background: #60c4ac;  text-decoration: none;
     color: #fff;    border: none;    outline: none;    border-radius: 2px;    width: 200px;    text-align: center;}
 .form-rms-btn a.btn-rm-back{background: none; border: none; padding: 0px; color: #60c4ac; margin: 0 10px 0 0;}
 .form-rms-btn a.btn-rm-back span{border-bottom: 1px solid #efefef;}
@@ -1622,7 +1622,7 @@ span.acnhr-link {
 .request-address-sec .form-rms-btn a {
     padding: 6px 85px;
     text-decoration: none;
-    margin-left: 0;
+    margin-left: 14%;
 }
 .request-address-sec .form-rms-input {
     float: none;
@@ -1761,6 +1761,14 @@ input[type=checkbox]#is_shipping, input[type=checkbox]#is_billing {
 	color: #000;
 	text-decoration: none;
 }
+<<<<<<< HEAD
+.viewBtn_rm button.buynow-rm a {
+    text-decoration: none;
+    color: white;
+}
+
+=======
+>>>>>>> 4f1cc5f7fb659df60513a129e56d41836a0b57de
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){
@@ -2578,8 +2586,16 @@ div#main-banner img{min-height:200px;width:100%;}
 	.field-align-xs {
 		margin-bottom: 15px;
 	}
+<<<<<<< HEAD
+	.request-address-sec .form-rms-btn a {
+		margin-left: 0;
+	}
+}
+@media only screen and (min-width: 769px) {
+=======
 }
 @media only screen and (min-width: 768px) {
+>>>>>>> 4f1cc5f7fb659df60513a129e56d41836a0b57de
     .costumes-carousel {
         display: none;
     }
@@ -2605,3 +2621,32 @@ div#main-banner img{min-height:200px;width:100%;}
         margin-left: -15px;
     }
 }
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.request-address-sec .form-rms-btn a {
+		    margin-right: 17%;
+	}
+    
+}
+@media only screen and (min-width: 991px) and (max-width: 1199px){
+	.request-address-sec .form-rms-btn a {
+			margin-left: 42%;
+	}	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
