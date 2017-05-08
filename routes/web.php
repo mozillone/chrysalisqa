@@ -59,10 +59,14 @@ Route::post('/add/shipping-adress', array('as' => 'shipping_address.post','uses'
 Route::post('/add/billing-adress', array('as' => 'billing_address.post','uses' => 'CheckoutController@addBillingAddress'));
 
 
+
 Route::post('/buy-it-now', array('as' => 'buy-it-now','uses' => 'CheckoutController@buyItNow'));
 Route::any('/get/credit-card/{card_id?}', array('as' => 'add-credit-card','uses' => 'CheckoutController@getCreditCard'));
 Route::get('/get-adress/{type?}/{address_id?}', array('as' => 'shipping_address.post','uses' => 'CheckoutController@getAddressInfo'));
 Route::post('/order/charity/fund', array('as' => 'order-charity-fund','uses' => 'CheckoutController@orderCharityFund'));
+Route::any('/get/credit-card', array('as' => 'add-credit-card','uses' => 'CheckoutController@getCreditCard'));
+Route::any('/any/shipping-adress', array('as' => 'shipping_address.post','uses' => 'CheckoutController@getShippingAddress'));
+Route::any('/get/billing-adress', array('as' => 'billing_address.post','uses' => 'CheckoutController@getBillingAddress'));
 /*******************Checkout Functionality end here *********/
 
 
@@ -182,6 +186,10 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
 	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
+	   	Route::any('/generatelables', array('as' => '','uses' => 'RequestabagController@Generatelables'));
+	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
+	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
+	   	Route::any('/closerequest', array('as' => '','uses' => 'RequestabagController@Closerequest'));
 	   /*****************************Request a bag ends here ***********************/
 
 });

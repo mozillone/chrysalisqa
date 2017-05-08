@@ -130,7 +130,7 @@ class CheckoutController extends Controller {
   }
   public function buyItNow(Request $request){
         $req=$request->all();
-        $cookie_id=SiteHelper::currentCookieKey();
+       $cookie_id=SiteHelper::currentCookieKey();
         $cart_id=Cart::verifyCostumeCart($req['costume_id'],$cookie_id);
         if($cart_id){
           $qty=Cart::verifyCostumeCartQuantity($req['costume_id'],$cookie_id);
@@ -142,6 +142,21 @@ class CheckoutController extends Controller {
           }else{
             return Redirect::back();
           }
+        }
+        else{
+             $cookie_id=$this->currentCookieKey();
+             $costume_id=$req['costume_id'];
+             $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
+             $res=Cart::verifyCostumeQuantity($costume_id,$qty);
+             if(count($res)){
+               $product[$cookie_id][]=array($req['costume_id']=>$qty);
+               Cart::addToCart($req,$cookie_id,$qty);
+               $reslt=$this->productsAddToCookie($product);
+               return Redirect::to('/checkout');
+           }
+           else{
+                  return Redirect::back();
+         }
         }
       }
 	  private function getCookieAllProducts(){
