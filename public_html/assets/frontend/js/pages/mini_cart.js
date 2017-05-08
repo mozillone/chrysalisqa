@@ -12,7 +12,7 @@ $(function(){
 					Lobibox.notify('error', {
                     size: 'mini',
                     title: 'Out Of Stock',
-                    msg: 'This is costume is Out of Stock ',
+                    msg: 'This costume is Out of Stock ',
                 });
 
 				}else{
@@ -20,7 +20,7 @@ $(function(){
 					Lobibox.notify('success', {
                     size: 'mini',
                     title: 'Add To Cart',
-                    msg: 'This is costume is added to cart',
+                    msg: 'This costume is added to cart',
               	  });
 
 					$('span.mini_cart').html(response);
