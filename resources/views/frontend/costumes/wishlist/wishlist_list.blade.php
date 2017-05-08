@@ -1,6 +1,8 @@
 @extends('/frontend/app')
 @section('styles')
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+ <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
+  <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
 <style>
 .list_products.wish_lists .col-md-3.col-sm-4.col-xs-6 {
     width: 20%;
@@ -38,6 +40,7 @@ p.list-sec-rm1.fav_costume sapn.active {
  @endsection
 @section('content')
  	<section class="content create_section_page">
+ 	 	<div id="ohsnap"></div>
 		<div class="prodcut_list_page">
 			<div class="container">
 			<div class="row">
@@ -72,7 +75,8 @@ p.list-sec-rm1.fav_costume sapn.active {
 				<div class="col-md-3 col-sm-4 col-xs-6" >
 					    <div class="prod_box">
 					        <div class="img_layer">
-					            <a href="/shop/{{$wish->costume_id}}/{{$wish->parent_cat_name}}/{{$wish->cat_name}}/{{$wish->name}}"><img class="img-responsive" @if($wish->image!=null && file_exists('costumers_images/{{$wish->image}}')) src="/costumers_images/{{$wish->image}}" @else src="/costumers_images/default-placeholder.jpg" @endif/></a>
+					            <a href="/product{{$wish->url_key}}"><img class="img-responsive" @if($wish->image!=null && file_exists(public_path
+					            ('costumers_images/Medium/'.$wish->image.''))) src="/costumers_images/Medium/{{$wish->image}}" @else src="/costumers_images/default-placeholder.jpg" @endif/></a>
 					            <div class="hover_box">
 					                <p class="like_fav">
 					                	<a href="#" onclick="return false;" class="like_costume" data-costume-id="{{$wish->costume_id}}">
@@ -82,13 +86,13 @@ p.list-sec-rm1.fav_costume sapn.active {
 					                		<span class="active"><i aria-hidden="true" class="fa fa-heart"></i></span>
 					                	</a>
 					                </p>
-					                <p class="hover_crt"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
+					                <p class="hover_crt add-cart" data-costume-id="{{$wish->costume_id}}"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
 					            </div>
 					        </div>
 					        <div class="slider_cnt">
-					            <h4><a href="/shop/{{$wish->costume_id}}/{{$wish->parent_cat_name}}/{{$wish->cat_name}}/{{$wish->name}}"></a></h4>
-								<p>Capten jack Superheroes & Villains</p>
-								<p class="fav-drs-size">Boys Small</p>
+					            <h4><a href="/product{{$wish->url_key}}"></a></h4>
+								<p>{{$wish->name}}</p>
+								<p class="fav-drs-size">{{ucfirst($wish->gender)}} @if($wish->condition=="brand_new") Brand New @elseif($wish->condition=="like_new") Like New @else {{ucfirst($data[0]->condition)}} @endif</p>
 					            <p>{{$wish->price}}</p>
 								<div class="fav_social">
 								 <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook fa-1x social"></i></a>
@@ -114,8 +118,12 @@ p.list-sec-rm1.fav_costume sapn.active {
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="{{ asset('/js/ohsnap.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
+<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
 
 @stop

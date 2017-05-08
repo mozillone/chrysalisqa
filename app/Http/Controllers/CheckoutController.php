@@ -30,39 +30,89 @@ class CheckoutController extends Controller {
         });
 	}
   public function checkout(Request $request){
-    $data['basic']=Cart::getCartProducts();
+    $coupan_code=Cart::verifyCoupanCode();
+    if(!$coupan_code){
+      $data['basic']=Cart::getCartProducts();
+    }else{
+      $data['basic']=Cart::getCartProductswithCoupan($coupan_code);
+     }
     $countries   = Site_model::Fetch_all_data('countries', '*');
-    $data['shipping_address']=Address::getAddressinfo(Auth::user()->id,'shipping');
-    $data['billing_address']=Address::getAddressinfo(Auth::user()->id,'biling');
-    $data['cc_details']=Creditcard::getCCList(Auth::user()->id);
-    return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries);
+    if(count($data['basic'])){
+         $cart_info=Cart::cartMetaInfo($data['basic']['basic'][0]->cart_id);
+         if(!empty($cart_info[0]->shipping_address_1)){
+             $data['cart_shipping_address']=$cart_info;
+         }else{
+             $data['shipping_address']=Address::getAddressinfo('shipping',"latest"); 
+         }
+
+         if(!empty($cart_info[0]->pay_address_1)){
+             $data['cart_billing_address']=$cart_info;
+         }else{
+             $data['billing_address']=Address::getAddressinfo('billing',"latest"); 
+         }
+
+         if(!empty($cart_info[0]->cc_id)){
+             $data['cart_cc_details']=Creditcard::getCCList(Auth::user()->id,$cart_info[0]->cc_id);
+         }else{
+             $data['cc_details']=Creditcard::getCCList(Auth::user()->id);
+         }
+    }else{
+       return Redirect::to('/');
+   }
+  return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries);
   }
   public function placeOrder(Request $request){
     $req=$request->all();
-    $result=Order::placeOrder($req);
+     $result=Order::placeOrder($req);
     if($result['result']=="0"){
        Session::flash('error',$result['message']);
        return Redirect::back();
 
+    }else{
+
+      $charities_list=Order::getCharitiesList();
+      return view('frontend.costumes.checkout.order_thanku')->with('order_id',17)->with('charities_list',$charities_list);
     }
     }
   public function addShippingAddress(Request $request){
     $req=$request->all();
-    Address::addShippingAddress($req);
+    $address_id=Address::addShippingAddress($req);
+    return Response::JSON($address_id);
   }
   public function addBillingAddress(Request $request){
     $req=$request->all();
-    dd($req);
-    Address::addBillingAddress($req);
+    $address_id=Address::addBillingAddress($req);
+    return Response::JSON($address_id);
   }
   public function addCreditCard(Request $request){
     $req=$request->all();
-    Creditcard:Creditcard();
+    $cc_id=Creditcard::addCreditCard($req,Auth::user()->id);
+    return Response::JSON($cc_id);
   }
-  public function getShippingAddress(){
-    $shipping_address=Address::getAddressinfo(Auth::user()->id,'shipping');
-    return Response::JSON($shipping_address);
+  public function getCreditCard($card_id=null){
+    if($card_id==null){
+      $card_list=Creditcard::getCCList(Auth::user()->id);
+    }else{
+      $card_list=Creditcard::getCCList(Auth::user()->id,$card_id);
+    }
+    return Response::JSON($card_list);
+  }
+  public function getAddressInfo($type,$adress_id=null){
+   $shipping_address=Address::getAddressinfo($type,$latest=null,$adress_id);
+   return Response::JSON($shipping_address);
     
+  }
+  public function orderCharityFund(Request $request){
+    $req=$request->all();
+    $charity_info=Order::orderCharityFund($req);
+    if(count($charity_info)){
+      Session::flash('success','Your fund transfor to '.$charity_info[0]->name.'');
+      return Redirect::to('dashboard');
+    }else{
+      Session::flash('error','Database error');
+      return Redirect::back();
+    }
+
   }
 	
 }

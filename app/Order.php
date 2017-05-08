@@ -12,6 +12,7 @@ use Cookie;
 use Session;
 use Config;
 use App\Cart;
+use App\Charities;
 
 class Order extends Authenticatable
 {
@@ -20,31 +21,32 @@ class Order extends Authenticatable
     ];
     protected function placeOrder($req){
         $data=Cart::getCartProducts();
-        if(count($data)){
+        if(count($data['basic'])){
+            $cart_info=Cart::cartMetaInfo($data['basic'][0]->cart_id);
             $order_info=array('user_id'=>Auth::user()->id, 
                                'firstname'=>Auth::user()->first_name, 
                                'lastname'=>Auth::user()->last_name, 
                                'email'=>Auth::user()->email, 
-                               'phone_number'=>Auth::user()->phone_number,
-                               'pay_firstname'=>$req['pay_firstname'],
-                               'pay_lastname'=>$req['pay_lastname'],
-                               'pay_address_1'=>$req['pay_address_1'],
-                               'pay_address_2'=>$req['pay_address_2'],
-                               'pay_city'=>$req['pay_city'],
-                               'pay_zipcode'=>$req['pay_zipcode'],
-                               'pay_country'=>$req['pay_country'],
-                               'shipping_firstname'=>$req['shipping_firstname'],
-                               'shipping_lastname'=>$req['shipping_lastname'],
-                               'shipping_address_1'=>$req['shipping_address_1'],
-                               'shipping_address_2'=>$req['shipping_address_2'],
-                               'shipping_city'=>$req['shipping_city'],
-                               'shipping_postcode'=>$req['shipping_postcode'],
-                               'shipping_country'=>$req['shipping_country'],
-                               'total'=>$data[0]->total,
+                               'phone_no'=>Auth::user()->phone_number,
+                               'pay_firstname'=>$cart_info[0]->pay_firstname,
+                               'pay_lastname'=>$cart_info[0]->pay_lastname,
+                               'pay_address_1'=>$cart_info[0]->pay_address_1,
+                               'pay_address_2'=>$cart_info[0]->pay_address_2,
+                               'pay_city'=>$cart_info[0]->pay_city,
+                               'pay_zipcode'=>$cart_info[0]->pay_zipcode,
+                               'pay_country'=>$cart_info[0]->pay_country,
+                               'shipping_firstname'=>$cart_info[0]->shipping_firstname,
+                               'shipping_lastname'=>$cart_info[0]->shipping_lastname,
+                               'shipping_address_1'=>$cart_info[0]->shipping_address_1,
+                               'shipping_address_2'=>$cart_info[0]->shipping_address_2,
+                               'shipping_city'=>$cart_info[0]->shipping_city,
+                               'shipping_postcode'=>$cart_info[0]->shipping_postcode,
+                               'shipping_country'=>$cart_info[0]->shipping_country,
+                               'total'=>$data['basic'][0]->total,
                                'created_at'=>date('Y-m-d h:i:s'),
                             );
              $order_id=Site_model::insert_get_id('order',$order_info);
-             foreach($data as $cart){
+             foreach($data['basic'] as $cart){
                   $costume_info=array('costume_id'=>$cart->costume_id, 
                              'sku'=>$cart->sku, 
                              'costume_name'=>$cart->costume_name, 
@@ -57,16 +59,40 @@ class Order extends Authenticatable
              }
              $order_total=array('order_id'=>$order_id,
                                 'code'=>"",
-                                'title'=>"",
-                                'value'=>$data[0]->total,
+                                'title'=>"Total",
+                                'value'=>$data['basic'][0]->total,
                         );
              Site_model::insert_get_id('order_total',$order_total);
-              $result=array('result'=>1,'message'=>"Cart Items are empty");
-            return $result;
+             Site_model::delete_single('cart',array('cart_id'=>$data['basic'][0]->cart_id));
+             $result=array('result'=>1,'message'=>$order_id);
+             return $result;
          }else{
             $result=array('result'=>0,'message'=>"Cart Items are empty");
             return $result;
         }
+    }
+    protected function getCharitiesList(){
+       $charities_list=DB::Select('SELECT * FROM cc_charities');
+       return $charities_list;
+    }
+    protected function orderCharityFund($req){
+      if(isset($req['suggest_charity']) && !empty($req['charity'])){
+         $result=array('name'=>$req['suggest_charity'],
+                        'suggested_by'=>Auth::user()->id,
+                        'created_at'=>date('Y-m-d h:i:s')
+                        );
+         $charity_id=Site_model::insert_get_id('charities',$result);
+      }{
+        $charity_id=$req['charity'];
+      }
+      $result=array('order_id'=>$req['order_id'],
+                    'charity_id'=>$charity_id,
+                    'amount'=>$req['amount'],
+                    'created_at'=>date('Y-m-d h:i:s')
+                      );
+       Site_model::insert_get_id('order_charity',$result);
+       $carity_info=Charities::getCharityInfo($charity_id);
+       return  $carity_info;
     }
     
 }

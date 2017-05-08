@@ -86,7 +86,6 @@ function searching(search=null){
 				console.log(now());
 				if(response.data.costumes.length!=0){
 					　$.each(response.data.costumes,function(index, value) {
-						
 						if(value.image!=null){
 							var path='/costumers_images/Medium/'+value.image;
 							if(fileExists(path)){
@@ -129,8 +128,13 @@ function searching(search=null){
 							var like='<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span></a>';
 							var fav='<a data-toggle="modal" data-target="#login_popup"><span '+is_fav+'>'+icon+'</span></a>';
 						}
+						if(value.quantity>=1){
+							var stock='<p class="hover_crt add-cart" data-costume-id="'+value.costume_id+'"><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</p>';
+						}else{
+							var stock='<p class="hover_crt"><i aria-hidden=true class="fa fa-shopping-cart"></i> Out of stock</p>';
+						}
 
-						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/product'+link+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+'<p class="hover_crt add-cart" data-costume-id="'+value.costume_id+'"><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</div></div><div class=slider_cnt><h4><a href="/shop/'+value.costume_id+'/'+parent_cat_name+'/'+sub_cat_name+'/'+value.name+'">'+value.name+'</a></h4><p>'+price+'</div></div></div>';
+						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/product'+link+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+' '+stock+'</div></div><div class=slider_cnt><h4><a href="/product'+link+'"</a>'+value.name+'</h4><p>'+price+'</div></div></div>';
 				    });
 					$(".pagination").show();
 					$("#itemContainer").append(res);
