@@ -129,7 +129,7 @@
 									</div>	
 									<div class="checkout_review_box">
 										<h2>Review Shipping & Delivery Time</h2>
-										@foreach($data['basic'] as $cart)
+										@foreach($data['basic']['basic'] as $cart)
 										<div class="well">
 											 <div class="shipping_date">
 												<span>Free Shipping from Chrysalis, NY <span class="in_prc">($0.00)</span></span><span class="shi_date_right text-right right"> Estimated Shipping from Brooklyn, NY <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i></span>
@@ -150,7 +150,14 @@
 													</div>
 												</div>
 												<div class="col-md-3 col-sm-3 col-xs-12">
-													<p class="price_right text-right"><span class="check_price">${{number_format(($cart->qty)*($cart->price), 2, '.', ',')}}</span>
+													<p class="price_right text-right"><span class="check_price">@if($cart->created_user_group=="admin" && $cart->discount!=null && $cart->uses_customer<$cart->uses_total && date('Y-m-d H:i:s')>=$cart->date_start && date('Y-m-d H:i:s')<=$cart->date_end)
+														<?php $discount=($cart->price/100)*$cart->discount;
+															   $new_price=$cart->price-$discount;
+													    ?>
+													  @else
+															 <?php $new_price=$cart->price;?>
+													@endif
+													${{number_format(($cart->qty)*($new_price), 2, '.', ',')}}</span>
 													<span><a href="/cart/delete/{{$cart->cart_item_id}}/{{$cart->cart_id}}"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
 												</div>
 											</div>
@@ -164,10 +171,10 @@
 									<div class="order_summery">
 										<div class="well">
 											<h3>Order Summary  </h3> 
-											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic'][0]->total, 2, '.', ',')}} <em>({{count($data)}} Items)</em></span></p>
-											<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$0.00 <em>(0 Items)</em></span></p>
-											<p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$0.00 </span></p>
-											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">${{number_format($data['basic'][0]->total, 2, '.', ',')}} </span></p>
+											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}} <em>({{count($data['basic'])}} Items)</em></span></p>
+											@if(!empty($data['basic']['dis_count'])) <p class="sub-all"><span>Shipping: </span> <span class="sub-price">-${{$data['basic']['dis_total']}} <em>({{$data['basic']['dis_count']}} Items)</em></span></p>@endif
+											<!-- <p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$0.00 </span></p> -->
+											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">@if(!empty($data['basic']['dis_count']))${{number_format($data['basic']['basic'][0]->total-$data['basic']['dis_total'], 2, '.', ',')}} @else ${{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}}@endif </span></p>
 											<button class="btn btn-primary">Place Order</button>
 										</div>
 									</div>
@@ -189,7 +196,7 @@
 	      <div class="modal-body">
 	       <form class="" action="javascript::void(0);" method="POST" id="shipping_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	       <input type="hidden" name="cart_id" value="{{ $data['basic'][0]->cart_id}}">
+	       <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
 						
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="chek-out">
@@ -278,7 +285,7 @@
 	      <div class="modal-body">
 	       <form class="" action="javascript::void(0);" method="POST" id="billing_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-		   <input type="hidden" name="cart_id" value="{{ $data['basic'][0]->cart_id}}">
+		   <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
 								<div class="col-md-12 col-sm-12 col-xs-12">
@@ -368,7 +375,7 @@
 	      <div class="modal-body">
 	       <form class="" action="javascript::void(0);" method="POST" id="cc_form">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-		   <input type="hidden" name="cart_id" value="{{ $data['basic'][0]->cart_id}}">
+		   <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
 		   	<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
 								<div class="col-md-12 col-sm-12 col-xs-12">
