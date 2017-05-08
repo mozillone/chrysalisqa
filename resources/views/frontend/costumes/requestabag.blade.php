@@ -289,7 +289,7 @@ if (isset($total_data) && !empty($total_data)) {
                                 	$db_state = $all_details['basic_address']->state;
 									} ?>
 										<select name="state" id="state">
-											<option value="">Select s State</option>
+											<option value="">Select a State</option>
 												@foreach($all_details['state_table'] as $state)
 											<option <?php if (!empty($db_state) == $state->abbrev): ?>
 												selected="selected"
