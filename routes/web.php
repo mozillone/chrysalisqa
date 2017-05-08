@@ -43,7 +43,7 @@ Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@ge
 Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesController@costumeReport'));
 
 /*******************Car Functionality stat here *********/
-Route::any('/addToCart', array('as' => 'report.post','uses' => 'CartController@addToCart'));
+Route::any('/addToCart', array('as' => '','uses' => 'CartController@addToCart'));
 Route::any('/cart', array('as' => 'cart','uses' => 'CartController@cart'));
 Route::any('/updateCart', array('as' => 'Update.Cart','uses' => 'CartController@updateCart'));
 Route::any('/cart/delete/{cart_item_id}/{cart_id}', array('as' => '','uses' => 'CartController@productRemoveFromCart'));
