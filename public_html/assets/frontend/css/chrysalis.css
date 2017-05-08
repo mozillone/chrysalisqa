@@ -1842,6 +1842,26 @@ input[type=checkbox]#is_shipping, input[type=checkbox]#is_billing {
 button.btn.btn-primary.item-update {
 	box-shadow: none;
 }
+.costumes-desktop .cart-img  {
+	position: relative;
+}
+.costumes-desktop .price-tag {
+	display: inline-grid;
+    font-family: Proxima-Nova-extrabold;
+    color: #000;
+    font-size: 10px;
+    position: absolute;
+    right: 8px;
+    bottom: 2px;
+}
+.costumes-desktop .price-doller {
+	text-align: center;
+    font-family: Proxima-Nova-Extrabold;
+    font-size: 18px;
+}
+a:hover {
+	text-decoration: none !important;
+}
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){
