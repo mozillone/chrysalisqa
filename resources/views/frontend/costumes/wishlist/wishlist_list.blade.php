@@ -76,7 +76,7 @@ p.list-sec-rm1.fav_costume sapn.active {
 					    <div class="prod_box">
 					        <div class="img_layer">
 					            <a href="/product{{$wish->url_key}}"><img class="img-responsive" @if($wish->image!=null && file_exists(public_path
-					            ('costumers_images/'.$wish->image.''))) src="/costumers_images/Medium/{{$wish->image}}" @else src="/costumers_images/default-placeholder.jpg" @endif/></a>
+					            ('costumers_images/Medium/'.$wish->image.''))) src="/costumers_images/Medium/{{$wish->image}}" @else src="/costumers_images/default-placeholder.jpg" @endif/></a>
 					            <div class="hover_box">
 					                <p class="like_fav">
 					                	<a href="#" onclick="return false;" class="like_costume" data-costume-id="{{$wish->costume_id}}">
