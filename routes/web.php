@@ -61,6 +61,7 @@ Route::post('/add/billing-adress', array('as' => 'billing_address.post','uses' =
 
 Route::any('/get/credit-card/{card_id?}', array('as' => 'add-credit-card','uses' => 'CheckoutController@getCreditCard'));
 Route::get('/get-adress/{type?}/{address_id?}', array('as' => 'shipping_address.post','uses' => 'CheckoutController@getAddressInfo'));
+Route::post('/order/charity/fund', array('as' => 'order-charity-fund','uses' => 'CheckoutController@orderCharityFund'));
 /*******************Checkout Functionality end here *********/
 
 

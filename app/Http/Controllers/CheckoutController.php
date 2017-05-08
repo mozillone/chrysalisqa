@@ -71,7 +71,7 @@ class CheckoutController extends Controller {
     }else{
 
       $charities_list=Order::getCharitiesList();
-      return view('frontend.costumes.checkout.order_thanku')->with('order_id',$result['message'])->with('charities_list',$charities_list);
+      return view('frontend.costumes.checkout.order_thanku')->with('order_id',17)->with('charities_list',$charities_list);
     }
     }
   public function addShippingAddress(Request $request){
@@ -101,6 +101,18 @@ class CheckoutController extends Controller {
    $shipping_address=Address::getAddressinfo($type,$latest=null,$adress_id);
    return Response::JSON($shipping_address);
     
+  }
+  public function orderCharityFund(Request $request){
+    $req=$request->all();
+    $charity_info=Order::orderCharityFund($req);
+    if(count($charity_info)){
+      Session::flash('success','Your fund transfor to '.$charity_info[0]->name.'');
+      return Redirect::to('dashboard');
+    }else{
+      Session::flash('error','Database error');
+      return Redirect::back();
+    }
+
   }
 	
 }

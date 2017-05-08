@@ -59,6 +59,10 @@ class Charities extends Authenticatable
         $res=DB::Update('UPDATE cc_charities SET status="'.$req['data']['status'].'" WHERE id='.$req['data']['id']);
         return $res;
     }
+    protected function getCharityInfo($charity_id){
+        $res=DB::Select('select name from cc_charities where id='.$charity_id);
+        return $res;
+    }
    
 
 }

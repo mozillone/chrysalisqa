@@ -12,6 +12,7 @@ use Cookie;
 use Session;
 use Config;
 use App\Cart;
+use App\Charities;
 
 class Order extends Authenticatable
 {
@@ -73,6 +74,25 @@ class Order extends Authenticatable
     protected function getCharitiesList(){
        $charities_list=DB::Select('SELECT * FROM cc_charities');
        return $charities_list;
+    }
+    protected function orderCharityFund($req){
+      if(isset($req['suggest_charity']) && !empty($req['charity'])){
+         $result=array('name'=>$req['suggest_charity'],
+                        'suggested_by'=>Auth::user()->id,
+                        'created_at'=>date('Y-m-d h:i:s')
+                        );
+         $charity_id=Site_model::insert_get_id('charities',$result);
+      }{
+        $charity_id=$req['charity'];
+      }
+      $result=array('order_id'=>$req['order_id'],
+                    'charity_id'=>$charity_id,
+                    'amount'=>$req['amount'],
+                    'created_at'=>date('Y-m-d h:i:s')
+                      );
+       Site_model::insert_get_id('order_charity',$result);
+       $carity_info=Charities::getCharityInfo($charity_id);
+       return  $carity_info;
     }
     
 }
