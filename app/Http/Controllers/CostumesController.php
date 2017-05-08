@@ -81,10 +81,10 @@ class CostumesController extends Controller {
 					$order_by=' order by cst.price ASC';
 				}
 				if($req['search']['sort_by']=="a-z"){
-					$order_by=' order by cst.name ASC';
+					$order_by=' order by dsr.name ASC';
 				}
 				if($req['search']['sort_by']=="z-a"){
-					$order_by=' order by cst.name DESC';
+					$order_by=' order by dsr.name DESC';
 				}
 			}
 		}
