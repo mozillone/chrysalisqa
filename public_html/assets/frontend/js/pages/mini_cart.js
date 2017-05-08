@@ -19,7 +19,7 @@ $(function(){
 					Lobibox.notify.closeAll();
 					Lobibox.notify('success', {
                     size: 'mini',
-                    title: 'Add To Cart',
+                    title: 'Added To Cart',
                     msg: 'This costume is added to cart',
               	  });
 

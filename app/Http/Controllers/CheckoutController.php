@@ -13,6 +13,8 @@ use App\Cart;
 use App\Creditcard;
 use App\Order;
 use App\Address;
+use Validator;
+use cookie;
 class CheckoutController extends Controller {
 
   protected $auth;
@@ -29,15 +31,15 @@ class CheckoutController extends Controller {
             }
         });
 	}
-  public function checkout(Request $request){
-    $coupan_code=Cart::verifyCoupanCode();
+  public function checkout(){
+     $coupan_code=Cart::verifyCoupanCode();
     if(!$coupan_code){
       $data['basic']=Cart::getCartProducts();
     }else{
       $data['basic']=Cart::getCartProductswithCoupan($coupan_code);
      }
     $countries   = Site_model::Fetch_all_data('countries', '*');
-    if(count($data['basic'])){
+    if(count($data['basic']['basic'])){
          $cart_info=Cart::cartMetaInfo($data['basic']['basic'][0]->cart_id);
          if(!empty($cart_info[0]->shipping_address_1)){
              $data['cart_shipping_address']=$cart_info;
@@ -63,7 +65,19 @@ class CheckoutController extends Controller {
   }
   public function placeOrder(Request $request){
     $req=$request->all();
-     $result=Order::placeOrder($req);
+    $rule  =  array(  
+                'shipping_address_1' => 'required',
+                'pay_address_1' => 'required',
+                'card_id' => 'required',
+                 );
+    $validator = Validator::make($req,$rule);
+    if ($validator->fails()) {
+      return Redirect::back()
+      ->withErrors($validator)
+      ->withInput()->send();
+    }
+
+    $result=Order::placeOrder($req);
     if($result['result']=="0"){
        Session::flash('error',$result['message']);
        return Redirect::back();
@@ -114,5 +128,55 @@ class CheckoutController extends Controller {
     }
 
   }
-	
+  public function buyItNow(Request $request){
+        $req=$request->all();
+        $cookie_id=SiteHelper::currentCookieKey();
+        $cart_id=Cart::verifyCostumeCart($req['costume_id'],$cookie_id);
+        if($cart_id){
+          $qty=Cart::verifyCostumeCartQuantity($req['costume_id'],$cookie_id);
+          $res=Cart::verifyCostumeQuantity($req['costume_id'],$qty);
+         if(count($res)){
+            Cart::updateCartDetails($req['costume_id'],$cart_id,$qty+1);
+            $res=$this->updateCartDetails($req['costume_id'],$qty+1);
+            return Redirect::to('/checkout');
+          }else{
+            return Redirect::back();
+          }
+        }
+      }
+	  private function getCookieAllProducts(){
+        $cookie = cookie::get('min-cart');
+        return $cookie;
+
+    }
+    private function productsAddToCookie($product){
+ 
+       $cookie=cookie('min-cart',$product, 5*60);
+       return $cookie;
+
+    }
+    private function updateCartDetails($costume_id,$qnty){
+      $cart_list=$this->getCookieAllProducts();
+      $cookie_id=$this->currentCookieKey();
+      $cart_list[$cookie_id][$costume_id]=$qnty;
+      $res=$this->productsAddToCookie($cart_list);
+      return $res;
+
+    }
+    private function cookieKeyGenarater(){
+        $key=str_random(64);
+        return $key;
+    }
+    private function verifieCookie(){
+        $res=$this->getCookieAllProducts();
+        if($res!=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    private function currentCookieKey(){
+        $cookie=cookie::get('min-cart');
+        return key($cookie);
+    }
 }
