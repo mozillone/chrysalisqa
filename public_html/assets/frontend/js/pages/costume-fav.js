@@ -16,6 +16,7 @@ $(document).on('click','.fav_costume',function(){
           $(this).find('span').html('<i aria-hidden=true class="fa fa-heart-o"></i>');
           //ohSnap('Costume is removed successfully from your wishlist', 'red');
         }
+        $('.fav_count').html(response.fav_count);
         
       },
          complete: function(jqXHR, textStatus) {
