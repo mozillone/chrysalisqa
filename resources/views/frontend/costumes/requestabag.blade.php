@@ -81,9 +81,9 @@ if (isset($total_data) && !empty($total_data)) {
         <div class="col-md-10 col-md-offset-1">
         <h4>Choose an option of how you would like to receive your Bag and payout.</h4>
              <div id="choose_an_option_for_bag_div">
-                					<p class="cst2-rms-chck"><input type="radio" name="is_payout" id="is_payout" value="0">Don't send me a payout. I want to support Chrysalis' waste reduction and charitable donation program.</p>
+                					<p class="cst2-rms-chck"><input type="checkbox" name="is_payout" id="is_payout" value="0">Don't send me a payout. I want to support Chrysalis' waste reduction and charitable donation program.</p>
                 					<p class="notes">*Note: At this time, Chrysalis does NOT issue tax receipts. </p>
-                					<p class="cst2-rms-chck"><input type="radio" name="is_payout" value="1" id="is_payout">I want to pay a $9.99 Shipping & Handling fee to receive my bag (fee deducted after bag has been processed).</p>
+                					<p class="cst2-rms-chck"><input type="checkbox" checked name="is_payout" value="1" id="is_payout">I want to pay a $9.99 Shipping & Handling fee to receive my bag (fee deducted after bag has been processed).</p>
                 					<span id="is_payout_error" style="color:red"></span>
                 					<div class="form-rms-btn">
                 						<a type="button" id="choose_an_option_for_bag_next" class="btn-rm-nxt nxt">
@@ -281,22 +281,26 @@ if (isset($total_data) && !empty($total_data)) {
                                 <span id="city_error" style="color:red"></span>
 
                             </div>
-                            <div class="form-rms">
-                                <p class="form-rms-que">State</p>
-                                <p class="form-rms-input">
-                                <?php if (isset($all_details['basic_address']->state) && !empty($all_details['basic_address']->state)) {
+                            <div class="form-rms form-align">
+								
+									<p class="form-rms-que">State</p>
+									<p class="form-rms-input">
+									<?php if (isset($all_details['basic_address']->state) && !empty($all_details['basic_address']->state)) {
                                 	$db_state = $all_details['basic_address']->state;
-                                } ?>
-                                	<select name="state" id="state">
-										<option value="">Select s State</option>
-											@foreach($all_details['state_table'] as $state)
-										<option <?php if (!empty($db_state) == $state->abbrev): ?>
-											selected="selected"
-										<?php endif ?> value="{{$state->abbrev}}">{{$state->name}}</option>
-											@endforeach
-									</select>
-								</p>
-                                <span id="state_error" style="color:red"></span>
+									} ?>
+										<select name="state" id="state">
+											<option value="">Select s State</option>
+												@foreach($all_details['state_table'] as $state)
+											<option <?php if (!empty($db_state) == $state->abbrev): ?>
+												selected="selected"
+											<?php endif ?> value="{{$state->abbrev}}">{{$state->name}}</option>
+												@endforeach
+										</select>
+									</p>
+									<span id="state_error" style="color:red"></span>
+								
+							
+                                
 
                                 <p class="form-rms-que">Zip Code</p>
                                 <p class="form-rms-input"><input type="text" name="zipcode" id="zipcode" value="<?php if (isset($all_details['basic_address']->zip_code) && !empty($all_details['basic_address']->zip_code)) { echo $all_details['basic_address']->zip_code; } ?>" tab-index="1" ></p>
