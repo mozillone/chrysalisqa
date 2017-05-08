@@ -169,9 +169,10 @@
 				</div>
 			<div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="login-register" id="loginModal">
+			<div class="report_item_pupup" id="loginModal">
 			
 				<div id="myTabContent" class="tab-content">
+				<h2>Report Item</h2>
 			
 					<div class="tab-pane active in" id="login_tab1">
 						<form class="" action="{{route('report.post')}}" method="POST" id="report">   

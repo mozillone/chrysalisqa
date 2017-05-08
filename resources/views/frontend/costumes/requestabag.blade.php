@@ -327,7 +327,7 @@ if (isset($total_data) && !empty($total_data)) {
 						<h4>What would you like to do with unaccepted items?</h4>
 						<div class="unaccepted-option">
                             <p class="cst2-rms-chck"><input type="checkbox" name="is_return" value="1">Please opt me into Return Assurance and return my unaccepted items for an additional $9.99* (I understand that up to $19.98 could be deduted from mybag earnings). </p>
-                            <p class="cst2-rms-chck">*Fee will be deduted from your earnings once your bag is processed.</p>
+                            <p class="cst2-rms-chck" style="margin-top: 0">*Fee will be deduted from your earnings once your bag is processed.</p>
                             <p class="cst2-rms-chck"><input type="checkbox" checked name="is_recycle" value="1">Please responsibly recycle my unaccepted items</p>
 						</div>
 						<h4>Have you registerd yet? Add your email!</h4>
