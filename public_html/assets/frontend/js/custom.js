@@ -89,7 +89,7 @@ $(function(){
 					}else{
 						var src='/costumers_images/default-placeholder.jpg';
 					}
-					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" height="65px" width="50px"></div><div class="media-body"><h4 class="media-heading">'+value.costume_name+'</h4><p><b>Item Condition : </b>'+capitalization(value.condition)+'</p><p><b>Size : </b>'+capitalization(value.size)+'</p></div></div></div>'
+					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" height="65px" width="50px"></div><div class="media-body"><h4 class="media-heading"><a href="/product'+value.url_key+'">'+value.costume_name+'</a></h4><p><b>Item Condition : </b>'+capitalization(value.condition)+'</p><p><b>Size : </b>'+capitalization(value.size)+'</p></div></div></div>'
 				});
 				cart+='</div></div><div class="chk-out"><a href="/checkout">Proceed to Checkout</a></div></div>';
 				}else{
