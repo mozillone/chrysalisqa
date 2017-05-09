@@ -904,6 +904,14 @@ p.sub-all.total_price{border-bottom:2px solid #ccc;border-top:2px solid #ccc;pad
 .check_out_page_left h2{margin-top:0px;margin-bottom:5px;font-size:22px;font-family:Proxima-Nova-Extrabold;padding-bottom:5px;margin:0px;color:#000000;}
 .checkout_page_total .well{background:none;box-shadow:none;border-radius:0px;}
 .check_out_page_left .methods{clear:both;padding:20px 0px;border-bottom:2px solid #ccc;width:95%;display:inline-block;margin:0 auto;margin-left:15px;}
+.checkout-content .check_out_page_left .methods {
+    display: flex;
+    align-items: center;
+}
+.check_out_page_left span.error {
+    color: red;
+    display: inline-block;
+}
 .check_out_page_left p.cehck_edit{text-align:right;}
 .check_out_page_left p a{color:#000;text-decoration:underline!important;font-family:Proxima-Nova-Bold;}
 .methods h4{font-family:Proxima-Nova-Extrabold;font-size:18px;color:#000;}
@@ -1283,6 +1291,9 @@ p.list-sec-rm1.fav_costume sapn.active {
     text-align: center;
     padding: 10px 20px;
     border-radius: 3px;
+}
+.chk-out a:hover {
+	color: white;
 }
 .icon_lins .dropdown-menu.cart-products .media-body .media-heading {
     color: #000000 ;

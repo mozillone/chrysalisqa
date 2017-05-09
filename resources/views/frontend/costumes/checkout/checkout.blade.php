@@ -39,7 +39,7 @@
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<h4>Shipping Adress:</h4>
 												</div>
-												<div class="col-md-4 col-sm-4 col-xs-12">
+												<div class="col-md-5 col-sm-4 col-xs-12">
 													@if(!empty($data['cart_shipping_address']))
 													<input type="hidden" value="{{$data['cart_shipping_address'][0]->shipping_address_1}}" name="shipping_address_1">
 														<div class="shipping_add">
@@ -61,22 +61,23 @@
 														<span class="shipping-empty">No Shipping Address Found</span>
 													@endif
 													@endif
+													<span class="error">{{ $errors->first('shipping_address_1') }}</span>
 													
 												</div>
-												<div class="col-md-4 col-sm-4 col-xs-12">
+												<div class="col-md-3 col-sm-4 col-xs-12">
 													@if(!empty($data['shipping_address']) || !empty($data['cart_shipping_address']))
 														<p class="cehck_edit"><a href="javascript::void(0);" class="shipping_popup">Edit</a></p>
 													@else
 														<p class="cehck_edit" data-toggle="modal" data-target="#shipping_popup"><a href="javascript::void(0);" class="shipping_popup">New</a></p>
 													@endif
 												</div>
-												<span class="error">{{ $errors->first('shipping_address_1') }}</span>
+												
 											</div>
 											<div class="billing_div methods">
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<h4>Billing Adress:</h4>
 												</div>
-												<div class="col-md-4 col-sm-4 col-xs-12">
+												<div class="col-md-5 col-sm-4 col-xs-12">
 												@if(!empty($data['cart_billing_address']))
 												<input type="hidden" name="pay_address_1" value="{{$data['cart_billing_address'][0]->pay_address_1}}"/>
 													<div class="billing_add">
@@ -100,21 +101,22 @@
 													<span class="billing-empty">No Billing Address Found</span>
 												@endif
 												@endif
+												<span class="error">{{ $errors->first('pay_address_1') }}</span>
 												</div>
-												<div class="col-md-4 col-sm-4 col-xs-12">
+												<div class="col-md-3 col-sm-4 col-xs-12">
 												@if(!empty($data['billing_address']) || !empty($data['cart_billing_address']))
 													<p class="cehck_edit"><a href="javascript::void(0);" class="billing_popup">Edit</a></p>
 												@else
 													<p class="cehck_edit"><a href="javascript::void(0);" class="billing_popup">New</a></p>
 												@endif
 												</div>
-												<span class="error">{{ $errors->first('pay_address_1') }}</span>
+												
 											</div>
 											<div class="payment_div methods">
 												<div class="col-md-4 col-sm-4 col-xs-12">
 														<h4>Payment Method:</h4>
 												</div>
-												<div class="col-md-4 col-sm-4 col-xs-12">
+												<div class="col-md-5 col-sm-4 col-xs-12">
 												@if(!empty($data['cart_cc_details']))
 												<input type="hidden" name="card_id" value="{{$data['cart_cc_details'][0]->id}}"/> 
 													<p class="card_exp">Ending in {{$data['cart_cc_details'][0]->exp_year}}</p>
@@ -128,15 +130,16 @@
 														<span class="payment-empty">No Payment Method Found</span>
 													@endif
 												@endif
+												<span class="error">{{ $errors->first('card_id') }}</span>
 												</div>
-												<div class="col-md-4 col-sm-4 col-xs-12">
+												<div class="col-md-3 col-sm-4 col-xs-12">
 													@if(!empty($data['cc_details']) || !empty($data['cart_cc_details']))
 														<p class="cehck_edit"><a href="javascript::void(0);" class="cc_popup">Edit</a></p>
 													@else
 														<p class="cehck_edit"><a href="javascript::void(0);" class="cc_popup">New</a></p>
 													@endif
 												</div>
-												<span class="error">{{ $errors->first('card_id') }}</span>
+												
 										</div>
 									</div>
 									</div>	
