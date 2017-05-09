@@ -25,7 +25,7 @@ class CartController extends Controller {
     if(count($req)){
       $res=Promotions::verifyCoupanCode($req['coupan_code']);
       if(!$res){
-         Session::flash('error','Coupan code is not valid.');
+         Session::flash('error','Coupon code is not valid.');
          return Redirect::back();
       }else{
         $data=Cart::getCartProductswithCoupan($req['coupan_code']);
