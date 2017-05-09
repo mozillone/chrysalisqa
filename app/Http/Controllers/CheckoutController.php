@@ -32,6 +32,7 @@ class CheckoutController extends Controller {
         });
 	}
   public function checkout(){
+    dd("test");
      $coupan_code=Cart::verifyCoupanCode();
     if(!$coupan_code){
       $data['basic']=Cart::getCartProducts();
@@ -207,6 +208,10 @@ class CheckoutController extends Controller {
     }
     private function currentCookieKey(){
         $cookie=cookie::get('min-cart');
-        return key($cookie);
+        if(is_array($cookie)){
+          return key($cookie);
+        }else{
+          return $this->cookieKeyGenarater();
+        }
     }
 }
