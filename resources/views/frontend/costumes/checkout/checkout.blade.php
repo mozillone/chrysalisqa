@@ -14,7 +14,7 @@
  <div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="checkout_page_total">
+					<div class="checkout_page_total checkout-content">
 						<h1>Checkout</h1>
 						@if (Session::has('error'))
 			            <div class="alert alert-danger alert-dismissable">
