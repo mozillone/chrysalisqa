@@ -207,6 +207,10 @@ class CheckoutController extends Controller {
     }
     private function currentCookieKey(){
         $cookie=cookie::get('min-cart');
-        return key($cookie);
+        if(is_array($cookie)){
+          return key($cookie);
+        }else{
+          return $this->cookieKeyGenarater();
+        }
     }
 }

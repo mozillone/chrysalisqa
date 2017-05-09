@@ -45,7 +45,6 @@ class AuthController extends Controller {
    public function postLogin(Request $request)
    {
    	$req = $request->all();
-   //	dd(URL::previous()[]);
    	$rule  =  array(  
 	              'email' => 'required|email',
                   'password' => 'required',
@@ -84,12 +83,13 @@ class AuthController extends Controller {
 				   	Cart::updateCartToUser();
 				  }
 				 $cookie = \Cookie::forget('min-cart');
-				 // if(!empty($req['costume_id'])){
-				 // 	return Redirect::to('/buy-it-now/'.trim($req['costume_id']));
-				 // }
-				 // if(!empty($req['is_cart'])){
-				 // 	return Redirect::to('/checkout');
-				 // }
+				 $fav_url_redirect=strrev(explode("/",strrev(URL::previous()))[3]);
+				 if(!empty($req['costume_id']) && $fav_url_redirect=="product"){
+				 	return Redirect::to('/buy-it-now/'.trim($req['costume_id']));
+				 }
+				 if(!empty($req['is_cart']) && $fav_url_redirect!="product"){
+				 	return Redirect::to('/checkout');
+				 }
 				 if(Session::has('is_loginPage')){
 					return Redirect::to('/dashboard')->withCookie($cookie);
 				 }else{
