@@ -483,8 +483,69 @@ class AuthController extends Controller {
 				 if(Session::has('is_loginPage')){
 					return Redirect::to('/dashboard')->withCookie($cookie);
 				 }else{
-						Session::set('auth_user_id_req_bag', 'request_a_bag_login');
-						return "login_sucess";
+						if (Auth::check() || isset($req_bag_session) && !empty($req_bag_session)) {
+							$userid 		= Auth::user()->id;
+							$is_payout 		= $request->is_payout;
+							$cus_name  		= $request->full_name;
+							$cus_email 		= $request->email_address;
+							$cus_phone 		= $request->phone_number;
+							
+							if (isset($request->is_return) && !empty($request->is_return)) {
+								$is_return 		= $request->is_return;
+							}else{
+								$is_return 		= "0";
+							}
+							if (isset($request->is_recycle) && !empty($request->is_recycle)) {
+								$is_recycle 		= $request->is_recycle;
+							}else{
+								$is_recycle 		= "0";
+							}
+							if (isset($request->address2) && !empty($request->address2)) {
+								$address2 		= $request->address2;
+							}else{
+								$address2 		= "";
+							}
+							$addres_array = array('fname'=>$cus_name,
+								'address1'=>$request->address1,
+								'address2'=>$address2,
+								'city'=>$request->city,
+								'state'=>$request->state,
+								'zip_code'=>$request->zipcode,
+								'phone'=>$cus_phone,
+								'user_id'=>$userid,
+								'address_type'=>'request_a_bag','created_on'=>date('y-m-d H:i:s'));
+							$ref_no = mt_rand(10000, 99999);
+							//echo $ref_no;die;
+							$addres_insert=DB::table('address_master')->insertGetId($addres_array);
+
+							$conversation_array = array('user_one'=>$userid,
+								'user_two'=>'1',
+								'status'=>'active',
+								'created_at'=>date('y-m-d H:i:s'));
+							$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
+
+							$requestabag_array = array('user_id'=>$userid,
+								'ref_no'=>$ref_no,
+								'addres_id'=>$addres_insert,
+								'conversation_id'=>$conversation_insert,
+								'is_payout'=>$is_payout,
+								'is_return'=>$is_return,
+								'is_recycle'=>$is_recycle,
+								'status'=>'requested',
+								'cus_name'=>$cus_name,
+								'cus_email'=>$cus_email,
+								'cus_phone'=>$cus_phone,
+								'created_at'=>date('y-m-d H:i:s'),
+								);
+
+							$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
+
+
+							return "success";
+
+					}else {
+
+					}
 				}
 			}
 			else 
