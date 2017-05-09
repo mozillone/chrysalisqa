@@ -46,6 +46,7 @@ class Order extends Authenticatable
                                'created_at'=>date('Y-m-d h:i:s'),
                             );
              $order_id=Site_model::insert_get_id('order',$order_info);
+             $this->orderStatusInserted($order_id,Config::get('constants.Processing'));
              foreach($data['basic'] as $cart){
                   $costume_info=array('costume_id'=>$cart->costume_id, 
                              'sku'=>$cart->sku, 
@@ -71,6 +72,11 @@ class Order extends Authenticatable
             return $result;
         }
     }
+    private function orderStatusInserted($order_id,$status_id){
+       $order_status=array('order_id'=>$order_id,'status_id'=>$status_id);
+       Site_model::insert_get_id('order_status',$order_status);
+       return true;
+    }
     protected function getCharitiesList(){
        $charities_list=DB::Select('SELECT * FROM cc_charities');
        return $charities_list;
@@ -94,5 +100,5 @@ class Order extends Authenticatable
        $carity_info=Charities::getCharityInfo($charity_id);
        return  $carity_info;
     }
-    
+  
 }

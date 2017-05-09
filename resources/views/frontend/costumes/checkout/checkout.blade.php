@@ -40,6 +40,7 @@
 												</div>
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													@if(!empty($data['cart_shipping_address']))
+													<input type="hidden" value="{{$data['cart_shipping_address'][0]->shipping_address_1}}" name="shipping_address_1">
 														<div class="shipping_add">
 															<p>{{$data['cart_shipping_address'][0]->shipping_address_1}},<br>
 															{{$data['cart_shipping_address'][0]->shipping_address_2	}}<br>
@@ -47,12 +48,14 @@
 														</div>
 													@else
 													@if(!empty($data['shipping_address']))
+													<input type="hidden"  value="{{$data['shipping_address'][0]->address1}}" name="shipping_address_1">
 														<div class="shipping_add">
 															<p>{{$data['shipping_address'][0]->address1}},<br>
 															{{$data['shipping_address'][0]->address2}}<br>
 															{{$data['shipping_address'][0]->city}},{{$data['shipping_address'][0]->state}},{{$data['shipping_address'][0]->zip_code}},{{$data['shipping_address'][0]->country}} <br></p>
 														</div>
 													@else
+														<input type="hidden"  name="shipping_address_1">
 														<div class="shipping_add"></div>
 														<span class="shipping-empty">No Shipping Address Found</span>
 													@endif
@@ -66,6 +69,7 @@
 														<p class="cehck_edit" data-toggle="modal" data-target="#shipping_popup"><a href="javascript::void(0);" class="shipping_popup">New</a></p>
 													@endif
 												</div>
+												<span class="error">{{ $errors->first('shipping_address_1') }}</span>
 											</div>
 											<div class="billing_div methods">
 												<div class="col-md-4 col-sm-4 col-xs-12">
@@ -73,6 +77,7 @@
 												</div>
 												<div class="col-md-4 col-sm-4 col-xs-12">
 												@if(!empty($data['cart_billing_address']))
+												<input type="hidden" name="pay_address_1" value="{{$data['cart_billing_address'][0]->pay_address_1}}"/>
 													<div class="billing_add">
 														<p>{{$data['cart_billing_address'][0]->pay_address_1}},<br>
 														{{$data['cart_billing_address'][0]->pay_address_2}}<br>
@@ -81,6 +86,7 @@
 													</div>
 												@else
 												@if(!empty($data['billing_address']))
+													<input type="hidden" name="pay_address_1" value="{{$data['billing_address'][0]->address1}}"/> 
 													<div class="billing_add">
 														<p>{{$data['billing_address'][0]->address1}},<br>
 														{{$data['billing_address'][0]->address2}}<br>
@@ -88,8 +94,9 @@
 														</p>
 													</div>
 												@else
+													<input type="hidden"  name="pay_address_1">
 													<div class="billing_add"></div>
-													<span class="shipping-empty">No Billing Address Found</span>
+													<span class="billing-empty">No Billing Address Found</span>
 												@endif
 												@endif
 												</div>
@@ -100,6 +107,7 @@
 													<p class="cehck_edit"><a href="javascript::void(0);" class="billing_popup">New</a></p>
 												@endif
 												</div>
+												<span class="error">{{ $errors->first('pay_address_1') }}</span>
 											</div>
 											<div class="payment_div methods">
 												<div class="col-md-4 col-sm-4 col-xs-12">
@@ -107,11 +115,14 @@
 												</div>
 												<div class="col-md-4 col-sm-4 col-xs-12">
 												@if(!empty($data['cart_cc_details']))
+												<input type="hidden" name="card_id" value="{{$data['cart_cc_details'][0]->id}}"/> 
 													<p class="card_exp">Ending in {{$data['cart_cc_details'][0]->exp_year}}</p>
 												@else
 													@if(!empty($data['cc_details']))
+													<input type="hidden" name="card_id" value="{{$data['cc_details'][0]->id}}"/>
 														<p class="card_exp">Ending in {{$data['cc_details'][0]->exp_year}}</p>
 													@else
+														<input type="hidden"  name="card_id">
 														<p class="card_exp"></p>
 														<span class="payment-empty">No Payment Method Found</span>
 													@endif
@@ -124,6 +135,7 @@
 														<p class="cehck_edit"><a href="javascript::void(0);" class="cc_popup">New</a></p>
 													@endif
 												</div>
+												<span class="error">{{ $errors->first('card_id') }}</span>
 										</div>
 									</div>
 									</div>	

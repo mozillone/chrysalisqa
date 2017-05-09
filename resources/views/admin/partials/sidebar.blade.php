@@ -74,6 +74,19 @@
           </li>
         </ul>
       </li>
+      <li {{ (Request::is('orders') ? 'class=active' : '') }}>
+        <a href="javascript:void(0)">
+           <i class="fa fa-shopping-cart" aria-hidden="true"></i><span>Orders</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu">
+          <li {{ (Request::is('orders') ? 'class=active' : '') }} >
+            <a href="{{route('orders-list')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Orders List</span>
+            </a>
+          </li>
+      
+        </ul>
+      </li>
        <li {{ (Request::is('promotions') ? 'class=active' : '') }} {{ (Request::is('promotion/create') ? 'class=active' : '') }} {{ (Request::is('promotion/edit/*') ? 'class=active' : '') }}>
         <a href="javascript:void(0)">
             <i class="fa fa-diamond" aria-hidden="true"></i> <span>Promotions</span> <i class="fa fa-angle-left pull-right"></i>

@@ -26,10 +26,10 @@ display: none;
     <li>
         <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
     </li>
-    <li class="active">Users</li>
+    <li class="active">Orders</li>
   </ol>
 </section>
-<section class="content" ng-controller="UsersController">
+<section class="content" ng-controller="OrdersController">
     <div class="row">
         <div class="col-md-12">
          @if (Session::has('error'))
@@ -45,42 +45,40 @@ display: none;
         @endif
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Users List</h3>
-                    <div class="box-tools pull-right" style="display:inline-flex">
-                    <a href="customer-add" class="btn btn-block btn-success btn-xs"><i class="fa fa-plus"></i> Add User</a>
-                    </div>
-                </div>
+                    <h3 class="box-title">Orders List</h3>
+                   </div>
                 <div class="box-body">
         <div class="table-responsive">
                 <table class="table table-striped table-bordered user-list-table">
                   <thead>
-                    <th>User Name</th>
-					<th>Email</th>
-					<th>Phone No.</th>
-                    <th>Is Seller?</th>
+                    <th>Order ID</th>
+					          <th>Customer Name</th>
+					          <th>Costume Name</th>
+                    <th>From</th>
+                    <th>To</th>
                     <th>Status</th>
-                    <th></th>
                   </thead>
                   <tbody>
                     <tr>
                       <input type="hidden" class="form-control token"  name="csrf-token" value="{{ csrf_token() }}">
-                      <!--<td><input type="text" class="form-control" ng-model="search.id" name="id" placeholder=""></td>-->
-                      <td><input type="text" class="form-control" ng-model="search.name" name="name" placeholder=""></td>
-					  <td><input type="text" class="form-control" ng-model="search.email" name="email" placeholder=""></td>
-					  <td><input type="text" class="form-control" ng-model="search.phone" name="phone" placeholder="" id="phone_number"></td>
+                      <td><input type="text" class="form-control" ng-model="search.order_id"  placeholder=""></td>
+                      <td><input type="text" class="form-control" ng-model="search.user_name"  placeholder=""></td>
+					            <td><input type="text" class="form-control" ng-model="search.costume_name"  placeholder=""></td>
+					             <td><input type="text" class="form-control" datepicker ng-model="search.from_date" placeholder="Order From"></td>
+                      <td><input type="text" class="form-control" datepicker ng-model="search.date_end" placeholder="Order To"></td>
+                   
                      <td>
-                        <select name="count" class="form-control" id="count" ng-model="search.count" >
+                        <select name="count" class="form-control" id="count" ng-model="search.status" >
                           <option value=""> All </option>  
-                          <option value="1">Yes</option>
-						  <option value="0">No</option>
-                        </select>
+                          <option value="Processing">Processing</option>
+                          <option value="Shipping">Shipping</option>
+                          <option value="Shipped">Shipped</option>
+                          <option value="Dispatched">Dispatched</option>
+                          <option value="Delivered">Delivered</option>
+                          <option value="Returned">Returned</option>
+						            </select>
                       </td>
-					   <td>
-                        <select name="mySelect" class="form-control" id="mySelect" ng-model="search.status">
-                          <option value=""> All </option>  
-                          <option ng-repeat="option in status" value="@{{option.value}}">@{{option.name}}</option>
-                        </select>
-                      </td>
+					   
                       <td><button class="btn btn-primary user-list-search" ng-click="seachUsers(search)">Search</button></td>
                     </tr>
                   </tbody>
@@ -89,7 +87,7 @@ display: none;
         <div class="row">
                     <div class="col-md-12">
                       <div class="pull-right user-list">
-                        <a href="javascript:void(0);" class="btn btn-xs btn-success" id="export" ng-click="usersExportCSV()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download"><i class="fa fa-download"></i></a>
+                        <a href="javascript:void(0);" class="btn btn-xs btn-success" id="export" ng-click="ordersExportCSV()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download"><i class="fa fa-download"></i></a>
                        </div>
                     </div>
                   </div>
@@ -109,8 +107,8 @@ display: none;
 {{-- page level scripts --}}
 @section('footer_scripts') 
 
-<script src="{{ asset('angular/Admin/UserManagement/Controllers/users-lists.js') }}"></script>
-<script src="{{ asset('angular/Admin/UserManagement/Services/user_management.js') }}"></script>
+<script src="{{ asset('angular/Admin/Orders/Controllers/orders-lists.js') }}"></script>
+<script src="{{ asset('angular/Admin/Orders/Services/orders.js') }}"></script>
 <script src="{{ asset('angular/Admin/ExportCsv/Services/ExportCsv.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 

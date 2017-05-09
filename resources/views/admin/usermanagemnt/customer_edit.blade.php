@@ -31,11 +31,7 @@ View User |@parent
 		<li>
 			<a href="{{url('customers-list')}}">Users</a>
 		</li>
-<<<<<<< HEAD
-		<li class="active"> Edit User</li>
-=======
 		<li class="active"> Edit {{$user->first_name}}  {{$user->last_name}}</li>
->>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 	</ol>
 	
 </section>
