@@ -48,10 +48,10 @@
 														<?php $discount=($cart->price/100)*$cart->discount;
 															   $new_price=$cart->price-$discount;
 													    ?>
-															<p><span class="old-price"><strike>{{number_format($cart->price, 2, '.', ',')}}</strike></span> <span class="new-price">{{number_format($new_price, 2, '.', ',')}}</span></p>
+															<p><span class="old-price"><strike>${{number_format($cart->price, 2, '.', ',')}}</strike></span> <span class="new-price">${{number_format($new_price, 2, '.', ',')}}</span></p>
 															@else
 															 <?php $new_price=$cart->price;?>
-															 <p><span class="new-price">{{number_format($cart->price, 2, '.', ',')}}</span></p>
+															 <p><span class="new-price">${{number_format($cart->price, 2, '.', ',')}}</span></p>
 															@endif
 													</div>
 													<div class="col-md-1 col-sm-1 col-xs-12">
