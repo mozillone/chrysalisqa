@@ -60,7 +60,7 @@ Route::post('/add/billing-adress', array('as' => 'billing_address.post','uses' =
 
 
 
-Route::post('/buy-it-now', array('as' => 'buy-it-now','uses' => 'CheckoutController@buyItNow'));
+Route::any('/buy-it-now/{costume_id?}', array('as' => 'buy-it-now','uses' => 'CheckoutController@buyItNow'));
 Route::any('/get/credit-card/{card_id?}', array('as' => 'add-credit-card','uses' => 'CheckoutController@getCreditCard'));
 Route::get('/get-adress/{type?}/{address_id?}', array('as' => 'shipping_address.post','uses' => 'CheckoutController@getAddressInfo'));
 Route::post('/order/charity/fund', array('as' => 'order-charity-fund','uses' => 'CheckoutController@orderCharityFund'));

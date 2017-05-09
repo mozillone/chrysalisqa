@@ -70,7 +70,13 @@ class CheckoutController extends Controller {
                 'pay_address_1' => 'required',
                 'card_id' => 'required',
                  );
-    $validator = Validator::make($req,$rule);
+  $messages = [
+        'shipping_address_1.required' => 'Shipping address is required',
+        'pay_address_1.required' => 'Billing address is required',
+        'card_id.required' => 'Payment method is required',
+    ];
+
+    $validator = Validator::make($req,$rule,$messages);
     if ($validator->fails()) {
       return Redirect::back()
       ->withErrors($validator)
@@ -128,16 +134,25 @@ class CheckoutController extends Controller {
     }
 
   }
-  public function buyItNow(Request $request){
+  public function buyItNow(Request $request,$cst_id=null){
+      if($request->all()==null){
+        $req=array('costume_id'=>$cst_id);
+      }else{
         $req=$request->all();
-       $cookie_id=SiteHelper::currentCookieKey();
-        $cart_id=Cart::verifyCostumeCart($req['costume_id'],$cookie_id);
+      }
+      if($cst_id==null){
+        $costume_id=$req['costume_id'];
+      }else{
+        $costume_id=$cst_id;
+      }
+      $cookie_id=SiteHelper::currentCookieKey();
+        $cart_id=Cart::verifyCostumeCart( $costume_id,$cookie_id);
         if($cart_id){
-          $qty=Cart::verifyCostumeCartQuantity($req['costume_id'],$cookie_id);
-          $res=Cart::verifyCostumeQuantity($req['costume_id'],$qty);
+          $qty=Cart::verifyCostumeCartQuantity( $costume_id,$cookie_id);
+          $res=Cart::verifyCostumeQuantity( $costume_id,$qty);
          if(count($res)){
-            Cart::updateCartDetails($req['costume_id'],$cart_id,$qty+1);
-            $res=$this->updateCartDetails($req['costume_id'],$qty+1);
+            Cart::updateCartDetails( $costume_id,$cart_id,$qty+1);
+            $res=$this->updateCartDetails( $costume_id,$qty+1);
             return Redirect::to('/checkout');
           }else{
             return Redirect::back();
@@ -145,11 +160,11 @@ class CheckoutController extends Controller {
         }
         else{
              $cookie_id=$this->currentCookieKey();
-             $costume_id=$req['costume_id'];
+             $costume_id= $costume_id;
              $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
              $res=Cart::verifyCostumeQuantity($costume_id,$qty);
              if(count($res)){
-               $product[$cookie_id][]=array($req['costume_id']=>$qty);
+               $product[$cookie_id][]=array($costume_id=>$qty);
                Cart::addToCart($req,$cookie_id,$qty);
                $reslt=$this->productsAddToCookie($product);
                return Redirect::to('/checkout');
