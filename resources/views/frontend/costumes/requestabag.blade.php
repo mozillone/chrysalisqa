@@ -445,7 +445,7 @@ if (isset($total_data) && !empty($total_data)) {
                 <img src="{{URL::asset('assets/frontend/img/bag-sucess.png')}}">
                 <h4>Hand in There!</h4>
                 <p>Your bag is on it's way</p>
-                <a type="button" id="average_payouts_next" class="btn-rm-nxt nxt">Browse Costumes</a>
+                <a type="button" id="average_payouts_next" href="{{URL::to('/')}}" class="btn-rm-nxt nxt">Browse Costumes</a>
 			</div>
 		</div>
 	</div>
