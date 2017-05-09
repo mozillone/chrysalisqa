@@ -1,5 +1,6 @@
-@extends('/frontend/app')
+@extends('/frontend/app')
 @section('styles')
+<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
   @endsection
 @section('content')
  <div class="container">
@@ -59,7 +60,7 @@
 													</div>
 													<div class="col-md-3 col-sm-3 col-xs-12">
 														<p class="price_right text-right"><span class="check_price">${{number_format(($cart->qty)*($new_price), 2, '.', ',')}}</span> 
-														<span><a href="/cart/delete/{{$cart->cart_item_id}}/{{$cart->cart_id}}"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
+														<span><a href="javascript::void(0);" data-item-id="{{$cart->cart_item_id}}" data-cart_id="{{$cart->cart_id}}" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
 													</div>
 												</div>
 											</div>
@@ -115,5 +116,6 @@
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
-
+<script src="{{ asset('/assets/frontend/js/pages/cart.js') }}"></script>
+<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 @stop
