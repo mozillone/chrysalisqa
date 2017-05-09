@@ -25,12 +25,12 @@ class CartController extends Controller {
     if(count($req)){
       $res=Promotions::verifyCoupanCode($req['coupan_code']);
       if(!$res){
-         Session::flash('error','The coupan code is not invalid.');
+         Session::flash('error','Coupon code is not valid.');
          return Redirect::back();
       }else{
         $data=Cart::getCartProductswithCoupan($req['coupan_code']);
         if($data['dis_total']=="0"){
-                Session::flash('error','No Admin costumes are found in your cart.');
+                Session::flash('error','No admin costumes are found in your cart.');
         } 
        }
     }else{

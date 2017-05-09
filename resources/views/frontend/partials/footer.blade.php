@@ -205,7 +205,8 @@
 						<h2>Sign In To Your Account</h2>
 						<form class="" action="{{route('login.post')}}" method="POST" id="loginpopup">   
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<input type="hidden" name="plan_id" value="">
+							<!-- <input type="hidden" name="costume_id" value="@if(!empty($data[0]->costume_id)){{$data[0]->costume_id}}@endif">
+							<input type="hidden" name="is_cart" value="@if(!empty($data['basic'])){{count($data['basic'])}}@endif"> -->
 							<div class="form-group">
 							<label>Email or Username</label>
 								<input type="text" id="loginpopup_email" name="email" placeholder="Email *" class="form-control">
@@ -248,6 +249,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="modal fade window-popup" id="single_signup_popup" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
