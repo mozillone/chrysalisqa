@@ -1543,7 +1543,7 @@ span.acnhr-link {
     padding: 6px 85px;
     text-decoration: none;
 }
-.carousel-inner {
+.costumes-carousel .carousel-inner {
     width: 80%;
     margin: 0 auto;
 }
@@ -1811,12 +1811,12 @@ input[type=checkbox]#is_shipping, input[type=checkbox]#is_billing {
     border: 1px solid #60c5ac ;
     background: #60c5ac ;
 }
-.report_item_pupup div#myTabContent label {
+.report_item_pupup div#myTabContent label , #single_signup_popup label{
     font-size: 18px;
     color: #000;
     font-family: Proxima-Nova-Semibold;
 }
-.report_item_pupup h2 {
+.report_item_pupup h2, #single_signup_popup h2 {
     font-size: 24px;
     margin-top: 0px;
     border: none;
@@ -1935,7 +1935,7 @@ input.addtocart-rm {
     cursor: pointer;
     min-height: 675px;
     overflow: hidden;
-    background: #999;
+    background: #f1f1f1;
     vertical-align: middle;
     display: flex;
     justify-content: center;
@@ -1957,6 +1957,12 @@ input.addtocart-rm {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#single_signup_popup .modal-dialog {
+    width: 500px;
+}
+#single_signup_popup div#myTabContent {
+    padding: 30px 70px;
 }
 /********************************************************************Media start here********************************************************************/
 
@@ -2010,7 +2016,7 @@ input.addtocart-rm {
     cursor: pointer;
     min-height: 290px;
     overflow: hidden;
-    background: #999;
+    background: #f1f1f1;
     vertical-align: middle;
     display: flex;
     justify-content: center;
@@ -2022,7 +2028,7 @@ input.addtocart-rm {
     cursor: pointer;
     min-height: 250px;
     overflow: hidden;
-    background: #999;
+    background: #f1f1f1;
     vertical-align: middle;
     display: flex;
     justify-content: center;
