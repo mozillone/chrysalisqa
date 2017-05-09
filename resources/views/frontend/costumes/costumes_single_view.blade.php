@@ -50,7 +50,7 @@
 @if(Auth::check())
 	<a href="#" onclick="return false;" class="fav_costume" data-costume-id='{{$data[0]->costume_id}}'>
 @else
-	<a data-toggle="modal" data-target="#login_popup">
+	<a data-toggle="modal" data-target="#login_popup_fav">
 @endif
 <span @if($data[0]->is_fav)  class="active" @endif>@if($data[0]->is_fav)<i aria-hidden=true class="fa fa-heart"></i> @else <i aria-hidden=true class="fa fa-heart-o"></i>@endif</span></a>
 	</h1>
