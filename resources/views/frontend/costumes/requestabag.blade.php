@@ -717,7 +717,7 @@ $(document).ready(function()
 
 	//numeric condition
 	$("#zipcode,#phone_number").on("keyup", function(){
-        var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
+        var valid = /^\d{0,10}(\.\d{0,10})?$/.test(this.value),
             val = this.value;
         
         if(!valid){
