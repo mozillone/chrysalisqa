@@ -488,6 +488,20 @@ if (isset($total_data) && !empty($total_data)) {
 							
 					</form>                  
 					</div>
+					<div class="tab-pane fade" id="forget_password1">
+						<form class="" action="{{route('forgotpassword.post')}}" method="POST" id="forgetpopup_password">   
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<div class="form-group">
+								<input type="text" id="forgotpop_email" name="email" placeholder="Email" class="form-control">
+								<p class="error">{{ $errors->first('email') }}</p>
+							</div>
+							<div class="form-group">
+								<div class="text-center rect_pswrd">
+									<button class="btn btn-primary">Reset Password</button>
+								</div>
+							</div>
+						</form>             
+					</div>
                    
                     <div class="form-group or text-center">
 								<p>Or</p>
@@ -498,7 +512,7 @@ if (isset($total_data) && !empty($total_data)) {
 					</div>
 				</div>
 				<div class="text-center close_icon">
-				<button type="button" class="close" data-dismiss="modal"><span>&times;</span> Close</button>
+				<button type="button" class="close" id="close_req" data-dismiss="modal"><span>&times;</span> Close</button>
 				</div>
 				</div>
 				
@@ -575,7 +589,10 @@ $(document).ready(function()
 		return str;
 		
 	});
-
+	$('#close_req').click(function(){
+		$('.modal-backdrop').remove();
+		$('#request_bag_signup_popup').css('display','none');
+	});
 	$('#average_payouts_next').click(function(){
 		$('#choose_an_option_for_bag_div').css('display','none');
 		$('#process_bar_hide').css('display','none');
@@ -678,13 +695,7 @@ $(document).ready(function()
 			 		window.location.href = "{{URL::to('login#signup_tab')}}";
 			 	}
 			 	if (data == "success") {
-			 		$('#ajax_loader').remove();
-			 		$('#process_bar_hide').css('display','none');
-			 		$('#h4_tag_hide').css('display','none');
-			 		$('#choose_an_option_for_bag_div').css('display','none');
-					$('#average_payouts_div').css('display','none');
-					$('#send_my_bag_div').css('display','none');
-					$('#your_bag_on_itsway').css('display','block');
+			 		window.location.href = "{{URL::to('costume/successrequestbag')}}";
 			 	}
 			 }
 			});
@@ -697,20 +708,44 @@ $(document).ready(function()
 	$('#request_a_bag_login').click(function(){
 		var loginpopup_email = $('#loginpopup_email').val();
 		var loginopup_password = $('#loginopup_password').val();
+		if($('input[name=is_payout]:checked').length<=0){
+			var is_payout = "0";		
+		}else{
+			var is_payout = "1";
+		}
+		if($('input[name=is_return]:checked').length<=0){
+			var is_return = "0";		
+		}else{
+			var is_return = "1";
+		}
+		if($('input[name=is_recycle]:checked').length<=0){
+			var is_recycle = "0";		
+		}else{
+			var is_recycle = "1";
+		}
+		var full_name = $('#full_name').val();
+		var address1  = $('#address1').val();
+		var address2  = $('#address2').val();
+		var city      = $('#city').val();
+		var state     = $('#state').val();
+		var  zipcode  = $('#zipcode').val();
+		var phone_number = $('#phone_number').val();
+		var email_address = $('#email_address').val(); 
+		var total_data    = {email: loginpopup_email,password:loginopup_password,is_payout: is_payout,full_name: full_name,address1: address1,address2:address2,city: city,state: state,zipcode: zipcode,phone_number: phone_number,is_return: is_return,is_recycle: is_recycle,email_address: email_address}
 		if (loginpopup_email != "" && loginopup_password !="") {
 			$.ajax({
 			 url: "{{URL::to('/postrequestabaglogin')}}",
 			 type: "POST",
-			 data: new FormData($('#loginpopup')[0]),
-			 contentType:false,
-			 cache: false,
-			 processData: false,
+			 data: total_data,
 			 success: function(data){
 			 	if (data == "login_sucess") {
 			 		$('#ajax_loader').remove();
 			 		$('#send_my_bag_next').html("Next");
 			 		$('#modal-backdrop').remove();
 			 		$('#request_bag_signup_popup').css('display','none');
+			 	}
+			 	else if (data == "success") {
+			 		window.location.href = "{{URL::to('costume/successrequestbag')}}";
 			 	}
 			 }
 			});
