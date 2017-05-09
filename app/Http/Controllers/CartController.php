@@ -29,6 +29,9 @@ class CartController extends Controller {
          return Redirect::back();
       }else{
         $data=Cart::getCartProductswithCoupan($req['coupan_code']);
+        if($data['dis_total']=="0"){
+                Session::flash('error','No Admin costumes are found in your cart.');
+        } 
        }
     }else{
       $data=Cart::getCartProducts();
