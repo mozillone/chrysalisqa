@@ -1543,7 +1543,7 @@ span.acnhr-link {
     padding: 6px 85px;
     text-decoration: none;
 }
-.carousel-inner {
+.costumes-carousel .carousel-inner {
     width: 80%;
     margin: 0 auto;
 }
@@ -1811,12 +1811,12 @@ input[type=checkbox]#is_shipping, input[type=checkbox]#is_billing {
     border: 1px solid #60c5ac ;
     background: #60c5ac ;
 }
-.report_item_pupup div#myTabContent label {
+.report_item_pupup div#myTabContent label , #single_signup_popup label, #login_popup_fav label{
     font-size: 18px;
     color: #000;
     font-family: Proxima-Nova-Semibold;
 }
-.report_item_pupup h2 {
+.report_item_pupup h2, #single_signup_popup h2, #login_popup_fav h2 {
     font-size: 24px;
     margin-top: 0px;
     border: none;
@@ -1843,6 +1843,9 @@ input[type=checkbox]#is_shipping, input[type=checkbox]#is_billing {
 .report_item_pupup {
     padding: 30px 70px;
     padding-top: 0px;
+}
+#login_popup_fav .login-register {
+	padding: 30px 70px;
 }
 #report_item .modal-content {
     padding-top: 0px;
@@ -1935,7 +1938,7 @@ input.addtocart-rm {
     cursor: pointer;
     min-height: 675px;
     overflow: hidden;
-    background: #999;
+    background: #f1f1f1;
     vertical-align: middle;
     display: flex;
     justify-content: center;
@@ -1957,6 +1960,12 @@ input.addtocart-rm {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#single_signup_popup .modal-dialog {
+    width: 500px;
+}
+#single_signup_popup div#myTabContent {
+    padding: 30px 70px;
 }
 /********************************************************************Media start here********************************************************************/
 
@@ -2010,7 +2019,7 @@ input.addtocart-rm {
     cursor: pointer;
     min-height: 290px;
     overflow: hidden;
-    background: #999;
+    background: #f1f1f1;
     vertical-align: middle;
     display: flex;
     justify-content: center;
@@ -2022,7 +2031,7 @@ input.addtocart-rm {
     cursor: pointer;
     min-height: 250px;
     overflow: hidden;
-    background: #999;
+    background: #f1f1f1;
     vertical-align: middle;
     display: flex;
     justify-content: center;
@@ -2266,7 +2275,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 }
 
 @media screen and (min-width:768px){
-#report_item .modal-dialog {
+#report_item .modal-dialog, #login_popup_fav .modal-dialog{
     width: 500px;
 }
 	p#other_thumbnails {
