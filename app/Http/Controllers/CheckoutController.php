@@ -70,7 +70,13 @@ class CheckoutController extends Controller {
                 'pay_address_1' => 'required',
                 'card_id' => 'required',
                  );
-    $validator = Validator::make($req,$rule);
+  $messages = [
+        'shipping_address_1.required' => 'Shipping address is required',
+        'pay_address_1.required' => 'Billing address is required',
+        'card_id.required' => 'Payment method is required',
+    ];
+
+    $validator = Validator::make($req,$rule,$messages);
     if ($validator->fails()) {
       return Redirect::back()
       ->withErrors($validator)
