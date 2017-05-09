@@ -1,4 +1,4 @@
-@extends('/frontend/app')
+@extends('/frontend/app')
 @section('styles')
   @endsection
 @section('content')

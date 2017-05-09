@@ -123,7 +123,7 @@
 
 	</div>
 
-<div class="list_products">
+<div class="list_products list-img-bg">
 	<div class="row" id="itemContainer">
 	</div>
 </div>
