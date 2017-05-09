@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Redirect;
 use Socialite;
 use URL;
 use Cookie;
+use DB;
 class AuthController extends Controller {
 
 	protected $auth;

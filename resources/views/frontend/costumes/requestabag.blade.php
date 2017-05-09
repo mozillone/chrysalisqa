@@ -488,6 +488,20 @@ if (isset($total_data) && !empty($total_data)) {
 							
 					</form>                  
 					</div>
+					<div class="tab-pane fade" id="forget_password1">
+						<form class="" action="{{route('forgotpassword.post')}}" method="POST" id="forgetpopup_password">   
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<div class="form-group">
+								<input type="text" id="forgotpop_email" name="email" placeholder="Email" class="form-control">
+								<p class="error">{{ $errors->first('email') }}</p>
+							</div>
+							<div class="form-group">
+								<div class="text-center rect_pswrd">
+									<button class="btn btn-primary">Reset Password</button>
+								</div>
+							</div>
+						</form>             
+					</div>
                    
                     <div class="form-group or text-center">
 								<p>Or</p>
@@ -498,7 +512,7 @@ if (isset($total_data) && !empty($total_data)) {
 					</div>
 				</div>
 				<div class="text-center close_icon">
-				<button type="button" class="close" data-dismiss="modal"><span>&times;</span> Close</button>
+				<button type="button" class="close" id="close_req" data-dismiss="modal"><span>&times;</span> Close</button>
 				</div>
 				</div>
 				
@@ -575,7 +589,10 @@ $(document).ready(function()
 		return str;
 		
 	});
-
+	$('#close_req').click(function(){
+		$('.modal-backdrop').remove();
+		$('#request_bag_signup_popup').css('display','none');
+	});
 	$('#average_payouts_next').click(function(){
 		$('#choose_an_option_for_bag_div').css('display','none');
 		$('#process_bar_hide').css('display','none');
