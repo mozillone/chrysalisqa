@@ -167,6 +167,9 @@ p.form-rms-que i {    color: #323031;}
 .accordion-opened .accordion-toggle:after {
     content: "\f054";
 }
+.span-align span.shi_date_right.text-right.right {
+    margin-top: 0;
+}
 span.shi_date_right.text-right.right {
     margin-top: -20px;
     float: right;
@@ -645,12 +648,18 @@ font-family: Proxima-Nova-Extrabold;}
 .creat_btn {
 margin-top: 10px;
 }
-.login-register ul.nav.nav-tabs li.active a{color:#000 !important;}
+.login-register ul.nav.nav-tabs li.active a{color:#000 !important;padding-left: 0;padding-bottom:0;}
 .login-register ul.nav.nav-tabs li.active {
 padding-left: 70px;
 border-top: 5px solid #60c5ac;
 border-left: 0px; border-right: 0px;
 border-bottom: 0px;
+padding-bottom: 0;
+
+margin-top: 20px;
+}
+.login-register p {
+    color: #000;
 }
 .form-group.or.text-center p {
 color: #000;
@@ -1811,12 +1820,12 @@ input[type=checkbox]#is_shipping, input[type=checkbox]#is_billing {
     border: 1px solid #60c5ac ;
     background: #60c5ac ;
 }
-.report_item_pupup div#myTabContent label , #single_signup_popup label{
+.report_item_pupup div#myTabContent label , #single_signup_popup label, #login_popup_fav label{
     font-size: 18px;
     color: #000;
     font-family: Proxima-Nova-Semibold;
 }
-.report_item_pupup h2, #single_signup_popup h2 {
+.report_item_pupup h2, #single_signup_popup h2, #login_popup_fav h2 {
     font-size: 24px;
     margin-top: 0px;
     border: none;
@@ -1843,6 +1852,9 @@ input[type=checkbox]#is_shipping, input[type=checkbox]#is_billing {
 .report_item_pupup {
     padding: 30px 70px;
     padding-top: 0px;
+}
+#login_popup_fav .login-register {
+	padding: 30px 70px;
 }
 #report_item .modal-content {
     padding-top: 0px;
@@ -2272,7 +2284,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 }
 
 @media screen and (min-width:768px){
-#report_item .modal-dialog {
+#report_item .modal-dialog, #login_popup_fav .modal-dialog{
     width: 500px;
 }
 	p#other_thumbnails {

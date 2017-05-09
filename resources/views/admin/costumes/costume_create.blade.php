@@ -45,7 +45,7 @@
 				</div>
 				
 				<div class="box-body">
-<<<<<<< HEAD
+
 				@if (Session::has('error'))
                     <div class="alert alert-danger alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -58,9 +58,6 @@
                     </div>
                     @endif
 					
-=======
-
->>>>>>> 2ebbe99a0b114e340179d12b946b4245e53c8bff
 		            <div class="alert alert-danger alert-dismissable" style="display:none" >
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					</div>
