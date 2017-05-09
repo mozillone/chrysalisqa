@@ -74,7 +74,7 @@
 	</div>
 
 	<div class="col-xs-6 col-sm-4 viewBtn_rm">
-	@if(helper::verifyCostumeQuantity($data[0]->costume_id,$data[0]->quantity+1))
+	@if(helper::verifyCostumeQuantity($data[0]->costume_id,$data[0]->quantity+1) && $data[0]->quantity>0)
 		<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
 		@if(!Auth::check())
 		<button type="button" class="buynow-rm"><a data-toggle="modal" data-target="#login_popup" class="buynow-rm">Buy it Now!</a> </button>

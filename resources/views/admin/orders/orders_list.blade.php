@@ -8,14 +8,7 @@
 @section('header_styles')
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
-<style type="text/css">
-#dtTable tr>th:first-child{
-display: none;
-}
-#dtTable tr>td:first-child{
-display: none;
-}
-</style>
+
 @stop
 
 {{-- Page content --}}
@@ -79,7 +72,7 @@ display: none;
 						            </select>
                       </td>
 					   
-                      <td><button class="btn btn-primary user-list-search" ng-click="seachUsers(search)">Search</button></td>
+                      <td><button class="btn btn-primary user-list-search" ng-click="seachOrders(search)">Search</button></td>
                     </tr>
                   </tbody>
               </table>
