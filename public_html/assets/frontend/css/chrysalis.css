@@ -1543,7 +1543,7 @@ span.acnhr-link {
     padding: 6px 85px;
     text-decoration: none;
 }
-.carousel-inner {
+.costumes-carousel .carousel-inner {
     width: 80%;
     margin: 0 auto;
 }
@@ -1935,7 +1935,7 @@ input.addtocart-rm {
     cursor: pointer;
     min-height: 675px;
     overflow: hidden;
-    background: #999;
+    background: #f1f1f1;
     vertical-align: middle;
     display: flex;
     justify-content: center;
@@ -2010,7 +2010,7 @@ input.addtocart-rm {
     cursor: pointer;
     min-height: 290px;
     overflow: hidden;
-    background: #999;
+    background: #f1f1f1;
     vertical-align: middle;
     display: flex;
     justify-content: center;
@@ -2022,7 +2022,7 @@ input.addtocart-rm {
     cursor: pointer;
     min-height: 250px;
     overflow: hidden;
-    background: #999;
+    background: #f1f1f1;
     vertical-align: middle;
     display: flex;
     justify-content: center;
