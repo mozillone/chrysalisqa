@@ -7,21 +7,25 @@ section.top_nav span{color:#60c5ac;}
 @font-face {
 	font-family: Proxima-Nova-Regular;
 	src: url('../fonts/proxima_nova-webfont.woff2');
+	src: url('../fonts/Mark-Simonson-Proxima-Nova.ttf');
 }
 
 @font-face {
 	font-family: Proxima-Nova-Semibold;
 	src: url('../fonts/proxima_nova_semibold-webfont.woff2');
+	src: url('../fonts/Mark-Simonson-Proxima-Nova-Semibold.ttf');
 }
 
 @font-face {
 	font-family: Proxima-Nova-Bold;
 	src: url('../fonts/proxima_nova_bold-webfont.woff2');
+	src: url('../fonts/Mark-Simonson-Proxima-Nova-Bold.ttf');
 }
 
 @font-face {
 	font-family: Proxima-Nova-Extrabold;
 	src: url('../fonts/proxima_nova_extrabold-webfont.woff2');
+	src: url('../fonts/Mark-Simonson-Proxima-Nova-Extrabold.ttf');
 }
 
 
@@ -1107,6 +1111,12 @@ label.btn.btn-default.upload_more_btn{    text-align: center;
     font-size: 18px;
     margin-bottom: 75px; color:#60C4AB;
     width: 200px;font-family: Proxima-Nova-Extrabold;}
+.upload-photo-blogs label.btn.btn-default.upload_more_btn {
+    margin-bottom: 18px;
+}
+.upload-photo-blogs a.upload_sub_btn.btn.btn-default {
+	margin-bottom: 20%;
+}
 a.upload_sub_btn.btn.btn-default{ background: #60C4AB; color:#fff;    margin-top: 30px;margin-bottom: 50px;}
 .up_btns_tl {
     text-align: center;
@@ -2002,6 +2012,14 @@ input.addtocart-rm {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+	.recently-viewed .owl-carousel.owl-theme .owl-item {
+    width: 200px !important;
+    margin-right: 20px;
+}
+	.recently-viewed .owl-carousel.owl-theme .owl-item img {
+    max-height: 250px;
+	width: auto;
 }
 
 	.img_layer a img {
