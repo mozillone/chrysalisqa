@@ -81,7 +81,7 @@ $(function(){
 			url: '/getMiniCartProducts',
 			success: function(response){
 				if(response['basic'].length){
-					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date"><span>'+response['basic'].length+' Item Added</span><a href="/cart">View & Edit Cart</a><span class="shi_date_right text-right right"><span classs="subtl">Subtotal</span><span class="ctr-tl-price"> $'+response['basic'][0].total+'</span></span></div><div class="row scels">';
+					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date"><span>'+response['basic'].length+' Items Added</span><a href="/cart">View & Edit Cart</a><span class="shi_date_right text-right right"><span classs="subtl">Subtotal</span><span class="ctr-tl-price"> $'+response['basic'][0].total+'</span></span></div><div class="row scels">';
 				$.each(response['basic'],function(i,value){
 					var path='/costumers_images/Medium/'+value.image+'';
 					if(fileExists(path)){
