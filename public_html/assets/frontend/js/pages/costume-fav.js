@@ -13,8 +13,8 @@ $(document).on('click','.fav_costume',function(){
           Lobibox.notify.closeAll();
           Lobibox.notify('success', {
                     size: 'mini',
-                    title: 'Added To favourite',
-                    msg: 'This costume is added your favourites list ',
+                    title: 'Added To favorites',
+                    msg: 'This costume is added your favorites list ',
                 });
         }else{
           $(this).find('span').removeClass('active');
@@ -22,8 +22,8 @@ $(document).on('click','.fav_costume',function(){
           //ohSnap('Costume is removed successfully from your wishlist', 'red');
             Lobibox.notify('success', {
                     size: 'mini',
-                    title: 'Removed from favourite',
-                    msg: 'This costume is removed from your favourite list ',
+                    title: 'Removed from favorites',
+                    msg: 'This costume is removed from your favorites list ',
                 });
         }
         $('.fav_count').html(response.fav_count);
@@ -40,7 +40,7 @@ $(document).on('click','.fav_costume',function(){
  $(document).on('click', '.delete', function(){ 
       var id=$(this).attr('data-costume-id');
       swal({   
-              title: "Are you sure want to remove this costume from your Wishlist?",   
+              title: "Are you sure want to remove this costume from your favorites?",   
                         text: "You will not be able to recover this costume",   
                         showCancelButton: true,   
                         confirmButtonColor: "#DD6B55",   
