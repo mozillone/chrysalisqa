@@ -15,7 +15,7 @@
 <section class="product_Details_page">
 	<div class="container">
 <div class="row">
-<div class="col-md-5 bxslider-strt">
+<div class="col-md-5 carousel-bg-style bxslider-strt">
 
 <ul class="bxslider">
 @foreach($data['images'] as $images)
@@ -133,7 +133,7 @@
 
 <div class="col-md-12 detailes_view_slider">
 <h2 class="viewHead-rm">People Also Viewing</h2>
-<div class="home_product_slider">
+<div class="home_product_slider recently-viewed">
 			<div class="container">
 				<div class="row">
 						<div class="col-xs-12">
