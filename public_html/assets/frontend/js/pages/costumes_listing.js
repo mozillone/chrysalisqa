@@ -116,10 +116,10 @@ function searching(search=null){
 						if(value.created_user_group=="admin" && value.discount!=null && value.uses_customer<value.uses_total && now()>=value.date_start && now()<=value.date_end){
 							var discount=(value.price/100)*value.discount;
 							var new_price=value.price-discount;
-							var price='<p><span class="old-price"><strike>$'+parseFloat(value.price).toFixed(2)+'</strike></span> <span class="new-price">$'+parseFloat(new_price).toFixed(2)+'</span></p>';
+							var price='<p><span class="old-price"><strike>$'+addCommas(value.price)+'</strike></span> <span class="new-price">$'+addCommas(new_price)+'</span></p>';
 					
 						}else{
-							var price='<p><span class="new-price">$'+parseFloat(value.price).toFixed(2)+'</span></p>';
+							var price='<p><span class="new-price">$'+addCommas(value.price)+'</span></p>';
 						}
 						if(is_login){
 							var like='<a href="#" onclick="return false;" class="like_costume" data-costume-id='+value.costume_id+'><span '+is_like+'><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span></a>';
@@ -173,4 +173,17 @@ function now()
 	        return false;
 	    }
 	}
+function addCommas(nStr)
+{
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return (x1 + x2);
+}
+
 });

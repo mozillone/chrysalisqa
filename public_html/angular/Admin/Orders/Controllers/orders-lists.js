@@ -1,4 +1,4 @@
-app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,Orders) 
+app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile) 
 {
 	var vm = this;
     $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -30,26 +30,26 @@ app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBui
     function createdRow(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
     }
-       $scope.seachCharities= function(search){
-          Orders.getOrdersSearchlist(search).then(function(response){
-          $scope.dtOptions = DTOptionsBuilder.newOptions()
-          .withOption('data',response.data.data.orders)
-          .withOption('createdRow', createdRow)
-            .withOption('order', [ ])
-            .withOption('responsive', true)
-            .withOption('bFilter', false)
-            .withOption('lengthChange', false);
-             $scope.dtColumns = [
-                      DTColumnBuilder.newColumn('order_id').withTitle('Order #').notSortable(),
-                      DTColumnBuilder.newColumn('user_name').withTitle('Customer Name'),
-                      DTColumnBuilder.newColumn('amount').withTitle('Amount'),
-                      DTColumnBuilder.newColumn('date').withTitle('Ordered Date'),
-                      DTColumnBuilder.newColumn('status').withTitle('Status'),
-                      DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
-                      .renderWith(actionsHtml)
-                    ], 
-          $scope.displayTable = true;
+       // $scope.seachCharities= function(search){
+       //    Orders.getOrdersSearchlist(search).then(function(response){
+       //    $scope.dtOptions = DTOptionsBuilder.newOptions()
+       //    .withOption('data',response.data.data.orders)
+       //    .withOption('createdRow', createdRow)
+       //      .withOption('order', [ ])
+       //      .withOption('responsive', true)
+       //      .withOption('bFilter', false)
+       //      .withOption('lengthChange', false);
+       //       $scope.dtColumns = [
+       //                DTColumnBuilder.newColumn('order_id').withTitle('Order #').notSortable(),
+       //                DTColumnBuilder.newColumn('user_name').withTitle('Customer Name'),
+       //                DTColumnBuilder.newColumn('amount').withTitle('Amount'),
+       //                DTColumnBuilder.newColumn('date').withTitle('Ordered Date'),
+       //                DTColumnBuilder.newColumn('status').withTitle('Status'),
+       //                DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
+       //                .renderWith(actionsHtml)
+       //              ], 
+       //    $scope.displayTable = true;
     
-          });
-        } 
+       //    });
+       //  } 
 }); 
