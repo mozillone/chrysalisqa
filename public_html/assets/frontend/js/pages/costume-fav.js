@@ -10,11 +10,21 @@ $(document).on('click','.fav_costume',function(){
        if(response.is_user_fav=="1"){
           $(this).find('span').addClass('active');
           $(this).find('span').html('<i aria-hidden=true class="fa fa-heart"></i>');
-          //ohSnap('Costume is successfully added into your wishlist', 'green');
+          Lobibox.notify.closeAll();
+          Lobibox.notify('success', {
+                    size: 'mini',
+                    title: 'Added To favourite',
+                    msg: 'This costume is added your favourites list ',
+                });
         }else{
           $(this).find('span').removeClass('active');
           $(this).find('span').html('<i aria-hidden=true class="fa fa-heart-o"></i>');
           //ohSnap('Costume is removed successfully from your wishlist', 'red');
+            Lobibox.notify('success', {
+                    size: 'mini',
+                    title: 'Removed from favourite',
+                    msg: 'This costume is removed from your favourite list ',
+                });
         }
         $('.fav_count').html(response.fav_count);
         
