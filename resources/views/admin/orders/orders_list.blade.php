@@ -8,6 +8,7 @@
 @section('header_styles')
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+<link rel="stylesheet" href="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}">
 
 @stop
 
@@ -104,6 +105,8 @@
 <script src="{{ asset('angular/Admin/Orders/Services/orders.js') }}"></script>
 <script src="{{ asset('angular/Admin/ExportCsv/Services/ExportCsv.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+<script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
+<script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
 
 @stop
 
