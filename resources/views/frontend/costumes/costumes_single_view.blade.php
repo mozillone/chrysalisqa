@@ -15,6 +15,11 @@
 <section class="product_Details_page">
 	<div class="container">
 <div class="row">
+	<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="#">Home &nbsp;&nbsp;> </a>
+  <a class="breadcrumb-item" href="#">&nbsp; Kids &nbsp;> &nbsp;</a>
+  <span class="breadcrumb-item active"> &nbsp;Tv & Movie</span>
+</nav>
 <div class="col-md-5 carousel-bg-style bxslider-strt">
 
 <ul class="bxslider">
@@ -46,13 +51,23 @@
 	{{ Session::get('success') }}
 </div>
 @endif
-<h1>{{$data[0]->name}}
+<h1 class="social-media-sec">
+
+
+{{$data[0]->name}}
 @if(Auth::check())
 	<a href="#" onclick="return false;" class="fav_costume" data-costume-id='{{$data[0]->costume_id}}'>
+
 @else
 	<a data-toggle="modal" data-target="#login_popup_fav">
 @endif
+
 <span @if($data[0]->is_fav)  class="active" @endif>@if($data[0]->is_fav)<i aria-hidden=true class="fa fa-heart"></i> @else <i aria-hidden=true class="fa fa-heart-o"></i>@endif</span></a>
+<div>
+	<a><i class="fa fa-facebook" aria-hidden="true"></i></a>  
+	<a><i class="fa fa-twitter" aria-hidden="true"></i></a>
+	<a><i class="fa fa-envelope" aria-hidden="true"></i></a>
+</div>
 	</h1>
 
 <!---Price section start -->
