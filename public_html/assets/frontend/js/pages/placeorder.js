@@ -74,6 +74,10 @@ $(document).ready(function() {
 			url: '/get-adress/shipping',
 			success: function(response){
 					var opt='<option value="new">New</option>';
+					if(response.length=="0"){
+						$('.shipping-dropdown').remove();
+						$('.shipping-or').remove();
+					}
 					$.each(response,function(i,value){
 						opt+='<option value="'+value.address_id+'">'+value.address1+','+value.city+','+value.zip_code+','+value.country+'</option>';
 					});
@@ -127,6 +131,10 @@ $(document).ready(function() {
     		$.ajax({
 			url: '/get-adress/billing',
 			success: function(response){
+					if(response.length=="0"){
+						$('.billing-dropdown').remove();
+						$('.billing-or').remove();
+					}
 					var opt='<option value="new">New</option>';
 					$.each(response,function(i,value){
 						opt+='<option value="'+value.address_id+'">'+value.address1+','+value.city+','+value.zip_code+','+value.country+'</option>';
@@ -179,6 +187,10 @@ $(document).ready(function() {
     		$.ajax({
 			url: '/get/credit-card',
 			success: function(response){
+					if(response.length=="0"){
+						$('.payment-dropdown').remove();
+						$('.payment-or').remove();
+					}
 					var opt='<option value="new">New</option>';
 					$.each(response,function(i,value){
 						opt+='<option value="'+value.id+'">'+value.credit_card_mask+'</option>';
@@ -225,7 +237,13 @@ $(document).ready(function() {
 			url: '/get-adress/'+type+'/'+address_id+'',
 			success: function(response){
 				$('input[name="shipping_address_1"]').val(response);
+				if($('#is_billing').is(':checked')){
+					$('input[name="billing_address_1"]').val(response);
+					$('.billing-empty,.error').remove();
+					$('.billing_popup').html('Edit');
+				}
 				$('.shipping-empty,.error').remove();
+				$('.shipping_popup').html('Edit');
 				if(!is_billing){
 					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				}
@@ -243,6 +261,12 @@ $(document).ready(function() {
 			url: '/get-adress/'+type+'/'+address_id+'',
 			success: function(response){
 				$('input[name="billing_address_1"]').val(response);
+				if($('#is_shipping').is(':checked')){
+					$('input[name="shipping_address_1"]').val(response);
+					$('.shipping-empty,.error').remove();
+					$('.shipping_popup').html('Edit');
+
+				}
 				$('.billing-empty,.error').remove();
 				$('.billing_popup').html('Edit');
 					if(!is_shipping){

@@ -216,13 +216,13 @@
 						
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="chek-out">
-									<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="col-md-12 col-sm-12 col-xs-12 shipping-dropdown">
 										<label for="">Choose Saved</label>
 											<select class="form-control shpng-adr-mdl-seletor"  name="address_id" id="shipping">
 											</select>
 									</div>
 								<div class="new_address">
-								<div class="text-center">
+								<div class="text-center shipping-or">
 									<p>Or</p>
 								</div>
 								<div class="address-form">
@@ -309,13 +309,13 @@
 		   <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
-								<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="col-md-12 col-sm-12 col-xs-12 billing-dropdown">
 											<label for="">Choose Saved</label>
 											<select class="form-control shpng-adr-mdl-seletor" id="billing">
 											</select>
 								</div>
 								<div class="new_address">
-									<div class="text-center">
+									<div class="text-center billing-or">
 										<p>Or</p>
 									</div>
 									
@@ -404,13 +404,13 @@
 		   <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
 		   	<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
-								<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="col-md-12 col-sm-12 col-xs-12 payment-dropdown">
 											<label for="">Choose Saved</label>
 											<select class="form-control shpng-adr-mdl-seletor" id="cc_list">
 											</select>
 								</div>
 								<div class="new_cc">
-								<div class="text-center">
+								<div class="text-center payment-or">
 									<p>Or</p>
 								</div>
 								<div class="address-form">
