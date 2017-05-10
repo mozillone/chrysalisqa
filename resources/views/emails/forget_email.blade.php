@@ -36,7 +36,7 @@
     font-weight: normal;
     font-size: 16px;
     padding: 10px 10px;
-    color: #fff;" target="_blank">Activate</a></td>
+    color: #fff;" target="_blank">Reset Password</a></td>
 					</tr>
 				</tbody>
 			</table>
