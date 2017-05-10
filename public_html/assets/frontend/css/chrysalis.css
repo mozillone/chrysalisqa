@@ -2022,7 +2022,9 @@ input.addtocart-rm {
     right: -58px;
     bottom: -40px;
 }
-
+.subscribe-btn-align .col-md-8.col-sm-12.col-xs-12 {
+    padding-right: 0;
+}
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){

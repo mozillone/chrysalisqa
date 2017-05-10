@@ -1,4 +1,4 @@
-<section class="newsletter-container">
+<section class="newsletter-container subscribe-btn-align">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-sm-12 col-xs-12"><h3>SIGN UP FOR OUR NEWSLETTER</h3>
