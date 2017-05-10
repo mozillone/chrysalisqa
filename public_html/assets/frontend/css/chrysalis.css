@@ -648,12 +648,18 @@ font-family: Proxima-Nova-Extrabold;}
 .creat_btn {
 margin-top: 10px;
 }
-.login-register ul.nav.nav-tabs li.active a{color:#000 !important;}
+.login-register ul.nav.nav-tabs li.active a{color:#000 !important;padding-left: 0;padding-bottom:0;}
 .login-register ul.nav.nav-tabs li.active {
 padding-left: 70px;
 border-top: 5px solid #60c5ac;
 border-left: 0px; border-right: 0px;
 border-bottom: 0px;
+padding-bottom: 0;
+
+margin-top: 20px;
+}
+.login-register p {
+    color: #000;
 }
 .form-group.or.text-center p {
 color: #000;

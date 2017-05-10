@@ -463,8 +463,9 @@ if (isset($total_data) && !empty($total_data)) {
 				<ul class="nav nav-tabs">
                     <li class="active"><a href="#login_tab1" data-toggle="tab" class="first_active">Sign In</a></li>
 				</ul>
-				<p>Please enter the registration details in order to proceed.</p>
+				
 				<div id="myTabContent" class="tab-content">
+				<p>Please enter the registration details in order to proceed.</p>
 					<div class="tab-pane active in" id="login_tab1">
 						<form class=""  method="POST" id="loginpopup">   
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
