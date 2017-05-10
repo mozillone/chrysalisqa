@@ -655,8 +655,6 @@ border-top: 5px solid #60c5ac;
 border-left: 0px; border-right: 0px;
 border-bottom: 0px;
 padding-bottom: 0;
-
-margin-top: 20px;
 }
 .login-register p {
     color: #000;
@@ -1512,7 +1510,7 @@ span.acnhr-link {
 
 .option-sec .form-rms-btn a {
     margin-left: 0;
-    padding: 6px 85px;
+    padding: 12px 85px;
     text-decoration: none;
 }
 .option-sec h3 {
@@ -1549,7 +1547,7 @@ span.acnhr-link {
 }
 .average-payout-sec-next.form-rms-btn a {
     margin-left: 0;
-    padding: 6px 85px;
+    padding: 12px 85px;
     text-decoration: none;
 }
 .costumes-carousel .carousel-inner {
@@ -1654,7 +1652,7 @@ span.acnhr-link {
     float: none;
 }
 .request-address-sec .form-rms-btn a {
-    padding: 6px 85px;
+    padding: 12px 85px;
     text-decoration: none;
     margin-left: 14%;
 }
@@ -1687,12 +1685,22 @@ span.acnhr-link {
     margin-bottom: 30px;
 }
 .request-success a {
-    background: #60c3ab;
-    padding: 6px 35px;
-    color: white;
-    text-decoration: none;
-    border-radius: 2px;
     cursor: pointer;
+    height: 40px;
+    line-height: 38px;
+    text-align: right;
+    margin-left: 20px;
+    font-family: Proxima-Nova-Extrabold;
+    font-size: 16px;
+    background: #60c4ac;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    width: 200px;
+    text-align: center;
+    padding: 14px 35px;
 }
 #send_my_bag_div {
     margin-bottom: 60px;
