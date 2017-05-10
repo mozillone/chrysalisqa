@@ -1978,12 +1978,51 @@ input.addtocart-rm {
     justify-content: center;
     align-items: center;
 }
+.carousel-bg-style.bxslider-strt #bx-pager a {
+	cursor: pointer;
+    min-height: 150px;
+    overflow: hidden;
+    background: #f1f1f1;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 35px;
+}
+.carousel-bg-style.bxslider-strt #bx-pager a img {
+    max-height: 150px;
+}
 #single_signup_popup .modal-dialog {
     width: 500px;
 }
 #single_signup_popup div#myTabContent {
     padding: 30px 70px;
 }
+.average-payout-sec .tip-sec {
+	position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.average-payout-sec .tip-sec p {
+	text-align: center;
+    position: relative;
+    right: -152px;
+    color: #EE4266;
+}
+.average-payout-sec .tip-sec a{
+	position: relative;
+    left: 91%;
+    top: -38px;
+    color: #EE4266;
+    border-bottom: 1px solid #EE4266;
+	cursor: pointer;
+}
+.average-payout-sec .tip-sec img {
+	position: relative;
+    right: -58px;
+    bottom: -40px;
+}
+
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){
@@ -2095,6 +2134,9 @@ input.addtocart-rm {
 }
 
 @media screen and (max-width:1024px){
+	.average-payout-sec .tip-sec {
+			right: -9% !important;
+	}
 	.responsive-menu .navbar-toggle {
     padding: 5px 6px!important;
 }
@@ -2869,6 +2911,9 @@ div#main-banner img{min-height:200px;width:100%;}
         margin-right: -15px;
         margin-left: -15px;
     }
+	.average-payout-sec .tip-sec{
+			right: -19%;
+	}
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.request-address-sec .form-rms-btn a {
