@@ -2041,6 +2041,8 @@ input.addtocart-rm {
 .social-media-sec i.fa.fa-heart-o {
 	float: right;
 	margin-left: 10px;
+	color: #ee4266;
+	font-weight: 700;
 }
 .social-media-sec div i {
     margin-right: 20px;
