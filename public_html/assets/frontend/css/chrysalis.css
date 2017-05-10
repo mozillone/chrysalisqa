@@ -1904,7 +1904,7 @@ button.btn.btn-primary.item-update {
 a {
 	color: black;
 }
-a:hover {
+a:hover, a:active {
 	text-decoration: none !important;
 	color: black;
 	cursor: pointer;
@@ -2044,6 +2044,9 @@ input.addtocart-rm {
 }
 .social-media-sec div i {
     margin-right: 20px;
+    color: #60c4ab;
+}
+.social-media-sec .active i.fa.fa-heart {
     color: #60c4ab;
 }
 /********************************************************************Media start here********************************************************************/
