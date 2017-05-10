@@ -2135,7 +2135,7 @@ input.addtocart-rm {
 
 @media screen and (max-width:1024px){
 	.average-payout-sec .tip-sec {
-			right: -9%;
+			right: -9% !important;
 	}
 	.responsive-menu .navbar-toggle {
     padding: 5px 6px!important;
