@@ -41,13 +41,13 @@
 <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_total_form" id="costume_total_form" method="post">
 <!--Create costume image code starts here-->
 	<div class="upload-photo-blogs" id="upload_div">
-	<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+	<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any accessories!</p>
 			<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 1</h2>
 		<h2 class="prog-head ">Upload Photos</h2>
 		
 		<!--- mobile heaindgs section end here -->
 
-		<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+		<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any accessories!</p>
 		
 		<!--- mobile heaindgs section end here -->
 		<div class="threeblogs">

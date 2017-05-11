@@ -145,17 +145,10 @@
 						<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 							<i class="fa fa-search"></i>
 						</button>
-						<?php 
-
-									if (isset(Auth::user()->id) && !empty(Auth::user()->id)) { ?>
-						<a href="{{URL::to('costume/sell-a-costume')}}"type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+						
+						<a href="{{URL::to('costume/sell-a-costume')}}" type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 							<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
 						</a>
-						<?php }  else{ ?>
-						<a href="{{URL::to('login')}}"type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
-							<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
-						</a>
-						<?php }?>
 					</div>
 					<div class="mobile-rm">	
 						<ul class="nav nav-tabs mobile-tabs @if(!Auth::check()) is_login @endif">
