@@ -55,15 +55,16 @@ class RequestabagController extends Controller
 		$count_generated_lable =  count($generated_lables);
 		$this->data['generated_lables_html'] = '0';
 		if ($count_generated_lable != 0) {
-			$html = '<p>';
+		
+			$html = '<div>';
 			foreach ($generated_lables as $label_html) {
 				if ($label_html->type == 'pick') {
-					$html .= 'Empty Bag Tracking Number:UX'.$label_html->shipping_no.' via USPS generated '.$label_html->created_at.' </br>';
+					$html .= '<p>Empty Bag Tracking Number: <a>UX'.$label_html->shipping_no.'</a> <i> via USPS generated '.$label_html->created_at.' </i> </p> ';
 				}else if($label_html->type == 'drop'){
-					$html .= 'Customer Tracking Number:UX'.$label_html->shipping_no.' via USPS generated '.$label_html->created_at.'';
+					$html .= '<p>Customer Tracking Number: <a>UX'.$label_html->shipping_no.'</a> <i> via USPS generated '.$label_html->created_at.'</i> </p>';
 				}				
 			}
-			$html .= '</p>';
+			$html .= '</div>';
 		$this->data['generated_lables_html'] = $html;
 		}
 		$payout_details = DB::table('request_credits')->where('request_id',$id)->where('type','payout')->first();
@@ -110,7 +111,10 @@ class RequestabagController extends Controller
 		$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
 		$status_update = DB::table('request_bags')->where('id',$request->id)->update(['status'=>'shipped']);
 		//echo "<pre>";print_r($shpippin_drop_insert);die;
-		$html = '<p>Empty Bag Tracking Number:UX'.$random_pick.' via USPS generated '.date('y-m-d H:i:s').' </br>Customer Tracking Number:UX'.$random_drop.' via USPS generated '.date('y-m-d H:i:s').'</p>';
+		
+		$html = '<div>		<p>Empty Bag Tracking Number: <a>UX'.$random_pick.'</a> <i>via USPS generated '.date('y-m-d H:i:s').'</i></p>
+							<p>Empty Bag Tracking Number: <a>UX'.$random_drop.'</a> <i>via USPS generated '.date('y-m-d H:i:s').'</i></p>
+						</div>';
 		$this->data['html'] = $html;
 		$this->data['status'] = "Shipped";
 		return $this->data;
