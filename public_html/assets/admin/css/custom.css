@@ -625,16 +625,21 @@ body .loading img{width:10%;}
 	text-align: center;
 }
 .sending-bag-sec p {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
     margin-top: 10px;
-	line-height: 30px;
+	font-weight: 700;
 }
-.process-bag-steps {
-	
+.sending-bag-sec p a {
+    display: inline-block;
+    margin-left: 30px;
+    margin-right: 30px;
+	font-weight: 400;
+	text-decoration: underline;
 }
 .row.process-bag-steps {
 	margin: 0;
 	padding-bottom: 60px;
+	text-align: left;
 }
 .process-bag-steps h4{
 	font-size:16px;

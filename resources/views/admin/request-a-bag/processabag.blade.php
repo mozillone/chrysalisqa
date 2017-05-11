@@ -145,6 +145,7 @@ print_r($payout_html);die;*/
 						<div class="">
 							   <a href="" id="generate_lables" class="btn btn-primary submit">Generate Bag Labels</a>
 						</div>
+						
 					</div>
 				</div>
 				<div class="box-body" id="tracking_ids" style="display: none;">
