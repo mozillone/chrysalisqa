@@ -143,7 +143,7 @@ function searching(search=null){
 					var list=$('#itemContainer').html().length;
 					$("ul.holder").empty();
 					$('#counting').html('')
-				    res='<div class="col-sm-12 col-md-6"><div class="caption">Sorry, we could not find any coustumes</div></div>';
+				    res='<div class="col-sm-12 col-md-6"><div class="caption">Sorry, we could not find any costumes</div></div>';
 				    $("#itemContainer").html(res);
 				 }
 			},
