@@ -49,17 +49,17 @@
 					@foreach($charities_list as $charities)
 					<li>
 						@if(file_exists(public_path('/charities_images/'.$charities->image)))
-							<img src="/charities_images/{{$charities->image}}" alt="cst3" /><input type="radio" name="charity" id="charity" value="{{$charities->id}}"/>{{$charities->name}}</li>
+							<img src="/charities_images/{{$charities->image}}" alt="cst3" /><span class="crt-name">{{$charities->name}}</span><input type="radio" name="charity" id="charity" value="{{$charities->id}}"/></li>
 						@else
-							<img src="/charities_images/default-placeholder.jpg" alt="cst3" />><input type="radio" name="charity" id="charity"/>{{$charities->name}}</li>
+							<img src="/charities_images/default-placeholder.jpg" alt="cst3" />{{$charities->name}}<input type="radio" name="charity" id="charity"/></li>
 						@endif
 					@endforeach
 					</ul>
-					<p class="cst2-rms-chck"><input type="checkbox"  id="suggest_charity"> I would like to suggest another charity organization</p>
+					<p class="cst2-rms-chck"><input type="checkbox"  id="suggest_charity" checked="checked"> I would like to suggest another charity organization</p>
 
 
-					<div class="thankyou-rms hide">
-					<p class="thankyou-rms-head thankyou-textR"><span>Please Specify:</span>
+					<div class="thankyou-rms">
+					<p class="thankyou-rms-head thankyou-text"><span>Please Specify:</span>
 					<input type="text" placeholder="Organization Name" name="suggest_charity" / ></p>
 					</div>
 

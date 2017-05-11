@@ -317,7 +317,16 @@ if (isset($total_data) && !empty($total_data)) {
 							</span>
 							</div>
                     </div>
+					
                 </div>
+				<div class="tip-sec">
+						<p><span class="up_tip">Tip</span>
+							If your costume is just too <br>
+								awesome, we suggest you
+						</p>
+						<a>Upload it Yourself!</a>
+						<img  src="{{URL::asset('assets/frontend/img/Tip-arrow_right.png')}}">
+					</div>
             </div>
         </div>
 	</div>

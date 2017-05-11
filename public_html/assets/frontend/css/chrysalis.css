@@ -655,8 +655,6 @@ border-top: 5px solid #60c5ac;
 border-left: 0px; border-right: 0px;
 border-bottom: 0px;
 padding-bottom: 0;
-
-margin-top: 20px;
 }
 .login-register p {
     color: #000;
@@ -1001,6 +999,7 @@ p.right_heading span.my_msg { font-weight: 800; }
 .prog-head{width:100%; float:left; font-size: 24px; 	font-family: Proxima-Nova-Bold; border-bottom: 2px solid #e1e1e1; padding-bottom: 10px; margin: 0px; color: #323031;margin-bottom: 20px;}
 a#pricing_next {    float: right;}
 .form-rms{width: 100%; float:left; margin: 10px 0; padding-left: 33px}
+.form-rms.column-align {padding-left: 27px;}
 .form-rms-que{width: 100%; float:left; font-size: 18px; color: #323031; font-family: Proxima-Nova-Extrabold; margin: 15px 0; text-indent: -32px;}
 .form-rms-input input{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
 .form-rms-input select{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
@@ -1512,7 +1511,7 @@ span.acnhr-link {
 
 .option-sec .form-rms-btn a {
     margin-left: 0;
-    padding: 6px 85px;
+    padding: 12px 85px;
     text-decoration: none;
 }
 .option-sec h3 {
@@ -1549,7 +1548,7 @@ span.acnhr-link {
 }
 .average-payout-sec-next.form-rms-btn a {
     margin-left: 0;
-    padding: 6px 85px;
+    padding: 12px 85px;
     text-decoration: none;
 }
 .costumes-carousel .carousel-inner {
@@ -1654,7 +1653,7 @@ span.acnhr-link {
     float: none;
 }
 .request-address-sec .form-rms-btn a {
-    padding: 6px 85px;
+    padding: 12px 85px;
     text-decoration: none;
     margin-left: 14%;
 }
@@ -1687,12 +1686,22 @@ span.acnhr-link {
     margin-bottom: 30px;
 }
 .request-success a {
-    background: #60c3ab;
-    padding: 6px 35px;
-    color: white;
-    text-decoration: none;
-    border-radius: 2px;
     cursor: pointer;
+    height: 40px;
+    line-height: 38px;
+    text-align: right;
+    margin-left: 20px;
+    font-family: Proxima-Nova-Extrabold;
+    font-size: 16px;
+    background: #60c4ac;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    width: 200px;
+    text-align: center;
+    padding: 14px 35px;
 }
 #send_my_bag_div {
     margin-bottom: 60px;
@@ -1895,9 +1904,10 @@ button.btn.btn-primary.item-update {
 a {
 	color: black;
 }
-a:hover {
+a:hover, a:active {
 	text-decoration: none !important;
 	color: black;
+	cursor: pointer;
 }
 .carousel-cart-img  .price-tag {
 	position: absolute;
@@ -1970,11 +1980,76 @@ input.addtocart-rm {
     justify-content: center;
     align-items: center;
 }
+.carousel-bg-style.bxslider-strt #bx-pager a {
+	cursor: pointer;
+    min-height: 150px;
+    overflow: hidden;
+    background: #f1f1f1;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 35px;
+}
+.carousel-bg-style.bxslider-strt #bx-pager a img {
+    max-height: 150px;
+}
 #single_signup_popup .modal-dialog {
     width: 500px;
 }
 #single_signup_popup div#myTabContent {
     padding: 30px 70px;
+}
+.average-payout-sec .tip-sec {
+	position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.average-payout-sec .tip-sec p {
+	text-align: center;
+    position: relative;
+    right: -152px;
+    color: #EE4266;
+}
+.average-payout-sec .tip-sec a{
+	position: relative;
+    left: 91%;
+    top: -38px;
+    color: #EE4266;
+    border-bottom: 1px solid #EE4266;
+	cursor: pointer;
+}
+.average-payout-sec .tip-sec img {
+	position: relative;
+    right: -58px;
+    bottom: -40px;
+}
+.subscribe-btn-align .col-md-8.col-sm-12.col-xs-12 {
+    padding-right: 0;
+}
+.breadcrumb {
+    padding: 8px 15px;
+    list-style: none;
+    border-radius: 4px;
+    margin-top: 15px;
+	margin-bottom:0;
+	background: white;
+}
+.social-media-sec div {
+    float: right;
+}
+.social-media-sec i.fa.fa-heart-o {
+	float: right;
+	margin-left: 10px;
+	color: #ee4266;
+	font-weight: 700;
+}
+.social-media-sec div i {
+    margin-right: 20px;
+    color: #60c4ab;
+}
+.social-media-sec .active i.fa.fa-heart {
+    color: #60c4ab;
 }
 /********************************************************************Media start here********************************************************************/
 
@@ -2087,6 +2162,9 @@ input.addtocart-rm {
 }
 
 @media screen and (max-width:1024px){
+	.average-payout-sec .tip-sec {
+			right: -9% !important;
+	}
 	.responsive-menu .navbar-toggle {
     padding: 5px 6px!important;
 }
@@ -2861,6 +2939,9 @@ div#main-banner img{min-height:200px;width:100%;}
         margin-right: -15px;
         margin-left: -15px;
     }
+	.average-payout-sec .tip-sec{
+			right: -19%;
+	}
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.request-address-sec .form-rms-btn a {
