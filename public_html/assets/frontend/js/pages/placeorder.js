@@ -1,14 +1,15 @@
 $(document).ready(function() {
   
 	
-	var shipping_address=$("#shipping_address").validate();
-	var billing_address=$("#billing_address").validate();
+	var shipping_address=$("#shipping_address").validate({ignore: ":hidden" });
+	var billing_address=$("#billing_address").validate({ignore: ":hidden" });
 	var cc_details=$("#cc_form").validate();
 	$("#shipping_firstname").rules("add", {required:true,maxlength: 100});
 	$("#shipping_lastname").rules("add", {maxlength: 100});
 	$("#shipping_address_1").rules("add", {required:true,maxlength: 100});
 	$("#shipping_city").rules("add", {required:true});
 	$("#shipping_postcode").rules("add", {required:true,number:true});
+	$("#shipping_state_dropdown").rules("add", {required:true,maxlength:100});
 	$("#shipping_state").rules("add", {required:true,maxlength:100});
 	$("#shipping_country").rules("add", {required:true});
 
@@ -17,11 +18,13 @@ $(document).ready(function() {
 	$("#billing_address_1").rules("add", {required:true,maxlength: 100});
 	$("#billing_city").rules("add", {required:true});
 	$("#billing_postcode").rules("add", {required:true,number:true});
+	$("#billing_state_dropdown").rules("add", {required:true,maxlength:100});
 	$("#billing_state").rules("add", {required:true,maxlength:100});
 	$("#billing_country").rules("add", {required:true});
 
 	$("#cardholder_name").rules("add", {required:true,maxlength: 50});
 	$("#cc_number").rules("add", {required:true,number:true,cc_chk:true});
+	$("#card_type").rules("add", {required:true});
 	$("#exp_month").rules("add", {required:true});
 	$("#exp_year").rules("add", {required:true});
 	$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
@@ -29,7 +32,45 @@ $(document).ready(function() {
 	    
     		
 	   
-    jQuery.validator.addMethod("cc_chk", function(value, element) 
+  //   jQuery.validator.addMethod("cc_chk", function(value, element) 
+		// {
+
+		//  	result = $('#cc_number').validateCreditCard();
+
+		// 	 if(result.valid  == true)
+		// 	 {
+					
+		// 			var name 		= result.card_type.name
+
+		// 			if(name == 'amex')
+		// 			{
+		// 				name = 'American Express';	
+		// 			}
+		// 			else if(name == 'visa')
+		// 			{
+		// 				name = 'Visa';	
+		// 			}
+		// 			else if(name == 'mastercard')
+		// 			{
+		// 				name = 'MasterCard';	
+		// 			}		
+					
+				 
+		// 	   return true;
+		// 	 }
+		// 	 else
+		// 	{
+		// 		 $.validator.messages.cc_chk =  "Please enter valid credit card.";
+
+		// 		return false;
+		// 	 }
+
+			 
+			 
+
+
+		// }, 	 $.validator.messages.cc_chk);
+		jQuery.validator.addMethod("cc_chk", function(value, element) 
 		{
 
 		 	result = $('#cc_number').validateCreditCard();
@@ -52,6 +93,25 @@ $(document).ready(function() {
 						name = 'MasterCard';	
 					}		
 					
+					var card_type		= $('#card_type').val();
+
+					if(card_type != '')
+					{	
+						if(card_type == name)
+						{
+							return true;
+						}
+						else 
+						{
+							
+
+							 $.validator.messages.cc_chk =  "Please check card type / credit card number ,entered "+name+' card selected card type '+card_type;
+						
+							return false;
+						}		
+
+
+					}
 				 
 			   return true;
 			 }
@@ -286,7 +346,14 @@ $(document).ready(function() {
 			success: function(response){
 					$('input[name="card_id"]').val(response);
 					$('.payment-empty,.error').remove();
-					$('.card_exp').html('Ending in '+response[0].exp_year);
+					if(response[0].card_type=="Visa"){
+						var img='<img src="/img/visa.png">';
+					}else if(response[0].card_type=="American Express"){
+					 var img='<img src="/img/americanexpress.png">';
+					}else if(response[0].card_type=="MasterCard"){
+						var img='<img src="/img/mastercard.png">';
+					} 
+					$('.card_exp').html(img+' Ending in '+response[0].exp_year);
 			}
 			});
     }
@@ -315,5 +382,15 @@ $(document).ready(function() {
                       }); 
          
     });
+    $(document).on('change','#shipping_country,#billing_country',function(){
+    		if($(this).val()!="United States"){
+    			$('.state_dropdown').addClass('hide');
+    			$('.normal-states').removeClass('hide');
+    		}else{
+    			$('.state_dropdown').removeClass('hide');
+    			$('.normal-states').addClass('hide');
+    		}
+    });
+
 
 })

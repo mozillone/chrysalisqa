@@ -119,11 +119,11 @@
 												<div class="col-md-5 col-sm-4 col-xs-12">
 												@if(!empty($data['cart_cc_details']))
 												<input type="hidden" name="card_id" value="{{$data['cart_cc_details'][0]->id}}"/> 
-													<p class="card_exp">Ending in {{$data['cart_cc_details'][0]->exp_year}}</p>
+													<p class="card_exp">@if($data['cart_cc_details'][0]->card_type=="Visa") <img src="/img/visa.png">  @elseif($data['cart_cc_details'][0]->card_type=="American Express") <img src="/img/americanexpress.png"> @elseif($data['cart_cc_details'][0]->card_type=="MasterCard") <img src="/img/mastercard.png"> @endif Ending in {{$data['cart_cc_details'][0]->exp_year}}</p>
 												@else
 													@if(!empty($data['cc_details']))
 													<input type="hidden" name="card_id" value="{{$data['cc_details'][0]->id}}"/>
-														<p class="card_exp">Ending in {{$data['cc_details'][0]->exp_year}}</p>
+														<p class="card_exp"> @if($data['cc_details'][0]->card_type=="Visa") <img src="/img/visa.png">  @elseif($data['cc_details'][0]->card_type=="American Express") <img src="/img/americanexpress.png"> @elseif($data['cc_details'][0]->card_type=="MasterCard") <img src="/img/mastercard.png"> @endif  Ending in {{$data['cc_details'][0]->exp_year}}</p>
 													@else
 														<input type="hidden"  name="card_id">
 														<p class="card_exp"></p>
@@ -258,9 +258,16 @@
 									</div>
 									<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="shipping_state" placeholder="State *" name="state">
+												<select class="form-control state_dropdown" name="state" id="shipping_state_dropdown">
+													<option value="" selected>State</option>
+													@foreach($states as $st)
+													<option value="{{$st->name}}">{{$st->name}}</option>
+													@endforeach
+
+												</select>
+												<input type="text" class="form-control normal-states hide" id="shipping_state" placeholder="State *" name="state">
 											</div>
-										</div>
+									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<select class="form-control" name="country" id="shipping_country">
@@ -350,9 +357,16 @@
 												<input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode">
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_state" placeholder="State *" name="state">
+												<select class="form-control state_dropdown" name="state" id="billing_state_dropdown">
+													<option value="" selected>State</option>
+													@foreach($states as $st)
+													<option value="{{$st->name}}">{{$st->name}}</option>
+													@endforeach
+
+												</select>
+												<input type="text" class="form-control normal-states hide" id="billing_state" placeholder="State *" name="state">
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -421,10 +435,22 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
+				                                <select name="card_type" id="card_type"  class="form-control">
+				                                    <option value="">Choose Card Type</option>
+				                                    <option value="Visa">Visa</option>
+				                                    <option value="American Express">American Express</option>
+				                                    <option value="MasterCard">Master Card</option>
+				                                </select>
+				                    		<div class="col-sm-3" id="creditcardimage"></div>
+				                        </div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
 											<input type="text" class="form-control" id="cc_number" placeholder="Card Number *" name="cc_number">
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="col-md-6">
+										<div class="form-group">
 										<div class="col-md-6 field-align-xs">
 											<select name="exp_month" class="form-control" id="exp_month">
 												<option value="">MM</option>
@@ -450,6 +476,7 @@
 												 @endfor
 											 </select>
 										</div>
+									</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">

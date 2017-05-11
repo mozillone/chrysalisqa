@@ -82,14 +82,14 @@ class Order extends Authenticatable
        return $charities_list;
     }
     protected function orderCharityFund($req){
-      if(isset($req['suggest_charity']) && !empty($req['charity'])){
+     if(isset($req['suggest_charity']) && !isset($req['charity'])){
          $result=array('name'=>$req['suggest_charity'],
                         'suggested_by'=>Auth::user()->id,
                         'created_at'=>date('Y-m-d h:i:s')
                         );
          $charity_id=Site_model::insert_get_id('charities',$result);
-      }{
-        $charity_id=$req['charity'];
+      }else{
+       $charity_id=$req['charity'];
       }
       $result=array('order_id'=>$req['order_id'],
                     'charity_id'=>$charity_id,
