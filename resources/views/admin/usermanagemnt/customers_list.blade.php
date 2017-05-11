@@ -16,6 +16,7 @@ display: none;
 display: none;
 }
 </style>
+
 @stop
 
 {{-- Page content --}}
