@@ -212,10 +212,11 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 .btn-success {
-    background-color: #00a65a;
+	background-color: #00a65a;
     border-color: #008d4c;
     border-radius: 2px;
-    padding: 3px 15px;
+    padding: 5px 15px;
+    font-weight: 700;
 }
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
     background-color: #222d32;
@@ -662,8 +663,8 @@ body .loading img{width:10%;}
 	.row_pregt .radio {
 		width: 15%;
 }
-	.radio-btn-align  .row_pregt .radio {
-		width: 30%;
+	.row_pregt.radio-btn-align .radio {
+    width: 30%;
 }
 }
 
