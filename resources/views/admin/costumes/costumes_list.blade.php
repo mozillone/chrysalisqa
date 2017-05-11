@@ -95,6 +95,8 @@
         </div>
     </div>
 </section>
+
+
 <script type="text/javascript">
    function changeCostumeStatus(id, status) {
         $.ajax({
