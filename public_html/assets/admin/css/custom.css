@@ -662,8 +662,8 @@ body .loading img{width:10%;}
 	.row_pregt .radio {
 		width: 15%;
 }
-	.radio-btn-align  .row_pregt .radio {
-		width: 30%;
+	.row_pregt.radio-btn-align .radio {
+    width: 30%;
 }
 }
 
