@@ -551,6 +551,10 @@ $(document).ready(function()
 <script type="text/javascript">
 $(document).ready(function()
 {
+  $(document).on('click','.nxt',function() {
+  $("html, body").animate({ scrollTop: 0 }, "slow");
+  return false;
+});
 	$('#choose_an_option_for_bag_div').css('display','block');
 	$('#average_payouts_div').css('display','none');
 	$('#send_my_bag_div').css('display','none');
