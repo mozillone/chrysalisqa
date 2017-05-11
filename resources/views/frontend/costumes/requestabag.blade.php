@@ -666,7 +666,7 @@ $(document).ready(function()
 		}
 		if (str == true) {
 			$('#send_my_bag_next').html("Submitting");
-			$('#send_my_bag_next').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
+			$('.request_bag_page').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
 			$.ajax({
 			 url: "{{URL::to('costume/postrequestabag')}}",
 			 type: "POST",
