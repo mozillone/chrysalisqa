@@ -1513,9 +1513,11 @@ span.acnhr-link {
     padding: 12px 85px;
     text-decoration: none;
 }
-.form-rms-btn a:hover, .form-rms-btn a:focus {
-	color: white;
+.form-rms-btn a:hover , .form-rms-btn a:focus,
+.request-success a:hover, .request-success a:focus {
+    color: white;
 }
+
 .option-sec h3 {
     font-family: Proxima-Nova-Extrabold;
     color: #000;
