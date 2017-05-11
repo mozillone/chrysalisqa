@@ -324,7 +324,7 @@ if (isset($total_data) && !empty($total_data)) {
 							If your costume is just too <br>
 								awesome, we suggest you
 						</p>
-						<a>Upload it Yourself!</a>
+						<a href="{{URL::to('costume/createtwo')}}">Upload it Yourself!</a>
 						<img  src="{{URL::asset('assets/frontend/img/Tip-arrow_right.png')}}">
 					</div>
             </div>
