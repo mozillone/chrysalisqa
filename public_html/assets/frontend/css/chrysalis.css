@@ -171,7 +171,6 @@ p.form-rms-que i {    color: #323031;}
     margin-top: 0;
 }
 span.shi_date_right.text-right.right {
-    margin-top: -20px;
     float: right;
 }
 .threeblogs i.fa.fa-times-circle {
@@ -1514,6 +1513,11 @@ span.acnhr-link {
     padding: 12px 85px;
     text-decoration: none;
 }
+.form-rms-btn a:hover , .form-rms-btn a:focus,
+.request-success a:hover, .request-success a:focus {
+    color: white;
+}
+
 .option-sec h3 {
     font-family: Proxima-Nova-Extrabold;
     color: #000;
@@ -2049,7 +2053,10 @@ input.addtocart-rm {
     color: #60c4ab;
 }
 .social-media-sec .active i.fa.fa-heart {
-    color: #60c4ab;
+	color: #60c4ab;
+    float: right;
+    margin-left: 10px;
+    font-weight: 700;
 }
 /********************************************************************Media start here********************************************************************/
 
