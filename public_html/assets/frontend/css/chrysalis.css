@@ -377,7 +377,7 @@ font-family: Proxima-Nova-Semibold;
 background: #fff !important;
 box-shadow: 1px 1px 2px #ccc;}
 	.rng .ui-slider-horizontal .ui-slider-range{height: 8px;}
-.list-banner, .list-banner img{width: 100%; float:left;}
+.list-banner, .list-banner img{width: 100%; float:left; margin-top: 15px;}
 .list-box-rm{width:100%; float:left; border: 1px solid #e1e1e1; padding: 20px; font-family: Proxima-Nova-A-Regular; margin: 15px 0 0;}
 .list-box-rma{border-top: 2px solid #11a89e;}
 .list-box-head{width:100%; float:left; font-size: 16px; font-family: Proxima-Nova-Extrabold; border-bottom: 1px solid #e1e1e1; padding-bottom: 15px; margin: 0px; color: #323031;}
@@ -861,7 +861,7 @@ height: auto;
 p.price_right span a {    cursor: pointer;}
 p.f_quality {    background: #ffd23f;    font-size: 16px;    padding: 5px 10px;    border-radius: 5px;    font-family: Proxima-Nova-Semibold !important;    display: inline-block;}
 .cart_page_vew h1{width:100%;float:left;font-size:24px;font-family:Proxima-Nova-Extrabold;border-bottom:1px solid #e1e1e1;padding-bottom:15px;margin:0px;color:#000000;}
-.shipping_date{
+.shipping_date.cart-price{
 	display: flex;
 	align-items: center;
 }
