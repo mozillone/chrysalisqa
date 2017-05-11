@@ -657,6 +657,9 @@ body .loading img{width:10%;}
     background-image: none;
     border: 1px solid #ccc;
 }
+.download-btn {
+	padding: 3px 25px;
+}
 
 
 
