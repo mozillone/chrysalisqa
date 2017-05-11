@@ -28,6 +28,7 @@ class Creditcard extends Authenticatable
         $cc_details=array('user_id'=>$user_id,
                        'cardholder_name'=>$req['cardholder_name'],
                        'credit_card_mask'=> $req['cc_number'],
+                       'card_type'=> $req['card_type'],
                        'exp_month'=> $req['exp_month'],
                        'exp_year'=> $req['exp_year'],
                        'cvn_pin'=> $req['cvn_pin'],

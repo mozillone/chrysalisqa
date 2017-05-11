@@ -1,4 +1,4 @@
-<section class="newsletter-container">
+<section class="newsletter-container subscribe-btn-align">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-sm-12 col-xs-12"><h3>SIGN UP FOR OUR NEWSLETTER</h3>
@@ -90,7 +90,7 @@
                     <li class="hide"><a href="#forget_password1" data-toggle="tab">Reset Password</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
-					<div class="tab-pane active in" id="login_tab1">
+					<div class="tab-pane active  in" id="login_tab1">
 						<form class="" action="{{route('login.post')}}" method="POST" id="loginpopup">   
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<input type="hidden" name="costume_id" value="@if(!empty($data[0]->costume_id)){{$data[0]->costume_id}}@endif">

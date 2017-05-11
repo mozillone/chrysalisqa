@@ -108,7 +108,7 @@ class CostumesController extends Controller {
 				$data['random_costumes']=Costumes::getRandomCategoyCostumesList($data[0]->category_id);
 				$data['images']=Costumes::getCostumeImages($costume_id);
 				$data['seller_info']=Costumes::costumeSellerInfo($data[0]->created_by);
-				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1);
+				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2);
 			}else{
 		     	return view('frontend.404');
 			}

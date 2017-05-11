@@ -15,6 +15,11 @@
 <section class="product_Details_page">
 	<div class="container">
 <div class="row">
+	<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home &nbsp;&nbsp;></a>
+  <a class="breadcrumb-item" href="/category/{{$parent_cat_name}}/{{$sub_cat_name}}">{{$data[0]->cat_name}} > &nbsp;</a>
+  <span class="breadcrumb-item active">{{$data[0]->name}}</span>
+</nav>
 <div class="col-md-5 carousel-bg-style bxslider-strt">
 
 <ul class="bxslider">
@@ -46,14 +51,24 @@
 	{{ Session::get('success') }}
 </div>
 @endif
-<h1>{{$data[0]->name}}
+<h1 class="social-media-sec">
+
+
+{{$data[0]->name}}
 @if(Auth::check())
 	<a href="#" onclick="return false;" class="fav_costume" data-costume-id='{{$data[0]->costume_id}}'>
+
 @else
 	<a data-toggle="modal" data-target="#login_popup_fav">
 @endif
+
 <span @if($data[0]->is_fav)  class="active" @endif>@if($data[0]->is_fav)<i aria-hidden=true class="fa fa-heart"></i> @else <i aria-hidden=true class="fa fa-heart-o"></i>@endif</span></a>
-	</h1>
+<div>
+	<a href="javascript:void(0)" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title={{$data[0]->name}}&&u={{Request::url()}}')"><i class="fa fa-facebook" aria-hidden="true"></i></a>  
+	<a href="javascript:void(0)" onclick="genericSocialShare('http://twitter.com/share?&amp;url={{Request::url()}}')"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+	<a  href="javascript:void(0)" onclick="genericSocialShare('https://plus.google.com/share?url={{Request::url()}}')"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+</div>
+	</h1> 
 
 <!---Price section start -->
 	<div class="row">
@@ -242,4 +257,10 @@
 <script src="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
 <script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
+<script type="text/javascript" async >
+ function genericSocialShare(url){
+	      window.open(url,'sharer','toolbar=0,status=0,width=648,height=395');
+        return true;
+    }
+</script>
 @stop

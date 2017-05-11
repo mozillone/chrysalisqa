@@ -190,7 +190,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	   /*****************************Orders starts here ***********************/
 
 	    /*****************************Orders ends here ***********************/
-	     Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
+	    Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
 	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
 	   
 	   /*****************************Request a bag starts here ***********************/
