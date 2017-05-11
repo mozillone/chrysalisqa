@@ -34,7 +34,7 @@
 						
 						<img class="img-responsive" src="{{asset('/assets/frontend/img/brand.png')}}">
 						<h5>OUR MISSION <i class="fa fa-plus pull-right hidden-lg  hidden-md"></i></h5>
-						<p style="display: none;">Revolutionize the costume industry, by giving people access to more affordable, environmentally friendly costumes. More on our mission here.</p>
+						<p style="display: none;">Revolutionize the costume industry, by giving people access to more affordable, environmentally friendly costumes. More on our mission <a style="border-bottom: 1px solid #ccc">here</a>.</p>
 						
 					</div>
 					</div>
