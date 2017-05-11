@@ -11,6 +11,8 @@ View User |@parent
        
 @stop
 
+
+
 {{-- Page content --}}
 @section('content')
 <style>

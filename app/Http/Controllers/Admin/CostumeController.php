@@ -813,4 +813,6 @@ class CostumeController extends Controller
         return redirect('/customes-list')->with('success', 'Costume deleted Successfully.');
 
     }
+
+    
 }
