@@ -129,6 +129,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	    /****************User Management End Here***************************/
 
 		/****************Costumes Management Code Starts Here*********************/
+		
 		Route::any('/costumes/create', ['as' => 'costumes-create','uses'=>'CostumeController@createCostume']);
 		Route::post('/upload', ['as' => 'image.store' , 'uses' => 'CostumeController@post_upload']);
 		Route::get('costumes-list', ['as' => 'costumes-list','uses'=>'CostumeController@costumesList']);

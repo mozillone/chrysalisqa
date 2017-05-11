@@ -474,7 +474,7 @@ if (isset($total_data) && !empty($total_data)) {
 				</ul>
 				
 				<div id="myTabContent" class="tab-content">
-				<p>Please enter the registration details in order to proceed.</p>
+				<p>Email address is already registered sign in using your password</p>
 					<div class="tab-pane active in" id="login_tab1">
 						<form class=""  method="POST" id="loginpopup">   
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
