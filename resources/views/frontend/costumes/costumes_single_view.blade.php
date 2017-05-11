@@ -15,7 +15,7 @@
 <section class="product_Details_page">
 	<div class="container">
 <div class="row">
-<div class="col-md-5 bxslider-strt">
+<div class="col-md-5 carousel-bg-style bxslider-strt">
 
 <ul class="bxslider">
 @foreach($data['images'] as $images)
@@ -50,7 +50,7 @@
 @if(Auth::check())
 	<a href="#" onclick="return false;" class="fav_costume" data-costume-id='{{$data[0]->costume_id}}'>
 @else
-	<a data-toggle="modal" data-target="#login_popup">
+	<a data-toggle="modal" data-target="#login_popup_fav">
 @endif
 <span @if($data[0]->is_fav)  class="active" @endif>@if($data[0]->is_fav)<i aria-hidden=true class="fa fa-heart"></i> @else <i aria-hidden=true class="fa fa-heart-o"></i>@endif</span></a>
 	</h1>
@@ -74,7 +74,7 @@
 	</div>
 
 	<div class="col-xs-6 col-sm-4 viewBtn_rm">
-	@if(helper::verifyCostumeQuantity($data[0]->costume_id,$data[0]->quantity+1))
+	@if(helper::verifyCostumeQuantity($data[0]->costume_id,$data[0]->quantity+1) && $data[0]->quantity>0)
 		<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
 		@if(!Auth::check())
 		<button type="button" class="buynow-rm"><a data-toggle="modal" data-target="#login_popup" class="buynow-rm">Buy it Now!</a> </button>
@@ -143,7 +143,7 @@
 
 <div class="col-md-12 detailes_view_slider">
 <h2 class="viewHead-rm">People Also Viewing</h2>
-<div class="home_product_slider">
+<div class="home_product_slider recently-viewed">
 			<div class="container">
 				<div class="row">
 						<div class="col-xs-12">

@@ -95,14 +95,18 @@ class SiteHelper  {
 		return $SubtotalPrice;
 	}
 	public static function verifyCostumeQuantity($costume_id){
-		$cookie_id=key(cookie::get('min-cart'));
-		$qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
-		$res=Cart::verifyCostumeQuantity($costume_id,$qty);
-		if($res){
-        	return true;
-        }else{
-        	return false;
-        }
+		if(cookie::get('min-cart')!=null){
+			$cookie_id=key(cookie::get('min-cart'));
+			$qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
+			$res=Cart::verifyCostumeQuantity($costume_id,$qty);
+			if($res){
+	        	return true;
+	        }else{
+	        	return false;
+	        }
+    	}else{
+    			return true;
+    	}
 	}
 	
 }
