@@ -1,10 +1,26 @@
+
 @extends('admin.app')
+
+{{-- Web site Title --}}
+@section('title') @parent
+@endsection
+
+{{-- page level styles --}}
+@section('header_styles')
+<link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
+<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+@stop
+
+{{-- Page content --}}
 @section('content')
-<h1>Manage Requests</h1>
-<ol class="breadcrumb">
-  <li><a href="{{ url('/admin/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-  <li class="active">Manage Request Bags</li>
-</ol>
+ <section class="content-header">
+    <h1>Manage Requests</h1>
+    <ol class="breadcrumb">
+    <li>
+        <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
+    </li>
+    <li class="active">Manage Request Bags</li>
+  </ol>
 </section>
 <!-- Main content -->
 
