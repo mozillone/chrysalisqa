@@ -14,7 +14,7 @@ $(document).on('click','.fav_costume',function(){
           Lobibox.notify('success', {
                     size: 'mini',
                     title: 'Added To favorites',
-                    msg: 'This costume is added your favorites list ',
+                    msg: 'This costume is added to your favorites list ',
                 });
         }else{
           $(this).find('span').removeClass('active');
