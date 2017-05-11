@@ -87,7 +87,7 @@ class RequestabagController extends Controller
 		$request_bags=DB::table('request_bags')->get();
 	return Datatables::of($request_bags)
         ->addColumn('actions', function ($request_bagso) {
-                return '<a href="/process-bag/'.$request_bagso->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>';
+                return '<a href="/process-bag/'.$request_bagso->id.'" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
             })
         ->make(true);
 	}
