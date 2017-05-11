@@ -81,7 +81,7 @@ display: none;
                <div class="row">
                     <div class="col-md-12">
                       <div class="pull-right user-list">
-                        <a href="javascript:void(0);" class="btn btn-xs btn-success" id="export" ng-click="charitiesExportCSV()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download"><i class="fa fa-download"></i></a>
+                        <a href="javascript:void(0);" class="btn btn-xs btn-success download-btn" id="export" ng-click="charitiesExportCSV()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download"><i class="fa fa-download"></i></a>
                        </div>
                     </div>
                   </div>
