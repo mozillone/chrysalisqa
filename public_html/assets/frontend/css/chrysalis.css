@@ -1902,7 +1902,6 @@ button.btn.btn-primary.item-update {
 	position: relative;
 }
 .costumes-desktop .price-tag {
-	display: inline-grid;
     font-family: Proxima-Nova-extrabold;
     color: #000;
     font-size: 10px;
@@ -1914,6 +1913,7 @@ button.btn.btn-primary.item-update {
 	text-align: center;
     font-family: Proxima-Nova-Extrabold;
     font-size: 18px;
+	display: block;
 }
 a {
 	color: black;
@@ -2048,6 +2048,7 @@ input.addtocart-rm {
     margin-top: 15px;
 	margin-bottom:0;
 	background: white;
+	font-weight: 600;
 }
 .social-media-sec div {
     float: right;
@@ -2068,9 +2069,7 @@ input.addtocart-rm {
     margin-left: 10px;
     font-weight: 700;
 }
-.list_products.list-img-bg {
-    min-height: 164.5vh;
-}
+
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){
