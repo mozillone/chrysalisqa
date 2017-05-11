@@ -31,7 +31,7 @@ display: none;
     <li class="active">Manage Request A Bag</li>
   </ol>
 </section>
-<section class="content">
+<section class="content request-bag-admin">
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
 			<div class="box box-primary">
@@ -63,46 +63,89 @@ print_r($payout_html);die;*/
 				<div class="box-header">
 					<h3 class="box-title col-md-12 heading-agent">Bag Request #{{$all_data->ref_no}}</h3>
 				</div>
-				<div class="box-body">
-					<div>
-					<input type="hidden" name="hidden_id" id="hidden_id" value="{{$all_data->id}}">
-					<input type="hidden" name="label_html" id="label_html" value="{{$label_html}}">
-						<p>Reference #:{{$all_data->ref_no}}</p>
-						<p>Request Date:{{$all_data->created_at}}</p>
-						<p>Status: <span id="dynamic_status">{{$all_data->status}}</span></p>
-						<?php if ($all_data->is_payout == "0") {
+				<div class="details-sec row">
+				<div class="col-md-6 col-sm-6">
+				<input type="hidden" name="hidden_id" id="hidden_id" value="{{$all_data->id}}">
+				<input type="hidden" name="label_html" id="label_html" value="{{$label_html}}">
+					<table>
+ 
+					  <tr>
+						<td>Reference #</td>
+						<td>{{$all_data->ref_no}}</td>
+					  
+					  </tr>
+					  <tr>
+						<td>Request Date:</td>
+						<td>{{$all_data->created_at}}</td>
+
+					  </tr>
+					  <tr>
+						<td>Status:</td>
+						<td id="dynamic_status">{{$all_data->status}}</td>
+
+					  </tr>
+					  <?php if ($all_data->is_payout == "0") {
 							$is_payout = "No";
 						}else{
 							$is_payout = "Yes";
 							} ?>
-						<p>Payout:{{$is_payout}}</p>
-						<?php if ($all_data->is_return == "0") {
+					   <tr>
+						<td>Payout:</td>
+						<td>{{$is_payout}}</td>
+
+					  </tr>
+					  <?php if ($all_data->is_return == "0") {
 							$is_return = "No";
 						}else{
 							$is_return = "Yes";
 							} ?>
-						<p>Return Assurance:{{$is_return}}</p>
+					  <tr>
+						<td>Return Assurance:</td>
+						<td>{{$is_return}}</td>
+
+					  </tr>
+					</table>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<table> 
+					  <tr>
+						<td>Customer Name:</td>
+						<td>{{$all_data->cus_name}}</td>
+					  
+					  </tr>
+					  <tr>
+						<td>Customer Email:</td>
+						<td>{{$all_data->cus_email}}</td>
+
+					  </tr>
+					  <tr>
+						<td>Customer Phone:</td>
+						<td>{{$all_data->cus_phone}}</td>
+
+					  </tr>
+					  <tr>
+						<td>Location:</td>
+						<td>{{$all_data->address1}}</td>
+
+					  </tr>
+					</table>
+				</div>
+				</div>
+				<div class="sending-bag-sec">
+					<div class="box-header">
+						<h3 class="box-title col-md-12 heading-agent">Send Bag</h3>
 					</div>
-					<div>
-						<p>Customer Name:{{$all_data->cus_name}}</p>
-						<p>Customer Email:{{$all_data->cus_email}}</p>
-						<p>Customer Phone:{{$all_data->cus_phone}}</p>
-						<p>Location:{{$all_data->address1}}</p>
+					<?php if ($label_html != "0") { ?>
+					<div class="box-body" id="tracking_ids">
+						<?php echo $label_html; ?>
 					</div>
-				</div>
-				<div class="box-header">
-					<h3 class="box-title col-md-12 heading-agent">Send Bag</h3>
-				</div>
-				<?php if ($label_html != "0") { ?>
-				<div class="box-body" id="tracking_ids">
-					<?php echo $label_html; ?>
-				</div>
-				<?php }else{ ?>					
-				<div class="box-body" id="heading_lables" >
-					<p>Click below to generate your tracking labels for sending a bag to the customer.</p>
-					<div class="pull-right">
-                           <a href="" id="generate_lables" class="btn btn-primary pull-right submit">Generate Bag Labels</a>
-                    </div>
+					<?php }else{ ?>					
+					<div class="box-body" id="heading_lables" >
+						<p>Click below to generate your tracking labels for sending a bag to the customer.</p>
+						<div class="">
+							   <a href="" id="generate_lables" class="btn btn-primary submit">Generate Bag Labels</a>
+						</div>
+					</div>
 				</div>
 				<div class="box-body" id="tracking_ids" style="display: none;">
 					
@@ -112,42 +155,61 @@ print_r($payout_html);die;*/
 				<div class="box-header">
 					<h3 class="box-title col-md-12 heading-agent">Process Bag</h3>
 				</div>
-				<h4>Payout:</h4>
-				<?php if ($payout_html != "0") { ?>
-					<div class="box-body" id="existing_payout">
-					<?php echo $payout_html; ?>
-				</div>
-				<?php }else{ ?>
-				<div class="box-body" id="enter_payout_amount">
-					<p>Customer has Requested a Payout.</p>
-					<input type="text" name="payout_amount" id="payout_amount" placeholder="Payout Amount">
-					<span id="payout_amount_error" style="color:red"></span>
-					<button onclick="PayoutAmount()">Save</button>
-				</div>
-				<div class="box-body" id="credited_payout_amount" style="display: none;">
+				<div class="row process-bag-steps">
+					<div class="col-md-4">
+						<h4>Payout:</h4>
+							<?php if ($payout_html != "0") { ?>
+								<div class="" id="existing_payout">
+								<?php echo $payout_html; ?>
+							</div>
+							<?php }else{ ?>
+							<div class="" id="enter_payout_amount">
+								<p>Customer has Requested a Payout.</p>
+								<input type="text" name="payout_amount" id="payout_amount" placeholder="Payout Amount">
+								<span id="payout_amount_error" style="color:red"></span>
+								<a style="margin-top: 10px"  class="btn btn-primary submit" onclick="PayoutAmount()">Save</a>
+							</div>
+							<div class="" id="credited_payout_amount" style="display: none;">
+								
+							</div>
+							<?php } ?>
 					
-				</div>
-				<?php } ?>
+					</div>
+					<div class="col-md-4">
+					<h4>Return Items:</h4>
+						<?php if ($return_html != "0") { ?>
+							<div class="" id="existing_payout">
+							<?php echo $return_html; ?>
+						</div>
+						<?php }else{ ?>
+						<div class="" id="enter_return_amount">
+							<p>Customer has Requested Return Bag</p>
+						
+							<input type="text" name="return_amount" id="return_amount" placeholder="Bag Weight (lbs)">
+							<span id="return_amount_error" style="color:red"></span>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="exclude_credit_deduction" id="exclude_credit_deduction"  value="">Exclude Credit Deduction
+								</label>
+							</div>
+							<a class="btn btn-primary submit" onclick="ReturnAmount()">Save</a>
+						</div>
+						<div class="box-body" id="credited_return_amount" style="display: none;">
+							
+						</div>
+						<?php } ?>
 				
-				<h4>Return Items:</h4>
-				<?php if ($return_html != "0") { ?>
-					<div class="box-body" id="existing_payout">
-					<?php echo $return_html; ?>
 				</div>
-				<?php }else{ ?>
-				<div class="box-body" id="enter_return_amount">
-					<p>Customer has Requested Return Bag</p>
-					<input type="text" name="return_amount" id="return_amount" placeholder="Bag Weight (lbs)">
-					<span id="return_amount_error" style="color:red"></span>
-					<input type="checkbox" name="exclude_credit_deduction" id="exclude_credit_deduction">Exclude Credit Deduction
-					<button onclick="ReturnAmount()">Save</button>
+				<div class="col-md-4">
+					<h4>Close Request:</h4>
+					<a class="btn btn-primary submit" onclick="CloseRequest()">Close Request</a>
 				</div>
-				<div class="box-body" id="credited_return_amount" style="display: none;">
-					
 				</div>
-				<?php } ?>
-				<h4>Close Request:</h4>
-				<button onclick="CloseRequest()">Close Request</button>
+				
+				
+				
+				
+				
 			</div>
 			</div>
 			
