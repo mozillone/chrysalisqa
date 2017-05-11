@@ -70,15 +70,93 @@
               </table>
         </div>
           <div class="table-responsive">
-          <table datatable dt-options="dtOptions" dt-columns="dtColumns"
+          <!-- <table datatable dt-options="dtOptions" dt-columns="dtColumns"
                         class="table table-bordered table-hover table-striped" id="dtTable">
-          </table>
+          </table> -->
+          <table class="table table-bordered table-hover" id="customes-list-table">
+              <thead>
+                  <tr>
+                      <th>SKU #</th>
+                      <th>Costume Name</th>
+                      <th>Customer Name</th>
+                      <th>Category</th>
+                      <th>Condition</th>
+                      <th>Created Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                 </tr>
+          </thead>
+              <tbody>
+          </tbody>
+        </table>
           </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script type="text/javascript">
+   function changeCostumeStatus(id, status) {
+        $.ajax({
+            type: "GET",
+            url: '{!! url('changecostumestatus') !!}',
+            data: {'id':id,'status':status},
+            dataType: 'json',
+            success: function(response) {
+                if(response){
+                    table.ajax.reload();
+                }
+            }
+        });
+        }
+        var table = '';
+  $(function() {
+            table = $('#customes-list-table').DataTable({
+      "ajax": {
+            "url" : "getallcostumes",
+           "type": "GET",
+         },
+      "searching": false,
+      "pageLength": 25,
+      "bLengthChange": false,
+      
+      "columns": [
+        { data: 'sku_no', name: 'sku_no'},
+        { data: 'custome_name', name: 'custome_name'},
+        { data: 'customer_name', name: 'customer_name'},
+        { data: 'cat_name', name: 'cat_name'},
+        { data: 'custome_condition', name: 'custome_condition'},
+        { data: 'custome_created_at', name: 'custome_created_at'},
+        { data: 'status', name: 'status'},
+        { data: 'actions', name: 'actions'}
+      ]
+    });
+
+
+  }); 
+
+
+        function deletecostume($id){
+        var id=$id;
+
+    swal({
+       title: "Are you sure want to delete this Costume?",
+                  showCancelButton: true,
+                 confirmButtonColor: "#DD6B55 ",
+                 confirmButtonText: "Yes, delete",
+                 closeOnConfirm: false,
+                 closeOnCancel: true
+               },
+
+               function(){
+               url = "/deletecostume/"+id+"";
+                window.location = url;
+               });
+
+
+   }
+
+</script>
 @stop
 
 
@@ -87,6 +165,57 @@
 <script src="{{ asset('angular/Admin/UserManagement/Controllers/users-lists.js') }}"></script>
 <script src="{{ asset('angular/Admin/UserManagement/Services/user_management.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+<script type="text/javascript">
+  var table = '';
+  $(function() {
+            table = $('#customes-list-table').DataTable({
+      "ajax": {
+            "url" : "getallcostumes",
+           "type": "GET",
+         },
+      "searching": false,
+      "pageLength": 25,
+      "bLengthChange": false,
+      
+      "columns": [
+        { data: 'sku_no', name: 'sku_no'},
+        { data: 'custome_name', name: 'custome_name'},
+        { data: 'customer_name', name: 'customer_name'},
+        { data: 'cat_name', name: 'cat_name'},
+        { data: 'custome_condition', name: 'custome_condition'},
+        { data: 'custome_created_at', name: 'custome_created_at'},
+        { data: 'status', name: 'status'},
+        { data: 'actions', name: 'actions'}
+      ]
+    });
+
+
+
+
+        function deleteinspiringCategorie($id){
+        var id=$id;
+
+    swal({
+       title: "Are you sure want to delete this Category?",
+                  showCancelButton: true,
+                 confirmButtonColor: "#DD6B55 ",
+                 confirmButtonText: "Yes, delete",
+                 closeOnConfirm: false,
+                 closeOnCancel: true
+               },
+
+               function(){
+               url = "/admin/talent/inspiringstories/categories/delete/"+id+"";
+                window.location = url;
+               });
+
+
+   }
+
+  }); 
+   
+
+</script>
 
 @stop
 
