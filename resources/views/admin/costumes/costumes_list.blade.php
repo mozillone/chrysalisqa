@@ -106,6 +106,7 @@
 <script src="{{ asset('angular/Admin/UserManagement/Services/user_management.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 
+
 <script type="text/javascript">
    function changeCostumeStatus(id, status) {
         $.ajax({
@@ -168,6 +169,7 @@
    }
 
 </script>
+
 @stop
 
 

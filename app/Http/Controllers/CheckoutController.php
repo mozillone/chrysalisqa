@@ -92,7 +92,7 @@ class CheckoutController extends Controller {
     }else{
 
       $charities_list=Order::getCharitiesList();
-      return view('frontend.costumes.checkout.order_thanku')->with('order_id',$req['message'])->with('charities_list',$charities_list);
+      return view('frontend.costumes.checkout.order_thanku')->with('order_id',$result['message'])->with('charities_list',$charities_list);
     }
     }
   public function addShippingAddress(Request $request){
