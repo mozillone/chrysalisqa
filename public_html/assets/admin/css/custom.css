@@ -602,10 +602,54 @@ body .loading img{width:10%;}
 .head-tickets{font-size:20px !important; font-weight:500 !important;}
 /*24-01-2017*/
 
-
-
-
-
+/* 5/11/2017 */
+.request-bag-admin td:first-child {
+    color: #000;
+    font-weight: 700;
+    margin-right: 20px;
+    padding-right: 70px;
+}
+.request-bag-admin td {
+    padding: 3px 0px;
+}
+.details-sec {
+	margin-bottom: 30px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.sending-bag-sec .heading-agent {
+    text-align: left;
+}
+.sending-bag-sec {
+	text-align: center;
+}
+.sending-bag-sec p {
+	margin-bottom: 30px;
+    margin-top: 10px;
+}
+.process-bag-steps {
+	
+}
+.row.process-bag-steps {
+	margin: 0;
+	padding-bottom: 60px;
+}
+.process-bag-steps h4{
+	font-size:16px;
+	font-weight: 700;
+}
+.process-bag-steps input[type="text"] {
+	display: block;
+    width: 90%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+}
 
 
 
@@ -661,7 +705,10 @@ body .loading img{width:10%;}
 .main-header .logo .logo-sm{display:none;}
 }
 
-
+@media only screen and (max-width : 768px) {
+	.request-bag-admin td:first-child {
+	padding-right: 5px;
+}
 
 @media only screen and (max-width : 767px) {
 		.form-group.has-feedback.cosutme-fr label.radio-inline {
@@ -673,6 +720,8 @@ body .loading img{width:10%;}
     width: 47%;
     float: left;
     margin-left: 0px;
+}
+	
 }
 #category-create .cat_img.fileupload.fileupload-new{margin-left: -30px;
     margin-top: 15px;}
