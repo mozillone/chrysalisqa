@@ -8,24 +8,28 @@ section.top_nav span{color:#60c5ac;}
 	font-family: Proxima-Nova-Regular;
 	src: url('../fonts/proxima_nova-webfont.woff2');
 	src: url('../fonts/Mark-Simonson-Proxima-Nova.ttf');
+	/* src: url('../fonts/ProximaNova-Regular.eot'); */
 }
 
 @font-face {
 	font-family: Proxima-Nova-Semibold;
 	src: url('../fonts/proxima_nova_semibold-webfont.woff2');
 	src: url('../fonts/Mark-Simonson-Proxima-Nova-Semibold.ttf');
+	/* src: url('../fonts/ProximaNova-Semibold.eot'); */
 }
 
 @font-face {
 	font-family: Proxima-Nova-Bold;
 	src: url('../fonts/proxima_nova_bold-webfont.woff2');
 	src: url('../fonts/Mark-Simonson-Proxima-Nova-Bold.ttf');
+	/* src: url('../fonts/ProximaNova-Bold.eot'); */
 }
 
 @font-face {
 	font-family: Proxima-Nova-Extrabold;
 	src: url('../fonts/proxima_nova_extrabold-webfont.woff2');
 	src: url('../fonts/Mark-Simonson-Proxima-Nova-Extrabold.ttf');
+	/* src: url('../fonts/ProximaNova-Extrabld.eot'); */
 }
 
 
@@ -857,6 +861,10 @@ height: auto;
 p.price_right span a {    cursor: pointer;}
 p.f_quality {    background: #ffd23f;    font-size: 16px;    padding: 5px 10px;    border-radius: 5px;    font-family: Proxima-Nova-Semibold !important;    display: inline-block;}
 .cart_page_vew h1{width:100%;float:left;font-size:24px;font-family:Proxima-Nova-Extrabold;border-bottom:1px solid #e1e1e1;padding-bottom:15px;margin:0px;color:#000000;}
+.shipping_date{
+	display: flex;
+	align-items: center;
+}
 .shipping_date span.shi_date_right{float:right;}
 .cart_page_vew .well{background:none;box-shadow:none;border-radius:0px;}
 .well .shipping_date{background:#f5f7fb;padding:10px;margin-bottom:20px;}
@@ -2057,6 +2065,9 @@ input.addtocart-rm {
     float: right;
     margin-left: 10px;
     font-weight: 700;
+}
+.list_products.list-img-bg {
+    min-height: 164.5vh;
 }
 /********************************************************************Media start here********************************************************************/
 
