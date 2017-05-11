@@ -6,28 +6,28 @@ section.top_nav span{color:#60c5ac;}
 
 @font-face {
 	font-family: Proxima-Nova-Regular;
-	src: url('../fonts/proxima_nova-webfont.woff2');
+	src: url('../fonts/proxima_nova-webfont.woff2'), url('../fonts/ProximaNova-Regular.eot');
 	src: url('../fonts/Mark-Simonson-Proxima-Nova.ttf');
 	/* src: url('../fonts/ProximaNova-Regular.eot'); */
 }
 
 @font-face {
 	font-family: Proxima-Nova-Semibold;
-	src: url('../fonts/proxima_nova_semibold-webfont.woff2');
+	src: url('../fonts/proxima_nova_semibold-webfont.woff2'), src: url('../fonts/ProximaNova-Semibold.eot');
 	src: url('../fonts/Mark-Simonson-Proxima-Nova-Semibold.ttf');
 	/* src: url('../fonts/ProximaNova-Semibold.eot'); */
 }
 
 @font-face {
 	font-family: Proxima-Nova-Bold;
-	src: url('../fonts/proxima_nova_bold-webfont.woff2');
+	src: url('../fonts/proxima_nova_bold-webfont.woff2'), url('../fonts/ProximaNova-Bold.eot');
 	src: url('../fonts/Mark-Simonson-Proxima-Nova-Bold.ttf');
 	/* src: url('../fonts/ProximaNova-Bold.eot'); */
 }
 
 @font-face {
 	font-family: Proxima-Nova-Extrabold;
-	src: url('../fonts/proxima_nova_extrabold-webfont.woff2');
+	src: url('../fonts/proxima_nova_extrabold-webfont.woff2'), url('../fonts/ProximaNova-Extrabld.eot');
 	src: url('../fonts/Mark-Simonson-Proxima-Nova-Extrabold.ttf');
 	/* src: url('../fonts/ProximaNova-Extrabld.eot'); */
 }
@@ -377,7 +377,7 @@ font-family: Proxima-Nova-Semibold;
 background: #fff !important;
 box-shadow: 1px 1px 2px #ccc;}
 	.rng .ui-slider-horizontal .ui-slider-range{height: 8px;}
-.list-banner, .list-banner img{width: 100%; float:left;}
+.list-banner, .list-banner img{width: 100%; float:left; margin-top: 15px;}
 .list-box-rm{width:100%; float:left; border: 1px solid #e1e1e1; padding: 20px; font-family: Proxima-Nova-A-Regular; margin: 15px 0 0;}
 .list-box-rma{border-top: 2px solid #11a89e;}
 .list-box-head{width:100%; float:left; font-size: 16px; font-family: Proxima-Nova-Extrabold; border-bottom: 1px solid #e1e1e1; padding-bottom: 15px; margin: 0px; color: #323031;}
@@ -861,7 +861,7 @@ height: auto;
 p.price_right span a {    cursor: pointer;}
 p.f_quality {    background: #ffd23f;    font-size: 16px;    padding: 5px 10px;    border-radius: 5px;    font-family: Proxima-Nova-Semibold !important;    display: inline-block;}
 .cart_page_vew h1{width:100%;float:left;font-size:24px;font-family:Proxima-Nova-Extrabold;border-bottom:1px solid #e1e1e1;padding-bottom:15px;margin:0px;color:#000000;}
-.shipping_date{
+.shipping_date.cart-price{
 	display: flex;
 	align-items: center;
 }
@@ -1006,7 +1006,9 @@ p.right_heading span.my_msg { font-weight: 800; }
 .prog-head{width:100%; float:left; font-size: 24px; 	font-family: Proxima-Nova-Bold; border-bottom: 2px solid #e1e1e1; padding-bottom: 10px; margin: 0px; color: #323031;margin-bottom: 20px;}
 a#pricing_next {    float: right;}
 .form-rms{width: 100%; float:left; margin: 10px 0; padding-left: 33px}
-.form-rms.column-align {padding-left: 27px;}
+.charity_rigt .form-rms.lst-stp {
+    padding-left: 27px;
+}
 .form-rms-que{width: 100%; float:left; font-size: 18px; color: #323031; font-family: Proxima-Nova-Extrabold; margin: 15px 0; text-indent: -32px;}
 .form-rms-input input{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
 .form-rms-input select{width: 300px; float:left; height: 30px; border: 1px solid #e1e1e1; padding: 0 10px; font-family: Proxima-Nova-Semibold; font-size: 16px;}
