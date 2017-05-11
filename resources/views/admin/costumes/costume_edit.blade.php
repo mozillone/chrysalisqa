@@ -23,6 +23,16 @@
 
 	{{-- Page content --}}
 	@section('content')
+
+	<?php
+		if (isset($costumes_data) && !empty($costumes_data)) {
+			$cos_data = $costumes_data;
+			//echo "<pre>";print_r($cos_data);
+		}else{
+			$cos_data = "";
+		}
+
+	 ?>
 	<section class="content-header">
 	<h1>Costume</h1>
 	<ol class="breadcrumb">
@@ -87,14 +97,15 @@
 	<option value="">Select Customer Name</option>
 	<option value="0">None</option>
 	@foreach($customers as $index=>$customer)
-	<option value="{{$customer->id}}">{{$customer->username}}</option>
+	
+	<option <?php if ($cos_data->customer_name == $customer->username) { ?> selected="selected" <?php	} ?> value="{{$customer->id}}">{{$customer->username}}</option>
 	@endforeach
 	</select>
 	<span id="customername_error" style="color:red"></span>
 	</div>
 	<div class="form-group has-feedback" >
 	<label for="inputEmail3" class="control-label">Costume Name<span class="req-field" >*</span></label>
-	<input type="text" class="form-control" placeholder="Enter Costume name"  name="costume_name" id="costume_name">
+	<input type="text" class="form-control" value="{{$cos_data->costume_name}}" placeholder="Enter Costume name"  name="costume_name" id="costume_name">
 	<span id="costumename_error" style="color:red"></span>
 	</div>
 	<div class="form-group has-feedback cosutme-fr" >
