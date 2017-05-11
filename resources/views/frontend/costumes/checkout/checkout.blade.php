@@ -187,7 +187,7 @@
 									<div class="order_summery">
 										<div class="well">
 											<h3>Order Summary  </h3> 
-											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}} <em>({{count($data['basic'])}} Items)</em></span></p>
+											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}} <em>({{count($data['basic']['basic'])}} Items)</em></span></p>
 											@if(!empty($data['basic']['dis_count'])) <p class="sub-all"><span>Shipping: </span> <span class="sub-price">-${{$data['basic']['dis_total']}} <em>({{$data['basic']['dis_count']}} Items)</em></span></p>@endif
 											<!-- <p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$0.00 </span></p> -->
 											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">@if(!empty($data['basic']['dis_count']))${{number_format($data['basic']['basic'][0]->total-$data['basic']['dis_total'], 2, '.', ',')}} @else ${{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}}@endif </span></p>
