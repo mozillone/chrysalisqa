@@ -421,6 +421,7 @@ if (isset($total_data) && !empty($total_data)) {
                             <p class="cst2-rms-chck"><input type="checkbox" name="is_return" value="1">Please opt me into Return Assurance and return my unaccepted items for an additional $9.99* (I understand that up to $19.98 could be deduted from mybag earnings). </p>
                             <p class="cst2-rms-chck" style="margin-top: 0">*Fee will be deduted from your earnings once your bag is processed.</p>
                             <p class="cst2-rms-chck"><input type="checkbox" checked name="is_recycle" value="1">Please responsibly recycle my unaccepted items</p>
+                            <span id="is_recycle_error" style="color:red; display: block;"></span>
 						</div>
 						<h4>Have you registerd yet? Add your email!</h4>
                         <!-- <form> -->
@@ -473,7 +474,7 @@ if (isset($total_data) && !empty($total_data)) {
 				</ul>
 				
 				<div id="myTabContent" class="tab-content">
-				<p>Please enter the registration details in order to proceed.</p>
+				<p>Email address is already registered sign in using your password</p>
 					<div class="tab-pane active in" id="login_tab1">
 						<form class=""  method="POST" id="loginpopup">   
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -643,11 +644,11 @@ $(document).ready(function()
 		/*if($('input[name=is_return]:checked').length<=0){
 			$('#is_return_error').html('This field is required.');
 			str=false;			
-		}
+		}*/
 		if($('input[name=is_recycle]:checked').length<=0){
 			$('#is_recycle_error').html('This field is required.');
 			str=false;			
-		}*/
+		}
 
 		if(!ValidateEmail(email_address)) { 
 			$('#email_address').css('border','1px solid red');
