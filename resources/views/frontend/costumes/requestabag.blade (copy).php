@@ -76,15 +76,14 @@ if (isset($total_data) && !empty($total_data)) {
     </div>
 </div>
 
-
 <div class="container" id="h4_tag_hide" >
     <div class="row option-sec">
         <div class="col-md-10 col-md-offset-1">
         <h4>Choose an option of how you would like to receive your Bag and payout.</h4>
              <div id="choose_an_option_for_bag_div">
-                					<p class="cst2-rms-chck"><input type="checkbox" name="is_payout" id="is_payout" value="0">Don't send me a payout. I want to support Chrysalis' waste reduction and charitable donation program.</p>
+                					<p class="cst2-rms-chck"><input type="radio" name="is_payout" id="is_payout" value="0">Don't send me a payout. I want to support Chrysalis' waste reduction and charitable donation program.</p>
                 					<p class="notes">*Note: At this time, Chrysalis does NOT issue tax receipts. </p>
-                					<p class="cst2-rms-chck"><input type="checkbox" checked name="is_payout" value="1" id="is_payout">I want to pay a $9.99 Shipping & Handling fee to receive my bag (fee deducted after bag has been processed).</p>
+                					<p class="cst2-rms-chck"><input type="radio" name="is_payout" value="1" id="is_payout">I want to pay a $9.99 Shipping & Handling fee to receive my bag (fee deducted after bag has been processed).</p>
                 					<span id="is_payout_error" style="color:red"></span>
                 					<div class="form-rms-btn">
                 						<a type="button" id="choose_an_option_for_bag_next" class="btn-rm-nxt nxt">
@@ -117,33 +116,18 @@ if (isset($total_data) && !empty($total_data)) {
                 <div class="row costumes">
                     <div class="costumes-desktop">
                         <div class="col-md-4 col-sm-4">
-							<div class="cart-img">
-								<img  src="{{URL::asset('assets/frontend/img/item-1.png')}}">
-								<span class="price-tag">
-									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>4</span>
-								</span>
-							</div>
+                            <img  src="{{URL::asset('assets/frontend/img/Item-2.1.png')}}">
                         </div>
                         <div class="col-md-4 col-sm-4">
-							<div class="cart-img">
-								<img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
-								<span class="price-tag">
-									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>2</span>
-								</span>
-							</div>
+                            <img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
                         </div>
                         <div class="col-md-4 col-sm-4">
-							<div class="cart-img">
-								<img  src="{{URL::asset('assets/frontend/img/Item-3.png')}}">
-								<span class="price-tag">
-									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>5</span>
-								</span>
-							</div>
+                            <img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
                         </div>
                     </div>
                  </div>
 
-             <div id="myCarousel" data-interval="false" class="carousel costumes-carousel slide" data-ride="carousel">
+             <div id="myCarousel" class="carousel costumes-carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                   <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -154,30 +138,15 @@ if (isset($total_data) && !empty($total_data)) {
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                   <div class="item active">
-                    <div class="carousel-cart-img">
-						<img  src="{{URL::asset('assets/frontend/img/item-1.1.png')}}">
-						<span class="price-tag">
-									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>12</span>
-						</span>
-					</div>
-                  </div>
-
-                  <div class="item">
-				  <div class="carousel-cart-img">
                     <img  src="{{URL::asset('assets/frontend/img/Item-2.1.png')}}">
-					<span class="price-tag">
-									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>4</span>
-						</span>
-						</div>
                   </div>
 
                   <div class="item">
-				  <div class="carousel-cart-img">
-                    <img  src="{{URL::asset('assets/frontend/img/Item-3.1.png')}}">
-					<span class="price-tag">
-									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>5</span>
-						</span>
-						</div>
+                    <img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
+                  </div>
+
+                  <div class="item">
+                    <img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
                   </div>
                 </div>
 
@@ -204,28 +173,13 @@ if (isset($total_data) && !empty($total_data)) {
             <div class="row costumes">
                 <div class="costumes-desktop">
                     <div class="col-md-4 col-sm-4">
-						<div class="cart-img">
-							<img  src="{{URL::asset('assets/frontend/img/item-1.1.png')}}">
-							<span class="price-tag">
-									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>6</span>
-							</span>
-						</div>
+                        <img  src="{{URL::asset('assets/frontend/img/Item-3.png')}}">
                     </div>
                     <div class="col-md-4 col-sm-4">
-						<div class="cart-img">
-                        <img  src="{{URL::asset('assets/frontend/img/Item-2.1.png')}}">
-						<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>7</span>
-							</span>
-							</div>
+                        <img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
                     </div>
                     <div class="col-md-4 col-sm-4">
-					<div class="cart-img">
                         <img  src="{{URL::asset('assets/frontend/img/Item-3.1.png')}}">
-						<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>9</span>
-							</span>
-							</div>
                     </div>
                 </div>
             </div>
@@ -240,37 +194,15 @@ if (isset($total_data) && !empty($total_data)) {
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                               <div class="item active">
-							  <div class="carousel-cart-img">
-							  
                                 <img  src="{{URL::asset('assets/frontend/img/Item-2.1.png')}}">
-								<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>9</span>
-							</span>
-							</div>
-							
-							
                               </div>
 
                               <div class="item">
-							  <div class="carousel-cart-img">
-									<img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
-									<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>15</span>
-							</span>
-							</div>
-						
-							
+                                <img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
                               </div>
 
                               <div class="item">
-							  <div class="carousel-cart-img">
                                 <img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
-								<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>6</span>
-							</span>
-							</div>
-								
-							
                               </div>
                             </div>
 
@@ -294,39 +226,15 @@ if (isset($total_data) && !empty($total_data)) {
                 </div>
                 <div class="row costumes">
                     <div class="col-md-4 col-sm-4">
-					<div class="cart-img">
-                        <img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
-						<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>10</span>
-							</span>
-							</div>
+                        <img  src="{{URL::asset('assets/frontend/img/Item-3.png')}}">
                     </div>
                     <div class="col-md-4 col-sm-4">
-					<div class="cart-img">
-                        <img  src="{{URL::asset('assets/frontend/img/Item-1.3.png')}}">
-						<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>11</span>
-							</span>
-							</div>
+                        <img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
                     </div>
                     <div class="col-md-4 col-sm-4">
-					<div class="cart-img">
-                        <img  src="{{URL::asset('assets/frontend/img/item-3.3.png')}}">
-						<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>15</span>
-							</span>
-							</div>
+                        <img  src="{{URL::asset('assets/frontend/img/Item-3.1.png')}}">
                     </div>
-					
                 </div>
-				<div class="tip-sec">
-						<p><span class="up_tip">Tip</span>
-							If your costume is just too <br>
-								awesome, we suggest you
-						</p>
-						<a>Upload it Yourself!</a>
-						<img  src="{{URL::asset('assets/frontend/img/Tip-arrow_right.png')}}">
-					</div>
             </div>
         </div>
 	</div>
@@ -373,26 +281,22 @@ if (isset($total_data) && !empty($total_data)) {
                                 <span id="city_error" style="color:red"></span>
 
                             </div>
-                            <div class="form-rms form-align">
-								
-									<p class="form-rms-que">State</p>
-									<p class="form-rms-input">
-									<?php if (isset($all_details['basic_address']->state) && !empty($all_details['basic_address']->state)) {
+                            <div class="form-rms">
+                                <p class="form-rms-que">State</p>
+                                <p class="form-rms-input">
+                                <?php if (isset($all_details['basic_address']->state) && !empty($all_details['basic_address']->state)) {
                                 	$db_state = $all_details['basic_address']->state;
-									} ?>
-										<select name="state" id="state">
-											<option value="">Select a State</option>
-												@foreach($all_details['state_table'] as $state)
-											<option <?php if (!empty($db_state) == $state->abbrev): ?>
-												selected="selected"
-											<?php endif ?> value="{{$state->abbrev}}">{{$state->name}}</option>
-												@endforeach
-										</select>
-									</p>
-									<span id="state_error" style="color:red"></span>
-								
-							
-                                
+                                } ?>
+                                	<select name="state" id="state">
+										<option value="">Select s State</option>
+											@foreach($all_details['state_table'] as $state)
+										<option <?php if (!empty($db_state) == $state->abbrev): ?>
+											selected="selected"
+										<?php endif ?> value="{{$state->abbrev}}">{{$state->name}}</option>
+											@endforeach
+									</select>
+								</p>
+                                <span id="state_error" style="color:red"></span>
 
                                 <p class="form-rms-que">Zip Code</p>
                                 <p class="form-rms-input"><input type="text" name="zipcode" id="zipcode" value="<?php if (isset($all_details['basic_address']->zip_code) && !empty($all_details['basic_address']->zip_code)) { echo $all_details['basic_address']->zip_code; } ?>" tab-index="1" ></p>
@@ -410,7 +314,7 @@ if (isset($total_data) && !empty($total_data)) {
                             <p><input class="condition-check" type="checkbox" name="quality_standards" value="">All items meet our Quality Standards
                             <span id="quality_standards_error" style="color:red; display: block;"></span>
                             </p>
-                            <p><input type="checkbox" name="reject_terms" checked value="">I agree with Chrysalis' Reject Terms
+                            <p><input type="checkbox" name="reject_terms" value="">I agree with Chrysalis' Reject Terms
 							<span id="reject_terms_error" style="color:red; display: block;"></span>
                             </p>
 						</div>
@@ -419,13 +323,12 @@ if (isset($total_data) && !empty($total_data)) {
 						<h4>What would you like to do with unaccepted items?</h4>
 						<div class="unaccepted-option">
                             <p class="cst2-rms-chck"><input type="checkbox" name="is_return" value="1">Please opt me into Return Assurance and return my unaccepted items for an additional $9.99* (I understand that up to $19.98 could be deduted from mybag earnings). </p>
-                            <p class="cst2-rms-chck" style="margin-top: 0">*Fee will be deduted from your earnings once your bag is processed.</p>
-                            <p class="cst2-rms-chck"><input type="checkbox" checked name="is_recycle" value="1">Please responsibly recycle my unaccepted items</p>
-                            <span id="is_recycle_error" style="color:red; display: block;"></span>
+                            <p class="cst2-rms-chck">*Fee will be deduted from your earnings once your bag is processed.</p>
+                            <p class="cst2-rms-chck"><input type="checkbox" id="is_recycle" name="is_recycle"  value="1" >Please responsibly recycle my unaccepted items</p>
 						</div>
 						<h4>Have you registerd yet? Add your email!</h4>
                         <!-- <form> -->
-                            <div class="form-rms" style="margin-bottom: 18px">
+                            <div class="form-rms" style="margin-bottom: 30px">
                                 <p class="form-rms-que">Email Address</p>
                                 <p class="form-rms-input"><input type="text" name="email_address" id="email_address" value="<?php if (isset($all_details['get_details']->email) && !empty($all_details['get_details']->email)) { echo $all_details['get_details']->email; } ?>" <?php if (isset($all_details['get_details']->email) && !empty($all_details['get_details']->email)) {  ?> readonly <?php } ?> tab-index="1" ></p>
                                 <span id="email_address_error" style="color:red"></span>
@@ -455,7 +358,7 @@ if (isset($total_data) && !empty($total_data)) {
                 <img src="{{URL::asset('assets/frontend/img/bag-sucess.png')}}">
                 <h4>Hand in There!</h4>
                 <p>Your bag is on it's way</p>
-                <a type="button" id="average_payouts_next" href="{{URL::to('/')}}" class="btn-rm-nxt nxt">Browse Costumes</a>
+                <a type="button" id="average_payouts_next" class="btn-rm-nxt nxt">Browse Costumes</a>
 			</div>
 		</div>
 	</div>
@@ -472,9 +375,7 @@ if (isset($total_data) && !empty($total_data)) {
 				<ul class="nav nav-tabs">
                     <li class="active"><a href="#login_tab1" data-toggle="tab" class="first_active">Sign In</a></li>
 				</ul>
-				
 				<div id="myTabContent" class="tab-content">
-				<p>Please enter the registration details in order to proceed.</p>
 					<div class="tab-pane active in" id="login_tab1">
 						<form class=""  method="POST" id="loginpopup">   
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -489,6 +390,9 @@ if (isset($total_data) && !empty($total_data)) {
 								<input type="password" id="loginopup_password" name="password"  class="form-control">
 								<p class="error">{{ $errors->first('password') }}</p>
 							</div>
+							<div class=" form-group loign-adtnl forgot"> 
+								<label><a href="#forget_password1" data-toggle="tab">Help! I forgot my password.</a></label>
+							</div>
 							<div class="form-group">
 								<div class="login-btn">
 									<button class="btn btn-primary" id="request_a_bag_login">Log In</button>
@@ -497,8 +401,17 @@ if (isset($total_data) && !empty($total_data)) {
 							
 					</form>                  
 					</div>
+                   
+                    <div class="form-group or text-center">
+								<p>Or</p>
+				</div>
+				<div class="social-login">
+					<div class="form-group socil-btn">
+						<a class="btn btn-primary social-login-btn social-facebook" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-facebook" aria-hidden="true"></i> &nbsp;Log In With Facebook</a>
+					</div>
+				</div>
 				<div class="text-center close_icon">
-				<button type="button" class="close" id="close_req" data-dismiss="modal"><span>&times;</span> Close</button>
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span> Close</button>
 				</div>
 				</div>
 				
@@ -551,6 +464,7 @@ $(document).ready(function()
 <script type="text/javascript">
 $(document).ready(function()
 {
+    $('#is_recycle').prop('checked', true);
 	$('#choose_an_option_for_bag_div').css('display','block');
 	$('#average_payouts_div').css('display','none');
 	$('#send_my_bag_div').css('display','none');
@@ -567,7 +481,7 @@ $(document).ready(function()
 		if (str == true) {
 			$('#choose_an_option_for_bag_div').css('display','none');
 			$('#process_bar_hide').css('display','none');
-			$('#h4_tag_hide').css('display','none');
+			$('#h4_tag_hide').remove();
 			$('#average_payouts_div').css('display','block');
 			$('#send_my_bag_div').css('display','none');
 			$('#your_bag_on_itsway').css('display','none');			 	
@@ -575,14 +489,11 @@ $(document).ready(function()
 		return str;
 		
 	});
-	$('#close_req').click(function(){
-		$('.modal-backdrop').remove();
-		$('#request_bag_signup_popup').css('display','none');
-	});
+
 	$('#average_payouts_next').click(function(){
 		$('#choose_an_option_for_bag_div').css('display','none');
 		$('#process_bar_hide').css('display','none');
-		$('#h4_tag_hide').css('display','none');
+		$('#h4_tag_hide').remove();
 		$('#average_payouts_div').css('display','none');
 		$('#send_my_bag_div').css('display','block');
 		$('#your_bag_on_itsway').css('display','none');		
@@ -644,11 +555,11 @@ $(document).ready(function()
 		/*if($('input[name=is_return]:checked').length<=0){
 			$('#is_return_error').html('This field is required.');
 			str=false;			
-		}*/
+		}
 		if($('input[name=is_recycle]:checked').length<=0){
 			$('#is_recycle_error').html('This field is required.');
 			str=false;			
-		}
+		}*/
 
 		if(!ValidateEmail(email_address)) { 
 			$('#email_address').css('border','1px solid red');
@@ -672,8 +583,6 @@ $(document).ready(function()
 			 processData: false,
 			 success: function(data){
 			 	if (data == "login") {
-			 		$('#send_my_bag_next').html("Next");
-					$('#ajax_loader').remove();
 			 		$('#send_my_bag_next').append('<div class="modal-backdrop fade in"></div>');
 			 		$('#request_bag_signup_popup').css('display','block');
 			 	}
@@ -681,7 +590,13 @@ $(document).ready(function()
 			 		window.location.href = "{{URL::to('login#signup_tab')}}";
 			 	}
 			 	if (data == "success") {
-			 		window.location.href = "{{URL::to('costume/successrequestbag')}}";
+			 		$('#ajax_loader').remove();
+			 		$('#process_bar_hide').css('display','none');
+			 		$('#h4_tag_hide').remove();
+			 		$('#choose_an_option_for_bag_div').css('display','none');
+					$('#average_payouts_div').css('display','none');
+					$('#send_my_bag_div').css('display','none');
+					$('#your_bag_on_itsway').css('display','block');
 			 	}
 			 }
 			});
@@ -694,44 +609,20 @@ $(document).ready(function()
 	$('#request_a_bag_login').click(function(){
 		var loginpopup_email = $('#loginpopup_email').val();
 		var loginopup_password = $('#loginopup_password').val();
-		if($('input[name=is_payout]:checked').length<=0){
-			var is_payout = "0";		
-		}else{
-			var is_payout = "1";
-		}
-		if($('input[name=is_return]:checked').length<=0){
-			var is_return = "0";		
-		}else{
-			var is_return = "1";
-		}
-		if($('input[name=is_recycle]:checked').length<=0){
-			var is_recycle = "0";		
-		}else{
-			var is_recycle = "1";
-		}
-		var full_name = $('#full_name').val();
-		var address1  = $('#address1').val();
-		var address2  = $('#address2').val();
-		var city      = $('#city').val();
-		var state     = $('#state').val();
-		var  zipcode  = $('#zipcode').val();
-		var phone_number = $('#phone_number').val();
-		var email_address = $('#email_address').val(); 
-		var total_data    = {email: loginpopup_email,password:loginopup_password,is_payout: is_payout,full_name: full_name,address1: address1,address2:address2,city: city,state: state,zipcode: zipcode,phone_number: phone_number,is_return: is_return,is_recycle: is_recycle,email_address: email_address}
 		if (loginpopup_email != "" && loginopup_password !="") {
 			$.ajax({
 			 url: "{{URL::to('/postrequestabaglogin')}}",
 			 type: "POST",
-			 data: total_data,
+			 data: new FormData($('#loginpopup')[0]),
+			 contentType:false,
+			 cache: false,
+			 processData: false,
 			 success: function(data){
 			 	if (data == "login_sucess") {
 			 		$('#ajax_loader').remove();
 			 		$('#send_my_bag_next').html("Next");
 			 		$('#modal-backdrop').remove();
 			 		$('#request_bag_signup_popup').css('display','none');
-			 	}
-			 	else if (data == "success") {
-			 		window.location.href = "{{URL::to('costume/successrequestbag')}}";
 			 	}
 			 }
 			});
@@ -740,7 +631,7 @@ $(document).ready(function()
 
 	//numeric condition
 	$("#zipcode,#phone_number").on("keyup", function(){
-        var valid = /^\d{0,10}(\.\d{0,10})?$/.test(this.value),
+        var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
             val = this.value;
         
         if(!valid){

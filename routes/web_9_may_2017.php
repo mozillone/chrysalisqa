@@ -60,7 +60,7 @@ Route::post('/add/billing-adress', array('as' => 'billing_address.post','uses' =
 
 
 
-Route::any('/buy-it-now/{costume_id?}', array('as' => 'buy-it-now','uses' => 'CheckoutController@buyItNow'));
+Route::post('/buy-it-now', array('as' => 'buy-it-now','uses' => 'CheckoutController@buyItNow'));
 Route::any('/get/credit-card/{card_id?}', array('as' => 'add-credit-card','uses' => 'CheckoutController@getCreditCard'));
 Route::get('/get-adress/{type?}/{address_id?}', array('as' => 'shipping_address.post','uses' => 'CheckoutController@getAddressInfo'));
 Route::post('/order/charity/fund', array('as' => 'order-charity-fund','uses' => 'CheckoutController@orderCharityFund'));
@@ -91,7 +91,6 @@ Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeCo
 /* Request a bag starts here*/
 Route::any('/costume/request-a-bag', array('as' => '','uses' => 'CreateCostumeController@requestaBag'));
 Route::any('/costume/postrequestabag', array('as' => '','uses' => 'CreateCostumeController@Postrequestabag'));
-Route::any('/costume/successrequestbag', array('as' => '','uses' => 'CreateCostumeController@Successrequestbag'));
 Route::post('/postrequestabaglogin', ['as' => 'requestabaglogin.post','uses'=>'AuthController@postrequestabagLogin']);
 
 /* Request a bag ends here*/
@@ -135,11 +134,6 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 		Route::any('costumes-insert', ['as' => 'costumes-insert','uses'=>'CostumeController@insertCostume']);
 		Route::get('/reported/costumes', ['as' => 'reported-costumes-list','uses'=>'CostumeController@getReportedCostumes']);
 		Route::any('/costume-reports-list', ['as' => '','uses'=>'CostumeController@getReportedCostumesData']);
-	   	Route::get('/getallcostumes', array('as' => '','uses' => 'CostumeController@Getallcostumes'));
-	   	Route::get('/custome-listing/{id}', ['as' => '','uses'=>'CostumeController@CostumeList']);
-	   	Route::any('/changecostumestatus', ['as' => '','uses'=>'CostumeController@changeCostumeStatus']);
-	   	Route::any('/deletecostume/{id}', ['as' => '','uses'=>'CostumeController@deleteCostume']);
-
 		/****************Costumes Managemnet Code Ends Here***********************/
 
 		/****************Attributes Management Starts Here*********************/
@@ -190,7 +184,7 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	   /*****************************Orders starts here ***********************/
 
 	    /*****************************Orders ends here ***********************/
-	    Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
+	     Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
 	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
 	   
 	   /*****************************Request a bag starts here ***********************/

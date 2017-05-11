@@ -43,7 +43,7 @@ Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@ge
 Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesController@costumeReport'));
 
 /*******************Car Functionality stat here *********/
-Route::any('/addToCart', array('as' => '','uses' => 'CartController@addToCart'));
+Route::any('/addToCart', array('as' => 'report.post','uses' => 'CartController@addToCart'));
 Route::any('/cart', array('as' => 'cart','uses' => 'CartController@cart'));
 Route::any('/updateCart', array('as' => 'Update.Cart','uses' => 'CartController@updateCart'));
 Route::any('/cart/delete/{cart_item_id}/{cart_id}', array('as' => '','uses' => 'CartController@productRemoveFromCart'));
@@ -53,20 +53,7 @@ Route::get('/getMiniCartProducts', array('as' => '','uses' => 'CartController@ge
 
 /*******************Checkout Functionality stat here *********/
 Route::any('checkout', array('as' => '','uses' => 'CheckoutController@checkout'));
-Route::any('/checkout/placeorder', array('as' => 'place-order','uses' => 'CheckoutController@placeOrder'));
 Route::post('/add/credit-card', array('as' => 'add-credit-card','uses' => 'CheckoutController@addCreditCard'));
-Route::post('/add/shipping-adress', array('as' => 'shipping_address.post','uses' => 'CheckoutController@addShippingAddress'));
-Route::post('/add/billing-adress', array('as' => 'billing_address.post','uses' => 'CheckoutController@addBillingAddress'));
-
-
-
-Route::any('/buy-it-now/{costume_id?}', array('as' => 'buy-it-now','uses' => 'CheckoutController@buyItNow'));
-Route::any('/get/credit-card/{card_id?}', array('as' => 'add-credit-card','uses' => 'CheckoutController@getCreditCard'));
-Route::get('/get-adress/{type?}/{address_id?}', array('as' => 'shipping_address.post','uses' => 'CheckoutController@getAddressInfo'));
-Route::post('/order/charity/fund', array('as' => 'order-charity-fund','uses' => 'CheckoutController@orderCharityFund'));
-Route::any('/get/credit-card', array('as' => 'add-credit-card','uses' => 'CheckoutController@getCreditCard'));
-Route::any('/any/shipping-adress', array('as' => 'shipping_address.post','uses' => 'CheckoutController@getShippingAddress'));
-Route::any('/get/billing-adress', array('as' => 'billing_address.post','uses' => 'CheckoutController@getBillingAddress'));
 /*******************Checkout Functionality end here *********/
 
 
@@ -91,8 +78,8 @@ Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeCo
 /* Request a bag starts here*/
 Route::any('/costume/request-a-bag', array('as' => '','uses' => 'CreateCostumeController@requestaBag'));
 Route::any('/costume/postrequestabag', array('as' => '','uses' => 'CreateCostumeController@Postrequestabag'));
-Route::any('/costume/successrequestbag', array('as' => '','uses' => 'CreateCostumeController@Successrequestbag'));
 Route::post('/postrequestabaglogin', ['as' => 'requestabaglogin.post','uses'=>'AuthController@postrequestabagLogin']);
+
 
 /* Request a bag ends here*/
 
@@ -112,7 +99,6 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	  	Route::post('/admin/profile/post', ['as' => 'admin-profile-update','uses'=>'UserController@adminProfileUpdate']);
 	   /****************User Management Start Here***************************/
 	    Route::get('customers-list', ['as' => 'customers-list','uses'=>'UserController@customersList']);
-		Route::get('customes-list', ['as' => 'customes-list','uses'=>'UserController@customesList']);
 	    Route::any('/customers/list', 'UserController@customersListData');
 		Route::get('/user-costumes-list/{id}', ['as' => 'user-costumes-list','uses'=>'UserController@userCostumes']);
 		Route::get('/user-costumessold-list/{id}', ['as' => 'user-costumessold-list','uses'=>'UserController@userSoldcostumes']);
@@ -135,11 +121,6 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 		Route::any('costumes-insert', ['as' => 'costumes-insert','uses'=>'CostumeController@insertCostume']);
 		Route::get('/reported/costumes', ['as' => 'reported-costumes-list','uses'=>'CostumeController@getReportedCostumes']);
 		Route::any('/costume-reports-list', ['as' => '','uses'=>'CostumeController@getReportedCostumesData']);
-	   	Route::get('/getallcostumes', array('as' => '','uses' => 'CostumeController@Getallcostumes'));
-	   	Route::get('/custome-listing/{id}', ['as' => '','uses'=>'CostumeController@CostumeList']);
-	   	Route::any('/changecostumestatus', ['as' => '','uses'=>'CostumeController@changeCostumeStatus']);
-	   	Route::any('/deletecostume/{id}', ['as' => '','uses'=>'CostumeController@deleteCostume']);
-
 		/****************Costumes Managemnet Code Ends Here***********************/
 
 		/****************Attributes Management Starts Here*********************/
@@ -187,20 +168,11 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 	    Route::post('/charities/csvExport', array('as' => '','uses' => 'CharitiesController@charitiesCsvExport'));
 	   /****************Charities Management Ends Here***********************/
 
-	   /*****************************Orders starts here ***********************/
 
-	    /*****************************Orders ends here ***********************/
-	    Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
-	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
-	   
 	   /*****************************Request a bag starts here ***********************/
 	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
 	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
-	   	Route::any('/generatelables', array('as' => '','uses' => 'RequestabagController@Generatelables'));
-	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
-	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
-	   	Route::any('/closerequest', array('as' => '','uses' => 'RequestabagController@Closerequest'));
 	   /*****************************Request a bag ends here ***********************/
 
 });
