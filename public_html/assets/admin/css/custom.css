@@ -626,6 +626,7 @@ body .loading img{width:10%;}
 .sending-bag-sec p {
 	margin-bottom: 30px;
     margin-top: 10px;
+	line-height: 30px;
 }
 .process-bag-steps {
 	
@@ -658,8 +659,11 @@ body .loading img{width:10%;}
 
 @media only screen and (min-width : 1300px) {
 
-		.row_pregt .radio {
-    width: 15%;
+	.row_pregt .radio {
+		width: 15%;
+}
+	.radio-btn-align  .row_pregt .radio {
+		width: 30%;
 }
 }
 
