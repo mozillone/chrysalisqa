@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	
 	 $("#report").validate({
 			rules: {
 				name: {
