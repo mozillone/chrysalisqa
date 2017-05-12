@@ -9,6 +9,8 @@ use App\Helpers\Site_model;
 use App\Helpers\SiteHelper;
 use Auth;
 use Session;
+//use App\Helpers\StripeApp;
+
 
 class Creditcard extends Authenticatable
 {
@@ -22,9 +24,14 @@ class Creditcard extends Authenticatable
     protected $fillable = [
         'id', 'user_id', 'display_name', 'cardholder_name', 'credit_card_mask', 'card_type', 'is_default', 'payment_method_token','exp_month','exp_year','cvn_pin',
     ];
-
+    public function __construct()
+    {
+      //$this->stripe=new StripeApp();
+     
+    }
    protected function addCreditCard($req,$user_id){
-           
+        // $customer=$this->stripe->cards(Auth::user()->api_customer_id,$req['cardholder_name'],$req['cc_number'],$req['exp_month'],$req['cvn_pin'],$req['exp_year']);    
+       
         $cc_details=array('user_id'=>$user_id,
                        'cardholder_name'=>$req['cardholder_name'],
                        'credit_card_mask'=> $req['cc_number'],
@@ -34,6 +41,7 @@ class Creditcard extends Authenticatable
                        'cvn_pin'=> $req['cvn_pin'],
                        'created_at'=>date('Y-m-d H:i:s'));
         $cc_id=Site_model::insert_get_id('creditcard',$cc_details);
+
          $this->updateCartOrderInfo($cc_id,$req['cart_id']);
         return $cc_id;
         }
