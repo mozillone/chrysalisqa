@@ -952,6 +952,7 @@ p.sub-all.total_price{border-bottom:2px solid #ccc;border-top:2px solid #ccc;pad
 .check_out_page_right h3{text-align:left;margin-bottom:15px;font-size:18px;font-family:Proxima-Nova-Extrabold;border-bottom:2px solid #ccc;padding-bottom:15px;margin-top:0px;color:#000;}
 .check_out_page_right .order_summery{border-top:3px solid #60c5ac;}
 .methods p{	font-family: Proxima-Nova-Bold; font-size:16px; color:#000;}
+.checkout-content .check_out_page_left .methods p{word-break: break-all;}
 .check_out_page_left .methods:last-child{border:none;}
 .check_out_page_right .btn-primary:active{background-color:#ef456f;boder-color:#ef456f;}
 .check_out_page_right .btn-primary:focus{background-color:#ef456f;boder-color:#ef456f;}
@@ -2097,6 +2098,20 @@ a.fav-style {
 }
 .empty-cart {
 	text-align: center;
+}
+
+.loader-align {
+	position: relative;
+}
+.loader-align .form-rms-btn a.btn-rm-back span:hover{
+	color: #60c4ac;
+}
+
+img#ajax_loader {
+    position: absolute;
+    /* top: 1px; */
+    top: -54px;
+    left: 30px;
 }
 /********************************************************************Media start here********************************************************************/
 
