@@ -65,35 +65,35 @@ class CheckoutController extends Controller {
   return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries)->with('states',$states);
   }
   public function placeOrder(Request $request){
-  //   $req=$request->all();
-  //   $rule  =  array(  
-  //               'shipping_address_1' => 'required',
-  //               'pay_address_1' => 'required',
-  //               'card_id' => 'required',
-  //                );
-  // $messages = [
-  //       'shipping_address_1.required' => 'Shipping address is required',
-  //       'pay_address_1.required' => 'Billing address is required',
-  //       'card_id.required' => 'Payment method is required',
-  //   ];
+    $req=$request->all();
+    $rule  =  array(  
+                'shipping_address_1' => 'required',
+                'pay_address_1' => 'required',
+                'card_id' => 'required',
+                 );
+  $messages = [
+        'shipping_address_1.required' => 'Shipping address is required',
+        'pay_address_1.required' => 'Billing address is required',
+        'card_id.required' => 'Payment method is required',
+    ];
 
-  //   $validator = Validator::make($req,$rule,$messages);
-  //   if ($validator->fails()) {
-  //     return Redirect::back()
-  //     ->withErrors($validator)
-  //     ->withInput()->send();
-  //   }
+    $validator = Validator::make($req,$rule,$messages);
+    if ($validator->fails()) {
+      return Redirect::back()
+      ->withErrors($validator)
+      ->withInput()->send();
+    }
 
-  //   $result=Order::placeOrder($req);
-  //   if($result['result']=="0"){
-  //      Session::flash('error',$result['message']);
-  //      return Redirect::back();
+    $result=Order::placeOrder($req);
+    if($result['result']=="0"){
+       Session::flash('error',$result['message']);
+       return Redirect::back();
 
-  //   }else{
+    }else{
 
       $charities_list=Order::getCharitiesList();
-      return view('frontend.costumes.checkout.order_thanku')->with('order_id',17)->with('charities_list',$charities_list);
-    //}
+      return view('frontend.costumes.checkout.order_thanku')->with('order_id',$result['message'])->with('charities_list',$charities_list);
+    }
     }
   public function addShippingAddress(Request $request){
     $req=$request->all();

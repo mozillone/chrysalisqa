@@ -120,7 +120,7 @@ if (isset($total_data) && !empty($total_data)) {
 							<div class="cart-img">
 								<img  src="{{URL::asset('assets/frontend/img/item-1.png')}}">
 								<span class="price-tag">
-									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>4</span>
+									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>2</span>
 								</span>
 							</div>
                         </div>
@@ -128,7 +128,7 @@ if (isset($total_data) && !empty($total_data)) {
 							<div class="cart-img">
 								<img  src="{{URL::asset('assets/frontend/img/Item-2.png')}}">
 								<span class="price-tag">
-									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>2</span>
+									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>4</span>
 								</span>
 							</div>
                         </div>
@@ -199,7 +199,7 @@ if (isset($total_data) && !empty($total_data)) {
 
             <div class="costumes-label">
                 <span>MEDIUM QUALITY / HOMEMADE</span>
-                <span><i class="fa fa-usd" aria-hidden="true"></i> 2.00 - 5.00</span>
+                <span><i class="fa fa-usd" aria-hidden="true"></i> 3.00 - 8.00</span>
             </div>
             <div class="row costumes">
                 <div class="costumes-desktop">
@@ -207,7 +207,7 @@ if (isset($total_data) && !empty($total_data)) {
 						<div class="cart-img">
 							<img  src="{{URL::asset('assets/frontend/img/item-1.1.png')}}">
 							<span class="price-tag">
-									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>6</span>
+									Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>3</span>
 							</span>
 						</div>
                     </div>
@@ -215,7 +215,7 @@ if (isset($total_data) && !empty($total_data)) {
 						<div class="cart-img">
                         <img  src="{{URL::asset('assets/frontend/img/Item-2.1.png')}}">
 						<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>7</span>
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>5</span>
 							</span>
 							</div>
                     </div>
@@ -223,7 +223,7 @@ if (isset($total_data) && !empty($total_data)) {
 					<div class="cart-img">
                         <img  src="{{URL::asset('assets/frontend/img/Item-3.1.png')}}">
 						<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>9</span>
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>8</span>
 							</span>
 							</div>
                     </div>
@@ -290,14 +290,14 @@ if (isset($total_data) && !empty($total_data)) {
 
                 <div class="costumes-label">
                     <span class="film-sec"><img  src="{{URL::asset('assets/frontend/img/film.png')}}">FILM QUALITY</span>
-                    <span class="film-sec-price"><i class="fa fa-usd" aria-hidden="true"></i> 2.00 - 5.00</span>
+                    <span class="film-sec-price"><i class="fa fa-usd" aria-hidden="true"></i> 10.00 - 20.00</span>
                 </div>
                 <div class="row costumes">
                     <div class="col-md-4 col-sm-4">
 					<div class="cart-img">
                         <img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
 						<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>10</span>
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>15</span>
 							</span>
 							</div>
                     </div>
@@ -305,7 +305,7 @@ if (isset($total_data) && !empty($total_data)) {
 					<div class="cart-img">
                         <img  src="{{URL::asset('assets/frontend/img/Item-1.3.png')}}">
 						<span class="price-tag">
-							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>11</span>
+							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>10</span>
 							</span>
 							</div>
                     </div>
@@ -324,7 +324,7 @@ if (isset($total_data) && !empty($total_data)) {
 							If your costume is just too <br>
 								awesome, we suggest you
 						</p>
-						<a>Upload it Yourself!</a>
+						<a href="{{URL::to('costume/createtwo')}}">Upload it Yourself!</a>
 						<img  src="{{URL::asset('assets/frontend/img/Tip-arrow_right.png')}}">
 					</div>
             </div>
@@ -474,7 +474,7 @@ if (isset($total_data) && !empty($total_data)) {
 				</ul>
 				
 				<div id="myTabContent" class="tab-content">
-				<p>Please enter the registration details in order to proceed.</p>
+				<p>Email address is already registered sign in using your password</p>
 					<div class="tab-pane active in" id="login_tab1">
 						<form class=""  method="POST" id="loginpopup">   
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -551,6 +551,10 @@ $(document).ready(function()
 <script type="text/javascript">
 $(document).ready(function()
 {
+  $(document).on('click','.nxt',function() {
+  $("html, body").animate({ scrollTop: 0 }, "slow");
+  return false;
+});
 	$('#choose_an_option_for_bag_div').css('display','block');
 	$('#average_payouts_div').css('display','none');
 	$('#send_my_bag_div').css('display','none');
@@ -662,7 +666,7 @@ $(document).ready(function()
 		}
 		if (str == true) {
 			$('#send_my_bag_next').html("Submitting");
-			$('#send_my_bag_next').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
+			$('.request_bag_page').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
 			$.ajax({
 			 url: "{{URL::to('costume/postrequestabag')}}",
 			 type: "POST",

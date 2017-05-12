@@ -41,13 +41,13 @@
 <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_total_form" id="costume_total_form" method="post">
 <!--Create costume image code starts here-->
 	<div class="upload-photo-blogs" id="upload_div">
-	<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+	<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any accessories!</p>
 			<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 1</h2>
 		<h2 class="prog-head ">Upload Photos</h2>
 		
 		<!--- mobile heaindgs section end here -->
 
-		<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+		<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any accessories!</p>
 		
 		<!--- mobile heaindgs section end here -->
 		<div class="threeblogs">
@@ -651,7 +651,7 @@ $heading_value=$headingexplode[1];
 
 <p class="form-rms-que form-rms-que1 dnt_br">04. Donate a Portion to Charity</p>
 <p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However, if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
-<p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis' Terms & Conditions.</p>
+<p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis' <a style="border-bottom: 1px solid #ccc">Terms & Conditions</a>.</p>
 <p class="ct3-rms-head">Donation Amount</p>
 <div class="form-rms-input">
 <p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option value="none">None</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></p>

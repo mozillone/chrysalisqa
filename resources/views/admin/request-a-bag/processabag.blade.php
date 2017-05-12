@@ -145,6 +145,7 @@ print_r($payout_html);die;*/
 						<div class="">
 							   <a href="" id="generate_lables" class="btn btn-primary submit">Generate Bag Labels</a>
 						</div>
+						
 					</div>
 				</div>
 				<div class="box-body" id="tracking_ids" style="display: none;">
@@ -202,7 +203,11 @@ print_r($payout_html);die;*/
 				</div>
 				<div class="col-md-4">
 					<h4>Close Request:</h4>
+					<?php if ($all_data->status == 'Closed') { ?>
+						<p>Closed</p>
+					<?php  }else{  ?>
 					<a class="btn btn-primary submit" onclick="CloseRequest()">Close Request</a>
+					<?php } ?>
 				</div>
 				</div>
 				
