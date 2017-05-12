@@ -596,6 +596,7 @@ $heading_value=$headingexplode[1];
 <!-- </form> -->
 </div>
 <div class="prog-form-rm" id="preferences_div">
+	
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
 <p class="prog-txt  hidden-xs">You're almost done! Just a few more questions.</p>
 <h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">step 3</h2>
@@ -681,7 +682,8 @@ $heading_value=$headingexplode[1];
 
 
 
-<div class="form-rms-btn">
+<div class="form-rms-btn loader-align">
+	
 <a type="button" id="preferences_finished" class="btn-rm-nxt">I'm Finished!</a>
 <a type="button" id="preferences_back" class="btn-rm-back"><span>Back</span></a>
 </div>
@@ -840,7 +842,7 @@ $('#donate_charity').change(function(){
 	var donate_percent = $(this).val();
 	var price = $('#price').val();
 	var total = (price*donate_percent)/100;
-	if (total = "NaN") {
+	if (donate_percent=="none") {
 		var total = 0.00;
 	}
 	$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
@@ -1276,7 +1278,7 @@ $('#donate_charity').change(function(){
 		}
 		if (str == true) {
 			$('#preferences_finished').html("Submitting");
-			$('#preferences_finished').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
+			$('.loader-align').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
 			$.ajax({
 			 url: "{{URL::to('costume/costumecreate')}}",
 			 type: "POST",
