@@ -1069,6 +1069,10 @@ a#preferences_finished:hover{text-decoration:none}
     margin: 0 auto;
     padding-left: 0px;
 }
+.ct3-list span.crt-name {
+    color: #000;
+    font-weight: 600;
+}
 .ct3-list li img {    float: left;    width: 80px;    min-height: 80px;    margin-bottom: 5px;max-height: 80px;}
 .ct3-list li input{margin: 10px auto 0; display: block;}
 .ct1-rms-rel input.input-rm100 {    width: 75px;    float: left;    height: 30px;}
@@ -2069,7 +2073,10 @@ input.addtocart-rm {
     margin-left: 10px;
     font-weight: 700;
 }
-
+a.fav-icon-sec {
+	display: block;
+	margin: 0 15px;
+}
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){
@@ -2111,10 +2118,16 @@ input.addtocart-rm {
     top: 100px;    line-height: 18px;
 }
 	.img_layer {
-	position: relative;
-    cursor: pointer;
     max-height: 351px;
+    position: relative;
+    cursor: pointer;
+    min-height: 290px;
     overflow: hidden;
+    background: #f1f1f1;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 	
 }
 	.list-img-bg  .img_layer{
@@ -2873,6 +2886,9 @@ div#main-banner img{min-height:200px;width:100%;}
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
+	.upload-photo-blogs h4 {
+		font-size: 14px;
+	}
     .request-bag-steps {
         min-height: 180px;
     }
