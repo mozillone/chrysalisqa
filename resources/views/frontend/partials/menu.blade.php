@@ -9,7 +9,7 @@
 							<div class="icon_lins text-right">
 								<ul> 
 									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-envelope-open" aria-hidden="true"></i><br>Messages</button></li>
-									<li><a type="button" class="btn btn-default btn-lg text-center fav-icon-sec"><i class="fa fa-heart" aria-hidden="true"></i>@if(Auth::check())<span class="fav_count">{{helper::getMyWishlistCount()}}</span>@endif<br>@if(Auth::check())<a href="{{route('wishlist')}}"  class="fav-icon-sec">Favorites</a> @else <a data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </a></li>
+									<li><a type="button" class="btn btn-default btn-lg text-center fav-icon-sec"><i class="fa fa-heart" aria-hidden="true"></i>@if(Auth::check())<span class="fav_count">{{helper::getMyWishlistCount()}}</span>@endif<br>@if(Auth::check())<a href="{{route('wishlist')}}">Favorites</a> @else <a class="fav-style" data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </a></li>
 									<li><button type="button" class="dropdown-toggle btn btn-default btn-lg text-center mini-cart" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart <span class="mini_cart">{{helper::getCartCount()}}</span></button>
 										<ul class="dropdown-menu cart-products">
 										</ul>

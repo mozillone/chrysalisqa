@@ -5,32 +5,44 @@ section.top_nav span{color:#60c5ac;}
 
 
 @font-face {
-	font-family: Proxima-Nova-Regular;
-	src: url('../fonts/proxima_nova-webfont.woff2'), url('../fonts/ProximaNova-Regular.eot');
-	src: url('../fonts/Mark-Simonson-Proxima-Nova.ttf');
-	/* src: url('../fonts/ProximaNova-Regular.eot'); */
+    font-family: 'Proxima-Nova-Bold';
+    src: url('../fonts/MarkSimonsonProximaNovaBold.eot');
+    src: url('../fonts/MarkSimonsonProximaNovaBold.eot') format('embedded-opentype'),
+         url('../fonts/MarkSimonsonProximaNovaBold.woff2') format('woff2'),
+         url('../fonts/MarkSimonsonProximaNovaBold.woff') format('woff'),
+         url('../fonts/MarkSimonsonProximaNovaBold.ttf') format('truetype'),
+         url('../fonts/MarkSimonsonProximaNovaBold.svg#MarkSimonsonProximaNovaBold') format('svg');
 }
 
 @font-face {
-	font-family: Proxima-Nova-Semibold;
-	src: url('../fonts/proxima_nova_semibold-webfont.woff2'), src: url('../fonts/ProximaNova-Semibold.eot');
-	src: url('../fonts/Mark-Simonson-Proxima-Nova-Semibold.ttf');
-	/* src: url('../fonts/ProximaNova-Semibold.eot'); */
+    font-family: 'Proxima-Nova-Regular';
+    src: url('fonts/MarkSimonsonProximaNova.eot');
+    src: url('fonts/MarkSimonsonProximaNova.eot') format('embedded-opentype'),
+         url('fonts/MarkSimonsonProximaNova.woff2') format('woff2'),
+         url('fonts/MarkSimonsonProximaNova.woff') format('woff'),
+         url('fonts/MarkSimonsonProximaNova.ttf') format('truetype'),
+         url('fonts/MarkSimonsonProximaNova.svg#MarkSimonsonProximaNova') format('svg');
 }
 
 @font-face {
-	font-family: Proxima-Nova-Bold;
-	src: url('../fonts/proxima_nova_bold-webfont.woff2'), url('../fonts/ProximaNova-Bold.eot');
-	src: url('../fonts/Mark-Simonson-Proxima-Nova-Bold.ttf');
-	/* src: url('../fonts/ProximaNova-Bold.eot'); */
+    font-family: 'Proxima-Nova-Extrabold';
+    src: url('fonts/MarkSimonsonProximaNovaExtrabold.eot');
+    src: url('fonts/MarkSimonsonProximaNovaExtrabold.eot') format('embedded-opentype'),
+         url('fonts/MarkSimonsonProximaNovaExtrabold.woff2') format('woff2'),
+         url('fonts/MarkSimonsonProximaNovaExtrabold.woff') format('woff'),
+         url('fonts/MarkSimonsonProximaNovaExtrabold.ttf') format('truetype'),
+         url('fonts/MarkSimonsonProximaNovaExtrabold.svg#MarkSimonsonProximaNovaExtrabold') format('svg');
+}
+@font-face {
+    font-family: 'Proxima-Nova-Semibold';
+    src: url('fonts/MarkSimonsonProximaNovaSemibold.eot');
+    src: url('fonts/MarkSimonsonProximaNovaSemibold.eot') format('embedded-opentype'),
+         url('fonts/MarkSimonsonProximaNovaSemibold.woff2') format('woff2'),
+         url('fonts/MarkSimonsonProximaNovaSemibold.woff') format('woff'),
+         url('fonts/MarkSimonsonProximaNovaSemibold.ttf') format('truetype'),
+         url('fonts/MarkSimonsonProximaNovaSemibold.svg#MarkSimonsonProximaNovaSemibold') format('svg');
 }
 
-@font-face {
-	font-family: Proxima-Nova-Extrabold;
-	src: url('../fonts/proxima_nova_extrabold-webfont.woff2'), url('../fonts/ProximaNova-Extrabld.eot');
-	src: url('../fonts/Mark-Simonson-Proxima-Nova-Extrabold.ttf');
-	/* src: url('../fonts/ProximaNova-Extrabld.eot'); */
-}
 
 
 @font-face {
@@ -213,7 +225,7 @@ span.pip.col-md-3 {
 .icon_lins.text-right ul li .btn{padding:0px;border:none;color:#656465;}
 .icon_lins.text-right{float:right;padding:15px 0px;}
 .icon_lins.text-right ul li:last-child{border-right:0px;margin-right:-15px;}
-.container.main_menu ul li a.dropdown-toggle{font-size:18px;color:#010101;padding-left:25px;padding-right:25px;font-family: Proxima-Nova-Bold;}
+.container.main_menu ul li a.dropdown-toggle{font-size:18px;color:#010101;padding-left:24px;padding-right:24px;font-family: Proxima-Nova-Bold;}
 .container.main_menu ul li{position:relative;}
 .main_menu .navbar-default .navbar-nav>.open>a,.navbar-default .navbar-nav>.open>a:focus,.navbar-default .navbar-nav>.open>a:hover{background:none;}
 li.dropdown.mega-dropdown.open ul.dropdown-menu.mega-dropdown-menu.row{border-top:5px solid #60c5ac; width:450px;}
@@ -2077,6 +2089,12 @@ a.fav-icon-sec {
 	display: block;
 	margin: 0 15px;
 }
+a.fav-style {
+	margin: 0 15px;
+	color: #656465;
+    font-family: Proxima-Nova-Semibold;
+    font-size: 13px;
+}
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){
@@ -2394,6 +2412,9 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 }
 
 @media screen and (min-width:768px){
+	.navbar-static-top .navbar-collapse.collapse.main_menu_in{
+			padding-left: inherit;
+	}
 #report_item .modal-dialog, #login_popup_fav .modal-dialog{
     width: 500px;
 }
