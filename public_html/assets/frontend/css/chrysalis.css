@@ -2095,6 +2095,9 @@ a.fav-style {
     font-family: Proxima-Nova-Semibold;
     font-size: 13px;
 }
+.empty-cart {
+	text-align: center;
+}
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){
