@@ -1,8 +1,7 @@
 <?php
 
 return [
-    
-   
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -153,6 +152,7 @@ return [
         Illuminate\Foundation\Providers\FoundationServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
         Illuminate\Mail\MailServiceProvider::class,
+        Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
         Illuminate\Pagination\PaginationServiceProvider::class,
         Illuminate\Pipeline\PipelineServiceProvider::class,
@@ -163,8 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-      //  Maatwebsite\Excel\ExcelServiceProvider::class,
-       
+
         /*
          * Package Service Providers...
          */
@@ -177,11 +176,10 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\ResponseMacroServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        igaster\laravelTheme\themeServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
@@ -233,11 +231,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 	    'Theme' => igaster\laravelTheme\Facades\Theme::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'helper' => App\Helpers\SiteHelper::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+    	'SendGrid'  => Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
