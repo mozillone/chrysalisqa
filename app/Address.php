@@ -42,7 +42,9 @@ class Address extends Authenticatable
                     $this->addShippingAddress($req);
                     $this->updateCartOrderAddress($req);
                }else{
+                    if ($req['is_dashboard'] != 'no') {
                     $this->updateCartOrderInfo($req,'billing');
+                    }
                }
                return $address_id;
     }
@@ -136,4 +138,56 @@ class Address extends Authenticatable
         Site_model::update_data('cart',$data,$cond);
         return true;   
      }
+
+     protected function updateShippingAddress($req){
+                $user_id=Auth::user()->id;
+                if(!empty($req['shipping_state_dropdown'])){ $state=$req['shipping_state_dropdown'];}else{$state=$req['state'];}
+                 $billing_address=array('fname'=>$req['firstname'],
+                                       'lname'=>$req['lastname'],
+                                       'address1'=>$req['address_1'],
+                                       'address2'=>$req['address_2'],
+                                       'city'=>$req['city'],
+                                       'state'=> $state,
+                                       'country'=>$req['country'],
+                                       'zip_code'=>$req['postcode'],
+                                       'address_type'=>'shipping',
+                                       'user_id'=>Auth::user()->id,
+                                       'created_on'=>date('Y-m-d h:i:s')
+                                        );
+                 if(isset($req['is_billing'])){
+                    $this->addBillingAddress($req);
+                  }
+                  if ($req['is_new'] == 'no') {
+                    $update_table = DB::table('address_master')->where('user_id',$user_id)->where('address_type','shipping')->update($billing_address);
+                  }else{
+                    $update_table=Site_model::insert_get_id('address_master',$billing_address);                   
+                  }
+               return $update_table;
+    }
+
+    protected function updateBillingAddress($req){
+                $user_id=Auth::user()->id;
+                if(!empty($req['billing_state_dropdown'])){ $state=$req['billing_state_dropdown'];}else{$state=$req['state'];}
+                $billing_address=array('fname'=>$req['firstname'],
+                                       'lname'=>$req['lastname'],
+                                       'address1'=>$req['address_1'],
+                                       'address2'=>$req['address_2'],
+                                       'city'=>$req['city'],
+                                       'state'=> $state,
+                                       'country'=>$req['country'],
+                                       'zip_code'=>$req['postcode'],
+                                       'address_type'=>'billing',
+                                       'user_id'=>Auth::user()->id,
+                                       'created_on'=>date('Y-m-d h:i:s')
+                                        );
+                 if(isset($req['is_billing'])){
+                    $this->addBillingAddress($req);
+                  }
+                  if ($req['is_new'] == 'no') {
+                    $update_table = DB::table('address_master')->where('user_id',$user_id)->where('address_type','billing')->update($billing_address);
+                  }else{
+                    $update_table=Site_model::insert_get_id('address_master',$billing_address);                   
+                  }
+               return $update_table;
+    }
 }

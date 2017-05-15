@@ -161,9 +161,6 @@
 									
 									//echo "<pre>";print_r($billing_address);die;
 									?>
-									<?php }else{
-									$billing_address = "";
-									} ?>
 									<p class="bill_adrs">
 										
 										<span> {{$billing_address->fname}}{{$billing_address->lname}}<br>
@@ -172,10 +169,13 @@
 											{{$billing_address->country}}{{$billing_address->zip_code}}</span>
 									</p> 
 									<p class="bill_adrs_dlte">
-										<span><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+										<span><a href="#" onclick="edit_billing({{$billing_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#" onclick="delete_address({{$billing_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
 									</p>
+									<?php }else{
+									$billing_address = "";
+									} ?>
 									<div class="form-group add_new_btn">
-										<a type="submit" class="btn btn-default">Add New</a>
+										<a type="submit" class="btn btn-default" id="billing_popup_add">Add New</a>
 									</div>
 								</div>
 							</div>
@@ -187,9 +187,6 @@
 									
 									//echo "<pre>";print_r($billing_address);die;
 									?>
-									<?php }else{
-									$shipping_address = "";
-									} ?>
 									<p class="bill_adrs">
 										
 										<span> {{$shipping_address->fname}}{{$shipping_address->lname}}<br>
@@ -198,8 +195,11 @@
 											{{$shipping_address->country}}{{$shipping_address->zip_code}}</span>
 									</p> 
 									<p class="bill_adrs_dlte">
-										<span><a href="#" onclick="edit_shipping({{$shipping_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+										<span><a href="#" onclick="edit_shipping({{$shipping_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#" onclick="delete_address({{$shipping_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
 									</p>
+									<?php }else{
+									$shipping_address = "";
+									} ?>
 									<div class="form-group add_new_btn">
 										<a type="submit" class="btn btn-default" id="shipping_popup_add">Add New</a>
 									</div>
@@ -243,8 +243,10 @@
 	        <h4 class="modal-title">Shipping Address</h4>
 	      </div>
 	      <div class="modal-body">
-	       <form class="" action="javascript::void(0);" method="POST" id="shipping_address">   
+	       <form class="" action="{{route('shipping_address')}}" method="POST" id="shipping_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
+	       <input type="hidden" name="is_new" value="yes">
+
 						
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="chek-out">
@@ -337,6 +339,7 @@
 	      <div class="modal-body">
 	       <form class="" action="{{route('shipping_address')}}" method="POST" id="shipping_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
+	       <input type="hidden" name="is_new" value="no">
 						
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="chek-out">
@@ -354,49 +357,49 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="edit_shipping_address_1" value="{{$shipping_address->address1}}" placeholder="Address1 *" name="address_1">
+											<input type="text" class="form-control" id="edit_shipping_address_1" value="<?php if (isset($shipping_address->address1)) { echo $shipping_address->address1; } ?>" placeholder="Address1 *" name="address_1">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="edit_shipping_address_2" value="{{$shipping_address->address2}}" placeholder="Address2" name="address_2">
+											<input type="text" class="form-control" id="edit_shipping_address_2" value="<?php if (isset($shipping_address->address2)) { echo $shipping_address->address2; } ?>" placeholder="Address2" name="address_2">
 									</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="edit_shipping_city" placeholder="City *" value="{{$shipping_address->city}}" name="city">
+											<input type="text" class="form-control" id="edit_shipping_city" placeholder="City *" value="<?php if (isset($shipping_address->city)) { echo $shipping_address->city; } ?>" name="city">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="edit_shipping_postcode" value="{{$shipping_address->zip_code}}" placeholder="Zipcode *" name="postcode">
+											<input type="text" class="form-control" id="edit_shipping_postcode" value="<?php if (isset($shipping_address->zip_code)) { echo $shipping_address->zip_code; } ?>" placeholder="Zipcode *" name="postcode">
 										</div>
 									</div>
 									<div class="col-md-6">
 											<div class="form-group">
-												<select class="form-control state_dropdown" name="state" id="state_dropdown">
-													<option value="" selected>State</option>
+												<select class="form-control state_dropdown" name="state" id="shipping_state_dropdown">
+													<option value="" >State</option>
 													@foreach($states as $st)
-													<option <?php if($shipping_address->state == $st->name){ ?> selected="selected" <?php } ?> value="{{$st->name}}">{{$st->name}}</option>
+													<option <?php if(isset($shipping_address->state) == $st->name){ ?> selected="selected" <?php } ?> value="{{$st->name}}">{{$st->name}}</option>
 													@endforeach
 
 												</select>
-												<input type="text" class="form-control normal-states hide" id="state" placeholder="State *" name="state">
+												<input type="text" class="form-control normal-states hide" id="shipping_state" placeholder="State *" name="state">
 											</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<select class="form-control" name="shipping_country" id="country">
+											<select class="form-control" name="country" id="shipping_country">
 													<option value="" selected> Select</option>
 													@foreach($countries as $cnt)
-													<option value="{{$cnt->country_name}}" <?php if($shipping_address->country == $cnt->country_name){ ?> selected="selected" <?php } ?>>{{$cnt->country_name}}</option>
+													<option value="{{$cnt->country_name}}" <?php if(isset($shipping_address->country) == $cnt->country_name){ ?> selected="selected" <?php } ?>>{{$cnt->country_name}}</option>
 													@endforeach
 											</select>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group checkbox-align">
-											<input type="checkbox" class="form-control" id="edit_is_billing" name="edit_is_billing"><label for="billing:use_for_shipping_yes">Bill to this address</label>
+											<input type="checkbox" class="form-control" id="is_billing" name="is_billing"><label for="billing:use_for_shipping_yes">Bill to this address</label>
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -419,6 +422,192 @@
 
 	</div>
 </div>
+<div class="modal fade window-popup" id="billing_popup" tabindex="-1">
+	<div class="modal-dialog shopping-address-modal">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" id="shi_close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Billing Address</h4>
+	      </div>
+	      <div class="modal-body">
+	       <form class="" action="{{route('billing_address')}}" method="POST" id="billing_address">   
+	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
+	       <input type="hidden" name="is_new" value="yes">	       
+	       <div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="chek-out">
+								<div class="new_address">									
+									<div class="address-form">
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_address_1" placeholder="Address1 *" name="address_1">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_address_2" placeholder="Address2" name="address_2">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_city" placeholder="City *" name="city">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode">
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<div class="form-group">
+												<select class="form-control state_dropdown" name="billing_state_dropdown" id="billing_state_dropdown">
+													<option value="" selected>State</option>
+													@foreach($states as $st)
+													<option value="{{$st->name}}">{{$st->name}}</option>
+													@endforeach
+
+												</select>
+												<input type="text" class="form-control normal-states hide" id="billing_state" placeholder="State *" name="state">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<select class="form-control" name="country" id="billing_country">
+														<option value="" selected> Select</option>
+														@foreach($countries as $cnt)
+														<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
+														@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group checkbox-align">
+												<input type="checkbox" class="form-control" id="is_shipping" name="is_shipping"><label for="billing:use_for_shipping_yes">Ship to this address</label>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<button class="btn btn-primary submit-btn">Submit</button>
+										</div>
+									
+										
+									</div>
+								</div>
+			
+									
+								
+						</div>
+					</div>
+				</form>  
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="close close-btn" id="shi_close" data-dismiss="modal"><span>×</span> Close</button>
+	      </div>
+	    </div>
+
+	</div>
+</div>
+<div class="modal fade window-popup" id="billing_popup_edit" tabindex="-1">
+	<div class="modal-dialog shopping-address-modal">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close"  id="shi_close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Billing Address</h4>
+	      </div>
+	      <div class="modal-body">
+	       <form class="" action="{{route('billing_address')}}" method="POST" id="billing_address">   
+	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
+	       <input type="hidden" name="is_new" value="no">	       
+	       <div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="chek-out">
+								<div class="new_address">									
+									<div class="address-form">
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_address_1" placeholder="Address1 *" name="address_1" value="<?php if (isset($billing_address->address1)) { echo $billing_address->address1; } ?>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_address_2" placeholder="Address2" name="address_2" value="<?php if (isset($billing_address->address2)) { echo $billing_address->address2; } ?>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_city" placeholder="City *" name="city" value="<?php if (isset($billing_address->city)) { echo $billing_address->city; } ?>">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode" value="<?php if (isset($billing_address->zip_code)) { echo $billing_address->zip_code; } ?>">
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<div class="form-group">
+												<select class="form-control state_dropdown" name="billing_state_dropdown" id="billing_state_dropdown">
+													<option value="" >State</option>
+													@foreach($states as $st)
+													<option <?php if(isset($billing_address->state) == $st->name){ ?> selected="selected" <?php } ?> value="{{$st->name}}">{{$st->name}}</option>
+													@endforeach
+
+												</select>
+												<input type="text" class="form-control normal-states hide" id="billing_state" placeholder="State *" name="state">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<select class="form-control" name="country" id="billing_country">
+														<option value="" selected> Select</option>
+														@foreach($countries as $cnt)
+														<option <?php if(isset($billing_address->country) == $cnt->country_name){ ?> selected="selected" <?php } ?> value="{{$cnt->country_name}}">{{$cnt->country_name}}</option>
+														@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group checkbox-align">
+												<input type="checkbox" class="form-control" id="is_shipping" name="is_shipping"><label for="billing:use_for_shipping_yes">Ship to this address</label>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<button class="btn btn-primary submit-btn">Submit</button>
+										</div>
+									
+										
+									</div>
+								</div>
+			
+									
+								
+						</div>
+					</div>
+				</form>  
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="close close-btn" id="shi_close" data-dismiss="modal"><span>×</span> Close</button>
+	      </div>
+	    </div>
+
+	</div>
+</div>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 			$(document).ready(function(){
@@ -429,11 +618,14 @@
 					$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
 				});
 				$('#shipping_close,#shi_close').click(function(){
-					$('#shipping_popup_edit').css('display','none');
-					$('#shipping_popup').css('display','none');
-					$('#shipping_popup').removeClass('in');
-					$('#shipping_popup_edit').removeClass('in');
+					$('#shipping_popup_edit,#shipping_popup,#billing_popup,#billing_popup_edit').css('display','none');
+					$('#shipping_popup,#shipping_popup_edit,#billing_popup,#billing_popup_edit').removeClass('in');
 					$('.modal-backdrop').remove();
+				});
+				$('#billing_popup_add').click(function(){
+					$('#billing_popup').css('display','block');
+					$('#billing_popup').addClass('in');
+					$('#billing_popup_add').append('<div class="modal-backdrop fade in"></div>');
 				});
 				
 			});
@@ -441,6 +633,27 @@
 					$('#shipping_popup_edit').css('display','block');
 					$('#shipping_popup_edit').addClass('in');
 					$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
+					}
+				function  edit_billing($id){
+					$('#billing_popup_edit').css('display','block');
+					$('#billing_popup_edit').addClass('in');
+					$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
+					}
+				function  delete_address($id){
+					var id = $id;
+					 if (confirm("Are you sure?")) {
+					        $.ajax({
+								 url: "{{URL::to('delete_address')}}",
+								 type: "POST",
+								 data: {'id':id},
+								 success: function(data){
+								 	if (data == "success") {
+								 		window.location.href = "{{URL::to('/dashboard')}}";
+								 	}
+								 }
+							});
+					    }
+					    return false;
 					}
 			$(document).on('change','#shipping_country,#billing_country',function(){
     		if($(this).val()!="United States"){

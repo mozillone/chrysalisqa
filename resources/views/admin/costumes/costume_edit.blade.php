@@ -95,7 +95,7 @@
 	<label for="inputEmail3" class="control-label">Customer<span class="req-field" >*</span></label>
 	<select class="form-control sony" data-live-search="true" id="customer_name" name="customer_name" >
 	<option value="">Select Customer Name</option>
-	<option value="0">None</option>
+	<option <?php if ($cos_data->customer_name == 'admin m') { ?> selected="selected"<?php } ?> value="0">None</option>
 	@foreach($customers as $index=>$customer)
 	
 	<option <?php if ($cos_data->customer_name == $customer->username) { ?> selected="selected" <?php	} ?> value="{{$customer->id}}">{{$customer->username}}</option>

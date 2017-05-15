@@ -32,6 +32,8 @@ Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthControll
 Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
 Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'DashboardController@EditProfile']);
 Route::any('/shipping_address', ['as' => 'shipping_address','uses'=>'DashboardController@addShippingAddress']);
+Route::any('/billing_address', ['as' => 'billing_address','uses'=>'DashboardController@addBillingAddress']);
+Route::any('/delete_address', ['as' => '','uses'=>'DashboardController@deleteAddress']);
 
 /** Products list page start here **/
 //Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
