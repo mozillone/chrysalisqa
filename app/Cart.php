@@ -155,8 +155,9 @@ class Cart extends Authenticatable
         $res=DB::Select('SELECT quantity FROM `cc_costumes` WHERE costume_id='.$costume_id.' having quantity>='.$qnt.'');
         return $res;
     }
-    protected function getCartCount(){
-        $currentCookieKeyID=SiteHelper::currentCookieKey();
+    protected function getCartCount($cookie_id){
+       // $currentCookieKeyID=SiteHelper::currentCookieKey();
+       $currentCookieKeyID=$cookie_id;
         if(Auth::check()){
         	$where="where crt.user_id=".Auth::user()->id.' or crt.cookie_id="'.$currentCookieKeyID.'"';
         }else{

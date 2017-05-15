@@ -24,7 +24,7 @@ class UserController extends Controller
     {
       $this->csv = new ExportFile();
       $this->sitehelper = new SiteHelper();
-     // $this->stripe=new StripeApp();
+      $this->stripe=new StripeApp();
       $this->middleware(function ($request, $next) {
           if(!Auth::check()){
             return Redirect::to('/admin/login')->send();
