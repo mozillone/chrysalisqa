@@ -23,7 +23,7 @@ $(document).ready(function() {
 	$("#billing_country").rules("add", {required:true});
 
 	$("#cardholder_name").rules("add", {required:true,maxlength: 50});
-	$("#cc_number").rules("add", {required:true,number:true,cc_chk:true});
+	$("#cc_number").rules("add", {required:true,cc_chk:true});
 	$("#card_type").rules("add", {required:true});
 	$("#exp_month").rules("add", {required:true});
 	$("#exp_year").rules("add", {required:true});

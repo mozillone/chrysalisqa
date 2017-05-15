@@ -726,54 +726,9 @@ class CostumeController extends Controller
 		$this->data['costumes_data'] = DB::table('costumes as c')->where('c.costume_id',$id)
 		->leftJoin('users as u','c.created_by','u.id')
 		->leftJoin('costume_description as cd','c.costume_id','cd.costume_id')
-		->select('u.display_name as customer_name','cd.name as costume_name','c.gender as cos_gender','c.condition as cos_condition')
+		->select('u.display_name as customer_name','cd.name as costume_name')
 		->first();
-		/*******Array push for both categories and subcategories displaying code starts here*****/
 		$this->data['categories']=array('modules_result'=>array());
-		/****Getting the hotel feautures code starts here***/
-		$hotelfeautures =\DB::table('category')->where('parent_id','=','0')->get();
-		//print_r($hotelfeautures);exit;
-		 $hotelcount=count($hotelfeautures);
-		if($hotelcount > 0)
-		{
-			 $module_array=array();
-			 foreach($hotelfeautures as $feautures_response)
-			 {
-				 foreach($feautures_response as $feauture_key=>$feauture_val)
-				 {
-					  $module_array[$feauture_key]=$feauture_val;
-				 }
-				  $module_array['submodule_result']=array();
-				  /* >> sub module code start*/
-				  $where=array('cc.parent_id'=>$feautures_response->category_id);
-					  $hotelfeautures=\DB::table('category as cc')
-					 ->join('category', 'category.category_id', '=', 'cc.parent_id')
-           ->select('cc.category_id as subcategoryid','cc.name as subcategoryname')->where($where)->get();
-					  $sub_count=count($hotelfeautures);
-					  if($sub_count > 0)
-					  {
-						  $submodule_array=array();
-						  foreach($hotelfeautures as $sub_response)
-							{
-								$submodule_array['count']=$feautures_response->category_id;
-								foreach($sub_response as $sub_key=>$sub_val)
-								{
-									$submodule_array[$sub_key]=$sub_val;
-								}
-								array_push($module_array['submodule_result'],$submodule_array);
-								
-							}
-					  }
-				 array_push($this->data['categories']['modules_result'],$module_array);
-			 }
-			 
-		}
-		//all_attributes_options
-		$this->data['get_costume_attribute_options'] = DB::table('costume_attribute_options')->where('costume_id',$id)->get();
-		foreach ($this->data['get_costume_attribute_options'] as  $costume_attribute_optionsvalue) {
-			$this->data['costume_attribute_options'] = $costume_attribute_optionsvalue;
-		}
-		//print_r($categories); exit;
 		$this->data['bd_height']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',16)->first();
 		$this->data['bd_height_in']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',17)->first();
         $this->data['bd_weight']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',18)->first();
