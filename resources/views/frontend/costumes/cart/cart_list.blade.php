@@ -55,7 +55,7 @@
 															 <p><span class="new-price">${{number_format($cart->price, 2, '.', ',')}}</span></p>
 															@endif
 													</div>
-													<div class="col-md-1 col-sm-1 col-xs-12">
+													<div class="col-md-1 col-sm-1 col-xs-8">
 													<p class="price_right text-right"><form action="{{route('Update.Cart')}}" method="POST" class="items"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="cart_id" value="{{$cart->cart_id}}"/><input type="hidden" name="costume_name" value="{{$cart->costume_name}}"/><input type="hidden" name="costume_id" value="{{$cart->costume_id}}"/><input name="qty" value="{{$cart->qty}}" class="form-control"/><button class="btn btn-primary item-update">Update</button></form></p>
 													</div>
 													<div class="col-md-3 col-sm-3 col-xs-12">
