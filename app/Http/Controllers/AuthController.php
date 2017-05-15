@@ -16,7 +16,6 @@ use Socialite;
 use URL;
 use Cookie;
 use DB;
-use App\Helpers\StripeApp;
 class AuthController extends Controller {
 
 	protected $auth;
@@ -24,7 +23,6 @@ class AuthController extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->auth = $auth;
-		$this->stripe=new StripeApp();
 		 		
 	}
 	public function index()
@@ -81,7 +79,7 @@ class AuthController extends Controller {
 				if (!empty($req['plan_id'])){
 					return Redirect::to('/subscription/'.$req['plan_id']);
 				}
-				 $currentCookieKeyID=SiteHelper::currentCookieKey();
+				  $currentCookieKeyID=SiteHelper::currentCookieKey();
 				 if($currentCookieKeyID!="0"){
 				   	Cart::updateCartToUser();
 				  }
@@ -127,18 +125,14 @@ class AuthController extends Controller {
 		}
 	    $rand=md5(uniqid(rand(), true));
 	    if(count(Session::get('social_data'))){ $active="1";}else{ $active="0";}
-	    $customer=$this->stripe->customers($req['email']);
-				
 	   $users = User::create([ 'first_name'      => $req['first_name'],
 			                   'last_name'       => $req['last_name'],
 			                   'display_name'    => trim($req['first_name']).' '.trim($req['last_name']),
 			                   'email'           => $req['email'],
 			                   'password'   => bcrypt($req['password']),
 			                   'active'=>$active,
-							   'activate_hash'=>$rand,
-							   'api_customer_id'=>$customer['id']
+							   'activate_hash'=>$rand
 			                   ])->id;
-
                          
   		if($users){
   			Session::flush();

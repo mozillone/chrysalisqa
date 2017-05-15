@@ -15,7 +15,6 @@ use App\Order;
 use App\Address;
 use Validator;
 use cookie;
-use App\Helpers\StripeApp;
 class CheckoutController extends Controller {
 
   protected $auth;
@@ -23,7 +22,6 @@ class CheckoutController extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->sitehelper = new SiteHelper();
-   // $this->stripe=new StripeApp();
       $this->middleware(function ($request, $next) {
               if(!Auth::check()){
                 return Redirect::to('/login')->send();

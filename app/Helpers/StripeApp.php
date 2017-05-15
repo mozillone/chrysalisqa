@@ -27,17 +27,40 @@ class StripeApp  {
                 
 				return $card;
 	}
-	public function charge($amount,$currency,$customer_id,$card_id)
+	public function charge($amount,$currency,$customer_id,$card_id,$desc)
 	{
 
 			 	$charge = Stripe::charges()->create([
 			        'amount' => $amount,
 			        'currency' => $currency,
 			        'customer' => $customer_id,
-			        'card' => $card_id
+			        'card' => $card_id,
+			        'description' => $desc
 			      ]);
                
 			 	return $charge;
    }
-  
+   public function charge_capture($amount,$currency,$customer_id,$card_id,$desc,$capture)
+   {
+   	       $charge = Stripe::charges()->create([
+			        'amount' => $amount,
+			        'currency' => $currency,
+			        'customer' => $customer_id,
+			        'card' => $card_id,
+			        'description' => $desc,
+			        'capture' => $capture
+			      ]);
+               
+			 	return $charge;
+   }
+   public function find_capture($trans_id)
+   {
+		   	$charge = Stripe::charges()->find($trans_id);
+		    return $charge;
+   }
+   public function charge_uncapture($trans_id)
+   {
+		   	$charge = Stripe::charges()->capture($trans_id);
+		    return $charge;
+   }
 }

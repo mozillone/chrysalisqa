@@ -13,7 +13,6 @@ use App\Helpers\SiteHelper;
 use App\Helpers\ExportFile;
 use Hash;
 use Response;
-use App\Helpers\StripeApp;
 
 class UserController extends Controller
 {
@@ -24,7 +23,6 @@ class UserController extends Controller
     {
       $this->csv = new ExportFile();
       $this->sitehelper = new SiteHelper();
-     // $this->stripe=new StripeApp();
       $this->middleware(function ($request, $next) {
           if(!Auth::check()){
             return Redirect::to('/admin/login')->send();
@@ -162,7 +160,6 @@ class UserController extends Controller
 		else{
 			$file_name="";
 		}
-			$customer=$this->stripe->customers($req['email']);
 			$user = new User();
 			$user->first_name    = $req['first_name'];
 			$user->last_name     = $req['last_name'];
@@ -173,7 +170,6 @@ class UserController extends Controller
 			$user->password      = Hash::make($req['password']);
 			$user->active        = "1";
 			$user->user_img =$file_name;
-			$user->api_customer_id =$customer['id'];
 			
 			
 			if($user->save()){

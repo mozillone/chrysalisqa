@@ -12,7 +12,8 @@
         "yajra/laravel-datatables-oracle": "~6.0",
         "cartalyst/stripe-laravel": "5.0.*",
         "maatwebsite/excel": "~2.1.0",
-         "laravel/socialite": "^2.0" 
+         "laravel/socialite": "^2.0",
+          "shippo/shippo-php": "1.*" 
           },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -23,7 +24,7 @@
         "maatwebsite/excel": "~2.1.0",
         "laravel/socialite": "^2.0",
          "cartalyst/stripe-laravel": "5.0.*"
-    },
+     },
     "autoload": {
         "classmap": [
             "database"
