@@ -67,7 +67,13 @@ class SiteHelper  {
 		return true;
 	}
 	public static function getCartCount(){
-		$count=Cart::getCartCount();
+		$cookie=cookie::get('min-cart');
+        if(is_array($cookie)){
+        	$cookie_id=key($cookie);
+        }else{
+        	$cookie_id=0;
+        }
+		$count=Cart::getCartCount($cookie_id);
 		return $count;
 	}
 	public static function currentCookieKey(){

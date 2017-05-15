@@ -40,7 +40,7 @@ class CartController extends Controller {
   }
   public function addToCart(Request $request){
     $req=$request->all();
-    $verify=$this->verifieCookie();
+     $verify=$this->verifieCookie();
              if($verify){
               $result=$this->getCookieAllProducts();
                foreach($result as $value){
@@ -53,7 +53,7 @@ class CartController extends Controller {
                   if(count($res)){
                     Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
                     $res=$this->updateCartDetails($costume_id,$qty+1);
-                    $count=Cart::getCartCount();
+                    $count=Cart::getCartCount($cookie_id);
                     return response($count)->cookie($res);
                   }else{
                     return response('out of stock');
@@ -68,7 +68,7 @@ class CartController extends Controller {
                      $product[$cookie_id][]=array($req['costume_id']=>$qty);
                      Cart::addToCart($req,$cookie_id,$qty);
                      $reslt=$this->productsAddToCookie($product);
-                     $count=Cart::getCartCount();
+                     $count=Cart::getCartCount($cookie_id);
                      return response($count)->cookie($reslt);
                  }else{
                   return response('out of stock');
@@ -86,7 +86,7 @@ class CartController extends Controller {
                Cart::addToCart($req,$cookie_id,$qty);
                $res=$this->productsAddToCookie($product);
                $reslt=$this->productsAddToCookie($product);
-               $count=Cart::getCartCount();
+               $count=Cart::getCartCount($cookie_id);
                return response($count)->cookie($res);
              }
     
