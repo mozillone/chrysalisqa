@@ -13,7 +13,7 @@ use Session;
 use Config;
 use App\Cart;
 use App\Charities;
-use App\Helpers\StripeApp;
+//use App\Helpers\StripeApp;
 class Order extends Authenticatable
 {
    protected $fillable = [
@@ -21,7 +21,7 @@ class Order extends Authenticatable
     ];
   public function __construct()
   {
-    $this->stripe=new StripeApp();
+    //$this->stripe=new StripeApp();
   }
     protected function placeOrder($req){
         $data=Cart::getCartProducts();
@@ -79,7 +79,7 @@ class Order extends Authenticatable
              $api_customer_id=Auth::user()->api_customer_id;
 
              
-             $this->stripe->charge($amount,$currency,$api_customer_id,$token);
+             //$this->stripe->charge($amount,$currency,$api_customer_id,$token);
              Site_model::insert_get_id('order_total',$order_total);
              Site_model::delete_single('cart',array('cart_id'=>$data['basic'][0]->cart_id));
              $result=array('result'=>1,'message'=>$order_id);
