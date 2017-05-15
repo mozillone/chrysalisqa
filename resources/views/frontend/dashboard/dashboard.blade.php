@@ -12,26 +12,22 @@
      </div>
    </section>    
    	<section class="content create_section_page">
-   		<div class="row">
-				<div class="col-md-12 col-sm-12">
-					@if (Session::has('error'))
-		            <div class="alert alert-danger alert-dismissable">
-						<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-						{{ Session::get('error') }}
-					</div>
-		            @elseif(Session::has('success'))
-					<div class="alert alert-success alert-dismissable">
-						<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-						{{ Session::get('success') }}
-					</div>
-					@endif
+   		<div class="container">
+			@if (Session::has('error'))
+	            <div class="alert alert-danger alert-dismissable">
+					<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+					{{ Session::get('error') }}
 				</div>
-		</div>
-		
-		<div class="container">
+	            @elseif(Session::has('success'))
+				<div class="alert alert-success alert-dismissable">
+					<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+					{{ Session::get('success') }}
+				</div>
+			@endif
+			
 			<div class="row">
 				<div class="col-md-12">
-					<div class="dashboard-top-box">
+						<div class="dashboard-top-box">
 						<p class="left_heading"><span>MY ACCOUNT</span> Keep your account info up to date for a smooth checkout process!</p>
 						<p class="right_heading">
 							<span class="my_msg"> My Messages</span>
