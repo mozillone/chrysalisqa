@@ -1,5 +1,6 @@
 @extends('/frontend/app')
 @section('styles')
+<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
   @endsection
 @section('content')
  <div class="container">
@@ -20,7 +21,7 @@
 						@endif
 						<div class="row">
 							<div class="col-md-9 col-sm-9 col-xs-12">
-								<div class="cart_page_vew">
+								<div class="cart_page_vew span-align">
 									@if(count($data['basic']))
 									@foreach($data['basic'] as $cart)
 										<div class="well">
@@ -48,18 +49,18 @@
 														<?php $discount=($cart->price/100)*$cart->discount;
 															   $new_price=$cart->price-$discount;
 													    ?>
-															<p><span class="old-price"><strike>{{number_format($cart->price, 2, '.', ',')}}</strike></span> <span class="new-price">{{number_format($new_price, 2, '.', ',')}}</span></p>
+															<p><span class="old-price"><strike>${{number_format($cart->price, 2, '.', ',')}}</strike></span> <span class="new-price">${{number_format($new_price, 2, '.', ',')}}</span></p>
 															@else
 															 <?php $new_price=$cart->price;?>
-															 <p><span class="new-price">{{number_format($cart->price, 2, '.', ',')}}</span></p>
+															 <p><span class="new-price">${{number_format($cart->price, 2, '.', ',')}}</span></p>
 															@endif
 													</div>
-													<div class="col-md-1 col-sm-1 col-xs-12">
+													<div class="col-md-1 col-sm-1 col-xs-8">
 													<p class="price_right text-right"><form action="{{route('Update.Cart')}}" method="POST" class="items"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="cart_id" value="{{$cart->cart_id}}"/><input type="hidden" name="costume_name" value="{{$cart->costume_name}}"/><input type="hidden" name="costume_id" value="{{$cart->costume_id}}"/><input name="qty" value="{{$cart->qty}}" class="form-control"/><button class="btn btn-primary item-update">Update</button></form></p>
 													</div>
 													<div class="col-md-3 col-sm-3 col-xs-12">
 														<p class="price_right text-right"><span class="check_price">${{number_format(($cart->qty)*($new_price), 2, '.', ',')}}</span> 
-														<span><a href="/cart/delete/{{$cart->cart_item_id}}/{{$cart->cart_id}}"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
+														<span><a href="javascript::void(0);" data-item-id="{{$cart->cart_item_id}}" data-cart_id="{{$cart->cart_id}}" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
 													</div>
 												</div>
 											</div>
@@ -115,5 +116,6 @@
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
-
+<script src="{{ asset('/assets/frontend/js/pages/cart.js') }}"></script>
+<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 @stop

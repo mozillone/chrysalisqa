@@ -94,7 +94,7 @@ class CostumesController extends Controller {
 		}else{
 			$is_login=' ';
 		}
-		$costumes = DB::select('SELECT cst.costume_id,dsr.name,cst.price as price'.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,cst.created_user_group,cst.quantity,link.url_key,created_user_group,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1"  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id and prom.code="" LEFT JOIN cc_coupon_costumes as cpn_cst on cpn_cst.costume_id=cst.costume_id '.$where.' group by cst.costume_id '.$order_by.' ');
+		$costumes = DB::select('SELECT cst.costume_id,dsr.name,FORMAT(cst.price,2) as price'.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,cst.created_user_group,cst.quantity,link.url_key,created_user_group,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1"  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id and prom.code="" LEFT JOIN cc_coupon_costumes as cpn_cst on cpn_cst.costume_id=cst.costume_id '.$where.' group by cst.costume_id '.$order_by.' ');
 		return response()->success(compact('costumes'));
 	}
 	public function costumeSingleView($slug1=null,$slug2=null,$slug3=null)
@@ -108,7 +108,7 @@ class CostumesController extends Controller {
 				$data['random_costumes']=Costumes::getRandomCategoyCostumesList($data[0]->category_id);
 				$data['images']=Costumes::getCostumeImages($costume_id);
 				$data['seller_info']=Costumes::costumeSellerInfo($data[0]->created_by);
-				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1);
+				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2);
 			}else{
 		     	return view('frontend.404');
 			}
@@ -136,4 +136,5 @@ class CostumesController extends Controller {
         return Redirect::back();
 
 	}
+	
 }

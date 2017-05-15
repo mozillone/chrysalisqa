@@ -41,13 +41,13 @@
 <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_total_form" id="costume_total_form" method="post">
 <!--Create costume image code starts here-->
 	<div class="upload-photo-blogs" id="upload_div">
-	<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+	<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any accessories!</p>
 			<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 1</h2>
 		<h2 class="prog-head ">Upload Photos</h2>
 		
 		<!--- mobile heaindgs section end here -->
 
-		<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+		<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any accessories!</p>
 		
 		<!--- mobile heaindgs section end here -->
 		<div class="threeblogs">
@@ -596,6 +596,7 @@ $heading_value=$headingexplode[1];
 <!-- </form> -->
 </div>
 <div class="prog-form-rm" id="preferences_div">
+	
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
 <p class="prog-txt  hidden-xs">You're almost done! Just a few more questions.</p>
 <h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">step 3</h2>
@@ -651,7 +652,7 @@ $heading_value=$headingexplode[1];
 
 <p class="form-rms-que form-rms-que1 dnt_br">04. Donate a Portion to Charity</p>
 <p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However, if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
-<p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis' Terms & Conditions.</p>
+<p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis' <a style="border-bottom: 1px solid #ccc">Terms & Conditions</a>.</p>
 <p class="ct3-rms-head">Donation Amount</p>
 <div class="form-rms-input">
 <p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option value="none">None</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></p>
@@ -681,7 +682,8 @@ $heading_value=$headingexplode[1];
 
 
 
-<div class="form-rms-btn">
+<div class="form-rms-btn loader-align">
+	
 <a type="button" id="preferences_finished" class="btn-rm-nxt">I'm Finished!</a>
 <a type="button" id="preferences_back" class="btn-rm-back"><span>Back</span></a>
 </div>
@@ -840,7 +842,7 @@ $('#donate_charity').change(function(){
 	var donate_percent = $(this).val();
 	var price = $('#price').val();
 	var total = (price*donate_percent)/100;
-	if (total = "NaN") {
+	if (donate_percent=="none") {
 		var total = 0.00;
 	}
 	$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
@@ -1276,7 +1278,7 @@ $('#donate_charity').change(function(){
 		}
 		if (str == true) {
 			$('#preferences_finished').html("Submitting");
-			$('#preferences_finished').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
+			$('.loader-align').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
 			$.ajax({
 			 url: "{{URL::to('costume/costumecreate')}}",
 			 type: "POST",

@@ -49,7 +49,7 @@ p.list-sec-rm1.fav_costume sapn.active {
 						<div class="col-md-6">
 							<p class="list-sec-rm1 fav_costume"><sapn class="active"><i aria-hidden=true class="fa fa-heart-o"></i></sapn> My Favorties ({{helper::getMyWishlistCount()}})</p>
 						</div>
-						<div class="col-md-6 text-right pull-right">
+						<div class="col-md-6 text-right pull-right back-link">
 							<a href="/dashboard">Back to My Account</a>
 						</div>
 
@@ -58,17 +58,6 @@ p.list-sec-rm1.fav_costume sapn.active {
 				</div>
 			<div class="list_products wish_lists">
 				<div class="row">
-				@if (Session::has('error'))
-				            <div class="alert alert-danger alert-dismissable">
-								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-								{{ Session::get('error') }}
-							</div>
-				            @elseif(Session::has('success'))
-							<div class="alert alert-success alert-dismissable">
-								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-								{{ Session::get('success') }}
-							</div>
-							@endif
 				@if(count($data))
 				@foreach($data as $wish)
 

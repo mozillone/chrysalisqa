@@ -55,7 +55,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'setTheme' => \igaster\laravelTheme\Middleware\setTheme::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'frontend' => \App\Http\Middleware\FronEndUsersMiddleware::class,
+        'frontend' => \App\Http\Middleware\ValidateBackHistory::class,
 
     ];
 }

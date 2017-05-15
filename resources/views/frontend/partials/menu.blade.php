@@ -7,9 +7,9 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="icon_lins text-right">
-								<ul>
+								<ul> 
 									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-envelope-open" aria-hidden="true"></i><br>Messages</button></li>
-									<li><button type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-heart" aria-hidden="true"></i>@if(Auth::check())<span class="fav_count">{{helper::getMyWishlistCount()}}</span>@endif<br>@if(Auth::check())<a href="{{route('wishlist')}}">Favorites</a> @else <a data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </button></li>
+									<li><a type="button" class="btn btn-default btn-lg text-center fav-icon-sec"><i class="fa fa-heart" aria-hidden="true"></i>@if(Auth::check())<span class="fav_count">{{helper::getMyWishlistCount()}}</span>@endif<br>@if(Auth::check())<a href="{{route('wishlist')}}">Favorites</a> @else <a class="fav-style" data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </a></li>
 									<li><button type="button" class="dropdown-toggle btn btn-default btn-lg text-center mini-cart" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart <span class="mini_cart">{{helper::getCartCount()}}</span></button>
 										<ul class="dropdown-menu cart-products">
 										</ul>
@@ -145,17 +145,10 @@
 						<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 							<i class="fa fa-search"></i>
 						</button>
-						<?php 
-
-									if (isset(Auth::user()->id) && !empty(Auth::user()->id)) { ?>
-						<a href="{{URL::to('costume/sell-a-costume')}}"type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+						
+						<a href="{{URL::to('costume/sell-a-costume')}}" type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 							<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
 						</a>
-						<?php }  else{ ?>
-						<a href="{{URL::to('login')}}"type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
-							<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
-						</a>
-						<?php }?>
 					</div>
 					<div class="mobile-rm">	
 						<ul class="nav nav-tabs mobile-tabs @if(!Auth::check()) is_login @endif">

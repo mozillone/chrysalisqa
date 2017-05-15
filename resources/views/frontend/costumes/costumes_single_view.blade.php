@@ -15,7 +15,12 @@
 <section class="product_Details_page">
 	<div class="container">
 <div class="row">
-<div class="col-md-5 bxslider-strt">
+	<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home &nbsp;&nbsp;></a>
+  <a class="breadcrumb-item" href="/category/{{$parent_cat_name}}/{{$sub_cat_name}}">{{$data[0]->cat_name}} > &nbsp;</a>
+  <span class="breadcrumb-item active">{{$data[0]->name}}</span>
+</nav>
+<div class="col-md-5 carousel-bg-style bxslider-strt">
 
 <ul class="bxslider">
 @foreach($data['images'] as $images)
@@ -46,14 +51,24 @@
 	{{ Session::get('success') }}
 </div>
 @endif
-<h1>{{$data[0]->name}}
+<h1 class="social-media-sec">
+
+
+{{$data[0]->name}}
 @if(Auth::check())
 	<a href="#" onclick="return false;" class="fav_costume" data-costume-id='{{$data[0]->costume_id}}'>
+
 @else
-	<a data-toggle="modal" data-target="#login_popup">
+	<a data-toggle="modal" data-target="#login_popup_fav">
 @endif
+
 <span @if($data[0]->is_fav)  class="active" @endif>@if($data[0]->is_fav)<i aria-hidden=true class="fa fa-heart"></i> @else <i aria-hidden=true class="fa fa-heart-o"></i>@endif</span></a>
-	</h1>
+<div>
+	<a href="javascript:void(0)" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title={{$data[0]->name}}&&u={{Request::url()}}')"><i class="fa fa-facebook" aria-hidden="true"></i></a>  
+	<a href="javascript:void(0)" onclick="genericSocialShare('http://twitter.com/share?&amp;url={{Request::url()}}')"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+	<a  href="javascript:void(0)" onclick="genericSocialShare('https://plus.google.com/share?url={{Request::url()}}')"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+</div>
+	</h1> 
 
 <!---Price section start -->
 	<div class="row">
@@ -74,8 +89,18 @@
 	</div>
 
 	<div class="col-xs-6 col-sm-4 viewBtn_rm">
-	<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
-	<button type="button" class="buynow-rm">@if(!Auth::check())<a data-toggle="modal" data-target="#login_popup" class="buynow-rm">Buy it Now!</a>  @else <a href="/checkout" class="buynow-rm">Buy it Now!</a>@endif</button>
+	@if(helper::verifyCostumeQuantity($data[0]->costume_id,$data[0]->quantity+1) && $data[0]->quantity>0)
+		<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
+		@if(!Auth::check())
+		<button type="button" class="buynow-rm"><a data-toggle="modal" data-target="#login_popup" class="buynow-rm">Buy it Now!</a> </button>
+		 @else
+			 <form action="{{route('buy-it-now')}}" method="POST"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="costume_id" value="{{ $data[0]->costume_id }}">
+									 <input type="submit" class="addtocart-rm" value="Buy it Now!">
+			</form>
+		@endif
+	 @else
+		 <button type="button" class="addtocart-rm" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> Out of stock</button>
+	@endif
 	</div>
 
 	</div>
@@ -133,7 +158,7 @@
 
 <div class="col-md-12 detailes_view_slider">
 <h2 class="viewHead-rm">People Also Viewing</h2>
-<div class="home_product_slider">
+<div class="home_product_slider recently-viewed">
 			<div class="container">
 				<div class="row">
 						<div class="col-xs-12">
@@ -169,9 +194,10 @@
 				</div>
 			<div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="login-register" id="loginModal">
+			<div class="report_item_pupup" id="loginModal">
 			
 				<div id="myTabContent" class="tab-content">
+				<h2>Report Item</h2>
 			
 					<div class="tab-pane active in" id="login_tab1">
 						<form class="" action="{{route('report.post')}}" method="POST" id="report">   
@@ -231,4 +257,10 @@
 <script src="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
 <script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
+<script type="text/javascript" async >
+ function genericSocialShare(url){
+	      window.open(url,'sharer','toolbar=0,status=0,width=648,height=395');
+        return true;
+    }
+</script>
 @stop

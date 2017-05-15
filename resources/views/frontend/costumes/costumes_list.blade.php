@@ -8,6 +8,7 @@
  	<section class="content create_section_page">
  	<div id="ohsnap"></div>
 <!--  	list-banner container html start here -->
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -123,7 +124,7 @@
 
 	</div>
 
-<div class="list_products">
+<div class="list_products list-img-bg">
 	<div class="row" id="itemContainer">
 	</div>
 </div>

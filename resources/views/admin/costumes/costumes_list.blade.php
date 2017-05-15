@@ -18,7 +18,7 @@
     <li>
         <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
     </li>
-    <li class="active">Customes List</li>
+    <li class="active">Costumes List</li>
   </ol>
 </section>
 <section class="content" ng-controller="CostumesController">
@@ -37,9 +37,9 @@
         @endif
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Customes List</h3>
+                    <h3 class="box-title">Costumes List</h3>
                     <div class="box-tools pull-right" style="display:inline-flex">
-                    <a href="customer-add" class="btn btn-block btn-success btn-xs"><i class="fa fa-plus"></i> Add Customer</a>
+                    <a href="customer-add" class="btn btn-block btn-success btn-xs"><i class="fa fa-plus"></i> Add Custome</a>
                     </div>
                 </div>
                 <div class="box-body">
@@ -70,15 +70,33 @@
               </table>
         </div>
           <div class="table-responsive">
-          <table datatable dt-options="dtOptions" dt-columns="dtColumns"
+          <!-- <table datatable dt-options="dtOptions" dt-columns="dtColumns"
                         class="table table-bordered table-hover table-striped" id="dtTable">
-          </table>
+          </table> -->
+          <table class="table table-bordered table-hover" id="customes-list-table">
+              <thead>
+                  <tr>
+                      <th>SKU #</th>
+                      <th>Costume Name</th>
+                      <th>Customer Name</th>
+                      <th>Category</th>
+                      <th>Condition</th>
+                      <th>Created Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                 </tr>
+          </thead>
+              <tbody>
+          </tbody>
+        </table>
           </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
 @stop
 
 
@@ -87,6 +105,70 @@
 <script src="{{ asset('angular/Admin/UserManagement/Controllers/users-lists.js') }}"></script>
 <script src="{{ asset('angular/Admin/UserManagement/Services/user_management.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+
+
+<script type="text/javascript">
+   function changeCostumeStatus(id, status) {
+        $.ajax({
+            type: "GET",
+            url: '{!! url('changecostumestatus') !!}',
+            data: {'id':id,'status':status},
+            dataType: 'json',
+            success: function(response) {
+                if(response){
+                    table.ajax.reload();
+                }
+            }
+        });
+        }
+        var table = '';
+  $(function() {
+            table = $('#customes-list-table').DataTable({
+      "ajax": {
+            "url" : "getallcostumes",
+           "type": "GET",
+         },
+      "searching": false,
+      "pageLength": 25,
+      "bLengthChange": false,
+      
+      "columns": [
+        { data: 'sku_no', name: 'sku_no'},
+        { data: 'custome_name', name: 'custome_name'},
+        { data: 'customer_name', name: 'customer_name'},
+        { data: 'cat_name', name: 'cat_name'},
+        { data: 'custome_condition', name: 'custome_condition'},
+        { data: 'custome_created_at', name: 'custome_created_at'},
+        { data: 'status', name: 'status'},
+        { data: 'actions', name: 'actions'}
+      ]
+    });
+
+
+  }); 
+
+
+        function deletecostume($id){
+        var id=$id;
+
+    swal({
+       title: "Are you sure want to delete this Costume?",
+                  showCancelButton: true,
+                 confirmButtonColor: "#DD6B55 ",
+                 confirmButtonText: "Yes, delete",
+                 closeOnConfirm: false,
+                 closeOnCancel: true
+               },
+
+               function(){
+               url = "/deletecostume/"+id+"";
+                window.location = url;
+               });
+
+
+   }
+
+</script>
 
 @stop
 

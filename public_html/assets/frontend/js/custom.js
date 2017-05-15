@@ -1,4 +1,5 @@
 $(function(){
+
 	$("#loginpopup").validate();
 	$("#loginpopup_email").rules("add", {required:true,email: true,messages: {
 		email: "Enter a valid  user email"
@@ -80,7 +81,7 @@ $(function(){
 			url: '/getMiniCartProducts',
 			success: function(response){
 				if(response['basic'].length){
-					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date"><span>'+response['basic'].length+' Item Added</span><a href="/cart">View & Edit Cart</a><span class="shi_date_right text-right right"><span classs="subtl">Subtotal</span><span class="ctr-tl-price"> $'+response['basic'][0].total+'</span></span></div><div class="row scels">';
+					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date cart-price"><span>'+response['basic'].length+' Items Added<br><a href="/cart">View & Edit Cart</a></span><span class="shi_date_right text-right right"><span classs="subtl">Subtotal</span><span class="ctr-tl-price"> $'+response['basic'][0].total+'</span></span></div><div class="row scels">';
 				$.each(response['basic'],function(i,value){
 					var path='/costumers_images/Medium/'+value.image+'';
 					if(fileExists(path)){
@@ -88,7 +89,7 @@ $(function(){
 					}else{
 						var src='/costumers_images/default-placeholder.jpg';
 					}
-					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" height="65px" width="50px"></div><div class="media-body"><h4 class="media-heading">'+value.costume_name+'</h4><p><b>Item Condition:</b>'+value.condition+'</p><p><b>Size:</b>'+value.size+'</p></div></div></div>'
+					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" height="65px" width="50px"></div><div class="media-body"><h4 class="media-heading"><a href="/product'+value.url_key+'">'+value.costume_name+'</a></h4><p><b>Item Condition : </b>'+capitalization(value.condition)+'</p><p><b>Size : </b>'+capitalization(value.size)+'</p></div></div></div>'
 				});
 				cart+='</div></div><div class="chk-out"><a href="/checkout">Proceed to Checkout</a></div></div>';
 				}else{
@@ -117,5 +118,12 @@ $(function(){
         $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
         //$('.accordion-heading i').toggleClass('fa-chevron-right fa-chevron-down');
     });
+    function capitalization(name){
+    	firstChar = name.substring( 0, 1 ); 
+    	firstChar.toUpperCase();
+		tail = name.substring( 1 ); 
+		name = firstChar.toUpperCase() + tail;
+		return name;
+    }
     
 })

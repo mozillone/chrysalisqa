@@ -83,7 +83,7 @@
 </div>
 
 <div class="col-md-6">
-<div class="form-rms">
+<div class="form-rms column-align">
 <p class="form-rms-que form-rms-que1">04. Donate a Portion to Charity</p>
 <p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However,if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
 <p class="ct3-rms-text">By Choosing to donate,I agree and accept Chrysalis Terms & Conditions.</p>

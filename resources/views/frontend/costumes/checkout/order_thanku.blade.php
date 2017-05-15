@@ -5,6 +5,22 @@
 @section('content')
  <div class="container">
 		<div class="row">
+		@if (Session::has('error'))
+        <div class="alert alert-danger alert-dismissable">
+			<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+			{{ Session::get('error') }}
+		</div>
+        @elseif(Session::has('success'))
+		<div class="alert alert-success alert-dismissable">
+			<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+			{{ Session::get('success') }}
+		</div>
+		@endif
+			<form action="{{route('order-charity-fund')}}" method="POST" id="order-charity">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input type="hidden" name="order_id" value="{{$order_id}}">
+			<input type="hidden" name="amount" value="1">
+					
 			<div class="thankyou-rm">
 				<div class="col-md-6">
 				<h2 class="prog-head">Thank You For Your Purchase!</h2>
@@ -25,7 +41,7 @@
 					<h2 class="prog-head">Did You know?</h2>
 					<p class="thankyou-text">A portion of our profits goes to a charity of your choice. Please take a moment to select a cause you feel most passionate about. Should this field be left blank, we will choose a charity on your behalf.</p>
 
-					<div class="thankyou-rms">
+					<div>
 
 
 
@@ -33,18 +49,18 @@
 					@foreach($charities_list as $charities)
 					<li>
 						@if(file_exists(public_path('/charities_images/'.$charities->image)))
-							<img src="/charities_images/{{$charities->image}}" alt="cst3" /><input type="radio" name="cst3" /></li>
+							<img src="/charities_images/{{$charities->image}}" alt="cst3" /><span class="crt-name">{{$charities->name}}</span><input type="radio" name="charity" id="charity" value="{{$charities->id}}"/></li>
 						@else
-							<img src="/charities_images/default-placeholder.jpg" alt="cst3" /><input type="radio" name="cst3" /></li>
+							<img src="/charities_images/default-placeholder.jpg" alt="cst3" />{{$charities->name}}<input type="radio" name="charity" id="charity"/></li>
 						@endif
 					@endforeach
 					</ul>
-					<p class="cst2-rms-chck"><input type="checkbox"> I would like to suggest another charity organization</p>
+					<p class="cst2-rms-chck"><input type="checkbox"  id="suggest_charity" checked="checked"> I would like to suggest another charity organization</p>
 
 
 					<div class="thankyou-rms">
-					<p class="thankyou-rms-head thankyou-textR"><span>Please Specify:</span>
-					<input type="text" placeholder="Organization Name" /></p>
+					<p class="thankyou-rms-head thankyou-text"><span>Please Specify:</span>
+					<input type="text" placeholder="Organization Name" name="suggest_charity" / ></p>
 					</div>
 
 					</div>
@@ -60,9 +76,10 @@
 					<div class="thankyou-donate">Your Donation: <span>$0.25</span> <br/>
 					Our Donation: <span>$0.25</span> <br/>
 					Total Donation: <span>$0.50</span></div>
-					<button type="button" class="thankyou-btn">Submit</button>
+					<input type="submit" value="Submit" class="thankyou-btn"/>
 					</div>
 				</div>
+				</form>
 
 			</div>
 	</div>	
@@ -71,4 +88,6 @@
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
+<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('/assets/frontend/js/pages/order_thanku.js') }}"></script>
 @stop

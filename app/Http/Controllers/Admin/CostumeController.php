@@ -638,6 +638,27 @@ class CostumeController extends Controller
 
 		
 	}
+	public function getReportedCostumes(){
+        return view('admin.costumes.ReportedCostumes.reported_costumes_list');
+	}
+    public function getReportedCostumesData(Request $request){
+		$req=$request->all();
+		$where="where 1";
+		if(count($req)){
+			if(!empty($req['search']['sku_no']) ){
+				$where.=' AND cst.sku_no="'.$req['search']['sku_no'].'"';
+			}
+			if(!empty($req['search']['cst_name']) ){
+					$where.=' AND cst.name LIKE "%'.$req['search']['cst_name'].'%"';
+			}
+			if(!empty($req['search']['user_name']) ){
+					$where.=' AND report.name LIKE "%'.$req['search']['user_name'].'%"';
+			}
+		}
+		$costume_reports = DB::select('SELECT cst.costume_id,cst.sku_no,cst.name as cst_name,report.name as user_name,report.phn_no,report.email,report.reason,DATE_FORMAT(report.created_at,"%m/%d/%Y %h:%i %p") as date FROM `cc_reported_costumes` as report LEFT JOIN cc_costumes as cst on cst.costume_id=report.costume_id '.$where.'');
+		return response()->success(compact('costume_reports'));
+	}
+
 	/*
 	Method Name :editCostume()
 	purpose:editCostume Method is used to show the edit page of costumes***/
@@ -650,13 +671,7 @@ class CostumeController extends Controller
 	public function updateCostume(){
 	
 	}
-	/*
-	Method name:deleteCostume()
-	purpose:deletCostume Method is used to delete the costume
-	*/
-	public function deleteCostume(){
 	
-	}
 	/*
 	Method Name:searchCostume()
 	purpose:searchCostume is used to search the costume
@@ -677,5 +692,172 @@ class CostumeController extends Controller
         return response()->json(['success'=>$imageName]);
 	}
 
+	public function Getallcostumes(){
+		$costumes=DB::table('costumes as c')->where('c.deleted_status','0')->leftJoin('costume_description as cd','c.costume_id','cd.costume_id')
+		->leftJoin('users as u','c.created_by','u.id')
+		->leftJoin('costume_to_category as ctc','c.costume_id','ctc.costume_id')
+		->leftJoin('category as cat','ctc.category_id','cat.category_id')
+		->select('c.sku_no as sku_no','cd.name as custome_name','u.display_name as customer_name','cat.name as cat_name','c.condition as custome_condition','c.created_at as custome_created_at','c.status as custome_status','c.costume_id as costumeid')->get();
+		
+	return Datatables::of($costumes)
+        ->addColumn('actions', function ($costumes) {
+                return '<a href="/custome-listing/'.$costumes->costumeid.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
+                <a href="javascript:void(0);" onclick="deletecostume('.$costumes->costumeid.')" class="btn btn-xs btn-danger delete_user"><i class="fa fa-trash-o"></i> Delete</a>';
+            }) 
+		->editColumn('status', function ($costumes) {
+					if ($costumes->custome_status == 'active') {
+						$costume_status = "1";
+					}else{
+						$costume_status = "0";
+					}
+                   $a = $costume_status == '1' ? 'checked' : '';
+                   return '<label class="switch">
+                                   <input type="checkbox" '.$a.' class="status" id="'. $costumes->costumeid .'" onClick="changeCostumeStatus('.$costumes->costumeid.','.$costume_status.');">
+                                   <div class="slider round"></div>
+                               </label>';
+                   })
+        ->make(true);
+	}
 
+	public function CostumeList($id){
+		//echo "<pre>";print_r($id);die;
+		$this->data = array();
+
+		$this->data['costumes_data'] = DB::table('costumes as c')->where('c.costume_id',$id)
+		->leftJoin('users as u','c.created_by','u.id')
+		->leftJoin('costume_description as cd','c.costume_id','cd.costume_id')
+		->select('u.display_name as customer_name','cd.name as costume_name','c.gender as cos_gender','c.condition as cos_condition')
+		->first();
+		/*******Array push for both categories and subcategories displaying code starts here*****/
+		$this->data['categories']=array('modules_result'=>array());
+		/****Getting the hotel feautures code starts here***/
+		$hotelfeautures =\DB::table('category')->where('parent_id','=','0')->get();
+		//print_r($hotelfeautures);exit;
+		 $hotelcount=count($hotelfeautures);
+		if($hotelcount > 0)
+		{
+			 $module_array=array();
+			 foreach($hotelfeautures as $feautures_response)
+			 {
+				 foreach($feautures_response as $feauture_key=>$feauture_val)
+				 {
+					  $module_array[$feauture_key]=$feauture_val;
+				 }
+				  $module_array['submodule_result']=array();
+				  /* >> sub module code start*/
+				  $where=array('cc.parent_id'=>$feautures_response->category_id);
+					  $hotelfeautures=\DB::table('category as cc')
+					 ->join('category', 'category.category_id', '=', 'cc.parent_id')
+           ->select('cc.category_id as subcategoryid','cc.name as subcategoryname')->where($where)->get();
+					  $sub_count=count($hotelfeautures);
+					  if($sub_count > 0)
+					  {
+						  $submodule_array=array();
+						  foreach($hotelfeautures as $sub_response)
+							{
+								$submodule_array['count']=$feautures_response->category_id;
+								foreach($sub_response as $sub_key=>$sub_val)
+								{
+									$submodule_array[$sub_key]=$sub_val;
+								}
+								array_push($module_array['submodule_result'],$submodule_array);
+								
+							}
+					  }
+				 array_push($this->data['categories']['modules_result'],$module_array);
+			 }
+			 
+		}
+		//all_attributes_options
+		$this->data['get_costume_attribute_options'] = DB::table('costume_attribute_options')->where('costume_id',$id)->get();
+		foreach ($this->data['get_costume_attribute_options'] as  $costume_attribute_optionsvalue) {
+			$this->data['costume_attribute_options'] = $costume_attribute_optionsvalue;
+		}
+		//print_r($categories); exit;
+		$this->data['bd_height']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',16)->first();
+		$this->data['bd_height_in']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',17)->first();
+        $this->data['bd_weight']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',18)->first();
+		$this->data['bd_chest']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',19)->first();
+		$this->data['bd_waist']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',20)->first();
+		/******Costume Faq code starts here*****/
+		$this->data['cosplay_one']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',2)->first();
+		$this->data['cosplay_one_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',2)->get();
+		$this->data['cosplay_two']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',3)->first();
+		$this->data['cosplay_two_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',3)->get();
+		$this->data['cosplay_three']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',4)->first();
+		$this->data['cosplay_three_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',4)->get();
+		$this->data['cosplay_four']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',5)->first();
+		$this->data['cosplay_four_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',5)->get();
+		$this->data['cosplay_five']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',21)->first();
+		$this->data['cosplay_five_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',21)->get();
+		/****Description,funfacts and faq code starts here***/
+		$this->data['descriptions']=DB::table('attributes')
+		->leftJoin('attribute_options','attribute_options.attribute_id','=','attributes.attribute_id')
+		->select('attributes.attribute_id','attributes.code','attributes.label','attributes.type','attribute_options.option_id','attribute_options.option_value')
+		->where('attributes.attribute_id','>=',6)
+		->where('attributes.attribute_id','<=',8)
+		->get();
+		$this->data['shippingoptions']=DB::table('attributes')
+		->leftJoin('attribute_options','attribute_options.attribute_id','=','attributes.attribute_id')
+		->select('attributes.attribute_id','attributes.code','attributes.label','attributes.type','attribute_options.option_id','attribute_options.option_value')
+		->where('attributes.attribute_id','=',9)
+		->first();
+		$this->data['packageditems']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',10)->first();
+		$this->data['packageditems_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',10)->get();
+		$this->data['dimensions']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',11)->first();
+		$this->data['dimensions_values']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',11)->get();
+		//print_r($description);exit;
+		$this->data['type']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',12)->first();
+		$this->data['type_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',12)->get();
+		$this->data['service']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',13)->first();
+		$this->data['service_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',13)->get();
+		$this->data['handling']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',14)->first();
+		$this->data['handling_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',14)->get();
+		$this->data['returnpolicy']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',15)->first();
+		$this->data['returnpolicy_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',15)->get();
+		$this->data['charities']=DB::table('charities')->select('id as id','name as name')->get();
+		$this->data['description']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',6)->first();
+		$this->data['description_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',6)->get();
+		$this->data['funfacts']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',7)->first();
+		$this->data['funfacts_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',7)->get();
+		$this->data['faq']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',8)->first();
+		$this->data['faq_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',8)->get();
+
+		$this->data['customers']=DB::table('users')->select('id as id','display_name as username')
+	 ->where('role_id','!=','1')
+	 ->where('active','=','1')
+	 ->orderby('display_name','ASC')
+	 ->get();
+		 return view('admin.costumes.costume_edit')->with($this->data);
+	}
+
+	public function changeCostumeStatus(Request $request) {
+        $status = $request->input('status'); 
+		$id     = $request->input('id');
+		$get_costume = DB::table('costumes')->where('costume_id', $id)->first(['status']);
+		if ($get_costume->status == 'active') {
+			$user = DB::table('costumes')->where('costume_id', $id)->update(['status' => 'inactive']);
+		}else{
+			$user = DB::table('costumes')->where('costume_id', $id)->update(['status' => 'active']);
+
+		}
+        
+        return $user;
+    }
+    /*
+	Method name:deleteCostume()
+	purpose:deletCostume Method is used to delete the costume
+	*/
+    public function deleteCostume($id){
+    	//echo "<pre>";print_r($id);die;
+    	//ALTER TABLE `cc_costumes` ADD `deleted_status` ENUM('1','0') NOT NULL AFTER `updated_at`; 
+    	//ALTER TABLE `cc_costumes` CHANGE `deleted_status` `deleted_status` ENUM('1','0') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0'; 
+    	$user = DB::table('costumes')->where('costume_id', $id)->update(['deleted_status' => '1']);
+    	
+
+        return redirect('/customes-list')->with('success', 'Costume deleted Successfully.');
+
+    }
+
+    
 }

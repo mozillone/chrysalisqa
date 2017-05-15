@@ -219,7 +219,6 @@ class Cart extends Authenticatable
           $total=0;
           foreach( $cart_products['basic'] as $cart){
             if($cart->created_user_group=="admin"){
-              echo $cart->price;
               $count++;
               $cart_products['dis_count']=$count;
               $total=($total+($cart->price/100)*$cart->discount)*$cart->qty;

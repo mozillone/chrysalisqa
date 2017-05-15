@@ -12,6 +12,7 @@ use Cookie;
 use Session;
 use Config;
 use App\Cart;
+use App\Charities;
 
 class Order extends Authenticatable
 {
@@ -45,6 +46,7 @@ class Order extends Authenticatable
                                'created_at'=>date('Y-m-d h:i:s'),
                             );
              $order_id=Site_model::insert_get_id('order',$order_info);
+             $this->orderStatusInserted($order_id,Config::get('constants.Processing'));
              foreach($data['basic'] as $cart){
                   $costume_info=array('costume_id'=>$cart->costume_id, 
                              'sku'=>$cart->sku, 
@@ -70,9 +72,33 @@ class Order extends Authenticatable
             return $result;
         }
     }
+    private function orderStatusInserted($order_id,$status_id){
+       $order_status=array('order_id'=>$order_id,'status_id'=>$status_id);
+       Site_model::insert_get_id('order_status',$order_status);
+       return true;
+    }
     protected function getCharitiesList(){
        $charities_list=DB::Select('SELECT * FROM cc_charities');
        return $charities_list;
     }
-    
+    protected function orderCharityFund($req){
+     if(isset($req['suggest_charity']) && !isset($req['charity'])){
+         $result=array('name'=>$req['suggest_charity'],
+                        'suggested_by'=>Auth::user()->id,
+                        'created_at'=>date('Y-m-d h:i:s')
+                        );
+         $charity_id=Site_model::insert_get_id('charities',$result);
+      }else{
+       $charity_id=$req['charity'];
+      }
+      $result=array('order_id'=>$req['order_id'],
+                    'charity_id'=>$charity_id,
+                    'amount'=>$req['amount'],
+                    'created_at'=>date('Y-m-d h:i:s')
+                      );
+       Site_model::insert_get_id('order_charity',$result);
+       $carity_info=Charities::getCharityInfo($charity_id);
+       return  $carity_info;
+    }
+  
 }

@@ -969,5 +969,8 @@ class CreateCostumeController  extends Controller {
 		}
 	}
 
-	
+	public function Successrequestbag(){
+		
+	  return view('frontend.costumes.sucess_request_bag');
+	}
 }

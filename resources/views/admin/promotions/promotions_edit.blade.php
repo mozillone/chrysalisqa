@@ -66,7 +66,7 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                                     </div>
                                     <div class="form-group has-feedback">
                                         <label for="inputEmail3" class="control-label">Discount Type <span class="req-field" >*</span></label>
-										<div class="row_pregt">
+										<div class="row_pregt radio-btn-align">
                                             <div class="radio col-md-4">
                                                 <input type="radio" value="percentage" name="type" @if($data['basic'][0]->type=="percentage") checked @endif>Percentage</label>
                                
