@@ -256,14 +256,14 @@
 	<label for="inputEmail3" class="control-label">Size<span class="req-field" >*</span></label>
 	<select name="size" id="size" class="form-control">
 	<option value="">Select Size</option>
-	<option value="1sz">1SZ</option>
-	<option value="xxs">XXS</option>
-	<option value="xs">XS</option>
-	<option value="xs">S</option>
-	<option value="m">M</option>
-	<option value="l">L</option>
-	<option value="xl">XL</option>
-	<option value="xxl">XXL</option>
+	<option <?php if ($cos_data->cos_size == '1sz') { ?> selected='selected' <?php } ?> value="1sz">1SZ</option>
+	<option <?php if ($cos_data->cos_size == 'xxs') { ?> selected='selected' <?php } ?> value="xxs">XXS</option>
+	<option <?php if ($cos_data->cos_size == 'xs') { ?> selected='selected' <?php } ?> value="xs">XS</option>
+	<option <?php if ($cos_data->cos_size == 's') { ?> selected='selected' <?php } ?> value="s">S</option>
+	<option <?php if ($cos_data->cos_size == 'm') { ?> selected='selected' <?php } ?> value="m">M</option>
+	<option <?php if ($cos_data->cos_size == 'l') { ?> selected='selected' <?php } ?> value="l">L</option>
+	<option <?php if ($cos_data->cos_size == 'xl') { ?> selected='selected' <?php } ?> value="xl">XL</option>
+	<option <?php if ($cos_data->cos_size == 'xxl') { ?> selected='selected' <?php } ?> value="xxl">XXL</option>
 	</select>
 	<span id="size_error" style="color:red"></span>
 	</div>
@@ -486,7 +486,7 @@
 
 	<label for="inputEmail3" class="control-label">{{$description->label}}<span class="req-field" ></span></label>
 	<div class="input-group">
-	<textarea type="{{$description->type}}" rows="6" cols="63" class="form-control"   name="{{$description->code}}" id="{{$description->code}}"></textarea>
+	<textarea type="{{$description->type}}"  rows="6" cols="63" class="form-control"   name="{{$description->code}}" id="{{$description->code}}">{{$cos_data->cos_description}}</textarea>
 
 	</div>
 
@@ -529,7 +529,7 @@
 	<label for="inputEmail3" class="control-label">Price<span class="req-field" ></span></label>
 	<div class="input-group">
 	<span class="input-group-addon">$</span>
-	<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="price" id="price" >
+	<input type="text" class="form-control" value="{{$cos_data->cos_price}}" aria-label="Amount (to the nearest dollar)" name="price" id="price" >
 
 	<span id="priceerror" style="color:red">
 	</div>
@@ -542,16 +542,17 @@
 	<label for="inputEmail3" class="control-label">Quantity*<span class="req-field" ></span></label>
 	<select class="form-control" name="quantity" id="quantity">
 	<option value="">Select Quantity</option>
-	<option value="1">1</option>
-	<option value="2">2</option>
-	<option value="3">3</option>
-	<option value="4">4</option>
-	<option value="5">5</option>
-	<option value="6">6</option>
-	<option value="7">7</option>
-	<option value="8">8</option>
-	<option value="9">9</option>
-	<option value="10">10</option>
+	
+	<option <?php if ($cos_data->cos_quantity == '1') { ?> selected='selected' <?php } ?> value="1">1</option>
+	<option <?php if ($cos_data->cos_quantity == '2') { ?> selected='selected' <?php } ?> value="2">2</option>
+	<option <?php if ($cos_data->cos_quantity == '3') { ?> selected='selected' <?php } ?> value="3">3</option>
+	<option <?php if ($cos_data->cos_quantity == '4') { ?> selected='selected' <?php } ?> value="4">4</option>
+	<option <?php if ($cos_data->cos_quantity == '5') { ?> selected='selected' <?php } ?> value="5">5</option>
+	<option <?php if ($cos_data->cos_quantity == '6') { ?> selected='selected' <?php } ?> value="6">6</option>
+	<option <?php if ($cos_data->cos_quantity == '7') { ?> selected='selected' <?php } ?> value="7">7</option>
+	<option <?php if ($cos_data->cos_quantity == '8') { ?> selected='selected' <?php } ?> value="8">8</option>
+	<option <?php if ($cos_data->cos_quantity == '9') { ?> selected='selected' <?php } ?> value="9">9</option>
+	<option <?php if ($cos_data->cos_quantity == '10') { ?> selected='selected' <?php } ?> value="10">10</option>
 	</select>
 	<span id="quantityerror" style="color:red"></span>
 	</div>
@@ -704,7 +705,9 @@
 	<select class="form-control"  autocomplete="off" name="charity_name" id="charity_name">
 	<option value="">Select Charity Name</option>
 	@foreach($charities as $index=>$charity)
-	<option value="{{$charity->id}}">{{$charity->name}}</option>
+	<option <?php if ($cos_data->cos_charity_id == $charity->id) { ?> selected="selected"
+		<?php
+	} ?> value="{{$charity->id}}">{{$charity->name}}</option>
 	@endforeach
 	</select>
 	<p class="error">{{ $errors->first('charity_name') }}</p>
