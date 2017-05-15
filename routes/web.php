@@ -30,7 +30,7 @@ Route::any('/admin/password/change/{verification?}', ['as' => 'admin.forgotpassw
 Route::any('/emailValidation', array('as' => '','uses' => 'AuthController@EmailNameCheck'));
 Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthController@forgorpasswordEmailCheck'));
 Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
-Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@EditProfile']);
+Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'DashboardController@EditProfile']);
 
 /** Products list page start here **/
 //Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
