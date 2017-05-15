@@ -16,7 +16,7 @@ use Socialite;
 use URL;
 use Cookie;
 use DB;
-use App\Helpers\StripeApp;
+//use App\Helpers\StripeApp;
 class AuthController extends Controller {
 
 	protected $auth;
@@ -24,7 +24,7 @@ class AuthController extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->auth = $auth;
-		$this->stripe=new StripeApp();
+		//$this->stripe=new StripeApp();
 		 		
 	}
 	public function index()
@@ -127,7 +127,7 @@ class AuthController extends Controller {
 		}
 	    $rand=md5(uniqid(rand(), true));
 	    if(count(Session::get('social_data'))){ $active="1";}else{ $active="0";}
-	    $customer=$this->stripe->customers($req['email']);
+	    //$customer=$this->stripe->customers($req['email']);
 				
 	   $users = User::create([ 'first_name'      => $req['first_name'],
 			                   'last_name'       => $req['last_name'],
@@ -136,7 +136,7 @@ class AuthController extends Controller {
 			                   'password'   => bcrypt($req['password']),
 			                   'active'=>$active,
 							   'activate_hash'=>$rand,
-							   'api_customer_id'=>$customer['id']
+							  // 'api_customer_id'=>$customer['id']
 			                   ])->id;
 
                          

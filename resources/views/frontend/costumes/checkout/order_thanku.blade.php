@@ -51,7 +51,7 @@
 						@if(file_exists(public_path('/charities_images/'.$charities->image)))
 							<img src="/charities_images/{{$charities->image}}" alt="cst3" /><span class="crt-name">{{$charities->name}}</span><input type="radio" name="charity" id="charity" value="{{$charities->id}}"/></li>
 						@else
-							<img src="/charities_images/default-placeholder.jpg" alt="cst3" />{{$charities->name}}<input type="radio" name="charity" id="charity"/></li>
+							<img src="/charities_images/default-placeholder.jpg" alt="cst3" />{{$charities->name}}<input type="radio" name="charity" id="charity" value="{{$charities->id}}"/></li>
 						@endif
 					@endforeach
 					</ul>

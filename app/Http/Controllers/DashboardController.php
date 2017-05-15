@@ -84,4 +84,11 @@ class DashboardController extends Controller {
     return view('frontend.dashboard.dashboard');
   }
 }
+
+public function addShippingAddress(Request $request){
+	echo "<pre>";print_r($request->all());die;
+    $req=$request->all();
+    $address_id=Address::addShippingAddress($req);
+    return Response::JSON($address_id);
+  }
 }

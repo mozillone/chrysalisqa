@@ -12,26 +12,22 @@
      </div>
    </section>    
    	<section class="content create_section_page">
-   		<div class="row">
-				<div class="col-md-12 col-sm-12">
-					@if (Session::has('error'))
-		            <div class="alert alert-danger alert-dismissable">
-						<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-						{{ Session::get('error') }}
-					</div>
-		            @elseif(Session::has('success'))
-					<div class="alert alert-success alert-dismissable">
-						<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-						{{ Session::get('success') }}
-					</div>
-					@endif
+   		<div class="container">
+			@if (Session::has('error'))
+	            <div class="alert alert-danger alert-dismissable">
+					<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+					{{ Session::get('error') }}
 				</div>
-		</div>
-		
-		<div class="container">
+	            @elseif(Session::has('success'))
+				<div class="alert alert-success alert-dismissable">
+					<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+					{{ Session::get('success') }}
+				</div>
+			@endif
+			
 			<div class="row">
 				<div class="col-md-12">
-					<div class="dashboard-top-box">
+						<div class="dashboard-top-box">
 						<p class="left_heading"><span>MY ACCOUNT</span> Keep your account info up to date for a smooth checkout process!</p>
 						<p class="right_heading">
 							<span class="my_msg"> My Messages</span>
@@ -339,7 +335,7 @@
 	        <h4 class="modal-title">Shipping Address</h4>
 	      </div>
 	      <div class="modal-body">
-	       <form class="" action="javascript::void(0);" method="POST" id="shipping_address">   
+	       <form class="" action="{{route('shipping_address')}}" method="POST" id="shipping_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
 						
 							<div class="col-md-12 col-sm-12 col-xs-12">
@@ -348,59 +344,59 @@
 								<div class="address-form">
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+											<input type="text" class="form-control" id="edit_shipping_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+											<input type="text" class="form-control" id="edit_shipping_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_address_1" placeholder="Address1 *" name="address_1">
+											<input type="text" class="form-control" id="edit_shipping_address_1" value="{{$shipping_address->address1}}" placeholder="Address1 *" name="address_1">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="address_2">
+											<input type="text" class="form-control" id="edit_shipping_address_2" value="{{$shipping_address->address2}}" placeholder="Address2" name="address_2">
 									</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_city" placeholder="City *" name="city">
+											<input type="text" class="form-control" id="edit_shipping_city" placeholder="City *" value="{{$shipping_address->city}}" name="city">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_postcode" placeholder="Zipcode *" name="postcode">
+											<input type="text" class="form-control" id="edit_shipping_postcode" value="{{$shipping_address->zip_code}}" placeholder="Zipcode *" name="postcode">
 										</div>
 									</div>
 									<div class="col-md-6">
 											<div class="form-group">
-												<select class="form-control state_dropdown" name="state" id="shipping_state_dropdown">
+												<select class="form-control state_dropdown" name="state" id="state_dropdown">
 													<option value="" selected>State</option>
 													@foreach($states as $st)
-													<option value="{{$st->name}}">{{$st->name}}</option>
+													<option <?php if($shipping_address->state == $st->name){ ?> selected="selected" <?php } ?> value="{{$st->name}}">{{$st->name}}</option>
 													@endforeach
 
 												</select>
-												<input type="text" class="form-control normal-states hide" id="shipping_state" placeholder="State *" name="state">
+												<input type="text" class="form-control normal-states hide" id="state" placeholder="State *" name="state">
 											</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<select class="form-control" name="country" id="shipping_country">
+											<select class="form-control" name="shipping_country" id="country">
 													<option value="" selected> Select</option>
 													@foreach($countries as $cnt)
-													<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
+													<option value="{{$cnt->country_name}}" <?php if($shipping_address->country == $cnt->country_name){ ?> selected="selected" <?php } ?>>{{$cnt->country_name}}</option>
 													@endforeach
 											</select>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group checkbox-align">
-											<input type="checkbox" class="form-control" id="is_billing" name="is_billing"><label for="billing:use_for_shipping_yes">Bill to this address</label>
+											<input type="checkbox" class="form-control" id="edit_is_billing" name="edit_is_billing"><label for="billing:use_for_shipping_yes">Bill to this address</label>
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -433,14 +429,28 @@
 					$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
 				});
 				$('#shipping_close,#shi_close').click(function(){
+					$('#shipping_popup_edit').css('display','none');
 					$('#shipping_popup').css('display','none');
 					$('#shipping_popup').removeClass('in');
+					$('#shipping_popup_edit').removeClass('in');
 					$('.modal-backdrop').remove();
 				});
+				
 			});
 				function  edit_shipping($id){
-					alert("haiiiiiii")
+					$('#shipping_popup_edit').css('display','block');
+					$('#shipping_popup_edit').addClass('in');
+					$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
 					}
+			$(document).on('change','#shipping_country,#billing_country',function(){
+    		if($(this).val()!="United States"){
+    			$('.state_dropdown').addClass('hide');
+    			$('.normal-states').removeClass('hide');
+    		}else{
+    			$('.state_dropdown').removeClass('hide');
+    			$('.normal-states').addClass('hide');
+    		}
+    });
 		</script>
 	</section>
 

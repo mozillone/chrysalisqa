@@ -111,7 +111,7 @@
 	<div class="col-md-9 col-sm-8">
 
 	<div class="list-sec-rm">
-	<p class="list-sec-rm1">{{$data['sub_cat_info'][0]->name}}</p>
+	<p class="list-sec-rm1">{{strtoupper($data['sub_cat_info'][0]->name)}}</p>
 	<p class="list-sec-rm2"><span>Sort By</span>
 	 <select name="search[sort_by]" class="sort_by">
 		<option value="Recently Listed">Recently Listed</option>
