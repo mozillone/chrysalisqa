@@ -23,13 +23,12 @@ class Address extends Authenticatable
          'address_id', 'fname','lname','address1','address2', 'city', 'state', 'country', 'zip_code', 'address_type', 'user_id','created_on'];
     protected function addBillingAddress($req){
                 $user_id=Auth::user()->id;
-                if(!empty($req['billing_state_dropdown'])){ $state=$req['billing_state_dropdown'];}else{$state=$req['state'];}
                 $billing_address=array('fname'=>$req['firstname'],
                                        'lname'=>$req['lastname'],
                                        'address1'=>$req['address_1'],
                                        'address2'=>$req['address_2'],
                                        'city'=>$req['city'],
-                                       'state'=> $state,
+                                       'state'=>$req['state'],
                                        'country'=>$req['country'],
                                        'zip_code'=>$req['postcode'],
                                        'address_type'=>'billing',
@@ -48,13 +47,12 @@ class Address extends Authenticatable
     }
      protected function addShippingAddress($req){
                 $user_id=Auth::user()->id;
-                if(!empty($req['shipping_state_dropdown'])){ $state=$req['shipping_state_dropdown'];}else{$state=$req['state'];}
-                 $billing_address=array('fname'=>$req['firstname'],
+                $billing_address=array('fname'=>$req['firstname'],
                                        'lname'=>$req['lastname'],
                                        'address1'=>$req['address_1'],
                                        'address2'=>$req['address_2'],
                                        'city'=>$req['city'],
-                                       'state'=> $state,
+                                       'state'=>$req['state'],
                                        'country'=>$req['country'],
                                        'zip_code'=>$req['postcode'],
                                        'address_type'=>'shipping',
@@ -88,24 +86,22 @@ class Address extends Authenticatable
     }
     private function updateCartOrderInfo($req,$type){
           if($type=="billing"){
-          if(!empty($req['billing_state_dropdown'])){ $state=$req['billing_state_dropdown'];}else{$state=$req['state'];}
           $data=array('pay_firstname'=>$req['firstname'],
                       'pay_lastname'=>$req['lastname'],
                       'pay_address_1'=>$req['address_1'],
                       'pay_address_2'=>$req['address_2'],
                       'pay_city'=>$req['city'],
-                      'pay_state'=>$state,
+                      'pay_state'=>$req['state'],
                       'pay_zipcode'=>$req['country'],
                       'pay_country'=>$req['postcode'],
                        );
           }else{
-          if(!empty($req['shipping_state_dropdown'])){ $state=$req['shipping_state_dropdown'];}else{$state=$req['state'];}
            $data=array('shipping_firstname'=>$req['firstname'],
                       'shipping_lastname'=>$req['lastname'],
                       'shipping_address_1'=>$req['address_1'],
                       'shipping_address_2'=>$req['address_2'],
                       'shipping_city'=>$req['city'],
-                      'shipping_state'=>$state,
+                      'shipping_state'=>$req['state'],
                       'shipping_postcode'=>$req['country'],
                       'shipping_country'=>$req['postcode'],
                        );

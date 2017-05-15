@@ -27,17 +27,17 @@ class StripeApp  {
                 
 				return $card;
 	}
-	public function charge($amount,$currency,$customer_id,$card_id,$desc)
+	public function charge($amount,$currency,$customer_id,$card_id)
 	{
 
 			 	$charge = Stripe::charges()->create([
 			        'amount' => $amount,
 			        'currency' => $currency,
 			        'customer' => $customer_id,
-			        'card' => $card_id,
-			        'description' => $desc
+			        'card' => $card_id
 			      ]);
                
 			 	return $charge;
    }
- }
+  
+}

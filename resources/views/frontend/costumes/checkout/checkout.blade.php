@@ -44,7 +44,7 @@
 													<input type="hidden" value="{{$data['cart_shipping_address'][0]->shipping_address_1}}" name="shipping_address_1">
 														<div class="shipping_add">
 															<p>{{$data['cart_shipping_address'][0]->shipping_address_1}},<br>
-															@if(!empty($data['cart_shipping_address'][0]->shipping_address_2)){{$data['cart_shipping_address'][0]->shipping_address_2}}<br>@endif
+															{{$data['cart_shipping_address'][0]->shipping_address_2	}}<br>
 															{{$data['cart_shipping_address'][0]->shipping_city	}},{{$data['cart_shipping_address'][0]->shipping_state}},{{$data['cart_shipping_address'][0]->shipping_postcode}},{{$data['cart_shipping_address'][0]->shipping_country}} <br></p>
 														</div>
 													@else
@@ -52,7 +52,7 @@
 													<input type="hidden"  value="{{$data['shipping_address'][0]->address1}}" name="shipping_address_1">
 														<div class="shipping_add">
 															<p>{{$data['shipping_address'][0]->address1}},<br>
-															@if(!empty($data['shipping_address'][0]->address2)){{$data['shipping_address'][0]->address2}}<br>@endif
+															{{$data['shipping_address'][0]->address2}}<br>
 															{{$data['shipping_address'][0]->city}},{{$data['shipping_address'][0]->state}},{{$data['shipping_address'][0]->zip_code}},{{$data['shipping_address'][0]->country}} <br></p>
 														</div>
 													@else
@@ -82,7 +82,7 @@
 												<input type="hidden" name="pay_address_1" value="{{$data['cart_billing_address'][0]->pay_address_1}}"/>
 													<div class="billing_add">
 														<p>{{$data['cart_billing_address'][0]->pay_address_1}},<br>
-														@if(!empty($data['cart_billing_address'][0]->pay_address_2)){{$data['cart_billing_address'][0]->pay_address_2}}<br>@endif
+														{{$data['cart_billing_address'][0]->pay_address_2}}<br>
 														{{$data['cart_billing_address'][0]->pay_city}},{{$data['cart_billing_address'][0]->pay_state}},{{$data['cart_billing_address'][0]->pay_zipcode}},{{$data['cart_billing_address'][0]->pay_country}} <br>
 														</p>
 													</div>
@@ -91,7 +91,7 @@
 													<input type="hidden" name="pay_address_1" value="{{$data['billing_address'][0]->address1}}"/> 
 													<div class="billing_add">
 														<p>{{$data['billing_address'][0]->address1}},<br>
-														@if(!empty($data['billing_address'][0]->address2)){{$data['billing_address'][0]->address2}}<br>@endif
+														{{$data['billing_address'][0]->address2}}<br>
 														{{$data['billing_address'][0]->city}},{{$data['billing_address'][0]->state}},{{$data['billing_address'][0]->zip_code}},{{$data['billing_address'][0]->country}} <br>
 														</p>
 													</div>
@@ -258,7 +258,7 @@
 									</div>
 									<div class="col-md-6">
 											<div class="form-group">
-												<select class="form-control state_dropdown" name="shipping_state_dropdown" id="shipping_state_dropdown">
+												<select class="form-control state_dropdown" name="state" id="shipping_state_dropdown">
 													<option value="" selected>State</option>
 													@foreach($states as $st)
 													<option value="{{$st->name}}">{{$st->name}}</option>
@@ -359,7 +359,7 @@
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="form-group">
-												<select class="form-control state_dropdown" name="billing_state_dropdown" id="billing_state_dropdown">
+												<select class="form-control state_dropdown" name="state" id="billing_state_dropdown">
 													<option value="" selected>State</option>
 													@foreach($states as $st)
 													<option value="{{$st->name}}">{{$st->name}}</option>
