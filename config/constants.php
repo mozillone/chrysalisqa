@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'Amenties_id' => '1',
+     'Amenties_id' => '1',
 	'Style_id' => '2',
     'IMAGES_PATH'=>'',
     'FROM_EMAIL'=>'jithender@dotcomweavers.com',
@@ -10,4 +10,5 @@ return array(
 	'IS_FILMY'=>21,
 	'Processing'=>1,
 	'Currency'=>'usd'
+	
 );
