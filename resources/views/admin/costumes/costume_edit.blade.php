@@ -1,4 +1,4 @@
-	@extends('admin.app')
+@extends('admin.app')
 
 	{{-- Web site Title --}}
 	@section('title') @parent
@@ -113,16 +113,16 @@
 	<label for="inputEmail3" class="control-label">Costume For<span class="req-field" >*</span></label>
 	<br>
 	<label class="radio-inline">
-	<input type="radio"   name="gender" id="male"  value="male" checked >Male</label>
+	<input type="radio" <?php if ($cos_data->cos_gender == 'male') { ?> checked='checked'	 <?php } ?>  name="gender" id="male"  value="male" >Male</label>
 
 	<label class="radio-inline">
-	<input type="radio"   name="gender" id="female"  value="female"  >Female</label>
+	<input type="radio" <?php if ($cos_data->cos_gender == 'female') { ?> checked='checked'	 <?php } ?>  name="gender" id="female"  value="female"  >Female</label>
 
 	<label class="radio-inline">
-	<input type="radio"   name="gender" id="unisex"  value="unisex" >Unisex</label>
+	<input type="radio" <?php if ($cos_data->cos_gender == 'unisex') { ?> checked='checked'	 <?php } ?>  name="gender" id="unisex"  value="unisex" >Unisex</label>
 
 	<label class="radio-inline">
-	<input type="radio"   name="gender" id="pet"  value="pet"  >Pet</label>
+	<input type="radio" <?php if ($cos_data->cos_gender == 'pet') { ?> checked='checked'	 <?php } ?>  name="gender" id="pet"  value="pet"  >Pet</label>
 
 	</div>
 	<span id="gendererror" style="color:red"></span>
@@ -132,10 +132,10 @@
 	<select class="form-control sony" name="category" id="category">
 	<option value="">Select Category</option>
 	<?php
-	$features_req = $categories['modules_result'];
-	foreach ($features_req as $features_res) {
+	$cos_data->modules_result = $categories['modules_result'];
+	foreach ($cos_data->modules_result as $features_res) {
 	//print_r($features_res);
-	?>																																						    <optgroup label="<?php echo ucfirst($features_res['name']);?>">
+	?>																						<optgroup label="<?php echo ucfirst($features_res['name']);?>">
 	<?php foreach ($features_res['submodule_result'] as $feature_val_res) {
 	?><option value="<?php echo $feature_val_res['subcategoryid'];?>"><?php echo ucfirst($feature_val_res['subcategoryname']);
 	?></option>
@@ -150,21 +150,22 @@
 	<div class="form-group" >
 	<label for="inputEmail3" class="control-label">Condition <span class="req-field" >*</span></label>
 	<br>
-	<label class="radio-inline"><input type="radio"  name="costumecondition" id="excellent"   value="excellent"  checked> &nbsp;
+	<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'excellent') { ?> checked='checked'	 <?php } ?> name="costumecondition" id="excellent"   value="excellent"  > &nbsp;
 	Excellent&nbsp;
 	</label>
-	<label class="radio-inline"><input type="radio"  name="costumecondition" id="brandnew"  value="brand_new"> &nbsp;
+	<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'brand_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" id="brandnew"  value="brand_new"> &nbsp;
 	Brand New&nbsp;
 	</label>
-	<label class="radio-inline"><input type="radio"  name="costumecondition" id="good"  value="good">&nbsp;
+	<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'good') { ?> checked='checked'	 <?php } ?> name="costumecondition" id="good"  value="good">&nbsp;
 	Good&nbsp;
 	</label>
-	<label class="radio-inline"><input type="radio"  name="costumecondition" id="likenew"  value="like_new">&nbsp;
+	<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'like_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" id="likenew"  value="like_new">&nbsp;
 	Like New&nbsp;
 	</label>
 	</div>
 	<span id="costumeconditionerror" style="color:red"></span>
 	</div>
+	<?php //echo "<pre>"; print_r($get_costume_attribute_options); ?>
 	<h4>Body & Dimensions (Optional)</h4></hr>
 	<div class="row" >
 	<div class="col-md-6" >
