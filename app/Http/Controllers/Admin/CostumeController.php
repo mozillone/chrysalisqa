@@ -726,7 +726,7 @@ class CostumeController extends Controller
 		$this->data['costumes_data'] = DB::table('costumes as c')->where('c.costume_id',$id)
 		->leftJoin('users as u','c.created_by','u.id')
 		->leftJoin('costume_description as cd','c.costume_id','cd.costume_id')
-		->select('u.display_name as customer_name','cd.name as costume_name','c.gender as cos_gender','c.condition as cos_condition')
+		->select('u.display_name as customer_name','cd.name as costume_name','c.gender as cos_gender','c.condition as cos_condition','c.price as cos_price','c.quantity as cos_quantity','c.size as cos_size','c.charity_id as cos_charity_id','cd.description as cos_description')
 		->first();
 		/*******Array push for both categories and subcategories displaying code starts here*****/
 		$this->data['categories']=array('modules_result'=>array());
