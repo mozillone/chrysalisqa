@@ -13,15 +13,26 @@ use Session;
 use Config;
 use App\Cart;
 use App\Charities;
-
+use App\Helpers\StripeApp;
 class Order extends Authenticatable
 {
    protected $fillable = [
                 'order_id', 'user_id','firstname', 'lastname', 'email', 'phone_no', 'pay_firstname', 'pay_lastname', 'pay_address_1', 'pay_address_2', 'pay_city', 'pay_zipcode', 'pay_country', 'payment_method', 'payment_code','shipping_firstname', 'shipping_lastname','shipping_address_1','shipping_address_2','shipping_city','shipping_postcode','shipping_country','shipping_method','shipping_code','comment','total','affiliate_id','commission','created_at','modified_at'
     ];
+  public function __construct()
+  {
+    $this->stripe=new StripeApp();
+  }
     protected function placeOrder($req){
         $data=Cart::getCartProducts();
         if(count($data['basic'])){
+           $cc_token=$this->getCreditCardToken($data['basic'][0]->cc_id);
+             if(count($cc_token)){
+                $token=$cc_token;
+             }else{
+               $result=array('result'=>0,'message'=>"Credit card token not valid");
+                return $result;
+             }
             $cart_info=Cart::cartMetaInfo($data['basic'][0]->cart_id);
             $order_info=array('user_id'=>Auth::user()->id, 
                                'firstname'=>Auth::user()->first_name, 
@@ -63,6 +74,12 @@ class Order extends Authenticatable
                                 'title'=>"Total",
                                 'value'=>$data['basic'][0]->total,
                         );
+             $amount=$data['basic'][0]->total;
+             $currency=Config::get('constants.Currency');
+             $api_customer_id=Auth::user()->api_customer_id;
+
+             
+             $this->stripe->charge($amount,$currency,$api_customer_id,$token);
              Site_model::insert_get_id('order_total',$order_total);
              Site_model::delete_single('cart',array('cart_id'=>$data['basic'][0]->cart_id));
              $result=array('result'=>1,'message'=>$order_id);
@@ -76,6 +93,14 @@ class Order extends Authenticatable
        $order_status=array('order_id'=>$order_id,'status_id'=>$status_id);
        Site_model::insert_get_id('order_status',$order_status);
        return true;
+    }
+    private function getCreditCardToken($cc_id){
+      $cc_details=DB::Select('SELECT *  FROM `cc_creditcard` WHERE `id` ='.$cc_id);
+      if(count($cc_details)){
+        return $cc_details[0]->payment_method_token;
+      }else{
+        return false;
+      }
     }
     protected function getCharitiesList(){
        $charities_list=DB::Select('SELECT * FROM cc_charities');
