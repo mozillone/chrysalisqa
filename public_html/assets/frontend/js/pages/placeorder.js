@@ -23,7 +23,7 @@ $(document).ready(function() {
 	$("#billing_country").rules("add", {required:true});
 
 	$("#cardholder_name").rules("add", {required:true,maxlength: 50});
-	$("#cc_number").rules("add", {required:true,cc_chk:true});
+	$("#cc_number").rules("add", {required:true,number:true,cc_chk:true});
 	$("#card_type").rules("add", {required:true});
 	$("#exp_month").rules("add", {required:true});
 	$("#exp_year").rules("add", {required:true});
@@ -304,12 +304,17 @@ $(document).ready(function() {
 				}
 				$('.shipping-empty,.error').remove();
 				$('.shipping_popup').html('Edit');
+				if(response[0].address2.length){
+						var address2=response[0].address2+'<br>';
+					}else{
+						var address2="";
+					}
 				if(!is_billing){
-					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				}
 				else{
-					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
-					$('.billing_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.billing_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				
 				}
 			}
@@ -329,12 +334,17 @@ $(document).ready(function() {
 				}
 				$('.billing-empty,.error').remove();
 				$('.billing_popup').html('Edit');
+					if(response[0].address2.length){
+						var address2=response[0].address2+'<br>';
+					}else{
+						var address2="";
+					}
 					if(!is_shipping){
-					$('.billing_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.billing_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				}
 				else{
-					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
-					$('.billing_add').html('<p>'+response[0].address1+',<br>'+response[0].address2+'<br>'+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.billing_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
 				
 				}
 			}
@@ -509,4 +519,5 @@ input_credit_card = function(input)
 };
 
 input_credit_card(document.getElementById('cc_number'));
+
 })
