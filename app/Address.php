@@ -42,9 +42,7 @@ class Address extends Authenticatable
                     $this->addShippingAddress($req);
                     $this->updateCartOrderAddress($req);
                }else{
-                    if ($req['is_dashboard'] != 'no') {
                     $this->updateCartOrderInfo($req,'billing');
-                    }
                }
                return $address_id;
     }
@@ -138,8 +136,7 @@ class Address extends Authenticatable
         Site_model::update_data('cart',$data,$cond);
         return true;   
      }
-
-     protected function updateShippingAddress($req){
+     protected function addShippingAddressDashboard($req){
                 $user_id=Auth::user()->id;
                 if(!empty($req['shipping_state_dropdown'])){ $state=$req['shipping_state_dropdown'];}else{$state=$req['state'];}
                  $billing_address=array('fname'=>$req['firstname'],
@@ -154,18 +151,18 @@ class Address extends Authenticatable
                                        'user_id'=>Auth::user()->id,
                                        'created_on'=>date('Y-m-d h:i:s')
                                         );
-                 if(isset($req['is_billing'])){
+                if ($req['is_edit'] == 'yes') {
+                  $address_id=DB::table('address_master')->where('user_id',$user_id)->where('address_type','shipping')->update($billing_address);
+                }else{
+                  $address_id=Site_model::insert_get_id('address_master',$billing_address);
+                }
+               if(isset($req['is_billing'])){
                     $this->addBillingAddress($req);
-                  }
-                  if ($req['is_new'] == 'no') {
-                    $update_table = DB::table('address_master')->where('user_id',$user_id)->where('address_type','shipping')->update($billing_address);
-                  }else{
-                    $update_table=Site_model::insert_get_id('address_master',$billing_address);                   
-                  }
-               return $update_table;
+               }
+               return $address_id;
     }
 
-    protected function updateBillingAddress($req){
+    protected function addBillingAddressDashboard($req){
                 $user_id=Auth::user()->id;
                 if(!empty($req['billing_state_dropdown'])){ $state=$req['billing_state_dropdown'];}else{$state=$req['state'];}
                 $billing_address=array('fname'=>$req['firstname'],
@@ -180,14 +177,15 @@ class Address extends Authenticatable
                                        'user_id'=>Auth::user()->id,
                                        'created_on'=>date('Y-m-d h:i:s')
                                         );
-                 if(isset($req['is_billing'])){
-                    $this->addBillingAddress($req);
-                  }
-                  if ($req['is_new'] == 'no') {
-                    $update_table = DB::table('address_master')->where('user_id',$user_id)->where('address_type','billing')->update($billing_address);
-                  }else{
-                    $update_table=Site_model::insert_get_id('address_master',$billing_address);                   
-                  }
-               return $update_table;
+               if ($req['is_edit'] == 'yes') {
+                  $address_id=DB::table('address_master')->where('user_id',$user_id)->where('address_type','billing')->update($billing_address);
+                }else{
+                  $address_id=Site_model::insert_get_id('address_master',$billing_address);
+                }
+               if(isset($req['is_shipping'])){
+                    $this->addShippingAddress($req);
+               }
+               return $address_id;
     }
+
 }

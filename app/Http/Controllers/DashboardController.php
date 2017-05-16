@@ -31,7 +31,7 @@ class DashboardController extends Controller {
 
 	}
 	public function dashboard()
-	{ 
+	{
 		if(Auth::user()->id!="1"){
 			$this->data = array();
 			$this->data['default_billing_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','billing')->first();
@@ -86,26 +86,24 @@ class DashboardController extends Controller {
     return view('frontend.dashboard.dashboard');
   }
 }
+public function addShippingAddress(Request $req){
+  //echo "<pre>";print_r($req->all());die;
 
-public function addShippingAddress(Request $request){
-	//echo "<pre>";print_r($request->all());die;
-    $req=$request->all();
-    $address_id=Address::updateShippingAddress($req);
-    Session::flash('success', 'Shipping address updated successfully.');
-    return Redirect::back();
-  }
+  $address_id=Address::addShippingAddressDashboard($req);
+  return Redirect::back();
 
-  public function addBillingAddress(Request $request){
-  //echo "<pre>";print_r($request->all());die;
-    $req=$request->all();
-    $address_id=Address::updateBillingAddress($req);
-    Session::flash('success', 'Billing address updated successfully.');
-    return Redirect::back();
-  }
-  public function deleteAddress(Request $request){
-    $id = $request->id;
-    $deleted = DB::table('address_master')->where('address_id',$id)->delete();
-    Session::flash('success', 'Address deleted successfully.');
-    return "success";
-  }
+}
+public function addBillingAddress(Request $req){
+ // echo "<pre>";print_r($req->all());die;
+  $address_id=Address::addBillingAddressDashboard($req);
+  return Redirect::back();
+
+}
+public function deleteAddress(Request $req){
+  //echo "<pre>";print_r($req->all());die;
+$deleteAddress = DB::table('address_master')->where('address_id',$req->id)->delete();
+
+return "success";
+
+}
 }

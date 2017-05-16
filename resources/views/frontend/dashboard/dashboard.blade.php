@@ -12,22 +12,26 @@
      </div>
    </section>    
    	<section class="content create_section_page">
-   		<div class="container">
-			@if (Session::has('error'))
-	            <div class="alert alert-danger alert-dismissable">
-					<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-					{{ Session::get('error') }}
+   		<div class="row">
+				<div class="col-md-12 col-sm-12">
+					@if (Session::has('error'))
+		            <div class="alert alert-danger alert-dismissable">
+						<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+						{{ Session::get('error') }}
+					</div>
+		            @elseif(Session::has('success'))
+					<div class="alert alert-success alert-dismissable">
+						<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+						{{ Session::get('success') }}
+					</div>
+					@endif
 				</div>
-	            @elseif(Session::has('success'))
-				<div class="alert alert-success alert-dismissable">
-					<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-					{{ Session::get('success') }}
-				</div>
-			@endif
-			
+		</div>
+		
+		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-						<div class="dashboard-top-box">
+					<div class="dashboard-top-box">
 						<p class="left_heading"><span>MY ACCOUNT</span> Keep your account info up to date for a smooth checkout process!</p>
 						<p class="right_heading">
 							<span class="my_msg"> My Messages</span>
@@ -172,10 +176,10 @@
 										<span><a href="#" onclick="edit_billing({{$billing_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#" onclick="delete_address({{$billing_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
 									</p>
 									<?php }else{
-									$billing_address = "";
+										$billing_address = "";
 									} ?>
 									<div class="form-group add_new_btn">
-										<a type="submit" class="btn btn-default" id="billing_popup_add">Add New</a>
+										<a type="submit" id="billing_popup_add" class="btn btn-default">Add New</a>
 									</div>
 								</div>
 							</div>
@@ -243,10 +247,9 @@
 	        <h4 class="modal-title">Shipping Address</h4>
 	      </div>
 	      <div class="modal-body">
-	       <form class="" action="{{route('shipping_address')}}" method="POST" id="shipping_address">   
+	       <form class="" action="{{route('shipping-address')}}" method="POST" id="shipping_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	       <input type="hidden" name="is_new" value="yes">
-
+	       <input type="hidden" name="is_edit" value="no">
 						
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="chek-out">
@@ -284,7 +287,7 @@
 									</div>
 									<div class="col-md-6">
 											<div class="form-group">
-												<select class="form-control state_dropdown" name="state" id="shipping_state_dropdown">
+												<select class="form-control state_dropdown" name="shiping_state_dropdown" id="billing_state_dropdown">
 													<option value="" selected>State</option>
 													@foreach($states as $st)
 													<option value="{{$st->name}}">{{$st->name}}</option>
@@ -337,9 +340,9 @@
 	        <h4 class="modal-title">Shipping Address</h4>
 	      </div>
 	      <div class="modal-body">
-	       <form class="" action="{{route('shipping_address')}}" method="POST" id="shipping_address">   
+	       <form class="" action="{{route('shipping-address')}}" method="POST" id="shipping_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	       <input type="hidden" name="is_new" value="no">
+	       <input type="hidden" name="is_edit" value="yes">
 						
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="chek-out">
@@ -347,32 +350,32 @@
 								<div class="address-form">
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="edit_shipping_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+											<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="edit_shipping_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+											<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="edit_shipping_address_1" value="<?php if (isset($shipping_address->address1)) { echo $shipping_address->address1; } ?>" placeholder="Address1 *" name="address_1">
+											<input type="text" class="form-control" id="shipping_address_1" placeholder="Address1 *" name="address_1" value="@if (!empty($shipping_address->address1)){{$shipping_address->address1}} @endif">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="edit_shipping_address_2" value="<?php if (isset($shipping_address->address2)) { echo $shipping_address->address2; } ?>" placeholder="Address2" name="address_2">
+											<input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="address_2" value="@if (!empty($shipping_address->address2)){{$shipping_address->address2}}@endif">
 									</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="edit_shipping_city" placeholder="City *" value="<?php if (isset($shipping_address->city)) { echo $shipping_address->city; } ?>" name="city">
+											<input type="text" class="form-control" id="shipping_city" placeholder="City *" name="city" value="@if (!empty($shipping_address->city)){{$shipping_address->city}}@endif">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="edit_shipping_postcode" value="<?php if (isset($shipping_address->zip_code)) { echo $shipping_address->zip_code; } ?>" placeholder="Zipcode *" name="postcode">
+											<input type="text" class="form-control" id="shipping_postcode" placeholder="Zipcode *" name="postcode" value="@if (!empty($shipping_address->zip_code)){{$shipping_address->zip_code}}@endif">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -380,7 +383,7 @@
 												<select class="form-control state_dropdown" name="state" id="shipping_state_dropdown">
 													<option value="" >State</option>
 													@foreach($states as $st)
-													<option <?php if(isset($shipping_address->state) == $st->name){ ?> selected="selected" <?php } ?> value="{{$st->name}}">{{$st->name}}</option>
+													<option value="{{$st->name}}">{{$st->name}}</option>
 													@endforeach
 
 												</select>
@@ -392,7 +395,7 @@
 											<select class="form-control" name="country" id="shipping_country">
 													<option value="" selected> Select</option>
 													@foreach($countries as $cnt)
-													<option value="{{$cnt->country_name}}" <?php if(isset($shipping_address->country) == $cnt->country_name){ ?> selected="selected" <?php } ?>>{{$cnt->country_name}}</option>
+													<option value="{{$cnt->country_name}}" <?php if (!empty($shipping_address->country) == $cnt->country_name) { ?> selected="selected" <?php } ?>>{{$cnt->country_name}}</option>
 													@endforeach
 											</select>
 										</div>
@@ -426,16 +429,16 @@
 	<div class="modal-dialog shopping-address-modal">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <button type="button" class="close" id="shi_close" data-dismiss="modal">&times;</button>
+	        <button type="button" id="bil_close" class="close" data-dismiss="modal">&times;</button>
 	        <h4 class="modal-title">Billing Address</h4>
 	      </div>
 	      <div class="modal-body">
-	       <form class="" action="{{route('billing_address')}}" method="POST" id="billing_address">   
+	       <form class="" action="{{route('billing-address')}}" method="POST" id="billing_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	       <input type="hidden" name="is_new" value="yes">	       
-	       <div class="col-md-12 col-sm-12 col-xs-12">
+	       <input type="hidden" name="is_edit" value="no">
+				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
-								<div class="new_address">									
+								<div class="new_address">
 									<div class="address-form">
 										<div class="col-md-6">
 											<div class="form-group">
@@ -509,7 +512,7 @@
 				</form>  
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="close close-btn" id="shi_close" data-dismiss="modal"><span>×</span> Close</button>
+	        <button type="button" class="close close-btn" id="billing_close" data-dismiss="modal"><span>×</span> Close</button>
 	      </div>
 	    </div>
 
@@ -519,16 +522,16 @@
 	<div class="modal-dialog shopping-address-modal">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <button type="button" class="close"  id="shi_close" data-dismiss="modal">&times;</button>
+	        <button type="button" id="bil_close" class="close" data-dismiss="modal">&times;</button>
 	        <h4 class="modal-title">Billing Address</h4>
 	      </div>
 	      <div class="modal-body">
-	       <form class="" action="{{route('billing_address')}}" method="POST" id="billing_address">   
+	       <form class="" action="{{route('billing-address')}}" method="POST" id="billing_address">   
 	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	       <input type="hidden" name="is_new" value="no">	       
-	       <div class="col-md-12 col-sm-12 col-xs-12">
+	       <input type="hidden" name="is_edit" value="yes">
+				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
-								<div class="new_address">									
+								<div class="new_address">
 									<div class="address-form">
 										<div class="col-md-6">
 											<div class="form-group">
@@ -542,30 +545,30 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_address_1" placeholder="Address1 *" name="address_1" value="<?php if (isset($billing_address->address1)) { echo $billing_address->address1; } ?>">
+												<input type="text" class="form-control" id="billing_address_1" placeholder="Address1 *" name="address_1" value="@if (isset($billing_address->address1)){{$billing_address->address1}}@endif">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_address_2" placeholder="Address2" name="address_2" value="<?php if (isset($billing_address->address2)) { echo $billing_address->address2; } ?>">
+												<input type="text" class="form-control" id="billing_address_2" placeholder="Address2" name="address_2" value="@if (isset($billing_address->address2)){{$billing_address->address2}}@endif">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_city" placeholder="City *" name="city" value="<?php if (isset($billing_address->city)) { echo $billing_address->city; } ?>">
+												<input type="text" class="form-control" id="billing_city" placeholder="City *" name="city" value="@if (isset($billing_address->city)){{$billing_address->city}}@endif">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode" value="<?php if (isset($billing_address->zip_code)) { echo $billing_address->zip_code; } ?>">
+												<input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode" value="@if (isset($billing_address->zip_code)){{$billing_address->zip_code}}@endif">
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="form-group">
 												<select class="form-control state_dropdown" name="billing_state_dropdown" id="billing_state_dropdown">
-													<option value="" >State</option>
+													<option value="" selected>State</option>
 													@foreach($states as $st)
-													<option <?php if(isset($billing_address->state) == $st->name){ ?> selected="selected" <?php } ?> value="{{$st->name}}">{{$st->name}}</option>
+													<option value="{{$st->name}}">{{$st->name}}</option>
 													@endforeach
 
 												</select>
@@ -577,7 +580,7 @@
 												<select class="form-control" name="country" id="billing_country">
 														<option value="" selected> Select</option>
 														@foreach($countries as $cnt)
-														<option <?php if(isset($billing_address->country) == $cnt->country_name){ ?> selected="selected" <?php } ?> value="{{$cnt->country_name}}">{{$cnt->country_name}}</option>
+														<option value="{{$cnt->country_name}}" <?php if (!empty($billing_address->country) == $cnt->country_name) { ?> selected="selected" <?php } ?>>{{$cnt->country_name}}</option>
 														@endforeach
 												</select>
 											</div>
@@ -602,7 +605,7 @@
 				</form>  
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="close close-btn" id="shi_close" data-dismiss="modal"><span>×</span> Close</button>
+	        <button type="button" class="close close-btn" data-dismiss="modal"><span>×</span> Close</button>
 	      </div>
 	    </div>
 
@@ -610,6 +613,15 @@
 </div>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
+$(document).on('change','#shipping_country,#billing_country',function(){
+    		if($(this).val()!="United States"){
+    			$('.state_dropdown').addClass('hide');
+    			$('.normal-states').removeClass('hide');
+    		}else{
+    			$('.state_dropdown').removeClass('hide');
+    			$('.normal-states').addClass('hide');
+    		}
+    });
 			$(document).ready(function(){
 				$('[data-toggle="tooltip"]').tooltip(); 
 				$('#shipping_popup_add').click(function(){
@@ -617,17 +629,16 @@
 					$('#shipping_popup').addClass('in');
 					$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
 				});
-				$('#shipping_close,#shi_close').click(function(){
-					$('#shipping_popup_edit,#shipping_popup,#billing_popup,#billing_popup_edit').css('display','none');
-					$('#shipping_popup,#shipping_popup_edit,#billing_popup,#billing_popup_edit').removeClass('in');
-					$('.modal-backdrop').remove();
-				});
 				$('#billing_popup_add').click(function(){
 					$('#billing_popup').css('display','block');
 					$('#billing_popup').addClass('in');
 					$('#billing_popup_add').append('<div class="modal-backdrop fade in"></div>');
 				});
-				
+				$('#shipping_close,#shi_close,#billing_close,#bil_close').click(function(){
+					$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').css('display','none');
+					$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').removeClass('in');
+					$('.modal-backdrop').remove();
+				});
 			});
 				function  edit_shipping($id){
 					$('#shipping_popup_edit').css('display','block');
@@ -637,33 +648,23 @@
 				function  edit_billing($id){
 					$('#billing_popup_edit').css('display','block');
 					$('#billing_popup_edit').addClass('in');
-					$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
+					$('#billing_popup_add').append('<div class="modal-backdrop fade in"></div>');
 					}
 				function  delete_address($id){
 					var id = $id;
-					 if (confirm("Are you sure?")) {
-					        $.ajax({
-								 url: "{{URL::to('delete_address')}}",
-								 type: "POST",
-								 data: {'id':id},
-								 success: function(data){
-								 	if (data == "success") {
-								 		window.location.href = "{{URL::to('/dashboard')}}";
-								 	}
-								 }
-							});
+					if (confirm("Are you sure?")) {
+						$.ajax({
+						 url: "{{URL::to('/deleteaddress')}}",
+						 type: "POST",
+						 data: {'id':id},
+						 success: function(data){
+						 	if (data == "success") {
+						 		window.location.href = "{{URL::to('/dashboard')}}";
+						 	}
+						 }});
 					    }
 					    return false;
 					}
-			$(document).on('change','#shipping_country,#billing_country',function(){
-    		if($(this).val()!="United States"){
-    			$('.state_dropdown').addClass('hide');
-    			$('.normal-states').removeClass('hide');
-    		}else{
-    			$('.state_dropdown').removeClass('hide');
-    			$('.normal-states').addClass('hide');
-    		}
-    });
 		</script>
 	</section>
 
