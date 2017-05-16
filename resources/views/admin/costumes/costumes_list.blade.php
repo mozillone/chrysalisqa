@@ -39,7 +39,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Costumes List</h3>
                     <div class="box-tools pull-right" style="display:inline-flex">
-                    <a href="customer-add" class="btn btn-block btn-success btn-xs"><i class="fa fa-plus"></i> Add Custome</a>
+                    <a href="{{URL::to('costumes/create')}}" class="btn btn-block btn-success btn-xs"><i class="fa fa-plus"></i> Add Custome</a>
                     </div>
                 </div>
                 <div class="box-body">
