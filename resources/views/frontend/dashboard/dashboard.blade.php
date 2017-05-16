@@ -386,7 +386,7 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<select class="form-control" name="country" id="country">
+											<select class="form-control" name="shipping_country" id="country">
 													<option value="" selected> Select</option>
 													@foreach($countries as $cnt)
 													<option value="{{$cnt->country_name}}" <?php if($shipping_address->country == $cnt->country_name){ ?> selected="selected" <?php } ?>>{{$cnt->country_name}}</option>
@@ -435,12 +435,22 @@
 					$('#shipping_popup_edit').removeClass('in');
 					$('.modal-backdrop').remove();
 				});
+				
 			});
 				function  edit_shipping($id){
 					$('#shipping_popup_edit').css('display','block');
 					$('#shipping_popup_edit').addClass('in');
 					$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
 					}
+			$(document).on('change','#shipping_country,#billing_country',function(){
+    		if($(this).val()!="United States"){
+    			$('.state_dropdown').addClass('hide');
+    			$('.normal-states').removeClass('hide');
+    		}else{
+    			$('.state_dropdown').removeClass('hide');
+    			$('.normal-states').addClass('hide');
+    		}
+    });
 		</script>
 	</section>
 
