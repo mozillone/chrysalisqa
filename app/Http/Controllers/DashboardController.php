@@ -90,19 +90,21 @@ public function addShippingAddress(Request $req){
   //echo "<pre>";print_r($req->all());die;
 
   $address_id=Address::addShippingAddressDashboard($req);
+  Session::flash('success', 'Shipping address updated successfully.');
   return Redirect::back();
 
 }
 public function addBillingAddress(Request $req){
  // echo "<pre>";print_r($req->all());die;
   $address_id=Address::addBillingAddressDashboard($req);
+  Session::flash('success', 'Billing address updated successfully.');
   return Redirect::back();
 
 }
 public function deleteAddress(Request $req){
   //echo "<pre>";print_r($req->all());die;
 $deleteAddress = DB::table('address_master')->where('address_id',$req->id)->delete();
-
+Session::flash('success', 'Address deleted successfully.');
 return "success";
 
 }
