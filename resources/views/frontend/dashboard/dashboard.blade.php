@@ -165,9 +165,6 @@
 									
 									//echo "<pre>";print_r($billing_address);die;
 									?>
-									<?php }else{
-									$billing_address = "";
-									} ?>
 									<p class="bill_adrs">
 										
 										<span> {{$billing_address->fname}}{{$billing_address->lname}}<br>
@@ -178,6 +175,9 @@
 									<p class="bill_adrs_dlte">
 										<span><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
 									</p>
+									<?php }else{
+										$billing_address = "";
+									} ?>
 									<div class="form-group add_new_btn">
 										<a type="submit" class="btn btn-default">Add New</a>
 									</div>
@@ -191,9 +191,6 @@
 									
 									//echo "<pre>";print_r($billing_address);die;
 									?>
-									<?php }else{
-									$shipping_address = "";
-									} ?>
 									<p class="bill_adrs">
 										
 										<span> {{$shipping_address->fname}}{{$shipping_address->lname}}<br>
@@ -204,6 +201,9 @@
 									<p class="bill_adrs_dlte">
 										<span><a href="#" onclick="edit_shipping({{$shipping_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
 									</p>
+									<?php }else{
+									$shipping_address = "";
+									} ?>
 									<div class="form-group add_new_btn">
 										<a type="submit" class="btn btn-default" id="shipping_popup_add">Add New</a>
 									</div>

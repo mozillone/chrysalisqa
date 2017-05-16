@@ -1,4 +1,4 @@
-@extends('admin.app')
+	@extends('admin.app')
 
 	{{-- Web site Title --}}
 	@section('title') @parent
@@ -179,7 +179,7 @@
 	<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field">*</span></label>
 
 	<div class="input-group">
-	<input type="{{$bd_height->type}}" class="form-control"   name="{{$bd_height->code}}" id="{{$bd_height->code}}">
+	<input type="{{$bd_height->type}}" class="form-control"  value="{{$bd_height_value->attribute_option_value}}" name="{{$bd_height->code}}" id="{{$bd_height->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
 	</div>
 	<span id="heightfterror" style="color:red"></span>
@@ -196,7 +196,7 @@
 	?>
 	<label for="inputEmail3" class="control-label"></label>
 	<div class="input-group">
-	<input type="{{$bd_height_in->type}}"  class="form-control"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
+	<input type="{{$bd_height_in->type}}"  class="form-control" value="{{$bd_height_in_value->attribute_option_value}}"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1;?></span>
 	</div>
 	<span id="heightinerror" style="color:red"></span>
@@ -213,7 +213,7 @@
 	?>
 	<label for="inputEmail3" class="control-label"><?php echo $attribute2;?><span class="req-field" >*</span></label>
 	<div class="input-group">
-	<input type="{{$bd_weight->type}}" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
+	<input type="{{$bd_weight->type}}" value="{{$bd_weight_value->attribute_option_value}}" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue2;?></span>
 	</div>
 	<span id="weightlbserror" style="color:red"></span>
@@ -230,7 +230,7 @@
 	?>
 	<label for="inputEmail3" class="control-label"><?php echo $attribute3;?><span class="req-field" >*</span></label>
 	<div class="input-group">
-	<input type="{{$bd_chest->type}}" class="form-control"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
+	<input type="{{$bd_chest->type}}" class="form-control" value="{{$bd_chest_value->attribute_option_value}}"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue3;?></span>
 	</div>
 	<span id="chestinerror" style="color:red"></span>
@@ -246,7 +246,7 @@
 	?>
 	<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field" >*</span></label>
 	<div class="input-group">
-	<input type="{{$bd_waist->type}}" class="form-control" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
+	<input type="{{$bd_waist->type}}" class="form-control" value="{{$bd_waist_value->attribute_option_value}}" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
 	</div>
 	<span id="waistlbserror" style="color:red"></span>
@@ -286,10 +286,10 @@
 	<br>
 	@foreach($cosplay_one_value as $index=>$cosplayonevalues)
 	<?php if ($cosplayonevalues->option_value == "yes") {?>
-	<input type="{{$cosplay_one->type}}"  checked name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" required>&nbsp;
+	<input type="{{$cosplay_one->type}}"  <?php if ($cosplay_one_value_value->attribute_option_value_id == $cosplayonevalues->option_id) { ?> checked="checked" <?php } ?> name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" required>&nbsp;
 	{{$cosplayonevalues->option_value}}&nbsp;
 	<?php } else {?>
-	<input type="{{$cosplay_one->type}}"   name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" onclick="cosplay_yes(<?php echo $cosplayonevalues->option_id?>)"  required>&nbsp;
+	<input type="{{$cosplay_one->type}}" <?php if ($cosplay_one_value_value->attribute_option_value_id == $cosplayonevalues->option_id) { ?> checked="checked" <?php } ?>  name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" onclick="cosplay_yes(<?php echo $cosplayonevalues->option_id?>)"  required>&nbsp;
 	{{$cosplayonevalues->option_value}}&nbsp;
 	<?php }?>
 	@endforeach
@@ -339,7 +339,7 @@
 	<span class="req-field" ></span></label>
 	<br>
 	@foreach($cosplay_two_value as $index=>$cosplaytwovalues)
-	<input type="{{$cosplay_two->type}}"  <?php if ($cosplaytwovalues->option_value == "yes") {?> checked <?php }?>name="{{$cosplay_two->code}}" id="{{$cosplay_two->code}}"  value="{{$cosplaytwovalues->option_id}}" onclick="uniquefashion_yes({{$cosplaytwovalues->option_id}})"  required>&nbsp;
+	<input type="{{$cosplay_two->type}}"  <?php if ($cosplay_two_value_value->attribute_option_value_id == $cosplaytwovalues->option_id) { ?> checked="checked" <?php } ?> name="{{$cosplay_two->code}}" id="{{$cosplay_two->code}}"  value="{{$cosplaytwovalues->option_id}}" onclick="uniquefashion_yes({{$cosplaytwovalues->option_id}})"  required>&nbsp;
 	{{$cosplaytwovalues->option_value}}&nbsp;
 
 	@endforeach

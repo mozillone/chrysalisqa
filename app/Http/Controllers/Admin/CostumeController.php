@@ -719,24 +719,17 @@ class CostumeController extends Controller
         ->make(true);
 	}
 
-	public function costumesList(){
-	   /*****Costumes View Page***/
-	    $title=Auth::user()->display_name." Costumes List";
-        return view('admin.costumes.costumes_list',compact('title'));
-	}
-	/*
-	Method Name : addCostume()
-	purpose:addCostume Method is used to show the add costume page
-	*/
-	public function createCostume(){
-	 /****Add Costumes View page ***/
-	 $customers=DB::table('users')->select('id as id','display_name as username')
-	 ->where('role_id','!=','1')
-	 ->where('active','=','1')
-	 ->orderby('display_name','ASC')
-	 ->get();
-	 /*******Array push for both categories and subcategories displaying code starts here*****/
-	 $categories=array('modules_result'=>array());
+	public function CostumeList($id){
+		//echo "<pre>";print_r($id);die;
+		$this->data = array();
+
+		$this->data['costumes_data'] = DB::table('costumes as c')->where('c.costume_id',$id)
+		->leftJoin('users as u','c.created_by','u.id')
+		->leftJoin('costume_description as cd','c.costume_id','cd.costume_id')
+		->select('u.display_name as customer_name','cd.name as costume_name','c.gender as cos_gender','c.condition as cos_condition','c.price as cos_price','c.quantity as cos_quantity','c.size as cos_size','c.charity_id as cos_charity_id','cd.description as cos_description')
+		->first();
+		/*******Array push for both categories and subcategories displaying code starts here*****/
+		$this->data['categories']=array('modules_result'=>array());
 		/****Getting the hotel feautures code starts here***/
 		$hotelfeautures =\DB::table('category')->where('parent_id','=','0')->get();
 		//print_r($hotelfeautures);exit;
@@ -771,71 +764,81 @@ class CostumeController extends Controller
 								
 							}
 					  }
-				 array_push($categories['modules_result'],$module_array);
+				 array_push($this->data['categories']['modules_result'],$module_array);
 			 }
 			 
 		}
+		//all_attributes_options
+		$this->data['get_costume_attribute_options'] = DB::table('costume_attribute_options')->where('costume_id',$id)->get();
+		foreach ($this->data['get_costume_attribute_options'] as  $costume_attribute_optionsvalue) {
+			$this->data['costume_attribute_options'] = $costume_attribute_optionsvalue;
+		}
+
 		//print_r($categories); exit;
-		//Fetching attributes code starts here***/
-		/*****************Body and dimensions code starts here***/
-		$bd_height=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',16)->first();
-		$bd_height_in=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',17)->first();
-        $bd_weight=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',18)->first();
-		$bd_chest=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',19)->first();
-		$bd_waist=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',20)->first();
+		$this->data['bd_height']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',16)->first();
+		$this->data['bd_height_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',16)->first();
+		$this->data['bd_height_in']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',17)->first();
+		$this->data['bd_height_in_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',17)->first();
+        $this->data['bd_weight']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',18)->first();
+		$this->data['bd_weight_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',18)->first();
+		$this->data['bd_chest']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',19)->first();
+		$this->data['bd_chest_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',19)->first();
+		$this->data['bd_waist']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',20)->first();
+		$this->data['bd_waist_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',20)->first();
 		/******Costume Faq code starts here*****/
-		$cosplay_one=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',2)->first();
-		$cosplay_one_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',2)->get();
-		$cosplay_two=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',3)->first();
-		$cosplay_two_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',3)->get();
-		$cosplay_three=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',4)->first();
-		$cosplay_three_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',4)->get();
-		$cosplay_four=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',5)->first();
-		$cosplay_four_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',5)->get();
-		$cosplay_five=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',21)->first();
-		$cosplay_five_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',21)->get();
-		/*****costume Faq code ends here***/
+		$this->data['cosplay_one']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',2)->first();
+		$this->data['cosplay_one_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',2)->get();
+		$this->data['cosplay_one_value_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',2)->first();
+		$this->data['cosplay_two']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',3)->first();
+		$this->data['cosplay_two_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',3)->get();
+		$this->data['cosplay_two_value_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',3)->first();
+		$this->data['cosplay_three']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',4)->first();
+		$this->data['cosplay_three_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',4)->get();
+		$this->data['cosplay_three_value_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',4)->first();
+		$this->data['cosplay_four']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',5)->first();
+		$this->data['cosplay_four_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',5)->get();
+		$this->data['cosplay_five']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',21)->first();
+		$this->data['cosplay_five_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',21)->get();
 		/****Description,funfacts and faq code starts here***/
-		$descriptions=DB::table('attributes')
+		$this->data['descriptions']=DB::table('attributes')
 		->leftJoin('attribute_options','attribute_options.attribute_id','=','attributes.attribute_id')
 		->select('attributes.attribute_id','attributes.code','attributes.label','attributes.type','attribute_options.option_id','attribute_options.option_value')
 		->where('attributes.attribute_id','>=',6)
 		->where('attributes.attribute_id','<=',8)
 		->get();
-		$shippingoptions=DB::table('attributes')
+		$this->data['shippingoptions']=DB::table('attributes')
 		->leftJoin('attribute_options','attribute_options.attribute_id','=','attributes.attribute_id')
 		->select('attributes.attribute_id','attributes.code','attributes.label','attributes.type','attribute_options.option_id','attribute_options.option_value')
 		->where('attributes.attribute_id','=',9)
 		->first();
-		$packageditems=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',10)->first();
-		$packageditems_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',10)->get();
-		$dimensions=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',11)->first();
-		$dimensions_values=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',11)->get();
+		$this->data['packageditems']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',10)->first();
+		$this->data['packageditems_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',10)->get();
+		$this->data['dimensions']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',11)->first();
+		$this->data['dimensions_values']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',11)->get();
 		//print_r($description);exit;
-		$type=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',12)->first();
-		$type_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',12)->get();
-		$service=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',13)->first();
-		$service_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',13)->get();
-		$handling=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',14)->first();
-		$handling_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',14)->get();
-		$returnpolicy=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',15)->first();
-		$returnpolicy_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',15)->get();
-		$charities=DB::table('charities')->select('id as id','name as name')->get();
-		$description=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',6)->first();
-		$description_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',6)->get();
-		$funfacts=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',7)->first();
-		$funfacts_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',7)->get();
-		$faq=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',8)->first();
-		$faq_value=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',8)->get();
-		//print_r($cosplay_one);exit;
-		/****Array push code ends here***/
-	 return view('admin.costumes.costume_create',compact('title','customers','categories','bd_height',
-	 'bd_height_in','bd_weight','bd_chest','bd_waist','cosplay_one','cosplay_one_value','cosplay_two','cosplay_two_value','cosplay_three','cosplay_three_value',
-	 'cosplay_four','cosplay_four_value','cosplay_five','cosplay_five_value','descriptions','shippingoptions','packageditems','packageditems_value'
-	 ,'dimensions','dimensions_values','type','type_value','service','service_value','handling','returnpolicy','handling_value','returnpolicy_value','charities',
-	 'description','description_value','funfacts','funfacts_value','faq','faq_value'));
-	}
+		$this->data['type']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',12)->first();
+		$this->data['type_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',12)->get();
+		$this->data['service']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',13)->first();
+		$this->data['service_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',13)->get();
+		$this->data['handling']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',14)->first();
+		$this->data['handling_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',14)->get();
+		$this->data['returnpolicy']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',15)->first();
+		$this->data['returnpolicy_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',15)->get();
+		$this->data['charities']=DB::table('charities')->select('id as id','name as name')->get();
+		$this->data['description']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',6)->first();
+		$this->data['description_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',6)->get();
+		$this->data['funfacts']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',7)->first();
+		$this->data['funfacts_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',7)->get();
+		$this->data['faq']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',8)->first();
+		$this->data['faq_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',8)->get();
 
+		$this->data['customers']=DB::table('users')->select('id as id','display_name as username')
+	 ->where('role_id','!=','1')
+	 ->where('active','=','1')
+	 ->orderby('display_name','ASC')
+	 ->get();
+		 return view('admin.costumes.costume_edit')->with($this->data);
+	}
 
 	public function changeCostumeStatus(Request $request) {
         $status = $request->input('status'); 
