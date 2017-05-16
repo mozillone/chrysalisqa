@@ -27,7 +27,7 @@
 	<?php
 		if (isset($costumes_data) && !empty($costumes_data)) {
 			$cos_data = $costumes_data;
-			//echo "<pre>";print_r($cos_data);
+			//echo "<pre>";print_r($descriptions);
 		}else{
 			$cos_data = "";
 		}
@@ -398,7 +398,7 @@
 	<span class="req-field" ></span></label>
 	<br>
 	@foreach($cosplay_three_value as $index=>$cosplaythreevalues)
-	<input type="{{$cosplay_three->type}}" <?php if ($cosplaythreevalues->option_value == "yes") {?> checked <?php }?>name="{{$cosplay_three->code}}" id="{{$cosplay_three->code}}" onclick="activity_yes({{$cosplaythreevalues->option_id}})"  value="{{$cosplaythreevalues->option_id}}"  required>&nbsp;
+	<input type="{{$cosplay_three->type}}" <?php if ($cosplay_three_value_value->attribute_option_value_id == $cosplaythreevalues->option_id) {?> checked <?php }?>name="{{$cosplay_three->code}}" id="{{$cosplay_three->code}}" onclick="activity_yes({{$cosplaythreevalues->option_id}})"  value="{{$cosplaythreevalues->option_id}}"  required>&nbsp;
 	{{$cosplaythreevalues->option_value}}&nbsp;
 
 	@endforeach
@@ -451,7 +451,7 @@
 	<span class="req-field" ></span></label>
 	<br>
 	@foreach($cosplay_four_value as $index=>$cosplayfourvalues)
-	<input type="{{$cosplay_four->type}}"  <?php if ($cosplayfourvalues->option_value == "yes") {?> checked <?php }?>name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}" onclick="make_costume_yes({{$cosplayfourvalues->option_id}})"  required>&nbsp;
+	<input type="{{$cosplay_four->type}}"  <?php if ($cosplay_four_value_value->attribute_option_value_id == $cosplayfourvalues->option_id) {?> checked <?php }?>name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}" onclick="make_costume_yes({{$cosplayfourvalues->option_id}})"  required>&nbsp;
 	{{$cosplayfourvalues->option_value}}&nbsp;
 
 	@endforeach
@@ -472,7 +472,7 @@
 	<span class="req-field" ></span></label>
 	<br>
 	@foreach($cosplay_five_value as $index=>$cosplayfivevalues)
-	<input type="{{$cosplay_five->type}}"  <?php if ($cosplayfivevalues->option_value == "yes") {?> checked <?php }?>name="{{$cosplay_five->code}}" id="{{$cosplay_five->code}}"  value="{{$cosplayfivevalues->option_id}}"  required>&nbsp;
+	<input type="{{$cosplay_five->type}}"  <?php if ($cosplay_five_value_value->attribute_option_value_id == $cosplayfivevalues->option_id) {?> checked <?php }?>name="{{$cosplay_five->code}}" id="{{$cosplay_five->code}}"  value="{{$cosplayfivevalues->option_id}}"  required>&nbsp;
 	{{$cosplayfivevalues->option_value}}&nbsp;
 
 	@endforeach
@@ -499,7 +499,7 @@
 
 	<label for="inputEmail3" class="control-label">{{$funfacts->label}}<span class="req-field" ></span></label>
 	<div class="input-group">
-	<textarea type="{{$funfacts->type}}" rows="6" cols="63" class="form-control"   name="{{$funfacts->code}}" id="{{$funfacts->code}}"></textarea>
+	<textarea type="{{$funfacts->type}}" rows="6" cols="63" class="form-control"   name="{{$funfacts->code}}" id="{{$funfacts->code}}">{{$funfacts_value_value->attribute_option_value}}</textarea>
 
 	</div>
 
@@ -511,7 +511,7 @@
 
 	<label for="inputEmail3" class="control-label">{{$faq->label}}<span class="req-field" ></span></label>
 	<div class="input-group">
-	<textarea type="{{$faq->type}}" rows="6" cols="63" class="form-control"   name="{{$faq->code}}" id="{{$faq->code}}"></textarea>
+	<textarea type="{{$faq->type}}" rows="6" cols="63" class="form-control"   name="{{$faq->code}}" id="{{$faq->code}}">{{$faq_value_value->attribute_option_value}}</textarea>
 
 	</div>
 
@@ -565,7 +565,7 @@
 	<label for="inputEmail3" class="control-label">{{$shippingoptions->label}} <span class="req-field" ></span></label>
 	<select class="form-control" name="{{$shippingoptions->code}}" id="{{$shippingoptions->code}}">
 	<option value="">Select Shipping Options</option>
-	<option value="{{$shippingoptions->option_id}}">{{$shippingoptions->option_value}}</option>
+	<option <?php if($shippingoptions_value->attribute_option_value_id == $shippingoptions->option_id){ ?> selected="selected"<?php } ?> value="{{$shippingoptions->option_id}}">{{$shippingoptions->option_value}}</option>
 	</select>
 	<p class="error">{{ $errors->first('name') }}</p>
 	</div>
@@ -585,7 +585,7 @@
 	<select name="{{$packageditems->code}}" id="{{$packageditems->code}}" class="form-control">
 	<option value="">Select Weight of Packaged Item </option>
 	@foreach($packageditems_value as $packagevalues)
-	<option value="{{$packagevalues->option_id}}">{{$packagevalues->option_value}}</option>
+	<option <?php if($packageditems_value_value->attribute_option_value == $packagevalues->option_value){ ?> selected="selected" <?php } ?> value="{{$packagevalues->option_id}}">{{$packagevalues->option_value}}</option>
 	@endforeach
 	</select>
 	<p class="error">{{ $errors->first('name') }}</p>
@@ -609,7 +609,7 @@
 	<div class="col-md-4">
 	<div class="input-group">
 
-	<input type="{{$dimensions->type}}" class="form-control" placeholder="<?php echo $dimensionattribute;?>" name="{{$dimensions->code}}" id="{{$dimensions->code}}">
+	<input type="{{$dimensions->type}}" value="@if(isset($dimensionval->attribute_option_value)){{$dimensionval->attribute_option_value}}@endif" class="form-control" placeholder="<?php echo $dimensionattribute;?>" name="{{$dimensions->code}}<?php echo $dimensionattribute;?>" id="{{$dimensions->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $dimensionvalue;?></span>
 	</div>
 	</div>
@@ -622,7 +622,7 @@
 	<select class="form-control"  name="{{$type->code}}" id="{{$type->code}}">
 	<option value="">Select Type</option>
 	@foreach($type_value as $index=>$typeval)
-	<option value="{{$typeval->option_id}}">{{$typeval->option_value}}</option>
+	<option <?php if($type_value_value->attribute_option_value == $typeval->option_value) {?> selected="selected" <?php } ?> value="{{$typeval->option_id}}">{{$typeval->option_value}}</option>
 	@endforeach
 	</select>
 	<p class="error">{{ $errors->first('name') }}</p>
@@ -632,7 +632,7 @@
 	<select class="form-control"  name="{{$service->code}}" id="{{$service->code}}">
 	<option value="">Select Service</option>
 	@foreach($service_value as $index=>$serviceval)
-	<option value="{{$serviceval->option_id}}">{{$serviceval->option_value}}</option>
+	<option <?php if($service_value_value->attribute_option_value == $serviceval->option_value) {?> selected="selected" <?php } ?> value="{{$serviceval->option_id}}">{{$serviceval->option_value}}</option>
 	@endforeach
 	</select>
 	<p class="error">{{ $errors->first('name') }}</p>
@@ -646,7 +646,7 @@
 	<div class="form-group has-feedback" >
 
 	<div id="locationField">
-	<input type="text" class="form-control" placeholder="Enter Location"  name="location" id="autocomplete" onFocus="geolocate()" >
+	<input type="text" class="form-control" value="{{$cos_data->item_location}}" placeholder="Enter Location"  name="location" id="autocomplete" onFocus="geolocate()" >
 	</div>
 	<span id="autocomplete_error" style="color:red"></span>
 	</div>
@@ -667,7 +667,7 @@
 	<select class="form-control"    name="{{$handling->code}}" id="{{$handling->code}}">
 	<option value="">Select Handling Time</option>
 	@foreach($handling_value as $index=>$handlingval)
-	<option value="{{$handlingval->option_id}}">{{$handlingval->option_value}}</option>
+	<option <?php if($handling_value_value->attribute_option_value == $handlingval->option_value) {?> selected="selected" <?php } ?> value="{{$handlingval->option_id}}">{{$handlingval->option_value}}</option>
 	@endforeach
 	</select>
 	<p class="error">{{ $errors->first('name') }}</p>
@@ -677,7 +677,7 @@
 	<select class="form-control"  name="{{$returnpolicy->code}}" id="{{$returnpolicy->code}}">
 	<option value="">Select Return Policy</option>
 	@foreach($returnpolicy_value as $index=>$returnpolicyval)
-	<option value="{{$returnpolicyval->option_id}}">{{$returnpolicyval->option_value}}</option>
+	<option <?php if($returnpolicy_value_value->attribute_option_value == $returnpolicyval->option_value) {?> selected="selected" <?php } ?> value="{{$returnpolicyval->option_id}}">{{$returnpolicyval->option_value}}</option>
 	@endforeach
 	</select>
 	<p class="error">{{ $errors->first('name') }}</p>
@@ -693,7 +693,10 @@
 	<div class="input-group">
 	<!-- <span class="input-group-addon">$</span> -->
 	<!-- <input type="text" class="form-control"  autocomplete="off"  name="charity_amount" id="charity_amount"> -->
-	<select class="form-control" name="charity_amount" id="charity_amount"><option value="">Donate Amount</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select>
+	<select class="form-control" name="charity_amount" id="charity_amount"><option value="">Donate Amount</option>
+		<option <?php if($cos_data->donation_amount == '10'){ ?> selected="selected" <?php } ?> value="10">10%</option>
+		<option <?php if($cos_data->donation_amount == '20'){ ?> selected="selected" <?php } ?> value="20">20%</option>
+		<option <?php if($cos_data->donation_amount == '30'){ ?> selected="selected" <?php } ?> value="30">30%</option></select>
 	<p class="cst3-textl2 d-amount"  id="dynamic_percent_amount"><i class="fa fa-usd" aria-hidden="true"></i>0.00</p>
 	<p class="error">{{ $errors->first('charity_amount') }}</p>
 
@@ -755,18 +758,11 @@
 	<input class="input-btn" id="upload-file-selector" name="files[]" multiple="" type="file">
 
 
+	<?php foreach ($costume_images as  $images) { ?>
+		<img width="180px;" height="298px;" src="{{ asset('costumers_images/Original/'.$images->image) }}">
+	<?php } ?>
 	</div>
-
 	</div>
-
-
-
-
-
-
-
-
-
 	</div>
 	<div class="box-footer">
 	<div class="pull-right">
