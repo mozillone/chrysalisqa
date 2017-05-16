@@ -10,6 +10,7 @@ use Session;
 use Hash;
 use DB;
 use App\Helpers\Site_model;
+use App\Address;
 class DashboardController extends Controller {
 
 	protected $messageBag = null;
@@ -83,5 +84,25 @@ class DashboardController extends Controller {
                                           return Redirect::back();
     return view('frontend.dashboard.dashboard');
   }
+}
+public function addShippingAddress(Request $req){
+  //echo "<pre>";print_r($req->all());die;
+
+  $address_id=Address::addShippingAddressDashboard($req);
+  return Redirect::back();
+
+}
+public function addBillingAddress(Request $req){
+ // echo "<pre>";print_r($req->all());die;
+  $address_id=Address::addBillingAddressDashboard($req);
+  return Redirect::back();
+
+}
+public function deleteAddress(Request $req){
+  //echo "<pre>";print_r($req->all());die;
+$deleteAddress = DB::table('address_master')->where('address_id',$req->id)->delete();
+
+return "success";
+
 }
 }

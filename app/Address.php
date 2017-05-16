@@ -136,4 +136,56 @@ class Address extends Authenticatable
         Site_model::update_data('cart',$data,$cond);
         return true;   
      }
+     protected function addShippingAddressDashboard($req){
+                $user_id=Auth::user()->id;
+                if(!empty($req['shipping_state_dropdown'])){ $state=$req['shipping_state_dropdown'];}else{$state=$req['state'];}
+                 $billing_address=array('fname'=>$req['firstname'],
+                                       'lname'=>$req['lastname'],
+                                       'address1'=>$req['address_1'],
+                                       'address2'=>$req['address_2'],
+                                       'city'=>$req['city'],
+                                       'state'=> $state,
+                                       'country'=>$req['country'],
+                                       'zip_code'=>$req['postcode'],
+                                       'address_type'=>'shipping',
+                                       'user_id'=>Auth::user()->id,
+                                       'created_on'=>date('Y-m-d h:i:s')
+                                        );
+                if ($req['is_edit'] == 'yes') {
+                  $address_id=DB::table('address_master')->where('user_id',$user_id)->where('address_type','shipping')->update($billing_address);
+                }else{
+                  $address_id=Site_model::insert_get_id('address_master',$billing_address);
+                }
+               if(isset($req['is_billing'])){
+                    $this->addBillingAddress($req);
+               }
+               return $address_id;
+    }
+
+    protected function addBillingAddressDashboard($req){
+                $user_id=Auth::user()->id;
+                if(!empty($req['billing_state_dropdown'])){ $state=$req['billing_state_dropdown'];}else{$state=$req['state'];}
+                $billing_address=array('fname'=>$req['firstname'],
+                                       'lname'=>$req['lastname'],
+                                       'address1'=>$req['address_1'],
+                                       'address2'=>$req['address_2'],
+                                       'city'=>$req['city'],
+                                       'state'=> $state,
+                                       'country'=>$req['country'],
+                                       'zip_code'=>$req['postcode'],
+                                       'address_type'=>'billing',
+                                       'user_id'=>Auth::user()->id,
+                                       'created_on'=>date('Y-m-d h:i:s')
+                                        );
+               if ($req['is_edit'] == 'yes') {
+                  $address_id=DB::table('address_master')->where('user_id',$user_id)->where('address_type','billing')->update($billing_address);
+                }else{
+                  $address_id=Site_model::insert_get_id('address_master',$billing_address);
+                }
+               if(isset($req['is_shipping'])){
+                    $this->addShippingAddress($req);
+               }
+               return $address_id;
+    }
+
 }
