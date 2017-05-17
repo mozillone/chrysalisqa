@@ -2103,8 +2103,8 @@ a.fav-style {
 .loader-align {
 	position: relative;
 }
-.loader-align .form-rms-btn a.btn-rm-back span:hover{
-	color: #60c4ac;
+.form-rms-btn a.btn-rm-back:hover {
+    color: #60c4ac;
 }
 
 img#ajax_loader {
