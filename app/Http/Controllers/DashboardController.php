@@ -110,7 +110,8 @@ return "success";
 
 }
 public function creditcradAdd(Request $req){
-  $cc_id=Creditcard::addCreditCardDashboard($req);
+  //echo "<pre>";print_r($req->all());die;
+  $cc_id=Creditcard::addCreditCardDashboard($req,Auth::user()->id);
   Session::flash('success', 'Card addedd successfully.');
   return Redirect::back();
 }

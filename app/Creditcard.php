@@ -78,10 +78,10 @@ class Creditcard extends Authenticatable
      }  
 
      protected function addCreditCardDashboard($req,$user_id){
-           
+        $card=$this->stripe->cards(Auth::user()->api_customer_id,$req['full_name_on_card'],$req['cc_number'],$req['exp_month'],$req['cvn_pin'],$req['exp_year']); 
         $cc_details=array('user_id'=>$user_id,
-                       'cardholder_name'=>$req['cardholder_name'],
-                       'credit_card_mask'=> $req['cc_number'],
+                       'cardholder_name'=>$req['full_name_on_card'],
+                       'credit_card_mask'=> $req['card_number'],
                        'card_type'=> $req['card_type'],
                        'exp_month'=> $req['exp_month'],
                        'exp_year'=> $req['exp_year'],
