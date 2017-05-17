@@ -966,11 +966,12 @@ p.sub-all.total_price{border-bottom:2px solid #ccc;border-top:2px solid #ccc;pad
 
 /* dashboard css start here */
 .dashboard-top-box p.right_heading { float: right; }
-.dashboard-top-box { border: 1px solid #ccc; display: inline-block; width: 100%; margin-bottom: 20px; padding: 5px; border-top: 2px solid #60c5ac; }
+.dashboard-top-box { border: 1px solid #ccc; font-size: 18px; display: inline-block; width: 100%; margin-bottom: 20px; padding: 15px; border-top: 2px solid #60c5ac; }
 .dashboard-top-box p.left_heading { float: left; }
-p.left_heading span { font-weight: 800; }
-p.right_heading span.my_facvrs { font-weight: 800; }
-p.right_heading span.my_msg { font-weight: 800; }
+.dashboard-top-box p {margin-bottom: 0}
+p.left_heading span { font-weight: 800; font-size: 18px;  font-family: Proxima-Nova-Extrabold;  color: #323031; }
+p.right_heading span.my_facvrs { font-weight: 800; color: #323031; font-family: Proxima-Nova-Extrabold; }
+p.right_heading span.my_msg { font-weight: 800; color: #323031; font-family: Proxima-Nova-Extrabold; margin-right: 20px;}
 .p_details .form-group { width: 44%; float: left; margin-right: 15px; margin-left: 15px; }
 .form-group.update_btn a { width: 100%; background: #61c5ac; border: 1px solid  #61c5ac; color: #fff; font-weight: 800; font-size: 18px; }
 .pay_details p.pymnt_right_box { float: right; clear: both; }
@@ -979,7 +980,7 @@ p.right_heading span.my_msg { font-weight: 800; }
 .billing_addres_1 p.bill_adrs { float: left; }
 .billing_addres_1 .form-group.add_new_btn { display: block; clear: left; text-align: right; border-top: 1px solid #ccc; padding-top: 15px; }
 .billing_addres_1 .form-group.add_new_btn a { padding: 7px 80px; background: #61c5ac; border: 1px solid #61c5ac; color: #fff; font-weight: 800; font-size: 18px; text-align: right; }
-.rencemt_order_table { border: 1px solid #ccc; padding: 10px 30px; margin-bottom: 30px; }
+.rencemt_order_table { border: 1px solid #e1e1e1; padding: 10px 30px; margin-bottom: 30px; }
 .rencemt_order_table .table.table-striped thead { font-weight: 600; font-size: 14px; color: #000; }
 .rencemt_order_table .table.table-striped tbody tr:hover { color: #ef4066; cursor: pointer; }
 .rencemt_order_table .table.table-striped tbody { font-size: 14px; }
@@ -996,6 +997,124 @@ p.right_heading span.my_msg { font-weight: 800; }
 	color: #EE4266;
 	font-size: 14px;
 	border-bottom: 1px solid #EE4266;
+}
+.rating-sec h3 {
+	font-size: 18px;
+	font-weight: 800;
+	color: #000;
+	margin-top: 0;
+}
+.rating-sec p {
+	font-size: 14px;
+	font-weight: 800;
+	color: #000;
+	margin-top: 8px;
+}
+.rating-sec span.rating-label {
+	display: inline-block;
+	color: #000;
+}
+.review-profile-sec {
+	text-align: center;
+	font-size: 12px;
+}
+.review-profile-sec img {
+	border-radius: 50%;
+	display: block;
+	margin: 0 auto;
+}
+.review-profile-sec a {
+	color: #EE4266;
+	border-bottom: 1px solid #EE4266;
+	display: inline-flex;
+}
+.rencemt_order_table.referral-sec h2 {
+	border-bottom: 0;
+	padding-bottom: 0;
+	margin-bottom: 5px;
+}
+.rencemt_order_table.referral-sec p {
+	color: #000;
+	font-weight: 800;
+}
+.rencemt_order_table.referral-sec form {
+	margin-top: 20px;
+}
+.rencemt_order_table.referral-sec .input-group {
+	margin-bottom: 15px;
+}
+.rencemt_order_table.referral-sec label {
+	color: #000;
+}
+.rencemt_order_table.referral-sec .input-group-addon {
+	color: white;
+	background-color: #61c5ac;
+	font-weight: 800;
+}
+.rencemt_order_table.referral-sec p a {
+	color: #EE4266;
+	border-bottom: 1px solid #EE4266;
+}
+.testmonials {
+	padding-top: 10px;
+	border-top: 2px solid #e1e1e1;
+	margin-top: 20px;
+	width: 100%;
+	height: 202px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding-right: 20px;
+	margin-bottom: 20px;
+}
+.personal-reviews {
+	margin-top: 20px;
+}
+.personal-reviews p {
+	font-size: 12px;
+	clear: both;
+}
+.panel-body {
+	padding: 30px;
+}
+.panel-default {
+	border-color: #e1e1e1;
+}
+.rating-stars {
+	font-size: 20px;
+	margin-top: 25px;
+	color: #F4C507;
+}
+.personal-ratings {
+	color: #F4C507;
+}
+.personal-ratings span {
+	float: right;
+	color: #656565;
+}
+.panel {
+	border-radius: 0;
+
+}
+.panel-body.add_new_card {
+	padding: 15px;
+}
+.panel-body.p_details {
+	padding: 15px;
+}
+.panel-default>.panel-heading {
+	background-color: white;
+	border-bottom: 0;
+}
+.panel-heading {
+	padding: 10px 30px;
+}
+.panel-heading h2 {
+	font-size: 18px;
+	font-weight: 800;
+	color: #000;
+	border-bottom: 2px solid #ccc;
+	padding-bottom: 20px;
+	padding-right: 30px;
 }
 /* dashboard css End here */
 
