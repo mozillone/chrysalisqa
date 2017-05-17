@@ -113,16 +113,16 @@
 	<label for="inputEmail3" class="control-label">Costume For<span class="req-field" >*</span></label>
 	<br>
 	<label class="radio-inline">
-	<input type="radio"   name="gender" id="male"  value="male" checked >Male</label>
+	<input type="radio" <?php if ($cos_data->cos_gender == 'male') { ?> checked='checked'	 <?php } ?>  name="gender" id="male"  value="male" >Male</label>
 
 	<label class="radio-inline">
-	<input type="radio"   name="gender" id="female"  value="female"  >Female</label>
+	<input type="radio" <?php if ($cos_data->cos_gender == 'female') { ?> checked='checked'	 <?php } ?>  name="gender" id="female"  value="female"  >Female</label>
 
 	<label class="radio-inline">
-	<input type="radio"   name="gender" id="unisex"  value="unisex" >Unisex</label>
+	<input type="radio" <?php if ($cos_data->cos_gender == 'unisex') { ?> checked='checked'	 <?php } ?>  name="gender" id="unisex"  value="unisex" >Unisex</label>
 
 	<label class="radio-inline">
-	<input type="radio"   name="gender" id="pet"  value="pet"  >Pet</label>
+	<input type="radio" <?php if ($cos_data->cos_gender == 'pet') { ?> checked='checked'	 <?php } ?>  name="gender" id="pet"  value="pet"  >Pet</label>
 
 	</div>
 	<span id="gendererror" style="color:red"></span>
@@ -132,10 +132,10 @@
 	<select class="form-control sony" name="category" id="category">
 	<option value="">Select Category</option>
 	<?php
-	$features_req = $categories['modules_result'];
-	foreach ($features_req as $features_res) {
+	$cos_data->modules_result = $categories['modules_result'];
+	foreach ($cos_data->modules_result as $features_res) {
 	//print_r($features_res);
-	?>																																						    <optgroup label="<?php echo ucfirst($features_res['name']);?>">
+	?>																						<optgroup label="<?php echo ucfirst($features_res['name']);?>">
 	<?php foreach ($features_res['submodule_result'] as $feature_val_res) {
 	?><option value="<?php echo $feature_val_res['subcategoryid'];?>"><?php echo ucfirst($feature_val_res['subcategoryname']);
 	?></option>
@@ -150,21 +150,22 @@
 	<div class="form-group" >
 	<label for="inputEmail3" class="control-label">Condition <span class="req-field" >*</span></label>
 	<br>
-	<label class="radio-inline"><input type="radio"  name="costumecondition" id="excellent"   value="excellent"  checked> &nbsp;
+	<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'excellent') { ?> checked='checked'	 <?php } ?> name="costumecondition" id="excellent"   value="excellent"  > &nbsp;
 	Excellent&nbsp;
 	</label>
-	<label class="radio-inline"><input type="radio"  name="costumecondition" id="brandnew"  value="brand_new"> &nbsp;
+	<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'brand_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" id="brandnew"  value="brand_new"> &nbsp;
 	Brand New&nbsp;
 	</label>
-	<label class="radio-inline"><input type="radio"  name="costumecondition" id="good"  value="good">&nbsp;
+	<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'good') { ?> checked='checked'	 <?php } ?> name="costumecondition" id="good"  value="good">&nbsp;
 	Good&nbsp;
 	</label>
-	<label class="radio-inline"><input type="radio"  name="costumecondition" id="likenew"  value="like_new">&nbsp;
+	<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'like_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" id="likenew"  value="like_new">&nbsp;
 	Like New&nbsp;
 	</label>
 	</div>
 	<span id="costumeconditionerror" style="color:red"></span>
 	</div>
+	<?php //echo "<pre>"; print_r($get_costume_attribute_options); ?>
 	<h4>Body & Dimensions (Optional)</h4></hr>
 	<div class="row" >
 	<div class="col-md-6" >
@@ -178,7 +179,7 @@
 	<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field">*</span></label>
 
 	<div class="input-group">
-	<input type="{{$bd_height->type}}" class="form-control"   name="{{$bd_height->code}}" id="{{$bd_height->code}}">
+	<input type="{{$bd_height->type}}" class="form-control"  value="{{$bd_height_value->attribute_option_value}}" name="{{$bd_height->code}}" id="{{$bd_height->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
 	</div>
 	<span id="heightfterror" style="color:red"></span>
@@ -195,7 +196,7 @@
 	?>
 	<label for="inputEmail3" class="control-label"></label>
 	<div class="input-group">
-	<input type="{{$bd_height_in->type}}"  class="form-control"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
+	<input type="{{$bd_height_in->type}}"  class="form-control" value="{{$bd_height_in_value->attribute_option_value}}"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1;?></span>
 	</div>
 	<span id="heightinerror" style="color:red"></span>
@@ -212,7 +213,7 @@
 	?>
 	<label for="inputEmail3" class="control-label"><?php echo $attribute2;?><span class="req-field" >*</span></label>
 	<div class="input-group">
-	<input type="{{$bd_weight->type}}" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
+	<input type="{{$bd_weight->type}}" value="{{$bd_weight_value->attribute_option_value}}" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue2;?></span>
 	</div>
 	<span id="weightlbserror" style="color:red"></span>
@@ -229,7 +230,7 @@
 	?>
 	<label for="inputEmail3" class="control-label"><?php echo $attribute3;?><span class="req-field" >*</span></label>
 	<div class="input-group">
-	<input type="{{$bd_chest->type}}" class="form-control"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
+	<input type="{{$bd_chest->type}}" class="form-control" value="{{$bd_chest_value->attribute_option_value}}"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue3;?></span>
 	</div>
 	<span id="chestinerror" style="color:red"></span>
@@ -245,7 +246,7 @@
 	?>
 	<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field" >*</span></label>
 	<div class="input-group">
-	<input type="{{$bd_waist->type}}" class="form-control" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
+	<input type="{{$bd_waist->type}}" class="form-control" value="{{$bd_waist_value->attribute_option_value}}" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
 	<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
 	</div>
 	<span id="waistlbserror" style="color:red"></span>
@@ -256,14 +257,14 @@
 	<label for="inputEmail3" class="control-label">Size<span class="req-field" >*</span></label>
 	<select name="size" id="size" class="form-control">
 	<option value="">Select Size</option>
-	<option value="1sz">1SZ</option>
-	<option value="xxs">XXS</option>
-	<option value="xs">XS</option>
-	<option value="xs">S</option>
-	<option value="m">M</option>
-	<option value="l">L</option>
-	<option value="xl">XL</option>
-	<option value="xxl">XXL</option>
+	<option <?php if ($cos_data->cos_size == '1sz') { ?> selected='selected' <?php } ?> value="1sz">1SZ</option>
+	<option <?php if ($cos_data->cos_size == 'xxs') { ?> selected='selected' <?php } ?> value="xxs">XXS</option>
+	<option <?php if ($cos_data->cos_size == 'xs') { ?> selected='selected' <?php } ?> value="xs">XS</option>
+	<option <?php if ($cos_data->cos_size == 's') { ?> selected='selected' <?php } ?> value="s">S</option>
+	<option <?php if ($cos_data->cos_size == 'm') { ?> selected='selected' <?php } ?> value="m">M</option>
+	<option <?php if ($cos_data->cos_size == 'l') { ?> selected='selected' <?php } ?> value="l">L</option>
+	<option <?php if ($cos_data->cos_size == 'xl') { ?> selected='selected' <?php } ?> value="xl">XL</option>
+	<option <?php if ($cos_data->cos_size == 'xxl') { ?> selected='selected' <?php } ?> value="xxl">XXL</option>
 	</select>
 	<span id="size_error" style="color:red"></span>
 	</div>
@@ -285,10 +286,10 @@
 	<br>
 	@foreach($cosplay_one_value as $index=>$cosplayonevalues)
 	<?php if ($cosplayonevalues->option_value == "yes") {?>
-	<input type="{{$cosplay_one->type}}"  checked name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" required>&nbsp;
+	<input type="{{$cosplay_one->type}}"  <?php if ($cosplay_one_value_value->attribute_option_value_id == $cosplayonevalues->option_id) { ?> checked="checked" <?php } ?> name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" required>&nbsp;
 	{{$cosplayonevalues->option_value}}&nbsp;
 	<?php } else {?>
-	<input type="{{$cosplay_one->type}}"   name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" onclick="cosplay_yes(<?php echo $cosplayonevalues->option_id?>)"  required>&nbsp;
+	<input type="{{$cosplay_one->type}}" <?php if ($cosplay_one_value_value->attribute_option_value_id == $cosplayonevalues->option_id) { ?> checked="checked" <?php } ?>  name="{{$cosplay_one->code}}" id="{{$cosplay_one->code}}"  value="{{$cosplayonevalues->option_id}}" onclick="cosplay_yes(<?php echo $cosplayonevalues->option_id?>)"  required>&nbsp;
 	{{$cosplayonevalues->option_value}}&nbsp;
 	<?php }?>
 	@endforeach
@@ -338,7 +339,7 @@
 	<span class="req-field" ></span></label>
 	<br>
 	@foreach($cosplay_two_value as $index=>$cosplaytwovalues)
-	<input type="{{$cosplay_two->type}}"  <?php if ($cosplaytwovalues->option_value == "yes") {?> checked <?php }?>name="{{$cosplay_two->code}}" id="{{$cosplay_two->code}}"  value="{{$cosplaytwovalues->option_id}}" onclick="uniquefashion_yes({{$cosplaytwovalues->option_id}})"  required>&nbsp;
+	<input type="{{$cosplay_two->type}}"  <?php if ($cosplay_two_value_value->attribute_option_value_id == $cosplaytwovalues->option_id) { ?> checked="checked" <?php } ?> name="{{$cosplay_two->code}}" id="{{$cosplay_two->code}}"  value="{{$cosplaytwovalues->option_id}}" onclick="uniquefashion_yes({{$cosplaytwovalues->option_id}})"  required>&nbsp;
 	{{$cosplaytwovalues->option_value}}&nbsp;
 
 	@endforeach
@@ -486,7 +487,7 @@
 
 	<label for="inputEmail3" class="control-label">{{$description->label}}<span class="req-field" ></span></label>
 	<div class="input-group">
-	<textarea type="{{$description->type}}" rows="6" cols="63" class="form-control"   name="{{$description->code}}" id="{{$description->code}}"></textarea>
+	<textarea type="{{$description->type}}"  rows="6" cols="63" class="form-control"   name="{{$description->code}}" id="{{$description->code}}">{{$cos_data->cos_description}}</textarea>
 
 	</div>
 
@@ -529,7 +530,7 @@
 	<label for="inputEmail3" class="control-label">Price<span class="req-field" ></span></label>
 	<div class="input-group">
 	<span class="input-group-addon">$</span>
-	<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="price" id="price" >
+	<input type="text" class="form-control" value="{{$cos_data->cos_price}}" aria-label="Amount (to the nearest dollar)" name="price" id="price" >
 
 	<span id="priceerror" style="color:red">
 	</div>
@@ -542,16 +543,17 @@
 	<label for="inputEmail3" class="control-label">Quantity*<span class="req-field" ></span></label>
 	<select class="form-control" name="quantity" id="quantity">
 	<option value="">Select Quantity</option>
-	<option value="1">1</option>
-	<option value="2">2</option>
-	<option value="3">3</option>
-	<option value="4">4</option>
-	<option value="5">5</option>
-	<option value="6">6</option>
-	<option value="7">7</option>
-	<option value="8">8</option>
-	<option value="9">9</option>
-	<option value="10">10</option>
+	
+	<option <?php if ($cos_data->cos_quantity == '1') { ?> selected='selected' <?php } ?> value="1">1</option>
+	<option <?php if ($cos_data->cos_quantity == '2') { ?> selected='selected' <?php } ?> value="2">2</option>
+	<option <?php if ($cos_data->cos_quantity == '3') { ?> selected='selected' <?php } ?> value="3">3</option>
+	<option <?php if ($cos_data->cos_quantity == '4') { ?> selected='selected' <?php } ?> value="4">4</option>
+	<option <?php if ($cos_data->cos_quantity == '5') { ?> selected='selected' <?php } ?> value="5">5</option>
+	<option <?php if ($cos_data->cos_quantity == '6') { ?> selected='selected' <?php } ?> value="6">6</option>
+	<option <?php if ($cos_data->cos_quantity == '7') { ?> selected='selected' <?php } ?> value="7">7</option>
+	<option <?php if ($cos_data->cos_quantity == '8') { ?> selected='selected' <?php } ?> value="8">8</option>
+	<option <?php if ($cos_data->cos_quantity == '9') { ?> selected='selected' <?php } ?> value="9">9</option>
+	<option <?php if ($cos_data->cos_quantity == '10') { ?> selected='selected' <?php } ?> value="10">10</option>
 	</select>
 	<span id="quantityerror" style="color:red"></span>
 	</div>
@@ -704,7 +706,9 @@
 	<select class="form-control"  autocomplete="off" name="charity_name" id="charity_name">
 	<option value="">Select Charity Name</option>
 	@foreach($charities as $index=>$charity)
-	<option value="{{$charity->id}}">{{$charity->name}}</option>
+	<option <?php if ($cos_data->cos_charity_id == $charity->id) { ?> selected="selected"
+		<?php
+	} ?> value="{{$charity->id}}">{{$charity->name}}</option>
 	@endforeach
 	</select>
 	<p class="error">{{ $errors->first('charity_name') }}</p>
