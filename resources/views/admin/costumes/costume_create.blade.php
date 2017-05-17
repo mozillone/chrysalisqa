@@ -7,6 +7,13 @@
 
 {{-- page level styles --}}
 @section('header_styles')
+
+<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+<link rel="stylesheet" href="{{ asset('/assets/admin/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
+<script src="{{ asset('/assets/admin/js/fileinput.js') }}"></script>
+    <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+    
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
 <link rel="stylesheet" href="{{ asset('/assets/admin/css/select2.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
