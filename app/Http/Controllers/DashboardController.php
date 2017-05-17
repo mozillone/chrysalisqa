@@ -10,6 +10,8 @@ use Session;
 use Hash;
 use DB;
 use App\Helpers\Site_model;
+use App\Address;
+use Response;
 class DashboardController extends Controller {
 
 	protected $messageBag = null;
@@ -84,11 +86,26 @@ class DashboardController extends Controller {
     return view('frontend.dashboard.dashboard');
   }
 }
+public function addShippingAddress(Request $req){
+  //echo "<pre>";print_r($req->all());die;
 
-public function addShippingAddress(Request $request){
-	echo "<pre>";print_r($request->all());die;
-    $req=$request->all();
-    $address_id=Address::addShippingAddress($req);
-    return Response::JSON($address_id);
-  }
+  $address_id=Address::addShippingAddressDashboard($req);
+  Session::flash('success', 'Shipping address updated successfully.');
+  return Redirect::back();
+
+}
+public function addBillingAddress(Request $req){
+ // echo "<pre>";print_r($req->all());die;
+  $address_id=Address::addBillingAddressDashboard($req);
+  Session::flash('success', 'Billing address updated successfully.');
+  return Redirect::back();
+
+}
+public function deleteAddress(Request $req){
+  //echo "<pre>";print_r($req->all());die;
+$deleteAddress = DB::table('address_master')->where('address_id',$req->id)->delete();
+Session::flash('success', 'Address deleted successfully.');
+return "success";
+
+}
 }

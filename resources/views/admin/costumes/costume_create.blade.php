@@ -607,7 +607,7 @@ $dimensionvalue     = $heightattributes[1];
 <div class="col-md-4">
 <div class="input-group">
 
-<input type="{{$dimensions->type}}" class="form-control" placeholder="<?php echo $dimensionattribute;?>" name="{{$dimensions->code}}" id="{{$dimensions->code}}">
+<input type="{{$dimensions->type}}" class="form-control" placeholder="<?php echo $dimensionattribute;?>" name="{{$dimensions->code}}{{$dimensions->code}}<?php echo $dimensionattribute;?>" id="{{$dimensions->code}}">
 <span class="input-group-addon" id="basic-addon2"><?php echo $dimensionvalue;?></span>
 </div>
 </div>
