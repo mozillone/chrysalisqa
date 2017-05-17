@@ -104,6 +104,11 @@ Route::get('/wishlist', ['as' => 'wishlist','uses'=>'WishlistCostumesController@
 Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostumesController@removeWishlistCostume']);
 
 
+Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
+
+
+
+
 
 
 	Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
