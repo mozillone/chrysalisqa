@@ -34,6 +34,7 @@ Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'DashboardController
 Route::any('/addshippingaddress', ['as' => 'shipping-address','uses'=>'DashboardController@addShippingAddress']);
 Route::any('/addbillingaddress', ['as' => 'billing-address','uses'=>'DashboardController@addBillingAddress']);
 Route::any('/deleteaddress', ['as' => '','uses'=>'DashboardController@deleteAddress']);
+Route::any('/creditcardadd', ['as' => 'creditcard-add','uses'=>'DashboardController@creditcradAdd']);
 
 /** Products list page start here **/
 //Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
@@ -105,6 +106,11 @@ Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@
 
 Route::get('/wishlist', ['as' => 'wishlist','uses'=>'WishlistCostumesController@myWishlistList']);
 Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostumesController@removeWishlistCostume']);
+
+
+Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
+
+
 
 
 

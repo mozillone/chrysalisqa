@@ -9,6 +9,7 @@ return array(
 	'FAQ_OPTION_VALUE'=>0,
 	'IS_FILMY'=>21,
 	'Processing'=>1,
-	'Currency'=>'usd'
+	'Currency'=>'usd',
+	'USPS'=>'402SAMPL6330'
 	
 );

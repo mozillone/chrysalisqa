@@ -34,6 +34,7 @@ class CreateCostumeController  extends Controller {
 	}
 	/***create costume step 2 code starts here***/
 	public function createCostumestep2(){
+		//echo "<pre>";print_r("hello");die;
 		/***Getting categories code starts here***/
 		/***selecting body and dimensions code starts here***/
 		$bodyanddimensions=DB::table('attributes')->select('attribute_id as attributeid','code as code','label as label','type as type')->where('attribute_id','1')->first();
@@ -117,6 +118,7 @@ class CreateCostumeController  extends Controller {
 	public function insertDescription(Request $request){
     
 	$req = $request->all();
+	//echo "<pre>";print_r($req);die;
 	$userid=Auth::user()->id;
 	//Getting the values of attribute description
 	$costume_name=$request->costume_name;
@@ -419,12 +421,24 @@ class CreateCostumeController  extends Controller {
 		 |@updated_at datetime
 		 */
 			//Check whether the costume inserted by admin or not if the user is selected insert the user id else insert the admin as costumer
+			 $addres_array = array('fname'=>Auth::user()->first_name,
+					'address1'=>$request->address1,
+					'address2'=>$request->address2,
+					'city'=>$request->city,
+					'state'=>$request->state,
+					'zip_code'=>$request->zipcode,
+					'phone'=>"",
+					'user_id'=>$userid,
+					'address_type'=>'costume','created_on'=>date('y-m-d H:i:s'));
+				//echo $ref_no;die;
+				$addres_insert=DB::table('address_master')->insertGetId($addres_array);
 			$costume=array('sku_no'=>$sku_val,
 			'gender'=>$gender,
 			'condition'=>$costume_condition,
 			'created_user_group'=>$customer_group,
 			'size'=>$size,
 			'item_location'=>$request->zipcode,
+			'address_id'=>$addres_insert,
 			'created_by'=>$userid,
 			'created_at'=>date('y-m-d H:i:s'),
 			'updated_at'=>date('y-m-d H:i:s'),
@@ -433,6 +447,7 @@ class CreateCostumeController  extends Controller {
 			$insert_costume=DB::table('costumes')->insertGetId($costume);
 			 Session::put('session_costume_id', $insert_costume);
 			 $costume_id = $insert_costume;
+
 
 			$file_name1 = str_random(10).'.'.$request->file1->getClientOriginalExtension();
 			$file_name2 = str_random(10).'.'.$request->file2->getClientOriginalExtension();

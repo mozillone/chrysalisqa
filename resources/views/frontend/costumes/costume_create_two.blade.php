@@ -511,7 +511,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <p class="form-rms-input"><select name="shipping" id="shipping">
 <option value="">Select Shipping Options</option>
 @foreach($shippingoptions as $index=>$shipping)
-<option value="{{$shipping->optionid}}">{{$shipping->value}}</option>
+<option value="{{$shipping->optionid}}">{{ucfirst($shipping->value)}}</option>
 @endforeach
 
 </select></p>
