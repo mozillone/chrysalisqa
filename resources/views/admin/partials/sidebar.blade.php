@@ -114,8 +114,6 @@
           </li>
         </ul>
       </li>
-
-<<<<<<< HEAD
       <li {{ Request::is('events') ? 'class=active' : '' }}>
       <a href="javascript:void(0)">
         <i class="fa fa-home" aria-hidden="true"></i>
@@ -142,7 +140,7 @@
 
       </li>
 
-      <li {{ Request::is('press') ? 'class=active' : '' }}>
+     <!--  <li {{ Request::is('press') ? 'class=active' : '' }}>
       <a href="javascript:void(0)">
         <i class="fa fa-home" aria-hidden="true"></i>
         <span>Press</span><i class="fa fa-angle-left pull-right"></i>
@@ -288,9 +286,7 @@
           </li>        
         </ul>
 
-      </li>
-
-=======
+      </li> -->
       <li {{ (Request::is('requestabag') ? 'class=active' : '') }}>
         <a href="javascript:void(0)">
            <i class="fa fa-home" aria-hidden="true"></i> <span>Request a Bag</span> <i class="fa fa-angle-left pull-right"></i>
@@ -304,8 +300,6 @@
         </ul>
         <!--  -->
       </li>
->>>>>>> 7188b7aa70b90c75a9c1dea4f3ff2e627b115597
-	 
     </ul>
   </section> 
 </aside>

@@ -702,6 +702,8 @@ body .loading img{width:10%;}
 	padding: 3px 25px;
 }
 
+#events-create .input-group label.error{top:60px;}
+.add-event-error .error{top:35px;position: absolute;}
 
 
 

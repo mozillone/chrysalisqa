@@ -160,10 +160,10 @@
                                 <div class="row">
                                 <div class="col-md-12">
                               <label for="inputEmail3" class="control-label"> Location Name<span class="req-field" >*</span></label>
-                            <div class="form-group has-feedback" >
+                            <div class="form-group has-feedback add-event-error" >
 
                                     <div id="locationField">
-                                        <input type="text" class="form-control" placeholder="Enter Location"  name="location" onFocus="geolocate()" >
+                                        <input type="text" class="form-control" placeholder="Enter Location"  name="location" id="autocomplete" onFocus="geolocate()" >
                                         <p class="error">{{ $errors->first('location') }}</p>
                                    </div>
                                   
