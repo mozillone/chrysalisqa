@@ -4,6 +4,7 @@ $(document).ready(function() {
 	var shipping_address=$("#shipping_address").validate({ignore: ":hidden" });
 	var billing_address=$("#billing_address").validate({ignore: ":hidden" });
 	var cc_details=$("#cc_form").validate();
+	var cc_dashboard_form = $('#cc_dashboard_form').validate();
 	$("#shipping_firstname").rules("add", {required:true,maxlength: 100});
 	$("#shipping_lastname").rules("add", {maxlength: 100});
 	$("#shipping_address_1").rules("add", {required:true,maxlength: 100});
@@ -27,6 +28,11 @@ $(document).ready(function() {
 	$("#card_type").rules("add", {required:true});
 	$("#exp_month").rules("add", {required:true});
 	$("#exp_year").rules("add", {required:true});
+	$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
+
+	$("#full_name_on_card").rules("add", {required:true,maxlength: 50});
+	$("#expiration_date").rules("add", {required:true,cc_chk:true});
+	$("#card_number").rules("add", {required:true});
 	$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
 
 	    

@@ -734,12 +734,22 @@ class CostumeController extends Controller
 	}
 
 	public function Getallcostumes(){
-		$costumes=DB::table('costumes as c')->where('c.deleted_status','0')->leftJoin('costume_description as cd','c.costume_id','cd.costume_id')
-		->leftJoin('users as u','c.created_by','u.id')
-		->leftJoin('costume_to_category as ctc','c.costume_id','ctc.costume_id')
-		->leftJoin('category as cat','ctc.category_id','cat.category_id')
-		->select('c.sku_no as sku_no','cd.name as custome_name','u.display_name as customer_name','cat.name as cat_name','c.condition as custome_condition','c.created_at as custome_created_at','c.status as custome_status','c.costume_id as costumeid')->get();
-		
+	
+		$costumes=DB::table('costumes as c')
+		->leftJoin('costume_description as cd','cd.costume_id','=','c.costume_id')
+		->leftJoin('users as u','u.id','=','c.created_by')
+		->leftJoin('costume_to_category as ctc','ctc.costume_id','=','c.costume_id')
+		->leftJoin('category as cat','cat.category_id','=','ctc.category_id')
+		->select('c.sku_no as sku_no',
+			'cd.name as custome_name',
+			'u.display_name as customer_name','cat.name as cat_name',
+			'c.condition as custome_condition',
+			'c.created_at as custome_created_at',
+			'c.status as custome_status',
+			'c.costume_id as costumeid')
+		->get();
+
+	//echo "<pre>";print_r($costumes);die;	
 	return Datatables::of($costumes)
         ->addColumn('actions', function ($costumes) {
                 return '<a href="/custome-listing/'.$costumes->costumeid.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>

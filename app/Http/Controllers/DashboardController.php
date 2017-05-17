@@ -11,6 +11,7 @@ use Hash;
 use DB;
 use App\Helpers\Site_model;
 use App\Address;
+use App\Creditcard;
 use Response;
 class DashboardController extends Controller {
 
@@ -107,5 +108,10 @@ $deleteAddress = DB::table('address_master')->where('address_id',$req->id)->dele
 Session::flash('success', 'Address deleted successfully.');
 return "success";
 
+}
+public function creditcradAdd(Request $req){
+  $cc_id=Creditcard::addCreditCardDashboard($req);
+  Session::flash('success', 'Card addedd successfully.');
+  return Redirect::back();
 }
 }
