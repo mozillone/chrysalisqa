@@ -182,7 +182,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-      //  Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Usps\UspsServiceProvider::class,
     ],
@@ -237,8 +237,8 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'helper' => App\Helpers\SiteHelper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Usps' => 'Usps\Facades\Usps'
-       // 'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'Usps' => 'Usps\Facades\Usps',
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
 
     ],
 
