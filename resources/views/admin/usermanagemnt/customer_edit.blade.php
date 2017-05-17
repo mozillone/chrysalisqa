@@ -7,12 +7,11 @@ View User |@parent
 
 @section('header_styles')
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/sweetalert/dist/sweetalert.css')}}">
-<link href="{{ asset('/assets/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('/assets/vendors/datetimepicker/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="{{ asset('/assets/admin/css/jquery.datetimepicker.css')}}">
-
+<link rel="stylesheet" href="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}">
        
 @stop
+
+
 
 {{-- Page content --}}
 @section('content')
@@ -247,7 +246,8 @@ function show(){
     <script src="{{asset('/assets/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
 	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <!-- Include Date Range Picker -->
-<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
+<script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
 <script type="text/javascript">
 $(function() {
 
@@ -258,35 +258,18 @@ $(function() {
       }
 });*/
 
-$('input[name="created_on"]').daterangepicker();
-$('input[name="expiry_on"]').daterangepicker();
 $('input[name="created_on"]').val('');
 $('input[name="expiry_on"]').val('');
 });
- jQuery('#date_timepicker_end_ticket').datetimepicker({
-        format: 'Y-m-d',
-        onShow: function (ct) {
-            this.setOptions({
-                closeOnDateSelect:true,
-                 minDate: new Date($('#date_timepicker_start').val()),
-                 maxDate: new Date($('#date_timepicker_end').val()),
-               // minDate: jQuery('#date_timepicker_start_ticket').val() ? jQuery('#date_timepicker_start_ticket').val() : false
-            })
-        },
-        timepicker: false
-    });
-	jQuery('#date_timepicker_end1_ticket').datetimepicker({
-        format: 'Y-m-d',
-        onShow: function (ct) {
-            this.setOptions({
-                closeOnDateSelect:true,
-                 minDate: new Date($('#date_timepicker_start').val()),
-                 maxDate: new Date($('#date_timepicker_end1').val()),
-               // minDate: jQuery('#date_timepicker_start_ticket').val() ? jQuery('#date_timepicker_start_ticket').val() : false
-            })
-        },
-        timepicker: false
-    });
+$('#date_timepicker_end_ticket').datetimepicker({format: 'MM/DD/YYYY',minDate: new Date()});
+$('#date_timepicker_end1_ticket').datetimepicker({format: 'MM/DD/YYYY'});
+
+$("#date_timepicker_end_ticket").on("dp.change", function (e) {
+            $('#date_timepicker_end1_ticket').data("DateTimePicker").minDate(e.date);
+        });
+        $("#date_timepicker_end1_ticket").on("dp.change", function (e) {
+        	//$('.from_date').data("DateTimePicker").maxDate(e.date);
+        });
 
 </script>
 	@stop

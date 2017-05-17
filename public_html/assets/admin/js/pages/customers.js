@@ -286,7 +286,7 @@ $(function(){
 			errorElement: 'span',
        		errorClass: 'error',
 		});
-		$("#phone,#contact_phone,#phone_number").on("keyup paste", function() {
+		$("#phone,#contact_phone,#phone_number,#aaa,#search.phone").on("keyup paste", function() {
 
   // Remove invalid chars from the input
 

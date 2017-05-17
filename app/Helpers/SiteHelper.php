@@ -67,7 +67,13 @@ class SiteHelper  {
 		return true;
 	}
 	public static function getCartCount(){
-		$count=Cart::getCartCount();
+		$cookie=cookie::get('min-cart');
+        if(is_array($cookie)){
+        	$cookie_id=key($cookie);
+        }else{
+        	$cookie_id=0;
+        }
+		$count=Cart::getCartCount($cookie_id);
 		return $count;
 	}
 	public static function currentCookieKey(){
@@ -93,6 +99,20 @@ class SiteHelper  {
 	public static function getCartSubtotalPrice(){
 		$SubtotalPrice=Cart::getCartSubtotalPrice();
 		return $SubtotalPrice;
+	}
+	public static function verifyCostumeQuantity($costume_id){
+		if(cookie::get('min-cart')!=null){
+			$cookie_id=key(cookie::get('min-cart'));
+			$qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
+			$res=Cart::verifyCostumeQuantity($costume_id,$qty);
+			if($res){
+	        	return true;
+	        }else{
+	        	return false;
+	        }
+    	}else{
+    			return true;
+    	}
 	}
 	
 }

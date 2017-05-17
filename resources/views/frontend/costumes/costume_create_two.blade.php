@@ -41,13 +41,13 @@
 <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_total_form" id="costume_total_form" method="post">
 <!--Create costume image code starts here-->
 	<div class="upload-photo-blogs" id="upload_div">
-	<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+	<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any accessories!</p>
 			<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 1</h2>
 		<h2 class="prog-head ">Upload Photos</h2>
 		
 		<!--- mobile heaindgs section end here -->
 
-		<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
+		<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any accessories!</p>
 		
 		<!--- mobile heaindgs section end here -->
 		<div class="threeblogs">
@@ -454,6 +454,12 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="faq" id="faq" maxlength="600" ></textarea></p>
 <span id="faqerror" style="color:red"></span>
 <p class="form-rms-sm1">( <span id="max_length_char3"></span> 600 characters)</p>
+<div class="form-rms-btn">
+<a type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></a>
+
+<!-- </form> -->
+<a type="button" id="costume_description_next" class="btn-rm-nxt nxt">Next Step</a>
+</div>
 </div>
 
 <!--costume three code starts here-->
@@ -463,12 +469,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <!--costume three code ends here-->
 </div>
 </div>
-<div class="form-rms-btn">
-<a type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></a>
 
-<!-- </form> -->
-<a type="button" id="costume_description_next" class="btn-rm-nxt nxt">Next Step</a>
-</div>
 </div>
 <div class="prog-form-rm" id="pricing_div">
 
@@ -510,7 +511,7 @@ $heading_waist_value_lbs=$explode_value_waist[1];
 <p class="form-rms-input"><select name="shipping" id="shipping">
 <option value="">Select Shipping Options</option>
 @foreach($shippingoptions as $index=>$shipping)
-<option value="{{$shipping->optionid}}">{{$shipping->value}}</option>
+<option value="{{$shipping->optionid}}">{{ucfirst($shipping->value)}}</option>
 @endforeach
 
 </select></p>
@@ -595,6 +596,7 @@ $heading_value=$headingexplode[1];
 <!-- </form> -->
 </div>
 <div class="prog-form-rm" id="preferences_div">
+	
 <!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
 <p class="prog-txt  hidden-xs">You're almost done! Just a few more questions.</p>
 <h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">step 3</h2>
@@ -650,10 +652,10 @@ $heading_value=$headingexplode[1];
 
 <p class="form-rms-que form-rms-que1 dnt_br">04. Donate a Portion to Charity</p>
 <p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume.However, if you donate 5% or more of your sale to a charity we will waive our transcation fee to match your contribution</p>
-<p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis' Terms & Conditions.</p>
+<p class="ct3-rms-text">By Choosing to donate, I agree and accept Chrysalis' <a style="border-bottom: 1px solid #ccc">Terms & Conditions</a>.</p>
 <p class="ct3-rms-head">Donation Amount</p>
 <div class="form-rms-input">
-<p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></p>
+<p class="form-rms-rel1"><select class="cst2-select80" id="donate_charity" name="donate_charity"><option value="">Donate Amount</option><option value="none">None</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option></select></p>
 <p class="cst3-textl2" id="dynamic_percent_amount"><i class="fa fa-usd" aria-hidden="true"></i>0.00</p>
 <span id="donate_charityerror" style="color:red"></span>
 </div>
@@ -680,7 +682,8 @@ $heading_value=$headingexplode[1];
 
 
 
-<div class="form-rms-btn">
+<div class="form-rms-btn loader-align">
+	
 <a type="button" id="preferences_finished" class="btn-rm-nxt">I'm Finished!</a>
 <a type="button" id="preferences_back" class="btn-rm-back"><span>Back</span></a>
 </div>
@@ -796,6 +799,17 @@ function previewImages(){
   }
 
 
+  	$('#donate_charity').change(function(){
+		if ($(this).val() == "none") {
+			$('input[name=charity_name]').prop('checked', false);
+		}
+	});
+
+  	$('#another_charity').change(function(){
+  		if ($(this).prop("checked") == true) {
+  			$('input[name=charity_name]').prop('checked', false);
+  		}
+  	});
 
 	$('input[name=file1]').change(function(){
 		$('#drag_n_drop_1').css('display','block');
@@ -803,6 +817,7 @@ function previewImages(){
 	$('#drag_n_drop_1').click(function(){
 		$('#front_view').find('li').remove();
 		$('#drag_n_drop_1').css('display','none');
+		$('input[name=file1]').val('');
 	});
 
 	$('input[name=file2]').change(function(){
@@ -811,6 +826,7 @@ function previewImages(){
 	$('#drag_n_drop_2').click(function(){
 		$('#back_view').find('li').remove();
 		$('#drag_n_drop_2').css('display','none');
+		$('input[name=file2]').val('');
 	});
 
 	$('input[name=file3]').change(function(){
@@ -819,12 +835,16 @@ function previewImages(){
 	$('#drag_n_drop_3').click(function(){
 		$('#details_view').find('li').remove();
 		$('#drag_n_drop_3').css('display','none');
+		$('input[name=file3]').val('');
 	});
 //donate amount percentage calculation
 $('#donate_charity').change(function(){
 	var donate_percent = $(this).val();
 	var price = $('#price').val();
 	var total = (price*donate_percent)/100;
+	if (donate_percent=="none") {
+		var total = 0.00;
+	}
 	$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
 });
 	//numeric condition
@@ -890,21 +910,15 @@ $('#donate_charity').change(function(){
 		$('#mention_hours_input').css('display','none');
 		$('#mention_hours_input').val('');
 	});
+
 	$('#another_charity').click(function(){
-
-    if($(this).prop("checked") == true){
-
-        $('#other_organzation_check').css('display','block');
-
-    }
-
-    else if($(this).prop("checked") == false){
-
-        $('#other_organzation_check').css('display','none');
-
-    }
-
-});
+	    if($(this).prop("checked") == true){
+	        $('#other_organzation_check').css('display','block');
+	    }
+	    else if($(this).prop("checked") == false){
+	        $('#other_organzation_check').css('display','none');
+	    }
+	});
 
 	
 	$( "#upload_next" ).click(function(a) {
@@ -1210,13 +1224,14 @@ $('#donate_charity').change(function(){
 		$('#step4').removeClass('active');
 		$('#upload_div').css('display','none');
 		$('#costume_description').css('display','none');
-		$('#pricing_div').css('display','block');
+		$('#pricing_div').css('display','none');
 		$('#preferences_div').css('display','none');
 	});
 	
 	$('#preferences_finished').click(function(a){
 		a.preventDefault();
 		str=true;
+
 		$('#item_location,#handlingtime,#returnpolicy,#donate_charity,#charity_name,#organzation_name').css('border','');
 		$('#item_locationerror,#handlingtimeerror,#returnpolicyerror,#donate_charityerror,#charity_nameerror,#organzation_nameerror').html('');
 		var item_location = $('#item_location').val();
@@ -1240,11 +1255,11 @@ $('#donate_charity').change(function(){
 			$('#returnpolicyerror').html('This field is required.');
 			str=false;
 		}
-		/*if (donate_charity == "") {
+		if (donate_charity == "") {
 			$('#donate_charity').css('border','1px solid red');
 			$('#donate_charityerror').html('Select Donate Amount');
 			str=false;
-		}*/
+		}
 		/*if($('input[name=charity_name]:checked').length<=0){
 			$('#charity_name').css('border','1px solid red');
 			$('#charity_nameerror').html('Select Donate to');
@@ -1262,6 +1277,8 @@ $('#donate_charity').change(function(){
 			}
 		}
 		if (str == true) {
+			$('#preferences_finished').html("Submitting");
+			$('.loader-align').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
 			$.ajax({
 			 url: "{{URL::to('costume/costumecreate')}}",
 			 type: "POST",
@@ -1271,6 +1288,7 @@ $('#donate_charity').change(function(){
 			 processData: false,
 			 success: function(data){
 			 	if (data == "success") {
+			 		$('#ajax_loader').remove();
 			 		$('#success_page').css('display','block');
 			 		$('#upload_div').css('display','none');
 					$('#costume_description').css('display','none');

@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.css') }}">
+ <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
 <style>
 	.owl-controls.clickable {
 		display: none;
@@ -14,7 +15,12 @@
 <section class="product_Details_page">
 	<div class="container">
 <div class="row">
-<div class="col-md-5 bxslider-strt">
+	<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/">Home &nbsp;&nbsp;></a>
+  <a class="breadcrumb-item" href="/category/{{$parent_cat_name}}/{{$sub_cat_name}}">{{$data[0]->cat_name}} > &nbsp;</a>
+  <span class="breadcrumb-item active">{{$data[0]->name}}</span>
+</nav>
+<div class="col-md-5 carousel-bg-style bxslider-strt">
 
 <ul class="bxslider">
 @foreach($data['images'] as $images)
@@ -45,14 +51,24 @@
 	{{ Session::get('success') }}
 </div>
 @endif
-<h1>{{$data[0]->name}}
+<h1 class="social-media-sec">
+
+
+{{$data[0]->name}}
 @if(Auth::check())
 	<a href="#" onclick="return false;" class="fav_costume" data-costume-id='{{$data[0]->costume_id}}'>
+
 @else
-	<a data-toggle="modal" data-target="#login_popup">
+	<a data-toggle="modal" data-target="#login_popup_fav">
 @endif
+
 <span @if($data[0]->is_fav)  class="active" @endif>@if($data[0]->is_fav)<i aria-hidden=true class="fa fa-heart"></i> @else <i aria-hidden=true class="fa fa-heart-o"></i>@endif</span></a>
-	</h1>
+<div>
+	<a href="javascript:void(0)" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title={{$data[0]->name}}&&u={{Request::url()}}')"><i class="fa fa-facebook" aria-hidden="true"></i></a>  
+	<a href="javascript:void(0)" onclick="genericSocialShare('http://twitter.com/share?&amp;url={{Request::url()}}')"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+	<a  href="javascript:void(0)" onclick="genericSocialShare('https://plus.google.com/share?url={{Request::url()}}')"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+</div>
+	</h1> 
 
 <!---Price section start -->
 	<div class="row">
@@ -73,8 +89,18 @@
 	</div>
 
 	<div class="col-xs-6 col-sm-4 viewBtn_rm">
-	<button type="button" class="addtocart-rm"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
-	<button type="button" class="buynow-rm">Buy it Now!</button>
+	@if(helper::verifyCostumeQuantity($data[0]->costume_id,$data[0]->quantity+1) && $data[0]->quantity>0)
+		<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>
+		@if(!Auth::check())
+		<button type="button" class="buynow-rm"><a data-toggle="modal" data-target="#login_popup" class="buynow-rm">Buy it Now!</a> </button>
+		 @else
+			 <form action="{{route('buy-it-now')}}" method="POST"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="costume_id" value="{{ $data[0]->costume_id }}">
+									 <input type="submit" class="addtocart-rm" value="Buy it Now!">
+			</form>
+		@endif
+	 @else
+		 <button type="button" class="addtocart-rm" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> Out of stock</button>
+	@endif
 	</div>
 
 	</div>
@@ -96,29 +122,10 @@
 			<div class="tab-content viewTabs-content">
 			
 		<div class="tab-pane active" id="viewTabs1">
-
-<!-- tab content starts -->
-				
-		<p class="viewTabs-text">Meet Captain Jack Sparrow, Pirate from the Pirates of the Caribbean.</p>
-
-		<p class="viewTabs-text">Why should girls have all the fun? Boys love to dress up to and this is a great costume for them. Whether it's a trip to Disney, Halloween, or just because he wants to be Captain Jack for the day this is a fun costume.</p>
-
-		<p class="viewTabs-text">Included in this set is a cream colored pirate shirt with the puffy, over-sized sleeves and lace up front. The lined vest is made from a weathered looking blue cotton that shows he's been having fun adventuring out to sea. A sash and head bandanna finish the look perfectly. All parts of this costume are made in cotton and are machine washable. Line dry to avoid shrinking.</p>
-
-<!-- tab content End -->			
-			
+		<p class="viewTabs-text">{{$data[0]->description}}</p>
 		</div>
-		
 		<div class="tab-pane" id="viewTabs2">
-
-<!-- tab content starts -->
-				
-		<p class="viewTabs-text">Why should girls have all the fun? Boys love to dress up to and this is a great costume for them. Whether it's a trip to Disney, Halloween, or just because he wants to be Captain Jack for the day this is a fun costume.</p>
-
-		<p class="viewTabs-text">Included in this set is a cream colored pirate shirt with the puffy, over-sized sleeves and lace up front. The lined vest is made from a weathered looking blue cotton that shows he's been having fun adventuring out to sea. A sash and head bandanna finish the look perfectly. All parts of this costume are made in cotton and are machine washable. Line dry to avoid shrinking.</p>			
-
-<!-- tab content End -->			
-			
+		<p class="viewTabs-text">@if(count($data['faq'])) {{$data['faq'][0]->attribute_option_value}} @else <span>No FAQ found</span> @endif</p>			
 		</div>
 
 		
@@ -151,14 +158,14 @@
 
 <div class="col-md-12 detailes_view_slider">
 <h2 class="viewHead-rm">People Also Viewing</h2>
-<div class="home_product_slider">
+<div class="home_product_slider recently-viewed">
 			<div class="container">
 				<div class="row">
 						<div class="col-xs-12">
 					<div class="owl-carousel owl-theme">
 					@foreach($data['random_costumes'] as $rand)
 						<div class="item">
-						<a href="/shop/{{$rand->costume_id}}/{{$parent_cat_name}}/{{$data[0]->cat_name}}/{{$rand->name}}">
+						<a href="/product{{$rand->url_key}}">
 							<div class="img_layer">
 								<img class="img-responsive" @if($rand->image!=null) src="/costumers_images/Medium/{{$rand->image}}" @else src="{{asset('/costumers_images/default-placeholder.jpg')}}" @endif >
 							</div>
@@ -187,9 +194,10 @@
 				</div>
 			<div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="login-register" id="loginModal">
+			<div class="report_item_pupup" id="loginModal">
 			
 				<div id="myTabContent" class="tab-content">
+				<h2>Report Item</h2>
 			
 					<div class="tab-pane active in" id="login_tab1">
 						<form class="" action="{{route('report.post')}}" method="POST" id="report">   
@@ -247,7 +255,12 @@
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
 <script src="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.js') }}"></script>
-<script>
-
+<script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
+<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
+<script type="text/javascript" async >
+ function genericSocialShare(url){
+	      window.open(url,'sharer','toolbar=0,status=0,width=648,height=395');
+        return true;
+    }
 </script>
 @stop

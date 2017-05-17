@@ -9,59 +9,74 @@ use Session;
 use Hash;
 use Response;
 use App\Cart;
+use App\Promotions;
 use Cookie;
 class CartController extends Controller {
 
-	protected $messageBag = null;
-	protected $auth;
-	
-	public function __construct(Guard $auth)
-	{
-		$this->sitehelper = new SiteHelper();
-	}
+  protected $messageBag = null;
+  protected $auth;
+  
+  public function __construct(Guard $auth)
+  {
+    $this->sitehelper = new SiteHelper();
+  }
   public function cart(Request $request){
-    $data=Cart::getCartProducts();
+    $req=$request->all();
+    if(count($req)){
+      $res=Promotions::verifyCoupanCode($req['coupan_code']);
+      if(!$res){
+         Session::flash('error','Coupon code is not valid.');
+         return Redirect::back();
+      }else{
+        $data=Cart::getCartProductswithCoupan($req['coupan_code']);
+        if($data['dis_total']=="0"){
+                Session::flash('error','No admin costumes are found in your cart.');
+        } 
+       }
+    }else{
+      $data=Cart::getCartProducts();
+     }
     return view('frontend.costumes.cart.cart_list',compact('data',$data));
   }
-	public function addToCart(Request $request){
-		$req=$request->all();
-		$verify=$this->verifieCookie();
+  public function addToCart(Request $request){
+    $req=$request->all();
+     $verify=$this->verifieCookie();
              if($verify){
-             	$result=$this->getCookieAllProducts();
-             	 foreach($result as $value){
-             	 	$costume_id=$req['costume_id'];
-             	 	$cookie_id=$this->currentCookieKey();
-             	 	$cart_id=Cart::verifyCostumeCart($costume_id,$cookie_id);
-             	 	if($cart_id){
-             	 		$qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
-             	 		$res=Cart::verifyCostumeQuantity($costume_id,$qty);
-             	 		if(count($res)){
-	             	 		Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
-	             	 		$res=$this->updateCartDetails($costume_id,$qty+1);
-                    $count=Cart::getCartCount();
-	             	 		return response($count)->cookie($res);
-             	 		}else{
-	             	 		return response('out of stock');
+              $result=$this->getCookieAllProducts();
+               foreach($result as $value){
+                $costume_id=$req['costume_id'];
+                $cookie_id=$this->currentCookieKey();
+                $cart_id=Cart::verifyCostumeCart($costume_id,$cookie_id);
+                if($cart_id){
+                  $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
+                 $res=Cart::verifyCostumeQuantity($costume_id,$qty);
+                  if(count($res)){
+                    Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
+                    $res=$this->updateCartDetails($costume_id,$qty+1);
+                    $count=Cart::getCartCount($cookie_id);
+                    return response($count)->cookie($res);
+                  }else{
+                    return response('out of stock');
 
-             	 		}
-             	 	}else{
-             	 		 $cookie_id=$this->currentCookieKey();
-			             $costume_id=$req['costume_id'];
-			             $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
-			             $res=Cart::verifyCostumeQuantity($costume_id,$qty);
-             	 		 if(count($res)){
-				             $product[$cookie_id][]=array($req['costume_id']=>$qty);
-				             Cart::addToCart($req,$cookie_id,$qty);
-				             $reslt=$this->productsAddToCookie($product);
-                     $count=Cart::getCartCount();
-				             return response($count)->cookie($reslt);
-				         }else{
-				         	return response('out of stock');
-				         }
-             	 	}
-            	 }
-            	
-		
+                  }
+                }else{
+                   $cookie_id=$this->currentCookieKey();
+                   $costume_id=$req['costume_id'];
+                   $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
+                   $res=Cart::verifyCostumeQuantity($costume_id,$qty);
+                   if(count($res)){
+                     $product[$cookie_id][]=array($req['costume_id']=>$qty);
+                     Cart::addToCart($req,$cookie_id,$qty);
+                     $reslt=$this->productsAddToCookie($product);
+                     $count=Cart::getCartCount($cookie_id);
+                     return response($count)->cookie($reslt);
+                 }else{
+                  return response('out of stock');
+                 }
+                }
+               }
+              
+    
                 
              }else{
                $cookie_id=$this->cookieKeyGenarater();
@@ -71,12 +86,12 @@ class CartController extends Controller {
                Cart::addToCart($req,$cookie_id,$qty);
                $res=$this->productsAddToCookie($product);
                $reslt=$this->productsAddToCookie($product);
-               $count=Cart::getCartCount();
+               $count=Cart::getCartCount($cookie_id);
                return response($count)->cookie($res);
              }
-		
-	}
-	
+    
+  }
+  
     private function getCookieAllProducts(){
         $cookie = cookie::get('min-cart');
         return $cookie;
@@ -122,9 +137,9 @@ class CartController extends Controller {
         }
         return Redirect::to('cart');
     }
-    public function productRemoveFromCart($cart_id){
-      Cart::productRemoveFromCart($cart_id);
-      return Redirect::to('cart');
+    public function productRemoveFromCart($cart_item_id,$cart_id){
+      Cart::productRemoveFromCart($cart_item_id,$cart_id);
+      return Redirect::back();
     }
     public function getMiniCartProducts(){
       $cart_list=Cart::getCartProducts();

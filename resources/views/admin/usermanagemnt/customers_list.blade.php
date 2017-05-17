@@ -16,6 +16,7 @@ display: none;
 display: none;
 }
 </style>
+
 @stop
 
 {{-- Page content --}}
@@ -26,7 +27,7 @@ display: none;
     <li>
         <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
     </li>
-    <li class="active">Users List</li>
+    <li class="active">Users</li>
   </ol>
 </section>
 <section class="content" ng-controller="UsersController">
@@ -68,7 +69,7 @@ display: none;
                       <td><input type="text" class="form-control" ng-model="search.name" name="name" placeholder=""></td>
 					  <td><input type="text" class="form-control" ng-model="search.email" name="email" placeholder=""></td>
 					  <td><input type="text" class="form-control" ng-model="search.phone" name="phone" placeholder="" id="phone_number"></td>
-                      <td>
+                     <td>
                         <select name="count" class="form-control" id="count" ng-model="search.count" >
                           <option value=""> All </option>  
                           <option value="1">Yes</option>

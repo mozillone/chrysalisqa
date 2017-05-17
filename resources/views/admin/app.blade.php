@@ -51,6 +51,7 @@
 <script src="{{ asset('/vendors/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
 <script src="{{ asset('angular/lib/angular-datatables.min.js') }}"></script>
+<script src="{{ asset('/angular/directives/datepicker.js') }}"></script>
 
   
 
@@ -63,7 +64,7 @@
 <script src="{{ asset('/assets/admin/js/jquery.min.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/respond.min.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/clockpicker.js') }}"></script> -->
-
+<script src="{{ asset('/angular/directives/datepicker.js') }}"></script>
 
 	   
 

@@ -8,6 +8,7 @@
  	<section class="content create_section_page">
  	<div id="ohsnap"></div>
 <!--  	list-banner container html start here -->
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -49,8 +50,8 @@
 	<div class="list-box-rm">
 	<h2 class="list-box-head">THEMES</h2>
 	<ul class="box-list1">
-	@foreach($data['sub_cats_list'] as $sub_cats_list)
-	<li @if($sub_cats_list->category_id==$data['sub_cat_info'][0]->category_id) class="active" @endif><a href="/shop/{{$sub_cats_list->category_id}}/{{$parent_cat_name}}/{{$sub_cats_list->name}}">{{$sub_cats_list->name}}</a></li>
+	@foreach($categories_list as $key=>$sub_cats_list)
+	<li @if(Request::url()==URL::to("category".$sub_cats_list)) class="active" @endif ><a href="/category{{$sub_cats_list}}">{{$key}}</a></li>
 	@endforeach
 	</ul>
 	<h2 class="list-box-head narrow-head">NARROW BY</h2>
@@ -110,7 +111,7 @@
 	<div class="col-md-9 col-sm-8">
 
 	<div class="list-sec-rm">
-	<p class="list-sec-rm1">{{$data['sub_cat_info'][0]->name}}</p>
+	<p class="list-sec-rm1">{{strtoupper($data['sub_cat_info'][0]->name)}}</p>
 	<p class="list-sec-rm2"><span>Sort By</span>
 	 <select name="search[sort_by]" class="sort_by">
 		<option value="Recently Listed">Recently Listed</option>
@@ -123,7 +124,7 @@
 
 	</div>
 
-<div class="list_products">
+<div class="list_products list-img-bg">
 	<div class="row" id="itemContainer">
 	</div>
 </div>
@@ -144,12 +145,12 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<!-- <script src="{{ asset('/js/ohsnap.js') }}"></script>
+<script src="{{ asset('/js/ohsnap.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
-<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script> -->
+<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
 
 @stop

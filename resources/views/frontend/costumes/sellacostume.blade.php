@@ -16,7 +16,10 @@
 						<p>Choose from the following options.</p>
 						</div>
 						<div class="row">
-						<a href="/costume/createtwo">
+            <?php 
+
+                  if (isset(Auth::user()->id) && !empty(Auth::user()->id)) { ?>
+						<a href="{{URL::to('costume/createtwo')}}">
 							<div class="col-md-6 col-sm-6 col-xs-12" >
 								<div class="upload_castume-blog">
 								<img class="img-responsive" src="../assets/frontend/img/upload-icon.png"/>
@@ -26,15 +29,31 @@
 								</div>
 								
 							</div></a>
+              <?php }  else{ ?>
+              <a href="{{URL::to('login')}}">
+              <div class="col-md-6 col-sm-6 col-xs-12" >
+                <div class="upload_castume-blog">
+                <img class="img-responsive" src="../assets/frontend/img/upload-icon.png"/>
+                  <h2>Upload Your Costume!</h2>
+                  <p>Tell us why your costume is so<br> special? Sell it Yourself!</p>
+                  <span class="acnhr-link">UPLOAD MY COSTUME</span>
+                </div>
+                
+              </div></a>
+              <?php }?>
+				<a href="{{URL::to('costume/request-a-bag')}}">
 							<div class="col-md-6 col-sm-6 col-xs-12 ">
+              
 							<div class="Ship_castume-blog upload_castume-blog" >
 								<img class="img-responsive" src="../assets/frontend/img/open-box-icon.png">
 									<h2>Ship Us Your Costume!</h2>
 									<p>Have a pile of old costumes taking <br>up space? Let us take care of it.</p>
-									<a href="">REQUEST A BAG</a>
+									<span class="acnhr-link">REQUEST A BAG</span>
+									
 								</div>
+              
 							</div>
-
+				</a>
 						</div>
 					</div>
 				</div>

@@ -13,6 +13,7 @@ use App\Helpers\SiteHelper;
 use App\Helpers\ExportFile;
 use Hash;
 use Response;
+use App\Helpers\StripeApp;
 
 class UserController extends Controller
 {
@@ -23,6 +24,7 @@ class UserController extends Controller
     {
       $this->csv = new ExportFile();
       $this->sitehelper = new SiteHelper();
+      $this->stripe=new StripeApp();
       $this->middleware(function ($request, $next) {
           if(!Auth::check()){
             return Redirect::to('/admin/login')->send();
@@ -76,6 +78,12 @@ class UserController extends Controller
       $title="Users List";
       return view('admin.usermanagemnt.customers_list')->with('title',$title);
     }
+	/****costumes list coding starts here***/
+	public function customesList()
+    {
+      $title="Costumes List";
+      return view('admin.costumes.costumes_list')->with('title',$title);
+    }
     public function customersListData(Request $request)
     {
         $req=$request->all();
@@ -121,6 +129,7 @@ class UserController extends Controller
         return response()->success(compact('users','credit'));
   
     }
+
     public function userCsvExport(Request $request){
 	
 		$req = $request->all();
@@ -153,6 +162,7 @@ class UserController extends Controller
 		else{
 			$file_name="";
 		}
+			$customer=$this->stripe->customers($req['email']);
 			$user = new User();
 			$user->first_name    = $req['first_name'];
 			$user->last_name     = $req['last_name'];
@@ -163,6 +173,7 @@ class UserController extends Controller
 			$user->password      = Hash::make($req['password']);
 			$user->active        = "1";
 			$user->user_img =$file_name;
+			$user->api_customer_id =$customer['id'];
 			
 			
 			if($user->save()){
@@ -175,8 +186,9 @@ class UserController extends Controller
 				} 
 	}
 	public function customerEdit($id){
+	$title="Users List";
 		$user = User::find($id);
-		return view('admin.usermanagemnt.customer_edit')->with('user_id',$id)->with('user', $user);
+		return view('admin.usermanagemnt.customer_edit')->with('user_id',$id)->with('user', $user)->with('title',$title);
 	}
 	public function customerUpdated(Request $request){
 		$req=$request->all();

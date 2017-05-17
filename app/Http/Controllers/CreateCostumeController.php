@@ -11,6 +11,8 @@ use Hash;
 use DB;
 use Response;
 use Illuminate\Support\Facades\Input;
+use Validator;
+use App\User;
 
 class CreateCostumeController  extends Controller {
 
@@ -20,6 +22,8 @@ class CreateCostumeController  extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->sitehelper = new SiteHelper();
+			
+
 	}
 	public function costumeListings($sub_cat_id,$parent_cat_name)
 	{
@@ -63,6 +67,7 @@ class CreateCostumeController  extends Controller {
 		->where('attribute_id','=','14')->get();
 		$returnpolicy=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','15')->get();
+
 		$charities=DB::table('charities')->select('id as id','name as name','image as image')->where('status','1')->get();
 		return view('frontend.costumes.costume_create_two',compact('categories','bodyanddimensions','bodydimensions_val','body_height_ft',
 		'body_height_in','body_weight_lbs','body_chest_in','body_waist_lbs','cosplayone','cosplaytwo','cosplaythree','cosplayfour',
@@ -432,15 +437,15 @@ class CreateCostumeController  extends Controller {
 			$file_name1 = str_random(10).'.'.$request->file1->getClientOriginalExtension();
 			$file_name2 = str_random(10).'.'.$request->file2->getClientOriginalExtension();
 			$file_name3 = str_random(10).'.'.$request->file3->getClientOriginalExtension(); 
-				$source_image_path=public_path('costumers_images');
-	            $thumb_image_path1=public_path('costumers_images/Original');
+				$source_image_path=public_path('costumers_images/Original');
+	           // $thumb_image_path1=public_path('costumers_images/Original');
 	            $thumb_image_path2=public_path('costumers_images/Medium');
 	            $thumb_image_path3=public_path('costumers_images/Small');
 	            //file1 moving to folder
 	            $request['file1']->move($source_image_path, $file_name1);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path1.'/'.$file_name1,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path2.'/'.$file_name1,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path3.'/'.$file_name1,30,30);
+	            //$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path1.'/'.$file_name1,150,150);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path2.'/'.$file_name1,475,650);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name1,$thumb_image_path3.'/'.$file_name1,150,150);
 	            //inserting in db
 	            $file_db_array1 = array('costume_id'=>$costume_id,
 	            	'image'=>$file_name1,
@@ -450,9 +455,9 @@ class CreateCostumeController  extends Controller {
 	            $file_db=DB::table('costume_image')->insert($file_db_array1);
 	            //file2 moving to folder
 	            $request['file2']->move($source_image_path, $file_name2);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path1.'/'.$file_name2,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path2.'/'.$file_name2,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path3.'/'.$file_name2,30,30);
+	            //$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path1.'/'.$file_name2,150,150);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path2.'/'.$file_name2,475,650);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name2,$thumb_image_path3.'/'.$file_name2,150,150);
 	            //inserting in db
 	            $file_db_array2 = array('costume_id'=>$costume_id,
 	            	'image'=>$file_name2,
@@ -462,9 +467,9 @@ class CreateCostumeController  extends Controller {
 	            $file_db=DB::table('costume_image')->insert($file_db_array2);
 	            //file3 moving to folder
 	            $request['file3']->move($source_image_path, $file_name3);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path1.'/'.$file_name3,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path2.'/'.$file_name3,150,150);
-	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path3.'/'.$file_name3,30,30);
+	           // $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path1.'/'.$file_name3,150,150);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path2.'/'.$file_name3,475,650);
+	            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name3,$thumb_image_path3.'/'.$file_name3,150,150);
 
 	            //inserting in db
 	            $file_db_array3 = array('costume_id'=>$costume_id,
@@ -478,15 +483,15 @@ class CreateCostumeController  extends Controller {
 	            if (isset($request['file4']) && !empty($request['file4'])) {
 	            	foreach ($request['file4'] as $file4) {
 	            		$file_name = str_random(10).'.'.$file4->getClientOriginalExtension();
-	            		$source_image_path=public_path('costumers_images');
-	            		$thumb_image_path1=public_path('costumers_images/Original');
+	            		$source_image_path=public_path('costumers_images/Original');
+	            		//$thumb_image_path1=public_path('costumers_images/Original');
 	            		$thumb_image_path2=public_path('costumers_images/Medium');
 	            		$thumb_image_path3=public_path('costumers_images/Small');
 	            		//file3 moving to folder
 			            $file4->move($source_image_path, $file_name);
-			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,198,295);
-			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path3.'/'.$file_name,30,30);
+			            //$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,475,650);
+			            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path3.'/'.$file_name,150,150);
 			            //inserting in db
 	            		$file_db_array4 = array('costume_id'=>$costume_id,
 	            			'image'=>$file_name,
@@ -519,6 +524,10 @@ class CreateCostumeController  extends Controller {
 			$costume_category=array('costume_id'=>$insert_costume,
 			'category_id'=>$subcategory);
 			$insert_costume_category=DB::table('costume_to_category')->insertGetId($costume_category);
+			/**** Url create start here ***/
+			Costumes::urlRewrites($insert_costume,'insert');
+			/**** Url create end here ***/
+			
 
 		/*****************************Attributes insertion code starts here****/
 		/*
@@ -811,7 +820,7 @@ class CreateCostumeController  extends Controller {
 		  	$handlingtime=$req['handlingtime'];
 		  	$returnpolicy=$req['returnpolicy'];
 		  	$donate_charity=$req['donate_charity'];
-		  	$charity_name=$req['charity_name'];
+		  	//$charity_name=$req['charity_name'];
 			/*
 			|Table:costume_attribute_options
 			|Preferences
@@ -844,12 +853,15 @@ class CreateCostumeController  extends Controller {
 		 
 		 	*/
 			//Check whether the costume inserted by admin or not if the user is selected insert the user id else insert the admin as costumer
+			if (isset($req['charity_name']) && !empty($req['charity_name'])) {
+				
 			$costume=array('charity_id'=>$donate_charity,
-			'donation_amount'=>$charity_name,
+			'donation_amount'=>$req['charity_name'],
 			'updated_at'=>date('y-m-d H:i:s'),
 			);
 
 			$update_costume = DB::table('costumes')->where('costume_id',$costume_id)->update($costume);
+			}
 
 			//charites
 			if (isset($req['organzation_name']) && !empty($req['organzation_name'])) {
@@ -865,4 +877,100 @@ class CreateCostumeController  extends Controller {
 			return "success";
 
 		}
+	public function requestaBag(){
+		$this->data = array();
+		$this->data['state_table'] = DB::table('states')->get(['name','abbrev']);
+		if (Auth::check()){
+			$userid 		= Auth::user()->id;
+			$this->data['get_details']    = DB::table('users')->where('id',$userid)->first();
+			$this->data['basic_address']  = Db::table('address_master')->where('user_id',$userid)->where('address_type','basic')->first();
+
+		}
+	  return view('frontend.costumes.requestabag')->with('total_data',$this->data);
+	}
+
+	public function Postrequestabag(Request $request){
+		/*echo "<pre>";
+		print_r($request->all());die;*/
+
+		
+		$cus_email 		= $request->email_address;
+		$email_check    = DB::table('users')->where('email',$cus_email)->count();
+		//echo "<pre>";print_r($email_check);die;
+		if ($email_check == 1) {
+			$req_bag_session = Session::get('auth_user_id_req_bag');
+			
+			if (Auth::check() || isset($req_bag_session) && !empty($req_bag_session)) {
+				$userid 		= Auth::user()->id;
+				$is_payout 		= $request->is_payout;
+				$cus_name  		= $request->full_name;
+				$cus_email 		= $request->email_address;
+				$cus_phone 		= $request->phone_number;
+				
+				if (isset($request->is_return) && !empty($request->is_return)) {
+					$is_return 		= $request->is_return;
+				}else{
+					$is_return 		= "0";
+				}
+				if (isset($request->is_recycle) && !empty($request->is_recycle)) {
+					$is_recycle 		= $request->is_recycle;
+				}else{
+					$is_recycle 		= "0";
+				}
+				if (isset($request->address2) && !empty($request->address2)) {
+					$address2 		= $request->address2;
+				}else{
+					$address2 		= "";
+				}
+				$addres_array = array('fname'=>$cus_name,
+					'address1'=>$request->address1,
+					'address2'=>$address2,
+					'city'=>$request->city,
+					'state'=>$request->state,
+					'zip_code'=>$request->zipcode,
+					'phone'=>$cus_phone,
+					'user_id'=>$userid,
+					'address_type'=>'request_a_bag','created_on'=>date('y-m-d H:i:s'));
+				$ref_no = mt_rand(10000, 99999);
+				//echo $ref_no;die;
+				$addres_insert=DB::table('address_master')->insertGetId($addres_array);
+
+				$conversation_array = array('user_one'=>$userid,
+					'user_two'=>'1',
+					'status'=>'active',
+					'created_at'=>date('y-m-d H:i:s'));
+				$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
+
+				$requestabag_array = array('user_id'=>$userid,
+					'ref_no'=>$ref_no,
+					'addres_id'=>$addres_insert,
+					'conversation_id'=>$conversation_insert,
+					'is_payout'=>$is_payout,
+					'is_return'=>$is_return,
+					'is_recycle'=>$is_recycle,
+					'status'=>'requested',
+					'cus_name'=>$cus_name,
+					'cus_email'=>$cus_email,
+					'cus_phone'=>$cus_phone,
+					'created_at'=>date('y-m-d H:i:s'),
+					);
+
+				$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
+
+
+				return "success";
+
+			}else{
+
+				return "login";
+			}
+		}else{
+			return "register";
+		}
+	}
+
+	public function Successrequestbag(){
+		
+	  return view('frontend.costumes.sucess_request_bag');
+	}
 }

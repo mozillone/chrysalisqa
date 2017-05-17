@@ -26,7 +26,7 @@
 <!--- progressbar section End -->
 
 <p class="prog-txt">Please upload the  <span>the minimum required photos</span> of your costume in front,back and side view. Listings with more photos sell faster! Don't forget to include any acessories!</p>
-	<div class="upload-photo-blogs">
+	<div class="upload-photo-blogs step-one-sec">
 		<h2 class="prog-head">Upload Photos</h2>
 		<div class="threeblogs">
 		<div class="col-md-3 col-sm-3 col-xs-12 upload_hint hidden-xs ">
@@ -256,12 +256,12 @@ $('#categoryname').on('change',function(){
 	
     var id=$(this).val();//catgeory id
 	alert(id);
-	 $.get("{{ url('/costume/ajaxSubcategory')}}", //This is the url defined in routes 
+	 $.get("{{ url('/costume/ajaxsubcategory')}}", //This is the url defined in routes 
          { categoryid: id  },  
 		 function(data) {
 			console.log(data);
 			var model = $('#subcategory').html('Select Subcategory');    //keeping subcategory field empty before
-					model.empty();
+			model.empty();
 					$.each(data, function(index, element) {
 			            model.append("<option value='"+ element.subcategoryid +"'>" + element.subcategoryname + "</option>");
 			        });
