@@ -494,7 +494,7 @@ section.top_nav span{color:#60c5ac;}
 		line-height: 30px;
 		border-right: 1px solid #ccc;
 	}
-	p.like_fav 0
+	p.like_fav {
 	border-top: 1px solid #ccc;
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
@@ -989,6 +989,13 @@ p.right_heading span.my_msg { font-weight: 800; }
 .rencemt_order_table .table.table-striped tbody tr td:last-child:hover { text-decoration: underline; }
 .form-rms.lst-stp .ct3-list {
     padding-left: 0px;    margin-bottom: 40px;
+}
+.rating-sec h2 a{
+	float: right;
+	clear: both;
+	color: #EE4266;
+	font-size: 14px;
+	border-bottom: 1px solid #EE4266;
 }
 /* dashboard css End here */
 
@@ -3016,6 +3023,16 @@ and (orientation:portrait){
 	.average-payout-sec .tip-sec{
 		right: -19%;
 	}
+}
+@media only screen and (min-width: 992px) and (max-width: 1279px) {
+	.mid_nav form.navbar-form.navbar-left input {
+		margin-left: 10px;
+		padding-left: 35px;
+	}
+	.mid_nav form.navbar-form.navbar-left i.fa.fa-search {
+		margin-left: 22px;
+	}
+	
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.request-address-sec .form-rms-btn a {

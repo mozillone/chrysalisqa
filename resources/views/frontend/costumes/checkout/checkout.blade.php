@@ -451,7 +451,7 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-										<div class="col-md-6 field-align-xs">
+										<div class="col-md-6 field-align-xs" style="padding: 0">
 											<select name="exp_month" class="form-control" id="exp_month">
 												<option value="">MM</option>
 												<option value="01">Jan</option>
@@ -468,7 +468,7 @@
 												<option value="12">Dec</option>
 											 </select>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6" style="padding: 0">
 											 <select name="exp_year" class="form-control" id="exp_year">
 												<option value="">YYYY</option>
 												@for($i=0;$i<=30;$i++)
