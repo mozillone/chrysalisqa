@@ -31,6 +31,47 @@ display: none;
 .crt_right_alng label.control-label {
     margin-bottom: 8px !important;
 }
+.cldr input {
+    position: relative;
+}
+.cldr img {
+    position: absolute;
+    right: 27px;
+    top: 36px;
+    cursor: pointer;
+}
+
+.cldr2 input {
+    position: relative;
+}
+
+.cldr2 img {
+    position: absolute;
+    right: 17px;
+    top: 26px;
+    cursor: pointer;
+}
+.cldr2.event-dates img {
+    z-index: 9999;
+    top: 10px;
+    right: 7px;
+}
+.input-group label.error.error-msg-align{
+  position:relative;  
+  left: 0;
+ }
+span.input-group-addon.glyphicon.glyphicon-time {
+    position: absolute;
+    top: 30px;
+    z-index: 10;
+    right: 9px;
+    border-color: transparent;
+}
+.clockpicker label.time-label {
+    text-align: left !important;
+    min-width: 85px;
+}
+
 .dmns_rigts .col-md-4 {
     padding-left: 0px;
 }
@@ -603,12 +644,12 @@ body .loading img{width:10%;}
 .head-tickets{font-size:20px !important; font-weight:500 !important;}
 /*24-01-2017*/
 
-/* 5/11/2017 */
-.request-bag-admin td:first-child {
-    color: #000;
-    font-weight: 700;
-    margin-right: 20px;
-    padding-right: 70px;
+#ui-datepicker-div{z-index: 9999 !important}
+
+#ui-datepicker-trigger{
+  position: absolute;
+    top: 36px;
+    right: 27px;
 }
 .request-bag-admin td {
     padding: 3px 0px;
@@ -661,6 +702,8 @@ body .loading img{width:10%;}
 	padding: 3px 25px;
 }
 
+#events-create .input-group label.error{top:60px;}
+.add-event-error .error{top:35px;position: absolute;}
 
 
 
@@ -718,10 +761,7 @@ body .loading img{width:10%;}
 .main-header .logo .logo-sm{display:none;}
 }
 
-@media only screen and (max-width : 768px) {
-	.request-bag-admin td:first-child {
-	padding-right: 5px;
-}
+
 
 @media only screen and (max-width : 767px) {
 		.form-group.has-feedback.cosutme-fr label.radio-inline {
@@ -733,8 +773,6 @@ body .loading img{width:10%;}
     width: 47%;
     float: left;
     margin-left: 0px;
-}
-	
 }
 #category-create .cat_img.fileupload.fileupload-new{margin-left: -30px;
     margin-top: 15px;}

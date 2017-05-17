@@ -17,6 +17,18 @@
   <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/dist/css/AdminLTE.min.css')}}">
   <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/dist/css/skins/_all-skins.min.css')}}">
   <link rel="stylesheet" href="{{ asset('/assets/admin/css/custom.css')}}">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+
+
+  
+<!-- <link rel="{{ asset('/assets/admin/css/bootstrap.css')}}"></script>
+<link rel="{{ asset('/assets/admin/css/bootstrap-theme.css')}}"></script>
+<link rel="{{ asset('/assets/admin/css/bootstrap-theme.min.css')}}"></script>
+<link rel="{{ asset('/assets/admin/css/github.min.css')}}"></script>
+  <link rel="{{ asset('/assets/admin/css/clockpicker.css')}}"></script> -->
+  
+  
   @yield('header_styles')
 
  </head>
@@ -30,6 +42,8 @@
    @include('admin.partials.footer')
 <script src="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <script src="{{ asset('/assets/admin/vendors/AdminLTE-master/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{{ asset('/assets/admin/vendors/AdminLTE-master/dist/js/app.min.js')}}"></script>
 <script src="{{ asset('/angular/lib/angular.js')}}"></script>
 <script src="{{ asset('/angular/Admin/app.js')}}"></script>
@@ -38,10 +52,24 @@
 <script src="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
 <script src="{{ asset('angular/lib/angular-datatables.min.js') }}"></script>
 <script src="{{ asset('/angular/directives/datepicker.js') }}"></script>
-    
+
+  
+
+
+<!-- <script src="{{ asset('/assets/admin/js/bootstrap.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/highlight.min.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/html5shiv.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/jquery.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/jquery.min.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/respond.min.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/clockpicker.js') }}"></script> -->
+<script src="{{ asset('/angular/directives/datepicker.js') }}"></script>
+
 	   
 
  @yield('footer_scripts')
+ 
  
 </body>
 </html>
