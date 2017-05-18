@@ -2,7 +2,7 @@
 @section('styles')
 @endsection
 @section('content')
-	<section class="content create_section_page" ng-controller="ListingsController">
+	<section class="content create_section_page">
  <div class="container">
 	<div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 table-responsive">
@@ -134,10 +134,40 @@
 										<label for="title">Full Name On Card</label>
 										<input type="text" class="form-control" name="full_name_on_card" id="full_name_on_card">
 									</div>
-									<div class="form-group">
+									<div class="col-md-6">
+										<label for="pwd">Expiration Date</label>
+										<div class="form-group">
+										<div class="col-md-6 field-align-xs" style="padding: 0">
+											<select name="exp_month" class="form-control" id="exp_month">
+												<option value="">MM</option>
+												<option value="01">Jan</option>
+												<option value="02">Feb</option>
+												<option value="03">Mar</option>
+												<option value="04">Apr</option>
+												<option value="05">May</option>
+												<option value="06">Jun</option>
+												<option value="07">Jul</option>
+												<option value="08">Aug</option>
+												<option value="09">Sep</option>
+												<option value="10">Oct</option>
+												<option value="11">Nov</option>
+												<option value="12">Dec</option>
+											 </select>
+										</div>
+										<div class="col-md-6" style="padding: 0">
+											 <select name="exp_year" class="form-control" id="exp_year">
+												<option value="">YYYY</option>
+												@for($i=0;$i<=30;$i++)
+												<option value="{{date('Y',strtotime('now'))+$i}}">{{date('Y',strtotime('now'))+$i}}</option>
+												 @endfor
+											 </select>
+										</div>
+									</div>
+									</div>
+									<!-- <div class="form-group">
 										<label for="pwd">Expiration Date</label>
 										<input type="text" class="form-control" name="expiration_date" id="expiration_date">
-									</div>
+									</div> -->
 									<div class="form-group">
 										<label for="text">Card Number</label>
 										<input type="text" class="form-control" name="card_number" id="card_number">
@@ -664,6 +694,12 @@ function  delete_address($id){
 			$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').removeClass('in');
 			$('.modal-backdrop').remove();
 		});
+		var cc_details=$("#cc_dashboard_form").validate();
+		$("#full_name_on_card").rules("add", {required:true,maxlength: 50});
+		$("#exp_month").rules("add", {required:true});
+		$("#exp_year").rules("add", {required:true});
+		$("#card_number").rules("add", {required:true,cc_chk:true});
+		$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
 
 	});
 			
@@ -671,8 +707,4 @@ function  delete_address($id){
 </section>
 
 @stop
-{{-- page level scripts --}}
-@section('footer_scripts')
-<script src="{{ asset('/assets/frontend/js/pages/placeorder.js') }}"></script>
-<script src="{{ asset('/js/credit-card-validation.js') }}"></script>
-@stop
+

@@ -4,7 +4,7 @@ $(document).ready(function() {
 	var shipping_address=$("#shipping_address").validate({ignore: ":hidden" });
 	var billing_address=$("#billing_address").validate({ignore: ":hidden" });
 	var cc_details=$("#cc_form").validate();
-	var cc_dashboard_form = $('#cc_dashboard_form').validate();
+	
 	$("#shipping_firstname").rules("add", {required:true,maxlength: 100});
 	$("#shipping_lastname").rules("add", {maxlength: 100});
 	$("#shipping_address_1").rules("add", {required:true,maxlength: 100});
