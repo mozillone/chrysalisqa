@@ -39,9 +39,9 @@ die;*/
             <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
         </li>
         <li>
-            Events
+            <a href="{{url('events-list')}}"> Events List</a>
         </li>
-        <li class="active">users Event</li>
+        <li class="active">Edit Event</li>
     </ol>
     
 </section>
@@ -50,7 +50,7 @@ die;*/
         <div class="col-sm-12 col-md-12">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title heading-agent col-md-12">users Event </h3>
+                    <h3 class="box-title heading-agent col-md-12">Edit Event </h3>
                 </div>
                 <div class="box-body">
                 <!--Tabs code starts here-->
@@ -59,18 +59,7 @@ die;*/
                 
                 
 
-                    @if (Session::has('error'))
-                    <div class="alert alert-danger alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        {{ Session::get('error') }}
-                    </div>
-                    @elseif(Session::has('success'))
-                    <div class="alert alert-success alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        {{ Session::get('success') }}
-                    </div>
-                    @endif 
-                    <form id="customer_users" class="form-horizontal defult-form" name="userForm" action="/admin/updateevent" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+                    <form id="events-create"" class="form-horizontal defult-form" name="userForm" action="/admin/updateevent" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -93,10 +82,11 @@ die;*/
         <?php
         $fromDate = $users->from_date;
         $explode = explode('-', $fromDate);
-        $month = $explode[0];
-        $date = $explode[1];
-        $year = $explode[2];
+        $year = $explode[0];
+        $month = $explode[1];
+        $date = $explode[2];
         $fullFromDate = $year.'/'.$month.'/'.$date;
+        // print_r($fullFromDate);exit;
         ?>
 
                                 <div class="row">
@@ -110,23 +100,33 @@ die;*/
                                 </div>
 
            
-        <div class="col-md-6">
+        
+
+<div class="col-md-6">
         <div class="form-group input-group clockpicker">
-<label for="inputEmail3" class="control-label">From Time<span class="req-field" >*</span></label>
-    <input type="text" class="form-control" name="fromTime" value="{{$users->from_time}}">
-    <span class="input-group-addon">
-        <span class="glyphicon glyphicon-time"></span>
-    </span>
+        <label for="inputEmail3" class="control-label time-label">From Time<span class="req-field" >*</span></label>
+<input type="text" class="form-control" name="fromTime" value="{{$users->from_time}}">
+<p class="error">{{ $errors->first('fromTime') }}</p>
+    
+        <span class="input-group-addon glyphicon glyphicon-time"></span>
+    
 </div>
 </div>
+
         
     <?php
         $toDate = $users->to_date;
+        //echo $toDate;exit;
         $explode = explode('-', $toDate);
-        $month = $explode[0];
-        $date = $explode[1];
-        $year = $explode[2];
+         //print_r($explode);exit;
+        $year = $explode[0];
+        // print_r($month);exit;
+        $month = $explode[1];
+        // print_r($date);exit;
+        $date = $explode[2];
+        // print_r($year);exit;
         $fullToDate = $year.'/'.$month.'/'.$date;
+        // print_r($fullToDate);exit;
     ?>
                                    
 
@@ -144,13 +144,16 @@ die;*/
         
  <div class="col-md-6">
         <div class="form-group input-group clockpicker">
-<label for="inputEmail3" class="control-label">To Time<span class="req-field" >*</span></label>
-    <input type="text" class="form-control" name="toTime"  value="{{$users->to_time}}">
-    <span class="input-group-addon">
-        <span class="glyphicon glyphicon-time"></span>
-    </span>
-        </div>
+        <label for="inputEmail3" class="control-label time-label">To Time<span class="req-field" >*</span></label>
+    <input type="text" class="form-control" name="toTime" value="{{$users->to_time}}">
+    <p class="error">{{ $errors->first('toTime') }}</p>
+    
+        <span class="input-group-addon glyphicon glyphicon-time"></span>
+    
 </div>
+</div>
+
+
                                     
                                 <div class="clearfix"></div>
                                     
@@ -182,7 +185,7 @@ die;*/
                                 </div> -->
                                 <div class="row">
                                 <div class="col-md-12">
-                              <label for="inputEmail3" class="control-label"> Location Name<span class="req-field" >*</span></label>
+                              <label for="inputEmail3" class="control-label"> Location Name</label>
                             <div class="form-group has-feedback" >
 
                                     <div id="locationField">
@@ -207,26 +210,23 @@ die;*/
                                 </div>
                                 
                                 <div class="form-group has-feedback">
-                                    <label for="inputEmail3" class="control-label">Address 1<span class="req-field" >*</span></label>
+                                    <label for="inputEmail3" class="control-label">Address 1</label>
 
                                         <input type="text" class="form-control field" placeholder="Enter Address 1"  name="address1" id="street_number" value="{{ $users->address1 }}">
-                                    <p class="error">{{ $errors->first('address1') }}</p> 
                                 </div>
 
                                 <div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">Address 2<span class="req-field" >*</span></label>
+                                    <label for="inputEmail3" class="control-label">Address 2</label>
                                         <input type="text" class="form-control" placeholder="Enter Address 2"  name="address2" id="name" value="{{ $users->address2 }}">
-                                    <p class="error">{{ $errors->first('address2') }}</p> 
                                 </div>
 
                                 <div class="form-group has-feedback wideField" colspan="3">
-                                    <label for="inputEmail3" class="control-label">City<span class="req-field" >*</span></label>
+                                    <label for="inputEmail3" class="control-label">City</label>
                                         <input type="text" class="form-control field" placeholder="Enter City"  name="city" id="locality" value="{{ $users->city }}">
-                                    <p class="error">{{ $errors->first('city') }}</p> 
                                 </div>
 
                                 <div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">State<span class="req-field" >*</span></label>
+                                    <label for="inputEmail3" class="control-label">State</label>
                                         <select class="form-control" id="sel1" name="state">
                                         <option value="{{ $users->state }}">{{ $users->state }}</option>
                                         <option>Select Another State</option>
@@ -234,12 +234,10 @@ die;*/
                                         <option value="{{$user->name}}">{{ $user->name }}</option>
                                         @endforeach
                                        </select>
-                                    <p class="error">{{ $errors->first('state') }}</p> 
                                 </div>
                                 <div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">Zip Code<span class="req-field" >*</span></label>
+                                    <label for="inputEmail3" class="control-label">Zip Code</label>
                                         <input type="text" class="form-control" placeholder="Enter Zip Code"  name="zipCode" id="name" value="{{ $users->zip_code }}">
-                                    <p class="error">{{ $errors->first('zipCode') }}</p> 
                                 </div>
                             </div>
                         </div>
@@ -253,7 +251,7 @@ die;*/
                     </div>
                     <div class="box-footer">
                         <div class="pull-right">
-                            <a href="/admin/updateevent" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
+                            <a href="/events-list" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
                             <button type="submit" class="btn btn-primary pull-right">Update Event</button>
                         </div>
                     </div>
@@ -288,6 +286,7 @@ die;*/
 
 <script src="{{ asset('/assets/admin/js/clockpicker.js') }}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+    <script src="{{ asset('/assets/admin/js/pages/events.js')}}"></script>
     
 
 

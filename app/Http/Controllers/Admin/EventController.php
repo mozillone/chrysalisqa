@@ -20,7 +20,7 @@ class EventController extends Controller {
 	
 
 	public function eventsList() {
-		$heading    = "Events";
+		$heading    = "Events List";
 		$create     = "Create Event";
 		$breadcrumb = "Events List";
 
@@ -70,12 +70,7 @@ return view('admin.events.events-list', compact('users','heading','create','brea
                   'toTime' => 'required',
                   'eventDesc' => 'required',
                   'eventTags' => 'required',
-                  'location' => 'required',
-                  'address1' => 'required',
-                  'address2' => 'required',
-                  'city' => 'required',
-                  'state' => 'required',
-                  'zipcode' => 'required'
+                  'location' => 'required'
                 ]);
    
    if ($validator->fails()) {
@@ -155,7 +150,9 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 
 
 		}
-	return "Success";
+	Session::flash('success', 'Event is created successfully');
+                  return Redirect::to('events-list');
+	
 
 
 
@@ -185,6 +182,7 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 		//validator rule
 		$rule  = array( 'eventName' => 'required|max:50',
                          );
+
          $validator = Validator::make($req,$rule);
          if ($validator->fails())
             {
@@ -192,6 +190,7 @@ return view('admin.events.events-list', compact('users','heading','create','brea
             }
          else
             { 
+        // print_r($validator);exit;
 
         //variables declaration
 		$event_Name = $request->eventName;
@@ -217,7 +216,8 @@ return view('admin.events.events-list', compact('users','heading','create','brea
         $city = $request->city;
         $state = $request->state;
         $zip_Code = $request->zipcode;
-        $event_id=$request->eventid; 
+        $event_id=$request->eventid;
+// echo $event_id;exit;
 
        //Event data updating code starts here
        $event_array = array(
@@ -231,16 +231,18 @@ return view('admin.events.events-list', compact('users','heading','create','brea
        		'event_tags' => $event_Tags
        		
        	); 
+
        //update the event array
-       $eventdata=DB::table('events')->where('event_id','=',$event_id)->update($event_array);
-      if($eventdata){
+       $eventdata=DB::table('events')->where('event_id',$event_id)->update($event_array);
+      //if($eventdata){
       	$get_address_id = DB::table('events')
-      							->where('event_id','=',$event_id)
+      							->where('event_id',$event_id)
       							->first();
+
       	$address_id = $get_address_id->address_id;
+       //echo $address_id;die;
 
-       }
-
+       //}
        //Address data updating code starts here
        $address_array = array(
        		'address1' => $address1,
@@ -251,14 +253,15 @@ return view('admin.events.events-list', compact('users','heading','create','brea
        	);
 
        $update_address_id = DB::table('address_master')
-       							->where('address_id', '=', $address_id)
+       							->where('address_id',$address_id)
        							->update($address_array);
 
-       	echo "Success";
+       	
 
 
     }
-
+    	Session::flash('success', 'Event is Updated Successfully');
+                  return Redirect::to('events-list');
 		
 	}
 
@@ -288,7 +291,8 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 						->where('address_id', '=', $address_id)
 						->delete();
 
-		echo "deleted";
+		Session::flash('success', 'Event is Deleted successfully');
+                  return Redirect::to('events-list');
 	}
 
 	public function searchEvent(Request $request) {

@@ -5,16 +5,28 @@
 @stop
 
 @section('content')
-<h1>Events</h1>
-<ol class="breadcrumb">
-	<li><a href="{{ url('/admin/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-	<li class="active">@section('breadcrumb'){{$breadcrumb}} @show</li>
-</ol>
+<style>
+.fileupload-new .btn-file {
+   margin: 10px 0 0 20px;
+}
+</style>
+
+<section class="content-header">
+    <h1>Events</h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Events List</li>
+    </ol>
+    
+</section>
 
 <!-- Main content -->
 
 <section class="content">
 	<div class="box box-default">
+	 				
 		<div class="box-header with-border">
 			<h3 class="box-title">@section('heading'){{$heading}}@show</h3>
 			<div class="box-tools pull-right">
@@ -240,7 +252,7 @@ $('input[name="searchToDate"]').val('');
                     "autoclose": true
                 });
                 });*/
-	function changeStatus(id, status) {
+	/*function changeStatus(id, status) {
 
 		$.ajax({
 			type: "GET",
@@ -260,7 +272,7 @@ $('input[name="searchToDate"]').val('');
 				}
 			}
 		});
-	    }
+	    }*/
 
 		function deleteCms($id){
 		var id=$id;

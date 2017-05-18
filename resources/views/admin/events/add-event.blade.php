@@ -10,9 +10,8 @@
 
 
 
-  <link rel="stylesheet" href="{{ asset('/assets/admin/css/googleautostyle.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/admin/css/googleautostyle.css') }}">
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
-
 <link rel="stylesheet" href="{{ asset('/assets/admin/css/clockpicker.css') }}">
 
 
@@ -34,6 +33,9 @@
         <li>
             <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
         </li>
+        <li>
+            <a href="{{url('events-list')}}"> Events List</a>
+        </li>
         <li class="active">Add Event</li>
     </ol>
     
@@ -52,18 +54,7 @@
                 
                 
 
-                    @if (Session::has('error'))
-                    <div class="alert alert-danger alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        {{ Session::get('error') }}
-                    </div>
-                    @elseif(Session::has('success'))
-                    <div class="alert alert-success alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        {{ Session::get('success') }}
-                    </div>
-                    @endif 
-                    <form id="events-create" class="form-horizontal defult-form" name="userForm" action="{{ route('insert-events') }}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+                  <form id="events-create" class="form-horizontal defult-form" name="userForm" action="{{ route('insert-events') }}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
                     {{ csrf_field() }}
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         
@@ -185,39 +176,32 @@
                                 </div>
                                 
                                 <div class="form-group has-feedback">
-                                    <label for="inputEmail3" class="control-label">Address 1<span class="req-field" >*</span></label>
+                                    <label for="inputEmail3" class="control-label">Address 1</label>
                                         <input type="text" class="field form-control" id="street_number" name="address1" disable="true" required></input>
-
-                                       
-                                    <p class="error">{{ $errors->first('address1') }}</p> 
                                 </div>
 
                                 <div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">Address 2<span class="req-field" >*</span></label>
-                                        <input type="text" class="field form-control" name="address2" id="route" required></input></td>
-                                    <p class="error">{{ $errors->first('address2') }}</p> 
+                                    <label for="inputEmail3" class="control-label">Address 2</label>
+                                        <input type="text" class="field form-control" name="address2" id="route" required></input></td> 
                                 </div>
 
                                 <div class="form-group has-feedback wideField" colspan="3">
-                                    <label for="inputEmail3" class="control-label">City<span class="req-field" >*</span></label>
+                                    <label for="inputEmail3" class="control-label">City</label>
                                         <input type="text" class="field form-control" id="locality" name="city" required="">
-                                    <p class="error">{{ $errors->first('city') }}</p> 
                                 </div>
 
                                 <div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">State<span class="req-field" >*</span></label>
+                                    <label for="inputEmail3" class="control-label">State</label>
                                         <select class="form-control" id="sel1" name="state">
                                         <option value="">--Select--</option>
                                         @foreach($users as $user)
                                         <option value="{{$user->name}}">{{ $user->name }}</option>
                                         @endforeach
-                                       </select>
-                                    <p class="error">{{ $errors->first('state') }}</p> 
+                                       </select> 
                                 </div>
                                 <div class="form-group has-feedback" >
-                                    <label for="inputEmail3" class="control-label">Zip Code<span class="req-field" >*</span></label>
+                                    <label for="inputEmail3" class="control-label">Zip Code</label>
                                         <input type="text" class="field form-control" id="postal_code" name="zipcode">
-                                    <p class="error">{{ $errors->first('zipCode') }}</p> 
                                 </div>
                             </div>
                         </div>
@@ -228,7 +212,7 @@
                     </div>
                     <div class="box-footer">
                         <div class="pull-right">
-                            <a href="/customers-list" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
+                            <a href="/events-list" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
                             <button type="submit" class="btn btn-primary pull-right">Create Event</button>
                         </div>
                     </div>
