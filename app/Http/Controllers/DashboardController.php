@@ -39,6 +39,12 @@ class DashboardController extends Controller {
 			$this->data['default_shipping_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','shipping')->first();
 			$this->data['states']   = Site_model::Fetch_all_data('states', '*');
     $this->data['countries']   = Site_model::Fetch_all_data('countries', '*');
+    $this->data['recent_orders'] = DB::Select('SELECT DATE_FORMAT(created_at,"%m/%d/%y") as date,ord.order_id,st.name as status FROM `cc_order` as ord LEFT JOIN cc_order_status as sts on sts.order_id=ord.order_id LEFT JOIN cc_status as st on st.status_id=sts.status_id  where ord.order_id='.Auth::user()->id.'
+ORDER BY `order_id` DESC');
+    $this->data['costumes_sold'] = DB::Select('SELECT DATE_FORMAT(created_at,"%m/%d/%y") as date,ord.order_id,st.name as status FROM `cc_order` as ord LEFT JOIN cc_order_status as sts on sts.order_id=ord.order_id LEFT JOIN cc_status as st on st.status_id=sts.status_id  where ord.order_id='.Auth::user()->id.'
+ORDER BY `order_id` DESC');
+    $this->data['creditcard_list'] = DB::table('creditcard')->where('user_id',Auth::user()->id)->get();
+//print_r($this->data['recent_orders']);
 			return view('frontend.dashboard.dashboard')->with($this->data);
 			
 		}else{

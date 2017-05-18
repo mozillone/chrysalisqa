@@ -113,18 +113,22 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">PAYMENT DETAILS</div>
 							<div class="panel-body pay_details">
+									@foreach ($creditcard_list as $cc_list)
 								<div class="checkbox">
-									<label><input type="checkbox">Visa ending in 1234 (default)</label>
-									<p class="pymnt_right_box"><span><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
+									<?php //print_r($creditcard_list);die; ?>
+
+									<label><input type="checkbox">{{$cc_list->card_type}} ending in {{$cc_list->credit_card_mask}} (default)</label>
+									<p class="pymnt_right_box"><span></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
 								</div>
-								<div class="checkbox">
+									@endforeach
+								<!-- <div class="checkbox">
 									<label><input type="checkbox">Amex ending in 3456</label>
 									<p class="pymnt_right_box"><span><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
 								</div>
 								<div class="checkbox">
 									<label><input type="checkbox">Paypal</label>
 									<p class="pymnt_right_box"><span><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
-								</div>
+								</div> -->
 							</div>
 							<div class="panel-heading">ADD NEW CARD</div>
 							<div class="panel-body add_new_card">
@@ -132,7 +136,7 @@
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group">
 										<label for="title">Full Name On Card</label>
-										<input type="text" class="form-control" name="full_name_on_card" id="full_name_on_card">
+										<input type="text" class="form-control" name="cardholder_name" id="cardholder_name">
 									</div>
 									<div class="col-md-6">
 										<label for="pwd">Expiration Date</label>
@@ -170,7 +174,7 @@
 									</div> -->
 									<div class="form-group">
 										<label for="text">Card Number</label>
-										<input type="text" class="form-control" name="card_number" id="card_number">
+										<input type="text" class="form-control" name="cc_number" id="cc_number">
 									</div>
 									<div class="form-group">
 										<label for="pwd">CVN Code</label>
@@ -247,9 +251,11 @@
 							<h2>RECENT ORDERS</H2>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Seller</th> <th>Status</th>  </tr> </thead> 
-								<tbody> <tr> <td>0/02/2017</td> <td>12345</td> <td>@mdo</td> <td>Print Label</td> </tr>
-									<tr>  <td>0/02/2017</td> <td>12345</td> <td>@fat</td> <td>Deleverd</td> </tr>
-									<tr>  <td>0/02/2017</td> <td>12345</td> <td>@twitter</td> <td>Deleverd</td> </tr> 
+								<tbody> 
+									<?php //print_r($recent_orders);die; ?>
+									@foreach ($recent_orders as $orders)
+									<tr> <td>{{$orders->date}}</td> <td>{{$orders->order_id}}</td> <td>@mdo</td> <td>{{$orders->status}}</td> </tr>
+									@endforeach 
 								</tbody> 
 							</table>
 						</div>
@@ -257,9 +263,10 @@
 							<h2>COSTUMES SOLD</H2>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Buyer</th> <th> Status</th>  </tr> </thead> 
-								<tbody> <tr> <td>0/02/2017</td> <td>12345</td> <td>@mdo</td> <td>Print Label</td> </tr>
-									<tr>  <td>0/02/2017</td> <td>12345</td> <td>@fat</td> <td>Deleverd</td> </tr>
-									<tr>  <td>0/02/2017</td> <td>12345	</td> <td>@twitter</td> <td>Deleverd</td> </tr> 
+								<tbody> 
+									@foreach ($recent_orders as $orders)
+									<tr> <td>{{$orders->date}}</td> <td>{{$orders->order_id}}</td> <td>@mdo</td> <td>{{$orders->status}}</td> </tr>
+									@endforeach 
 								</tbody> 
 							</table>
 						</div>
@@ -641,7 +648,11 @@
 
 </div>
 </div>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+@stop
+{{-- page level scripts --}}
+@section('footer_scripts')
+<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('/js/credit-card-validation.js') }}"></script>
 <script type="text/javascript">
 $(document).on('change','#shipping_country,#billing_country',function(){
 		if($(this).val()!="United States"){
@@ -695,14 +706,170 @@ function  delete_address($id){
 			$('.modal-backdrop').remove();
 		});
 		var cc_details=$("#cc_dashboard_form").validate();
-		$("#full_name_on_card").rules("add", {required:true,maxlength: 50});
+		$("#cardholder_name").rules("add", {required:true,maxlength: 50});
 		$("#exp_month").rules("add", {required:true});
 		$("#exp_year").rules("add", {required:true});
-		$("#card_number").rules("add", {required:true,cc_chk:true});
+		$("#cc_number").rules("add", {required:true,cc_chk:true});
 		$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
 
 	});
-			
+jQuery.validator.addMethod("cc_chk", function(value, element) 
+		{
+
+		 	result = $('#cc_number').validateCreditCard();
+
+			 if(result.valid  == true)
+			 {
+					
+					var name 		= result.card_type.name
+
+					if(name == 'amex')
+					{
+						name = 'American Express';	
+					}
+					else if(name == 'visa')
+					{
+						name = 'Visa';	
+					}
+					else if(name == 'mastercard')
+					{
+						name = 'MasterCard';	
+					}		
+					
+					
+				 
+			   return true;
+			 }
+			 else
+			{
+				 $.validator.messages.cc_chk =  "Please enter valid credit card.";
+
+				return false;
+			 }
+
+			 
+			 
+
+
+		}, 	 $.validator.messages.cc_chk);
+		input_credit_card = function(input)
+{
+    var format_and_pos = function(char, backspace)
+    {
+        var start = 0;
+        var end = 0;
+        var pos = 0;
+        var separator = " ";
+        var value = input.value;
+
+        if (char !== false)
+        {
+            start = input.selectionStart;
+            end = input.selectionEnd;
+
+            if (backspace && start > 0) // handle backspace onkeydown
+            {
+                start--;
+
+                if (value[start] == separator)
+                { start--; }
+            }
+            // To be able to replace the selection if there is one
+            value = value.substring(0, start) + char + value.substring(end);
+
+            pos = start + char.length; // caret position
+        }
+
+        var d = 0; // digit count
+        var dd = 0; // total
+        var gi = 0; // group index
+        var newV = "";
+        var groups = /^\D*3[47]/.test(value) ? // check for American Express
+        [4, 6, 5] : [4, 4, 4, 4];
+
+        for (var i = 0; i < value.length; i++)
+        {
+            if (/\D/.test(value[i]))
+            {
+                if (start > i)
+                { pos--; }
+            }
+            else
+            {
+                if (d === groups[gi])
+                {
+                    newV += separator;
+                    d = 0;
+                    gi++;
+
+                    if (start >= i)
+                    { pos++; }
+                }
+                newV += value[i];
+                d++;
+                dd++;
+            }
+            if (d === groups[gi] && groups.length === gi + 1) // max length
+            { break; }
+        }
+        input.value = newV;
+
+        if (char !== false)
+        { input.setSelectionRange(pos, pos); }
+    };
+
+    input.addEventListener('keypress', function(e)
+    {
+        var code = e.charCode || e.keyCode || e.which;
+
+        // Check for tab and arrow keys (needed in Firefox)
+        if (code !== 9 && (code < 37 || code > 40) &&
+        // and CTRL+C / CTRL+V
+        !(e.ctrlKey && (code === 99 || code === 118)))
+        {
+            e.preventDefault();
+
+            var char = String.fromCharCode(code);
+
+            // if the character is non-digit
+            // OR
+            // if the value already contains 15/16 digits and there is no selection
+            // -> return false (the character is not inserted)
+
+            if (/\D/.test(char) || (this.selectionStart === this.selectionEnd &&
+            this.value.replace(/\D/g, '').length >=
+            (/^\D*3[47]/.test(this.value) ? 15 : 16))) // 15 digits if Amex
+            {
+                return false;
+            }
+            format_and_pos(char);
+        }
+    });
+    
+    // backspace doesn't fire the keypress event
+    input.addEventListener('keydown', function(e)
+    {
+        if (e.keyCode === 8 || e.keyCode === 46) // backspace or delete
+        {
+            e.preventDefault();
+            format_and_pos('', this.selectionStart === this.selectionEnd);
+        }
+    });
+    
+    input.addEventListener('paste', function()
+    {
+        // A timeout is needed to get the new value pasted
+        setTimeout(function(){ format_and_pos(''); }, 50);
+    });
+    
+    input.addEventListener('blur', function()
+    {
+    	// reformat onblur just in case (optional)
+        format_and_pos(this, false);
+    });
+};
+
+input_credit_card(document.getElementById('cc_number'));	
 	</script>
 </section>
 
