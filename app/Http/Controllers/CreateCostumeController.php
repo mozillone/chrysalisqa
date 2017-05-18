@@ -817,14 +817,17 @@ class CreateCostumeController  extends Controller {
 				);
 			$insert_type=DB::table('costume_attribute_options')->insert($package_val);
 			//Service
-			switch($service){ case '24': $service_name="USPS Media Mail(2-8 Business Hours)"; break; case '25': $service_name="USPS Media Mail(10-18 Business Hours)"; break; }
+			if($service != ""){
+
+			$service_name_db = DB::table('attribute_options')->where('option_id',$service)->first(['option_value']);
 			$service_val=array('costume_id'=>$costume_id,
 				'attribute_id'=>'13',
 				'attribute_option_value_id'=>$service,
-				'attribute_option_value'=>$service_name,
+				'attribute_option_value'=>$service_name_db->option_value,
 				);
 				
 			$insert_service=DB::table('costume_attribute_options')->insert($service_val);
+			}
 
 
 			//end pricing insertion
