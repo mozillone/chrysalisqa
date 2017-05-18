@@ -105,6 +105,12 @@
 
 	</div>
 	</div>
+	<div class="shipping_rm">
+	<p class="shipp-rm"><label>Shipping:</label> $11.00 Expedited Shipping | <a href="javascript:void(0);">See Details</a></p>
+	<p class="shipp-rm1">Item location: Brooklyn, NY USA <br/>Ships to: United States</p>
+	<p class="shipp-rm shipp-rm-20"><label>Delivery:</label> Estimated between Wed. Oct. 5 and Sat. Oct. 8 <i class="fa fa-info-circle" aria-hidden="true"></i></p>
+	</div>
+
 	<p class="returns-rm">Returns: <span>Seller does not offer returns</span></p>
 
 

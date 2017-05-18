@@ -8,10 +8,10 @@
         "php": ">=5.6.4",
         "cartalyst/stripe-laravel": "5.0.*",
         "guzzle/guzzle": "*",
-        "johnpaulmedina/laravel-usps": "dev-master",
         "laravel/framework": "5.3.*",
         "laravel/socialite": "^2.0",
-        "yajra/laravel-datatables-oracle": "~6.0"
+        "yajra/laravel-datatables-oracle": "~6.0",
+        "mpinchuk/laravel-usps": "dev-master",
 
     },
     "require-dev": {

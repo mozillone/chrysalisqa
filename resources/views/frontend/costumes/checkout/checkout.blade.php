@@ -148,7 +148,7 @@
 										@foreach($data['basic']['basic'] as $cart)
 										<div class="well">
 											 <div class="shipping_date">
-												<span>Free Shipping from Chrysalis, NY <span class="in_prc">($0.00)</span></span><span class="shi_date_right text-right right"> Estimated Shipping from Brooklyn, NY <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i></span>
+												<span>Free Shipping from {{$cart->city}}, {{$cart->state}} <span class="in_prc">($0.00)</span></span><span class="shi_date_right text-right right"> Estimated Shipping from Brooklyn, NY <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i></span>
 											</div>
 											<div class="row">
 												<div class="col-md-9 col-sm-9 col-xs-12">

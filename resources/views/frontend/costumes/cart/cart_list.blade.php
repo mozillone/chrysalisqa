@@ -26,7 +26,7 @@
 									@foreach($data['basic'] as $cart)
 										<div class="well">
 											<div class="shipping_date">
-												<span>Shipping from Brooklyn, NY</span><span class="shi_date_right text-right right"> Estimated Shipping from Brooklyn, NY <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i></span>
+												<span>Shipping from {{$cart->city}}, {{$cart->state}}</span><span class="shi_date_right text-right right"> Estimated Shipping from Brooklyn, NY <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i></span>
 											</div>
 											<div class="row">
 												<div class="col-md-6 col-sm-6 col-xs-12">
