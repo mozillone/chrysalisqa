@@ -8,6 +8,7 @@ return array(
 	'FAQ_ID'=>8,
 	'FAQ_OPTION_VALUE'=>0,
 	'IS_FILMY'=>21,
+	'Shipping_id'=>9,
 	'Processing'=>1,
 	'Currency'=>'usd',
 	'USPS'=>'402SAMPL6330'
