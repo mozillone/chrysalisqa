@@ -116,11 +116,11 @@ class Cart extends Authenticatable
     protected function verifyCostumeCartQuantity($costume_id,$cookie_id){
         $currentCookieKeyID=$cookie_id;
         if(Auth::check()){
-            $where="where crt.user_id=".Auth::user()->id.' or crt.cookie_id="'.$currentCookieKeyID.'" and items.costume_id='.$costume_id.'';
+            $where="where crt.user_id=".Auth::user()->id.' and items.costume_id='.$costume_id.'';
         }else{
             $where="where crt.cookie_id='".$currentCookieKeyID."' and items.costume_id=".$costume_id."";
         }
-       $data=DB::Select('SELECT items.qty  FROM `cc_cart_items` as items LEFT JOIN cc_cart as crt on crt.cart_id=items.cart_id '.$where.' ');
+        $data=DB::Select('SELECT items.qty  FROM `cc_cart_items` as items LEFT JOIN cc_cart as crt on crt.cart_id=items.cart_id '.$where.' ');
         if(!empty($data)){
                 return $data[0]->qty;
        }else{
@@ -139,7 +139,7 @@ class Cart extends Authenticatable
      protected function verifyCostumeCart($costume_id,$cookie_id){
         $currentCookieKeyID=$cookie_id;
         if(Auth::check()){
-            $where="where crt.user_id=".Auth::user()->id.' or crt.cookie_id="'.$currentCookieKeyID.'" and items.costume_id='.$costume_id.'';
+            $where="where crt.user_id=".Auth::user()->id.' and items.costume_id='.$costume_id.'';
         }else{
             $where="where crt.cookie_id='".$currentCookieKeyID."' and items.costume_id=".$costume_id."";
         }
@@ -159,11 +159,11 @@ class Cart extends Authenticatable
        // $currentCookieKeyID=SiteHelper::currentCookieKey();
        $currentCookieKeyID=$cookie_id;
         if(Auth::check()){
-        	$where="where crt.user_id=".Auth::user()->id.' or crt.cookie_id="'.$currentCookieKeyID.'"';
+        	$where="where crt.user_id=".Auth::user()->id.'';
         }else{
         	$where="where crt.cookie_id='".$currentCookieKeyID."'";
         }
-        $res=DB::Select('select count(itms.cart_item_id) as mini_count from cc_cart_items as itms LEFT JOIN cc_cart as crt on crt.cart_id=itms.cart_id '.$where.'');
+        $res=DB::Select('select sum(itms.qty) as mini_count from cc_cart_items as itms LEFT JOIN cc_cart as crt on crt.cart_id=itms.cart_id '.$where.'');
         return $res[0]->mini_count;
 
     }
@@ -199,7 +199,7 @@ class Cart extends Authenticatable
     protected function getCartProducts(){
     	$currentCookieKeyID=SiteHelper::currentCookieKey();
         if(Auth::check()){
-        	$where="where crt.user_id=".Auth::user()->id.' or crt.cookie_id="'.$currentCookieKeyID.'"';
+        	$where="where crt.user_id=".Auth::user()->id.'';
         }else{
         	$where="where crt.cookie_id='".$currentCookieKeyID."'";
         }
@@ -210,7 +210,7 @@ class Cart extends Authenticatable
     protected function getCartProductswithCoupan($code){
        $currentCookieKeyID=SiteHelper::currentCookieKey();
         if(Auth::check()){
-          $where="where crt.user_id=".Auth::user()->id.' or crt.cookie_id="'.$currentCookieKeyID.'"';
+          $where="where crt.user_id=".Auth::user()->id.'';
         }else{
           $where="where crt.cookie_id='".$currentCookieKeyID."'";
         }
