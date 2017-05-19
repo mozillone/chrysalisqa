@@ -105,7 +105,7 @@
 										<input type="text" class="form-control" value="{{Auth::user()->email}}" name="email" id="email">
 									</div>
 									<div class="form-group update_btn">
-										<button type="submit" class="btn btn-primary pull-right update_btn">Update</button>
+										<a type="submit" class="btn btn-primary pull-right update_btn">Update</a>
 									</div>
 									
 								</form>
@@ -142,7 +142,7 @@
 										<label for="title">Full Name On Card</label>
 										<input type="text" class="form-control" name="cardholder_name" id="cardholder_name">
 									</div>
-									<div class="col-md-6">
+									<div class="">
 										<label for="pwd">Expiration Date</label>
 										<div class="form-group">
 										<div class="col-md-6 field-align-xs" style="padding: 0">
@@ -189,7 +189,7 @@
 									</div>
 									
 									<div class="form-group update_btn">
-										<button class="btn btn-default">Save Card</button>
+										<a class="btn btn-default">Save Card</a>
 									</div>
 									
 								</form>
