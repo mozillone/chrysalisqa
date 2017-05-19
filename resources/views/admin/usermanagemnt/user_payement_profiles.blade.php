@@ -5,6 +5,7 @@
 @endsection
 
 @section('header_styles')
+<link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/sweetalert/dist/sweetalert.css')}}">
 @stop
 
@@ -68,26 +69,20 @@
                 <div class="box-body">
         
           <div class="table-responsive">
-          <table datatable dt-options="dtOptions" dt-columns="dtColumns"
-                        class="table table-bordered table-hover table-striped" id="dtTable">
-						<tr>
-						<th>Card Holder Name
-</th>
-						<th>Card No
-</th>
-						<th>Card Type
-</th>
-						<th>Exp. Date
-
-</th>
-						<th>Created Date
-</th>
-						<th>Status</th>
-						</tr>
-						<tr>
-						<td colspan="7"><center>No Data Avialable..!!</center></td>
-						</tr>
-          </table>
+          	<table class="table table-bordered table-hover" id="dtTable1">
+              	<thead>
+                  	<tr>
+                		<th>Card Holder Name</th>
+                      	<th>Card No</th>
+                      	<th>Card Type</th>
+                      	<th>Exp. Date</th>
+                      	<th>Created Date</th>
+                      	<th>Status</th>
+                 	</tr>
+          	</thead>
+              <tbody>
+          </tbody>
+        </table>
           </div>
          </div>
             </div>
@@ -99,8 +94,52 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts') 
-<script src="{{ asset('angular/Admin/UserManagement/Controllers/users-lists.js') }}"></script>
-<script src="{{ asset('angular/Admin/UserManagement/Services/user_management.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+<script type="text/javascript">
+  var table = '';
+  var id = <?php echo $usersdid; ?>;
+  $(function() {
+            table = $('#dtTable1').DataTable({
+      "ajax": {
+            "url" : "{{URL::to('user/getallpaymentprofile')}}",
+           "type": "GET",
+           "data":{'id':id}
+         },
+      "searching": false,
+      "pageLength": 50,
+      "bLengthChange": false,
+      
+      "columns": [
+        { data: 'cardholder_name', name: 'cardholder_name' },
+        { data: 'credit_card_mask', name: 'credit_card_mask' },
+        { data: 'card_type', name: 'card_type' },
+        { data: 'exp_year', name: 'exp_year' },
+        { data: 'created_at', name: 'created_at' },
+        { data: 'actions', name: 'actions', orderable: false, searchable: false}
+      ]
+    });
+
+  }); 
+   
+function deleteccard($id){
+        var id=$id;
+
+    swal({
+       title: "Are you sure want to delete this Card?",
+                  showCancelButton: true,
+                 confirmButtonColor: "#DD6B55 ",
+                 confirmButtonText: "Yes, delete",
+                 closeOnConfirm: false,
+                 closeOnCancel: true
+               },
+
+               function(){
+               url = "{{URL::to('user/deleteccard/')}}"+'/'+id;
+                window.location = url;
+               });
+
+
+   }
+</script>
 
 @stop
