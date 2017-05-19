@@ -122,7 +122,7 @@
 									<?php //print_r($creditcard_list);die; ?>
 
 									<label><input type="checkbox">{{$cc_list->card_type}} ending in {{$cc_list->credit_card_mask}} (default)</label>
-									<p class="pymnt_right_box"><span></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
+									<p class="pymnt_right_box"><span></span> <span><a href="javascript:void(0);" onclick="deleteccard({{$cc_list->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
 								</div>
 									@endforeach
 								<!-- <div class="checkbox">
@@ -694,6 +694,24 @@ function  delete_address($id){
 	    }
 	    return false;
 	}
+	function deleteccard($id){
+        
+    var id = $id;
+	if (confirm("Are you sure?")) {
+		$.ajax({
+		 url: "{{URL::to('/deleteccard')}}",
+		 type: "POST",
+		 data: {'id':id},
+		 success: function(data){
+		 	if (data == "success") {
+		 		window.location.href = "{{URL::to('/dashboard')}}";
+		 	}
+		 }});
+	    }
+	    return false;
+
+
+   }
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip(); 
 		$('#shipping_popup_add').click(function(){

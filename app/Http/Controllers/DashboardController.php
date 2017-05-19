@@ -59,37 +59,37 @@ ORDER BY `order_id` DESC');
 	
     $req=$request->all();
 	//echo "<pre>";print_r($req);die;
-                                          if(count($req)){
-                                          $name = User::find(Auth::user()->id);
-                                          if(isset($req['avatar'])){
-                                            $file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
-                                            $source_image_path=public_path('profile_img');
-                                            $thumb_image_path1=public_path('profile_img');
-                                            $thumb_image_path2=public_path('profile_img/thumbs');
-                                            $req['avatar']->move($source_image_path, $file_name);
-                                            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-                                            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+        if(count($req)){
+        $name = User::find(Auth::user()->id);
+        if(isset($req['avatar'])){
+          $file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
+          $source_image_path=public_path('profile_img');
+          $thumb_image_path1=public_path('profile_img');
+          $thumb_image_path2=public_path('profile_img/thumbs');
+          $req['avatar']->move($source_image_path, $file_name);
+          $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+          $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
 
-                                          }
-                                          else if(isset($req['is_removed'])){
-                                            $file_name="";
-                                          }
-                                          else{
-                                            $file_name=$name->avatar;
-                                          }
-                                          $userData = [
-                                              'first_name' => $req['first_name'],
-                                              'last_name' => $req['last_name'],
-                                              'display_name' =>  $req['first_name']." ".$req['last_name'],
-                                              'email'=>$req['email'],
-                                              'user_img' =>$file_name
-                                          ];
-                                          if(!empty($req['password'])){
-                                            $userData['password'] =  Hash::make($req['password']);
-                                          }
-                                          $affectedRows = User::where('id', '=', Auth::user()->id)->update($userData);
-                                          Session::flash('success', 'Your profile is upadated successfully');
-                                          return Redirect::back();
+        }
+        else if(isset($req['is_removed'])){
+          $file_name="";
+        }
+        else{
+          $file_name=$name->avatar;
+        }
+        $userData = [
+            'first_name' => $req['first_name'],
+            'last_name' => $req['last_name'],
+            'display_name' =>  $req['first_name']." ".$req['last_name'],
+            'email'=>$req['email'],
+            'user_img' =>$file_name
+        ];
+        if(!empty($req['password'])){
+          $userData['password'] =  Hash::make($req['password']);
+        }
+        $affectedRows = User::where('id', '=', Auth::user()->id)->update($userData);
+        Session::flash('success', 'Your profile is upadated successfully');
+        return Redirect::back();
     return view('frontend.dashboard.dashboard');
   }
 }
@@ -121,4 +121,10 @@ public function creditcradAdd(Request $req){
   Session::flash('success', 'Card addedd successfully.');
   return Redirect::back();
 }
+public function Deleteccard(Request $req){
+    //echo $id;die;
+    $delete_card = DB::table('creditcard')->where('id',$req->id)->delete();
+    Session::flash('success', 'Card deleted successfully.');
+    return "success";
+  }
 }
