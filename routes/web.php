@@ -135,7 +135,9 @@ Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 	    Route::any('/status/change', 'UserController@changeUserStatus');
 	    Route::any('/customer/emailValidation', array('as' => '','uses' => 'UserController@EmailNameCheck'));
 	    Route::post('user/csvExport', array('as' => '','uses' => 'UserController@userCsvExport'));
-	    /****************User Management End Here***************************/
+	   	Route::any('user/getallpaymentprofile', array('as' => '','uses' => 'UserController@Getallpaymentprofile'));
+	   	Route::any('user/deleteccard/{id}', ['as' => '','uses'=>'UserController@Deleteccard']);
+	   	/****************User Management End Here***************************/
 
 		/****************Costumes Management Code Starts Here*********************/
 		
