@@ -18,13 +18,13 @@
 		@endif
 			<form action="{{route('order-charity-fund')}}" method="POST" id="order-charity">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="hidden" name="order_id" value="{{$order_id}}">
+			<input type="hidden" name="order_id" value="1">
 			<input type="hidden" name="amount" value="1">
 					
 			<div class="thankyou-rm">
 				<div class="col-md-6">
 				<h2 class="prog-head">Thank You For Your Purchase!</h2>
-					<p class="thankyou-text thankyou-textR">Order No:{{$order_id}}</p>
+					<p class="thankyou-text thankyou-textR">Order No:{{implode(",",$order_id)}}</p>
 					<p class="thankyou-text">Hang tight! You will receive an order confirmation with details of your purchase shortly!</p>
 
 					<p class="thankyou-text">In the meantime, <br/>
