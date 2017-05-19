@@ -12,10 +12,15 @@
  </div>
 </section>    
 	<section class="content create_section_page">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 col-sm-12">
-					@if (Session::has('error'))
+
+				</div>
+			</div>
+		</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				@if (Session::has('error'))
 					<div class="alert alert-danger alert-dismissable">
 						<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
 						{{ Session::get('error') }}
@@ -26,13 +31,6 @@
 						{{ Session::get('success') }}
 					</div>
 					@endif
-				</div>
-			</div>
-		</div>
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
 				<div class="dashboard-top-box">
 					<p class="left_heading"><span>MY ACCOUNT</span> Keep your account info up to date for a smooth checkout process!</p>
 					<p class="right_heading">

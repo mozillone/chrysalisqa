@@ -6,7 +6,12 @@ use Auth;
 use App\Wishlist;
 use App\Category;
 use App\Cart;
+use App\Address;
 use Cookie;
+use Usps\Rate;
+use Usps\RatePackage;
+use Config;
+
 class SiteHelper  {
 
 	public static function getMenus(){
@@ -113,6 +118,42 @@ class SiteHelper  {
     	}else{
     			return true;
     	}
+	}
+	public static function userCartShippingAddress($cart_id){
+		$address=Address::userCartShippingAddress($cart_id);
+		return $address;
+	}
+	public static function domesticRate($originationZip,$cart_id)
+	{	
+			
+			 $destinationZipCode=Address::userCartShippingAddress($cart_id);
+			 $rate = new Rate(Config::get('constants.USPS'));
+			 $package = new RatePackage;
+			 $package->setService(RatePackage::SERVICE_EXPRESS);
+			 $package->setZipOrigination(62858); //62858 originationZip
+			 $package->setZipDestination(62858); //destinationZipCode
+			 $package->setPounds(30);
+			 $package->setOunces(0);
+			 $package->setContainer('');
+			 $package->setSize(RatePackage::SIZE_REGULAR);
+			 $package->setField('Machinable', true);
+
+			 $rate->addPackage($package);
+			 $rate->getRate();
+			 $rate->getArrayResponse();
+			 
+			 if ($rate->isSuccess()) {
+   				$res=$rate->getArrayResponse();
+   				$est=explode('-',filter_var($res['RateV4Response']['Package']['Postage']['MailService'], FILTER_SANITIZE_NUMBER_INT));
+   				$data['rate']=$res['RateV4Response']['Package']['Postage']['Rate'];
+   				$data['MailService']=$est[0];
+   				$res=array('result'=>1,'msg'=>$data);
+    			return $res;
+			 } else {
+			 	$res=array('result'=>0,'msg'=>'Error:' . $rate->getErrorMessage());
+				return $res;
+    		 }
+	
 	}
 	
 }
