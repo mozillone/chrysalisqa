@@ -89,17 +89,26 @@
         .view-order .box.box-info {
             border-top-color: #00c0ef;
         }
+
         .summery-details .old-orders .checkbox label {
             min-width: inherit;
             padding-right: 20px !important;
         }
+
         .old-orders label {
             min-width: 150px;
             padding-bottom: 8px;
             padding-top: 8px;
         }
+
         .old-orders input[type="text"], .old-orders select {
-            width: 70%;
+            width: 70% !important;
+        }
+
+        .order-submit-btn {
+            background-color: #60c5ac;
+            border-color: #60c5ac;
+            color: #000;
         }
 
 
@@ -127,64 +136,64 @@
                                 <div class="summery-details">
                                     <div class="summery-info">
                                         <div class="row">
-                                        <div class="col-md-4">
-                                            <h3>Order Summary</h3>
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <td>Order #</td>
-                                                    <td>10842</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ordered Date:</td>
-                                                    <td>2017-05-09 07:30:33</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Status:</td>
-                                                    <td>Shipped</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                            <div class="col-md-4">
+                                                <h3>Order Summary</h3>
+                                                <table>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Order #</td>
+                                                        <td>10842</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ordered Date:</td>
+                                                        <td>2017-05-09 07:30:33</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Status:</td>
+                                                        <td>Shipped</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3>Buyer Information</h3>
+                                                <table>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Order #</td>
+                                                        <td>10842</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ordered Date:</td>
+                                                        <td>2017-05-09 07:30:33</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Status:</td>
+                                                        <td>Shipped</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3>Seller Information</h3>
+                                                <table>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Order #</td>
+                                                        <td>10842</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ordered Date:</td>
+                                                        <td>2017-05-09 07:30:33</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Status:</td>
+                                                        <td>Shipped</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <h3>Buyer Information</h3>
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <td>Order #</td>
-                                                    <td>10842</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ordered Date:</td>
-                                                    <td>2017-05-09 07:30:33</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Status:</td>
-                                                    <td>Shipped</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <h3>Seller Information</h3>
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <td>Order #</td>
-                                                    <td>10842</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ordered Date:</td>
-                                                    <td>2017-05-09 07:30:33</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Status:</td>
-                                                    <td>Shipped</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
                                     </div>
                                     <div class="address-sec">
                                         <div class="row">
@@ -292,7 +301,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>CS0037</td>
-                                                        <td>Captain Jack Sparrow - Pirates </td>
+                                                        <td>Captain Jack Sparrow - Pirates</td>
                                                         <td>$79.00</td>
                                                         <td>5</td>
                                                         <td>$179.00</td>
@@ -335,7 +344,7 @@
                                             <div class="col-md-6">
                                                 <h3>Order Status Update</h3>
                                                 <div class="form-inline">
-                                                    <label >Current Status</label>
+                                                    <label>Current Status</label>
                                                     <span>Pending</span>
                                                 </div>
                                                 <div class="form-inline">
@@ -356,14 +365,15 @@
                                                 <div class="checkbox">
                                                     <label><input type="checkbox" value="">Option 1</label>
                                                 </div>
-                                                <a href="#" class="btn">Submit</a>
+                                                <a href="#" class="btn order-submit-btn">Submit</a>
 
                                             </div>
                                             <div class="col-md-6">
                                                 <h3>Order Status Update</h3>
                                                 <div class="form-inline">
-                                                    <label >Current Status</label>
-                                                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                                    <label>Current Status</label>
+                                                    <input type="text" class="form-control" id="email"
+                                                           placeholder="Enter email" name="email">
                                                 </div>
                                                 <div class="form-inline">
                                                     <label for="transaction">Updtate Status</label>
@@ -379,11 +389,44 @@
                                                 <div class="checkbox">
                                                     <label><input type="checkbox" value="">Option 1</label>
                                                 </div>
-                                                <a href="#" class="btn">Submit</a>
+                                                <a href="#" class="btn order-submit-btn">Submit</a>
 
                                             </div>
                                         </div>
 
+                                    </div>
+                                    <div class="order-list-sec">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3>Comments History</h3>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Message</th>
+                                                        <th>Status Change</th>
+                                                        <th>Comment Date</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Order is received</td>
+                                                        <td>Delivered</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Order is shipped. Tracking no is 11234556</td>
+                                                        <td>Shipped</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Order is accepted</td>
+                                                        <td>Processing</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -391,19 +434,115 @@
 
 
                             <div class="tab-pane" id="status">
-                                <h4>Pane B</h4>
-                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                                    ac turpis egestas.</p>
+                                <div class="summery-details">
+                                    <div class="order-list-sec">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3>Shipping Info</h3>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Message</th>
+                                                        <th>Status Change</th>
+                                                        <th>Comment Date</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Order is received</td>
+                                                        <td>Delivered</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Order is shipped. Tracking no is 11234556</td>
+                                                        <td>Shipped</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Order is accepted</td>
+                                                        <td>Processing</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane" id="payment">
-                                <h4>Pane C</h4>
-                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                                    ac turpis egestas.</p>
+                                <div class="summery-details">
+                                    <div class="order-list-sec">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3>Comments History</h3>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Message</th>
+                                                        <th>Status Change</th>
+                                                        <th>Comment Date</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Order is received</td>
+                                                        <td>Delivered</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Order is shipped. Tracking no is 11234556</td>
+                                                        <td>Shipped</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Order is accepted</td>
+                                                        <td>Processing</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane" id="dispute">
-                                <h4>Pane D</h4>
-                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                                    ac turpis egestas.</p>
+                                <div class="summery-details">
+                                    <div class="order-list-sec">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3>Comments History</h3>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Message</th>
+                                                        <th>Status Change</th>
+                                                        <th>Comment Date</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Order is received</td>
+                                                        <td>Delivered</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Order is shipped. Tracking no is 11234556</td>
+                                                        <td>Shipped</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Order is accepted</td>
+                                                        <td>Processing</td>
+                                                        <td>11/25/2016 12:30 PM</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div><!-- tab content -->
                     </div>
