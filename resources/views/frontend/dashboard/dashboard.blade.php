@@ -105,7 +105,7 @@
 										<input type="text" class="form-control" value="{{Auth::user()->email}}" name="email" id="email">
 									</div>
 									<div class="form-group update_btn">
-										<a type="submit" class="btn btn-primary pull-right update_btn">Update</a>
+										<button type="submit" class="btn btn-primary pull-right update_btn common-btn">Update</button>
 									</div>
 									
 								</form>
@@ -189,7 +189,7 @@
 									</div>
 									
 									<div class="form-group update_btn">
-										<a class="btn btn-default">Save Card</a>
+										<button class="btn common-btn">Save Card</button>
 									</div>
 									
 								</form>

@@ -2267,6 +2267,15 @@ img#ajax_loader {
 	outline: none;
 	border-color: #ee4266 !important;
 }
+.common-btn , .common-btn:hover, .common-btn:focus{
+	padding: 7px 80px;
+    background: #61c5ac;
+    border: 1px solid #61c5ac;
+    color: #fff;
+    font-weight: 800;
+    font-size: 18px;
+    text-align: right;
+}
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){
