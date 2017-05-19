@@ -46,19 +46,21 @@
 				<div class="col-md-6">
 					<div class="dashboad_left_side">
 						<div class="panel panel-default">
-							<div class="panel-heading">PROFILE DETAILS</div>
+							<div class="panel-heading">
+								<h2>PROFILE DETAILS</h2>
+								</div>
 							<div class="panel-body p_details">
 								<form id="edit_customer" class="form-horizontal defult-form" action="{{route('edit-profile')}}" method="POST" novalidate enctype="multipart/form-data">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								 <div class="col-md-12">
-          <h2 class="heading-agent">Profile Image</h2>
+         
           <div class="col-md-12">
             <div class="form-group">
               
               <div class="fileupload fileupload-new" data-provides="fileupload"> 
-                <img  @if(empty(Auth::user()->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/{{Auth::user()->user_img}}" @endif class="img-pview img-responsive" id="img-chan" name="img-chan">
+                <img class="img-circle"  @if(empty(Auth::user()->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/{{Auth::user()->user_img}}" @endif class="img-pview img-responsive" id="img-chan" name="img-chan">
                 <span class="remove_pic">
-                  <i class="fa fa-times-circle" aria-hidden="true"></i>
+                 
                 </span>
 			<div class="row upload_bx">
 			<div class="col-md-8 col-sm-10 col-xs-12">
@@ -111,7 +113,9 @@
 							</div>
 						</div>
 						<div class="panel panel-default">
-							<div class="panel-heading">PAYMENT DETAILS</div>
+							<div class="panel-heading">
+								<h2>PAYMENT DETAILS</h2>
+								</div>
 							<div class="panel-body pay_details">
 									@foreach ($creditcard_list as $cc_list)
 								<div class="checkbox">
@@ -192,7 +196,8 @@
 							</div>
 						</div>
 						<div class="panel panel-default">
-							<div class="panel-heading">BILLING ADDRESS</div>
+							<div class="panel-heading">
+								<h2>BILLING ADDRESS</h2></div>
 							<div class="panel-body billing_addres_1">
 							<?php if(isset($default_billing_address) && !empty($default_billing_address)){
 								$billing_address = $default_billing_address; 
@@ -218,7 +223,8 @@
 							</div>
 						</div>
 						<div class="panel panel-default">
-							<div class="panel-heading">SHIPPING ADDRESS</div>
+							<div class="panel-heading">
+								<h2>SHIPPING ADDRESS</h2></div>
 							<div class="panel-body billing_addres_1">
 							<?php if(isset($default_shipping_address) && !empty($default_shipping_address)){
 								$shipping_address = $default_shipping_address; 
