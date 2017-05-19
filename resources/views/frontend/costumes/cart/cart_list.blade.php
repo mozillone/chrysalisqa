@@ -23,10 +23,23 @@
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<div class="cart_page_vew span-align">
 									@if(count($data['basic']))
+									<?php $shipping_amount=0;$shipping_count=0?>
 									@foreach($data['basic'] as $cart)
 										<div class="well">
 											<div class="shipping_date">
-												<span>Shipping from {{$cart->city}}, {{$cart->state}}</span><span class="shi_date_right text-right right"> Estimated Shipping from Brooklyn, NY <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i></span>
+											   <span>@if($cart->shipping!="Free Shipping" ) Expedited Shipping {{$cart->city}}, {{$cart->state}}  <span class="in_prc">@if(helper::userCartShippingAddress($cart->cart_id))
+											   <?php $amount=helper::domesticRate($cart->item_location,$cart->cart_id);?>
+											   @if(helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0" ) 
+											         <?php $shipping_amount+=$shipping_amount+helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['rate'];$shipping_count++?>
+											    @endif
+											    @if(helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0")
+											    	({{helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['rate']}})
+											    @else
+											    	({{helper::domesticRate($cart->item_location,$cart->cart_id)['msg']}})
+											    @endif
+											  @endif </span>  @else Free Shipping {{$cart->city}}, {{$cart->state}}  <span class="in_prc">($0.00)</span> @endif </span><span class="shi_date_right text-right right">@if($cart->shipping!="Free Shipping" && helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0") @if(helper::userCartShippingAddress($cart->cart_id))
+											    Est delivery between {{date('D M d')}}  and {{date('D M d',strtotime('+'.helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['MailService'].' day'))}}
+											  <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i>  @endif @endif </span>
 											</div>
 											<div class="row">
 												<div class="col-md-6 col-sm-6 col-xs-12">
@@ -99,9 +112,11 @@
 												<div class="well">
 													<h3>Order Summary  </h3> 
 													<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic'][0]->total, 2, '.', ',')}} <em>({{count($data['basic'])}} Items)</em></span></p>
-													@if(!empty($data['dis_count'])) <p class="sub-all"><span>Shipping: </span> <span class="sub-price">-${{$data['dis_total']}} <em>({{$data['dis_count']}} Items)</em></span></p>@endif
+													<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$
+													{{number_format($shipping_amount, 2, '.', ',')}}<em>({{$shipping_count}} Items)</em></span></p>
+													@if(!empty($data['dis_count'])) <p class="sub-all"><span>Coupon code: </span> <span class="sub-price">-${{$data['dis_total']}} <em>({{$data['dis_count']}} Items)</em></span></p>@endif
 													<!-- <p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$19.00 </span></p>   -->
-													<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">@if(!empty($data['dis_count']))${{number_format($data['basic'][0]->total-$data['dis_total'], 2, '.', ',')}} @else ${{number_format($data['basic'][0]->total, 2, '.', ',')}}@endif</span></p>
+													<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">@if(!empty($data['dis_count']))${{number_format($data['basic'][0]->total+$shipping_amount-$data['dis_total'], 2, '.', ',')}} @else ${{number_format($data['basic'][0]->total+$shipping_amount, 2, '.', ',')}}@endif</span></p>
 													@if(!Auth::check())<a data-toggle="modal" data-target="#login_popup" class="btn btn-primary">Continue to Checkout</a>  @else <a href="/checkout" class="btn btn-primary">Continue to Checkout</a>@endif
 												</div>
 											</div>

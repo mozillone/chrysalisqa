@@ -295,7 +295,7 @@ if (isset($total_data) && !empty($total_data)) {
                 <div class="row costumes">
                     <div class="col-md-4 col-sm-4">
 					<div class="cart-img">
-                        <img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
+                        <img  src="{{URL::asset('assets/frontend/img/Item-1.3.png')}}">
 						<span class="price-tag">
 							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>15</span>
 							</span>
@@ -303,7 +303,7 @@ if (isset($total_data) && !empty($total_data)) {
                     </div>
                     <div class="col-md-4 col-sm-4">
 					<div class="cart-img">
-                        <img  src="{{URL::asset('assets/frontend/img/Item-1.3.png')}}">
+                        <img  src="{{URL::asset('assets/frontend/img/Item2.2.png')}}">
 						<span class="price-tag">
 							    Avg Payout <span class="price-doller"> <i class="fa fa-usd" aria-hidden="true"></i>10</span>
 							</span>
