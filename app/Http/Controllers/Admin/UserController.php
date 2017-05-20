@@ -310,5 +310,22 @@ class UserController extends Controller
 	$title=Auth::user()->display_name."Payement Profiles";
 	return view('admin.usermanagemnt.user_payement_profiles',compact('title','userid'));
 	}
+
+	public function Getallpaymentprofile(Request $request){
+		//echo "<pre>";print_r($request->id);die;
+
+		$creditcard=DB::table('creditcard')->where('user_id',$request->id)->get();
+	return Datatables::of($creditcard)
+        ->addColumn('actions', function ($creditcardso) {
+                return '<a href="javascript:void(0);" onclick="deleteccard('.$creditcardso->id.')" class="btn btn-xs btn-danger delete_user"><i class="fa fa-trash-o"></i></a>';
+            })
+        ->make(true);
+	}
+
+	public function Deleteccard($id){
+		//echo $id;die;
+		$delete_card = DB::table('creditcard')->where('id',$id)->delete();
+		return Redirect::back()->with('success','Card deleted successfully.');
+	}
  
 }
