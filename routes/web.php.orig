@@ -34,7 +34,6 @@ Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'DashboardController
 Route::any('/addshippingaddress', ['as' => 'shipping-address','uses'=>'DashboardController@addShippingAddress']);
 Route::any('/addbillingaddress', ['as' => 'billing-address','uses'=>'DashboardController@addBillingAddress']);
 Route::any('/deleteaddress', ['as' => '','uses'=>'DashboardController@deleteAddress']);
-Route::any('/creditcardadd', ['as' => 'creditcard-add','uses'=>'DashboardController@creditcradAdd']);
 
 /** Products list page start here **/
 //Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
@@ -197,26 +196,8 @@ Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 	    Route::post('/charities/csvExport', array('as' => '','uses' => 'CharitiesController@charitiesCsvExport'));
 	   /****************Charities Management Ends Here***********************/
 
-	   /*****************************Orders starts here ***********************/
-
-	    /*****************************Orders ends here ***********************/
-	    Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
-	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
-	    Route::any('/order/summary/{order_id}', ['as' => '','uses'=>'OrdersController@orderSummary']);
-	    Route::post('order/status/update', ['as' => '','uses'=>'OrdersController@orderStatusUpdate']);
-	    Route::post('/order/billing-address/update', ['as' => '','uses'=>'OrdersController@OrderBillingAddressUpate']);
-	    Route::post('/order/shipping-address/update', ['as' => '','uses'=>'OrdersController@OrderShippingAddressUpate']);
-	   
-	   /*****************************Request a bag starts here ***********************/
-	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
-	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
-	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
-	   	Route::any('/generatelables', array('as' => '','uses' => 'RequestabagController@Generatelables'));
-	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
-	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
-	   	Route::any('/closerequest', array('as' => '','uses' => 'RequestabagController@Closerequest'));
-	   /*****************************Request a bag ends here ***********************/
-	   /****************Events Management Starts Here*********************/
+<<<<<<< HEAD
+/****************Events Management Starts Here*********************/
 	   
 	   
 	   Route::any('/events-list', [
@@ -256,6 +237,23 @@ Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 /****************Events Management Ends Here***********************/
 
 /****************Press Management Starts Here*********************/
+=======
+	   /*****************************Orders starts here ***********************/
+
+	    /*****************************Orders ends here ***********************/
+	    Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
+	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
+	   
+	   /*****************************Request a bag starts here ***********************/
+	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
+	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
+	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
+	   	Route::any('/generatelables', array('as' => '','uses' => 'RequestabagController@Generatelables'));
+	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
+	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
+	   	Route::any('/closerequest', array('as' => '','uses' => 'RequestabagController@Closerequest'));
+	   /*****************************Request a bag ends here ***********************/
+>>>>>>> 7188b7aa70b90c75a9c1dea4f3ff2e627b115597
 
 Route::any('/press-posts', [
 	   		'as' => 'press-posts',
@@ -326,8 +324,5 @@ Route::any('add-job-post', [
 		'as' => 'add-job-post',
 	   	'uses' => 'JobsController@addJobPost'
 	]);
- 
-/****************Jobs Management Ends Here***********************/
-
 });
-
+/****************Jobs Management Ends Here***********************/

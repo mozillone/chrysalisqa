@@ -644,12 +644,24 @@ body .loading img{width:10%;}
 .head-tickets{font-size:20px !important; font-weight:500 !important;}
 /*24-01-2017*/
 
+<<<<<<< HEAD
 #ui-datepicker-div{z-index: 9999 !important}
 
 #ui-datepicker-trigger{
   position: absolute;
     top: 36px;
     right: 27px;
+}
+
+
+#events-create .input-group label.error{top:60px;}
+=======
+/* 5/11/2017 */
+.request-bag-admin td:first-child {
+    color: #000;
+    font-weight: 700;
+    margin-right: 20px;
+    padding-right: 70px;
 }
 .request-bag-admin td {
     padding: 3px 0px;
@@ -701,9 +713,8 @@ body .loading img{width:10%;}
 .download-btn {
 	padding: 3px 25px;
 }
+>>>>>>> 7188b7aa70b90c75a9c1dea4f3ff2e627b115597
 
-#events-create .input-group label.error{top:60px;}
-.add-event-error .error{top:35px;position: absolute;}
 
 
 
@@ -717,6 +728,7 @@ body .loading img{width:10%;}
 	.row_pregt.radio-btn-align .radio {
     width: 30%;
 }
+
 }
 
 
@@ -761,7 +773,10 @@ body .loading img{width:10%;}
 .main-header .logo .logo-sm{display:none;}
 }
 
-
+@media only screen and (max-width : 768px) {
+	.request-bag-admin td:first-child {
+	padding-right: 5px;
+}
 
 @media only screen and (max-width : 767px) {
 		.form-group.has-feedback.cosutme-fr label.radio-inline {
@@ -773,6 +788,8 @@ body .loading img{width:10%;}
     width: 47%;
     float: left;
     margin-left: 0px;
+}
+	
 }
 #category-create .cat_img.fileupload.fileupload-new{margin-left: -30px;
     margin-top: 15px;}
