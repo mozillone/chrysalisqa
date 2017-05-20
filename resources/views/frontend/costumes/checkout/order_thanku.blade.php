@@ -1,6 +1,142 @@
 @extends('/frontend/app')
 @section('styles')
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/order_thanku.css')}}">
+<link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/slidersjs/ion.rangeSlider.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/slidersjs/ion.rangeSlider.skinFlat.css') }}">
+<style type="text/css">
+	 .irs-line-mid, .irs-line-left, .irs-line-right, .irs-bar, .irs-bar-edge, .irs-slider {
+            background: #60C4AB;
+        }
+
+        .irs-bar {
+            background: #E1E1E1;
+        }
+
+        .range-slider {
+            width: 35%;
+            margin: 0 auto;
+        }
+        .range-slider a {
+            background: #EE4266;
+            color: white;
+            padding: 12px 80px;
+            display: inline-block;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 800;
+            margin: 0 auto;
+        }
+
+        .irs-from, .irs-to, .irs-single {
+            background: #60C3AB;
+            display: none;
+        }
+
+        .irs-min, .irs-max {
+            display: none;
+        }
+
+        .irs-from:after, .irs-to:after, .irs-single:after {
+            border-top-color: #60C4AB;
+        }
+
+        .irs-slider {
+            border-radius: 50%;
+            background: white;
+            box-shadow: 1px 1px 2px #ccc;
+            border: 1px solid #d3d3d3;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .outer {
+            border: solid 1px transparent;
+            width: 402px;
+            margin: 40px auto;
+            position: relative;
+            background-color: #e1e1e1;
+            /*background: url("../assets/frontend/img/dollar.png") no-repeat 100% 100%;*/
+
+        }
+
+        #first-box {
+            position: relative;
+            left: auto;
+            right: auto;
+            width: 0;
+            height: 210px;
+            background-color: #60C3AB;
+            float: left;
+        }
+
+        #second-box {
+            width: 0;
+            height: 210px;
+            float: right;
+            background-color: #60C3AB;
+        }
+
+        .doller-img {
+            position: absolute;
+            left: 6%;
+            top: 12%;
+            z-index: 1;
+        }
+
+        .range-slider .currency-bar {
+            padding-left: 0;
+            list-style-type: none;
+            display: flex;
+            font-weight: 800;
+            font-size: 10px;
+            margin-bottom: 0;
+        }
+
+        .range-slider .currency-bar li {
+            padding: 0 3.15%;
+        }
+
+        .range-slider .currency-bar li:first-child {
+            padding-left: 0;
+        }
+
+        .range-slider .currency-bar li:nth-child(even) {
+            color: #60C4AB;
+        }
+
+        .contribution-label {
+            padding-left: 0;
+            list-style-type: none;
+            font-size: 18px;
+            font-weight: 800;
+            font-family: Proxima-Nova-Extrabold;
+            min-height: 50px;
+            display: block;
+        }
+
+        .contribution-label li:last-child {
+            float: right;
+            text-align: end;
+        }
+
+        .contribution-label li:first-child {
+            float: left;
+        }
+
+        .range-slider table {
+            margin: 0 auto;
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+
+        .range-slider table td:nth-child(even) {
+            font-weight: 800;
+            padding-left: 5px;
+        }
+
+</style>
 @endsection
 @section('content')
  <div class="container">
@@ -18,7 +154,7 @@
 		@endif
 			<form action="{{route('order-charity-fund')}}" method="POST" id="order-charity">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="hidden" name="order_id" value="1">
+			<input type="hidden" name="order_id" value="{{implode(',',$order_id)}}">
 			<input type="hidden" name="amount" value="1">
 					
 			<div class="thankyou-rm">
@@ -71,12 +207,57 @@
 					<div class="thankyou-doeven">
 					<h2 class="thankyou-do">Do even MORE!</h2>
 					<p class="thankyou-textC">Join us in our mission to see a dollar raised for every box shipped. <span class="thankyou-bold">Donate 0.50 cents below and we will match your donation!</span></p>
-					<p class="thankyou-do-img"><img src="../assets/frontend/img/dollar.png" alt="dollar" /></p>
+					<div class="thankyou-do-img">
+					<div class="outer">
+				        <img class="doller-img" src="/assets/frontend/img/Dollar_white.png" alt="">
+				        <div id="first-box">
+				        </div>
+				        <div id="second-box">
+				        </div>
+				        <div style="clear:both">
 
-					<div class="thankyou-donate">Your Donation: <span>$0.25</span> <br/>
-					Our Donation: <span>$0.25</span> <br/>
-					Total Donation: <span>$0.50</span></div>
-					<input type="submit" value="Submit" class="thankyou-btn"/>
+				        </div>
+
+				    </div>		
+					<div class="range-slider">
+				        <ul class="currency-bar">
+				            <li>0</li>
+				            <li>$0.25</li>
+				            <li>$0.5</li>
+				            <li>$0.75</li>
+				            <li>$1</li>
+				            <li>$0.75</li>
+				            <li>$0.5</li>
+				            <li>$0.25</li>
+				            <li>0</li>
+				        </ul>
+				        <input type="text" class="js-range-slider" value=""/>
+				        <ul class="contribution-label">
+				            <li>Your <br> Contribution</li>
+				            <li>Our <br> Contribution</li>
+				        </ul>
+				        <div>
+				            <table>
+				                <tr>
+				                    <td>Your Donation:</td>
+				                    <td class="my-donation"> $0.00</td>
+				                </tr>
+				                <tr>
+				                    <td>Our Donation:</td>
+				                    <td class="chrysalis-donation">$0.00</td>
+				                </tr>
+				                <tr>
+				                    <td>Total Donation:</td>
+				                    <td class="total-donation">$0.00</td>
+				                </tr>
+				            </table>
+				        </div>
+				        <div style="text-align: center; margin-bottom: 50px">
+				          <input type="submit" value="Submit" class="thankyou-btn"/>
+				        </div>
+
+				    </div>
+				    </div>
 					</div>
 				</div>
 				</form>
@@ -89,5 +270,6 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
 <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('/assets/frontend/vendors/slidersjs/rangeSlider.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/order_thanku.js') }}"></script>
 @stop

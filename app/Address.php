@@ -196,7 +196,11 @@ class Address extends Authenticatable
               $zip_code=$cart_info[0]->shipping_postcode;
           }else{
              $address_info=$this->getAddressinfo('shipping',"latest"); 
-             $zip_code= $address_info[0]->zip_code;
+             if(count($address_info)){
+               $zip_code= $address_info[0]->zip_code;
+              }else{
+                 return false;
+              }
           }
           return $zip_code;
         }else{

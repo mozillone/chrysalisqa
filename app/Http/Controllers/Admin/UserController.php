@@ -14,7 +14,7 @@ use App\Helpers\ExportFile;
 use Hash;
 use Response;
 use App\Helpers\StripeApp;
-
+use Exception;
 class UserController extends Controller
 {
     protected $messageBag = null;
@@ -234,8 +234,13 @@ class UserController extends Controller
 
       $data=User::find($id)->toArray();
       $apiId=$data['api_customer_id'];
-      $res = User::where('id',$id)->delete();
+       $res = User::where('id',$id)->delete();
       if($res){
+      	try{
+        	$this->stripe->customerDelete($apiId);
+        }catch(Exception $e){
+        	
+        }
       	Session::flash('success', 'User is Deleted Successfully');
         return Redirect::back();
       }else{
