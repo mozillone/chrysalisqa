@@ -254,25 +254,35 @@
 				<div class="col-md-6">
 					<div class="dashboad_right_side">
 						<div class="rencemt_order_table">
-							<h2>RECENT ORDERS</H2>
+							<div class="col-md-12">
+								<h2>RECENT ORDERS <span class="pull-right"><a href="/my/orders">View All</a></span></h2>
+								
+							</div>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Seller</th> <th>Status</th>  </tr> </thead> 
 								<tbody> 
-									<?php //print_r($recent_orders);die; ?>
-									@foreach ($recent_orders as $orders)
-									<tr> <td>{{$orders->date}}</td> <td>{{$orders->order_id}}</td> <td>@mdo</td> <td>{{$orders->status}}</td> </tr>
-									@endforeach 
+									@if(count($recent_orders))
+										@foreach ($recent_orders as $orders)
+										<tr> <td>{{$orders->date}}</td> <td>{{$orders->order_id}}</td> <td>{{$orders->seller_name}}</td> <td>{{$orders->status}}</td> </tr>
+										@endforeach
+									@else
+										<tr> <td></td> <td></td>No Recent Orders are found<td></td> <td></td> </tr>
+									@endif 
 								</tbody> 
 							</table>
 						</div>
 						<div class="rencemt_order_table">
-							<h2>COSTUMES SOLD</H2>
+							<h2>COSTUMES SOLD <span class="pull-right"><a href="">View All</a></span></</H2>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Buyer</th> <th> Status</th>  </tr> </thead> 
-								<tbody> 
-									@foreach ($recent_orders as $orders)
-									<tr> <td>{{$orders->date}}</td> <td>{{$orders->order_id}}</td> <td>@mdo</td> <td>{{$orders->status}}</td> </tr>
-									@endforeach 
+								<tbody>
+									@if(count($costumes_sold)) 
+										@foreach ($costumes_sold as $sold_costumes)
+										<tr> <td>{{$sold_costumes->date}}</td> <td>{{$sold_costumes->order_id}}</td> <td>{{$sold_costumes->buyer_name}}</td> <td>{{$sold_costumes->status}}</td> </tr>
+										@endforeach 
+									@else
+										<tr> <td></td> <td></td> <td>No costumes sold are found</td> <td></td> </tr>
+									@endif 
 								</tbody> 
 							</table>
 						</div>

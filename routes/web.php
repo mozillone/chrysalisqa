@@ -112,6 +112,16 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 
 
+/**************** User Orders routes start here ******************/
+Route::any('/my/orders', ['as' => 'my-orders-list','uses'=>'OrdersController@myOrdersList']);
+Route::any('/my-orders-list', ['as' => '','uses'=>'OrdersController@myOrdersListData']);
+Route::any('/order/{order_id}', ['as' => '','uses'=>'OrdersController@myOrderSummary']);
+
+Route::any('/my/costumes-slod', ['as' => 'my-costumes-slod','uses'=>'OrdersController@costumeSoldList']);
+Route::any('/my-costumes-slod', ['as' => '','uses'=>'OrdersController@costumeSoldListData']);
+Route::any('/order/{order_id}', ['as' => '','uses'=>'OrdersController@costumeSoldSummary']);
+/**************** User Orders routes end here ******************/
+
 
 
 
