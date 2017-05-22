@@ -14,7 +14,7 @@ use Config;
 use App\Cart;
 use App\Charities;
 use App\Address;
-use App\Helpers\StripeApp;
+//use App\Helpers\StripeApp;
 use Exception;
 use Redirect;
 class Order extends Authenticatable
@@ -24,12 +24,12 @@ class Order extends Authenticatable
     ];
   public function __construct()
   {
-    $this->stripe=new StripeApp();
+    //$this->stripe=new StripeApp();
   }
     protected function placeOrder($req){
          $api_customer_id=Auth::user()->api_customer_id;
          try {
-                $this->stripe->customerFind($api_customer_id);
+               // $this->stripe->customerFind($api_customer_id);
          }catch(Exception $e){
                $result=array('result'=>0,'message'=>$e->getMessage());
                 return $result;
@@ -45,10 +45,10 @@ class Order extends Authenticatable
          }
          if(count($data['basic'])){
            $cc_token=$this->getCreditCardToken($card_id);
-             if(count($cc_token) && $cc_token!=false){
+             if(count($cc_token)){
                 $token=$cc_token;
                  try {
-                   $this->stripe->CCVerify($api_customer_id,$token);
+                   //$this->stripe->CCVerify($api_customer_id,$token);
                  }catch(Exception $e){
                        $result=array('result'=>0,'message'=>$e->getMessage());
                         return $result;
@@ -157,7 +157,7 @@ class Order extends Authenticatable
                               'title'=>"Subtotal",
                               'value'=>$subtotal,
                       );
-                $order_info=$this->stripe->charge($amount,$currency,$api_customer_id,$token);
+                //$order_info=$this->stripe->charge($amount,$currency,$api_customer_id,$token);
                 $this->insertTransaction($order_info,$order_id,$cart->cc_id);
             
                 Site_model::insert_get_id('order_total',$order_subtotal);
@@ -221,10 +221,10 @@ class Order extends Authenticatable
     private function  insertTransaction($data,$order_id,$cc_id){
       $transaction=array('order_id'=>$order_id,
                     'user_id'=>Auth::user()->id,
-                    'amount'=>$data['amount'],
-                    'api_transaction_no'=>$data['id'],
+                    'amount'=>25555,
+                 //   'api_transaction_no'=>$data['id'],
                     'cc_id'=>$cc_id,
-                    'status'=>$data['outcome']['type'],
+                    'status'=>'Autherised',
                     'created_at'=>date('Y-m-d h:i:s'),
                     'updated_at'=>date('Y-m-d h:i:s')
                       );

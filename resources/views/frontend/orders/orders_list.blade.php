@@ -42,7 +42,11 @@
                 <table class="table table-striped table-bordered user-list-table">
                   <thead>
                     <th>Order No.</th>
+<<<<<<< HEAD
                     <th>From</th>
+=======
+					<th>From</th>
+>>>>>>> 4a283f775a2054ed1b0b07ebc875fc11e75af937
                     <th>To</th>
                     <th>Status</th>
                     <th></th>
