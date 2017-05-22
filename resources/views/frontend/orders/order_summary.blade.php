@@ -108,29 +108,33 @@
                             <div class="address-sec">
                                 <div class="row">
                                     <div class="col-md-6">
-										<ul>
-											<li><h2>Billing Address :</h2></li>
-											<li>
-												<p>{{$order['basic'][0]->pay_username}}</p>
-												<p>{{$order['basic'][0]->pay_address_1}}</p>
-												<p>{{$order['basic'][0]->pay_city}}</p>
-												<p>{{$order['basic'][0]->pay_state}} {{$order['basic'][0]->pay_zipcode}}</p>
-											</li>
-										</ul>
+										<div class="rencemt_order_table">
+											<ul>
+												<li><h2>Billing Address :</h2></li>
+												<li>
+													<p>{{$order['basic'][0]->pay_username}}</p>
+													<p>{{$order['basic'][0]->pay_address_1}}</p>
+													<p>{{$order['basic'][0]->pay_city}}</p>
+													<p>{{$order['basic'][0]->pay_state}} {{$order['basic'][0]->pay_zipcode}}</p>
+												</li>
+											</ul>
+										</div>
                                         
                                         
                                     </div>
                                     <div class="col-md-6">
-										<ul>
-											<li><h2>Shipping Address :</h2></li>
-											<li>
-												<p>{{$order['basic'][0]->ship_username}}</p>
-												<p>{{$order['basic'][0]->shipping_address_1}}</p>
-												<p>{{$order['basic'][0]->shipping_city}}</p>
-												<p>{{$order['basic'][0]->shipping_state}} {{$order['basic'][0]->shipping_postcode}}</p>
-											</li>
-										</ul>
-                                        
+										<div class="rencemt_order_table">
+											<ul>
+												<li><h2>Shipping Address :</h2></li>
+												<li>
+													<p>{{$order['basic'][0]->ship_username}}</p>
+													<p>{{$order['basic'][0]->shipping_address_1}}</p>
+													<p>{{$order['basic'][0]->shipping_city}}</p>
+													<p>{{$order['basic'][0]->shipping_state}} {{$order['basic'][0]->shipping_postcode}}</p>
+												</li>
+											</ul>
+										</div>
+											
                                         
                                      </div>
                                 </div>
