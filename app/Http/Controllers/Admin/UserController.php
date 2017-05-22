@@ -322,5 +322,19 @@ class UserController extends Controller
 		$delete_card = DB::table('creditcard')->where('id',$id)->delete();
 		return Redirect::back()->with('success','Card deleted successfully.');
 	}
+
+	public function Getallusercostumes(Request $request){
+
+		$costumes_list=DB::table('costumes')
+		->leftJoin('costume_description','costume_description.costume_id','costumes.costume_id')
+		->where('created_by',$request->id)
+		->get();
+		//echo "<pre>";print_r($request->costume_id);die;
+	return Datatables::of($costumes_list)
+        ->addColumn('actions', function ($costumes_lists) {
+                return '<a href="javascript:void(0);" onclick="deleteccard('.$costumes_lists->costume_id.')" class="btn btn-xs btn-danger delete_user"><i class="fa fa-trash-o"></i></a>';
+            })
+        ->make(true);
+	}
  
 }

@@ -127,4 +127,11 @@ public function Deleteccard(Request $req){
     Session::flash('success', 'Card deleted successfully.');
     return "success";
   }
+
+public function allOrders(){
+  /*$this->data = array();
+  $this->data['recent_orders'] = DB::Select('SELECT DATE_FORMAT(created_at,"%m/%d/%y") as date,ord.order_id,st.name as status FROM `cc_order` as ord LEFT JOIN cc_order_status as sts on sts.order_id=ord.order_id LEFT JOIN cc_status as st on st.status_id=sts.status_id  where ord.order_id='.Auth::user()->id.'
+ORDER BY `order_id` DESC');
+  return view('frontend.dashboard.allorders')->with('all_data',$this->data);*/
+}
 }

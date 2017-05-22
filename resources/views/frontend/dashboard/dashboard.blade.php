@@ -254,24 +254,31 @@
 				<div class="col-md-6">
 					<div class="dashboad_right_side">
 						<div class="rencemt_order_table">
+								<span><a href="{{URL::to('allorders')}}">View All</a></span>
 							<h2>RECENT ORDERS</H2>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Seller</th> <th>Status</th>  </tr> </thead> 
 								<tbody> 
-									<?php //print_r($recent_orders);die; ?>
+									<?php //print_r($recent_orders);die; 
+									$i = 1;?>
 									@foreach ($recent_orders as $orders)
 									<tr> <td>{{$orders->date}}</td> <td>{{$orders->order_id}}</td> <td>@mdo</td> <td>{{$orders->status}}</td> </tr>
+									<?php if ($i++ == 3) break; ?>
 									@endforeach 
 								</tbody> 
 							</table>
 						</div>
 						<div class="rencemt_order_table">
+								<span> View All</span>
 							<h2>COSTUMES SOLD</H2>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Buyer</th> <th> Status</th>  </tr> </thead> 
 								<tbody> 
+									<?php //print_r($recent_orders);die; 
+									$i = 1;?>
 									@foreach ($recent_orders as $orders)
 									<tr> <td>{{$orders->date}}</td> <td>{{$orders->order_id}}</td> <td>@mdo</td> <td>{{$orders->status}}</td> </tr>
+									<?php if ($i++ == 3) break; ?>
 									@endforeach 
 								</tbody> 
 							</table>
