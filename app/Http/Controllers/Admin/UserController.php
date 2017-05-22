@@ -289,15 +289,67 @@ class UserController extends Controller
 	/****user sold costumes code starts here************/
 	public function userSoldcostumes($id){
 	$userid=$id;
-	$title=Auth::user()->display_name."Costumes Sold";
-	return view('admin.usermanagemnt.user_customessold_list',compact('title','userid'));
+	$info=User::find($userid)->toArray();
+	$title=$info['first_name']." ".$info['first_name']."Costumes Sold";
+	return view('admin.usermanagemnt.user_customessold_list',compact('userid',$userid))->with('user_name',$info['first_name']." ".$info['first_name'])->with('title',$title);
 	}
+	public function userCostumeSoldListData(Request $request,$user_id)
+    {
+        $req=$request->all();
+        $where='where ord.seller_id='.$user_id.'';
+        $having='';
+        if(!empty($req['search'])){
+          if(!empty($req['search']['order_id']) ){
+            $where.=' AND ord.order_id ='.$req['search']['order_id'];
+          }
+          if (!empty($req['search']['from_date'])) {
+            $where .= ' AND  ord.created_at >="'.date('Y-m-d 00:00:01', strtotime($req['search']['from_date'])).'"';
+          }
+          if (!empty($req['search']['date_end'])) {
+            $where .= ' AND  ord.created_at  <= "'.date('Y-m-d 23:59:59', strtotime($req['search']['date_end'])).'"';
+          }
+          if(isset($req['search']['status'])){
+          if($req['search']['status']!=""){
+              $where.=' AND sts.name="'.$req['search']['status'].'"';
+          }
+        }
+        }
+         $orders = DB::select('SELECT Date_format(ord.created_at,"%m/%d/%Y %h:%i %p") as date,ord.order_id,concat("$",ord.total) as price,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id  '.$where.' GROUP BY ord.order_id ORDER BY `order_id` DESC');
+        return response()->success(compact('orders'));
+  
+    }
 	/****User Recent Orders Code Starts Here****/
 	public function recentOrders($id){
 	$userid=$id;
-	$title=Auth::user()->display_name."Recent Orders";
-	return view('admin.usermanagemnt.user_recentorders',compact('title','userid'));
+	$info=User::find($userid)->toArray();
+	$title=$info['first_name']." ".$info['first_name']."Costumes Sold";
+	return view('admin.usermanagemnt.user_recentorders',compact('userid',$userid))->with('user_name',$info['first_name']." ".$info['first_name'])->with('title',$title);
 	}
+	public function userOrdersListData(Request $request,$user_id)
+    {
+        $req=$request->all();
+        $where='where ord.buyer_id='.$user_id.'';
+        $having='';
+        if(!empty($req['search'])){
+          if(!empty($req['search']['order_id']) ){
+            $where.=' AND ord.order_id ='.$req['search']['order_id'];
+          }
+          if (!empty($req['search']['from_date'])) {
+            $where .= ' AND  ord.created_at >="'.date('Y-m-d 00:00:01', strtotime($req['search']['from_date'])).'"';
+          }
+          if (!empty($req['search']['date_end'])) {
+            $where .= ' AND  ord.created_at  <= "'.date('Y-m-d 23:59:59', strtotime($req['search']['date_end'])).'"';
+          }
+          if(isset($req['search']['status'])){
+          if($req['search']['status']!=""){
+              $where.=' AND sts.name="'.$req['search']['status'].'"';
+          }
+        }
+        }
+         $orders = DB::select('SELECT Date_format(ord.created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",ord.total) as price,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id '.$where.' GROUP BY ord.order_id ORDER BY `order_id` DESC');
+        return response()->success(compact('orders'));
+  
+    }
 	/****User Credit history code starts here***/
 	public function creditHistory($id){
 	$userid=$id;

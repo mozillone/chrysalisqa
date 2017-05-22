@@ -280,26 +280,7 @@
                             </div>
 
                         </div>
-                    </div>
-
-
-                    <div class="tab-pane" id="status">
-                        <h4>Pane B</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
-                    </div>
-                    <div class="tab-pane" id="payment">
-                        <h4>Pane C</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
-                    </div>
-                    <div class="tab-pane" id="dispute">
-                        <h4>Pane D</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
-                    </div>
-                </div><!-- tab content -->
-                <div class="container">
+                         <div class="container">
                     <h2>Comments History</h2>
                       <table class="table">
                         <thead>
@@ -320,6 +301,26 @@
                         </tbody>
                       </table>
                 </div>
+                    </div>
+
+
+                    <div class="tab-pane" id="status">
+                        <h4>Pane B</h4>
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                            ac turpis egestas.</p>
+                    </div>
+                    <div class="tab-pane" id="payment">
+                        <h4>Pane C</h4>
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                            ac turpis egestas.</p>
+                    </div>
+                    <div class="tab-pane" id="dispute">
+                        <h4>Pane D</h4>
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                            ac turpis egestas.</p>
+                    </div>
+                </div><!-- tab content -->
+               
             </div>
 
         </div>
