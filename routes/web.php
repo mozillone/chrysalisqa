@@ -120,7 +120,7 @@ Route::any('/order/{order_id}', ['as' => '','uses'=>'OrdersController@myOrderSum
 
 Route::any('/my/costumes-slod', ['as' => 'my-costumes-slod','uses'=>'OrdersController@costumeSoldList']);
 Route::any('/my-costumes-slod', ['as' => '','uses'=>'OrdersController@costumeSoldListData']);
-Route::any('/order/{order_id}', ['as' => '','uses'=>'OrdersController@costumeSoldSummary']);
+Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costumeSoldSummary']);
 /**************** User Orders routes end here ******************/
 
 

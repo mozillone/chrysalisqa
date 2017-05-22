@@ -34,6 +34,7 @@
 		<script src="{{ asset('/angular/app.js')}}"></script>
 		<script src="{{ asset('/js/jquery.validate.min.js')}}"></script>
 		<script src="{{ asset('/assets/frontend/js/custom.js')}}"></script>
+		<script src="{{ asset('/angular/directives/datepicker.js') }}"></script>
 		
 		
 		@yield('footer_scripts')

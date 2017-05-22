@@ -1,7 +1,7 @@
 @extends('frontend.app')
 
 {{-- Web site Title --}}
-@section('title') My Orders List @parent
+@section('title') My Costumes Sold List @parent
 @endsection
 
 {{-- page level styles --}}
@@ -16,10 +16,10 @@
  <section class="container content-header">
    <nav class="breadcrumb">
   <a class="breadcrumb-item" href="/dashboard">Dashboard &nbsp;&nbsp; > </a>
-  <span class="breadcrumb-item active"> Orders List</span>
+  <span class="breadcrumb-item active"> Costumes Sold</span>
 </nav>
 </section>
-<section class="container content" ng-controller="OrdersController">
+<section class="container content" ng-controller="SoldOrdersController">
     <div class="row">
         <div class="col-md-12">
          @if (Session::has('error'))
@@ -35,7 +35,7 @@
         @endif
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Orders List</h3>
+                    <h3 class="box-title">Costumes Sold</h3>
                    </div>
                 <div class="box-body">
         <div class="table-responsive">
@@ -66,7 +66,7 @@
                         </select>
                       </td>
              
-                      <td><button class="btn btn-primary user-list-search" ng-click="seachOrders(search)">Search</button></td>
+                      <td><button class="btn btn-primary user-list-search" ng-click="seachSoldOrders(search)">Search</button></td>
                     </tr>
                   </tbody>
               </table>
@@ -95,7 +95,7 @@
 @section('footer_scripts') 
 <script src="{{ asset('/vendors/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
-<script src="{{ asset('angular/Frontend/Orders/Controllers/orders-lists.js') }}"></script>
+<script src="{{ asset('angular/Frontend/Orders/Controllers/soldOrders-lists.js') }}"></script>
 <script src="{{ asset('angular/Frontend/Orders/Services/orders.js') }}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>

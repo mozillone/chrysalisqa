@@ -273,7 +273,7 @@
 							</table>
 						</div>
 						<div class="rencemt_order_table">
-							<h2>COSTUMES SOLD <span class="pull-right"><a href="">View All</a></span></</H2>
+							<h2>COSTUMES SOLD <span class="pull-right"><a href="/my/costumes-slod">View All</a></span></</H2>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Buyer</th> <th> Status</th>  </tr> </thead> 
 								<tbody>

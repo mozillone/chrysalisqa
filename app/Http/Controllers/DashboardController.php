@@ -34,19 +34,13 @@ class DashboardController extends Controller {
 	public function dashboard()
 	{
 		if(Auth::user()->id!="1"){
-			$this->data = array();
+    	$this->data = array();
 			$this->data['default_billing_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','billing')->first();
 			$this->data['default_shipping_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','shipping')->first();
 			$this->data['states']   = Site_model::Fetch_all_data('states', '*');
     $this->data['countries']   = Site_model::Fetch_all_data('countries', '*');
-    $this->data['recent_orders'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id   where ord.buyer_id='.Auth::user()->id.'
-ORDER BY `order_id` DESC LIMIt 0,5');
-    $this->data['costumes_sold'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id where ord.seller_id='.Auth::user()->id.'
-ORDER BY ord.order_id DESC LIMIt 0,5');
-    $this->data['recent_orders'] = DB::Select('SELECT DATE_FORMAT(ord.created_at,"%m/%d/%y") as date,ord.order_id,st.name as status FROM `cc_order` as ord LEFT JOIN cc_order_status as sts on sts.order_id=ord.order_id LEFT JOIN cc_status as st on st.status_id=sts.status_id  where ord.order_id='.Auth::user()->id.'
-ORDER BY `order_id` DESC');
-    $this->data['costumes_sold'] = DB::Select('SELECT DATE_FORMAT(ord.created_at,"%m/%d/%y") as date,ord.order_id,st.name as status FROM `cc_order` as ord LEFT JOIN cc_order_status as sts on sts.order_id=ord.order_id LEFT JOIN cc_status as st on st.status_id=sts.status_id  where ord.order_id='.Auth::user()->id.'
-ORDER BY `order_id` DESC');
+    $this->data['recent_orders'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id   where ord.buyer_id='.Auth::user()->id.' ORDER BY `order_id` DESC LIMIt 0,5');
+    $this->data['costumes_sold'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id where ord.seller_id='.Auth::user()->id.' ORDER BY ord.order_id DESC LIMIt 0,5');
     $this->data['creditcard_list'] = DB::table('creditcard')->where('user_id',Auth::user()->id)->get();
 //print_r($this->data['recent_orders']);
 			return view('frontend.dashboard.dashboard')->with($this->data);

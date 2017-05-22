@@ -10,5 +10,14 @@ app.factory('Orders', function($http){
 	    });
 	  
 	  }
+	   fac.getSoldOrdersSearchlist=function(search){
+	 	  var _token=$('.token').val();
+	 	 return  $http({
+	       method: 'POST',
+	     	url: '/my-costumes-slod',
+	       data:{search:search,_token:_token}
+	    });
+	  
+	  }
   return fac;
 });
