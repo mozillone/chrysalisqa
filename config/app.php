@@ -182,10 +182,10 @@ return [
         App\Providers\RouteServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-       // Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Usps\UspsServiceProvider::class,
-        Cmgmyr\Messenger\MessengerServiceProvider::class,
+        //Cmgmyr\Messenger\MessengerServiceProvider::class,
     ],
 
     /*

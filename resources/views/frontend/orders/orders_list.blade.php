@@ -13,16 +13,13 @@
 
 {{-- Page content --}}
 @section('content')
- <section class="content-header">
-    <h1>Orders</h1>
-    <ol class="breadcrumb">
-    <li>
-        <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
-    </li>
-    <li class="active">Orders</li>
-  </ol>
+ <section class="container content-header">
+   <nav class="breadcrumb">
+  <a class="breadcrumb-item" href="/dashboard">Dashboard &nbsp;&nbsp; > </a>
+  <span class="breadcrumb-item active"> Orders List</span>
+</nav>
 </section>
-<section class="content" ng-controller="OrdersController">
+<section class="container content" ng-controller="OrdersController">
     <div class="row">
         <div class="col-md-12">
          @if (Session::has('error'))
@@ -45,9 +42,10 @@
                 <table class="table table-striped table-bordered user-list-table">
                   <thead>
                     <th>Order No.</th>
-					          <th>From</th>
+					<th>From</th>
                     <th>To</th>
                     <th>Status</th>
+                    <th></th>
                   </thead>
                   <tbody>
                     <tr>

@@ -266,7 +266,7 @@
 										<tr> <td>{{$orders->date}}</td> <td>{{$orders->order_id}}</td> <td>{{$orders->seller_name}}</td> <td>{{$orders->status}}</td> </tr>
 										@endforeach
 									@else
-										<tr> <td></td> <td></td>No Recent Orders are found<td></td> <td></td> </tr>
+										<tr> <td></td> <td></td><td>No Recent Orders are found</td> <td></td> </tr>
 									@endif 
 
 								</tbody> 
