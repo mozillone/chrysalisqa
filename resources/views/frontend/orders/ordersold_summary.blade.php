@@ -17,7 +17,7 @@
         <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
     </li>
     <li>
-        <a href="/my/orders">Orders</a>
+        <a href="/my/costumes-slod">Orders</a>
     </li>
     <li class="active">View Order #{{$order_id}}</li>
   </ol>

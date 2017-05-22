@@ -55,9 +55,9 @@ class OrdersController extends Controller {
   
     }
     public function myOrderSummary($order_id){
-      $res=Order::orderUserCheck($order_id);
-      if($res){
-        $order=Order::myOrderSummary($order_id);
+      $res=Order::orderBuyerCheck($order_id);
+      if($res=="true"){
+        $order=Order::userOrderSummary($order_id);
         if(count($order)){
           return view('frontend.orders.order_summary',compact('order',$order))->with('order_id',$order_id);
         }else{
@@ -66,7 +66,7 @@ class OrdersController extends Controller {
         }
       }else{
          Session::flash('error', 'Order info not found');
-         return "success";
+         return Redirect::to('/dashboard');
       }
 
     }
@@ -102,12 +102,18 @@ class OrdersController extends Controller {
   
     }
     public function costumeSoldSummary($order_id){
-      $order=Order::orderSummary($order_id);
-      if(count($order)){
-        return view('admin.orders.order_summary',compact('order',$order))->with('order_id',$order_id);
+      $res=Order::orderSellerCheck($order_id);
+      if($res=="true"){
+        $order=Order::userOrderSummary($order_id);
+        if(count($order)){
+          return view('frontend.orders.ordersold_summary',compact('order',$order))->with('order_id',$order_id);
+        }else{
+          Session::flash('error', 'Order information not found.'); 
+          return Redirect::to('/orders'); 
+        }
       }else{
-        Session::flash('error', 'Order information not found.'); 
-        return Redirect::to('/orders'); 
+         Session::flash('error', 'Order info not found');
+         return Redirect::to('/dashboard');
       }
 
     }

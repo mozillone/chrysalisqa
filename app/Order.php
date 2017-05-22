@@ -242,16 +242,19 @@ class Order extends Authenticatable
         return $order; 
 
     }
-    protected function myOrderSummary($order_id){
+    protected function userOrderSummary($order_id){
         $order['basic']=DB::Select('SELECT ord.order_id,ord.created_at,ord.total,ord.phone_no,sts.name as status,trans.api_transaction_no,trans.status as payment_status,buyer.id as buyer_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,buyer.email as buyer_email,buyer.phone_number as buyer_phone,seller.id as seller_id,concat(seller.first_name," ",seller.last_name) as seller_name,seller.email as seller_email,seller.phone_number as seller_phone,concat(ord.pay_firstname," ",ord.pay_lastname) as pay_username,ord.pay_firstname,ord.pay_lastname,ord.pay_address_1,ord.pay_address_2,ord.pay_city,ord.pay_state,ord.pay_zipcode,ord.pay_country,concat(ord.shipping_firstname," ",ord.shipping_lastname) as ship_username,ord.shipping_firstname,ord.shipping_lastname,ord.shipping_address_1,ord.shipping_address_2,ord.shipping_city,ord.shipping_state,ord.shipping_postcode,ord.shipping_country FROM `cc_order` as ord LEFT JOIN  cc_status as sts on sts.status_id=ord.order_status_id LEFT JOIN cc_transactions as trans on trans.order_id=ord.order_id LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id  LEFT JOIN cc_users as seller on seller.id=ord.seller_id where ord.order_id='.$order_id.'  group by ord.order_id');
          $order['items']=DB::Select('SELECT * FROM `cc_order_items` where order_id="'.$order_id.'" order by sku ');
          $order['order_amount']=DB::Select('SELECT * FROM `cc_order_total` where order_id="'.$order_id.'" order by sort_order ');
            $order['order_comment']=DB::Select('SELECT ord_sts.comment,sts.name as status,DATE_FORMAT(ord_sts.created_at,"%m/%d/%Y %h:%i %p") as date FROM `cc_order_status` as ord_sts LEFT JOIN cc_status as sts on sts.status_id=ord_sts.status_id where ord_sts.order_id='.$order_id.' order by order_status_id desc');
         return $order; 
-
     }
-    protected function orderUserCheck($order_id){
+    protected function orderBuyerCheck($order_id){
      $res=DB::Select('SELECT if(count(order_id)>=1,"true","false") as is_exists  FROM `cc_order` WHERE `order_id` ='.$order_id.' AND `buyer_id` ='.Auth::user()->id);
+     return $res[0]->is_exists;
+    }
+    protected function orderSellerCheck($order_id){
+     $res=DB::Select('SELECT if(count(order_id)>=1,"true","false") as is_exists  FROM `cc_order` WHERE `order_id` ='.$order_id.' AND `seller_id` ='.Auth::user()->id);
      return $res[0]->is_exists;
     }
     protected function orderStatusUpdate($req){
