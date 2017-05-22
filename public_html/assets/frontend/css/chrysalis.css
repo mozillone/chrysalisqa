@@ -855,12 +855,12 @@ font-family: Proxima-Nova-Semibold;}
 .returns-rm{width: 100%; float:left; font-size: 18px; font-family: Proxima-Nova-Semibold; margin: 20px 0;}
 .returns-rm span{font-family: Proxima-Nova-Extrabold;}
 
-.viewTabs_rm{width: 100%; float:left; border: 1px solid #e1e1e1;}
+.viewTabs_rm{width: 100%; float:left; border:}
 
 .nav-tabs.viewTabs{border: none !important;}
 .nav-tabs.viewTabs>li{width: 33.33%;}
 .nav-tabs.viewTabs>li>a{font-size: 18px; font-weight: bold; color: #323031; border: none; border-radius: 0px; padding: 25px 15px; margin: 0px; background: #fff !important; border: 1px solid #e1e1e1; text-align: center; font-family: Proxima-Nova-Extrabold;}
-.nav-tabs.viewTabs>li.active>a, .nav-tabs.viewTabs>li.active>a:hover, .nav-tabs.viewTabs>li.active>a:focus{color: #323031; border: none; border-top: 3px solid #60c5ac;margin-top: -1px; background: #fff; border-radius: 0px; font-family: Proxima-Nova-Extrabold;}
+.nav-tabs.viewTabs>li.active>a, .nav-tabs.viewTabs>li.active>a:hover, .nav-tabs.viewTabs>li.active>a:focus{color: #323031; border: none; border-top: 3px solid #60c5ac; background: #fff; border-radius: 0px; font-family: Proxima-Nova-Extrabold;}
 .nav-tabs.viewTabs>li>a:hover{background: #fff; color: #323031; border: none; border-top: 3px solid #60c5ac; font-family: Proxima-Nova-Extrabold;}
 
 .viewTabs-text{width: 100%; float:left; color: #323031; font-size: 16px; margin: 25px 0 10px;	font-family: Proxima-Nova-Regular; font-weight:600;}
@@ -2278,6 +2278,35 @@ img#ajax_loader {
 }
 .table-responsive.auto-scroll-none {
 	overflow-x: inherit;
+}
+.nav-tabs.viewTabs.order-summery-tabs>li {
+    width: 25%;
+}
+.nav-tabs.viewTabs.order-summery-tabs {
+	margin-top: 10px;
+}
+.summery-info table {
+    margin-bottom: 20px;
+}
+.summery-info table td {
+	padding: 3px 0;
+}
+.summery-info table td:first-child {
+    min-width: 100px;
+	font-weight: 700;
+	color: #000;
+}
+.summery-info table td:last-child {
+	max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.ellipse-email {
+	
+}
+.summery-info .rencemt_order_table {
+	margin-top: 30px;
 }
 /********************************************************************Media start here********************************************************************/
 

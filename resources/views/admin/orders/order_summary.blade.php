@@ -12,15 +12,12 @@
 @section('content')
  <section class="content-header">
     <h1>View Order #{{$order_id}}</h1>
-    <ol class="breadcrumb">
-    <li>
-        <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
-    </li>
-    <li>
-        <a href="{{url('orders')}}">Orders</a>
-    </li>
-    <li class="active">View Order #{{$order_id}}</li>
-  </ol>
+	<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="{{url('dashboard')}}">Dashboard &nbsp;&nbsp;></a>
+  <a class="breadcrumb-item" href="{{url('orders')}}">Orders > &nbsp;</a>
+  <span class="breadcrumb-item active">View Order #{{$order_id}}</span>
+</nav>
+  
 </section>
 <div class="view-order">
 <section class="content">

@@ -254,7 +254,7 @@
 				<div class="col-md-6">
 					<div class="dashboad_right_side">
 						<div class="rencemt_order_table">
-							<div class="col-md-12">
+							<div>
 								<h2>RECENT ORDERS <span class="pull-right"><a href="/my/orders">View All</a></span></h2>
 								
 							</div>
@@ -273,7 +273,9 @@
 							</table>
 						</div>
 						<div class="rencemt_order_table">
-							<h2>COSTUMES SOLD <span class="pull-right"><a href="/my/costumes-slod">View All</a></span></</H2>
+							<div>
+								<h2>COSTUMES SOLD <span class="pull-right"><a href="/my/costumes-slod">View All</a></span></</h2>
+							</div>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Buyer</th> <th> Status</th>  </tr> </thead> 
 								<tbody>
