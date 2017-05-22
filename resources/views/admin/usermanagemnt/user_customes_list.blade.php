@@ -71,21 +71,21 @@
                 <div class="box-body">
         
           <div class="table-responsive">
-          <table datatable dt-options="dtOptions" dt-columns="dtColumns"
-                        class="table table-bordered table-hover table-striped" id="dtTable">
-						<tr>
-						<th>Costume Name</th>
+          <table class="table table-bordered table-hover" id="dtTable1">
+              	<thead>
+                  	<tr>
+                		<th>Costume Name</th>
 						<th>Catgeory</th>
 						<th>Condition</th>
 						<th>Qty. Available</th>
 						<th>Created Date</th>
 						<th>Status</th>
 						<th>Actions</th>
-						</tr>
-						<tr>
-						<td colspan="7"><center>No Data Avialable..!!</center></td>
-						</tr>
-          </table>
+                 	</tr>
+          	   </thead>
+              <tbody>
+              </tbody>
+            </table>
           </div>
          </div>
             </div>
@@ -97,8 +97,33 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts') 
-<script src="{{ asset('angular/Admin/UserManagement/Controllers/users-lists.js') }}"></script>
-<script src="{{ asset('angular/Admin/UserManagement/Services/user_management.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+<script type="text/javascript">
+  var table = '';
+  var id = <?php echo $usersdid; ?>;
+  $(function() {
+            table = $('#dtTable1').DataTable({
+      "ajax": {
+            "url" : "{{URL::to('user/getallusercostumes')}}",
+           "type": "GET",
+           "data":{'id':id}
+         },
+      "searching": false,
+      "pageLength": 50,
+      "bLengthChange": false,
+      
+      "columns": [
+        { data: 'name', name: 'name' },
+        { data: 'credit_card_mask', name: 'credit_card_mask' },
+        { data: 'card_type', name: 'card_type' },
+        { data: 'exp_year', name: 'exp_year' },
+        { data: 'exp_year', name: 'exp_year' },
+        { data: 'exp_year', name: 'exp_year' },
+        { data: 'actions', name: 'actions', orderable: false, searchable: false}
+      ]
+    });
 
+  }); 
+   
+</script>
 @stop

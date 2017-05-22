@@ -36,6 +36,7 @@ Route::any('/addbillingaddress', ['as' => 'billing-address','uses'=>'DashboardCo
 Route::any('/deleteaddress', ['as' => '','uses'=>'DashboardController@deleteAddress']);
 Route::any('/deleteccard', ['as' => '','uses'=>'DashboardController@Deleteccard']);
 Route::any('/creditcardadd', ['as' => 'creditcard-add','uses'=>'DashboardController@creditcradAdd']);
+Route::any('/allorders', ['as' => 'allorders','uses'=>'DashboardController@allOrders']);
 
 /** Products list page start here **/
 //Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
@@ -148,6 +149,7 @@ Route::any('/order/{order_id}', ['as' => '','uses'=>'OrdersController@costumeSol
 	    Route::post('user/csvExport', array('as' => '','uses' => 'UserController@userCsvExport'));
 	   	Route::any('user/getallpaymentprofile', array('as' => '','uses' => 'UserController@Getallpaymentprofile'));
 	   	Route::any('user/deleteccard/{id}', ['as' => '','uses'=>'UserController@Deleteccard']);
+	   	Route::any('user/getallusercostumes', array('as' => '','uses' => 'UserController@Getallusercostumes'));
 	   	/****************User Management End Here***************************/
 
 		/****************Costumes Management Code Starts Here*********************/

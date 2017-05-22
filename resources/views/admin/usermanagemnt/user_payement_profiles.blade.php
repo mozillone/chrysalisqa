@@ -79,10 +79,10 @@
                       	<th>Created Date</th>
                       	<th>Status</th>
                  	</tr>
-          	</thead>
+          	   </thead>
               <tbody>
-          </tbody>
-        </table>
+              </tbody>
+            </table>
           </div>
          </div>
             </div>

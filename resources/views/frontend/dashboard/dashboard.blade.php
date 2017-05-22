@@ -268,6 +268,7 @@
 									@else
 										<tr> <td></td> <td></td>No Recent Orders are found<td></td> <td></td> </tr>
 									@endif 
+
 								</tbody> 
 							</table>
 						</div>
@@ -283,6 +284,7 @@
 									@else
 										<tr> <td></td> <td></td> <td>No costumes sold are found</td> <td></td> </tr>
 									@endif 
+
 								</tbody> 
 							</table>
 						</div>
