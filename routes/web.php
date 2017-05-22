@@ -150,6 +150,9 @@ Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costu
 	   	Route::any('user/getallpaymentprofile', array('as' => '','uses' => 'UserController@Getallpaymentprofile'));
 	   	Route::any('user/deleteccard/{id}', ['as' => '','uses'=>'UserController@Deleteccard']);
 	   	Route::any('user/getallusercostumes', array('as' => '','uses' => 'UserController@Getallusercostumes'));
+
+		Route::any('/user-orders-list/{user_id}', ['as' => '','uses'=>'UserController@userOrdersListData']);
+		Route::any('/user-costumes-slod/{user_id}', ['as' => '','uses'=>'UserController@userCostumeSoldListData']);
 	   	/****************User Management End Here***************************/
 
 		/****************Costumes Management Code Starts Here*********************/
