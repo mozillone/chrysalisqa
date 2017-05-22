@@ -10,7 +10,7 @@
 @stop
 {{-- Content --}}
 @section('content')
- <section class="content-header">
+ <section class="container content-header">
     <h1>View Order #{{$order_id}}</h1>
     <ol class="breadcrumb">
     <li>
@@ -23,7 +23,7 @@
   </ol>
 </section>
 <div class="view-order">
-<section class="content">
+<section class="content container">
 <div class="bg-card">
     <div class="row">
         <div class="col-md-12">
