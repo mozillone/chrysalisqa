@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Redirect;
 use DB;
+use App\Order;
+use Session;
 
 
 class OrdersController extends Controller {
@@ -57,8 +59,37 @@ class OrdersController extends Controller {
           }
         }
         }
-        $orders = DB::select('SELECT ord.order_id,concat(usr.first_name," ",usr.last_name) as user_name,concat("$",ord.total) as amount,DATE_FORMAT(ord.created_at,"%m/%d/%Y %h:%i %p") as date,sts.name as status,GROUP_CONCAT(DISTINCT(itms.costume_name) SEPARATOR ",") as costume_name FROM `cc_order` as ord LEFT JOIN cc_order_items as itms on itms.order_id=ord.order_id LEFT JOIN cc_users as usr on usr.id=ord.user_id LEFT JOIN cc_order_status as ord_st on ord_st.order_id=ord.order_id LEFT JOIN cc_status as sts on sts.status_id=ord_st.status_id  '.$where.' GROUP BY ord.order_id '.$having.' ORDER BY `order_id` DESC');
+        $orders = DB::select('SELECT ord.order_id,concat(usr.first_name," ",usr.last_name) as user_name,concat("$",ord.total) as amount,DATE_FORMAT(ord.created_at,"%m/%d/%Y %h:%i %p") as date,sts.name as status,GROUP_CONCAT(DISTINCT(itms.costume_name) SEPARATOR ",") as costume_name FROM `cc_order` as ord LEFT JOIN cc_order_items as itms on itms.order_id=ord.order_id LEFT JOIN cc_users as usr on usr.id=ord.buyer_id LEFT JOIN cc_order_status as ord_st on ord_st.order_id=ord.order_id LEFT JOIN cc_status as sts on sts.status_id=ord_st.status_id  '.$where.' GROUP BY ord.order_id '.$having.' ORDER BY `order_id` DESC');
         return response()->success(compact('orders'));
   
     }
+    public function orderSummary($order_id){
+      $order=Order::orderSummary($order_id);
+      if(count($order)){
+        return view('admin.orders.order_summary',compact('order',$order))->with('order_id',$order_id);
+      }else{
+        Session::flash('error', 'Order information not found.'); 
+        return Redirect::to('/orders'); 
+      }
+
+    }
+    public function orderStatusUpdate(Request $request){
+       $req=$request->all();
+       Order::orderStatusUpdate($req);
+       Session::flash('success', 'Order status is updated successfully'); 
+       return Redirect::back(); 
+      }
+    public function OrderBillingAddressUpate(Request $request){
+       $req=$request->all();
+       Order::OrderBillingAddressUpate($req);
+       Session::flash('success', 'Billing address is updated successfully'); 
+       return Redirect::back(); 
+    }
+     public function OrderShippingAddressUpate(Request $request){
+       $req=$request->all();
+       Order::OrderShippingAddressUpate($req);
+       Session::flash('success', 'Shipping address is updated successfully'); 
+       return Redirect::back(); 
+    }
+
 }

@@ -207,6 +207,10 @@ Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 	    /*****************************Orders ends here ***********************/
 	    Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
 	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
+	    Route::any('/order/summary/{order_id}', ['as' => '','uses'=>'OrdersController@orderSummary']);
+	    Route::post('order/status/update', ['as' => '','uses'=>'OrdersController@orderStatusUpdate']);
+	    Route::post('/order/billing-address/update', ['as' => '','uses'=>'OrdersController@OrderBillingAddressUpate']);
+	    Route::post('/order/shipping-address/update', ['as' => '','uses'=>'OrdersController@OrderShippingAddressUpate']);
 	   
 	   /*****************************Request a bag starts here ***********************/
 	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
@@ -217,6 +221,118 @@ Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
 	   	Route::any('/closerequest', array('as' => '','uses' => 'RequestabagController@Closerequest'));
 	   /*****************************Request a bag ends here ***********************/
+	   /****************Events Management Starts Here*********************/
+	   
+	   
+	   Route::any('/events-list', [
+	   		'as' => 'events-list',
+	   		'uses' => 'EventController@eventsList'
+	   	]);
+	   Route::any('/add-event', [
+	   		'as' => 'add-event',
+	   		'uses' => 'EventController@addEvent'
+	   	]);
+	   Route::any('events-fetch', [
+	   		'as' => 'events-fetch',
+	   		'uses' => 'EventController@EventsFetch'
+	   	]);
+	   Route::post('/insertevents', [
+	   		'as' => 'insert-events',
+	   		'uses' => 'EventController@insertEvents'
+	   	]);
+	   Route::any('/admin/editevent/{id}', [
+	   		'as' => 'editevent',
+	   		'uses' => 'EventController@editEvent'
+	   	]);
+	   Route::any('/admin/updateevent', [
+	   		'as' => '',
+	   		'uses' => 'EventController@updateEvent'
+	   	]);
+	   Route::any('/admin/deleteevent/{id}', [
+	   		'as' => 'deleteevent',
+	   		'uses' => 'EventController@deleteEvent'
+	   	]);
+	   Route::post('/admin/event/search', [
+			'as' => '',
+	   		'uses' => 'EventController@searchEvent'
+		]);
+	   
+
+/****************Events Management Ends Here***********************/
+
+/****************Press Management Starts Here*********************/
+
+Route::any('/press-posts', [
+	   		'as' => 'press-posts',
+	   		'uses' => 'PressController@pressPosts'
+	   	]);
+
+Route::any('/add-press-post', [
+	   		'as' => 'add-press-post',
+	   		'uses' => 'PressController@addPressPost'
+	   	]);
+
+
+/****************Press Management Ends Here***********************/
+
+/****************Support Management Starts Here*********************/
+
+Route::any('support-tickets', [
+	   		'as' => 'support-tickets',
+	   		'uses' => 'SupportController@supportTickets'
+	   	]);
+
+Route::any('manage-ticket', [
+	   		'as' => 'manage-ticket',
+	   		'uses' => 'SupportController@manageTicket'
+	   	]);
+
+
+/****************Support Management Ends Here***********************/
+
+/****************Blog Management Starts Here*********************/
+Route::any('blog-posts', [
+			'as' => 'blog-posts',
+	   		'uses' => 'BlogController@blogPosts'
+	]);
+Route::any('add-blog-post', [
+			'as' => 'add-blog-post',
+	   		'uses' => 'BlogController@addBlogPost'
+	]);
+
+/****************Blog Management Ends Here***********************/
+
+/****************CMS Management Starts Here*********************/
+Route::any('add-cms-page', [
+		'as' => 'add-cms-page',
+	   	'uses' => 'CmsController@addCmsPage'
+	]);
+Route::any('cms-pages', [
+		'as' => 'cms-pages',
+	   	'uses' => 'CmsController@cmsPages'
+	]);
+Route::any('cms-blocks', [
+		'as' => 'cms-blocks',
+	   	'uses' => 'CmsController@cmsBlocks'
+	]);
+Route::any('add-cms-block', [
+		'as' => 'add-cms-block',
+	   	'uses' => 'CmsController@addCmsBlock'
+	]);
+
+/****************CMS Management Ends Here***********************/
+
+/****************Jobs Management Starts Here*********************/
+Route::any('manage-jobs', [
+		'as' => 'manage-jobs',
+	   	'uses' => 'JobsController@manageJobs'
+	]);
+Route::any('add-job-post', [
+		'as' => 'add-job-post',
+	   	'uses' => 'JobsController@addJobPost'
+	]);
+ 
+/****************Jobs Management Ends Here***********************/
 
 });
 

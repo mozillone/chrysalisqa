@@ -87,7 +87,8 @@
       
         </ul>
       </li>
-       <li {{ (Request::is('promotions') ? 'class=active' : '') }} {{ (Request::is('promotion/create') ? 'class=active' : '') }} {{ (Request::is('promotion/edit/*') ? 'class=active' : '') }}>
+
+      <li {{ (Request::is('promotions') ? 'class=active' : '') }} {{ (Request::is('promotion/create') ? 'class=active' : '') }} {{ (Request::is('promotion/edit/*') ? 'class=active' : '') }}>
         <a href="javascript:void(0)">
             <i class="fa fa-diamond" aria-hidden="true"></i> <span>Promotions</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
@@ -100,7 +101,8 @@
           </li>
         </ul>
       </li>
-        <li {{ (Request::is('charities') ? 'class=active' : '') }}>
+
+      <li {{ (Request::is('charities') ? 'class=active' : '') }}>
         <a href="javascript:void(0)">
            <i class="fa fa-home" aria-hidden="true"></i> <span>Charities</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
@@ -112,7 +114,179 @@
           </li>
         </ul>
       </li>
+      <li {{ Request::is('events') ? 'class=active' : '' }}>
+      <a href="javascript:void(0)">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <span>Events</span><i class="fa fa-angle-left pull-right"></i>
+      </a>
 
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('events') ? 'class=active' : '' }}>
+            <a href="{{route('events-list')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Events List</span>
+            </a>
+          </li>        
+        </ul>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('events') ? 'class=active' : '' }}>
+            <a href="{{route('add-event')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Add Event</span>
+            </a>
+          </li>        
+        </ul>
+
+      </li>
+
+     <!--  <li {{ Request::is('press') ? 'class=active' : '' }}>
+      <a href="javascript:void(0)">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <span>Press</span><i class="fa fa-angle-left pull-right"></i>
+      </a>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('press') ? 'class=active' : '' }}>
+            <a href="{{ route('press-posts')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Press Posts</span>
+            </a>
+          </li>        
+        </ul>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('press') ? 'class=active' : '' }}>
+            <a href="{{ route('add-press-post')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Add Press Posts</span>
+            </a>
+          </li>        
+        </ul>
+
+      </li>
+
+      <li {{ Request::is('support') ? 'class=active' : '' }}>
+      <a href="javascript:void(0)">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <span>Support</span><i class="fa fa-angle-left pull-right"></i>
+      </a>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('support') ? 'class=active' : '' }}>
+            <a href="{{ route('support-tickets')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Support Tickets</span>
+            </a>
+          </li>        
+        </ul>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('support') ? 'class=active' : '' }}>
+            <a href="{{ route('manage-ticket')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Manage Tickets</span>
+            </a>
+          </li>        
+        </ul>
+
+      </li>
+
+      <li {{ Request::is('blog') ? 'class=active' : '' }}>
+      <a href="javascript:void(0)">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <span>Blog</span><i class="fa fa-angle-left pull-right"></i>
+      </a>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('blog') ? 'class=active' : '' }}>
+            <a href="{{ route('blog-posts')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Blog Posts</span>
+            </a>
+          </li>        
+        </ul>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('blog') ? 'class=active' : '' }}>
+            <a href="{{ route('add-blog-post')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Add Blog Post</span>
+            </a>
+          </li>        
+        </ul>
+
+      </li>
+
+      <li {{ Request::is('cms') ? 'class=active' : '' }}>
+      <a href="javascript:void(0)">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <span>CMS</span><i class="fa fa-angle-left pull-right"></i>
+      </a>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('cms') ? 'class=active' : '' }}>
+            <a href="{{ route('add-cms-page')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Add CMS Page</span>
+            </a>
+          </li>        
+        </ul>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('cms') ? 'class=active' : '' }}>
+            <a href="{{ route('cms-pages')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>CMS Pages</span>
+            </a>
+          </li>        
+        </ul>
+
+         <ul class="treeview-menu menu">
+          <li {{ Request::is('cms') ? 'class=active' : '' }}>
+            <a href="{{ route('cms-blocks')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>CMS Blocks</span>
+            </a>
+          </li>        
+        </ul>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('cms') ? 'class=active' : '' }}>
+            <a href="{{ route('add-cms-block')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Add CMS Block</span>
+            </a>
+          </li>        
+        </ul>
+
+      </li>
+      
+      <li {{ Request::is('jobs') ? 'class=active' : '' }}>
+      <a href="javascript:void(0)">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <span>Blog</span><i class="fa fa-angle-left pull-right"></i>
+      </a>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('jobs') ? 'class=active' : '' }}>
+            <a href="{{ route('manage-jobs')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Blog Posts</span>
+            </a>
+          </li>        
+        </ul>
+
+        <ul class="treeview-menu menu">
+          <li {{ Request::is('jobs') ? 'class=active' : '' }}>
+            <a href="{{ route('add-job-post')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              <span>Add Blog Post</span>
+            </a>
+          </li>        
+        </ul>
+
+      </li> -->
       <li {{ (Request::is('requestabag') ? 'class=active' : '') }}>
         <a href="javascript:void(0)">
            <i class="fa fa-home" aria-hidden="true"></i> <span>Request a Bag</span> <i class="fa fa-angle-left pull-right"></i>
@@ -126,7 +300,6 @@
         </ul>
         <!--  -->
       </li>
-	 
     </ul>
   </section> 
 </aside>
