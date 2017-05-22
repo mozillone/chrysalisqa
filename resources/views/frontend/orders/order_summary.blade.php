@@ -108,27 +108,38 @@
                             <div class="address-sec">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3>Billing Address
-                                        </h3>
-                                        <p>{{$order['basic'][0]->pay_username}}</p>
-                                        <p>{{$order['basic'][0]->pay_address_1}}</p>
-                                        <p>{{$order['basic'][0]->pay_city}}</p>
-                                        <p>{{$order['basic'][0]->pay_state}} {{$order['basic'][0]->pay_zipcode}}</p>
+										<ul>
+											<li><h2>Billing Address :</h2></li>
+											<li>
+												<p>{{$order['basic'][0]->pay_username}}</p>
+												<p>{{$order['basic'][0]->pay_address_1}}</p>
+												<p>{{$order['basic'][0]->pay_city}}</p>
+												<p>{{$order['basic'][0]->pay_state}} {{$order['basic'][0]->pay_zipcode}}</p>
+											</li>
+										</ul>
+                                        
+                                        
                                     </div>
                                     <div class="col-md-6">
-                                        <h3>Shipping Address
-                                        </h3>
-                                        <p>{{$order['basic'][0]->ship_username}}</p>
-                                        <p>{{$order['basic'][0]->shipping_address_1}}</p>
-                                        <p>{{$order['basic'][0]->shipping_city}}</p>
-                                        <p>{{$order['basic'][0]->shipping_state}} {{$order['basic'][0]->shipping_postcode}}</p>
+										<ul>
+											<li><h2>Shipping Address :</h2></li>
+											<li>
+												<p>{{$order['basic'][0]->ship_username}}</p>
+												<p>{{$order['basic'][0]->shipping_address_1}}</p>
+												<p>{{$order['basic'][0]->shipping_city}}</p>
+												<p>{{$order['basic'][0]->shipping_state}} {{$order['basic'][0]->shipping_postcode}}</p>
+											</li>
+										</ul>
+                                        
+                                        
                                      </div>
                                 </div>
                             </div>
                             <div class="payment-sec">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3>Payment Information</h3>
+									<div class="rencemt_order_table">
+                                        <h2>Payment Information</h2>
                                         <table>
                                             <tbody>
                                             <tr>
@@ -149,9 +160,12 @@
                                             </tr>
                                             </tbody>
                                         </table>
+										</div>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3>Shipping Information</h3>
+									<div class="rencemt_order_table">
+                                        <h2>Shipping Information</h2>
+										</div>
                                         
                                     </div>
                                 </div>
@@ -160,7 +174,8 @@
                             <div class="order-list-sec">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h3>Items Ordered</h3>
+									<div class="rencemt_order_table">
+                                        <h2>Items Ordered</h2>
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
@@ -199,33 +214,38 @@
                                             </tr>
                                             </tbody>
                                         </table>
+										</div>
                                     </div>
+								
+									<div class="col-md-12">
+										<div class="rencemt_order_table">
+											<h2>Comments History</h2>
+											  <table class="table">
+												<thead>
+												  <tr>
+													<th>Message</th>
+													<th>Status Change</th>
+													<th>Comment Date</th>
+												  </tr>
+												</thead>
+												<tbody>
+												@foreach($order['order_comment'] as $comments)
+												  <tr>
+													<td>{{$comments->comment}}</td>
+													<td>{{$comments->status}}</td>
+													<td>{{$comments->date}}</td>
+												  </tr>
+												@endforeach                          
+												</tbody>
+											  </table>
+										</div>
+									</div>
+								
                                 </div>
                             </div>
                            
 
                         </div>
-                        <div class="container">
-                    <h2>Comments History</h2>
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Message</th>
-                            <th>Status Change</th>
-                            <th>Comment Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($order['order_comment'] as $comments)
-                          <tr>
-                            <td>{{$comments->comment}}</td>
-                            <td>{{$comments->status}}</td>
-                            <td>{{$comments->date}}</td>
-                          </tr>
-                        @endforeach                          
-                        </tbody>
-                      </table>
-                </div>
                     </div>
 
 

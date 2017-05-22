@@ -2291,10 +2291,14 @@ img#ajax_loader {
 .summery-info table td {
 	padding: 3px 0;
 }
-.summery-info table td:first-child {
+.summery-info table td:first-child, .payment-sec table td:first-child {
     min-width: 100px;
 	font-weight: 700;
 	color: #000;
+}
+.payment-sec table td:first-child {
+	min-width: 150px;
+	padding: 3px 0;
 }
 .summery-info table td:last-child {
 	max-width: 200px;
@@ -2302,8 +2306,24 @@ img#ajax_loader {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.ellipse-email {
-	
+.address-sec h2{
+	font-size: 18px;
+    font-weight: 800;
+    color: #000;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 5px;
+    display: inline-block;
+	margin-top: 10px;
+}
+.address-sec ul {
+	list-style-type: none;
+	padding-left: 0;
+	display: inline-flex;
+}
+.address-sec ul li:last-child {
+    padding-left: 40px;
+    font-weight: 700;
+    color: #000;
 }
 .summery-info .rencemt_order_table {
 	margin-top: 30px;

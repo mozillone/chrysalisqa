@@ -14,7 +14,7 @@
 {{-- Page content --}}
 @section('content')
  <section class="container content-header">
-   <nav class="breadcrumb">
+   <nav class="breadcrumb row">
   <a class="breadcrumb-item" href="/dashboard">Dashboard &nbsp;&nbsp; > </a>
   <span class="breadcrumb-item active"> Orders List</span>
 </nav>
