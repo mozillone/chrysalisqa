@@ -38,16 +38,12 @@
                     <h3 class="box-title">Orders List</h3>
                    </div>
                 <div class="box-body">
-        <div class="table-responsive">
+        <div class="table-responsive auto-scroll-none">
                 <table class="table table-striped table-bordered user-list-table">
                   <thead>
                     <th>Order No.</th>
-<<<<<<< HEAD
                     <th>From</th>
-=======
-					<th>From</th>
->>>>>>> 4a283f775a2054ed1b0b07ebc875fc11e75af937
-                    <th>To</th>
+			        <th>To</th>
                     <th>Status</th>
                     <th></th>
                   </thead>
@@ -82,7 +78,7 @@
                        </div>
                     </div> -->
                   </div>
-          <div class="table-responsive">
+          <div class="table-responsive auto-scroll-none">
           <table datatable dt-options="dtOptions" dt-columns="dtColumns"
                         class="table table-bordered table-hover table-striped" id="dtTable">
           </table>
