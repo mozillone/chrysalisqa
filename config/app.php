@@ -185,7 +185,7 @@ return [
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Usps\UspsServiceProvider::class,
-       // Cmgmyr\Messenger\MessengerServiceProvider::class,
+        Nahid\Talk\TalkServiceProvider::class,
     ],
 
     /*
@@ -240,6 +240,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Usps' => 'Usps\Facades\Usps',
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'Talk'      => Nahid\Talk\Facades\Talk::class,
 
    ],
 
