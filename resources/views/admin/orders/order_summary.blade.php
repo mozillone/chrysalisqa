@@ -144,6 +144,9 @@
                                     </div>
                                     <div class="col-md-6">
                                         <h3>Shipping Information</h3>
+                                        <form action="/orders/genaate-label" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label for="shipping">Carrier</label>
@@ -170,6 +173,8 @@
                                                 <input type="text" class="form-control" id="usr">
                                             </div>
                                         </div>
+                                         <input type="submit" value="Generate Label" class="btn btn-primary"/>
+                                        </form>
 
                                     </div>
                                 </div>
@@ -251,6 +256,9 @@
                                     </div>
                                     <div class="col-md-6">
                                         <h3>Transaction</h3>
+                                        <form action="/add/order/transation" method="POST" id="order_status">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
                                         <div class="form-inline">
                                             <label >Amount</label>
                                             <input type="email" class="form-control" id="email" placeholder="$0.00" name="email">
@@ -270,7 +278,7 @@
                                             <label><input type="checkbox" value="">Notify Customer By Email</label>
                                         </div>
                                         <a href="#" class="btn btn-primary">Submit</a>
-
+                                         </form>
                                     </div>
                                 </div>
 
