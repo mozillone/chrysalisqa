@@ -33,7 +33,7 @@
                        {{ Session::get('success') }}
                 </div>
         @endif
-            <div class="box box-info">
+            <div class="box box-info costume-sold-sec">
 			<div class="rencemt_order_table">
                 <div class="box-header with-border">
                     <h2 class="box-title">Costumes Sold</h2>
@@ -81,7 +81,7 @@
                   </div>
           <div class="table-responsive auto-scroll-none">
           <table datatable dt-options="dtOptions" dt-columns="dtColumns"
-                        class="table table-hover table-striped" id="dtTable">
+                        class="table table-striped" id="dtTable">
           </table>
           </div>
                 </div>
