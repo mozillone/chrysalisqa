@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 use DB;
 use App\Order;
 use Session;
-
+use Usps\PriorityLabel;
+use Config;
 
 class OrdersController extends Controller {
     
@@ -65,6 +66,7 @@ class OrdersController extends Controller {
     }
     public function orderSummary($order_id){
       $order=Order::orderSummary($order_id);
+      //dd($order);
       if(count($order)){
         return view('admin.orders.order_summary',compact('order',$order))->with('order_id',$order_id);
       }else{
@@ -79,6 +81,12 @@ class OrdersController extends Controller {
        Session::flash('success', 'Order status is updated successfully'); 
        return Redirect::back(); 
       }
+     public function orderAdditionalTransaction(Request $request){
+       $req=$request->all();
+       Order::orderAdditionalTransaction($req);
+       Session::flash('success', 'Order Transacrtion is completed successfully'); 
+       return Redirect::back(); 
+      }
     public function OrderBillingAddressUpate(Request $request){
        $req=$request->all();
        Order::OrderBillingAddressUpate($req);
@@ -90,6 +98,44 @@ class OrdersController extends Controller {
        Order::OrderShippingAddressUpate($req);
        Session::flash('success', 'Shipping address is updated successfully'); 
        return Redirect::back(); 
+    }
+    public function orderLabelGenate(Request $request){
+       $req=$request->all();
+     //  dd(Config::get('constants.USPS'));
+     // $label = new InternationalLabel('402SAMPL6330');
+
+    $label = new PriorityLabel('466CHERR0126');
+// During test mode this seems not to always work as expected
+$label->setTestMode(true);
+$label->setFromAddress('John', 'Doe', '', '5161 Lankershim Blvd', 'North Hollywood', 'CA', '91601', '# 204', '', '8882721214');
+$label->setToAddress('Vincent', 'Gabriel', '', '230 Murray St', 'New York', 'NY', '10282');
+$label->setWeightOunces(1);
+$label->setField(36, 'LabelDate', '03/12/2014');
+//$label->setField(32, 'SeparateReceiptPage', 'true');
+// Perform the request and return result
+
+$label->createLabel();
+dd($label);
+//print_r($label->getArrayResponse());
+//print_r($label->getPostData());
+//var_dump($label->isError());
+// See if it was successful
+if ($label->isSuccess()) {
+    //echo 'Done';
+    //echo "\n Confirmation:" . $label->getConfirmationNumber();
+    $label = $label->getLabelContents();
+    if ($label) {
+        $contents = base64_decode($label);
+        header('Content-type: application/pdf');
+        header('Content-Disposition: inline; filename="label.pdf"');
+        header('Content-Transfer-Encoding: binary');
+        header('Content-Length: ' . strlen($contents));
+        echo $contents;
+        exit;
+    }
+} else {
+    echo 'Error: ' . $label->getErrorMessage();
+}
     }
 
 }

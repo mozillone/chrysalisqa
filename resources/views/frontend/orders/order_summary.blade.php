@@ -11,16 +11,11 @@
 {{-- Content --}}
 @section('content')
  <section class="container content-header">
-    <h1>View Order #{{$order_id}}</h1>
-    <ol class="breadcrumb">
-    <li>
-        <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
-    </li>
-    <li>
-        <a href="/my/orders">Orders</a>
-    </li>
-    <li class="active">View Order #{{$order_id}}</li>
-  </ol>
+  <nav class="breadcrumb row">
+  <a class="breadcrumb-item" href="{{url('dashboard')}}">Dashboard &nbsp;&nbsp;></a>
+  <a class="breadcrumb-item" href="/my/orders">Orders > &nbsp;</a>
+  <span class="breadcrumb-item active">View Order #{{$order_id}}</span>
+</nav>
 </section>
 <div class="view-order">
 <section class="content container">
@@ -28,23 +23,30 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-info">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#summery" data-toggle="tab">Summary</a></li>
-                    <li><a href="#status" data-toggle="tab">Shipping Status</a></li>
-                    <li><a href="#payment" data-toggle="tab">Payment Info</a></li>
-                    <li><a href="#dispute" data-toggle="tab">Dispute</a></li>
-                </ul>
+				<div class="viewTabs_rm">
+						<ul class="nav nav-tabs viewTabs order-summery-tabs">
+							<li class="active"><a href="#summery" data-toggle="tab">Summary</a></li>
+							<li><a href="#status" data-toggle="tab">Shipping Status</a></li>
+							<li><a href="#payment" data-toggle="tab">Payment Info</a></li>
+							<li><a href="#dispute" data-toggle="tab">Dispute</a></li>
+						</ul>
+				
+				</div>
+                
                 <div class="tab-content">
                     <div class="tab-pane active" id="summery">
                         <div class="summery-details">
                             <div class="summery-info">
                                 <div class="row">
                                 <div class="col-md-4">
-                                    <h3>Order Summary</h3>
+									<div class="rencemt_order_table">
+									
+                                    <h2>Order Summary</h2>
+									
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <td>Order #</td>
+                                            <td>Order #:</td>
                                             <td>{{$order['basic'][0]->order_id}}</td>
                                         </tr>
                                         <tr>
@@ -57,9 +59,11 @@
                                         </tr>
                                         </tbody>
                                     </table>
+									</div>
                                 </div>
                                 <div class="col-md-4">
-                                    <h3>Buyer Information</h3>
+								<div class="rencemt_order_table">
+                                    <h2>Buyer Information</h2>
                                     <table>
                                         <tbody>
                                         <tr>
@@ -67,7 +71,7 @@
                                             <td>{{$order['basic'][0]->buyer_name}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Email</td>
+                                            <td>Email:</td>
                                             <td>{{$order['basic'][0]->buyer_email}}</td>
                                         </tr>
                                         <tr>
@@ -76,9 +80,11 @@
                                         </tr>
                                         </tbody>
                                     </table>
+									</div>
                                 </div>
                                 <div class="col-md-4">
-                                    <h3>Seller Information</h3>
+								<div class="rencemt_order_table">
+                                    <h2>Seller Information</h2>
                                     <table>
                                         <tbody>
                                         <tr>
@@ -86,7 +92,7 @@
                                             <td>{{$order['basic'][0]->seller_name}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Email</td>
+                                            <td>Email:</td>
                                             <td>{{$order['basic'][0]->seller_email}}</td>
                                         </tr>
                                         <tr>
@@ -95,33 +101,49 @@
                                         </tr>
                                         </tbody>
                                     </table>
+									</div>
                                 </div>
                             </div>
                             </div>
                             <div class="address-sec">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3>Billing Address
-                                        </h3>
-                                        <p>{{$order['basic'][0]->pay_username}}</p>
-                                        <p>{{$order['basic'][0]->pay_address_1}}</p>
-                                        <p>{{$order['basic'][0]->pay_city}}</p>
-                                        <p>{{$order['basic'][0]->pay_state}} {{$order['basic'][0]->pay_zipcode}}</p>
+										<div class="rencemt_order_table">
+											<ul>
+												<li><h2>Billing Address :</h2></li>
+												<li>
+													<p>{{$order['basic'][0]->pay_username}}</p>
+													<p>{{$order['basic'][0]->pay_address_1}}</p>
+													<p>{{$order['basic'][0]->pay_city}}</p>
+													<p>{{$order['basic'][0]->pay_state}} {{$order['basic'][0]->pay_zipcode}}</p>
+												</li>
+											</ul>
+										</div>
+                                        
+                                        
                                     </div>
                                     <div class="col-md-6">
-                                        <h3>Shipping Address
-                                        </h3>
-                                        <p>{{$order['basic'][0]->ship_username}}</p>
-                                        <p>{{$order['basic'][0]->shipping_address_1}}</p>
-                                        <p>{{$order['basic'][0]->shipping_city}}</p>
-                                        <p>{{$order['basic'][0]->shipping_state}} {{$order['basic'][0]->shipping_postcode}}</p>
+										<div class="rencemt_order_table">
+											<ul>
+												<li><h2>Shipping Address :</h2></li>
+												<li>
+													<p>{{$order['basic'][0]->ship_username}}</p>
+													<p>{{$order['basic'][0]->shipping_address_1}}</p>
+													<p>{{$order['basic'][0]->shipping_city}}</p>
+													<p>{{$order['basic'][0]->shipping_state}} {{$order['basic'][0]->shipping_postcode}}</p>
+												</li>
+											</ul>
+										</div>
+											
+                                        
                                      </div>
                                 </div>
                             </div>
                             <div class="payment-sec">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3>Payment Information</h3>
+									<div class="rencemt_order_table">
+                                        <h2>Payment Information</h2>
                                         <table>
                                             <tbody>
                                             <tr>
@@ -142,9 +164,12 @@
                                             </tr>
                                             </tbody>
                                         </table>
+										</div>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3>Shipping Information</h3>
+									<div class="rencemt_order_table">
+                                        <h2>Shipping Information</h2>
+										</div>
                                         
                                     </div>
                                 </div>
@@ -153,7 +178,8 @@
                             <div class="order-list-sec">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h3>Items Ordered</h3>
+									<div class="rencemt_order_table">
+                                        <h2>Items Ordered</h2>
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
@@ -192,33 +218,38 @@
                                             </tr>
                                             </tbody>
                                         </table>
+										</div>
                                     </div>
+								
+									<div class="col-md-12">
+										<div class="rencemt_order_table">
+											<h2>Comments History</h2>
+											  <table class="table">
+												<thead>
+												  <tr>
+													<th>Message</th>
+													<th>Status Change</th>
+													<th>Comment Date</th>
+												  </tr>
+												</thead>
+												<tbody>
+												@foreach($order['order_comment'] as $comments)
+												  <tr>
+													<td>{{$comments->comment}}</td>
+													<td>{{$comments->status}}</td>
+													<td>{{$comments->date}}</td>
+												  </tr>
+												@endforeach                          
+												</tbody>
+											  </table>
+										</div>
+									</div>
+								
                                 </div>
                             </div>
                            
 
                         </div>
-                        <div class="container">
-                    <h2>Comments History</h2>
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Message</th>
-                            <th>Status Change</th>
-                            <th>Comment Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($order['order_comment'] as $comments)
-                          <tr>
-                            <td>{{$comments->comment}}</td>
-                            <td>{{$comments->status}}</td>
-                            <td>{{$comments->date}}</td>
-                          </tr>
-                        @endforeach                          
-                        </tbody>
-                      </table>
-                </div>
                     </div>
 
 

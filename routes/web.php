@@ -216,16 +216,21 @@ Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costu
 	   /****************Charities Management Ends Here***********************/
 
 	   /*****************************Orders starts here ***********************/
-
-	    /*****************************Orders ends here ***********************/
 	    Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
 	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
 	    Route::any('/order/summary/{order_id}', ['as' => '','uses'=>'OrdersController@orderSummary']);
 	    Route::post('order/status/update', ['as' => '','uses'=>'OrdersController@orderStatusUpdate']);
+	    Route::post('/add/order/transation', ['as' => '','uses'=>'OrdersController@orderAdditionalTransaction']);
 	    Route::post('/order/billing-address/update', ['as' => '','uses'=>'OrdersController@OrderBillingAddressUpate']);
 	    Route::post('/order/shipping-address/update', ['as' => '','uses'=>'OrdersController@OrderShippingAddressUpate']);
-	   
-	   /*****************************Request a bag starts here ***********************/
+	    Route::post('/orders/genaate-label', ['as' => '','uses'=>'OrdersController@orderLabelGenate']);
+	     /*****************************Orders ends here ***********************/
+
+	    /*****************************Transactions starts here ***********************/
+	    Route::any('/transactions', ['as' => 'transactions-list','uses'=>'TransactionsController@transactionsList']);
+	    Route::any('/transactions-list', ['as' => '','uses'=>'TransactionsController@transactionsListData']);
+	    /*****************************Transactions end here ***********************/
+
 	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
 	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));

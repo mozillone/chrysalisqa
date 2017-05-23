@@ -74,7 +74,7 @@
           </li>
         </ul>
       </li>
-      <li {{ (Request::is('orders') ? 'class=active' : '') }}>
+      <li {{ (Request::is('orders') ? 'class=active' : '') || (Request::is('transactions') ? 'class=active' : '')  }}  >
         <a href="javascript:void(0)">
            <i class="fa fa-shopping-cart" aria-hidden="true"></i><span>Orders</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
@@ -84,7 +84,11 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Orders List</span>
             </a>
           </li>
-      
+           <li {{ (Request::is('transactions') ? 'class=active' : '') }} >
+           <a href="{{route('transactions-list')}}">
+              <i class="fa fa-money" aria-hidden="true"></i> <span>Transactions List</span>
+            </a>
+          </li>
         </ul>
       </li>
 
