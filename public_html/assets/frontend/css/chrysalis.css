@@ -2325,8 +2325,23 @@ img#ajax_loader {
     font-weight: 700;
     color: #000;
 }
+.order-filter-btn, .order-filter-btn:hover, .order-filter-btn:focus  {
+	letter-spacing: 0.3px;
+    font-size: 19px;
+    background: #60c3ab;
+    color: #fff;
+    padding: 3px 15px;
+    font-weight: 800;
+    font-family: Proxima-Nova-Extrabold;
+	border: 1px solid #60c3ab;
+	
+}
 .summery-info .rencemt_order_table {
 	margin-top: 30px;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+	background-color: #60c3ab;
+    border-color: #60c3ab;
 }
 /********************************************************************Media start here********************************************************************/
 
