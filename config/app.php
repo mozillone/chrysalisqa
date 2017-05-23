@@ -185,7 +185,6 @@ return [
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Usps\UspsServiceProvider::class,
-       // Cmgmyr\Messenger\MessengerServiceProvider::class,
     ],
 
     /*
