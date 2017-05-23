@@ -220,8 +220,10 @@ Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costu
 	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
 	    Route::any('/order/summary/{order_id}', ['as' => '','uses'=>'OrdersController@orderSummary']);
 	    Route::post('order/status/update', ['as' => '','uses'=>'OrdersController@orderStatusUpdate']);
+	    Route::post('/add/order/transation', ['as' => '','uses'=>'OrdersController@orderAdditionalTransaction']);
 	    Route::post('/order/billing-address/update', ['as' => '','uses'=>'OrdersController@OrderBillingAddressUpate']);
 	    Route::post('/order/shipping-address/update', ['as' => '','uses'=>'OrdersController@OrderShippingAddressUpate']);
+	    Route::post('/orders/genaate-label', ['as' => '','uses'=>'OrdersController@orderLabelGenate']);
 	     /*****************************Orders ends here ***********************/
 
 	    /*****************************Transactions starts here ***********************/

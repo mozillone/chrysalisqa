@@ -291,5 +291,8 @@ class Order extends Authenticatable
       Site_model::update_data('order',$data,$cond);
       return true;
     }
+    // protected function  orderAdditionalTransaction($req){
+    //     $this->insertTransaction($order_info,$order_id,$cart->cc_id);
+    // }
   
 }
