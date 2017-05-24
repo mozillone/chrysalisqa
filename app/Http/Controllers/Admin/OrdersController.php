@@ -91,7 +91,7 @@ class OrdersController extends Controller {
         $order['comment']=$req['comment'];
         $sent=Mail::send('emails.order_status_notification',array("order"=>$order), function ($m) use($order){
               $m->to($order['basic'][0]->buyer_email, $order['basic'][0]->buyer_name);
-                $m->subject('#{{$order["basic"][0]->order_id}} status report');
+                $m->subject('#'.$order["basic"][0]->order_id.' status report');
             });
        }
        Session::flash('success', 'Order status is updated successfully'); 
@@ -104,6 +104,12 @@ class OrdersController extends Controller {
          Session::flash('error',$result['message']);
          return Redirect::back();
        }else{
+         if(isset($req['is_notify'])){
+          $sent=Mail::send('emails.order_transaction_notification',array("transacrtion"=>$result['message']), function ($m) use($result){
+                $m->to($result['message']['buyer_email'], $result['message']['buyer_name']);
+                  $m->subject('#'.$result["message"]['order_id'].' Transaction report');
+              });
+         }
          Session::flash('success', 'Order Transacrtion is completed successfully'); 
          return Redirect::back(); 
        }

@@ -272,6 +272,8 @@
                                         <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
                                         <input type="hidden" name="cc_id" value="{{$order['basic'][0]->cc_id}}">
                                         <input type="hidden" name="user_id" value="{{$order['basic'][0]->buyer_id}}">
+                                        <input type="hidden" name="buyer_email" value="{{$order['basic'][0]->buyer_email}}">
+                                        <input type="hidden" name="buyer_name" value="{{$order['basic'][0]->buyer_name}}">
                                         <div class="form-inline">
                                             <label >Amount</label>
                                             <input type="text" class="form-control" id="transaction_amount" placeholder="0.00" name="transaction_amount">
@@ -288,7 +290,7 @@
                                             <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
                                         </div>
                                         <div class="checkbox">
-                                            <label><input type="checkbox" name="is_notify">Notify Customer By Email</label>
+                                            <label><input type="checkbox" name="is_notify"  value="1">Notify Customer By Email</label>
                                         </div>
                                         <input type="submit" value="Submit" class="btn btn-primary"/>
                                          </form>
