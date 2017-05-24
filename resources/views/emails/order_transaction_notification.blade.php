@@ -27,6 +27,8 @@
 			<p style="font-size:14px; font-weight:normal;">Amount : <font color="#000000" face="Times New Roman"><span style="font-weight: normal;"> {{$transacrtion['amount']}</span></font></p>
 
 			<p style="font-size:14px; font-weight:normal;">Status : <font color="#000000" face="Times New Roman"><span style="font-weight: normal;">{{$transacrtion['status']}</font>/span></font></p>
+			
+			<p style="font-size:14px; font-weight:normal;">Comment : <font color="#000000" face="Times New Roman"><span style="font-weight: normal;">{{$transacrtion['comment']}</font>/span></font></p>
 
 				<p style="font-size:14px; font-weight:normal;">If you have any questions about our different plans, feel free to contact us at <a href="#|DOMAIN|#/contact-us" target="_blank">contact@chrysalis.com</a></p>
 			</td>
