@@ -14,9 +14,10 @@ use Config;
 use App\Cart;
 use App\Charities;
 use App\Address;
-//use App\Helpers\StripeApp;
+use App\Helpers\StripeApp;
 use Exception;
 use Redirect;
+
 class Order extends Authenticatable
 {
    protected $fillable = [
@@ -24,12 +25,12 @@ class Order extends Authenticatable
     ];
   public function __construct()
   {
-    //$this->stripe=new StripeApp();
+    $this->stripe=new StripeApp();
   }
     protected function placeOrder($req){
          $api_customer_id=Auth::user()->api_customer_id;
          try {
-               // $this->stripe->customerFind($api_customer_id);
+                $this->stripe->customerFind($api_customer_id);
          }catch(Exception $e){
                $result=array('result'=>0,'message'=>$e->getMessage());
                 return $result;
@@ -48,7 +49,7 @@ class Order extends Authenticatable
              if(count($cc_token)){
                 $token=$cc_token;
                  try {
-                   //$this->stripe->CCVerify($api_customer_id,$token);
+                   $this->stripe->CCVerify($api_customer_id,$token);
                  }catch(Exception $e){
                        $result=array('result'=>0,'message'=>$e->getMessage());
                         return $result;
@@ -119,6 +120,7 @@ class Order extends Authenticatable
                                  'shipping_postcode'=>$shipping_zipcode,
                                  'shipping_country'=> $shipping_country,
                                  'total'=>'0.00',
+                                 'cc_id'=>$card_id,
                                  'created_at'=>date('Y-m-d h:i:s'),
                                 );
                 $order_id=Site_model::insert_get_id('order',$order_info);
@@ -157,7 +159,7 @@ class Order extends Authenticatable
                               'title'=>"Subtotal",
                               'value'=>$subtotal,
                       );
-                //$order_info=$this->stripe->charge($amount,$currency,$api_customer_id,$token);
+                $order_info=$this->stripe->charge($amount,$currency,$api_customer_id,$token);
                 $this->insertTransaction($order_info,$order_id,$cart->cc_id);
             
                 Site_model::insert_get_id('order_total',$order_subtotal);
@@ -221,18 +223,19 @@ class Order extends Authenticatable
     private function  insertTransaction($data,$order_id,$cc_id){
       $transaction=array('order_id'=>$order_id,
                     'user_id'=>Auth::user()->id,
-                    'amount'=>25555,
-                 //   'api_transaction_no'=>$data['id'],
+                    'amount'=>$data['amount']/100,
+                    'api_transaction_no'=>$data['id'],
                     'cc_id'=>$cc_id,
-                    'status'=>'Autherised',
+                    'status'=>$data['outcome']['type'],
                     'created_at'=>date('Y-m-d h:i:s'),
                     'updated_at'=>date('Y-m-d h:i:s')
                       );
        Site_model::insert_get_id('transactions',$transaction);
        return true;
     }
+
     protected function orderSummary($order_id){
-        $order['basic']=DB::Select('SELECT ord.order_id,ord.created_at,ord.total,ord.phone_no,sts.name as status,trans.api_transaction_no,trans.status as payment_status,buyer.id as buyer_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,buyer.email as buyer_email,buyer.phone_number as buyer_phone,seller.id as seller_id,concat(seller.first_name," ",seller.last_name) as seller_name,seller.email as seller_email,seller.phone_number as seller_phone,concat(ord.pay_firstname," ",ord.pay_lastname) as pay_username,ord.pay_firstname,ord.pay_lastname,ord.pay_address_1,ord.pay_address_2,ord.pay_city,ord.pay_state,ord.pay_zipcode,ord.pay_country,concat(ord.shipping_firstname," ",ord.shipping_lastname) as ship_username,ord.shipping_firstname,ord.shipping_lastname,ord.shipping_address_1,ord.shipping_address_2,ord.shipping_city,ord.shipping_state,ord.shipping_postcode,ord.shipping_country FROM `cc_order` as ord LEFT JOIN  cc_status as sts on sts.status_id=ord.order_status_id LEFT JOIN cc_transactions as trans on trans.order_id=ord.order_id LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id  LEFT JOIN cc_users as seller on seller.id=ord.seller_id where ord.order_id='.$order_id.'  group by ord.order_id');
+        $order['basic']=DB::Select('SELECT ord.order_id,ord.created_at,ord.total,ord.phone_no,ord.cc_id,sts.name as status,trans.api_transaction_no,trans.status as payment_status,buyer.id as buyer_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,buyer.email as buyer_email,buyer.phone_number as buyer_phone,seller.id as seller_id,concat(seller.first_name," ",seller.last_name) as seller_name,seller.email as seller_email,seller.phone_number as seller_phone,concat(ord.pay_firstname," ",ord.pay_lastname) as pay_username,ord.pay_firstname,ord.pay_lastname,ord.pay_address_1,ord.pay_address_2,ord.pay_city,ord.pay_state,ord.pay_zipcode,ord.pay_country,concat(ord.shipping_firstname," ",ord.shipping_lastname) as ship_username,ord.shipping_firstname,ord.shipping_lastname,ord.shipping_address_1,ord.shipping_address_2,ord.shipping_city,ord.shipping_state,ord.shipping_postcode,ord.shipping_country FROM `cc_order` as ord LEFT JOIN  cc_status as sts on sts.status_id=ord.order_status_id LEFT JOIN cc_transactions as trans on trans.order_id=ord.order_id LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id  LEFT JOIN cc_users as seller on seller.id=ord.seller_id where ord.order_id='.$order_id.'  group by ord.order_id');
          $order['items']=DB::Select('SELECT * FROM `cc_order_items` where order_id="'.$order_id.'" order by sku ');
          $order['order_amount']=DB::Select('SELECT * FROM `cc_order_total` where order_id="'.$order_id.'" order by sort_order ');
          $order['status']=DB::Select('SELECT * FROM  cc_status');
@@ -291,8 +294,50 @@ class Order extends Authenticatable
       Site_model::update_data('order',$data,$cond);
       return true;
     }
-    // protected function  orderAdditionalTransaction($req){
-    //     $this->insertTransaction($order_info,$order_id,$cart->cc_id);
-    // }
+     protected function  orderAdditionalTransaction($req){
+      $user=User::find($req['user_id'])->toArray();
+      $api_customer_id=$user['api_customer_id'];
+
+      $token=$this->getCreditCardToken($req['cc_id']);
+      if(count($token)){
+          $token=$token;
+           try {
+             $this->stripe->CCVerify($api_customer_id,$token);
+           }catch(Exception $e){
+                 $result=array('result'=>0,'message'=>$e->getMessage());
+                  return $result;
+           }
+        }else{
+         $result=array('result'=>0,'message'=>"Credit card token not valid");
+          return $result;
+       }
+      $amount=$req['transaction_amount'];
+      $currency=Config::get('constants.Currency');
+     
+       try {
+          $data=$this->stripe->charge($amount,$currency,$api_customer_id,$token);
+            $transaction=array('order_id'=>$req['order_id'],
+                    'user_id'=>$user['id'],
+                    'amount'=>$data['amount']/100,
+                    'api_transaction_no'=>$data['id'],
+                    'cc_id'=>$req['cc_id'],
+                    'status'=>$data['outcome']['type'],
+                    'created_at'=>date('Y-m-d h:i:s'),
+                    'updated_at'=>date('Y-m-d h:i:s')
+                      );
+            $transaction_id=Site_model::insert_get_id('transactions',$transaction);
+            $transaction_info=array('user_name'=>$user['first_name']." ".$user['last_name'],'transaction_id'=>$transaction_id,'order_id'=>$req['order_id'],'status'=>$data['outcome']['type'],'amount'=>($data['amount']/100),'buyer_email'=>$req['buyer_email'],'buyer_name'=>$req['buyer_name'],'comment'=>$req['comment']);
+            $result=array('result'=>1,'message'=>$transaction_info);
+            return $result;
+        }catch(Exception $e){
+                 $result=array('result'=>0,'message'=>$e->getMessage());
+                  return $result;
+           }
+     }
+     protected function getOrderStatus($status_id){
+      $status=DB::Select('SELECT name  FROM `cc_status` WHERE `status_id`='.$status_id);
+      return $status[0]->name;
+
+     }
   
 }

@@ -24,6 +24,17 @@
 <div class="bg-card">
     <div class="row">
         <div class="col-md-12">
+        @if (Session::has('error'))
+                    <div class="alert alert-danger alert-dismissable">
+                        <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+                        {{ Session::get('error') }}
+                    </div>
+                    @elseif(Session::has('success'))
+                    <div class="alert alert-success alert-dismissable">
+                        <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+                        {{ Session::get('success') }}
+                    </div>
+                    @endif
             <div class="box box-info">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#summery" data-toggle="tab">Summary</a></li>
@@ -249,19 +260,23 @@
                                             <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
                                         </div>
                                         <div class="checkbox">
-                                            <label><input type="checkbox" value="">Notify Customer By Email</label>
+                                            <label><input type="checkbox" name="is_notify" value="1">Notify Customer By Email</label>
                                         </div>
                                         <input type="submit" value="Submit" class="btn btn-primary"/>
                                     </form>
                                     </div>
                                     <div class="col-md-6">
                                         <h3>Transaction</h3>
-                                        <form action="/add/order/transation" method="POST" id="order_status">
+                                        <form action="/add/order/transation" method="POST" id="order_transaction">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
+                                        <input type="hidden" name="cc_id" value="{{$order['basic'][0]->cc_id}}">
+                                        <input type="hidden" name="user_id" value="{{$order['basic'][0]->buyer_id}}">
+                                        <input type="hidden" name="buyer_email" value="{{$order['basic'][0]->buyer_email}}">
+                                        <input type="hidden" name="buyer_name" value="{{$order['basic'][0]->buyer_name}}">
                                         <div class="form-inline">
                                             <label >Amount</label>
-                                            <input type="email" class="form-control" id="email" placeholder="$0.00" name="email">
+                                            <input type="text" class="form-control" id="transaction_amount" placeholder="0.00" name="transaction_amount">
                                         </div>
                                         <div class="form-inline">
                                             <label for="transaction">Transaction Type</label>
@@ -272,12 +287,12 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="comment1">Comment:</label>
-                                            <textarea class="form-control" rows="5" id="comment1"></textarea>
+                                            <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
                                         </div>
                                         <div class="checkbox">
-                                            <label><input type="checkbox" value="">Notify Customer By Email</label>
+                                            <label><input type="checkbox" name="is_notify"  value="1">Notify Customer By Email</label>
                                         </div>
-                                        <a href="#" class="btn btn-primary">Submit</a>
+                                        <input type="submit" value="Submit" class="btn btn-primary"/>
                                          </form>
                                     </div>
                                 </div>
