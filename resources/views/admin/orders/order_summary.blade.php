@@ -260,7 +260,7 @@
                                             <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
                                         </div>
                                         <div class="checkbox">
-                                            <label><input type="checkbox" value="">Notify Customer By Email</label>
+                                            <label><input type="checkbox" name="is_notify" value="1">Notify Customer By Email</label>
                                         </div>
                                         <input type="submit" value="Submit" class="btn btn-primary"/>
                                     </form>
@@ -288,7 +288,7 @@
                                             <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
                                         </div>
                                         <div class="checkbox">
-                                            <label><input type="checkbox" value="">Notify Customer By Email</label>
+                                            <label><input type="checkbox" name="is_notify">Notify Customer By Email</label>
                                         </div>
                                         <input type="submit" value="Submit" class="btn btn-primary"/>
                                          </form>

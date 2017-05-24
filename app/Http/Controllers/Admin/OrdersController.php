@@ -10,7 +10,7 @@ use App\Order;
 use Session;
 use Usps\InternationalLabel;
 use Config;
-
+use Mail;
 class OrdersController extends Controller {
     
         protected $user_id            = '';
@@ -83,8 +83,16 @@ class OrdersController extends Controller {
 
     }
     public function orderStatusUpdate(Request $request){
-       $req=$request->all();
-       Order::orderStatusUpdate($req);
+        $req=$request->all();
+        Order::orderStatusUpdate($req);
+        if(isset($req['is_notify'])){
+        $order=Order::orderSummary($req['order_id']);
+        $order['status']=Order::getOrderStatus($req['status_id']);
+        $sent=Mail::send('emails.order_status_notification',array("order"=>$order), function ($m) use($order){
+              $m->to($order['basic'][0]->buyer_email, $order['basic'][0]->buyer_name);
+                $m->subject('#{{$order["basic"][0]->order_id}} status report');
+            });
+       }
        Session::flash('success', 'Order status is updated successfully'); 
        return Redirect::back(); 
       }

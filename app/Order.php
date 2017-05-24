@@ -331,5 +331,10 @@ class Order extends Authenticatable
                   return $result;
            }
      }
+     protected function getOrderStatus($status_id){
+      $status=DB::Select('SELECT name  FROM `cc_status` WHERE `status_id`='.$status_id);
+      return $status[0]->name;
+
+     }
   
 }
