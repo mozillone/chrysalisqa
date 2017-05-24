@@ -280,15 +280,21 @@ $(document).ready(function() {
     		}
      })
     $(document).on('submit','#cc_form',function(){
+    	$('.payment-fail').html("");
 		var data=$(this).serializeArray();
 		$.ajax({
 			type: 'POST',
 			url: '/add/credit-card',
 			data: data,
 			success: function(response){
-					getSelectedCreditCard(response);
-					$('.cc_popup').html('Edit');
-					$('#cc_popup').modal('hide');
+					console.log(response.result);
+					if(response.result=="1"){
+						getSelectedCreditCard(response.message);
+						$('.cc_popup').html('Edit');
+						$('#cc_popup').modal('hide');
+					}else{
+						$('.payment-fail').html(response.message);
+					}
 				}
 			});	
 
@@ -357,7 +363,7 @@ $(document).ready(function() {
     	$.ajax({
 			url: '/get/credit-card/'+card_id,
 			success: function(response){
-					$('input[name="card_id"]').val(response);
+					$('input[name="card_id"]').val(card_id);
 					$('.payment-empty,.error').remove();
 					if(response[0].card_type=="Visa"){
 						var img='<img src="/img/visa.png">';

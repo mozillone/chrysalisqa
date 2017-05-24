@@ -169,6 +169,31 @@
                                     <div class="col-md-6">
 									<div class="rencemt_order_table">
                                         <h2>Shipping Information</h2>
+
+                                        <h4>Shipping Info</h4>
+                                           <table class="table">
+                                            <thead>
+                                              <tr>
+                                                <th>Track#</th>
+                                                <th>Action</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                            @if(count($order['order_shipping']))
+                                            @foreach($order['order_shipping'] as $shipping)
+                                              <tr>
+                                                <td>{{$shipping->track_no}}</td>
+                                                <td><a href="/sold/order/track-info/download/{{$shipping->track_no}}" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Download</a> <a target="_blank" href="https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&text28777=&tLabels=9400111699000840733045%2C" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
+                                              </tr>
+                                            @endforeach    
+                                            @else
+                                                <tr>
+                                                  <td>No Track information found</td>
+                                              </tr>
+                                            @endif                      
+                                            </tbody>
+                                          </table>
+                                       
 										</div>
                                         
                                     </div>

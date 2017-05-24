@@ -24,6 +24,17 @@
 <div class="bg-card">
     <div class="row">
         <div class="col-md-12">
+        @if (Session::has('error'))
+                    <div class="alert alert-danger alert-dismissable">
+                        <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+                        {{ Session::get('error') }}
+                    </div>
+                    @elseif(Session::has('success'))
+                    <div class="alert alert-success alert-dismissable">
+                        <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+                        {{ Session::get('success') }}
+                    </div>
+                    @endif
             <div class="box box-info">
 			<div class="viewTabs_rm">
                 <ul class="nav nav-tabs viewTabs order-summery-tabs">
@@ -166,8 +177,46 @@
                                         </table>
                                     </div>
 									</div>
-                                </div>
+                               
 
+                             <div class="col-md-6">
+                                    <div class="rencemt_order_table">
+                                        <h2>Shipping Information</h2>
+
+                                        <h4>Shipping Info</h4>
+                                           <table class="table">
+                                            <thead>
+                                              <tr>
+                                                <th>Track#</th>
+                                                <th>Action</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                            @if(count($order['order_shipping']))
+                                            @foreach($order['order_shipping'] as $shipping)
+                                              <tr>
+                                                <td>{{$shipping->track_no}}</td>
+                                                <td><a href="/sold/order/track-info/download/{{$shipping->track_no}}" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Download</a> <a target="_blank" href="https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&text28777=&tLabels=9400111699000840733045%2C" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
+                                              </tr>
+                                            @endforeach    
+                                            @else
+                                                <tr>
+                                                  <td>No Track information found</td>
+                                              </tr>
+                                            @endif                      
+                                            </tbody>
+                                          </table>
+                                        <form action="/seller/orders/genaate-label" method="POST" id="shipping_process">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
+                                        <input type="hidden" name="user_id" value="{{$order['basic'][0]->buyer_id}}">
+                                        
+                                         <input type="submit" value="Generate Label" class="btn btn-primary"/>
+                                        </form>
+                                       
+                                        </div>
+                                        
+                                    </div>
                             </div>
                             <div class="order-list-sec">
                                 <div class="row">

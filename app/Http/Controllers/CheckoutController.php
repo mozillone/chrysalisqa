@@ -109,8 +109,8 @@ class CheckoutController extends Controller {
   }
   public function addCreditCard(Request $request){
     $req=$request->all();
-    $cc_id=Creditcard::addCreditCard($req,Auth::user()->id);
-    return Response::JSON($cc_id);
+    $result=Creditcard::addCreditCard($req,Auth::user()->id);
+    return Response::JSON($result);
   }
   public function getCreditCard($card_id=null){
     if($card_id==null){

@@ -154,22 +154,45 @@
                                         </table>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3>Shipping Information</h3>
-                                        <form action="/orders/genaate-label" method="POST">
+                                        <h4>Shipping Info</h4>
+                                           <table class="table">
+                                            <thead>
+                                              <tr>
+                                                <th>Track#</th>
+                                                <th>Action</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                            @if(count($order['order_shipping']))
+                                            @foreach($order['order_shipping'] as $shipping)
+                                              <tr>
+                                                <td>{{$shipping->track_no}}</td>
+                                                <td><a href="/order/track-info/download/{{$shipping->track_no}}" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Download</a> <a target="_blank" href="https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&text28777=&tLabels=9400111699000840733045%2C" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
+                                              </tr>
+                                            @endforeach    
+                                            @else
+                                                <tr>
+                                                  <td>No Track information found</td>
+                                              </tr>
+                                            @endif                      
+                                            </tbody>
+                                          </table>
+                                        <form action="/orders/genaate-label" method="POST" id="shipping_process">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
+                                        <input type="hidden" name="user_id" value="{{$order['basic'][0]->buyer_id}}">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label for="shipping">Carrier</label>
-                                                <select class="form-control" name="" id="shipping">
-                                                    <option value="">USPS</option>
-                                                    <option value="">UPS</option>
+                                                <select class="form-control" name="carrier_type" id="carrier_type">
+                                                    <option value="USPS">USPS</option>
+                                                    <option value="FedEx">FedEx</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="sel1">Method</label>
-                                                <select class="form-control" id="sel1">
-                                                    <option value="None">None</option>
+                                                <select class="form-control" id="method" name="method">
+                                                    <option value="">None</option>
                                                     <option value="Priority Mail Express">Priority Mail
                                                         Express
                                                     </option>
@@ -181,7 +204,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="usr">Weight (lbs)</label>
-                                                <input type="text" class="form-control" id="usr">
+                                                <input type="text" class="form-control" id="weight" name="weight">
                                             </div>
                                         </div>
                                          <input type="submit" value="Generate Label" class="btn btn-primary"/>

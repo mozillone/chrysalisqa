@@ -121,6 +121,8 @@ Route::any('/order/{order_id}', ['as' => '','uses'=>'OrdersController@myOrderSum
 Route::any('/my/costumes-slod', ['as' => 'my-costumes-slod','uses'=>'OrdersController@costumeSoldList']);
 Route::any('/my-costumes-slod', ['as' => '','uses'=>'OrdersController@costumeSoldListData']);
 Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costumeSoldSummary']);
+Route::any('/seller/orders/genaate-label', ['as' => '','uses'=>'OrdersController@orderLabelGenate']);
+Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'OrdersController@downlaodTrankDetails']);
 /**************** User Orders routes end here ******************/
 
 
@@ -224,6 +226,7 @@ Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costu
 	    Route::post('/order/billing-address/update', ['as' => '','uses'=>'OrdersController@OrderBillingAddressUpate']);
 	    Route::post('/order/shipping-address/update', ['as' => '','uses'=>'OrdersController@OrderShippingAddressUpate']);
 	    Route::post('/orders/genaate-label', ['as' => '','uses'=>'OrdersController@orderLabelGenate']);
+	    Route::any('/order/track-info/download/{track_no}', ['as' => '','uses'=>'OrdersController@downlaodTrankDetails']);
 	     /*****************************Orders ends here ***********************/
 
 	    /*****************************Transactions starts here ***********************/

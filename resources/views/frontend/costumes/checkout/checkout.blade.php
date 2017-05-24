@@ -433,6 +433,7 @@
 		   <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
 		   	<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
+								<div class="payment-fail"></div>
 								<div class="col-md-12 col-sm-12 col-xs-12 payment-dropdown">
 											<label for="">Choose Saved</label>
 											<select class="form-control shpng-adr-mdl-seletor" id="cc_list">
