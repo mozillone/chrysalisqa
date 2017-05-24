@@ -326,7 +326,7 @@ class Order extends Authenticatable
                     'updated_at'=>date('Y-m-d h:i:s')
                       );
             $transaction_id=Site_model::insert_get_id('transactions',$transaction);
-            $transaction_info=array('user_name'=>$user['first_name']." ".$user['last_name'],'transaction_id'=>$transaction_id,'order_id'=>$req['order_id'],'status'=>$data['outcome']['type'],'amount'=>($data['amount']/100),'buyer_email'=>$req['buyer_email'],'buyer_name'=>$req['buyer_name']);
+            $transaction_info=array('user_name'=>$user['first_name']." ".$user['last_name'],'transaction_id'=>$transaction_id,'order_id'=>$req['order_id'],'status'=>$data['outcome']['type'],'amount'=>($data['amount']/100),'buyer_email'=>$req['buyer_email'],'buyer_name'=>$req['buyer_name'],'comment'=>$req['comment']);
             $result=array('result'=>1,'message'=>$transaction_info);
             return $result;
         }catch(Exception $e){
