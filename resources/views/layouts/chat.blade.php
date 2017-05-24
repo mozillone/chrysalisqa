@@ -20,11 +20,10 @@
   <body>
 <div class="header">
     <div class="container header-brand">
-        <a href="{{url('/home')}}" class="brand">Talk Message</a>
+        <a href="{{url('/')}}" class="brand">Talk Message</a>
     </div>
 </div>
       <div class="container clearfix body">
-   @include('partials.peoplelist')
     
     <div class="chat">
       <div class="chat-header clearfix">
@@ -76,7 +75,7 @@
         var msgshow = function(data) {
             var html = '<li id="message-' + data.id + '">' +
             '<div class="message-data">' +
-            '<span class="message-data-name"> <a href="#" class="talkDeleteMessage" data-message-id="' + data.id + '" title="Delete Messag"><i class="fa fa-close" style="margin-right: 3px;"></i></a>' + data.sender.name + '</span>' +
+            '<span class="message-data-name">' + data.sender.name + '</span>' +
             '<span class="message-data-time">1 Second ago</span>' +
             '</div>' +
             '<div class="message my-message">' +

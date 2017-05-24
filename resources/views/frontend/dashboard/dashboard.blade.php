@@ -12,11 +12,6 @@
  </div>
 </section>    
 	<section class="content create_section_page">
-
-				</div>
-			</div>
-		</div>
-	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
