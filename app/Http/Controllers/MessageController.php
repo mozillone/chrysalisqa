@@ -37,13 +37,16 @@ class MessageController extends Controller
 
         View::composer('partials.peoplelist', function($view) {
             $threads = Talk::threads();
+
             $view->with(compact('threads'));
         });
     }
 
     public function chatHistory($id)
-    {   $this->callPartials();
-        $conversations = Talk::getMessagesByUserId($id);
+    {   
+        
+        $this->callPartials();
+        $conversations = Talk::getConversationsById($id);
         $user = '';
         $messages = [];
         if(!$conversations) {
@@ -53,7 +56,7 @@ class MessageController extends Controller
             $messages = $conversations->messages;
         }
 
-        return view('messages.conversations', compact('messages', 'user'));
+        return view('messages.message', compact('messages', 'user'));
     }
 
     public function ajaxSendMessage(Request $request)
@@ -68,7 +71,7 @@ class MessageController extends Controller
             $this->validate($request, $rules);
 
             $body = $request->input('message-data');
-            $userId = $request->input('_id');
+            $userId = Auth::user()->id;
 
             if ($message = Talk::sendMessageByUserId($userId, $body)) {
                 $html = view('ajax.newMessageHtml', compact('message'))->render();
@@ -92,5 +95,22 @@ class MessageController extends Controller
     public function tests()
     {$this->callPartials();
         dd(Talk::channel());
+    }
+
+    public function converstationsofUser(){
+        $id = Auth::user()->id;
+        $this->callPartials();
+        $conversations = Talk::getConversationsById($id);
+        //dd($conversations);
+        $user = '';
+        $messages = [];
+        if(!$conversations) {
+            $user = User::find($id);
+        } else {
+            $user = $conversations->withUser;
+            $messages = $conversations->messages;
+        }
+
+        return view('messages.conversations', compact('messages', 'user'));
     }
 }

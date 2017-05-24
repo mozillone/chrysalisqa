@@ -356,7 +356,9 @@ Route::any('add-job-post', [
 /****************Jobs Management Ends Here***********************/
 
 });
-Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read');
+
+Route::any('message/{id}', 'MessageController@chatHistory')->name('message.read');
+Route::get('conversations', 'MessageController@converstationsofUser');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
