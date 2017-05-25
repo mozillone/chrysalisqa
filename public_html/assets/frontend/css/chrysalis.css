@@ -2462,6 +2462,24 @@ img#ajax_loader {
 	margin-bottom: 5px;
 	display: inline-block;
 }
+.blog-sec nav.breadcrumb {
+	margin-bottom: 15px;
+}
+.blog-article img {
+	width: 100%;
+	margin-bottom: 20px;
+}
+.blog-article h3 {
+	font-family: 'Proxima-Nova-Extrabold';
+	color: #000;
+	margin-top: 5px;
+}
+.blog-article p {
+	color: #31393C;
+}
+.blog-article hr {
+	margin-top: 40px;
+}
 .event-sec .progressbar_main {
 	padding: 8px;
 }

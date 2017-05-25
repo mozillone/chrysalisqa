@@ -2,18 +2,18 @@
 <html >
   <head>
     <meta charset="UTF-8">
-      <meta name="csrf-token" content="{{csrf_token()}}">
+      <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <title>Talk Message</title>
     
     
-    <link rel="stylesheet" href="{{asset('chat/css/reset.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('chat/css/reset.css')); ?>">
 
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-	<link rel="stylesheet" href="{{ asset('/assets/frontend/css/chrysalis.css')}}">
+	<link rel="stylesheet" href="<?php echo e(asset('/assets/frontend/css/chrysalis.css')); ?>">
 
-        <link rel="stylesheet" href="{{asset('chat/css/style.css')}}">
+        <link rel="stylesheet" href="<?php echo e(asset('chat/css/style.css')); ?>">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
@@ -42,25 +42,25 @@
     
     <div class="chat">
       <div class="chat-header clearfix">
-        @if(isset($user))
-            <img src="{{@$user->avatar}}" alt="avatar" />
-        @endif
+        <?php if(isset($user)): ?>
+            <img src="<?php echo e(@$user->avatar); ?>" alt="avatar" />
+        <?php endif; ?>
         <div class="chat-about">
-            @if(isset($user))
-                <div class="chat-with">{{'Chat with ' . @$user->name}}</div>
-            @else
+            <?php if(isset($user)): ?>
+                <div class="chat-with"><?php echo e('Chat with ' . @$user->name); ?></div>
+            <?php else: ?>
                 <div class="chat-with">No Thread Selected</div>
-            @endif
+            <?php endif; ?>
         </div>
         <i class="fa fa-star"></i>
       </div> <!-- end chat-header -->
       
-      @yield('content')
+      <?php echo $__env->yieldContent('content'); ?>
       
       <div class="chat-message clearfix">
       <form action="" method="post" id="talkSendMessage">
             <textarea name="message-data" id="message-data" placeholder ="Type your message" rows="3"></textarea>
-            <input type="hidden" name="_id" value="{{@request()->route('id')}}">
+            <input type="hidden" name="_id" value="<?php echo e(@request()->route('id')); ?>">
             <button type="submit">Send</button>
       </form>
 
@@ -72,7 +72,7 @@
 
 
       <script>
-          var __baseUrl = "{{url('/')}}"
+          var __baseUrl = "<?php echo e(url('/')); ?>"
       </script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
@@ -80,7 +80,7 @@
 
 
 
-        <script src="{{asset('chat/js/talk.js')}}"></script>
+        <script src="<?php echo e(asset('chat/js/talk.js')); ?>"></script>
 
     <script>
         var show = function(data) {
@@ -102,7 +102,8 @@
         }
 
     </script>
-    {!! talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['msgshow']]]) !!}
+    <?php echo talk_live(['user'=>["id"=>auth()->user()->id, 'callback'=>['msgshow']]]); ?>
+
 
   </body>
 </html>

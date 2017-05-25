@@ -1,0 +1,206 @@
+<?php $__env->startSection('title'); ?>
+Category edit@parent
+<?php $__env->stopSection(); ?>
+
+
+
+<?php $__env->startSection('header_styles'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('/vendors/jquery-ui/themes/base/jquery-ui.css')); ?>">
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('content'); ?>
+<section class="content-header">
+    <h1>Categories</h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="<?php echo e(url('dashboard')); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li>
+            <a href="<?php echo e(route('categories-list')); ?>">Categories List</a>
+        </li>
+        
+        <li class="active">edit <?php echo e($cat_data[0]->name); ?></li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title col-md-12 heading-agent">Edit <?php echo e($cat_data[0]->name); ?></h3>
+                </div>
+                <div class="box-body">
+                     <form id="category-edit" class="form-horizontal defult-form" name="userForm" action="<?php echo e(route('categories-edit')); ?>" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"> 
+                        <input type="hidden" name="category_id" value="<?php echo e($cat_data[0]->category_id); ?>"> 
+                        <div class="col-md-12">
+                            <h4>Basic Information</h4>
+                            <hr>
+                            <div class="col-md-6">
+                                    <div class="form-group has-feedback" >
+                                        <label for="inputEmail3" class="control-label">Category Name <span class="req-field" >*</span></label>
+                                            <input type="text" class="form-control" placeholder="Enter category name"  name="name" id="name" value="<?php echo e($cat_data[0]->name); ?>">
+                                        <p class="error"><?php echo e($errors->first('name')); ?></p> 
+                                    </div>
+                                    <div class="form-group has-feedback" >
+                                        <label for="inputEmail3" class="control-label">Parent Category</label>
+                                            <select class="form-control" id="parent_id" name="parent_id">
+                                                <option value="">--Select--</option>
+                                                <?php $__currentLoopData = $parent_cats; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cats): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                                <option value="<?php echo e($cats->category_id); ?>" <?php if($cats->category_id==$cat_data[0]->parent_id && $cat_data[0]->parent_id!="0"): ?> selected <?php endif; ?>><?php echo e($cats->name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                                           </select>
+                                        <p class="error"><?php echo e($errors->first('parent_id')); ?></p> 
+                                    </div>
+                                     <div class="form-group has-feedback" >
+                                        <label for="inputEmail3" class="control-label">Category Description<span class="req-field" >*</span></label>
+                                            <textarea class="form-control" placeholder="Enter category description"  name="desc"><?php echo e($cat_data[0]->description); ?></textarea> 
+                                        <p class="error"><?php echo e($errors->first('desc')); ?></p> 
+                                    </div>
+                                </div> 
+                           <!--  <div class="col-md-6">
+                             <div class="col-md-12">
+                                    <div class="form-group has-feedback" >
+                                        <label for="inputEmail3" class="control-label">Category Image <span class="req-field" >*</span></label>
+                                            <input type="file" class="form-control" name="cat_image" id="cat_image">
+                                            <div class="col-md-12">
+                                                 <img <?php if(file_exists( public_path('category_images/Normal/'.$cat_data[0]->thumb_image))): ?>) src="/category_images/Normal/<?php echo e($cat_data[0]->thumb_image); ?>" <?php else: ?>  src="/category_images/df_img.jpg" <?php endif; ?> class="img-responsive"/>
+                                            </div>
+                                        <p class="error"><?php echo e($errors->first('cat_image')); ?></p> 
+                                    </div>
+                                     <div class="form-group has-feedback" >
+                                        <label for="inputEmail3" class="control-label">Category Banner Image <span class="req-field" >*</span></label>
+                                            <input type="file" class="form-control" name="banner_image" id="banner_image">
+                                            <div class="col-md-12">
+                                                 <img <?php if(file_exists( public_path('category_images/Banner/'.$cat_data[0]->banner_image))): ?>) src="/category_images/Banner/<?php echo e($cat_data[0]->banner_image); ?>" <?php else: ?>  src="/category_images/df_img.jpg" <?php endif; ?> class="img-responsive"/>
+                                            </div>
+                                        <p class="error"><?php echo e($errors->first('banner_image')); ?></p> 
+                                    </div>
+                                </div> 
+                            </div> -->
+                             <div class="col-md-6">
+                            <label for="inputEmail3" class="control-label">Category Image <span class="req-field" >*</span></label>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                      <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
+                                          <div class="">
+                                            <div class=" upload_btns">
+                                                      <span class=" btn-file">
+                                                        <span class="fileupload-exists"></span>     
+                                                        <input id="cat_image" name="cat_image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
+                                               </span> 
+                                              </div>
+                                            </div>
+                                      </div>
+									  <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                      <div class="cat_img fileupload fileupload-new" data-provides="fileupload"> 
+                                          <img <?php if(file_exists( public_path('category_images/Normal/'.$cat_data[0]->thumb_image))): ?>) src="/category_images/Normal/<?php echo e($cat_data[0]->thumb_image); ?>" <?php else: ?>  src="/category_images/df_img.jpg" <?php endif; ?>  class="img-responsive"  id="img-chan1">
+                                      
+                         
+                                        <span class="fileupload-preview"></span>
+                                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+                                      </div>
+												   </div>
+                                    </div>
+                            </div>  
+                        </div>
+                          <div class="col-md-6">
+                            <label for="inputEmail3" class="control-label">Category Banner Image <span class="req-field" >*</span></label>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                      <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
+                                          <div class="">
+                                            <div class=" upload_btns">
+                                                      <span class=" btn-file">
+                                                        <span class="fileupload-exists"></span>     
+                                                        <input id="banner_image" name="banner_image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
+                                                        <input type="hidden" name="is_removed"/>
+                                              </span> 
+                                              </div>
+                                            </div>
+                                      </div>
+									  <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <div class="ban_img fileupload fileupload-new" data-provides="fileupload"> 
+                                          <img <?php if(file_exists( public_path('category_images/Banner/'.$cat_data[0]->banner_image))): ?>) src="/category_images/Banner/<?php echo e($cat_data[0]->banner_image); ?>" <?php else: ?>  src="/category_images/df_img.jpg" <?php endif; ?> class="img-responsive"  id="img-chan2">
+                                 
+                         
+                                        <span class="fileupload-preview"></span>
+                                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+                                      </div>
+										    </div>
+                                    </div>
+                            </div>  
+                        </div>
+                    </div> 
+                    </div> 
+                     <div class="col-md-12 costumes <?php if($cat_data[0]->parent_id=='0'): ?>hide <?php endif; ?> ">
+                            <h4>Category Costumes</h4>
+                            <hr>
+                            <div class="col-md-8">
+                                <div class="col-md-6">
+                                        <div class="form-group has-feedback" >
+                                            <label for="inputEmail3" class="control-label">Product</label>
+                                                <input type="text" class="form-control" placeholder="Enter category name"  name="products_list" id="products_list">
+                                                 <input type="hidden"  id="cst_name">
+                                                 <input type="hidden"  id="products_id">
+                                                 <input type="hidden"  id="sku_no">
+                                                 <input type="hidden"  id="price">
+                                                 <span>Note: Type the product name to autopopulate</span>
+                                        </div>
+                                </div> 
+                            <div class="col-md-2">
+                                <a class="btn btn-primary pull-right add-prod">+Add</a>
+                            </div>
+                            </div>
+                            <div class="col-md-12">
+                                <h4>Assigned Products</h4>
+                                <table class="table table-inverse">
+                                  <thead>
+                                    <tr>
+                                      <th>Costume Name</th>
+                                      <th>SKU No</th>
+                                      <th>Price</th>
+                                      <th></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id='reorder' class="assigned-products">
+                                    <?php $__currentLoopData = $cat_costumes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cst): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                    <tr>
+                                        <td><input type="hidden" value="<?php echo e($cst->costume_id); ?>" name="costume_list[]" class="costume_id"/><?php echo e($cst->cst_name); ?></td>
+                                        <td><?php echo e($cst->sku_no); ?></td>
+                                        <td>$<?php echo e($cst->price); ?></td>
+                                        <td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='<?php echo e($cst->costume_id); ?>'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                        </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                                  </tbody>
+                                </table>
+                            </div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="pull-right">
+                            <a href="/categories" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
+                            <button type="submit" class="btn btn-primary pull-right">Update</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                    
+            </div>
+            
+        </div>
+    </section>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('footer_scripts'); ?>
+<script src="<?php echo e(asset('/js/jquery.validate.min.js')); ?>"></script>
+<script src ="<?php echo e(asset('/vendors/jquery-ui/jquery-ui.min.js')); ?>"></script>
+<script src="<?php echo e(asset('/assets/admin/js/pages/category.js')); ?>"></script>
+<script src="<?php echo e(asset('/js/validator-addtional-methods.js')); ?>"></script>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
