@@ -24,8 +24,9 @@
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<div class="cart_page_vew span-align">
 									<?php if(count($data['basic'])): ?>
-									<?php $shipping_amount=0;$shipping_count=0?>
+									<?php $shipping_amount=0;$shipping_count=0;$costumes_count=0;?>
 									<?php $__currentLoopData = $data['basic']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+									<?php $costumes_count+=$cart->qty;?>
 										<div class="well">
 											<div class="shipping_date">
 											   <span><?php if($cart->shipping!="Free Shipping" ): ?> Expedited Shipping <?php echo e($cart->city); ?>, <?php echo e($cart->state); ?>  <span class="in_prc"><?php if(helper::userCartShippingAddress($cart->cart_id)): ?>
@@ -113,7 +114,7 @@
 											<div class="order_summery">
 												<div class="well">
 													<h3>Order Summary  </h3> 
-													<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">$<?php echo e(number_format($data['basic'][0]->total, 2, '.', ',')); ?> <em>(<?php echo e(count($data['basic'])); ?> Items)</em></span></p>
+													<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">$<?php echo e(number_format($data['basic'][0]->total, 2, '.', ',')); ?> <em>(<?php echo e($costumes_count); ?> Items)</em></span></p>
 													<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$
 													<?php echo e(number_format($shipping_amount, 2, '.', ',')); ?><em>(<?php echo e($shipping_count); ?> Items)</em></span></p>
 													<?php if(!empty($data['dis_count'])): ?> <p class="sub-all"><span>Coupon code: </span> <span class="sub-price">-$<?php echo e($data['dis_total']); ?> <em>(<?php echo e($data['dis_count']); ?> Items)</em></span></p><?php endif; ?>

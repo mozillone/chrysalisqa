@@ -146,8 +146,9 @@
 									</div>	
 									<div class="checkout_review_box">
 										<h2>Review Shipping & Delivery Time</h2>
-										<?php $shipping_amount=0;$shipping_count=0?>
+										<?php $shipping_amount=0;$shipping_count=0;$costumes_count=0;?>
 										<?php $__currentLoopData = $data['basic']['basic']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+										<?php $costumes_count+=$cart->qty;?>
 										<div class="well">
 											 <div class="shipping_date"><div class="shipping_date">
 											   <span><?php if($cart->shipping!="Free Shipping" ): ?> Expedited Shipping <?php echo e($cart->city); ?>, <?php echo e($cart->state); ?>  <span class="in_prc"><?php if(helper::userCartShippingAddress($cart->cart_id)): ?>
@@ -202,7 +203,7 @@
 									<div class="order_summery">
 										<div class="well">
 											<h3>Order Summary  </h3> 
-											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">$<?php echo e(number_format($data['basic']['basic'][0]->total, 2, '.', ',')); ?> <em>(<?php echo e(count($data['basic']['basic'])); ?> Items)</em></span></p>
+											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">$<?php echo e(number_format($data['basic']['basic'][0]->total, 2, '.', ',')); ?> <em>(<?php echo e($costumes_count); ?> Items)</em></span></p>
 											<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$
 											<?php echo e(number_format($shipping_amount, 2, '.', ',')); ?><em>(<?php echo e($shipping_count); ?> Items)</em></span></p>
 											<?php if(!empty($data['dis_count'])): ?> <p class="sub-all"><span>Coupon code: </span> <span class="sub-price">-$<?php echo e($data['dis_total']); ?> <em>(<?php echo e($data['dis_count']); ?> Items)</em></span></p><?php endif; ?>
@@ -260,7 +261,7 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="address_2">
+											<input type="text" class="form-control" id="shipping_address_2" placeholder="Address2 *" name="address_2">
 									</div>
 									</div>
 									<div class="col-md-6">
@@ -361,7 +362,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_address_2" placeholder="Address2" name="address_2">
+												<input type="text" class="form-control" id="billing_address_2" placeholder="Address2 *" name="address_2">
 											</div>
 										</div>
 										<div class="col-md-6">
