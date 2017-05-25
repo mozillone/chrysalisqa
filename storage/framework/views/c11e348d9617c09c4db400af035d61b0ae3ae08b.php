@@ -268,7 +268,7 @@
                                         <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                         <input type="hidden" name="order_id" value="<?php echo e($order['basic'][0]->order_id); ?>">
                                         <div class="form-inline">
-                                            <label for="update-status">Updtate Status</label>
+                                            <label for="update-status">Update Status</label>
                                             <select class="form-control" id="update-status" name="status_id"> 
                                                 <?php $__currentLoopData = $order['status']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                                                 <option value="<?php echo e($status->status_id); ?>" <?php if($order['basic'][0]->status==$status->name): ?> selected <?php endif; ?>><?php echo e($status->name); ?></option>

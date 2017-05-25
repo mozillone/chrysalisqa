@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Redirect;
 use DB;
 use App\Order;
+use App\Transactions;
 use Session;
 
 
@@ -59,6 +60,18 @@ class TransactionsController extends Controller {
         $transactions = DB::select('SELECT trans.order_id,concat(usr.first_name," ",usr.last_name) as user_name,concat("$ ",trans.amount) as price,DATE_FORMAT(trans.created_at,"%m/%d/%Y %h:%i %p") as date,CONCAT(UCASE(LEFT(trans.status, 1)), SUBSTRING(trans.status, 2)) as status FROM cc_transactions as trans  LEFT JOIN cc_users as usr on usr.id=trans.user_id '.$where.' GROUP BY trans.id  ORDER BY trans.id DESC');
         return response()->success(compact('transactions'));
   
+    }
+    public function transactionView($tansaction_id)
+    {
+      $title="Transactions View";
+      $transaction_info=Transactions::getTransactionInformation($tansaction_id);
+      if(count($transaction_info)){
+        return view('admin.transactions.transaction_view',compact('transaction_info',$transaction_info))->with('title',$title);
+      }else{
+        Session::flash('error', 'Transaction information not found.'); 
+        return Redirect::to('/transactions'); 
+      }
+      
     }
    
 }

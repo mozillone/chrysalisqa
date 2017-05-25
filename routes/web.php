@@ -232,6 +232,7 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 	    /*****************************Transactions starts here ***********************/
 	    Route::any('/transactions', ['as' => 'transactions-list','uses'=>'TransactionsController@transactionsList']);
 	    Route::any('/transactions-list', ['as' => '','uses'=>'TransactionsController@transactionsListData']);
+	    Route::any('/transaction/summary/{transaction_id}', ['as' => '','uses'=>'TransactionsController@transactionView']);
 	    /*****************************Transactions end here ***********************/
 
 	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
