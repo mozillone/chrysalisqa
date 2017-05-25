@@ -57,7 +57,7 @@ class TransactionsController extends Controller {
           }
         }
         }
-        $transactions = DB::select('SELECT trans.order_id,concat(usr.first_name," ",usr.last_name) as user_name,concat("$ ",trans.amount) as price,DATE_FORMAT(trans.created_at,"%m/%d/%Y %h:%i %p") as date,CONCAT(UCASE(LEFT(trans.status, 1)), SUBSTRING(trans.status, 2)) as status FROM cc_transactions as trans  LEFT JOIN cc_users as usr on usr.id=trans.user_id '.$where.' GROUP BY trans.id  ORDER BY trans.id DESC');
+        $transactions = DB::select('SELECT trans.id as transaction_id,trans.order_id,concat(usr.first_name," ",usr.last_name) as user_name,concat("$ ",trans.amount) as price,DATE_FORMAT(trans.created_at,"%m/%d/%Y %h:%i %p") as date,CONCAT(UCASE(LEFT(trans.status, 1)), SUBSTRING(trans.status, 2)) as status FROM cc_transactions as trans  LEFT JOIN cc_users as usr on usr.id=trans.user_id '.$where.' GROUP BY trans.id  ORDER BY trans.id DESC');
         return response()->success(compact('transactions'));
   
     }
