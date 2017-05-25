@@ -383,7 +383,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="address_2" value="{{$order['basic'][0]->shipping_address_2}}">
+                                            <input type="text" class="form-control" id="shipping_address_2" placeholder="Address2 *" name="address_2" value="{{$order['basic'][0]->shipping_address_2}}">
                                     </div>
                                     </div>
                                     <div class="col-md-6">
