@@ -29,5 +29,20 @@ $(function(){
 			errorElement : 'div',
 			errorLabelContainer: '.errorTxt',
 	})
+     $("#shipping_process").validate({
+			rules: {
+				weight:{
+					 	required: true,
+					 	number:true,
+					 	maxlength:10,
+					},
+				method:{
+					 	required: true,
+					}
+				
+			},
+			errorElement : 'div',
+			errorLabelContainer: '.errorTxt',
+	})
 })
 

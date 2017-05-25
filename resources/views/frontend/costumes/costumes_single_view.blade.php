@@ -8,6 +8,12 @@
 	.owl-controls.clickable {
 		display: none;
 	}
+	.likeview-rm1 .like-span1{
+		color: #000;
+	}
+	.likeview-rm1 .like-span1.active{
+		color: #60c4ab !important;
+	}
 
 </style>
 @endsection
