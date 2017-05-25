@@ -359,5 +359,13 @@ class Order extends Authenticatable
       DB::Update('update `cc_order` SET order_status_id='.Config::get('constants.Shipping').' WHERE order_id='.$req['order_id'].'');
       return true;
      }
+     protected function getStateAbbrev($state){
+        $state_abbrev=DB::Select('SELECT abbrev FROM `cc_states` WHERE `name` LIKE "'.$state.'"');
+        if(count($state_abbrev)){
+            return $state_abbrev[0]->abbrev;
+        }else{
+          return "";
+        }
+     }
   
 }

@@ -1,21 +1,18 @@
-@extends('admin.app')
+<?php $__env->startSection('title'); ?> View Order #<?php echo e($order_id); ?> @parent  <?php $__env->stopSection(); ?>
 
-{{-- Web site Title --}}
-@section('title') View Order #{{$order_id}} @parent @endsection
 
-{{-- page level styles --}}
-@section('header_styles')
-<link rel="stylesheet" href="{{ asset('/assets/admin/css/pages/order_summary.css')}}">
+<?php $__env->startSection('header_styles'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('/assets/admin/css/pages/order_summary.css')); ?>">
 
-@stop
-{{-- Content --}}
-@section('content')
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
  <section class="content-header">
-    <h1>View Order #{{$order_id}}</h1>
+    <h1>View Order #<?php echo e($order_id); ?></h1>
 	<nav class="breadcrumb">
-  <a class="breadcrumb-item" href="{{url('dashboard')}}">Dashboard &nbsp;&nbsp;></a>
-  <a class="breadcrumb-item" href="{{url('orders')}}">Orders > &nbsp;</a>
-  <span class="breadcrumb-item active">View Order #{{$order_id}}</span>
+  <a class="breadcrumb-item" href="<?php echo e(url('dashboard')); ?>">Dashboard &nbsp;&nbsp;></a>
+  <a class="breadcrumb-item" href="<?php echo e(url('orders')); ?>">Orders > &nbsp;</a>
+  <span class="breadcrumb-item active">View Order #<?php echo e($order_id); ?></span>
 </nav>
   
 </section>
@@ -24,17 +21,19 @@
 <div class="bg-card">
     <div class="row">
         <div class="col-md-12">
-        @if (Session::has('error'))
+        <?php if(Session::has('error')): ?>
                     <div class="alert alert-danger alert-dismissable">
                         <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-                        {{ Session::get('error') }}
+                        <?php echo e(Session::get('error')); ?>
+
                     </div>
-                    @elseif(Session::has('success'))
+                    <?php elseif(Session::has('success')): ?>
                     <div class="alert alert-success alert-dismissable">
                         <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-                        {{ Session::get('success') }}
+                        <?php echo e(Session::get('success')); ?>
+
                     </div>
-                    @endif
+                    <?php endif; ?>
             <div class="box box-info">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#summery" data-toggle="tab">Summary</a></li>
@@ -53,15 +52,15 @@
                                         <tbody>
                                         <tr>
                                             <td>Order #</td>
-                                            <td>{{$order['basic'][0]->order_id}}</td>
+                                            <td><?php echo e($order['basic'][0]->order_id); ?></td>
                                         </tr>
                                         <tr>
                                             <td>Ordered Date:</td>
-                                            <td>{{$order['basic'][0]->created_at}}</td>
+                                            <td><?php echo e($order['basic'][0]->created_at); ?></td>
                                         </tr>
                                         <tr>
                                             <td>Status:</td>
-                                            <td>{{$order['basic'][0]->status}}</td>
+                                            <td><?php echo e($order['basic'][0]->status); ?></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -72,15 +71,15 @@
                                         <tbody>
                                         <tr>
                                             <td>Buyer Name:</td>
-                                            <td>{{$order['basic'][0]->buyer_name}}</td>
+                                            <td><?php echo e($order['basic'][0]->buyer_name); ?></td>
                                         </tr>
                                         <tr>
                                             <td>Email</td>
-                                            <td>{{$order['basic'][0]->buyer_email}}</td>
+                                            <td><?php echo e($order['basic'][0]->buyer_email); ?></td>
                                         </tr>
                                         <tr>
                                             <td>Phone #:</td>
-                                            <td>{{$order['basic'][0]->buyer_phone}}</td>
+                                            <td><?php echo e($order['basic'][0]->buyer_phone); ?></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -91,15 +90,15 @@
                                         <tbody>
                                         <tr>
                                             <td>Seller Name:</td>
-                                            <td>{{$order['basic'][0]->seller_name}}</td>
+                                            <td><?php echo e($order['basic'][0]->seller_name); ?></td>
                                         </tr>
                                         <tr>
                                             <td>Email</td>
-                                            <td>{{$order['basic'][0]->seller_email}}</td>
+                                            <td><?php echo e($order['basic'][0]->seller_email); ?></td>
                                         </tr>
                                         <tr>
                                             <td>Phone #:</td>
-                                            <td>{{$order['basic'][0]->seller_phone}}</td>
+                                            <td><?php echo e($order['basic'][0]->seller_phone); ?></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -112,19 +111,19 @@
                                         <h3>Billing Address
                                             <a href="javascript::void(0);" data-toggle="modal" data-target="#billing_popup">Edit</a>
                                         </h3>
-                                        <p>{{$order['basic'][0]->pay_username}}</p>
-                                        <p>{{$order['basic'][0]->pay_address_1}}</p>
-                                        <p>{{$order['basic'][0]->pay_city}}</p>
-                                        <p>{{$order['basic'][0]->pay_state}} {{$order['basic'][0]->pay_zipcode}}</p>
+                                        <p><?php echo e($order['basic'][0]->pay_username); ?></p>
+                                        <p><?php echo e($order['basic'][0]->pay_address_1); ?></p>
+                                        <p><?php echo e($order['basic'][0]->pay_city); ?></p>
+                                        <p><?php echo e($order['basic'][0]->pay_state); ?> <?php echo e($order['basic'][0]->pay_zipcode); ?></p>
                                     </div>
                                     <div class="col-md-6">
                                         <h3>Shipping Address
                                             <a href="javascript::void(0);" data-toggle="modal" data-target="#shipping_popup">Edit</a>
                                         </h3>
-                                        <p>{{$order['basic'][0]->ship_username}}</p>
-                                        <p>{{$order['basic'][0]->shipping_address_1}}</p>
-                                        <p>{{$order['basic'][0]->shipping_city}}</p>
-                                        <p>{{$order['basic'][0]->shipping_state}} {{$order['basic'][0]->shipping_postcode}}</p>
+                                        <p><?php echo e($order['basic'][0]->ship_username); ?></p>
+                                        <p><?php echo e($order['basic'][0]->shipping_address_1); ?></p>
+                                        <p><?php echo e($order['basic'][0]->shipping_city); ?></p>
+                                        <p><?php echo e($order['basic'][0]->shipping_state); ?> <?php echo e($order['basic'][0]->shipping_postcode); ?></p>
                                      </div>
                                 </div>
                             </div>
@@ -136,7 +135,7 @@
                                             <tbody>
                                             <tr>
                                                 <td>Total Amount:</td>
-                                                <td>${{$order['basic'][0]->total}}</td>
+                                                <td>$<?php echo e($order['basic'][0]->total); ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Payment Method:</td>
@@ -144,11 +143,11 @@
                                             </tr>
                                             <tr>
                                                 <td>Transaction ID:</td>
-                                                <td>{{$order['basic'][0]->api_transaction_no}}</td>
+                                                <td><?php echo e($order['basic'][0]->api_transaction_no); ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Status:</td>
-                                                <td>{{$order['basic'][0]->payment_status}}</td>
+                                                <td><?php echo e($order['basic'][0]->payment_status); ?></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -163,24 +162,24 @@
                                               </tr>
                                             </thead>
                                             <tbody>
-                                            @if(count($order['order_shipping']))
-                                            @foreach($order['order_shipping'] as $shipping)
+                                            <?php if(count($order['order_shipping'])): ?>
+                                            <?php $__currentLoopData = $order['order_shipping']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $shipping): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                                               <tr>
-                                                <td>{{$shipping->track_no}}</td>
-                                                <td><a href="/order/track-info/download/{{$shipping->track_no}}" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Download</a> <a target="_blank" href="https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&text28777=&tLabels=9400111699000840733045%2C" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
+                                                <td><?php echo e($shipping->track_no); ?></td>
+                                                <td><a href="/order/track-info/download/<?php echo e($shipping->track_no); ?>" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Download</a> <a target="_blank" href="https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&text28777=&tLabels=9400111699000840733045%2C" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
                                               </tr>
-                                            @endforeach    
-                                            @else
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>    
+                                            <?php else: ?>
                                                 <tr>
                                                   <td>No Track information found</td>
                                               </tr>
-                                            @endif                      
+                                            <?php endif; ?>                      
                                             </tbody>
                                           </table>
                                         <form action="/orders/genaate-label" method="POST" id="shipping_process">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
-                                        <input type="hidden" name="user_id" value="{{$order['basic'][0]->buyer_id}}">
+                                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                        <input type="hidden" name="order_id" value="<?php echo e($order['basic'][0]->order_id); ?>">
+                                        <input type="hidden" name="user_id" value="<?php echo e($order['basic'][0]->buyer_id); ?>">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label for="shipping">Carrier</label>
@@ -227,30 +226,30 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($order['items'] as $items)
+                                            <?php $__currentLoopData = $order['items']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $items): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                                             <tr>
-                                                <td>{{$items->sku}}</td>
-                                                <td>{{$items->costume_name}}</td>
-                                                <td>$ {{number_format($items->price, 2, '.', ',')}}</td>
-                                                <td>{{$items->qty}}</td>
-                                                <td>$ {{number_format(($items->price*$items->qty), 2, '.', ',')}}</td>
+                                                <td><?php echo e($items->sku); ?></td>
+                                                <td><?php echo e($items->costume_name); ?></td>
+                                                <td>$ <?php echo e(number_format($items->price, 2, '.', ',')); ?></td>
+                                                <td><?php echo e($items->qty); ?></td>
+                                                <td>$ <?php echo e(number_format(($items->price*$items->qty), 2, '.', ',')); ?></td>
                                             </tr>
-                                            @endforeach
-                                            @foreach($order['order_amount'] as $amount)
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                                            <?php $__currentLoopData = $order['order_amount']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $amount): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                                             <tr>
                                                 <td></td>
                                                 <td></td>
-                                                <td>{{$amount->title}}</td>
+                                                <td><?php echo e($amount->title); ?></td>
                                                 <td></td>
-                                                <td>${{number_format($amount->value, 2, '.', ',')}}</td>
+                                                <td>$<?php echo e(number_format($amount->value, 2, '.', ',')); ?></td>
                                             </tr>
-                                             @endforeach
+                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                             <tr style="background: white">
                                                 <td></td>
                                                 <td></td>
                                                 <td>Total Paid</td>
                                                 <td></td>
-                                                <td>${{number_format($order['basic'][0]->total, 2, '.', ',')}}</td>
+                                                <td>$<?php echo e(number_format($order['basic'][0]->total, 2, '.', ',')); ?></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -263,17 +262,17 @@
                                         <h3>Order Status Update</h3>
                                         <div class="form-inline">
                                             <label >Current Status</label>
-                                            <span>{{$order['basic'][0]->status}}</span>
+                                            <span><?php echo e($order['basic'][0]->status); ?></span>
                                         </div>
                                         <form action="/order/status/update" method="POST" id="order_status">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
+                                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                        <input type="hidden" name="order_id" value="<?php echo e($order['basic'][0]->order_id); ?>">
                                         <div class="form-inline">
                                             <label for="update-status">Updtate Status</label>
                                             <select class="form-control" id="update-status" name="status_id"> 
-                                                @foreach($order['status'] as $status)
-                                                <option value="{{$status->status_id}}" @if($order['basic'][0]->status==$status->name) selected @endif>{{$status->name}}</option>
-                                                @endforeach
+                                                <?php $__currentLoopData = $order['status']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $status): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                                <option value="<?php echo e($status->status_id); ?>" <?php if($order['basic'][0]->status==$status->name): ?> selected <?php endif; ?>><?php echo e($status->name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                            </select>
                                         </div>
                                         <div class="form-group">
@@ -289,12 +288,12 @@
                                     <div class="col-md-6">
                                         <h3>Transaction</h3>
                                         <form action="/add/order/transation" method="POST" id="order_transaction">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
-                                        <input type="hidden" name="cc_id" value="{{$order['basic'][0]->cc_id}}">
-                                        <input type="hidden" name="user_id" value="{{$order['basic'][0]->buyer_id}}">
-                                        <input type="hidden" name="buyer_email" value="{{$order['basic'][0]->buyer_email}}">
-                                        <input type="hidden" name="buyer_name" value="{{$order['basic'][0]->buyer_name}}">
+                                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                        <input type="hidden" name="order_id" value="<?php echo e($order['basic'][0]->order_id); ?>">
+                                        <input type="hidden" name="cc_id" value="<?php echo e($order['basic'][0]->cc_id); ?>">
+                                        <input type="hidden" name="user_id" value="<?php echo e($order['basic'][0]->buyer_id); ?>">
+                                        <input type="hidden" name="buyer_email" value="<?php echo e($order['basic'][0]->buyer_email); ?>">
+                                        <input type="hidden" name="buyer_name" value="<?php echo e($order['basic'][0]->buyer_name); ?>">
                                         <div class="form-inline">
                                             <label >Amount</label>
                                             <input type="text" class="form-control" id="transaction_amount" placeholder="0.00" name="transaction_amount">
@@ -332,13 +331,13 @@
                           </tr>
                         </thead>
                         <tbody>
-                        @foreach($order['order_comment'] as $comments)
+                        <?php $__currentLoopData = $order['order_comment']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comments): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                           <tr>
-                            <td>{{$comments->comment}}</td>
-                            <td>{{$comments->status}}</td>
-                            <td>{{$comments->date}}</td>
+                            <td><?php echo e($comments->comment); ?></td>
+                            <td><?php echo e($comments->status); ?></td>
+                            <td><?php echo e($comments->date); ?></td>
                           </tr>
-                        @endforeach                          
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>                          
                         </tbody>
                       </table>
                 </div>
@@ -376,8 +375,8 @@
           </div>
           <div class="modal-body">
            <form class="" action="/order/shipping-address/update" method="POST" id="shipping_address">   
-           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-           <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
+           <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+           <input type="hidden" name="order_id" value="<?php echo e($order['basic'][0]->order_id); ?>">
                         
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="chek-out">
@@ -385,41 +384,41 @@
                                 <div class="address-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="{{$order['basic'][0]->shipping_firstname}}">
+                                            <input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="<?php echo e($order['basic'][0]->shipping_firstname); ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="{{$order['basic'][0]->shipping_lastname}}">
+                                            <input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="<?php echo e($order['basic'][0]->shipping_lastname); ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="shipping_address_1" placeholder="Address1 *" name="address_1" value="{{$order['basic'][0]->shipping_address_1}}">
+                                            <input type="text" class="form-control" id="shipping_address_1" placeholder="Address1 *" name="address_1" value="<?php echo e($order['basic'][0]->shipping_address_1); ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="address_2" value="{{$order['basic'][0]->shipping_address_2}}">
+                                            <input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="address_2" value="<?php echo e($order['basic'][0]->shipping_address_2); ?>">
                                     </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="shipping_city" placeholder="City *" name="city" value="{{$order['basic'][0]->shipping_city}}">
+                                            <input type="text" class="form-control" id="shipping_city" placeholder="City *" name="city" value="<?php echo e($order['basic'][0]->shipping_city); ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="shipping_postcode" placeholder="Zipcode *" name="postcode" value="{{$order['basic'][0]->shipping_postcode}}">
+                                            <input type="text" class="form-control" id="shipping_postcode" placeholder="Zipcode *" name="postcode" value="<?php echo e($order['basic'][0]->shipping_postcode); ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                             <div class="form-group">
                                                 <select class="form-control state_dropdown" name="shipping_state_dropdown" id="shipping_state_dropdown">
                                                     <option value="" selected>State</option>
-                                                    @foreach($order['states'] as $st)
-                                                    <option value="{{$st->name}}" @if($st->name==$order['basic'][0]->shipping_state) selected @endif>{{$st->name}}</option>
-                                                    @endforeach
+                                                    <?php $__currentLoopData = $order['states']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                                    <option value="<?php echo e($st->name); ?>" <?php if($st->name==$order['basic'][0]->shipping_state): ?> selected <?php endif; ?>><?php echo e($st->name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 
                                                 </select>
                                                 <input type="text" class="form-control normal-states hide" id="shipping_state" placeholder="State *" name="state">
@@ -429,9 +428,9 @@
                                         <div class="form-group">
                                             <select class="form-control" name="country" id="shipping_country">
                                                     <option value="" selected> Select</option>
-                                                    @foreach($order['countries'] as $cnt)
-                                                    <option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
-                                                    @endforeach
+                                                    <?php $__currentLoopData = $order['countries']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cnt): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                                    <option value="<?php echo e($cnt->country_name); ?>" <?php if($cnt->id=="230"): ?> selected <?php endif; ?>><?php echo e($cnt->country_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                             </select>
                                         </div>
                                     </div>
@@ -464,49 +463,49 @@
           </div>
           <div class="modal-body">
            <form class="" action="/order/billing-address/update" method="POST" id="billing_address">   
-           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-           <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
+           <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+           <input type="hidden" name="order_id" value="<?php echo e($order['basic'][0]->order_id); ?>">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="chek-out">
                                          
                                     <div class="address-form">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="{{$order['basic'][0]->pay_firstname}}">
+                                                <input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="<?php echo e($order['basic'][0]->pay_firstname); ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="{{$order['basic'][0]->pay_lastname}}">
+                                                <input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="<?php echo e($order['basic'][0]->pay_lastname); ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="billing_address_1" placeholder="Address1 *" name="address_1" value="{{$order['basic'][0]->pay_address_1}}">
+                                                <input type="text" class="form-control" id="billing_address_1" placeholder="Address1 *" name="address_1" value="<?php echo e($order['basic'][0]->pay_address_1); ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="billing_address_2" placeholder="Address2" name="address_2" value="{{$order['basic'][0]->pay_address_2}}">
+                                                <input type="text" class="form-control" id="billing_address_2" placeholder="Address2" name="address_2" value="<?php echo e($order['basic'][0]->pay_address_2); ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="billing_city" placeholder="City *" name="city" value="{{$order['basic'][0]->pay_city}}">
+                                                <input type="text" class="form-control" id="billing_city" placeholder="City *" name="city" value="<?php echo e($order['basic'][0]->pay_city); ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode" value="{{$order['basic'][0]->pay_zipcode}}">
+                                                <input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode" value="<?php echo e($order['basic'][0]->pay_zipcode); ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <div class="form-group">
                                                 <select class="form-control state_dropdown" name="billing_state_dropdown" id="billing_state_dropdown">
                                                     <option value="" selected>State</option>
-                                                    @foreach($order['states'] as $st)
-                                                    <option value="{{$st->name}}" @if($st->name==$order['basic'][0]->pay_state) selected @endif>{{$st->name}}</option>
-                                                    @endforeach
+                                                    <?php $__currentLoopData = $order['states']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                                    <option value="<?php echo e($st->name); ?>" <?php if($st->name==$order['basic'][0]->pay_state): ?> selected <?php endif; ?>><?php echo e($st->name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 
                                                 </select>
                                                 <input type="text" class="form-control normal-states hide" id="billing_state" placeholder="State *" name="state">
@@ -516,9 +515,9 @@
                                             <div class="form-group">
                                                 <select class="form-control" name="country" id="billing_country">
                                                         <option value="" selected> Select</option>
-                                                        @foreach($order['countries'] as $cnt)
-                                                        <option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
-                                                        @endforeach
+                                                        <?php $__currentLoopData = $order['countries']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cnt): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                                        <option value="<?php echo e($cnt->country_name); ?>" <?php if($cnt->id=="230"): ?> selected <?php endif; ?>><?php echo e($cnt->country_name); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -543,11 +542,13 @@
 </div>
 </section>
 </div>
-@stop
+<?php $__env->stopSection(); ?>
 
-{{-- page level scripts --}}
-@section('footer_scripts')
-<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('/assets/admin/js/pages/order_process.js') }}"></script>
 
-@stop
+<?php $__env->startSection('footer_scripts'); ?>
+<script src="<?php echo e(asset('/js/jquery.validate.min.js')); ?>"></script>
+<script src="<?php echo e(asset('/assets/admin/js/pages/order_process.js')); ?>"></script>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
