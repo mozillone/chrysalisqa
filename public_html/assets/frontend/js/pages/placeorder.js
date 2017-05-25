@@ -8,6 +8,7 @@ $(document).ready(function() {
 	$("#shipping_firstname").rules("add", {required:true,maxlength: 100});
 	$("#shipping_lastname").rules("add", {maxlength: 100});
 	$("#shipping_address_1").rules("add", {required:true,maxlength: 100});
+	$("#shipping_address_2").rules("add", {required:true,maxlength: 100});
 	$("#shipping_city").rules("add", {required:true});
 	$("#shipping_postcode").rules("add", {required:true,number:true});
 	$("#shipping_state_dropdown").rules("add", {required:true,maxlength:100});
@@ -17,6 +18,7 @@ $(document).ready(function() {
 	$("#billing_firstname").rules("add", {required:true,maxlength: 100});
 	$("#billing_lastname").rules("add", {maxlength: 100});
 	$("#billing_address_1").rules("add", {required:true,maxlength: 100});
+	$("#billing_address_2").rules("add", {required:true,maxlength: 100});
 	$("#billing_city").rules("add", {required:true});
 	$("#billing_postcode").rules("add", {required:true,number:true});
 	$("#billing_state_dropdown").rules("add", {required:true,maxlength:100});

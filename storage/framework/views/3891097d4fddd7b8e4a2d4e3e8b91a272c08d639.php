@@ -1,5 +1,4 @@
-@extends('/frontend/app')
-@section('styles')
+<?php $__env->startSection('styles'); ?>
 <style type="text/css">
 	.chek-out .form-group {
     width: 45%;
@@ -8,27 +7,29 @@
 }
 
 </style>
-<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
-  @endsection
-@section('content')
+<link rel="stylesheet" href="<?php echo e(asset('/vendors/sweetalert/dist/sweetalert.css')); ?>">
+  <?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
  <div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="checkout_page_total checkout-content">
 						<h1>Checkout</h1>
-						@if (Session::has('error'))
+						<?php if(Session::has('error')): ?>
 			            <div class="alert alert-danger alert-dismissable">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-							{{ Session::get('error') }}
+							<?php echo e(Session::get('error')); ?>
+
 						</div>
-			            @elseif(Session::has('success'))
+			            <?php elseif(Session::has('success')): ?>
 						<div class="alert alert-success alert-dismissable">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-							{{ Session::get('success') }}
+							<?php echo e(Session::get('success')); ?>
+
 						</div>
-						@endif
+						<?php endif; ?>
 						<form action="/checkout/placeorder" method="POST" id="placeorder">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 						<div class="row">
 							<div class="col-md-9 col-sm-8 col-xs-12">
 								<div class="check_out_page_left">
@@ -40,36 +41,36 @@
 													<h4>Shipping Adress:</h4>
 												</div>
 												<div class="col-md-5 col-sm-4 col-xs-12">
-													@if(!empty($data['cart_shipping_address']))
-													<input type="hidden" value="{{$data['cart_shipping_address'][0]->shipping_address_1}}" name="shipping_address_1">
+													<?php if(!empty($data['cart_shipping_address'])): ?>
+													<input type="hidden" value="<?php echo e($data['cart_shipping_address'][0]->shipping_address_1); ?>" name="shipping_address_1">
 														<div class="shipping_add">
-															<p>{{$data['cart_shipping_address'][0]->shipping_address_1}},<br>
-															@if(!empty($data['cart_shipping_address'][0]->shipping_address_2)){{$data['cart_shipping_address'][0]->shipping_address_2}}<br>@endif
-															{{$data['cart_shipping_address'][0]->shipping_city	}},{{$data['cart_shipping_address'][0]->shipping_state}},{{$data['cart_shipping_address'][0]->shipping_postcode}},{{$data['cart_shipping_address'][0]->shipping_country}} <br></p>
+															<p><?php echo e($data['cart_shipping_address'][0]->shipping_address_1); ?>,<br>
+															<?php if(!empty($data['cart_shipping_address'][0]->shipping_address_2)): ?><?php echo e($data['cart_shipping_address'][0]->shipping_address_2); ?><br><?php endif; ?>
+															<?php echo e($data['cart_shipping_address'][0]->shipping_city); ?>,<?php echo e($data['cart_shipping_address'][0]->shipping_state); ?>,<?php echo e($data['cart_shipping_address'][0]->shipping_postcode); ?>,<?php echo e($data['cart_shipping_address'][0]->shipping_country); ?> <br></p>
 														</div>
-													@else
-													@if(!empty($data['shipping_address']))
-													<input type="hidden"  value="{{$data['shipping_address'][0]->address1}}" name="shipping_address_1">
+													<?php else: ?>
+													<?php if(!empty($data['shipping_address'])): ?>
+													<input type="hidden"  value="<?php echo e($data['shipping_address'][0]->address1); ?>" name="shipping_address_1">
 														<div class="shipping_add">
-															<p>{{$data['shipping_address'][0]->address1}},<br>
-															@if(!empty($data['shipping_address'][0]->address2)){{$data['shipping_address'][0]->address2}}<br>@endif
-															{{$data['shipping_address'][0]->city}},{{$data['shipping_address'][0]->state}},{{$data['shipping_address'][0]->zip_code}},{{$data['shipping_address'][0]->country}} <br></p>
+															<p><?php echo e($data['shipping_address'][0]->address1); ?>,<br>
+															<?php if(!empty($data['shipping_address'][0]->address2)): ?><?php echo e($data['shipping_address'][0]->address2); ?><br><?php endif; ?>
+															<?php echo e($data['shipping_address'][0]->city); ?>,<?php echo e($data['shipping_address'][0]->state); ?>,<?php echo e($data['shipping_address'][0]->zip_code); ?>,<?php echo e($data['shipping_address'][0]->country); ?> <br></p>
 														</div>
-													@else
+													<?php else: ?>
 														<input type="hidden"  name="shipping_address_1">
 														<div class="shipping_add"></div>
 														<span class="shipping-empty">No Shipping Address Found</span>
-													@endif
-													@endif
-													<span class="error">{{ $errors->first('shipping_address_1') }}</span>
+													<?php endif; ?>
+													<?php endif; ?>
+													<span class="error"><?php echo e($errors->first('shipping_address_1')); ?></span>
 													
 												</div>
 												<div class="col-md-3 col-sm-4 col-xs-12">
-													@if(!empty($data['shipping_address']) || !empty($data['cart_shipping_address']))
+													<?php if(!empty($data['shipping_address']) || !empty($data['cart_shipping_address'])): ?>
 														<p class="cehck_edit"><a href="javascript::void(0);" class="shipping_popup">Edit</a></p>
-													@else
+													<?php else: ?>
 														<p class="cehck_edit" data-toggle="modal" data-target="#shipping_popup"><a href="javascript::void(0);" class="shipping_popup">New</a></p>
-													@endif
+													<?php endif; ?>
 												</div>
 												
 											</div>
@@ -78,37 +79,37 @@
 													<h4>Billing Adress:</h4>
 												</div>
 												<div class="col-md-5 col-sm-4 col-xs-12">
-												@if(!empty($data['cart_billing_address']))
-												<input type="hidden" name="pay_address_1" value="{{$data['cart_billing_address'][0]->pay_address_1}}"/>
+												<?php if(!empty($data['cart_billing_address'])): ?>
+												<input type="hidden" name="pay_address_1" value="<?php echo e($data['cart_billing_address'][0]->pay_address_1); ?>"/>
 													<div class="billing_add">
-														<p>{{$data['cart_billing_address'][0]->pay_address_1}},<br>
-														@if(!empty($data['cart_billing_address'][0]->pay_address_2)){{$data['cart_billing_address'][0]->pay_address_2}}<br>@endif
-														{{$data['cart_billing_address'][0]->pay_city}},{{$data['cart_billing_address'][0]->pay_state}},{{$data['cart_billing_address'][0]->pay_zipcode}},{{$data['cart_billing_address'][0]->pay_country}} <br>
+														<p><?php echo e($data['cart_billing_address'][0]->pay_address_1); ?>,<br>
+														<?php if(!empty($data['cart_billing_address'][0]->pay_address_2)): ?><?php echo e($data['cart_billing_address'][0]->pay_address_2); ?><br><?php endif; ?>
+														<?php echo e($data['cart_billing_address'][0]->pay_city); ?>,<?php echo e($data['cart_billing_address'][0]->pay_state); ?>,<?php echo e($data['cart_billing_address'][0]->pay_zipcode); ?>,<?php echo e($data['cart_billing_address'][0]->pay_country); ?> <br>
 														</p>
 													</div>
-												@else
-												@if(!empty($data['billing_address']))
-													<input type="hidden" name="pay_address_1" value="{{$data['billing_address'][0]->address1}}"/> 
+												<?php else: ?>
+												<?php if(!empty($data['billing_address'])): ?>
+													<input type="hidden" name="pay_address_1" value="<?php echo e($data['billing_address'][0]->address1); ?>"/> 
 													<div class="billing_add">
-														<p>{{$data['billing_address'][0]->address1}},<br>
-														@if(!empty($data['billing_address'][0]->address2)){{$data['billing_address'][0]->address2}}<br>@endif
-														{{$data['billing_address'][0]->city}},{{$data['billing_address'][0]->state}},{{$data['billing_address'][0]->zip_code}},{{$data['billing_address'][0]->country}} <br>
+														<p><?php echo e($data['billing_address'][0]->address1); ?>,<br>
+														<?php if(!empty($data['billing_address'][0]->address2)): ?><?php echo e($data['billing_address'][0]->address2); ?><br><?php endif; ?>
+														<?php echo e($data['billing_address'][0]->city); ?>,<?php echo e($data['billing_address'][0]->state); ?>,<?php echo e($data['billing_address'][0]->zip_code); ?>,<?php echo e($data['billing_address'][0]->country); ?> <br>
 														</p>
 													</div>
-												@else
+												<?php else: ?>
 													<input type="hidden"  name="pay_address_1">
 													<div class="billing_add"></div>
 													<span class="billing-empty">No Billing Address Found</span>
-												@endif
-												@endif
-												<span class="error">{{ $errors->first('pay_address_1') }}</span>
+												<?php endif; ?>
+												<?php endif; ?>
+												<span class="error"><?php echo e($errors->first('pay_address_1')); ?></span>
 												</div>
 												<div class="col-md-3 col-sm-4 col-xs-12">
-												@if(!empty($data['billing_address']) || !empty($data['cart_billing_address']))
+												<?php if(!empty($data['billing_address']) || !empty($data['cart_billing_address'])): ?>
 													<p class="cehck_edit"><a href="javascript::void(0);" class="billing_popup">Edit</a></p>
-												@else
+												<?php else: ?>
 													<p class="cehck_edit"><a href="javascript::void(0);" class="billing_popup">New</a></p>
-												@endif
+												<?php endif; ?>
 												</div>
 												
 											</div>
@@ -117,27 +118,27 @@
 														<h4>Payment Method:</h4>
 												</div>
 												<div class="col-md-5 col-sm-4 col-xs-12">
-												@if(!empty($data['cart_cc_details']))
-												<input type="hidden" name="card_id" value="{{$data['cart_cc_details'][0]->id}}"/> 
-													<p class="card_exp">@if($data['cart_cc_details'][0]->card_type=="Visa") <img src="/img/visa.png">  @elseif($data['cart_cc_details'][0]->card_type=="American Express") <img src="/img/americanexpress.png"> @elseif($data['cart_cc_details'][0]->card_type=="MasterCard") <img src="/img/mastercard.png"> @endif Ending in {{$data['cart_cc_details'][0]->exp_year}}</p>
-												@else
-													@if(!empty($data['cc_details']))
-													<input type="hidden" name="card_id" value="{{$data['cc_details'][0]->id}}"/>
-														<p class="card_exp"> @if($data['cc_details'][0]->card_type=="Visa") <img src="/img/visa.png">  @elseif($data['cc_details'][0]->card_type=="American Express") <img src="/img/americanexpress.png"> @elseif($data['cc_details'][0]->card_type=="MasterCard") <img src="/img/mastercard.png"> @endif  Ending in {{$data['cc_details'][0]->exp_year}}</p>
-													@else
+												<?php if(!empty($data['cart_cc_details'])): ?>
+												<input type="hidden" name="card_id" value="<?php echo e($data['cart_cc_details'][0]->id); ?>"/> 
+													<p class="card_exp"><?php if($data['cart_cc_details'][0]->card_type=="Visa"): ?> <img src="/img/visa.png">  <?php elseif($data['cart_cc_details'][0]->card_type=="American Express"): ?> <img src="/img/americanexpress.png"> <?php elseif($data['cart_cc_details'][0]->card_type=="MasterCard"): ?> <img src="/img/mastercard.png"> <?php endif; ?> Ending in <?php echo e($data['cart_cc_details'][0]->exp_year); ?></p>
+												<?php else: ?>
+													<?php if(!empty($data['cc_details'])): ?>
+													<input type="hidden" name="card_id" value="<?php echo e($data['cc_details'][0]->id); ?>"/>
+														<p class="card_exp"> <?php if($data['cc_details'][0]->card_type=="Visa"): ?> <img src="/img/visa.png">  <?php elseif($data['cc_details'][0]->card_type=="American Express"): ?> <img src="/img/americanexpress.png"> <?php elseif($data['cc_details'][0]->card_type=="MasterCard"): ?> <img src="/img/mastercard.png"> <?php endif; ?>  Ending in <?php echo e($data['cc_details'][0]->exp_year); ?></p>
+													<?php else: ?>
 														<input type="hidden"  name="card_id">
 														<p class="card_exp"></p>
 														<span class="payment-empty">No Payment Method Found</span>
-													@endif
-												@endif
-												<span class="error">{{ $errors->first('card_id') }}</span>
+													<?php endif; ?>
+												<?php endif; ?>
+												<span class="error"><?php echo e($errors->first('card_id')); ?></span>
 												</div>
 												<div class="col-md-3 col-sm-4 col-xs-12">
-													@if(!empty($data['cc_details']) || !empty($data['cart_cc_details']))
+													<?php if(!empty($data['cc_details']) || !empty($data['cart_cc_details'])): ?>
 														<p class="cehck_edit"><a href="javascript::void(0);" class="cc_popup">Edit</a></p>
-													@else
+													<?php else: ?>
 														<p class="cehck_edit"><a href="javascript::void(0);" class="cc_popup">New</a></p>
-													@endif
+													<?php endif; ?>
 												</div>
 												
 										</div>
@@ -146,53 +147,54 @@
 									<div class="checkout_review_box">
 										<h2>Review Shipping & Delivery Time</h2>
 										<?php $shipping_amount=0;$shipping_count=0;$costumes_count=0;?>
-										@foreach($data['basic']['basic'] as $cart)
+										<?php $__currentLoopData = $data['basic']['basic']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 										<?php $costumes_count+=$cart->qty;?>
 										<div class="well">
 											 <div class="shipping_date"><div class="shipping_date">
-											   <span>@if($cart->shipping!="Free Shipping" ) Expedited Shipping {{$cart->city}}, {{$cart->state}}  <span class="in_prc">@if(helper::userCartShippingAddress($cart->cart_id))
+											   <span><?php if($cart->shipping!="Free Shipping" ): ?> Expedited Shipping <?php echo e($cart->city); ?>, <?php echo e($cart->state); ?>  <span class="in_prc"><?php if(helper::userCartShippingAddress($cart->cart_id)): ?>
 											   <?php $amount=helper::domesticRate($cart->item_location,$cart->cart_id);?>
-											   @if(helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0" ) 
+											   <?php if(helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0" ): ?> 
 											         <?php $shipping_amount+=$shipping_amount+helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['rate'];$shipping_count++?>
-											    @endif
-											    @if(helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0")
-											    	({{helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['rate']}})
-											    @else
-											    	({{helper::domesticRate($cart->item_location,$cart->cart_id)['msg']}})
-											    @endif
-											  @endif </span>  @else Free Shipping {{$cart->city}}, {{$cart->state}}  <span class="in_prc">($0.00)</span> @endif </span><span class="shi_date_right text-right right">@if($cart->shipping!="Free Shipping" && helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0") @if(helper::userCartShippingAddress($cart->cart_id))
-											    Est delivery between {{date('D M d')}}  and {{date('D M d',strtotime('+'.helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['MailService'].' day'))}}
-											  <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i>  @endif @endif </span>
+											    <?php endif; ?>
+											    <?php if(helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0"): ?>
+											    	(<?php echo e(helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['rate']); ?>)
+											    <?php else: ?>
+											    	(<?php echo e(helper::domesticRate($cart->item_location,$cart->cart_id)['msg']); ?>)
+											    <?php endif; ?>
+											  <?php endif; ?> </span>  <?php else: ?> Free Shipping <?php echo e($cart->city); ?>, <?php echo e($cart->state); ?>  <span class="in_prc">($0.00)</span> <?php endif; ?> </span><span class="shi_date_right text-right right"><?php if($cart->shipping!="Free Shipping" && helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0"): ?> <?php if(helper::userCartShippingAddress($cart->cart_id)): ?>
+											    Est delivery between <?php echo e(date('D M d')); ?>  and <?php echo e(date('D M d',strtotime('+'.helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['MailService'].' day'))); ?>
+
+											  <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i>  <?php endif; ?> <?php endif; ?> </span>
 											</div></div>
 											<div class="row">
 												<div class="col-md-9 col-sm-9 col-xs-12">
 													<div class="media">
 														<div class="media-left">
-															@if($cart->image!=null && file_exists(public_path('/costumers_images/Medium/'.$cart->image)))<img src="costumers_images/Medium/{{$cart->image}}" class="media-object"> @else <img src="costumers_images/default-placeholder.jpg" class="media-object"> @endif
+															<?php if($cart->image!=null && file_exists(public_path('/costumers_images/Medium/'.$cart->image))): ?><img src="costumers_images/Medium/<?php echo e($cart->image); ?>" class="media-object"> <?php else: ?> <img src="costumers_images/default-placeholder.jpg" class="media-object"> <?php endif; ?>
 														</div>
 														<div class="media-body">
-															<h4 class="media-heading"><a href="/product{{$cart->url_key}}">{{$cart->costume_name}}</a></h4>
-															<p>@if($cart->is_film=="yes")<p class="f_quality1">Film Quality</p> @else  @endif</p>
-															<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
+															<h4 class="media-heading"><a href="/product<?php echo e($cart->url_key); ?>"><?php echo e($cart->costume_name); ?></a></h4>
+															<p><?php if($cart->is_film=="yes"): ?><p class="f_quality1">Film Quality</p> <?php else: ?>  <?php endif; ?></p>
+															<p><b>Item Condition:</b> <?php echo e(ucwords(str_replace('_', ' ',$cart->condition))); ?></p>
 															<p><b>Size:</b> Small</p>
-															<p class="upload_id">Uploaded by<span> {{$cart->user_name}}</span></p>
+															<p class="upload_id">Uploaded by<span> <?php echo e($cart->user_name); ?></span></p>
 														</div>
 													</div>
 												</div>
 												<div class="col-md-3 col-sm-3 col-xs-12">
-													<p class="price_right text-right"><span class="check_price">@if($cart->created_user_group=="admin" && $cart->discount!=null && $cart->uses_customer<$cart->uses_total && date('Y-m-d H:i:s')>=$cart->date_start && date('Y-m-d H:i:s')<=$cart->date_end)
+													<p class="price_right text-right"><span class="check_price"><?php if($cart->created_user_group=="admin" && $cart->discount!=null && $cart->uses_customer<$cart->uses_total && date('Y-m-d H:i:s')>=$cart->date_start && date('Y-m-d H:i:s')<=$cart->date_end): ?>
 														<?php $discount=($cart->price/100)*$cart->discount;
 															   $new_price=$cart->price-$discount;
 													    ?>
-													  @else
+													  <?php else: ?>
 															 <?php $new_price=$cart->price;?>
-													@endif
-													${{number_format(($cart->qty)*($new_price), 2, '.', ',')}}</span>
-													<span><a data-item-id="{{$cart->cart_item_id}}" data-cart_id="{{$cart->cart_id}}" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
+													<?php endif; ?>
+													$<?php echo e(number_format(($cart->qty)*($new_price), 2, '.', ',')); ?></span>
+													<span><a data-item-id="<?php echo e($cart->cart_item_id); ?>" data-cart_id="<?php echo e($cart->cart_id); ?>" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
 												</div>
 											</div>
 										</div>
-										@endforeach
+										<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 									</div>
 								</div>
 							</div>
@@ -201,12 +203,12 @@
 									<div class="order_summery">
 										<div class="well">
 											<h3>Order Summary  </h3> 
-											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}} <em>({{$costumes_count}} Items)</em></span></p>
+											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">$<?php echo e(number_format($data['basic']['basic'][0]->total, 2, '.', ',')); ?> <em>(<?php echo e($costumes_count); ?> Items)</em></span></p>
 											<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$
-											{{number_format($shipping_amount, 2, '.', ',')}}<em>({{$shipping_count}} Items)</em></span></p>
-											@if(!empty($data['dis_count'])) <p class="sub-all"><span>Coupon code: </span> <span class="sub-price">-${{$data['dis_total']}} <em>({{$data['dis_count']}} Items)</em></span></p>@endif
+											<?php echo e(number_format($shipping_amount, 2, '.', ',')); ?><em>(<?php echo e($shipping_count); ?> Items)</em></span></p>
+											<?php if(!empty($data['dis_count'])): ?> <p class="sub-all"><span>Coupon code: </span> <span class="sub-price">-$<?php echo e($data['dis_total']); ?> <em>(<?php echo e($data['dis_count']); ?> Items)</em></span></p><?php endif; ?>
 											<!-- <p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$0.00 </span></p> -->
-											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">@if(!empty($data['basic']['dis_count']))${{number_format($data['basic']['basic'][0]->total+$shipping_amount-$data['basic']['dis_total'], 2, '.', ',')}} @else ${{number_format($data['basic']['basic'][0]->total+$shipping_amount, 2, '.', ',')}}@endif </span></p>
+											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price"><?php if(!empty($data['basic']['dis_count'])): ?>$<?php echo e(number_format($data['basic']['basic'][0]->total+$shipping_amount-$data['basic']['dis_total'], 2, '.', ',')); ?> <?php else: ?> $<?php echo e(number_format($data['basic']['basic'][0]->total+$shipping_amount, 2, '.', ',')); ?><?php endif; ?> </span></p>
 											<button class="btn btn-primary">Place Order</button>
 										</div>
 									</div>
@@ -227,8 +229,8 @@
 	      </div>
 	      <div class="modal-body">
 	       <form class="" action="javascript::void(0);" method="POST" id="shipping_address">   
-	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	       <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
+	       <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+	       <input type="hidden" name="cart_id" value="<?php echo e($data['basic']['basic'][0]->cart_id); ?>">
 						
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="chek-out">
@@ -244,12 +246,12 @@
 								<div class="address-form">
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+											<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="<?php echo e(Auth::user()->first_name); ?>">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+											<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="<?php echo e(Auth::user()->last_name); ?>">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -276,9 +278,9 @@
 											<div class="form-group">
 												<select class="form-control state_dropdown" name="shipping_state_dropdown" id="shipping_state_dropdown">
 													<option value="" selected>State</option>
-													@foreach($states as $st)
-													<option value="{{$st->name}}">{{$st->name}}</option>
-													@endforeach
+													<?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+													<option value="<?php echo e($st->name); ?>"><?php echo e($st->name); ?></option>
+													<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 
 												</select>
 												<input type="text" class="form-control normal-states hide" id="shipping_state" placeholder="State *" name="state">
@@ -288,9 +290,9 @@
 										<div class="form-group">
 											<select class="form-control" name="country" id="shipping_country">
 													<option value="" selected> Select</option>
-													@foreach($countries as $cnt)
-													<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
-													@endforeach
+													<?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cnt): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+													<option value="<?php echo e($cnt->country_name); ?>" <?php if($cnt->id=="230"): ?> selected <?php endif; ?>><?php echo e($cnt->country_name); ?></option>
+													<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 											</select>
 										</div>
 									</div>
@@ -328,8 +330,8 @@
 	      </div>
 	      <div class="modal-body">
 	       <form class="" action="javascript::void(0);" method="POST" id="billing_address">   
-	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-		   <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
+	       <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+		   <input type="hidden" name="cart_id" value="<?php echo e($data['basic']['basic'][0]->cart_id); ?>">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
 								<div class="col-md-12 col-sm-12 col-xs-12 billing-dropdown">
@@ -345,12 +347,12 @@
 									<div class="address-form">
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+												<input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="<?php echo e(Auth::user()->first_name); ?>">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+												<input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="<?php echo e(Auth::user()->last_name); ?>">
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -377,9 +379,9 @@
 											<div class="form-group">
 												<select class="form-control state_dropdown" name="billing_state_dropdown" id="billing_state_dropdown">
 													<option value="" selected>State</option>
-													@foreach($states as $st)
-													<option value="{{$st->name}}">{{$st->name}}</option>
-													@endforeach
+													<?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+													<option value="<?php echo e($st->name); ?>"><?php echo e($st->name); ?></option>
+													<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 
 												</select>
 												<input type="text" class="form-control normal-states hide" id="billing_state" placeholder="State *" name="state">
@@ -389,9 +391,9 @@
 											<div class="form-group">
 												<select class="form-control" name="country" id="billing_country">
 														<option value="" selected> Select</option>
-														@foreach($countries as $cnt)
-														<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
-														@endforeach
+														<?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cnt): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+														<option value="<?php echo e($cnt->country_name); ?>" <?php if($cnt->id=="230"): ?> selected <?php endif; ?>><?php echo e($cnt->country_name); ?></option>
+														<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 												</select>
 											</div>
 										</div>
@@ -430,8 +432,8 @@
 	      </div>
 	      <div class="modal-body">
 	       <form class="" action="javascript::void(0);" method="POST" id="cc_form">   
-	       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-		   <input type="hidden" name="cart_id" value="{{ $data['basic']['basic'][0]->cart_id}}">
+	       <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+		   <input type="hidden" name="cart_id" value="<?php echo e($data['basic']['basic'][0]->cart_id); ?>">
 		   	<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="chek-out">
 								<div class="payment-fail"></div>
@@ -488,9 +490,9 @@
 										<div class="col-md-6" style="padding: 0">
 											 <select name="exp_year" class="form-control" id="exp_year">
 												<option value="">YYYY</option>
-												@for($i=0;$i<=30;$i++)
-												<option value="{{date('Y',strtotime('now'))+$i}}">{{date('Y',strtotime('now'))+$i}}</option>
-												 @endfor
+												<?php for($i=0;$i<=30;$i++): ?>
+												<option value="<?php echo e(date('Y',strtotime('now'))+$i); ?>"><?php echo e(date('Y',strtotime('now'))+$i); ?></option>
+												 <?php endfor; ?>
 											 </select>
 										</div>
 									</div>
@@ -526,12 +528,14 @@
 
 	</div>
 </div>
-@stop
-{{-- page level scripts --}}
-@section('footer_scripts')
-<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('/assets/frontend/js/pages/placeorder.js') }}"></script>
-<script src="{{ asset('/js/credit-card-validation.js') }}"></script>
-<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+<?php $__env->stopSection(); ?>
 
-@stop
+<?php $__env->startSection('footer_scripts'); ?>
+<script src="<?php echo e(asset('/js/jquery.validate.min.js')); ?>"></script>
+<script src="<?php echo e(asset('/assets/frontend/js/pages/placeorder.js')); ?>"></script>
+<script src="<?php echo e(asset('/js/credit-card-validation.js')); ?>"></script>
+<script src="<?php echo e(asset('/vendors/sweetalert/dist/sweetalert.min.js')); ?>"></script>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('/frontend/app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

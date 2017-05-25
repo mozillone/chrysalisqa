@@ -1,24 +1,21 @@
-@extends('admin.app')
+<?php $__env->startSection('title'); ?> @parent
+<?php $__env->stopSection(); ?>
 
-{{-- Web site Title --}}
-@section('title') @parent
-@endsection
 
-{{-- page level styles --}}
-@section('header_styles')
-<link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
-<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
-<link rel="stylesheet" href="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}">
+<?php $__env->startSection('header_styles'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('/vendors/sweetalert/dist/sweetalert.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')); ?>">
 
-@stop
+<?php $__env->stopSection(); ?>
 
-{{-- Page content --}}
-@section('content')
+
+<?php $__env->startSection('content'); ?>
  <section class="content-header">
     <h1>Transactions</h1>
     <ol class="breadcrumb">
     <li>
-        <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
+        <a href="<?php echo e(url('dashboard')); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
     </li>
     <li class="active">Transactions</li>
   </ol>
@@ -26,17 +23,19 @@
 <section class="content" ng-controller="TransactionsController">
     <div class="row">
         <div class="col-md-12">
-         @if (Session::has('error'))
+         <?php if(Session::has('error')): ?>
                 <div class="alert alert-danger alert-dismissable">
                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        {{ Session::get('error') }}
+                        <?php echo e(Session::get('error')); ?>
+
                 </div>
-                @elseif(Session::has('success'))
+                <?php elseif(Session::has('success')): ?>
                  <div class="alert alert-success alert-dismissable">
                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                       {{ Session::get('success') }}
+                       <?php echo e(Session::get('success')); ?>
+
                 </div>
-        @endif
+        <?php endif; ?>
             <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">Transactions List</h3>
@@ -54,7 +53,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <input type="hidden" class="form-control token"  name="csrf-token" value="{{ csrf_token() }}">
+                      <input type="hidden" class="form-control token"  name="csrf-token" value="<?php echo e(csrf_token()); ?>">
                       <td><input type="text" class="form-control" ng-model="search.order_id"  placeholder=""></td>
                       <td><input type="text" class="form-control" ng-model="search.id"  placeholder=""></td>
 					            <td><input type="text" class="form-control" ng-model="search.user_name"  placeholder=""></td>
@@ -93,23 +92,20 @@
         </div>
     </div>
 </section>
-@stop
-
-
-{{-- page level scripts --}}
-@section('footer_scripts') 
-
-<script src="{{ asset('angular/Admin/Transactions/Controllers/transactions-lists.js') }}"></script>
-<script src="{{ asset('angular/Admin/Transactions/Services/transactions.js') }}"></script>
-<script src="{{ asset('angular/Admin/ExportCsv/Services/ExportCsv.js') }}"></script>
-<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
-<script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
-<script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
-
-@stop
+<?php $__env->stopSection(); ?>
 
 
 
+<?php $__env->startSection('footer_scripts'); ?> 
+
+<script src="<?php echo e(asset('angular/Admin/Transactions/Controllers/transactions-lists.js')); ?>"></script>
+<script src="<?php echo e(asset('angular/Admin/Transactions/Services/transactions.js')); ?>"></script>
+<script src="<?php echo e(asset('angular/Admin/ExportCsv/Services/ExportCsv.js')); ?>"></script>
+<script src="<?php echo e(asset('/vendors/sweetalert/dist/sweetalert.min.js')); ?>"></script>
+<script src="<?php echo e(asset('/vendors/bootstrap-datetimepicker/moment.js')); ?>"></script>
+<script src="<?php echo e(asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')); ?>"></script>
+
+<?php $__env->stopSection(); ?>
 
 
 
@@ -137,3 +133,8 @@
 
 
 
+
+
+
+
+<?php echo $__env->make('admin.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

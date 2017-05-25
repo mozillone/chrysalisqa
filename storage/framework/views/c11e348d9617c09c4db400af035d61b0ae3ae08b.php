@@ -37,7 +37,7 @@
             <div class="box box-info">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="/order/summary/<?php echo e($order['basic'][0]->order_id); ?>">Summary</a></li>
-                    <li><a href="">Shipping Status</a></li>
+                    <li><a href="/order/shipping/<?php echo e($order['basic'][0]->order_id); ?>">Shipping Status</a></li>
                     <li><a href="#payment">Payment Info</a></li>
                     <li><a href="#dispute">Dispute</a></li>
                 </ul>
@@ -382,7 +382,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="address_2" value="<?php echo e($order['basic'][0]->shipping_address_2); ?>">
+                                            <input type="text" class="form-control" id="shipping_address_2" placeholder="Address2 *" name="address_2" value="<?php echo e($order['basic'][0]->shipping_address_2); ?>">
                                     </div>
                                     </div>
                                     <div class="col-md-6">

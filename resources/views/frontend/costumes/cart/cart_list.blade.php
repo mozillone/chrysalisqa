@@ -23,8 +23,9 @@
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<div class="cart_page_vew span-align">
 									@if(count($data['basic']))
-									<?php $shipping_amount=0;$shipping_count=0?>
+									<?php $shipping_amount=0;$shipping_count=0;$costumes_count=0;?>
 									@foreach($data['basic'] as $cart)
+									<?php $costumes_count+=$cart->qty;?>
 										<div class="well">
 											<div class="shipping_date">
 											   <span>@if($cart->shipping!="Free Shipping" ) Expedited Shipping {{$cart->city}}, {{$cart->state}}  <span class="in_prc">@if(helper::userCartShippingAddress($cart->cart_id))
@@ -111,7 +112,7 @@
 											<div class="order_summery">
 												<div class="well">
 													<h3>Order Summary  </h3> 
-													<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic'][0]->total, 2, '.', ',')}} <em>({{count($data['basic'])}} Items)</em></span></p>
+													<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic'][0]->total, 2, '.', ',')}} <em>({{$costumes_count}} Items)</em></span></p>
 													<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$
 													{{number_format($shipping_amount, 2, '.', ',')}}<em>({{$shipping_count}} Items)</em></span></p>
 													@if(!empty($data['dis_count'])) <p class="sub-all"><span>Coupon code: </span> <span class="sub-price">-${{$data['dis_total']}} <em>({{$data['dis_count']}} Items)</em></span></p>@endif

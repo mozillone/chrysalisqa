@@ -123,7 +123,7 @@ class Order extends Authenticatable
                                  'cc_id'=>$card_id,
                                  'created_at'=>date('Y-m-d h:i:s'),
                                 );
-                $order_id=Site_model::insert_get_id('order',$order_info);
+                 $order_id=Site_model::insert_get_id('order',$order_info);
                  $this->orderStatusInserted($order_id,Config::get('constants.Processing'));
                  $price=0;
                  $total_shiping=0;
@@ -197,7 +197,7 @@ class Order extends Authenticatable
       }
     }
     protected function getCharitiesList(){
-       $charities_list=DB::Select('SELECT * FROM cc_charities');
+       $charities_list=DB::Select('SELECT * FROM cc_charities order by id desc LIMIT 0,5');
        return $charities_list;
     }
     protected function orderCharityFund($req){
