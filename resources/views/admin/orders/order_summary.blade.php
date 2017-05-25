@@ -269,7 +269,7 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
                                         <div class="form-inline">
-                                            <label for="update-status">Updtate Status</label>
+                                            <label for="update-status">Update Status</label>
                                             <select class="form-control" id="update-status" name="status_id"> 
                                                 @foreach($order['status'] as $status)
                                                 <option value="{{$status->status_id}}" @if($order['basic'][0]->status==$status->name) selected @endif>{{$status->name}}</option>
