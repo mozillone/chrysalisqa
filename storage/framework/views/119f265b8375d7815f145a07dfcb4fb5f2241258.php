@@ -2,18 +2,18 @@
 <html >
   <head>
     <meta charset="UTF-8">
-      <meta name="csrf-token" content="{{csrf_token()}}">
+      <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <title>Talk Message</title>
     
     
-    <link rel="stylesheet" href="{{asset('chat/css/reset.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('chat/css/reset.css')); ?>">
 
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-	<link rel="stylesheet" href="{{ asset('/assets/frontend/css/chrysalis.css')}}">
+	<link rel="stylesheet" href="<?php echo e(asset('/assets/frontend/css/chrysalis.css')); ?>">
 
-        <link rel="stylesheet" href="{{asset('chat/css/style.css')}}">
+        <link rel="stylesheet" href="<?php echo e(asset('chat/css/style.css')); ?>">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
@@ -54,7 +54,7 @@
 		<div class="clearfix messages-chat-list">
             <div class="tab-content">
                 <div class="tab-pane active" id="Inbox">
-					@include('partials.peoplelist')	
+					<?php echo $__env->make('partials.peoplelist', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
 				</div>
                 <div class="tab-pane" id="Sent-msg">Sent messages</div>
                 

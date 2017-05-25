@@ -3,21 +3,21 @@
   box-sizing: border-box;
 }
 
-body {
+ /* body {
   background: #C5DDEB;
   font: 14px/20px "Lato", Arial, sans-serif;
   padding: 40px 0;
   color: white;
-}
+} 
 
 .container {
   margin: 0 auto;
   width: 750px;
   border-radius: 5px;
-}
+} */
 
 .body {
-    background: #444753;
+    background: #fff;
     margin-top: 10px;
 }
 
@@ -46,8 +46,9 @@ body {
 }
 
 .people-list {
-    width: 260px;
-    float: left;
+    width: 100%;
+    padding: 22px 41px;
+	
 }
 .people-list .search {
   padding: 20px;
@@ -67,13 +68,18 @@ body {
 }
 .people-list ul {
   padding: 20px;
-  height: 770px;
+  
 }
 .people-list ul li {
   padding-bottom: 20px;
 }
 .people-list img {
-  float: left;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+}
+.people-list .col-md-2 img {
+	border-radius: 0;
 }
 .people-list .about {
   float: left;
@@ -87,7 +93,7 @@ body {
 }
 
 .chat {
-  width: 490px;
+  width: 100%;
   float: left;
   background: #F2F5F8;
   border-top-right-radius: 5px;
@@ -241,3 +247,76 @@ body {
 .talkDeleteMessage {
     color: #563333;
 }
+
+/* message-page styles */
+
+
+
+.tabs-left>li, .tabs-right>li {
+  float: none;
+ 
+}
+.message-chat-sec .nav-tabs {
+    border: 1px solid #e1e1e1;
+    padding: 20px;
+}
+.message-chat-sec .nav>li>a {
+	padding-left: 0;
+    font-size: 16px;
+    font-family: Proxima-Nova-Extrabold;
+}
+.message-chat-sec .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+	border: 1px solid transparent;
+}
+.message-chat-sec .nav-tabs>li>a:hover {
+	border: 1px solid transparent;
+}
+.message-chat-sec .nav>li:first-child {
+    border-bottom: 2px solid #e1e1e1;
+}
+.message-chat-sec i.fa.fa-angle-right {
+    float: right;
+    margin-top: 5px;
+}
+.messages-chat-list {
+	border: 1px solid #e1e1e1;
+}
+.message-chat-sec .people-list ul {
+	display: flex;
+	align-items: center;
+}
+.message-chat-sec .people-list p{
+	margin-bottom: 0;
+	word-break: break-word;
+}
+.message-chat-sec .people-list ul {
+	padding: 0;
+}
+
+.message-chat-sec {
+    margin-top: 20px;
+}
+.message-chat-sec h4 {
+	margin: 0;
+    margin-bottom: 5px;
+    font-family: Proxima-Nova-Semibold;
+	font-size: 16px;
+}
+.message-header {
+	font-family: Proxima-Nova-Semibold;
+	color: #000;
+}
+.message-chat-sec .people-list li p, .message-chat-sec .people-list li span {
+	margin-left: 20px;
+}
+.message-chat-sec .people-list li p {
+	color: #ED4266;
+	text-decoration: underline;
+}
+
+
+
+
+
+
+
