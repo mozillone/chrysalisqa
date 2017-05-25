@@ -7,7 +7,7 @@ $(document).on('click','.like_costume',function(){
       data: {costume_id:costume_id,_token:token},
       context: this,
       success: function(response){
-        if(response.is_user_like){
+        if(response.is_user_like=="1"){
           $(this).find('span').addClass('active');
         }else{
           $(this).find('span').removeClass('active');
