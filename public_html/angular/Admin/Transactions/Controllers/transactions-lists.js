@@ -23,7 +23,7 @@ app.controller('TransactionsController', function($scope,DTOptionsBuilder, DTCol
                     ], 
     $scope.displayTable = true;
     function actionsHtml(data, type, full, meta) {
-         var records='<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="right" title="" href="/transaction/summary/'+data.order_id+'" data-original-title="View"><i class="fa fa-eye"></i></a>';
+         var records='<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="right" title="" href="/transaction/summary/'+data.id+'" data-original-title="View"><i class="fa fa-eye"></i></a>';
          return records;
     }
    
