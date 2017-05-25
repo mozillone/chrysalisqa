@@ -197,7 +197,7 @@ class Order extends Authenticatable
       }
     }
     protected function getCharitiesList(){
-       $charities_list=DB::Select('SELECT * FROM cc_charities');
+       $charities_list=DB::Select('SELECT * FROM cc_charities order by id desc LIMIT 0,5');
        return $charities_list;
     }
     protected function orderCharityFund($req){
