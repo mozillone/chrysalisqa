@@ -36,10 +36,10 @@
                     <?php endif; ?>
             <div class="box box-info">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#summery" data-toggle="tab">Summary</a></li>
-                    <li><a href="#status" data-toggle="tab">Shipping Status</a></li>
-                    <li><a href="#payment" data-toggle="tab">Payment Info</a></li>
-                    <li><a href="#dispute" data-toggle="tab">Dispute</a></li>
+                    <li class="active"><a href="/order/summary/<?php echo e($order['basic'][0]->order_id); ?>">Summary</a></li>
+                    <li><a href="">Shipping Status</a></li>
+                    <li><a href="#payment">Payment Info</a></li>
+                    <li><a href="#dispute">Dispute</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="summery">
@@ -341,23 +341,6 @@
                         </tbody>
                       </table>
                 </div>
-                    </div>
-
-
-                    <div class="tab-pane" id="status">
-                        <h4>Pane B</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
-                    </div>
-                    <div class="tab-pane" id="payment">
-                        <h4>Pane C</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
-                    </div>
-                    <div class="tab-pane" id="dispute">
-                        <h4>Pane D</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
                     </div>
                 </div><!-- tab content -->
                
