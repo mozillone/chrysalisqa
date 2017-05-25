@@ -43,7 +43,7 @@ app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBui
                       DTColumnBuilder.newColumn('order_id').withTitle('Order No.  ').notSortable(),
                       DTColumnBuilder.newColumn('seller_name').withTitle('Seller'),
                       DTColumnBuilder.newColumn('status').withTitle('Status'),
-                      DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
+                      DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().renderWith(actionsHtml)
                     ], 
           $scope.displayTable = true;
     
