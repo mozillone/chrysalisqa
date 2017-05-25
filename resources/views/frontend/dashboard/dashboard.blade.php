@@ -657,7 +657,7 @@
 			</form>  
       </div>
       <div class="modal-footer">
-        <button type="button" class="close close-btn" data-dismiss="modal"><span>×</span> Close</button>
+        <button type="button" class="close close-btn" id="billing_close" data-dismiss="modal"><span>×</span> Close</button>
       </div>
     </div>
 
