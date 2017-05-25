@@ -31,7 +31,7 @@ $(document).on('click','.like_costume_view',function(){
       data: {costume_id:costume_id,_token:token},
       context: this,
       success: function(response){
-        if(response.is_user_like){
+        if(response.is_user_like=="1"){
           $('.like-span1').addClass('active');
         }else{
            $('.like-span1').removeClass('active');
