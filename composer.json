@@ -5,13 +5,16 @@
    "license": "MIT",
    "type": "project",
    "require": {
-       "php": ">=5.6.4",
-       "cartalyst/stripe-laravel": "5.0.*",
-       "guzzle/guzzle": "*",
-       "laravel/framework": "5.3.*",
-       "laravel/socialite": "^2.0",
-       "yajra/laravel-datatables-oracle": "~6.0",
-       "mpinchuk/laravel-usps": "dev-master"    },
+      "php": ">=5.6.4",
+      "cartalyst/stripe-laravel": "5.0.*",
+      "ckeditor/ckeditor": "^4.6",
+      "guzzle/guzzle": "*",
+      "laravel/framework": "5.3.*",
+      "laravel/socialite": "^2.0",
+      "mpinchuk/laravel-usps": "dev-master",
+      "yajra/laravel-datatables-oracle": "~6.0",
+      "unisharp/laravel-filemanager": "^1.7"
+   },
    "require-dev": {
        "fzaninotto/faker": "~1.4",
        "mockery/mockery": "0.9.*",

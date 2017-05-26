@@ -317,8 +317,44 @@ Route::any('add-cms-block', [
 		'as' => 'add-cms-block',
 	   	'uses' => 'CmsController@addCmsBlock'
 	]);
+Route::post('store-cms-page', [
+    'as' => 'store-cms-page',
+    'uses' => 'CmsController@store'
+]);
+        Route::get('get-all-pages', [
+            'as' => 'get-all-pages',
+            'uses' => 'CmsController@getAllPages'
+        ]);
 
-/****************CMS Management Ends Here***********************/
+        Route::any('delete-page/{id}', [
+            'as' => 'delete-page',
+            'uses' => 'CmsController@destroy'
+        ]);
+
+        Route::any('edit-page/{id}', [
+            'as' => 'edit-page',
+            'uses' => 'CmsController@edit'
+        ]);
+
+        Route::any('update-page/{id}', [
+            'as' => 'update-page',
+            'uses' => 'CmsController@update'
+        ]);
+
+        Route::any('change-page-status', [
+            'as' => 'change-page-status',
+            'uses' => 'CmsController@changePageStatus'
+        ]);
+
+        Route::any('page-search', [
+            'as' => 'page-search',
+            'uses' => 'CmsController@pageSearch'
+        ]);
+        Route::any('check-url-availability', [
+            'as' => 'check-url-availability',
+            'uses' => 'CmsController@checkUrlAvailability'
+        ]);
+        /****************CMS Management Ends Here***********************/
 
 /****************Jobs Management Starts Here*********************/
 Route::any('manage-jobs', [

@@ -24,7 +24,7 @@ Category create@parent
         <li>
             <a href="{{route('categories-list')}}">Categories List</a>
         </li>
-        
+
         <li class="active">Add Category</li>
     </ol>
 </section>
@@ -47,9 +47,9 @@ Category create@parent
                         {{ Session::get('success') }}
                     </div>
                     @endif
-                    <!-- <form class="form-horizontal" ng-submit="save(userForm.$valid, data)" name="userForm" > --> 
+                    <!-- <form class="form-horizontal" ng-submit="save(userForm.$valid, data)" name="userForm" > -->
                     <form id="category-create" class="form-horizontal defult-form" name="userForm" action="{{route('categories-create')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="col-md-12">
                             <h4>Basic Information</h4>
                             <hr>
@@ -57,7 +57,7 @@ Category create@parent
                                     <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Category Name <span class="req-field" >*</span></label>
                                             <input type="text" class="form-control" placeholder="Enter category name"  name="name" id="name">
-                                        <p class="error">{{ $errors->first('name') }}</p> 
+                                        <p class="error">{{ $errors->first('name') }}</p>
                                     </div>
                                     <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Parent Category</label>
@@ -67,14 +67,14 @@ Category create@parent
                                                 <option value="{{$cats->category_id}}">{{$cats->name}}</option>
                                                 @endforeach
                                            </select>
-                                        <p class="error">{{ $errors->first('parent_id') }}</p> 
+                                        <p class="error">{{ $errors->first('parent_id') }}</p>
                                     </div>
                                      <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Category Description<span class="req-field" >*</span></label>
-                                            <textarea class="form-control" placeholder="Enter category description"  name="desc"></textarea> 
-                                        <p class="error">{{ $errors->first('desc') }}</p> 
+                                            <textarea class="form-control" placeholder="Enter category description"  name="desc"></textarea>
+                                        <p class="error">{{ $errors->first('desc') }}</p>
                                     </div>
-                                </div> 
+                                </div>
                             <div class="col-md-6">
                             <label for="inputEmail3" class="control-label">Category Image <span class="req-field" >*</span></label>
                                 <div class="col-md-12">
@@ -84,22 +84,22 @@ Category create@parent
                                           <div class="">
                                             <div class=" upload_btns">
                                                       <span class=" btn-file">
-                                                        <span class="fileupload-exists"></span>     
+                                                        <span class="fileupload-exists"></span>
                                                         <input id="cat_image" name="cat_image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
                                                         <input type="hidden" name="is_removed"/>
-                                              </span> 
+                                              </span>
                                               </div>
                                             </div>
                                       </div>
 									  <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <div class="cat_img fileupload fileupload-new" data-provides="fileupload"> 
+                                      <div class="cat_img fileupload fileupload-new" data-provides="fileupload">
                                           <img src="{{asset('/category_images/df_img.jpg')}}" class="img-responsive"  id="img-chan1">
                                         <span class="fileupload-preview"></span>
                                         <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                       </div>
 									   </div>
 									 </div>
-                            </div>  
+                            </div>
                         </div>
                           <div class="col-md-6">
                             <label for="inputEmail3" class="control-label">Category Banner Image <span class="req-field" >*</span></label>
@@ -110,31 +110,31 @@ Category create@parent
                                           <div class="">
                                             <div class=" upload_btns">
                                                       <span class=" btn-file">
-                                                        <span class="fileupload-exists"></span>     
+                                                        <span class="fileupload-exists"></span>
                                                         <input id="banner_image" name="banner_image" type="file" placeholder="Profile Image" class="img-pview img-responsivel">
                                                         <input type="hidden" name="is_removed"/>
-                                              </span> 
+                                              </span>
                                               </div>
                                             </div>
                                       </div>
                   									   <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <div class="ban_img fileupload fileupload-new" data-provides="fileupload"> 
+                                                        <div class="ban_img fileupload fileupload-new" data-provides="fileupload">
                                                             <img src="{{asset('/category_images/df_img.jpg')}}" class="img-responsive"  id="img-chan2">
-                                                      
-                                           
+
+
                                                           <span class="fileupload-preview"></span>
                                                           <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                                         </div>
-                  									     
+
                   									     </div>
                                     </div>
-                            </div>  
+                            </div>
                         </div>
-                    </div> 
+                    </div>
                      <div class="col-md-12 costumes hide">
                             <h4>Category Costumes</h4>
                             <hr>
-                            
+
                                 <div class="col-md-6">
 									<div class=" c_ctmes-admin ">
 											<div class="form-group has-feedback col-md-10" >
@@ -145,19 +145,19 @@ Category create@parent
 													<input type="hidden"  id="sku_no">
 													<input type="hidden"  id="price">
 													<span>Note: Type the product name to autopopulate</span>
-										
+
 											</div>
 															<div class="form-group col-md-1 text-left add_btn">
-												
+
 											 <a class="btn btn-primary pull-right add-prod">+Add</a>
 											 </div>
 									</div>
-								
-                                </div> 
+
+                                </div>
                             <div class="col-md-2">
-                               
+
                             </div>
-                     
+
                             <div class="col-md-12">
                                 <h4>Assigned Products</h4>
                                 <table class="table table-inverse">
@@ -183,7 +183,7 @@ Category create@parent
                     </div>
                 </form>
             </div>
-            
+
         </div>
     </section>
 

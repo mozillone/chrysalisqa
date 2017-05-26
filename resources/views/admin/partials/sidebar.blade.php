@@ -1,5 +1,5 @@
 <!---Left Menu-->
-<aside class="main-sidebar"> 
+<aside class="main-sidebar">
   <section class="sidebar">
     <ul class="sidebar-menu">
       <li {{ (Request::is('dashboard') ? 'class=active' : '') }}>
@@ -7,7 +7,7 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
-       
+
       <li {{ (Request::is('user-lists') ? 'class=active' : '') }}  {{ (Request::is('agent-list') ? 'class=active' : '') }} {{ (Request::is('user-edit/*') ? 'class=active' : '') }} {{ (Request::is('agent-edit/*') ? 'class=active' : '') }} {{ (Request::is('user-add') ? 'class=active' : '') }} {{ (Request::is('agent-add') ? 'class=active' : '') }}>
         <a href="javascript:void(0)">
             <i class="fa fa-users "></i> <span>User Management</span> <i class="fa fa-angle-left pull-right"></i>
@@ -84,7 +84,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Orders List</span>
             </a>
           </li>
-      
+
         </ul>
       </li>
 
@@ -126,7 +126,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Events List</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
         <ul class="treeview-menu menu">
@@ -135,7 +135,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Add Event</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
       </li>
@@ -152,7 +152,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Press Posts</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
         <ul class="treeview-menu menu">
@@ -161,7 +161,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Add Press Posts</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
       </li>
@@ -178,7 +178,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Support Tickets</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
         <ul class="treeview-menu menu">
@@ -187,7 +187,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Manage Tickets</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
       </li>
@@ -204,7 +204,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Blog Posts</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
         <ul class="treeview-menu menu">
@@ -213,10 +213,10 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Add Blog Post</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
-      </li>
+      </li> -->
 
       <li {{ Request::is('cms') ? 'class=active' : '' }}>
       <a href="javascript:void(0)">
@@ -230,7 +230,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Add CMS Page</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
         <ul class="treeview-menu menu">
@@ -239,7 +239,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>CMS Pages</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
          <ul class="treeview-menu menu">
@@ -248,7 +248,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>CMS Blocks</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
         <ul class="treeview-menu menu">
@@ -257,12 +257,12 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Add CMS Block</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
       </li>
-      
-      <li {{ Request::is('jobs') ? 'class=active' : '' }}>
+
+      <!-- <li {{ Request::is('jobs') ? 'class=active' : '' }}>
       <a href="javascript:void(0)">
         <i class="fa fa-home" aria-hidden="true"></i>
         <span>Blog</span><i class="fa fa-angle-left pull-right"></i>
@@ -274,7 +274,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Blog Posts</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
         <ul class="treeview-menu menu">
@@ -283,7 +283,7 @@
               <i class="fa fa-circle-o" aria-hidden="true"></i>
               <span>Add Blog Post</span>
             </a>
-          </li>        
+          </li>
         </ul>
 
       </li> -->
@@ -301,5 +301,5 @@
         <!--  -->
       </li>
     </ul>
-  </section> 
+  </section>
 </aside>
