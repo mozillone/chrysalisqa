@@ -14,7 +14,7 @@
 {{-- Page content --}}
 @section('content')
  <section class="container content-header">
-   <nav class="breadcrumb">
+   <nav class="breadcrumb row">
   <a class="breadcrumb-item" href="/dashboard">Dashboard &nbsp;&nbsp; > </a>
   <span class="breadcrumb-item active"> Orders List</span>
 </nav>
@@ -33,13 +33,16 @@
                        {{ Session::get('success') }}
                 </div>
         @endif
-            <div class="box box-info">
+            <div class="box box-info costume-sold-sec">
+			<div class="rencemt_order_table">
+			
                 <div class="box-header with-border">
-                    <h3 class="box-title">Orders List</h3>
+				
+                    <h2 class="box-title">Orders List</h2>
                    </div>
                 <div class="box-body">
-        <div class="table-responsive auto-scroll-none">
-                <table class="table table-striped table-bordered user-list-table">
+				<div class="table-responsive auto-scroll-none">
+                <table class="table table-striped user-list-table">
                   <thead>
                     <th>Order No.</th>
                     <th>From</th>
@@ -66,7 +69,7 @@
                         </select>
                       </td>
              
-                      <td><button class="btn btn-primary user-list-search" ng-click="seachOrders(search)">Search</button></td>
+                      <td><button class="btn btn-primary user-list-search order-filter-btn" ng-click="seachOrders(search)">Search</button></td>
                     </tr>
                   </tbody>
               </table>
@@ -80,10 +83,11 @@
                   </div>
           <div class="table-responsive auto-scroll-none">
           <table datatable dt-options="dtOptions" dt-columns="dtColumns"
-                        class="table table-bordered table-hover table-striped" id="dtTable">
+                        class="table table-striped" id="dtTable">
           </table>
           </div>
                 </div>
+				</div>
             </div>
         </div>
     </div>

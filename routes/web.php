@@ -121,6 +121,8 @@ Route::any('/order/{order_id}', ['as' => '','uses'=>'OrdersController@myOrderSum
 Route::any('/my/costumes-slod', ['as' => 'my-costumes-slod','uses'=>'OrdersController@costumeSoldList']);
 Route::any('/my-costumes-slod', ['as' => '','uses'=>'OrdersController@costumeSoldListData']);
 Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costumeSoldSummary']);
+Route::any('/seller/orders/genaate-label', ['as' => '','uses'=>'OrdersController@orderLabelGenate']);
+Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'OrdersController@downlaodTrankDetails']);
 /**************** User Orders routes end here ******************/
 
 
@@ -216,16 +218,23 @@ Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costu
 	   /****************Charities Management Ends Here***********************/
 
 	   /*****************************Orders starts here ***********************/
-
-	    /*****************************Orders ends here ***********************/
 	    Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
 	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
 	    Route::any('/order/summary/{order_id}', ['as' => '','uses'=>'OrdersController@orderSummary']);
 	    Route::post('order/status/update', ['as' => '','uses'=>'OrdersController@orderStatusUpdate']);
+	    Route::post('/add/order/transation', ['as' => '','uses'=>'OrdersController@orderAdditionalTransaction']);
 	    Route::post('/order/billing-address/update', ['as' => '','uses'=>'OrdersController@OrderBillingAddressUpate']);
 	    Route::post('/order/shipping-address/update', ['as' => '','uses'=>'OrdersController@OrderShippingAddressUpate']);
-	   
-	   /*****************************Request a bag starts here ***********************/
+	    Route::post('/orders/genaate-label', ['as' => '','uses'=>'OrdersController@orderLabelGenate']);
+	    Route::any('/order/track-info/download/{track_no}', ['as' => '','uses'=>'OrdersController@downlaodTrankDetails']);
+	     /*****************************Orders ends here ***********************/
+
+	    /*****************************Transactions starts here ***********************/
+	    Route::any('/transactions', ['as' => 'transactions-list','uses'=>'TransactionsController@transactionsList']);
+	    Route::any('/transactions-list', ['as' => '','uses'=>'TransactionsController@transactionsListData']);
+	    Route::any('/transaction/summary/{transaction_id}', ['as' => '','uses'=>'TransactionsController@transactionView']);
+	    /*****************************Transactions end here ***********************/
+
 	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
 	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
@@ -385,3 +394,10 @@ Route::any('add-job-post', [
 
 });
 
+Route::any('message/{id}', 'MessageController@chatHistory')->name('message.read');
+Route::get('conversations', 'MessageController@converstationsofUser');
+
+Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+   Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
+   Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete');
+});

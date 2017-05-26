@@ -11,8 +11,8 @@
        "laravel/framework": "5.3.*",
        "laravel/socialite": "^2.0",
        "yajra/laravel-datatables-oracle": "~6.0",
-       "mpinchuk/laravel-usps": "dev-master",
-       "cmgmyr/messenger": "~2.0"   },
+         "nahid/talk": "^2.2",
+       "mpinchuk/laravel-usps": "dev-master"   },
    "require-dev": {
        "fzaninotto/faker": "~1.4",
        "mockery/mockery": "0.9.*",

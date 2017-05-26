@@ -12,27 +12,35 @@
 @section('content')
  <section class="content-header">
     <h1>View Order #{{$order_id}}</h1>
-    <ol class="breadcrumb">
-    <li>
-        <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
-    </li>
-    <li>
-        <a href="{{url('orders')}}">Orders</a>
-    </li>
-    <li class="active">View Order #{{$order_id}}</li>
-  </ol>
+	<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="{{url('dashboard')}}">Dashboard &nbsp;&nbsp;></a>
+  <a class="breadcrumb-item" href="{{url('orders')}}">Orders > &nbsp;</a>
+  <span class="breadcrumb-item active">View Order #{{$order_id}}</span>
+</nav>
+  
 </section>
 <div class="view-order">
 <section class="content">
 <div class="bg-card">
     <div class="row">
         <div class="col-md-12">
+        @if (Session::has('error'))
+                    <div class="alert alert-danger alert-dismissable">
+                        <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+                        {{ Session::get('error') }}
+                    </div>
+                    @elseif(Session::has('success'))
+                    <div class="alert alert-success alert-dismissable">
+                        <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+                        {{ Session::get('success') }}
+                    </div>
+                    @endif
             <div class="box box-info">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#summery" data-toggle="tab">Summary</a></li>
-                    <li><a href="#status" data-toggle="tab">Shipping Status</a></li>
-                    <li><a href="#payment" data-toggle="tab">Payment Info</a></li>
-                    <li><a href="#dispute" data-toggle="tab">Dispute</a></li>
+                    <li class="active"><a href="/order/summary/{{$order['basic'][0]->order_id}}">Summary</a></li>
+                    <li><a href="/order/shipping/{{$order['basic'][0]->order_id}}">Shipping Status</a></li>
+                    <li><a href="#payment">Payment Info</a></li>
+                    <li><a href="#dispute">Dispute</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="summery">
@@ -146,33 +154,59 @@
                                         </table>
                                     </div>
                                     <div class="col-md-6">
-                                        <h3>Shipping Information</h3>
+                                        <h4>Shipping Info</h4>
+                                           <table class="table">
+                                            <thead>
+                                              <tr>
+                                                <th>Track#</th>
+                                                <th>Action</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                            @if(count($order['order_shipping']))
+                                            @foreach($order['order_shipping'] as $shipping)
+                                              <tr>
+                                                <td>{{$shipping->track_no}}</td>
+                                                <td><a href="/order/track-info/download/{{$shipping->track_no}}" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Download</a> <a target="_blank" href="https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&text28777=&tLabels=9400111699000840733045%2C" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
+                                              </tr>
+                                            @endforeach    
+                                            @else
+                                                <tr>
+                                                  <td>No Track information found</td>
+                                              </tr>
+                                            @endif                      
+                                            </tbody>
+                                          </table>
+                                        <form action="/orders/genaate-label" method="POST" id="shipping_process">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
+                                        <input type="hidden" name="user_id" value="{{$order['basic'][0]->buyer_id}}">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label for="shipping">Carrier</label>
-                                                <select class="form-control" name="" id="shipping">
-                                                    <option value="">USPS</option>
-                                                    <option value="">UPS</option>
+                                                <select class="form-control" name="carrier_type" id="carrier_type">
+                                                    <option value="USPS">USPS</option>
+                                                    <option value="FedEx">FedEx</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="sel1">Method</label>
-                                                <select class="form-control" id="sel1">
-                                                    <option value="None">None</option>
-                                                    <option value="Priority Mail Express">Priority Mail
-                                                        Express
-                                                    </option>
-                                                    <option value="Priority Mail">Priority Mail</option>
-                                                    <option value="First-Class Mail">First-Class Mail</option>
-                                                    <option value="USPS Retail Ground">USPS Retail Ground
+                                                <select class="form-control" id="method" name="method">
+                                                    <option value="">None</option>
+                                                    <option value="PRIORITY">Priority Mail</option>
+                                                    <option value="EXPRESS">Express</option>
+                                                    <option value="FIRST CLASS">First-Class Mail</option>
+                                                    <option value="FIRST CLASS COMMERCIAL">USPS Retail Ground
                                                     </option>
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="usr">Weight (lbs)</label>
-                                                <input type="text" class="form-control" id="usr">
+                                                <input type="text" class="form-control" id="weight" name="weight">
                                             </div>
                                         </div>
+                                         <input type="submit" value="Generate Label" class="btn btn-primary"/>
+                                        </form>
 
                                     </div>
                                 </div>
@@ -235,7 +269,7 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
                                         <div class="form-inline">
-                                            <label for="update-status">Updtate Status</label>
+                                            <label for="update-status">Update Status</label>
                                             <select class="form-control" id="update-status" name="status_id"> 
                                                 @foreach($order['status'] as $status)
                                                 <option value="{{$status->status_id}}" @if($order['basic'][0]->status==$status->name) selected @endif>{{$status->name}}</option>
@@ -247,16 +281,23 @@
                                             <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
                                         </div>
                                         <div class="checkbox">
-                                            <label><input type="checkbox" value="">Notify Customer By Email</label>
+                                            <label><input type="checkbox" name="is_notify" value="1">Notify Customer By Email</label>
                                         </div>
                                         <input type="submit" value="Submit" class="btn btn-primary"/>
                                     </form>
                                     </div>
                                     <div class="col-md-6">
                                         <h3>Transaction</h3>
+                                        <form action="/add/order/transation" method="POST" id="order_transaction">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
+                                        <input type="hidden" name="cc_id" value="{{$order['basic'][0]->cc_id}}">
+                                        <input type="hidden" name="user_id" value="{{$order['basic'][0]->buyer_id}}">
+                                        <input type="hidden" name="buyer_email" value="{{$order['basic'][0]->buyer_email}}">
+                                        <input type="hidden" name="buyer_name" value="{{$order['basic'][0]->buyer_name}}">
                                         <div class="form-inline">
                                             <label >Amount</label>
-                                            <input type="email" class="form-control" id="email" placeholder="$0.00" name="email">
+                                            <input type="text" class="form-control" id="transaction_amount" placeholder="0.00" name="transaction_amount">
                                         </div>
                                         <div class="form-inline">
                                             <label for="transaction">Transaction Type</label>
@@ -267,13 +308,13 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="comment1">Comment:</label>
-                                            <textarea class="form-control" rows="5" id="comment1"></textarea>
+                                            <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
                                         </div>
                                         <div class="checkbox">
-                                            <label><input type="checkbox" value="">Notify Customer By Email</label>
+                                            <label><input type="checkbox" name="is_notify"  value="1">Notify Customer By Email</label>
                                         </div>
-                                        <a href="#" class="btn btn-primary">Submit</a>
-
+                                        <input type="submit" value="Submit" class="btn btn-primary"/>
+                                         </form>
                                     </div>
                                 </div>
 
@@ -301,23 +342,6 @@
                         </tbody>
                       </table>
                 </div>
-                    </div>
-
-
-                    <div class="tab-pane" id="status">
-                        <h4>Pane B</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
-                    </div>
-                    <div class="tab-pane" id="payment">
-                        <h4>Pane C</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
-                    </div>
-                    <div class="tab-pane" id="dispute">
-                        <h4>Pane D</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
                     </div>
                 </div><!-- tab content -->
                
@@ -359,7 +383,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="shipping_address_2" placeholder="Address2" name="address_2" value="{{$order['basic'][0]->shipping_address_2}}">
+                                            <input type="text" class="form-control" id="shipping_address_2" placeholder="Address2 *" name="address_2" value="{{$order['basic'][0]->shipping_address_2}}">
                                     </div>
                                     </div>
                                     <div class="col-md-6">

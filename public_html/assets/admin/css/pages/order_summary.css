@@ -85,5 +85,5 @@
             padding-top: 8px;
         }
         .old-orders input[type="text"], .old-orders select {
-            width: 70%;
+            /*width: 70%;*/
         }

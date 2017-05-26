@@ -86,7 +86,7 @@ class DashboardController extends Controller {
           $userData['password'] =  Hash::make($req['password']);
         }
         $affectedRows = User::where('id', '=', Auth::user()->id)->update($userData);
-        Session::flash('success', 'Your profile is upadated successfully');
+        Session::flash('success', 'Your profile is updated successfully');
         return Redirect::back();
     return view('frontend.dashboard.dashboard');
   }
@@ -116,7 +116,7 @@ return "success";
 public function creditcradAdd(Request $req){
   //echo "<pre>";print_r($req->all());die;
   $cc_id=Creditcard::addCreditCardDashboard($req,Auth::user()->id);
-  Session::flash('success', 'Card addedd successfully.');
+  Session::flash('success', 'Card added successfully.');
   return Redirect::back();
 }
 public function Deleteccard(Request $req){

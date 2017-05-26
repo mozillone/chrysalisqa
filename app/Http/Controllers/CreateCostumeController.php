@@ -896,6 +896,7 @@ class CreateCostumeController  extends Controller {
 
 		}
 	public function requestaBag(){
+		
 		$this->data = array();
 		$this->data['state_table'] = DB::table('states')->get(['name','abbrev']);
 		if (Auth::check()){
@@ -908,6 +909,7 @@ class CreateCostumeController  extends Controller {
 	}
 
 	public function Postrequestabag(Request $request){
+
 		/*echo "<pre>";
 		print_r($request->all());die;*/
 

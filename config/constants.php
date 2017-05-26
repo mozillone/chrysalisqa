@@ -10,6 +10,7 @@ return array(
 	'IS_FILMY'=>21,
 	'Shipping_id'=>9,
 	'Processing'=>1,
+	'Shipping'=>2,
 	'Currency'=>'usd',
 	'USPS'=>'402SAMPL6330'
 	
