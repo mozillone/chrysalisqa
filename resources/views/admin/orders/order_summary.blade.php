@@ -249,7 +249,7 @@
                                         <div class="checkbox">
                                             <label><input type="checkbox" value="">Notify Customer By Email</label>
                                         </div>
-                                        <input type="submit" value="Submit" class="btn"/>
+                                        <input type="submit" value="Submit" class="btn btn-primary"/>
                                     </form>
                                     </div>
                                     <div class="col-md-6">
@@ -272,7 +272,7 @@
                                         <div class="checkbox">
                                             <label><input type="checkbox" value="">Notify Customer By Email</label>
                                         </div>
-                                        <a href="#" class="btn">Submit</a>
+                                        <a href="#" class="btn btn-primary">Submit</a>
 
                                     </div>
                                 </div>
@@ -280,26 +280,7 @@
                             </div>
 
                         </div>
-                    </div>
-
-
-                    <div class="tab-pane" id="status">
-                        <h4>Pane B</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
-                    </div>
-                    <div class="tab-pane" id="payment">
-                        <h4>Pane C</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
-                    </div>
-                    <div class="tab-pane" id="dispute">
-                        <h4>Pane D</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac turpis egestas.</p>
-                    </div>
-                </div><!-- tab content -->
-                <div class="container">
+                         <div class="container">
                     <h2>Comments History</h2>
                       <table class="table">
                         <thead>
@@ -320,6 +301,26 @@
                         </tbody>
                       </table>
                 </div>
+                    </div>
+
+
+                    <div class="tab-pane" id="status">
+                        <h4>Pane B</h4>
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                            ac turpis egestas.</p>
+                    </div>
+                    <div class="tab-pane" id="payment">
+                        <h4>Pane C</h4>
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                            ac turpis egestas.</p>
+                    </div>
+                    <div class="tab-pane" id="dispute">
+                        <h4>Pane D</h4>
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                            ac turpis egestas.</p>
+                    </div>
+                </div><!-- tab content -->
+               
             </div>
 
         </div>
@@ -393,7 +394,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                      <div class="col-md-12">
+                                      <div class="col-md-12 text-center">
                                             <button class="btn btn-primary submit-btn">Submit</button>
                                     </div>          
                                 
@@ -408,7 +409,6 @@
                   
           </div>
           <div class="modal-footer">
-            <button type="button" class="close close-btn" data-dismiss="modal"><span>×</span> Close</button>
           </div>
         </div>
 
@@ -481,24 +481,21 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 text-center">
                                             <button class="btn btn-primary submit-btn">Submit</button>
                                         </div>
                                     
                                         
                                     </div>
-                                </div>
-            
-                                    
-                                
+                                </div>                               
                         </div>
                         </form> 
                     </div>
-                 
+          <div class="modal-footer text-center">
+            
+          </div>        
           </div>
-          <div class="modal-footer">
-            <button type="button" class="close close-btn" data-dismiss="modal"><span>×</span> Close</button>
-          </div>
+         
         </div>
 
     </div>

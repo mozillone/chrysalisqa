@@ -2276,6 +2276,9 @@ img#ajax_loader {
     font-size: 18px;
     text-align: right;
 }
+.table-responsive.auto-scroll-none {
+	overflow-x: inherit;
+}
 /********************************************************************Media start here********************************************************************/
 
 @media screen and (min-width:1280px){

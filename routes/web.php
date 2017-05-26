@@ -36,6 +36,7 @@ Route::any('/addbillingaddress', ['as' => 'billing-address','uses'=>'DashboardCo
 Route::any('/deleteaddress', ['as' => '','uses'=>'DashboardController@deleteAddress']);
 Route::any('/deleteccard', ['as' => '','uses'=>'DashboardController@Deleteccard']);
 Route::any('/creditcardadd', ['as' => 'creditcard-add','uses'=>'DashboardController@creditcradAdd']);
+Route::any('/allorders', ['as' => 'allorders','uses'=>'DashboardController@allOrders']);
 
 /** Products list page start here **/
 //Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
@@ -112,6 +113,16 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 
 
+/**************** User Orders routes start here ******************/
+Route::any('/my/orders', ['as' => 'my-orders-list','uses'=>'OrdersController@myOrdersList']);
+Route::any('/my-orders-list', ['as' => '','uses'=>'OrdersController@myOrdersListData']);
+Route::any('/order/{order_id}', ['as' => '','uses'=>'OrdersController@myOrderSummary']);
+
+Route::any('/my/costumes-slod', ['as' => 'my-costumes-slod','uses'=>'OrdersController@costumeSoldList']);
+Route::any('/my-costumes-slod', ['as' => '','uses'=>'OrdersController@costumeSoldListData']);
+Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costumeSoldSummary']);
+/**************** User Orders routes end here ******************/
+
 
 
 
@@ -138,6 +149,10 @@ Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 	    Route::post('user/csvExport', array('as' => '','uses' => 'UserController@userCsvExport'));
 	   	Route::any('user/getallpaymentprofile', array('as' => '','uses' => 'UserController@Getallpaymentprofile'));
 	   	Route::any('user/deleteccard/{id}', ['as' => '','uses'=>'UserController@Deleteccard']);
+	   	Route::any('user/getallusercostumes', array('as' => '','uses' => 'UserController@Getallusercostumes'));
+
+		Route::any('/user-orders-list/{user_id}', ['as' => '','uses'=>'UserController@userOrdersListData']);
+		Route::any('/user-costumes-slod/{user_id}', ['as' => '','uses'=>'UserController@userCostumeSoldListData']);
 	   	/****************User Management End Here***************************/
 
 		/****************Costumes Management Code Starts Here*********************/
