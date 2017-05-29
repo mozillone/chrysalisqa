@@ -1,5 +1,7 @@
 /node_modules
 /public/storage
+/app/Creditcard.php
+/app/order.php
 /storage/*.key
 /vendor
 /.idea

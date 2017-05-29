@@ -34,7 +34,9 @@ Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'DashboardController
 Route::any('/addshippingaddress', ['as' => 'shipping-address','uses'=>'DashboardController@addShippingAddress']);
 Route::any('/addbillingaddress', ['as' => 'billing-address','uses'=>'DashboardController@addBillingAddress']);
 Route::any('/deleteaddress', ['as' => '','uses'=>'DashboardController@deleteAddress']);
+Route::any('/deleteccard', ['as' => '','uses'=>'DashboardController@Deleteccard']);
 Route::any('/creditcardadd', ['as' => 'creditcard-add','uses'=>'DashboardController@creditcradAdd']);
+Route::any('/allorders', ['as' => 'allorders','uses'=>'DashboardController@allOrders']);
 
 /** Products list page start here **/
 //Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
@@ -111,6 +113,18 @@ Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostume
 Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 
 
+/**************** User Orders routes start here ******************/
+Route::any('/my/orders', ['as' => 'my-orders-list','uses'=>'OrdersController@myOrdersList']);
+Route::any('/my-orders-list', ['as' => '','uses'=>'OrdersController@myOrdersListData']);
+Route::any('/order/{order_id}', ['as' => '','uses'=>'OrdersController@myOrderSummary']);
+
+Route::any('/my/costumes-slod', ['as' => 'my-costumes-slod','uses'=>'OrdersController@costumeSoldList']);
+Route::any('/my-costumes-slod', ['as' => '','uses'=>'OrdersController@costumeSoldListData']);
+Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costumeSoldSummary']);
+Route::any('/seller/orders/genaate-label', ['as' => '','uses'=>'OrdersController@orderLabelGenate']);
+Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'OrdersController@downlaodTrankDetails']);
+/**************** User Orders routes end here ******************/
+
 
 
 
@@ -135,7 +149,13 @@ Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 	    Route::any('/status/change', 'UserController@changeUserStatus');
 	    Route::any('/customer/emailValidation', array('as' => '','uses' => 'UserController@EmailNameCheck'));
 	    Route::post('user/csvExport', array('as' => '','uses' => 'UserController@userCsvExport'));
-	    /****************User Management End Here***************************/
+	   	Route::any('user/getallpaymentprofile', array('as' => '','uses' => 'UserController@Getallpaymentprofile'));
+	   	Route::any('user/deleteccard/{id}', ['as' => '','uses'=>'UserController@Deleteccard']);
+	   	Route::any('user/getallusercostumes', array('as' => '','uses' => 'UserController@Getallusercostumes'));
+
+		Route::any('/user-orders-list/{user_id}', ['as' => '','uses'=>'UserController@userOrdersListData']);
+		Route::any('/user-costumes-slod/{user_id}', ['as' => '','uses'=>'UserController@userCostumeSoldListData']);
+	   	/****************User Management End Here***************************/
 
 		/****************Costumes Management Code Starts Here*********************/
 		
@@ -198,12 +218,23 @@ Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 	   /****************Charities Management Ends Here***********************/
 
 	   /*****************************Orders starts here ***********************/
-
-	    /*****************************Orders ends here ***********************/
 	    Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
 	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
-	   
-	   /*****************************Request a bag starts here ***********************/
+	    Route::any('/order/summary/{order_id}', ['as' => '','uses'=>'OrdersController@orderSummary']);
+	    Route::post('order/status/update', ['as' => '','uses'=>'OrdersController@orderStatusUpdate']);
+	    Route::post('/add/order/transation', ['as' => '','uses'=>'OrdersController@orderAdditionalTransaction']);
+	    Route::post('/order/billing-address/update', ['as' => '','uses'=>'OrdersController@OrderBillingAddressUpate']);
+	    Route::post('/order/shipping-address/update', ['as' => '','uses'=>'OrdersController@OrderShippingAddressUpate']);
+	    Route::post('/orders/genaate-label', ['as' => '','uses'=>'OrdersController@orderLabelGenate']);
+	    Route::any('/order/track-info/download/{track_no}', ['as' => '','uses'=>'OrdersController@downlaodTrankDetails']);
+	     /*****************************Orders ends here ***********************/
+
+	    /*****************************Transactions starts here ***********************/
+	    Route::any('/transactions', ['as' => 'transactions-list','uses'=>'TransactionsController@transactionsList']);
+	    Route::any('/transactions-list', ['as' => '','uses'=>'TransactionsController@transactionsListData']);
+	    Route::any('/transaction/summary/{transaction_id}', ['as' => '','uses'=>'TransactionsController@transactionView']);
+	    /*****************************Transactions end here ***********************/
+
 	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
 	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
@@ -346,8 +377,44 @@ Route::any('add-cms-block', [
 		'as' => 'add-cms-block',
 	   	'uses' => 'CmsController@addCmsBlock'
 	]);
+Route::post('store-cms-page', [
+    'as' => 'store-cms-page',
+    'uses' => 'CmsController@store'
+]);
+        Route::get('get-all-pages', [
+            'as' => 'get-all-pages',
+            'uses' => 'CmsController@getAllPages'
+        ]);
 
-/****************CMS Management Ends Here***********************/
+        Route::any('delete-page/{id}', [
+            'as' => 'delete-page',
+            'uses' => 'CmsController@destroy'
+        ]);
+
+        Route::any('edit-page/{id}', [
+            'as' => 'edit-page',
+            'uses' => 'CmsController@edit'
+        ]);
+
+        Route::any('update-page/{id}', [
+            'as' => 'update-page',
+            'uses' => 'CmsController@update'
+        ]);
+
+        Route::any('change-page-status', [
+            'as' => 'change-page-status',
+            'uses' => 'CmsController@changePageStatus'
+        ]);
+
+        Route::any('page-search', [
+            'as' => 'page-search',
+            'uses' => 'CmsController@pageSearch'
+        ]);
+        Route::any('check-url-availability', [
+            'as' => 'check-url-availability',
+            'uses' => 'CmsController@checkUrlAvailability'
+        ]);
+        /****************CMS Management Ends Here***********************/
 
 /****************Jobs Management Starts Here*********************/
 Route::any('manage-jobs', [
@@ -363,3 +430,10 @@ Route::any('add-job-post', [
 
 });
 
+Route::any('message/{id}', 'MessageController@chatHistory')->name('message.read');
+Route::get('conversations', 'MessageController@converstationsofUser');
+
+Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+   Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
+   Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete');
+});

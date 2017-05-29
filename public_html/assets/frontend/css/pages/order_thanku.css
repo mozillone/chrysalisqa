@@ -19,5 +19,6 @@
 .thankyou-donate span{font-family: Proxima-Nova-Bold;}
 .thankyou-btn{width: 250px; background-color: #EE4266 !important; color: #fff; text-align: center; margin: 0 auto; display: block; height: 40px; line-height: 40px; border: none; outline: none; border-radius: 5px; font-size: 18px; }
 .thankyou-do-img{width: 100%; float:left; margin: 0 auto; display: block;}
-.thankyou-do-img img{width: auto; margin: 40px auto 0; display: block;}
+.thankyou-do-img img{width: auto; display: block;}
 .thankyou-doeven{width: 100%; float:left;}
+

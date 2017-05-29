@@ -13,9 +13,14 @@ class VerifyCsrfToken extends BaseVerifier
      *
      * @var array
      */
-    protected $except = ['/emailValidation','/forgot/emailVerification','/customer/emailValidation','/search','/searching','/amenitiesValidation','/styleValidation','/listingNameValidation','/planValidation','/costume/costumecreate','/costume/postrequestabag','/postrequestabaglogin','/generatelables' ,'/payoutamount','/returnamount','/closerequest','/changecostumestatus','/delete_address','/admin/event/search'
+
+    protected $except = ['/emailValidation','/forgot/emailVerification','/customer/emailValidation','/search','/searching','/amenitiesValidation','/styleValidation','/listingNameValidation','/planValidation','/costume/costumecreate','/costume/postrequestabag','/postrequestabaglogin','/generatelables' ,'/payoutamount','/returnamount','/closerequest','/changecostumestatus','/deleteaddress','/deleteccard'
+
         //
     ];
+
+
+
     // public function handle( $request, Closure $next )
     // {
     //     if (

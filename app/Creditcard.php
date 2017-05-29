@@ -10,6 +10,7 @@ use App\Helpers\SiteHelper;
 use Auth;
 use Session;
 use App\Helpers\StripeApp;
+use Exception;
 
 class Creditcard extends Authenticatable
 {
@@ -29,24 +30,24 @@ class Creditcard extends Authenticatable
      
     }
 
-   // protected function addCreditCard($req,$user_id){
+    // protected function addCreditCard($req,$user_id){
            
-   //      $cc_details=array('user_id'=>$user_id,
-   //                     'cardholder_name'=>$req['cardholder_name'],
-   //                     'credit_card_mask'=> $req['cc_number'],
-   //                     'card_type'=> $req['card_type'],
-   //                     'exp_month'=> $req['exp_month'],
-   //                     'exp_year'=> $req['exp_year'],
-   //                     'cvn_pin'=> $req['cvn_pin'],
-   //                     'created_at'=>date('Y-m-d H:i:s'));
-   //      $cc_id=Site_model::insert_get_id('creditcard',$cc_details);
-   //       $this->updateCartOrderInfo($cc_id,$req['cart_id']);
-   //      return $cc_id;
-   //      }
+    //      $cc_details=array('user_id'=>$user_id,
+    //                     'cardholder_name'=>$req['cardholder_name'],
+    //                     'credit_card_mask'=> $req['cc_number'],
+    //                     'card_type'=> $req['card_type'],
+    //                     'exp_month'=> $req['exp_month'],
+    //                     'exp_year'=> $req['exp_year'],
+    //                     'cvn_pin'=> $req['cvn_pin'],
+    //                     'created_at'=>date('Y-m-d H:i:s'));
+    //      $cc_id=Site_model::insert_get_id('creditcard',$cc_details);
+    //       $this->updateCartOrderInfo($cc_id,$req['cart_id']);
+    //      return $cc_id;
+    //      }
     protected function addCreditCard($req,$user_id){
-           
-         $card=$this->stripe->cards(Auth::user()->api_customer_id,$req['cardholder_name'],$req['cc_number'],$req['exp_month'],$req['cvn_pin'],$req['exp_year']);    
-         $cc_details=array('user_id'=>$user_id,
+        try {
+         $card=$this->stripe->cards(Auth::user()->api_customer_id,$req['cardholder_name'],$req['cc_number'],$req['exp_month'],$req['cvn_pin'],$req['exp_year']); 
+          $cc_details=array('user_id'=>$user_id,
                        'cardholder_name'=>$req['cardholder_name'],
                        'credit_card_mask'=> $cardno='xxxx-xxxx-xxxx-'.$card['last4'],
                        'card_type'=> $card['brand'],
@@ -58,9 +59,15 @@ class Creditcard extends Authenticatable
         $cc_id=Site_model::insert_get_id('creditcard',$cc_details);
 
          $this->updateCartOrderInfo($cc_id,$req['cart_id']);
-        return $cc_id;
-
-        }
+         $result=array('result'=>1,'message'=>$cc_id);
+         return $result;  
+         }catch(Exception $e){
+             $result=array('result'=>0,'message'=>$e->getMessage());
+              return $result;
+         } 
+        
+    
+        } 
     protected function getCCList($user_id,$cc_id=null){
         if($cc_id==null){
             $where='where user_id="'.$user_id.'"';
@@ -78,11 +85,11 @@ class Creditcard extends Authenticatable
      }  
 
      protected function addCreditCardDashboard($req,$user_id){
-        $card=$this->stripe->cards(Auth::user()->api_customer_id,$req['full_name_on_card'],$req['cc_number'],$req['exp_month'],$req['cvn_pin'],$req['exp_year']); 
+        $card=$this->stripe->cards(Auth::user()->api_customer_id,$req['cardholder_name'],$req['cc_number'],$req['exp_month'],$req['cvn_pin'],$req['exp_year']); 
         $cc_details=array('user_id'=>$user_id,
-                       'cardholder_name'=>$req['full_name_on_card'],
-                       'credit_card_mask'=> $req['card_number'],
-                       'card_type'=> $req['card_type'],
+                       'cardholder_name'=>$req['cardholder_name'],
+                       'credit_card_mask'=> $req['cc_number'],
+                       'card_type'=> "",
                        'exp_month'=> $req['exp_month'],
                        'exp_year'=> $req['exp_year'],
                        'cvn_pin'=> $req['cvn_pin'],

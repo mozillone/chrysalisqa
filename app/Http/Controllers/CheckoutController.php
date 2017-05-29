@@ -92,9 +92,9 @@ class CheckoutController extends Controller {
        return Redirect::back();
 
     }else{
-
+     // $result['message']
       $charities_list=Order::getCharitiesList();
-      return view('frontend.costumes.checkout.order_thanku')->with('order_id',$result['message'])->with('charities_list',$charities_list);
+      return view('frontend.costumes.checkout.order_thanku')->with('order_id', $result['message'])->with('charities_list',$charities_list);
     }
     }
   public function addShippingAddress(Request $request){
@@ -109,8 +109,8 @@ class CheckoutController extends Controller {
   }
   public function addCreditCard(Request $request){
     $req=$request->all();
-    $cc_id=Creditcard::addCreditCard($req,Auth::user()->id);
-    return Response::JSON($cc_id);
+    $result=Creditcard::addCreditCard($req,Auth::user()->id);
+    return Response::JSON($result);
   }
   public function getCreditCard($card_id=null){
     if($card_id==null){

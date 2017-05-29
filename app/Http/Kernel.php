@@ -56,6 +56,7 @@ class Kernel extends HttpKernel
         'setTheme' => \igaster\laravelTheme\Middleware\setTheme::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'frontend' => \App\Http\Middleware\ValidateBackHistory::class,
+        'talk'  =>  \Nahid\Talk\Middleware\TalkMiddleware::class,
 
     ];
 }

@@ -34,11 +34,15 @@ class DashboardController extends Controller {
 	public function dashboard()
 	{
 		if(Auth::user()->id!="1"){
-			$this->data = array();
+    	$this->data = array();
 			$this->data['default_billing_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','billing')->first();
 			$this->data['default_shipping_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','shipping')->first();
 			$this->data['states']   = Site_model::Fetch_all_data('states', '*');
     $this->data['countries']   = Site_model::Fetch_all_data('countries', '*');
+    $this->data['recent_orders'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id   where ord.buyer_id='.Auth::user()->id.' ORDER BY `order_id` DESC LIMIt 0,5');
+    $this->data['costumes_sold'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id where ord.seller_id='.Auth::user()->id.' ORDER BY ord.order_id DESC LIMIt 0,5');
+    $this->data['creditcard_list'] = DB::table('creditcard')->where('user_id',Auth::user()->id)->get();
+//print_r($this->data['recent_orders']);
 			return view('frontend.dashboard.dashboard')->with($this->data);
 			
 		}else{
@@ -53,37 +57,37 @@ class DashboardController extends Controller {
 	
     $req=$request->all();
 	//echo "<pre>";print_r($req);die;
-                                          if(count($req)){
-                                          $name = User::find(Auth::user()->id);
-                                          if(isset($req['avatar'])){
-                                            $file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
-                                            $source_image_path=public_path('profile_img');
-                                            $thumb_image_path1=public_path('profile_img');
-                                            $thumb_image_path2=public_path('profile_img/thumbs');
-                                            $req['avatar']->move($source_image_path, $file_name);
-                                            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-                                            $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+        if(count($req)){
+        $name = User::find(Auth::user()->id);
+        if(isset($req['avatar'])){
+          $file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
+          $source_image_path=public_path('profile_img');
+          $thumb_image_path1=public_path('profile_img');
+          $thumb_image_path2=public_path('profile_img/thumbs');
+          $req['avatar']->move($source_image_path, $file_name);
+          $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+          $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
 
-                                          }
-                                          else if(isset($req['is_removed'])){
-                                            $file_name="";
-                                          }
-                                          else{
-                                            $file_name=$name->avatar;
-                                          }
-                                          $userData = [
-                                              'first_name' => $req['first_name'],
-                                              'last_name' => $req['last_name'],
-                                              'display_name' =>  $req['first_name']." ".$req['last_name'],
-                                              'email'=>$req['email'],
-                                              'user_img' =>$file_name
-                                          ];
-                                          if(!empty($req['password'])){
-                                            $userData['password'] =  Hash::make($req['password']);
-                                          }
-                                          $affectedRows = User::where('id', '=', Auth::user()->id)->update($userData);
-                                          Session::flash('success', 'Your profile is upadated successfully');
-                                          return Redirect::back();
+        }
+        else if(isset($req['is_removed'])){
+          $file_name="";
+        }
+        else{
+          $file_name=$name->avatar;
+        }
+        $userData = [
+            'first_name' => $req['first_name'],
+            'last_name' => $req['last_name'],
+            'display_name' =>  $req['first_name']." ".$req['last_name'],
+            'email'=>$req['email'],
+            'user_img' =>$file_name
+        ];
+        if(!empty($req['password'])){
+          $userData['password'] =  Hash::make($req['password']);
+        }
+        $affectedRows = User::where('id', '=', Auth::user()->id)->update($userData);
+        Session::flash('success', 'Your profile is updated successfully');
+        return Redirect::back();
     return view('frontend.dashboard.dashboard');
   }
 }
@@ -112,7 +116,20 @@ return "success";
 public function creditcradAdd(Request $req){
   //echo "<pre>";print_r($req->all());die;
   $cc_id=Creditcard::addCreditCardDashboard($req,Auth::user()->id);
-  Session::flash('success', 'Card addedd successfully.');
+  Session::flash('success', 'Card added successfully.');
   return Redirect::back();
+}
+public function Deleteccard(Request $req){
+    //echo $id;die;
+    $delete_card = DB::table('creditcard')->where('id',$req->id)->delete();
+    Session::flash('success', 'Card deleted successfully.');
+    return "success";
+  }
+
+public function allOrders(){
+  /*$this->data = array();
+  $this->data['recent_orders'] = DB::Select('SELECT DATE_FORMAT(created_at,"%m/%d/%y") as date,ord.order_id,st.name as status FROM `cc_order` as ord LEFT JOIN cc_order_status as sts on sts.order_id=ord.order_id LEFT JOIN cc_status as st on st.status_id=sts.status_id  where ord.order_id='.Auth::user()->id.'
+ORDER BY `order_id` DESC');
+  return view('frontend.dashboard.allorders')->with('all_data',$this->data);*/
 }
 }

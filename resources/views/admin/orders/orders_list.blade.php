@@ -60,10 +60,10 @@
 					            <td><input type="text" class="form-control" ng-model="search.costume_name"  placeholder=""></td>
 					             <td><input type="text" class="form-control" datepicker ng-model="search.from_date" placeholder="Order From"></td>
                       <td><input type="text" class="form-control" datepicker ng-model="search.date_end" placeholder="Order To"></td>
-                   
+
                      <td>
                         <select name="count" class="form-control" id="count" ng-model="search.status" >
-                          <option value=""> All </option>  
+                          <option value=""> All </option>
                           <option value="Processing">Processing</option>
                           <option value="Shipping">Shipping</option>
                           <option value="Shipped">Shipped</option>
@@ -72,7 +72,7 @@
                           <option value="Returned">Returned</option>
 						            </select>
                       </td>
-					   
+
                       <td><button class="btn btn-primary user-list-search" ng-click="seachOrders(search)">Search</button></td>
                     </tr>
                   </tbody>
@@ -99,7 +99,7 @@
 
 
 {{-- page level scripts --}}
-@section('footer_scripts') 
+@section('footer_scripts')
 
 <script src="{{ asset('angular/Admin/Orders/Controllers/orders-lists.js') }}"></script>
 <script src="{{ asset('angular/Admin/Orders/Services/orders.js') }}"></script>

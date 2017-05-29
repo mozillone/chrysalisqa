@@ -9,6 +9,7 @@ use App\Helpers\Site_model;
 use App\Helpers\SiteHelper;
 use Auth;
 use Session;
+use App\Cart;
 
 class Address extends Authenticatable
 {
@@ -95,8 +96,8 @@ class Address extends Authenticatable
                       'pay_address_2'=>$req['address_2'],
                       'pay_city'=>$req['city'],
                       'pay_state'=>$state,
-                      'pay_zipcode'=>$req['country'],
-                      'pay_country'=>$req['postcode'],
+                      'pay_zipcode'=>$req['postcode'],
+                      'pay_country'=>$req['country'],
                        );
           }else{
           if(!empty($req['shipping_state_dropdown'])){ $state=$req['shipping_state_dropdown'];}else{$state=$req['state'];}
@@ -106,8 +107,8 @@ class Address extends Authenticatable
                       'shipping_address_2'=>$req['address_2'],
                       'shipping_city'=>$req['city'],
                       'shipping_state'=>$state,
-                      'shipping_postcode'=>$req['country'],
-                      'shipping_country'=>$req['postcode'],
+                      'shipping_postcode'=>$req['postcode'],
+                      'shipping_country'=>$req['country'],
                        );
           }
          $cond=array('cart_id'=>$req['cart_id']);
@@ -129,8 +130,8 @@ class Address extends Authenticatable
                       'shipping_address_2'=>$req['address_2'],
                       'shipping_city'=>$req['city'],
                       'shipping_state'=>$req['state'],
-                      'shipping_postcode'=>$req['country'],
-                      'shipping_country'=>$req['postcode'],
+                      'shipping_postcode'=>$req['postcode'],
+                      'shipping_country'=>$req['country'],
                        );
         $cond=array('cart_id'=>$req['cart_id']);
         Site_model::update_data('cart',$data,$cond);
@@ -186,6 +187,25 @@ class Address extends Authenticatable
                     $this->addShippingAddress($req);
                }
                return $address_id;
+    }
+    protected function userCartShippingAddress($cart_id){
+       if(Auth::check()){
+          $user_id=Auth::user()->id;
+          $cart_info=Cart::cartMetaInfo($cart_id);
+          if(!empty($cart_info[0]->shipping_address_1)){
+              $zip_code=$cart_info[0]->shipping_postcode;
+          }else{
+             $address_info=$this->getAddressinfo('shipping',"latest"); 
+             if(count($address_info)){
+               $zip_code= $address_info[0]->zip_code;
+              }else{
+                 return false;
+              }
+          }
+          return $zip_code;
+        }else{
+          return false;
+       }
     }
 
 }

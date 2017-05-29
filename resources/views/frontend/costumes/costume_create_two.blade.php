@@ -570,13 +570,18 @@ $heading_value=$headingexplode[1];
 <span id="typeserror" style="color:red"></span>
 
 </div>
-<div class="form-rms">
+<div class="form-rms" id="service_div">
 <p class="form-rms-que">04. Service</p>
 <p class="form-rms-input">
 <select id="service" name="service">
 <option value="">Select Service</option>
 @foreach($service as $index=>$service)
-<option value="{{$service->optionid}}" name="service">{{$service->value}}</option>
+<?php
+$str = strtolower($service->value);
+?>
+<option value="{{$service->optionid}}" name="service">{{ucfirst($str)}}</option>
+
+
 @endforeach
 </select>
 </p>
@@ -814,15 +819,26 @@ function previewImages(){
 	$('input[name=file1]').change(function(){
 		$('#drag_n_drop_1').css('display','block');
 	});
+  $('input[name=file1]').change(function(){
+    $('#drag_n_drop_1').css('display','block');
+  });
 	$('#drag_n_drop_1').click(function(){
 		$('#front_view').find('li').remove();
 		$('#drag_n_drop_1').css('display','none');
 		$('input[name=file1]').val('');
 	});
 
-	$('input[name=file2]').change(function(){
-		$('#drag_n_drop_2').css('display','block');
+	$('#shipping').change(function(){
+		if($(this).val() == 16){
+      $('#service_div').css('display','none');
+    }else{
+      $('#service_div').css('display','block');
+    }
 	});
+  $('#free_shipping').click(function(){
+    $('#service_div').css('display','none');
+    $('#shipping').val('16');
+  });
 	$('#drag_n_drop_2').click(function(){
 		$('#back_view').find('li').remove();
 		$('#drag_n_drop_2').css('display','none');
@@ -1186,11 +1202,14 @@ $('#donate_charity').change(function(){
 			$('#typeserror').html('This field is required.');
 			str=false;
 		}
-		if (service == "") {
-			$('#service').css('border','1px solid red');
-			$('#serviceerror').html('This field is required.');
-			str=false;
-		}
+    if ($('#shipping').val() == 78) {
+
+    if (service == "") {
+      $('#service').css('border','1px solid red');
+      $('#serviceerror').html('This field is required.');
+      str=false;
+    }
+    }
 		if (str == true) {
 			/*$.ajax({
 			 url: "{{URL::to('costume/costumepricing')}}",
