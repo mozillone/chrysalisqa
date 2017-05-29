@@ -247,6 +247,14 @@ Route::any('/usps', ['as' => '','uses'=>'USPSController@index']);
 			'as' => '',
 	   		'uses' => 'EventController@searchEvent'
 		]);
+	   Route::any('/admin/event/tags', [
+	   		'as' => '',
+	   		'uses' => 'EventController@tagsEvents'
+	   	]);
+	   Route::any('/admin/changeapprovedstatus', [
+	   		'as' => 'admin/changeapprovedstatus',
+	   		'uses' => 'EventController@tagsEvents'
+	   	]);
 	   
 
 /****************Events Management Ends Here***********************/
@@ -257,11 +265,39 @@ Route::any('/press-posts', [
 	   		'as' => 'press-posts',
 	   		'uses' => 'PressController@pressPosts'
 	   	]);
+Route::any('/press-post-list', [
+			'as' => 'press-post-list',
+	   		'uses' => 'PressController@pressPostList'
+	]);
 
 Route::any('/add-press-post', [
 	   		'as' => 'add-press-post',
 	   		'uses' => 'PressController@addPressPost'
 	   	]);
+Route::any('/insert-press-post', [
+			'as' => 'insert-press-post',
+	   		'uses' => 'PressController@insertPressPost'
+	]);
+Route::any('/admin/editpress/{id}', [
+			'as' => 'admin/editpress',
+	   		'uses' => 'PressController@editPressPost'
+	]);
+Route::any('/admin/updatepress', [
+			'as' => 'admin/updatepress',
+	   		'uses' => 'PressController@updatePressPost'
+	]);
+Route::any('/admin/deletepress/{id}', [
+			'as' => 'admin/deletepress',
+	   		'uses' => 'PressController@deletePressPost'
+	]);
+Route::any('/admin/press/search', [
+			'as' => '',
+	   		'uses' => 'PressController@searchPress'
+	]);
+Route::any('/admin/changepublishstatus', [
+			'as' => 'admin/changepublishstatus',
+	   		'uses' => 'PressController@searchPress'
+	]);
 
 
 /****************Press Management Ends Here***********************/

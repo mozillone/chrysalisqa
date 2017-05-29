@@ -140,7 +140,7 @@
 
       </li>
 
-     <!--  <li {{ Request::is('press') ? 'class=active' : '' }}>
+      <li {{ Request::is('press') ? 'class=active' : '' }}>
       <a href="javascript:void(0)">
         <i class="fa fa-home" aria-hidden="true"></i>
         <span>Press</span><i class="fa fa-angle-left pull-right"></i>
@@ -265,14 +265,14 @@
       <li {{ Request::is('jobs') ? 'class=active' : '' }}>
       <a href="javascript:void(0)">
         <i class="fa fa-home" aria-hidden="true"></i>
-        <span>Blog</span><i class="fa fa-angle-left pull-right"></i>
+        <span>Jobs</span><i class="fa fa-angle-left pull-right"></i>
       </a>
 
         <ul class="treeview-menu menu">
           <li {{ Request::is('jobs') ? 'class=active' : '' }}>
             <a href="{{ route('manage-jobs')}}">
               <i class="fa fa-circle-o" aria-hidden="true"></i>
-              <span>Blog Posts</span>
+              <span>Manage Jobs</span>
             </a>
           </li>        
         </ul>
@@ -281,12 +281,12 @@
           <li {{ Request::is('jobs') ? 'class=active' : '' }}>
             <a href="{{ route('add-job-post')}}">
               <i class="fa fa-circle-o" aria-hidden="true"></i>
-              <span>Add Blog Post</span>
+              <span>Add Job Post</span>
             </a>
           </li>        
         </ul>
 
-      </li> -->
+      </li>
       <li {{ (Request::is('requestabag') ? 'class=active' : '') }}>
         <a href="javascript:void(0)">
            <i class="fa fa-home" aria-hidden="true"></i> <span>Request a Bag</span> <i class="fa fa-angle-left pull-right"></i>

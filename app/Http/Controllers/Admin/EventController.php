@@ -15,18 +15,19 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
 use Validator;
+use App\User;
 
 class EventController extends Controller {
 	
 
 	public function eventsList() {
 		$heading    = "Events List";
-		$create     = "Create Event";
+		$create     = "Add Event";
 		$breadcrumb = "Events List";
 
-		$users = DB::table('states')->select('*')->get();
+		$states = DB::table('states')->select('*')->get();
 
-return view('admin.events.events-list', compact('users','heading','create','breadcrumb'));
+return view('admin.events.events-list', compact('states','heading','create','breadcrumb'));
 	}
 
 	public function EventsFetch() {
@@ -43,6 +44,20 @@ return view('admin.events.events-list', compact('users','heading','create','brea
                    ';
             })
 
+            ->editColumn('status', function ($usersss) {
+
+					if ($usersss->approved == 'active') {
+						$approved = "1";
+					}else{
+						$approved = "0";
+					}
+                   $a = $approved == '1' ? 'checked' : '';
+                   return '<label class="switch">
+                                   <input type="checkbox" '.$a.' class="status" id="'. $usersss->id .'" onClick="changeapprovedstatus('.$usersss->id.','.$approved.');">
+                                   <div class="slider round"></div>
+                               </label>';
+                   })
+            
             ->make(true);
 	}
 
@@ -52,14 +67,16 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 
 		
 		$users = DB::table('states')->select('*')->get();
+
+		
 		return view('admin.events.add-event', compact('users'));
+
 	}
 
 	public function insertEvents(Request $request) {
 
 		
-		/*$req = $request->all();
-		print_r($req);exit;*/
+		$req = $request->all();
 		$validator = Validator::make($request->all(), [
 		  
                   'eventName' => 'required',
@@ -85,6 +102,26 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 		$eventName = $request->input('eventName');
 		$eventUrl = $request->input('eventUrl');
 		
+		if(count($req)){
+			$name = User::find(Auth::user()->id);
+			if(isset($req['eventImage'])){
+				$file_name = str_random(10).'.'.$req['eventImage']->getClientOriginalExtension();
+				$source_image_path=public_path('profile_img');
+				$thumb_image_path1=public_path('profile_img');
+				$thumb_image_path2=public_path('profile_img/thumbs');
+				$req['eventImage']->move($source_image_path, $file_name);
+				/*$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+				$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);*/
+
+			}
+			else if(isset($req['is_removed'])){
+				$file_name="";
+			}
+			else{
+				$file_name=$name->avatar;
+			}
+}
+
 		$fromDate = $request->input('fromDate');
 		$explode = explode('/', $fromDate);
 		$month = $explode[0];
@@ -132,6 +169,7 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 		$eventData = array(
 			'event_name' => $eventName,
 			'event_url' => $eventUrl,
+			'user_img' =>$file_name,
 			'from_date' => $fullFromDate,
 			'from_time' => $fromTime,
 			'to_date' => $fullToDate,
@@ -180,7 +218,16 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 
 		$req=$request->all();
 		//validator rule
-		$rule  = array( 'eventName' => 'required|max:50',
+		$rule  = array( 
+				  'eventName' => 'required',
+                  'eventUrl' => 'required',
+                  'fromDate' => 'required',
+                  'toDate' => 'required',
+                  'fromTime' => 'required',
+                  'toTime' => 'required',
+                  'eventDesc' => 'required',
+                  'eventTags' => 'required',
+                  'location' => 'required'
                          );
 
          $validator = Validator::make($req,$rule);
@@ -295,6 +342,7 @@ return view('admin.events.events-list', compact('users','heading','create','brea
                   return Redirect::to('events-list');
 	}
 
+
 	public function searchEvent(Request $request) {
 		$req = $request->all();
 		/*echo "<pre>";
@@ -360,6 +408,29 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 
 
             ->make(true);
+	}
+
+	public function tagsEvents(Request $request) {
+		$event_tags = DB::table('event_tags')
+		->where('event_tags','LIKE','%'.$request->text.'%')
+							->get();
+							//echo "<pre>";print_r($event_tags);die;
+		return Response::JSON($event_tags);
+	}
+
+	public function changeapprovedstatus() {
+		$status = $request->input('status') == 1?0:1;
+        $id     = $request->input('id');
+
+        $date = [date('y-m-d H:i:s')];
+
+        $user = DB::table('events')->where('event_id', $id)->
+        update(
+        	['status' => trim($status)]
+
+        	);
+        $user == 1?true:false;
+        return $user;
 	}
 	
 }

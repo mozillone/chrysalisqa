@@ -76,8 +76,8 @@
            <td>
               <select name="searchState" id="searchState" class="form-control ng-pristine ng-valid ng-empty ng-touched">
                  <option value=""> Select State </option>
-          @foreach($users as $user)
-          <option value="{{$user->name}}">{{ $user->name }}</option>
+          @foreach($states as $state)
+          <option value="{{$state->abbrev}}">{{ $state->abbrev }}</option>
           @endforeach
               </select>
            </td>
@@ -163,6 +163,7 @@ $('input[name="searchToDate"]').val('');
 			"searching": false,
 			"pageLength": 50,
 			"bLengthChange": false,
+			"order": [[ 4, "desc" ]],
 
 			"columns": [
 			    { data: 'event_name', name: 'event_name' },
@@ -170,7 +171,7 @@ $('input[name="searchToDate"]').val('');
 				{ data: 'from_time', name: 'from_time' },
 				{ data: 'to_time', name: 'to_time' },
 				{ data: 'created_at', name: 'created_at' },
-				{ data: 'approved', name: 'approved' },
+				{ data: 'status', name: 'status' },
 
 
 				{ data: 'actions', name: 'actions', orderable: false, searchable: false}
@@ -209,7 +210,7 @@ $('input[name="searchToDate"]').val('');
 					{ data: 'from_time', name: 'from_time' },
 					{ data: 'to_time', name: 'to_time' },
 					{ data: 'created_at', name: 'created_at' },
-					{ data: 'approved', name: 'approved' },
+					{ data: 'status', name: 'status' },
 					{ data: 'actions', name: 'actions', orderable: false, searchable: false}
 				]
 			});
@@ -273,6 +274,27 @@ $('input[name="searchToDate"]').val('');
 			}
 		});
 	    }*/
+	    function changeapprovedstatus(id, status) {
+alert(id);
+    $.ajax({
+      type: "GET",
+      url: '{!! url("/admin/changeapprovedstatus") !!}',
+      data: {'id':id,'status':status},
+      dataType: 'json',
+      success: function(response) {
+        if(response){
+          table.ajax.reload();
+          console.log( table.row( this ).data().status );
+          $('.box-body').before('<div class="callout callout-success">Status Updated.</div>');
+          setTimeout(function() {
+          //console.log();
+    $('.callout-success').fadeOut('fast');
+}, 2000);
+
+        }
+      }
+    });
+      }
 
 		function deleteCms($id){
 		var id=$id;

@@ -59,7 +59,7 @@ die;*/
                 
                 
 
-                    <form id="events-create"" class="form-horizontal defult-form" name="userForm" action="/admin/updateevent" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+                    <form id="events-update" class="form-horizontal defult-form" name="userForm" action="/admin/updateevent" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -78,6 +78,12 @@ die;*/
                                     <label for="inputEmail3" class="control-label">Event URL<span class="req-field" >*</span></label>
                                         <input type="text" class="form-control" placeholder="Enter Event URL"  name="eventUrl" id="name" value="{{$users->event_url}}">
                                     <p class="error">{{ $errors->first('eventUrl') }}</p> 
+                                </div>
+
+                                <div class="form-group has-feedback" >
+                                    <label for="inputEmail3" class="control-label">Event Image</label>
+                        <input type="file" name="eventImage"><br><br>
+                                     
                                 </div>
         <?php
         $fromDate = $users->from_date;
@@ -103,8 +109,8 @@ die;*/
         
 
 <div class="col-md-6">
-        <div class="form-group input-group clockpicker">
-        <label for="inputEmail3" class="control-label time-label">From Time<span class="req-field" >*</span></label>
+        <div class="form-group input-group clockpicker" id="error-msg-align">
+        <label for="inputEmail3" class="control-label time-label error-msg-align">From Time<span class="req-field" >*</span></label>
 <input type="text" class="form-control" name="fromTime" value="{{$users->from_time}}">
 <p class="error">{{ $errors->first('fromTime') }}</p>
     
@@ -143,8 +149,8 @@ die;*/
 
         
  <div class="col-md-6">
-        <div class="form-group input-group clockpicker">
-        <label for="inputEmail3" class="control-label time-label">To Time<span class="req-field" >*</span></label>
+        <div class="form-group input-group clockpicker" id="error-msg-align">
+        <label for="inputEmail3" class="control-label time-label ">To Time<span class="req-field" >*</span></label>
     <input type="text" class="form-control" name="toTime" value="{{$users->to_time}}">
     <p class="error">{{ $errors->first('toTime') }}</p>
     
@@ -286,7 +292,9 @@ die;*/
 
 <script src="{{ asset('/assets/admin/js/clockpicker.js') }}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
-    <script src="{{ asset('/assets/admin/js/pages/events.js')}}"></script>
+    <script src="{{ asset('/js/jquery.validate.min.js')}}"></script>
+
+ <script src="{{ asset('/assets/admin/js/pages/events.js')}}"></script>
     
 
 
