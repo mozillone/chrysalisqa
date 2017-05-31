@@ -10,12 +10,17 @@
 
 
 
+
 <link rel="stylesheet" href="{{ asset('/assets/admin/css/googleautostyle.css') }}">
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('/assets/admin/css/clockpicker.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/admin/css/bootstrap-tagsinput.css') }}">
 
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.css">
 
+      
        
 @stop
 
@@ -24,6 +29,9 @@
 <style>
 .fileupload-new .btn-file {
    margin: 10px 0 0 20px;
+}
+.notes{
+    margin-top: 31PX;
 }
 </style>
 
@@ -63,14 +71,22 @@
                                 <div class="col-md-12">
                                     <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Event Name<span class="req-field" >*</span></label>
-                                        <input type="text" class="form-control" placeholder="Enter Event name"  name="eventName" id="name">
+                                        <input type="text" class="form-control" placeholder="Enter Event name"  name="eventName" id="eventName">
                                         <p class="error">{{ $errors->first('eventName') }}</p> 
+
                                     </div>
                                 <div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Event URL<span class="req-field" >*</span></label>
                                         <input type="text" class="form-control" placeholder="Enter Event URL"  name="eventUrl" >
                                     <p class="error">{{ $errors->first('eventUrl') }}</p> 
                                 </div>
+
+                                <div class="form-group has-feedback" >
+                                    <label for="inputEmail3" class="control-label">Event Image<span class="req-field" >*</span></label>
+                        <input type="file" name="eventImage"><br><br>
+                                    <p class="error">{{ $errors->first('eventUrl') }}</p> 
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6 cldr" >
                                         <div class="form-group" >
@@ -134,12 +150,14 @@
                                 </div>
 
 
-                                    
-
+        
                                 <div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Event Tags<span class="req-field" >*</span></label>
-                                        <input type="text" class="form-control" placeholder="Enter Event Tags"  name="eventTags">
-                                        <p class="error">{{ $errors->first('eventTags') }}</p>
+                                    <input type="text"  class="form-control" name="eventTags" id="eventTags"/>
+                                    
+                                    <input type="text" name="tags" placeholder="Tags" class="typeahead tm-input form-control tm-input-info"/>
+                                        <!-- <input type="text" class="form-control" placeholder="Enter Event Tags"  name="eventTags">
+                                        <p class="error"> -->{{ $errors->first('eventTags') }}</p>
                                 </div>
                                       
                                 </div>
@@ -155,7 +173,9 @@
 
                                     <div id="locationField">
                                         <input type="text" class="form-control" placeholder="Enter Location"  name="location" id="autocomplete" onFocus="geolocate()" >
+                                        <label class="note" style="margin-top: 31px;">Note: Type the location name and select  to populate in address fields</label>
                                         <p class="error">{{ $errors->first('location') }}</p>
+
                                    </div>
                                   
                                 </div>
@@ -166,7 +186,7 @@
                                 
                                 
                                     
-                                    <input type="hidden" class="field form-control" id="administrative_area_level_1" name="state"></input>
+                                    
                                     
                                     <input type="hidden" class="field form-control" id="country" name="country" required></input>
 
@@ -192,12 +212,8 @@
 
                                 <div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">State</label>
-                                        <select class="form-control" id="sel1" name="state">
-                                        <option value="">--Select--</option>
-                                        @foreach($users as $user)
-                                        <option value="{{$user->name}}">{{ $user->name }}</option>
-                                        @endforeach
-                                       </select> 
+                                    <input type="text" class="field form-control" id="administrative_area_level_1" name="state"></input>
+                                        
                                 </div>
                                 <div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Zip Code</label>
@@ -252,13 +268,14 @@
 
  <script src="{{ asset('/assets/admin/js/pages/events.js')}}"></script>
 
-<script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script><script>
   $( function() {
     $( ".datepicker" ).datepicker({
       showOn: "button",
       buttonImage: "{{ asset('img/calendar.png') }}",
       buttonImageOnly: true,
-      buttonText: "Select date"
+      buttonText: "Select date",
     });
   } );
   </script>
@@ -297,7 +314,8 @@ height:300,
         // location types.
         autocomplete = new google.maps.places.Autocomplete(
             /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-            {types: ['geocode']});
+            {types: ['geocode'],
+            componentRestrictions: {country: 'us'}});
 
         // When the user selects an address from the dropdown, populate the address
         // fields in the form.
@@ -367,5 +385,42 @@ height:300,
     });
     </script>
 
+
+<!-- Event Tags Bootstrap Code starts here -->
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    var tagApi = $(".tm-input").tagsManager();
+
+
+    jQuery(".typeahead").typeahead({
+
+      name: 'tags',
+
+      displayKey: 'name',
+
+      source: function (query, process) {
+
+        return $.get('/admin/event/tags', { query: query }, function (data) {
+          
+          return process(data);
+
+        });
+
+      },
+
+      afterSelect :function (item){
+
+        tagApi.tagsManager("pushTag", item);
+
+      }
+
+    });
+
+  });
+
+</script>
 
     @stop

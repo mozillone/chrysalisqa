@@ -6,11 +6,22 @@
 @stop
 
 @section('content')
-<h1>Press</h1>
-<ol class="breadcrumb">
-  <li><a href="{{ url('/admin/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-  <li class="active">@section('breadcrumb'){{$breadcrumb}} @show</li>
-</ol>
+<style>
+.fileupload-new .btn-file {
+   margin: 10px 0 0 20px;
+}
+</style>
+
+<section class="content-header">
+    <h1>Press Posts</h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="active">Press Posts</li>
+    </ol>
+    
+</section>
 
 <!-- Main content -->
 
@@ -30,42 +41,42 @@
        @include('admin.partials.notifications')
 
 <form  method="POST" name="user_search" id="user_search" >
-    {{ csrf_field() }}
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="table-responsive">
   <table class="table table-striped table-bordered user-list-table">
      <thead>
         <tr>
            <th>Title</th>
            <th>Category</th>
-           <th>Published Time</th>
-           <th>Status</th>
+           <th>Created From Date</th>
+           <th>Created To Date</th>
         </tr>
      </thead>
      <tbody>
 
         <tr>
-           <td><input autocomplete="off" class="form-control ng-pristine ng-valid ng-empty ng-touched" name="searchEventName" placeholder="" type="text"></td>
+           <td><input autocomplete="off" class="form-control ng-pristine ng-valid ng-empty ng-touched" name="pressTitle" placeholder="" type="text"></td>
 
               <td>
               <div class="input-group cldr">
-              <select name="searchState" id="searchState" class="form-control ng-pristine ng-valid ng-empty ng-touched">
-                 <option value=""> All </option>
-          
-          <option>Category 1</option>
-          <option>Category 2</option>
-          <option>Category 3</option>
-          
+              <select name="searchCategory" id="searchCategory" class="form-control ng-pristine ng-valid ng-empty ng-touched">
+          <option value="Categories"> All </option>
+          @foreach($categories as $category)
+          <option value="{{$category->id}}">{{$category->cat_name}}</option>
+          @endforeach
               </select>
               </div>
               </td>
 
 
-              <td><div class="input-group cldr clockpicker">
-                
-                <input type="text" class="form-control" name="fromTime">
-    <span class="input-group-addon">
-        <span class="glyphicon glyphicon-time"></span>
-    </span>
+              <td>
+              <div class="input-group cldr2 event-dates">
+              <input autocomplete="off" class="form-control ng-pristine ng-valid ng-empty ng-touched datepicker" name="searchFromDate" placeholder="" type="text">
+              </div>
+              </td>
+
+              <td><div class="input-group cldr2 event-dates">
+                <input type="text" autocomplete="off"  name="searchToDate" class="form-control ng-pristine ng-valid ng-empty ng-touched datepicker" value="" />
                    
                 </div></td>
 
@@ -73,15 +84,7 @@
                                                     
                                                 </div></td>
 
-           <td>
-              <select name="searchState" id="searchState" class="form-control ng-pristine ng-valid ng-empty ng-touched">
-                 <option value=""> All </option>
-          
-          <option>Draft</option>
-          <option>Published</option>
-          
-              </select>
-           </td>
+           
           
            <td><input type="hidden" value="{{Request::segment(4)}}" id="role_id" name="role_id">
                <button class="btn btn-primary user-list-search" id="search" name="search">Search</button></td>
@@ -104,9 +107,8 @@
                 <th>Post Title</th>
                 <th>Categories</th>
                 <th>Created Date</th>
-                <th>Published Date</th>
-                <th>Approved?</th>
-                <th>Actions</th>
+                <th>Status</th>
+                <th>Actionsd</th>
                  </tr>
           </thead>
               <tbody>
@@ -116,15 +118,7 @@
 
       </div>
         </div>
-      <!--  <div class="tab-pane" id="professionals">
-          <h3>professionals</h3>
-        </div>
-        <div class="tab-pane" id="business">
-          <h3>business</h3>
-        </div>
-          <div class="tab-pane" id="schools">
-          <h3>schools</h3>
-        </div> -->
+      
       </div>
   </div>
     </div>
@@ -148,19 +142,10 @@
   } );
   </script>
 
-  <script>
-$('.clockpicker').clockpicker();
-</script>
-
 <script type="text/javascript">
 $(function() {
 
-/*$('input[name="created_on"]').daterangepicker({
-      autoUpdateInput: false,
-      locale: {
-          cancelLabel: 'Clear'
-      }
-});*/
+
 
 $('input[name="searchFromDate"]').datepicker();
 $('input[name="searchToDate"]').datepicker();
@@ -169,66 +154,78 @@ $('input[name="searchToDate"]').val('');
 });
 </script>
 
+  <script>
+$('.clockpicker').clockpicker();
+</script>
+
+<!-- <script type="text/javascript">
+$(function() {
+
+$('input[name="searchFromDate"]').datepicker();
+$('input[name="searchToDate"]').datepicker();
+$('input[name="searchFromDate"]').val('');
+$('input[name="searchToDate"]').val('');
+});
+</script> -->
+
 <!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script> -->
 <script type="text/javascript">
   var table = '';
   $(function() {
             table = $('#users-table').DataTable({
       "ajax": {
-            "url" : "/events-fetch",
+            "url" : "/press-post-list",
           "type": "GET",
          },
       "searching": false,
       "pageLength": 50,
+      "order": [[ 2, "desc" ]],
       "bLengthChange": false,
 
       "columns": [
-          { data: 'event_name', name: 'event_name' },
-          { data: 'display_name', name: 'display_name' },
-          { data: 'from_time', name: 'from_time' },
-          { data: 'to_time', name: 'to_time' },
+          { data: 'press_title', name: 'press_title' },
+          { data: 'cat_name', name: 'cat_name' },
           { data: 'created_at', name: 'created_at' },
-          { data: 'approved', name: 'approved' },
-
+          { data: 'status', name: 'status' },
           { data: 'actions', name: 'actions', orderable: false, searchable: false}
       ]
     });
+
+
 
     //implementing code for search functionality in ajax
    
 
 
     $("#search").click(function(){
-      alert();
 
              table.destroy();
              console.log($("#user_search").serialize());
 
 
-             var searchEvent=$("input[name=searchEvent]").val();
-             var searchFromDate=$("input[name=searchFromDate]").val();
-             var searchToDate=$("input[name=searchToDate]").val();
-             var searchState=$("input[name=searchState]").val();
+             var pressTitle=$("input[name=pressTitle]").val();
              
+             var searchCategory=$("input[name=searchCategory]").val();
+
+
+             var searchFromDate = $("input[name=searchFromDate]").val();
+             var searchToDate = $("input[name=searchToDate]").val();
 
 
         table = $('#users-table').DataTable({
         "ajax": {
-              "url" : "/admin/event/search",
+              "url" : "/admin/press/search",
              "type": "POST",
-             "data": {searchEvent:searchEvent, searchFromDate:searchFromDate, searchToDate:searchToDate, searchState:searchState}
+             "data": {pressTitle:pressTitle, searchCategory:searchCategory, searchFromDate:searchFromDate, searchToDate:searchToDate}
            },
         "searching": false,
         "pageLength": 50,
         "bLengthChange": false,
-        "order": [ [3, 'desc'] ],
         "columns": [
-          { data: 'event_name', name: 'event_name' },
-          { data: 'display_name', name: 'display_name' },
-          { data: 'from_time', name: 'from_time' },
-          { data: 'to_time', name: 'to_time' },
+         { data: 'press_title', name: 'press_title' },
+          { data: 'cat_name', name: 'cat_name' },
           { data: 'created_at', name: 'created_at' },
-          { data: 'approved', name: 'approved' },
+          { data: 'status', name: 'status', orderable: false, searchable: false},
           { data: 'actions', name: 'actions', orderable: false, searchable: false}
         ]
       });
@@ -271,27 +268,27 @@ $('input[name="searchToDate"]').val('');
                     "autoclose": true
                 });
                 });*/
-  function changeStatus(id, status) {
+  function changePublishStatus(id, status) {
 
-    $.ajax({
-      type: "GET",
-      url: '{!! url('admin/changemenustatus') !!}',
-      data: {'id':id,'status':status},
-      dataType: 'json',
-      success: function(response) {
-        if(response){
-          table.ajax.reload();
-          console.log( table.row( this ).data().status );
-          $('.box-body').before('<div class="callout callout-success">Status Updated.</div>');
-          setTimeout(function() {
-          //console.log();
-    $('.callout-success').fadeOut('fast');
-}, 2000);
+        $.ajax({
+            type: "GET",
+            url: '{!! url('/admin/press/status') !!}',
+            data: {'id':id,'status':status},
+            dataType: 'json',
+            success: function(response) {
+                if(response){
+                    table.ajax.reload();
+                    console.log( table.row( this ).data().status );
+                    $('.box-body').before('<div class="callout callout-success">Status Updated.</div>');
+                    setTimeout(function() {
+                        //console.log();
+                        $('.callout-success').fadeOut('fast');
+                    }, 2000);
 
-        }
-      }
-    });
-      }
+                }
+            }
+        });
+    }
 
     function deleteCms($id){
     var id=$id;
@@ -307,7 +304,7 @@ $('input[name="searchToDate"]').val('');
                 },
 
                 function(){
-                url = "/admin/cms/delete/"+id+"";
+                url = "/admin/deletepress/"+id+"";
           window.location = url;
                 });
 

@@ -73,14 +73,16 @@
                                                     
                                                 </div></td>
 
-           <td>
+<td><input autocomplete="off" class="form-control ng-pristine ng-valid ng-empty ng-touched" name="city" placeholder="" type="text"></td>
+
+           <!-- <td>
               <select name="searchState" id="searchState" class="form-control ng-pristine ng-valid ng-empty ng-touched">
                  <option value=""> Select State </option>
-          @foreach($users as $user)
-          <option value="{{$user->name}}">{{ $user->name }}</option>
+          @foreach($states as $state)
+          <option value="{{$state->abbrev}}">{{ $state->abbrev }}</option>
           @endforeach
               </select>
-           </td>
+           </td> -->
           
            <td><input type="hidden" value="{{Request::segment(4)}}" id="role_id" name="role_id">
                <button class="btn btn-primary user-list-search" id="search" name="search">Search</button></td>
@@ -100,7 +102,7 @@
 			  	<table class="table table-bordered table-hover" id="users-table">
 			        <thead>
 			            <tr>
-					     	<th>Event Name</th>
+					   <th>Event Name</th>
 							<th>Suggested By</th>
 			                <th>Event Start Time</th>
 			                <th>Event End Time</th>
@@ -163,6 +165,7 @@ $('input[name="searchToDate"]').val('');
 			"searching": false,
 			"pageLength": 50,
 			"bLengthChange": false,
+			"order": [[ 4, "desc" ]],
 
 			"columns": [
 			    { data: 'event_name', name: 'event_name' },
@@ -170,7 +173,7 @@ $('input[name="searchToDate"]').val('');
 				{ data: 'from_time', name: 'from_time' },
 				{ data: 'to_time', name: 'to_time' },
 				{ data: 'created_at', name: 'created_at' },
-				{ data: 'approved', name: 'approved' },
+				{ data: 'status', name: 'status' },
 
 
 				{ data: 'actions', name: 'actions', orderable: false, searchable: false}
@@ -187,17 +190,17 @@ $('input[name="searchToDate"]').val('');
              console.log($("#user_search").serialize());
 
 
-             var searchEventName=$("input[name=searchEventName]").val();
-             var searchFromDate=$("input[name=searchFromDate]").val();
-             var searchToDate=$("input[name=searchToDate]").val();
-             var searchState=$("#searchState option:selected").val();
-             
+             var searchEventName = $("input[name=searchEventName]").val();
+             var searchFromDate = $("input[name=searchFromDate]").val();
+             var searchToDate = $("input[name=searchToDate]").val();
+             var searchCity = $("input[name=city]").val();
+             // var searchCity=$("#searchState option:selected").val();
 
 				table = $('#users-table').DataTable({
 				"ajax": {
 	            "url" : "/admin/event/search",
 		         "type": "POST",
-		         "data": {searchEventName:searchEventName, searchFromDate:searchFromDate, searchToDate:searchToDate, searchState:searchState}
+		         "data": {searchEventName:searchEventName,searchFromDate:searchFromDate,searchToDate:searchToDate,searchCity:searchCity}
 		       },
 				"searching": false,
 				"pageLength": 50,
@@ -209,7 +212,7 @@ $('input[name="searchToDate"]').val('');
 					{ data: 'from_time', name: 'from_time' },
 					{ data: 'to_time', name: 'to_time' },
 					{ data: 'created_at', name: 'created_at' },
-					{ data: 'approved', name: 'approved' },
+					{ data: 'status', name: 'status' },
 					{ data: 'actions', name: 'actions', orderable: false, searchable: false}
 				]
 			});
@@ -273,6 +276,51 @@ $('input[name="searchToDate"]').val('');
 			}
 		});
 	    }*/
+	    function changeapprovedstatus(id, status) {
+alert(id);
+    $.ajax({
+      type: "GET",
+      url: '{!! url("/admin/changeapprovedstatus") !!}',
+      data: {'id':id,'status':status},
+      dataType: 'json',
+      success: function(response) {
+        if(response){
+          table.ajax.reload();
+          console.log( table.row( this ).data().status );
+          $('.box-body').before('<div class="callout callout-success">Status Updated.</div>');
+          setTimeout(function() {
+          //console.log();
+    $('.callout-success').fadeOut('fast');
+}, 2000);
+
+        }
+      }
+    });
+    /*****change status code starts here***/
+
+      }
+      /******change status code starts here***/
+      function changeStatus(id, status) {
+
+        $.ajax({
+            type: "GET",
+            url: '{!! url('/admin/events/status') !!}',
+            data: {'id':id,'status':status},
+            dataType: 'json',
+            success: function(response) {
+                if(response){
+                    table.ajax.reload();
+                    console.log( table.row( this ).data().status );
+                    $('.box-body').before('<div class="callout callout-success">Status Updated.</div>');
+                    setTimeout(function() {
+                        //console.log();
+                        $('.callout-success').fadeOut('fast');
+                    }, 2000);
+
+                }
+            }
+        });
+    }
 
 		function deleteCms($id){
 		var id=$id;

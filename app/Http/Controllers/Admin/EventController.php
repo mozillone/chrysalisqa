@@ -15,18 +15,19 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
 use Validator;
+use App\User;
 
 class EventController extends Controller {
 	
 
 	public function eventsList() {
 		$heading    = "Events List";
-		$create     = "Create Event";
+		$create     = "Add Event";
 		$breadcrumb = "Events List";
 
-		$users = DB::table('states')->select('*')->get();
+		$states = DB::table('states')->select('*')->get();
 
-return view('admin.events.events-list', compact('users','heading','create','breadcrumb'));
+return view('admin.events.events-list', compact('states','heading','create','breadcrumb'));
 	}
 
 	public function EventsFetch() {
@@ -35,14 +36,23 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 				->select('events.event_id as id', 'events.event_name', 'users.display_name','events.from_time', 'events.to_time', 'events.created_at', 'events.approved' )
 				->get();
 
-		 return Datatables::of($users)
+				return Datatables::of($users)
             ->addColumn('actions', function ($usersdetails) {
-                return '<a href="/admin/editevent/'.$usersdetails->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
+                return 
+                '<a href="/admin/editevent/'.$usersdetails->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
                        
                        <a href="/admin/deleteevent/'.$usersdetails->id.'"  class="btn btn-xs btn-danger delete_user" onClick="deleteCareers('.$usersdetails->id.');" ><i class="fa fa-trash-o"></i> Delete</a>
                    ';
             })
 
+            ->editColumn('status', function ($users) {
+       $a = $users->approved == 1?'checked':'';
+       return '<label class="switch">
+                                   <input type="checkbox" '.$a.' class="status" id="'.$users->id.'" onClick="changeStatus('.$users->id.','.$users->approved.');">
+                                   <div class="slider round"></div>
+                               </label>';
+     })
+            
             ->make(true);
 	}
 
@@ -52,14 +62,16 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 
 		
 		$users = DB::table('states')->select('*')->get();
+
+		
 		return view('admin.events.add-event', compact('users'));
+
 	}
 
 	public function insertEvents(Request $request) {
 
 		
-		/*$req = $request->all();
-		print_r($req);exit;*/
+		$req = $request->all();
 		$validator = Validator::make($request->all(), [
 		  
                   'eventName' => 'required',
@@ -85,6 +97,26 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 		$eventName = $request->input('eventName');
 		$eventUrl = $request->input('eventUrl');
 		
+		if(count($req)){
+			$name = User::find(Auth::user()->id);
+			if(isset($req['eventImage'])){
+				$file_name = str_random(10).'.'.$req['eventImage']->getClientOriginalExtension();
+				$source_image_path=public_path('profile_img');
+				$thumb_image_path1=public_path('profile_img');
+				$thumb_image_path2=public_path('profile_img/thumbs');
+				$req['eventImage']->move($source_image_path, $file_name);
+				/*$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+				$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);*/
+
+			}
+			else if(isset($req['is_removed'])){
+				$file_name="";
+			}
+			else{
+				$file_name=$name->avatar;
+			}
+}
+
 		$fromDate = $request->input('fromDate');
 		$explode = explode('/', $fromDate);
 		$month = $explode[0];
@@ -132,6 +164,7 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 		$eventData = array(
 			'event_name' => $eventName,
 			'event_url' => $eventUrl,
+			'user_img' =>$file_name,
 			'from_date' => $fullFromDate,
 			'from_time' => $fromTime,
 			'to_date' => $fullToDate,
@@ -160,7 +193,7 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 }
 
 	public function editEvent($id) {
-		$eventid=$id;
+		$eventid = $id;
 		$states = DB::table('states')->select('*')->get();
 		$users = DB::table('events')
 				->leftjoin('address_master', 'events.address_id', '=', 'address_master.address_id')
@@ -180,7 +213,16 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 
 		$req=$request->all();
 		//validator rule
-		$rule  = array( 'eventName' => 'required|max:50',
+		$rule  = array( 
+				  'eventName' => 'required',
+                  'eventUrl' => 'required',
+                  'fromDate' => 'required',
+                  'toDate' => 'required',
+                  'fromTime' => 'required',
+                  'toTime' => 'required',
+                  'eventDesc' => 'required',
+                  'eventTags' => 'required',
+                  'location' => 'required'
                          );
 
          $validator = Validator::make($req,$rule);
@@ -295,10 +337,11 @@ return view('admin.events.events-list', compact('users','heading','create','brea
                   return Redirect::to('events-list');
 	}
 
+
 	public function searchEvent(Request $request) {
 		$req = $request->all();
 		/*echo "<pre>";
-		print_r($req);
+		print_r($request->all());
 		die;*/
 		$users_list = DB::table('events')
 				->leftjoin('users', 'events.created_by', '=', 'users.id')
@@ -336,9 +379,13 @@ return view('admin.events.events-list', compact('users','heading','create','brea
 		
 		}
 
-		if($request->searchState !="") {
+if($request->searchCity !="") {
+			$users_list->where('address_master.city', '=', $request->searchCity);
+}
+
+		/*if($request->searchState !="") {
 			$users_list->where('address_master.state', '=', $request->searchState);
-		}
+		}*/
 
 		$users = $users_list->get();
 
@@ -356,10 +403,41 @@ return view('admin.events.events-list', compact('users','heading','create','brea
                        <a href="/admin/deleteevent/'.$usersdetails->id.'"  class="btn btn-xs btn-danger delete_user" onClick="deleteCareers('.$usersdetails->id.');" ><i class="fa fa-trash-o"></i> Delete</a>
                    ';
             })
+            ->editColumn('status', function ($users) {
+       $a = $users->approved == 1?'checked':'';
+       return '<label class="switch">
+                                   <input type="checkbox" '.$a.' class="status" id="'.$users->id.'" onClick="changeStatus('.$users->id.','.$users->approved.');">
+                                   <div class="slider round"></div>
+                               </label>';
+     })
 
 
 
             ->make(true);
+	}
+
+	public function updateStatus(Request $request) {
+		$event_tags = DB::table('event_tags')
+		->where('event_tags','LIKE','%'.$request->text.'%')
+							->get();
+							//echo "<pre>";print_r($event_tags);die;
+		return Response::JSON($event_tags);
+	}
+
+	public function industryStatus(Request $request) {
+		
+		$status = $request->input('status') == 1?0:1;
+        $id     = $request->input('id');
+
+        $date = [date('y-m-d H:i:s')];
+
+        $user = DB::table('events')->where('event_id', $id)->
+        update(
+        	['approved' => trim($status)]
+
+        	);
+        $user == 1?true:false;
+        return $user;
 	}
 	
 }

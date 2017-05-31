@@ -59,15 +59,8 @@
         
       </div>
         </div>
-      <!--  <div class="tab-pane" id="professionals">
-          <h3>professionals</h3>
-        </div>
-        <div class="tab-pane" id="business">
-          <h3>business</h3>
-        </div>
-          <div class="tab-pane" id="schools">
-          <h3>schools</h3>
-        </div> -->
+      
+      
       </div>
   </div>      
     </div>

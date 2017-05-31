@@ -16,6 +16,17 @@ die;*/
 ?>
 
 
+@if (isset($users) && !empty($users))
+<?php     
+$all_data = $users; 
+
+?>
+@else
+<?php
+$all_data = ""; ?>
+@endif
+
+
 <link rel="stylesheet" href="{{ asset('/assets/admin/css/googleautostyle.css') }}">
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('/assets/admin/css/clockpicker.css') }}">
@@ -59,7 +70,7 @@ die;*/
                 
                 
 
-                    <form id="events-create"" class="form-horizontal defult-form" name="userForm" action="/admin/updateevent" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+                    <form id="events-update" class="form-horizontal defult-form" name="userForm" action="/admin/updateevent" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -70,14 +81,20 @@ die;*/
                                 <div class="col-md-12">
                                     <div class="form-group has-feedback" >
              <label for="inputEmail3" class="control-label">Event Name<span class="req-field" >*</span></label>
-             <input type="text" class="form-control" placeholder="Enter Event name"  name="eventName" id="eventName" value="{{$users->event_name}}">
+             <input type="text" class="form-control" placeholder="Enter Event name"  name="eventName" id="eventName" value="{{$all_data->event_name}}">
                 <p class="error">{{ $errors->first('eventName') }}</p>
 
                                     </div>
                                 <div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Event URL<span class="req-field" >*</span></label>
-                                        <input type="text" class="form-control" placeholder="Enter Event URL"  name="eventUrl" id="name" value="{{$users->event_url}}">
+                                        <input type="text" class="form-control" placeholder="Enter Event URL"  name="eventUrl" id="name" value="{{$all_data->event_url}}">
                                     <p class="error">{{ $errors->first('eventUrl') }}</p> 
+                                </div>
+
+                                <div class="form-group has-feedback" >
+                                    <label for="inputEmail3" class="control-label">Event Image</label>
+                        <input type="file" name="eventImage"><br><br>
+                                     
                                 </div>
         <?php
         $fromDate = $users->from_date;
@@ -103,9 +120,9 @@ die;*/
         
 
 <div class="col-md-6">
-        <div class="form-group input-group clockpicker">
-        <label for="inputEmail3" class="control-label time-label">From Time<span class="req-field" >*</span></label>
-<input type="text" class="form-control" name="fromTime" value="{{$users->from_time}}">
+        <div class="form-group input-group clockpicker" id="error-msg-align">
+        <label for="inputEmail3" class="control-label time-label error-msg-align">From Time<span class="req-field" >*</span></label>
+<input type="text" class="form-control" name="fromTime" value="{{$all_data->from_time}}">
 <p class="error">{{ $errors->first('fromTime') }}</p>
     
         <span class="input-group-addon glyphicon glyphicon-time"></span>
@@ -143,9 +160,9 @@ die;*/
 
         
  <div class="col-md-6">
-        <div class="form-group input-group clockpicker">
-        <label for="inputEmail3" class="control-label time-label">To Time<span class="req-field" >*</span></label>
-    <input type="text" class="form-control" name="toTime" value="{{$users->to_time}}">
+        <div class="form-group input-group clockpicker" id="error-msg-align">
+        <label for="inputEmail3" class="control-label time-label ">To Time<span class="req-field" >*</span></label>
+    <input type="text" class="form-control" name="toTime" value="{{$all_data->to_time}}">
     <p class="error">{{ $errors->first('toTime') }}</p>
     
         <span class="input-group-addon glyphicon glyphicon-time"></span>
@@ -161,7 +178,7 @@ die;*/
                                 <label for="inputEmail3" class="control-label">Event Description
         <span class="req-field" >*</span>
         </label>
-                        <textarea id="summernote" name=eventDesc>{{ $users->event_desc }}</textarea>
+                        <textarea id="summernote" name=eventDesc>{{ $all_data->event_desc }}</textarea>
                         <p class="error">{{ $errors->first('eventDesc') }}</p> 
                                 </div>
 
@@ -170,7 +187,7 @@ die;*/
 
                                 <div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Event Tags<span class="req-field" >*</span></label>
-                                        <input type="text" class="form-control" placeholder="Enter Event Tags"  name="eventTags" id="name" value="{{$users->event_tags}}">
+                                        <input type="text" class="form-control" placeholder="Enter Event Tags"  name="eventTags" id="name" value="{{$all_data->event_tags}}">
                                 </div>
                                       
                                 </div>
@@ -212,23 +229,23 @@ die;*/
                                 <div class="form-group has-feedback">
                                     <label for="inputEmail3" class="control-label">Address 1</label>
 
-                                        <input type="text" class="form-control field" placeholder="Enter Address 1"  name="address1" id="street_number" value="{{ $users->address1 }}">
+                                        <input type="text" class="form-control field" placeholder="Enter Address 1"  name="address1" id="street_number" value="{{ $all_data->address1 }}">
                                 </div>
 
                                 <div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Address 2</label>
-                                        <input type="text" class="form-control" placeholder="Enter Address 2"  name="address2" id="name" value="{{ $users->address2 }}">
+                                        <input type="text" class="form-control" placeholder="Enter Address 2"  name="address2" id="name" value="{{ $all_data->address2 }}">
                                 </div>
 
                                 <div class="form-group has-feedback wideField" colspan="3">
                                     <label for="inputEmail3" class="control-label">City</label>
-                                        <input type="text" class="form-control field" placeholder="Enter City"  name="city" id="locality" value="{{ $users->city }}">
+                                        <input type="text" class="form-control field" placeholder="Enter City"  name="city" id="locality" value="{{ $all_data->city }}">
                                 </div>
 
                                 <div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">State</label>
                                         <select class="form-control" id="sel1" name="state">
-                                        <option value="{{ $users->state }}">{{ $users->state }}</option>
+                                        <option value="{{ $all_data->state }}">{{ $users->state }}</option>
                                         <option>Select Another State</option>
                                         @foreach($states as $user)
                                         <option value="{{$user->name}}">{{ $user->name }}</option>
@@ -237,7 +254,7 @@ die;*/
                                 </div>
                                 <div class="form-group has-feedback" >
                                     <label for="inputEmail3" class="control-label">Zip Code</label>
-                                        <input type="text" class="form-control" placeholder="Enter Zip Code"  name="zipCode" id="name" value="{{ $users->zip_code }}">
+                                        <input type="text" class="form-control" placeholder="Enter Zip Code"  name="zipCode" id="name" value="{{ $all_data->zip_code }}">
                                 </div>
                             </div>
                         </div>
@@ -286,7 +303,9 @@ die;*/
 
 <script src="{{ asset('/assets/admin/js/clockpicker.js') }}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
-    <script src="{{ asset('/assets/admin/js/pages/events.js')}}"></script>
+    <script src="{{ asset('/js/jquery.validate.min.js')}}"></script>
+
+ <script src="{{ asset('/assets/admin/js/pages/events.js')}}"></script>
     
 
 
