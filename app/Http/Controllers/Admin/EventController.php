@@ -33,7 +33,7 @@ return view('admin.events.events-list', compact('states','heading','create','bre
 	public function EventsFetch() {
 		$users = DB::table('events')
 				->leftjoin('users', 'events.created_by', '=', 'users.id')
-				->select('events.event_id as id', 'events.event_name', 'users.display_name','events.from_time', 'events.to_time', 'events.created_at', 'events.approved' )
+				->select('events.event_id as id', 'events.event_name', 'users.display_name','events.from_time', 'events.to_time', 'events.created_at', 'events.approved',DB::Raw('DATE_FORMAT(cc_events.created_at,"%m/%d/%y %h:%i %p") as date_format') )
 				->get();
 
 				return Datatables::of($users)
@@ -41,7 +41,7 @@ return view('admin.events.events-list', compact('states','heading','create','bre
                 return 
                 '<a href="/admin/editevent/'.$usersdetails->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
                        
-                       <a href="/admin/deleteevent/'.$usersdetails->id.'"  class="btn btn-xs btn-danger delete_user" onClick="deleteCareers('.$usersdetails->id.');" ><i class="fa fa-trash-o"></i> Delete</a>
+                        <a href="javascript:void(0);"  class="btn btn-xs btn-danger delete_user" onClick="deleteEvent('.$usersdetails->id.');" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i> </a>
                    ';
             })
 
@@ -400,7 +400,7 @@ if($request->searchCity !="") {
             ->addColumn('actions', function ($usersdetails) {
                 return '<a href="/admin/editevent/'.$usersdetails->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
                        
-                       <a href="/admin/deleteevent/'.$usersdetails->id.'"  class="btn btn-xs btn-danger delete_user" onClick="deleteCareers('.$usersdetails->id.');" ><i class="fa fa-trash-o"></i> Delete</a>
+                       <a href="javascript:void(0);"  class="btn btn-xs btn-danger delete_user" onClick="deleteEvent('.$usersdetails->id.');" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i> </a>
                    ';
             })
             ->editColumn('status', function ($users) {

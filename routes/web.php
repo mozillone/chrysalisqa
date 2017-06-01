@@ -271,7 +271,7 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 	   		'uses' => 'EventController@updateEvent'
 	   	]);
 	   Route::any('/admin/deleteevent/{id}', [
-	   		'as' => 'deleteevent',
+	   		'as' => '',
 	   		'uses' => 'EventController@deleteEvent'
 	   	]);
 	   Route::any('/admin/event/search', [
@@ -319,7 +319,7 @@ Route::any('/admin/updatepress', [
 	   		'uses' => 'PressController@updatePressPost'
 	]);
 Route::any('/admin/deletepress/{id}', [
-			'as' => 'admin/deletepress',
+			'as' => '',
 	   		'uses' => 'PressController@deletePressPost'
 	]);
 Route::any('/admin/press/search', [

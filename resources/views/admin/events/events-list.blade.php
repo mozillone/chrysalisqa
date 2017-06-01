@@ -2,6 +2,8 @@
 
 @section('header_styles')
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+
 @stop
 
 @section('content')
@@ -130,7 +132,10 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+
 <script>
+
   $( function() {
     $( ".datepicker" ).datepicker({
       showOn: "button",
@@ -172,7 +177,7 @@ $('input[name="searchToDate"]').val('');
 			    { data: 'display_name', name: 'display_name' },
 				{ data: 'from_time', name: 'from_time' },
 				{ data: 'to_time', name: 'to_time' },
-				{ data: 'created_at', name: 'created_at' },
+				{ data: 'date_format', name: 'date_format' },
 				{ data: 'status', name: 'status' },
 
 
@@ -211,7 +216,7 @@ $('input[name="searchToDate"]').val('');
 			    	{ data: 'display_name', name: 'display_name' },
 					{ data: 'from_time', name: 'from_time' },
 					{ data: 'to_time', name: 'to_time' },
-					{ data: 'created_at', name: 'created_at' },
+					{ data: 'date_format', name: 'date_format' },
 					{ data: 'status', name: 'status' },
 					{ data: 'actions', name: 'actions', orderable: false, searchable: false}
 				]
@@ -322,26 +327,24 @@ alert(id);
         });
     }
 
-		function deleteCms($id){
-		var id=$id;
+		function deleteEvent($id){
+		
+    var id=$id;
 
-     swal({
-        title: "Are you sure want to delete this Cms?",
-                  text: "You will not be able to recover this Cms",
-                  showCancelButton: true,
-                  confirmButtonColor: "#DD6B55 ",
-                  confirmButtonText: "Yes, delete",
-                  closeOnConfirm: false,
-                  closeOnCancel: true
-                },
+   swal({
+      title: "Are you sure want to delete this Event-Post?",
+                 showCancelButton: true,
+                confirmButtonColor: "#DD6B55 ",
+                confirmButtonText: "Yes, delete",
+                closeOnConfirm: false,
+                closeOnCancel: true
+              },
 
-                function(){
-                url = "/admin/cms/delete/"+id+"";
-			    window.location = url;
-                });
-
-
-    }
+              function(){
+              url = "/admin/deleteevent/"+id+"";
+               window.location = url;
+              });
+  }
 
 </script>
 @endsection

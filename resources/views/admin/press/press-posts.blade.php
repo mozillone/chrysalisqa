@@ -3,6 +3,7 @@
 @section('header_styles')
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('/assets/admin/css/clockpicker.css') }}">
+<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
 @stop
 
 @section('content')
@@ -64,7 +65,7 @@
           @foreach($categories as $category)
           <option value="{{$category->id}}">{{$category->cat_name}}</option>
           @endforeach
-              </select>
+            </select>
               </div>
               </td>
 
@@ -131,6 +132,8 @@
 <!-- Include Date Range Picker -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <script src="{{ asset('/assets/admin/js/clockpicker.js') }}"></script>
+<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+
 <script>
   $( function() {
     $( ".datepicker" ).datepicker({
@@ -158,17 +161,9 @@ $('input[name="searchToDate"]').val('');
 $('.clockpicker').clockpicker();
 </script>
 
-<!-- <script type="text/javascript">
-$(function() {
 
-$('input[name="searchFromDate"]').datepicker();
-$('input[name="searchToDate"]').datepicker();
-$('input[name="searchFromDate"]').val('');
-$('input[name="searchToDate"]').val('');
-});
-</script> -->
 
-<!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script> -->
+
 <script type="text/javascript">
   var table = '';
   $(function() {
@@ -185,7 +180,7 @@ $('input[name="searchToDate"]').val('');
       "columns": [
           { data: 'press_title', name: 'press_title' },
           { data: 'cat_name', name: 'cat_name' },
-          { data: 'created_at', name: 'created_at' },
+          { data: 'date_format', name: 'date_format' },
           { data: 'status', name: 'status' },
           { data: 'actions', name: 'actions', orderable: false, searchable: false}
       ]
@@ -204,8 +199,8 @@ $('input[name="searchToDate"]').val('');
 
 
              var pressTitle=$("input[name=pressTitle]").val();
-             
-             var searchCategory=$("input[name=searchCategory]").val();
+
+             var searchCategory=$("select[name=searchCategory]").val();
 
 
              var searchFromDate = $("input[name=searchFromDate]").val();
@@ -224,7 +219,7 @@ $('input[name="searchToDate"]').val('');
         "columns": [
          { data: 'press_title', name: 'press_title' },
           { data: 'cat_name', name: 'cat_name' },
-          { data: 'created_at', name: 'created_at' },
+          { data: 'date_format', name: 'date_format' },
           { data: 'status', name: 'status', orderable: false, searchable: false},
           { data: 'actions', name: 'actions', orderable: false, searchable: false}
         ]
@@ -290,26 +285,24 @@ $('input[name="searchToDate"]').val('');
         });
     }
 
-    function deleteCms($id){
-    var id=$id;
+   function deletePress($id){
+   
+       var id=$id;
 
-     swal({
-        title: "Are you sure want to delete this Cms?",
-                  text: "You will not be able to recover this Cms",
-                  showCancelButton: true,
-                  confirmButtonColor: "#DD6B55 ",
-                  confirmButtonText: "Yes, delete",
-                  closeOnConfirm: false,
-                  closeOnCancel: true
-                },
+   swal({
+      title: "Are you sure want to delete this Press-Post?",
+                 showCancelButton: true,
+                confirmButtonColor: "#DD6B55 ",
+                confirmButtonText: "Yes, delete",
+                closeOnConfirm: false,
+                closeOnCancel: true
+              },
 
-                function(){
-                url = "/admin/deletepress/"+id+"";
-          window.location = url;
-                });
-
-
-    }
+              function(){
+              url = "/admin/deletepress/"+id+"";
+               window.location = url;
+              });
+  }
 
 </script>
 @endsection

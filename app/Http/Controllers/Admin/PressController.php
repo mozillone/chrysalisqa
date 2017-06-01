@@ -264,7 +264,7 @@ class PressController extends Controller {
 		$pressid = $id;
 		
 		// Delete Query
-		
+		// echo $pressid;exit;
 
 		
 			$delete_press_id = DB::table('press')
@@ -279,7 +279,8 @@ class PressController extends Controller {
 
 
 		Session::flash('success', 'Press is Deleted successfully');
-                  return Redirect::back();
+		  return redirect('/press-posts');
+                
 	}
 
 	public function pressPostList(Request $request) {
@@ -289,7 +290,7 @@ class PressController extends Controller {
 		$users = DB::table('press')
 				->leftjoin('press_cat_link', 'press_cat_link.press_id', '=', 'press.press_id')
 				->leftjoin('press_categories', 'press_categories.id', '=', 'press_cat_link.cat_id')
-				->select('press.press_id as id', 'press.press_title', 'press.status', 'press.created_at', 'press.updated_at',DB::raw("group_concat(cc_press_categories.cat_name SEPARATOR ', ') as cat_name"))
+				->select('press.press_id as id', 'press.press_title', 'press.status', 'press.created_at', 'press.updated_at',DB::raw("group_concat(cc_press_categories.cat_name SEPARATOR ', ') as cat_name"),DB::Raw('DATE_FORMAT(cc_press.created_at,"%m/%d/%y %h:%i %p") as date_format'))
 				->groupBy('press.press_id', 'press.press_title', 'press.created_at', 'press.updated_at')
 				->get();
 				
@@ -300,7 +301,7 @@ class PressController extends Controller {
             ->addColumn('actions', function ($usersdetails) {
                 return '<a href="/admin/editpress/'.$usersdetails->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
                        
-                       <a href="/admin/deletepress/'.$usersdetails->id.'"  class="btn btn-xs btn-danger delete_user" onClick="deleteCms('.$usersdetails->id.');" ><i class="fa fa-trash-o"></i> Delete</a>
+                       <a href="javascript:void(0);"  class="btn btn-xs btn-danger delete_user" onClick="deletePress('.$usersdetails->id.');" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i> </a>
                    ';
             })
             ->editColumn('status', function ($users) {
@@ -318,12 +319,12 @@ class PressController extends Controller {
 
 		$req = $request->all();
 		
-		echo "<pre>";print_r($req);die;
+		// echo "<pre>";print_r($req);die;
 		
 		$users_list = DB::table('press')
 				->leftjoin('press_cat_link', 'press_cat_link.press_id', '=', 'press.press_id')
 				->leftjoin('press_categories', 'press_categories.id', '=', 'press_cat_link.cat_id')
-				->select('press.press_id as id', 'press.press_title', 'press.status', 'press.created_at', 'press.updated_at',DB::raw("group_concat(cc_press_categories.cat_name SEPARATOR ', ') as cat_name"))
+				->select('press.press_id as id', 'press.press_title', 'press.status','press.updated_at',DB::raw("group_concat(cc_press_categories.cat_name SEPARATOR ', ') as cat_name"),DB::Raw('DATE_FORMAT(cc_press.created_at,"%m/%d/%y %h:%i %p") as date_format'))
 				->groupBy('press.press_id', 'press.press_title','press.status', 'press.created_at', 'press.updated_at');
 		
 		if(($request->pressTitle) !="") {
@@ -361,7 +362,7 @@ class PressController extends Controller {
             ->addColumn('actions', function ($usersdetails) {
                 return '<a href="/admin/editpress/'.$usersdetails->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
                        
-                       <a href="/admin/deletepress/'.$usersdetails->id.'"  class="btn btn-xs btn-danger delete_user" onClick="deleteCareers('.$usersdetails->id.');" ><i class="fa fa-trash-o"></i> Delete</a>
+                       <a href="/admin/deletepress/'.$usersdetails->id.'"  class="btn btn-xs btn-danger delete_user" onClick="deletePress('.$usersdetails->id.');" ><i class="fa fa-trash-o"></i> Delete</a>
                    ';
             })
 
