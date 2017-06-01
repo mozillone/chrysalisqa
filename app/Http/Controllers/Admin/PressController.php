@@ -318,32 +318,60 @@ class PressController extends Controller {
 	public function searchPress(Request $request) {
 
 		$req = $request->all();
+		//print_r($req); exit;
+	    $fromdate = $request->searchFromDate;
+	    if($fromdate!=""){
+	    $date_explode = explode('/', $fromdate);
+		$month = $date_explode[0];
+		$date = $date_explode[1];
+		$year = $date_explode[2];
+		$fulldate = $year.'-'.$month.'-'.$date;
+		$fromdate_one=date($fulldate . ' 00:00:00', time());
+
 		
-		// echo "<pre>";print_r($req);die;
+	    }
+	    $todate = $request->searchToDate;
+	    if($todate!=""){
+	    $date_explode_two = explode('/', $todate);
+		$month_two = $date_explode_two[0];
+		$date_two= $date_explode_two[1];
+		$year_two = $date_explode_two[2];
+		$fulldate_two = $year_two.'-'.$month_two.'-'.$date_two;
+		$fromdate_two=date($fulldate_two . ' 00:00:00', time());
+
+	    }
+	  
+
+		
 		
 		$users_list = DB::table('press')
 				->leftjoin('press_cat_link', 'press_cat_link.press_id', '=', 'press.press_id')
 				->leftjoin('press_categories', 'press_categories.id', '=', 'press_cat_link.cat_id')
 				->select('press.press_id as id', 'press.press_title', 'press.status','press.updated_at',DB::raw("group_concat(cc_press_categories.cat_name SEPARATOR ', ') as cat_name"),DB::Raw('DATE_FORMAT(cc_press.created_at,"%m/%d/%y %h:%i %p") as date_format'))
 				->groupBy('press.press_id', 'press.press_title','press.status', 'press.created_at', 'press.updated_at');
+
 		
 		if(($request->pressTitle) !="") {
 			$users_list->where('press_title',$request->pressTitle);
 		}
 
 		if($request->searchCategory !="") {
-		
-		
 			$users_list->where('press_cat_link.cat_id', $req['searchCategory']);
-		}
+        }
 
-		if(($request->searchFromDate) !="") {
-			$users_list->where('created_at',$request->searchFromDate);
-		}
 
-		if(($request->searchToDate) !="") {
-			$users_list->where('created_at',$request->searchToDate);
-		}
+		if(($fromdate) && ($todate)!="") {
+           $users_list->whereBetween('press.created_at', array($fromdate_one,$fromdate_two));
+       }
+
+		// if(($request->searchFromDate) !="") {
+			
+		// 	$users_list->where('created_at', $fullDate);
+		// }
+
+		// if(($request->searchToDate) !="") {
+		// 	$users_list->where('created_at',$request->searchToDate);
+		// }
 
 		
 		

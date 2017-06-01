@@ -343,17 +343,44 @@ return view('admin.events.events-list', compact('states','heading','create','bre
 		/*echo "<pre>";
 		print_r($request->all());
 		die;*/
+		$fromdate = $request->searchFromDate;
+	    if($fromdate!=""){
+	    $date_explode = explode('/', $fromdate);
+		$month = $date_explode[0];
+		$date = $date_explode[1];
+		$year = $date_explode[2];
+		$fulldate = $year.'-'.$month.'-'.$date;
+		$fromdate_one=date($fulldate . ' 00:00:00', time());
+
+		
+	    }
+	    $todate = $request->searchToDate;
+	    if($todate!=""){
+	    $date_explode_two = explode('/', $todate);
+		$month_two = $date_explode_two[0];
+		$date_two= $date_explode_two[1];
+		$year_two = $date_explode_two[2];
+		$fulldate_two = $year_two.'-'.$month_two.'-'.$date_two;
+		$fromdate_two=date($fulldate_two . ' 00:00:00', time());
+
+	    }
+
+
 		$users_list = DB::table('events')
 				->leftjoin('users', 'events.created_by', '=', 'users.id')
 				->leftjoin('address_master', 'events.address_id', '=', 'address_master.address_id')
-				->select('events.event_id as id', 'events.event_name', 'users.display_name','events.from_time', 'events.to_time', 'events.created_at', 'events.approved');
+				->select('events.event_id as id', 'events.event_name', 'users.display_name','events.from_time', 'events.to_time', DB::Raw('DATE_FORMAT(cc_events.created_at,"%m/%d/%y %h:%i %p") as date_format'), 'events.approved');
 		
 
 		if($request->searchEventName !="") {
 			$users_list->where('events.event_name', '=', $request->searchEventName);
 		}
 
-		if($request->searchFromDate !="") {
+		if(($fromdate) && ($todate)!="") {
+           $users_list->whereBetween('events.created_at', array($fromdate_one,$fromdate_two));
+       }
+
+		/*if($request->searchFromDate !="") {
 		
 		$from_Date = $request->searchFromDate;
 		$explode = explode('/', $from_Date);
@@ -364,9 +391,9 @@ return view('admin.events.events-list', compact('states','heading','create','bre
 
 			$users_list->where('events.from_date', '=', $full_FromDate);
 		
-		}
+		}*/
 
-		if($request->searchToDate !="") {
+		/*if($request->searchToDate !="") {
 
 		$to_Date = $request->searchToDate;
 		$explode = explode('/', $to_Date);
@@ -377,7 +404,7 @@ return view('admin.events.events-list', compact('states','heading','create','bre
 
 			$users_list->where('events.to_date', '=', $full_ToDate);
 		
-		}
+		}*/
 
 if($request->searchCity !="") {
 			$users_list->where('address_master.city', '=', $request->searchCity);

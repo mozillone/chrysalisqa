@@ -213,12 +213,12 @@ $('input[name="searchToDate"]').val('');
 				"order": [ [3, 'desc'] ],
 				"columns": [
 					{ data: 'event_name', name: 'event_name' },
-			    	{ data: 'display_name', name: 'display_name' },
-					{ data: 'from_time', name: 'from_time' },
-					{ data: 'to_time', name: 'to_time' },
-					{ data: 'date_format', name: 'date_format' },
-					{ data: 'status', name: 'status' },
-					{ data: 'actions', name: 'actions', orderable: false, searchable: false}
+          { data: 'display_name', name: 'display_name' },
+          { data: 'from_time', name: 'from_time' },
+          { data: 'to_time', name: 'to_time' },
+          { data: 'date_format', name: 'date_format' },
+          { data: 'status', name: 'status' },
+          { data: 'actions', name: 'actions', orderable: false, searchable: false}
 				]
 			});
 

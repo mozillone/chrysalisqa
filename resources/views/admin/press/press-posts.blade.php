@@ -61,7 +61,7 @@
               <td>
               <div class="input-group cldr">
               <select name="searchCategory" id="searchCategory" class="form-control ng-pristine ng-valid ng-empty ng-touched">
-          <option value="Categories"> All </option>
+          <option value=""> All </option>
           @foreach($categories as $category)
           <option value="{{$category->id}}">{{$category->cat_name}}</option>
           @endforeach
