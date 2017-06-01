@@ -12,25 +12,20 @@
  </div>
 </section>    
 	<section class="content create_section_page">
-		<div class="row">
-			<div class="col-md-12 col-sm-12">
-				@if (Session::has('error'))
-	            <div class="alert alert-danger alert-dismissable">
-					<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-					{{ Session::get('error') }}
-				</div>
-	            @elseif(Session::has('success'))
-				<div class="alert alert-success alert-dismissable">
-					<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-					{{ Session::get('success') }}
-				</div>
-				@endif
-			</div>
-	</div>
-	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
+				@if (Session::has('error'))
+					<div class="alert alert-danger alert-dismissable">
+						<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+						{{ Session::get('error') }}
+					</div>
+					@elseif(Session::has('success'))
+					<div class="alert alert-success alert-dismissable">
+						<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+						{{ Session::get('success') }}
+					</div>
+					@endif
 				<div class="dashboard-top-box">
 					<p class="left_heading"><span>MY ACCOUNT</span> Keep your account info up to date for a smooth checkout process!</p>
 					<p class="right_heading">
@@ -46,19 +41,21 @@
 				<div class="col-md-6">
 					<div class="dashboad_left_side">
 						<div class="panel panel-default">
-							<div class="panel-heading">PROFILE DETAILS</div>
+							<div class="panel-heading">
+								<h2>PROFILE DETAILS</h2>
+								</div>
 							<div class="panel-body p_details">
 								<form id="edit_customer" class="form-horizontal defult-form" action="{{route('edit-profile')}}" method="POST" novalidate enctype="multipart/form-data">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								 <div class="col-md-12">
-          <h2 class="heading-agent">Profile Image</h2>
+         
           <div class="col-md-12">
             <div class="form-group">
               
               <div class="fileupload fileupload-new" data-provides="fileupload"> 
-                <img  @if(empty(Auth::user()->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/{{Auth::user()->user_img}}" @endif class="img-pview img-responsive" id="img-chan" name="img-chan">
+                <img class="img-circle"  @if(empty(Auth::user()->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/{{Auth::user()->user_img}}" @endif class="img-pview img-responsive" id="img-chan" name="img-chan">
                 <span class="remove_pic">
-                  <i class="fa fa-times-circle" aria-hidden="true"></i>
+                 
                 </span>
 			<div class="row upload_bx">
 			<div class="col-md-8 col-sm-10 col-xs-12">
@@ -103,7 +100,7 @@
 										<input type="text" class="form-control" value="{{Auth::user()->email}}" name="email" id="email">
 									</div>
 									<div class="form-group update_btn">
-										<button type="submit" class="btn btn-primary pull-right update_btn">Update</button>
+										<button type="submit" class="btn btn-primary pull-right update_btn common-btn">Update</button>
 									</div>
 									
 								</form>
@@ -111,20 +108,26 @@
 							</div>
 						</div>
 						<div class="panel panel-default">
-							<div class="panel-heading">PAYMENT DETAILS</div>
-							<div class="panel-body pay_details">
-								<div class="checkbox">
-									<label><input type="checkbox">Visa ending in 1234 (default)</label>
-									<p class="pymnt_right_box"><span><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
+							<div class="panel-heading">
+								<h2>PAYMENT DETAILS</h2>
 								</div>
+							<div class="panel-body pay_details">
+									@foreach ($creditcard_list as $cc_list)
 								<div class="checkbox">
+									<?php //print_r($creditcard_list);die; ?>
+
+									<label><input type="checkbox">{{$cc_list->card_type}} ending in {{$cc_list->credit_card_mask}} (default)</label>
+									<p class="pymnt_right_box"><span></span> <span><a href="javascript:void(0);" onclick="deleteccard({{$cc_list->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
+								</div>
+									@endforeach
+								<!-- <div class="checkbox">
 									<label><input type="checkbox">Amex ending in 3456</label>
 									<p class="pymnt_right_box"><span><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
 								</div>
 								<div class="checkbox">
 									<label><input type="checkbox">Paypal</label>
 									<p class="pymnt_right_box"><span><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
-								</div>
+								</div> -->
 							</div>
 							<div class="panel-heading">ADD NEW CARD</div>
 							<div class="panel-body add_new_card">
@@ -132,9 +135,9 @@
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group">
 										<label for="title">Full Name On Card</label>
-										<input type="text" class="form-control" name="full_name_on_card" id="full_name_on_card">
+										<input type="text" class="form-control" name="cardholder_name" id="cardholder_name">
 									</div>
-									<div class="col-md-6">
+									<div class="">
 										<label for="pwd">Expiration Date</label>
 										<div class="form-group">
 										<div class="col-md-6 field-align-xs" style="padding: 0">
@@ -170,7 +173,7 @@
 									</div> -->
 									<div class="form-group">
 										<label for="text">Card Number</label>
-										<input type="text" class="form-control" name="card_number" id="card_number">
+										<input type="text" class="form-control" name="cc_number" id="cc_number">
 									</div>
 									<div class="form-group">
 										<label for="pwd">CVN Code</label>
@@ -181,14 +184,15 @@
 									</div>
 									
 									<div class="form-group update_btn">
-										<button class="btn btn-default">Save Card</button>
+										<button class="btn common-btn">Save Card</button>
 									</div>
 									
 								</form>
 							</div>
 						</div>
 						<div class="panel panel-default">
-							<div class="panel-heading">BILLING ADDRESS</div>
+							<div class="panel-heading">
+								<h2>BILLING ADDRESS</h2></div>
 							<div class="panel-body billing_addres_1">
 							<?php if(isset($default_billing_address) && !empty($default_billing_address)){
 								$billing_address = $default_billing_address; 
@@ -214,7 +218,8 @@
 							</div>
 						</div>
 						<div class="panel panel-default">
-							<div class="panel-heading">SHIPPING ADDRESS</div>
+							<div class="panel-heading">
+								<h2>SHIPPING ADDRESS</h2></div>
 							<div class="panel-body billing_addres_1">
 							<?php if(isset($default_shipping_address) && !empty($default_shipping_address)){
 								$shipping_address = $default_shipping_address; 
@@ -244,22 +249,39 @@
 				<div class="col-md-6">
 					<div class="dashboad_right_side">
 						<div class="rencemt_order_table">
-							<h2>RECENT ORDERS</H2>
+							<div>
+								<h2>RECENT ORDERS <span class="pull-right"><a href="/my/orders">View All</a></span></h2>
+								
+							</div>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Seller</th> <th>Status</th>  </tr> </thead> 
-								<tbody> <tr> <td>0/02/2017</td> <td>12345</td> <td>@mdo</td> <td>Print Label</td> </tr>
-									<tr>  <td>0/02/2017</td> <td>12345</td> <td>@fat</td> <td>Deleverd</td> </tr>
-									<tr>  <td>0/02/2017</td> <td>12345</td> <td>@twitter</td> <td>Deleverd</td> </tr> 
+								<tbody> 
+									@if(count($recent_orders))
+										@foreach ($recent_orders as $orders)
+										<tr> <td>{{$orders->date}}</td> <td>{{$orders->order_id}}</td> <td>{{$orders->seller_name}}</td> <td>{{$orders->status}}</td> </tr>
+										@endforeach
+									@else
+										<tr> <td></td> <td></td><td>No Recent Orders are found</td> <td></td> </tr>
+									@endif 
+
 								</tbody> 
 							</table>
 						</div>
 						<div class="rencemt_order_table">
-							<h2>COSTUMES SOLD</H2>
+							<div>
+								<h2>COSTUMES SOLD <span class="pull-right"><a href="/my/costumes-slod">View All</a></span></</h2>
+							</div>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Buyer</th> <th> Status</th>  </tr> </thead> 
-								<tbody> <tr> <td>0/02/2017</td> <td>12345</td> <td>@mdo</td> <td>Print Label</td> </tr>
-									<tr>  <td>0/02/2017</td> <td>12345</td> <td>@fat</td> <td>Deleverd</td> </tr>
-									<tr>  <td>0/02/2017</td> <td>12345	</td> <td>@twitter</td> <td>Deleverd</td> </tr> 
+								<tbody>
+									@if(count($costumes_sold)) 
+										@foreach ($costumes_sold as $sold_costumes)
+										<tr> <td>{{$sold_costumes->date}}</td> <td>{{$sold_costumes->order_id}}</td> <td>{{$sold_costumes->buyer_name}}</td> <td>{{$sold_costumes->status}}</td> </tr>
+										@endforeach 
+									@else
+										<tr> <td></td> <td></td> <td>No costumes sold are found</td> <td></td> </tr>
+									@endif 
+
 								</tbody> 
 							</table>
 						</div>
@@ -635,13 +657,17 @@
 			</form>  
       </div>
       <div class="modal-footer">
-        <button type="button" class="close close-btn" data-dismiss="modal"><span>×</span> Close</button>
+        <button type="button" class="close close-btn" id="billing_close" data-dismiss="modal"><span>×</span> Close</button>
       </div>
     </div>
 
 </div>
 </div>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+@stop
+{{-- page level scripts --}}
+@section('footer_scripts')
+<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('/js/credit-card-validation.js') }}"></script>
 <script type="text/javascript">
 $(document).on('change','#shipping_country,#billing_country',function(){
 		if($(this).val()!="United States"){
@@ -677,6 +703,24 @@ function  delete_address($id){
 	    }
 	    return false;
 	}
+	function deleteccard($id){
+        
+    var id = $id;
+	if (confirm("Are you sure?")) {
+		$.ajax({
+		 url: "{{URL::to('/deleteccard')}}",
+		 type: "POST",
+		 data: {'id':id},
+		 success: function(data){
+		 	if (data == "success") {
+		 		window.location.href = "{{URL::to('/dashboard')}}";
+		 	}
+		 }});
+	    }
+	    return false;
+
+
+   }
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip(); 
 		$('#shipping_popup_add').click(function(){
@@ -695,14 +739,170 @@ function  delete_address($id){
 			$('.modal-backdrop').remove();
 		});
 		var cc_details=$("#cc_dashboard_form").validate();
-		$("#full_name_on_card").rules("add", {required:true,maxlength: 50});
+		$("#cardholder_name").rules("add", {required:true,maxlength: 50});
 		$("#exp_month").rules("add", {required:true});
 		$("#exp_year").rules("add", {required:true});
-		$("#card_number").rules("add", {required:true,cc_chk:true});
+		$("#cc_number").rules("add", {required:true,cc_chk:true});
 		$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
 
 	});
-			
+jQuery.validator.addMethod("cc_chk", function(value, element) 
+		{
+
+		 	result = $('#cc_number').validateCreditCard();
+
+			 if(result.valid  == true)
+			 {
+					
+					var name 		= result.card_type.name
+
+					if(name == 'amex')
+					{
+						name = 'American Express';	
+					}
+					else if(name == 'visa')
+					{
+						name = 'Visa';	
+					}
+					else if(name == 'mastercard')
+					{
+						name = 'MasterCard';	
+					}		
+					
+					
+				 
+			   return true;
+			 }
+			 else
+			{
+				 $.validator.messages.cc_chk =  "Please enter valid credit card.";
+
+				return false;
+			 }
+
+			 
+			 
+
+
+		}, 	 $.validator.messages.cc_chk);
+		input_credit_card = function(input)
+{
+    var format_and_pos = function(char, backspace)
+    {
+        var start = 0;
+        var end = 0;
+        var pos = 0;
+        var separator = " ";
+        var value = input.value;
+
+        if (char !== false)
+        {
+            start = input.selectionStart;
+            end = input.selectionEnd;
+
+            if (backspace && start > 0) // handle backspace onkeydown
+            {
+                start--;
+
+                if (value[start] == separator)
+                { start--; }
+            }
+            // To be able to replace the selection if there is one
+            value = value.substring(0, start) + char + value.substring(end);
+
+            pos = start + char.length; // caret position
+        }
+
+        var d = 0; // digit count
+        var dd = 0; // total
+        var gi = 0; // group index
+        var newV = "";
+        var groups = /^\D*3[47]/.test(value) ? // check for American Express
+        [4, 6, 5] : [4, 4, 4, 4];
+
+        for (var i = 0; i < value.length; i++)
+        {
+            if (/\D/.test(value[i]))
+            {
+                if (start > i)
+                { pos--; }
+            }
+            else
+            {
+                if (d === groups[gi])
+                {
+                    newV += separator;
+                    d = 0;
+                    gi++;
+
+                    if (start >= i)
+                    { pos++; }
+                }
+                newV += value[i];
+                d++;
+                dd++;
+            }
+            if (d === groups[gi] && groups.length === gi + 1) // max length
+            { break; }
+        }
+        input.value = newV;
+
+        if (char !== false)
+        { input.setSelectionRange(pos, pos); }
+    };
+
+    input.addEventListener('keypress', function(e)
+    {
+        var code = e.charCode || e.keyCode || e.which;
+
+        // Check for tab and arrow keys (needed in Firefox)
+        if (code !== 9 && (code < 37 || code > 40) &&
+        // and CTRL+C / CTRL+V
+        !(e.ctrlKey && (code === 99 || code === 118)))
+        {
+            e.preventDefault();
+
+            var char = String.fromCharCode(code);
+
+            // if the character is non-digit
+            // OR
+            // if the value already contains 15/16 digits and there is no selection
+            // -> return false (the character is not inserted)
+
+            if (/\D/.test(char) || (this.selectionStart === this.selectionEnd &&
+            this.value.replace(/\D/g, '').length >=
+            (/^\D*3[47]/.test(this.value) ? 15 : 16))) // 15 digits if Amex
+            {
+                return false;
+            }
+            format_and_pos(char);
+        }
+    });
+    
+    // backspace doesn't fire the keypress event
+    input.addEventListener('keydown', function(e)
+    {
+        if (e.keyCode === 8 || e.keyCode === 46) // backspace or delete
+        {
+            e.preventDefault();
+            format_and_pos('', this.selectionStart === this.selectionEnd);
+        }
+    });
+    
+    input.addEventListener('paste', function()
+    {
+        // A timeout is needed to get the new value pasted
+        setTimeout(function(){ format_and_pos(''); }, 50);
+    });
+    
+    input.addEventListener('blur', function()
+    {
+    	// reformat onblur just in case (optional)
+        format_and_pos(this, false);
+    });
+};
+
+input_credit_card(document.getElementById('cc_number'));	
 	</script>
 </section>
 

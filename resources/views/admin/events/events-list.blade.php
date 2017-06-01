@@ -297,7 +297,6 @@ alert(id);
           //console.log();
     $('.callout-success').fadeOut('fast');
 }, 2000);
-
         }
       }
     });

@@ -78,7 +78,6 @@
 
               <td><div class="input-group cldr2 event-dates">
                 <input type="text" autocomplete="off"  name="searchToDate" class="form-control ng-pristine ng-valid ng-empty ng-touched datepicker" value="" />
-                   
                 </div></td>
 
                                                 
@@ -86,7 +85,6 @@
                                                 </div></td>
 
            
-          
            <td><input type="hidden" value="{{Request::segment(4)}}" id="role_id" name="role_id">
                <button class="btn btn-primary user-list-search" id="search" name="search">Search</button></td>
         </tr>
@@ -145,17 +143,27 @@
   } );
   </script>
 
+<<<<<<< HEAD
 <script type="text/javascript">
 $(function() {
 
 
 
+=======
+  <script>
+$('.clockpicker').clockpicker();
+</script>
+
+<!-- <script type="text/javascript">
+$(function() {
+
+>>>>>>> c7be4f2d5064176fcfd3b2b2a15272255a2deba7
 $('input[name="searchFromDate"]').datepicker();
 $('input[name="searchToDate"]').datepicker();
 $('input[name="searchFromDate"]').val('');
 $('input[name="searchToDate"]').val('');
 });
-</script>
+</script> -->
 
   <script>
 $('.clockpicker').clockpicker();
@@ -205,7 +213,6 @@ $('.clockpicker').clockpicker();
 
              var searchFromDate = $("input[name=searchFromDate]").val();
              var searchToDate = $("input[name=searchToDate]").val();
-
 
         table = $('#users-table').DataTable({
         "ajax": {
@@ -264,7 +271,6 @@ $('.clockpicker').clockpicker();
                 });
                 });*/
   function changePublishStatus(id, status) {
-
         $.ajax({
             type: "GET",
             url: '{!! url('/admin/press/status') !!}',

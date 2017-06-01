@@ -286,7 +286,8 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 	   		'as' => 'admin/changeapprovedstatus',
 	   		'uses' => 'EventController@updateeventStatus'
 	   	]);
-	   Route::any('/admin/events/status', 'EventController@industryStatus');
+	   Route::any('/admin/events/status', ['uses' => 'EventController@industryStatus'
+	   	]);
 	   
 
 /****************Events Management Ends Here***********************/
@@ -319,7 +320,7 @@ Route::any('/admin/updatepress', [
 	   		'uses' => 'PressController@updatePressPost'
 	]);
 Route::any('/admin/deletepress/{id}', [
-			'as' => '',
+			'as' => 'admin/deletepress',
 	   		'uses' => 'PressController@deletePressPost'
 	]);
 Route::any('/admin/press/search', [

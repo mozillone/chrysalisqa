@@ -113,6 +113,7 @@ die;*/
                                     <label for="inputEmail3" class="control-label">Post Image<span class="req-field" >*</span></label>
                         <input type="file" name="postImage" id="postImage"><br><br>
                                     <p class="error">{{ $errors->first('postImage') }}</p> 
+
                                 </div>
  <div>
                                 

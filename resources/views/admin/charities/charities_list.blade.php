@@ -61,7 +61,7 @@ display: none;
                     <th>Created To</th>
                     <th>Display Status</th>
                   </thead>
-                  <tbody>
+                  <tbody>categories-create
                     <tr>
                       <input type="hidden" class="form-control token"  name="csrf-token" value="{{ csrf_token() }}">
                       <td><input type="text" class="form-control" ng-model="search.name" name="name" placeholder="Charity Name"></td>
@@ -69,9 +69,9 @@ display: none;
                       <td><input type="text" class="form-control" datepicker ng-model="search.date_end" name="date_end" placeholder="Created To"></td>
                       <td>
                         <select name="count" class="form-control" id="count" ng-model="search.status" >
-                            <option value=""> All </option>  
-                            <option value="1">Active</option>  
-                            <option value="0">InActive</option>  
+                            <option value=""> All </option>
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
                         </select>
                       </td>
                       <td><button class="btn btn-primary user-list-search" ng-click="seachCharities(search)">Search</button></td>
@@ -98,7 +98,7 @@ display: none;
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <button type="button" class="close" 
+                <button type="button" class="close"
                    data-dismiss="modal">
                        <span aria-hidden="true">&times;</span>
                        <span class="sr-only">Close</span>
@@ -107,10 +107,10 @@ display: none;
                    Add Charity
                 </h4>
             </div>
-            
+
             <!-- Modal Body -->
             <div class="modal-body">
-                
+
                 <form class="form-horizontal" role="form" method="POST" id="charity-create" action="{{route('charity-create')}}" enctype='multipart/form-data'>
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <div class="form-group">
@@ -124,22 +124,22 @@ display: none;
                               <div class="col-md-12 ">
                                 <div class=" upload_btns">
                                           <span class=" btn-file">
-                                            <span class="fileupload-exists"></span>     
+                                            <span class="fileupload-exists"></span>
                                             <input id="profile_logo" name="image" type="file" placeholder="Profile Image" class="form-control">
                                             <input type="hidden" name="is_removed"/>
-                                  </span> 
+                                  </span>
                                   </div>
                                 </div>
                           </div>
-                          <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload"> 
+                          <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload">
                             <img src="{{asset('/charities_images/default-placeholder.jpg')}}" class="img-pview img-responsive" id="img-chan" name="img-chan">
                              <span class="fileupload-preview"></span>
                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                           </div>
-                        </div>  
+                        </div>
                 </div>
             </div>
-            
+
             <!-- Modal Footer -->
             <div class="modal-footer">
                 <input type="submit" class="btn btn-primary" value="Submit"/>
@@ -157,7 +157,7 @@ display: none;
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <button type="button" class="close" 
+                <button type="button" class="close"
                    data-dismiss="modal">
                        <span aria-hidden="true">&times;</span>
                        <span class="sr-only">Close</span>
@@ -165,10 +165,10 @@ display: none;
                 <h4 class="modal-title" id="charity_heading">
                 </h4>
             </div>
-            
+
             <!-- Modal Body -->
             <div class="modal-body">
-                
+
                 <form class="form-horizontal" role="form" method="POST" id="charity-edit" action="{{route('charity-edit')}}" enctype='multipart/form-data'>
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="charity_id" value="">
@@ -183,24 +183,24 @@ display: none;
                               <div class="">
                                 <div class=" upload_btns">
                                           <span class=" btn-file">
-                                            <span class="fileupload-exists"></span>     
+                                            <span class="fileupload-exists"></span>
                                             <input id="edit_img_pic" name="image" type="file" placeholder="Profile Image" class="img-responsivel">
                                             <input type="hidden" name="is_removed"/>
-                                  </span> 
+                                  </span>
                                   </div>
                                 </div>
                           </div>
-                          <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload"> 
+                          <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload">
                             <img src="{{asset('/charities_images/default-placeholder.jpg')}}" class="img-pview img-responsive"  id="img-chan1">
-                           
-             
+
+
                             <span class="fileupload-preview"></span>
                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                           </div>
                         </div>
                 </div>
             </div>
-            
+
             <!-- Modal Footer -->
             <div class="modal-footer">
                 <input type="submit" class="btn btn-primary" value="Submit"/>
@@ -216,7 +216,7 @@ display: none;
 </section>
 @stop
 {{-- page level scripts --}}
-@section('footer_scripts') 
+@section('footer_scripts')
 <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('/angular/Admin/Charities/Controllers/charities-lists.js') }}"></script>
 <script src="{{ asset('/angular/Admin/Charities/Services/charities.js') }}"></script>

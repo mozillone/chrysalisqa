@@ -122,7 +122,7 @@ $all_data = ""; ?>
 <div class="col-md-6">
         <div class="form-group input-group clockpicker" id="error-msg-align">
         <label for="inputEmail3" class="control-label time-label error-msg-align">From Time<span class="req-field" >*</span></label>
-<input type="text" class="form-control" name="fromTime" value="{{$all_data->from_time}}">
+<input type="text" class="form-control" name="fromTime" value="{{$users->from_time}}">
 <p class="error">{{ $errors->first('fromTime') }}</p>
     
         <span class="input-group-addon glyphicon glyphicon-time"></span>
@@ -162,7 +162,7 @@ $all_data = ""; ?>
  <div class="col-md-6">
         <div class="form-group input-group clockpicker" id="error-msg-align">
         <label for="inputEmail3" class="control-label time-label ">To Time<span class="req-field" >*</span></label>
-    <input type="text" class="form-control" name="toTime" value="{{$all_data->to_time}}">
+    <input type="text" class="form-control" name="toTime" value="{{$users->to_time}}">
     <p class="error">{{ $errors->first('toTime') }}</p>
     
         <span class="input-group-addon glyphicon glyphicon-time"></span>

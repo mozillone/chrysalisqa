@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://chrysalis.local.dotcomweavers.net/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://ionden.com/a/plugins/ion.rangeSlider/static/css/ion.rangeSlider.css">
+    <link rel="stylesheet" href="http://ionden.com/a/plugins/ion.rangeSlider/static/css/ion.rangeSlider.skinFlat.css">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="http://ionden.com/a/plugins/ion.rangeSlider/static/js/ion-rangeSlider/ion.rangeSlider.js"></script>
+    <style>
+        .irs-line-mid, .irs-line-left, .irs-line-right, .irs-bar, .irs-bar-edge, .irs-slider {
+            background: #60C4AB;
+        }
+
+        .irs-bar {
+            background: #E1E1E1;
+        }
+
+        .range-slider {
+            width: 35%;
+            margin: 0 auto;
+        }
+        .range-slider a {
+            background: #EE4266;
+            color: white;
+            padding: 12px 80px;
+            display: inline-block;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 800;
+            margin: 0 auto;
+        }
+
+        .irs-from, .irs-to, .irs-single {
+            background: #60C3AB;
+            display: none;
+        }
+
+        .irs-min, .irs-max {
+            display: none;
+        }
+
+        .irs-from:after, .irs-to:after, .irs-single:after {
+            border-top-color: #60C4AB;
+        }
+
+        .irs-slider {
+            border-radius: 50%;
+            background: white;
+            box-shadow: 1px 1px 2px #ccc;
+            border: 1px solid #d3d3d3;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .outer {
+            border: solid 1px transparent;
+            width: 402px;
+            margin: 40px auto;
+            position: relative;
+            background-color: #e1e1e1;
+            /*background: url("../assets/frontend/img/dollar.png") no-repeat 100% 100%;*/
+
+        }
+
+        #first-box {
+            position: relative;
+            left: auto;
+            right: auto;
+            width: 25%;
+            height: 210px;
+            background-color: #60C3AB;
+            float: left;
+        }
+
+        #second-box {
+            width: 25%;
+            height: 210px;
+            float: right;
+            background-color: #60C3AB;
+        }
+
+        .doller-img {
+            position: absolute;
+            left: 6%;
+            top: 12%;
+            z-index: 1;
+        }
+
+        .range-slider .currency-bar {
+            padding-left: 0;
+            list-style-type: none;
+            display: flex;
+            font-weight: 800;
+            font-size: 10px;
+            margin-bottom: 0;
+        }
+
+        .range-slider .currency-bar li {
+            padding: 0 3.15%;
+        }
+
+        .range-slider .currency-bar li:first-child {
+            padding-left: 0;
+        }
+
+        .range-slider .currency-bar li:nth-child(even) {
+            color: #60C4AB;
+        }
+
+        .contribution-label {
+            padding-left: 0;
+            list-style-type: none;
+            font-size: 18px;
+            font-weight: 800;
+            font-family: Proxima-Nova-Extrabold;
+            min-height: 50px;
+            display: block;
+        }
+
+        .contribution-label li:last-child {
+            float: right;
+            text-align: end;
+        }
+
+        .contribution-label li:first-child {
+            float: left;
+        }
+
+        .range-slider table {
+            margin: 0 auto;
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+
+        .range-slider table td:nth-child(even) {
+            font-weight: 800;
+            padding-left: 5px;
+        }
+
+
+    </style>
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="container">
+    <h2>Do even MORE!</h2>
+    <p>Join us in our mission to see a dollar raised for every box shipped.
+        <span>Donate 0.50 cents below and we will match your donation!</span>
+    </p>
+
+
+    <div class="outer">
+        <img class="doller-img" src="../assets/frontend/img/Dollar_white.png" alt="">
+        <div id="first-box">
+        </div>
+        <div id="second-box">
+        </div>
+        <div style="clear:both">
+
+        </div>
+
+    </div>
+    <div class="range-slider">
+        <ul class="currency-bar">
+            <li>0</li>
+            <li>$0.25</li>
+            <li>$0.5</li>
+            <li>$0.75</li>
+            <li>$1</li>
+            <li>$0.75</li>
+            <li>$0.5</li>
+            <li>$0.25</li>
+            <li>0</li>
+        </ul>
+        <input type="text" class="js-range-slider" value=""/>
+        <ul class="contribution-label">
+            <li>Your <br> Contribution</li>
+            <li>Our <br> Contribution</li>
+        </ul>
+        <div>
+            <table>
+                <tr>
+                    <td>Your Donation:</td>
+                    <td> $0.25</td>
+                </tr>
+                <tr>
+                    <td>Our Donation:</td>
+                    <td>$0.25</td>
+                </tr>
+                <tr>
+                    <td>Total Donation:</td>
+                    <td>$0.50</td>
+                </tr>
+            </table>
+        </div>
+        <div style="text-align: center; margin-bottom: 50px">
+            <a class="submit-btn" href="#">Submit</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    var $range = $(".js-range-slider"),
+        min = 0,
+        max = 100;
+
+    function colorBoxUpdate(val) {
+
+        $('.outer #first-box').width(val * 4);
+        $('.outer #second-box').width(val * 4);
+
+    }
+
+    var reverse = function (num) {
+        se.update({from: (num), to: max - num});
+        colorBoxUpdate(num);
+    };
+
+    var se = $range.ionRangeSlider({
+        type: "double",
+        min: min,
+        max: max,
+        from: 25,
+        to: 75,
+        step: 12.5,
+        prefix: "$",
+        to_fixed: true,
+        onChange: function (data) {
+            if (data.from <= 50) {
+                reverse(data.from);
+            }
+            else if (data.from > 50) {
+                reverse(50);
+            }
+        }
+    }).data('ionRangeSlider');
+
+
+</script>
+</body>
+</html>
