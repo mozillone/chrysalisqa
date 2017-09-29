@@ -1,0 +1,16 @@
+/public_html/category_images
+/public_html/charities_images
+/public_html/costumers_images
+/public_html/profile_img
+/public_html/press_images
+/public_html/event_images
+/public_html/blog_images
+/config/database.php
+/storage
+/vendor
+/.idea
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+.env
