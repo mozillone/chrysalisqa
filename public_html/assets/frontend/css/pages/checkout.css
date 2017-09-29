@@ -1,0 +1,46 @@
+.chek-out .form-group {width: 45%;float: left;margin-right: 20px;}
+.checkout_page_total .well h3 {
+    margin-top: 0px;
+    font-size: 22px;
+    font-family: Proxima-Nova-Extrabold;
+    color: #000;
+}
+.check_out_page_left .checkout_review_box .media-body {
+    padding-left: 15px;
+}
+.check_out_page_left .checkout_review_box .media-left {
+    max-width: 100px;
+    overflow: hidden;
+}
+.img-loading {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+}
+.checkout_review_box {
+    margin-bottom: 50px;
+}
+.checkout_review_box .pull-right h2 {
+    padding-bottom: 0px;
+}
+.well .shipping_date span{color: #010101;}
+.check_out_page_left h2{    padding-bottom: 20px;}
+.checkout_idi_box {    display: inline-block;    margin-bottom: 50px;}
+.well .shipping_date i {
+    color: #8f8d8f;
+}
+.loading-page {
+    z-index: 9999;
+    opacity: 0.2;
+    pointer-events: none;
+}
+.img-loading img {
+    width: 50px;
+}
+.img-loading {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    top: 550px;

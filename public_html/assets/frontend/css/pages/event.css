@@ -1,0 +1,15 @@
+.pac-container {
+    z-index: 100000;
+}
+.popover.clockpicker-popover{
+    z-index: 9999;
+}
+.popover {
+    z-index: 999;
+}
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
+}
