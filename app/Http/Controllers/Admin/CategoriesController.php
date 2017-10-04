@@ -89,7 +89,9 @@ class CategoriesController extends Controller
    }
    public function editCategories(Request $request,$cat_id=null)
    {
+
          $req=$request->all();
+
          if(count($req))
          {
          //dd($req);
@@ -113,6 +115,7 @@ class CategoriesController extends Controller
                   $cat_info=Category::getUrlCategoryId($key_url);
                   if(!count($cat_info) || $cat_info[0]->url_offset==$req['category_id']){
                     $cat_info=Category::getUrlCategoryId($key_url);
+                    
                     Category::updateCategory($req);
                     Session::flash('success', 'Category is updated successfully');
                     return Redirect::to('categories');
@@ -126,6 +129,7 @@ class CategoriesController extends Controller
          {
             $cond=array('category_id'=>$cat_id);
             $cat_data=Site_model::fetch_data('category','*',$cond);
+
             $parent_cats=Category::getParentCategories();
             $costumes_list=Costumes::getCostumesList();
             $cat_costumes=Category::getCatCostumesList($cat_id);
@@ -153,6 +157,7 @@ class CategoriesController extends Controller
     }
    public function createAttributesValue(Request $request)
    {
+
          $req=$request->all();
          if(count($req))
          {

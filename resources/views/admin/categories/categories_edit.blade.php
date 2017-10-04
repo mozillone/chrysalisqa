@@ -50,6 +50,7 @@ Category edit@parent
                                         <label for="inputEmail3" class="control-label">Parent Category</label>
                                             <select class="form-control" id="parent_id" name="parent_id">
                                                 <option value="">--Select--</option>
+                                                <option value="">none</option>
                                                 @foreach($parent_cats as $cats)
                                                 <option value="{{$cats->category_id}}" @if($cats->category_id==$cat_data[0]->parent_id && $cat_data[0]->parent_id!="0") selected @endif>{{$cats->name}}</option>
                                                 @endforeach
@@ -138,6 +139,14 @@ Category edit@parent
                                     </div>
                             </div>  
                         </div>
+
+
+                      <div class="col-md-6">
+                                    <div class="form-group has-feedback" >
+                                        <label for="inputEmail3" class="control-label">Sort Order <span class="req-field" >*</span></label>
+                                            <input type="text" class="form-control" placeholder="Sort Order"  name="sort" id="name" value="{{$cat_data[0]->sort_order}}">                                       
+                                    </div>                                    
+                      </div> 
                     </div> 
                     </div> 
                      <div class="col-md-12 costumes @if($cat_data[0]->parent_id=='0')hide @endif ">
