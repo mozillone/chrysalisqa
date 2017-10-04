@@ -1,39 +1,19 @@
-<<<<<<< HEAD
-/public_html/category_images
-/public_html/charities_images
-/public_html/costumers_images
-/public_html/profile_img
-/public_html/press_images
-/public_html/event_images
-/public_html/blog_images
-/config/database.php
-/storage
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
 /vendor
-/.idea
-/.vagrant
-Homestead.json
-Homestead.yaml
-npm-debug.log
-.env
-=======
-<<<<<<< HEAD
-=======
 /node_modules
-/public/storage
-/app/Creditcard.php
-/app/order.php
-/storage/*.key
->>>>>>> c7be4f2d5064176fcfd3b2b2a15272255a2deba7
-/vendor
-/Homestead.yaml
-/Homestead.json
 .env
-/.metadata
-/.buildpath
-/.settings
-/.project
+/bower_components
 npm-debug.log
-/storage
-/config/database.php
-/public_html/profile_img
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
