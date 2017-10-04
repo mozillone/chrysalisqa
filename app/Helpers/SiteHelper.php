@@ -11,27 +11,34 @@ use Cookie;
 use Usps\Rate;
 use Usps\RatePackage;
 use Config;
-<<<<<<< HEAD
 use DateTime;
 use DB;
 use Mail;
-=======
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 class SiteHelper  {
 
 	public static function getMenus(){
 		$categories_list=[];
 		$cond=array("parent_id"=>"0");
-		$getTopCategoriesList=Site_model::Fetch_data('category','*',$cond);
+		$getTopCategoriesList=DB::table('category')
+                              ->orderBy('sort_order','ASC')
+                              ->orderBy('category_id','ASC') 
+                              ->where('parent_id',$cond)
+                              ->get();  
+
+        //$getTopCategoriesList=Site_model::Fetch_data('category','*',$cond);
 		foreach($getTopCategoriesList as $menus){
-<<<<<<< HEAD
+
 			$cond=array('parent_id'=>$menus->category_id,'status'=>1);
-			$getSubCategories = Site_model::Fetch_data('category','*',$cond);
-=======
-			$cond=array('parent_id'=>$menus->category_id);
-			$getSubCategories=Site_model::Fetch_data('category','*',$cond);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
+
+
+            $getSubCategories=DB::table('category')
+                              ->orderBy('sort_order','ASC')
+                              ->orderBy('category_id','ASC') 
+                              ->where('parent_id',$cond)
+                              ->get();
+
+
+			//$getSubCategories = Site_model::Fetch_data('category','*',$cond);
 			$categories_list[$menus->name][]="None";
 			foreach ($getSubCategories as $subCat) {
 				$link=Category::getUrlLinks($subCat->category_id);
@@ -40,7 +47,6 @@ class SiteHelper  {
 			}
 			
 		}
-<<<<<<< HEAD
 	
 		return $categories_list;
 	}
@@ -60,22 +66,15 @@ class SiteHelper  {
         return $faqs;
     }
 
-=======
-		return $categories_list;
-	}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	public static function getMyWishlistCount(){
 		$count=Wishlist::getMyWishlistCount(Auth::user()->id)[0]->count;
 		return $count;
 	}
-<<<<<<< HEAD
 	public static function getMessagesCount(){
         $msgs_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.' OR cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
 		//$msgs_count[0]->count_dt;
 		return $msgs_count[0]->count_dt;
 	}
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	public static function generate_image_thumbnail($source_image_path, $thumbnail_image_path,$thumbnail_with,$thumbnail_height) {
    	//dd($source_image_path);
 		list($source_image_width, $source_image_height, $source_image_type) = getimagesize($source_image_path);
@@ -164,7 +163,6 @@ class SiteHelper  {
 		$address=Address::userCartShippingAddress($cart_id);
 		return $address;
 	}
-<<<<<<< HEAD
 	public static function domesticRate($originationZip,$cart_id,$service,$pounds="0",$ounces="0")
 	{
 	 $destinationZipCode=Address::userCartShippingAddress($cart_id);
@@ -369,39 +367,5 @@ public static function domesticRateSingleCostume($originationZip,$destinationZip
     }
 
 
-=======
-	public static function domesticRate($originationZip,$cart_id)
-	{	
-			
-			 $destinationZipCode=Address::userCartShippingAddress($cart_id);
-			 $rate = new Rate(Config::get('constants.USPS'));
-			 $package = new RatePackage;
-			 $package->setService(RatePackage::SERVICE_EXPRESS);
-			 $package->setZipOrigination(62858); //62858 originationZip
-			 $package->setZipDestination(62858); //destinationZipCode
-			 $package->setPounds(30);
-			 $package->setOunces(0);
-			 $package->setContainer('');
-			 $package->setSize(RatePackage::SIZE_REGULAR);
-			 $package->setField('Machinable', true);
-
-			 $rate->addPackage($package);
-			 $rate->getRate();
-			 $rate->getArrayResponse();
-			 
-			 if ($rate->isSuccess()) {
-   				$res=$rate->getArrayResponse();
-   				$est=explode('-',filter_var($res['RateV4Response']['Package']['Postage']['MailService'], FILTER_SANITIZE_NUMBER_INT));
-   				$data['rate']=$res['RateV4Response']['Package']['Postage']['Rate'];
-   				$data['MailService']=$est[0];
-   				$res=array('result'=>1,'msg'=>$data);
-    			return $res;
-			 } else {
-			 	$res=array('result'=>0,'msg'=>'Error:' . $rate->getErrorMessage());
-				return $res;
-    		 }
-	
-	}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	
 }

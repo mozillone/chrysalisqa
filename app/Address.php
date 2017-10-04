@@ -10,11 +10,8 @@ use App\Helpers\SiteHelper;
 use Auth;
 use Session;
 use App\Cart;
-<<<<<<< HEAD
 use App\Address;
 use App\Order;
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 class Address extends Authenticatable
 {
@@ -28,7 +25,6 @@ class Address extends Authenticatable
     protected $fillable = [
          'address_id', 'fname','lname','address1','address2', 'city', 'state', 'country', 'zip_code', 'address_type', 'user_id','created_on'];
     protected function addBillingAddress($req){
-<<<<<<< HEAD
                $user_id=Auth::user()->id;
                 $state=$req['state'];
                 if(isset($req['address_id']) && $req['address_id']!="new"){
@@ -45,20 +41,12 @@ class Address extends Authenticatable
                    Site_model::update_data('cart',$res,$cond);
                   return true; 
                 }
-=======
-                $user_id=Auth::user()->id;
-                if(!empty($req['billing_state_dropdown'])){ $state=$req['billing_state_dropdown'];}else{$state=$req['state'];}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 $billing_address=array('fname'=>$req['firstname'],
                                        'lname'=>$req['lastname'],
                                        'address1'=>$req['address_1'],
                                        'address2'=>$req['address_2'],
                                        'city'=>$req['city'],
                                        'state'=> $state,
-<<<<<<< HEAD
-=======
-                                       'country'=>$req['country'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                        'zip_code'=>$req['postcode'],
                                        'address_type'=>'billing',
                                        'user_id'=>Auth::user()->id,
@@ -76,7 +64,6 @@ class Address extends Authenticatable
     }
      protected function addShippingAddress($req){
                 $user_id=Auth::user()->id;
-<<<<<<< HEAD
                 $state=$req['state'];
                 if(isset($req['address_id']) && $req['address_id']!="new"){
                    $data=DB::Select('Select * FROM `cc_address_master` WHERE `address_id` ='.$req['address_id'].' and user_id='.Auth::user()->id);
@@ -92,19 +79,12 @@ class Address extends Authenticatable
                    Site_model::update_data('cart',$res,$cond);
                   return true; 
                 }
-=======
-                if(!empty($req['shipping_state_dropdown'])){ $state=$req['shipping_state_dropdown'];}else{$state=$req['state'];}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                  $billing_address=array('fname'=>$req['firstname'],
                                        'lname'=>$req['lastname'],
                                        'address1'=>$req['address_1'],
                                        'address2'=>$req['address_2'],
                                        'city'=>$req['city'],
                                        'state'=> $state,
-<<<<<<< HEAD
-=======
-                                       'country'=>$req['country'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                        'zip_code'=>$req['postcode'],
                                        'address_type'=>'shipping',
                                        'user_id'=>Auth::user()->id,
@@ -144,12 +124,7 @@ class Address extends Authenticatable
                       'pay_address_2'=>$req['address_2'],
                       'pay_city'=>$req['city'],
                       'pay_state'=>$state,
-<<<<<<< HEAD
                       'pay_zipcode'=>$req['postcode']
-=======
-                      'pay_zipcode'=>$req['postcode'],
-                      'pay_country'=>$req['country'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                        );
           }else{
           if(!empty($req['shipping_state_dropdown'])){ $state=$req['shipping_state_dropdown'];}else{$state=$req['state'];}
@@ -159,12 +134,7 @@ class Address extends Authenticatable
                       'shipping_address_2'=>$req['address_2'],
                       'shipping_city'=>$req['city'],
                       'shipping_state'=>$state,
-<<<<<<< HEAD
                       'shipping_postcode'=>$req['postcode']
-=======
-                      'shipping_postcode'=>$req['postcode'],
-                      'shipping_country'=>$req['country'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                        );
           }
          $cond=array('cart_id'=>$req['cart_id']);
@@ -172,44 +142,28 @@ class Address extends Authenticatable
         return true;    
      }
      private function updateCartOrderAddress($req){
-<<<<<<< HEAD
        $pay_state=$req['state'];
        $shipping_state=$req['state'];
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
          $data=array('pay_firstname'=>$req['firstname'],
                       'pay_lastname'=>$req['lastname'],
                       'pay_address_1'=>$req['address_1'],
                       'pay_address_2'=>$req['address_2'],
                       'pay_city'=>$req['city'],
-<<<<<<< HEAD
                       'pay_state'=>$pay_state,
                       'pay_zipcode'=>$req['postcode'],
-=======
-                      'pay_state'=>$req['state'],
-                      'pay_zipcode'=>$req['country'],
-                      'pay_country'=>$req['postcode'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                       'shipping_firstname'=>$req['firstname'],
                       'shipping_lastname'=>$req['lastname'],
                       'shipping_address_1'=>$req['address_1'],
                       'shipping_address_2'=>$req['address_2'],
                       'shipping_city'=>$req['city'],
-<<<<<<< HEAD
                       'shipping_state'=>$shipping_state,
                       'shipping_postcode'=>$req['postcode']
-=======
-                      'shipping_state'=>$req['state'],
-                      'shipping_postcode'=>$req['postcode'],
-                      'shipping_country'=>$req['country'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                        );
         $cond=array('cart_id'=>$req['cart_id']);
         Site_model::update_data('cart',$data,$cond);
         return true;   
      }
      protected function addShippingAddressDashboard($req){
-<<<<<<< HEAD
 
                 $user_id=Auth::user()->id;
                 if(!empty($req['shiping_state_dropdown'])){ 
@@ -218,10 +172,6 @@ class Address extends Authenticatable
                     $state=$req['state'];
                 }
                  //echo "<pre>";print_r($state);die;
-=======
-                $user_id=Auth::user()->id;
-                if(!empty($req['shipping_state_dropdown'])){ $state=$req['shipping_state_dropdown'];}else{$state=$req['state'];}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                  $billing_address=array('fname'=>$req['firstname'],
                                        'lname'=>$req['lastname'],
                                        'address1'=>$req['address_1'],
@@ -235,16 +185,11 @@ class Address extends Authenticatable
                                        'created_on'=>date('Y-m-d h:i:s')
                                         );
                 if ($req['is_edit'] == 'yes') {
-<<<<<<< HEAD
                   $address_id=DB::table('address_master')->where('user_id',$user_id)->where('address_type','shipping')->where('address_id',$req['shipping_address_id'])->update($billing_address);
-=======
-                  $address_id=DB::table('address_master')->where('user_id',$user_id)->where('address_type','shipping')->update($billing_address);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 }else{
                   $address_id=Site_model::insert_get_id('address_master',$billing_address);
                 }
                if(isset($req['is_billing'])){
-<<<<<<< HEAD
                     $billing_address=array('fname'=>$req['firstname'],
                                        'lname'=>$req['lastname'],
                                        'address1'=>$req['address_1'],
@@ -258,15 +203,11 @@ class Address extends Authenticatable
                                        'created_on'=>date('Y-m-d h:i:s')
                                         );
                     $address_id=Site_model::insert_get_id('address_master',$billing_address);
-=======
-                    $this->addBillingAddress($req);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                }
                return $address_id;
     }
 
     protected function addBillingAddressDashboard($req){
-<<<<<<< HEAD
       //echo "<pre>";print_r($req->all());die;
                 $user_id=Auth::user()->id;
                 if(!empty($req['billing_state_dropdown'])){ 
@@ -274,10 +215,6 @@ class Address extends Authenticatable
                 }else{
                   $state=$req['state'];
                 }
-=======
-                $user_id=Auth::user()->id;
-                if(!empty($req['billing_state_dropdown'])){ $state=$req['billing_state_dropdown'];}else{$state=$req['state'];}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 $billing_address=array('fname'=>$req['firstname'],
                                        'lname'=>$req['lastname'],
                                        'address1'=>$req['address_1'],
@@ -291,16 +228,11 @@ class Address extends Authenticatable
                                        'created_on'=>date('Y-m-d h:i:s')
                                         );
                if ($req['is_edit'] == 'yes') {
-<<<<<<< HEAD
                   $address_id=DB::table('address_master')->where('user_id',$user_id)->where('address_type','billing')->where('address_id',$req['billing_address_id'])->update($billing_address);
-=======
-                  $address_id=DB::table('address_master')->where('user_id',$user_id)->where('address_type','billing')->update($billing_address);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 }else{
                   $address_id=Site_model::insert_get_id('address_master',$billing_address);
                 }
                if(isset($req['is_shipping'])){
-<<<<<<< HEAD
                     $billing_address=array('fname'=>$req['firstname'],
                                        'lname'=>$req['lastname'],
                                        'address1'=>$req['address_1'],
@@ -345,25 +277,15 @@ class Address extends Authenticatable
                 }
                
                return $address_id;
-=======
-                    $this->addShippingAddress($req);
-               }
-               return $address_id;
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     }
     protected function userCartShippingAddress($cart_id){
        if(Auth::check()){
           $user_id=Auth::user()->id;
           $cart_info=Cart::cartMetaInfo($cart_id);
-<<<<<<< HEAD
           if(!empty($cart_info[0]->shipping_address_2)){
 
               $zip_code=$cart_info[0]->shipping_postcode;
            //    dd($zip_code);
-=======
-          if(!empty($cart_info[0]->shipping_address_1)){
-              $zip_code=$cart_info[0]->shipping_postcode;
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           }else{
              $address_info=$this->getAddressinfo('shipping',"latest"); 
              if(count($address_info)){
@@ -377,7 +299,6 @@ class Address extends Authenticatable
           return false;
        }
     }
-<<<<<<< HEAD
     protected function getStatesList(){
       $states=DB::Select('SELECT * FROM `cc_states` order by name');
       return $states;
@@ -396,7 +317,4 @@ class Address extends Authenticatable
       $data=DB::Select('Select * FROM `cc_address_master` WHERE `address_id` ='.$add_id.' and user_id='.Auth::user()->id);
       return $data;
     }
-=======
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }

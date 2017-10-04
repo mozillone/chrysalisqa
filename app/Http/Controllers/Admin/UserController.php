@@ -6,15 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
-<<<<<<< HEAD
 use App\UserMeta;
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 use Datatables;
 use DB;
 use Session;
 use App\Helpers\SiteHelper;
-<<<<<<< HEAD
 use App\Helpers\Site_model;
 use App\Helpers\ExportFile;
 use Hash;
@@ -24,13 +20,6 @@ use App\Helpers\StripeApp;
 use Exception;
 use App\Address;
 use App\Imageresize;
-=======
-use App\Helpers\ExportFile;
-use Hash;
-use Response;
-use App\Helpers\StripeApp;
-use Exception;
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 class UserController extends Controller
 {
     protected $messageBag = null;
@@ -40,12 +29,8 @@ class UserController extends Controller
     {
       $this->csv = new ExportFile();
       $this->sitehelper = new SiteHelper();
-<<<<<<< HEAD
       //$this->braintreeApi = new BraintreeApp();
        $this->stripe=new StripeApp();
-=======
-      $this->stripe=new StripeApp();
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
       $this->middleware(function ($request, $next) {
           if(!Auth::check()){
             return Redirect::to('/admin/login')->send();
@@ -66,13 +51,8 @@ class UserController extends Controller
       $name = User::find(Auth::user()->id);
       if(isset($req['avatar'])){
         $file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
-<<<<<<< HEAD
         $source_image_path=public_path('profile_img/resize');
         $thumb_image_path1=public_path('profile_img/resize');
-=======
-        $source_image_path=public_path('profile_img');
-        $thumb_image_path1=public_path('profile_img');
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         $thumb_image_path2=public_path('profile_img/thumbs');
         $req['avatar']->move($source_image_path, $file_name);
         $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
@@ -88,10 +68,6 @@ class UserController extends Controller
       $userData = [
           'first_name' => $req['first_name'],
           'last_name' => $req['last_name'],
-<<<<<<< HEAD
-=======
-		  'display_name'=>$req['user_name'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           'email'=>$req['email'],
           'user_img' =>$file_name
       ];
@@ -113,7 +89,6 @@ class UserController extends Controller
       $title="Costumes List";
       return view('admin.costumes.costumes_list')->with('title',$title);
     }
-<<<<<<< HEAD
 
     public function customersListData(){
 
@@ -234,54 +209,6 @@ class UserController extends Controller
 //
 //    }
 
-=======
-    public function customersListData(Request $request)
-    {
-        $req=$request->all();
-		$userslist=DB::table('users as user')
-		->select('user.id',DB::Raw("CONCAT(cc_user.first_name,' ',cc_user.last_name) as display_name")  ,'user.phone_number','user.email','user.active','user.deleted',DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as date_format'),DB::Raw('DATE_FORMAT(cc_user.created_at,"%m/%d/%y %h:%i %p") as lastlogin'))
-		->orderby('user.created_at','DESC')
-		->where('user.role_id','!=','1');
-		if(!empty($req['search'])){
-		
-		if(!empty($req['search']['name']) ){
-		$userslist->where('user.display_name', 'LIKE', "%".$req['search']['name']."%");
-		 }
-		 if(!empty($req['search']['email']) ){
-		$userslist->where('user.email',$req['search']['email']);
-		 }
-		 if(!empty($req['search']['phone']) ){
-		$userslist->where('user.phone_number', 'like','%'.$req['search']['phone'] .'%');
-		 }
-		 if(isset($req['search']['status'])){
-            if($req['search']['status']==""){
-			$userslist->whereIn('user.active',array('0','1'));
-             }
-            if($req['search']['status']!=""){
-              $userslist->where('user.active',$req['search']['status']);
-            }
-          }
-		 if(isset($req['search']['count'])){
-            if($req['search']['count']==""){
-			$userslist->whereIn('user.deleted',array('0','1'));
-             }
-            if($req['search']['count']!=""){
-              $userslist->where('user.deleted',$req['search']['count']);
-            }
-          }
-
-		  }
-		 $users=$userslist->get();
-		
-		//->where('users.role_id','!=',1);
-		//$users=$userslist->get();
-		//$userslist=DB::table('users')->select('users.*')->order_by('users.created_at','DESC')->get();
-       // $users = DB::select('SELECT user.id,user.display_name as name,user.phone_number,user.email,user.active,DATE_FORMAT(user.created_at,"%m/%d/%y %h:%i %p") as date, FROM `cc_users` as user where '.$where.' ORDER BY user.created_at DESC');
-        return response()->success(compact('users','credit'));
-  
-    }
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     public function userCsvExport(Request $request){
 	
 		$req = $request->all();
@@ -314,7 +241,6 @@ class UserController extends Controller
 		else{
 			$file_name="";
 		}
-<<<<<<< HEAD
         try{
          $customer=$this->stripe->customers($req['email']);
         }catch(Exception $e){
@@ -356,23 +282,6 @@ class UserController extends Controller
 
 			// $this->braintreeApi->createCustomer($customerData,$users);
 			if($users){
-=======
-			$customer=$this->stripe->customers($req['email']);
-			$user = new User();
-			$user->first_name    = $req['first_name'];
-			$user->last_name     = $req['last_name'];
-			$user->display_name  = $req['user_name'];
-			$user->phone_number	 = $req['phone_number'];
-			//$user->display_name  = $user->first_name." ".$user->last_name;
-			$user->email         = $req['email'];
-			$user->password      = Hash::make($req['password']);
-			$user->active        = "1";
-			$user->user_img =$file_name;
-			$user->api_customer_id =$customer['id'];
-			
-			
-			if($user->save()){
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				Session::flash('success', 'User created successfully');
 					return Redirect::to('customers-list');
 				}else{
@@ -388,7 +297,6 @@ class UserController extends Controller
 	}
 	public function customerUpdated(Request $request){
 		$req=$request->all();
-<<<<<<< HEAD
     //echo "<pre>";print_r($request->all());die;
 		$name = User::find($req['user_id']);
 		if(!empty($request->avatar))
@@ -396,24 +304,11 @@ class UserController extends Controller
 	        $image = Imageresize::DashboardProfile($req['avatar']);
           
           $file_name = $image;
-=======
-		$name = User::find($req['user_id']);
-		if(!empty($request->avatar))
-        {
-	        $file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
-			$source_image_path=public_path('profile_img');
-			$thumb_image_path1=public_path('profile_img');
-			$thumb_image_path2=public_path('profile_img/thumbs');
-			$req['avatar']->move($source_image_path, $file_name);
-			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
-			$this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	
 		}
 		else{
 			$file_name=$name->user_img;
 		}
-<<<<<<< HEAD
     $vacation_from = date('Y-m-d',strtotime($req['date_timepicker_end_ticket']));
     $vacation_to = date('Y-m-d',strtotime($req['date_timepicker_end1_ticket']));
     if(!empty($req['vacationstatus'])){$vacationstatus=$req['vacationstatus'];}else{$vacationstatus="0";}
@@ -427,19 +322,6 @@ class UserController extends Controller
 				'vacation_status'=>$vacationstatus,
 				'vacation_from'=>$vacation_from,
 				'vacation_to'=>$vacation_to,
-=======
-		if(!empty($req['vacationstatus'])){$vacationstatus=$req['vacationstatus'];}else{$vacationstatus="0";}
-		$userData = [
-				'first_name' => $req['first_name'],
-				'last_name' => $req['last_name'],
-				'phone_number'=>$req['phone_number'],
-				'display_name' =>  $req['first_name']." ".$req['last_name'],
-				'email'=>$req['email'],
-				'user_img' =>$file_name,
-				'vacation_status'=>$vacationstatus,
-				'vacation_from'=>$req['date_timepicker_end_ticket'],
-				'vacation_to'=>$req['date_timepicker_end1_ticket'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				
 		];
 		if(!empty($req['password'])){
@@ -459,17 +341,11 @@ class UserController extends Controller
        $res = User::where('id',$id)->delete();
       if($res){
       	try{
-<<<<<<< HEAD
         	//$this->braintreeApi->deleteCustomer($apiId);
           $this->stripe->customerDelete($apiId);
         }catch(Exception $e){
         	Session::flash('error', $e->getMessage());
            return Redirect::back();
-=======
-        	$this->stripe->customerDelete($apiId);
-        }catch(Exception $e){
-        	
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         }
       	Session::flash('success', 'User is Deleted Successfully');
         return Redirect::back();
@@ -479,7 +355,6 @@ class UserController extends Controller
       }
         
     }
-<<<<<<< HEAD
     public function changeUserStatus(Request $request){
         $id     = $request->input('id');
         $getUser = DB::table('users')->where('id', $id)->first(['active']);
@@ -498,15 +373,6 @@ class UserController extends Controller
 //    	//$users = DB::select('SELECT user.id,user.display_name as name,user.email,user.active,DATE_FORMAT(user.created_at,"%m/%d/%y %h:%i %p") as date FROM `iv_users` as user where role_id!="1" ORDER BY user.created_at DESC');
 //        return response()->success(true);
 //    }
-=======
-    public function changeUserStatus(Request $request)
-    {
-    	$req = $request->all();
-    	$user = User::where('id', $req['data']['id'])->update(['active'=>$req['data']['status']]);
-    	//$users = DB::select('SELECT user.id,user.display_name as name,user.email,user.active,DATE_FORMAT(user.created_at,"%m/%d/%y %h:%i %p") as date FROM `iv_users` as user where role_id!="1" ORDER BY user.created_at DESC');
-        return response()->success(true);
-    }
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     public function EmailNameCheck(Request $request)
     {
     	$req=$request->all();
@@ -617,15 +483,11 @@ class UserController extends Controller
 	public function Getallpaymentprofile(Request $request){
 		//echo "<pre>";print_r($request->id);die;
 
-<<<<<<< HEAD
 		$creditcard=DB::table('creditcard')
     ->select('creditcard.id','creditcard.cardholder_name','creditcard.credit_card_mask',
       'creditcard.card_type','creditcard.exp_year',
       DB::Raw('DATE_FORMAT(cc_creditcard.created_at,"%m/%d/%y %h:%i %p") as date_format'))
     ->where('user_id',$request->id)->get();
-=======
-		$creditcard=DB::table('creditcard')->where('user_id',$request->id)->get();
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	return Datatables::of($creditcard)
         ->addColumn('actions', function ($creditcardso) {
                 return '<a href="javascript:void(0);" onclick="deleteccard('.$creditcardso->id.')" class="btn btn-xs btn-danger delete_user"><i class="fa fa-trash-o"></i></a>';
@@ -642,7 +504,6 @@ class UserController extends Controller
 	public function Getallusercostumes(Request $request){
 
 		$costumes_list=DB::table('costumes')
-<<<<<<< HEAD
     ->leftJoin('costume_description','costume_description.costume_id','costumes.costume_id')
     ->leftJoin('costume_to_category','costume_to_category.costume_id','costumes.costume_id')
 		->leftJoin('category','category.category_id','costume_to_category.category_id')
@@ -652,15 +513,10 @@ class UserController extends Controller
       'costumes.status as cos_status')
 		->where('costumes.created_by',$request->id)
     ->where('costumes.deleted_status',"0")
-=======
-		->leftJoin('costume_description','costume_description.costume_id','costumes.costume_id')
-		->where('created_by',$request->id)
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		->get();
 		//echo "<pre>";print_r($request->costume_id);die;
 	return Datatables::of($costumes_list)
         ->addColumn('actions', function ($costumes_lists) {
-<<<<<<< HEAD
                 return '<a href="javascript:void(0);" onclick="deletecostume('.$costumes_lists->costume_id.')" class="btn btn-xs btn-danger delete_user"><i class="fa fa-trash-o"></i></a>';
             })
         ->make(true);
@@ -678,11 +534,5 @@ class UserController extends Controller
       Session::flash('success', 'Settings updated successfully');
       return Redirect::back();
   }
-=======
-                return '<a href="javascript:void(0);" onclick="deleteccard('.$costumes_lists->costume_id.')" class="btn btn-xs btn-danger delete_user"><i class="fa fa-trash-o"></i></a>';
-            })
-        ->make(true);
-	}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
  
 }

@@ -27,10 +27,7 @@ class Promotions extends Authenticatable
                         'discount'=>$req['discount'],
                         'date_start'=>date('y-m-d',strtotime($req['date_start'])),
                         'date_end'=>date('y-m-d',strtotime($req['date_end'])),
-<<<<<<< HEAD
                         'status'=>"1",
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                         'uses_total'=>$req['uses_total']
                         );
             $coupon_id=$this->insertPromotionsInfo($data);
@@ -129,7 +126,6 @@ class Promotions extends Authenticatable
         return $res;
    }
     protected function getSelectedCategories($cat_id){
-<<<<<<< HEAD
         if($cat_id=="all"){
             $where='Where 1'; 
              $res=DB::Select('SELECT cat1.category_id,cat1.parent_id,cat2.name as parent_cat,cat1.name as sub_cat  FROM cc_category as cat1 INNER JOIN cc_category as cat2 on cat2.category_id=cat1.parent_id');
@@ -143,14 +139,6 @@ class Promotions extends Authenticatable
             } 
         }
 
-=======
-        $data=DB::Select('SELECT  category_id,name,parent_id FROM `cc_category` where category_id='.$cat_id);
-        if($data[0]->parent_id=="0"){
-            $res=DB::Select('SELECT cat1.category_id,cat1.parent_id,cat2.name as parent_cat,cat1.name as sub_cat  FROM cc_category as cat1 INNER JOIN cc_category as cat2 on cat2.category_id=cat1.parent_id where cat1.parent_id='.$data[0]->category_id);
-        }else{
-            $res=DB::Select('SELECT cat1.category_id,cat1.parent_id,cat2.name as parent_cat,cat1.name as sub_cat  FROM cc_category as cat1 INNER JOIN cc_category as cat2 on cat2.category_id=cat1.parent_id where cat1.category_id='.$data[0]->category_id);
-        }
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           return $res;
     }
     protected function getPromotionInfo($coupon_id){
@@ -160,17 +148,10 @@ class Promotions extends Authenticatable
         return $data;
     }
    protected function verifyCoupanCode($code){
-<<<<<<< HEAD
        $res=DB::Select('SELECT if(count(*)>=1,true,false) as is_exists,coupon_id  FROM `cc_promotion_coupon` WHERE code="'.$code.'" and DATE(NOW()) between date_start and date_end and status="1"'); 
        return $res;
 
    }
  
-=======
-       $res=DB::Select('SELECT if(count(*)>=1,true,false) as is_exists  FROM `cc_promotion_coupon` WHERE code="'.$code.'"');        
-       return $res[0]->is_exists;
-
-   }
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 }

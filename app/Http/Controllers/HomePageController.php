@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Redirect;
-<<<<<<< HEAD
 use Mail;
 use URL;
 use App\Helpers\Site_model;
@@ -43,6 +42,8 @@ class HomePageController extends Controller {
 		->groupBy('costumes.costume_id')
 		->orderBy('costumes.is_featured_date',"DESC")
 		->limit(4)->get();
+
+		
 		//echo "<pre>";print_r($featured_costumes);die;
         $pageData = DB::table('cms_blocks')->where(array('cms_blocks.slug'=>'home','cms_blocks.status'=>1))->first();
         if (!empty($pageData)){
@@ -51,14 +52,6 @@ class HomePageController extends Controller {
             return view('frontend.index')->with(array('featured_costumes'=>$featured_costumes));
         }
 
-=======
-
-class HomePageController extends Controller {
-
-	public function index()
-	{
-		return view('frontend.index');
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	}
 	
 }

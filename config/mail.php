@@ -8,11 +8,7 @@ return [
 
     'port' => env('MAIL_PORT', 587),
 
-<<<<<<< HEAD
     'from' => ['address' => 'web@dotcomweavers.net', 'name' => 'Chrysalis'],
-=======
-    'from' => ['address' => 'vamsi@dotcomweavers.com', 'name' => 'vamsi'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 

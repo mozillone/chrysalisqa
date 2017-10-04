@@ -12,11 +12,6 @@
     <link rel="stylesheet" href="{{ asset('/assets/admin/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
     <script src="{{ asset('/assets/admin/js/fileinput.js') }}"></script>
-<<<<<<< HEAD
-=======
-    <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 @stop
 
 {{-- Page content --}}
@@ -31,11 +26,7 @@
                 <a href="{{url('cms-pages')}}">Pages</a>
             </li>
 
-<<<<<<< HEAD
             <li class="active">{{$page->title}}</li>
-=======
-            <li class="active">Edit Page</li>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         </ol>
     </section>
     <section class="content">
@@ -65,11 +56,7 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="status" value="1">
                                 <div class="col-md-6">
-<<<<<<< HEAD
                                     <h2 class="heading-agent">Page Info</h2>
-=======
-                                    <h2 class="heading-agent">*Page Info</h2>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                     <div class="col-md-12">
                                         <div class="form-group has-feedback" >
                                             <label for="page_title" class="control-label">Page Title<span class="req-field" >*</span></label>
@@ -79,7 +66,6 @@
                                         </div>
                                         <div class="form-group has-feedback page-url-container" >
                                             <label for="page_url" class="control-label">Page URL<span class="req-field" >*</span></label>
-<<<<<<< HEAD
                                             <div class="input-group">
                                                 <div class="input-group-addon"><?=URL::to('/pages').'/';?></div>
                                                 <input type="text" class="form-control page-url" id="page_url" name="url" disabled="true" value="{{ $page->url }}" placeholder="Enter Page URL">
@@ -93,33 +79,16 @@
                                         <div class="form-group has-feedback">
                                             <label for="page_desc" class="control-label">Page Description<span class="req-field" >*</span></label>
                                             <textarea id="page_desc" class="form-control" name="page_desc">{{ $page->description }}</textarea>
-=======
-                                            <input type="text" class="form-control pagee-url" placeholder="Enter Page URL" value="{{ $page->url }}" name="url" id="page_url">
-                                            <p class="error">{{ $errors->first('url') }}</p>
-                                            <span id="page_url_error" style="color:red"></span>
-                                        </div>
-                                        <div class="form-group has-feedback">
-                                            <label for="page_desc" class="control-label">Page Description<span class="req-field" >*</span></label>
-                                            <textarea id="page_desc" class="form-control" name="description">{{ $page->description }}</textarea>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                             <p class="error">{{ $errors->first('description') }}</p>
                                             <span id="page_desc_error" style="color:red"></span>
                                         </div>
                                     </div>
-<<<<<<< HEAD
                                
-=======
-                                </div>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
-<<<<<<< HEAD
                                 <h2 class="heading-agent">Meta Information</h2>
-=======
-                                <h2 class="heading-agent">*Meta Information</h2>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                 <div class="col-md-12">
                                     <div class="form-group has-feedback" >
                                         <label for="meta_title" class="control-label">Meta Title<span class="req-field" >*</span></label>
@@ -155,21 +124,11 @@
     <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
     <script src="{{ asset('/assets/admin/js/pages/cms.js') }}"></script>
-<<<<<<< HEAD
     <script src="{{asset('ckeditor/ckeditor/ckeditor.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             CKEDITOR.replace( 'page_desc' );
-=======
-    <script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#page_desc').summernote({
-                height:300,
-            });
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
             $('.page-url').on('focusout', function () {
                 var pageUrl = $(this).val();

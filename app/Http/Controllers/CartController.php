@@ -11,10 +11,7 @@ use Response;
 use App\Cart;
 use App\Promotions;
 use Cookie;
-<<<<<<< HEAD
 use Meta;
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 class CartController extends Controller {
 
   protected $messageBag = null;
@@ -23,17 +20,13 @@ class CartController extends Controller {
   public function __construct(Guard $auth)
   {
     $this->sitehelper = new SiteHelper();
-<<<<<<< HEAD
     Meta::title('Chrysalis');
     Meta::set('robots', 'index,follow');
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   }
   public function cart(Request $request){
     $req=$request->all();
     if(count($req)){
       $res=Promotions::verifyCoupanCode($req['coupan_code']);
-<<<<<<< HEAD
       if(!$res[0]->is_exists){
          Session::flash('error','Coupon code is not valid.');
          return Redirect::back();
@@ -54,21 +47,6 @@ class CartController extends Controller {
   Meta::set('title', 'Shopping Cart');
  // dd($data);
   return view('frontend.costumes.cart.cart_list',compact('data',$data));
-=======
-      if(!$res){
-         Session::flash('error','Coupon code is not valid.');
-         return Redirect::back();
-      }else{
-        $data=Cart::getCartProductswithCoupan($req['coupan_code']);
-        if($data['dis_total']=="0"){
-                Session::flash('error','No admin costumes are found in your cart.');
-        } 
-       }
-    }else{
-      $data=Cart::getCartProducts();
-     }
-    return view('frontend.costumes.cart.cart_list',compact('data',$data));
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   }
   public function addToCart(Request $request){
     $req=$request->all();
@@ -163,14 +141,10 @@ class CartController extends Controller {
         $req=$request->all();
         $verify=Cart::verifyCostumeQuantity($req['costume_id'],$req['qty']);
         if(count($verify)){
-<<<<<<< HEAD
             Cart::updateCartDetails($req['costume_id'],$req['cart_id'],$req['qty']);
             if($req['qty']!="0"){
             Session::flash('success','The requested quantity for \'"'.$req['costume_name'].'"\' is updated.');
           }
-=======
-          Cart::updateCartDetails($req['costume_id'],$req['cart_id'],$req['qty']);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         }else{
           Session::flash('error','The requested quantity for \'"'.$req['costume_name'].'"\' is not available.');
         }
@@ -183,13 +157,10 @@ class CartController extends Controller {
     public function getMiniCartProducts(){
       $cart_list=Cart::getCartProducts();
       return Response::JSON($cart_list);
-<<<<<<< HEAD
     }  
     public function storeCreditsUpdate(Request $request){
        $req=$request->all();
        $res=Cart::storeCreditsUpdate($req);
        return Response::JSON($res);
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     }
 }

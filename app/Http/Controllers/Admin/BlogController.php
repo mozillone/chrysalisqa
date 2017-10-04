@@ -15,7 +15,6 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
 use Validator;
-<<<<<<< HEAD
 use App\Helpers\Site_model;
 use App\User;
 use App\Imageresize;
@@ -327,15 +326,4 @@ class BlogController extends Controller {
 
         return $post;
     }
-=======
-
-class BlogController extends Controller {
-	public function blogPosts() {
-		return view('admin.blog.blog-posts');
-	}
-
-	public function addBlogPost() {
-		return view('admin.blog.add-blog-post');
-	}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }

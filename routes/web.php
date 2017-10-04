@@ -11,14 +11,10 @@
 |
 */
 //Auth::routes();
-<<<<<<< HEAD
 Route::get('sitemap',['as' => 'sitemaps.posts','uses'=> 'SitemapsController@index']);
 Route::get('stripeuserupdate/{email}', ['as' => 'stripe.userupdate','uses'=> 'SitemapsController@stripeUsersUpdate']);
 Route::get('update/subcategories/attributes', ['as' => 'update.subcategories.attributes','uses'=> 'SitemapsController@updateAttributesForSubcategories']);
    
-=======
-    
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 Route::get('/', ['as' => '','uses'=>'HomePageController@index']);
 Route::get('/login', ['as' => 'login','uses'=>'AuthController@getSignin']);
 Route::post('/login', ['as' => 'login.post','uses'=>'AuthController@postLogin']);
@@ -26,11 +22,7 @@ Route::post('/register', ['as' => 'register','uses'=>'AuthController@postRegiste
 Route::any('admin', 'AuthController@getAdminSignin');
 Route::post('/admin/login', ['as' => 'admin.login.post','uses'=>'AuthController@postAdminSignin']);
 Route::get('social/login/redirect/{provider}', ['uses' => 'AuthController@redirectToProvider', 'as' => 'social.login']);
-<<<<<<< HEAD
 Route::any('social/login/{provider}', 'AuthController@handleProviderCallback');
-=======
-Route::get('social/login/{provider}', 'AuthController@handleProviderCallback');
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 Route::get('/logout', ['as' => 'logout','uses'=>'AuthController@logout']);
 Route::get('/verification/{verification}', ['as' => '','uses'=>'AuthController@verification']);
 Route::any('/forgetPassword', ['as' => 'forgotpassword.post','uses'=>'AuthController@forgotPassword']);
@@ -39,7 +31,6 @@ Route::post('/admin/forgotpassword', ['as' => 'admin.forgotpassword.post','uses'
 Route::any('/password/change/{verification?}', ['as' => 'forgotpassword.change','uses'=>'AuthController@forgotPasswordChange']);
 Route::any('/admin/password/change/{verification?}', ['as' => 'admin.forgotpassword.change','uses'=>'AuthController@adminForgotPasswordChange']);
 Route::any('/emailValidation', array('as' => '','uses' => 'AuthController@EmailNameCheck'));
-<<<<<<< HEAD
 Route::any('/usernameValidation', array('as' => '','uses' => 'AuthController@UserNameCheck'));
 Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthController@forgorpasswordEmailCheck'));
 Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
@@ -64,24 +55,6 @@ Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesCont
 Route::any('/product/{slug1?}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
 Route::any('inquire-costume', array('as' => 'inquire-costume','uses' => 'CostumesController@inquireCostume'));
-=======
-Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthController@forgorpasswordEmailCheck'));
-Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
-Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'DashboardController@EditProfile']);
-Route::any('/addshippingaddress', ['as' => 'shipping-address','uses'=>'DashboardController@addShippingAddress']);
-Route::any('/addbillingaddress', ['as' => 'billing-address','uses'=>'DashboardController@addBillingAddress']);
-Route::any('/deleteaddress', ['as' => '','uses'=>'DashboardController@deleteAddress']);
-Route::any('/deleteccard', ['as' => '','uses'=>'DashboardController@Deleteccard']);
-Route::any('/creditcardadd', ['as' => 'creditcard-add','uses'=>'DashboardController@creditcradAdd']);
-Route::any('/allorders', ['as' => 'allorders','uses'=>'DashboardController@allOrders']);
-
-/** Products list page start here **/
-//Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
-//Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
-Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesController@costumeListings'))->where('name', '[A-Za-z]+');;
-Route::any('/product/{slug1?}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
-Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 /** Products list page end here **/
 
 Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesController@costumeReport'));
@@ -91,16 +64,10 @@ Route::any('/addToCart', array('as' => '','uses' => 'CartController@addToCart'))
 Route::any('/cart', array('as' => 'cart','uses' => 'CartController@cart'));
 Route::any('/updateCart', array('as' => 'Update.Cart','uses' => 'CartController@updateCart'));
 Route::any('/cart/delete/{cart_item_id}/{cart_id}', array('as' => '','uses' => 'CartController@productRemoveFromCart'));
-<<<<<<< HEAD
 Route::any('/store_credits/update', array('as' => '','uses' => 'CartController@storeCreditsUpdate'));
 Route::get('/getMiniCartProducts', array('as' => '','uses' => 'CartController@getMiniCartProducts'));
 
 /*******************Car Functionality end here \*********/
-=======
-Route::get('/getMiniCartProducts', array('as' => '','uses' => 'CartController@getMiniCartProducts'));
-
-/*******************Car Functionality end here *********/
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 /*******************Checkout Functionality stat here *********/
 Route::any('checkout', array('as' => '','uses' => 'CheckoutController@checkout'));
@@ -114,12 +81,8 @@ Route::post('/add/billing-adress', array('as' => 'billing_address.post','uses' =
 Route::any('/buy-it-now/{costume_id?}', array('as' => 'buy-it-now','uses' => 'CheckoutController@buyItNow'));
 Route::any('/get/credit-card/{card_id?}', array('as' => 'add-credit-card','uses' => 'CheckoutController@getCreditCard'));
 Route::get('/get-adress/{type?}/{address_id?}', array('as' => 'shipping_address.post','uses' => 'CheckoutController@getAddressInfo'));
-<<<<<<< HEAD
 Route::any('/orders/charity/fund', array('as' => 'orders-charity-fund','uses' => 'CheckoutController@orderCharityFund'));
 Route::any('/orders/charity', array('as' => '','uses' => 'CheckoutController@orderCharityRedirect'));
-=======
-Route::post('/order/charity/fund', array('as' => 'order-charity-fund','uses' => 'CheckoutController@orderCharityFund'));
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 Route::any('/get/credit-card', array('as' => 'add-credit-card','uses' => 'CheckoutController@getCreditCard'));
 Route::any('/any/shipping-adress', array('as' => 'shipping_address.post','uses' => 'CheckoutController@getShippingAddress'));
 Route::any('/get/billing-adress', array('as' => 'billing_address.post','uses' => 'CheckoutController@getBillingAddress'));
@@ -134,15 +97,9 @@ Route::any('/get/billing-adress', array('as' => 'billing_address.post','uses' =>
 Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
 /** Costume Like page end here **/
 /****costume create page 2 routes starts here***/
-<<<<<<< HEAD
 Route::any('/costume/sell-a-costume', array('as' => '','uses' => 'CmsController@viewSellACostume'));
 Route::any('/costume/createone', array('as' => '','uses' => 'CreateCostumeController@createCostumestep1'));
 Route::any('/costume/create', array('as' => '','uses' => 'CreateCostumeController@createCostumestep2'));
-=======
-Route::any('/costume/sell-a-costume', array('as' => '','uses' => 'CreateCostumeController@sellCostume'));
-Route::any('/costume/createone', array('as' => '','uses' => 'CreateCostumeController@createCostumestep1'));
-Route::any('/costume/createtwo', array('as' => '','uses' => 'CreateCostumeController@createCostumestep2'));
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 Route::any('/costume/createthree', array('as' => '','uses' => 'CreateCostumeController@createCostumestep3'));
 Route::any('/costume/createfour', array('as' => '','uses' => 'CreateCostumeController@createCostumestep4'));
 Route::any('/costume/ajaxsubcategory', array('as' => '','uses' => 'CreateCostumeController@ajaxSubCategory'));
@@ -178,7 +135,6 @@ Route::any('/my/costumes-slod', ['as' => 'my-costumes-slod','uses'=>'OrdersContr
 Route::any('/my-costumes-slod', ['as' => '','uses'=>'OrdersController@costumeSoldListData']);
 Route::any('/sold/order/{order_id}', ['as' => '','uses'=>'OrdersController@costumeSoldSummary']);
 Route::any('/seller/orders/genaate-label', ['as' => '','uses'=>'OrdersController@orderLabelGenate']);
-<<<<<<< HEAD
 Route::any('/sold/order/track-info/download/{track_no}/{type?}', ['as' => '','uses'=>'OrdersController@downlaodTrankDetails']);
 Route::any('/my-order/shipping/{order_id}', ['as' => '','uses'=>'OrdersController@orderShippingList']);
 Route::any('/myorder-shippings/{order_id}', ['as' => '','uses'=>'OrdersController@orderShippingData']);
@@ -199,12 +155,6 @@ Route::any('/generate-url-rewrites', ['as' => 'generate-url-rewrites','uses'=>'U
 Route::any('/del-rewrites', ['as' => 'del-rewrites','uses'=>'UrlRewritesController@deleteUrlRewrites']);
 /******************************************************************************************************************************/
 
-=======
-Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'OrdersController@downlaodTrankDetails']);
-/**************** User Orders routes end here ******************/
-
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 
 
@@ -212,19 +162,13 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 	  	Route::get('/admin/dashboard', 'DashboardController@dashboard');
 	  	Route::get('/admin/profile', 'UserController@adminProfile');
 	  	Route::post('/admin/profile/post', ['as' => 'admin-profile-update','uses'=>'UserController@adminProfileUpdate']);
-<<<<<<< HEAD
 	  	Route::any('/settings', ['as' => 'settings','uses'=>'UserController@adminSettings']);
 	  	Route::post('/request_bag/settings', ['as' => 'request_bag','uses'=>'UserController@requesBagSettings']);
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	   /****************User Management Start Here***************************/
 	    Route::get('customers-list', ['as' => 'customers-list','uses'=>'UserController@customersList']);
 		Route::get('customes-list', ['as' => 'customes-list','uses'=>'UserController@customesList']);
 	    Route::any('/customers/list', 'UserController@customersListData');
-<<<<<<< HEAD
 	    Route::any('customers-search', 'UserController@searchCustomers');
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		Route::get('/user-costumes-list/{id}', ['as' => 'user-costumes-list','uses'=>'UserController@userCostumes']);
 		Route::get('/user-costumessold-list/{id}', ['as' => 'user-costumessold-list','uses'=>'UserController@userSoldcostumes']);
 		Route::get('/user-recentorders-list/{id}', ['as' => 'user-recentorders-list','uses'=>'UserController@recentOrders']);
@@ -254,7 +198,6 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 		Route::get('/reported/costumes', ['as' => 'reported-costumes-list','uses'=>'CostumeController@getReportedCostumes']);
 		Route::any('/costume-reports-list', ['as' => '','uses'=>'CostumeController@getReportedCostumesData']);
 	   	Route::get('/getallcostumes', array('as' => '','uses' => 'CostumeController@Getallcostumes'));
-<<<<<<< HEAD
 	   	Route::post('/getallsearchcostumes', array('as' => '','uses' => 'CostumeController@Getallsearchcostumes'));
 	   	Route::get('/custome-listing/{id}', ['as' => '','uses'=>'CostumeController@CostumeList']);
 	   	Route::any('/changecostumestatus', ['as' => '','uses'=>'CostumeController@changeCostumeStatus']);
@@ -263,13 +206,6 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 	   	Route::any('/changefeaturestatus', ['as' => '','uses'=>'CostumeController@changeFeaturedStatus']);
 	   	Route::any('/delete-costume-image', ['as' => 'delete-costume-image','uses'=>'CostumeController@deleteCostumeImage']);
 	   	/****************Costumes Managemnet Code Ends Here***********************/
-=======
-	   	Route::get('/custome-listing/{id}', ['as' => '','uses'=>'CostumeController@CostumeList']);
-	   	Route::any('/changecostumestatus', ['as' => '','uses'=>'CostumeController@changeCostumeStatus']);
-	   	Route::any('/deletecostume/{id}', ['as' => '','uses'=>'CostumeController@deleteCostume']);
-
-		/****************Costumes Managemnet Code Ends Here***********************/
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 		/****************Attributes Management Starts Here*********************/
 		Route::any('/attributes/create', ['as' => 'attributes-create','uses'=>'AttributeController@createAttributes']);
@@ -287,11 +223,7 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 
 
 		/****************Categories Management Starts Here*********************/
-<<<<<<< HEAD
 		Route::any('/categories/create', ['as' => 'categories-create','uses'=>'CategoriesController@createCategories']);
-=======
-		Route::any('/category/create', ['as' => 'categories-create','uses'=>'CategoriesController@createCategories']);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	    Route::any('/categories/edit/{id?}', ['as' => 'categories-edit','uses'=>'CategoriesController@editCategories']);
 	    Route::any('/category-delete/{id}', ['as' => '','uses'=>'CategoriesController@deleteCategory']);
 	    Route::any('/categories', ['as' => 'categories-list','uses'=>'CategoriesController@categoriesList']);
@@ -324,16 +256,12 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 	    Route::any('/orders', ['as' => 'orders-list','uses'=>'OrdersController@ordersList']);
 	    Route::any('/orders-list', ['as' => '','uses'=>'OrdersController@ordersListData']);
 	    Route::any('/order/summary/{order_id}', ['as' => '','uses'=>'OrdersController@orderSummary']);
-<<<<<<< HEAD
 	    Route::any('/order/desputes/{order_id}', ['as' => '','uses'=>'OrdersController@orderDesputes']);
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	    Route::post('order/status/update', ['as' => '','uses'=>'OrdersController@orderStatusUpdate']);
 	    Route::post('/add/order/transation', ['as' => '','uses'=>'OrdersController@orderAdditionalTransaction']);
 	    Route::post('/order/billing-address/update', ['as' => '','uses'=>'OrdersController@OrderBillingAddressUpate']);
 	    Route::post('/order/shipping-address/update', ['as' => '','uses'=>'OrdersController@OrderShippingAddressUpate']);
 	    Route::post('/orders/genaate-label', ['as' => '','uses'=>'OrdersController@orderLabelGenate']);
-<<<<<<< HEAD
 	    Route::any('/order/track-info/download/{track_no}/{type}', ['as' => '','uses'=>'OrdersController@downlaodTrankDetails']);
 	    Route::any('/order/shipping/{order_id}', ['as' => '','uses'=>'OrdersController@orderShippingList']);
 	    Route::any('/order-shippings/{order_id}', ['as' => '','uses'=>'OrdersController@orderShippingData']);
@@ -341,38 +269,26 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 	    Route::any('/order-transactions/{order_id}', ['as' => '','uses'=>'OrdersController@orderTransactionsData']);
 	    Route::any('/export-orders', ['as' => '','uses'=>'OrdersController@ordersCsvExport']);
 
-=======
-	    Route::any('/order/track-info/download/{track_no}', ['as' => '','uses'=>'OrdersController@downlaodTrankDetails']);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	     /*****************************Orders ends here ***********************/
 
 	    /*****************************Transactions starts here ***********************/
 	    Route::any('/transactions', ['as' => 'transactions-list','uses'=>'TransactionsController@transactionsList']);
 	    Route::any('/transactions-list', ['as' => '','uses'=>'TransactionsController@transactionsListData']);
 	    Route::any('/transaction/summary/{transaction_id}', ['as' => '','uses'=>'TransactionsController@transactionView']);
-<<<<<<< HEAD
 	    Route::any('/export-transaction', ['as' => '','uses'=>'TransactionsController@transactionsCsvExport']);
 
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	    /*****************************Transactions end here ***********************/
 
 	   	Route::any('/manage-bags', ['as' => 'manage-bags','uses'=>'RequestabagController@manageBag']);
 	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
 	   	Route::any('/generatelables', array('as' => '','uses' => 'RequestabagController@Generatelables'));
-<<<<<<< HEAD
 	   	Route::any('/returnlablegenerate', array('as' => '','uses' => 'RequestabagController@returnLableGenerate'));
 	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
 	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
 	   	Route::any('/closerequest', array('as' => '','uses' => 'RequestabagController@Closerequest'));
 	   	Route::any('/requestabag_message',array('as' => '','uses' => 'RequestabagController@RequestabagMessage'));
 	   	Route::any('/request-bag/label/{track_id}',array('as' => '','uses' => 'RequestabagController@downlaodRequestBagLabels'));
-=======
-	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
-	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
-	   	Route::any('/closerequest', array('as' => '','uses' => 'RequestabagController@Closerequest'));
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	   /*****************************Request a bag ends here ***********************/
 	   /****************Events Management Starts Here*********************/
 	   
@@ -409,12 +325,9 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 			'as' => '',
 	   		'uses' => 'EventController@searchEvent'
 		]);
-<<<<<<< HEAD
 
 	   
 
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	   Route::any('/admin/event/tags', [
 	   		'as' => '',
 	   		'uses' => 'EventController@tagsEvents'
@@ -425,12 +338,8 @@ Route::any('/sold/order/track-info/download/{track_no}', ['as' => '','uses'=>'Or
 	   	]);
 	   Route::any('/admin/events/status', ['uses' => 'EventController@industryStatus'
 	   	]);
-<<<<<<< HEAD
 
 
-=======
-	   
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 /****************Events Management Ends Here***********************/
 
@@ -485,11 +394,8 @@ Route::any('support-tickets', [
 	   		'uses' => 'SupportController@supportTickets'
 	   	]);
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 Route::any('manage-ticket', [
 	   		'as' => 'manage-ticket',
 	   		'uses' => 'SupportController@manageTicket'
@@ -500,7 +406,6 @@ Route::any('manage-ticket', [
 
 /****************Blog Management Starts Here*********************/
 Route::any('blog-posts', [
-<<<<<<< HEAD
             'as' => 'blog-posts',
                'uses' => 'BlogController@index'
     ]);
@@ -568,39 +473,6 @@ Route::any('change-blog-status', [
             'as' => 'store-cms-page',
             'uses' => 'CmsController@store'
         ]);
-=======
-			'as' => 'blog-posts',
-	   		'uses' => 'BlogController@blogPosts'
-	]);
-Route::any('add-blog-post', [
-			'as' => 'add-blog-post',
-	   		'uses' => 'BlogController@addBlogPost'
-	]);
-
-/****************Blog Management Ends Here***********************/
-
-/****************CMS Management Starts Here*********************/
-Route::any('add-cms-page', [
-		'as' => 'add-cms-page',
-	   	'uses' => 'CmsController@addCmsPage'
-	]);
-Route::any('cms-pages', [
-		'as' => 'cms-pages',
-	   	'uses' => 'CmsController@cmsPages'
-	]);
-Route::any('cms-blocks', [
-		'as' => 'cms-blocks',
-	   	'uses' => 'CmsController@cmsBlocks'
-	]);
-Route::any('add-cms-block', [
-		'as' => 'add-cms-block',
-	   	'uses' => 'CmsController@addCmsBlock'
-	]);
-Route::post('store-cms-page', [
-    'as' => 'store-cms-page',
-    'uses' => 'CmsController@store'
-]);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         Route::get('get-all-pages', [
             'as' => 'get-all-pages',
             'uses' => 'CmsController@getAllPages'
@@ -634,7 +506,6 @@ Route::post('store-cms-page', [
             'as' => 'check-url-availability',
             'uses' => 'CmsController@checkUrlAvailability'
         ]);
-<<<<<<< HEAD
 
         /******************** End CMS Pages Routes ***************/
 
@@ -677,9 +548,6 @@ Route::post('store-cms-page', [
             'uses' => 'CmsController@blockSearch'
         ]);
        /***************** End CMS Blocks Routes ******************/
-=======
-        /****************CMS Management Ends Here***********************/
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 /****************Jobs Management Starts Here*********************/
 Route::any('manage-jobs', [
@@ -693,7 +561,6 @@ Route::any('add-job-post', [
  
 /****************Jobs Management Ends Here***********************/
 
-<<<<<<< HEAD
 /************************* FAQ routes starts here ***************************/
 Route::any('manage-faqs', [
     'as' => 'manage-faqs',
@@ -739,17 +606,10 @@ Route::any('faq-search', [
 Route::any('message/{id}', 'MessageController@chatHistory')->name('message.read');
 Route::get('conversations', 'MessageController@converstationsofUser');
 Route::post('conversation/delete', 'MessageController@converstationsDelete');
-=======
-});
-
-Route::any('message/{id}', 'MessageController@chatHistory')->name('message.read');
-Route::get('conversations', 'MessageController@converstationsofUser');
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
    Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete');
-<<<<<<< HEAD
 });
 /****************Messaging Ends Here***********************/
 /****************Ticket Routes Code Starts Here**************/
@@ -1103,6 +963,3 @@ Route::any('getpaypal', [
     'uses' => 'Admin\ReportsController@getallPaypal'
 ]);
 
-=======
-});
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

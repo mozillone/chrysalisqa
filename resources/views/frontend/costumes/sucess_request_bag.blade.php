@@ -14,11 +14,7 @@
             </div>
             <div class="col-md-12 request-success">
                 <img src="{{URL::asset('assets/frontend/img/bag-sucess.png')}}">
-<<<<<<< HEAD
                 <h4>Hang in There!</h4>
-=======
-                <h4>Hand in There!</h4>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 <p>Your bag is on it's way</p>
                 <a type="button" id="average_payouts_next" href="{{URL::to('/')}}" class="btn-rm-nxt nxt">Browse Costumes</a>
 			</div>

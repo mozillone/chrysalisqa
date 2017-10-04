@@ -88,17 +88,12 @@ View User |@parent
 											<p class="error">{{ $errors->first('last_name') }}</p>
 										</div>
 									</div>
-<<<<<<< HEAD
 									<!-- <div class="col-md-12">
-=======
-									<div class="col-md-12">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">Phone #<span class="req-field" >*</span></label>
 											<input type="text" class="form-control" name="phone_number" value="{{$user->phone_number}}" placeholder="123-456-7890"  id="phone_number" required>
 											<p class="error">{{ $errors->first('phone_num') }}</p>
 										</div>
-<<<<<<< HEAD
 									</div> -->
 									<div class="col-sm-12 col-md-12">
 									<div class="form-group has-feedback" >
@@ -110,16 +105,6 @@ View User |@parent
 									<p class="error">{{ $errors->first('email') }}</p> 
 								</div>
 							</div>
-=======
-									</div>
-									<div class="col-md-12">
-										<div class="form-group" >
-											<label for="inputEmail3" class="control-label">Email Address<span class="req-field" >*</span></label>
-											<input type="text" class="form-control" name="email" placeholder="my@email.com" value="{{$user->email}}" id="email" required>
-											<p class="error">{{ $errors->first('last_name') }}</p>
-										</div>
-									</div>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 									<?php
 											$status=$user->vacation_status;
 											if($status==1){?>
@@ -145,11 +130,7 @@ View User |@parent
 											
 										</div>
 									</div>
-<<<<<<< HEAD
 									
-=======
-												
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<?php	} else {
 											?>
 									<div class="col-md-12">
@@ -182,7 +163,6 @@ View User |@parent
 						<div class="col-md-6">
 							<h2 class="heading-agent" style="display:none">sADsd</h2>
 							<br><br><br>
-<<<<<<< HEAD
 									
 								<div class="col-md-12">
 										<div class="form-group" >
@@ -191,17 +171,6 @@ View User |@parent
 											<p class="error">{{ $errors->first('last_name') }}</p>
 										</div>
 									
-=======
-							<div class="col-md-12">
-									<div class="form-group has-feedback" >
-									<label for="inputEmail3" class="control-label">Username<span class="req-field" >*</span></label>
-									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Username"  name="user_name" id="user_name" value="{{$user->display_name}}">
-										<span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon2" style="position:static;"></span>
-									</div>
-									<p class="error">{{ $errors->first('email') }}</p> 
-								</div>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 								
 								<div class="form-group has-feedback">
 									<label for="inputEmail3" class="control-label">Password</label>
@@ -215,31 +184,18 @@ View User |@parent
 									</div> 
 									<p class="error">{{ $errors->first('password') }}</p> 
 								</div> 
-<<<<<<< HEAD
 								</div>
 						</div>
 						<div class="col-md-6">
 							<h2 class="heading-agent">Profile Image</h2>
 							<div class="col-md-12 profile_pic_admin">
-=======
-							</div>
-						</div>
-						<div class="col-md-6">
-							<h2 class="heading-agent">Profile Image</h2>
-							<div class="col-md-12">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 								<div class="form-group">
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									
 									<div class="fileupload fileupload-new" data-provides="fileupload"> 
-<<<<<<< HEAD
 									<div class="userpic">
 										<img  @if(empty($user->user_img)) src="{{asset('/img/default.png')}}" @else src="{{asset('profile_img/resize/'.$user->user_img)}}" @endif class="img-pview img-responsive img-circle pic" id="img-chan" name="img-chan">
 										</div>
-=======
-										<img  @if(empty($user->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/{{$user->user_img}}" @endif class="img-pview img-responsive img-circle pic" id="img-chan" name="img-chan">
-										
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<span class="btn btn-default btn-file">
 											<span class="fileupload-new">Upload Photo</span>
 											<span class="fileupload-exists"></span>     
@@ -257,13 +213,7 @@ View User |@parent
 						<div class="col-md-12">
 						<h2 class="heading-agent">{{$user->first_name}}  {{$user->last_name}} Reviews </h2>
 						<span> No Reviews Found </span>
-<<<<<<< HEAD
 						
-=======
-						<!--sony adding rating stars--->
-						
-                         <!--sony adding rating stars ended--->
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 						
 						</div>
 					</div>
@@ -280,7 +230,6 @@ View User |@parent
 </section>
 <script type="text/javascript">
 function show(){
-<<<<<<< HEAD
 	var status = $('#vacationstatus').prop('checked');
 	if (status ==  true) {
 		$('#fromdatevactaion').show();
@@ -294,11 +243,6 @@ function show(){
 	}
 }
 
-=======
-	$('#fromdatevactaion').show();
-	$('#todatevaction').show();
-}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 </script>
 
 
@@ -331,18 +275,9 @@ $('input[name="expiry_on"]').val('');
 $('#date_timepicker_end_ticket').datetimepicker({format: 'MM/DD/YYYY',minDate: new Date()});
 $('#date_timepicker_end1_ticket').datetimepicker({format: 'MM/DD/YYYY'});
 
-<<<<<<< HEAD
        /* $("#date_timepicker_end1_ticket").on("dp.change", function (e) {
         	//$('.from_date').data("DateTimePicker").maxDate(e.date);
         });*/
-=======
-$("#date_timepicker_end_ticket").on("dp.change", function (e) {
-            $('#date_timepicker_end1_ticket').data("DateTimePicker").minDate(e.date);
-        });
-        $("#date_timepicker_end1_ticket").on("dp.change", function (e) {
-        	//$('.from_date').data("DateTimePicker").maxDate(e.date);
-        });
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 </script>
 	@stop

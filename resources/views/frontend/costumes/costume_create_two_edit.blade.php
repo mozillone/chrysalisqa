@@ -3,7 +3,7 @@
 <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
-<link  href="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.0.0/cropper.css" rel="stylesheet">
+<link  href="{{asset('assets/frontend/css/cropper.css')}}" rel="stylesheet">
 <style>
 /* sucess page code starts here*/
 
@@ -24,20 +24,34 @@
 ;
    font-family: Proxima-Nova-Extrabold;
     }
-    
+    i.fa.fa-percent {
+    position: absolute;
+    z-index: 99;
+    right: 54px;
+    top: 14px;
+    font-size: 13px;
+}
+.media.tnks_media .media-left img {
+   border: 1px solid #e2e2e2 ;
+}
+/*.success_page_final p{font-size: 20px !important;}*/
     .media.tnks_media {
-   width: 500px;
+   width: 550px;
    margin: 0 auto;
    text-align: left;
-   border: 3px solid #60c3ab
-;
-   padding: 25px;
-   border-radius: 15px;
+   border: 5px solid #60c3ab;
+    padding: 28px 40px;
+   border-radius: 18px;
     }
     .media.tnks_media .media-body a {
    color: #ee4266
 ;
     }
+	.media.tnks_media .media-left {
+    max-height: 215px;
+    overflow: hidden;
+    float: left;
+}
     .media.tnks_media .media-body p {
    font-size: 16px;
     }
@@ -49,8 +63,8 @@
     -webkit-border-radius:50%;
     border-radius:50%;
     text-align:center;
-    width: 50px;
-    height: 50px;
+    width: 58px;
+    height: 58px;
     font-size:20px;
     }
     ul.social-network li {
@@ -58,16 +72,16 @@
    margin: 0 2px;
     }
     .tnks_socila {
-   margin-top: 30px;
+   margin-top: 42px;
    margin-bottom: 10px;
     }
     .tnks_socila ul.social-network.social-circle {
-   padding-left: 0px;
+   padding-left: 0px;margin-bottom:42px;
     }
     .media.tnks_media .media-body p {
    margin-bottom: 30px;
     }
-    .success_page_final h2{font-family: Proxima-Nova-Extrabold;}
+    .success_page_final h2{font-family: Proxima-Nova-Extrabold;margin-top: 80px;}
     
     @media screen and (max-width:767px){
     .media.tnks_media {
@@ -459,14 +473,14 @@
 												<div class="img-pp">
 													<div class="img-pp-iner">
 														<img class="img-responsive crp1" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
-														<input type="range" id="zoom-level" min="0" value="0" step="any" >
+														<input type="range" id="zoom-level" min="0" max="5"value="0" step="any" >
 														<img class="img-responsive crp2" src="{{URL::asset('assets/frontend/img/crp_2.png')}}">
 													</div>
 												</div>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-success pull-right save" id="crop">Save</button>
-												<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel1">Cancel</button>
 											</div>
 										</div>
 									</div>
@@ -488,7 +502,7 @@
 												<div class="img-pp">
 													<div class="img-pp-iner">
 														<img class="img-responsive crp1" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
-														<input type="range" id="zoom-level2" min="0" value="0" step="any" >
+														<input type="range" id="zoom-level2" min="0" max="5" value="0" step="any" >
 														<img class="img-responsive crp2" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
 													</div>
 												</div>
@@ -497,7 +511,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-success pull-right save" id="crop2">Save</button>
-												<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel2">Cancel</button>
 											</div>
 										</div>
 									</div>
@@ -519,7 +533,7 @@
 												<div class="img-pp">
 													<div class="img-pp-iner">
 														<img class="img-responsive crp1" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
-														<input type="range" id="zoom-level3" min="0" value="0" step="any" >
+														<input type="range" id="zoom-level3" min="0" max="5" value="0" step="any" >
 														<img class="img-responsive crp2" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
 													</div>
 												</div>
@@ -528,7 +542,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-success pull-right save" id="crop3">Save</button>
-												<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel3">Cancel</button>
 											</div>
 										</div>
 									</div>
@@ -556,7 +570,7 @@
 											<div class="img-pp">
 												<div class="img-pp-iner">
 													<img class="img-responsive crp1" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
-													<input type="range" min="0" value="0" step="any" class="slider">
+													<input type="range" min="0" max="5" value="0" step="any" class="slider">
 													<img class="img-responsive crp2" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
 												</div>
 											</div>
@@ -641,10 +655,10 @@
 								<div class="form-rms">
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 										<p class="form-rms-que">Costume Name *</p>
-										<p class="form-rms-small">Example:<br>"Dark Knight Joker Cosplay"</p>
+										<p class="form-rms-small"><span>Name your Costume Be Specific!</span></p>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12">
-										<p class="form-rms-input"><input type="text" name="costume_name" value="{{$costume_description->name}}" id="costume_name" autocomplete="off" tab-index="1" placeholder=""></p>
+										<p class="form-rms-input"><input type="text" name="costume_name" value="{{$costume_description->name}}" id="costume_name" autocomplete="off" tab-index="1" placeholder="Dark Knight Joker Cosplay"></p>
 										<span id="costumename_error" style="color:red"></span>
 									</div>
 								</div>
@@ -669,10 +683,42 @@
 
 
 								<!--category code ends here-->
+
+								<!--Get subcategory ajax code starts here-->
+								<div class="form-rms">
+									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
+										<p class="form-rms-que">Sub Category*</p>
+									</div>
+									<div class="col-md-8 col-sm-8 col-xs-12">
+										<p class="form-rms-input">
+										 
+											@if(count($db_subcategoryname)>0 &&!empty($db_subcategoryname))
+											<select name="subcategory" id="subcategory" class="form-control">
+												<option value="">Select Sub Category</option>
+												@foreach($db_subcategoryname as $index=>$category)
+												@if(!empty($costume_category_2->category_id))
+													<option <?php if($costume_category_2->category_id == $category->subcategoryid) { ?> selected="selected" <?php } ?> value="{{$category->subcategoryid}}">{{$category->subcategoryname}}</option>
+												@else	
+													 
+												@endif
+												@endforeach
+											</select>
+											@else
+											<select name="subcategory" id="subcategory">
+												<option value="">Select Sub Category</option>
+											</select>
+											@endif
+										</p>
+										<span id="subcategoryerror" style="color:red"></span>
+									</div>
+								</div>
+
+								<!--Get subcategory regarding categories code ends here-->
+
 								<!--Gender Code starts here-->
 								<div class="form-rms">
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-										<p class="form-rms-que">Sex*</p>
+										<p class="form-rms-que">Gender*</p>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12" id="genderRadio">
 										<p class="form-rms-input">
@@ -681,11 +727,11 @@
 											<div class="form-rms-input">
 												<div class="col-md-2 col-sm-4 ">
 													<input  id="radio-1" class="radio-custom" name="gender" <?php if ($costume_details->gender == "male") { ?> checked='checked' <?php } ?>  type="radio" value="male">
-													<label for="radio-1" class="radio-custom-label">Male</label>
+													<label for="radio-1" class="radio-custom-label">Mens</label>
 												</div>
 												<div class="col-md-2 col-sm-4">
 													<input id="radio-2"  class="radio-custom" name="gender"  <?php if ($costume_details->gender == "female") { ?> checked='checked' <?php } ?> type="radio" value="female">
-													<label for="radio-2" class="radio-custom-label">Female</label>
+													<label for="radio-2" class="radio-custom-label">Womens</label>
 												</div>
 												<div class="col-md-2 col-sm-4">
 													<input id="radio-3"  class="radio-custom" name="gender" <?php if ($costume_details->gender == "boy") { ?> checked='checked' <?php } ?>  type="radio" value="boy">
@@ -734,36 +780,7 @@
 
 
 								<!--size code ends here-->
-								<!--Get subcategory ajax code starts here-->
-								<div class="form-rms">
-									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-										<p class="form-rms-que">Sub Category*</p>
-									</div>
-									<div class="col-md-8 col-sm-8 col-xs-12">
-										<p class="form-rms-input">
-										 
-											@if(count($db_subcategoryname)>0 &&!empty($db_subcategoryname))
-											<select name="subcategory" id="subcategory" class="form-control">
-												<option value="">Select Sub Category</option>
-												@foreach($db_subcategoryname as $index=>$category)
-												@if(!empty($costume_category_2->category_id))
-													<option <?php if($costume_category_2->category_id == $category->subcategoryid) { ?> selected="selected" <?php } ?> value="{{$category->subcategoryid}}">{{$category->subcategoryname}}</option>
-												@else	
-													 
-												@endif
-												@endforeach
-											</select>
-											@else
-											<select name="subcategory" id="subcategory">
-												<option value="">Select Sub Category</option>
-											</select>
-											@endif
-										</p>
-										<span id="subcategoryerror" style="color:red"></span>
-									</div>
-								</div>
-
-								<!--Get subcategory regarding categories code ends here-->
+								
 								<div class="form-rms costume-error condition_div">
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 										<p class="form-rms-que">Condition*</p>
@@ -771,17 +788,22 @@
 									<div class="col-md-8 col-sm-8 col-xs-12">
 										<div class="col-md-12 col-sm-12 col-xs-12 pdlft0">
 											<p class="form-rms-input">
+
+											<div class="col-md-2 col-sm-4 pdlft0">													
+													<span class="full-rms"><input type="radio" class="radio-custom" name="condition" <?php if ($costume_details->condition == "good") { ?> checked='checked' <?php } ?> value="good" id="good"> <label for="good"  class="radio-custom-label">Good</label></span>														
+												</div>
+
+												<div class="col-md-3 col-sm-4 pdlft10 ">												
+													<span class="full-rms"><input type="radio" class="radio-custom" name="condition" <?php if ($costume_details->condition == "like_new") { ?> checked='checked' <?php } ?> value="like_new" id="likenew"><label for="likenew" class="radio-custom-label"> Like New</label></span>												 
+												</div>
+
 												<div class="col-md-3 col-sm-4 pdlft0">	
 													<span class="full-rms">
 														<input type="radio" class="radio-custom" name="condition" <?php if ($costume_details->condition == "brand_new") { ?> checked='checked' <?php } ?> value="brand_new" id="brandnew"> <label for="brandnew" class="radio-custom-label">Brand New</label>
 													</span>												
 												</div>
-												<div class="col-md-3 col-sm-4 ">												
-													<span class="full-rms"><input type="radio" class="radio-custom" name="condition" <?php if ($costume_details->condition == "like_new") { ?> checked='checked' <?php } ?> value="like_new" id="likenew"><label for="likenew" class="radio-custom-label"> Like New</label></span>												 
-												</div>
-												<div class="col-md-3 col-sm-4 ">													
-													<span class="full-rms"><input type="radio" class="radio-custom" name="condition" <?php if ($costume_details->condition == "good") { ?> checked='checked' <?php } ?> value="good" id="good"> <label for="good"  class="radio-custom-label">Good</label></span>														
-												</div>
+												
+												
 											</p>
 											<span id="costumeconditionerror" style="color:red"></span>
 										</div>
@@ -809,55 +831,22 @@
 
 
 										@if(count($db_film_name)== 1)
-										<p class="form-rms-small" id="film_text" @if(count($db_film_name)!= 1) style="display: none;" @endif >Which production was your costume featured in?</p>
+										<p class="form-rms-small" id="film_text" @if(count($db_film_name)!= 1) style="display: none;" @endif >Was it Used in a Production? Which One?</p>
 										<p class="ct1-rms-rel form-rms-input" id="film_text_input" @if(count($db_film_name)!= 1) style="display: none;" @endif>
 											<input type="text" name="film_name" value="{{$db_film_name->attribute_option_value}}" id="film_name" > <span><span>
 											</p>
 											@else
-											<p class="form-rms-small" id="film_text" style="display: none;">Which production was your costume featured in?</p>
+											<p class="form-rms-small" id="film_text" style="display: none;">Was it Used in a Production? Which One?</p>
 											<p class="ct1-rms-rel form-rms-input" id="film_text_input" style="display: none;">
 												<input type="text" name="film_name" id="film_name" > <span><span>
 												</p>
 												@endif
-												<span id="qualityerror" style="color:red"></span>
+												<!-- <span id="qualityerror" style="color:red"></span> -->
 												</div>	
 								</div>
- 
-								<div class="form-rms descibr_smte_text">
-									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-										<p class="form-rms-que form-rms-que1"><span></span>How would you describe your costume?</p>
-										
-										<p> Please enter a maximum of <strong>10</strong> keywords to describe the categories in which your costume could belong to.</p>
-										<p><span class="ctume_tip-spn">Tip:</span>Have a specialty costume? To increase your chances of making a sale, input the appropriate keywords with our existing <a href="#" style="color: red;text-decoration: underline;">list of categories.</a></p>
-									</div>
-									<div class="col-md-8 col-sm-8 col-xs-12">
-										<p class="form-rms-input keywrds-input"><input type="text" id="keywords_tag">
-											<a href="javascript:void(0)" id="keywords_add">Add</a>
-										</p>
-										<div id="div" class="keywords_div">
-											@if(!empty($costume_description->keywords))
-											<?php $explode = explode(',', $costume_description->keywords);
-												$keyword_count = count($explode);
-												foreach ($explode as $key => $keywords) {
-												?>
-												@if(!empty($keywords))
-												<p class="keywords_p p_{{10-$key}}">{{$keywords}}<span id="remove_{{10-$key}}">X</span> </p>
-												<input id="input_{{10-$key}}" name="keyword_{{10-$key}}" value="{{$keywords}}" type="hidden">
-												@endif
-												<?php
-												}
-												for ($x = 10-$keyword_count+1; $x <= 10; $x++) {?>
-												<input id="input_{{$x}}" name="keyword_{{$x}}" value="" type="hidden">
-											<?php } ?>
-											@endif
-										</div>
-										<div id="count">@if(!empty($costume_description->keywords)){{10 - count($explode)}}
-        
-                                        @else 10
-                                        @endif left</div>
-									</div>
-								</div>
-				<div class="form-rms costume-error make_costume">
+
+
+								<div class="form-rms costume-error make_costume">
 				<div class="col-md-4 col-sm-4 pdlft0">
 				<p class="form-rms-que"> {{$cosplayfour->label}}</p>
 				</div>
@@ -867,7 +856,7 @@
 					@foreach($cosplayfour_values as $index=>$cosplayfour_val)
 					<span class="full-rms">
 
-						<div class="col-md-2  col-sm-4 col-xs-12  pdlft30">
+						<div class="col-md-2  col-sm-4 col-xs-12  pdlft25">
 						<input id="{{$cosplayfour_val->optionid}}" class="radio-custom" name="{{$cosplayfour->code}}" <?php if($db_cosplayfour->attribute_option_value_id == $cosplayfour_val->optionid) { ?> checked="checked" <?php } ?> type="{{$cosplayfour->type}}" value="{{$cosplayfour_val->optionid}}">
 						<label for="{{$cosplayfour_val->optionid}}" class="radio-custom-label">{{$cosplayfour_val->value}}</label>
 					</div>
@@ -883,25 +872,56 @@
 					</p>
 					@else
 							<div class="col-md-12  col-sm-12 how_div" id="mention_hours" style="display: none">
-						<p class="col-md-4  col-sm-6 mtop10" >How long did it take?</p>
+						<p class="col-md-4  col-sm-6 mtop10" >How long did it take? *</p>
 						<p class="col-md-8 col-sm-8 " id="mention_hours_input"style="display: none;">
 							<input type="text" name="make_costume_time" id="make_costume_time1" class="input-rm100"> <span><i>hours</i><span>
+							<span id="usercostumeerror" style="color:red"></span>
 						</p>
 						</div>
 					@endif
-					<span id="usercostumeerror" style="color:red"></span>
+					
 				</div>
 				</div>
+ 
+								<div class="form-rms descibr_smte_text">
+									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
+										<p class="form-rms-que form-rms-que1"><span></span>How would you describe your costume?</p>
+										
+										<p> Please enter a maximum of <strong>10</strong> keywords to describe the categories in which your costume could belong to.</p>
+										<p><span class="ctume_tip-spn">Tip:</span>Have a specialty costume? To increase your chances of making a sale, input the appropriate keywords with our existing list of categories.</p>
+									</div>
+									<div class="col-md-8 col-sm-8 col-xs-12">
+										<p class="form-rms-input keywrds-input"><input type="text" id="keywords_tag">
+											<a href="javascript:void(0)" id="keywords_add">Add</a>
+										</p>
+										<div id="div" class="keywords_div">
+											@if(!empty($costume_description->keywords))
+											<?php $explode = explode(',', $costume_description->keywords);
+												$keyword_count = count($explode);
+												foreach ($explode as $key => $keywords) {
+											?>
+											@if(!empty($keywords))
+												<p class="keywords_p p_{{10-$key}}">{{$keywords}}<span id="remove_{{10-$key}}">X</span> </p>
+												<input id="input_{{10-$key}}" name="keyword_{{10-$key}}" value="{{$keywords}}" type="hidden">
+												@endif
+												<?php
+											}
+												for ($x = 10-$keyword_count+1; $x <= 10; $x++) {?>
+												<input id="input_{{$x}}" name="keyword_{{$x}}" value="" type="hidden">
+											<?php } ?>
+											@endif
+										</div>
+
+										<div id="count">@if(!empty($costume_description->keywords)){{10 - count($explode)}}@endif left</div>
+									</div>
+								</div>
+				
 											
 				<div class="form-rms costume-error describe_cnt">
 					<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 						<p class="form-rms-que form-rms-que1">Describe your Costume:*</p>
 						<p class="form-rms-detailed">  
-							<span>Be as detailed as possible. Here are some helping questions:</span><br>
-							<span>- What is your costume made out of?
-							Describe the <br>comfort and/or durability.</span>
-							<span>- What are your costume's finest features?</span>
-							<span>- Does your costume belong to a specific time period or sequel? Which one?</span>
+							<span>Tip: what makes your costume unique? Describe it with keywords to help buyers find it.</span>
 							
 						</p>
 					</div>
@@ -996,7 +1016,7 @@
 								</div>
 								<div class="form-rms">
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-										<p class="form-rms-que">Dimensions</p>
+										<p class="form-rms-que">Dimensions: (Optional)</p>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12">
 										<div class="form-rms-input dimensions-two dimensions-two-pk_info">
@@ -1077,7 +1097,7 @@
                                             <span class="glyphicon glyphicon-minus"></span>
                                             </button>
                                             </span>
-                                            <input type="text" name="donate_charity" class="form-control input-number" id="dnt_amt" value="{{$costume_details->dynamic_percent}}" min="1" max="100">
+                                            <input type="text" name="donate_charity" class="form-control input-number" id="donate_charity" value="{{$costume_details->dynamic_percent}}" min="0" max="100"><i class="fa fa-percent" aria-hidden="true"></i>
                                             <span class="input-group-btn">
                                             <button type="button" class="btn btn-default btn-number donate_charity chr_bt2" data-type="plus" data-field="donate_charity">
                                             <span class="glyphicon glyphicon-plus"></span>
@@ -1165,7 +1185,7 @@
                                         </div>
                                         <div class="media-body">
                                             <p>I'm selling my <a href="" id="costumename"></a> on Chrysalis.</p>
-                                            <p><a href="javascript:void(0);" id="amount"></a> of the sale goes to <a href="javascript:void(0);" id="charity_center"></a>. </p>
+                                            <p id="amount_charity"><a href="javascript:void(0);" id="amount"></a> of the sale goes to <a href="javascript:void(0);" id="charity_center"></a>. </p>
                                             <p>Check it out! </p>
                                         </div>
                                     </div>
@@ -1225,17 +1245,20 @@
 					@section('footer_scripts')
 					<!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
 					<script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
-					<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.0.0/cropper.js"></script>
+					<script type="text/javascript" src="{{asset('/assets/frontend/js/cropper.js')}}"></script>
 					<script type="text/javascript" src="{{asset('/assets/frontend/js/costumesedit.js')}}"></script>
 					<script type="text/javascript">
 						$(document).ready(function(){
                               
+                              $('#price').on('keydown', function(e){-1!==$.inArray(e.keyCode,[46,8,9,27,13,110,190])||/65|67|86|88/.test(e.keyCode)&&(!0===e.ctrlKey||!0===e.metaKey)||35<=e.keyCode&&40>=e.keyCode||(e.shiftKey||48>e.keyCode||57<e.keyCode)&&(96>e.keyCode||105<e.keyCode)&&e.preventDefault()});
                           
                             var selector = '.ct3-list  li';
                             $(selector).on("click",function()
                             {
                                 $(selector).removeClass('active');
                                 $(this).addClass('active');
+                                var r = $(this).find('input[type=radio]');
+    							$(r).prop('checked',true); 
                             });
 							
 							//delete multiple selected images code

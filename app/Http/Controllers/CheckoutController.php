@@ -16,13 +16,10 @@ use App\Address;
 use Validator;
 use cookie;
 use App\Helpers\StripeApp;
-<<<<<<< HEAD
 use Meta;
 use URL;
 use App\Promotions;
 
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 class CheckoutController extends Controller {
 
   protected $auth;
@@ -33,28 +30,21 @@ class CheckoutController extends Controller {
    // $this->stripe=new StripeApp();
       $this->middleware(function ($request, $next) {
               if(!Auth::check()){
-<<<<<<< HEAD
                  Session::put('curentURL',URL::current());
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 return Redirect::to('/login')->send();
             }
             else{
                  return $next($request);
             }
         });
-<<<<<<< HEAD
     Meta::title('Chrysalis');
     Meta::set('robots', 'index,follow');
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	}
   public function checkout(){
      $coupan_code=Cart::verifyCoupanCode();
     if(!$coupan_code){
       $data['basic']=Cart::getCartProducts();
     }else{
-<<<<<<< HEAD
         $res=Promotions::verifyCoupanCode($coupan_code);
         if($res[0]->is_exists){
             $data['basic']=Cart::getCartProductswithCoupan($coupan_code, $res[0]->coupon_id);
@@ -71,29 +61,17 @@ class CheckoutController extends Controller {
         
      }
    //  dd($costumer_costumes);
-=======
-      $data['basic']=Cart::getCartProductswithCoupan($coupan_code);
-     }
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     $states   = Site_model::Fetch_all_data('states', '*');
     $countries   = Site_model::Fetch_all_data('countries', '*');
     if(count($data['basic']['basic'])){
          $cart_info=Cart::cartMetaInfo($data['basic']['basic'][0]->cart_id);
-<<<<<<< HEAD
          if(!empty($cart_info[0]->shipping_address_2)){
-=======
-         if(!empty($cart_info[0]->shipping_address_1)){
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
              $data['cart_shipping_address']=$cart_info;
          }else{
              $data['shipping_address']=Address::getAddressinfo('shipping',"latest"); 
          }
 
-<<<<<<< HEAD
          if(!empty($cart_info[0]->pay_address_2)){
-=======
-         if(!empty($cart_info[0]->pay_address_1)){
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
              $data['cart_billing_address']=$cart_info;
          }else{
              $data['billing_address']=Address::getAddressinfo('billing',"latest"); 
@@ -107,7 +85,6 @@ class CheckoutController extends Controller {
     }else{
        return Redirect::to('/');
    }
-<<<<<<< HEAD
 //dd($costumer_costumes);
    Meta::set('title', 'Checkout');
   return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries)->with('states',$states)->with('costumer_costumes',$costumer_costumes);
@@ -128,20 +105,6 @@ class CheckoutController extends Controller {
   $messages = [
         'shipping_address_2.required' => 'Shipping address is required',
         'pay_address_2.required' => 'Billing address is required',
-=======
-  return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries)->with('states',$states);
-  }
-  public function placeOrder(Request $request){
-    $req=$request->all();
-    $rule  =  array(  
-                'shipping_address_1' => 'required',
-                'pay_address_1' => 'required',
-                'card_id' => 'required',
-                 );
-  $messages = [
-        'shipping_address_1.required' => 'Shipping address is required',
-        'pay_address_1.required' => 'Billing address is required',
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         'card_id.required' => 'Payment method is required',
     ];
 
@@ -158,19 +121,12 @@ class CheckoutController extends Controller {
        return Redirect::back();
 
     }else{
-<<<<<<< HEAD
      // $result['message']*/
       $charities_list=Order::getCharitiesList(); 
       $order_donations=false;
        Meta::set('title', 'Order Review');
       return view('frontend.costumes.checkout.order_thanku')->with('order_id',$result['message'])->with('charities_list',$charities_list)->with('order_donations',$order_donations);
    }
-=======
-     // $result['message']
-      $charities_list=Order::getCharitiesList();
-      return view('frontend.costumes.checkout.order_thanku')->with('order_id', $result['message'])->with('charities_list',$charities_list);
-    }
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     }
   public function addShippingAddress(Request $request){
     $req=$request->all();
@@ -185,12 +141,9 @@ class CheckoutController extends Controller {
   public function addCreditCard(Request $request){
     $req=$request->all();
     $result=Creditcard::addCreditCard($req,Auth::user()->id);
-<<<<<<< HEAD
     if($result['result']=="0"){
       Session::flash('error',$result['message']);
     }
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     return Response::JSON($result);
   }
   public function getCreditCard($card_id=null){
@@ -208,7 +161,6 @@ class CheckoutController extends Controller {
   }
   public function orderCharityFund(Request $request){
     $req=$request->all();
-<<<<<<< HEAD
     if(!count($req)){
       return Redirect::to('/');
     }
@@ -218,24 +170,15 @@ class CheckoutController extends Controller {
       $charities_list=Order::getCharitiesList(); 
       $order_donations=true;
       return view('frontend.costumes.checkout.order_thanku')->with('order_id',array('order_id'=>$req['order_id']))->with('charities_list',$charities_list)->with('order_donations',$order_donations);
-=======
-    $charity_info=Order::orderCharityFund($req);
-    if(count($charity_info)){
-      Session::flash('success','Your fund transfor to '.$charity_info[0]->name.'');
-      return Redirect::to('dashboard');
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     }else{
       Session::flash('error','Database error');
       return Redirect::back();
     }
 
   }
-<<<<<<< HEAD
   public function orderCharityRedirect(){
       return Redirect::to('/');
   }
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   public function buyItNow(Request $request,$cst_id=null){
       if($request->all()==null){
         $req=array('costume_id'=>$cst_id);

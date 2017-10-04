@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}">
-<<<<<<< HEAD
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
 <style type="text/css">
 #dtTable tr>th:first-child{
@@ -19,9 +18,6 @@ display: none;
 display: none;
 }
 </style>
-=======
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 @stop
 
 {{-- Page content --}}
@@ -87,18 +83,7 @@ display: none;
                     </tr>
                   </tbody>
               </table>
-<<<<<<< HEAD
        
-=======
-        </div>
-        <div class="row">
-                    <div class="col-md-12">
-                      <div class="pull-right user-list">
-                        <a href="javascript:void(0);" class="btn btn-xs btn-success" id="export" ng-click="ordersExportCSV()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download"><i class="fa fa-download"></i></a>
-                       </div>
-                    </div>
-                  </div>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           <div class="table-responsive">
           <table datatable dt-options="dtOptions" dt-columns="dtColumns"
                         class="table table-bordered table-hover table-striped" id="dtTable">
@@ -122,14 +107,11 @@ display: none;
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
 
-<<<<<<< HEAD
 <script src="{{ asset('/assets/frontend/js/dataTables.buttons.min.js')}}"></script>
 <script src="{{ asset('/assets/frontend/js/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('/assets/frontend/js/buttons.print.min.js')}}"></script>
 
 
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 @stop
 
 

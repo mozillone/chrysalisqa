@@ -1,27 +1,12 @@
 @extends('/frontend/app')
 @section('styles')
-<<<<<<< HEAD
 <link rel="stylesheet" href="{{ asset('/assets/frontend/css/pages/checkout.css')}}">
-=======
-<style type="text/css">
-	.chek-out .form-group {
-    width: 45%;
-    float: left;
-    margin-right: 20px;
-}
-
-</style>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
   @endsection
 @section('content')
  <div class="container">
 			<div class="row">
-<<<<<<< HEAD
 				<div class="col-md-12 col-sm-12 col-xs-12">
-=======
-				<div class="col-md-12">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					<div class="checkout_page_total checkout-content">
 						<h1>Checkout</h1>
 						@if (Session::has('error'))
@@ -45,7 +30,6 @@
 										<div class="row">
 											<div class="shipping_div methods">
 												<div class="col-md-4 col-sm-4 col-xs-12">
-<<<<<<< HEAD
 													<h4>Shipping Address:</h4>
 												</div>
 												<div class="col-md-5 col-sm-4 col-xs-12">
@@ -66,28 +50,6 @@
 														</div>
 													@else
 														<input type="hidden"  name="shipping_address_2">
-=======
-													<h4>Shipping Adress:</h4>
-												</div>
-												<div class="col-md-5 col-sm-4 col-xs-12">
-													@if(!empty($data['cart_shipping_address']))
-													<input type="hidden" value="{{$data['cart_shipping_address'][0]->shipping_address_1}}" name="shipping_address_1">
-														<div class="shipping_add">
-															<p>{{$data['cart_shipping_address'][0]->shipping_address_1}},<br>
-															@if(!empty($data['cart_shipping_address'][0]->shipping_address_2)){{$data['cart_shipping_address'][0]->shipping_address_2}}<br>@endif
-															{{$data['cart_shipping_address'][0]->shipping_city	}},{{$data['cart_shipping_address'][0]->shipping_state}},{{$data['cart_shipping_address'][0]->shipping_postcode}},{{$data['cart_shipping_address'][0]->shipping_country}} <br></p>
-														</div>
-													@else
-													@if(!empty($data['shipping_address']))
-													<input type="hidden"  value="{{$data['shipping_address'][0]->address1}}" name="shipping_address_1">
-														<div class="shipping_add">
-															<p>{{$data['shipping_address'][0]->address1}},<br>
-															@if(!empty($data['shipping_address'][0]->address2)){{$data['shipping_address'][0]->address2}}<br>@endif
-															{{$data['shipping_address'][0]->city}},{{$data['shipping_address'][0]->state}},{{$data['shipping_address'][0]->zip_code}},{{$data['shipping_address'][0]->country}} <br></p>
-														</div>
-													@else
-														<input type="hidden"  name="shipping_address_1">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 														<div class="shipping_add"></div>
 														<span class="shipping-empty">No Shipping Address Found</span>
 													@endif
@@ -97,24 +59,16 @@
 												</div>
 												<div class="col-md-3 col-sm-4 col-xs-12">
 													@if(!empty($data['shipping_address']) || !empty($data['cart_shipping_address']))
-<<<<<<< HEAD
 														<p class="cehck_edit"><a href="javascript::void(0);" class="shipping_popup" data-address-id="">Edit</a></p>
 													@else
 														<p class="cehck_edit" data-toggle="modal" data-target="#shipping_popup"><a href="javascript::void(0);" class="shipping_popup">New</a></p>
 													@endif
 													<span class="error shipping-error"></span>
-=======
-														<p class="cehck_edit"><a href="javascript::void(0);" class="shipping_popup">Edit</a></p>
-													@else
-														<p class="cehck_edit" data-toggle="modal" data-target="#shipping_popup"><a href="javascript::void(0);" class="shipping_popup">New</a></p>
-													@endif
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 												</div>
 												
 											</div>
 											<div class="billing_div methods">
 												<div class="col-md-4 col-sm-4 col-xs-12">
-<<<<<<< HEAD
 													<h4>Billing Address:</h4>
 												</div>
 												<div class="col-md-5 col-sm-4 col-xs-12">
@@ -124,22 +78,10 @@
 														<p>@if(!empty($data['cart_billing_address'][0]->pay_address_1)){{$data['cart_billing_address'][0]->pay_address_1}}<br>@endif
 														@if(!empty($data['cart_billing_address'][0]->pay_address_2)){{$data['cart_billing_address'][0]->pay_address_2}}<br>@endif 
 														{{$data['cart_billing_address'][0]->pay_city}}, {{$data['cart_billing_address'][0]->pay_state}} {{$data['cart_billing_address'][0]->pay_zipcode}}<br>
-=======
-													<h4>Billing Adress:</h4>
-												</div>
-												<div class="col-md-5 col-sm-4 col-xs-12">
-												@if(!empty($data['cart_billing_address']))
-												<input type="hidden" name="pay_address_1" value="{{$data['cart_billing_address'][0]->pay_address_1}}"/>
-													<div class="billing_add">
-														<p>{{$data['cart_billing_address'][0]->pay_address_1}},<br>
-														@if(!empty($data['cart_billing_address'][0]->pay_address_2)){{$data['cart_billing_address'][0]->pay_address_2}}<br>@endif
-														{{$data['cart_billing_address'][0]->pay_city}},{{$data['cart_billing_address'][0]->pay_state}},{{$data['cart_billing_address'][0]->pay_zipcode}},{{$data['cart_billing_address'][0]->pay_country}} <br>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 														</p>
 													</div>
 												@else
 												@if(!empty($data['billing_address']))
-<<<<<<< HEAD
 													<input type="hidden" name="pay_address_2" value="{{$data['billing_address'][0]->address2}}" data-cart="false" data-address="{{json_encode($data['billing_address'][0])}}"/> 
 													<div class="billing_add">
 														<p>@if(!empty($data['billing_address'][0]->address1)){{$data['billing_address'][0]->address1}}<br>@endif
@@ -149,17 +91,6 @@
 													</div>
 												@else
 													<input type="hidden"  name="pay_address_2">
-=======
-													<input type="hidden" name="pay_address_1" value="{{$data['billing_address'][0]->address1}}"/> 
-													<div class="billing_add">
-														<p>{{$data['billing_address'][0]->address1}},<br>
-														@if(!empty($data['billing_address'][0]->address2)){{$data['billing_address'][0]->address2}}<br>@endif
-														{{$data['billing_address'][0]->city}},{{$data['billing_address'][0]->state}},{{$data['billing_address'][0]->zip_code}},{{$data['billing_address'][0]->country}} <br>
-														</p>
-													</div>
-												@else
-													<input type="hidden"  name="pay_address_1">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 													<div class="billing_add"></div>
 													<span class="billing-empty">No Billing Address Found</span>
 												@endif
@@ -172,10 +103,7 @@
 												@else
 													<p class="cehck_edit"><a href="javascript::void(0);" class="billing_popup">New</a></p>
 												@endif
-<<<<<<< HEAD
 												<span class="error billing-error"></span>
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 												</div>
 												
 											</div>
@@ -183,7 +111,6 @@
 												<div class="col-md-4 col-sm-4 col-xs-12">
 														<h4>Payment Method:</h4>
 												</div>
-<<<<<<< HEAD
 												<div class="col-md-5 col-sm-6 col-xs-12">
 												@if(!empty($data['cart_cc_details']))
 												<input type="hidden" name="card_id" value="{{$data['cart_cc_details'][0]->id}}"/> 
@@ -192,16 +119,6 @@
 													@if(!empty($data['cc_details']))
 													<input type="hidden" name="card_id" value="{{$data['cc_details'][0]->id}}"/>
 														<p class="card_exp"> @if($data['cc_details'][0]->card_type=="Visa") <img src="/img/visa.png">  @elseif($data['cc_details'][0]->card_type=="American Express") <img src="/img/americanexpress.png"> @elseif($data['cc_details'][0]->card_type=="MasterCard") <img src="/img/mastercard.png"> @endif  Ending in {{$data['cc_details'][0]->last_digits}}</p>
-=======
-												<div class="col-md-5 col-sm-4 col-xs-12">
-												@if(!empty($data['cart_cc_details']))
-												<input type="hidden" name="card_id" value="{{$data['cart_cc_details'][0]->id}}"/> 
-													<p class="card_exp">@if($data['cart_cc_details'][0]->card_type=="Visa") <img src="/img/visa.png">  @elseif($data['cart_cc_details'][0]->card_type=="American Express") <img src="/img/americanexpress.png"> @elseif($data['cart_cc_details'][0]->card_type=="MasterCard") <img src="/img/mastercard.png"> @endif Ending in {{$data['cart_cc_details'][0]->exp_year}}</p>
-												@else
-													@if(!empty($data['cc_details']))
-													<input type="hidden" name="card_id" value="{{$data['cc_details'][0]->id}}"/>
-														<p class="card_exp"> @if($data['cc_details'][0]->card_type=="Visa") <img src="/img/visa.png">  @elseif($data['cc_details'][0]->card_type=="American Express") <img src="/img/americanexpress.png"> @elseif($data['cc_details'][0]->card_type=="MasterCard") <img src="/img/mastercard.png"> @endif  Ending in {{$data['cc_details'][0]->exp_year}}</p>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 													@else
 														<input type="hidden"  name="card_id">
 														<p class="card_exp"></p>
@@ -210,20 +127,13 @@
 												@endif
 												<span class="error">{{ $errors->first('card_id') }}</span>
 												</div>
-<<<<<<< HEAD
 												<div class="col-md-3 col-sm-2 col-xs-12">
-=======
-												<div class="col-md-3 col-sm-4 col-xs-12">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 													@if(!empty($data['cc_details']) || !empty($data['cart_cc_details']))
 														<p class="cehck_edit"><a href="javascript::void(0);" class="cc_popup">Edit</a></p>
 													@else
 														<p class="cehck_edit"><a href="javascript::void(0);" class="cc_popup">New</a></p>
 													@endif
-<<<<<<< HEAD
 												<span class="error payment-error"></span>
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 												</div>
 												
 										</div>
@@ -231,7 +141,6 @@
 									</div>	
 									<div class="checkout_review_box">
 										<h2>Review Shipping & Delivery Time</h2>
-<<<<<<< HEAD
 										<?php	  $shipping_count=0;
 												  $costumes_count=0;
 												  $shipping_amount=0;
@@ -263,28 +172,6 @@
 													</div>
 													 @endif 
 													<div class="row">
-=======
-										<?php $shipping_amount=0;$shipping_count=0;$costumes_count=0;?>
-										@foreach($data['basic']['basic'] as $cart)
-										<?php $costumes_count+=$cart->qty;?>
-										<div class="well">
-											 <div class="shipping_date"><div class="shipping_date">
-											   <span>@if($cart->shipping!="Free Shipping" ) Expedited Shipping {{$cart->city}}, {{$cart->state}}  <span class="in_prc">@if(helper::userCartShippingAddress($cart->cart_id))
-											   <?php $amount=helper::domesticRate($cart->item_location,$cart->cart_id);?>
-											   @if(helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0" ) 
-											         <?php $shipping_amount+=$shipping_amount+helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['rate'];$shipping_count++?>
-											    @endif
-											    @if(helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0")
-											    	({{helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['rate']}})
-											    @else
-											    	({{helper::domesticRate($cart->item_location,$cart->cart_id)['msg']}})
-											    @endif
-											  @endif </span>  @else Free Shipping {{$cart->city}}, {{$cart->state}}  <span class="in_prc">($0.00)</span> @endif </span><span class="shi_date_right text-right right">@if($cart->shipping!="Free Shipping" && helper::domesticRate($cart->item_location,$cart->cart_id)['result']!="0") @if(helper::userCartShippingAddress($cart->cart_id))
-											    Est delivery between {{date('D M d')}}  and {{date('D M d',strtotime('+'.helper::domesticRate($cart->item_location,$cart->cart_id)['msg']['MailService'].' day'))}}
-											  <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title="Hooray!"></i>  @endif @endif </span>
-											</div></div>
-											<div class="row">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 												<div class="col-md-9 col-sm-9 col-xs-12">
 													<div class="media">
 														<div class="media-left">
@@ -292,18 +179,11 @@
 														</div>
 														<div class="media-body">
 															<h4 class="media-heading"><a href="/product{{$cart->url_key}}">{{$cart->costume_name}}</a></h4>
-<<<<<<< HEAD
 															<p>@if($cart->is_film=="yes")<p class="f_quality">Film Quality</p> @else  @endif</p>
 															<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
 															<p><b>Size:</b> {{ucfirst($cart->size)}}</p>
 															<p><b>Quantity:</b> {{$cart->qty}}</p>
 															@if($cart->created_user_group=="admin")<span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>@endif
-=======
-															<p>@if($cart->is_film=="yes")<p class="f_quality1">Film Quality</p> @else  @endif</p>
-															<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
-															<p><b>Size:</b> Small</p>
-															<p class="upload_id">Uploaded by<span> {{$cart->user_name}}</span></p>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 														</div>
 													</div>
 												</div>
@@ -319,7 +199,6 @@
 													<span><a data-item-id="{{$cart->cart_item_id}}" data-cart_id="{{$cart->cart_id}}" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
 												</div>
 											</div>
-<<<<<<< HEAD
 											<?php  $seller_id=$cart->created_by;
 											//echo $seller_id;
 										//die();
@@ -370,19 +249,11 @@
 									</div>
 									</div>
 								</div>
-=======
-										</div>
-										@endforeach
-									</div>
-								</div>
-							</div>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 							<div class="col-md-3 col-sm-4 col-xs-12">
 								<div class="check_out_page_right">
 									<div class="order_summery">
 										<div class="well">
 											<h3>Order Summary  </h3> 
-<<<<<<< HEAD
 											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">$<span class="sub-total sub-p" data-subtotal="{{$data['basic']['basic'][0]->total}}">{{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}}</span> <em>({{$costumes_count}} Items)</em></span></p>
 											<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$
 											<span class="shipping_total">0.00</span><em>({{$costumes_count}} Items)</em></span></p>
@@ -400,18 +271,6 @@
 									<img src="">
 									
 								</div>
-=======
-											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">${{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}} <em>({{$costumes_count}} Items)</em></span></p>
-											<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$
-											{{number_format($shipping_amount, 2, '.', ',')}}<em>({{$shipping_count}} Items)</em></span></p>
-											@if(!empty($data['dis_count'])) <p class="sub-all"><span>Coupon code: </span> <span class="sub-price">-${{$data['dis_total']}} <em>({{$data['dis_count']}} Items)</em></span></p>@endif
-											<!-- <p class="sub-all s_credit"><span>Store Credit Apllied: </span> <span class="sub-price">$0.00 </span></p> -->
-											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">@if(!empty($data['basic']['dis_count']))${{number_format($data['basic']['basic'][0]->total+$shipping_amount-$data['basic']['dis_total'], 2, '.', ',')}} @else ${{number_format($data['basic']['basic'][0]->total+$shipping_amount, 2, '.', ',')}}@endif </span></p>
-											<button class="btn btn-primary">Place Order</button>
-										</div>
-									</div>
-								</div>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 							</div>
 						</div>
 						</form>
@@ -443,25 +302,16 @@
 									<p>Or</p>
 								</div>
 								<div class="address-form">
-<<<<<<< HEAD
 									<div class="col-md-6 col-sm-6 col-sm-12">
-=======
-									<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<div class="form-group">
 											<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
 										</div>
 									</div>
-<<<<<<< HEAD
 									<div class="col-md-6 col-sm-6 col-sm-12">
-=======
-									<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<div class="form-group">
 											<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
 										</div>
 									</div>
-<<<<<<< HEAD
 									<div class="col-md-6 col-sm-6 col-sm-12">
 										<div class="form-group">
 											<input type="text" class="form-control" id="shipping_address_2" placeholder="Street Address *" name="address_2">
@@ -480,38 +330,12 @@
 									<div class="col-md-6 col-sm-6 col-sm-12">
 									<div class="form-group">
 												<select class="form-control state_dropdown" name="state" id="shipping_state">
-=======
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_address_1" placeholder="Address1 *" name="address_1">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_address_2" placeholder="Address2 *" name="address_2">
-									</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_city" placeholder="City *" name="city">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" class="form-control" id="shipping_postcode" placeholder="Zipcode *" name="postcode">
-										</div>
-									</div>
-									<div class="col-md-6">
-											<div class="form-group">
-												<select class="form-control state_dropdown" name="shipping_state_dropdown" id="shipping_state_dropdown">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 													<option value="" selected>State</option>
 													@foreach($states as $st)
 													<option value="{{$st->name}}">{{$st->name}}</option>
 													@endforeach
 
 												</select>
-<<<<<<< HEAD
 											</div>
 									</div>
 									<div class="col-md-6 col-sm-6 col-sm-12">
@@ -521,31 +345,11 @@
 									</div>
 									
 									<div class="col-md-6 col-md-6 col-xs-12">
-=======
-												<input type="text" class="form-control normal-states hide" id="shipping_state" placeholder="State *" name="state">
-											</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<select class="form-control" name="country" id="shipping_country">
-													<option value="" selected> Select</option>
-													@foreach($countries as $cnt)
-													<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
-													@endforeach
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<div class="form-group checkbox-align">
 											<input type="checkbox" class="form-control" id="is_billing" name="is_billing"><label for="billing:use_for_shipping_yes">Bill to this address</label>
 										</div>
 									</div>
-<<<<<<< HEAD
 									<div class="col-md-12 col-xs-12">
-=======
-									<div class="col-md-12">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											<button class="btn btn-primary submit-btn">Submit</button>
 									</div>			
 								
@@ -580,11 +384,7 @@
 					<div class="chek-out">
 								<div class="col-md-12 col-sm-12 col-xs-12 billing-dropdown">
 											<label for="">Choose Saved</label>
-<<<<<<< HEAD
 											<select class="form-control shpng-adr-mdl-seletor" name="address_id" id="billing">
-=======
-											<select class="form-control shpng-adr-mdl-seletor" id="billing">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											</select>
 								</div>
 								<div class="new_address">
@@ -593,25 +393,16 @@
 									</div>
 									
 									<div class="address-form">
-<<<<<<< HEAD
 										<div class="col-md-6 col-sm-6 col-xs-12">
-=======
-										<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											<div class="form-group">
 												<input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
 											</div>
 										</div>
-<<<<<<< HEAD
 										<div class="col-md-6 col-sm-6 col-xs-12">
-=======
-										<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											<div class="form-group">
 												<input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
 											</div>
 										</div>
-<<<<<<< HEAD
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="form-group">
 												<input type="text" class="form-control" id="billing_address_2" placeholder="Street Address *" name="address_2">
@@ -623,44 +414,19 @@
 											</div>
 										</div>
 									<div class="col-md-6 col-sm-6 col-xs-12">
-=======
-										<div class="col-md-6">
-											<div class="form-group">
-												<input type="text" class="form-control" id="billing_address_1" placeholder="Address1 *" name="address_1">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<input type="text" class="form-control" id="billing_address_2" placeholder="Address2 *" name="address_2">
-											</div>
-										</div>
-										<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											<div class="form-group">
 												<input type="text" class="form-control" id="billing_city" placeholder="City *" name="city">
 											</div>
 										</div>
-<<<<<<< HEAD
 										<div class="col-md-6  col-sm-6 col-xs-12">
 												<div class="form-group">
 												<select class="form-control state_dropdown" name="state" id="billing_state">
-=======
-										<div class="col-md-6">
-											<div class="form-group">
-												<input type="text" class="form-control" id="billing_postcode" placeholder="Zipcode *" name="postcode">
-											</div>
-										</div>
-										<div class="col-md-6 col-sm-6 col-xs-12">
-											<div class="form-group">
-												<select class="form-control state_dropdown" name="billing_state_dropdown" id="billing_state_dropdown">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 													<option value="" selected>State</option>
 													@foreach($states as $st)
 													<option value="{{$st->name}}">{{$st->name}}</option>
 													@endforeach
 
 												</select>
-<<<<<<< HEAD
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
@@ -670,31 +436,11 @@
 										
 										</div>
 											<div class="col-md-6  ship-chckbox">
-=======
-												<input type="text" class="form-control normal-states hide" id="billing_state" placeholder="State *" name="state">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<select class="form-control" name="country" id="billing_country">
-														<option value="" selected> Select</option>
-														@foreach($countries as $cnt)
-														<option value="{{$cnt->country_name}}" @if($cnt->id=="230") selected @endif>{{$cnt->country_name}}</option>
-														@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											<div class="form-group checkbox-align">
 												<input type="checkbox" class="form-control" id="is_shipping" name="is_shipping"><label for="billing:use_for_shipping_yes">Ship to this address</label>
 											</div>
 										</div>
-<<<<<<< HEAD
 										<div class="col-md-12 col-sm-12  col-xs-12">
-=======
-										<div class="col-md-12">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											<button class="btn btn-primary submit-btn">Submit</button>
 										</div>
 									
@@ -739,20 +485,12 @@
 									<p>Or</p>
 								</div>
 								<div class="address-form">
-<<<<<<< HEAD
 									<div class="col-md-6 col-sm-6 col-xs-12">
-=======
-									<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<div class="form-group">
 											<input type="text" class="form-control" id="cardholder_name" placeholder="Full Name on Card *" name="cardholder_name">
 										</div>
 									</div>
-<<<<<<< HEAD
 											<div class="col-md-6 col-sm-6 col-xs-12">
-=======
-									<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<div class="form-group">
 				                                <select name="card_type" id="card_type"  class="form-control">
 				                                    <option value="">Choose Card Type</option>
@@ -763,24 +501,14 @@
 				                    		<div class="col-sm-3" id="creditcardimage"></div>
 				                        </div>
 									</div>
-<<<<<<< HEAD
 											<div class="col-md-6 col-sm-6 col-xs-12">
-=======
-									<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<div class="form-group">
 											<input type="text" class="form-control" id="cc_number" placeholder="Card Number *" name="cc_number">
 										</div>
 									</div>
-<<<<<<< HEAD
 											<div class="col-md-6 col-sm-6 col-xs-12">
 										<div class="form-group">
 										<div class="col-md-6 col-xs-6 field-align-xs" style="padding: 0; padding-right: 5px;">
-=======
-									<div class="col-md-6">
-										<div class="form-group">
-										<div class="col-md-6 field-align-xs" style="padding: 0">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											<select name="exp_month" class="form-control" id="exp_month">
 												<option value="">MM</option>
 												<option value="01">Jan</option>
@@ -797,11 +525,7 @@
 												<option value="12">Dec</option>
 											 </select>
 										</div>
-<<<<<<< HEAD
 										<div class="col-md-6 col-xs-6" style="padding: 0; padding-left: 5px;">
-=======
-										<div class="col-md-6" style="padding: 0">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											 <select name="exp_year" class="form-control" id="exp_year">
 												<option value="">YYYY</option>
 												@for($i=0;$i<=30;$i++)
@@ -811,20 +535,12 @@
 										</div>
 									</div>
 									</div>
-<<<<<<< HEAD
 									<div class="col-md-6 col-sm-6 col-xs-12">
-=======
-									<div class="col-md-6">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<div class="form-group">
 											<input type="text" class="form-control" id="cvn_pin" placeholder="CVN Code*" name="cvn_pin">
 										</div>
 									</div>
-<<<<<<< HEAD
 									<div class="col-md-12 col-sm-12 col-xs-12">
-=======
-									<div class="col-md-12">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<button class="btn btn-primary submit-btn">Submit</button>
 									</div>
 									
@@ -853,10 +569,7 @@
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
-<<<<<<< HEAD
 <script src="{{ asset('/assets/frontend/js/jquery-ui.js') }}"></script>
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/placeorder.js') }}"></script>
 <script src="{{ asset('/js/credit-card-validation.js') }}"></script>

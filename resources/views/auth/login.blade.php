@@ -52,20 +52,12 @@
 								<div class="form-group">
 								<label>Email</label>
 									<input type="text" id="login_email" name="email"  class="form-control">
-<<<<<<< HEAD
 									<p class="error" style="color :red;">{{ $errors->first('email') }}</p>
-=======
-									<p class="error">{{ $errors->first('email') }}</p>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 								</div>
 								<div class="form-group">
 									<label>Password</label>
 									<input type="password" id="login_password" name="password"  class="form-control">
-<<<<<<< HEAD
 									<p class="error" style="color :red;">{{ $errors->first('password') }}</p>
-=======
-									<p class="error">{{ $errors->first('password') }}</p>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 								</div>
 								<div class="form-group">
 									<div class=" text-right rect_pswrd">
@@ -83,7 +75,6 @@
 							<form role="form" action="{{route('register')}}" method="POST" id="signup">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	        	    			<div class="row">
-<<<<<<< HEAD
 				    				<div class="col-xs-12 col-sm-12 col-md-12">
 				    					<div class="form-group">
 				    					<label>Username </label>
@@ -93,8 +84,6 @@
 									</div>
 								</div>
 								<div class="row">
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				    				<div class="col-xs-6 col-sm-6 col-md-6">
 				    					<div class="form-group">
 				    					<label>First Name </label>
@@ -119,11 +108,7 @@
 				    				<div class="col-xs-6 col-sm-6 col-md-6">
 				    					<div class="form-group">
 				    					<label>Create Password </label>
-<<<<<<< HEAD
 											<input type="password" name="password" id="signup_password" class="form-control input-sm">
-=======
-											<input type="password" name="password" id="signup_password" class="form-control input-sm" placeholder=" *">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											<p class="error">{{ $errors->first('password') }}</p>
 										</div>
 									</div>

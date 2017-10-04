@@ -11,12 +11,8 @@ use View;
 use Redirect;
 use App\Conversations;
 use Session;
-<<<<<<< HEAD
 use DB;
 use Meta;
-=======
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 class MessageController extends Controller
 {
     protected $auth;
@@ -32,12 +28,8 @@ class MessageController extends Controller
             }
         });
 
-<<<<<<< HEAD
         Meta::title('Chrysalis');
         Meta::set('robots', 'index,follow');
-=======
- 
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         
     }
 
@@ -65,7 +57,6 @@ class MessageController extends Controller
             $user = $conversations->withUser;
             $messages = $conversations->messages;
         }
-<<<<<<< HEAD
         $get_con = DB::table('conversations')
             ->leftjoin('url_rewrites','url_rewrites.url_offset','=','conversations.costume_id')
             ->leftjoin('costume_image','costume_image.costume_id','=','conversations.costume_id')
@@ -76,14 +67,6 @@ class MessageController extends Controller
 
     public function ajaxSendMessage(Request $request)
     {   //echo "<pre>";print_r($request->input('message-data'));die;
-=======
-
-        return view('messages.message', compact('messages', 'user'));
-    }
-
-    public function ajaxSendMessage(Request $request)
-    {   
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         $this->callPartials();
         if ($request->ajax()) {
             $rules = [
@@ -93,24 +76,16 @@ class MessageController extends Controller
 
             $this->validate($request, $rules);
 
-<<<<<<< HEAD
             $request = $request->all();
             $userId = Auth::user()->id;
 
             if ($message = $this->sendMessageByUserId($userId, $request)) {
-=======
-            $body = $request->input('message-data');
-            $userId = Auth::user()->id;
-
-            if ($message = Talk::sendMessageByUserId($userId, $body)) {
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 $html = view('ajax.newMessageHtml', compact('message'))->render();
                 return response()->json(['status'=>'success', 'html'=>$html], 200);
             }
         }
     }
 
-<<<<<<< HEAD
     public function sendMessageByUserId($receiverId, $message)
     {
          //echo "<pre>";print_r($message);die;
@@ -131,8 +106,6 @@ class MessageController extends Controller
         return $get_details;
     }
 
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     public function ajaxDeleteMessage(Request $request, $id)
     {
         $this->callPartials();
@@ -151,16 +124,11 @@ class MessageController extends Controller
     }
 
     public function converstationsofUser(){
-<<<<<<< HEAD
         Meta::set('title', 'Messages');
         Meta::set('description', 'Messages - Chrysalis');
 
         $id = Auth::user()->id;
         /*$this->callPartials();
-=======
-        $id = Auth::user()->id;
-        $this->callPartials();
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         $conversations = Talk::getConversationsById($id);
         //dd($conversations);
         $user = '';
@@ -170,7 +138,6 @@ class MessageController extends Controller
         } else {
             $user = $conversations->withUser;
             $messages = $conversations->messages;
-<<<<<<< HEAD
         }*/
         $this->data = array();
         $this->data['conversations_sent'] = DB::Select('SELECT usr.first_name,usr.last_name,cnvs.id,cnvs.created_at,cnvs.subject,cnvs.type_id,cnvs.costume_id,cnvs.type,msg.is_seen,msg.user_id,msg.conversation_id,costume_image.image,costume_url.url_key,(SELECT cm1.message FROM cc_messages as cm1  WHERE cnvs.id = cm1.conversation_id ORDER BY created_at DESC LIMIT 1) as message FROM `cc_conversations` as cnvs LEFT JOIN cc_messages as msg on msg.conversation_id=cnvs.id LEFT JOIN cc_costume_image as costume_image on costume_image.costume_id=cnvs.costume_id LEFT JOIN cc_url_rewrites as costume_url on costume_url.url_offset=cnvs.costume_id LEFT JOIN cc_users as usr on usr.id=cnvs.user_one where cnvs.user_one='.Auth::user()->id.' group by cnvs.id');
@@ -195,10 +162,5 @@ class MessageController extends Controller
         //echo "<pre>";print_r($request->all());die;
         $conversation_delete = Talk::deleteConversations($request->conversation_id);
         return "success";
-=======
-        }
-
-        return view('messages.conversations', compact('messages', 'user'));
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     }
 }

@@ -26,11 +26,7 @@ class Wishlist extends Authenticatable
           return $res;
     }
     protected function myWishlistList($user_id){
-<<<<<<< HEAD
         $wish_list=DB::Select('SELECT  cst.costume_id,cst.gender,cst.size,dsr.name,CONCAT("$",FORMAT(cst.price,2)) as price,if((select count(*) from cc_costumes_like as likes where likes.user_id='.Auth::user()->id.' and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id='.Auth::user()->id.' and  wsh_lst.  costume_id=cst.costume_id )>=1,true,false) as is_fav,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,link.url_key FROM `cc_customer_wishlist` as wish LEFT JOIN cc_costumes as cst on cst.costume_id=wish.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1"  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" where wish.user_id='.$user_id.' group by cst.costume_id');
-=======
-        $wish_list=DB::Select('SELECT  cst.costume_id,cst.gender,cst.condition,dsr.name,CONCAT("$",FORMAT(cst.price,2)) as price,if((select count(*) from cc_costumes_like as likes where likes.user_id='.Auth::user()->id.' and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id='.Auth::user()->id.' and  wsh_lst.  costume_id=cst.costume_id )>=1,true,false) as is_fav,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,link.url_key FROM `cc_customer_wishlist` as wish LEFT JOIN cc_costumes as cst on cst.costume_id=wish.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1"  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" where wish.user_id='.$user_id.'');
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
        
         return $wish_list;
     }

@@ -46,16 +46,9 @@ Reported Costumes List @parent
         <div class="table-responsive">
                 <table class="table table-striped table-bordered user-list-table">
                   <thead>
-<<<<<<< HEAD
                     <th>Sku</th>
                     <th>Costume Name</th>
                     <th>Reporter Name</th>
-=======
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Active</th>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                     <th></th>
                   </thead>
                   <tbody>

@@ -45,11 +45,7 @@ Categories List@parent
                     </div>
                 </div>
                 <div class="box-body">
-<<<<<<< HEAD
 			           <div class="table-responsive cate_search_div">
-=======
-			           <div class="table-responsive">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           					<table datatable dt-options="dtOptions" dt-columns="dtColumns"
                            				class="table table-bordered table-hover table-striped" id="dtTable">
           					</table>

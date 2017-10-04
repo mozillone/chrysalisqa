@@ -1,8 +1,4 @@
 @extends('admin.app')
-<<<<<<< HEAD
-=======
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 {{-- Web site Title --}}
 @section('title')
 Edit {{$data['basic'][0]->name}} Promotion @parent
@@ -19,11 +15,7 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
 {{-- Page content --}}
 @section('content')
 <section class="content-header">
-<<<<<<< HEAD
     <h1>Edit {{$data['basic'][0]->name}} </h1>
-=======
-    <h1>Edit {{$data['basic'][0]->name}} Promotion</h1>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     <ol class="breadcrumb">
         <li>
             <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
@@ -32,11 +24,7 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
             <a href="{{route('promotions-list')}}">Promotions List</a>
         </li>
         
-<<<<<<< HEAD
         <li class="active">Edit {{$data['basic'][0]->name}} </li>
-=======
-        <li class="active">Edit {{$data['basic'][0]->name}} Promotion</li>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     </ol>
 </section>
 <section class="content">
@@ -44,11 +32,7 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
         <div class="col-sm-12 col-md-12">
             <div class="box box-primary">
                 <div class="box-header">
-<<<<<<< HEAD
                     <h3 class="box-title col-md-12 heading-agent">Edit {{$data['basic'][0]->name}} </h3>
-=======
-                    <h3 class="box-title col-md-12 heading-agent">Edit {{$data['basic'][0]->name}} Promotion</h3>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 </div>
                 <div class="box-body">
                     @if (Session::has('error'))
@@ -127,10 +111,7 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
                                         <label for="inputEmail3" class="control-label">Category List</label>
                                               <select class="form-control" id="cats">
                                                 <option value="">--Select--</option>
-<<<<<<< HEAD
                                                 <option value="all">Select All</option>
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                                 @foreach($cats_list as $cats)
                                                 <option value="{{$cats->category_id}}">{{$cats->name}}</option>
                                                 @endforeach
@@ -203,8 +184,4 @@ Edit {{$data['basic'][0]->name}} Promotion @parent
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
 <script src="{{ asset('/assets/admin/js/pages/promotions.js') }}"></script>
-<<<<<<< HEAD
-=======
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 @stop

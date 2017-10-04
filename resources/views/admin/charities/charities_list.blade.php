@@ -61,11 +61,7 @@ display: none;
                     <th>Created To</th>
                     <th>Display Status</th>
                   </thead>
-<<<<<<< HEAD
                   <tbody>
-=======
-                  <tbody>categories-create
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                     <tr>
                       <input type="hidden" class="form-control token"  name="csrf-token" value="{{ csrf_token() }}">
                       <td><input type="text" class="form-control" ng-model="search.name" name="name" placeholder="Charity Name"></td>
@@ -126,11 +122,7 @@ display: none;
                         <div class="form-group">
                           <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
                               <div class="col-md-12 ">
-<<<<<<< HEAD
                                 <div class=" upload_btns charity_popup">
-=======
-                                <div class=" upload_btns">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                           <span class=" btn-file">
                                             <span class="fileupload-exists"></span>
                                             <input id="profile_logo" name="image" type="file" placeholder="Profile Image" class="form-control">
@@ -226,10 +218,7 @@ display: none;
 {{-- page level scripts --}}
 @section('footer_scripts')
 <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
-<<<<<<< HEAD
 <script src="{{ asset('/js/validator-addtional-methods.js') }}"></script>
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 <script src="{{ asset('/angular/Admin/Charities/Controllers/charities-lists.js') }}"></script>
 <script src="{{ asset('/angular/Admin/Charities/Services/charities.js') }}"></script>
 <script src="{{ asset('angular/Admin/ExportCsv/Services/ExportCsv.js') }}"></script>

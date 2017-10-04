@@ -16,28 +16,19 @@ use Socialite;
 use URL;
 use Cookie;
 use DB;
-<<<<<<< HEAD
 use Meta;
 use Carbon\Carbon;
 //use App\BraintreeApp;
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 use App\Helpers\StripeApp;
 class AuthController extends Controller {
 
 	protected $auth;
-<<<<<<< HEAD
 	protected $layout = 'layouts.main';
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	
 	public function __construct(Guard $auth)
 	{
 		$this->auth = $auth;
-<<<<<<< HEAD
 		//$this->braintreeApi = new BraintreeApp();
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		$this->stripe=new StripeApp();
 		 		
 	}
@@ -56,13 +47,9 @@ class AuthController extends Controller {
     	if(Auth::check()){
     		return Redirect::to('/dashboard');
     	}else{
-<<<<<<< HEAD
             Meta::set('title', 'Customer Login | Chrysalis Costumes');
             Meta::set('description', 'Login into Chrysalis Costumes');
             return View('auth.login');
-=======
-    		return View('auth.login');
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     	}	
    }
    public function postLogin(Request $request)
@@ -90,12 +77,8 @@ class AuthController extends Controller {
 		if($user){
 			if ($this->auth->attempt($credentials, $request->has('remember')))
 			{
-<<<<<<< HEAD
                 $userData = User::where("email","=", $request->input('email'))->first();
                 Session::put('userId', $userData->id);
-=======
-				
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				$activation=User::where("email","=", $request->input('email'))->where("active","=", "0")->count();
 	
 				if($activation){
@@ -118,7 +101,6 @@ class AuthController extends Controller {
 				 if(!empty($req['is_cart']) && $fav_url_redirect!="product"){
 				 	return Redirect::to('/checkout');
 				 }
-<<<<<<< HEAD
 				 if(Session::has('curentURL')){
 				 	return Redirect::to(Session::get('curentURL'))->withCookie($cookie);
 				 }
@@ -134,13 +116,6 @@ class AuthController extends Controller {
                      $updateUserTime= User::where("email","=", $request->input('email'))->update($loginTime);
                  	return Redirect::back()->withCookie($cookie);
 					}
-=======
-				 if(Session::has('is_loginPage')){
-					return Redirect::to('/dashboard')->withCookie($cookie);
-				 }else{
-						return Redirect::back()->withCookie($cookie);
-				}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			}
 			else 
 			{ 
@@ -156,10 +131,7 @@ class AuthController extends Controller {
  	public function postRegisterUser(Request $request)
 	{
 		$req = $request->all();
-<<<<<<< HEAD
 		//echo "<pre>";print_r($req);die;
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		$rule  =  array(  
     	              'first_name' => 'required|max:255',
                       'last_name' => 'required|max:255',
@@ -174,7 +146,6 @@ class AuthController extends Controller {
 		}
 	    $rand=md5(uniqid(rand(), true));
 	    if(count(Session::get('social_data'))){ $active="1";}else{ $active="0";}
-<<<<<<< HEAD
 	    try{
          $customer=$this->stripe->customers($req['email']);
         }catch(Exception $e){
@@ -183,11 +154,6 @@ class AuthController extends Controller {
         }
 	    $users = User::create([ 'username' =>$req['username'],
 	   							'first_name'      => $req['first_name'],
-=======
-	    $customer=$this->stripe->customers($req['email']);
-				
-	   $users = User::create([ 'first_name'      => $req['first_name'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			                   'last_name'       => $req['last_name'],
 			                   'display_name'    => trim($req['first_name']).' '.trim($req['last_name']),
 			                   'email'           => $req['email'],
@@ -195,7 +161,6 @@ class AuthController extends Controller {
 			                   'active'=>$active,
 							   'activate_hash'=>$rand,
 							    'api_customer_id'=>$customer['id']
-<<<<<<< HEAD
 							   ])->id;
 	 //   $customerData = [
 		// 		'firstName' => $req['first_name'],
@@ -203,9 +168,6 @@ class AuthController extends Controller {
 		// 		'email' => $req['email'],
 		// ];
 	 //    $this->braintreeApi->createCustomer($customerData,$users);
-=======
-			                   ])->id;
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
                          
   		if($users){
@@ -215,11 +177,7 @@ class AuthController extends Controller {
   			}else{
   				$email['name']=trim($req['first_name']).' '.trim($req['last_name']);
   				$email['activation_link']=URL::to('/').'/verification/'.$rand;
-<<<<<<< HEAD
 				$sent=Mail::send('emails.registration',array("email"=>$email), function ($m) use($req) {
-=======
-				$sent=Mail::send('emails.activation_email',array("email"=>$email), function ($m) use($req) {
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
 					$m->to($req['email'], trim($req['first_name']).' '.trim($req['last_name']));
 				    $m->subject('Activation Link');
@@ -237,7 +195,6 @@ class AuthController extends Controller {
     {
         return Socialite::driver($provider)->redirect();
     }
-<<<<<<< HEAD
     public function handleProviderCallback($provider,Request $request)
     {
        	if (!$request->has('code') || $request->has('denied')) {
@@ -255,21 +212,12 @@ class AuthController extends Controller {
            
            return redirect ('/login');
        }
-=======
-    public function handleProviderCallback($provider)
-    {
-       
-        $user = Socialite::driver($provider)->user();
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         $data = [
                 'name'  => $user->getName(),
                 'email' => $user->getEmail(),
                 'profile_img' => $user->getAvatar()
         ];
-<<<<<<< HEAD
         
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         $users=User::where("email","=", $user->getEmail())->first();
         
         if($users)
@@ -326,11 +274,7 @@ class AuthController extends Controller {
 		}
 	 	$request->merge([$field => $request->input('email')]);
  		$credentials = $request->only($field,'password');
-<<<<<<< HEAD
 		$user=User::where("email","=", $request->input('email'))->where('role_id','=',"1")->orwhere('role_id','=',"2")->count();
-=======
-		$user=User::where("email","=", $request->input('email'))->where('role_id','=',"1")->count();
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		if($user){
 			if ($this->auth->attempt($credentials, $request->has('remember')))
 			{
@@ -398,11 +342,7 @@ class AuthController extends Controller {
 						User::where('email', '=',$req['email'])->update(array('activate_hash'=> $rand));
 				 		$email['name']=$email[0]['display_name'];
 		  				$email['activation_link']=$activation_link;
-<<<<<<< HEAD
 						$sent=Mail::send('emails.registration',array("email"=>$email), function ($m) use($email) {
-=======
-						$sent=Mail::send('emails.activation_email',array("email"=>$email), function ($m) use($email) {
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 							$m->to($email[0]['email'], $email[0]['display_name']);
 						    $m->subject('Activation Link');
 						});
@@ -411,11 +351,7 @@ class AuthController extends Controller {
 				 			Session::flash('success', 'Your account not been activated yet.New verification code is sent your mail');
 				 		}
 				 		else{
-<<<<<<< HEAD
 				 			Session::flash('error', 'Your account not been activated yet.New verification code is sent your mail');		
-=======
-				 			Session::flash('error', 'New verification code is not sent due to error');		
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				 		}
 						return Redirect::to("/login");
 					 }  
@@ -538,7 +474,6 @@ class AuthController extends Controller {
 			return Response::JSON(true);
 		}
 	}
-<<<<<<< HEAD
 	public function UserNameCheck(Request $request)
 	{
 		$req=$request->all();
@@ -556,8 +491,6 @@ class AuthController extends Controller {
 			return Response::JSON(true);
 		}
 	}
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	public function forgorpasswordEmailCheck(Request $request)
 	{
 		$req=$request->all();
@@ -573,10 +506,7 @@ class AuthController extends Controller {
 	{       
 		Session::flush();
 		Auth::logout();
-<<<<<<< HEAD
 		$cookie = \Cookie::forget('min-cart');
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		return Redirect::to('/');
 	}
 
@@ -617,11 +547,7 @@ class AuthController extends Controller {
 				}
 				  $currentCookieKeyID=SiteHelper::currentCookieKey();
 				  if($currentCookieKeyID!="0"){
-<<<<<<< HEAD
 				   //	Cart::updateCartToUser();
-=======
-				   	Cart::updateCartToUser();
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				  }
 				 $cookie = \Cookie::forget('min-cart');
 				 if(Session::has('is_loginPage')){
@@ -662,7 +588,6 @@ class AuthController extends Controller {
 							//echo $ref_no;die;
 							$addres_insert=DB::table('address_master')->insertGetId($addres_array);
 
-<<<<<<< HEAD
 							$conversation_array = array('type'=>'request_a_bag','user_one'=>$userid,
 								'subject'=>'Request a bag subject',
 								'user_two'=>'1',
@@ -679,14 +604,6 @@ class AuthController extends Controller {
 							        'conversation_id'=>$conversation_insert,
 							        'created_at'=>date('y-m-d H:i:s'));
 							$theard = DB::table('messages')->insertGetId($theard_array);
-=======
-							$conversation_array = array('user_one'=>$userid,
-								'user_two'=>'1',
-								'status'=>'active',
-								'created_at'=>date('y-m-d H:i:s'));
-							$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 							$requestabag_array = array('user_id'=>$userid,
 								'ref_no'=>$ref_no,
 								'addres_id'=>$addres_insert,
@@ -702,22 +619,14 @@ class AuthController extends Controller {
 								);
 
 							$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
-<<<<<<< HEAD
 							$conversation_array = array('type_id'=>$requestabag_insert);
 				$conversation_insert=DB::table('conversations')->where('id',$conversation_insert)->update($conversation_array);
-=======
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 							return "success";
 
 					}else {
-<<<<<<< HEAD
 						Session::flash('error', 'Invalid Email or Password'); 
 						return Redirect::to('/login');
-=======
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					}
 				}
 			}
@@ -728,7 +637,6 @@ class AuthController extends Controller {
 			}
 		}
 		else{
-<<<<<<< HEAD
 
 			Session::flash('error', 'Invalid Email or Password');
 			return Redirect::to('/login');
@@ -736,10 +644,4 @@ class AuthController extends Controller {
 		Session::flash('error', 'Invalid Email or Password');
 	}
 	
-=======
-			Session::flash('error', 'Invalid Email or Password');
-			return Redirect::to('/login');
-		}
-	}
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }

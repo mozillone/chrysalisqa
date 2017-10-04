@@ -55,12 +55,9 @@
              <p class="error">{{ $errors->first('password') }}</p>
             <i class="fa fa-lock form-control-feedback" aria-hidden="true"></i>
           </div>
-<<<<<<< HEAD
           <div class="checkbox text-left">
             <label align="center"><input id="remember" name="remember" type="checkbox" value="remember">Remember me</label>
           </div>
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           <div class="row">
             <div class="col-xs-12">
               <button type="submit" class="btn btn-primary btn-block btn-flat">

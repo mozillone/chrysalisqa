@@ -47,11 +47,7 @@
 					  <li><a href="/user-costumessold-list/{{$userid}}">Costumes Sold</a></li>
 					  <li  class="active"><a  href="/user-recentorders-list/{{$userid}}">Recent Orders</a></li>
 					  <li><a  href="/user-credithistory-list/{{$userid}}">Credit History</a></li>
-<<<<<<< HEAD
 					  <li><a  href="/user-payementprofiles-list/{{$userid}}">Payment Profiles</a></li>
-=======
-					  <li><a  href="/user-payementprofiles-list/{{$userid}}">Payement Profiles</a></li>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				</ul>
 	              <div class="box-body">
         			<div class="table-responsive">
@@ -87,18 +83,7 @@
 		                  </tbody>
 		              </table>
         		</div>
-<<<<<<< HEAD
         		<div class="table-responsive">
-=======
-        		<div class="row">
-                    <div class="col-md-12">
-                      <div class="pull-right user-list">
-                        <a href="javascript:void(0);" class="btn btn-xs btn-success" id="export" ng-click="ordersExportCSV()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download"><i class="fa fa-download"></i></a>
-                       </div>
-                    </div>
-                </div>
-		          <div class="table-responsive">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			          <table datatable dt-options="dtOptions" dt-columns="dtColumns"
 			                        class="table table-bordered table-hover table-striped" id="dtTable">
 			          </table>
@@ -118,11 +103,8 @@
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
 
-<<<<<<< HEAD
 <script src="{{ asset('/assets/frontend/js/dataTables.buttons.min.js')}}"></script>
 <script src="{{ asset('/assets/frontend/js/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('/assets/frontend/js/buttons.print.min.js')}}"></script>
 
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 @stop

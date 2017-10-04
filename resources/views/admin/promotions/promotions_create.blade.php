@@ -75,12 +75,9 @@ Add Promotion@parent
                                                     <label class="radio-inline"><input type="radio" value="flat"  name="type"> &nbsp;
  Flat Amount&nbsp;
                                                    </label>
-<<<<<<< HEAD
                                                    <label class="radio-inline"><input type="radio" value="free" name="type"> &nbsp;
  Free Shipping&nbsp;
                                                    </label>
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 
 
@@ -88,11 +85,7 @@ Add Promotion@parent
 
 
 
-<<<<<<< HEAD
                                     <div class="form-group has-feedback disc" >
-=======
-                                    <div class="form-group has-feedback" >
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                         <label for="inputEmail3" class="control-label">Discount <span class="req-field" >*</span></label>
                                             <input type="text" class="form-control" placeholder="Enter discount"  name="discount" id="discount">
                                     </div>
@@ -123,10 +116,7 @@ Add Promotion@parent
                                         <label for="inputEmail3" class="control-label">Category List</label>
                                               <select class="form-control" id="cats">
                                                 <option value="">--Select--</option>
-<<<<<<< HEAD
                                                 <option value="all">Select All</option>
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                                 @foreach($cats_list as $cats)
                                                 <option value="{{$cats->category_id}}">{{$cats->name}}</option>
                                                 @endforeach

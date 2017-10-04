@@ -30,13 +30,8 @@ class CmsController extends Controller  {
 		if (count($req)) {
 			$rule = array(
 				'title'  => 'required|max:60',
-<<<<<<< HEAD
 				'url'    => 'unique:cms_pages,url|required',
 				'page_desc'  => 'required',
-=======
-				'url'    => 'required',
-				'description'  => 'required',
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				'meta_title'   => 'required|max:60',
 				'meta_desc' => 'required',
 			);
@@ -50,13 +45,8 @@ class CmsController extends Controller  {
 
 				$data = array(
 					'title'      => $req['title'],
-<<<<<<< HEAD
 					'url'      => $req['url'],
 					'description'        => $req['page_desc'],
-=======
-					'url'      => url('/'.$req['url']),
-					'description'        => $req['description'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					'meta_title'    => $req['meta_title'],
 					'meta_desc' => $req['meta_desc'],
 					'status' => $pageStatus,
@@ -77,7 +67,6 @@ class CmsController extends Controller  {
         $pages = \App\CmsPages::all();
         return Datatables::of($pages)
             ->addColumn('actions', function ($pages) {
-<<<<<<< HEAD
                 return '<a href="/edit-page/'.$pages->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i></a>';
             })
             ->editColumn('created',function($pages){
@@ -87,13 +76,6 @@ class CmsController extends Controller  {
                 $slug = url('/pages/'.$pages->url);
                 $url = "<a href=".$slug." target='_blank'>$slug</a>";
                 return $url;
-=======
-                return '<a href="edit-page/'.$pages->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
-                <a href="javascript:void(0);" onclick="deletePage('.$pages->id.')" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>';
-            })
-            ->editColumn('created',function($pages){
-                return date('dS M Y, h:i:s A', strtotime($pages->created_at));
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             })
             ->editColumn('status', function ($pages) {
                 $a = $pages->status == '1' ? 'checked' : '';
@@ -113,7 +95,6 @@ class CmsController extends Controller  {
 	}
 
 	public function addCmsBlock() {
-<<<<<<< HEAD
 	    $pagesData = array(
 	        'about-us'=>'About Us',
             'how-it-works'=>'How It Works',
@@ -127,23 +108,6 @@ class CmsController extends Controller  {
 		return view('admin.cms.add-cms-block')->with('pagesData',$pagesData);
 	}
 
-=======
-		return view('admin.cms.add-cms-block');
-	}
-
-    public function destroy($id) {
-        $condition = array('id' => $id);
-        $delete    = Site_model::delete_single('cms_pages', $condition);
-        if ($delete) {
-            Session::flash('success', 'CMS page has been deleted successfully.');
-        } else {
-            Session::flash('fail', 'Unable To delete this CMS page. Pls try again.');
-        }
-
-        return redirect('cms-pages');
-    }
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     public function edit($id) {
         $page = \App\CmsPages::find($id);
         return view('admin.cms.edit-cms-page',compact('page'));
@@ -155,12 +119,7 @@ class CmsController extends Controller  {
         if (count($req)) {
             $rule = array(
                 'title'  => 'required|max:60',
-<<<<<<< HEAD
                 'page_desc'  => 'required',
-=======
-                'url'    => 'required',
-                'description'  => 'required',
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 'meta_title'   => 'required|max:60',
                 'meta_desc' => 'required',
                 'status' => 'required'
@@ -174,12 +133,7 @@ class CmsController extends Controller  {
 
                 $data = array(
                     'title'      => $req['title'],
-<<<<<<< HEAD
                     'description'        => $req['page_desc'],
-=======
-                    'url'      => $req['url'],
-                    'description'        => $req['description'],
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                     'meta_title'    => $req['meta_title'],
                     'meta_desc' => $req['meta_desc'],
                     'status' => $req['status'],
@@ -199,10 +153,6 @@ class CmsController extends Controller  {
     }
 
     public function changePageStatus(Request $request) {
-<<<<<<< HEAD
-=======
-        $status = $request->input('status');
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         $id     = $request->input('id');
         $getPage = DB::table('cms_pages')->where('id', $id)->first(['status']);
         if ($getPage->status == 1) {
@@ -217,7 +167,6 @@ class CmsController extends Controller  {
     public function pageSearch(Request $request){
         $req = $request->all();
 
-<<<<<<< HEAD
         if(isset($req['to_date']) && !empty($req['to_date'])){
             list($m,$d,$y) = explode("/",$req['to_date']);
             $timestamp = mktime(0,0,0,$m,$d,$y);
@@ -245,26 +194,11 @@ class CmsController extends Controller  {
             }else if($req['status'] == 'disabled'){
                 $req['status'] = 0;
             }
-=======
-        list($m,$d,$y) = explode("-",$req['to_date']);
-        $timestamp = mktime(0,0,0,$m,$d,$y);
-        $to_date = date("Y-m-d 23:59:59",$timestamp);
-
-        $pages = DB::table('cms_pages');
-        if(!empty($req['title'])){
-            $pages->where('cms_pages.title','LIKE','%'.$req['title'].'%');
-        }
-        if(!empty($req['from_date'])) {
-            $pages->whereBetween('cms_pages.created_at', array(date('Y-m-d h:i:s', strtotime($req['from_date'])), $to_date));
-        }
-        if(!empty($req['status'])){
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             $pages->where('cms_pages.status','=',$req['status']);
         }
 
         return Datatables::of($pages)
             ->addColumn('actions', function ($pages) {
-<<<<<<< HEAD
                 return '<a href="/edit-page/'.$pages->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i></a>';
             })
             ->editColumn('created',function($pages){
@@ -274,13 +208,6 @@ class CmsController extends Controller  {
                 $slug = url('/pages/'.$pages->url);
                 $url = "<a href=".$slug." target='_blank'>$slug</a>";
                 return $url;
-=======
-                return '<a href="edit-page/'.$pages->id.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Edit</a>
-                <a href="javascript:void(0);" onclick="deletePage('.$pages->id.')" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>';
-            })
-            ->editColumn('created',function($pages){
-                return date('dS M Y, h:i:s A', strtotime($pages->created_at));
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             })
             ->editColumn('status', function ($pages) {
                 $a = $pages->status == '1' ? 'checked' : '';
@@ -303,7 +230,6 @@ class CmsController extends Controller  {
         }
     }
 
-<<<<<<< HEAD
     public function getAllBlocks(){
         $cmsBlocks = DB::table('cms_blocks')->select('*')->get();
         return Datatables::of($cmsBlocks)
@@ -469,6 +395,4 @@ class CmsController extends Controller  {
 
     }
 
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }

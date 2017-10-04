@@ -4,11 +4,7 @@
 	<title>Activation Email</title>
 </head>
 <body>
-<<<<<<< HEAD
 <table style="font-weight:normal;border-collapse:collapse;border:0;padding:0;margin-top:0;width:640px; margin:0 auto;">
-=======
-<table style="font-weight:normal;border-collapse:collapse;border:0;margin:0;padding:0;font-family:Arial,sans-serif;width:100%">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	<tbody>
 		<tr>
 			<td colspan="4" style="border-collapse:collapse;border:0;margin:0;padding:0;color:#333;font-family:Arial,sans-serif;font-size:16px;line-height:26px;background-color:#fff;border-bottom:1px solid #fff" valign="top">

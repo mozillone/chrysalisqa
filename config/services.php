@@ -37,7 +37,6 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-<<<<<<< HEAD
     'chyrsalis_mail_add' => [
         'test_email' => env('TEST_EMAIL'),
         'admin_email' => env('ADMIN_EMAIL'),
@@ -46,9 +45,6 @@ return [
         'support_email' => env('SUPPORT_EMAIL')
     ],
    'facebook' => [
-=======
-    'facebook' => [
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             'client_id' =>  env('FACEBOOK_CLIENT_ID'),
             'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
             'redirect' => env('FACEBOOK_REDIRECT'),
@@ -61,7 +57,6 @@ return [
     ],
     'usps' => [
         'username' => "402SAMPL6330"
-<<<<<<< HEAD
     ],
     'braintree' => [
         'environment' => 'sandbox',
@@ -72,8 +67,4 @@ return [
     ]
 
 
-=======
-    ]
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 ];

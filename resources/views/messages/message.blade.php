@@ -3,7 +3,6 @@
 @section('content')
     <div class="chat-history">
         <ul id="talkMessages">
-<<<<<<< HEAD
             <?php 	//echo "<pre>";print_r($user);die; ?>
             @foreach($messages as $message)
                 @if($message->sender->id == auth()->user()->id)
@@ -51,31 +50,6 @@
                         
                     </li>
 					<hr>
-=======
-
-            @foreach($messages as $message)
-                @if($message->sender->id == auth()->user()->id)
-                    <li class="clearfix" id="message-{{$message->id}}">
-                        <div class="message-data align-right">
-                            <span class="message-data-time" >{{$message->humans_time}} ago</span> &nbsp; &nbsp;
-                            <span class="message-data-name" >{{$message->sender->name}}</span>
-                        </div>
-                        <div class="message other-message float-right">
-                            {{$message->message}}
-                        </div>
-                    </li>
-                @else
-
-                    <li id="message-{{$message->id}}">
-                        <div class="message-data">
-                            <span class="message-data-name">{{$message->sender->name}}</span>
-                            <span class="message-data-time">{{$message->humans_time}} ago</span>
-                        </div>
-                        <div class="message my-message">
-                            {{$message->message}}
-                        </div>
-                    </li>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 @endif
             @endforeach
 

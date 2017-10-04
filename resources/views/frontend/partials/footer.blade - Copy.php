@@ -45,11 +45,7 @@
 						<ul class="col-md-6 col-sm-6 col-xs-12">
 							<li>About</li>
 							<li>How It Works</li>
-<<<<<<< HEAD
 							<li><a href="/contact-support">Support & Contact</a></li>
-=======
-							<li>Support & Contact</li>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 							<li>Events</li>
 						</ul>
 						<ul class="col-md-6 col-sm-6 col-xs-12">

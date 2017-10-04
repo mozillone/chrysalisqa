@@ -1,26 +1,18 @@
 <?php
 
 return array(
-<<<<<<< HEAD
     'Amenties_id' => '1',
-=======
-     'Amenties_id' => '1',
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	'Style_id' => '2',
     'IMAGES_PATH'=>'',
     'FROM_EMAIL'=>'jithender@dotcomweavers.com',
 	'FAQ_ID'=>8,
 	'FAQ_OPTION_VALUE'=>0,
 	'IS_FILMY'=>21,
-<<<<<<< HEAD
 	'IS_Returns'=>15,
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	'Shipping_id'=>9,
 	'Processing'=>1,
 	'Shipping'=>2,
 	'Currency'=>'usd',
-<<<<<<< HEAD
 
 	'USPS'=>'475CHRYS6822',
 	'USPS_RATE_URL'=>'http://production.shippingapis.com/ShippingAPI.dll?API=RateV4',
@@ -60,8 +52,3 @@ return array(
         'PAYPAL_OAUTHTOKEN'=>env('PAYPAL_OAUTH_TOKEN'),
         'PAYPAL_OAUTHSECRET'=>env('PAYPAL_OAUTH_SECRET')
 );
-=======
-	'USPS'=>'402SAMPL6330'
-	
-);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

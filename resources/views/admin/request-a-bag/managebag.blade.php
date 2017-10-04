@@ -44,11 +44,7 @@
               <thead>
                   <tr>
                 <th>Ref #</th>
-<<<<<<< HEAD
                       <th>Customer Name</th>
-=======
-                      <th>Costumer Name</th>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                       <th>Request Date</th>
                       <th>PayOut</th>
                       <th>Return Assurance</th>
@@ -81,19 +77,12 @@
       "searching": false,
       "pageLength": 50,
       "bLengthChange": false,
-<<<<<<< HEAD
       "order": [ 2, 'DESC'],
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
       
       "columns": [
         { data: 'ref_no', name: 'ref_no' },
         { data: 'cus_name', name: 'cus_name' },
-<<<<<<< HEAD
         { data: 'date', name: 'date' },
-=======
-        { data: 'created_at', name: 'created_at' },
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         { data: 'is_payout', name: 'is_payout' },
         { data: 'is_return', name: 'is_return' },
         { data: 'status', name: 'status' },

@@ -19,14 +19,9 @@ class AdminMiddleware
     {  
         if(!empty($request->user()->id))
         {
-<<<<<<< HEAD
              
                $roles=User::where('id','=',$request->user()->id)->get()->toArray();
                 if (($roles[0]['role_id'] != 1) && ($roles[0]['role_id'] != 2))
-=======
-               $roles=User::where('id','=',$request->user()->id)->get()->toArray();
-                if ($roles[0]['role_id'] != 1)
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 {   
                     Session::flash('error', 'No permission for access this page');
                     return Redirect::to("/");  

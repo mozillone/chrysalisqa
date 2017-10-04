@@ -73,7 +73,6 @@ class Costumes extends Authenticatable
         }else{
             $is_login=',if((select count(*) from cc_costumes_like as likes where likes.user_id=cst.created_by and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id=cst.created_by and  wsh_lst.    costume_id=cst.costume_id )>=1,true,false) as is_fav';
         }
-<<<<<<< HEAD
         //dd('SELECT *  FROM `cc_costume_attribute_options` WHERE `costume_id` ='.$costume_id.' AND `attribute_id` = '.Config::get('constants.FAQ_ID').' AND `attribute_option_value_id` = '.Config::get('constants.FAQ_OPTION_VALUE').'');
         $data=DB::Select('SELECT cats.category_id,cats.parent_id,cats.name as cat_name,cats.description,cst.costume_id,cst.weight_pounds,cst.weight_ounces,dsr.name,dsr.description,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,cst.created_user_group,cst.deleted_status,cst.status as cos_act_status '.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer FROM `cc_costume_to_category` as cat JOIN cc_costumes as cst on cst.costume_id=cat.costume_id JOIN cc_category  as cats on cats.category_id=cat.category_id LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id where cat.costume_id='.$costume_id.' group by cat.costume_id');
         $data['faq']=DB::Select('SELECT *  FROM `cc_costume_attribute_options` WHERE `costume_id` ='.$costume_id.' AND `attribute_id` = '.Config::get('constants.FAQ_ID').' AND `attribute_option_value_id` = '.Config::get('constants.FAQ_OPTION_VALUE').'');
@@ -98,23 +97,6 @@ class Costumes extends Authenticatable
     protected function costumeSellerInfo($user_id){
         $costumeSellerInfo=DB::Select('select id,display_name,email,phone_number from cc_users where id='.$user_id);
         $costumeSellerInfo['shipping_location']=DB::Select('select * from cc_address_master where user_id='.$user_id.' and address_type="selling"');
-=======
-        $data=DB::Select('SELECT cats.category_id,cats.name as cat_name,cats.description,cst.costume_id,dsr.name,dsr.description,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,cst.created_user_group '.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer FROM `cc_costume_to_category` as cat JOIN cc_costumes as cst on cst.costume_id=cat.costume_id JOIN cc_category  as cats on cats.category_id=cat.category_id LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id where cat.costume_id='.$costume_id.' group by cat.costume_id');
-        $data['faq']=DB::Select('SELECT *  FROM `cc_costume_attribute_options` WHERE `costume_id` ='.$costume_id.' AND `attribute_id` = '.Config::get('constants.FAQ_ID').' AND `attribute_option_value_id` = '.Config::get('constants.FAQ_OPTION_VALUE').'');
-        return $data;
-
-    }
-    protected function getRandomCategoyCostumesList($cat_id){
-       $data=DB::Select('SELECT dsr.name,price,img.image,link.url_key FROM `cc_costume_to_category` as cat LEFT JOIN cc_costumes as cst on cst.costume_id=cat.costume_id LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1"  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN cc_url_rewrites as link on link.url_offset=dsr.costume_id and link.type="product" where cat.category_id='.$cat_id.' ORDER BY RAND() LIMIT 10');
-        return $data;
-    }
-    protected function getCostumeImages($costume_id){
-        $costume_images=DB::Select('SELECT * FROM `cc_costume_image` where costume_id='.$costume_id);
-        return $costume_images;
-    }
-    protected function costumeSellerInfo($user_id){
-        $costumeSellerInfo=DB::Select('select display_name,email,phone_number from cc_users where id='.$user_id);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         return $costumeSellerInfo;
     }
     protected function costumeReport($req){
@@ -125,10 +107,7 @@ class Costumes extends Authenticatable
                     'reason'=>$req['reason'],
                     'created_at'=>date('Y-m-d H:i:s'),
             );
-<<<<<<< HEAD
         //echo "<pre>";print_r($data);die;
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         $res=Site_model::insert_data('reported_costumes',$data);
         return $res;
     }
@@ -144,13 +123,10 @@ class Costumes extends Authenticatable
             return true;
         }else{
              $costume_name=$this->getCostumeInfo($costume_id);
-<<<<<<< HEAD
              $costume_count = $this->getCostumeCount($costume_name);
              if($costume_count>1){
                  $costume_count++;
              }
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
              if(!$costume_name){
                 return true;
              }
@@ -159,19 +135,11 @@ class Costumes extends Authenticatable
             $main_cat=$this->specialCharectorsRemove($data[0]->parent_cat_name);
             $sub_cat=$this->specialCharectorsRemove($data[0]->sub_cat_name);
             $name=$this->specialCharectorsRemove($costume_name);
-<<<<<<< HEAD
             $url_key='/'.$main_cat.'/'.$sub_cat.'/'.$name.$costume_count;
         }else{
             $main_cat=$this->specialCharectorsRemove($data[0]->name);
             $name=$this->specialCharectorsRemove($costume_name);
             $url_key='/'.$main_cat.'/'.$name.$costume_count;
-=======
-            $url_key='/'.$main_cat.'/'.$sub_cat.'/'.$name;
-        }else{
-            $main_cat=$this->specialCharectorsRemove($data[0]->name);
-            $name=$this->specialCharectorsRemove($costume_name);
-            $url_key='/'.$main_cat.'/'.$name;
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         }
         $data=array('type'=>'product',
                     'url_offset'=>$costume_id,
@@ -205,13 +173,8 @@ class Costumes extends Authenticatable
     }
       private function getUrlCategoryInfo($costume_id){
         $cat_info=DB::Select('SELECT *  FROM `cc_costume_to_category` WHERE `costume_id` ='.$costume_id);
-<<<<<<< HEAD
        if(count($cat_info)){
           $data=DB::Select('SELECT  category_id,name,parent_id FROM `cc_category` where category_id='.$cat_info[0]->category_id);
-=======
-        if(count($cat_info)){
-             $data=DB::Select('SELECT  category_id,name,parent_id FROM `cc_category` where category_id='.$cat_info[0]->category_id);
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         }else{
             return false;
         }
@@ -230,7 +193,6 @@ class Costumes extends Authenticatable
             return false;
         }
       }
-<<<<<<< HEAD
 
     private function getCostumeCount($costume_name){
         $costume_count = DB::table('costume_description')
@@ -262,8 +224,4 @@ class Costumes extends Authenticatable
     }
     /* End */
 
-=======
-    /************* Costume URL Create end here **************/
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }

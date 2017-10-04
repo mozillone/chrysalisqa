@@ -466,7 +466,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-success pull-right save" id="crop">Save</button>
-												<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel1">Cancel</button>
 											</div>
 										</div>
 									</div>
@@ -497,7 +497,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-success pull-right save" id="crop2">Save</button>
-												<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel2">Cancel</button>
 											</div>
 										</div>
 									</div>
@@ -528,7 +528,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-success pull-right save" id="crop3">Save</button>
-												<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel3">Cancel</button>
 											</div>
 										</div>
 									</div>

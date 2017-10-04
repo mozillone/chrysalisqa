@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}">
-<<<<<<< HEAD
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
 <style type="text/css">
 #dtTable tr>th:first-child{
@@ -19,19 +18,13 @@ display: none;
 display: none;
 }
 </style>
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 @stop
 
 {{-- Page content --}}
 @section('content')
  <section class="content-header">
-<<<<<<< HEAD
     <h1>Orders</h1>
-=======
-    <h1>Users</h1>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     <ol class="breadcrumb">
     <li>
         <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
@@ -39,11 +32,7 @@ display: none;
     <li class="active">Orders</li>
   </ol>
 </section>
-<<<<<<< HEAD
 <section class="content orders_list_div_dashboard" ng-controller="OrdersController">
-=======
-<section class="content" ng-controller="OrdersController">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     <div class="row">
         <div class="col-md-12">
          @if (Session::has('error'))
@@ -57,11 +46,7 @@ display: none;
                        {{ Session::get('success') }}
                 </div>
         @endif
-<<<<<<< HEAD
             <div class="box box-info ">
-=======
-            <div class="box box-info">
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 <div class="box-header with-border">
                     <h3 class="box-title">Orders List</h3>
                    </div>
@@ -102,17 +87,7 @@ display: none;
                   </tbody>
               </table>
         </div>
-<<<<<<< HEAD
        
-=======
-        <div class="row">
-                    <div class="col-md-12">
-                      <div class="pull-right user-list">
-                        <a href="javascript:void(0);" class="btn btn-xs btn-success" id="export" ng-click="ordersExportCSV()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download"><i class="fa fa-download"></i></a>
-                       </div>
-                    </div>
-                  </div>
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           <div class="table-responsive">
           <table datatable dt-options="dtOptions" dt-columns="dtColumns"
                         class="table table-bordered table-hover table-striped" id="dtTable">
@@ -136,15 +111,12 @@ display: none;
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
 
-<<<<<<< HEAD
 <script src="{{ asset('/assets/frontend/js/dataTables.buttons.min.js')}}"></script>
 <script src="{{ asset('/assets/frontend/js/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('/assets/frontend/js/buttons.print.min.js')}}"></script>
 
 
 
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 @stop
 
 
