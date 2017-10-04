@@ -38,6 +38,7 @@ class Category extends Authenticatable
                        'created_at'=>date('Y-m-d H:i:s'));
         $cat_id=Site_model::insert_get_id('category',$category);
         $this->urlRewrites($cat_id,"insert");
+<<<<<<< HEAD
 
 
         if($parent_id != "0"){
@@ -60,6 +61,8 @@ class Category extends Authenticatable
             }
         }
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         if(isset($req['costume_list']) && $parent_id!="0"){
             foreach($req['costume_list'] as $key=>$value){
                 $category_coustume=array('costume_id'=>$value,
@@ -119,7 +122,11 @@ class Category extends Authenticatable
         return true;
     }
     protected function getUrlLinks($id){
+<<<<<<< HEAD
     	$data=$this->getUrlCategoryInfo($id);
+=======
+        $data=$this->getUrlCategoryInfo($id);
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         if($data[0]->parent_id!="0"){
             $main_cat=$this->specialCharectorsRemove($data[0]->parent_cat_name);
             $sub_cat=$this->specialCharectorsRemove($data[0]->sub_cat_name);
@@ -130,6 +137,7 @@ class Category extends Authenticatable
         }
         return $url_key;
     }
+<<<<<<< HEAD
      protected function getCategoriesCostumes($cat_id){
        $costumes=DB::Select('SELECT name FROM `cc_costume_to_category` as cats LEFT JOIN cc_costume_description as cst on cst.costume_id=cats.costume_id where cats.category_id='.$cat_id);
         return $costumes;
@@ -145,6 +153,15 @@ class Category extends Authenticatable
 
              $res=DB::Select('SELECT cat1.category_id,cat1.name as sub_cat_name,cat2.name as parent_cat_name,cat1.parent_id FROM cc_category as cat1 INNER JOIN cc_category as cat2 on cat2.category_id=cat1.parent_id WHERE cat1.category_id ='.$data[0]->category_id);
 //dd($res);
+=======
+
+    private function getUrlCategoryInfo($cat_id){
+        $data=DB::Select('SELECT  category_id,name,parent_id FROM `cc_category` where category_id='.$cat_id);
+        if($data[0]->parent_id=="0"){
+             return $data;
+        }else{
+             $res=DB::Select('SELECT cat1.category_id,cat1.name as sub_cat_name,cat2.name as parent_cat_name,cat1.parent_id FROM cc_category as cat1 INNER JOIN cc_category as cat2 on cat2.category_id=cat1.parent_id WHERE cat1.category_id ='.$data[0]->category_id);
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
              return $res;
             
       }  
@@ -174,7 +191,11 @@ class Category extends Authenticatable
                         'banner_image'=> $banner_file_name,
                         'updated_at'=>date('Y-m-d H:i:s'));
         }
+<<<<<<< HEAD
         else if(isset($req['banner_image']) && isset($req['cat_image'])){
+=======
+        else if(isset($req['banner_image']) && !isset($req['cat_image'])){
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             $cat_image_path=public_path('category_images/Normal');
             $cat_file_name=$this->fileUploading($cat_image_path,$req['cat_image']);
             
@@ -192,6 +213,7 @@ class Category extends Authenticatable
                         'parent_id'=>$parent_id,
                         'updated_at'=>date('Y-m-d H:i:s'));
          }
+<<<<<<< HEAD
         
         
         if($parent_id != "0"){
@@ -215,6 +237,10 @@ class Category extends Authenticatable
         } 
         
 
+=======
+       
+        
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         $cond=array('category_id'=>$req['category_id']);
         Site_model::update_data('category',$category,$cond);
         $this->urlRewrites($req['category_id'],"update");

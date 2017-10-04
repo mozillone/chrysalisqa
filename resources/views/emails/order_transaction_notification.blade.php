@@ -1,13 +1,21 @@
 <table bgcolor="FFFFFF" border="0" cellpadding="10" cellspacing="0" style="border:1px solid #E0E0E0; color: #3d3d3d;" width="650">
 	<tbody>
 		<tr>
+<<<<<<< HEAD
 			<td class="logo" style=" margin:0 auto;text-align:center"><a href="#"><img border="0" src="{{asset('assets/frontend/img/brand.png')}}" style="margin: 10px auto 0px;" /></a></span></td>
+=======
+			<td class="logo" style=" margin:0 auto;text-align:center"><a href="#"><img border="0" height="28" src="{{asset('assets/frontend/img/brand.png')}}" style="margin: 10px auto 0px; width: 206px; height: 28px;" width="206" /></a></span></td>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		</tr>
 		<tr>
 			<td>
 			<p style=" border-top: 1px solid #ccc;">&nbsp;</p>
 			</td>
+<<<<<<< HEAD
 		</tr> 
+=======
+		</tr>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		<!-- [middle starts here] -->
 		<tr>
 			<td style="padding: 10px 40px 20px;" valign="top">

@@ -14,6 +14,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
 
 
+<<<<<<< HEAD
     protected $except = ['/emailValidation','/forgot/emailVerification','/customer/emailValidation',
     '/search','/searching','/amenitiesValidation','/styleValidation','/listingNameValidation',
     '/planValidation','/costume/costumecreate','/costume/postrequestabag','/postrequestabaglogin',
@@ -24,6 +25,11 @@ class VerifyCsrfToken extends BaseVerifier
  'conversation/delete','/support_message','/change-block-status', '/change-page-status','/change-blog-status',
         '/search-by-zip','/admin/jobs/search','check_priority','/add-blog-category','/changefeaturestatus',
         '/getallsearchcostumes','/faq-search','/change-faq-status','subscribenews','/admin/paypal/search'
+=======
+    protected $except = ['/emailValidation','/forgot/emailVerification','/customer/emailValidation','/search','/searching','/amenitiesValidation','/styleValidation','/listingNameValidation','/planValidation','/costume/costumecreate','/costume/postrequestabag','/postrequestabaglogin','/generatelables' ,'/payoutamount','/returnamount','/closerequest','/changecostumestatus','/deleteaddress','/deleteccard','/delete_address','/admin/event/search','/admin/press/search'
+
+        //
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     ];
 
 

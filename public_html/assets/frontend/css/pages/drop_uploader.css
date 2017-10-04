@@ -50,7 +50,11 @@ span.text a {
 }
 .upload-photo-blogs .up-blog {
     background: #ccc;
+<<<<<<< HEAD
     height: 298px;    cursor: pointer; position:relative;
+=======
+    height: 295px;    cursor: pointer; position:relative;
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }
 .drop_uploader.drop_zone ul.files {
     width: 90%;
@@ -144,9 +148,15 @@ span.text a {
     background-repeat: no-repeat;
 } */
 
+<<<<<<< HEAD
 /* .drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
     width: 200px;
     height: 298px;
+=======
+.drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
+    width: 196px;
+    height: 295px;
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     border-radius: 8px 8px 8px 8px;
     -moz-border-radius: 8px 8px 8px 8px;
     -webkit-border-radius: 8px 8px 8px 8px;
@@ -162,6 +172,7 @@ span.text a {
     background-repeat: no-repeat;
     background-position: 100% 50%;
     background-size: contain;
+<<<<<<< HEAD
 } */
 .drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
     width: 200px;
@@ -181,6 +192,8 @@ span.text a {
     width: 100%;
     background-repeat: no-repeat;    background-size: cover;
     background-position: center center;
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }
 .drop_uploader.drop_zone ul.files.thumb li div.thumbnail .du_hover_layer {
     width: 100px;

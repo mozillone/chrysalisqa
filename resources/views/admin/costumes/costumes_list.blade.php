@@ -8,8 +8,11 @@
 @section('header_styles')
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+<<<<<<< HEAD
 
 <link rel="stylesheet" href="{{ asset('/assets/frontend/css/buttons.dataTables.min.css')}}">
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 @stop
 
 {{-- Page content --}}
@@ -23,7 +26,11 @@
     <li class="active">Costumes List</li>
   </ol>
 </section>
+<<<<<<< HEAD
 <section class="content" >
+=======
+<section class="content" ng-controller="CostumesController">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     <div class="row">
         <div class="col-md-12">
          @if (Session::has('error'))
@@ -46,6 +53,7 @@
                 </div>
                 <div class="box-body">
         <div class="table-responsive">
+<<<<<<< HEAD
           <form  method="post" name="coslist_search" id="coslist_search" action="javascript:void(0);">
 
                       <input type="hidden" class="form-control token"  name="csrf-token" value="{{ csrf_token() }}">
@@ -56,10 +64,19 @@
                     <th>Customer Name</th>
                     <th>Condition</th>
                     <th>Status</th>
+=======
+                <table class="table table-striped table-bordered user-list-table">
+                  <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Active</th>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                     <th></th>
                   </thead>
                   <tbody>
                     <tr>
+<<<<<<< HEAD
                       <td><input type="text" class="form-control"  name="sku" id="sku" placeholder="Sku"></td>
                       <td><input type="text" class="form-control"  name="costume_name" id="costume_name" placeholder="Costume Name"></td>
                       <td><input type="text" class="form-control"  name="customer_name" id="customer_name" placeholder="Customer Name"></td>
@@ -85,6 +102,22 @@
                   </tbody>
               </table>
               </form>
+=======
+                      <input type="hidden" class="form-control token"  name="csrf-token" value="{{ csrf_token() }}">
+                      <td><input type="text" class="form-control" ng-model="search.id" name="id" placeholder="Customer ID"></td>
+                      <td><input type="text" class="form-control" ng-model="search.name" name="name" placeholder="User Name"></td>
+                      <td><input type="text" class="form-control" ng-model="search.email" name="email" placeholder="Email"></td>
+                      <td>
+                        <select name="mySelect" class="form-control" id="mySelect" ng-model="search.status">
+                          <option value=""> All </option>  
+                          <option ng-repeat="option in status" value="@{{option.value}}">@{{option.name}}</option>
+                        </select>
+                      </td>
+                      <td><button class="btn btn-primary user-list-search" ng-click="seachUsers(search)">Search</button></td>
+                    </tr>
+                  </tbody>
+              </table>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         </div>
           <div class="table-responsive">
           <!-- <table datatable dt-options="dtOptions" dt-columns="dtColumns"
@@ -98,11 +131,16 @@
                       <th>Customer Name</th>
                       <th>Category</th>
                       <th>Condition</th>
+<<<<<<< HEAD
                       <th>Price</th>
                       <th>Created Date</th>
                       <th>Status</th>
                       <th>Status</th>
                       <th>Featured</th>
+=======
+                      <th>Created Date</th>
+                      <th>Status</th>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                       <th>Actions</th>
                  </tr>
           </thead>
@@ -122,16 +160,24 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts') 
+<<<<<<< HEAD
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 
 <script src="{{ asset('/assets/frontend/js/dataTables.buttons.min.js')}}"></script>
 <script src="{{ asset('/assets/frontend/js/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('/assets/frontend/js/buttons.print.min.js')}}"></script>
 
+=======
+<script src="{{ asset('angular/Admin/UserManagement/Controllers/users-lists.js') }}"></script>
+<script src="{{ asset('angular/Admin/UserManagement/Services/user_management.js') }}"></script>
+<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 <script type="text/javascript">
    function changeCostumeStatus(id, status) {
         $.ajax({
+<<<<<<< HEAD
             type: "POST",
             url: "{!! URL::to('changecostumestatus') !!}",
             data: {'id':id,'status':status},
@@ -147,6 +193,10 @@
         $.ajax({
             type: "POST",
             url: "{!! URL::to('changefeaturestatus') !!}",
+=======
+            type: "GET",
+            url: '{!! url('changecostumestatus') !!}',
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             data: {'id':id,'status':status},
             dataType: 'json',
             success: function(response) {
@@ -166,6 +216,7 @@
       "searching": false,
       "pageLength": 25,
       "bLengthChange": false,
+<<<<<<< HEAD
       "order": [ 6, 'DESC'],
       "columnDefs": [{
       "targets": [ 7 ],
@@ -185,6 +236,8 @@
                     }
                 }
             ],
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
       
       "columns": [
         { data: 'sku_no', name: 'sku_no'},
@@ -192,11 +245,16 @@
         { data: 'customer_name', name: 'customer_name'},
         { data: 'cat_name', name: 'cat_name'},
         { data: 'custome_condition', name: 'custome_condition'},
+<<<<<<< HEAD
         { data: 'price', name: 'price'},
         { data: 'custome_created_at', name: 'custome_created_at'},
         { data: 'custome_status', name: 'custome_status'},
         { data: 'status', name: 'status'},
         { data: 'is_featured', name: 'is_featured'},
+=======
+        { data: 'custome_created_at', name: 'custome_created_at'},
+        { data: 'status', name: 'status'},
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         { data: 'actions', name: 'actions'}
       ]
     });
@@ -204,6 +262,7 @@
 
   }); 
 
+<<<<<<< HEAD
   $("#search").click(function(){
     table.destroy();
        var sku=$("#sku").val();
@@ -256,6 +315,8 @@
 
     });
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
         function deletecostume($id){
         var id=$id;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php //echo "<pre>";print_r($message->message);die; ?>
 <li class="clearfix" id="message-{{$message->id}}">
 <div class="message-data row">
@@ -14,4 +15,14 @@
 <span class="message-data-time" >1 Second ago</span> &nbsp; &nbsp;
 </div>
 </div>
+=======
+<li class="clearfix" id="message-{{$message->id}}">
+    <div class="message-data align-right">
+        <span class="message-data-time" >{{$message->humans_time}} ago</span> &nbsp; &nbsp;
+        <span class="message-data-name" >{{$message->sender->name}}</span>
+    </div>
+    <div class="message other-message float-right">
+        {{$message->message}}
+    </div>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 </li>

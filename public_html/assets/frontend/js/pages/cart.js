@@ -15,6 +15,7 @@ $(function(){
                       }); 
          
     });
+<<<<<<< HEAD
     var sub_total=$('.sub-p').attr('data-subtotal');
    $(document).on('click','.credits-apply',function(){
       var credits=$('.store-p').text();
@@ -120,4 +121,7 @@ $(function(){
   $('coupan_submit')
     $("#coupan_submit").validate();
   $("#coupan").rules("add", {required:true,minlength:1,maxlength:100});
+=======
+	
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 })

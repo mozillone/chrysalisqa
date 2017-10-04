@@ -1,5 +1,8 @@
 $("#promotions-create").validate({
+<<<<<<< HEAD
             ignore: "input[type='text']:hidden",
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             rules: {
                 name:{
                         required: true,
@@ -78,12 +81,21 @@ $('.costume_id').each(function(i,v){
 	products.push($(this).val());
 });
 $('.add-prod').click(function(){
+<<<<<<< HEAD
   var product_name=$('#cst_name').val();
 	var sku_no=$('#sku_no').val();
 	var price=$('#price').val();
 	var product_id=$('#products_id').val();
  if(jQuery.inArray(product_id,products)==-1 || products.length==0){
  	products.push(product_id);
+=======
+	var product_name=$('#cst_name').val();
+	var sku_no=$('#sku_no').val();
+	var price=$('#price').val();
+	var product_id=$('#products_id').val();
+	if(jQuery.inArray(product_id,products)==-1 || products.length==0){
+	products.push(product_id);
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	$('#costumes').append('<option value='+product_id+'>'+sku_no+'-'+product_name+'</option>')
 	$('#products_list').val("");
 	}
@@ -112,7 +124,11 @@ $(document).on('click','.remove_product',function(){
 $(document).on('click','.add_cat',function(){
     var cat_id=$('#cats option:selected').val();
     if(jQuery.inArray(cat_id,cats)==-1 || cats.length==0){
+<<<<<<< HEAD
        cats.push(cat_id);
+=======
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     $.ajax({
           url: '/getSelectedCategories/'+cat_id,
           dataType: "json",
@@ -142,6 +158,7 @@ $(document).on('click','.submit',function(){
   $('#promotions-create').submit();
 });
 
+<<<<<<< HEAD
 $(document).on('change','input[name="type"]',function(){
   var type=$(this).val();
   if(type=="free"){
@@ -152,3 +169,5 @@ $(document).on('change','input[name="type"]',function(){
   }
 });
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $(function(){
 
 // custom method for url validation with or without http://
@@ -180,3 +181,69 @@ $(".remove_pic").on("click",function(){
     $('input[name="is_removed"]').val("1");
 });
 });
+=======
+$("#events-create").validate({
+            rules: {
+                eventName:{
+                        required: true 
+                    },
+                eventUrl:{
+                        required: true
+                    },
+                fromDate:{
+                        required: true
+                    },
+                fromTime:{
+                        required: true
+                    },
+                toDate:{
+                        required: true
+                    },
+                toTime:{
+                        required: true
+                    },
+                eventDesc:{
+                        required: true
+                    },
+                eventTags:{
+                        required: true
+                    },
+                location:{
+                        required: true
+                    },
+                }
+ 	
+        }); 
+$("#events-update").validate({
+            rules: {
+                eventName:{
+                        required: true 
+                    },
+                eventUrl:{
+                        required: true
+                    },
+                fromDate:{
+                        required: true
+                    },
+                fromTime:{
+                        required: true
+                    },
+                toDate:{
+                        required: true
+                    },
+                toTime:{
+                        required: true
+                    },
+                eventDesc:{
+                        required: true
+                    },
+                eventTags:{
+                        required: true
+                    },
+                location:{
+                        required: true
+                    },
+                }
+    
+        }); 
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

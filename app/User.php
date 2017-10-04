@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+<<<<<<< HEAD
 use DB;
 use App\Helpers\Site_model;
 use App\Helpers\Paypal;
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 class User extends Authenticatable
 {
@@ -18,7 +21,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+<<<<<<< HEAD
         'id', 'role_id', 'username','paypal_email','display_name', 'first_name', 'last_name', 'email', 'password', 'user_img', 'active', 'last_login', 'newsletter', 'deleted', 'api_customer_id', 'activate_hash', 'reset_hash'
+=======
+        'id', 'role_id', 'display_name', 'first_name', 'last_name', 'email', 'password', 'user_img', 'active', 'last_login', 'newsletter', 'deleted', 'api_customer_id', 'activate_hash', 'reset_hash'
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     ];
 
     /**
@@ -29,6 +36,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+<<<<<<< HEAD
 
     protected function ShippingDetails($data){
         if (isset($data['free_shipping']) && !empty($data['free_shipping'])) {
@@ -59,4 +67,6 @@ class User extends Authenticatable
      $credit_insert =Site_model::insert_get_id('user_credit_log',$data); 
      return $credit_insert;
     }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }

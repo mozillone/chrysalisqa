@@ -32,7 +32,11 @@
     wrapperClass: 'bx-wrapper',
 
     // TOUCH
+<<<<<<< HEAD
     touchEnabled: false,
+=======
+    touchEnabled: true,
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     swipeThreshold: 50,
     oneToOneTouch: true,
     preventDefaultSwipeX: true,
@@ -1107,8 +1111,12 @@
 
         if (slider.viewport.get(0).setPointerCapture) {
           slider.pointerId = orig.pointerId;
+<<<<<<< HEAD
      /*      slider.viewport.get(0).setPointerCapture(slider.pointerId); */
 	 touchPoints = (typeof orig.changedTouches !== 'undefined') ? orig.changedTouches : [orig];
+=======
+          slider.viewport.get(0).setPointerCapture(slider.pointerId);
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         }
         // bind a "touchmove" event to the viewport
         slider.viewport.bind('touchmove MSPointerMove pointermove', onTouchMove);
@@ -1233,7 +1241,11 @@
       }
       slider.viewport.unbind('touchend MSPointerUp pointerup', onTouchEnd);
       if (slider.viewport.get(0).releasePointerCapture) {
+<<<<<<< HEAD
        touchPoints = (typeof orig.changedTouches !== 'undefined') ? orig.changedTouches : [orig];
+=======
+        slider.viewport.get(0).releasePointerCapture(slider.pointerId);
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
       }
     };
 

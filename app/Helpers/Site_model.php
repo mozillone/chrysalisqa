@@ -62,6 +62,28 @@ use Authenticatable, CanResetPassword;
         return $data_info;
    }
    
+<<<<<<< HEAD
+=======
+  protected function find_user_and_meta($table,$user_id)
+   {     
+    $array=array();
+         $where = array(
+              'user_id'  => $user_id,
+           );
+      $query=DB::table($table)->select("*")->where($where)->get();
+       if (count($query)) {
+
+           
+
+             foreach ($query as $key => $objects) {
+               $array[$objects->meta_key] =$objects->meta_value;;
+               }
+       }
+     if(count($array)>0){$meta=$array;}else{$meta="";} 
+     return $meta;
+   }
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   protected  function userPermissions($user_id){
         $permissions=DB::Select('SELECT per.id,per.code FROM `tum_user_roles` as user_roles
                         JOIN tum_role_permissions as roles on roles.role_id=user_roles.role_id
@@ -69,6 +91,7 @@ use Authenticatable, CanResetPassword;
                         where user_roles.user_id='.$user_id);
         return $permissions;
     }
+<<<<<<< HEAD
      protected function save_meta_for($table,$data = array(),$user_id)
     {
         // If there's no data, get out of here.
@@ -128,5 +151,7 @@ use Authenticatable, CanResetPassword;
         }
        return $res;
     }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   
 }

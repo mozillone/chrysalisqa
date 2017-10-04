@@ -10,18 +10,26 @@ use App\Order;
 use Session;
 use Response;
 use Config;
+<<<<<<< HEAD
 use App\Helpers\StripeApp;
 use App\Helpers\Site_model;
 use App\Helpers\Endicia\Endicia;
 use App\Address;
 use Mail;
+=======
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 class OrdersController extends Controller {
     
     public function __construct(Guard $auth)
     {
+<<<<<<< HEAD
           $this->stripe=new StripeApp();
           $this->middleware(function ($request, $next) {
+=======
+        $this->middleware(function ($request, $next) {
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
               if(!Auth::check()){
                 return Redirect::to('/login')->send();
             }
@@ -43,9 +51,13 @@ class OrdersController extends Controller {
         $having='';
         if(!empty($req['search'])){
           if(!empty($req['search']['order_id']) ){
+<<<<<<< HEAD
            // $where.=' AND ord.order_id ='.$req['search']['order_id'];
               $where.=' AND ord.order_id LIKE "%'.$req['search']['order_id'].'%"';
 
+=======
+            $where.=' AND ord.order_id ='.$req['search']['order_id'];
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           }
           if (!empty($req['search']['from_date'])) {
             $where .= ' AND  ord.created_at >="'.date('Y-m-d 00:00:01', strtotime($req['search']['from_date'])).'"';
@@ -59,7 +71,11 @@ class OrdersController extends Controller {
           }
         }
         }
+<<<<<<< HEAD
          $orders = DB::select('SELECT DATE_FORMAT(ord.created_at,"%m/%d/%Y %h:%i:%s") as date,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id '.$where.' GROUP BY ord.order_id ORDER BY `order_id` DESC');
+=======
+         $orders = DB::select('SELECT ord.created_at as date,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id '.$where.' GROUP BY ord.order_id ORDER BY `order_id` DESC');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         return response()->success(compact('orders'));
   
     }
@@ -92,9 +108,13 @@ class OrdersController extends Controller {
         $having='';
         if(!empty($req['search'])){
           if(!empty($req['search']['order_id']) ){
+<<<<<<< HEAD
             //$where.=' AND ord.order_id ='.$req['search']['order_id'];
               $where.=' AND ord.order_id LIKE "%'.$req['search']['order_id'].'%"';
 
+=======
+            $where.=' AND ord.order_id ='.$req['search']['order_id'];
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           }
           if (!empty($req['search']['from_date'])) {
             $where .= ' AND  ord.created_at >="'.date('Y-m-d 00:00:01', strtotime($req['search']['from_date'])).'"';
@@ -108,7 +128,11 @@ class OrdersController extends Controller {
           }
         }
         }
+<<<<<<< HEAD
          $orders = DB::select('SELECT DATE_FORMAT(ord.created_at,"%m/%d/%Y %h:%i:%s") as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id  '.$where.' GROUP BY ord.order_id ORDER BY `order_id` DESC');
+=======
+         $orders = DB::select('SELECT ord.created_at as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id  '.$where.' GROUP BY ord.order_id ORDER BY `order_id` DESC');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         return response()->success(compact('orders'));
   
     }
@@ -129,6 +153,7 @@ class OrdersController extends Controller {
 
     }
     public function orderLabelGenate(Request $request){
+<<<<<<< HEAD
       $req=$request->all();
               $order=Order::orderSummary($req['order_id']);
               $seller_address=Address::getUserSellerAddress($order['basic'][0]->seller_id);
@@ -611,6 +636,115 @@ class OrdersController extends Controller {
         }
       
       
+=======
+    // $req=$request->all();
+    //    $from = array(
+    //            'from_name' => 'John Smith',
+    //            'from_firm' => 'ABC Inc.',
+    //            'from_address1' => '123 Main St.',
+    //            'from_address2' => 'Suite 100',
+    //            'from_city' => 'Anytown',
+    //            'from_state' => 'PA',
+    //            'from_zip5' => '12345');
+    
+    //  $to = array(
+    //            'to_name' => 'Mike Smith',
+    //            'to_firm' => 'XYZ Inc.',
+    //            'to_address1' => '456 2nd St.',
+    //            'to_address2' => 'Apt B',
+    //            'to_city' => 'Othertown',
+    //            'to_state' => 'NY',
+    //            'to_zip5' => '67890');
+    
+    // $dimensions = array(
+    //            'width' => 5.5,
+    //            'length' => 11,
+    //            'height' => 11,
+    //            'girth' => 11);
+    //   $container = "VARIABLE";
+    //   $size = "REGULAR";
+    //   $insured_amount = 0;
+    //   $weight_in_ounces = 0;
+    //   $service_type = 'Retail Ground';
+
+    //   $ch = curl_init('https://secure.shippingapis.com/ShippingAPI.dll?API=DelivConfirmCertifyV4&XML=%3C?xml%20version=%221.0%22%20encoding=%22UTF-8%22%20?%3E%3CDelivConfirmCertifyV4.0Request%20USERID=%22228OURBA2607%22%20PASSWORD=%22728ZK94KL112%22%3E%3CRevision%3E2%3C/Revision%3E%3CImageParameters%20/%3E%3CFromName%3EJohn%3C/FromName%3E%3CFromFirm%3E%20%3C/FromFirm%3E%3CFromAddress1%3EFlat%201%3C/FromAddress1%3E%3CFromAddress2%3ERoad%201%3C/FromAddress2%3E%3CFromCity%3ENY%3C/FromCity%3E%3CFromState%3ENY%3C/FromState%3E%3CFromZip5%3E12345%20%3C/FromZip5%3E%3CFromZip4/%3E%3CToName%3E%20Mozilla%20Foundation%20%3C/ToName%3E%3CToFirm%3E%20%3C/ToFirm%3E%3CToAddress1%3E%20Building%20K%20%3C/ToAddress1%3E%3CToAddress2%3E%201981%20Landings%20Drive%20%3C/ToAddress2%3E%3CToCity%3E%20Mountain%20View%3C/ToCity%3E%3CToState%3E%20CA%20%3C/ToState%3E%3CToZip5%3E%20%20%2094043%20%3C/ToZip5%3E%3CToZip4%20/%3E%3CWeightInOunces%3E%203%20%3C/WeightInOunces%3E%3CServiceType%3EPriority%3C/ServiceType%3E%3CImageType%3ETIF%3C/ImageType%3E%3C/DelivConfirmCertifyV4.0Request%3E');
+
+    //     curl_setopt($ch, CURLOPT_HEADER, false);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    //     $output = curl_exec($ch);
+    //     curl_close($ch);
+    //     $collection = new \Illuminate\Support\Collection(json_decode(json_encode(simplexml_load_string($this->removeNamespaceFromXML($output))), true));
+    //     if(!isset($collection->toArray()['Number'])){
+    //       $track_id=$collection->toArray()['DeliveryConfirmationNumber'];
+    //       $fileName = 'uspslabel/'.$track_id.'.pdf';
+    //       $array_text = array("_");
+    //       $array_replace =  "+";
+    //       $contents = base64_decode(str_replace($array_text, $array_replace, $collection->toArray()['DeliveryConfirmationLabel']))  ;
+    //       file_put_contents($fileName,$contents);
+    //       Order::orderShippingmentProcess($req,$track_id);
+    //       Session::flash('success', 'Order Shipping process started'); 
+    //       return Redirect::back(); 
+    //     }else{
+    //       Session::flash('success', $collection->toArray()['Description']); 
+    //       return Redirect::back(); 
+    //     }
+      $req=$request->all();
+    $order=Order::orderSummary($req['order_id']);
+    $user_id=Config::get('constants.USPS');
+    $from = array(
+               'from_name' => 'chrysalis',
+               'from_firm' => '',
+               'from_address1' => '846 Haymond Rocks Road',
+               'from_address2' => '846 Haymond Rocks Road',
+               'from_city' => 'ANN ARBOR',
+               'from_state' => 'MI',
+               'from_zip5' =>  '48113');
+     if(!empty($order['basic'][0]->shipping_state)){
+      $state=Order::getStateAbbrev($order['basic'][0]->shipping_state);
+     }else{
+      $state="";
+     }
+     $to = array(
+               'to_name' =>  $order['basic'][0]->shipping_firstname.' '.$order['basic'][0]->shipping_lastname,
+               'to_firm' => '',
+               'to_address1' => $order['basic'][0]->shipping_address_1,
+               'to_address2' => $order['basic'][0]->shipping_address_2,
+               'to_city' =>$order['basic'][0]->shipping_city,
+               'to_state' => $state,
+               'to_zip5' => $order['basic'][0]->shipping_postcode);
+
+      $container = "VARIABLE";
+      $size = "REGULAR";
+      $insured_amount = 0;
+      $weight_in_ounces = 0.1;
+      $service_type ='PRIORITY';
+      $xml='<?xml version="1.0" encoding="UTF-8" ?><DelivConfirmCertifyV4.0Request USERID="'.$user_id.'"><Revision>2</Revision><ImageParameters /><FromName>'.$from['from_name'].'</FromName><FromFirm> </FromFirm><FromAddress1>'.$from['from_address1'].'</FromAddress1><FromAddress2>'.$from['from_address2'].'</FromAddress2><FromCity>'.$from['from_city'].'</FromCity><FromState>'.$from['from_state'].'</FromState><FromZip5>'.$from['from_zip5'].'</FromZip5><FromZip4/><ToName>'.$to['to_name'].'</ToName><ToFirm> </ToFirm><ToAddress1>'.$to['to_address2'].'</ToAddress1><ToAddress2>'.$to['to_address2'].'</ToAddress2><ToCity>'.$to['to_city'].'</ToCity><ToState>'.$to['to_state'].'</ToState><ToZip5>'.$to['to_zip5'].'</ToZip5><ToZip4 /><WeightInOunces>'.$weight_in_ounces.'</WeightInOunces><ServiceType>'.$service_type.'</ServiceType><ImageType>TIF</ImageType></DelivConfirmCertifyV4.0Request>';
+        $ch = curl_init('https://secure.shippingapis.com/ShippingAPI.dll?API=DelivConfirmCertifyV4&XML='.urlencode($xml));
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        $collection = new \Illuminate\Support\Collection(json_decode(json_encode(simplexml_load_string($this->removeNamespaceFromXML($output))), true));
+        if(!isset($collection->toArray()['Number'])){
+          $track_id=$collection->toArray()['DeliveryConfirmationNumber'];
+          $fileName = 'uspslabel/'.$track_id.'.pdf';
+          $array_text = array("_");
+          $array_replace =  "+";
+          $contents = base64_decode(str_replace($array_text, $array_replace, $collection->toArray()['DeliveryConfirmationLabel']))  ;
+          file_put_contents($fileName,$contents);
+          Order::orderShippingmentProcess($req,$track_id);
+          Session::flash('success', 'Order Shipping process started'); 
+          return Redirect::back(); 
+        }else{
+          Session::flash('error', $collection->toArray()['Description']); 
+          return Redirect::back(); 
+        }
+
+      }
+ 
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
       function removeNamespaceFromXML( $xml )
       {
         // Because I know all of the the namespaces that will possibly appear in 
@@ -637,6 +771,7 @@ class OrdersController extends Controller {
         // Return sanitized and cleaned up XML with no namespaces
         return $xml;
     }
+<<<<<<< HEAD
      public function downlaodTrankDetails($track_id,$type="usps"){
         // $file=public_path("uspslabel/".$track_id.".pdf");
         // return Response::download($file);
@@ -735,5 +870,11 @@ class OrdersController extends Controller {
        return true;
       
       }
+=======
+     public function downlaodTrankDetails($track_id){
+        $file=public_path("uspslabel/".$track_id.".pdf");
+        return Response::download($file);
+    }
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 }

@@ -16,6 +16,7 @@ span.logo-lg {width: 57%;    margin: 0 auto;}
     background-color: #60c5ac;
     border-color: #60c5ac;
 }
+<<<<<<< HEAD
 .c_edit_csmts .drop_uploader img {
     background: #fff;
 }
@@ -24,6 +25,9 @@ span.logo-lg {width: 57%;    margin: 0 auto;}
     top: 0;
 }
 /*Jithu 24042017 *******/ 
+=======
+/*Jithu 24042017 *******/
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 /*#dtTable tr>th:first-child{
 display: none;
 }
@@ -32,6 +36,7 @@ display: none;
 }
 */
 /*******************/
+<<<<<<< HEAD
 
 
 
@@ -646,6 +651,11 @@ div#messaging_div textarea#message_theard {
     font-style: italic;
     color: #ccc;
 }
+=======
+.col-md-6.dimsn-bknd {
+    margin-top: 6px;
+}
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 .crt_right_alng label.control-label {
     margin-bottom: 8px !important;
 }
@@ -678,12 +688,15 @@ div#messaging_div textarea#message_theard {
   position:relative;  
   left: 0;
  }
+<<<<<<< HEAD
 
  #events-update .input-group label.error { position: absolute; top: 65px !important; left: 0; }
 
  #locationField, error {
     margin-top: 35px;
 }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 span.input-group-addon.glyphicon.glyphicon-time {
     position: absolute;
     top: 30px;
@@ -712,6 +725,7 @@ span.input-group-addon.glyphicon.glyphicon-time {
 .c_ctmes-admin .form-group.has-feedback {
     padding-left: 0px;
 }
+<<<<<<< HEAD
 .view-order .box-header.with-border{padding-bottom: 0px !important;    border-bottom: 0px;}
 .nav>li>a:hover, .nav>li>a:active, .nav>li>a:focus {
     color: #444;
@@ -735,6 +749,8 @@ div#lightbox .modal-content {
 .box.box-info.order_review_tabs ul li a {
     color: #333;
 }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 /* .defult-form .fileupload.fileupload-new img {
     width: 100%;
 }
@@ -774,7 +790,11 @@ input#banner_image {
 }
 a.btn.btn-primary.pull-right.add-prod {
     margin-top: 27px;
+<<<<<<< HEAD
 	}
+=======
+}
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 .btn-warning:hover, .btn-warning:active, .btn-warning.hover {
     background-color: #60c5ac;    border-color: #60c5ac;
 }
@@ -820,7 +840,11 @@ span.remove_pic_banner {
 .btn-primary {
     background-color: #60c5ac;
     border-color: #60c5ac;
+<<<<<<< HEAD
     color: #fff;
+=======
+    color: #000;
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }
 ul.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front{max-height:150px; overflow-y:auto;}
 .btn-primary:hover {
@@ -927,7 +951,10 @@ input:checked + .slider:before {
   margin-right: 0px;
   margin-left: 0px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 h3.box-title{width:100%; float:left;}
 .box-title.heading-agent{border-bottom: 1px solid #eee; padding: 0px 0 10px 0;}
 #user_add_from input{border: 1px solid #ccc; border-radius: 4px;}
@@ -1009,6 +1036,7 @@ span.remove_pic {
 
 /*28-04-17 crate dharma*/
 .drop_uploader.drop_zone {
+<<<<<<< HEAD
     border: none !important;margin-top: 0px !important;
 }
 input#upload-file-selector{margin-top: 25px}
@@ -1020,16 +1048,31 @@ background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
     background-color: #e1e1e1;border-radius: 0px;
+=======
+    border: none !important;
+}
+.frnt_back_view .up-blog { background: #ccc; height: 295px; cursor: pointer; position: relative; }
+.frnt_back_view .drop_uploader.drop_zone .text { color:transparent;  }
+.frnt_back_view .drop_uploader.drop_zone ul.files.thumb li div.thumbnail {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 100% 50%;
+    background-color: #e1e1e1;
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }
 .input-btn{ margin:0 auto; }
 .d-amount{float: left; position: absolute; left:173px; width: 80px; top: 9px; margin-left: 10px;}
 
+<<<<<<< HEAD
 .threeblogs .box-title.heading-agent {
     font-weight: bold;
 }
 .col-md-6.pckg_right .input-group {
     margin-bottom: 15px;
 }
+=======
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 
 .ticket-view-approvals, .ticket-view-discussions, .ticket-view-task, .ticket-view-more{width:100%; float:left;margin:0 0 40px; padding:0 0px;}
@@ -1087,7 +1130,11 @@ ul.status-dashboard li{display: -webkit-inline-box; padding: 0 0 0 10px;}
 .status-count{width: 100%; float: left; text-align: center; margin: 20px 0;}
 .status-count .status-active{width: 25%; background: #fff; padding: 20px; border-radius: 100%; margin: 20px 0; margin: 0 auto; border:2px solid #3c8dbc; font-size:20px; color:#000;}
 .status-count span{font-size:20px}
+<<<<<<< HEAD
 span.remove {    position: absolute;    z-index: 999;    right: 30px;    color: red;    top: 15px;    cursor: pointer;}
+=======
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 /*27-12-2016*/
 /*29-12-2016*/
 .doc-info{width: 50%; float: left; margin:0 0 20px;}
@@ -1162,7 +1209,11 @@ input#edit_img_pic {
 
 .defult-form .image-label{width:100%; float:left; text-align:left !important;}
 .defult-form .fileupload.fileupload-new {position:relative !important;}
+<<<<<<< HEAD
 .defult-form .fileupload.fileupload-new span.remove_pic,.defult-form .fileupload.fileupload-new span.edit_remove_pic{position: absolute !important;top: 0px !important;left: 145px !important;color: red;cursor: pointer;}
+=======
+.defult-form .fileupload.fileupload-new span.remove_pic,.defult-form .fileupload.fileupload-new span.edit_remove_pic{position: absolute !important;top: 0px !important;left: 155px !important;color: red;cursor: pointer;}
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 /*10-01-2017*/
 .task-ticket span{padding:0 0px 0 15px; text-align:right;float:right}
@@ -1215,6 +1266,7 @@ left: 162px;
 /*16-01-2017*/
 
 /*17-01-2017*/
+<<<<<<< HEAD
 .drop_uploader{
     position: absolute;
     top: inherit;
@@ -1231,6 +1283,8 @@ left: 162px;
     top: 0px;
     z-index: 999;
 }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 .ticket-tabs{margin:20px 0 0;}
 .ticket-view .ticket-view-task{margin-top:20px;}
 .ticket-view-task .table>thead>tr>th{border-bottom:1px solid #f4f4f4}
@@ -1325,10 +1379,13 @@ body .loading img{width:10%;}
 .request-bag-admin td {
     padding: 3px 0px;
 }
+<<<<<<< HEAD
 .request-bag-admin td:first-child {
     min-width: 120px;
 	font-weight: 700;
 }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 .details-sec {
 	margin-bottom: 30px;
 	padding-left: 15px;
@@ -1378,6 +1435,7 @@ body .loading img{width:10%;}
 }
 
 #events-create .input-group label.error{top:60px;}
+<<<<<<< HEAD
 .add-event-error .error{top:55px;position: absolute;}
 
 
@@ -1418,6 +1476,19 @@ body .loading img{width:10%;}
 .user-request-sec .form-control {
     width: 60%;
 }
+=======
+.add-event-error .error{top:46px;position: absolute;}
+
+#error-msg-align label.error{
+  top: 60px !important;
+}
+div#locationField label.error {
+  position: relative;
+  top: 35px;
+}
+
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 @media only screen and (min-width : 1300px) {
 
 	.row_pregt .radio {
@@ -1442,6 +1513,7 @@ body .loading img{width:10%;}
 
 
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
+<<<<<<< HEAD
     .multi_div:nth-child(2n+1){margin-left: -10px !important;}
     .multi_div{width: auto;}
     .threeblogs.edit_admin_cstume {
@@ -1480,6 +1552,9 @@ body .loading img{width:10%;}
 }
   .fileupload.fileupload-new.frnt_view_img {
 
+=======
+	.fileupload.fileupload-new.frnt_view_img {
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     max-height: inherit;
 }
 .cupn_catries {
@@ -1489,6 +1564,7 @@ body .loading img{width:10%;}
     max-height: 50px;
     overflow: hidden;
 }
+<<<<<<< HEAD
 } 
 
 
@@ -1527,6 +1603,12 @@ body .loading img{width:10%;}
 	.orders_list_div_dashboard table#dtTable thead tr th:nth-child(2) {
     width: 18% !important;
 }
+=======
+}
+
+
+@media only screen and (min-width : 768px) {
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 .costume_creates_pages .fileupload.fileupload-new {
     min-width: 150px;
     min-height: 150px;
@@ -1541,6 +1623,7 @@ body .loading img{width:10%;}
 .main-header .logo .logo-sm{display:none;}
 }
 
+<<<<<<< HEAD
 @media only screen and (min-width : 1025px) {
     .threeblogs.edit_admin_cstume .col-md-4.col-sm-4.col-xs-12.multi_div {
     width: auto;
@@ -1657,6 +1740,12 @@ min-height: 298px;max-height: 298px;    width: 198px; margin: 0 auto;}
     text-align: center;
 }
     .form-group.has-feedback.cosutme-fr label.radio-inline {
+=======
+
+
+@media only screen and (max-width : 767px) {
+		.form-group.has-feedback.cosutme-fr label.radio-inline {
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     width: 40%;
     float: left;
     margin-left: 0px;
@@ -1686,7 +1775,11 @@ min-height: 298px;max-height: 298px;    width: 198px; margin: 0 auto;}
     padding-left: 0px;padding-right: 0px;
 }
 
+<<<<<<< HEAD
 /* 	.main-header .logo .logo-lg{display:none;} */
+=======
+	.main-header .logo .logo-lg{display:none;}
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 .main-header .logo img {    width: 130px;      margin-top: 5px;}
 .skin-blue .main-header .logo{background-color: #fff;}
 .main-footer .pull-right{width:100%; float:left; text-align:center;}

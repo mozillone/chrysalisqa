@@ -7,12 +7,16 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Redirect;
 use DB;
 use App\Order;
+<<<<<<< HEAD
 use App\Address;
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 use Session;
 use Usps\InternationalLabel;
 use Config;
 use Mail;
 use Response;
+<<<<<<< HEAD
 use App\Helpers\Site_model;
 //use App\BraintreeApp;
 use App\Helpers\StripeApp;
@@ -23,6 +27,8 @@ use App\Helpers\Endicia\Endicia;
 use App\Helpers\FedEx\ShipService,
     App\Helpers\FedEx\ShipService\ComplexType,
     App\Helpers\FedEx\ShipService\SimpleType;  
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 class OrdersController extends Controller {
     
         protected $user_id            = '';
@@ -34,10 +40,14 @@ class OrdersController extends Controller {
         protected $prod_api           = 'ShippingAPI.dll';
     public function __construct(Guard $auth)
     {
+<<<<<<< HEAD
        //$this->braintreeApi = new BraintreeApp();
        $this->stripe=new StripeApp();
        $this->csv = new ExportFile();
        $this->middleware(function ($request, $next) {
+=======
+        $this->middleware(function ($request, $next) {
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
               if(!Auth::check()){
                 return Redirect::to('/login')->send();
             }
@@ -60,7 +70,11 @@ class OrdersController extends Controller {
         $having='';
         if(!empty($req['search'])){
           if(!empty($req['search']['order_id']) ){
+<<<<<<< HEAD
             $where.=' AND ord.order_id ="'.$req['search']['order_id'].'"';
+=======
+            $where.=' AND ord.order_id ='.$req['search']['order_id'];
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           }
           if(!empty($req['search']['user_name']) ){
             $where.=' AND concat(usr.first_name," ",usr.last_name) LIKE "%'.$req['search']['user_name'].'%"';
@@ -83,6 +97,7 @@ class OrdersController extends Controller {
           }
         }
         }
+<<<<<<< HEAD
         $orders = DB::select('SELECT ord.order_id,concat(usr.first_name," ",usr.last_name) as user_name,concat(usr1.first_name," ",usr1.last_name) as seller_name,concat("$",ord.total) as amount,DATE_FORMAT(ord.created_at,"%m/%d/%Y %h:%i %p") as date,sts.name as status,GROUP_CONCAT(DISTINCT(itms.costume_name) SEPARATOR ",") as costume_name FROM `cc_order` as ord LEFT JOIN cc_order_items as itms on itms.order_id=ord.order_id LEFT JOIN cc_users as usr on usr.id=ord.buyer_id  LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id  LEFT JOIN cc_users as usr1 on usr1.id=ord.seller_id  '.$where.' GROUP BY ord.order_id '.$having.' ORDER BY `order_id` DESC');
         return response()->success(compact('orders'));
   
@@ -102,6 +117,12 @@ class OrdersController extends Controller {
        $this->csv->csvExportFile($data);
     }
   }
+=======
+        $orders = DB::select('SELECT ord.order_id,concat(usr.first_name," ",usr.last_name) as user_name,concat("$",ord.total) as amount,DATE_FORMAT(ord.created_at,"%m/%d/%Y %h:%i %p") as date,sts.name as status,GROUP_CONCAT(DISTINCT(itms.costume_name) SEPARATOR ",") as costume_name FROM `cc_order` as ord LEFT JOIN cc_order_items as itms on itms.order_id=ord.order_id LEFT JOIN cc_users as usr on usr.id=ord.buyer_id LEFT JOIN cc_order_status as ord_st on ord_st.order_id=ord.order_id LEFT JOIN cc_status as sts on sts.status_id=ord_st.status_id  '.$where.' GROUP BY ord.order_id '.$having.' ORDER BY `order_id` DESC');
+        return response()->success(compact('orders'));
+  
+    }
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     public function orderSummary($order_id){
       $order=Order::orderSummary($order_id);
       if(count($order)){
@@ -140,7 +161,11 @@ class OrdersController extends Controller {
                   $m->subject('#'.$result["message"]['order_id'].' Transaction report');
               });
          }
+<<<<<<< HEAD
          Session::flash('success', 'Order Transaction is completed successfully'); 
+=======
+         Session::flash('success', 'Order Transacrtion is completed successfully'); 
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
          return Redirect::back(); 
        }
       }
@@ -157,6 +182,7 @@ class OrdersController extends Controller {
        return Redirect::back(); 
     }
    public function orderLabelGenate(Request $request){
+<<<<<<< HEAD
       $req=$request->all();
       if($req['carrier_type']=="USPS"){
         //$this->usps($req);
@@ -626,6 +652,61 @@ class OrdersController extends Controller {
             }
           }
         
+=======
+    $req=$request->all();
+    $order=Order::orderSummary($req['order_id']);
+    $user_id=Config::get('constants.USPS');
+    $from = array(
+               'from_name' => 'chrysalis',
+               'from_firm' => '',
+               'from_address1' => '846 Haymond Rocks Road',
+               'from_address2' => '846 Haymond Rocks Road',
+               'from_city' => 'ANN ARBOR',
+               'from_state' => 'MI',
+               'from_zip5' =>  '48113');
+     if(!empty($order['basic'][0]->shipping_state)){
+      $state=Order::getStateAbbrev($order['basic'][0]->shipping_state);
+     }else{
+      $state="";
+     }
+     $to = array(
+               'to_name' =>  $order['basic'][0]->shipping_firstname.' '.$order['basic'][0]->shipping_lastname,
+               'to_firm' => '',
+               'to_address1' => $order['basic'][0]->shipping_address_1,
+               'to_address2' => $order['basic'][0]->shipping_address_2,
+               'to_city' =>$order['basic'][0]->shipping_city,
+               'to_state' => $state,
+               'to_zip5' => $order['basic'][0]->shipping_postcode);
+
+      $container = "VARIABLE";
+      $size = "REGULAR";
+      $insured_amount = 0;
+      $weight_in_ounces = $req['weight'] ;
+      $service_type =$req['method'];
+      $xml='<?xml version="1.0" encoding="UTF-8" ?><DelivConfirmCertifyV4.0Request USERID="'.$user_id.'"><Revision>2</Revision><ImageParameters /><FromName>'.$from['from_name'].'</FromName><FromFirm> </FromFirm><FromAddress1>'.$from['from_address1'].'</FromAddress1><FromAddress2>'.$from['from_address2'].'</FromAddress2><FromCity>'.$from['from_city'].'</FromCity><FromState>'.$from['from_state'].'</FromState><FromZip5>'.$from['from_zip5'].'</FromZip5><FromZip4/><ToName>'.$to['to_name'].'</ToName><ToFirm> </ToFirm><ToAddress1>'.$to['to_address2'].'</ToAddress1><ToAddress2>'.$to['to_address2'].'</ToAddress2><ToCity>'.$to['to_city'].'</ToCity><ToState>'.$to['to_state'].'</ToState><ToZip5>'.$to['to_zip5'].'</ToZip5><ToZip4 /><WeightInOunces>'.$weight_in_ounces.'</WeightInOunces><ServiceType>'.$service_type.'</ServiceType><ImageType>TIF</ImageType></DelivConfirmCertifyV4.0Request>';
+        $ch = curl_init('https://secure.shippingapis.com/ShippingAPI.dll?API=DelivConfirmCertifyV4&XML='.urlencode($xml));
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        $collection = new \Illuminate\Support\Collection(json_decode(json_encode(simplexml_load_string($this->removeNamespaceFromXML($output))), true));
+        if(!isset($collection->toArray()['Number'])){
+          $track_id=$collection->toArray()['DeliveryConfirmationNumber'];
+          $fileName = 'uspslabel/'.$track_id.'.pdf';
+          $array_text = array("_");
+          $array_replace =  "+";
+          $contents = base64_decode(str_replace($array_text, $array_replace, $collection->toArray()['DeliveryConfirmationLabel']))  ;
+          file_put_contents($fileName,$contents);
+          Order::orderShippingmentProcess($req,$track_id);
+          Session::flash('success', 'Order Shipping process started'); 
+          return Redirect::back(); 
+        }else{
+          Session::flash('error', $collection->toArray()['Description']); 
+          return Redirect::back(); 
+        }
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
       }
  
       function removeNamespaceFromXML( $xml )
@@ -654,6 +735,7 @@ class OrdersController extends Controller {
         // Return sanitized and cleaned up XML with no namespaces
         return $xml;
     }
+<<<<<<< HEAD
     public function downlaodTrankDetails($track_id,$type="usps"){
         if($type=="usps"){
           $file=public_path("uspslabel/".$track_id.".pdf");
@@ -799,3 +881,12 @@ class OrdersController extends Controller {
     }
 }
 
+=======
+    public function downlaodTrankDetails($track_id){
+        $file=public_path("uspslabel/".$track_id.".pdf");
+        return Response::download($file);
+    }
+
+
+}
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

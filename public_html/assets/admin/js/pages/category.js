@@ -82,7 +82,11 @@ $('.add-prod').click(function(){
 	var product_id=$('#products_id').val();
   if(sku_no.length){
   	if(jQuery.inArray(product_id,products)==-1 || products.length==0){
+<<<<<<< HEAD
     products.push(product_id);
+=======
+  	products.push(product_id);
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
    	$('.assigned-products').append('<tr><td>'+product_name+'</td><td>'+sku_no+'</td><td>$'+price+'</td><td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='+product_id+'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>')
   	$('#products_list').val("");
   	}
@@ -122,6 +126,7 @@ $( "#reorder" ).sortable({
            	});
       }
 });
+<<<<<<< HEAD
  $('input[name="cat_name"]').val($('#parent_id option:selected').text());
 $(document).on('change','#parent_id',function(){
 	if($(this).val()){
@@ -129,6 +134,13 @@ $(document).on('change','#parent_id',function(){
 		$('.costumes').removeClass('hide');
 	}else{
      $('input[name="cat_name"]').val('');
+=======
+
+$(document).on('change','#parent_id',function(){
+	if($(this).val()){
+		$('.costumes').removeClass('hide');
+	}else{
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		$('.costumes').addClass('hide');
 	}
 });
@@ -233,12 +245,18 @@ $(document).on("click",".remove_pic_cat",function(){
   $('#img-chan1').attr('src',"/category_images/df_img.jpg");
   $('input[name="cat_image"]').val('');
   $('input[name="is_removed"]').val("1");
+<<<<<<< HEAD
   $(this).remove();
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   });
 $(document).on("click",".remove_pic_banner",function(){
   $('#img-chan2').attr('src',"/category_images/df_img.jpg");
   $('input[name="banner_image"]').val('');
   $('input[name="is_removed"]').val("1");
+<<<<<<< HEAD
   $(this).remove();
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   });
     

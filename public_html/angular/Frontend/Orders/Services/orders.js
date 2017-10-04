@@ -19,6 +19,7 @@ app.factory('Orders', function($http){
 	    });
 	  
 	  }
+<<<<<<< HEAD
 	  fac.getMycostumeSearchlist=function(search){
 	 	  var _token=$('.token').val();
 	 	 return  $http({
@@ -28,5 +29,7 @@ app.factory('Orders', function($http){
 	    });
 	  
 	  }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   return fac;
 });

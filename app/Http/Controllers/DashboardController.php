@@ -13,8 +13,11 @@ use App\Helpers\Site_model;
 use App\Address;
 use App\Creditcard;
 use Response;
+<<<<<<< HEAD
 use App\Imageresize;
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 class DashboardController extends Controller {
 
 	protected $messageBag = null;
@@ -37,16 +40,22 @@ class DashboardController extends Controller {
 	{
 		if(Auth::user()->id!="1"){
     	$this->data = array();
+<<<<<<< HEAD
       $this->data['default_billing_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','billing')->get();
        $this->data['seller_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
 			//print_r($this->data['default_billing_address']);die;
       $this->data['user_details'] = DB::table('users')->where('id',Auth::user()->id)->first();
 			$this->data['default_shipping_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','shipping')->get();
+=======
+			$this->data['default_billing_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','billing')->first();
+			$this->data['default_shipping_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','shipping')->first();
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			$this->data['states']   = Site_model::Fetch_all_data('states', '*');
     $this->data['countries']   = Site_model::Fetch_all_data('countries', '*');
     $this->data['recent_orders'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id   where ord.buyer_id='.Auth::user()->id.' ORDER BY `order_id` DESC LIMIt 0,5');
     $this->data['costumes_sold'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id where ord.seller_id='.Auth::user()->id.' ORDER BY ord.order_id DESC LIMIt 0,5');
     $this->data['creditcard_list'] = DB::table('creditcard')->where('user_id',Auth::user()->id)->get();
+<<<<<<< HEAD
     $this->data['my_costumes'] = DB::table('costumes')->where('created_by',Auth::user()->id)
     ->leftJoin('costume_description','costumes.costume_id','costume_description.costume_id')
     ->take(5)
@@ -56,6 +65,10 @@ class DashboardController extends Controller {
     $states=Address::getStatesList();
     //echo "<pre>";print_r($this->data['my_costumes']);die; 
    		return view('frontend.dashboard.dashboard')->with($this->data)->with('states',$states);
+=======
+//print_r($this->data['recent_orders']);
+			return view('frontend.dashboard.dashboard')->with($this->data);
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			
 		}else{
 			return Redirect::to('admin/dashboard');
@@ -68,6 +81,7 @@ class DashboardController extends Controller {
   {
 	
     $req=$request->all();
+<<<<<<< HEAD
   
 //echo "<pre>";print_r($req);die;
         if(count($req)){
@@ -99,6 +113,31 @@ class DashboardController extends Controller {
             'first_name' => $total_name[0],
             'last_name' => $last_name_split,
             'display_name' => $req['last_name'],
+=======
+	//echo "<pre>";print_r($req);die;
+        if(count($req)){
+        $name = User::find(Auth::user()->id);
+        if(isset($req['avatar'])){
+          $file_name = str_random(10).'.'.$req['avatar']->getClientOriginalExtension();
+          $source_image_path=public_path('profile_img');
+          $thumb_image_path1=public_path('profile_img');
+          $thumb_image_path2=public_path('profile_img/thumbs');
+          $req['avatar']->move($source_image_path, $file_name);
+          $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path1.'/'.$file_name,150,150);
+          $this->sitehelper->generate_image_thumbnail($source_image_path.'/'.$file_name,$thumb_image_path2.'/'.$file_name,30,30);
+
+        }
+        else if(isset($req['is_removed'])){
+          $file_name="";
+        }
+        else{
+          $file_name=$name->avatar;
+        }
+        $userData = [
+            'first_name' => $req['first_name'],
+            'last_name' => $req['last_name'],
+            'display_name' =>  $req['first_name']." ".$req['last_name'],
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             'email'=>$req['email'],
             'user_img' =>$file_name
         ];
@@ -106,6 +145,7 @@ class DashboardController extends Controller {
           $userData['password'] =  Hash::make($req['password']);
         }
         $affectedRows = User::where('id', '=', Auth::user()->id)->update($userData);
+<<<<<<< HEAD
         // send mail
         $reg_subject        = "Profile Updated";
         $reg_data           = array('name'=>$total_name[0]);
@@ -113,6 +153,8 @@ class DashboardController extends Controller {
         $reg_to             = Auth::user()->email;
         $mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
         // end mail
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         Session::flash('success', 'Your profile is updated successfully');
         return Redirect::back();
     return view('frontend.dashboard.dashboard');
@@ -133,6 +175,7 @@ public function addBillingAddress(Request $req){
   return Redirect::back();
 
 }
+<<<<<<< HEAD
 public function deleteAddress($id){
   //echo "<pre>";print_r($id);die;
 $deleteAddress = DB::table('address_master')->where('address_id',$id)->delete();
@@ -299,4 +342,32 @@ public function ShippingDetails(Request $request){
           echo "<pre>";print_r($request->all());die;
         }
 
+=======
+public function deleteAddress(Request $req){
+  //echo "<pre>";print_r($req->all());die;
+$deleteAddress = DB::table('address_master')->where('address_id',$req->id)->delete();
+Session::flash('success', 'Address deleted successfully.');
+return "success";
+
+}
+public function creditcradAdd(Request $req){
+  //echo "<pre>";print_r($req->all());die;
+  $cc_id=Creditcard::addCreditCardDashboard($req,Auth::user()->id);
+  Session::flash('success', 'Card added successfully.');
+  return Redirect::back();
+}
+public function Deleteccard(Request $req){
+    //echo $id;die;
+    $delete_card = DB::table('creditcard')->where('id',$req->id)->delete();
+    Session::flash('success', 'Card deleted successfully.');
+    return "success";
+  }
+
+public function allOrders(){
+  /*$this->data = array();
+  $this->data['recent_orders'] = DB::Select('SELECT DATE_FORMAT(created_at,"%m/%d/%y") as date,ord.order_id,st.name as status FROM `cc_order` as ord LEFT JOIN cc_order_status as sts on sts.order_id=ord.order_id LEFT JOIN cc_status as st on st.status_id=sts.status_id  where ord.order_id='.Auth::user()->id.'
+ORDER BY `order_id` DESC');
+  return view('frontend.dashboard.allorders')->with('all_data',$this->data);*/
+}
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }

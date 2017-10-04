@@ -1,4 +1,5 @@
 $(function(){
+<<<<<<< HEAD
 
  $("body").on("click", ".main_cat_url_class > a", function(event){
     main_cat_url = $(this).attr('data-cat-url');
@@ -6,20 +7,26 @@ $(function(){
  });
 
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
  $("#loginpopup").validate();
 	$("#loginpopup_email").rules("add", {required:true,email: true,messages: {
 		email: "Enter a valid  user email"
 	  }});
 	$("#loginopup_password").rules("add", {required:true,minlength:5,maxlength:15});
+<<<<<<< HEAD
  $("#loginpopup1").validate();
 	$("#loginpopup_email1").rules("add", {required:true,email: true,messages: {
 		email: "Enter a valid  user email"
 	  }});
 	$("#loginopup_password1").rules("add", {required:true,minlength:5,maxlength:15});
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	
 	
 	$("#signup_pop").validate();
 	$("#pop_first_name").rules("add", {required:true});
+<<<<<<< HEAD
 	$("#pop_username").rules("add", {required:true,remote: {url: "/usernameValidation",type: "post"},messages: {
 		email: "Enter a valid  Username",
 		remote: "This Username is already registered."
@@ -44,6 +51,24 @@ $(function(){
                 	required: true,
                 	remote: {url: "/usernameValidation",type: "post"}
                 },
+=======
+	$("#pop_last_name").rules("add", {required:true});
+	$("#popup_email").rules("add", {required:true,email: true,remote: {url: "/emailValidation",type: "post"},messages: {
+		email: "Enter a valid  user email",
+		remote: "This email is already taken."
+	  }});
+
+	$("#popup_password").rules("add", {required:true,minlength:5,maxlength:15});
+	$("#pop_cpassword").rules("add", {required:true,equalTo:"#popup_password",messages: {
+		equalTo: "Enter same as password"
+	  }});
+	$("#signup_pop1").validate({
+            rules: {
+                first_name:{
+                        required: true,
+                        maxlength: 50
+                    },
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 last_name:{
                         required: true,
                           maxlength: 50,
@@ -51,6 +76,7 @@ $(function(){
                 email:{
                        required:true,
                        email: true,
+<<<<<<< HEAD
                        remote: {url: "/emailValidation",type: "post"}
                     },
                  password:{
@@ -68,6 +94,14 @@ $(function(){
                  	equalTo: "Password doesn't matches."
                  }
                  }	
+=======
+                       remote: {url: "/emailValidation",type: "post"},messages: {
+						email: "Enter a valid  user email",
+						remote: "This email is already taken."
+					  }
+                    },
+                    }
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
        
         });
 
@@ -75,9 +109,12 @@ $(function(){
 	$("#forgetpopup_password").validate();
 	$("#forgotpop_email").rules("add", {required:true,email: true});
 	
+<<<<<<< HEAD
 	$("#single_forgetpopup_password").validate();
 	$("#sing_forgotpop_email").rules("add", {required:true,email: true});
 	
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     $(".mobile-plus").click(function(){
 	$(this).toggleClass("mobile-minus");	
     $(this).parent("li").find(".responsive-inner").toggleClass("none-rm");
@@ -100,6 +137,7 @@ $(function(){
 	   });
    }
     $(document).on('click','.signup_popup', function(){
+<<<<<<< HEAD
     	  $('#loginpopup')[0].reset();
    		  $('#signup_pop')[0].reset();
    		  $('label.error').remove();
@@ -119,27 +157,50 @@ $(function(){
      $(document).on('click','.mini-cart', function(){
      	 	var qty=0;
      	 	$.ajax({
+=======
+   		  $('#loginpopup')[0].reset();
+   		  $('#signup_pop')[0].reset();
+   		  $('label.error').remove();
+   		  $('.tab-pane').removeClass('active');
+   		  $('#login_tab1').addClass('active');
+   		  $('.first_active').trigger('click');
+   		  $('#signup_popup').modal('show');
+        });
+     $(document).on('click','.mini-cart', function(){
+   		 	$.ajax({
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			type: 'GET',
 			url: '/getMiniCartProducts',
 			success: function(response){
 				if(response['basic'].length){
+<<<<<<< HEAD
 					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date cart-price"><span><b class="qty">0</b> Items Added<br><a href="/cart">View & Edit Cart</a></span><span class="shi_date_right text-right right"><span classs="subtl">Subtotal</span><span class="ctr-tl-price"> $'+response['basic'][0].total+'</span></span></div><div class="row scels">';
 				$.each(response['basic'],function(i,value){
 					qty=parseInt(qty)+parseInt(value.qty);
 					var path='/costumers_images/Small/'+value.image+'';
+=======
+					var cart='<div class="cart_page_vew"><div class="well"><div class="shipping_date cart-price"><span>'+response['basic'].length+' Items Added<br><a href="/cart">View & Edit Cart</a></span><span class="shi_date_right text-right right"><span classs="subtl">Subtotal</span><span class="ctr-tl-price"> $'+response['basic'][0].total+'</span></span></div><div class="row scels">';
+				$.each(response['basic'],function(i,value){
+					var path='/costumers_images/Medium/'+value.image+'';
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					if(fileExists(path)){
 						var src=path;
 					}else{
 						var src='/costumers_images/default-placeholder.jpg';
 					}
+<<<<<<< HEAD
 					
 					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" ></div><div class="media-body"><h4 class="media-heading"><a href="/product'+value.url_key+'">'+value.costume_name+'</a></h4><p><b>Item Condition : </b>'+capitalization(value.condition)+'</p><p><b>Size : </b>'+capitalization(value.size)+'</p></div></div></div>'
+=======
+					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" height="65px" width="50px"></div><div class="media-body"><h4 class="media-heading"><a href="/product'+value.url_key+'">'+value.costume_name+'</a></h4><p><b>Item Condition : </b>'+capitalization(value.condition)+'</p><p><b>Size : </b>'+capitalization(value.size)+'</p></div></div></div>'
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				});
 				cart+='</div></div><div class="chk-out"><a href="/checkout">Proceed to Checkout</a></div></div>';
 				}else{
 					var cart="<div class='empty-cart'>You have no items in your shopping cart.</div>";
 				}
 				$('.cart-products').html(cart);
+<<<<<<< HEAD
 				$('.qty').text(qty);
 			}
 			});	
@@ -147,6 +208,10 @@ $(function(){
 			
 			
 		
+=======
+			}
+			});	
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         });
      function fileExists(url) {
 	    if(url){
@@ -174,6 +239,7 @@ $(function(){
 		name = firstChar.toUpperCase() + tail;
 		return name;
     }
+<<<<<<< HEAD
 	
 
 
@@ -307,3 +373,7 @@ $('.respnsive-ser-rm').click(function() {
   });
   
   
+=======
+    
+})
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

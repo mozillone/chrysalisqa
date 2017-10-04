@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+<<<<<<< HEAD
 jQuery(document).ready(function($) {
 
   if (window.history && window.history.pushState) {
@@ -12,13 +13,19 @@ jQuery(document).ready(function($) {
 
   }
 });
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   	$("#order-charity").validate({
   			ignore: ":hidden",
             rules: {
                 suggest_charity:{
                         required: true,
                         maxlength:100
+<<<<<<< HEAD
                     }
+=======
+                    },
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
            }
  	
@@ -28,11 +35,18 @@ jQuery(document).ready(function($) {
 	
 	$('#suggest_charity').change(function(){
 		if($(this).is(":checked")){
+<<<<<<< HEAD
             $("#charity").remove("remove");
             $("input[name='charity']").prop('checked', false);
 			$('.thankyou-rms').removeClass('hide');
 		}else{
             $("#charity").rules("add", {required:true});
+=======
+			$("#charity").remove("remove");
+			$('.thankyou-rms').removeClass('hide');
+		}else{
+			$("#charity").rules("add", {required:true});
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			$('.thankyou-rms').addClass('hide');
 		}
 	})
@@ -50,7 +64,12 @@ jQuery(document).ready(function($) {
         $('.outer #second-box').width(val * 4);
 
     }
+<<<<<<< HEAD
      var reverse = function (num) {
+=======
+
+    var reverse = function (num) {
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         se.update({from: (num), to: max - num});
         colorBoxUpdate(num);
         if(num==0){
@@ -58,16 +77,22 @@ jQuery(document).ready(function($) {
         	$('.chrysalis-donation').html('$0.00');
         	$('.total-donation').html('$0.00');
         	$('input[name="amount"]').val('0.00');
+<<<<<<< HEAD
             $('.crt-amount').html('Donation should not be $0.00');
           
         }
         if(num==25){
             $('span.crt-amount').empty();
+=======
+        }
+        if(num==12.5){
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         	$('.my-donation').html('$0.25');
         	$('.chrysalis-donation').html('$0.25');
         	$('.total-donation').html('$0.50');
         	$('input[name="amount"]').val('0.50');
         }
+<<<<<<< HEAD
         if(num==50){
             $('span.crt-amount').empty();
         	$('.my-donation').html('$0.50');
@@ -88,6 +113,26 @@ jQuery(document).ready(function($) {
         // 	$('.total-donation').html('$2.00');
         // 	$('input[name="amount"]').val('2.00');
         // }
+=======
+        if(num==25){
+        	$('.my-donation').html('$0.5');
+        	$('.chrysalis-donation').html('$0.5');
+        	$('.total-donation').html('$1.00');
+        	$('input[name="amount"]').val('1.00');
+        }
+         if(num==37.5){
+        	$('.my-donation').html('$0.75');
+        	$('.chrysalis-donation').html('$0.75');
+        	$('.total-donation').html('$1.50');
+        	$('input[name="amount"]').val('1.50');
+        }
+        if(num==50){
+        	$('.my-donation').html('$1.00');
+        	$('.chrysalis-donation').html('$1.00');
+        	$('.total-donation').html('$2.00');
+        	$('input[name="amount"]').val('2.00');
+        }
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     };
 
     var se = $range.ionRangeSlider({
@@ -96,7 +141,11 @@ jQuery(document).ready(function($) {
         max: max,
         from: 0,
         to: 100,
+<<<<<<< HEAD
         step: 25,
+=======
+        step: 12.5,
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         prefix: "$",
         to_fixed: true,
         onChange: function (data) {
@@ -108,6 +157,7 @@ jQuery(document).ready(function($) {
             }
         }
     }).data('ionRangeSlider');
+<<<<<<< HEAD
 
 $('#order-charity').submit(function(e){
       var amount=$('input[name="amount"]').val();
@@ -117,4 +167,6 @@ $('#order-charity').submit(function(e){
       }
      
 });
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 })

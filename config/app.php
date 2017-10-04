@@ -1,4 +1,8 @@
+<<<<<<< HEAD
     <?php
+=======
+<?php
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 return [
     
@@ -186,6 +190,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Usps\UspsServiceProvider::class,
         Nahid\Talk\TalkServiceProvider::class,
+<<<<<<< HEAD
         Intervention\Image\ImageServiceProvider::class,
 		Approached\LaravelImageOptimizer\ServiceProvider::class,
         //Skovmand\Mailchimp\MailchimpServiceProvider::class,
@@ -194,6 +199,8 @@ return [
         Intervention\Image\ImageServiceProvider::class
 
        
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     ],
 
     /*
@@ -241,15 +248,22 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+<<<<<<< HEAD
         'Theme' => igaster\laravelTheme\Facades\Theme::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'fedex' => App\FedEx\AbstractComplexType::class,
+=======
+	    'Theme' => igaster\laravelTheme\Facades\Theme::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         'helper' => App\Helpers\SiteHelper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Usps' => 'Usps\Facades\Usps',
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'Talk'      => Nahid\Talk\Facades\Talk::class,
+<<<<<<< HEAD
         'Image' => Intervention\Image\Facades\Image::class,
         'Meta'    => Eusonlito\LaravelMeta\Facade::class,
         'Sitemap' => Watson\Sitemap\Facades\Sitemap::class,
@@ -301,5 +315,9 @@ return [
     */
 
     'tags' => ['Tag', 'MetaName', 'MetaProperty', 'TwitterCard'],
+=======
+
+   ],
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 ];

@@ -1,11 +1,15 @@
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
    "name": "laravel/laravel",
    "description": "The Laravel Framework.",
    "keywords": ["framework", "laravel"],
    "license": "MIT",
    "type": "project",
    "require": {
+<<<<<<< HEAD
       "php": ">=5.6.4",
       "approached/laravel-image-optimizer": "^2.3",
       "braintree/braintree_php": "*",
@@ -23,6 +27,16 @@
       "watson/sitemap": "*",
       "yajra/laravel-datatables-oracle": "~6.0"
    },
+=======
+       "php": ">=5.6.4",
+       "cartalyst/stripe-laravel": "5.0.*",
+       "guzzle/guzzle": "*",
+       "laravel/framework": "5.3.*",
+       "laravel/socialite": "^2.0",
+       "yajra/laravel-datatables-oracle": "~6.0",
+         "nahid/talk": "^2.2",
+       "mpinchuk/laravel-usps": "dev-master"   },
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
    "require-dev": {
        "fzaninotto/faker": "~1.4",
        "mockery/mockery": "0.9.*",
@@ -68,4 +82,8 @@
            "packagist": false
        }
    ]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

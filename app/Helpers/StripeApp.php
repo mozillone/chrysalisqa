@@ -61,6 +61,7 @@ class StripeApp  {
                
 			 	return $charge;
    }
+<<<<<<< HEAD
    public function charge_capture($amount,$currency,$customer_id,$card_id,$desc,$capture)
    {
    	       $charge = Stripe::charges()->create([
@@ -94,5 +95,7 @@ class StripeApp  {
 	 	$result=Stripe::refunds()->create($transaction_id);
 	 	return $result;
 	 }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   
 }

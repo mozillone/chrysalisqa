@@ -10,6 +10,7 @@
 @stop
 {{-- Content --}}
 @section('content')
+<<<<<<< HEAD
 <section class="container content-header view-order_tl_div">
   	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
@@ -20,6 +21,16 @@
 </nav>
 </div>
 </div>
+=======
+ <section class="container content-header">
+    
+  
+<nav class="breadcrumb row">
+  <a class="breadcrumb-item" href="{{url('dashboard')}}">Dashboard &nbsp;&nbsp;></a>
+  <a class="breadcrumb-item" href="/my/orders">Orders > &nbsp;</a>
+  <span class="breadcrumb-item active">View Order #{{$order_id}}</span>
+</nav>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 </section>
 <div class="view-order">
 <section class="container content">
@@ -41,7 +52,13 @@
 			<div class="viewTabs_rm">
                 <ul class="nav nav-tabs viewTabs order-summery-tabs">
                     <li class="active"><a href="#summery" data-toggle="tab">Summary</a></li>
+<<<<<<< HEAD
                    
+=======
+                    <li><a href="#status" data-toggle="tab">Shipping Status</a></li>
+                    <li><a href="#payment" data-toggle="tab">Payment Info</a></li>
+                    <li><a href="#dispute" data-toggle="tab">Dispute</a></li>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 </ul>
 			</div>
                 <div class="tab-content">
@@ -50,7 +67,11 @@
                             <div class="summery-info">
                                 <div class="row">
                                 <div class="col-md-4">
+<<<<<<< HEAD
 								<div class="rencemt_order_table table-responsive">
+=======
+								<div class="rencemt_order_table">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                     <h2>Order Summary</h2>
                                     <table>
                                         <tbody>
@@ -60,7 +81,11 @@
                                         </tr>
                                         <tr>
                                             <td>Ordered Date:</td>
+<<<<<<< HEAD
                                             <td>{{$order['basic'][0]->date}}</td>
+=======
+                                            <td>{{$order['basic'][0]->created_at}}</td>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                         </tr>
                                         <tr>
                                             <td>Status:</td>
@@ -71,7 +96,11 @@
 									</div>
                                 </div>
                                 <div class="col-md-4">
+<<<<<<< HEAD
 								<div class="rencemt_order_table table-responsive">
+=======
+								<div class="rencemt_order_table">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                     <h2>Buyer Information</h2>
                                     <table>
                                         <tbody>
@@ -92,7 +121,11 @@
 									</div>
                                 </div>
                                 <div class="col-md-4">
+<<<<<<< HEAD
 								<div class="rencemt_order_table table-responsive">
+=======
+								<div class="rencemt_order_table">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                     <h2>Seller Information</h2>
                                     <table>
                                         <tbody>
@@ -124,7 +157,11 @@
 											</li>
 											<li>
 												<p>{{$order['basic'][0]->pay_username}}</p>
+<<<<<<< HEAD
 												<p>{{$order['basic'][0]->pay_address_1}} {{$order['basic'][0]->pay_address_2}}</p>
+=======
+												<p>{{$order['basic'][0]->pay_address_1}}</p>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 												<p>{{$order['basic'][0]->pay_city}}</p>
 												<p>{{$order['basic'][0]->pay_state}} {{$order['basic'][0]->pay_zipcode}}</p>
 											</li>
@@ -139,7 +176,11 @@
 										<li><h2>Shipping Address :</h2></li>	
 										<li>
 											<p>{{$order['basic'][0]->ship_username}}</p>
+<<<<<<< HEAD
 											<p>{{$order['basic'][0]->shipping_address_1}} {{$order['basic'][0]->shipping_address_2}}</p>
+=======
+											<p>{{$order['basic'][0]->shipping_address_1}}</p>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 											<p>{{$order['basic'][0]->shipping_city}}</p>
 											<p>{{$order['basic'][0]->shipping_state}} {{$order['basic'][0]->shipping_postcode}}</p>
 										</li>
@@ -153,7 +194,11 @@
                             <div class="payment-sec">
                                 <div class="row">
                                     <div class="col-md-6">
+<<<<<<< HEAD
 									<div class="rencemt_order_table table-responsive">
+=======
+									<div class="rencemt_order_table">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                         <h2>Payment Information</h2>
                                         <table>
                                             <tbody>
@@ -180,7 +225,11 @@
                                
 
                              <div class="col-md-6">
+<<<<<<< HEAD
                                     <div class="rencemt_order_table table-responsive ship_info_rsp">
+=======
+                                    <div class="rencemt_order_table">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                         <h2>Shipping Information</h2>
 
                                         <h4>Shipping Info</h4>
@@ -196,7 +245,11 @@
                                             @foreach($order['order_shipping'] as $shipping)
                                               <tr>
                                                 <td>{{$shipping->track_no}}</td>
+<<<<<<< HEAD
                                                 <td><a href="/sold/order/track-info/download/{{$shipping->track_no}}" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Download</a> <a target="_blank" href="https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&text28777=&tLabels={{$shipping->track_no}}" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
+=======
+                                                <td><a href="/sold/order/track-info/download/{{$shipping->track_no}}" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Download</a> <a target="_blank" href="https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&text28777=&tLabels=9400111699000840733045%2C" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                               </tr>
                                             @endforeach    
                                             @else
@@ -210,9 +263,13 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="order_id" value="{{$order['basic'][0]->order_id}}">
                                         <input type="hidden" name="user_id" value="{{$order['basic'][0]->buyer_id}}">
+<<<<<<< HEAD
                                          <input type="hidden" name="transation_api_id" value="{{$order['basic'][0]->api_transaction_no}}">
                                         <input type="hidden" name="transation_id" value="{{$order['basic'][0]->transaction_id}}">
                                          <input type="hidden" name="status" value="{{$order['basic'][0]->payment_status}}">
+=======
+                                        
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                          <input type="submit" value="Generate Label" class="btn btn-primary"/>
                                         </form>
                                        
@@ -223,14 +280,21 @@
                             <div class="order-list-sec">
                                 <div class="row">
                                     <div class="col-md-12">
+<<<<<<< HEAD
 									<div class="rencemt_order_table item_orders table-responsive">
+=======
+									<div class="rencemt_order_table">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                         <h2>Items Ordered</h2>
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
                                                 <th>SKU</th>
                                                 <th>Costume Name</th>
+<<<<<<< HEAD
                                                 <th>Weight (lbs)</th>
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                                 <th>Original Price</th>
                                                 <th>Qty</th>
                                                 <th>Price</th>
@@ -238,16 +302,23 @@
                                             </thead>
                                             <tbody>
                                             @foreach($order['items'] as $items)
+<<<<<<< HEAD
 										
                                             <tr>
                                                 <td>{{$items->sku}}</td>
                                                 <td>{{$items->costume_name}}</td>
                                                 <td>{{$items->weight*$items->qty}} (lbs)</td>
+=======
+                                            <tr>
+                                                <td>{{$items->sku}}</td>
+                                                <td>{{$items->costume_name}}</td>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                                 <td>$ {{number_format($items->price, 2, '.', ',')}}</td>
                                                 <td>{{$items->qty}}</td>
                                                 <td>$ {{number_format(($items->price*$items->qty), 2, '.', ',')}}</td>
                                             </tr>
                                             @endforeach
+<<<<<<< HEAD
                                             <?php $total=0;?>
                                             @foreach($order['order_amount'] as $amount)
 											@if($amount->title!="Store Credits" && $amount->title!="Coupon code")
@@ -260,22 +331,43 @@
                                                <td><?php $total+=$amount->value;?>${{number_format($amount->value, 2, '.', ',')}}</td>
                                             </tr>
 											@endif
+=======
+                                            @foreach($order['order_amount'] as $amount)
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{$amount->title}}</td>
+                                                <td></td>
+                                                <td>${{number_format($amount->value, 2, '.', ',')}}</td>
+                                            </tr>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                              @endforeach
                                             <tr style="background: white">
                                                 <td></td>
                                                 <td></td>
+<<<<<<< HEAD
                                                 <td></td>
                                                 <td>Total Paid</td>
                                                 <td></td>
                                                 <td>${{number_format($total, 2, '.', ',')}}</td>
                                             </tr>
 											
+=======
+                                                <td>Total Paid</td>
+                                                <td></td>
+                                                <td>${{number_format($order['basic'][0]->total, 2, '.', ',')}}</td>
+                                            </tr>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                             </tbody>
                                         </table>
 										</div>
                                     </div>
 									<div class="col-md-12">
+<<<<<<< HEAD
 									<div class="rencemt_order_table table-responsive">
+=======
+									<div class="rencemt_order_table">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 									 <h2>Comments History</h2>
 									  <table class="table">
 										<thead>
@@ -304,6 +396,25 @@
                         </div>
                     </div>
 
+<<<<<<< HEAD
+=======
+
+                    <div class="tab-pane" id="status">
+                        <h4>Pane B</h4>
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                            ac turpis egestas.</p>
+                    </div>
+                    <div class="tab-pane" id="payment">
+                        <h4>Pane C</h4>
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                            ac turpis egestas.</p>
+                    </div>
+                    <div class="tab-pane" id="dispute">
+                        <h4>Pane D</h4>
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                            ac turpis egestas.</p>
+                    </div>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 </div><!-- tab content -->
               
             </div>

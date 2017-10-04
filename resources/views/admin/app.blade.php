@@ -42,17 +42,40 @@
    @include('admin.partials.footer')
 <script src="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <script src="{{ asset('/assets/admin/vendors/AdminLTE-master/bootstrap/js/bootstrap.min.js')}}"></script>
+<<<<<<< HEAD
 <script src="{{ asset('/assets/admin/vendors/AdminLTE-master/dist/js/app.min.js')}}"></script>
 <script src="{{ asset('/angular/lib/angular.js')}}"></script>
 <script src="{{ asset('/angular/lib/angular-datatables.buttons.min.js')}}"></script>
 <script src="{{ asset('/angular/Admin/app.js')}}"></script>
 <script src="{{ asset('/assets/admin/js/custom.js')}}"></script>
+=======
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{{ asset('/assets/admin/vendors/AdminLTE-master/dist/js/app.min.js')}}"></script>
+<script src="{{ asset('/angular/lib/angular.js')}}"></script>
+<script src="{{ asset('/angular/Admin/app.js')}}"></script>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 <script src="{{ asset('/angular/Admin/directives/datepicker.js')}}"></script>
 <script src="{{ asset('/vendors/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
 <script src="{{ asset('angular/lib/angular-datatables.min.js') }}"></script>
 <script src="{{ asset('/angular/directives/datepicker.js') }}"></script>
 
+<<<<<<< HEAD
+=======
+  
+
+
+<!-- <script src="{{ asset('/assets/admin/js/bootstrap.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/highlight.min.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/html5shiv.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/jquery.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/jquery.min.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/respond.min.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/clockpicker.js') }}"></script> -->
+<script src="{{ asset('/angular/directives/datepicker.js') }}"></script>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 	   
 

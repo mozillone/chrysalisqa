@@ -25,7 +25,11 @@
 		</li>
 		<li>
 			<a href="{{url('customers-list')}}">Users</a>
+<<<<<<< HEAD
 			</li>
+=======
+		</li>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		
 		<li class="active">Add User</li>
 	</ol>
@@ -70,12 +74,17 @@
 											<p class="error">{{ $errors->first('last_name') }}</p>
 										</div>
 									</div>
+<<<<<<< HEAD
 									<!-- <div class="col-md-12">
+=======
+									<div class="col-md-12">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<div class="form-group" >
 											<label for="inputEmail3" class="control-label">Phone #<span class="req-field" >*</span></label>
 											<input type="text" class="form-control" name="phone_number" placeholder="123-456-7890"  id="phone_number" required>
 											<p class="error">{{ $errors->first('phone_num') }}</p>
 										</div>
+<<<<<<< HEAD
 									</div> -->
 									<div class="col-sm-12 col-md-12">
 									<div class="form-group has-feedback" >
@@ -87,6 +96,16 @@
 									<p class="error">{{ $errors->first('email') }}</p> 
 								</div>
 							</div>
+=======
+									</div>
+									<div class="col-md-12">
+										<div class="form-group" >
+											<label for="inputEmail3" class="control-label">Email Address<span class="req-field" >*</span></label>
+											<input type="text" class="form-control" name="email" placeholder="my@email.com" id="email" required>
+											<p class="error">{{ $errors->first('last_name') }}</p>
+										</div>
+									</div>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 									
 								</div>
 								
@@ -97,11 +116,22 @@
 							<h2 class="heading-agent" style="display:none">Login Info</h2> 
 							<br><br><br>
 							<div class="col-md-12">
+<<<<<<< HEAD
 								<div class="form-group" >
 											<label for="inputEmail3" class="control-label">Email Address<span class="req-field" >*</span></label>
 											<input type="text" class="form-control" name="email" placeholder="my@email.com" id="email" required>
 											<p class="error">{{ $errors->first('last_name') }}</p>
 										</div>
+=======
+								<div class="form-group has-feedback" >
+									<label for="inputEmail3" class="control-label">Username<span class="req-field" >*</span></label>
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Username"  name="user_name" id="user_name">
+										<span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon2" style="position:static;"></span>
+									</div>
+									<p class="error">{{ $errors->first('email') }}</p> 
+								</div>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 								<div class="form-group has-feedback" ng-class="{ 'has-error': userForm.password.$invalid && ( data.formSubmitted || userForm.password.$touched) }">
 									<label autofocus="off" autocomplete="flase" for="inputEmail3" class="control-label">Password<span class="req-field" >*</span></label>
 									<div class="input-group">
@@ -124,6 +154,7 @@
 								<div class="form-group"> 
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									<div class="fileupload fileupload-new" data-provides="fileupload"> 
+<<<<<<< HEAD
 									<div class="photo_uploads">
 										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan" name="img-chan" >
 									
@@ -131,6 +162,12 @@
 											<i class="fa fa-times-circle" aria-hidden="true"></i>
 										</span>
 											</div>
+=======
+										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan" name="img-chan" >
+										<span class="remove_pic">
+											<i class="fa fa-times-circle" aria-hidden="true"></i>
+										</span>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 										<span class="btn btn-default btn-file">
 											<span class="fileupload-new" style="float:right">Upload Photo</span>
 											<span class="fileupload-exists"></span>     

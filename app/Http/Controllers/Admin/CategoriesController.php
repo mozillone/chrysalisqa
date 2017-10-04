@@ -40,7 +40,12 @@ class CategoriesController extends Controller
    }
    public function categoriesData(Request $request)
    {
+<<<<<<< HEAD
         $categories = DB::select('SELECT cat.category_id,cat.name,cat.parent_id,if(cat.parent_id=0,cat.name,cat1.name)  as main_cat,cat.sort_order  FROM `cc_category`  as cat INNER JOIN cc_category as cat1 on  cat.parent_id=cat1.category_id  or cat.parent_id="0" where cat.status=1 GROUP by cat.category_id order by parent_id,category_id asc');
+=======
+        $categories = DB::select('SELECT cat.category_id,cat.name,cat.parent_id,if(cat.parent_id=0,cat.name,cat1.name)  as main_cat,cat.sort_order  FROM `cc_category`  as cat INNER JOIN cc_category as cat1 on  cat.parent_id=cat1.category_id  or cat.parent_id="0"
+                                  GROUP by cat.category_id order by parent_id,category_id asc');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         return response()->success(compact('categories'));
    }
    public function getCostumesList(){
@@ -50,7 +55,10 @@ class CategoriesController extends Controller
    public function createCategories(Request $request)
    {
          $req=$request->all();
+<<<<<<< HEAD
        //  dd($req);
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
          if(count($req))
          {
             $rule  = array('name' => 'required|max:50','desc' => 'required|max:200','cat_image' => 'required','banner_image'=>'required');
@@ -61,6 +69,7 @@ class CategoriesController extends Controller
             }
             else
               { 
+<<<<<<< HEAD
                   if(!empty($req['cat_name'])){
                     $slug1=$this->specialCharectorsRemove($req['cat_name']);
                     $slug2=$this->specialCharectorsRemove($req['name']);
@@ -78,6 +87,11 @@ class CategoriesController extends Controller
                    Session::flash('error', 'This Category is already exits');
                    return Redirect::back(); 
                   }
+=======
+                  Category::createCategory($req);
+                  Session::flash('success', 'Category is created successfully');
+                  return Redirect::back();
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
               }
          }
          else
@@ -89,12 +103,18 @@ class CategoriesController extends Controller
    }
    public function editCategories(Request $request,$cat_id=null)
    {
+<<<<<<< HEAD
 
          $req=$request->all();
 
          if(count($req))
          {
          //dd($req);
+=======
+         $req=$request->all();
+         if(count($req))
+         {
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
            $rule  = array('name' => 'required|max:50','desc' => 'required|max:200');
            $validator = Validator::make($req,$rule);
             if ($validator->fails())
@@ -104,6 +124,7 @@ class CategoriesController extends Controller
             else
               { 
                   
+<<<<<<< HEAD
                   if(!empty($req['cat_name'])){
                     $slug1=$this->specialCharectorsRemove($req['cat_name']);
                     $slug2=$this->specialCharectorsRemove($req['name']);
@@ -123,13 +144,21 @@ class CategoriesController extends Controller
                      Session::flash('error', 'This Category is already exits');
                      return Redirect::to("/categories"); 
                   }
+=======
+                  Category::updateCategory($req);
+                  Session::flash('success', 'Category is updated successfully');
+                  return Redirect::to('categories');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
               }
          }
          else
          {
             $cond=array('category_id'=>$cat_id);
             $cat_data=Site_model::fetch_data('category','*',$cond);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             $parent_cats=Category::getParentCategories();
             $costumes_list=Costumes::getCostumesList();
             $cat_costumes=Category::getCatCostumesList($cat_id);
@@ -140,11 +169,19 @@ class CategoriesController extends Controller
          }
    }
    public function deleteCategory($id)
+<<<<<<< HEAD
    {
         $deleteCategory = DB::table('category')->where('category_id', $id)->delete();
         $deleteUrlRewrite = DB::table('url_rewrites')->where('type', 'category')->where('url_offset', $id)->delete();
         Session::flash('success', 'Category is deleted successfully');
         return Redirect::back();
+=======
+   {   
+         $cond = array('category_id'=>$id);
+         Site_model::delete_single('category',$cond);
+         Session::flash('success', 'Category is deleted successfully');
+         return Redirect::back();
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
    }
    public function attributesValuesList()
    {
@@ -157,7 +194,10 @@ class CategoriesController extends Controller
     }
    public function createAttributesValue(Request $request)
    {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
          $req=$request->all();
          if(count($req))
          {
@@ -221,11 +261,14 @@ class CategoriesController extends Controller
          Session::flash('success', 'Attribute value is deleted successfully');
          return Redirect::back();
    }
+<<<<<<< HEAD
    private function specialCharectorsRemove($string) {
             $string = preg_replace('/&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig|quot|rsquo);/i', '\\1', $string );
             $string =str_replace(array('\'', '"'), '', $string); 
             $string = preg_replace(array('/[^a-z0-9]/i', '/[-]+/') , '-', $string);
             return strtolower(trim($string, '-'));
     }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 }

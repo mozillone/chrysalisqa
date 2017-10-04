@@ -45,7 +45,11 @@
   <li><a href="/user-costumessold-list/{{$userid}}">Costumes Sold</a></li>
   <li><a  href="/user-recentorders-list/{{$userid}}">Recent Orders</a></li>
   <li><a  href="/user-credithistory-list/{{$userid}}">Credit History</a></li>
+<<<<<<< HEAD
   <li><a  href="/user-payementprofiles-list/{{$userid}}">Payment Profiles</a></li>
+=======
+  <li><a  href="/user-payementprofiles-list/{{$userid}}">Payement Profiles</a></li>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 </ul>
 <!--Tab code ends here-->
 				
@@ -113,17 +117,27 @@
       "bLengthChange": false,
       
       "columns": [
+<<<<<<< HEAD
         { data: 'cos_name', name: 'cos_name' },
         { data: 'cat_name', name: 'cat_name' },
         { data: 'cos_condition', name: 'cos_condition' },
         { data: 'cos_qan', name: 'cos_qan' },
         { data: 'date_format', name: 'date_format' },
         { data: 'cos_status', name: 'cos_status' },
+=======
+        { data: 'name', name: 'name' },
+        { data: 'credit_card_mask', name: 'credit_card_mask' },
+        { data: 'card_type', name: 'card_type' },
+        { data: 'exp_year', name: 'exp_year' },
+        { data: 'exp_year', name: 'exp_year' },
+        { data: 'exp_year', name: 'exp_year' },
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         { data: 'actions', name: 'actions', orderable: false, searchable: false}
       ]
     });
 
   }); 
+<<<<<<< HEAD
 
   function deletecostume($id){
         var id=$id;
@@ -144,6 +158,8 @@
 
 
    }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
    
 </script>
 @stop

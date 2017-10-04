@@ -16,7 +16,11 @@ die;*/
 ?>
 
 
+<<<<<<< HEAD
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+=======
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 
 
@@ -32,13 +36,21 @@ die;*/
 </style>
 
 <section class="content-header">
+<<<<<<< HEAD
     <h1>Press</h1>
+=======
+    <h1>Edit Press Post</h1>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     <ol class="breadcrumb">
         <li>
             <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
         </li>
         <li>
+<<<<<<< HEAD
             <a href="{{url('press-posts')}}"></i>Press Posts</a>
+=======
+            <a href="{{url('press-posts')}}"></i> Press Posts</a>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         </li>
         <li class="active">Edit Press Post</li>
     </ol>
@@ -48,9 +60,13 @@ die;*/
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="box box-primary">
+<<<<<<< HEAD
                 <div class="box-header">
             <h3 class="box-title heading-agent col-md-12">Edit Press Post </h3>
         </div>
+=======
+                
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 <div class="box-body">
                 
                 
@@ -68,12 +84,21 @@ die;*/
                     </div>
                     @endif 
                     
+<<<<<<< HEAD
                     <form id="press-update" class="form-horizontal defult-form" name="userForm" action="/admin/updatepress" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
                     {{ csrf_field() }}
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         
                         <div class="col-md-6">
                             <h2 class="heading-agent">Update Information</h2>
+=======
+                    <form id="press-create" class="form-horizontal defult-form" name="userForm" action="/admin/updatepress" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        
+                        <div class="col-md-7">
+                            <h2 class="heading-agent">Post Information</h2>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                 <div class="col-md-12">
                                     <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Post Title<span class="req-field" >*</span></label>
@@ -90,11 +115,19 @@ die;*/
                                     
                                 <div class="clearfix"></div>
                                     
+<<<<<<< HEAD
                                 <div class="form-group has-feedback" >
                                 <label for="inputEmail3" class="control-label">Post Description
         <span class="req-field" >*</span>
         </label>
                     <textarea id="postDesc" name=postDesc>{{$categories->press_desc}}</textarea>
+=======
+                                <div>
+                                <label for="inputEmail3" class="control-label">Post Description
+        <span class="req-field" >*</span>
+        </label>
+                    <textarea id="summernote" name=postDesc>{{$categories->press_desc}}</textarea>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                         <p class="error">{{ $errors->first('postDesc') }}</p> 
                                 </div>
 
@@ -106,11 +139,16 @@ die;*/
                                 </div>
                                 </div>         
                                 
+<<<<<<< HEAD
                                 <div class="col-md-6">
+=======
+                                <div class="col-md-3">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                             <h2 class="heading-agent">Settings</h2>
                                 
                                 <div class="col-md-12">
                               
+<<<<<<< HEAD
                                 <div class="box-body">
                                         <div class="col-md-12 file-ups">
                                             <div class="form-group">
@@ -145,6 +183,28 @@ die;*/
                                             </div>
                                         </div>
                                     </div>   
+=======
+                                <div class="form-group has-feedback" >
+                                    <label for="inputEmail3" class="control-label">Post Image<span class="req-field" >*</span></label>
+                        <input type="file" name="postImage" id="postImage"><br><br>
+                                    <p class="error">{{ $errors->first('postImage') }}</p> 
+
+                                </div>
+ <div>
+                                
+                                    Categories<br>
+                                  
+                                    @foreach($users as $index=>$user)
+                                    <input type="checkbox" name="Categories[]" value="{{$user->id}}"<?php foreach($presscategories as $val){if ($val->cat_id ==$user->id ) { echo ' checked="checked"'; } }?>">
+                               {{$user->cat_name}}<br>
+                                   @endforeach
+                              
+                                </div>
+
+                            </div>
+                        </div>
+                         </div>   
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                         <?php // echo "<pre>";print_r($categories);die; ?>
                        <input type="hidden" name="pressid" id="pressid" value="{{ $categories->id }}">
                        
@@ -156,7 +216,11 @@ die;*/
                         <div class="pull-right">
                             <button type="submit" class="btn btn-primary pull-right">update</button>
 
+<<<<<<< HEAD
                             <a href="/press-posts" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
+=======
+                            <a href="/press-posts" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Cancel</a>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                         </div>
                     </div>
                      </div>
@@ -177,16 +241,47 @@ die;*/
     @section('footer_scripts')
     
 
+<<<<<<< HEAD
 <script src="{{ asset('/assets/admin/js/clockpicker.js') }}"></script>
 <script src="{{ asset('/js/jquery.validate.min.js')}}"></script>
 <script src="{{ asset('/assets/admin/js/pages/press.js')}}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 <script src="{{ asset('ckeditor/ckeditor/ckeditor.js')}}"></script>
+=======
+
+<script src="{{ asset('/assets/admin/js/clockpicker.js') }}"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+    
+<script src="{{ asset('/js/jquery.validate.min.js')}}"></script>
+
+ <script src="{{ asset('/assets/admin/js/pages/press.js')}}"></script>
+
+    
+    
+
+<script>
+  $( function() {
+    $( ".datepicker" ).datepicker({
+      showOn: "button",
+      buttonImage: "{{ asset('img/calendar.png') }}",
+      buttonImageOnly: true,
+      buttonText: "Select date"
+    });
+  } );
+  </script>
+
+<!-- Time Picker -->
+<script>
+$('.clockpicker').clockpicker();
+</script>
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 <!-- Summernote -->
 
 <script type="text/javascript">
 $(document).ready(function() {
+<<<<<<< HEAD
     $(document).ready(function() {
         CKEDITOR.replace( 'postDesc' );
     });
@@ -196,6 +291,12 @@ $(document).ready(function() {
         $('input[type="file"]').val('');
      $('input[name="imageExists"]').val("removed");
     });
+=======
+$('#summernote').summernote({
+height:300,
+});
+});
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 </script>
 
 

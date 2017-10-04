@@ -69,7 +69,10 @@ Category create@parent
                                            </select>
                                         <p class="error">{{ $errors->first('parent_id') }}</p>
                                     </div>
+<<<<<<< HEAD
                                     <input type="hidden" name="cat_name"/>
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                      <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Category Description<span class="req-field" >*</span></label>
                                             <textarea class="form-control" placeholder="Enter category description"  name="desc"></textarea>

@@ -23,7 +23,11 @@ Category edit@parent
             <a href="{{route('categories-list')}}">Categories List</a>
         </li>
         
+<<<<<<< HEAD
         <li class="active">{{$cat_data[0]->name}}</li>
+=======
+        <li class="active">edit {{$cat_data[0]->name}}</li>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     </ol>
 </section>
 <section class="content">
@@ -50,12 +54,18 @@ Category edit@parent
                                         <label for="inputEmail3" class="control-label">Parent Category</label>
                                             <select class="form-control" id="parent_id" name="parent_id">
                                                 <option value="">--Select--</option>
+<<<<<<< HEAD
                                                 <option value="">none</option>
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                                 @foreach($parent_cats as $cats)
                                                 <option value="{{$cats->category_id}}" @if($cats->category_id==$cat_data[0]->parent_id && $cat_data[0]->parent_id!="0") selected @endif>{{$cats->name}}</option>
                                                 @endforeach
                                            </select>
+<<<<<<< HEAD
                                              <input type="hidden" name="cat_name"/>
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                         <p class="error">{{ $errors->first('parent_id') }}</p> 
                                     </div>
                                      <div class="form-group has-feedback" >
@@ -87,7 +97,11 @@ Category edit@parent
                              <div class="col-md-6">
                             <label for="inputEmail3" class="control-label">Category Image <span class="req-field" >*</span></label>
                                 <div class="col-md-12">
+<<<<<<< HEAD
                                     <div class="form-group cate_edit_pic">
+=======
+                                    <div class="form-group">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
                                       <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
                                           <div class="">
@@ -114,7 +128,11 @@ Category edit@parent
                           <div class="col-md-6">
                             <label for="inputEmail3" class="control-label">Category Banner Image <span class="req-field" >*</span></label>
                                 <div class="col-md-12">
+<<<<<<< HEAD
                                     <div class="form-group cate_edit_pic">
+=======
+                                    <div class="form-group">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
                                       <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
                                           <div class="">
@@ -139,6 +157,7 @@ Category edit@parent
                                     </div>
                             </div>  
                         </div>
+<<<<<<< HEAD
 
 
                       <div class="col-md-6">
@@ -147,13 +166,19 @@ Category edit@parent
                                             <input type="text" class="form-control" placeholder="Sort Order"  name="sort" id="name" value="{{$cat_data[0]->sort_order}}">                                       
                                     </div>                                    
                       </div> 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                     </div> 
                     </div> 
                      <div class="col-md-12 costumes @if($cat_data[0]->parent_id=='0')hide @endif ">
                             <h4>Category Costumes</h4>
                             <hr>
                             <div class="col-md-8">
+<<<<<<< HEAD
                                 <div class="col-md-6 col-sm-6  col-xs-8 cate_edit_csotumes">
+=======
+                                <div class="col-md-6">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                         <div class="form-group has-feedback" >
                                             <label for="inputEmail3" class="control-label">Product</label>
                                                 <input type="text" class="form-control" placeholder="Enter category name"  name="products_list" id="products_list">
@@ -164,11 +189,19 @@ Category edit@parent
                                                  <span>Note: Type the product name to autopopulate</span>
                                         </div>
                                 </div> 
+<<<<<<< HEAD
                             <div class="col-md-2 col-sm-2 col-xs-4">
                                 <a class="btn btn-primary pull-right add-prod">+Add</a>
                             </div>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
+=======
+                            <div class="col-md-2">
+                                <a class="btn btn-primary pull-right add-prod">+Add</a>
+                            </div>
+                            </div>
+                            <div class="col-md-12">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                 <h4>Assigned Products</h4>
                                 <table class="table table-inverse">
                                   <thead>

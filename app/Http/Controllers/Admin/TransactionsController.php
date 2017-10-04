@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Redirect;
 use DB;
 use App\Order;
 use App\Transactions;
+<<<<<<< HEAD
 use App\Helpers\ExportFile;
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 use Session;
 
 
@@ -16,8 +19,12 @@ class TransactionsController extends Controller {
     
     public function __construct(Guard $auth)
     {
+<<<<<<< HEAD
           $this->csv = new ExportFile();
           $this->middleware(function ($request, $next) {
+=======
+        $this->middleware(function ($request, $next) {
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
               if(!Auth::check()){
                 return Redirect::to('/login')->send();
             }
@@ -39,10 +46,17 @@ class TransactionsController extends Controller {
         $having='';
         if(!empty($req['search'])){
           if(!empty($req['search']['order_id']) ){
+<<<<<<< HEAD
             $where.=' AND trans.order_id ="'.$req['search']['order_id'].'"';
           }
           if(!empty($req['search']['id']) ){
             $where.=' AND trans.id ="'.$req['search']['id'].'"';
+=======
+            $where.=' AND trans.order_id ='.$req['search']['order_id'];
+          }
+          if(!empty($req['search']['id']) ){
+            $where.=' AND trans.id ='.$req['search']['id'];
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
           }
           if(!empty($req['search']['user_name']) ){
             $where.=' AND concat(usr.first_name," ",usr.last_name) LIKE "%'.$req['search']['user_name'].'%"';
@@ -75,6 +89,7 @@ class TransactionsController extends Controller {
       }
       
     }
+<<<<<<< HEAD
     public function transactionsCsvExport(Request $request){
        $req = $request->all();
        if(!empty($req['data'])){
@@ -90,5 +105,7 @@ class TransactionsController extends Controller {
     }
   }
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
    
 }

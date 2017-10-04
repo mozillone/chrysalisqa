@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 app.controller('TransactionsController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,Transactions,Exports) 
+=======
+app.controller('TransactionsController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,Transactions) 
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 {
 	var vm = this;
     $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -11,6 +15,7 @@ app.controller('TransactionsController', function($scope,DTOptionsBuilder, DTCol
       .withOption('order', [ ])
       .withOption('responsive', true)
       .withOption('bFilter', false)
+<<<<<<< HEAD
       .withOption('lengthChange', false)
       .withDOM('Bfrtip')
       .withButtons([
@@ -24,6 +29,10 @@ app.controller('TransactionsController', function($scope,DTOptionsBuilder, DTCol
             ]);
        $scope.dtColumns = [
                       DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+=======
+      .withOption('lengthChange', false);
+       $scope.dtColumns = [
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                       DTColumnBuilder.newColumn('order_id').withTitle('Order #').notSortable(),
                       DTColumnBuilder.newColumn('user_name').withTitle('Customer Name'),
                       DTColumnBuilder.newColumn('price').withTitle('Amount'),
@@ -37,10 +46,14 @@ app.controller('TransactionsController', function($scope,DTOptionsBuilder, DTCol
          var records='<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="right" title="" href="/transaction/summary/'+data.transaction_id+'" data-original-title="View"><i class="fa fa-eye"></i></a>';
          return records;
     }
+<<<<<<< HEAD
    function getCheckboxes(data) {
        return '<input type="checkbox" class="rowsChecked" name="user_checkboxes" value='+data.transaction_id+' checked>' 
     }
 
+=======
+   
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     function createdRow(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
     }
@@ -52,6 +65,7 @@ app.controller('TransactionsController', function($scope,DTOptionsBuilder, DTCol
             .withOption('order', [ ])
             .withOption('responsive', true)
             .withOption('bFilter', false)
+<<<<<<< HEAD
             .withOption('lengthChange', false)
              .withDOM('Bfrtip')
               .withButtons([
@@ -65,6 +79,10 @@ app.controller('TransactionsController', function($scope,DTOptionsBuilder, DTCol
             ]);
              $scope.dtColumns = [
                       DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+=======
+            .withOption('lengthChange', false);
+             $scope.dtColumns = [
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                       DTColumnBuilder.newColumn('order_id').withTitle('Order #').notSortable(),
                       DTColumnBuilder.newColumn('user_name').withTitle('Customer Name'),
                       DTColumnBuilder.newColumn('price').withTitle('Amount'),
@@ -76,6 +94,7 @@ app.controller('TransactionsController', function($scope,DTOptionsBuilder, DTCol
           $scope.displayTable = true;
     
           });
+<<<<<<< HEAD
 
         } 
           $scope.transactionsExportCSV = function(){
@@ -105,4 +124,7 @@ app.controller('TransactionsController', function($scope,DTOptionsBuilder, DTCol
              
            }); 
     }
+=======
+        } 
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }); 

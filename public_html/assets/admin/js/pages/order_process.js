@@ -14,7 +14,10 @@ $(function(){
 			errorLabelContainer: '.errorTxt',
 	});
         $("#order_transaction").validate({
+<<<<<<< HEAD
         	ignore: ":hidden",
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			rules: {
 				transaction_amount:{
 					 	required: true,
@@ -65,6 +68,7 @@ $(function(){
 	
     $("#shipping_firstname").rules("add", {required:true,maxlength: 100});
 	$("#shipping_lastname").rules("add", {maxlength: 100});
+<<<<<<< HEAD
 	$("#shipping_address_1").rules("add", {maxlength: 100});
 	$("#shipping_address_2").rules("add", {required:true,maxlength: 100});
 	$("#shipping_city").rules("add", {required:true});
@@ -107,5 +111,24 @@ $(function(){
     		$('.amt').show();
     	}
     });
+=======
+	$("#shipping_address_1").rules("add", {required:true,maxlength: 100});
+	$("#shipping_address_2").rules("add", {required:true,maxlength: 100});
+	$("#shipping_city").rules("add", {required:true});
+	$("#shipping_postcode").rules("add", {required:true,number:true});
+	$("#shipping_state_dropdown").rules("add", {required:true,maxlength:100});
+	$("#shipping_state").rules("add", {required:true,maxlength:100});
+	$("#shipping_country").rules("add", {required:true});
+
+	$("#billing_firstname").rules("add", {required:true,maxlength: 100});
+	$("#billing_lastname").rules("add", {maxlength: 100});
+	$("#billing_address_1").rules("add", {required:true,maxlength: 100});
+	$("#billing_address_2").rules("add", {required:true,maxlength: 100});
+	$("#billing_city").rules("add", {required:true});
+	$("#billing_postcode").rules("add", {required:true,number:true});
+	$("#billing_state_dropdown").rules("add", {required:true,maxlength:100});
+	$("#billing_state").rules("add", {required:true,maxlength:100});
+	$("#billing_country").rules("add", {required:true});
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 })
 

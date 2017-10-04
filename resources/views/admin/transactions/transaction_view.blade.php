@@ -23,8 +23,12 @@
 <section class="content">
 <div class="bg-card">
     <div class="row">
+<<<<<<< HEAD
 	    <div class="table-responsive">
         <div class="col-md-12 col-sm-12 col-xs-12">
+=======
+        <div class="col-md-12">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         @if (Session::has('error'))
                     <div class="alert alert-danger alert-dismissable">
                         <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
@@ -36,6 +40,7 @@
                         {{ Session::get('success') }}
                     </div>
                     @endif
+<<<<<<< HEAD
             <div class="box box-info ">
                 <div class="">
                 <div class="payment-sec">
@@ -46,6 +51,15 @@
 										</div>
 										<div class="content">
                                         <table class="table table-striped">
+=======
+            <div class="box box-info">
+                <div class="tab-content">
+                <div class="payment-sec">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3>Transaction Information</h3>
+                                        <table>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                             <tbody>
                                              <tr>
                                                 <td>Transaction#:</td>
@@ -73,7 +87,10 @@
                                             </tr>
                                             </tbody>
                                         </table>
+<<<<<<< HEAD
 										</div>
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                     </div>
                   </div>
 
@@ -83,7 +100,11 @@
                
             </div>
 
+<<<<<<< HEAD
         </div>      </div>
+=======
+        </div>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     </div>
   </section>
 </div>

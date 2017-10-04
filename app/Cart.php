@@ -12,7 +12,10 @@ use Cookie;
 use Session;
 use Config;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 class Cart extends Authenticatable
 {
     use Notifiable;
@@ -23,7 +26,11 @@ class Cart extends Authenticatable
      * @var array
      */
     protected $fillable = [
+<<<<<<< HEAD
          'cart_id', 'user_id','cookie_id', 'firstname', 'lastname', 'email', 'phone_no', 'pay_firstname', 'pay_lastname', 'pay_address_1', 'pay_address_2', 'pay_city', 'pay_zipcode',' pay_state','pay_country', 'payment_method', 'payment_code','shipping_firstname', 'shipping_lastname','shipping_address_1','shipping_address_2','shipping_city','shipping_postcode','shipping_country','shipping_method','shipping_code','comment','total','coupan_code','affiliate_id','commission','created_at','modified_at'
+=======
+         'cart_id', 'user_id','cookie_id', 'firstname', 'lastname', 'email', 'phone_no', 'pay_firstname', 'pay_lastname', 'pay_address_1', 'pay_address_2', 'pay_city', 'pay_zipcode', 'pay_country', 'payment_method', 'payment_code','shipping_firstname', 'shipping_lastname','shipping_address_1','shipping_address_2','shipping_city','shipping_postcode','shipping_country','shipping_method','shipping_code','comment','total','coupan_code','affiliate_id','commission','created_at','modified_at'
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     ];
     protected function addToCart($req,$cookie_id,$qty){
 
@@ -72,6 +79,7 @@ class Cart extends Authenticatable
              return true;
     }
     protected function updateCartDetails($costume_id,$cart_id,$qty){
+<<<<<<< HEAD
             if($qty=="0"){
                $res=DB::Delete('delete FROM `cc_cart_items` WHERE cart_id='.$cart_id.' and  costume_id='.$costume_id.'');
                 $total=$this->getCartSubtotalPrice($cart_id);
@@ -80,6 +88,8 @@ class Cart extends Authenticatable
                 Site_model::update_data('cart',$data,$cond);
                 return true;
             }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             $result=$this->verifieItemExists($costume_id,$cart_id);
               if($result=="1"){
                 $res=DB::Update('UPDATE `cc_cart_items` SET qty='.$qty.' WHERE cart_id='.$cart_id.' and  costume_id='.$costume_id.'');
@@ -99,10 +109,13 @@ class Cart extends Authenticatable
         $data=DB::Select('SELECT cart_id FROM `cc_cart` WHERE user_id= '.$user_id.'');
         return $data;
     }
+<<<<<<< HEAD
     protected function userCartData($user_id){
         $data=DB::Select('SELECT * FROM `cc_cart` WHERE user_id= '.$user_id.'');
         return $data;
     }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     private function cookieCartVerify($cookie_id){
         $data=DB::Select('SELECT cart_id FROM `cc_cart` WHERE cookie_id= "'.$cookie_id.'"');
         return $data;
@@ -113,7 +126,10 @@ class Cart extends Authenticatable
                         'sku'=>$costume_info->sku_no,
                         'costume_name'=>$costume_info->name,
                         'qty'=>$qty,
+<<<<<<< HEAD
                         'weight'=>($costume_info->weight_pounds)+($costume_info->weight_ounces/16),
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                         'price'=>$costume_info->price);
             Site_model::insert_data('cart_items',$data);
             return true;
@@ -124,7 +140,11 @@ class Cart extends Authenticatable
         return $data[0]->is_exists;
     }
     protected function getCostumeInfo($costume_id){
+<<<<<<< HEAD
        $data=DB::Select('SELECT cst.costume_id,dsr.name,cst.sku_no,cst.quantity,cst.price,cst.weight_pounds,cst.weight_ounces FROM cc_costumes as cst LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id WHERE cst.costume_id='.$costume_id);
+=======
+       $data=DB::Select('SELECT cst.costume_id,dsr.name,cst.sku_no,cst.quantity,cst.price FROM cc_costumes as cst LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id WHERE cst.costume_id='.$costume_id);
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
        return $data;
     }
     protected function verifyCostumeCartQuantity($costume_id,$cookie_id){
@@ -182,6 +202,7 @@ class Cart extends Authenticatable
 
     }
     protected function updateCartToUser(){
+<<<<<<< HEAD
 
        $currentCookieKeyID=SiteHelper::currentCookieKey();
        $carts_list=DB::Select('Select crt.cart_id,crt.total FROM `cc_cart` as crt LEFT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id WHERE crt.cookie_id="'.$currentCookieKeyID.'"');
@@ -226,6 +247,34 @@ class Cart extends Authenticatable
     // }else{
     //     DB::Update('UPDATE `cc_cart` SET `user_id`='.Auth::user()->id.' WHERE cookie_id="'.$currentCookieKeyID.'"');
     // }
+=======
+       $currentCookieKeyID=SiteHelper::currentCookieKey();
+       $carts_list=DB::Select('Select itms.* FROM `cc_cart` as crt LEFT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id WHERE crt.cookie_id="'.$currentCookieKeyID.'"');
+      $user_cart=DB::Select('Select cart_id FROM `cc_cart` WHERE user_id="'.Auth::user()->id.'"');
+      if(count($user_cart)){
+      foreach ($carts_list as $key => $carts) {
+            $check_cart=DB::Select('Select if(count(*)>0,true,false)  as is_exits from  cc_cart_items where cart_id='.$user_cart[0]->cart_id.' and costume_id='.$carts->costume_id.'');
+            if($check_cart[0]->is_exits){
+                DB::Update('update cc_cart_items set qty=qty+'.$carts->qty.' where cart_id='.$user_cart[0]->cart_id.' and costume_id='.$carts->costume_id.'');
+            }else{
+                $new_check_cart=DB::Select('Select cart_id,costume_id,sku,costume_name,qty,price from  cc_cart_items where cart_id='.$carts_list[0]->cart_id.' and costume_id='.$carts->costume_id.'');
+           
+                $data=array('cart_id'=>$new_check_cart[0]->cart_id,
+                        'costume_id'=>$new_check_cart[0]->costume_id,
+                        'sku'=>$new_check_cart[0]->sku,
+                        'costume_name'=>$new_check_cart[0]->costume_name,
+                        'qty'=>$new_check_cart[0]->qty,
+                        'price'=>$new_check_cart[0]->price);
+            Site_model::insert_data('cart_items',$data);
+            }
+            //DB::Update('update cc_cart_items set qty=qty+'.$carts->qty.' where cart_id='.$user_cart[0]->cart_id.' and costume_id='.$carts->costume_id.'');
+      }
+      $cond=array('cookie_id'=> $currentCookieKeyID);
+      Site_model::delete_single('cart',$cond);
+    }else{
+        DB::Update('UPDATE `cc_cart` SET `user_id`='.Auth::user()->id.' WHERE cookie_id="'.$currentCookieKeyID.'"');
+    }
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
        
     }
     protected function getCartProducts(){
@@ -235,6 +284,7 @@ class Cart extends Authenticatable
         }else{
         	$where="where crt.cookie_id='".$currentCookieKeyID."'";
         }
+<<<<<<< HEAD
           	$cart_products['basic']=DB::Select('SELECT itms.*,img.image,cst.condition,cst.size,cst.weight_pounds,cst.weight_ounces,concat(usr.first_name," ",usr.last_name) as user_name,usr.is_free,cstopt.attribute_option_value  as is_film,crt.total,crt.coupan_code,crt.coupon_amount,crt.cc_id,crt.store_credits,link.url_key,created_user_group,cst.created_by,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,addr.*,(SELECT attribute_option_value  FROM `cc_costume_attribute_options` WHERE `costume_id` = cst.costume_id and attribute_id='.Config::get('constants.Shipping_id').') as shipping,cst.item_location FROM `cc_cart` as crt RIGHT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id LEFT JOIN cc_costume_image as img on img.costume_id=itms.costume_id and img.type="1" LEFT JOIN cc_costumes as cst on cst.costume_id=itms.costume_id LEFT JOIN cc_users as usr on usr.id=cst.created_by LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="'.Config::get('constants.IS_FILMY').'" LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id and prom.code="" LEFT JOIN cc_address_master as addr on addr.user_id=cst.created_by and addr.address_type="selling" '.$where.' group by itms.cart_item_id');
             $data=DB::Select('SELECT cart_id,coupan_code,store_credits from cc_cart as crt '.$where.'');
             if(count($data)){
@@ -244,12 +294,20 @@ class Cart extends Authenticatable
            	return $cart_products;
     }
     protected function getCartProductswithCoupan($code,$coupon_id="0"){
+=======
+        DB::Update('update cc_cart as crt set coupan_code=""  '.$where.'');
+          	$cart_products['basic']=DB::Select('SELECT itms.*,img.image,cst.condition,cst.size,concat(usr.first_name," ",usr.last_name) as user_name,cstopt.attribute_option_value  as is_film,crt.total,crt.coupan_code,crt.cc_id,link.url_key,created_user_group,cst.created_by,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,addr.city,addr.state,addr.country,(SELECT attribute_option_value  FROM `cc_costume_attribute_options` WHERE `costume_id` = cst.costume_id and attribute_id='.Config::get('constants.Shipping_id').') as shipping,cst.item_location FROM `cc_cart` as crt RIGHT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id LEFT JOIN cc_costume_image as img on img.costume_id=itms.costume_id and img.type="1" LEFT JOIN cc_costumes as cst on cst.costume_id=itms.costume_id LEFT JOIN cc_users as usr on usr.id=cst.created_by LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="'.Config::get('constants.IS_FILMY').'" LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id and prom.code=""  LEFT JOIN cc_address_master as addr on addr.address_id=cst.address_id '.$where.' group by itms.cart_item_id');
+    	return $cart_products;
+    }
+    protected function getCartProductswithCoupan($code){
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
        $currentCookieKeyID=SiteHelper::currentCookieKey();
         if(Auth::check()){
           $where="where crt.user_id=".Auth::user()->id.'';
         }else{
           $where="where crt.cookie_id='".$currentCookieKeyID."'";
         }
+<<<<<<< HEAD
         $cart_products['basic']=DB::Select('SELECT itms.*,img.image,cst.condition,cst.size,cst.weight_pounds,cst.weight_ounces,concat(usr.first_name," ",usr.last_name) as user_name,usr.is_free,cstopt.attribute_option_value  as is_film,crt.total,crt.coupan_code,crt.coupon_amount,crt.cc_id,crt.store_credits,link.url_key,created_user_group,cst.created_by,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,addr.city,addr.state,addr.country,addr.*,(SELECT attribute_option_value  FROM `cc_costume_attribute_options` WHERE `costume_id` = cst.costume_id and attribute_id='.Config::get('constants.Shipping_id').') as shipping,cst.item_location  FROM `cc_cart` as crt RIGHT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id LEFT JOIN cc_costume_image as img on img.costume_id=itms.costume_id and img.type="1" LEFT JOIN cc_costumes as cst on cst.costume_id=itms.costume_id LEFT JOIN cc_users as usr on usr.id=cst.created_by LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="'.Config::get('constants.IS_FILMY').'" LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id and prom.code="'.$code.'" LEFT JOIN cc_address_master as addr on addr.user_id=cst.created_by and addr.address_type="selling" '.$where.' group by itms.cart_item_id');
          DB::Update('UPDATE `cc_cart` SET `coupan_code`="'.$code.'",coupon_id="'.$coupon_id.'"  WHERE cart_id="'.$cart_products['basic'][0]->cart_id.'"');
             $data=DB::Select('SELECT cart_id,coupan_code,store_credits from cc_cart as crt '.$where.'');
@@ -294,6 +352,24 @@ class Cart extends Authenticatable
         DB::Update('update cc_cart as crt set coupan_code="",coupon_id="" '.$where.'');
       
     }
+=======
+        $cart_products['basic']=DB::Select('SELECT itms.*,img.image,cst.condition,cst.size,concat(usr.first_name," ",usr.last_name) as user_name,cstopt.attribute_option_value  as is_film,crt.total,crt.coupan_code,link.url_key,created_user_group,cst.created_by,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,addr.city,addr.state,addr.country,(SELECT attribute_option_value  FROM `cc_costume_attribute_options` WHERE `costume_id` = cst.costume_id and attribute_id='.Config::get('constants.Shipping_id').') as shipping,cst.item_location  FROM `cc_cart` as crt RIGHT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id LEFT JOIN cc_costume_image as img on img.costume_id=itms.costume_id and img.type="1" LEFT JOIN cc_costumes as cst on cst.costume_id=itms.costume_id LEFT JOIN cc_users as usr on usr.id=cst.created_by LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="'.Config::get('constants.IS_FILMY').'" LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id and prom.code="'.$code.'" LEFT JOIN cc_address_master as addr on addr.address_id=cst.address_id  '.$where.' group by itms.cart_item_id');
+          DB::Update('UPDATE `cc_cart` SET `coupan_code`="'.$code.'" WHERE cart_id="'.$cart_products['basic'][0]->cart_id.'"');
+          $count=0;
+          $total=0;
+          foreach( $cart_products['basic'] as $cart){
+            if($cart->created_user_group=="admin"){
+              $count++;
+              $cart_products['dis_count']=$count;
+              $total=($total+($cart->price/100)*$cart->discount)*$cart->qty;
+            }
+         
+          }
+         $cart_products['dis_total']=$total;
+         return $cart_products;
+    }
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     protected function getCartSubtotalPrice($cart_id){
         $total_price=DB::Select('SELECT sum(price*qty) as total_price FROM `cc_cart_items` where cart_id='.$cart_id);
 	   	return $total_price[0]->total_price;
@@ -302,7 +378,11 @@ class Cart extends Authenticatable
     	$cond=array('cart_item_id'=>$cart_item_id);
     	Site_model::delete_single('cart_items',$cond);
         $total=$this->getCartSubtotalPrice($cart_id);
+<<<<<<< HEAD
         $data=array('total'=>$total,'store_credits'=>"0.00",'modified_at'=>date('Y-m-d h:i:s'));
+=======
+        $data=array('total'=>$total,'modified_at'=>date('Y-m-d h:i:s'));
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         $cond=array('cart_id'=>$cart_id,);
         Site_model::update_data('cart',$data,$cond);
         return true;
@@ -319,6 +399,7 @@ class Cart extends Authenticatable
             return false;
         }
      }
+<<<<<<< HEAD
       protected function storeCreditsUpdate($req){
         $cart_amount=DB::Select('Select cart_id,total from `cc_cart`  WHERE user_id='.Auth::user()->id);
         if(trim($req['credits'])<=Auth::user()->credits){
@@ -383,3 +464,11 @@ protected function getUserCartShippingAddress(){
 }
 
 }
+=======
+
+     
+    
+   
+}
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

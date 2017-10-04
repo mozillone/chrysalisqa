@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('admin.app')
 
 @section('header_styles')
@@ -248,3 +249,6 @@ var table = '';
   
 
 @endsection
+=======
+<h1>Welcome</h1>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

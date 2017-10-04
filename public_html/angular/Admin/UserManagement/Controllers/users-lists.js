@@ -14,9 +14,15 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
       .withOption('lengthChange', false);
        $scope.dtColumns = [
                DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+<<<<<<< HEAD
                              DTColumnBuilder.newColumn('username').withTitle('User Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  //DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
+=======
+                             DTColumnBuilder.newColumn('display_name').withTitle('Name'),
+                      DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
+					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					//  DTColumnBuilder.newColumn(null).withTitle('testing').notSortable().renderWith(phone),,
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
@@ -66,7 +72,10 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
     }
     var params = {"id":userId, "status":user_status};
     UserManagement.changeStatus(params).then(function(response){
+<<<<<<< HEAD
       
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     	
     });
   }
@@ -111,9 +120,15 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
             .withOption('lengthChange', false);
              $scope.dtColumns = [
                  DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+<<<<<<< HEAD
                          DTColumnBuilder.newColumn('username').withTitle('User Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  //DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
+=======
+                         DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
+                      DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
+					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
 					  DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login'),
@@ -144,9 +159,15 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
+<<<<<<< HEAD
                       DTColumnBuilder.newColumn('user').withTitle('User Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  //DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
+=======
+                      DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
+                      DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
+					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					//  DTColumnBuilder.newColumn(null).withTitle('testing').notSortable().renderWith(phone),,
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
@@ -208,7 +229,11 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
              $scope.dtColumns = [
                             DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
+<<<<<<< HEAD
 					  //DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
+=======
+					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
 					  DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login'),
@@ -301,7 +326,11 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
             .withOption('lengthChange', false);
              $scope.dtColumns = [
                             DTColumnBuilder.newColumn('display_name').withTitle('Customer Name'),
+<<<<<<< HEAD
 							//DTColumnBuilder.newColumn('phone_number').withTitle('Phone No.').notSortable(),
+=======
+							DTColumnBuilder.newColumn('phone_number').withTitle('Phone No.').notSortable(),
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                            DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 						 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,

@@ -62,8 +62,13 @@
                                     <td>
                                         <select class="form-control" id="page-status">
                                             <option defualt value=""> All </option>
+<<<<<<< HEAD
                                             <option value="enabled">Enabled</option>
                                             <option value="disabled">Disabled</option>
+=======
+                                            <option value="1">Enabled</option>
+                                            <option value="0">Disabled</option>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                                         </select>
                                     </td>
                                     <td><button class="btn btn-primary" id="search-page">Search</button></td>
@@ -104,6 +109,7 @@
 
     <script type="text/javascript">
 
+<<<<<<< HEAD
         $(function () {
             $('#fromDate').datetimepicker({
                 format: 'MM/DD/YYYY'
@@ -116,6 +122,25 @@
             });
             $("#toDate").on("dp.change", function (e) {
                 $('#fromDate').data("DateTimePicker").maxDate(e.date);
+=======
+        $(document).ready(function () {
+            $('#fromDate').on('keydown', function (e) {
+                e.preventDefault();
+            });
+            $('#toDate').on('keydown', function (e) {
+                e.preventDefault();
+            });
+        });
+
+        $(function () {
+            $('#fromDate').datetimepicker({
+                format: 'MM-DD-YYYY',
+                defaultDate: new Date()
+            });
+            $('#toDate').datetimepicker({
+                format: 'MM-DD-YYYY',
+                defaultDate: new Date()
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             });
         });
 
@@ -140,9 +165,15 @@
                     "type": "GET",
                 },
                 "searching": false,
+<<<<<<< HEAD
                 "pageLength": 10,
                 "bLengthChange": false,
                 "order": [[ 2, "desc" ]],
+=======
+                "pageLength": 25,
+                "bLengthChange": false,
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 "columns": [
                     { data: 'title', name: 'title'},
                     { data: 'url', name: 'url'},
@@ -155,6 +186,28 @@
 
         });
 
+<<<<<<< HEAD
+=======
+        function deletePage(pageId){
+
+            swal({
+                    title: "Are you sure want to delete this Page?",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55 ",
+                    confirmButtonText: "Yes, delete",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                },
+
+                function(){
+                    url = "/delete-page/"+pageId+"";
+                    window.location = url;
+                });
+
+
+        }
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         $("#search-page").click(function(){
 
             table.destroy();
@@ -171,9 +224,15 @@
                     "data": {title:pageTitle, from_date:fromDate, to_date:toDate,status:pageStatus}
                 },
                 "searching": false,
+<<<<<<< HEAD
                 "pageLength": 10,
                 "bLengthChange": false,
                 "order": [ [2, 'desc'] ],
+=======
+                "pageLength": 50,
+                "bLengthChange": false,
+                "order": [ [3, 'desc'] ],
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                 "columns": [
                     { data: 'title', name: 'title'},
                     { data: 'url', name: 'url'},

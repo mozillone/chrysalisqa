@@ -12,6 +12,7 @@ app.controller('SoldOrdersController', function($scope,DTOptionsBuilder, DTColum
       .withOption('order', [ ])
       .withOption('responsive', true)
       .withOption('bFilter', false)
+<<<<<<< HEAD
       .withOption('lengthChange', false)
       .withDOM('Bfrtip')
       .withButtons([
@@ -23,6 +24,9 @@ app.controller('SoldOrdersController', function($scope,DTOptionsBuilder, DTColum
                     }
                 }
             ]);
+=======
+      .withOption('lengthChange', false);
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
        $scope.dtColumns = [
                       DTColumnBuilder.newColumn('order_id').withTitle('Order#').notSortable(),
                       DTColumnBuilder.newColumn('buyer_name').withTitle('Buyer').notSortable(),

@@ -111,8 +111,13 @@ ul.bxslider {
   margin-top: -16px;
   outline: 0;
   width: 32px;
+<<<<<<< HEAD
   height: 32px; color:transparent;
 /*   text-indent: -9999px; */
+=======
+  height: 32px;
+  text-indent: -9999px;
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   z-index: 9999;
 }
 .bx-wrapper .bx-controls-direction a.disabled {

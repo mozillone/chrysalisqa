@@ -9,9 +9,14 @@ $(document).ready(function(){
 					email: true,
 				},
 				phone: {
+<<<<<<< HEAD
 					//required: true,
 					number: true,
 					minlength:10,
+=======
+					required: true,
+					number: true,
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					maxlength:10
 				},
 				reason: {
@@ -42,6 +47,7 @@ $(document).ready(function(){
 		    $(".icon-rm .toggle-btn").click(function(){
 			$(this).parent(".icon-rm").toggleClass("btn-cross");	
 			$(".mobile-rm").toggleClass("toggle");	
+<<<<<<< HEAD
 		    });
 // tabbed content
     // http://www.entheosweb.com/tutorials/css/mobile_list_tabs.asp
@@ -81,5 +87,8 @@ $(document).ready(function(){
 	   to add border to right side
 	   of last tab */
 	$('ul.mobile_list_tabs li').last().addClass("tab_last");
+=======
+		    });	
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			
 });

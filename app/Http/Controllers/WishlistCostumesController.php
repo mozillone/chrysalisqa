@@ -9,7 +9,10 @@ use App\Wishlist;
 use Session;
 use DB;
 use Response;
+<<<<<<< HEAD
 use Meta;
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 class WishlistCostumesController extends Controller {
 
 	protected $messageBag = null;
@@ -26,6 +29,7 @@ class WishlistCostumesController extends Controller {
                return $next($request);
           }
       });
+<<<<<<< HEAD
 
         Meta::title('Chrysalis');
         Meta::set('robots', 'index,follow');
@@ -35,6 +39,11 @@ class WishlistCostumesController extends Controller {
         Meta::set('title', 'Favorites');
         Meta::set('description', 'Favorites - Chrysalis');
 
+=======
+	}
+	public function myWishlistList()
+	{
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		$data=Wishlist::myWishlistList(Auth::user()->id);
 		return view('frontend.costumes.wishlist.wishlist_list',compact('data',$data));
 	}

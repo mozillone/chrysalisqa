@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('admin.app')
 
 {{-- Web site Title --}}
@@ -113,3 +114,6 @@
 
 
 @stop
+=======
+<h1>welcome</h1>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

@@ -18,10 +18,16 @@ $(function(){
 					//maxlength: 10,
 					//remote: {url: "/customer/emailValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
 				},
+<<<<<<< HEAD
 				username:{
 					required: true,
 					maxlength: 50,
 					remote: {url: "/usernameValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
+=======
+				user_name:{
+					required: true,
+					maxlength: 50,
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				},
 				email: {
       				required: true,
@@ -30,7 +36,11 @@ $(function(){
 	   				},
 				password: {
 					required: true,
+<<<<<<< HEAD
 					minlength: 8,
+=======
+					minlength: 5,
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					maxlength: 15,
 				},
 			},
@@ -64,14 +74,21 @@ $(function(){
                  {
                     required: "Enter Email Address",
                     email: "Please enter a valid email address.",
+<<<<<<< HEAD
                     remote: "This email is already registered."
+=======
+                    remote: "This email is already taken."
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                  },
 				 phone_number:
 				 {
 					required: "Enter Phone Number"
                    
 				 },
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			},
 			errorElement: 'span',
        		errorClass: 'error',
@@ -93,20 +110,29 @@ $(function(){
 					//maxlength: 10,
 					//remote: {url: "/customer/emailValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
 				},
+<<<<<<< HEAD
 				username:{
 					required: true,
 					maxlength: 50,
 					remote: {url: "/usernameValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
+=======
+				user_name:{
+					required: true,
+					maxlength: 50,
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				},
 				email: {
       				required: true,
       				email: true,
       				remote: {url: "/customer/emailValidation",data: {"user_id":$('input[name="user_id"]').val()},type: "post"},
 	   				},
+<<<<<<< HEAD
 	   				password: {
 					minlength: 8,
 					maxlength: 15,
 				},
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				
 			},
 			highlight: function(element) {
@@ -137,7 +163,11 @@ $(function(){
                  {
                     required: "Enter Email Address",
                     email: "Please enter a valid email address.",
+<<<<<<< HEAD
                     remote: "This email is already registered."
+=======
+                    remote: "This email is already taken."
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                  },
 				 phone_number:
 				 {
@@ -148,21 +178,30 @@ $(function(){
 			errorElement: 'span',
        		errorClass: 'error',
 		});
+<<<<<<< HEAD
 	    sub_cos_counter = 0;
 		$("#customer_edit1").validate({
         	//onfocusout: function(element) { $(element).valid(); },
+=======
+		$("#customer_edit1").validate({
+        	onfocusout: function(element) { $(element).valid(); },
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			rules: {
 				customer_name:{
 						required: true,
 						maxlength: 50,
 				},
+<<<<<<< HEAD
 				gender:{
 					required: true,
 				},
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				costume_name:{
 					 	required: true,
 						maxlength: 50,
 				},
+<<<<<<< HEAD
 				costume_cost:{
 					 	required: true,
 						maxlength: 50,
@@ -333,13 +372,44 @@ $(function(){
 				ounces:{
 					required: true,
 				},
+=======
+				category:{
+					 	required: true,
+						maxlength: 50,
+				}, 
+				heightft:{
+					required: true,
+				},
+				
+				heightin:{
+					required: true,
+					
+				},
+				
+				weightlbs:{
+					required: true,
+					
+				},
+				chestin:{
+					required: true,
+					
+				},
+				waistlbs:{
+					required: true,
+					
+				},
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				size:{
 					required: true,
 					
 				},
 				price:{
 					required: true,
+<<<<<<< HEAD
 					number: true
+=======
+					
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				},
 				quantity:{
 					required: true,
@@ -354,11 +424,19 @@ $(function(){
 					
 				},
 				fun_fact:{
+<<<<<<< HEAD
 					required: false,
 					
 				},
 				faq:{
 					required: false,
+=======
+					required: true,
+					
+				},
+				faq:{
+					required: true,
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					
 				},
 				weight_package_items:{
@@ -388,6 +466,7 @@ $(function(){
 				charity_name:{
 				  required: true,
 				},
+<<<<<<< HEAD
 				cosplay:{
 					required: true,
 				},
@@ -414,6 +493,17 @@ $(function(){
 				},
 				
 				
+=======
+				img_chan:{
+				  required: true,
+				},
+				img_chan1:{
+				  required: true,
+				},
+				img_chan2:{
+				  required: true,
+				},
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			},
 			highlight: function(element) {
           	 $(element).closest('.form-control').addClass('error');
@@ -433,10 +523,13 @@ $(function(){
 			   {
 			    required: "Enter Costume Name",
 			   },
+<<<<<<< HEAD
 			   costume_cost:
 			   {
 			    required: "Enter Costume Cost",
 			   },
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			   category:
 			   {
 			    required: "Select Category",
@@ -452,7 +545,11 @@ $(function(){
                  {
                     required: "Enter Email Address",
                     email: "Please enter a valid email address.",
+<<<<<<< HEAD
                     remote: "This email is already registered."
+=======
+                    remote: "This email is already taken."
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                  },
 				 phone_number:
 				 {
@@ -463,7 +560,10 @@ $(function(){
 			errorElement: 'span',
        		errorClass: 'error',
 		});
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		$("#phone,#contact_phone,#phone_number,#aaa,#search.phone").on("keyup paste", function() {
 
   // Remove invalid chars from the input
@@ -694,6 +794,7 @@ $(function(){
 	  });
 
 });
+<<<<<<< HEAD
 
 //key words hash tag
 $("#keywords_add").click(function(){
@@ -768,3 +869,5 @@ $("#keywords_add").click(function(){
       $('#keywords_add').show();
     }
   });
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

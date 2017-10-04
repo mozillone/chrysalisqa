@@ -1,4 +1,5 @@
 $("#press-create").validate({
+<<<<<<< HEAD
     rules: {
         postTitle:{
             required: true,
@@ -132,3 +133,18 @@ $("#press_image").on('change', function(){
 
 
 });
+=======
+            rules: {
+                postTitle:{
+                        required: true 
+                    },
+                postDesc:{
+                        required: true
+                    },
+                status:{
+                        required: true
+                    },
+                }
+ 	
+        }); 
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

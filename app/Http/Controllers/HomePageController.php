@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Redirect;
+<<<<<<< HEAD
 use Mail;
 use URL;
 use App\Helpers\Site_model;
@@ -50,6 +51,14 @@ class HomePageController extends Controller {
             return view('frontend.index')->with(array('featured_costumes'=>$featured_costumes));
         }
 
+=======
+
+class HomePageController extends Controller {
+
+	public function index()
+	{
+		return view('frontend.index');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	}
 	
 }

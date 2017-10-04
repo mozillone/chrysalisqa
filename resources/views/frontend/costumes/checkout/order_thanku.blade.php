@@ -90,12 +90,20 @@
             list-style-type: none;
             display: flex;
             font-weight: 800;
+<<<<<<< HEAD
             font-size: 14px;
+=======
+            font-size: 10px;
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             margin-bottom: 0;
         }
 
         .range-slider .currency-bar li {
+<<<<<<< HEAD
                padding: 0 6.7%;
+=======
+            padding: 0 3.15%;
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         }
 
         .range-slider .currency-bar li:first-child {
@@ -115,9 +123,13 @@
             min-height: 50px;
             display: block;
         }
+<<<<<<< HEAD
 .range-slider span.error.crt-amount {
  font-family: Proxima-Nova-semibold;
 }
+=======
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         .contribution-label li:last-child {
             float: right;
             text-align: end;
@@ -138,6 +150,7 @@
             padding-left: 5px;
         }
 
+<<<<<<< HEAD
 @media only screen and (max-width: 767px) {
 
     .outer {
@@ -159,6 +172,8 @@
     padding: 0 5.6%;
 }
 }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 </style>
 @endsection
 @section('content')
@@ -175,6 +190,7 @@
 			{{ Session::get('success') }}
 		</div>
 		@endif
+<<<<<<< HEAD
 			<form action="/orders/charity/fund" method="POST" id="order-charity">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input type="hidden" name="order_id" value="{{implode(',',$order_id)}}">
@@ -184,19 +200,40 @@
 				<div class="col-md-6 col-sm-6 col-md-6">
 				<h2 class="prog-head">Thank You For Your Purchase!</h2>
 					<p class="thankyou-text thankyou-textR">Order No's: {{implode(',',$order_id)}}</p>
+=======
+			<form action="{{route('order-charity-fund')}}" method="POST" id="order-charity">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input type="hidden" name="order_id" value="{{implode(',',$order_id)}}">
+			<input type="hidden" name="amount" value="1">
+					
+			<div class="thankyou-rm">
+				<div class="col-md-6">
+				<h2 class="prog-head">Thank You For Your Purchase!</h2>
+					<p class="thankyou-text thankyou-textR">Order No:{{implode(",",$order_id)}}</p>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					<p class="thankyou-text">Hang tight! You will receive an order confirmation with details of your purchase shortly!</p>
 
 					<p class="thankyou-text">In the meantime, <br/>
 					<span class="thankyou-bold">Share Your Purchase!</span></p>
 					<ul class="thankyou-socio">
+<<<<<<< HEAD
 					<li><a href="javascript:void(0)" class="icon-fb" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title={{implode(',',$order_id)}} orders review&&u={{URL::to('/')}}')" title="Facebook Share"><img src="{{asset('assets/frontend/img/thnk-fb.png')}}" alt="thnk-fb" /></a></li>
 					<li><a href="javascript:void(0)" class="icon-tw" onclick="genericSocialShare('http://twitter.com/share?&amp;url={{URL::to('/')}}')" title="Twitter Share"><img src="{{asset('assets/frontend/img/thnk-tw.png')}}" alt="thnk-tw" /></a></li>
 					<li><img src="{{asset('assets/frontend/img/thnk-yt.png')}}" alt="thnk-yt" /></li>
+=======
+					<li><img src="../assets/frontend/img/thnk-fb.png" alt="thnk-fb" /></li>
+					<li><img src="../assets/frontend/img/thnk-tw.png" alt="thnk-tw" /></li>
+					<li><img src="../assets/frontend/img/thnk-yt.png" alt="thnk-yt" /></li>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					</ul>
 
 				</div>
 
+<<<<<<< HEAD
 				<div class="col-md-6 col-sm-6 col-md-6">
+=======
+				<div class="col-md-6">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					<h2 class="prog-head">Did You know?</h2>
 					<p class="thankyou-text">A portion of our profits goes to a charity of your choice. Please take a moment to select a cause you feel most passionate about. Should this field be left blank, we will choose a charity on your behalf.</p>
 
@@ -206,6 +243,7 @@
 
 					<ul class="ct3-list">
 					@foreach($charities_list as $charities)
+<<<<<<< HEAD
                     <!-- image logic -->
                         <?php
                         if(isset($charities->image) && !empty($charities->image)){
@@ -226,19 +264,37 @@
 					@endforeach
 					</ul>
 					 @if(!$order_donations)<p class="cst2-rms-chck"><input type="checkbox"  id="suggest_charity"  checked="checked"> I would like to suggest another charity organization</p>
+=======
+					<li>
+						@if(file_exists(public_path('/charities_images/'.$charities->image)))
+							<img src="/charities_images/{{$charities->image}}" alt="cst3" /><span class="crt-name">{{$charities->name}}</span><input type="radio" name="charity" id="charity" value="{{$charities->id}}"/></li>
+						@else
+							<img src="/charities_images/default-placeholder.jpg" alt="cst3" />{{$charities->name}}<input type="radio" name="charity" id="charity" value="{{$charities->id}}"/></li>
+						@endif
+					@endforeach
+					</ul>
+					<p class="cst2-rms-chck"><input type="checkbox"  id="suggest_charity" checked="checked"> I would like to suggest another charity organization</p>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 
 					<div class="thankyou-rms">
 					<p class="thankyou-rms-head thankyou-text"><span>Please Specify:</span>
 					<input type="text" placeholder="Organization Name" name="suggest_charity" / ></p>
 					</div>
+<<<<<<< HEAD
                      @endif
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 					</div>
 				</div>
 
 
+<<<<<<< HEAD
 				<div class="col-md-12 col-sm-12 col-xs-12">
+=======
+				<div class="col-md-12">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					<div class="thankyou-doeven">
 					<h2 class="thankyou-do">Do even MORE!</h2>
 					<p class="thankyou-textC">Join us in our mission to see a dollar raised for every box shipped. <span class="thankyou-bold">Donate 0.50 cents below and we will match your donation!</span></p>
@@ -256,6 +312,7 @@
 				    </div>		
 					<div class="range-slider">
 				        <ul class="currency-bar">
+<<<<<<< HEAD
 				            <li>$0.00</li>
 				            <li>$0.25</li>
 				            <li>$0.50</li>
@@ -264,6 +321,17 @@
 				           <li>$0.75</li> -->
 				            <li>$0.25</li>
 				            <li>$0.00</li>
+=======
+				            <li>0</li>
+				            <li>$0.25</li>
+				            <li>$0.5</li>
+				            <li>$0.75</li>
+				            <li>$1</li>
+				            <li>$0.75</li>
+				            <li>$0.5</li>
+				            <li>$0.25</li>
+				            <li>0</li>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				        </ul>
 				        <input type="text" class="js-range-slider" value=""/>
 				        <ul class="contribution-label">
@@ -271,7 +339,10 @@
 				            <li>Our <br> Contribution</li>
 				        </ul>
 				        <div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				            <table>
 				                <tr>
 				                    <td>Your Donation:</td>
@@ -285,6 +356,7 @@
 				                    <td>Total Donation:</td>
 				                    <td class="total-donation">$0.00</td>
 				                </tr>
+<<<<<<< HEAD
 
                          
 				            </table>
@@ -294,6 +366,13 @@
                           <input type="submit" value="Submit" class="thankyou-btn"/>
 				        </div>
                        @endif
+=======
+				            </table>
+				        </div>
+				        <div style="text-align: center; margin-bottom: 50px">
+				          <input type="submit" value="Submit" class="thankyou-btn"/>
+				        </div>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 				    </div>
 				    </div>
@@ -311,10 +390,13 @@
 <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('/assets/frontend/vendors/slidersjs/rangeSlider.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/order_thanku.js') }}"></script>
+<<<<<<< HEAD
 <script type="text/javascript" async >
     function genericSocialShare(url){
         window.open(url,'sharer','toolbar=0,status=0,width=648,height=395');
         return true;
     }
     </script>
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 @stop

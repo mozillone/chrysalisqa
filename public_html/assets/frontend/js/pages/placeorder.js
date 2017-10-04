@@ -1,5 +1,6 @@
 $(document).ready(function() {
   
+<<<<<<< HEAD
 	var shipping_address=$("#shipping_address").validate({ignore: ":hidden" });
 	var billing_address=$("#billing_address").validate({ignore: ":hidden" });
 	var cc_details=$("#cc_form").validate();
@@ -22,12 +23,40 @@ $(document).ready(function() {
 	$("#billing_postcode").rules("add", {required:true,number:true});
 	$("#billing_state").rules("add", {required:true,maxlength:100});
 	
+=======
+	
+	var shipping_address=$("#shipping_address").validate({ignore: ":hidden" });
+	var billing_address=$("#billing_address").validate({ignore: ":hidden" });
+	var cc_details=$("#cc_form").validate();
+	
+	$("#shipping_firstname").rules("add", {required:true,maxlength: 100});
+	$("#shipping_lastname").rules("add", {maxlength: 100});
+	$("#shipping_address_1").rules("add", {required:true,maxlength: 100});
+	$("#shipping_address_2").rules("add", {required:true,maxlength: 100});
+	$("#shipping_city").rules("add", {required:true});
+	$("#shipping_postcode").rules("add", {required:true,number:true});
+	$("#shipping_state_dropdown").rules("add", {required:true,maxlength:100});
+	$("#shipping_state").rules("add", {required:true,maxlength:100});
+	$("#shipping_country").rules("add", {required:true});
+
+	$("#billing_firstname").rules("add", {required:true,maxlength: 100});
+	$("#billing_lastname").rules("add", {maxlength: 100});
+	$("#billing_address_1").rules("add", {required:true,maxlength: 100});
+	$("#billing_address_2").rules("add", {required:true,maxlength: 100});
+	$("#billing_city").rules("add", {required:true});
+	$("#billing_postcode").rules("add", {required:true,number:true});
+	$("#billing_state_dropdown").rules("add", {required:true,maxlength:100});
+	$("#billing_state").rules("add", {required:true,maxlength:100});
+	$("#billing_country").rules("add", {required:true});
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	$("#cardholder_name").rules("add", {required:true,maxlength: 50});
 	$("#cc_number").rules("add", {required:true,cc_chk:true});
 	$("#card_type").rules("add", {required:true});
 	$("#exp_month").rules("add", {required:true});
 	$("#exp_year").rules("add", {required:true});
 	$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
+<<<<<<< HEAD
 	var seller_shippings=[];
 	$('.shipping_amount').each(function(i,value){
 		var seller_id=parseInt($(this).attr('data-seller-id'));
@@ -71,6 +100,11 @@ $(document).ready(function() {
 			$('.shipping_total').html(parseFloat(shipping_amount).toFixed(2));
 			
 	})
+=======
+
+	
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	    
     		
 	   
@@ -172,6 +206,7 @@ $(document).ready(function() {
     /***************Shipping Address start here *******************/
     $(document).on('click','.shipping_popup',function(){
     	clearForm();
+<<<<<<< HEAD
     	var shipping_addr=$('input[name="shipping_address_2"]').attr('data-address');
     	var is_new=false;
     	if(shipping_addr!=undefined){
@@ -180,6 +215,8 @@ $(document).ready(function() {
     	}else{
     		is_new=true;
     	}
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     			$.ajax({
 			url: '/get-adress/shipping',
 			success: function(response){
@@ -189,6 +226,7 @@ $(document).ready(function() {
 						$('.shipping-or').remove();
 					}
 					$.each(response,function(i,value){
+<<<<<<< HEAD
 						if(value.address1.length){
 							var addr=value.address1+" "+value.address2;
 						}else{
@@ -221,6 +259,12 @@ $(document).ready(function() {
 					$('#shipping').html(opt);
 					$('.new_address').removeClass('hide');
 					$('.udt').remove();
+=======
+						opt+='<option value="'+value.address_id+'">'+value.address1+','+value.city+','+value.zip_code+','+value.country+'</option>';
+					});
+					$('#shipping').html(opt);
+					$('.new_address').removeClass('hide');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     				$("#shipping option:eq(0)").attr("selected", "selected");
     				$('#shipping_popup').modal('show');
 				}
@@ -228,7 +272,10 @@ $(document).ready(function() {
     });
     $(document).on('change','#shipping',function(){
     	var type=$(this).val();
+<<<<<<< HEAD
     	$('.udt').remove();
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     	if(type=="new"){
     		 	
 	    	$('.new_address').removeClass('hide');
@@ -238,6 +285,7 @@ $(document).ready(function() {
 			$("#shipping_address_1").rules("remove");
 			$("#shipping_city").rules("remove");
 			$("#shipping_postcode").rules("remove");
+<<<<<<< HEAD
 		
     		$('.new_address').addClass('hide');
     		$('.new_address').after('<div class="col-md-12 col-xs-12 udt"><button class="btn btn-primary submit-btn">Update</button></div>');
@@ -247,12 +295,22 @@ $(document).ready(function() {
     $(document).on('submit','#shipping_address',function(){
     	$('.img-loading').removeClass('hide');
     	$('.main-container').addClass('loading-page');
+=======
+			$("#shipping_country").rules("remove");
+
+    		$('.new_address').addClass('hide');
+    		getShippingSelectedAdress('shipping',$(this).val());
+    	}
+     })
+    $(document).on('submit','#shipping_address',function(){
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		var data=$(this).serializeArray();
 		$.ajax({
 			type: 'POST',
 			url: '/add/shipping-adress',
 			data: data,
 			success: function(response){
+<<<<<<< HEAD
 					location.reload();
 					// if($('#is_billing').is(":checked")){
 					// 	getShippingSelectedAdress('shipping',response,true)
@@ -262,6 +320,16 @@ $(document).ready(function() {
 					// }
 					// $('.shipping_popup').html('Edit');
 					// $('#shipping_popup').modal('hide');
+=======
+					if($('#is_billing').is(":checked")){
+						getShippingSelectedAdress('shipping',response,true)
+					}else{
+						getShippingSelectedAdress('shipping',response);
+			
+					}
+					$('.shipping_popup').html('Edit');
+					$('#shipping_popup').modal('hide');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				}
 			});	
 
@@ -270,6 +338,7 @@ $(document).ready(function() {
     /***************Billing Address start here *******************/
     $(document).on('click','.billing_popup',function(){
     	clearForm();
+<<<<<<< HEAD
     	var is_new=false;
     	var billing_addr=$('input[name="pay_address_2"]').attr('data-address');
     	if(billing_addr!=undefined){
@@ -279,6 +348,8 @@ $(document).ready(function() {
     		is_new=true;
     	}
     	
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     		$.ajax({
 			url: '/get-adress/billing',
 			success: function(response){
@@ -288,6 +359,7 @@ $(document).ready(function() {
 					}
 					var opt='<option value="new">New</option>';
 					$.each(response,function(i,value){
+<<<<<<< HEAD
 						if(value.address1.length){
 							var addr=value.address1+", "+value.address2;
 						}else{
@@ -319,6 +391,12 @@ $(document).ready(function() {
 					$('#billing').html(opt);
 					$('.new_address').removeClass('hide');
 					$('.udt').remove();
+=======
+						opt+='<option value="'+value.address_id+'">'+value.address1+','+value.city+','+value.zip_code+','+value.country+'</option>';
+					});
+					$('#billing').html(opt);
+					$('.new_address').removeClass('hide');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     				$("#billing option:eq(0)").attr("selected", "selected");
     				$('#billing_popup').modal('show');
 				}
@@ -326,7 +404,10 @@ $(document).ready(function() {
     });
     $(document).on('change','#billing',function(){
     	var type=$(this).val();
+<<<<<<< HEAD
     	$('.udt').remove();
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     	if(type=="new"){
     		$('.new_address').removeClass('hide');
     	}else{
@@ -335,6 +416,7 @@ $(document).ready(function() {
 			$("#billing_address_1").rules("remove");
 			$("#billing_city").rules("remove");
 			$("#billing_postcode").rules("remove");
+<<<<<<< HEAD
 			
     		$('.new_address').addClass('hide');
     		$('.new_address').after('<div class="col-md-12 col-xs-12 udt"><button class="btn btn-primary submit-btn">Update</button></div>');
@@ -344,12 +426,22 @@ $(document).ready(function() {
     $(document).on('submit','#billing_address',function(){
     	$('.img-loading').removeClass('hide');
     	$('.main-container').addClass('loading-page');
+=======
+			$("#billing_country").rules("remove");
+
+    		$('.new_address').addClass('hide');
+    		getBillingSelectedAdress('billing',$(this).val());
+    		}
+     })
+    $(document).on('submit','#billing_address',function(){
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		var data=$(this).serializeArray();
 		$.ajax({
 			type: 'POST',
 			url: '/add/billing-adress',
 			data: data,
 			success: function(response){
+<<<<<<< HEAD
 				location.reload();
 					// if($('#is_shipping').is(":checked")){
 					// 	getBillingSelectedAdress('billing',response,true)
@@ -358,6 +450,15 @@ $(document).ready(function() {
 			
 					// }
 					// $('#billing_popup').modal('hide');
+=======
+					if($('#is_shipping').is(":checked")){
+						getBillingSelectedAdress('billing',response,true)
+					}else{
+						getBillingSelectedAdress('billing',response);
+			
+					}
+					$('#billing_popup').modal('hide');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				}
 			});	
 
@@ -399,8 +500,11 @@ $(document).ready(function() {
     		}
      })
     $(document).on('submit','#cc_form',function(){
+<<<<<<< HEAD
     	$('.img-loading').removeClass('hide');
     	$('.main-container').addClass('loading-page');
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     	$('.payment-fail').html("");
 		var data=$(this).serializeArray();
 		$.ajax({
@@ -408,6 +512,7 @@ $(document).ready(function() {
 			url: '/add/credit-card',
 			data: data,
 			success: function(response){
+<<<<<<< HEAD
 					location.reload();
 					// if(response.result=="1"){
 					// 	getSelectedCreditCard(response.message);
@@ -416,12 +521,26 @@ $(document).ready(function() {
 					// }else{
 					// 	$('.payment-fail').html(response.message);
 					// }
+=======
+					console.log(response.result);
+					if(response.result=="1"){
+						getSelectedCreditCard(response.message);
+						$('.cc_popup').html('Edit');
+						$('#cc_popup').modal('hide');
+					}else{
+						$('.payment-fail').html(response.message);
+					}
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				}
 			});	
 
 	 });
     /**************************************************************/
+<<<<<<< HEAD
      function getShippingSelectedAdress(type,address_id,is_billing){
+=======
+     function getShippingSelectedAdress(type,address_id,is_billing=false){
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     	$('.shipping_add').html('');
     	$.ajax({
 			url: '/get-adress/'+type+'/'+address_id+'',
@@ -440,17 +559,29 @@ $(document).ready(function() {
 						var address2="";
 					}
 				if(!is_billing){
+<<<<<<< HEAD
 					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+'<br></p>');
 				}
 				else{
 					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+'<br></p>');
 					$('.billing_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+'<br></p>');
+=======
+					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+				}
+				else{
+					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.billing_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				
 				}
 			}
 			});
     }
+<<<<<<< HEAD
     function getBillingSelectedAdress(type,address_id,is_shipping){
+=======
+    function getBillingSelectedAdress(type,address_id,is_shipping=false){
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     	$('.billing_add').html('');
     	$.ajax({
 			url: '/get-adress/'+type+'/'+address_id+'',
@@ -470,11 +601,19 @@ $(document).ready(function() {
 						var address2="";
 					}
 					if(!is_shipping){
+<<<<<<< HEAD
 					$('.billing_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+'<br></p>');
 				}
 				else{
 					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+'<br></p>');
 					$('.billing_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+'<br></p>');
+=======
+					$('.billing_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+				}
+				else{
+					$('.shipping_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+					$('.billing_add').html('<p>'+response[0].address1+',<br>'+address2+response[0].city+','+response[0].state+','+response[0].zip_code+','+response[0].country+'<br></p>');
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				
 				}
 			}
@@ -493,7 +632,11 @@ $(document).ready(function() {
 					}else if(response[0].card_type=="MasterCard"){
 						var img='<img src="/img/mastercard.png">';
 					} 
+<<<<<<< HEAD
 					$('.card_exp').html(img+' Ending in '+response[0].last_digits);
+=======
+					$('.card_exp').html(img+' Ending in '+response[0].exp_year);
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			}
 			});
     }
@@ -650,6 +793,7 @@ input_credit_card = function(input)
 
 input_credit_card(document.getElementById('cc_number'));
 
+<<<<<<< HEAD
 $('#placeorder').submit(function(e){
 	var is_shipping=$('input[name="shipping_address_2"]').val();
 	var is_billing=$('input[name="pay_address_2"]').val();
@@ -768,3 +912,6 @@ $(document).on('change','.shipping_amount',function(){
 });
 
 });
+=======
+})
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

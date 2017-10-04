@@ -56266,7 +56266,11 @@ $.extend($.validator, {
 		number: "Please enter a valid number.",
 		digits: "Please enter only digits.",
 		creditcard: "Please enter a valid credit card number.",
+<<<<<<< HEAD
 		equalTo: "Please enter the same password again.",
+=======
+		equalTo: "Please enter the same value again.",
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		accept: "Please enter a value with a valid extension.",
 		maxlength: $.validator.format("Please enter no more than {0} characters."),
 		minlength: $.validator.format("Please enter at least {0} characters."),

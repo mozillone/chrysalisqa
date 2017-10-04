@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,Orders,Exports) 
+=======
+app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,Orders) 
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 {
 	var vm = this;
     $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -11,6 +15,7 @@ app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBui
       .withOption('order', [ ])
       .withOption('responsive', true)
       .withOption('bFilter', false)
+<<<<<<< HEAD
       .withOption('lengthChange', false)
       .withDOM('Bfrtip')
       .withButtons([
@@ -34,6 +39,12 @@ app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBui
                       DTColumnBuilder.newColumn('order_id').withTitle('Order #').notSortable(),
                       DTColumnBuilder.newColumn('user_name').withTitle('Customer Name'),
                       DTColumnBuilder.newColumn('seller_name').withTitle('Seller Name'),
+=======
+      .withOption('lengthChange', false);
+       $scope.dtColumns = [
+                      DTColumnBuilder.newColumn('order_id').withTitle('Order #').notSortable(),
+                      DTColumnBuilder.newColumn('user_name').withTitle('Customer Name'),
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                       DTColumnBuilder.newColumn('amount').withTitle('Amount'),
                       DTColumnBuilder.newColumn('date').withTitle('Ordered Date'),
                       DTColumnBuilder.newColumn('status').withTitle('Status'),
@@ -57,6 +68,7 @@ app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBui
             .withOption('order', [ ])
             .withOption('responsive', true)
             .withOption('bFilter', false)
+<<<<<<< HEAD
             .withOption('lengthChange', false)
              .withDOM('Bfrtip')
               .withButtons([
@@ -76,6 +88,10 @@ app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBui
                 }
             ]);ope.dtColumns = [
                       DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+=======
+            .withOption('lengthChange', false);
+             $scope.dtColumns = [
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                       DTColumnBuilder.newColumn('order_id').withTitle('Order #').notSortable(),
                       DTColumnBuilder.newColumn('user_name').withTitle('Customer Name'),
                       DTColumnBuilder.newColumn('amount').withTitle('Amount'),
@@ -88,6 +104,7 @@ app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBui
     
           });
         } 
+<<<<<<< HEAD
     function getCheckboxes(data) {
        return '<input type="checkbox" class="rowsChecked" name="user_checkboxes" value='+data.order_id+' checked>' 
     }
@@ -119,4 +136,6 @@ app.controller('OrdersController', function($scope,DTOptionsBuilder, DTColumnBui
              
            }); 
     }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 }); 

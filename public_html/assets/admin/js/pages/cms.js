@@ -1,12 +1,16 @@
 $(function(){
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     $("#add_cms_page").validate({
         onfocusout: function(element) { $(element).valid(); },
         rules: {
             title:{
                 required: true,
+<<<<<<< HEAD
                 
             },
             url:{
@@ -28,6 +32,25 @@ $(function(){
             },
             
             
+=======
+                maxlength: 255,
+            },
+            url:{
+                required: true,
+                maxlength: 255,
+            },
+            description:{
+                required: true,
+            },
+            meta_title:{
+                required: true,
+                maxlength: 127,
+            },
+            meta_desc: {
+                required: true,
+                maxlength: 512,
+            },
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         },
         highlight: function(element) {
             $(element).closest('.form-control').addClass('error');
@@ -58,6 +81,7 @@ $(function(){
         },
         errorElement: 'span',
         errorClass: 'error',
+<<<<<<< HEAD
         focusInvalid: false,
         invalidHandler: function(form, validator) {
 
@@ -69,6 +93,8 @@ $(function(){
             }, 1000);
 
         }
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     });
 
     $("#edit_cms_page").validate({
@@ -78,6 +104,7 @@ $(function(){
                 required: true,
                 maxlength: 255,
             },
+<<<<<<< HEAD
            meta_title:{
                  required: true,
             },
@@ -92,6 +119,23 @@ $(function(){
 
             },
             
+=======
+            url:{
+                required: true,
+                maxlength: 255,
+            },
+            description:{
+                required: true,
+            },
+            meta_title:{
+                required: true,
+                maxlength: 127,
+            },
+            meta_desc: {
+                required: true,
+                maxlength: 512,
+            },
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         },
         highlight: function(element) {
             $(element).closest('.form-control').addClass('error');
@@ -107,7 +151,13 @@ $(function(){
             title:{
                 required: "Enter Page Title",
             },
+<<<<<<< HEAD
            
+=======
+            url:{
+                required: "Enter Page URL",
+            },
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
             page_desc:{
                 required: "Enter Page Description",
             },
@@ -120,6 +170,7 @@ $(function(){
         },
         errorElement: 'span',
         errorClass: 'error',
+<<<<<<< HEAD
         focusInvalid: false,
         invalidHandler: function(form, validator) {
 
@@ -240,4 +291,7 @@ $(function(){
         }
     });
 
+=======
+    });
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 });

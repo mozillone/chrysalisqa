@@ -1,5 +1,6 @@
 @extends('/frontend/app')
 @section('styles')
+<<<<<<< HEAD
     <link rel="stylesheet" href="{{asset('assets/frontend/css/jquery-ui.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
     <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
@@ -7,6 +8,11 @@
 	
 
 	</style>
+=======
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
  @endsection
 @section('content')
  	<section class="content create_section_page">
@@ -15,7 +21,11 @@
 
 <div class="container">
 	<div class="row">
+<<<<<<< HEAD
 		<div class="col-md-12 col-xs-12 col-sm-12"" ">
+=======
+		<div class="col-md-12">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 			<div class="list-banner" @if(empty($data['sub_cat_info'][0]->banner_image) || !file_exists(public_path('category_images/Banner/'.$data["sub_cat_info"][0]->banner_image.''))) style=" background-image: url('/category_images/df_img.jpg')" @else style=" background-image: url('/category_images/Banner/{{$data['sub_cat_info'][0]->banner_image}}')" @endif>
 			
 			</div>
@@ -36,9 +46,14 @@
 	<form id="search_list">
 	<input type="hidden" name="cat_id" value="{{$data['sub_cat_info'][0]->category_id}}"/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+<<<<<<< HEAD
 	@if(!empty($parent_cat))<input type="hidden" name="is_main" value="{{ $parent_cat }}"> @endif
 	<div class="col-md-3 col-sm-4 list_view_left_view clearfix hidden-xs">
         @if($parent_cat_name == "kids")    
+=======
+	<div class="col-md-3 col-sm-4">
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	<div class="list-box-rm list-box-rma">
 	<h2 class="list-box-head">KIDS COSTUMES</h2>
 	<ul class="box-list1 gender">
@@ -48,6 +63,7 @@
 	</ul>
 	<input type="hidden" name="search[gender]" class="search"/>
 	</div>
+<<<<<<< HEAD
         @endif
         @if($parent_cat_name != "mens" && $parent_cat_name != "womens" && $parent_cat_name != "pets" && $parent_cat_name != "kids")
         <div class="list-box-rm list-box-rma">
@@ -63,12 +79,19 @@
 	<input type="hidden" name="search[gender]" class="search"/>
 	</div>
         @endif
+=======
+
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 
 	<div class="list-box-rm">
 	<h2 class="list-box-head">THEMES</h2>
 	<ul class="box-list1">
+<<<<<<< HEAD
 	<li @if(Request::url()==URL::to("category/".$parent_cat_name)) class="active" @endif><a href="/category/{{$parent_cat_name}}">See All</a></li>
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	@foreach($categories_list as $key=>$sub_cats_list)
 	<li @if(Request::url()==URL::to("category".$sub_cats_list)) class="active" @endif ><a href="/category{{$sub_cats_list}}">{{$key}}</a></li>
 	@endforeach
@@ -89,9 +112,15 @@
 	<h3 class="list-box-subhead">Condition</h3>
 	<ul class="box-list2">
 	<li><input type="checkbox" name="search[condition][]" value="brand_new" class="search"> Brand New</li>
+<<<<<<< HEAD
         <li><input type="checkbox" name="search[condition][]" value="like_new" class="search"> Like New</li>
         <li><input type="checkbox" name="search[condition][]" value="excellent" class="search"> Excellent</li>
 	<li><input type="checkbox" name="search[condition][]" value="good" class="search"> Good</li>
+=======
+	<li><input type="checkbox" name="search[condition][]" value="good" class="search"> Good</li>
+	<li><input type="checkbox" name="search[condition][]" value="like_new" class="search"> Like New</li>
+	<li><input type="checkbox" name="search[condition][]" value="excellent" class="search"> Excellent</li>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	</ul>
 
 	<h3 class="list-box-subhead">Size</h3>
@@ -107,17 +136,28 @@
 	<input type="hidden" name="search[sizes]"/>
 	</ul>
 	<h3 class="list-box-subhead">Price</h3>
+<<<<<<< HEAD
 <div class="list-stl row price-range-slider">
+=======
+<div class="list-stl row">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 						<div class="col-sm-12 rng">	
 								
 								<input type="hidden" id="amount2"   name="search[price]" readonly style="border:0; color:#f6931f; font-weight:bold;" value="" class="form-control">
 								
 								 <div id="price-range"></div>
 							      <div class="row price_amt">
+<<<<<<< HEAD
 									 <div class="col-md-6 col-xs-6">
 									 <p class="text-left price_min">$0</p>
 									 </div>
 									 <div class="col-md-6 col-xs-6">
+=======
+									 <div class="col-md-6">
+									 <p class="text-left price_min">$0</p>
+									 </div>
+									 <div class="col-md-6">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 									 <p class="text-right price_max">$10000</p>
 									 </div> 
                                  </div>
@@ -126,6 +166,7 @@
 					</div>
 	</div>
 	</div>
+<<<<<<< HEAD
 	<div class="hidden-sm hidden-md hidden-lg col-xs-12 mbl_slct-drp">
 	<p class="list-sec-rm1 mobile_heading_list">{{strtoupper($data['sub_cat_info'][0]->name)}}</p>
 		<select class="form-control" id="theams">
@@ -137,6 +178,12 @@
 	<div class="col-md-9 col-sm-8 col-xs-12">
 
 	<div class="list-sec-rm hidden-xs ">
+=======
+
+	<div class="col-md-9 col-sm-8">
+
+	<div class="list-sec-rm">
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	<p class="list-sec-rm1">{{strtoupper($data['sub_cat_info'][0]->name)}}</p>
 	<p class="list-sec-rm2"><span>Sort By</span>
 	 <select name="search[sort_by]" class="sort_by">
@@ -149,6 +196,7 @@
 	 </p>
 
 	</div>
+<<<<<<< HEAD
 	<div class="clearfix"></div>
 	
 	<div class="hidden-sm hidden-md hidden-lg row filer-divs">
@@ -336,6 +384,8 @@
 								</div>
 							</div>
 						</div>	
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
 <div class="list_products list-img-bg">
 	<div class="row" id="itemContainer">
@@ -357,7 +407,11 @@
 @stop
 {{-- page level scripts --}}
 @section('footer_scripts')
+<<<<<<< HEAD
 <script src="{{ asset('/assets/frontend/js/jquery-ui.js') }}"></script>
+=======
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 <script src="{{ asset('/js/ohsnap.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>

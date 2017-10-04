@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function openNav() {
     document.getElementById("myfilter-sidenav").style.width = "80%";
     document.getElementById("main").style.marginLeft = "0px";
@@ -17,6 +18,10 @@ $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClas
 });	
 $(function() {
 	 $( "div#price-range" ).slider({
+=======
+$(function() {
+	 $( "#price-range" ).slider({
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 		range: true,
 		min: 0,
 		max: 1000,
@@ -81,6 +86,7 @@ $(document).on('change','.sort_by',function(){
 	var search=$('#search_list').serializeArray();
 	searching(search);
 })
+<<<<<<< HEAD
 $(document).on('click','.mbl_sort',function(){
 	if($(this).find('i').hasClass('fa-sort-amount-asc')){
 		$(this).find('i').removeClass('fa-sort-amount-asc');
@@ -97,6 +103,9 @@ $(document).on('click','.mbl_sort',function(){
 	}
 })
 function searching(search){
+=======
+function searching(search=null){
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	var filter=$('#search_list').serializeArray();
 	var res="";
 	var cat_id=$('input[name="cat_id"]').val();
@@ -115,9 +124,15 @@ function searching(search){
 			url: '/getCostumesData',
 			data: filter,
 			success: function(response){
+<<<<<<< HEAD
 				if(response.data.costumes.length!=0){
 					　$.each(response.data.costumes,function(index, value) {
 						var cst_len="";
+=======
+				console.log(now());
+				if(response.data.costumes.length!=0){
+					　$.each(response.data.costumes,function(index, value) {
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 						if(value.image!=null){
 							var path='/costumers_images/Medium/'+value.image;
 							if(fileExists(path)){
@@ -133,18 +148,27 @@ function searching(search){
 						}else{
 							var link="";
 						}
+<<<<<<< HEAD
 						if(value.is_like=="1"){
+=======
+						if(value.is_like){
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 							var is_like='class="active"';
 						}else{
 							var is_like=' ';
 						}
+<<<<<<< HEAD
 						if(value.is_fav=="1"){
+=======
+						if(value.is_fav){
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 							var is_fav='class="active"';
 							var icon='<i aria-hidden=true class="fa fa-heart"></i>';
 						}else{
 							var is_fav=' ';
 							var icon='<i aria-hidden=true class="fa fa-heart-o"></i>';
 						}
+<<<<<<< HEAD
 						if (value.created_user_group=="admin") {
 							var offset=20;
 							var cc_cos = '<img src="/img/chrysalis_brand.png"></span>';
@@ -153,6 +177,8 @@ function searching(search){
 							var cc_cos = '';
 							cst_len="no_brand";
 						}
+=======
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 						if(value.created_user_group=="admin" && value.discount!=null && value.uses_customer<value.uses_total && now()>=value.date_start && now()<=value.date_end){
 							var discount=(value.price/100)*value.discount;
 							var new_price=value.price-discount;
@@ -173,6 +199,7 @@ function searching(search){
 						}else{
 							var stock='<p class="hover_crt"><i aria-hidden=true class="fa fa-shopping-cart"></i> Out of stock</p>';
 						}
+<<<<<<< HEAD
 						if(value.name.length<=20){
 							var cst_name=value.name;
 							cst_len+=" sml_name";
@@ -180,13 +207,21 @@ function searching(search){
 							var cst_name=value.name.substr(0,offset)+"...";
 						}
 						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/product'+link+'"  style="background-image:url('+src+');background-repeat:no-repeat;">&nbsp;</a><div class=hover_box><p class=like_fav>'+like+' '+fav+' '+stock+'</div></div><div class="slider_cnt '+cst_len+'"><span class="cc_brand">'+cc_cos+'</span><h4><a href="/product'+link+'"</a>'+cst_name+'</h4>'+price+'</div></div></div>';
+=======
+
+						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/product'+link+'"><img class=img-responsive src='+src+'/></a><div class=hover_box><p class=like_fav>'+like+' '+fav+' '+stock+'</div></div><div class=slider_cnt><h4><a href="/product'+link+'"</a>'+value.name+'</h4><p>'+price+'</div></div></div>';
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 				    });
 					$(".pagination").show();
 					$("#itemContainer").append(res);
 					pagination();
 				}else{
 					var list=$('#itemContainer').html().length;
+<<<<<<< HEAD
 					$("ul.holder").remove();
+=======
+					$("ul.holder").empty();
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					$('#counting').html('')
 				    res='<div class="col-sm-12 col-md-6"><div class="caption">Sorry, we could not find any costumes</div></div>';
 				    $("#itemContainer").html(res);
@@ -230,4 +265,8 @@ function addCommas(nStr)
     }
     return (x1 + x2);
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 });

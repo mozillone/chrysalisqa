@@ -114,7 +114,11 @@
         { data: 'credit_card_mask', name: 'credit_card_mask' },
         { data: 'card_type', name: 'card_type' },
         { data: 'exp_year', name: 'exp_year' },
+<<<<<<< HEAD
         { data: 'date_format', name: 'date_format' },
+=======
+        { data: 'created_at', name: 'created_at' },
+>>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
         { data: 'actions', name: 'actions', orderable: false, searchable: false}
       ]
     });
