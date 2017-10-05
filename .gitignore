@@ -23,3 +23,8 @@ Thumbs.db
 npm-debug.log
 /config/database.php
 /public_html/profile_img
+/tmp
+/.cache
+/.local
+.bash_history
+
