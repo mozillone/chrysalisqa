@@ -129,14 +129,16 @@ class ReportsController extends Controller
   public function getallPaypal(Request $request){
   $paypots = DB::table('paypal_payouts as pp')
   ->leftJoin('users','users.id','=','pp.user_id')
-  //->where('status','not_paid')
+  ->where('status','!=','paid')
   ->groupBy('pp.user_id')
   ->select('users.first_name as name','users.paypal_email as email',DB::Raw('DATE_FORMAT(cc_pp.created_at,"%m/%d/%y %h:%i %p") as date'),
     'pp.status as status',DB::raw('SUM(cc_pp.amount) as amount'),'pp.user_id as user_id','pp.id as id')
   ->get();
     return Datatables::of($paypots)
     ->addColumn('checkbox', function ($transactions_list) {
-        return '<input type="checkbox" name="tran_id[]" value="'.$transactions_list->id.'-'.number_format(floatval($transactions_list->amount),2,'.','').'" >';
+        if($transactions_list->status != 'pending'){
+            return '<input type="checkbox" name="tran_id[]" value="'.$transactions_list->id.'-'.number_format(floatval($transactions_list->amount),2,'.','').'" >';
+        }
       })
       ->editColumn('amount',function($paypots){
                 return '$'.number_format(floatval($paypots->amount),2,'.','');
@@ -879,6 +881,54 @@ cc_costume_description ON cc_costume_description.costume_id = cc_costumes.costum
                 return date('m/d/y h:i:s A', strtotime($discounts->created_at));
             })
             ->make(true);
+    }
+
+    
+    public static function getStatusChange()
+    {
+        //echo "string"; exit;
+        $payouts = DB::table('paypal_payouts')->get();
+        foreach ($payouts as $key => $value) {
+            if($value->status == 'pending'){
+                $get_batch_id = DB::table('payout_log')->where('type_id',$value->id)->where('batch_status', 'PENDING')->get();
+                foreach ($get_batch_id as $key => $batch_id) {
+                    //echo "string1"; exit;
+                    //print_r($value->id); exit;
+                    $get_status = PayPalPayout::getPayoutStatus($batch_id->payout_batch_id);
+                    //echo"<pre>";print_r($get_status['status']);exit;
+                    if($get_status['status'] == 1){
+                        $output = $get_status['output'];
+                        if($value->id == $batch_id->type_id){
+                            if ($output->batch_header->batch_status == "SUCCESS") {
+                                $get_details = DB::table('paypal_payouts')->where('id',$value->id)->update(['status'=>'paid']);
+
+                                $log_array = array('type'=>'seller_payout',
+                                    'type_id'=>$value->id,
+                                    'user_id'=>$batch_id->user_id,
+                                    'note'=>'Seller report',
+                                    'payout_batch_id'=>$output->batch_header->payout_batch_id,
+                                    'batch_status'=>$output->batch_header->batch_status,
+                                    'sender_batch_id'=>$output->batch_header->sender_batch_header->sender_batch_id,
+                                    'created_at'=>date('y-m-d H:i:s'));
+
+                                //$insertin_log = Site_model::insert_get_id('payout_log',$log_array);
+                                $updateLog = DB::table('payout_log')
+                                        ->where('id',$batch_id->id)
+                                        ->update(['note'=> json_encode($get_status['output']), 'batch_status'=>'Success', 'updated_at'=>date('y-m-d H:i:s')]);
+                                //echo 'scuccess';
+                            }
+                        }
+                    }
+                    else{
+                        $updateLog = DB::table('payout_log')
+                                        ->where('id',$batch_id->id)
+                                        ->update(['note'=> json_encode($get_status['output']), 'batch_status'=>'FAILED', 'updated_at'=>date('y-m-d H:i:s')]);
+                        //echo 'fail'; //exit;
+                    }
+                }
+            }
+        }
+        
     }
 }
 

@@ -120,9 +120,9 @@ class CreateCostumeController  extends Controller {
 
 	/****create costume code starts here***/
 	public function Costumecreate(Request $request){
-
 		 	
 			$req=$request->all();
+
 			$userid=Auth::user()->id;
 
 		  	$costume_name=$req['costume_name'];
@@ -131,11 +131,11 @@ class CreateCostumeController  extends Controller {
 		  	$gender = $req['gender'];
 		  	$size = $req['size'];
 		  	$subcategory = $req['subcategory'];
-		  	$heightft ='height-ft';
-		  	$heightin = 'height-in';
-		  	$weightlbs = 'weight-lbs';
-		  	$chestin ='chest-in';
-		  	$waistlbs ='waist-lbs';
+		  	$heightft = $req['height-ft'];
+		  	$heightin = $req['height-in'];
+		  	$weightlbs = $req['weight-lbs'];
+		  	$chestin =$req['chest-in'];
+		  	$waistlbs =$req['waist-lbs'];
 		  	$cosplay = null;
 		  	$fashion = null;
 		  	$activity = null;
@@ -163,10 +163,7 @@ class CreateCostumeController  extends Controller {
 		  	}*/
 		  	$description = $req['description'];
 		  	 
-		  	$faq = $req['faq'];
-		  	 
-		  	
-		  
+		  	$faq = $req['faq'];  		  
 		  	
 			$customer_group="user";
 			/*
@@ -564,6 +561,7 @@ class CreateCostumeController  extends Controller {
 			'attribute_option_value'=>$heightft,
 			);
 			$height_ft_insert=DB::table('costume_attribute_options')->insert($height_ft);
+			
 			//Height-inches
 			$height_in=array('costume_id'=>$insert_costume,
 			'attribute_id'=>'17',
@@ -843,9 +841,11 @@ class CreateCostumeController  extends Controller {
 			
 			Meta::set('url', $share_url);
 
+			DB::update('update cc_costumes set donating_percent = FORMAT(`donation_amount`/`price`,2)*100  where costume_id = ?', [$costume_id]);
+
 			$charity_info = Costumes::leftjoin('charities', 'costumes.charity_id', '=', 'charities.id')
 									->join('costume_description','costumes.costume_id','=','costume_description.costume_id')
-									->select('charities.name','costume_description.name as cos_name', 'costumes.donation_amount')
+									->select('charities.name','costume_description.name as cos_name', 'costumes.donation_amount', 'costumes.donating_percent')
 									->where('costumes.costume_id',$costume_id)
 									->first();
 									//echo "<pre>"; print_r($charity_info); exit;
@@ -854,7 +854,7 @@ class CreateCostumeController  extends Controller {
 				//$amount = $charity_info->donation_amount*100;
 				$amount = number_format($charity_info->donation_amount,2);
 				if($amount > 0){
-					$donation.= '$'.$amount.' of the sale goes to '.ucfirst($charity_info->name);
+					$donation.= $charity_info->donating_percent.'% of the sale goes to '.ucfirst($charity_info->name);
 				}
 				$is_amount = 1;
 			}
@@ -868,7 +868,7 @@ class CreateCostumeController  extends Controller {
 			/* End*/
 
 
-			return response()->json(['msg' => 'success', 'cat_url' => '/category/'.$list_url_arr[1].'/'.$list_url_arr[2], 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$charity_info->cos_name, 'amount'=>$amount, 'charity_center'=>ucfirst($charity_info->name) ]);
+			return response()->json(['msg' => 'success', 'cat_url' => '/category/'.$list_url_arr[1].'/'.$list_url_arr[2], 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$charity_info->cos_name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name) ]);
 
 		}
 	public function requestaBag(){
@@ -1107,7 +1107,7 @@ class CreateCostumeController  extends Controller {
 
 	public function EditCostumeAdd(Request $request){
 
-
+		 
 		$userid=Auth::user()->id;
 
 		//echo "<pre>";print_r($request->all());die;
@@ -1125,11 +1125,11 @@ class CreateCostumeController  extends Controller {
 		  	$gender = $req['gender'];
 		  	$size = $req['size'];
 		  	$subcategory = $req['subcategory'];
-		  	$heightft ='height-ft';
-		  	$heightin = 'height-in';
-		  	$weightlbs = 'weight-lbs';
-		  	$chestin ='chest-in';
-		  	$waistlbs ='waist-lbs';
+		  	$heightft =$req['height-ft'];
+		  	$heightin = $req['height-in'];
+		  	$weightlbs = $req['weight-lbs'];
+		  	$chestin =$req['chest-in'];
+		  	$waistlbs =$req['waist-lbs'];
 		  	$cosplay = null;
 		  	$fashion = null;
 		  	$activity = null;
@@ -1770,9 +1770,11 @@ class CreateCostumeController  extends Controller {
 			
 			Meta::set('url', $share_url);
 
-			$charity_info = Costumes::join('charities', 'costumes.charity_id', '=', 'charities.id')
+			DB::update('update cc_costumes set donating_percent = FORMAT(`donation_amount`/`price`,2)*100  where costume_id = ?', [$costume_id]);
+
+			$charity_info = Costumes::leftjoin('charities', 'costumes.charity_id', '=', 'charities.id')
 									->join('costume_description','costumes.costume_id','=','costume_description.costume_id')
-									->select('charities.name','costume_description.name as cos_name', 'costumes.donation_amount')
+									->select('charities.name','costume_description.name as cos_name', 'costumes.donation_amount', 'costumes.donating_percent')
 									->where('costumes.costume_id',$request->costume_id)
 									->first();
 			$donation = ''; $amount = '';
@@ -1781,7 +1783,7 @@ class CreateCostumeController  extends Controller {
 				//$amount = $charity_info->donation_amount*100;
 				$amount = number_format($charity_info->donation_amount,2);
 				if($amount > 0){
-					$donation.= '$'.$amount.' of the sale goes to '.ucfirst($charity_info->name).". Check it out!" ;	
+					$donation.= $charity_info->donating_percent.'% of the sale goes to '.ucfirst($charity_info->name).". Check it out!" ;	
 				}
 				
 				$is_amount = 1;
@@ -1796,7 +1798,7 @@ class CreateCostumeController  extends Controller {
 			$charity_center = ucfirst($charity_info->name);
 			/* End*/
 
-			return response()->json(['msg'=>'success', 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$charity_info->cos_name, 'amount'=>$amount, 'charity_center'=>ucfirst($charity_info->name)]);
+			return response()->json(['msg'=>'success', 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$charity_info->cos_name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name)]);
 
 			//return "success";
 	}
