@@ -159,24 +159,20 @@ $(function(){
     $('#30').click(function() {
         $('#mention_hours').css('display', 'block');
         $('#mention_hours_input').css('display', 'block');
-        $("#freqently").show();
     });
     $('#33').click(function() {
         $('#film_text').css('display', 'none');
         $('#film_text_input').css('display', 'none');
         $('#film_text_input').val('');
-         $("#freqently").hide();
     });
     $('#32').click(function() {
         $('#film_text').css('display', 'block');
         $('#film_text_input').css('display', 'block');
-        $("#freqently").show();
     });
     $('#31').click(function() {
         $('#mention_hours').css('display', 'none');
         $('#mention_hours_input').css('display', 'none');
         $('#mention_hours_input').val('');
-         $("#freqently").hide();
     });
 
     $('#another_charity').click(function() {
@@ -206,7 +202,7 @@ $(function(){
         }
     });
 
-   
+    $(".freqently").hide();
 
     $('#costume_description_next').click(function(a) {
 
@@ -316,7 +312,8 @@ $(function(){
 
         if ($('input[name=make_costume]:checked').val() == 30) {
             if ($('input[name=make_costume_time1]').val() == "") {
-                $('#usercostumeerror').html('This field is required.');                 
+                $('#usercostumeerror').html('This field is required.');
+                $(".freqently").show();
                 str = false;
             }
         }
@@ -801,7 +798,7 @@ $(function(){
                         if(response.amount == 0.00){
                             $("#amount_charity").css({'visibility':'hidden'});  
                         }else{
-                            $("#amount").text(response.amount+"%");
+                            $("#amount").text('$'+response.amount);
                             $("#charity_center").text(response.charity_center);  
                             
                         }
