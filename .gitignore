@@ -12,8 +12,14 @@ Thumbs.db
 *.sql
 *.sqlite
 
-/vendor
 /node_modules
+/storage/logs/laravel.log
+/vendor
 .env
-/bower_components
+/.metadata
+/.buildpath
+/.settings
+/.project
 npm-debug.log
+/config/database.php
+/public_html/profile_img
