@@ -172,20 +172,24 @@ $('#activity_yes_div').css('display','none');
 $('#30').click(function(){
 $('#mention_hours').css('display','block');
 $('#mention_hours_input').css('display','block');
+ $("#freqently").show();
 });
 $('#33').click(function(){
     $('#film_text').css('display','none');
     $('#film_text_input').css('display','none');
     $('#film_text_input').val('');
+     $("#freqently").hide();
   });
   $('#32').click(function(){
     $('#film_text').css('display','block');
     $('#film_text_input').css('display','block');
+     $("#freqently").show();
   });
 $('#31').click(function(){
 $('#mention_hours').css('display','none');
 $('#mention_hours_input').css('display','none');
 $('#mention_hours_input').val('');
+ $("#freqently").hide();
 });
 
 $('#another_charity').click(function(){
@@ -356,12 +360,12 @@ $('#other_organzation_check').css('display','none');
         }
 
          
-        if ($('input[name=fimquality]:checked').val() == 32) {
+        /*if ($('input[name=fimquality]:checked').val() == 32) {
             if ($('input[name=film_name]').val() == "") {
                 $('#qualityerror').html('This field is required.');
                 str = false;
             }
-        }
+        }*/
 
           if ($('input[name=make_costume]:checked').val() == 30) {
               if ($('input[name=make_costume_time]').val() == "") {
@@ -535,9 +539,13 @@ processData: false,
             $("#costumename").attr('href',response.share_url);
             $("#costumename").text(response.costume_name);
 
-            $("#amount").text(response.amount+"%");
-            $("#charity_center").text(response.charity_center);
-
+            if(response.amount == 0.00){
+                $("#amount_charity").css({'visibility':'hidden'});
+            }else{
+                $("#amount").text(response.amount+"%");    
+                $("#charity_center").text(response.charity_center);
+            }
+            
             $('#twiter_url').attr('data-url', response.share_url);
             $('#twiter_url').attr('data-title', response.quote);
 
@@ -585,48 +593,57 @@ $('input[name=charity_name]').click(function(){
   $('#other_organzation_check').css('display','none');
 });
 
-    //key words hash tag
-    $(document).on("click","#keywords_add",function(){
 
-      var val = $('#keywords_tag').val();
-      if (val != "") {    
-      var div_cont= $('#count').html().split(' ');
-     
-      var total =div_cont[0];
+    $('#keywords_tag').keydown(function(e){
+        if(e.keyCode === 13){
+                keywords();
+         }  
+    });
 
-      if (total > 0) {
-         if (val.indexOf(',') !== -1) { 
-            
-          var segments = val.split(',');
-          var count=segments.length;
-          $('#count').html(total-count+ " left");
-          if (total == 1) {
-            var hashtag = '#'+segments[0];
-            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
-            $('#keywords_tag').prop('value','');
-            $('#input_'+total+'').val(hashtag);
-            $('#count').html(total-1+ " left");
-          }else{
-            $.each(segments,function(i){
-            var hashtag = '#'+segments[i];
-            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
-            $('#input_'+total+'').val(hashtag);
-            $('#keywords_tag').prop('value','');
-            total--;
-            });
-          }
-        }else{
-          var hashtag = '#'+val;
-          $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
-          $('#keywords_tag').prop('value','');
-          $('#input_'+total+'').val(hashtag);
-          $('#count').html(total-1+ " left");
+   
+    $("#keywords_add").click(function(){
+         keywords();
+    });     
+
+    function keywords()
+    {
+        var val = $('#keywords_tag').val();
+        if(val != ""){
+            var div_cont= $('#count').html().split(' ');
+            var total =div_cont[0];
+            if (total > 0) {
+                if (val.indexOf(',') !== -1) {
+                    var segments = val.split(',');
+                    var count=segments.length;
+                    $('#count').html(total-count+ " left");
+                    if (total == 1) {
+                        var hashtag = '#'+segments[0];
+                        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                        $('#keywords_tag').prop('value','');
+                        $('#input_'+total+'').val(hashtag);
+                        $('#count').html(total-1+ " left");
+                    }else{
+                        $.each(segments,function(i){
+                            var hashtag = '#'+segments[i];
+                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                            $('#input_'+total+'').val(hashtag);
+                            $('#keywords_tag').prop('value','');
+                            total--;
+                        });
+                    }
+                }else{
+                    var hashtag = '#'+val;
+                    $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                    $('#keywords_tag').prop('value','');
+                    $('#input_'+total+'').val(hashtag);
+                    $('#count').html(total-1+ " left");
+                }
+            }else{
+                $('#keywords_add').hide();
+            }
         }
-      }else{
-        $('#keywords_add').hide();
-      }
-      }
-      });
+    }
+    
 
 
   $(document).on('click', '[id^="remove_"]', function(e){
@@ -682,6 +699,7 @@ $(document).on("change", "#file1", function() {
                             cropBoxResizable:false,
                             zoomOnTouch:false,
                             setDragMode:'move',
+                            viewMode:1,
                             aspectRatio: 3 / 5,
                             center:false,
                             data: {
@@ -712,7 +730,7 @@ $(document).on("change", "#file1", function() {
                         $(".Forntview").attr('value',imgdata);
                         $(".result").attr("src", imgdata);
                         $("#selected_file_0").remove();
-                        $(".result").css({ "width": "198px", "height": "298px","position":"relative","top":"-55px" });
+                        $(".result").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
                         $("#file1").hide();
                         $(this).parents().find("#front_view").children("#drag_n_drop_1").removeClass('hide');
                         $('.Forntview').attr('data-value',1);
@@ -766,6 +784,7 @@ $(document).on("change", "#file2", function() {
                             cropBoxResizable:false,
                             zoomOnTouch:false,
                             setDragMode:'move',
+                            viewMode:1,
                             aspectRatio: 3 / 5,
                             center:false,
                             data: {
@@ -797,7 +816,7 @@ $(document).on("change", "#file2", function() {
                         $(".Backview").attr('value',imgdata);
                         $(".result2").attr("src", imgdata);
                         $("#selected_file_1").remove();
-                        $(".result2").css({ "width": "198px", "height": "298px", "position": "relative", "top": "-55px" });
+                        $(".result2").css({ "width": "198px", "height": "298px", "position": "absolute", "top": "0px","left":"0px" });
                         $("#file2").hide();
                         $(this).parents().find("#back_view").children("#drag_n_drop_2").removeClass('hide');
                         $('.Backview').attr('data-value',2);
@@ -852,6 +871,7 @@ $(document).on("change", "#file3", function() {
                             cropBoxResizable:false,
                             zoomOnTouch:false,
                             setDragMode:'move',
+                             viewMode:1,
                             aspectRatio: 3 / 5,
                             center:false,
                             data: {
@@ -1016,6 +1036,7 @@ $("#upload-file-selector").on("change",function () {
                             cropBoxResizable: false,
                             zoomOnTouch: false,
                             setDragMode: 'move',
+                             viewMode:1,
                             aspectRatio: 3 / 5,
                             center: false,
                             data: {
@@ -1116,3 +1137,15 @@ $(document).on("click","#drag_n_drop_1,#drag_n_drop_2,#drag_n_drop_3",function()
     $(this).siblings().find("input[type='hidden']").attr('data-value','');
 
 });
+
+   $(document).on("click", "#cancel1", function() {
+        $(this).parents().find("#front_view").children("#drag_n_drop_1").addClass('hide');
+    });
+
+    $(document).on("click", "#cancel2", function() {
+        $(this).parents().find("#back_view").children("#drag_n_drop_2").addClass('hide');
+    });
+
+    $(document).on("click", "#cancel3", function() {
+        $(this).parents().find("#details_view").children("#drag_n_drop_3").addClass('hide');
+    });

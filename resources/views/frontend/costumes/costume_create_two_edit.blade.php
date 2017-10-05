@@ -654,11 +654,11 @@
 								<!--costume name code starts here-->
 								<div class="form-rms">
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-										<p class="form-rms-que">Costume Name *</p>
-										<p class="form-rms-small"><span>Name your Costume Be Specific!</span></p>
+										<p class="form-rms-que">Costume Name*</p>
+										<p class="form-rms-small"><span>Name your Costume. Be Specific!</span></p>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12">
-										<p class="form-rms-input"><input type="text" name="costume_name" value="{{$costume_description->name}}" id="costume_name" autocomplete="off" tab-index="1" placeholder="Dark Knight Joker Cosplay"></p>
+										<p class="form-rms-input"><input type="text" name="costume_name" value="{{$costume_description->name}}" id="costume_name" autocomplete="off" tab-index="1" placeholder="Example : Dark Knight Joker Cosplay"></p>
 										<span id="costumename_error" style="color:red"></span>
 									</div>
 								</div>
@@ -753,6 +753,7 @@
 								</div>
 
 
+
 								<!--Gender code ends here-->
 								<!--size code starts here-->
 								<div class="form-rms">
@@ -761,7 +762,7 @@
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12">
 										<p class="form-rms-input">
-											<select name="size" id="size" class="form-control">
+											<select name="size" id="size" class="form-control ">
 												<option value="">Select Size</option>
 												<option <?php if ($costume_details->size == "1sz") { ?> selected="selected" <?php } ?> value="1sz">1SZ</option>
 												<option <?php if ($costume_details->size == "xxs") { ?> selected="selected" <?php } ?> value="xxs">XXS</option>
@@ -772,6 +773,8 @@
 												<option <?php if ($costume_details->size == "xl") { ?> selected="selected" <?php } ?> value="xl">XL</option>
 												<option <?php if ($costume_details->size == "xxl") { ?> selected="selected" <?php } ?> value="xxl">XXL</option>
 												<option <?php if ($costume_details->size == "std") { ?> selected="selected" <?php } ?> value="std">STD</option>
+
+												<option <?php if ($costume_details->size == "custom") { ?> selected="selected" <?php } ?> value="std">Custom</option>
 											</select>
 										</p>
 										<span id="sizeerror" style="color:red"></span>
@@ -779,6 +782,52 @@
 								</div>
 
 
+
+
+								<!-- body dimension code stars here-->
+								
+
+								<div class="form-rms body-dimnets">
+									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
+										<p class="form-rms-que">{{$bodyanddimensions->label}} (Optional)</p>
+									</div>
+									<div class="col-md-8 col-sm-8 col-xs-12">
+										<div class="form-rms-input">
+											<?php
+												$value_height=$body_height_ft->value;
+												$explode_value_height=explode('-',$value_height);
+												$heading=$explode_value_height[0];
+												$heading_value=$explode_value_height[1];
+												$value_height_in=$body_height_in->value;
+												$explode_value_height_in=explode('-',$value_height_in);
+												$heading_value_in=$explode_value_height_in[1];
+												$value_weight=$body_weight_lbs->value;
+												$explode_value_weight=explode('-',$value_weight);
+												$heading_weight_value=$explode_value_weight[0];
+												$heading_weight_value_lbs=$explode_value_weight[1];
+												$value_chest=$body_chest_in->value;
+												$explode_value_chest=explode('-',$value_chest);
+												$heading_chest_value=$explode_value_chest[0];
+												$heading_chest_value_in=$explode_value_chest[1];
+												$value_waist=$body_waist_lbs->value;
+												$explode_value_waist=explode('-',$value_waist);
+												$heading_waist_value=$explode_value_waist[0];
+												$heading_waist_value_lbs=$explode_value_waist[1];
+											?>
+
+											<p class="form-rms-dim form-rms-he"><?php echo ucfirst($heading); ?> <br/> <span class="form-rms-he1">
+												<input type="{{$bodyanddimensions->code}}" name="{{$body_height_ft->value}}" id="{{$body_height_ft->value}}"> <span><?php echo $heading_value;?></span>
+											<input type="{{$bodyanddimensions->code}}" class="form-rms-dt" name="{{$body_height_in->value}}" id="{{$body_height_in->value}}" > <span><?php echo $heading_value_in; ?></span></span></p>
+											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_weight_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}"> <span><?php echo $heading_weight_value_lbs;?></span></span></p>
+											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_chest_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" > <span><?php echo $heading_chest_value_in; ?> </span></span></p>
+											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_waist_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_waist_lbs->value}}" id="{{$body_waist_lbs->value}}"> <span><?php echo $heading_waist_value_lbs; ?></span></span></p>
+											<span id="bodydimensionerror"  style="color:red"></span>
+										</div>
+									</div>
+								</div>
+
+									 
+									<!-- ends here -->
 								<!--size code ends here-->
 								
 								<div class="form-rms costume-error condition_div">
@@ -891,7 +940,7 @@
 										<p><span class="ctume_tip-spn">Tip:</span>Have a specialty costume? To increase your chances of making a sale, input the appropriate keywords with our existing list of categories.</p>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12">
-										<p class="form-rms-input keywrds-input"><input type="text" id="keywords_tag">
+										<p class="form-rms-input keywrds-input"><input type="text" id="keywords_tag" onKeydown="memSort(event);">
 											<a href="javascript:void(0)" id="keywords_add">Add</a>
 										</p>
 										<div id="div" class="keywords_div">
@@ -933,7 +982,7 @@
 				</div>
 				
 
-				<div class="form-rms">
+				<div class="form-rms" id="freqently">
 					<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 					<p class="form-rms-que form-rms-que1">Frequently Asked Questions</p>
 					<span>Create your own costume FAQ to avoid unneccessary inquiries from potential buyers.</span>
@@ -1249,8 +1298,23 @@
 					<script type="text/javascript" src="{{asset('/assets/frontend/js/costumesedit.js')}}"></script>
 					<script type="text/javascript">
 						$(document).ready(function(){
+
+							$("#freqently").hide();
+							$("#size").change(function()
+							{
+								var val = $(this).val();
+								if(val == 'custom')
+								{
+									$(".body-dimnets").removeClass('hide');
+								}
+								else
+								{
+									$(".body-dimnets").addClass('hide');
+								}
+							});
+
                               
-                              $('#price').on('keydown', function(e){-1!==$.inArray(e.keyCode,[46,8,9,27,13,110,190])||/65|67|86|88/.test(e.keyCode)&&(!0===e.ctrlKey||!0===e.metaKey)||35<=e.keyCode&&40>=e.keyCode||(e.shiftKey||48>e.keyCode||57<e.keyCode)&&(96>e.keyCode||105<e.keyCode)&&e.preventDefault()});
+                            $('#price').on('keydown', function(e){-1!==$.inArray(e.keyCode,[46,8,9,27,13,110,190])||/65|67|86|88/.test(e.keyCode)&&(!0===e.ctrlKey||!0===e.metaKey)||35<=e.keyCode&&40>=e.keyCode||(e.shiftKey||48>e.keyCode||57<e.keyCode)&&(96>e.keyCode||105<e.keyCode)&&e.preventDefault()});
                           
                             var selector = '.ct3-list  li';
                             $(selector).on("click",function()
@@ -1281,11 +1345,7 @@
 								$(".deletedImages").append(MakeInput);
 							});
 
-						});
-					</script>
-        <script>
-        
-        $('.btn-number').click(function(e){
+							 $('.btn-number').click(function(e){
                                e.preventDefault();
                                
                                fieldName = $(this).attr('data-field');
@@ -1377,7 +1437,10 @@
                                    e.preventDefault();
                                    }
                                    });
-        </script>
+
+						});
+					</script>
+        
         <script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
 
 <script>

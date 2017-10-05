@@ -326,7 +326,7 @@ i.fa.fa-percent {
 					<h2>UPLOAD A COSTUME</h2>
 					<ul id="progressbar" class="progressbar_rm" style="display:none;">
 						<li class="active" id="step1"><span class="s-head">Step 1</span> <span>Upload <br/>Photos</span></li>
-						<li id="step2"><span class="s-head">Step 2</span> <span>Fill in Costume <br/>Description</span></li>
+						<li id="step2"><span class="s-head">Sostunetep 2</span> <span>Fill in Costume <br/>Description</span></li>
 						<li id="step3"><span class="s-head">Step 3</span> <span>Pricing & <br/>Shipping</span></li>
 						<li id="step4"><span class="s-head">Step 4</span> <span>Review <br/>Preferences</span></li>
 					</ul>
@@ -550,15 +550,15 @@ i.fa.fa-percent {
 									<!--costume name code starts here-->
 									<div class="form-rms">
 										<div class="col-md-4 col-sm-4 pdlft0">
-											<p class="form-rms-que">Costume Name *</p>									
+											<p class="form-rms-que">Costume Name*</p>									
 											<p class="form-rms-small">
-												<span>Name your Costume Be Specific!</span><br/>
+												<span>Name your Costume. Be Specific!</span><br/>
 												 
 											</p>
 										</div>	
 										<div class="col-md-8 col-sm-8">
 											<p class="form-rms-input">
-												<input type="text" name="costume_name" class="form-control" id="costume_name" autocomplete="off" tab-index="1" placeholder="Dark Knight Joker Cosplay">
+												<input type="text" name="costume_name" class="form-control" id="costume_name" autocomplete="off" tab-index="1" placeholder="Example : Dark Knight Joker Cosplay">
 												<span id="costumename_error" style="color:red"></span>
 											</p>										
 										</div>
@@ -648,6 +648,7 @@ i.fa.fa-percent {
 													<option value="xl">XL</option>
 													<option value="xxl">XXL</option>
 													<option value="std">STD</option>
+													<option value="custom">Custom</option>
 												</select>
 											</p>
 											<span id="sizeerror" style="color:red"></span>
@@ -655,6 +656,29 @@ i.fa.fa-percent {
 										
 									</div>
 									<!--size code ends here-->
+
+
+									<!-- body dimension code stars here-->
+									
+									<div class="form-rms costume-error body-dimnets hide ">
+									<div class="col-md-4 col-sm-4 pdlft0">
+										<p class="form-rms-que">Body &amp; Dimensions (Optional)</p>
+										</div>
+											<div class="col-md-8 col-sm-8">
+										<div class="form-rms-input">
+											<p class="form-rms-dim form-rms-he">Height <br> <span class="form-rms-he1">
+												<input type="body-dimensions" name="height-ft" id="height-ft"> <span>ft</span>
+											<input type="body-dimensions" class="form-rms-dt" name="height-in" id="height-in"> <span>in</span></span></p>
+											<p class="form-rms-dim weight-chest">Weight <br> <span class="form-rms-he1"><input type="text" name="weight-lbs" id="weight-lbs"> <span>lbs</span></span></p>
+											<p class="form-rms-dim weight-chest">Chest <br> <span class="form-rms-he1"><input type="text" name="chest-in" id="chest-in"> <span>in </span></span></p>
+											<p class="form-rms-dim weight-chest">Waist <br> <span class="form-rms-he1"><input type="text" name="waist-lbs" id="waist-lbs"> <span>lbs</span></span></p>
+											<span id="bodydimensionerror" style="color:red"></span>
+										</div>
+									</div>
+									</div>
+									<!-- ends here -->		
+
+
 									
 									<!--Get subcategory regarding categories code ends here-->
 									<div class="form-rms costume-error condition_div scrool_top">
@@ -913,7 +937,7 @@ i.fa.fa-percent {
 															</div>
 														</div>-->
 														
-														<div class="form-rms freqently">
+														<div class="form-rms freqently" id="freqently">
 															
 															<div class="col-md-4 col-sm-4 pdlft0">
 																<p class="form-rms-que form-rms-que1">Frequently Asked Questions</p>
@@ -1281,7 +1305,7 @@ i.fa.fa-percent {
 								<script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
 							 
 								<script type="text/javascript" src="{{asset('/assets/frontend/js/cropper.js')}}"></script>
-							      <script type="text/javascript" src="{{asset('/assets/frontend/js/pages/costumecustom.js')}}"></script>
+							     <script type="text/javascript" src="{{asset('/assets/frontend/js/pages/costumecustom.js')}}"></script>
 
 							<script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
 
@@ -1294,6 +1318,33 @@ i.fa.fa-percent {
 <script type="text/javascript">
 $(document).ready(function()
 {
+    $(".freqently").hide();
+	/*$('input[type=radio]').on('change', function()
+	{
+
+	   if($('input[name=fimquality]:checked').val() ===	 32 )
+	   {
+	   		$(".freqently").removeClass('hide');
+	   }
+	   else
+	   {
+	   		$(".freqently").addClass('hide');
+	   } 
+	});*/
+	//size select custom
+
+	$("#size").change(function()
+	{
+		var val = $(this).val();
+		if(val == 'custom')
+		{
+			$(".body-dimnets").removeClass('hide');
+		}
+		else
+		{
+			$(".body-dimnets").addClass('hide');
+		}
+	});
 
     $('#costume_description_next').click(function () {
 	$('html, body').animate({scrollTop:0}, 'fast');

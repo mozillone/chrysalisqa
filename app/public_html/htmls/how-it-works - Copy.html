@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chrysalis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css links Start -->
+    <link rel="stylesheet" href="../assets/frontend/vendors/bootstrap/dist/css/bootstrap.css">
+    <link href="../assets/frontend/css/chrysalis.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Script links Start -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .how-it-works-page {
+            color: #31393C;
+        }
+
+        .how-it-works-page .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+            background: #521270;
+            color: white;
+            border: none;
+            position: relative;
+        }
+
+        .how-it-works-page .nav-tabs > li {
+            width: 50%;
+            background: #7D4D94;
+            color: #521270;
+        }
+
+        .how-it-works-page .nav-tabs > li.active > a:after {
+            content: '\f0d7';
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none;
+            font-size: 70px;
+            position: absolute;
+            bottom: -45px;
+            color: #521270;
+            left: 50%;
+            z-index: 1;
+        }
+
+        .how-it-works-page .nav-tabs > li a {
+            border-radius: 0;
+            height: 100px;
+            font-size: 22px;
+            font-family: Proxima-Nova-Extrabold;
+            margin: 0;
+            text-align: center;
+            align-items: center;
+            line-height: 75px;
+        }
+
+        .how-it-works-page .nav-tabs > li > a:hover, .how-it-works-page .nav-tabs > li > a {
+            border: none;
+        }
+
+        .how-it-works-page .tab-content button {
+            width: 205px;
+            height: 40px;
+            display: block;
+            background: #EE4266;
+            color: white;
+            border: 1px solid #EE4266;
+            border-radius: 2px;
+            margin-bottom: 20px;
+        }
+
+        .how-it-works-page .tab-content .col-md-6:first-child {
+            padding-right: 0;
+        }
+
+        .how-it-works-page .tab-content .col-md-6:last-child {
+            padding-left: 0;
+        }
+
+        .tab-info {
+            padding: 15px 30px 3px 30px;
+            background: #F5F8FB;
+        }
+
+        .how-it-works-page .tab-img {
+            background: url("http://i0.kym-cdn.com/photos/images/original/000/525/318/f5b.png");
+            height: 450px;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .tab-info h3 {
+            font-size: 22px;
+            font-family: Proxima-Nova-Extrabold;
+            color: #000;
+        }
+
+        .abc {
+            height: 477px;
+            width: 570px;
+        }
+
+        .how-it-works-page .additional-info h3 {
+            font-size: 22px;
+            font-family: Proxima-Nova-Extrabold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .how-it-works-page .additional-info .panel-body {
+            padding: 15px 35px 25px;
+            font-family: Proxima-Nova-Regular;
+            font-size: 18px;
+            border-bottom: 1px solid #e1e1e1;
+            margin-bottom: 30px;
+        }
+
+        .additional-info p {
+            margin-bottom: 0;
+            font-family: Proxima-Nova-Regular;
+            font-weight: bold;
+            font-size: 18px;
+
+        }
+
+        .how-it-works-page .tab-content {
+            margin-bottom: 60px;
+        }
+        .how-it-works-page .steps {
+            text-align: center;
+            position: relative;
+        }
+        .how-it-works-page .arrow-img {
+            position: absolute;
+            top: 0;
+            right: -68px;
+        }
+        .procedure-steps {
+            margin-bottom: 30px;
+        }
+        .procedure-steps h4 {
+            font-family: Proxima-Nova-Extrabold;
+            font-size: 18px;
+        }
+        .procedure-steps p {
+            font-family: Proxima-Nova-Semibold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container how-it-works-page" style="margin-top: 100px">
+    <div class="procedure-steps">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="steps">
+                    <img src="../assets/frontend/img/Step-3-piggy.png" alt="">
+                    <h4>Step1</h4>
+                    <p>Unload those old costumes
+                        by selling them directly to
+                        Chrysalis or other users</p>
+                    <img class="arrow-img" src="../assets/frontend/img/arrow-right.png" alt="">
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="steps">
+                    <img src="../assets/frontend/img/Step-2-bag.png" alt="">
+                    <h4>Step2</h4>
+                    <p>Turn that pile of cloth into cash!</p>
+                    <img class="arrow-img" src="../assets/frontend/img/arrow-right.png" alt="">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="steps">
+                    <img src="../assets/frontend/img/Step-3-piggy.png" alt="">
+                    <h4>Step3</h4>
+                    <p>Shop from an ever-growing list
+                        of affordable and unique
+                        costumes on Chrysalis</p>
+                    <img class="arrow-img" src="../assets/frontend/img/arrow-right.png" alt="">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="steps">
+                    <img src="../assets/frontend/img/Step-2-bag.png" alt="">
+                    <h4>Step4</h4>
+                    <p>Throw a Costume Party</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">I Want To Sell My Costume(s)</a></li>
+        <li><a data-toggle="tab" href="#menu1">I Want a Costume</a></li>
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tab-info">
+                        <h3>You have two options...</h3>
+                        <label>Option#1:</label>
+                        <p>If you have 3 or more costumes to sell you can request a costume cleanout kit.
+                            We send you a large bag with a prepaid shipping label. You simply place your old
+                            costumes in the bag and bring it to the post office; we pay you for the costumes we
+                            are able to accept. We offer cash or Chrysalis Store Credit for your next costume
+                            purchase.</p>
+                        <button>Request a Bag</button>
+                        <label>Option #2:</label>
+                        <p>
+                            If you have less than 3 costumes, or something so large it cannot fit into our
+                            cleanout bags, you can sell it yourself by uploading it onto Chrysalis. This is a great
+                            option for large custom made Comic Con costumes, mascot costumes, suits of armor, and
+                            unique homemade items. This option is a little more time intensive but it offers the best
+                            payout.
+                        </p>
+                        <button>Upload a Costume</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="tab-img">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tab-img">
+
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="tab-info">
+                        <h3>You have two options...</h3>
+                        <label>Option#1:</label>
+                        <p>If you have 3 or more costumes to sell you can request a costume cleanout kit.
+                            We send you a large bag with a prepaid shipping label. You simply place your old
+                            costumes in the bag and bring it to the post office; we pay you for the costumes we
+                            are able to accept. We offer cash or Chrysalis Store Credit for your next costume
+                            purchase.</p>
+                        <button>Request a Bag</button>
+                        <label>Option #2:</label>
+                        <p>
+                            If you have less than 3 costumes, or something so large it cannot fit into our
+                            cleanout bags, you can sell it yourself by uploading it onto Chrysalis. This is a great
+                            option for large custom made Comic Con costumes, mascot costumes, suits of armor, and
+                            unique homemade items. This option is a little more time intensive but it offers the best
+                            payout.
+                        </p>
+                        <button>Upload a Costume</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="additional-info">
+        <h3>Additional Information</h3>
+        <p>01. Selling Requirements</p>
+        <div class="panel-body">
+            For a costume to be sold on Chrysalis it needs to be in excellent condition.
+            We don’t expect perfection, very slight wear is acceptable, but the costume must be complete,
+            with no defects or flaws that could compromise utility for the next owner.
+        </div>
+
+        <p>02. Cleanliness Requirements</p>
+        <div class="panel-body">
+            Costumes sold directly to other users need to be clean and ready to be worn.
+            Costumes sent to Chrysalis are inspected and cleaned prior to resale.
+            However, we do not accept excessively dirty costumes with obvious stains or odors.
+        </div>
+
+        <p>
+            03. Request a Bag
+        </p>
+        <div class="panel-body">
+            In order for us to have a chance to offer you a payout you need
+            to have at least three costumes to request a costume cleanout kit.
+            These costumes need to pass our cleanliness and selling requirements.
+        </div>
+
+        <p>04. Upload a Costume - Photo Guide</p>
+        <div class="panel-body">
+            The easiest way to upload photos is to use the Chrysalis app.
+            You can also upload the photos on our site. We recommend taking a few photos showing
+            the entire costume as well as a detail photo showing any spots
+            with wear or minor flaws, or any accessories.
+            As a general rule, do not photograph anything that is not included with the costume.
+        </div>
+
+        <p>05. Chrysalis' Referral Program</p>
+        <div class="panel-body">
+            If you believe in our vision help us make it a reality.
+            Get your friends and family members to send us a Costume Cleanout Kit
+            and both of you get $5 worth of Chrysalis Store Credit.
+        </div>
+
+        <p>
+            06. How Does Chrysalis Profit?
+        </p>
+        <div class="panel-body">
+            We charge a 3% transaction fee for every user uploaded costume.
+            We also make a small margin on costumes we resell.
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>
