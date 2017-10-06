@@ -834,7 +834,7 @@ i.fa.fa-percent {
 												@foreach($cosplayfive_values as $index=>$cosplayfive_val)
 												<span class="full-rms">
 													<div class="col-md-2  col-sm-4">
-														<input id="{{$cosplayfive_val->optionid}}" class="radio-custom" name="{{$cosplayfive->code}}" type="{{$cosplaythree->type}}" value="{{$cosplayfive_val->optionid}}">
+														<input id="{{$cosplayfive_val->optionid}}" class="radio-custom faq-checkbox" name="{{$cosplayfive->code}}" type="{{$cosplaythree->type}}" value="{{$cosplayfive_val->optionid}}">
 														<label for="{{$cosplayfive_val->optionid}}" class="radio-custom-label">{{$cosplayfive_val->value}}</label>
 													</div>
 												</span>
@@ -861,7 +861,7 @@ i.fa.fa-percent {
 															@foreach($cosplayfour_values as $index=>$cosplayfour_val)
 															
 															<div class="col-md-2  col-sm-4 pdlft10">
-																<input id="{{$cosplayfour_val->optionid}}" class="radio-custom" name="{{$cosplayfour->code}}" type="{{$cosplayfour->type}}" id="{{$cosplayfour_val->optionid}}" value="{{$cosplayfour_val->optionid}}">
+																<input id="{{$cosplayfour_val->optionid}}" class="radio-custom faq-checkbox" name="{{$cosplayfour->code}}" type="{{$cosplayfour->type}}" id="{{$cosplayfour_val->optionid}}" value="{{$cosplayfour_val->optionid}}">
 																<label for="{{$cosplayfour_val->optionid}}" class="radio-custom-label">{{$cosplayfour_val->value}}</label>
 															</div>
 															
@@ -937,7 +937,7 @@ i.fa.fa-percent {
 															</div>
 														</div>-->
 														
-														<div class="form-rms freqently" id="freqently">
+														<div class="form-rms freqently hide" id="freqently">
 															
 															<div class="col-md-4 col-sm-4 pdlft0">
 																<p class="form-rms-que form-rms-que1">Frequently Asked Questions</p>
@@ -1318,21 +1318,8 @@ i.fa.fa-percent {
 <script type="text/javascript">
 $(document).ready(function()
 {
-    $(".freqently").hide();
-	/*$('input[type=radio]').on('change', function()
-	{
-
-	   if($('input[name=fimquality]:checked').val() ===	 32 )
-	   {
-	   		$(".freqently").removeClass('hide');
-	   }
-	   else
-	   {
-	   		$(".freqently").addClass('hide');
-	   } 
-	});*/
+   
 	//size select custom
-
 	$("#size").change(function()
 	{
 		var val = $(this).val();
@@ -1343,6 +1330,15 @@ $(document).ready(function()
 		else
 		{
 			$(".body-dimnets").addClass('hide');
+		}
+	});
+	
+	$(".faq-checkbox").change(function(){
+							
+		if($("#30").prop("checked") || $("#32").prop("checked")){
+			$("#freqently").removeClass("hide");
+		} else{
+		$("#freqently").addClass("hide");
 		}
 	});
 

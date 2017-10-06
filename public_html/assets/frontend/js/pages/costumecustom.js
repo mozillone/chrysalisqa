@@ -159,20 +159,24 @@ $(function(){
     $('#30').click(function() {
         $('#mention_hours').css('display', 'block');
         $('#mention_hours_input').css('display', 'block');
+        //$("#freqently").show();
     });
     $('#33').click(function() {
         $('#film_text').css('display', 'none');
         $('#film_text_input').css('display', 'none');
         $('#film_text_input').val('');
+         //$("#freqently").hide();
     });
     $('#32').click(function() {
         $('#film_text').css('display', 'block');
         $('#film_text_input').css('display', 'block');
+        //$("#freqently").show();
     });
     $('#31').click(function() {
         $('#mention_hours').css('display', 'none');
         $('#mention_hours_input').css('display', 'none');
         $('#mention_hours_input').val('');
+         //$("#freqently").hide();
     });
 
     $('#another_charity').click(function() {
@@ -202,7 +206,7 @@ $(function(){
         }
     });
 
-    $(".freqently").hide();
+   
 
     $('#costume_description_next').click(function(a) {
 
@@ -212,13 +216,13 @@ $(function(){
         $('#costume_name,#categoryname,#subcategory,#gender,#size,#description,#funfcats,#faq,#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#funfacts').css('border', '');
         $('#costumename_error,#subcategoryerror,#categoryerror,#gendererror,#sizeerror,#uniquefashionerror,#cosplayerror,#costumeconditionerror,#descriptionerror,#facterror,#faqerror,#activityerror,#bodydimensionerror,#qualityerror,#usercostumeerror').html('');
         var costumename = $('#costume_name').val();
-
+        console.log(costumename);
         var category = $('#categoryname').val();
         //var gender = $('#gender').val();
         var gender = '';
         var size = $('#size').val();
         var subcategory = $('#subcategory').val();
-          
+
         var description = $('#description').val();
         //var funfact = $('#funfacts').val();
         var faq = $('#faq').val();
@@ -241,7 +245,7 @@ $(function(){
             }
         }
 
-        if (subcategory == "") {
+        if (subcategory == '') {
             $('#subcategory').css('border', '1px solid red');
             $('#subcategoryerror').html('This field is required.');
             str = false;
@@ -258,15 +262,10 @@ $(function(){
             str = false;
         }
 
-        var red  = $('input[name=gender]:checked').val();
-        if(red == null)
-        {
-             $('#gendererror').html('This field is required.');
-             str = false;
-        }else
-        {
-             $('#gendererror').html('');
-             str = true;
+        if ($('input[name=gender]:checked').length <= 0) {
+            $('#gendererror').html('This field is required.');
+            str = false;
+
         }
 
         if ($('input[name=gender]:checked').val() == null || $('input[name=gender]:checked').val() == '') {
@@ -312,12 +311,11 @@ $(function(){
 
         if ($('input[name=make_costume]:checked').val() == 30) {
             if ($('input[name=make_costume_time1]').val() == "") {
-                $('#usercostumeerror').html('This field is required.');
-                $(".freqently").show();
+                $('#usercostumeerror').html('This field is required.');                 
                 str = false;
             }
         }
-       
+       console.log(str);
         if (str == true) {
             $('#step3').addClass('active');
             $('#upload_div').css('display', 'none');
@@ -611,6 +609,8 @@ $(function(){
     });
 
 
+    //category code
+
     $('#categoryname').on('change', function() {
 
         var id = $(this).val(); //catgeory id
@@ -622,11 +622,12 @@ $(function(){
         $.get("/costume/ajaxsubcategory", //This is the url defined in routes
             { categoryid: id },
             function(data) {
-                console.log(data);
+                //data = JSON.parse(data);
                 var model = $('#subcategory').html('Select Subcategory'); //keeping subcategory field empty before
                 model.empty();
                 model.append("<option value=''>Select Subcategory</option>");
                 $.each(data, function(index, element) {
+                     
                     model.append("<option value='" + element.subcategoryid + "'>" + element.subcategoryname + "</option>");
                 });
             });
@@ -701,7 +702,7 @@ $(function(){
         $('#handlingtimeerror,#returnpolicyerror,#donate_charityerror,#charity_nameerror,#organzation_nameerror').html('');
         var handlingtime = $('#handlingtime').val();
         var returnpolicy = $('input[name=returnpolicy]:checked').val();
-        console.log(returnpolicy);
+        
         var donate_charity = $('#donate_charity').val();
 
       
@@ -721,9 +722,9 @@ $(function(){
             str = false;
         }
         if (donate_charity == 0) {
-            $('#donate_charity').css('border', '1px solid red');
-            $('#donate_charityerror').html('Select Donate Amount');
-            str = false;
+            /*$('#donate_charity').css('border', '1px solid red');
+            $('#donate_charityerror').html('Select Donate Amount');*/
+            str = true;
         }
 
        
@@ -798,7 +799,7 @@ $(function(){
                         if(response.amount == 0.00){
                             $("#amount_charity").css({'visibility':'hidden'});  
                         }else{
-                            $("#amount").text('$'+response.amount);
+                            $("#amount").text(response.amount+"%");
                             $("#charity_center").text(response.charity_center);  
                             
                         }

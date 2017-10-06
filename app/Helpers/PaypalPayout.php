@@ -18,17 +18,19 @@ class PayPalPayout
  public static function SinglePayout($email,$amount) {
     $message = '';
     $api_request = array('email' => $email, 'amount' =>$amount);
+    $final_output = array();
  	// Create a new instance of Payout object
     $payouts = new Payout();
 
         $senderBatchHeader = new \PayPal\Api\PayoutSenderBatchHeader();
-
+//print_r(env('PAYPAL_OAUTH_TOKEN')); exit;
         $apiContext = new ApiContext(
             new \PayPal\Auth\OAuthTokenCredential(
                 Config::get('constants.PAYPAL_OAUTHTOKEN'),
                 Config::get('constants.PAYPAL_OAUTHSECRET')
             )
         );
+        //echo "<pre>"; print_r($apiContext); exit;
 $senderBatchHeader->setSenderBatchId(uniqid())
     ->setEmailSubject("You have a payment");
 // #### Sender Item
@@ -73,16 +75,22 @@ if($message == '') {
            );
 try {
     $output = $payouts->create(null, $apiContext);
+    $final_output['status'] = 1;
+    $final_output['output'] = $output;
     $api_data['api_response'] = "batch_status=".$output->batch_header->batch_status.", link=".$output->links[0]->href;
 } catch (\PayPal\Exception\PayPalConnectionException $ex) {
-        $api_data['api_response'] = json_encode($ex->getData());    
+    $final_output['status'] = 0;
+    $final_output['output'] = $ex->getData();
+    $api_data['api_response'] = json_encode($ex->getData());    
     }catch (\Exception $ex) {
-       $api_data['api_response'] = $ex->getMessage();
+      $final_output['status'] = 0;
+      $final_output['output'] = $ex->getMessage();
+      $api_data['api_response'] = $ex->getMessage();
     }
 // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
 //echo $output;die;
 $insertin_log = Site_model::insert_get_id('api_log',$api_data);
-return $output;
+return $final_output;
  }
 
 
@@ -141,7 +149,7 @@ return $output;
         } catch (\Exception $ex) {
            /*ResultPrinter::printError("Get Payout Batch Status", "PayoutBatch", null, $payoutBatchId, $ex); exit(1);*/
             $final_output['status'] = 0;
-            $final_output['output'] = $ex->getData();
+            $final_output['output'] = $ex->getMessage();
             $api_data['api_response'] = json_encode($ex);
         }
         

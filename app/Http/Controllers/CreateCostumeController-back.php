@@ -861,6 +861,7 @@ class CreateCostumeController  extends Controller {
 		$costume_category_2 = DB::table('costume_to_category')->where('costume_id',$id)->where('sort_no','1')->first();
 		$costume_details = DB::table('costumes')->where('costume_id',$id)->first();
 		$db_body_height_ft = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','16')->first();
+		
 		$db_body_height_in = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','17')->first();
 		$db_body_weight_lbs = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','18')->first();
 		$db_body_chest_in = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','19')->first();

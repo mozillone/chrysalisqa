@@ -14,7 +14,7 @@ var id=$(this).val();//catgeory id
 $.get("/costume/ajaxsubcategory", //This is the url defined in routes 
 { categoryid: id  },  
 function(data) {
-console.log(data);
+ //data = JSON.parse(data);
 var model = $('#subcategory').html('Select Subcategory');    //keeping subcategory field empty before
 model.empty();
 model.append("<option value=''>Select Subcategory</option>");
@@ -50,12 +50,13 @@ $('input[name=file2]').change(function(){
 $('#drag_n_drop_2').css('display','block');
 });
 $('#drag_n_drop_1').click(function(){
-$('#front_image_id').remove();
-$('#front_view').find('li').remove();
-$('#drag_n_drop_1').css('display','none');
-$('input[name=file1]').val('');
-$('input[name=hidden]').attr('value','');
-$(".Backview").attr('value','');
+    $('#front_image_id').remove();
+    $('#front_view').find('li').remove();
+    $('#drag_n_drop_1').css('display','none');
+    $('input[name=file1]').val('');
+    $('input[name=hidden]').attr('value','');
+    $(".Backview").attr('value','');
+    $("#file1").removeattr('style');
 });
 
 $('#shipping').change(function(){
@@ -172,24 +173,24 @@ $('#activity_yes_div').css('display','none');
 $('#30').click(function(){
 $('#mention_hours').css('display','block');
 $('#mention_hours_input').css('display','block');
- $("#freqently").show();
+ //$("#freqently").removeClass('hide');
 });
 $('#33').click(function(){
     $('#film_text').css('display','none');
     $('#film_text_input').css('display','none');
     $('#film_text_input').val('');
-     $("#freqently").hide();
+     //$("#freqently").addClass('hide');
   });
   $('#32').click(function(){
     $('#film_text').css('display','block');
     $('#film_text_input').css('display','block');
-     $("#freqently").show();
+     //$("#freqently").removeClass('hide');
   });
 $('#31').click(function(){
 $('#mention_hours').css('display','none');
 $('#mention_hours_input').css('display','none');
 $('#mention_hours_input').val('');
- $("#freqently").hide();
+ //$("#freqently").addClass('hide');
 });
 
 $('#another_charity').click(function(){
@@ -246,6 +247,7 @@ $('#other_organzation_check').css('display','none');
         if(cost_val == 31)
         {
             $("#make_costume_time1").val('');
+            $("#faq").val('');
         }
     });
 
@@ -311,25 +313,17 @@ $('#other_organzation_check').css('display','none');
             str = false;
         }
 
-        var red  = $('input[name=gender]:checked').val();
-        if(red == null)
-        {
-             $('#gendererror').html('This field is required.');
-             str = false;
-        }else
-        {
-             $('#gendererror').html('');
-             str = true;
-        }
+         if ($('input[name=gender]:checked').length <= 0) {
+            $('#gendererror').html('This field is required.');
+            str = false;
 
-        var check_val = $('input[name=make_costume]:checked').val();
-      
+        }
 
         if ($('input[name=gender]:checked').val() == null || $('input[name=gender]:checked').val() == '') {
             $('#gendererror').html('This field is required.');
             str = false;
 
-        }        
+        }         
         if (size == '') {
             $('#size').css('border', '1px solid red');
             $('#sizeerror').html('This field is required.');
@@ -481,12 +475,12 @@ $('#returnpolicy').css('border','1px solid red');
 $('#returnpolicyerror').html('This field is required.');
 str=false;
 }
-if (donate_charity == "") {
-$('#donate_charity').css('border','1px solid red');
-$('#donate_charityerror').html('Select Donate Amount');
-str=false;
+if (donate_charity == 0) {
+/*$('#donate_charity').css('border','1px solid red');
+$('#donate_charityerror').html('Select Donate Amount');*/
+str=true;
 }
-if (donate_charity != "" && donate_charity != "none") {
+if (donate_charity != "" && donate_charity != 0) {
         $('#charity_nameerror').html('Please select any Charity.');
         str=false;
       if (charity_name == true) {
@@ -517,6 +511,7 @@ str = true;
 if (str == true) {
 $('#preferences_finished').html("Submitting");
 
+ 
 $('#ajax_loader').css('display','block');
 $.ajax({
 url: "/costume/costumeeditadd",
@@ -527,7 +522,7 @@ cache: false,
 processData: false,
     success: function(response) {
         if (response.msg == "success") {
-            console.log(response);
+   
             $('#ajax_loader').hide();
             $('#success_page').css('display','block');
             $('#upload_div').css('display','none');
@@ -598,9 +593,7 @@ $('input[name=charity_name]').click(function(){
         if(e.keyCode === 13){
                 keywords();
          }  
-    });
-
-   
+    });   
     $("#keywords_add").click(function(){
          keywords();
     });     
@@ -609,8 +602,10 @@ $('input[name=charity_name]').click(function(){
     {
         var val = $('#keywords_tag').val();
         if(val != ""){
-            var div_cont= $('#count').html().split(' ');
-            var total =div_cont[0];
+            var div_cont= $('#count').html().split(' '); 
+            console.log(div_cont[0]);   
+            var total =10-$(".keywords_p").length;
+
             if (total > 0) {
                 if (val.indexOf(',') !== -1) {
                     var segments = val.split(',');
@@ -618,22 +613,24 @@ $('input[name=charity_name]').click(function(){
                     $('#count').html(total-count+ " left");
                     if (total == 1) {
                         var hashtag = '#'+segments[0];
-                        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p> ');
                         $('#keywords_tag').prop('value','');
+                       // $(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
                         $('#input_'+total+'').val(hashtag);
                         $('#count').html(total-1+ " left");
                     }else{
                         $.each(segments,function(i){
                             var hashtag = '#'+segments[i];
-                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
-                            $('#input_'+total+'').val(hashtag);
+                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span></p>');                           
+                            $('#input_'+total+'').val(hashtag);       
                             $('#keywords_tag').prop('value','');
                             total--;
                         });
                     }
                 }else{
                     var hashtag = '#'+val;
-                    $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                    $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p><input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
+                    
                     $('#keywords_tag').prop('value','');
                     $('#input_'+total+'').val(hashtag);
                     $('#count').html(total-1+ " left");
@@ -641,6 +638,8 @@ $('input[name=charity_name]').click(function(){
             }else{
                 $('#keywords_add').hide();
             }
+            
+            
         }
     }
     
@@ -730,8 +729,8 @@ $(document).on("change", "#file1", function() {
                         $(".Forntview").attr('value',imgdata);
                         $(".result").attr("src", imgdata);
                         $("#selected_file_0").remove();
-                        $(".result").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
-                        $("#file1").hide();
+                        $(".result").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
+                        //$("#file1").hide();
                         $(this).parents().find("#front_view").children("#drag_n_drop_1").removeClass('hide');
                         $('.Forntview').attr('data-value',1);
 
@@ -816,8 +815,8 @@ $(document).on("change", "#file2", function() {
                         $(".Backview").attr('value',imgdata);
                         $(".result2").attr("src", imgdata);
                         $("#selected_file_1").remove();
-                        $(".result2").css({ "width": "198px", "height": "298px", "position": "absolute", "top": "0px","left":"0px" });
-                        $("#file2").hide();
+                        $(".result2").css({ "width": "198px", "height": "298px", "position": "absolute", "top": "-10px","left":"0px" });
+                        //$("#file2").hide();
                         $(this).parents().find("#back_view").children("#drag_n_drop_2").removeClass('hide');
                         $('.Backview').attr('data-value',2);
 
@@ -904,11 +903,11 @@ $(document).on("change", "#file3", function() {
                         $(".result3").attr("src", imgdata);
                         $("#selected_file_2").remove();
                         $(".result3").css({ "width": "198px", "height": "298px","position":"relative","bottom":"280px" });
-                        $("#file3").hide();
+                        //$("#file3").hide();
                         $(this).parents().find("#details_view").children("#drag_n_drop_3").removeClass('hide');
                         if($(".drop_zone3").hasClass('additional'))
                         {
-                          $(".result3").css({ "width": "198px", "height": "298px","position":"relative","bottom":"55px" });
+                          $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
                         }
                     });
                 };
@@ -923,14 +922,7 @@ $(document).on("change", "#file3", function() {
 });
 //ends here
 
-//remove selected pic form the view
-
-$(document).on("click","#drag_n_drop_1",function()
-{
-   $(this).siblings().find('img').remove();
-   $(this).siblings().find("input[type='hidden']").attr('value','');
-
-});
+ 
 
 //multiple images slider images script
 
@@ -1119,24 +1111,48 @@ $(document).on("click",".remove_pic",function()
     $(this).parent().find("input[type='file']").show();
 });*/
 
-$(document).on("click","#drag_n_drop_1,#drag_n_drop_2,#drag_n_drop_3",function()
+$(document).on("click","#drag_n_drop_1",function()
 {
-
-    var FrontImage = $(this).siblings().find('.Forntview').attr('data-id');
-    var backImage = $(this).siblings().find(".Backview").attr('data-id');
-    var AdditionalIMage = $(this).siblings().find(".Additional").attr('data-id');
+    var FrontImage = $(this).siblings().find('.Forntview').attr('data-id');     
     var Front = '<input type="hidden" name="Frontone" value="'+FrontImage+'">';
-    $(".FrontDelete").html(Front);
+    $(".FrontDelete").html(Front);    
+    $(this).siblings().find('img').remove();
+    $(this).siblings().find("input[type='hidden']").val('');
+    $(this).siblings().find("input[type='hidden']").attr('data-id','');
+    $(this).siblings().find("input[type='hidden']").attr('data-value','');
+    $(this).siblings.find("#file1").removeattr('style');
+    $(this).siblings().find('img').remove();
+    $(this).siblings().find("input[type='hidden']").attr('value','');
+
+});
+
+ 
+
+$(document).on("click","#drag_n_drop_2",function()
+{   
+    var backImage = $(this).siblings().find(".Backview").attr('data-id');  
     var Back = '<input type="hidden" name="Backone" value="'+backImage+'">';
-    $(".BackDelete").html(Back);
+    $(".BackDelete").html(Back); 
+    $(this).siblings().find('img').remove();
+    $(this).siblings().find("input[type='hidden']").val('');
+    $(this).siblings().find("input[type='hidden']").attr('data-id','');
+    $(this).siblings().find("input[type='hidden']").attr('data-value','');
+    $("#file2").css({"display":"block !important"});
+});
+
+
+$(document).on("click","#drag_n_drop_3",function()
+{
+    var AdditionalIMage = $(this).siblings().find(".Additional").attr('data-id');
     var Addi = '<input type="hidden" name="Addione" value="'+AdditionalIMage+'">';
     $(".AddiDelete").html(Addi);
     $(this).siblings().find('img').remove();
     $(this).siblings().find("input[type='hidden']").val('');
     $(this).siblings().find("input[type='hidden']").attr('data-id','');
     $(this).siblings().find("input[type='hidden']").attr('data-value','');
-
+    $("#file3").css({"display":"block !important"});
 });
+
 
    $(document).on("click", "#cancel1", function() {
         $(this).parents().find("#front_view").children("#drag_n_drop_1").addClass('hide');

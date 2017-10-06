@@ -774,7 +774,7 @@
 												<option <?php if ($costume_details->size == "xxl") { ?> selected="selected" <?php } ?> value="xxl">XXL</option>
 												<option <?php if ($costume_details->size == "std") { ?> selected="selected" <?php } ?> value="std">STD</option>
 
-												<option <?php if ($costume_details->size == "custom") { ?> selected="selected" <?php } ?> value="std">Custom</option>
+												<option <?php if ($costume_details->size == "custom") { ?> selected="selected" <?php } ?> value="custom">Custom</option>
 											</select>
 										</p>
 										<span id="sizeerror" style="color:red"></span>
@@ -786,7 +786,7 @@
 
 								<!-- body dimension code stars here-->
 								
-
+								@if($costume_details->size == "custom")
 								<div class="form-rms body-dimnets">
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 										<p class="form-rms-que">{{$bodyanddimensions->label}} (Optional)</p>
@@ -816,15 +816,34 @@
 											?>
 
 											<p class="form-rms-dim form-rms-he"><?php echo ucfirst($heading); ?> <br/> <span class="form-rms-he1">
-												<input type="{{$bodyanddimensions->code}}" name="{{$body_height_ft->value}}" id="{{$body_height_ft->value}}"> <span><?php echo $heading_value;?></span>
-											<input type="{{$bodyanddimensions->code}}" class="form-rms-dt" name="{{$body_height_in->value}}" id="{{$body_height_in->value}}" > <span><?php echo $heading_value_in; ?></span></span></p>
-											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_weight_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}"> <span><?php echo $heading_weight_value_lbs;?></span></span></p>
-											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_chest_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" > <span><?php echo $heading_chest_value_in; ?> </span></span></p>
-											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_waist_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_waist_lbs->value}}" id="{{$body_waist_lbs->value}}"> <span><?php echo $heading_waist_value_lbs; ?></span></span></p>
+												<input type="{{$bodyanddimensions->code}}" name="{{$body_height_ft->value}}" id="{{$body_height_ft->value}}" value="{{$db_body_height_ft->attribute_option_value}}"> <span><?php echo $heading_value;?></span>
+											<input type="{{$bodyanddimensions->code}}" class="form-rms-dt" name="{{$body_height_in->value}}" id="{{$body_height_in->value}}" value="{{$db_body_height_in->attribute_option_value}}"> <span><?php echo $heading_value_in; ?></span></span></p>
+											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_weight_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}" value="{{$db_body_weight_lbs->attribute_option_value}}"> <span><?php echo $heading_weight_value_lbs;?></span></span></p>
+											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_chest_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" value="{{$db_body_chest_in->attribute_option_value}}" > <span><?php echo $heading_chest_value_in; ?> </span></span></p>
+											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_waist_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_waist_lbs->value}}" id="{{$body_waist_lbs->value}}" value="{{$db_body_waist_lbs->attribute_option_value}}"> <span><?php echo $heading_waist_value_lbs; ?></span></span></p>
 											<span id="bodydimensionerror"  style="color:red"></span>
 										</div>
 									</div>
 								</div>
+
+								@else
+								<div class="form-rms costume-error body-dimnets hide ">
+									<div class="col-md-4 col-sm-4 pdlft0">
+										<p class="form-rms-que">Body &amp; Dimensions (Optional)</p>
+										</div>
+											<div class="col-md-8 col-sm-8">
+										<div class="form-rms-input">
+											<p class="form-rms-dim form-rms-he">Height <br> <span class="form-rms-he1">
+												<input type="body-dimensions" name="height-ft" id="height-ft"> <span>ft</span>
+											<input type="body-dimensions" class="form-rms-dt" name="height-in" id="height-in"> <span>in</span></span></p>
+											<p class="form-rms-dim weight-chest">Weight <br> <span class="form-rms-he1"><input type="text" name="weight-lbs" id="weight-lbs"> <span>lbs</span></span></p>
+											<p class="form-rms-dim weight-chest">Chest <br> <span class="form-rms-he1"><input type="text" name="chest-in" id="chest-in"> <span>in </span></span></p>
+											<p class="form-rms-dim weight-chest">Waist <br> <span class="form-rms-he1"><input type="text" name="waist-lbs" id="waist-lbs"> <span>lbs</span></span></p>
+											<span id="bodydimensionerror" style="color:red"></span>
+										</div>
+									</div>
+									</div>
+								@endif
 
 									 
 									<!-- ends here -->
@@ -870,7 +889,7 @@
 											@foreach($cosplayfive_values as $cosplayfive_val)
 											 
 											<div class="col-md-2  col-sm-4">
-												<input id="{{$cosplayfive_val->optionid}}" <?php if($db_cosplayfive->attribute_option_value_id == $cosplayfive_val->optionid) { ?> checked="checked" <?php } ?> value="{{$cosplayfive_val->optionid}}" class="radio-custom" name="{{$cosplayfive->code}}" type="radio" value="{{$cosplayfive_val->optionid}}">
+												<input id="{{$cosplayfive_val->optionid}}" <?php if($db_cosplayfive->attribute_option_value_id == $cosplayfive_val->optionid) { ?> checked="checked" <?php } ?> value="{{$cosplayfive_val->optionid}}" class="radio-custom faq-checkbox" name="{{$cosplayfive->code}}" type="radio" value="{{$cosplayfive_val->optionid}}">
 												<label for="{{$cosplayfive_val->optionid}}" class="radio-custom-label">{{$cosplayfive_val->value}}</label>
 											</div>
 											
@@ -906,7 +925,7 @@
 					<span class="full-rms">
 
 						<div class="col-md-2  col-sm-4 col-xs-12  pdlft25">
-						<input id="{{$cosplayfour_val->optionid}}" class="radio-custom" name="{{$cosplayfour->code}}" <?php if($db_cosplayfour->attribute_option_value_id == $cosplayfour_val->optionid) { ?> checked="checked" <?php } ?> type="{{$cosplayfour->type}}" value="{{$cosplayfour_val->optionid}}">
+						<input id="{{$cosplayfour_val->optionid}}" class="radio-custom faq-checkbox" name="{{$cosplayfour->code}}" <?php if($db_cosplayfour->attribute_option_value_id == $cosplayfour_val->optionid) { ?> checked="checked" <?php } ?> type="{{$cosplayfour->type}}" value="{{$cosplayfour_val->optionid}}">
 						<label for="{{$cosplayfour_val->optionid}}" class="radio-custom-label">{{$cosplayfour_val->value}}</label>
 					</div>
  
@@ -940,28 +959,44 @@
 										<p><span class="ctume_tip-spn">Tip:</span>Have a specialty costume? To increase your chances of making a sale, input the appropriate keywords with our existing list of categories.</p>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12">
-										<p class="form-rms-input keywrds-input"><input type="text" id="keywords_tag" onKeydown="memSort(event);">
+										<p class="form-rms-input keywrds-input"><input type="text" id="keywords_tag">
 											<a href="javascript:void(0)" id="keywords_add">Add</a>
 										</p>
-										<div id="div" class="keywords_div">
-											@if(!empty($costume_description->keywords))
+
+									<div id="div" class="keywords_div">
+									@if(empty($costume_description->keywords))	
+									 
+									<input id="input_10" name="keyword_10" value="" type="hidden">
+									<input id="input_9" name="keyword_9" value="" type="hidden">
+									<input id="input_8" name="keyword_8" value="" type="hidden">
+									<input id="input_7" name="keyword_7" value="" type="hidden">
+									<input id="input_6" name="keyword_6" value="" type="hidden">
+									<input id="input_5" name="keyword_5" value="" type="hidden">
+									<input id="input_4" name="keyword_4" value="" type="hidden">
+									<input id="input_3" name="keyword_3" value="" type="hidden">
+									<input id="input_2" name="keyword_2" value="" type="hidden">
+									<input id="input_1" name="keyword_1" value="" type="hidden">
+								 	@endif
+
+									@if(!empty($costume_description->keywords))
 											<?php $explode = explode(',', $costume_description->keywords);
 												$keyword_count = count($explode);
 												foreach ($explode as $key => $keywords) {
-											?>
-											@if(!empty($keywords))
+												?>
+												@if(!empty($keywords))
 												<p class="keywords_p p_{{10-$key}}">{{$keywords}}<span id="remove_{{10-$key}}">X</span> </p>
 												<input id="input_{{10-$key}}" name="keyword_{{10-$key}}" value="{{$keywords}}" type="hidden">
+												<!-- <div class="extrakeywords">
+												</div> -->
 												@endif
 												<?php
-											}
-												for ($x = 10-$keyword_count+1; $x <= 10; $x++) {?>
-												<input id="input_{{$x}}" name="keyword_{{$x}}" value="" type="hidden">
-											<?php } ?>
+												}
+											 ?>
 											@endif
 										</div>
 
-										<div id="count">@if(!empty($costume_description->keywords)){{10 - count($explode)}}@endif left</div>
+										<div id="count">@if(!empty($costume_description->keywords)){{10 - count($explode)}}left @else 10left @endif </div>
+											
 									</div>
 								</div>
 				
@@ -978,28 +1013,53 @@
 						<p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="description" id="description" maxlength="600" >{{$db_des_costume->attribute_option_value}}</textarea></p>
 						<span id="descriptionerror" style="color:red"></span>
 						<p class="form-rms-sm1 max_lnths1 max-edit2">( <span id="max_length_char1"></span> 600 characters)</p>
-					</div>
-				</div>
-				
+						</div>
+				</div>				
 
+				@if(!empty($db_faq->attribute_option_value))
 				<div class="form-rms" id="freqently">
 					<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-					<p class="form-rms-que form-rms-que1">Frequently Asked Questions</p>
-					<span>Create your own costume FAQ to avoid unneccessary inquiries from potential buyers.</span>
-					<br>
-					<span class="cret-tip"><i>Tip: Use easy-to read bullet points!</i></span>
+						<p class="form-rms-que form-rms-que1">Frequently Asked Questions</p>
+						<span>Create your own costume FAQ to avoid unneccessary inquiries from potential buyers.</span>
+						<br>
+						<span class="cret-tip"><i>Tip: Use easy-to read bullet points!</i></span>
+					</div>
+
+					<div class="col-md-8 col-sm-8 col-xs-12">
+						<p class="form-rms-input">
+						<textarea placeholder="Please be as detailed as possible!" name="faq" id="faq" maxlength="600" >{{$db_faq->attribute_option_value}}</textarea></p>
+						<span id="faqerror" style="color:red"></span>
+						<p class="form-rms-sm1">( <span id="max_length_char3"></span> 600 characters)</p>
+					</div>
+				
 				</div>
-				<div class="col-md-8 col-sm-8 col-xs-12">
-					<p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="faq" id="faq" maxlength="600" >{{$db_faq->attribute_option_value}}</textarea></p>
-					<span id="faqerror" style="color:red"></span>
-					<p class="form-rms-sm1">( <span id="max_length_char3"></span> 600 characters)</p>
+				@else
+
+					<div class="form-rms hide" id="freqently">
+					<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
+						<p class="form-rms-que form-rms-que1">Frequently Asked Questions</p>
+						<span>Create your own costume FAQ to avoid unneccessary inquiries from potential buyers.</span>
+						<br>
+						<span class="cret-tip"><i>Tip: Use easy-to read bullet points!</i></span>
+					</div>
+
+					<div class="col-md-8 col-sm-8 col-xs-12">
+						<p class="form-rms-input">
+						<textarea placeholder="Please be as detailed as possible!" name="faq" id="faq" maxlength="600" ></textarea></p>
+						<span id="faqerror" style="color:red"></span>
+						<p class="form-rms-sm1">( <span id="max_length_char3"></span> 600 characters)</p>
+					</div>
+				
 				</div>
-				<div class="form-rms-btn step3-last-2 edit_btns-grp">
+
+
+				@endif
+			
+			<div class="form-rms-btn step3-last-2 edit_btns-grp">
 					<a type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></a>
 					<!-- </form> -->
 					<a type="button" id="costume_description_next" class="btn-rm-nxt nxt">Next Step</a>
 				</div>
-			</div>
 								<!--costume three code starts here-->
 								<!--costume three code ends here-->
 							</div>
@@ -1142,10 +1202,10 @@
                                             <div class="col-md-3">
                                             <div class="input-group">
                                             <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default btn-number donate_charity chr_bt1" disabled="disabled" data-type="minus" data-field="donate_charity">
+                                            <button type="button" class="btn btn-default btn-number donate_charity chr_bt1" data-type="minus" data-field="donate_charity" min="0" max="100">
                                             <span class="glyphicon glyphicon-minus"></span>
                                             </button>
-                                            </span>
+                                            </span	>
                                             <input type="text" name="donate_charity" class="form-control input-number" id="donate_charity" value="{{$costume_details->dynamic_percent}}" min="0" max="100"><i class="fa fa-percent" aria-hidden="true"></i>
                                             <span class="input-group-btn">
                                             <button type="button" class="btn btn-default btn-number donate_charity chr_bt2" data-type="plus" data-field="donate_charity">
@@ -1299,7 +1359,24 @@
 					<script type="text/javascript">
 						$(document).ready(function(){
 
-							$("#freqently").hide();
+							// Code added by gayatri
+					        var url = window.location;
+					        var parts = url.toString().split("/");
+					    	var id = parts[parts.length-2];
+					        if(window.location.pathname.match('costume/edit/'+id+'/charity')){
+					        	$('#step1').addClass('active');
+					        	$('#step2').addClass('active');
+					        	$('#step3').addClass('active');
+					        	$('#step4').addClass('active');
+					        	$('#upload_div').css('display','none');
+								$('#costume_description').css('display','none');
+								$('#pricing_div').css('display','none');
+								$('#preferences_div').css('display','block');
+					        }
+
+					    //End
+
+							//$("#freqently").hide();
 							$("#size").change(function()
 							{
 								var val = $(this).val();
@@ -1312,6 +1389,17 @@
 									$(".body-dimnets").addClass('hide');
 								}
 							});
+							
+							$(".faq-checkbox").change(function(){
+							
+								if($("#30").prop("checked") || $("#32").prop("checked")){
+									$("#freqently").removeClass("hide");
+								} else{
+								$("#freqently").addClass("hide");
+								}
+							});
+							
+							$(".faq-checkbox").trigger("change");
 
                               
                             $('#price').on('keydown', function(e){-1!==$.inArray(e.keyCode,[46,8,9,27,13,110,190])||/65|67|86|88/.test(e.keyCode)&&(!0===e.ctrlKey||!0===e.metaKey)||35<=e.keyCode&&40>=e.keyCode||(e.shiftKey||48>e.keyCode||57<e.keyCode)&&(96>e.keyCode||105<e.keyCode)&&e.preventDefault()});

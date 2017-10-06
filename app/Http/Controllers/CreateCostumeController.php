@@ -33,7 +33,15 @@ class CreateCostumeController  extends Controller {
 	
 		Meta::title('Chrysalis');
         Meta::set('robots', 'index,follow');
-
+        $this->middleware(function ($request, $next) {
+              if(!Auth::check()){
+                 Session::put('curentURL',URL::current());
+                return Redirect::to('/login')->send();
+            }
+            else{
+                 return $next($request);
+            }
+        });
 			
 
 	}
@@ -60,6 +68,7 @@ class CreateCostumeController  extends Controller {
 		/***selecting body and dimensions code starts here***/
 		$bodyanddimensions=DB::table('attributes')->select('attribute_id as attributeid','code as code','label as label','type as type')->where('attribute_id','1')->first();
 		$body_height_ft=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('option_id','=','1')->first();
+
 		$body_height_in=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('option_id','=','2')->first();
 		$body_weight_lbs=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('option_id','=','3')->first();
 		$body_chest_in=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('option_id','=','5')->first();
@@ -121,6 +130,7 @@ class CreateCostumeController  extends Controller {
 	/****create costume code starts here***/
 	public function Costumecreate(Request $request){
 		 	
+		 	//dd($request->faq);
 			$req=$request->all();
 
 			$userid=Auth::user()->id;
@@ -555,6 +565,7 @@ class CreateCostumeController  extends Controller {
 		|@attribute_option_value_id
 		|@attribute_option_value
 		*/
+
 			$height_ft=array('costume_id'=>$insert_costume, 
 			'attribute_id'=>'16',
 			'attribute_option_value_id'=>'0',
@@ -1010,6 +1021,8 @@ class CreateCostumeController  extends Controller {
 		/***selecting body and dimensions code starts here***/
 		$bodyanddimensions=DB::table('attributes')->select('attribute_id as attributeid','code as code','label as label','type as type')->where('attribute_id','1')->first();
 		$body_height_ft=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('option_id','=','1')->first();
+
+
 		$body_height_in=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('option_id','=','2')->first();
 		$body_weight_lbs=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('option_id','=','3')->first();
 		$body_chest_in=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('option_id','=','5')->first();
@@ -1053,6 +1066,7 @@ class CreateCostumeController  extends Controller {
 		$costume_category_2 = DB::table('costume_to_category')->where('costume_id',$id)->where('sort_no','1')->first();
 		$costume_details = DB::table('costumes')->where('costume_id',$id)->first();
 		$db_body_height_ft = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','16')->first();
+		 
 		$db_body_height_in = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','17')->first();
 		$db_body_weight_lbs = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','18')->first();
 		$db_body_chest_in = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','19')->first();
@@ -1066,6 +1080,7 @@ class CreateCostumeController  extends Controller {
 		$db_des_costume = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','6')->first();
 		$db_funfact = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','7')->first();
 		$db_faq = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','8')->first();
+
 		$db_shippin_opt = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','9')->first();
 		$db_dimensions_length = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','22')->first();
 		$db_dimensions_width = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','23')->first();
@@ -1106,8 +1121,8 @@ class CreateCostumeController  extends Controller {
 	}
 
 	public function EditCostumeAdd(Request $request){
-
-		 
+ 
+	 	//dd($request->keyword_8);
 		$userid=Auth::user()->id;
 
 		//echo "<pre>";print_r($request->all());die;
@@ -1325,34 +1340,34 @@ class CreateCostumeController  extends Controller {
 
 		// echo "images insertion";die;
 	            $final_keywords = array();
-			if(!empty($request->keyword_10)){
+			if($request->has('keyword_10')){
 				$final_keywords[1] = $request->keyword_10;
 			}
-			if(!empty($request->keyword_9)){
+			if($request->has('keyword_9')){
 				$final_keywords[2] = $request->keyword_9;
 			}
-			if(!empty($request->keyword_8)){
+			if($request->has('keyword_8')){
 				$final_keywords[3] = $request->keyword_8;
 			}
-			if(!empty($request->keyword_7)){
+			if($request->has('keyword_7')){
 				$final_keywords[4] = $request->keyword_7;
 			}
-			if(!empty($request->keyword_6)){
+			if($request->has('keyword_6')){
 				$final_keywords[5] = $request->keyword_6;
 			}
-			if(!empty($request->keyword_5)){
+			if($request->has('keyword_5')){
 				$final_keywords[6] = $request->keyword_5;
 			}
-			if(!empty($request->keyword_4)){
+			if($request->has('keyword_4')){
 				$final_keywords[7] = $request->keyword_4;
 			}
-			if(!empty($request->keyword_3)){
+			if($request->has('keyword_3')){
 				$final_keywords[8] = $request->keyword_3;
 			}
-			if(!empty($request->keyword_2)){
+			if($request->has('keyword_2')){
 				$final_keywords[9] = $request->keyword_2;
 			}
-			if(!empty($request->keyword_1)){
+			if($request->has('keyword_1')){
 				$final_keywords[10] = $request->keyword_1;
 			}
 			$final_keywords = implode(",", $final_keywords);

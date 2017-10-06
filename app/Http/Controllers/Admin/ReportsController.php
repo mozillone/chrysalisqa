@@ -130,6 +130,7 @@ class ReportsController extends Controller
   $paypots = DB::table('paypal_payouts as pp')
   ->leftJoin('users','users.id','=','pp.user_id')
   ->where('status','!=','paid')
+  //->where('note',0)
   ->groupBy('pp.user_id')
   ->select('users.first_name as name','users.paypal_email as email',DB::Raw('DATE_FORMAT(cc_pp.created_at,"%m/%d/%y %h:%i %p") as date'),
     'pp.status as status',DB::raw('SUM(cc_pp.amount) as amount'),'pp.user_id as user_id','pp.id as id')
@@ -202,29 +203,36 @@ class ReportsController extends Controller
                 //dd($get_paypal_email);
                 //echo $get_paypal_email->paypal_email; echo "<br>";
               $single_payout =PaypalPayout::SinglePayout($get_paypal_email->paypal_email,$amount);
-              $payout_batch_id = $single_payout->batch_header->payout_batch_id;
-              $batch_status    = $single_payout->batch_header->batch_status;
-              $sender_batch_id    = $single_payout->batch_header->sender_batch_header->sender_batch_id;
-              $log_array = array('type'=>'seller_payout',
-                'type_id'=>$val,
-                'user_id'=>$user_id,
-                'note'=>'Seller report',
-                'payout_batch_id'=>$payout_batch_id,
-                'batch_status'=>$batch_status,
-                'sender_batch_id'=>$sender_batch_id,
-                'created_at'=>date('y-m-d H:i:s'),);
-              $insertin_log    = Site_model::insert_get_id('payout_log',$log_array);
-              //dd($batch_status);
-              if ($batch_status == "sucess") {
-                $get_details = DB::table('paypal_payouts')->where('id',$val)->update(['status'=>'paid']);
+              if($single_payout['status'] == 1){
+                $output = $single_payout['output'];
+                $payout_batch_id = $output->batch_header->payout_batch_id;
+                  $batch_status    = $output->batch_header->batch_status;
+                  $sender_batch_id    = $output->batch_header->sender_batch_header->sender_batch_id;
+                  $log_array = array('type'=>'seller_payout',
+                    'type_id'=>$val,
+                    'user_id'=>$user_id,
+                    'note'=>'Seller report',
+                    'payout_batch_id'=>$payout_batch_id,
+                    'batch_status'=>$batch_status,
+                    'sender_batch_id'=>$sender_batch_id,
+                    'created_at'=>date('y-m-d H:i:s'),);
+                  $insertin_log    = Site_model::insert_get_id('payout_log',$log_array);
+                  //dd($batch_status);
+                  if ($batch_status == "sucess") {
+                    $get_details = DB::table('paypal_payouts')->where('user_id',$user_id)->update(['status'=>'paid']);
 
-              }
-              if ($batch_status == "PENDING") {
-                $get_details = DB::table('paypal_payouts')->where('id',$val)->update(['status'=>'pending']);
+                  }
+                  if ($batch_status == "PENDING") {
+                    $get_details = DB::table('paypal_payouts')->where('user_id',$user_id)->update(['status'=>'pending']);
+                  }
+                  \Session::flash('success', "Seller payout process successfully completed.");
 
+              }else{
+                $error = $single_payout['output'];
+                \Session::flash('error', $error);
               }
          }
-         \Session::flash('success', "Seller payout process successfully completed.");
+         
       }
     }else{
         \Session::flash('info', "No seller selected.");
@@ -886,36 +894,43 @@ cc_costume_description ON cc_costume_description.costume_id = cc_costumes.costum
     
     public static function getStatusChange()
     {
-        //echo "string"; exit;
-        $payouts = DB::table('paypal_payouts')->get();
+        $get_batch_id = DB::table('payout_log')->where('batch_status', 'PENDING')->get();
+        foreach ($get_batch_id as $key => $batch_id) {
+            $get_status = PayPalPayout::getPayoutStatus($batch_id->payout_batch_id);
+            if($get_status['status'] == 1){
+                $output = $get_status['output'];
+                //if($value->id == $batch_id->type_id){
+                    if ($output->batch_header->batch_status == "SUCCESS") {
+                        $get_details = DB::table('paypal_payouts')->where('user_id',$batch_id->user_id)->update(['status'=>'paid']);
+
+                        $updateLog = DB::table('payout_log')
+                                ->where('id',$batch_id->id)
+                                ->update(['note'=> json_encode($get_status['output']), 'batch_status'=>'SUCCESS', 'updated_at'=>date('y-m-d H:i:s')]);
+                    }
+                //}
+            }
+            else{
+                $updateLog = DB::table('payout_log')
+                                ->where('id',$batch_id->id)
+                                ->update(['note'=> json_encode($get_status['output']), 'batch_status'=>'FAILED', 'updated_at'=>date('y-m-d H:i:s')]);
+            }
+        }
+
+        /*$payouts = DB::table('paypal_payouts')->get();
         foreach ($payouts as $key => $value) {
             if($value->status == 'pending'){
-                $get_batch_id = DB::table('payout_log')->where('type_id',$value->id)->where('batch_status', 'PENDING')->get();
+                $get_batch_id = DB::table('payout_log')->where('batch_status', 'PENDING')->get();
                 foreach ($get_batch_id as $key => $batch_id) {
-                    //echo "string1"; exit;
-                    //print_r($value->id); exit;
                     $get_status = PayPalPayout::getPayoutStatus($batch_id->payout_batch_id);
-                    //echo"<pre>";print_r($get_status['status']);exit;
                     if($get_status['status'] == 1){
                         $output = $get_status['output'];
                         if($value->id == $batch_id->type_id){
                             if ($output->batch_header->batch_status == "SUCCESS") {
-                                $get_details = DB::table('paypal_payouts')->where('id',$value->id)->update(['status'=>'paid']);
+                                $get_details = DB::table('paypal_payouts')->where('user_id',$batch_id->user_id)->update(['status'=>'paid']);
 
-                                $log_array = array('type'=>'seller_payout',
-                                    'type_id'=>$value->id,
-                                    'user_id'=>$batch_id->user_id,
-                                    'note'=>'Seller report',
-                                    'payout_batch_id'=>$output->batch_header->payout_batch_id,
-                                    'batch_status'=>$output->batch_header->batch_status,
-                                    'sender_batch_id'=>$output->batch_header->sender_batch_header->sender_batch_id,
-                                    'created_at'=>date('y-m-d H:i:s'));
-
-                                //$insertin_log = Site_model::insert_get_id('payout_log',$log_array);
                                 $updateLog = DB::table('payout_log')
                                         ->where('id',$batch_id->id)
-                                        ->update(['note'=> json_encode($get_status['output']), 'batch_status'=>'Success', 'updated_at'=>date('y-m-d H:i:s')]);
-                                //echo 'scuccess';
+                                        ->update(['note'=> json_encode($get_status['output']), 'batch_status'=>'SUCCESS', 'updated_at'=>date('y-m-d H:i:s')]);
                             }
                         }
                     }
@@ -923,11 +938,10 @@ cc_costume_description ON cc_costume_description.costume_id = cc_costumes.costum
                         $updateLog = DB::table('payout_log')
                                         ->where('id',$batch_id->id)
                                         ->update(['note'=> json_encode($get_status['output']), 'batch_status'=>'FAILED', 'updated_at'=>date('y-m-d H:i:s')]);
-                        //echo 'fail'; //exit;
                     }
                 }
             }
-        }
+        }*/
         
     }
 }
