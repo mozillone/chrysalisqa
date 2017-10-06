@@ -153,6 +153,7 @@ Route::any('/getSearchCostumesData', ['as' => '','uses'=>'SearchController@getSe
 /************************************************** Costume URL Rewrites ******************************************************/
 Route::any('/generate-url-rewrites', ['as' => 'generate-url-rewrites','uses'=>'UrlRewritesController@generateUrlRewrites']);
 Route::any('/del-rewrites', ['as' => 'del-rewrites','uses'=>'UrlRewritesController@deleteUrlRewrites']);
+Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 /******************************************************************************************************************************/
 
 
@@ -681,6 +682,9 @@ Route::any('/search', [
 ]);
 /****************** events routes ends here **********************/
 Route::any('/costume/edit/{id}', array('as' => '','uses' => 'CreateCostumeController@EditCostume'));
+/* Code added by Gayatri */
+Route::any('/costume/edit/{id}/charity', array('as' => '','uses' => 'CreateCostumeController@EditCostume'));
+/* End */
 Route::any('costume/costumeeditadd', array('as' => '','uses' => 'CreateCostumeController@EditCostumeAdd'));
 Route::any('/my/costumes', array('as' => '','uses' => 'CreateCostumeController@MyCostumes'));
 Route::any('/my-costumes-list', ['as' => '','uses'=>'OrdersController@myCostumesListData']);
