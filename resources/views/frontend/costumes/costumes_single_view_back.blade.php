@@ -193,6 +193,7 @@ a.size_chrtcls {
 													</p>
 									</div>
 								</div>
+								
 
 								<div class="col-md-6 col-xs-12 col-sm-4 viewBtn_rm">
 									@if(helper::verifyCostumeQuantity($data[0]->costume_id,$data[0]->quantity+1) && $data[0]->quantity>0)
@@ -221,7 +222,6 @@ a.size_chrtcls {
 								<p class="shipp-rm shipp-rm-20"><label>Delivery: &nbsp; </label> @if($priority_info['result']=="1") Est. between {{date('D . M . d')}}  and {{date('D . M .d',strtotime('+'.$priority_info["msg"]["MailService"].' days'))}} @else {{$priority_info['msg']}} @endif  <i class="fa fa-info-circle" aria-hidden="true"></i></p>
 							</div>
 						@endif
-
 						<p class="returns-rm">Returns: <span>Seller <?php if(isset($data['returns'][0])){ echo $data['returns'][0]->attribute_option_value; }else{ echo " Return Not Accepted"; } ?></span></p>
 
 

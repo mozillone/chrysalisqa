@@ -1,3 +1,22 @@
+$(document).on('change','#price', function(){
+        var number = $('#price').val(); 
+        if(number.indexOf('.') == "-1"){
+            $(this).val($(this).val()+".00");
+        }
+
+var donate_percent = $('#donate_charity').val();
+var cuurent_one = donate_percent.replace("%",'');
+var str = cuurent_one.replace(/\s/g, ''); 
+var price = $('#price').val();
+var total = (price*str)/100;
+if (donate_percent=="none") {
+var total = 0.00;
+}
+var amount = parseFloat(total).toFixed(2);
+$('#hidden_donation_amounts').val(amount);
+$('#dynamic_percent_amounts').html("$"+amount);
+});
+
 $('#categoryname').on('change',function(){
 
 var id=$(this).val();//catgeory id
@@ -96,7 +115,7 @@ $('input[name=file3]').attr('value','');
 $(".drop_uploader").addClass('additional');
 });
 //donate amount percentage calculation
-$('#donate_charity').change(function(){
+/*$('#donate_charity').change(function(){
 var donate_percent = $(this).val();
 var price = $('#price').val();
 var total = (price*donate_percent)/100;
@@ -106,16 +125,8 @@ var total = 0.00;
 $('#hidden_donation_amount').val(parseFloat(total).toFixed(2));
 $('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
 });
-$('#price').keyup(function(){
-var donate_percent = $('#donate_charity').val();
-var price = $('#price').val();
-var total = (price*donate_percent)/100;
-if (donate_percent=="none") {
-var total = 0.00;
-}
-$('#hidden_donation_amount').val(parseFloat(total).toFixed(2));
-$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
-});
+*/
+ 
 //numeric condition
 $("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height,#make_costume_time1").on("keyup", function(){
 var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
@@ -220,12 +231,12 @@ $('#other_organzation_check').css('display','none');
 
         if (file1 == '') {
             $('input[name=file1]').css('border', '1px solid red');
-            $('#file1_error').html('Upload Front View');
+            $('#file1_error').html('Upload Front');
             str = false;
         }
         if (file2 == '') {
             $('input[name=file2]').css('border', '1px solid red');
-            $('#file2_error').html('Upload Back View');
+            $('#file2_error').html('Upload Back');
             str = false;
         }
          
@@ -280,7 +291,7 @@ $('#other_organzation_check').css('display','none');
         var heightin = $('#height-in').val();
         var weightlbs = $('#weight-lbs').val();
         var chestin = $('#chest-in').val();
-        var waistlbs = $('#waist-lbs').val();
+        var waistlbs = $('#waist-inches').val();
         var costumecondition = "";
         var qualitycostume = "";
         var usercostume = "";
@@ -288,13 +299,55 @@ $('#other_organzation_check').css('display','none');
         //var cosplay = "";
         var uniquefashion = "";
 
-      
-        if(category == 68){
+        var cleaned = $("#cleaned").val();
+         
+        var condition_val =  $('input[name=condition]:checked').val(); 
+        
+        if(condition_val == 'good' || condition_val == 'like_new')
+        {
+            if(cleaned == "")
+            {
+                 $('#cleanederror').html('This field is required.');
+                 str = false;
+            }           
+        }
+
+      if(size == 'custom'){
+            if(heightft == ""){
+                $('#height-ft').css('border', '1px solid red');
+                $('#heighterror').html('This field is required.');
+                str = false;
+            }
+            if(heightin == ""){
+                $('#height-in').css('border', '1px solid red');
+                $('#heighterror').html('This field is required.');
+                str = false;
+            }
+
+            if(weightlbs == ""){
+                $('#weight-lbs').css('border', '1px solid red');
+                $('#weighterror').html('This field is required.');
+                str = false;
+            }
+
+            if(chestin == ""){
+                $('#chest-in').css('border', '1px solid red');
+                $('#chesterror').html('This field is required.');
+                str = false;
+            }
+
+            if(waistlbs == ""){
+                $('#waist-inches').css('border', '1px solid red');
+                $('#waisterror').html('This field is required.');
+                str = false;
+            }
+        }
+        /*if(category == 68){
             if($('input[name="fimquality"]:checked').next().html() == 'No'){
                 $('#qualityerror').html('The Film Production category is limited to costumes that have been used on Film and Television sets.');
                 str = false;
             }
-        }
+        }*/
 
         if (subcategory == "") {
             $('#subcategory').css('border', '1px solid red');
@@ -459,45 +512,61 @@ str=true;
 $('#handlingtime,#returnpolicy,#donate_charity,#charity_name,#organzation_name').css('border','');
 $('#handlingtimeerror,#returnpolicyerror,#donate_charityerror,#charity_nameerror,#organzation_nameerror').html('');
 var handlingtime  = $('#handlingtime').val();
-var returnpolicy  = $('#returnpolicy').val();
+var returnpolicy  = $('input[name=returnpolicy]:checked').val();
 var donate_charity = $('#donate_charity').val();
 var atLeastOneIsChecked = $('input[name="another_charity"]:checked').length > 0;
 var charity_name = $('input[name="charity_name"]:checked').length > 0;
 var organzation_name = $('#organzation_name').val();
 
-if (handlingtime == "") {
-$('#handlingtime').css('border','1px solid red');
-$('#handlingtimeerror').html('This field is required.');
-str=false;
-}
-if (returnpolicy == "") {
-$('#returnpolicy').css('border','1px solid red');
-$('#returnpolicyerror').html('This field is required.');
-str=false;
-}
-if (donate_charity == 0) {
-/*$('#donate_charity').css('border','1px solid red');
-$('#donate_charityerror').html('Select Donate Amount');*/
-str=true;
-}
-if (donate_charity != "" && donate_charity != 0) {
-        $('#charity_nameerror').html('Please select any Charity.');
-        str=false;
-      if (charity_name == true) {
-           $('#charity_nameerror').html('');
-         str=true; 
-        }
-      else if($('#another_charity').prop("checked") == true){
-      	$('#charity_nameerror').html('');
-         str=true;
-      }
-    }
+
+// if (donate_charity == 0) {
+// /*$('#donate_charity').css('border','1px solid red');
+// $('#donate_charityerror').html('Select Donate Amount');*/
+// str=true;
+// }
+// if (donate_charity != "" && donate_charity != 0) {
+//         $('#charity_nameerror').html('Please select any Charity.');
+//         str=false;
+//       if (charity_name == true) {
+//            $('#charity_nameerror').html('');
+//          str=true; 
+//         }
+//       else if($('#another_charity').prop("checked") == true){
+//       	$('#charity_nameerror').html('');
+//          str=true;
+//       }
+//     }
 /*if($('input[name=charity_name]:checked').length<=0){
 $('#charity_name').css('border','1px solid red');
 $('#charity_nameerror').html('Select Donate to');
 str=false;
 
 }*/
+
+        if(parseInt(donate_charity) == 0 && charity_name != '' ){
+            $('#donate_charity').css('border', '1px solid red');
+            $('#donate_charityerror').html('Select Donate Amount');
+            str = false;
+           // console.log('1');
+        }else if(parseInt(donate_charity) != 0 && charity_name == '' ){
+            $('#charity_nameerror').html('Please select any Charity.');
+            str = false;
+            //console.log('2');
+        }
+
+        if (handlingtime == '' || handlingtime == null) {
+            $('#handlingtime').css('border', '1px solid red');
+            $('#handlingtimeerror').html('This field is required.');
+            str = false;
+            //console.log('3');
+        }
+
+        if (returnpolicy == undefined || returnpolicy == '' || returnpolicy == null) {
+            $('#returnpolicyerror').html('This field is required.');
+            str = false;
+            //console.log('4');
+        }
+        //console.log('str='+str); return false;
 if (atLeastOneIsChecked == true) {
 $('#organzation_name').css('border','1px solid red');
 $('#organzation_nameerror').html('This field is required.');
@@ -583,10 +652,10 @@ $("html, body").animate({ scrollTop: 70 }, "slow");
 return false;
 });
 
-$('input[name=charity_name]').click(function(){
+/*$('input[name=charity_name]').click(function(){
   $('#another_charity').prop('checked','');
   $('#other_organzation_check').css('display','none');
-});
+});*/
 
 
     $('#keywords_tag').keydown(function(e){
@@ -613,15 +682,16 @@ $('input[name=charity_name]').click(function(){
                     $('#count').html(total-count+ " left");
                     if (total == 1) {
                         var hashtag = '#'+segments[0];
+                        //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
                         $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p> ');
-                        $('#keywords_tag').prop('value','');
-                       // $(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
+                        $('#keywords_tag').prop('value','');    
                         $('#input_'+total+'').val(hashtag);
                         $('#count').html(total-1+ " left");
                     }else{
                         $.each(segments,function(i){
                             var hashtag = '#'+segments[i];
-                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span></p>');                           
+                            //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
+                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span></p>');                                                         
                             $('#input_'+total+'').val(hashtag);       
                             $('#keywords_tag').prop('value','');
                             total--;
@@ -629,11 +699,11 @@ $('input[name=charity_name]').click(function(){
                     }
                 }else{
                     var hashtag = '#'+val;
+                    //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
                     $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p><input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
-                    
                     $('#keywords_tag').prop('value','');
                     $('#input_'+total+'').val(hashtag);
-                    $('#count').html(total-1+ " left");
+                    $('#count').html(total-1+ " left"); 
                 }
             }else{
                 $('#keywords_add').hide();
@@ -722,7 +792,7 @@ $(document).on("change", "#file1", function() {
                     });
                     $(document).on("click", "#crop", function() {
                         $("#myModal").modal('hide');
-                        imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                        imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
                         $(".drop_zone1").find("img.result").remove();
                         var FrontView = '<img src="'+imgdata+'" class="result">';
                         $(".drop_zone1").append(FrontView);
@@ -808,7 +878,7 @@ $(document).on("change", "#file2", function() {
 
                     $(document).on("click", "#crop2", function() {
                         $("#myModal2").modal('hide');
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
                         $(".drop_zone2").find("img.result2").remove();
                         var Backview = '<img src="'+imgdata+'" class="result2">';
                         $(".drop_zone2").append(Backview);
@@ -870,7 +940,7 @@ $(document).on("change", "#file3", function() {
                             cropBoxResizable:false,
                             zoomOnTouch:false,
                             setDragMode:'move',
-                             viewMode:1,
+                            viewMode:1,
                             aspectRatio: 3 / 5,
                             center:false,
                             data: {
@@ -895,7 +965,7 @@ $(document).on("change", "#file3", function() {
                     $(document).on("click", "#crop3", function() {
                         $("#myModal3").modal('hide');
                         $('.Additional').attr('data-value',3);
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
                         $(".drop_zone3").find("img.result3").remove();
                         $(".Additional").attr('value',imgdata);
                         var Additional = '<img src="'+imgdata+'" class="result3">';
@@ -942,6 +1012,10 @@ $(document).on('slid.bs.carousel', '.carousel', function () {
     var active_item_index = getActiveItemIndex(items);
     activeCropperObjIndex = active_item_index;
     slider.val(zooms[active_item_index]);
+    if(activeCropperObjIndex >0)
+    {
+        slider.val(2);
+    }
     if(zooms[activeCropperObjIndex] !== -100){
         slider.trigger("input");
     }
@@ -1028,7 +1102,7 @@ $("#upload-file-selector").on("change",function () {
                             cropBoxResizable: false,
                             zoomOnTouch: false,
                             setDragMode: 'move',
-                             viewMode:1,
+                            viewMode:1,
                             aspectRatio: 3 / 5,
                             center: false,
                             data: {
@@ -1067,7 +1141,7 @@ $(document).on("input", ".slider", function () {
 
 $(document).on("click", ".saveMultiple", function () {
     $cropper_objs.forEach(function($image, index){
-        var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
         $('#other_thumbnails').append("<div index='"+index+"' class=\"col-md-4 col-sm-4 col-xs-12 multi_div\"><img src= " + imgdata + " class=\"multi_thumbs pip\">" +
             "<br/><span class=\"remove\">" +
             "<i class=\"fa fa-times-circle\"></i>" +

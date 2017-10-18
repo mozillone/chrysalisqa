@@ -32,8 +32,10 @@ class CostumesController extends Controller {
         Meta::set('description', ucfirst($slug1).' Buy and Sell Affordable, Environment Friendly Costumes');
         $key_url='/'.$slug1;
 		$cat_info=Category::getUrlCategoryId($key_url);
+
 		if(count($cat_info)){
 			$categories_list=[];
+			//dd($cat_info);
 			$sub_cat_id=$cat_info[0]->url_offset;
 			$data['sub_cat_info']=Costumes::getCategoryInfo($sub_cat_id);
 			//dd($data);
@@ -67,15 +69,18 @@ class CostumesController extends Controller {
 			$categories_list=[];
 			$sub_cat_id=$cat_info[0]->url_offset;
 			$data['sub_cat_info']=Costumes::getCategoryInfo($sub_cat_id);
-			//dd($sub_cat_id);
+			//dd($data['sub_cat_info']);
 			$parent_cat_id=$data['sub_cat_info'][0]->parent_id;
 			$sub_cats_list=Costumes::getParentCategories($parent_cat_id);
+			//dd($sub_cats_list);
 			$categories_list[$sub_cats_list[0]->name][]="None";
 			foreach ($sub_cats_list as $subCat) {
-				$link=Category::getUrlLinks($subCat->category_id);
+				$link = Category::getUrlLinks($subCat->category_id);
+				
 				//dd($link);
 				$categories_list[$subCat->name]=$link;
 			}
+
 			return view('frontend.costumes.costumes_list',compact('data',$data))->with('parent_cat_name',$slug1)->with('categories_list',$categories_list)->with('parent_cat',false);;
 		}
 		else{
@@ -86,13 +91,14 @@ class CostumesController extends Controller {
 	public function getCostumesData(Request $request)
 	{
 		$req=$request->all();
+		//dd($req);
 		if(!empty($req['is_main'])){
 			$where='where cats.parent_id='.$req['cat_id'].' and deleted_status="0"';
 		}else{
 			$where='where cat.category_id='.$req['cat_id'].'';
 		}
 		
-                $where.=' AND cst.deleted_status=0 AND cst.status="active"';
+        $where.=' AND cst.deleted_status=0 AND cst.status="active" AND link.id=(select id from cc_url_rewrites where url_offset=cst.costume_id  order by id desc limit 0,1)';
                 
 		$order_by='order by cst.created_at ASC';
 
@@ -151,7 +157,7 @@ class CostumesController extends Controller {
 			}
 		}
 		if(Auth::check()){
-		$is_login=',if((select count(*) from cc_costumes_like as likes where likes.user_id='.Auth::user()->id.' and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id='.Auth::user()->id.'  and  wsh_lst.costume_id=cst.costume_id )>=1,true,false) as is_fav';
+			$is_login=',if((select count(*) from cc_costumes_like as likes where likes.user_id='.Auth::user()->id.' and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id='.Auth::user()->id.'  and  wsh_lst.costume_id=cst.costume_id )>=1,true,false) as is_fav';
 		}else{
 			$is_login=' ';
 		}
@@ -190,7 +196,7 @@ class CostumesController extends Controller {
 				/* End */		
 				$data['seller_info']=Costumes::costumeSellerInfo($data[0]->created_by);
                                 $data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
-				//dd($data);
+				//dd(nl2br($data['faq'][0]->attribute_option_value));
 				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2);
 			}else{
 		     	return view('frontend.404');

@@ -69,11 +69,11 @@ class CategoriesController extends Controller
                     $slug1=$this->specialCharectorsRemove($req['name']);
                     $key_url='/'.$slug1;
                   }
-                  $cat_info=Category::getUrlCategoryId($key_url);
+                  $cat_info = Category::getUrlCategoryId($key_url);
                   if(!count($cat_info)){
-                  Category::createCategory($req);
-                  Session::flash('success', 'Category is created successfully');
-                  return Redirect::back();
+                    Category::createCategory($req);
+                    Session::flash('success', 'Category is created successfully');
+                    return Redirect::back();
                   }else{
                    Session::flash('error', 'This Category is already exits');
                    return Redirect::back(); 
@@ -87,57 +87,58 @@ class CategoriesController extends Controller
              return view('admin.categories.categories_create',compact('parent_cats',$parent_cats))->with('costumes_list',$costumes_list);
          }
    }
-   public function editCategories(Request $request,$cat_id=null)
-   {
+    public function editCategories(Request $request,$cat_id=null)
+    {
 
-         $req=$request->all();
+      $req=$request->all();
 
-         if(count($req))
-         {
-         //dd($req);
-           $rule  = array('name' => 'required|max:50','desc' => 'required|max:200');
-           $validator = Validator::make($req,$rule);
-            if ($validator->fails())
-            {
-               return Redirect::back()->withErrors($validator->messages())->withInput();
-            }
-            else
-              { 
-                  
-                  if(!empty($req['cat_name'])){
-                    $slug1=$this->specialCharectorsRemove($req['cat_name']);
-                    $slug2=$this->specialCharectorsRemove($req['name']);
-                    $key_url='/'.$slug1.'/'.$slug2;
-                  }else{
-                    $slug1=$this->specialCharectorsRemove($req['name']);
-                    $key_url='/'.$slug1;
-                  }
-                  $cat_info=Category::getUrlCategoryId($key_url);
-                  if(!count($cat_info) || $cat_info[0]->url_offset==$req['category_id']){
-                    $cat_info=Category::getUrlCategoryId($key_url);
-                    
-                    Category::updateCategory($req);
-                    Session::flash('success', 'Category is updated successfully');
-                    return Redirect::to('categories');
-                  }else{
-                     Session::flash('error', 'This Category is already exits');
-                     return Redirect::to("/categories"); 
-                  }
-              }
-         }
-         else
-         {
-            $cond=array('category_id'=>$cat_id);
-            $cat_data=Site_model::fetch_data('category','*',$cond);
+      if(count($req))
+      {
+     //dd($req);
+        $rule  = array('name' => 'required|max:50','desc' => 'required|max:200');
+        $validator = Validator::make($req,$rule);
+        if ($validator->fails())
+        {
+          return Redirect::back()->withErrors($validator->messages())->withInput();
+        }
+        else
+        { 
+          if($req['cat_name'] !== '--Select--'){
+            $slug1=$this->specialCharectorsRemove($req['cat_name']);
+            $slug2=$this->specialCharectorsRemove($req['name']);
+            $key_url='/'.$slug1.'/'.$slug2;
+          }else{
+            $slug1=$this->specialCharectorsRemove($req['name']);
+            $key_url='/'.$slug1;
+          }
+          
+          $cat_info=Category::getUrlCategoryId($key_url); 
 
-            $parent_cats=Category::getParentCategories();
-            $costumes_list=Costumes::getCostumesList();
-            $cat_costumes=Category::getCatCostumesList($cat_id);
-            return view('admin.categories.categories_edit',compact('cat_data',$cat_data))
-                        ->with('parent_cats',$parent_cats)
-                        ->with('costumes_list',$costumes_list)
-                        ->with('cat_costumes',$cat_costumes);
-         }
+          if(!count($cat_info) || $cat_info[0]->url_offset==$req['category_id']){
+            $cat_info=Category::getUrlCategoryId($key_url);
+            
+            Category::updateCategory($req);
+            Session::flash('success', 'Category is updated successfully');
+            return Redirect::to('categories');
+          }else{
+             Session::flash('error', 'This Category is already exits');
+             return Redirect::to("/categories"); 
+          }
+        }
+      }
+      else
+      {
+        $cond=array('category_id'=>$cat_id);
+        $cat_data=Site_model::fetch_data('category','*',$cond);
+
+        $parent_cats=Category::getParentCategories();
+        $costumes_list=Costumes::getCostumesList();
+        $cat_costumes=Category::getCatCostumesList($cat_id);
+        return view('admin.categories.categories_edit',compact('cat_data',$cat_data))
+                    ->with('parent_cats',$parent_cats)
+                    ->with('costumes_list',$costumes_list)
+                    ->with('cat_costumes',$cat_costumes);
+     }
    }
    public function deleteCategory($id)
    {
@@ -227,5 +228,21 @@ class CategoriesController extends Controller
             $string = preg_replace(array('/[^a-z0-9]/i', '/[-]+/') , '-', $string);
             return strtolower(trim($string, '-'));
     }
+
+  public static function deleteCategoryCostume($product_id, $category_id)
+  {
+    $is_deleted = DB::table('costume_to_category')
+                    ->where('costume_id',$product_id)
+                    ->where('category_id', $category_id)
+                    ->delete();
+
+    if($is_deleted){
+      Session::flash('success', 'Costume Deleted successfully');
+      return redirect()->back();
+    }else{
+      Session::flash('error', 'Costume not Deleted, Try Again');
+      return redirect()->back();
+    }
+  }
 
 }

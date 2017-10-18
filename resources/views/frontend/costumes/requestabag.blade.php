@@ -94,12 +94,33 @@
 						<h2>REQUEST A BAG <img  src="{{URL::asset('assets/frontend/img/bag-min.png')}}"></h2>
 					</div>
 				</div>
-				<h4>Average Payouts</h4>
-				<div class="col-md-8 col-md-offset-2">
-					<div class="costumes-label">
+			
+				
+			</div>
+			
+			
+			
+			<div class="r-bag_div col-md-8 col-md-offset-2">	
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<ul class="nav nav-pills">
+					<li class="active"><a data-toggle="pill" href="#payouts">Average Payouts</a></li>
+					<li><a data-toggle="pill" href="#calculator">Payout Calculator</a></li>
+
+				</ul>
+				
+				
+				<div class="tab-content">
+					<div id="payouts" class="tab-pane fade in active">
+						
+						<div class="col-md-12 col-sm-12 ">
+							<div class="costumes-label">
 						<span>AVERAGE COSTUMES</span>
-						<span><i class="fa fa-usd" aria-hidden="true"></i> 2.00 - 5.00</span>
+						<span><i class="fa fa-usd" aria-hidden="true"></i> $1.00 - 5.00</span>
 					</div>
+					
+					
+					
+					
 					<div class="row costumes">
 						<div class="costumes-desktop">
 							<div class="col-md-4 col-sm-4">
@@ -173,10 +194,10 @@
 						</a>
 					</div>
 				</div>
-				<div class="col-md-8 col-md-offset-2">
+				<div class="col-md-12 col-sm-12 ">
 					<div class="costumes-label">
-						<span>MEDIUM QUALITY / HOMEMADE</span>
-						<span><i class="fa fa-usd" aria-hidden="true"></i> 3.00 - 8.00</span>
+						<span>MEDIUM QUALITY</span>
+						<span><i class="fa fa-usd" aria-hidden="true"></i> $3.00 - 8.00</span>
 					</div>
 					<div class="row costumes">
 						<div class="costumes-desktop">
@@ -251,11 +272,11 @@
 						</a>
 					</div>
 				</div>
-				<div class="col-md-8 col-md-offset-2">
+				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="costumes-desktop">
 						<div class="costumes-label">
-							<span class="film-sec"><img  src="{{URL::asset('assets/frontend/img/film.png')}}">FILM QUALITY</span>
-							<span class="film-sec-price"><i class="fa fa-usd" aria-hidden="true"></i> 10.00 - 20.00</span>
+							<span class="film-sec">HIGH QUALITY</span>
+							<span class="film-sec-price"><i class="fa fa-usd" aria-hidden="true"></i>$25.00 & up</span>
 						</div>
 						<div class="row costumes">
 							<div class="col-md-4 col-sm-4">
@@ -283,17 +304,106 @@
 								</div>
 							</div>
 						</div>
-						<div class="tip-sec">
+						<!--<div class="tip-sec">
 							<p><span class="up_tip">Tip</span>
 								If your costume is just too <br>
 								awesome, we suggest you
 							</p>
 							<a href="{{URL::to('costume/create')}}">Upload it Yourself!</a>
 							<img  src="{{URL::asset('assets/frontend/img/Tip-arrow_right.png')}}">
-						</div>
+						</div>-->
 					</div>
 				</div>
+						
+					</div>
+					<div id="calculator" class="tab-pane fade">
+						
+						
+						<table class="table table-striped">
+    <thead>
+		<tr>
+        <th>Initial Chrysalis Listing Price</th>
+        <th>% Paid Out</th>
+        <th>Payment Method</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><$14.99</td>
+        <td>10%</td>
+        <td>Upfront Payout</td>
+      </tr>
+      <tr>
+        <td>$15-$19.99</td>
+        <td>15%</td>
+        <td>Upfront Payout</td>
+      </tr>
+      <tr>
+        <td>$20-$29.99</td>
+        <td>20%</td>
+        <td>Upfront Payout</td>
+      </tr>
+	        <tr>
+        <td>$30-$39.99</td>
+        <td>25%</td>
+        <td>Upfront Payout</td>
+      </tr>
+	        <tr>
+        <td>$40-$49.99</td>
+        <td>30%</td>
+        <td>Upfront Payout</td>
+      </tr>
+	        <tr>
+        <td>$50-$59.99</td>
+        <td>40%</td>
+        <td>Consignment</td>
+      </tr>
+	        <tr>
+        <td>$60-$74.99</td>
+        <td>45%</td>
+        <td>Consignment</td>
+      </tr>
+	        <tr>
+        <td>$75-$89.99</td>
+        <td>50%</td>
+        <td>Consignment</td>
+      </tr>
+	        <tr>
+        <td>$90-$124.99</td>
+        <td>55%</td>
+        <td>Consignment</td>
+      </tr>
+	        <tr>
+        <td>$125-$199.99</td>
+        <td>65%</td>
+        <td>Consignment</td>
+      </tr>
+	        <tr>
+        <td>$200 and up</td>
+        <td>80%</td>
+        <td>Consignment</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="tbl_cnt">
+  <h2>Payout Method Examples:</h2>
+<h3>Upfront Payout: </h3>
+<p>We list your costume for $20. You receive $4 instantly 
+when we accept the costume.</p>
+
+
+<h3>Consignment : </h3>
+<p>We list your costume for $200. You receive $160
+when it sells.</p>
+
+			</div>			
+						
+					</div>
+
+				</div>	</div>
 			</div>
+			
+			
 			<div>
 				<div class="form-rms-btn average-payout-sec-next">
 					<a type="button" id="average_payouts_next" class="btn-rm-nxt nxt">Next</a>

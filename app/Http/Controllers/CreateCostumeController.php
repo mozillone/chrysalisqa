@@ -30,6 +30,7 @@ class CreateCostumeController  extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->sitehelper = new SiteHelper();
+	    
 	
 		Meta::title('Chrysalis');
         Meta::set('robots', 'index,follow');
@@ -84,6 +85,12 @@ class CreateCostumeController  extends Controller {
 		$cosplayfive=DB::table('attributes')->select('attribute_id as attributeid','code as code','label as label','type as type')->where('attribute_id','21')->first();
 		$cosplayfive_values=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('attribute_id','21')->get();
 		$categories=DB::table('category')->select('category_id as categoryid','name as categoryname')->where('status','=','1')->where('parent_id','=','0')->get();
+
+
+		$handwashed=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
+		->where('attribute_id','=','31')->get();
+
+
 		$shippingoptions=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','9')->get();
 		$packageditems=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
@@ -99,7 +106,7 @@ class CreateCostumeController  extends Controller {
 		$returnpolicy=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','15')->get();
 
-		$charities=DB::table('charities')->select('id as id','name as name','image as image')->where('status','1')->get();
+		$charities=DB::table('charities')->select('id as id','name as name','image as image')->where('status','1')->limit(8)->get();
 
 		$cosplaySubCategories=Site_model::Fetch_data('category','*', array('parent_id'=>66,'status'=>1));
 
@@ -110,14 +117,24 @@ class CreateCostumeController  extends Controller {
 		return view('frontend.costumes.costume_create_two',compact('categories','bodyanddimensions','bodydimensions_val','body_height_ft',
 		'body_height_in','body_weight_lbs','body_chest_in','body_waist_lbs','cosplayone','cosplaytwo','cosplaythree','cosplayfour',
 		'cosplayfive','cosplayone_values','cosplaytwo_values','cosplaythree_values','cosplayfour_values','cosplayfive_values',
-		'shippingoptions','packageditems','type','dimensions','service','handlingtime','returnpolicy','charities', 'cosplaySubCategories', 'uniqueFashionSubCategories', 'filmTheatreSubCategories'));
+		'shippingoptions','packageditems','type','dimensions','service','handlingtime','handwashed','returnpolicy','charities', 'cosplaySubCategories', 'uniqueFashionSubCategories', 'filmTheatreSubCategories'));
 		
 	}
 	/****Fetching sub category values based on category code starts here***/
 	public function ajaxSubCategory(){
 	    $id = Input::get('categoryid');
-		 $results = DB::table('category')->where('parent_id', '=',$id)->where('status', '=',1)->get(['category_id as subcategoryid','name as subcategoryname']);
-		return $results;
+
+	    if($id == null || $id == "")
+	    {
+	    	return response()->json('Please Select category');
+	    }
+	    else
+	    {
+	    	 $results = DB::table('category')->where('parent_id', '=',$id)->where('status', '=',1)->get(['category_id as subcategoryid','name as subcategoryname']);
+			return $results;
+	    }
+
+		
 		
 	}
 	
@@ -129,13 +146,16 @@ class CreateCostumeController  extends Controller {
 
 	/****create costume code starts here***/
 	public function Costumecreate(Request $request){
-		 	
-		 	//dd($request->faq);
+		 	//echo ini_get('post_max_size');
+		 	//exit;
+
+
 			$req=$request->all();
 
 			$userid=Auth::user()->id;
 
 		  	$costume_name=$req['costume_name'];
+
 		  	$categoryname=$req['categoryname'];
 		  	$costume_condition=$req['condition'];
 		  	$gender = $req['gender'];
@@ -149,33 +169,200 @@ class CreateCostumeController  extends Controller {
 		  	$cosplay = null;
 		  	$fashion = null;
 		  	$activity = null;
-
-		  	/*if($request->has('cosplay'))
-		  	{
-		  		$cosplay=$req['cosplay'];
-		  	}
-		  	if($request->has('fashion'))
-		  	{
-		  		$fashion=$req['fashion'];
-		  	}
-		  	if($request->has('activity'))
-		  	{
-		  		$activity=$req['activity'];
-		  	}*/
-		  	
+		  	$cleaned = $req['cleaned'];	 
 		  	$makecostume=$req['make_costume'];
 		  	$filmquality=$req['fimquality'];
-		  	//$makecostumetime = $req['make-costume-time'];
-
-		  	/*if($request->has('funfcats'))
-		  	{
-		  		$funfacts = $req['funfcats'];
-		  	}*/
-		  	$description = $req['description'];
-		  	 
+		  	$description = $req['description'];		  	 
 		  	$faq = $req['faq'];  		  
-		  	
-			$customer_group="user";
+		  	$customer_group="user";
+
+		 	$costume=array(
+			'weight_pounds'=>$req['pounds'],
+			'weight_ounces'=>$req['ounces'],
+			'gender'=>$gender,
+			'condition'=>$costume_condition,
+			'created_user_group'=>$customer_group,
+			'size'=>$size,
+			'cat_id'=>$categoryname,
+			'condition_type' => $cleaned,
+			'created_by'=>$userid,
+			'created_at'=>date('y-m-d H:i:s'),
+			'updated_at'=>date('y-m-d H:i:s'),
+			);
+
+			$insert_costume=DB::table('costumes')->insertGetId($costume);
+			 Session::put('session_costume_id', $insert_costume);
+			 $costume_id = $insert_costume;
+		 
+		 //image croppind code for Front View
+
+			$Imagecrop1 = $request->Imagecrop1;
+			$img = str_replace('data:image/jpeg;base64,', '', $Imagecrop1);
+			$img = str_replace(' ', '+', $img);
+			$data = base64_decode($img);
+		    $source = imagecreatefromstring($data);
+		    $Orand = str_random(10) . '.png';
+		    $originalPath = public_path('costumers_images/Original/').$Orand;
+		    $data1 = $Orand;
+			$OriginalImage = file_put_contents($originalPath, $data);
+
+			$Mediumresizeimg = Image::make($originalPath);
+		    //$Mrand = str_random(10) . '.png';
+		    $Mediumresizeimg->resize(260, 356);
+
+		    $Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
+
+
+			$Smallresizeimg = Image::make($originalPath);
+			//$Srand = str_random(10) . '.png';
+		    $Smallresizeimg->resize(140, 190);
+
+		    $Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
+
+
+			$Largeresizeimg = Image::make($originalPath);
+			//$Lrand = str_random(10) . '.png';
+		    $Largeresizeimg->resize(475, 650);
+
+		    $Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
+
+
+			if($OriginalImage)
+			{
+				$file_db_array1 = array('costume_id'=>$costume_id,
+					'image'=>$data1,
+					'type'=>1,
+					'sort_order'=>0,
+				);
+				$file_db=DB::table('costume_image')->insert($file_db_array1);
+			}
+
+			//image croppind code for Back View
+			$Imagecrop2 = $request->Imagecrop2;
+			$img1 = str_replace('data:image/jpeg;base64,', '', $Imagecrop2);
+			$img1 = str_replace(' ', '+', $img1);
+			$data1 = base64_decode($img1);
+			$source = imagecreatefromstring($data1);
+			$Orand = str_random(10) . '.png';
+			$originalPath1 = public_path('costumers_images/Original/').$Orand;
+			$data2 = $Orand;
+			$OriginalImage2 = file_put_contents($originalPath1, $data1);
+
+			$Mediumresizeimg = Image::make($originalPath1);
+			//$Mrand = str_random(10) . '.png';
+			$Mediumresizeimg->resize(260, 356);
+
+			$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
+
+
+			$Smallresizeimg = Image::make($originalPath1);
+			//$Srand = str_random(10) . '.png';
+			$Smallresizeimg->resize(140, 190);
+
+			$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
+
+
+			$Largeresizeimg = Image::make($originalPath1);
+			//$Lrand = str_random(10) . '.png';
+			$Largeresizeimg->resize(475, 650);
+
+			$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
+	            
+			//$file2 = Imageresize::CreateCostumeFrontend2($request->file2);
+
+			if($OriginalImage2)
+			{
+				$file_db_array2 = array('costume_id'=>$costume_id,
+					'image'=>$data2,
+					'type'=>2,
+					'sort_order'=>0,
+				);
+				$file_db=DB::table('costume_image')->insert($file_db_array2);
+			}
+ 
+				
+            if (isset($request['Imagecrop3']) && !empty($request['Imagecrop3'])) {
+
+				$Imagecrop3 = $request->Imagecrop3;
+				$img2 = str_replace('data:image/jpeg;base64,', '', $Imagecrop3);
+				$img2 = str_replace(' ', '+', $img2);
+				$data2 = base64_decode($img2);
+				$source = imagecreatefromstring($data2);
+				$Orand = str_random(10) . '.png';
+				$originalPath2 = public_path('costumers_images/Original/').$Orand;
+				$data3 = $Orand;
+				$OriginalImage3 = file_put_contents($originalPath2, $data2);
+				$Mediumresizeimg = Image::make($originalPath2);
+				//$Mrand = str_random(10) . '.png';
+				$Mediumresizeimg->resize(260, 356);
+
+				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
+				$Smallresizeimg = Image::make($originalPath2);
+				//$Srand = str_random(10) . '.png';
+				$Smallresizeimg->resize(140, 190);
+				$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
+				$Largeresizeimg = Image::make($originalPath2);
+				//$Lrand = str_random(10) . '.png';
+				$Largeresizeimg->resize(475, 650);
+
+				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
+
+				if($OriginalImage3)
+				{
+					$file_db_array3 = array('costume_id'=>$costume_id,
+            		'image'=>$data3,
+            		'type'=>3,
+            		'sort_order'=>0,
+            		);
+            		$file_db=DB::table('costume_image')->insert($file_db_array3);
+				}
+            	 
+            	
+       		 }
+
+	            //moving extra images
+
+			if (isset($request['multi']) && !empty($request['multi'])) {
+				foreach ($request['multi'] as $file4) {
+					$multiImagecrop = $file4;
+					$img = str_replace('data:image/jpeg;base64,', '', $multiImagecrop);
+					$img = str_replace(' ', '+', $img);
+					$data = base64_decode($img);
+					//$source = imagecreatefromstring($data);
+					$Multiplerand = str_random(10) . '.png';
+					$originalPath = public_path('costumers_images/Original/').$Multiplerand;
+					$multidata = $Multiplerand;
+					$OriginalImage = file_put_contents($originalPath, $data);
+
+					$Mediumresizeimg = Image::make($originalPath);
+					//$Mrand = str_random(10) . '.png';
+					$Mediumresizeimg->resize(260, 356);
+
+					$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Multiplerand);
+
+
+					$Smallresizeimg = Image::make($originalPath);
+					//$Srand = str_random(10) . '.png';
+					$Smallresizeimg->resize(140, 190);
+
+					$Smallresizeimg->save(public_path('costumers_images/Small/').$Multiplerand);
+
+
+					$Largeresizeimg = Image::make($originalPath);
+					//$Lrand = str_random(10) . '.png';
+					$Largeresizeimg->resize(475, 650);
+
+					$Largeresizeimg->save(public_path('costumers_images/Large/').$Multiplerand);
+
+					$file_db_array4 = array('costume_id'=>$costume_id,
+						'image'=>$multidata,
+						'type'=>4,
+						'sort_order'=>0,
+					);
+					$file_db=DB::table('costume_image')->insert($file_db_array4);
+				}
+			}	    
+			
 			/*
 		 |Tbale:costumes
 		 |@sku_no varchar
@@ -222,22 +409,7 @@ class CreateCostumeController  extends Controller {
 			}
 			$final_keywords = implode(",", $final_keywords);
 			 
-			$costume=array(
-			'weight_pounds'=>$req['pounds'],
-			'weight_ounces'=>$req['ounces'],
-			'gender'=>$gender,
-			'condition'=>$costume_condition,
-			'created_user_group'=>$customer_group,
-			'size'=>$size,
-			'cat_id'=>$categoryname,
-			'created_by'=>$userid,
-			'created_at'=>date('y-m-d H:i:s'),
-			'updated_at'=>date('y-m-d H:i:s'),
-			);
-
-			$insert_costume=DB::table('costumes')->insertGetId($costume);
-			 Session::put('session_costume_id', $insert_costume);
-			 $costume_id = $insert_costume;
+			
 
 			 if (isset($request['file4']) && !empty($request['file4'])) {
 			 	$file4 = $request['file4'];
@@ -246,171 +418,7 @@ class CreateCostumeController  extends Controller {
 			 }
 
 
-			//image croppind code for Front View
-
-			$Imagecrop1 = $request->Imagecrop1;
-			$img = str_replace('data:image/png;base64,', '', $Imagecrop1);
-			$img = str_replace(' ', '+', $img);
-			$data = base64_decode($img);
-		    $source = imagecreatefromstring($data);
-		    $Orand = str_random(10) . '.png';
-		    $originalPath = public_path('costumers_images/Original/').$Orand;
-		    $data1 = $Orand;
-			$OriginalImage = file_put_contents($originalPath, $data);
-
-			$Mediumresizeimg = Image::make($originalPath);
-		    //$Mrand = str_random(10) . '.png';
-		    $Mediumresizeimg->resize(260, 356);
-
-		    $Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
-
-
-			$Smallresizeimg = Image::make($originalPath);
-			//$Srand = str_random(10) . '.png';
-		    $Smallresizeimg->resize(140, 190);
-
-		    $Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
-
-
-			$Largeresizeimg = Image::make($originalPath);
-			//$Lrand = str_random(10) . '.png';
-		    $Largeresizeimg->resize(475, 650);
-
-		    $Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
-
-
-			if($OriginalImage)
-			{
-				$file_db_array1 = array('costume_id'=>$costume_id,
-					'image'=>$data1,
-					'type'=>1,
-					'sort_order'=>0,
-				);
-				$file_db=DB::table('costume_image')->insert($file_db_array1);
-			}
-
-			//image croppind code for Back View
-			$Imagecrop2 = $request->Imagecrop2;
-			$img1 = str_replace('data:image/png;base64,', '', $Imagecrop2);
-			$img1 = str_replace(' ', '+', $img1);
-			$data1 = base64_decode($img1);
-			$source = imagecreatefromstring($data1);
-			$Orand = str_random(10) . '.png';
-			$originalPath1 = public_path('costumers_images/Original/').$Orand;
-			$data2 = $Orand;
-			$OriginalImage2 = file_put_contents($originalPath1, $data1);
-
-			$Mediumresizeimg = Image::make($originalPath1);
-			//$Mrand = str_random(10) . '.png';
-			$Mediumresizeimg->resize(260, 356);
-
-			$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
-
-
-			$Smallresizeimg = Image::make($originalPath1);
-			//$Srand = str_random(10) . '.png';
-			$Smallresizeimg->resize(140, 190);
-
-			$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
-
-
-			$Largeresizeimg = Image::make($originalPath1);
-			//$Lrand = str_random(10) . '.png';
-			$Largeresizeimg->resize(475, 650);
-
-			$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
-	            
-			//$file2 = Imageresize::CreateCostumeFrontend2($request->file2);
-
-			if($OriginalImage2)
-			{
-				$file_db_array2 = array('costume_id'=>$costume_id,
-					'image'=>$data2,
-					'type'=>2,
-					'sort_order'=>0,
-				);
-				$file_db=DB::table('costume_image')->insert($file_db_array2);
-			}
-
-				
-	            if (isset($request['file3']) && !empty($request['file3'])) {
-
-					$Imagecrop3 = $request->Imagecrop3;
-					$img2 = str_replace('data:image/png;base64,', '', $Imagecrop3);
-					$img2 = str_replace(' ', '+', $img2);
-					$data2 = base64_decode($img2);
-					$source = imagecreatefromstring($data2);
-					$Orand = str_random(10) . '.png';
-					$originalPath2 = public_path('costumers_images/Original/').$Orand;
-					$data3 = $Orand;
-					$OriginalImage2 = file_put_contents($originalPath2, $data2);
-					$Mediumresizeimg = Image::make($originalPath2);
-					//$Mrand = str_random(10) . '.png';
-					$Mediumresizeimg->resize(260, 356);
-
-					$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
-					$Smallresizeimg = Image::make($originalPath2);
-					//$Srand = str_random(10) . '.png';
-					$Smallresizeimg->resize(140, 190);
-					$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
-					$Largeresizeimg = Image::make($originalPath2);
-					//$Lrand = str_random(10) . '.png';
-					$Largeresizeimg->resize(475, 650);
-
-					$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
- 
-	            	//inserting in db
-	            	$file_db_array3 = array('costume_id'=>$costume_id,
-	            		'image'=>$data3,
-	            		'type'=>3,
-	            		'sort_order'=>0,
-	            	);
-	            	$file_db=DB::table('costume_image')->insert($file_db_array3);
-	       		 }
-
-	            //moving extra images
-
-				if (isset($request['multi']) && !empty($request['multi'])) {
-					foreach ($request['multi'] as $file4) {
-						$multiImagecrop = $file4;
-						$img = str_replace('data:image/png;base64,', '', $multiImagecrop);
-						$img = str_replace(' ', '+', $img);
-						$data = base64_decode($img);
-						//$source = imagecreatefromstring($data);
-						$Multiplerand = str_random(10) . '.png';
-						$originalPath = public_path('costumers_images/Original/').$Multiplerand;
-						$multidata = $Multiplerand;
-						$OriginalImage = file_put_contents($originalPath, $data);
-
-						$Mediumresizeimg = Image::make($originalPath);
-						//$Mrand = str_random(10) . '.png';
-						$Mediumresizeimg->resize(260, 356);
-
-						$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Multiplerand);
-
-
-						$Smallresizeimg = Image::make($originalPath);
-						//$Srand = str_random(10) . '.png';
-						$Smallresizeimg->resize(140, 190);
-
-						$Smallresizeimg->save(public_path('costumers_images/Small/').$Multiplerand);
-
-
-						$Largeresizeimg = Image::make($originalPath);
-						//$Lrand = str_random(10) . '.png';
-						$Largeresizeimg->resize(475, 650);
-
-						$Largeresizeimg->save(public_path('costumers_images/Large/').$Multiplerand);
-
-						$file_db_array4 = array('costume_id'=>$costume_id,
-							'image'=>$multidata,
-							'type'=>4,
-							'sort_order'=>0,
-						);
-						$file_db=DB::table('costume_image')->insert($file_db_array4);
-					}
-				}
-	    
+			
 		 /*
 		 |Tbale:costume_description
 		 |@costume_id int
@@ -779,19 +787,48 @@ class CreateCostumeController  extends Controller {
 			|@attribute_option_value
 			*/
 			//Handling Time
-			switch($handlingtime){ case '26': $handlingtime_name="Same Business Day"; break; case '27': $handlingtime_name="10 Business Days"; break; }
+			/*switch($handlingtime)
+			{ 
+				case '26': 
+							$handlingtime ="Same Business Day"; 
+							break; 
+				case '27': 
+							$handlingtime ="10 Business Days"; 
+							break; 
+			}*/
+
+			$handling_name = DB::table('attribute_options')
+								->select('option_value as value')
+								->where('attribute_id','=','14')
+								->where('option_id',$handlingtime)
+								->first();
+
 			$handlingtime_val=array('costume_id'=>$costume_id,
 				'attribute_id'=>'14',
 				'attribute_option_value_id'=>$handlingtime,
-				'attribute_option_value'=>$handlingtime_name,
+				'attribute_option_value'=>$handling_name->value,
 				);
 			$insert_handlingtime=DB::table('costume_attribute_options')->insert($handlingtime_val);
 			//Return Policy
-			switch($returnpolicy){ case '28': $returnpolicy_name="Return Accepted"; break; case '29': $returnpolicy_name="Return Not Accepted "; break; }
+			/*switch($returnpolicy){ 
+					case '28': 
+								$returnpolicy_name="Return Accepted"; 
+								break; 
+					case '29': 
+								$returnpolicy_name="Return Not Accepted "; 
+								break; 
+			}*/
+
+			$returnpolicy_name = DB::table('attribute_options')
+								->select('option_value as value')
+								->where('attribute_id','=','15')
+								->where('option_id',$returnpolicy)
+								->first();
+
 			$returnpolicy_val=array('costume_id'=>$costume_id,
 				'attribute_id'=>'15',
 				'attribute_option_value_id'=>$returnpolicy,
-				'attribute_option_value'=>$returnpolicy_name,
+				'attribute_option_value'=>$returnpolicy_name->value,
 				);
 			$insert_returnpolicy=DB::table('costume_attribute_options')->insert($returnpolicy_val);
 
@@ -1054,7 +1091,7 @@ class CreateCostumeController  extends Controller {
 		$returnpolicy=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','15')->get();
 
-		$charities=DB::table('charities')->select('id as id','name as name','image as image')->where('status','1')->get();
+		$charities=DB::table('charities')->select('id as id','name as name','image as image')->where('status','1')->limit(8)->get();
 		$front_image = DB::table('costume_image')->where('costume_id',$id)->where('type','1')->first();
 		$back_image = DB::table('costume_image')->where('costume_id',$id)->where('type','2')->first();
 
@@ -1086,6 +1123,14 @@ class CreateCostumeController  extends Controller {
 		$db_dimensions_width = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','23')->first();
 		$db_dimensions_height = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','24')->first();
 		$db_handlingtime = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','14')->first();
+
+		$handling_costume = DB::table('costumes as c')
+							->leftjoin('attribute_options as ao','ao.option_id','=','c.condition_type')
+							->where('c.costume_id',$id)
+							->select('c.condition_type','ao.option_id','c.costume_id')
+							->first();
+	 					
+
 		$db_return = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','15')->first();
 		$costume_id = $id;
 		$db_subcategoryname = DB::table('category')->where('parent_id', $costume_details->cat_id)->where('status', '=',1)->get(['category_id as subcategoryid','name as subcategoryname']);
@@ -1107,6 +1152,12 @@ class CreateCostumeController  extends Controller {
 		$filmTheatreSubCategories=Site_model::Fetch_data('category','*', array('parent_id'=>147,'status'=>1));
 
 
+		$handwashed=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
+		->where('attribute_id','=','31')->get();
+
+
+
+
 		return view('frontend.costumes.costume_create_two_edit',compact('categories','bodyanddimensions','bodydimensions_val','body_height_ft',
 		'body_height_in','body_weight_lbs','body_chest_in','body_waist_lbs','cosplayone','cosplaytwo','cosplaythree','cosplayfour',
 		'cosplayfive','cosplayone_values','cosplaytwo_values','cosplaythree_values','cosplayfour_values','cosplayfive_values',
@@ -1115,25 +1166,22 @@ class CreateCostumeController  extends Controller {
 		'db_body_height_ft','db_body_height_in','db_body_weight_lbs','db_body_chest_in','db_body_waist_lbs',
 		'db_cosplayone','db_cosplaytwo','db_cosplaythree','db_cosplayfour','db_cosplayfive','db_des_costume',
 		'db_funfact','db_faq','db_shippin_opt','db_dimensions_length','db_dimensions_width','db_dimensions_height',
-		'db_handlingtime','db_return','costume_id','db_subcategoryname','db_cosplayplay_yes_opt','db_uniquefashion_yes_opt',
+		'db_handlingtime','handling_costume','db_return','costume_id','db_subcategoryname','db_cosplayplay_yes_opt','db_uniquefashion_yes_opt','handwashed',
 		'db_activity_yes_opt','db_make_costume_time','charities_details','db_film_name', 'cosplaySubCategories', 'uniqueFashionSubCategories', 'filmTheatreSubCategories'));
 		
 	}
 
 	public function EditCostumeAdd(Request $request){
  
-	 	//dd($request->keyword_8);
+	  
 		$userid=Auth::user()->id;
-
+// echo
 		//echo "<pre>";print_r($request->all());die;
 		$delete_costume_attributes = DB::table('costume_attribute_options')->where('costume_id',$request->costume_id)->delete();
 	 
 		$delete_costume_attributes = DB::table('costume_to_category')->where('costume_id',$request->costume_id)->delete();
 			$req=$request->all();
  
-
-
-
 			$costume_name=$req['costume_name'];
 		  	$categoryname=$req['categoryname'];
 		  	$costume_condition=$req['condition'];
@@ -1144,12 +1192,13 @@ class CreateCostumeController  extends Controller {
 		  	$heightin = $req['height-in'];
 		  	$weightlbs = $req['weight-lbs'];
 		  	$chestin =$req['chest-in'];
-		  	$waistlbs =$req['waist-lbs'];
+		  	$waistlbs =$req['waist-inches'];
 		  	$cosplay = null;
 		  	$fashion = null;
 		  	$activity = null;
 
- 
+		  	$cleaned = $req['cleaned'];
+
 		  	$makecostume=$req['make_costume'];
 		  	$filmquality=$req['fimquality'];
 		  	//$makecostumetime = $req['make-costume-time'];
@@ -1168,6 +1217,7 @@ class CreateCostumeController  extends Controller {
 			'created_user_group'=>$customer_group,
 			'size'=>$size,
 			'cat_id'=>$categoryname,
+			'condition_type' =>$cleaned,
 			'dynamic_percent'=>$request->dynamic_percent_amount,
 			'created_by'=>$userid,
 			'created_at'=>date('y-m-d H:i:s'),
@@ -1185,7 +1235,7 @@ class CreateCostumeController  extends Controller {
 
 				$file_db = DB::table('costume_image')->where('costume_id', $request->costume_id)->where('type', '1')->delete();
 				$Imagecrop1 = $request->Imagecrop1;
-				$img = str_replace('data:image/png;base64,', '', $Imagecrop1);
+				$img = str_replace('data:image/jpeg;base64,', '', $Imagecrop1);
 				$img = str_replace(' ', '+', $img);
 				$data = base64_decode($img);
 				//$source = imagecreatefromstring($data);
@@ -1217,7 +1267,7 @@ class CreateCostumeController  extends Controller {
 			$file_db = DB::table('costume_image')->where('costume_id', $request->costume_id)->where('type', '2')->delete();
 
 			$Imagecrop2 = $request->Imagecrop2;
-			$img = str_replace('data:image/png;base64,', '', $Imagecrop2);
+			$img = str_replace('data:image/jpeg;base64,', '', $Imagecrop2);
 			$img = str_replace(' ', '+', $img);
 			$data = base64_decode($img);
 			$Orand = str_random(10) . '.png';
@@ -1250,7 +1300,7 @@ class CreateCostumeController  extends Controller {
 		if($request->Imagecrop3 != "" || !empty($request->Imagecrop3)) {
 			$file_db = DB::table('costume_image')->where('costume_id', $request->costume_id)->where('type', '2')->delete();
 			$Imagecrop1 = $request->Imagecrop3;
-			$img = str_replace('data:image/png;base64,', '', $Imagecrop1);
+			$img = str_replace('data:image/jpeg;base64,', '', $Imagecrop1);
 			$img = str_replace(' ', '+', $img);
 			$data = base64_decode($img);
 			$Orand = str_random(10) . '.png';
@@ -1307,7 +1357,7 @@ class CreateCostumeController  extends Controller {
 		if (isset($request['multi']) && !empty($request['multi'])) {
 			foreach ($request['multi'] as $file4) {
 				$multiImagecrop = $file4;
-				$img = str_replace('data:image/png;base64,', '', $multiImagecrop);
+				$img = str_replace('data:image/jpeg;base64,', '', $multiImagecrop);
 				$img = str_replace(' ', '+', $img);
 				$data = base64_decode($img);
 				//$source = imagecreatefromstring($data);
@@ -1708,19 +1758,43 @@ class CreateCostumeController  extends Controller {
 			|@attribute_option_value
 			*/
 			//Handling Time
-			switch($handlingtime){ case '26': $handlingtime_name="Same Business Day"; break; case '27': $handlingtime_name="10 Business Days"; break; }
+			$handling_name = DB::table('attribute_options')
+								->select('option_value as value')
+								->where('attribute_id','=','14')
+								->where('option_id',$handlingtime)
+								->first();
+			/*switch($handlingtime){ 
+				case '26': 
+						$handling_name->value =="Same Business Day"
+						break; 	
+				case '27': 
+						$handling_name =="10 Business Days"; 
+						break; 
+				case '28': 
+						$handlingtime =="10 Business Days"; 
+						break; 
+				case '29': 
+						$handlingtime =="10 Business Days"; 
+						break; 
+				}*/
 			$handlingtime_val=array('costume_id'=>$request->costume_id,
 				'attribute_id'=>'14',
 				'attribute_option_value_id'=>$handlingtime,
-				'attribute_option_value'=>$handlingtime_name,
+				'attribute_option_value'=>$handling_name->value,
 				);
 			$insert_handlingtime=DB::table('costume_attribute_options')->insert($handlingtime_val);
 			//Return Policy
-			switch($returnpolicy){ case '28': $returnpolicy_name="Return Accepted"; break; case '29': $returnpolicy_name="Return Not Accepted "; break; }
+			/*switch($returnpolicy){ case '30': $returnpolicy_name="Return Accepted"; break; case '31': $returnpolicy_name="Return Not Accepted "; break; }*/
+
+			$returnpolicy_name = DB::table('attribute_options')
+								->select('option_value as value')
+								->where('attribute_id','=','15')
+								->where('option_id',$returnpolicy)
+								->first();
 			$returnpolicy_val=array('costume_id'=>$request->costume_id,
 				'attribute_id'=>'15',
 				'attribute_option_value_id'=>$returnpolicy,
-				'attribute_option_value'=>$returnpolicy_name,
+				'attribute_option_value'=>$returnpolicy_name->value,
 				);
 			$insert_returnpolicy=DB::table('costume_attribute_options')->insert($returnpolicy_val);
 
@@ -1775,7 +1849,7 @@ class CreateCostumeController  extends Controller {
 			$reg_to             = Auth::user()->email;
 			$mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
 			// end mail
-			// 
+			//dd($request->costume_id);
 			/* Added by Gayatri*/
 			$listUrlObj = \DB::table('url_rewrites')->where('type', 'product')->where('url_offset', $request->costume_id)->first();
 
@@ -1826,8 +1900,21 @@ class CreateCostumeController  extends Controller {
             return Redirect::to('/login');
         }
 	}
-
-
+	/**
+	 * Written by Gayatri
+	 * delete the Costumes
+	 * @param  [Integer] $id [Costume Id]
+	 * @return Redirection back
+	 */
+	public function deleteCostume($id)
+	{
+		$costume = DB::table('costumes')->where('costume_id', $id)->update(['deleted_status' => '1']);
+    	$cc_url_rewrite_delete = DB::table('url_rewrites')->where('type', 'product')->where('url_offset', $id)->delete();
+        $costume_to_category = DB::table('costume_to_category')->where('costume_id', $id)->delete();
+        $costume_attribute_options = DB::table('costume_attribute_options')->where('costume_id', $id)->delete();
+        $costume_image = DB::table('costume_image')->where('costume_id', $id)->delete();
+        return Redirect::back()->with('success', 'Costume deleted Successfully.');
+	}
 
 
 }

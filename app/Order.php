@@ -377,27 +377,28 @@ class Order extends Authenticatable
       }
     }
     protected function getCharitiesList(){
-       $charities_list=DB::Select('SELECT * FROM cc_charities order by id desc LIMIT 0,5');
+       $charities_list=DB::Select('SELECT * FROM cc_charities where status = "1" order by id desc LIMIT 0,5');
        return $charities_list;
     }
     protected function orderCharityFund($req){
-     if(isset($req['suggest_charity']) && !isset($req['charity'])){
-         $result=array('name'=>$req['suggest_charity'],
+     if(isset($req['suggested_charity']) && !empty($req['suggested_charity'])){
+         $result = array('name'=>$req['suggested_charity'],
                         'suggested_by'=>Auth::user()->id,
+                        'status'=>'0',
                         'created_at'=>date('Y-m-d h:i:s')
                         );
-         $charity_id=Site_model::insert_get_id('charities',$result);
+         $charity_id = Site_model::insert_get_id('charities',$result);
       }else{
-       $charity_id=$req['charity'];
+        $charity_id = $req['charity'];
       }
-      $result=array('order_id'=>$req['order_id'],
-                    'user_id'=>Auth::user()->id,
-                    'charity_id'=>$charity_id,
-                    'amount'=>$req['amount'],
-                    'created_at'=>date('Y-m-d h:i:s')
+      $result = array('order_id' => $req['order_id'],
+                    'user_id' => Auth::user()->id,
+                    'charity_id' => $req['charity'],
+                    'amount' => $req['amount'],
+                    'created_at' => date('Y-m-d h:i:s')
                       );
        Site_model::insert_get_id('order_charity',$result);
-       $carity_info=Charities::getCharityInfo($charity_id);
+       $carity_info = Charities::getCharityInfo($req['charity']);
        return  $carity_info;
     }
     private function  insertTransaction($data,$order_id,$cc_id){

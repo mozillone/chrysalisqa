@@ -361,75 +361,89 @@ class RequestabagController extends Controller
       return "success";
 	}
 
-		public function Generatelables(Request $request){
-            try{
-        $islabelGenerated = DB::table('request_shippings')->where('request_id', $request->hidden_id)->first(); if(! $islabelGenerated){
-        		DB::beginTransaction();
-		$req=$request->all();
-		$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
-		$request_bag= Site_model::find_user_and_meta('user_meta',Auth::user()->id);
-		if(isset($request_bag['service'])){ $service=$request_bag['service'];}else{$service="";}
-		if(isset($request_bag['weight'])){ $weight=$request_bag['weight'];}else{$weight="0";}
-     	$this->data = array();
-		$random_drop = str_random(13);
-		$random_pick = str_random(13);
-		$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
-		$sellerAddress = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
-		//dd($sellerAddress);
-		$response=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
-		if($response['result']=="0"){
-			 Session::flash('error',$response['msg']);
-                         return Redirect::back();
-		}
-		$track_id=$response['msg'];
-		$shipping_array_pick = array('request_id'=>$req['hidden_id'],
-			'type'=>'pick',
-			'weight'=>'',
-			'shipping_no'=>$track_id,
-			'created_at'=>date('y-m-d H:i:s'),
-			);
-		$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
-		$response=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
-		$track_id=$response['msg'];
-		if($response['result']=="0"){
-			 Session::flash('error',$response['msg']);
-      		 return Redirect::back();
-		}
-		$shipping_array_drop = array('request_id'=>$req['hidden_id'],
-			'type'=>'drop',
-			'weight'=>'',
-			'shipping_no'=>$track_id,
-			'created_at'=>date('y-m-d H:i:s'),
-			);
-		$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
-                
-		$status_update = DB::table('request_bags')->where('id',$request->hidden_id)->update(['status'=>'shipped']);
-                
-                $oRequestBag = DB::table('request_bags')->where('id',$request->hidden_id)->first();
-                
-                //send mail
-                $reg_subject = "REQUEST A BAG Status";
-                $reg_data = array('name'=>$oRequestBag->cus_name,'refno'=>$oRequestBag->ref_no, 'status'=>'shipped');
-                $template = 'emails.reqabag_statusshipped';
-	        	$reg_to = $oRequestBag->cus_email;
-                $mail_status = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
-                $template_admin = 'emails.reqabag_status_change_admin';
-                $admin_mail_status = $this->sitehelper->sendmail("ndepa@dotcomweavers.com",$reg_subject,$template_admin,$reg_data);
-                // end mail
-                
-                DB::commit();
-				Session::flash('success','Label generated successfully');
-                return Redirect::back();
-        	}else{
-        		Session::flash('error','Label already generated.');
-                return Redirect::back();
-        	}   
-            }catch(\Exception $e){
-                DB::rollBack();
-                //dd($e);
-                Session::flash('error',$e->getMessage());
-                return Redirect::back();
-            }
+	public function Generatelables(Request $request){
+		//print_r(Config::get('constants.FedEx_Ship_Url')); exit;
+        try{
+	        $islabelGenerated = DB::table('request_shippings')->where('request_id', $request->hidden_id)->first(); 
+		        if(! $islabelGenerated)
+		        {
+			        DB::beginTransaction();
+					$req=$request->all();
+					$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
+					$request_bag= Site_model::find_user_and_meta('user_meta',Auth::user()->id);
+					if(isset($request_bag['service'])){ 
+						$service=$request_bag['service'];
+					}else{
+						$service="";
+					}
+					if(isset($request_bag['weight'])){ 
+						$weight=$request_bag['weight'];
+					}else{
+						$weight="0";
+					}
+			     	$this->data = array();
+					$random_drop = str_random(13);
+					$random_pick = str_random(13);
+					$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
+					$sellerAddress = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
+					//dd($sellerAddress);
+					$response=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
+//dd($response);
+					if($response['result']=="0"){
+						Session::flash('error',$response['msg']);
+			            return Redirect::back();
+					}
+					$track_id=$response['msg'];
+					$shipping_array_pick = array('request_id'=>$req['hidden_id'],
+						'type'=>'pick',
+						'weight'=>'',
+						'shipping_no'=>$track_id,
+						'created_at'=>date('y-m-d H:i:s'),
+						);
+					$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
+					$response=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
+					//dd($response);
+					$track_id=$response['msg'];
+					if($response['result']=="0"){
+						 Session::flash('error',$response['msg']);
+			      		 return Redirect::back();
+					}
+					$shipping_array_drop = array('request_id'=>$req['hidden_id'],
+						'type'=>'drop',
+						'weight'=>'',
+						'shipping_no'=>$track_id,
+						'created_at'=>date('y-m-d H:i:s'),
+						);
+					$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
+			                
+					$status_update = DB::table('request_bags')->where('id',$request->hidden_id)->update(['status'=>'shipped']);
+		                
+		            $oRequestBag = DB::table('request_bags')->where('id',$request->hidden_id)->first();
+		            
+		            //send mail
+		            $reg_subject = "REQUEST A BAG Status";
+		            $reg_data = array('name'=>$oRequestBag->cus_name,'refno'=>$oRequestBag->ref_no, 'status'=>'shipped');
+		            $template = 'emails.reqabag_statusshipped';
+		        	$reg_to = $oRequestBag->cus_email;
+		            $mail_status = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
+		            $template_admin = 'emails.reqabag_status_change_admin';
+		            $admin_mail_status = $this->sitehelper->sendmail("ndepa@dotcomweavers.com",$reg_subject,$template_admin,$reg_data);
+		            // end mail
+		            
+		            DB::commit();
+					Session::flash('success','Label generated successfully');
+		            return Redirect::back();
+		    }
+		    else{
+    			Session::flash('error','Label already generated.');
+            	return Redirect::back();
+    		}   
+        }catch(\Exception $e){
+            DB::rollBack();
+            //dd($e);
+            Session::flash('error',$e->getMessage());
+            return Redirect::back();
+        }
 	}
 
 	 private function fedex($req,$address,$service,$sellerAddress){
@@ -523,13 +537,17 @@ class RequestabagController extends Controller
               $packageLineItem1
           ]);
           $requestedShipment->setShippingChargesPayment($shippingChargesPayment);
+         
           $processShipmentRequest = new ComplexType\ProcessShipmentRequest();
           $processShipmentRequest->setWebAuthenticationDetail($webAuthenticationDetail);
           $processShipmentRequest->setClientDetail($clientDetail);
           $processShipmentRequest->setVersion($version);
           $processShipmentRequest->setRequestedShipment($requestedShipment);
+          //dd($processShipmentRequest);
           $shipService = new ShipService\Request();
-          $shipService->getSoapClient()->__setLocation('https://wsbeta.fedex.com:443/web-services/ship');
+          
+          $shipService->getSoapClient()->__setLocation(Config::get('constants.FedEx_Ship_Url'));
+          //$shipService->getSoapClient()->__setLocation('https://wsbeta.fedex.com:443/web-services/ship');
           $response = $shipService->getProcessShipmentReply($processShipmentRequest);
           //dd($response);
           if($response->HighestSeverity=="SUCCESS"){
@@ -539,6 +557,7 @@ class RequestabagController extends Controller
               $fp = fopen($fileName, 'wb');   
               fwrite($fp, $response->CompletedShipmentDetail->CompletedPackageDetails->Label->Parts->Image);
               $res=array('result'=>'1', 'msg'=> $track_id); 
+              //print_r($res);exit;
               return  $res;
           }else{
           	$msg = "";
@@ -695,7 +714,7 @@ class RequestabagController extends Controller
 			</soapenv:Envelope>';
 
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services');
+            curl_setopt($ch, CURLOPT_URL, 'https://ws.fedex.com:443/web-services');
             curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
             curl_setopt($ch, CURLOPT_VERBOSE, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -706,11 +725,12 @@ class RequestabagController extends Controller
 
             // remove colons and dashes to simplify the xml
             $result_xml = str_replace(array(':','-'), '', $result_xml);
-             $response = @simplexml_load_string($result_xml);
-             $result=json_decode(json_encode($response), TRUE);
-             
-             if(!isset($result['SOAPENVBody']['SOAPENVFault'])){
-             $track_id=$result['SOAPENVBody']['ProcessShipmentReply']['CompletedShipmentDetail']['CompletedPackageDetails']['TrackingIds']['TrackingNumber'];
+            $response = @simplexml_load_string($result_xml);
+            $result=json_decode(json_encode($response), TRUE);
+             //dd($result);
+            if(!isset($result['SOAPENVBody']['SOAPENVFault'])){
+
+            	$track_id=$result['SOAPENVBody']['ProcessShipmentReply']['CompletedShipmentDetail']['CompletedPackageDetails']['TrackingIds']['TrackingNumber'];
               $fileName = 'fedexlabel/'.$track_id.".pdf";
               $fp = fopen($fileName, 'wb');   
                $array_text = array("_");

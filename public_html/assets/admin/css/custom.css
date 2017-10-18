@@ -1420,6 +1420,16 @@ body .loading img{width:10%;}
 .user-request-sec .form-control {
     width: 60%;
 }
+
+/*Oct-12 siva chnages*/
+#customer_edit1 .dmns_rigts, #customer_edit1 .pckg_right .has-feedback{position: relative;}
+#customer_edit1 .dmns_rigts span.error, #customer_edit1 .pckg_right .has-feedback .input-group + span.error{position: absolute; bottom:-5px;}
+#customer_edit1 .cosutme-fr, .create-admin_pagess{position: relative;}
+#customer_edit1 .cosutme-fr span.error, .create-admin_pagess span.error{top:100%; position:absolute; left:0; width:300px;}
+
+/*Oct-12 siva chnages done*/
+
+
 @media only screen and (min-width : 1300px) {
 
 	.row_pregt .radio {

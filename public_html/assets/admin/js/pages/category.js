@@ -76,10 +76,12 @@ $('.costume_id').each(function(i,v){
 	products.push($(this).val());
 });
 $('.add-prod').click(function(){
+  $("#elements_change").val("1");
   var product_name=$('#cst_name').val();
 	var sku_no=$('#sku_no').val();
 	var price=parseFloat($('#price').val()).toFixed(2);
 	var product_id=$('#products_id').val();
+  var cat_id = $("#category_id").val();
   if(sku_no.length){
   	if(jQuery.inArray(product_id,products)==-1 || products.length==0){
     products.push(product_id);
@@ -98,7 +100,7 @@ $('form').submit(function(eventObj) {
 $(document).on('click','.remove_cost',function(){
 	var productid=$(this).attr('data-cost-id');
   products.splice( $.inArray(productid, products), 1 );
-	$(this).closest('tr').remove();
+  $(this).closest('tr').remove();
 })
 $( "#reorder" ).sortable({
 	items: "tr",
@@ -115,7 +117,7 @@ $( "#reorder" ).sortable({
            	        url: "/ticket/task/position/update",
            	        method:"POST",
            	        data:{new_position:new_position,old_position:old_position,oservice_id:oservice_id,task_id:task_id,limit:limit,_token:_token},
-           	 		async: true,
+           	 		     async: true,
            	        success: function( response ) {
            	        	tasks_success_ajax(response);
            	        }

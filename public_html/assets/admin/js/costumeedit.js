@@ -3,7 +3,7 @@
 $(".remove").click(function(){
     $(this).parent(".pip").remove();
 });
-$('#donate_charity').change(function(){
+/*$('#donate_charity').change(function(){
     if ($(this).val() == "none") {
         $('input[name=charity_name]').prop('checked', false);
     }
@@ -13,7 +13,7 @@ $('#another_charity').change(function(){
     if ($(this).prop("checked") == true) {
         $('input[name=charity_name]').prop('checked', false);
     }
-});
+});*/
 
 $('input[name=file1]').change(function(){
     $('#drag_n_drop_1').css('display','block');
@@ -132,7 +132,7 @@ $(document).on("change", "#file1", function() {
                     });
                     $(document).on("click", "#crop", function() {
                         $("#myModal").modal('hide');
-                        imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                        imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
                         $(".drop_zone1").find("img.result").remove();
                         var FrontView = '<img src="'+imgdata+'" class="result">';
                         $(".drop_zone1").append(FrontView);
@@ -225,7 +225,7 @@ $(document).on("change", "#file2", function() {
 
                     $(document).on("click", "#crop2", function() {
                         $("#myModal2").modal('hide');
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
                         $(".drop_zone2").find("img.result2").remove();
                         var Backview = '<img src="'+imgdata+'" class="result2">';
                         $(".drop_zone2").append(Backview);
@@ -316,7 +316,7 @@ $(document).on("change", "#file3", function() {
                     });
                     $(document).on("click", "#crop3", function() {
                         $("#myModal3").modal('hide');
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
                         $(".drop_zone3").find("img.result3").remove();
                         $(".Additional").attr('value',imgdata);
                         var Additional = '<img src="'+imgdata+'" class="result3">';
@@ -370,6 +370,10 @@ $(document).on('slid.bs.carousel', '.carousel', function () {
     var active_item_index = getActiveItemIndex(items);
     activeCropperObjIndex = active_item_index;
     slider.val(zooms[active_item_index]);
+    if(activeCropperObjIndex >0)
+        {
+            slider.val(2);
+        }
     if(zooms[activeCropperObjIndex] !== -100){
         slider.trigger("input");
     }
@@ -495,7 +499,7 @@ $(document).on("input", ".slider", function () {
 
 $(document).on("click", ".saveMultiple", function () {
     $cropper_objs.forEach(function($image, index){
-        var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
         $('#other_thumbnails').append("<div index='"+index+"' class=\"col-md-4 col-sm-4 col-xs-12 multi_div\"><img src= " + imgdata + " class=\"multi_thumbs pip\">" +
             "<br/><span class=\"remove\">" +
             "<i class=\"fa fa-times-circle\"></i>" +

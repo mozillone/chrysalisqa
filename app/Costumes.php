@@ -200,6 +200,15 @@ class Costumes extends Authenticatable
             ->count();
         return $costume_count;
     }
+
+    /* Added by gayatri */
+    public static function getCostumesCount($costume_name){
+        $costume_count = DB::table('costume_description')
+            ->where('name',$costume_name)
+            ->count();
+        return $costume_count;
+    }
+    /* End */
     /************* Costume URL Create end here **************/
 
     /* Added by Gayatri */

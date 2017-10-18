@@ -90,6 +90,7 @@ class CheckoutController extends Controller {
   return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries)->with('states',$states)->with('costumer_costumes',$costumer_costumes);
   }
   public function placeOrder(Request $request){
+    //echo "string"; exit;
      $req=$request->all();
    //  dd($req);
      if(!isset($req['shipping_type'])){
@@ -161,10 +162,11 @@ class CheckoutController extends Controller {
   }
   public function orderCharityFund(Request $request){
     $req=$request->all();
+    //echo "<pre>"; print_r($req); exit;
     if(!count($req)){
       return Redirect::to('/');
     }
-    $charity_info=Order::orderCharityFund($req);
+    $charity_info = Order::orderCharityFund($req);
     if(count($charity_info)){
       Session::flash('success','Your fund transfer to '.$charity_info[0]->name.' is successful');
       $charities_list=Order::getCharitiesList(); 

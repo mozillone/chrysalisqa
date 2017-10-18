@@ -27,7 +27,7 @@
     i.fa.fa-percent {
     position: absolute;
     z-index: 99;
-    right: 54px;
+    right: 60px;
     top: 14px;
     font-size: 13px;
 }
@@ -346,18 +346,18 @@
 						<!--Create costume image code starts here-->
 						<input type="hidden" name="costume_id" value="{{$costume_id}}">
 						<div class="upload-photo-blogs" id="upload_div">
-							<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any accessories!</p>
+							<p class="prog-txt desk-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! </p>
 							<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 1</h2>
-							<h2 class="prog-head ">Upload Photos<span>(The optimal dimensions for the image is 260 x 356 pixels.)</span></h2>
+							<h2 class="prog-head ">Upload Photos<span></span></h2>
 							<!--- mobile heaindgs section end here -->
-							<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! Don't forget to include any accessories!</p>
+							<p class="prog-txt mobile-pro-text">Please upload <span>the minimum required photos</span> of your costume in front, back and side view. Listings with more photos sell faster! </p>
 							<!--- mobile heaindgs section end here -->
 							<div class="threeblogs">
 								<div class="col-md-3 col-sm-3 col-xs-12 upload_hint r">
 									<p><span class="up_tip">Tip</span> Respect your costume’s  integrity with crisp, clear photos. Placing them in settings that correspond with their theme can encourage a sale.</p>
 								</div>
 								<div class="col-md-3 col-sm-3 col-xs-12  c_pic " id="front_view">
-									<h4>01. Front View</h4>
+									<h4>01. Front </h4>
 									<span class="remove_pic" id="drag_n_drop_1" >
 										<i class="fa fa-times-circle" aria-hidden="true"></i>				
 									</span>
@@ -391,7 +391,7 @@
 								</div>
 
 								<div class="col-md-3 col-sm-3 col-xs-12 rc_pic" id="back_view">
-									<h4>02. Back View</h4>
+									<h4>02. Back </h4>
 									<span class="remove_pic" id="drag_n_drop_2" >
 										<i class="fa fa-times-circle" aria-hidden="true"></i>				
 									</span>
@@ -422,7 +422,7 @@
 									<span id="file2_error" style="color:red"></span>
 								</div>
 								<div class="col-md-3 col-sm-3 col-xs-12 rc_pic " id="details_view">
-									<h4>03. Additional</h4>
+									<h4>03. Detail </h4>
 									<span class="remove_pic" id="drag_n_drop_3" @if(empty($details_image->image)) style="display: none;" @endif>
 										<i class="fa fa-times-circle" aria-hidden="true"></i>					
 									</span>
@@ -464,7 +464,7 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												{{--<button type="button" class="close"  id="closeModal1" data-dismiss="modal">&times;</button>--}}
-												<h4 class="modal-title">Front View</h4>
+												<h4 class="modal-title">Front</h4>
 											</div>
 											<div class="modal-body">
 												<p>Crop your photo to control how your full-size photo appears on the public listing page.</p>
@@ -473,7 +473,7 @@
 												<div class="img-pp">
 													<div class="img-pp-iner">
 														<img class="img-responsive crp1" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
-														<input type="range" id="zoom-level" min="0" max="5"value="0" step="any" >
+														<input type="range" id="zoom-level" min="0" max="4" value="2" step="any" >
 														<img class="img-responsive crp2" src="{{URL::asset('assets/frontend/img/crp_2.png')}}">
 													</div>
 												</div>
@@ -493,7 +493,7 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												{{--<button type="button" class="close"  id="closeModal2"  data-dismiss="modal">&times;</button>--}}
-												<h4 class="modal-title">Back View</h4>
+												<h4 class="modal-title">Back</h4>
 											</div>
 											<div class="modal-body">
 												<p>Crop your photo to control how your full-size photo appears on the public listing page.</p>
@@ -502,7 +502,7 @@
 												<div class="img-pp">
 													<div class="img-pp-iner">
 														<img class="img-responsive crp1" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
-														<input type="range" id="zoom-level2" min="0" max="5" value="0" step="any" >
+														<input type="range" id="zoom-level2" min="0" max="4" value="2" step="any" >
 														<img class="img-responsive crp2" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
 													</div>
 												</div>
@@ -524,7 +524,7 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												{{--<button type="button" class="close"  id="closeModal3"  data-dismiss="modal">&times;</button>--}}
-												<h4 class="modal-title">Additional Photo</h4>
+												<h4 class="modal-title">Detail</h4>
 											</div>
 											<div class="modal-body">
 												<p>Crop your photo to control how your full-size photo appears on the public listing page.</p>
@@ -533,7 +533,7 @@
 												<div class="img-pp">
 													<div class="img-pp-iner">
 														<img class="img-responsive crp1" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
-														<input type="range" id="zoom-level3" min="0" max="5" value="0" step="any" >
+														<input type="range" id="zoom-level3" min="0" max="4" value="2" step="any" >
 														<img class="img-responsive crp2" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
 													</div>
 												</div>
@@ -570,7 +570,7 @@
 											<div class="img-pp">
 												<div class="img-pp-iner">
 													<img class="img-responsive crp1" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
-													<input type="range" min="0" max="5" value="0" step="any" class="slider">
+													<input type="range" min="0" max="4" value="2" step="any" class="slider">
 													<img class="img-responsive crp2" src="{{URL::asset('assets/frontend/img/crp_1.png')}}">
 												</div>
 											</div>
@@ -633,13 +633,10 @@
 								<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 									<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default nxt">Next Step</a>
 								</div>
-								<!-- </form> -->
+								
 							</div>
 						</div>
-					</div>
-					<!--- progressbar section End -->
-					<!--Second div code starts here-->
-					<!-- </div> -->
+					
 
 
 					<div id="costume_description">
@@ -654,8 +651,7 @@
 								<!--costume name code starts here-->
 								<div class="form-rms">
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-										<p class="form-rms-que">Costume Name*</p>
-										<p class="form-rms-small"><span>Name your Costume. Be Specific!</span></p>
+										<p class="form-rms-que">Name your Costume. Be Specific!*</p>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12">
 										<p class="form-rms-input"><input type="text" name="costume_name" value="{{$costume_description->name}}" id="costume_name" autocomplete="off" tab-index="1" placeholder="Example : Dark Knight Joker Cosplay"></p>
@@ -789,7 +785,7 @@
 								@if($costume_details->size == "custom")
 								<div class="form-rms body-dimnets">
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-										<p class="form-rms-que">{{$bodyanddimensions->label}} (Optional)</p>
+										<p class="form-rms-que">{{$bodyanddimensions->label}} *</p>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12">
 										<div class="form-rms-input">
@@ -815,12 +811,30 @@
 												$heading_waist_value_lbs=$explode_value_waist[1];
 											?>
 
-											<p class="form-rms-dim form-rms-he"><?php echo ucfirst($heading); ?> <br/> <span class="form-rms-he1">
-												<input type="{{$bodyanddimensions->code}}" name="{{$body_height_ft->value}}" id="{{$body_height_ft->value}}" value="{{$db_body_height_ft->attribute_option_value}}"> <span><?php echo $heading_value;?></span>
-											<input type="{{$bodyanddimensions->code}}" class="form-rms-dt" name="{{$body_height_in->value}}" id="{{$body_height_in->value}}" value="{{$db_body_height_in->attribute_option_value}}"> <span><?php echo $heading_value_in; ?></span></span></p>
-											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_weight_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}" value="{{$db_body_weight_lbs->attribute_option_value}}"> <span><?php echo $heading_weight_value_lbs;?></span></span></p>
-											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_chest_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" value="{{$db_body_chest_in->attribute_option_value}}" > <span><?php echo $heading_chest_value_in; ?> </span></span></p>
-											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_waist_value); ?> <br/> <span class="form-rms-he1"><input type="text" name="{{$body_waist_lbs->value}}" id="{{$body_waist_lbs->value}}" value="{{$db_body_waist_lbs->attribute_option_value}}"> <span><?php echo $heading_waist_value_lbs; ?></span></span></p>
+											<p class="form-rms-dim form-rms-he"><?php echo ucfirst($heading); ?> <br/> 
+												<span class="form-rms-he1">
+													<input type="{{$bodyanddimensions->code}}" name="{{$body_height_ft->value}}" id="{{$body_height_ft->value}}" value="{{$db_body_height_ft->attribute_option_value}}"> <span><?php echo $heading_value;?></span>
+													<input type="{{$bodyanddimensions->code}}" class="form-rms-dt" name="{{$body_height_in->value}}" id="{{$body_height_in->value}}" value="{{$db_body_height_in->attribute_option_value}}"> <span><?php echo $heading_value_in; ?></span>
+													<span id="heighterror" style="color:red"></span>
+												</span>
+											</p>
+											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_weight_value); ?> <br/> 
+												<span class="form-rms-he1">
+													<input type="text" name="{{$body_weight_lbs->value}}" id="{{$body_weight_lbs->value}}" value="{{$db_body_weight_lbs->attribute_option_value}}"> <span><?php echo $heading_weight_value_lbs;?></span>
+												<span id="weighterror" style="color:red"></span>
+											</span></p>
+											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_chest_value); ?> <br/> 
+												<span class="form-rms-he1">
+													<input type="text" name="{{$body_chest_in->value}}" id="{{$body_chest_in->value}}" value="{{$db_body_chest_in->attribute_option_value}}" > <span><?php echo $heading_chest_value_in; ?> </span>
+													<span id="chesterror" style="color:red"></span>
+												</span>
+											</p>
+											<p class="form-rms-dim weight-chest"><?php echo ucfirst($heading_waist_value); ?> <br/> 
+												<span class="form-rms-he1">
+													<input type="text" name="waist-inches" id="waist-inches" value="{{$db_body_waist_lbs->attribute_option_value}}"> <span>in</span>
+													<span id="waisterror" style="color:red"></span>
+												</span>
+											</p>
 											<span id="bodydimensionerror"  style="color:red"></span>
 										</div>
 									</div>
@@ -829,16 +843,24 @@
 								@else
 								<div class="form-rms costume-error body-dimnets hide ">
 									<div class="col-md-4 col-sm-4 pdlft0">
-										<p class="form-rms-que">Body &amp; Dimensions (Optional)</p>
+										<p class="form-rms-que">Body &amp; Dimensions * </p>
 										</div>
 											<div class="col-md-8 col-sm-8">
 										<div class="form-rms-input">
 											<p class="form-rms-dim form-rms-he">Height <br> <span class="form-rms-he1">
 												<input type="body-dimensions" name="height-ft" id="height-ft"> <span>ft</span>
-											<input type="body-dimensions" class="form-rms-dt" name="height-in" id="height-in"> <span>in</span></span></p>
-											<p class="form-rms-dim weight-chest">Weight <br> <span class="form-rms-he1"><input type="text" name="weight-lbs" id="weight-lbs"> <span>lbs</span></span></p>
-											<p class="form-rms-dim weight-chest">Chest <br> <span class="form-rms-he1"><input type="text" name="chest-in" id="chest-in"> <span>in </span></span></p>
-											<p class="form-rms-dim weight-chest">Waist <br> <span class="form-rms-he1"><input type="text" name="waist-lbs" id="waist-lbs"> <span>lbs</span></span></p>
+											<input type="body-dimensions" class="form-rms-dt" name="height-in" id="height-in"> <span>in</span>
+												<span id="heighterror" style="color:red"></span>
+											</span></p>
+											<p class="form-rms-dim weight-chest">Weight <br> <span class="form-rms-he1"><input type="text" name="weight-lbs" id="weight-lbs"> <span>lbs</span>
+												<span id="weighterror" style="color:red"></span>
+											</span></p>
+											<p class="form-rms-dim weight-chest">Chest <br> <span class="form-rms-he1"><input type="text" name="chest-in" id="chest-in"> <span>in </span>
+												<span id="chesterror" style="color:red"></span>
+											</span></p>
+											<p class="form-rms-dim weight-chest">Waist <br> <span class="form-rms-he1"><input type="text" name="waist-inches" id="waist-inches"> <span>in</span>
+												<span id="waisterror" style="color:red"></span>
+											</span></p>
 											<span id="bodydimensionerror" style="color:red"></span>
 										</div>
 									</div>
@@ -858,25 +880,50 @@
 											<p class="form-rms-input">
 
 											<div class="col-md-2 col-sm-4 pdlft0">													
-													<span class="full-rms"><input type="radio" class="radio-custom" name="condition" <?php if ($costume_details->condition == "good") { ?> checked='checked' <?php } ?> value="good" id="good"> <label for="good"  class="radio-custom-label">Good</label></span>														
+													<span class="full-rms"><input type="radio" class="radio-custom conditon_check" name="condition" <?php if ($costume_details->condition == "good") { ?> checked='checked' <?php } ?> value="good" id="good"> <label for="good"  class="radio-custom-label">Good</label></span>														
+												</div> 
+
+												<div class="col-md-3 col-sm-4 pdlft5 ">												
+													<span class="full-rms"><input type="radio" class="radio-custom conditon_check" name="condition" <?php if ($costume_details->condition == "like_new") { ?> checked='checked' <?php } ?> value="like_new" id="likenew"><label for="likenew" class="radio-custom-label"> Like New</label></span>												 
 												</div>
 
-												<div class="col-md-3 col-sm-4 pdlft10 ">												
-													<span class="full-rms"><input type="radio" class="radio-custom" name="condition" <?php if ($costume_details->condition == "like_new") { ?> checked='checked' <?php } ?> value="like_new" id="likenew"><label for="likenew" class="radio-custom-label"> Like New</label></span>												 
-												</div>
-
-												<div class="col-md-3 col-sm-4 pdlft0">	
+												<div class="col-md-3 col-sm-4 marginm15">	
 													<span class="full-rms">
-														<input type="radio" class="radio-custom" name="condition" <?php if ($costume_details->condition == "brand_new") { ?> checked='checked' <?php } ?> value="brand_new" id="brandnew"> <label for="brandnew" class="radio-custom-label">Brand New</label>
-													</span>												
+														<input type="radio" class="radio-custom conditon_check" name="condition" <?php if ($costume_details->condition == "brand_new") { ?> checked='checked' <?php } ?> value="brand_new" id="brandnew"> <label for="brandnew" class="radio-custom-label">Brand New</label>
+													</span>
 												</div>
-												
-												
 											</p>
 											<span id="costumeconditionerror" style="color:red"></span>
 										</div>
 									</div>
 								</div>
+
+								<div class="form-rms hide" id="cleaned_select">
+										<div class="col-md-4 col-sm-4 pdlft0">
+											<p class="form-rms-que">How was it cleaned?*
+											<i class="fa fa-info-circle fa-info-rm" aria-hidden="true" data-toggle="tooltip" title="Costumes must be clean and ready for the next user. If you are not able to clean your costume you can always send it to Chrysalis with one of our cleanout bags. There are few materials our state of the art facility cannot clean."></i>
+											</p>
+										</div>
+										<div class="col-md-8 col-sm-8">
+											<p class="form-rms-input">
+												<select name="cleaned" id="cleaned" class="form-control">
+									<option value="">Select</option>
+
+
+									<option <?php if ($handling_costume->option_id == '129') { ?> selected='selected' <?php } ?> value="129" >Hand Washed</option>
+
+									<option <?php if ($handling_costume->option_id == '130') { ?> selected='selected' <?php } ?> value="130">Machine Washed</option>
+
+									<option <?php if ($handling_costume->option_id == '131') { ?> selected='selected' <?php } ?> value="131">Professionally Cleaned</option>
+
+ 	
+									</select>
+											</p>
+											<span id="cleanederror" style="color:red"></span>
+										</div>
+									</div>
+
+
 
 
 								<div class="form-rms film_quality_div">
@@ -906,7 +953,7 @@
 											@else
 											<p class="form-rms-small" id="film_text" style="display: none;">Was it Used in a Production? Which One?</p>
 											<p class="ct1-rms-rel form-rms-input" id="film_text_input" style="display: none;">
-												<input type="text" name="film_name" id="film_name" > <span><span>
+												<input type="text" name="film_name" id="film_name" placeholder="Optional">  <span><span>
 												</p>
 												@endif
 												<!-- <span id="qualityerror" style="color:red"></span> -->
@@ -953,16 +1000,16 @@
  
 								<div class="form-rms descibr_smte_text">
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-										<p class="form-rms-que form-rms-que1"><span></span>How would you describe your costume?</p>
+										<p class="form-rms-que form-rms-que1"><span></span>Keywords</p>
 										
 										<p> Please enter a maximum of <strong>10</strong> keywords to describe the categories in which your costume could belong to.</p>
-										<p><span class="ctume_tip-spn">Tip:</span>Have a specialty costume? To increase your chances of making a sale, input the appropriate keywords with our existing list of categories.</p>
+										<p><span class="ctume_tip-spn">Tip:</span>What makes your costume unique? Describe it with keywords to help buyers find it.</p>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12">
 										<p class="form-rms-input keywrds-input"><input type="text" id="keywords_tag">
 											<a href="javascript:void(0)" id="keywords_add">Add</a>
 										</p>
-
+ 
 									<div id="div" class="keywords_div">
 									@if(empty($costume_description->keywords))	
 									 
@@ -977,7 +1024,7 @@
 									<input id="input_2" name="keyword_2" value="" type="hidden">
 									<input id="input_1" name="keyword_1" value="" type="hidden">
 								 	@endif
-
+								 	
 									@if(!empty($costume_description->keywords))
 											<?php $explode = explode(',', $costume_description->keywords);
 												$keyword_count = count($explode);
@@ -986,8 +1033,7 @@
 												@if(!empty($keywords))
 												<p class="keywords_p p_{{10-$key}}">{{$keywords}}<span id="remove_{{10-$key}}">X</span> </p>
 												<input id="input_{{10-$key}}" name="keyword_{{10-$key}}" value="{{$keywords}}" type="hidden">
-												<!-- <div class="extrakeywords">
-												</div> -->
+												 
 												@endif
 												<?php
 												}
@@ -995,7 +1041,7 @@
 											@endif
 										</div>
 
-										<div id="count">@if(!empty($costume_description->keywords)){{10 - count($explode)}}left @else 10left @endif </div>
+										<div id="count">@if(!empty($costume_description->keywords)){{10 - count($explode)}}left @else 10 left @endif </div>
 											
 									</div>
 								</div>
@@ -1005,12 +1051,13 @@
 					<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 						<p class="form-rms-que form-rms-que1">Describe your Costume:*</p>
 						<p class="form-rms-detailed">  
-							<span>Tip: what makes your costume unique? Describe it with keywords to help buyers find it.</span>
-							
+							<span>Tell us your costume’s story! How was it made? Is there anything in the photo that is not included? A prop for example? Anything a buyer should know?</span>
 						</p>
 					</div>
 					<div class="col-md-8 col-sm-8 col-xs-12">
-						<p class="form-rms-input"><textarea placeholder="Please be as detailed as possible!" name="description" id="description" maxlength="600" >{{$db_des_costume->attribute_option_value}}</textarea></p>
+						<p class="form-rms-input">
+						<textarea placeholder= "My costume was commissioned for the production…
+" name="description" id="description" maxlength="600" >{{$db_des_costume->attribute_option_value}}</textarea></p>
 						<span id="descriptionerror" style="color:red"></span>
 						<p class="form-rms-sm1 max_lnths1 max-edit2">( <span id="max_length_char1"></span> 600 characters)</p>
 						</div>
@@ -1022,7 +1069,6 @@
 						<p class="form-rms-que form-rms-que1">Frequently Asked Questions</p>
 						<span>Create your own costume FAQ to avoid unneccessary inquiries from potential buyers.</span>
 						<br>
-						<span class="cret-tip"><i>Tip: Use easy-to read bullet points!</i></span>
 					</div>
 
 					<div class="col-md-8 col-sm-8 col-xs-12">
@@ -1040,7 +1086,7 @@
 						<p class="form-rms-que form-rms-que1">Frequently Asked Questions</p>
 						<span>Create your own costume FAQ to avoid unneccessary inquiries from potential buyers.</span>
 						<br>
-						<span class="cret-tip"><i>Tip: Use easy-to read bullet points!</i></span>
+				
 					</div>
 
 					<div class="col-md-8 col-sm-8 col-xs-12">
@@ -1057,7 +1103,7 @@
 			
 			<div class="form-rms-btn step3-last-2 edit_btns-grp">
 					<a type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></a>
-					<!-- </form> -->
+				
 					<a type="button" id="costume_description_next" class="btn-rm-nxt nxt">Next Step</a>
 				</div>
 								<!--costume three code starts here-->
@@ -1077,7 +1123,7 @@
 								<div class="form-rms pricess pric_tag_three">
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 										<p class="form-rms-que">Price *</p>
-										<span>We recommend selling your second hand costumes 50-60% of their purchased price.</span>
+										<span>We recommend selling your second hand costumes for 50-60% of their purchase price.</span>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12 ">
 										<div class="form-rms-input price-divs">
@@ -1115,9 +1161,9 @@
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12">
 										<div class="form-rms-input dimensions-two dimensions-two-pk_info">
-											<p class="form-rms-dim"><span class="form-rms-he1"><input id="pounds" name="pounds" value="{{$costume_details->weight_pounds}}" type="text"> <span>lbs</span></span></p>
+											<p class="form-rms-dim"><span class="form-rms-he1"><input id="pounds" name="pounds" value="{{$costume_details->weight_pounds}}" type="text" placeholder="0"> <span>lbs</span></span></p>
 											<span id="poundserror" style="color:red"></span>
-											<p class="form-rms-dim"><span class="form-rms-he1"><input id="ounces" name="ounces" value="{{$costume_details->weight_ounces}}" type="text"> <span>oz </span></span></p>
+											<p class="form-rms-dim"><span class="form-rms-he1"><input id="ounces" name="ounces" value="{{$costume_details->weight_ounces}}" type="text" placeholder="0"> <span>oz </span></span></p>
 											<span id="ounceserror" style="color:red"></span>
 										</div>
 										<p class="ct3-rms-text">Note: Weight is applicable for one costume ONLY.</p>
@@ -1142,7 +1188,7 @@
 							<a type="button" id="pricing_back" class="btn-rm-back"><span>Back</span></a>
 							<a type="button" id="pricing_next" class="btn-rm-nxt nxt">Next Step</a>
 						</div>
-						<!-- </form> -->
+						
 					</div>
 					<div class="prog-form-rm" id="preferences_div">
 						<!-- <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="costume_preferences_form" id="costume_preferences_form" method="post"> -->
@@ -1173,13 +1219,14 @@
 								</div>
 								<div class="col-md-8 col-sm-8 col-xs-12">
 									<p class="form-rms-input">
+									@if(isset($db_return) && !empty($db_return))
                                     @foreach($returnpolicy as $index=>$returnpolicy)
                                         <div class="col-md-4  col-sm-6 pdlft0">
                                         <input id="{{$returnpolicy->optionid}}" class="radio-custom" name="returnpolicy" <?php if($db_return->attribute_option_value_id == $returnpolicy->optionid) { ?> checked="checked" <?php } ?>  type="radio" value="{{$returnpolicy->optionid}}">
                                         <label for="{{$returnpolicy->optionid}}" class="radio-custom-label">{{$returnpolicy->value}}</label>
                                         </div>
                                     @endforeach
-        
+        							@endif
         
 									</p>
 									<span id="returnpolicyerror" style="color:red"></span>
@@ -1191,7 +1238,8 @@
 									<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 										<p class="form-rms-que form-rms-que1 dnt_br">Donate a Portion to Charity</p>
 										
-										<p class="ct3-rms-text">Chrysalis Charges a 3% transaction fee on sale of every costume. However, if you donate 5% or more of your sale to a charity we will waitve our transaction fee to match your contribution.</p>
+										<p class="ct3-rms-text">Chrysalis charges a 3.5% + .20 cent transaction fee on every sale. However, if you donate 10% or more of your sale to one of our charities we will waive our transaction fee to match your contribution.
+.</p>
 										<p class="ct3-rms-text">By Choosing to donate, you agree and accept Chrysalis' <a style="border-bottom: 1px solid #ccc">Terms & Conditions</a>.</p>
 									</div>
 									<div class="col-md-8 col-sm-8 col-xs-12 dnt-amcnts">
@@ -1200,19 +1248,19 @@
 											<p class="form-rms-rel111">
                                             
                                             <div class="col-md-3">
-                                            <div class="input-group">
-                                            <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default btn-number donate_charity chr_bt1" data-type="minus" data-field="donate_charity" min="0" max="100">
-                                            <span class="glyphicon glyphicon-minus"></span>
-                                            </button>
-                                            </span	>
-                                            <input type="text" name="donate_charity" class="form-control input-number" id="donate_charity" value="{{$costume_details->dynamic_percent}}" min="0" max="100"><i class="fa fa-percent" aria-hidden="true"></i>
-                                            <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default btn-number donate_charity chr_bt2" data-type="plus" data-field="donate_charity">
-                                            <span class="glyphicon glyphicon-plus"></span>
-                                            </button>
-                                            </span>
-                                            </div>
+	                                            <div class="input-group">
+		                                            <span class="input-group-btn">
+			                                            <button type="button" class="btn btn-default btn-number donate_charity chr_bt1" data-type="minus" data-field="donate_charity" min="0" max="100">
+			                                            <span class="glyphicon glyphicon-minus"></span>
+			                                            </button>
+		                                            </span	>
+	                                            	<input type="text" name="donate_charity" class="form-control input-number" id="donate_charity" value="{{$costume_details->dynamic_percent}}" min="0" max="100">
+		                                            <span class="input-group-btn">
+			                                            <button type="button" class="btn btn-default btn-number donate_charity chr_bt2" data-type="plus" data-field="donate_charity">
+			                                            <span class="glyphicon glyphicon-plus"></span>
+			                                            </button>
+		                                            </span>
+	                                            </div>
                                             </div>
                                             <div class="clearfix"></div>
                                             
@@ -1220,13 +1268,13 @@
                                                         </p>
                                                         <div class="col-md-5 donation_amt">
                                                         <p class="ct3-rms-head">Donation Amount</p>
-												<p class="cst3-textl2" name="dynamic_percent_amount" id="dynamic_percent_amount"><i class="fa fa-usd" aria-hidden="true"></i>{{number_format($costume_details->donation_amount, 2)}}</p>
-												<input type="hidden" name="hidden_donation_amount" id="hidden_donation_amount" value="{{$costume_details->donation_amount}}">
+												<p class="cst3-textl2" name="dynamic_percent_amount" id="dynamic_percent_amounts"><i class="fa fa-usd" aria-hidden="true"></i>
+{{number_format($costume_details->donation_amount, 2)}}</p>
+												<input type="hidden" name="hidden_donation_amount" id="hidden_donation_amounts" value="{{$costume_details->donation_amount}}">
 												<span id="donate_charityerror" style="color:red"></span>
                                                 </div>
 										</div>
 									</div>
-        
 									<div class="col-md-12 col-sm-12 col-xs-12 pdlft0">
 										<p class="ct3-rms-head">Organization of choice</p>
 									</div>
@@ -1234,8 +1282,9 @@
 										<ul class="ct3-list">
 											<?php //echo $costume_details->charity_id;die; ?>
 											@foreach($charities as $index=>$charity)
-											<li><img src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" />
-												<p>{{$charity->name}}</p>
+												<li>
+													<img src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" />
+														<p>{{$charity->name}}</p>
 											<input type="radio" id="{{$charity->name}}" @if($costume_details->charity_id == $charity->id) checked="checked" @endif value="{{$charity->id}}" name="charity_name" /></li>
 											@endforeach
 										</ul>
@@ -1255,7 +1304,7 @@
 									<a type="button" id="preferences_back" class="btn-rm-back"><span>Back</span></a>
 								</div>
 							</div>
-							<!-- </form> -->
+							
 						</div>
 					</form>
 				</div><!-- id='total_forms_div' -->
@@ -1347,7 +1396,7 @@
 						<!-- </div> -->
 						<!-- </div> -->	
 					</div>	</div>		</div>	
-					<!-- </form> -->
+					
 					<!---Second div code ends here-->
 					@stop
 					{{-- page level scripts --}}
@@ -1358,6 +1407,26 @@
 					<script type="text/javascript" src="{{asset('/assets/frontend/js/costumesedit.js')}}"></script>
 					<script type="text/javascript">
 						$(document).ready(function(){
+							$("input:radio:checked").parent().addClass('active');
+							if(parseInt($("#donate_charity").val())<=10){
+								$("#donate_charity").css({"color":"#000","font-weight":""});
+							}
+
+							if(parseInt($("#donate_charity").val()) ==15){
+								$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+							}
+
+							if(parseInt($("#donate_charity").val()) ==25){
+								$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+							}
+
+							if(parseInt($("#donate_charity").val()) == 50){
+								$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+							}
+
+							if(parseInt($("#donate_charity").val()) ==100){
+								$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+							}
 
 							// Code added by gayatri
 					        var url = window.location;
@@ -1401,6 +1470,31 @@
 							
 							$(".faq-checkbox").trigger("change");
 
+							$(".conditon_check").change(function(){
+							
+								if($("#good").prop("checked") || $("#likenew").prop("checked")){
+									$("#cleaned_select").removeClass("hide");
+								} else{
+									$("#cleaned_select").addClass("hide");
+									$("#cleaned").val('');
+								}
+							});
+
+							
+							$(".conditon_check").trigger("change");
+
+							/*var cleaned = $('input[name=condition]:checked').val();
+
+							if(cleaned == 'good' || cleaned == 'like_new')
+							{
+								$("#cleaned_select").show();
+							}
+							else
+							{
+								$("#cleaned_select").hide();
+							}*/
+
+
                               
                             $('#price').on('keydown', function(e){-1!==$.inArray(e.keyCode,[46,8,9,27,13,110,190])||/65|67|86|88/.test(e.keyCode)&&(!0===e.ctrlKey||!0===e.metaKey)||35<=e.keyCode&&40>=e.keyCode||(e.shiftKey||48>e.keyCode||57<e.keyCode)&&(96>e.keyCode||105<e.keyCode)&&e.preventDefault()});
                           
@@ -1434,56 +1528,130 @@
 							});
 
 							 $('.btn-number').click(function(e){
-                               e.preventDefault();
+                               	e.preventDefault();
                                
-                               fieldName = $(this).attr('data-field');
-                               type      = $(this).attr('data-type');
-                               var input = $("input[name='"+fieldName+"']");
-                               var currentVal = parseInt(input.val());
-                               if(type == 'minus') {
-                               var present = currentVal-1;
-                               }
-                               else if(type == 'plus') {
-                               var present = currentVal+1;
+                               	fieldName = $(this).attr('data-field');
+                               	type      = $(this).attr('data-type');
+                               	var input = $("input[name='"+fieldName+"']");
                                
-                               }
+                               	var currentVal = parseInt(input.val());
+                               	if(type == 'minus') {
+                               		if(currentVal <= 10){
+                               			var present = currentVal-1;
+                               		}else if(currentVal == 15){
+                               			var present = currentVal-5;
+                               		}else if(currentVal == 25){
+                               			var present = currentVal-10;
+                               		}else if(currentVal == 50){
+                               			var present = currentVal-25;
+                               		}else if(currentVal == 100){
+                               			var present = currentVal-50;
+                               		}
+                               	}
+                               	else if(type == 'plus') {
+                               		if(currentVal < 10){
+                               			var present = currentVal+1;
+                               		}else if(currentVal == 10 ){
+                               			var present = currentVal+5;
+                               		}else if(currentVal == 15 ){
+                               			var present = currentVal+10;
+                               		}else if(currentVal == 25 ){
+                               			var present = currentVal+25;
+                               		}else if(currentVal>=50){
+                               			var present = currentVal+50;
+                               		}
+                               	}
                                
-                               //console.log(present);
-                               
-                               var price = $('#price').val();
-                               
-                               var total = (price * present) / 100;
-                               
-                               $('#hidden_donation_amount').val(parseFloat(total).toFixed(2));
-                               $('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " + parseFloat(total).toFixed(2));
+                               	var price = $('#price').val();
+                               	var total = (price * present) / 100;
+                               	var amount = parseFloat(total).toFixed(2);
+                               	$('#hidden_donation_amounts').val(amount);
+                               	$('#dynamic_percent_amounts').html("$"+amount);
                                
                                
                                //$('#dynamic_amount').html("<input type='hidden' name='donation_amount_val' id='hidden_donation_amount' value='"+parseFloat(total).toFixed(2)+"'>");
                                
-                               
-                               if (!isNaN(currentVal)) {
-                               if(type == 'minus') {
-                               
-                               if(currentVal > input.attr('min')) {
-                               input.val(currentVal - 1).change();
-                               }
-                               if(parseInt(input.val()) == input.attr('min')) {
-                               $(this).attr('disabled', true);
-                               }
-                               
-                               } else if(type == 'plus') {
-                               
-                               if(currentVal < input.attr('max')) {
-                               input.val(currentVal + 1).change();
-                               }
-                               if(parseInt(input.val()) == input.attr('max')) {
-                               $(this).attr('disabled', true);
-                               }
-                               
-                               }
-                               } else {
-                               input.val(0);
-                               }
+                               	if (!isNaN(currentVal)) {
+	                               	if(type == 'minus') {
+	                               		if(currentVal <= 10){
+			                               	if(currentVal > input.attr('min')) {
+			                               		input.val((currentVal - 1)+" %").css({"color":"#000","font-weight":""}).change();
+			                               	}
+			                               	if(parseInt(input.val()) == input.attr('min')) {
+			                               		$(this).attr('disabled', true);
+			                               	}
+		                               	}else if(currentVal == 15 ){
+		                               		if(currentVal > input.attr('min')) {
+			                               		input.val((currentVal - 5)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+			                               	}
+			                               	if(parseInt(input.val()) == input.attr('min')) {
+			                               		$(this).attr('disabled', true);
+			                               	}
+		                               	}else if(currentVal == 25 ){
+		                               		if(currentVal > input.attr('min')) {
+			                               		input.val((currentVal - 10)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+			                               	}
+			                               	if(parseInt(input.val()) == input.attr('min')) {
+			                               		$(this).attr('disabled', true);
+			                               	}
+		                               	}else if(currentVal == 50 ){
+		                               		if(currentVal > input.attr('min')) {
+			                               		input.val((currentVal - 25)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+			                               	}
+			                               	if(parseInt(input.val()) == input.attr('min')) {
+			                               		$(this).attr('disabled', true);
+			                               	}
+		                               	}else if(currentVal<=100){
+	                               			if(currentVal <= input.attr('max')) {
+			                               		input.val((currentVal - 50)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+			                               	}
+			                               	if(parseInt(input.val()) == input.attr('max')) {
+			                               		$(this).attr('disabled', true);
+			                               	}
+	                               		}
+	                               	} 
+	                               	else if(type == 'plus') {
+	                               		if(currentVal < 10){
+	                               			if(currentVal < input.attr('max')) {
+			                               		input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+			                               	}
+			                               	if(parseInt(input.val()) == input.attr('max')) {
+			                               		$(this).attr('disabled', true);
+			                               	}
+	                               		}else if(currentVal == 10 ){
+	                               			if(currentVal < input.attr('max')) {
+			                               		input.val((currentVal + 5)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+			                               	}
+			                               	if(parseInt(input.val()) == input.attr('max')) {
+			                               		$(this).attr('disabled', true);
+			                               	}
+	                               		}else if(currentVal == 15 ){
+	                               			if(currentVal < input.attr('max')) {
+			                               		input.val((currentVal + 10)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+			                               	}
+			                               	if(parseInt(input.val()) == input.attr('max')) {
+			                               		$(this).attr('disabled', true);
+			                               	}
+	                               		}else if(currentVal == 25 ){
+	                               			if(currentVal < input.attr('max')) {
+			                               		input.val((currentVal + 25)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+			                               	}
+			                               	if(parseInt(input.val()) == input.attr('max')) {
+			                               		$(this).attr('disabled', true);
+			                               	}
+	                               		}else if(currentVal>=50){
+	                               			if(currentVal < input.attr('max')) {
+			                               		input.val((currentVal + 50)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+			                               	}
+			                               	if(parseInt(input.val()) == input.attr('max')) {
+			                               		$(this).attr('disabled', true);
+			                               	}
+	                               		}
+		                               
+	                               	}
+                               	} else {
+                               		input.val(0);
+                               	}
                                });
         						$('.input-number').focusin(function(){
                                    $(this).data('oldValue', $(this).val());
@@ -1493,19 +1661,18 @@
                                   minValue =  parseInt($(this).attr('min'));
                                   maxValue =  parseInt($(this).attr('max'));
                                   valueCurrent = parseInt($(this).val());
-                                  
                                   name = $(this).attr('name');
                                   if(valueCurrent >= minValue) {
-                                  $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+                                  	$(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
                                   } else {
-                                  alert('Sorry, the minimum value was reached');
-                                  $(this).val($(this).data('oldValue'));
+                                  	alert('Sorry, the minimum value was reached');
+                                  	$(this).val($(this).data('oldValue'));
                                   }
                                   if(valueCurrent <= maxValue) {
-                                  $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+                                  	$(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
                                   } else {
-                                  alert('Sorry, the maximum value was reached');
-                                  $(this).val($(this).data('oldValue'));
+                                  	alert('Sorry, the maximum value was reached');
+                                  	$(this).val($(this).data('oldValue'));
                                   }
                                   
                                   
@@ -1603,7 +1770,7 @@
         <style>
         
         
-        #dynamic_percent_amount
+        #dynamic_percent_amounts
         {
             float:none !important;
        		position:relative !important;

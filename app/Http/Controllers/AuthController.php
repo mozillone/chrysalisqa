@@ -94,13 +94,13 @@ class AuthController extends Controller {
 				   	Cart::updateCartToUser();
 				  }
 				 $cookie = \Cookie::forget('min-cart');
-				 $fav_url_redirect=strrev(explode("/",strrev(URL::previous()))[3]);
+				 /*$fav_url_redirect=strrev(explode("/",strrev(URL::previous()))[3]);
 				 if(!empty($req['costume_id']) && $fav_url_redirect=="product"){
 				 	return Redirect::to('/buy-it-now/'.trim($req['costume_id']));
 				 }
 				 if(!empty($req['is_cart']) && $fav_url_redirect!="product"){
 				 	return Redirect::to('/checkout');
-				 }
+				 }*/
 				 if(Session::has('curentURL')){
 				 	return Redirect::to(Session::get('curentURL'))->withCookie($cookie);
 				 }

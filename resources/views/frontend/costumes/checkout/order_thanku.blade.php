@@ -115,7 +115,7 @@
             min-height: 50px;
             display: block;
         }
-.range-slider span.error.crt-amount {
+.range-slider span.error.crt-amount, .range-slider span.error.charity_err {
  font-family: Proxima-Nova-semibold;
 }
         .contribution-label li:last-child {
@@ -221,11 +221,13 @@
                         ?>
                         <!-- end image logic -->
 					<li>
-                        <img src="{{URL::asset($listingImage)}}" alt="cst3" /><p class="crt-name">{{ $charities->name }}</p><input type="radio" name="charity" id="charity" value="{{$charities->id}}"/>
+                        <img src="{{URL::asset($listingImage)}}" alt="cst3" /><p class="crt-name">{{ $charities->name }}</p><input type="radio" name="charity" id="charity1" value="{{$charities->id}}"/>
                     </li>
 					@endforeach
+
 					</ul>
-					 @if(!$order_donations)<p class="cst2-rms-chck"><input type="checkbox"  id="suggest_charity"  checked="checked"> I would like to suggest another charity organization</p>
+                    <span class="error charity_err"></span>
+					<!--  @if(!$order_donations)<p class="cst2-rms-chck"><input type="checkbox"  id="suggest_charity"  checked="checked"> I would like to suggest another charity organization</p>
 
 
 					<div class="thankyou-rms">
@@ -233,6 +235,13 @@
 					<input type="text" placeholder="Organization Name" name="suggest_charity" / ></p>
 					</div>
                      @endif
+ -->
+                    <div class="thankyou-rms">
+                        <p class="thankyou-rms-head thankyou-text">
+                            <p>Want to suggest a favorite charity organization? <br> we will do our best to include it in the future!</p>
+                            <input type="text" class="form-control" placeholder="Organization Name" name="suggested_charity" / >
+                        </p>
+                    </div>
 
 					</div>
 				</div>
@@ -289,10 +298,11 @@
                          
 				            </table>
 				        </div>
-				        @if(!$order_donations)<div style="text-align: center; margin-bottom: 50px">
-                         <span class="error crt-amount"></span>
-                          <input type="submit" value="Submit" class="thankyou-btn"/>
-				        </div>
+				        @if(!$order_donations)
+                            <div style="text-align: center; margin-bottom: 50px">
+                                <span class="error crt-amount"></span>
+                                <input type="submit" value="Submit" class="thankyou-btn"/>
+				            </div>
                        @endif
 
 				    </div>

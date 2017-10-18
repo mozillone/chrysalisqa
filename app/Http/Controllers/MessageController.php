@@ -36,7 +36,7 @@ class MessageController extends Controller
       public function callPartials()
     {
          Talk::setAuthUserId(Auth::user()->id);
-
+//echo "string"; exit;
         View::composer('partials.peoplelist', function($view) {
             $threads = Talk::threads();
 
@@ -45,8 +45,7 @@ class MessageController extends Controller
     }
 
     public function chatHistory($id)
-    {   
-        
+    {  
         $this->callPartials();
         $conversations = Talk::getConversationsById($id);
         $user = '';
@@ -61,6 +60,7 @@ class MessageController extends Controller
             ->leftjoin('url_rewrites','url_rewrites.url_offset','=','conversations.costume_id')
             ->leftjoin('costume_image','costume_image.costume_id','=','conversations.costume_id')
             ->where('conversations.id',$id)->first();
+
         $make_seen = DB::table('messages')->where('conversation_id',$id)->update(['is_seen'=>'1']);
         return view('messages.message', compact('messages', 'user','get_con'));
     }
@@ -146,7 +146,7 @@ class MessageController extends Controller
         $msgs_inbox = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
         $msgs_sent = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
        // echo "<pre>";print_r($this->data);die;
-        //echo "<pre>";print_r($this->data['conversations_sent']);die;
+        //echo "<pre>";print_r($this->data['conversations_inbox']);die;
         /*$this->data['conversations_inbox'] = DB::table('conversations')
         ->where('conversations.user_two' ,$id)
         ->leftJoin('messages','conversations.id','messages.conversation_id')

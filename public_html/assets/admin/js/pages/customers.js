@@ -1,4 +1,28 @@
 $(function(){
+	$(document).on('change','#price', function(){
+        var number = $('#price').val();
+        var present_val = '';
+        present_val = $(this).val()+".00";
+        
+        if(number.indexOf('.') == "-1"){
+            $(this).val($(this).val()+".00");
+            $("#price").val(present_val);
+        }
+
+
+var donate_percent = $('#donate_charity').val();
+var cuurent_one = donate_percent.replace("%",'');
+var str = cuurent_one.replace(/\s/g, ''); 
+var price = $('#price').val();
+var total = (price*str)/100;
+if (donate_percent=="none") {
+var total = 0.00;
+}
+var amount = parseFloat(total).toFixed(2);
+$('#hidden_donation_amounts').val(amount);
+$('#dynamic_percent_amounts').html("$"+amount);
+
+    });
 	
 	
         $("#customer_create").validate({
@@ -76,7 +100,7 @@ $(function(){
 			errorElement: 'span',
        		errorClass: 'error',
 		});
-	 $("#customer_edit").validate({
+/*	 $("#customer_edit").validate({
         	onfocusout: function(element) { $(element).valid(); },
 			rules: {
 				first_name:{
@@ -147,16 +171,19 @@ $(function(){
 			},
 			errorElement: 'span',
        		errorClass: 'error',
-		});
+		});*/
 	    sub_cos_counter = 0;
-		$("#customer_edit1").validate({
-        	//onfocusout: function(element) { $(element).valid(); },
+
+			$("#customer_edit1").validate({
 			rules: {
 				customer_name:{
 						required: true,
 						maxlength: 50,
 				},
 				gender:{
+					required: true,
+				},
+				costumecondition:{
 					required: true,
 				},
 				costume_name:{
@@ -172,17 +199,14 @@ $(function(){
 					 	required: true,
 						maxlength: 50,
 				},
-				
 				pounds:{
 					required: true,
 				},
 				ounces:{
 					required: true,
-				},			
-				
+				},	
 				size:{
 					required: true,
-					
 				},
 				price:{
 					required: true,
@@ -190,63 +214,118 @@ $(function(){
 				},
 				quantity:{
 					required: true,
-					
 				},
 				shipping_option:{
 					required: true,
-					
 				},
 				costume_desc:{
 					required: true,
-					
-				},
-				fun_fact:{
-					required: false,
-					
 				},
 				faq:{
 					required: false,
-					
 				},
 				weight_package_items:{
-				 required: true,
+				 	required: true,
 				},
 				dimensions:{
-				  required: true,
+				  	required: true,
 				},
 				type:{
-				  required: true,
+				  	required: true,
 				},
 				service:{
-				  required: true,
+				  	required: true,
 				},
 				location:{
-				  required: true,
+				  	required: true,
 				},
 				handling_time:{
-				  required: true,
+				  	required: true,
 				},
 				return_policy:{
-				  required: true,
+				  	required: true,
 				},
-				charity_amount:{
-				  required: true,
+				donate_charity:{
+				  	required: {
+		                depends: function(element) {
+		                	if($('#charity_name').val() != "")
+	                		{
+	                			$("#don_err").html('This field is required.');
+	                			return true;
+	                		}
+		                }
+		            }
 				},
 				charity_name:{
-				  required: true,
+				  	required: {
+		                depends: function(element) {
+		                    return parseInt($('#donate_charity').val()) != 0
+		                }
+		            }
 				},
+				/*cleaned:{
+					required:{
+						depends:function(element)
+						{
+							var cleaned = $("#cleaned").val();
+							var condition_val =  $('input[name=condition]:checked').val();
+							if(condition_val == 'good' || condition_val == 'like_new')
+							{
+								if(cleaned == "")
+								{
+									$("#cleanederror").html('This field is required.');
+	                				return true;
+								}
+							}
+						}
+					}
+				},*/
 				img_chan:{
-				  required: true,
-				  accept: "jpg|jpeg|png|gif",
+				  	required: true,
+				  	accept: "jpg|jpeg|png|gif",
 				},
 				img_chan1:{
-				  required: false,
-				  accept: "jpg|jpeg|png|gif",
+				  	required: false,
+				  	accept: "jpg|jpeg|png|gif",
 				},
 				"files[]":{
 					accept: "jpg|jpeg|png|gif",
 				},
-				
+				heightft:{
+					required: {
+		                depends: function(element) {
+		                    return $('#size').val() == 'custom'
+		                }
+		            }
+				},
+				heightin:{
+					required: {
+		                depends: function(element) {
+		                    return $('#size').val() == 'custom'
+		                }
+		            }
+				},
+				weightlbs:{
+					required: {
+		                depends: function(element) {
+		                    return $('#size').val() == 'custom' 
+		                }
+		            }
+				},
+				chestin:{
+					required: {
+		                depends: function(element) {
+		                    return $('#size').val() == 'custom'
+		                }
+		            }
+				},
+				waistlbs:{
+					required: {
+		                depends: function(element) {
+		                    return $('#size').val() == 'custom' 
+		                }
+		            }
+				},
 			},
 			highlight: function(element) {
           	 $(element).closest('.form-control').addClass('error');
@@ -296,14 +375,65 @@ $(function(){
 			errorElement: 'span',
        		errorClass: 'error',
        		submitHandler: function(form) {
+       			var flag = 1; 
 				if(sub_cos_counter == 0){
 					sub_cos_counter = 1;
+					flag = 1;
+					//form.submit();
+				}
+				var condition_val =  $('input[name=costumecondition]:checked').val();
+				var cleaned = $("#cleaned").val();
+				if($('#charity_name').val() != "" && parseInt($("#donate_charity").val()) == 0 )
+        		{
+        			$("#don_err").text('This field is required.');
+        			flag = 0;
+        			//return true;
+        		}else{
+			     	$("#don_err").text('');
+			     	flag = 1;
+			     	//form.submit();
+				}
+
+				if(condition_val != 'good' ||  condition_val != 'like_new')
+        		{
+        			if(cleaned == "")
+        			{
+        				$("#cleanederror").text('This field is required.');
+        				flag = 0;
+        			}
+        	 
+        		}else{
+			     	$("#cleanederror").text('');
+			     	flag = 1;
+			     	//form.submit();
+				}
+
+				if(condition_val == 'brand_new')
+				{
+					if(cleaned == "")
+					{
+						$("#cleanederror").text('');
+			     		flag = 1;
+					}
+				}
+
+
+				if(flag == 1){
 					form.submit();
 				}
 			}
-		});
+			
+			});
 
-
+	/*$('#submit').on('click', function(e){
+		if($(this).val() != "" && parseInt($("#donate_charity").val()) == 0){
+			$("#donate_err").html("This field is required.");
+			return false;
+		}else{
+			$("#donate_err").html("");
+			return true;
+		}
+	});*/
 	$("#customer_edit2").validate({
         	//onfocusout: function(element) { $(element).valid(); },
 			rules: {
@@ -382,12 +512,43 @@ $(function(){
 				return_policy:{
 				  required: true,
 				},
-				charity_amount:{
-				  required: true,
+				donate_charity:{
+				  	required: {
+		                depends: function(element) {
+		                	// if($('#charity_name').val() != "")
+	                		// {
+	                		// 	//$("#don_err").html('This field is required.');
+	                		// 	return true;
+	                		// }
+	                		return $('#charity_name').val() != ""
+		                }
+		            }
 				},
 				charity_name:{
-				  required: true,
+				  	required: {
+		                depends: function(element) {
+		                    return parseInt($('#donate_charity').val()) != 0
+		                }
+		            }
 				},
+
+				/*cleaned:{
+				  	required: {
+		                depends: function(element) {
+		                    var cleaned = $("#cleaned").val();
+		                    var condition_val =  $('input[name=condition]:checked').val();
+							if(condition_val == 'good' || condition_val == 'like_new')
+							{
+								if(cleaned == "")
+								{
+									return $('#cleaned').val() != '';								 
+								}
+							}
+		                }
+		            }
+				},*/
+
+ 
 				cosplay:{
 					required: true,
 				},
@@ -412,7 +573,41 @@ $(function(){
 				"files[]":{
 					accept: "jpg|jpeg|png|gif",
 				},
-				
+				heightft:{
+					required: {
+		                depends: function(element) {
+		                    return $('#size').val() == 'custom'
+		                }
+		            }
+				},
+				heightin:{
+					required: {
+		                depends: function(element) {
+		                    return $('#size').val() == 'custom'
+		                }
+		            }
+				},
+				weightlbs:{
+					required: {
+		                depends: function(element) {
+		                    return $('#size').val() == 'custom' 
+		                }
+		            }
+				},
+				chestin:{
+					required: {
+		                depends: function(element) {
+		                    return $('#size').val() == 'custom'
+		                }
+		            }
+				},
+				waistlbs:{
+					required: {
+		                depends: function(element) {
+		                    return $('#size').val() == 'custom' 
+		                }
+		            }
+				},
 				
 			},
 			highlight: function(element) {
@@ -462,6 +657,56 @@ $(function(){
 			},
 			errorElement: 'span',
        		errorClass: 'error',
+       		submitHandler: function(form) {
+			     //form.submit();
+			     var flag = 1; 
+				if(sub_cos_counter == 0){
+					sub_cos_counter = 1;
+					flag = 1;
+					//form.submit();
+				}
+			     var condition_val =  $('input[name=costumecondition]:checked').val();
+			  
+			     var cleaned = $("#cleaned").val();
+
+			    if($('#charity_name').val() != "" && parseInt($("#donate_charity").val()) == 0 )
+        		{
+        			$("#don_err").text('This field is required.');
+        			return;
+        			flag = 0;
+        		}else{
+			     	$("#don_err").text('');
+			     	flag = 1;
+				}
+
+				if(condition_val != 'good' || condition_val != 'like_new')
+        		{
+        			 if(cleaned == "")
+        			 {
+        			 	$("#cleanederror").text('This field is required.');
+        				flag = 0;
+        			 }
+        		}else{
+			     	$("#cleanederror").text('');
+			     	flag = 1;
+			     	//form.submit();
+				}
+
+				if(condition_val == 'brand_new')
+				{
+					if(cleaned == "")
+					{
+						$("#cleanederror").text('');
+			     		flag = 1;
+					}
+				}
+
+
+
+				if(flag == 1){
+					form.submit();
+				}
+        	}
 		});
 
 		$("#phone,#contact_phone,#phone_number,#aaa,#search.phone").on("keyup paste", function() {
@@ -696,7 +941,67 @@ $(function(){
 });
 
 //key words hash tag
-$("#keywords_add").click(function(){
+
+
+ //key words hash tag
+
+    $('#keywords_tag').keydown(function(e){
+
+        if(e.keyCode === 13){
+        	e.preventDefault();
+                keywords();
+         }  
+    });
+
+   
+    $("#keywords_add").click(function(){
+         keywords();
+    });     
+
+    function keywords()
+    {
+        var val = $('#keywords_tag').val();
+        if(val != ""){
+            var div_cont= $('#count').html().split(' ');
+            var total =10-$(".keywords_p").length;
+            if (total > 0) {
+                if (val.indexOf(',') !== -1) {
+                    var segments = val.split(',');
+                    var count=segments.length;
+                    $('#count').html(total-count+ " left");
+                    if (total == 1) {
+                        var hashtag = '#'+segments[0];
+                        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                        $('#keywords_tag').prop('value','');
+                        $('#input_'+total+'').val(hashtag);
+                        $('#count').html(total-1+ " left");
+                    }else{
+                        $.each(segments,function(i){
+                            var hashtag = '#'+segments[i];
+                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                            $('#input_'+total+'').val(hashtag);
+                            $('#keywords_tag').prop('value','');
+                            total--;
+                        });
+                    }
+                }else{
+                    var hashtag = '#'+val;
+                    $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                    $('#keywords_tag').prop('value','');
+                    $('#input_'+total+'').val(hashtag);
+                    $('#count').html(total-1+ " left");
+                }
+            }else{
+                $('#keywords_add').hide();
+            }
+        }
+    }
+    
+
+
+
+
+/*$("#keywords_add").click(function(){
 
   var val = $('#keywords_tag').val();
 	if (val != "") {
@@ -748,7 +1053,7 @@ $("#keywords_add").click(function(){
     $('#keywords_add').hide();
   }
 	}
-  });
+  });*/
 
 
 

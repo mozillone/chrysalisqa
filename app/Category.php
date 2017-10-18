@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use DB;
 use App\Helpers\Site_model;
 use App\Helpers\SiteHelper;
-
+use App\Costumes;
 class Category extends Authenticatable
 {
     use Notifiable;
@@ -97,8 +97,9 @@ class Category extends Authenticatable
         }
     }
     
-    private function urlRewrites($id,$type){
-        if($type=="update"){
+    private function urlRewrites($id,$type,$old_name='',$new_name='',$product_added=''){
+      //echo "string"; exit;
+        if($type == "update"){
               $cond=array('type'=>'category',
                     'url_offset'=>$id);
               Site_model::delete_single('url_rewrites',$cond);
@@ -107,16 +108,108 @@ class Category extends Authenticatable
         if($data[0]->parent_id!="0"){
             $main_cat=$this->specialCharectorsRemove($data[0]->parent_cat_name);
             $sub_cat=$this->specialCharectorsRemove($data[0]->sub_cat_name);
-            $url_key='/'.$main_cat.'/'.$sub_cat;
-        }else{
-            $main_cat=$this->specialCharectorsRemove($data[0]->name);
             $url_key='/'.$main_cat;
-        }
-        $data=array('type'=>'category',
+            /*$data=array('type'=>'category',
                     'url_offset'=>$id,
                     'url_key'=> $url_key);
-        Site_model::insert_data('url_rewrites',$data);
-        return true;
+            
+            Site_model::insert_data('url_rewrites',$data);*/
+            /* Addeed by Gayatri */
+            if(($old_name != $new_name) || $product_added !=""){
+              
+              $taged_costumes = DB::table('costume_to_category')->where('category_id', $id)->get();
+              
+              $sub_cat_url_name = $this->specialCharectorsRemove($data[0]->sub_cat_name);
+              
+              foreach ($taged_costumes as $key => $cos_to_cat) {
+                $cos_name = DB::table('costume_description')->where('costume_id',$cos_to_cat->costume_id)->select('name')->first();
+                $costume_count = Costumes::getCostumesCount($cos_name->name);
+                if($costume_count>1){
+                  $costume_count++;
+                }
+                $costume_url_name = $this->specialCharectorsRemove($cos_name->name);
+                $product_url = $url_key."/".$sub_cat_url_name."/".$costume_url_name.$costume_count;
+
+                $data = array('type'=>'product',
+                              'url_offset'=>$cos_to_cat->costume_id,
+                              'url_key'=> $product_url
+                            );
+                //echo"<pre>";print_r($data);
+                Site_model::insert_data('url_rewrites',$data);
+              }
+              $data = array('type'=>'category',
+                              'url_offset'=>$id,
+                              'url_key'=> $url_key."/".$sub_cat_url_name
+                            );
+              //echo"<pre>";print_r($data);
+              //exit;
+              Site_model::insert_data('url_rewrites',$data);
+            }
+            if($old_name == ''){
+            	$main_cat=$this->specialCharectorsRemove($data[0]->parent_cat_name);
+	            $sub_cat=$this->specialCharectorsRemove($data[0]->sub_cat_name);
+	            $url_key='/'.$main_cat.'/'.$sub_cat;
+            	$data=array('type'=>'category',
+                    'url_offset'=>$id,
+                    'url_key'=> $url_key);
+            
+            	Site_model::insert_data('url_rewrites',$data);
+            }
+            /* END */
+        }else{
+          //echo "string"; exit;
+            $main_cat=$this->specialCharectorsRemove($data[0]->name);
+            $url_key='/'.$main_cat;
+            /* Added by Gayatri */
+            if($old_name != $new_name){
+
+              $sub_cat = Costumes::getParentCategories($id);
+              foreach ($sub_cat as $key => $child_cat) {
+                
+                $taged_costumes = DB::table('costume_to_category')->where('category_id', $child_cat->category_id)->get();
+                $sub_cat_url_name = $this->specialCharectorsRemove($child_cat->name);
+
+                foreach ($taged_costumes as $key => $cos_to_cat) {
+                  $cos_name = DB::table('costume_description')->where('costume_id',$cos_to_cat->costume_id)->select('name')->first();
+                  $costume_count = Costumes::getCostumesCount($cos_name->name);
+                  if($costume_count>1){
+                    $costume_count++;
+                  }
+                  $costume_url_name = $this->specialCharectorsRemove($cos_name->name);
+                  $product_url = $url_key."/".$sub_cat_url_name."/".$costume_url_name.$costume_count;
+
+                  $data = array('type'=>'product',
+                                'url_offset'=>$cos_to_cat->costume_id,
+                                'url_key'=> $product_url
+                              );
+                  //echo "<pre>"; print_r($data);
+                  Site_model::insert_data('url_rewrites',$data);
+                }
+                $data = array('type'=>'category',
+                                'url_offset'=>$child_cat->category_id,
+                                'url_key'=> $url_key."/".$sub_cat_url_name
+                              );
+                //echo "<pre>"; print_r($data);
+                Site_model::insert_data('url_rewrites',$data);
+              }
+              $data = array('type'=>'category',
+                            'url_offset'=>$id,
+                            'url_key'=> $url_key
+                          );
+              //echo "<pre>"; print_r($data); exit;
+              Site_model::insert_data('url_rewrites',$data);
+
+              return true;
+            }
+            if($old_name == ''){
+            	$data=array('type'=>'category',
+                    'url_offset'=>$id,
+                    'url_key'=> $url_key);
+            
+            	Site_model::insert_data('url_rewrites',$data);
+            }
+            /* End */
+        }
     }
     protected function getUrlLinks($id){
     	$data=$this->getUrlCategoryInfo($id);
@@ -154,8 +247,12 @@ class Category extends Authenticatable
         return $costumes_list;
     }
      protected function updateCategory($req){
-
-         if(!empty($req['parent_id'])){$parent_id=$req['parent_id'];}else{$parent_id="0";}
+      //echo "<pre>"; print_r($req); exit;
+        if(!empty($req['parent_id'])){
+          $parent_id = $req['parent_id'];
+        }else{
+          $parent_id="0";
+        }
         if(isset($req['cat_image']) && !isset($req['banner_image'])){
             $cat_image_path=public_path('category_images/Normal');
             $sort = $req['sort'];
@@ -221,21 +318,21 @@ class Category extends Authenticatable
             }
         } 
         
-
-        $cond=array('category_id'=>$req['category_id']);
+        $cond = array('category_id'=>$req['category_id']);
         Site_model::update_data('category',$category,$cond);
-        $this->urlRewrites($req['category_id'],"update");
+        
         if(isset($req['costume_list']) && $parent_id!="0"){
-             Site_model::delete_single('costume_to_category',$cond);
-            foreach(array_unique($req['costume_list']) as $key=>$value){
-                $category_coustume=array('costume_id'=>$value,
-                       'category_id'=>$req['category_id'],
-                       'sort_no'=>$key,
-                       );
-               Site_model::insert_get_id('costume_to_category',$category_coustume);
-            }
-          return true;
+          Site_model::delete_single('costume_to_category',$cond);
+          foreach(array_unique($req['costume_list']) as $key=>$value){
+            $category_coustume=array('costume_id'=>$value,
+                   'category_id'=>$req['category_id'],
+                   'sort_no'=>$key,
+                   );
+            Site_model::insert_get_id('costume_to_category',$category_coustume);
+          }
         }
+        $this->urlRewrites($req['category_id'],"update",$req['old_category'],$req['name'],$req['elements_change']);
+          return true;
     }
     private function specialCharectorsRemove($string) {
             $string = preg_replace('/&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig|quot|rsquo);/i', '\\1', $string );
@@ -244,6 +341,7 @@ class Category extends Authenticatable
             return strtolower(trim($string, '-'));
     }
     protected function getUrlCategoryId($key_url){
+    	//dd($key_url);
            $data=DB::Select('SELECT  * FROM `cc_url_rewrites` where url_key="'.$key_url.'"');
            return $data;
 

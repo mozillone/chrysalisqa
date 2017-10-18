@@ -1,6 +1,26 @@
 $(function(){
 
+    $(document).on('change','#price', function(){
+        var number = $('#price').val(); 
+        if(number.indexOf('.') == "-1"){
+            $(this).val($(this).val()+".00");
+        }
 
+
+        var donate_percent = $('#donate_charity').val();
+        var cuurent_one = donate_percent.replace("%",'');
+        var str = cuurent_one.replace(/\s/g, ''); 
+        var price = $('#price').val();
+        var total = (price*str)/100;
+        if (donate_percent=="none") {
+        var total = 0.00;
+        }
+        var amount = parseFloat(total).toFixed(2);
+        $('#hidden_donation_amounts').val(amount);
+        $('#dynamic_percent_amounts').html("$"+amount);
+
+
+    });
     var imgdata;
     $("#upload_next").click(function(a) {
         a.preventDefault();
@@ -14,19 +34,14 @@ $(function(){
 
         if (file1 == '') {
             $('input[name=file1]').css('border', '1px solid red');
-            $('#file1_error').html('Upload Front View');
+            $('#file1_error').html('Upload Front');
             str = false;
         }
         if (file2 == '') {
             $('input[name=file2]').css('border', '1px solid red');
-            $('#file2_error').html('Upload Back View');
+            $('#file2_error').html('Upload Back');
             str = false;
         }
-        /*if(file3==''){
-         $('input[name=file3]').css('border','1px solid red');
-         $('#file3_error').html('Upload Detail/Accessories');
-         str=false;
-         }*/
         if (str == true) {
             $('#step2').addClass('active');
             $('#upload_div').css('display', 'none');
@@ -216,11 +231,12 @@ $(function(){
         $('#costume_name,#categoryname,#subcategory,#gender,#size,#description,#funfcats,#faq,#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#funfacts').css('border', '');
         $('#costumename_error,#subcategoryerror,#categoryerror,#gendererror,#sizeerror,#uniquefashionerror,#cosplayerror,#costumeconditionerror,#descriptionerror,#facterror,#faqerror,#activityerror,#bodydimensionerror,#qualityerror,#usercostumeerror').html('');
         var costumename = $('#costume_name').val();
-        console.log(costumename);
+       
         var category = $('#categoryname').val();
         //var gender = $('#gender').val();
         var gender = '';
         var size = $('#size').val();
+
         var subcategory = $('#subcategory').val();
 
         var description = $('#description').val();
@@ -234,16 +250,55 @@ $(function(){
         var costumecondition = "";
         var qualitycostume = "";
         var usercostume = "";
-        //var activity = "";
-        //var cosplay = "";
+        var cleaned = $("#cleaned").val();
+
+
+        var condition_val =  $('input[name=condition]:checked').val();
+
+   
+
+        if(condition_val == 'good' || condition_val == 'like_new')
+        {
+            if(cleaned == "")
+            {
+                 $('#cleanederror').html('This field is required.');
+                 str = false;
+            }           
+        }
         var uniquefashion = "";
-      
-        if(category == 68){
+        if(size == 'custom'){
+            if(heightft == ""){
+                $('#height-ft').css('border', '1px solid red');
+                $('#heighterror').html('This field is required.');
+                str = false;
+            }
+            if(heightin == ""){
+                $('#height-in').css('border', '1px solid red');
+                $('#heighterror').html('This field is required.');
+                str = false;
+            }
+            if(weightlbs == ""){
+                $('#weight-lbs').css('border', '1px solid red');
+                $('#weighterror').html('This field is required.');
+                str = false;
+            }
+            if(chestin == ""){
+                $('#chest-in').css('border', '1px solid red');
+                $('#chesterror').html('This field is required.');
+                str = false;
+            }
+            if(waistlbs == ""){
+                $('#waist-lbs').css('border', '1px solid red');
+                $('#waisterror').html('This field is required.');
+                str = false;
+            }
+        }
+       /* if(category == 68){
             if($('input[name="fimquality"]:checked').next().html() == 'No'){
                 $('#qualityerror').html('The Film Production category is limited to costumes that have been used on Film and Television sets.');
                 str = false;
             }
-        }
+        }*/
 
         if (subcategory == '') {
             $('#subcategory').css('border', '1px solid red');
@@ -261,30 +316,24 @@ $(function(){
             $('#categoryerror').html('This field is required.');
             str = false;
         }
-
         if ($('input[name=gender]:checked').length <= 0) {
             $('#gendererror').html('This field is required.');
             str = false;
-
         }
-
         if ($('input[name=gender]:checked').val() == null || $('input[name=gender]:checked').val() == '') {
             $('#gendererror').html('This field is required.');
             str = false;
-
         }        
         if (size == '') {
             $('#size').css('border', '1px solid red');
             $('#sizeerror').html('This field is required.');
             str = false;
-        } 
-        
+        }
         if (description == "") {
             $('#description').css('border', '1px solid red');
             $('#descriptionerror').html('This field is required.');
             str = false;
         }
- 
         if ($('input[name=condition]:checked').length <= 0) {
             $('#costumeconditionerror').html('This field is required.');
             str = false;
@@ -298,9 +347,7 @@ $(function(){
         if ($('input[name=make_costume]:checked').length <= 0) {
             $('#usercostumeerror').html('This field is required.');
             str = false;
-
         }
-
         /*if ($('input[name=fimquality]:checked').val() == 32) {
             if ($('input[name=film_name]').val() == "") {
                 $('#qualityerror').html('This field is required.');
@@ -308,14 +355,12 @@ $(function(){
                 str = false;
             }
         }*/
-
         if ($('input[name=make_costume]:checked').val() == 30) {
             if ($('input[name=make_costume_time1]').val() == "") {
                 $('#usercostumeerror').html('This field is required.');                 
                 str = false;
             }
-        }
-       console.log(str);
+        }     
         if (str == true) {
             $('#step3').addClass('active');
             $('#upload_div').css('display', 'none');
@@ -329,9 +374,6 @@ $(function(){
         $(window).scrollTop(scrollPos);
         return str;
     });
-
-   
-    
     $('#costume_description_back').click(function() {
         $('#step2').removeClass('active');
         $('#upload_div').css('display', 'block');
@@ -339,9 +381,9 @@ $(function(){
         $('#pricing_div').css('display', 'none');
         $('#preferences_div').css('display', 'none');
     });
-
     //front view image adding code here
     $(document).on("change", "#file1", function() {
+        $("#zoom-level").val('');
         $(".modal-footer").show();
         var imgdata = '';
         var imgVal = $(this).val();
@@ -371,21 +413,23 @@ $(function(){
                                 scalable: false,
                                 zoomOnWheel:false,
                                 dragMode:'move',
-                                minCropBoxWidth:198,
+                                viewMode:1,
+                                minCropBoxWidth:220,
                                 minCropBoxHeight:298,
                                 cropBoxMovable:true,
                                 cropBoxResizable:false,
                                 zoomOnTouch:false,
-                                viewMode:1,
-                                setDragMode:'none',
+                                setDragMode:'move',
                                 aspectRatio: 3 / 5,
-                                center:false,
+                                autoCropArea: 0.80,
+                                center:true,
 
                                 data: {
-                                    width: 198,
+                                    width: 220,
                                     height:298
                                 },
                             });
+
                             $image.cropper('getCroppedCanvas', {
                                 width: 220,
                                 height: 298,
@@ -394,29 +438,27 @@ $(function(){
                                 imageSmoothingQuality: 'high',
                             });
                         }, 1000);
-
-                        $("img").mousedown(function(){
-    return false;
-});
-                        $(document).on("input", "#zoom-level", function() {
+                            $("img").mousedown(function(){
+                            return false;
+                        });
+                           $(document).on("input", "#zoom-level", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
                         $(document).on("click", "#crop", function() {
                             $("#myModal").modal('hide');
-                            imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);                         
                             $(".modalOpen1").attr('value',imgdata);
                             $(".result").attr("src", imgdata);
                             $("#og_image").attr('content',imgdata);
                             $("#success_page").children().find(".media-object").attr('src',imgdata);
-
+                            $(".modalOpen1").width(220);
+                            $(".modalOpen1").height(298);
                             $(".result").css({ "width": "198px", "height": "298px" });
                             $("#file1").hide();
                             $(this).parents().find("#front_view").children("#drag_n_drop_1").removeClass('hide');
-
                         });
-
                     }
                     reader.readAsDataURL(file[0]);
                 });
@@ -430,6 +472,7 @@ $(function(){
 
     //second file image code starts here
     $(document).on("change", "#file2", function() {
+         $("#zoom-level2").val('');
         $(".modal-footer").show();
         var imgVal = $(this).val();
         if (imgVal != "") {
@@ -489,9 +532,11 @@ $(function(){
 
                         $(document).on("click", "#crop2", function() {
                             $("#myModal2").modal('hide');
-                            var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                            var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
                             $(".modalOpen2").attr('value',imgdata);
                             $(".result2").attr("src", imgdata);
+                            $(".modalOpen2").width(220);
+                            $(".modalOpen2").height(298);
                             $(".result2").css({ "width": "198px", "height": "298px" });
                             $("#file2").hide();
                             $(this).parents().find("#back_view").children("#drag_n_drop_2").removeClass('hide');
@@ -512,6 +557,7 @@ $(function(){
     //additional file uoploading functionality
 
     $(document).on("change", "#file3", function() {
+         $("#zoom-level3").val('');
         $(".modal-footer").show();
         var imgVal = $(this).val();
         if (imgVal != "") {
@@ -570,7 +616,7 @@ $(function(){
                         });
                         $(document).on("click", "#crop3", function() {
                             $("#myModal3").modal('hide');
-                            var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                            var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
                             $(".modalOpen3").attr('value',imgdata);
                             $(".result3").attr("src", imgdata);
                             $(".result3").css({ "width": "198px", "height": "298px" });
@@ -648,6 +694,7 @@ $(function(){
         var Height = $('#Height').val();;
         var pounds = $('#pounds').val();
         var ounces = $('#ounces').val();
+        
         if (price == "") {
             $('#price').css('border', '1px solid red');
             $('#priceerror').html('This field is required.');
@@ -710,48 +757,29 @@ $(function(){
         var atLeastOneIsChecked = $('input[name="another_charity"]:checked').length > 0;
         var charity_name = $('input[name="charity_name"]:checked').length > 0;
         var organzation_name = $('#organzation_name').val();
+    
 
-        if (handlingtime == "") {
+        if(parseInt(donate_charity) == 0 && charity_name != '' ){
+            $('#donate_charity').css('border', '1px solid red');
+            $('#donate_charityerror').html('Select Donate Amount');
+            str = false;
+        }else if(parseInt(donate_charity) != 0 && charity_name == '' ){
+            $('#charity_nameerror').html('Please select any Charity.');
+            str = false;
+        }
+
+        if (handlingtime == '' || handlingtime == null) {
             $('#handlingtime').css('border', '1px solid red');
             $('#handlingtimeerror').html('This field is required.');
             str = false;
         }
-        if (returnpolicy == undefined || returnpolicy == '') {
-            //$('#returnpolicy').css('border', '1px solid red');
+
+        if (returnpolicy == undefined || returnpolicy == '' || returnpolicy == null) {
             $('#returnpolicyerror').html('This field is required.');
             str = false;
         }
-        if (donate_charity == 0) {
-            /*$('#donate_charity').css('border', '1px solid red');
-            $('#donate_charityerror').html('Select Donate Amount');*/
-            str = true;
-        }
-
        
-
-        if (donate_charity != "" && donate_charity != 0) {
-            $('#charity_nameerror').html('Please select any Charity.');
-            str = false;
-            if (charity_name == true) {
-                $('#charity_nameerror').html('');
-                str = true;
-            };
-        }
-
-        if (charity_name == true) {
-            if (donate_charity == "" || donate_charity == 0) {
-                //$('#donate_charity').css('border', '1px solid red');
-                $('#donate_charityerror').html('Select Donate Amount');
-                $('#charity_nameerror').html('');
-                str = false;
-            }
-        }
-        /*if($('input[name=charity_name]:checked').length<=0){
-         $('#charity_name').css('border','1px solid red');
-         $('#charity_nameerror').html('Select Donate to');
-         str=false;
-
-         }*/
+         
         if (atLeastOneIsChecked == true) {
             $('#organzation_name').css('border', '1px solid red');
             $('#organzation_nameerror').html('This field is required.');
@@ -766,11 +794,12 @@ $(function(){
         if (loading) {
             return;
         }
-
         if (str == true) {
             loading = true;
             $('#preferences_finished').html("Submitting");
+
             $('#ajax_loader').css('display', 'block');
+          
             $.ajax({
                 url: "/costume/costumecreate",
                 type: "POST",
@@ -780,8 +809,7 @@ $(function(){
                 processData: false,
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
-                    //console.log(response.cat_url);
+          
                     if (response.msg == "success") {
                         $('#ajax_loader').remove();
                         $("#costume_view_my_listing").attr("href", response.cat_url);
@@ -916,6 +944,10 @@ $(function(){
         var active_item_index = getActiveItemIndex(items);
         activeCropperObjIndex = active_item_index;
         slider.val(zooms[active_item_index]);
+        if(activeCropperObjIndex >0)
+        {
+            slider.val(2);
+        }
         if(zooms[activeCropperObjIndex] !== -100){
             slider.trigger("input");
         }
@@ -941,7 +973,7 @@ $(function(){
     //multiple file uploading code
 
     $("#upload-file-selector").on("change",function () {
-
+        slider.val('');
         var imgVal = $(this).val();
         if (imgVal != "") {
             $('#lightbox').modal('show');
@@ -955,6 +987,7 @@ $(function(){
                     $(".modal-footer").show();
                 }
                 $($(this)[0].files).each(function (index, element) {
+
                     var file = $(this);
                     var reader = new FileReader();
                     reader.onload = function (e) {
@@ -998,13 +1031,16 @@ $(function(){
                                 dragMode: 'move',
                                 minCropBoxWidth: 198,
                                 minCropBoxHeight: 298,
+                                minCanvasWidth:198,
+                                minCanvasHeight:298,
                                 cropBoxMovable: true,
                                 cropBoxResizable: false,
                                 zoomOnTouch: false,
-                                  viewMode:1,
+                                viewMode:1,
                                 setDragMode: 'move',
                                 aspectRatio: 3 / 5,
                                 center: false,
+                                responsive:true,
                                 data: {
                                     width: 198,
                                     height: 298
@@ -1016,7 +1052,10 @@ $(function(){
                                 fillColor: '#fff',
                                 imageSmoothingEnabled: false,
                                 imageSmoothingQuality: 'high',
+                                 minWidth: 220,
+                                 minHeight: 298,
                             });
+
                             $cropper_objs.push($image);
                             zooms.push(-100);
                         }, 1000);
@@ -1041,7 +1080,7 @@ $(function(){
 
     $(document).on("click", ".saveMultiple", function () {
         $cropper_objs.forEach(function($image, index){
-            var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+            var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
             $('#other_thumbnails').append("<div index='"+index+"' class=\"col-md-4 col-sm-4 col-xs-12 multi_div\"><img src= " + imgdata + " class=\"multi_thumbs pip\">" +
                 "<br/><span class=\"remove\">" +
                 "<i class=\"fa fa-times-circle\"></i>" +
@@ -1068,7 +1107,5 @@ $(function(){
         activeCropperObjIndex = 0;
         $(".modal-footer").hide();
     }
-
-
 });
-
+ 

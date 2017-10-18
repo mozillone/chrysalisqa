@@ -8,7 +8,7 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}">
-
+<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
 @stop
 
 {{-- Page content --}}
@@ -90,7 +90,7 @@
 <script src="{{ asset('angular/Frontend/costumes/Services/costumes.js') }}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
-
+<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 @stop
 
 

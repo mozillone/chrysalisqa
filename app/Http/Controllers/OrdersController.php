@@ -687,7 +687,7 @@ class OrdersController extends Controller {
     public function myCostumesListData(Request $request)
     {
         $req=$request->all();
-        $where='where cst.created_by='.Auth::user()->id.'';
+        $where='where cst.created_by='.Auth::user()->id.' and cst.deleted_status = 0 ';
         $having='';
         if(!empty($req['search'])){
            if(!empty($req['search']['costume_name']) ){

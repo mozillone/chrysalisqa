@@ -54,6 +54,8 @@
 						@endif
 						<h1 class="social-media-sec">
 
+						
+
 							<div class="col-md-6 col-sm-12 col-xs-12">
 								<h2>{{$data[0]->name}}</h2>
 							</div>
@@ -113,6 +115,7 @@
 
 							</div>
 						</div>
+				
 						@if(Auth::check() && !empty($data['seller_info']['shipping_location'])  && helper::getSellerShippingAddress($data[0]->created_by) && helper::getUserShippingAddress())
                             <?php $priority_info=helper::domesticRateSingleCostume($data['seller_info']['shipping_location'][0]->zip_code,helper::getUserShippingAddress()['zip_code'],$data[0]->weight_pounds,$data[0]->weight_ounces);
                             ?>
@@ -123,7 +126,7 @@
 								<p class="shipp-rm shipp-rm-20"><label>Delivery: &nbsp; </label> @if($priority_info['result']=="1") Est. between {{date('D . M . d')}}  and {{date('D . M .d',strtotime('+'.$priority_info["msg"]["MailService"].' days'))}} @else {{$priority_info['msg']}} @endif  <i class="fa fa-info-circle" aria-hidden="true"></i></p>
 							</div>
 						@endif
-
+<!-- {!! nl2br($data['faq'][0]->attribute_option_value) !!}  -->
 						<p class="returns-rm">Returns: <span>Seller <?php if(isset($data['returns'][0])){ echo $data['returns'][0]->attribute_option_value; }else{ echo " Return Not Accepted"; } ?></span></p>
 
 
@@ -137,19 +140,20 @@
 								<li><a href="#viewTabs3" data-toggle="tab">Seller Information</a>
 								</li>
 							</ul>
-
 							<div class="tab-content viewTabs-content">
 
 								<div class="tab-pane active" id="viewTabs1">
 									<p class="viewTabs-text">{{$data[0]->description}}</p>
 								</div>
+
 								<div class="tab-pane" id="viewTabs2">
-									<p class="viewTabs-text">@if(count($data['faq'])) {{$data['faq'][0]->attribute_option_value}} @else <span>No FAQ found</span> @endif</p>
+									<p class="viewTabs-text">@if(count($data['faq'])) 
+									{!! nl2br($data['faq'][0]->attribute_option_value) !!} @else <span>No FAQ found</span> @endif</p>
 								</div>
+								 
 
-
-								<div class="tab-pane" id="viewTabs3">
-									<p class="viewTabs-text">
+									<div class="tab-pane" id="viewTabs3">
+										<p class="viewTabs-text">
 									@if(!empty($data['seller_info'][0]))
 										@if($data['seller_info'][0]->id != 1)
 											<p>Name: <span>{{$data['seller_info'][0]->display_name}}</span></p>
