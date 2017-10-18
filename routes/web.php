@@ -105,6 +105,10 @@ Route::any('/costume/createfour', array('as' => '','uses' => 'CreateCostumeContr
 Route::any('/costume/ajaxsubcategory', array('as' => '','uses' => 'CreateCostumeController@ajaxSubCategory'));
 
 Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeController@Costumecreate'));
+
+/* Added by Gayatri */
+Route::any('/costumedelete/{id}', 'CreateCostumeController@deleteCostume');
+/* End */
 /****costume create page 2 code ends here***/
 
 /* Request a bag starts here*/
@@ -230,6 +234,9 @@ Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 	    Route::any('/categories', ['as' => 'categories-list','uses'=>'CategoriesController@categoriesList']);
 	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
 	    Route::any('/getCostumesList', ['as' => '','uses'=>'CategoriesController@getCostumesList']);
+	    Route::get('/delete/categorycostume/{pid}/{cid}', 'CategoriesController@deleteCategoryCostume');
+	    //Route::get('/abc', 'CategoriesController@deleteCategoryCostume');
+	    
 		/****************Categories Management Ends Here***********************/
 
 		/****************Promotions Management Starts Here*********************/
