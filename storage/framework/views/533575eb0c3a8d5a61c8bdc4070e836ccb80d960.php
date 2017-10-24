@@ -41,9 +41,12 @@
 	<div class="list-box-rm list-box-rma">
 	<h2 class="list-box-head">KIDS COSTUMES</h2>
 	<ul class="box-list1 gender">
-	<li data-gender="male">Boys</li>
-	<li data-gender="female">Girls</li>
-	<li data-gender="unisex">Both</li>
+		<li data-gender="male">Men's</li>
+		<li data-gender="female">Women's</li>
+		<!-- <li data-gender="unisex">Both</li> -->
+		<li data-gender="boy">Boys</li>
+		<li data-gender="girl">Girls</li>
+		<li data-gender="baby">Babies</li>
 	</ul>
 	<input type="hidden" name="search[gender]" class="search"/>
 	</div>
@@ -128,6 +131,8 @@
 	<div class="hidden-sm hidden-md hidden-lg col-xs-12 mbl_slct-drp">
 	<p class="list-sec-rm1 mobile_heading_list"><?php echo e(strtoupper($data['sub_cat_info'][0]->name)); ?></p>
 		<select class="form-control" id="theams">
+			<!-- <li <?php if(Request::url()==URL::to("category/".$parent_cat_name)): ?> class="active" <?php endif; ?>><a href="/category/<?php echo e($parent_cat_name); ?>">See All</a></li> -->
+			<option value="/category/<?php echo e($parent_cat_name); ?>" <?php if(Request::url()==URL::to("category".$parent_cat_name)): ?> selected="" <?php endif; ?> >See All</option>
 		<?php $__currentLoopData = $categories_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$sub_cats_list): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
     		<option value="/category<?php echo e($sub_cats_list); ?>" <?php if(Request::url()==URL::to("category".$sub_cats_list)): ?> selected="" <?php endif; ?> ><?php echo e($key); ?></option>
     	<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
@@ -183,9 +188,15 @@
 													<div id="collapseOne1" class="panel-collapse collapse">
 														<div class="panel-body">
 															<ul class="box-list1 gender">
-																<li data-gender="male">Boys</li>
+															<li data-gender="male">Men's</li>
+															<li data-gender="female">Women's</li>
+															<!-- <li data-gender="unisex">Both</li> -->
+															<li data-gender="boy">Boys</li>
+															<li data-gender="girl">Girls</li>
+															<li data-gender="baby">Babies</li>
+																<!-- <li data-gender="male">Boys</li>
 																<li data-gender="female">Girls</li>
-																<li data-gender="unisex">Both</li>
+																<li data-gender="unisex">Both</li> -->
 															</ul>
 														</div>
 													</div>
@@ -205,9 +216,15 @@
 															<div id="collapseOne1" class="panel-collapse collapse">
 																<div class="panel-body">
 																	<ul class="box-list1 gender">
+																		<!-- <li data-gender="male">Men's</li>
+																		<li data-gender="female">Women's</li>
+																		<li data-gender="unisex">Both</li> -->
 																		<li data-gender="male">Men's</li>
 																		<li data-gender="female">Women's</li>
-																		<li data-gender="unisex">Both</li>
+																		<!-- <li data-gender="unisex">Both</li> -->
+																		<li data-gender="boy">Boys</li>
+																		<li data-gender="girl">Girls</li>
+																		<li data-gender="baby">Babies</li>
 																	</ul>
 																</div>
 															</div>
@@ -364,6 +381,18 @@
 <script src="<?php echo e(asset('/assets/frontend/js/pages/costume-like.js')); ?>"></script>
 <script src="<?php echo e(asset('/assets/frontend/js/pages/mini_cart.js')); ?>"></script>
 <script src="<?php echo e(asset('/assets/frontend/vendors/lobibox-master/js/notifications.js')); ?>"></script>
+
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$(document).on("click", ".holder a.jp-current ,.jp-next,.jp-previous",function () {
+		$('html,body').animate({
+		scrollTop: 300
+		}, 700);
+	});
+	});
+</script>
+
 
 <?php $__env->stopSection(); ?>
 
