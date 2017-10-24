@@ -13,14 +13,14 @@
 				<?php $counter = 0; ?>
 				@foreach($faqs as $faq)
 				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="headingOne-{{$faq->id}}">
-						<h4 class="panel-title">
-							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne-{{$faq->id}}" <?php echo (($counter == 0) ? "aria-expanded='true'" : "aria-expanded='false'") ?> aria-controls="collapseOne{{$faq->id}}" class="clps">
-								{{ $faq->title }}
-								<span class="more-expnd"><i class="more-less glyphicon glyphicon-triangle-bottom"></i></span>
-							</a>
-						</h4>
-					</div>
+						<div class="panel-heading" role="tab" id="headingOne-{{$faq->id}}">
+							<h4 class="panel-title">
+								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne-{{$faq->id}}" <?php echo (($counter == 0) ? "aria-expanded='true'" : "aria-expanded='false'") ?> aria-controls="collapseOne{{$faq->id}}" class="clps">
+									{{ $faq->title }}
+									<span class="more-expnd"><i class="more-less glyphicon glyphicon-triangle-bottom"></i></span>
+								</a>
+							</h4>
+						</div>
 					<div id="collapseOne-{{$faq->id}}" class="panel-collapse collapse @if($counter==0) @endif" role="tabpanel" aria-labelledby="headingOne-{{$faq->id}}">
 						<div class="panel-body">
 							{{ $faq->description }}

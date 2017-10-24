@@ -73,6 +73,7 @@ $('#drag_n_drop_3').click(function(){
 //front view image jquery code
 
 $(document).on("change", "#file1", function() {
+    $("#zoom-level").val('');
     $(".modal-footer").show();
     var imgdata = '';
     var imgVal = $(this).val();
@@ -166,6 +167,7 @@ $(document).on("change", "#file1", function() {
 
 //second file image code starts here
 $(document).on("change", "#file2", function() {
+    $("#zoom-level2").val('');
     $(".modal-footer").show();
     var imgVal = $(this).val();
     if (imgVal != "") {
@@ -258,6 +260,7 @@ $(document).on("change", "#file2", function() {
 //additional file uoploading functionality
 
 $(document).on("change", "#file3", function() {
+    $("#zoom-level3").val('');
     $(".modal-footer").show();
     var imgVal = $(this).val();
     if (imgVal != "") {
@@ -399,7 +402,7 @@ $(document).on("click", '#multiCancel', function(){
 //multiple file uploading code
 
 $("#upload-file-selector").on("change",function () {
-
+    slider.val('');
     var imgVal = $(this).val();
     if (imgVal != "") {
         $('#lightbox').modal('show');

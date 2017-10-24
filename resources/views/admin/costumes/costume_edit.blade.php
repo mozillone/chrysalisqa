@@ -121,10 +121,11 @@
 									</div>
 									<span id="gendererror" style="color:red"></span>
 								</div>
-								<?php //echo "<pre>";print_r($sub_cat->category_id);die; ?>
+								<?php //echo "<pre>";print_r($sub_cat);die; ?>
 								<div class="form-group has-feedback" >
 									<label for="inputEmail3" class="control-label">Catgeory<span class="req-field" >*</span></label>
-									<select class="form-control sony" name="category" id="category">
+									@if(!empty($sub_cat))
+										<select class="form-control sony" name="category" id="category">
 										<option value="">Select Category</option>
 										<?php
                                             $cos_data->modules_result = $categories['modules_result'];
@@ -139,6 +140,24 @@
 											</optgroup>
 										<?php }?>
 									</select>
+									@else
+										<select class="form-control sony" name="category" id="category">
+											<option value="">Select Category</option>
+											<?php
+												$features_req = $categories['modules_result'];
+												foreach ($features_req as $features_res) {
+													//print_r($features_res);
+												?>
+												<optgroup label="<?php echo ucfirst($features_res['name']);?>">
+													<?php foreach ($features_res['submodule_result'] as $feature_val_res) {
+													?>
+													<option value="<?php echo $feature_val_res['subcategoryid'];?>"><?php echo ucfirst($feature_val_res['subcategoryname']);
+													?></option>
+													<?php }?>
+												</optgroup>
+											<?php }?>
+										</select>
+									@endif
 									<span id="categoryerror" style="color:red"></span>
 								</div>
 
@@ -364,8 +383,8 @@
 											<input type="text" id="keywords_tag" class="form-control" name="keywords_tag">
 											<a href="javascript:void(0);" id="keywords_add" >ADD</a>
 											<div id="div" class="keywords_div">
-
-											@if(empty($cos_data->keywords))	
+						 
+											@if(empty($cos_data->cos_keywords))	
 									 
 									<input id="input_10" name="keyword_10" value="" type="hidden">
 									<input id="input_9" name="keyword_9" value="" type="hidden">
@@ -380,20 +399,23 @@
 								 	@endif	
 
 
-															@if(!empty($cos_data->cos_keywords))
-															<?php $explode = explode(',', $cos_data->cos_keywords);
-																foreach ($explode as $key => $keywords) {
-																?>
-																@if(!empty($keywords))
-																<p class="keywords_p p_{{$key+1}}">{{$keywords}}<span id="remove_{{$key+1}}">X</span> </p>
-																<input id="input_{{$key+1}}" name="keyword[]" value="{{$keywords}}" type="hidden">
-																@endif
-																<?php
-																}
-															?>
-															@endif
-														</div>
-														<div id="count">@if(!empty($cos_data->cos_keywords)){{10 -  count($explode)}} @endif left</div>
+
+								 	@if(!empty($cos_data->cos_keywords))
+											<?php $explode = explode(',', $cos_data->cos_keywords);
+												$keyword_count = count($explode);
+												foreach ($explode as $key => $keywords) {
+												?>
+												@if(!empty($keywords))
+												<p class="keywords_p p_{{10-$key}}">{{$keywords}}<span id="remove_{{10-$key}}">X</span> </p>
+												<input id="input_{{10-$key}}" name="keyword_{{10-$key}}" value="{{$keywords}}" type="hidden">
+												 
+												@endif
+												<?php
+												}
+											 ?>
+											@endif
+											</div>
+											<div id="count">@if(!empty($cos_data->cos_keywords)){{10 - count($explode)}} left @else 10 left @endif </div>
 													</div>
 													<span id="costume-desc-error" style="color:red"></span>
 												</div>
@@ -1126,6 +1148,7 @@ if(parseInt($("#donate_charity").val())<=10){
 			$("#freqent").addClass("hide");
 		}
 	});
+	$(".faq-checkbox").trigger("change");
 	var Fimage = $("input[name=Imagecrop1]").attr('data-id');
 	var Bimage = $("input[name=Imagecrop2]").attr('data-id');
 	var Aimage = $("input[name=Imagecrop3]").attr('data-id');
@@ -1302,7 +1325,7 @@ if(parseInt($("#donate_charity").val())<=10){
 											});
 										</script>
 										<script type="text/javascript">
-											$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensionsdimensionsWidth,#dimensionsdimensionsLength,#dimensionsdimensionsLength").on("keyup", function(){
+											$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensionsdimensionsWidth,#dimensionsdimensionsLength,#dimensionsdimensionsLength,#make_costume_time").on("keyup", function(){
 												var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
 												val = this.value;
 												if(!valid){

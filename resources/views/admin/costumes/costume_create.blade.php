@@ -1291,7 +1291,7 @@ autocomplete.setBounds(circle.getBounds());
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
 async defer></script>
 <script type="text/javascript">
-$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensions").on("keyup", function(){
+$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensions,#make_costume_time").on("keyup", function(){
 var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
 val = this.value;
 if(!valid){

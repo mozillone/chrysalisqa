@@ -902,47 +902,7 @@
 							$(".mobile-rm").toggleClass("toggle");	
 						});	
 					</script>
-<script type="text/javascript">
-						$(document).ready(function(){
-						
 
-				
-							$(".size_chekd").click(function(){
-							
-								var inputValue = $(this).attr("value");
-								var targetsizes_chart = $("." + inputValue);
-								$(".sizes_chart").not(targetsizes_chart).hide();
-								$(targetsizes_chart).show();
-							
-							
-							});
-						});
-						$("#szchart,#mens_chart").click(function(){
-						var radiobtn = document.getElementById("sizechart_1");
-						radiobtn.checked = true;
-						});
-						$("#womens_chart").click(function(){
-						var radiobtn = document.getElementById("sizechart_2");
-						radiobtn.checked = true;
-						});
-						$("#boys_chart").click(function(){
-						var radiobtn = document.getElementById("sizechart_3");
-						radiobtn.checked = true;
-						});
-						$("#girls_chart").click(function(){
-						var radiobtn = document.getElementById("sizechart_4");
-						radiobtn.checked = true;
-						});
-						$("#pets_chart").click(function(){
-						var radiobtn = document.getElementById("sizechart_5");
-						radiobtn.checked = true;
-						});
-						$("#infants_chart").click(function(){
-						var radiobtn = document.getElementById("sizechart_6");
-						radiobtn.checked = true;
-						});
-						
-					</script>
 	<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 	<script src="{{ asset('/assets/frontend/js/owl.carousel.min.js') }}"></script>
 	<script src="{{ asset('/assets/frontend/js/pages/costumes_view.js') }}"></script>
@@ -953,4 +913,41 @@
 	<script src="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.js') }}"></script>
 	<script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
 	<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$(".size_chekd").click(function(){
+		var inputValue = $(this).attr("value");
+		var targetsizes_chart = $("." + inputValue);
+		$(".sizes_chart").not(targetsizes_chart).hide();
+		$(targetsizes_chart).show();
+		});
+
+	
+	$("#szchart,#mens_chart").click(function(){
+	var radiobtn = document.getElementById("sizechart_1");
+	radiobtn.checked = true;
+	});
+	$("#womens_chart").click(function(){
+	var radiobtn = document.getElementById("sizechart_2");
+	radiobtn.checked = true;
+	});
+	$("#boys_chart").click(function(){
+	var radiobtn = document.getElementById("sizechart_3");
+	radiobtn.checked = true;
+	});
+	$("#girls_chart").click(function(){
+	var radiobtn = document.getElementById("sizechart_4");
+	radiobtn.checked = true;
+	});
+	$("#pets_chart").click(function(){
+	var radiobtn = document.getElementById("sizechart_5");
+	radiobtn.checked = true;
+	});
+	$("#infants_chart").click(function(){
+	var radiobtn = document.getElementById("sizechart_6");
+	radiobtn.checked = true;
+	});
+	
+					</script>
 @stop

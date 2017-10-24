@@ -80,6 +80,7 @@ class Request extends AbstractRequest
      */
     public function getProcessShipmentReply(ComplexType\ProcessShipmentRequest $processShipmentRequest)
     {
+       //echo"<pre>"; print_r($this->_soapClient->processShipment($processShipmentRequest->toArray())); exit;
         return $this->_soapClient->processShipment($processShipmentRequest->toArray());
     }
        /**

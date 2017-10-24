@@ -42,9 +42,12 @@
 	<div class="list-box-rm list-box-rma">
 	<h2 class="list-box-head">KIDS COSTUMES</h2>
 	<ul class="box-list1 gender">
-	<li data-gender="male">Boys</li>
-	<li data-gender="female">Girls</li>
-	<li data-gender="unisex">Both</li>
+		<li data-gender="male">Men's</li>
+		<li data-gender="female">Women's</li>
+		<!-- <li data-gender="unisex">Both</li> -->
+		<li data-gender="boy">Boys</li>
+		<li data-gender="girl">Girls</li>
+		<li data-gender="baby">Babies</li>
 	</ul>
 	<input type="hidden" name="search[gender]" class="search"/>
 	</div>
@@ -129,6 +132,8 @@
 	<div class="hidden-sm hidden-md hidden-lg col-xs-12 mbl_slct-drp">
 	<p class="list-sec-rm1 mobile_heading_list">{{strtoupper($data['sub_cat_info'][0]->name)}}</p>
 		<select class="form-control" id="theams">
+			<!-- <li @if(Request::url()==URL::to("category/".$parent_cat_name)) class="active" @endif><a href="/category/{{$parent_cat_name}}">See All</a></li> -->
+			<option value="/category/{{$parent_cat_name}}" @if(Request::url()==URL::to("category".$parent_cat_name)) selected="" @endif >See All</option>
 		@foreach($categories_list as $key=>$sub_cats_list)
     		<option value="/category{{$sub_cats_list}}" @if(Request::url()==URL::to("category".$sub_cats_list)) selected="" @endif >{{$key}}</option>
     	@endforeach
@@ -184,9 +189,15 @@
 													<div id="collapseOne1" class="panel-collapse collapse">
 														<div class="panel-body">
 															<ul class="box-list1 gender">
-																<li data-gender="male">Boys</li>
+															<li data-gender="male">Men's</li>
+															<li data-gender="female">Women's</li>
+															<!-- <li data-gender="unisex">Both</li> -->
+															<li data-gender="boy">Boys</li>
+															<li data-gender="girl">Girls</li>
+															<li data-gender="baby">Babies</li>
+																<!-- <li data-gender="male">Boys</li>
 																<li data-gender="female">Girls</li>
-																<li data-gender="unisex">Both</li>
+																<li data-gender="unisex">Both</li> -->
 															</ul>
 														</div>
 													</div>
@@ -206,9 +217,15 @@
 															<div id="collapseOne1" class="panel-collapse collapse">
 																<div class="panel-body">
 																	<ul class="box-list1 gender">
+																		<!-- <li data-gender="male">Men's</li>
+																		<li data-gender="female">Women's</li>
+																		<li data-gender="unisex">Both</li> -->
 																		<li data-gender="male">Men's</li>
 																		<li data-gender="female">Women's</li>
-																		<li data-gender="unisex">Both</li>
+																		<!-- <li data-gender="unisex">Both</li> -->
+																		<li data-gender="boy">Boys</li>
+																		<li data-gender="girl">Girls</li>
+																		<li data-gender="baby">Babies</li>
 																	</ul>
 																</div>
 															</div>
@@ -365,5 +382,17 @@
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
 <script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
+
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$(document).on("click", ".holder a.jp-current ,.jp-next,.jp-previous",function () {
+		$('html,body').animate({
+		scrollTop: 300
+		}, 700);
+	});
+	});
+</script>
+
 
 @stop

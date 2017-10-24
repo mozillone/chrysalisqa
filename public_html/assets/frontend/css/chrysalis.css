@@ -587,7 +587,21 @@ p.right_heading span.my_msg{font-weight:800;color:#323031;font-family:Proxima-No
 .billing_addres_1 p.bill_adrs_dlte{float:right;/* margin-top:-30px; */}
 i.fa.fa-at.jssocials-share-logo:after{content:"\f003";font-family:'FontAwesome';}
 i.fa.fa-at.jssocials-share-logo:before{display:none;}
-.btn.active, .btn:active {box-shadow: none !important;}.billing_addres_1 p.bill_adrs{float:left;width:90%;font-family:Proxima-Nova-Medium;border-bottom:0px solid #cccccc;padding-bottom:30px;}
+#edit_shipping span#basic-addon1 {
+    position: absolute;
+    z-index: 999;
+    width: 50px;
+    height: 40px;
+    line-height: 22px;
+    border-right: 1px solid #cccccc;
+}
+.input-group.paypal_field {
+    width: 90%;
+}
+.input-group.paypal_field #paypal_email {
+    margin-left: 45px;
+}
+.btn.active, .btn:active {box-shadow: none !important;}.billing_addres_1 p.bill_adrs{float:left;width:90%;font-family:Proxima-Nova-Medium;border-bottom:0px solid #cccccc;padding-bottom:0px;}
 .billing_addres_1 .form-group.add_new_btn{display:block;clear:left;text-align:right;padding-top:15px;}
 .billing_addres_1 .form-group.add_new_btn a{padding:7px 80px;background:#61c5ac;border:1px solid #61c5ac;color:#fff;font-weight:800;font-size:18px;text-align:right;}
 .rencemt_order_table{border:1px solid #e1e1e1;padding:10px 30px;margin-bottom:20px;}
@@ -1492,6 +1506,10 @@ span.remove_pic{cursor:pointer;color:red;}
 .how-it-works-page .tab-content .col-md-6:first-child{padding-right:0;}
 .how-it-works-page .tab-content .col-md-6:last-child{padding-left:0;}
 .tab-info{padding:15px 30px 3px 30px;background:#F5F8FB;}
+.founders_lft img {    height: auto !important;}
+.pay_pal_desc {font-size: 12px; }
+i.fa.fa-cc-paypal {color: #009cde;}
+#edit_shipping #basic-addon1 img {    width: 20px;}
 .tab-info h3{font-size:22px;font-family:Proxima-Nova-Extrabold;color:#31393C;}
 .abc{height:477px;width:570px;}
 .tab-img.tab1.wanto_sell{height:470px;}
@@ -1747,6 +1765,7 @@ form#register-newsletter input.btn.btn-custom-3{margin-left:9px;}
 .footer_head p{display:block !important;}
 }
 @media screen and (max-width:1024px){
+    .login-register ul.nav.nav-tabs li a:hover {background: none !important;}
 	.responsive-rm>li span.mobile-plus {
 		width: 100%;
     margin-bottom: 20px;
@@ -2070,6 +2089,9 @@ div#activity_yes_div .radio-inline{float:left;width:100%;text-align:left;margin-
 .upload_hint p:after{width:140px;height:187px;position:absolute;content:"";background:url(../../frontend/img/tip-arrow.png);background-repeat:no-repeat;right:-57px;top:125px;}
 }
 @media screen and (max-width:767px){ 
+    .input-group.paypal_field {
+    width: 85%;
+}
 	.col-md-8.col-sm-8.pdlft0.how_lng_tme .col-md-2.col-sm-4.col-xs-12.pdlft25 {
     padding-left: 10px;
 }
@@ -2516,7 +2538,7 @@ form.navbar-form.navbar-left.mble_srch-div button.close{margin-top:-24px;margin-
 .press-articles hr{display:none;}
 .panel-group-mobile-cms .press-filters{border:none;overflow-y:scroll;max-height:430px;padding-top:0px;}
 .panel-group-mobile-cms .panel.panel-default h4.panel-title a i{font-size:12px;top:0px;}
-.panel-group-mobile-cms a:hover, a:active{text-decoration:none !important;color:#FFF;cursor:pointer;}
+.panel-group-mobile-cms a:hover, a:active{text-decoration:none !important;color:#323031;cursor:pointer;}
 .panel-group-mobile-cms{clear:both;}
 .panel-group-mobile-cms .panel.panel-default h4.panel-title{text-align:center;color:#fff;width:100%;font-family:Proxima-Nova-bold;background:#60c3ab;font-size:16px;padding:19px;}
 .panel-group-mobile-cms .panel-body{padding:20px 0px 0px 0px;}
@@ -2569,8 +2591,9 @@ p.shipp-rm.shipp-rm-20{width:100%;}
 .viewBtn_rm button{width:100%;font-size:16px;}
 input.addtocart-rm{width:100%;font-size:16px;}
 .product_view_rm{width:100%;float:inherit;margin:20px 0;}
-.carousel-bg-style.bxslider-strt .bx-wrapper{min-height:350px;max-height:350px;}
+.carousel-bg-style.bxslider-strt .bx-wrapper{min-height:500px;max-height:500px;}
 .request-bag-steps span span.step-header{font-size:16px;}
+ul.bxslider li{display: inherit;    min-height: 500px;}
 .option-sec p a{font-size:16px;text-decoration:underline;}
 .option-sec h3{font-size:18px;}
 .mbl-step1-header span.step-header{color:#323031;}

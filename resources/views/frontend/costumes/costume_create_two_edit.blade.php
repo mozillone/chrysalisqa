@@ -982,7 +982,7 @@
 					@if(count($db_make_costume_time)== 1)
                         <div class="col-md-12  col-sm-12 how_div" id="mention_hours" style="display: block;">
 						<p class="col-md-4  col-sm-6" id="mention_hours" @if(count($db_make_costume_time)!= 1) style="display: none;" @endif >How long did it take?</p>
-						<p class="col-md-8" id="mention_hours_input" @if(count($db_make_costume_time)!= 1) style="display: none;" @endif><input type="text" name="make_costume_time" id="make_costume_time1" value="{{$db_make_costume_time->attribute_option_value}}" class="input-rm100"> <span><i>hours</i><span>
+						<p class="col-md-8" id="mention_hours_input" @if(count($db_make_costume_time)!= 1) style="display: none;" @endif><input type="text" name="make_costume_time" id="make_costume_time1" value="{{$db_make_costume_time->attribute_option_value}}" class="input-rm100"> <span><i>hours</i><span><span id="usercostumeerror" style="color:red"></span>
                         </div>
 					</p>
 					@else
@@ -1041,7 +1041,7 @@
 											@endif
 										</div>
 
-										<div id="count">@if(!empty($costume_description->keywords)){{10 - count($explode)}}left @else 10 left @endif </div>
+										<div id="count">@if(!empty($costume_description->keywords)){{10 - count($explode)}} left @else 10 left @endif </div>
 											
 									</div>
 								</div>
@@ -1217,7 +1217,7 @@
 								<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 									<p class="form-rms-que">Return Policy *</p>
 								</div>
-								<div class="col-md-8 col-sm-8 col-xs-12">
+								<div class="col-md-8 col-sm-8 col-xs-12 return_divs">
 									<p class="form-rms-input">
 									@if(isset($db_return) && !empty($db_return))
                                     @foreach($returnpolicy as $index=>$returnpolicy)
@@ -1283,8 +1283,8 @@
 											<?php //echo $costume_details->charity_id;die; ?>
 											@foreach($charities as $index=>$charity)
 												<li>
-													<img src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" />
-														<p>{{$charity->name}}</p>
+													<img class="img-responsive" src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" />
+													
 											<input type="radio" id="{{$charity->name}}" @if($costume_details->charity_id == $charity->id) checked="checked" @endif value="{{$charity->id}}" name="charity_name" /></li>
 											@endforeach
 										</ul>
@@ -1391,6 +1391,7 @@
                                     </div>
                                 </div>
                          </div>
+						    </div>
 						
 						<!-- End -->
 						<!-- </div> -->
@@ -1496,7 +1497,7 @@
 
 
                               
-                            $('#price').on('keydown', function(e){-1!==$.inArray(e.keyCode,[46,8,9,27,13,110,190])||/65|67|86|88/.test(e.keyCode)&&(!0===e.ctrlKey||!0===e.metaKey)||35<=e.keyCode&&40>=e.keyCode||(e.shiftKey||48>e.keyCode||57<e.keyCode)&&(96>e.keyCode||105<e.keyCode)&&e.preventDefault()});
+                            $('#price,#pounds,#ounces').on('keydown', function(e){-1!==$.inArray(e.keyCode,[46,8,9,27,13,110,190])||/65|67|86|88/.test(e.keyCode)&&(!0===e.ctrlKey||!0===e.metaKey)||35<=e.keyCode&&40>=e.keyCode||(e.shiftKey||48>e.keyCode||57<e.keyCode)&&(96>e.keyCode||105<e.keyCode)&&e.preventDefault()});
                           
                             var selector = '.ct3-list  li';
                             $(selector).on("click",function()

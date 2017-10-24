@@ -31,20 +31,17 @@ class CreateCostumeController  extends Controller {
 	{
 		$this->sitehelper = new SiteHelper();
 	    
-	
 		Meta::title('Chrysalis');
         Meta::set('robots', 'index,follow');
         $this->middleware(function ($request, $next) {
-              if(!Auth::check()){
-                 Session::put('curentURL',URL::current());
+            if(!Auth::check()){
+                Session::put('curentURL',URL::current());
                 return Redirect::to('/login')->send();
             }
             else{
                  return $next($request);
             }
-        });
-			
-
+        }, ['except' => ['requestaBag','Postrequestabag']]);
 	}
 	public function costumeListings($sub_cat_id,$parent_cat_name)
 	{
@@ -84,7 +81,7 @@ class CreateCostumeController  extends Controller {
 		$cosplayfour_values=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('attribute_id','5')->get();
 		$cosplayfive=DB::table('attributes')->select('attribute_id as attributeid','code as code','label as label','type as type')->where('attribute_id','21')->first();
 		$cosplayfive_values=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('attribute_id','21')->get();
-		$categories=DB::table('category')->select('category_id as categoryid','name as categoryname')->where('status','=','1')->where('parent_id','=','0')->get();
+		$categories=DB::table('category')->select('category_id as categoryid','name as categoryname')->where('status','=','1')->where('parent_id','=','0')->orderby('sort_order','asc')->get();
 
 
 		$handwashed=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
@@ -130,7 +127,7 @@ class CreateCostumeController  extends Controller {
 	    }
 	    else
 	    {
-	    	 $results = DB::table('category')->where('parent_id', '=',$id)->where('status', '=',1)->get(['category_id as subcategoryid','name as subcategoryname']);
+	    	 $results = DB::table('category')->where('parent_id', '=',$id)->where('status', '=',1)->orderby('sort_order','asc')->get(['category_id as subcategoryid','name as subcategoryname']);
 			return $results;
 	    }
 
@@ -920,6 +917,7 @@ class CreateCostumeController  extends Controller {
 
 		}
 	public function requestaBag(){
+
 		Meta::set('title', 'Request a Bag');
         Meta::set('description', 'Request a Bag to send your costumes to Chrysalis');
 		$this->data = array();
@@ -934,11 +932,7 @@ class CreateCostumeController  extends Controller {
 	}
 
 	public function Postrequestabag(Request $request){
-
-		/*echo "<pre>";
-		print_r($request->all());die;*/
-
-		//echo date('y-m-d H:i:s');die;
+		//dd($request->all());
 		$cus_email 		= $request->email_address;
 		$email_check    = DB::table('users')->where('email',$cus_email)->count();
 		//echo "<pre>";print_r($email_check);die;
@@ -1074,7 +1068,7 @@ class CreateCostumeController  extends Controller {
 		$cosplayfour_values=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('attribute_id','5')->get();
 		$cosplayfive=DB::table('attributes')->select('attribute_id as attributeid','code as code','label as label','type as type')->where('attribute_id','21')->first();
 		$cosplayfive_values=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('attribute_id','21')->get();
-		$categories=DB::table('category')->select('category_id as categoryid','name as categoryname')->where('status','=','1')->where('parent_id','=','0')->get();
+		$categories=DB::table('category')->select('category_id as categoryid','name as categoryname')->where('status','=','1')->where('parent_id','=','0')->orderby('sort_order','asc')->get();
 		$shippingoptions=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','9')->get();
 		$packageditems=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')

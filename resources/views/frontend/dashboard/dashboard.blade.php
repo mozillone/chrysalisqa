@@ -142,8 +142,13 @@
 										
 										<div class="checkbox">
 										<label class="shiping_checkbox"><input type="checkbox" <?php if (Auth::user()->is_free == 1) { ?> checked="checked" <?php } ?> name="free_shipping" id="free_shipping">I want to Offer Free Shipping</label></div>
-										<label>Please enter your PayPal email address to receive payouts.</label>
-										<input type="text" class="form-control"  name="paypal_email" value="{{Auth::user()->paypal_email}}" id="paypal_email" placeholder="Paypal email">
+										 Paypal Account <span class="pay_pal_desc">(Do you intend to receive payouts?)</span>
+										<!-- <label>Please enter your PayPal email address to receive payouts.</label> -->
+										<div class="input-group paypal_field">
+											<span class="input-group-addon" id="basic-addon1"><img src="{{URL::asset('assets/frontend/img/paypal.png')}}"></span>
+											<input type="text" class="form-control"  name="paypal_email" value="{{Auth::user()->paypal_email}}" id="paypal_email" placeholder="Paypal email">
+										</div>
+										
 										<div class="form-group ">
 										</div>
 										<div class="form-group update_btn">

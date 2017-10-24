@@ -122,10 +122,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
       }
       $('#charity_name').val(name);
       $('#charity_edit_popup').modal('show');
-<<<<<<< HEAD
  
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
      
      
  });
@@ -249,10 +246,7 @@ $(document).on("click",".remove_pic",function(){
   $('#img-chan').attr('src',"/charities_images/default-placeholder.jpg");
   $('input[type="file"]').val('');
   $('input[name="is_removed"]').val("1");
-<<<<<<< HEAD
   $(this).remove();
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   });
 $(document).on("click",".edit_remove_pic",function(){
   $('#img-chan1').attr('src',"/charities_images/default-placeholder.jpg");
@@ -283,8 +277,4 @@ $("#charity-edit").validate({
                     },
                 }
   
-<<<<<<< HEAD
         });
-=======
-        });
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3

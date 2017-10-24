@@ -56,33 +56,34 @@
                             <div class="list front_chat" id="myUL">
                                 @foreach($conversations_inbox as $inbox)
                                 <div class="clearfix row" attr-to="{{$inbox->conversation_id}}" >
-                                <a href="{{URL::to('message')}}<?php echo '/'.$inbox->conversation_id; ?>">
+                               
+                                <a href="@if(!empty($inbox->type_id)){{URL::to('message')}}<?php echo '/'.$inbox->conversation_id; ?> @else javascript:void(0); @endif">
 
-                                <div class="col-md-3 col-sm-4">
-                                <ul>
-                                <li>
-                                <img src="{{isset($inbox->user_img) && !empty($inbox->user_img)?url('/profile_img/'.$inbox->user_img):url('/profile_img/default.jpg')}}" alt="avatar" />      
-                                </li>
-                                <li>
-                                <p>{{$inbox->first_name}}</p>
-                                <span>{{ date('m-d-y', strtotime($inbox->created_at))}}</span>
-                                </li>
+                                    <div class="col-md-3 col-sm-4">
+                                        <ul>
+                                            <li>
+                                                <img src="{{isset($inbox->user_img) && !empty($inbox->user_img)?url('/profile_img/'.$inbox->user_img):url('/profile_img/default.jpg')}}" alt="avatar" />      
+                                            </li>
+                                            <li>
+                                                <p>{{$inbox->first_name}}</p>
+                                                <span>{{ date('m-d-y', strtotime($inbox->created_at))}}</span>
+                                            </li>
 
-                                </ul>
+                                        </ul>
 
-                                <div>@if($inbox->is_seen!=1 && $inbox->user_id!=auth()->user()->id)<span class="msg_cnt"></span>@endif</div>
+                                        <div>@if($inbox->is_seen!=1 && $inbox->user_id!=auth()->user()->id)<span class="msg_cnt"></span>@endif</div>
 
-                                </div>
-                                <div class="col-md-6 col-sm-5">
+                                    </div>
+                                    <div class="col-md-6 col-sm-5">
 
-                                <h4>{{$inbox->subject}}</h4>
-                                <div @if($inbox->is_seen!=1 && $inbox->user_id!=auth()->user()->id) class="status" @else class="status_unbold" @endif>
-                                @if(auth()->user()->id == $inbox->id)
-                                @endif
-                                <span>{!!substr($inbox->message, 0, 35)!!}@if(strlen($inbox->message)>35){{'...'}}@endif</span>
+                                        <h4>{{$inbox->subject}}</h4>
+                                        <div @if($inbox->is_seen!=1 && $inbox->user_id!=auth()->user()->id) class="status" @else class="status_unbold" @endif>
+                                        @if(auth()->user()->id == $inbox->id)
+                                        @endif
+                                        <span>{!!substr($inbox->message, 0, 35)!!}@if(strlen($inbox->message)>35){{'...'}}@endif</span>
 
-                                </div>
-                                </div>
+                                        </div>
+                                    </div>
                                 <div class="col-md-2 col-sm-2 text-center">
                                     <?php
                                     if(isset($inbox->image) && !empty($inbox->image)){

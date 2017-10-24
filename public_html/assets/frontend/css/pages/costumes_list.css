@@ -71,12 +71,12 @@ width: 200px;
     border-bottom: 2px solid #60c4ac;
     color: #000;    text-align: center;
     padding: 12px;
-    font-size: 16px;
-    font-family: Proxima-Nova-Extrabold;
+    font-size: 14px;
+    font-family: Proxima-Nova-bold;
 }
 .r-bag_div .table>tbody>tr>td {
     border-top: 0px solid #fff;
-    font-family: Proxima-Nova-Extrabold;    text-align: center;
+    font-family: Proxima-Nova-bold;    text-align: center;
     color: #000;
     font-size: 16px;
 }
@@ -93,7 +93,7 @@ width: 200px;
     font-size: 18px;margin-bottom: 40px;
     color: #000;
 }
-.tbl_cnt h3 {
+.tbl_cnt h3 { 
     font-family: Proxima-Nova-Extrabold;
     font-size: 18px;
     color: #000;
@@ -102,4 +102,200 @@ width: 200px;
     font-family: Proxima-Nova-bold;
     font-size: 16px;
     color: #000;
+}
+.costumes-desktop .price-tag{display: none;}
+
+
+.request_bag_page .average-payout-sec .tip-sec img {
+    position: relative;
+    right: -45px;
+    bottom: -39px;
+}
+
+.request_bag_page .average-payout-sec .tip-sec {
+    position: absolute;
+    bottom: 0;
+    right: -70px;
+}
+    .row.costumes.tabs_view_film {
+    border: none;
+    padding-top: 0px;
+}
+
+/*Media start here*/
+
+
+
+
+@media only screen and (min-device-width:768px) and (max-device-width:1024px){
+    .row.costumes.tabs_view_film {
+    border: none;
+    padding-top: 0px;
+}
+
+div#payouts .col-md-12.col-sm-12 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.costumes-label span:last-child {
+    margin-right: 0;
+}
+}
+
+@media screen and (max-width:767px){ 
+
+.list_pagination a{    margin-right: 5px !important;    font-size: 12px;padding: 5px;}
+.imageModel .modal-content{    width: 90%;    margin: 0 auto;}
+.r-bag_div ul.nav.nav-pills li a{    font-size: 12px;width: auto;padding: 8px;}
+.carousel-cart-img .price-tag{display: none !important;}
+.tbl_cnt{width: auto;}
+
+.costumes-label span:last-child {
+    margin-right: 0;
+}
+.costumes-carousel .carousel-inner{    width: 100% !important;}
+
+
+
+/*Charity*/
+.costumes-desktop .cart-img, .carousel-inner .carousel-cart-img img {
+    width: 100%;
+}
+.create_edit .checkbox-custom-label, .radio-custom-label{width: 100%; text-align: left;}
+
+.create_edit .form-rms.descibr_smte_text p, .form-rms-detailed, #freqently span {
+    text-align: left;float: left;
+}
+.create_edit #keywords_add {
+
+    line-height: 16px;
+    width: 30%;
+    float: right;
+}
+div#count {
+    text-align: left;
+    float: left;
+    display: block;
+    width: 100%;
+}
+input#keywords_tag{border-radius: 0px !important; box-shadow: none;}
+.ct3-list li img{float: inherit !important;}
+/*.form-rms.lst-stp ul li{width: auto !important}*/
+.create_edit .ct3-list li img{margin-bottom: 5px;width: auto;
+    height: auto;
+    min-height: auto;
+    max-height: 95px;}
+#dynamic_percent_amounts {
+    float: none !important;
+    position: relative !important;
+    left: 10px;
+    text-align: left;
+}
+.return_divs .col-md-4.col-sm-6 {
+    padding-left: 0px;
+}
+.form-rms.lst-stp ul li{padding-left: 5px !important;
+    padding-right: 5PX !important;}
+/*    .create_edit .form-rms.lst-stp ul li {
+    width: 30% !important;
+}*/
+.col-md-8.col-sm-8.pdlft0.how_lng_tme .col-md-2.col-sm-4.pdlft10:nth-child(2) {
+    padding-left: 10px;
+}
+.describe_cnt.scrool_top p{text-align: left;}
+.form-rms.descibr_smte_text p {
+    text-align: left;
+}
+/*.film-sec{background-color: transparent; padding-left: 0px;}*/
+.theatre_quality .col-md-2.col-sm-4 {
+    padding-left: 0px;
+}
+.col-md-8.col-sm-8.pdlft0.how_lng_tme .col-md-12.col-sm-12 {
+    padding-left: 10px;
+}
+div#mention_hours{text-align: left !important;}
+.costume_create_st1 .col-md-8.col-sm-8.pdlft0.how_lng_tme .col-md-2.col-sm-4.pdlft10:nth-child(2) {
+    padding-left: 0px;
+}
+.costume_create_st1 .col-md-8.col-sm-8.pdlft0.how_lng_tme .col-md-2.col-sm-4.pdlft10 {
+    padding-left: 0;
+}
+div#freqently {
+    text-align: left;
+}
+#pricing_div .form-rms{text-align: left;}
+.costume_create_st1 .col-md-8.col-sm-8.retrun_plicy .col-md-4.col-sm-6.pdlft10 {
+    padding-left: 0px;
+}
+.costume_create_st1 .ct3-list li img {
+    width: 95px;
+}
+#other_thumbnails img{width: 197px !important} 
+.multi_thumbs{width: 197px !important; margin: 0 auto;}
+
+a#costume_description_next, a#pricing_next{width: auto;}
+.form-rms-input textarea{top: 10px;}
+.keywords_div {
+    float: left;
+}
+a#keywords_add {
+    line-height: 16px;
+    width: 30%;
+    float: right; text-align: center;
+}
+a#preferences_finished {
+    float: right;
+    width: auto;
+}
+img#ajax_loader {
+    position: absolute;
+    top: -14px;
+    right: 167px;
+}
+.img-pp-iner {
+    width: 100% !important;
+    margin: 0 auto;
+    margin-top: 20px !important;
+    margin-bottom: 10px;    padding-bottom: 0px !important;
+}
+.img-pp-iner img.img-responsive.crp2 {
+    float: right;
+    margin-right: inherit !important;
+}
+.list-box-head{    font-size: 14px;}
+.list-box-search .box-search-arrw{line-height: 45px;}
+.box-list2 li {
+    width: 100% !important;
+    float: left;
+    font-family: Proxima-Nova-Semibold;
+    font-size: 16px;
+    color: #323031;
+    cursor: pointer;
+    margin: 5px 0;
+}
+.panel-group-mobile-cms a:hover, a:active{color: #323031 !important;}
+.r-bag_div .carousel-indicators {
+    display: block;
+}
+.r-bag_div a.left.carousel-control span.glyphicon.glyphicon-chevron-left{display: block;    left: -20px;}
+.r-bag_div a.right.carousel-control span.glyphicon.glyphicon-chevron-right{display: block;    right: -20px;}
+.average-payout-sec .carousel-inner>.item .carousel-cart-img img{width: 100% !important;}
+.r-bag_div.col-md-8.col-md-offset-2.average-payout-sec {    padding: 0;}
+.average-payout-sec-next.form-rms-btn{    margin-top: 60px;}
+.film-sec {    background-color: #FFD23F;    width: auto !important;    height: 30px;    display: inline-flex;    line-height: 31px;    align-items: center;    padding-left: 10px !important;    padding-right: 10px !important;}
+span.mb_price_tag {    margin-top: 10px;} 
+p.price_tip_crsl {    color: #ef4066;margin-top: 15px;}
+div#payouts .col-md-12.col-sm-12 {
+    padding-left: 15px;
+}
+.glyphicon-chevron-left:before {
+    color: #000;
+    content: "\f104";
+    font-family: 'FontAwesome';
+}
+.glyphicon-chevron-right:before {
+    color: #000;
+    content: "\f105";
+    font-family: 'FontAwesome';
+}
 }

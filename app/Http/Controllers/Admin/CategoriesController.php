@@ -40,7 +40,7 @@ class CategoriesController extends Controller
    }
    public function categoriesData(Request $request)
    {
-        $categories = DB::select('SELECT cat.category_id,cat.name,cat.parent_id,if(cat.parent_id=0,cat.name,cat1.name)  as main_cat,cat.sort_order  FROM `cc_category`  as cat INNER JOIN cc_category as cat1 on  cat.parent_id=cat1.category_id  or cat.parent_id="0" where cat.status=1 GROUP by cat.category_id order by parent_id,category_id asc');
+        $categories = DB::select('SELECT cat.category_id,cat.name,cat.parent_id,if(cat.parent_id=0,cat.name,cat1.name)  as main_cat,cat.sort_order  FROM `cc_category`  as cat INNER JOIN cc_category as cat1 on  cat.parent_id=cat1.category_id  or cat.parent_id="0" where cat.status=1 GROUP by cat.category_id order by (case when cat.parent_id > 0 then cat1.sort_order end) asc,(case WHEN cat1.parent_id=0 then cat.sort_order end) asc');
         return response()->success(compact('categories'));
    }
    public function getCostumesList(){

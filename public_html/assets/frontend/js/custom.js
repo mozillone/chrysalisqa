@@ -32,7 +32,7 @@ $(function(){
 
 	$("#popup_password").rules("add", {required:true,minlength:8,maxlength:15});
 	$("#pop_cpassword").rules("add", {required:true,equalTo:"#popup_password",messages: {
-		equalTo: "Password doesn't matches."
+		equalTo: "Passwords don't match."
 	  }});
 	$("#signup_pop1").validate({
             rules: {
@@ -65,7 +65,7 @@ $(function(){
                  		remote: "This email is already registered."
                  	},
                  cpassword:{
-                 	equalTo: "Password doesn't matches."
+                 	equalTo: "Passwords don't match."
                  }
                  }	
        

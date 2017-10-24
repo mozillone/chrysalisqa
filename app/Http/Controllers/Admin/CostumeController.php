@@ -62,7 +62,7 @@ class CostumeController extends Controller
 	 /*******Array push for both categories and subcategories displaying code starts here*****/
 	 $categories = array('modules_result'=>array());
 		/****Getting the hotel feautures code starts here***/
-		$hotelfeautures =\DB::table('category')->where('parent_id','=','0')->get();
+		$hotelfeautures =\DB::table('category')->where('parent_id','=','0')->orderby('sort_order','asc')->get();
 		//print_r($hotelfeautures);exit;
 		 $hotelcount=count($hotelfeautures);
 		if($hotelcount > 0)
@@ -79,7 +79,7 @@ class CostumeController extends Controller
 				  $where=array('cc.parent_id'=>$feautures_response->category_id);
 					  $hotelfeautures=\DB::table('category as cc')
 					 	->join('category', 'category.category_id', '=', 'cc.parent_id')
-           				->select('cc.category_id as subcategoryid','cc.name as subcategoryname')->where('cc.status',1)->where($where)->get();
+           				->select('cc.category_id as subcategoryid','cc.name as subcategoryname')->where('cc.status',1)->where($where)->orderby('cc.sort_order','asc')->get();
 					  $sub_count=count($hotelfeautures);
 					  if($sub_count > 0)
 					  {
@@ -156,6 +156,8 @@ class CostumeController extends Controller
 		->where('attribute_id','=','31')->get();
 
 		$cosplaySubCategories=Site_model::Fetch_data('category','*', array('parent_id'=>66,'status'=>1));
+		$cos_data = DB::table('costume_description')->where('costume_id',$id)->first();
+
 
 		$uniqueFashionSubCategories=Site_model::Fetch_data('category','*', array('parent_id'=>143,'status'=>1 ));
 
@@ -165,8 +167,7 @@ class CostumeController extends Controller
 		/****Array push code ends here***/
 	 return view('admin.costumes.costume_create',compact('title','customers','categories','bd_height',
 	 'bd_height_in','bd_weight','bd_chest','bd_waist','cosplay_one','cosplay_one_value','cosplay_two','cosplay_two_value','cosplay_three','cosplay_three_value',
-	 'cosplay_four','cosplay_four_value','cosplay_five','cosplay_five_value','descriptions','shippingoptions','packageditems','packageditems_value'
-	 ,'dimensions','dimensions_values','type','type_value','service','service_value','handling','returnpolicy','handling_value','returnpolicy_value','charities','handwashed',
+	 'cosplay_four','cosplay_four_value','cosplay_five','cosplay_five_value','descriptions','shippingoptions','packageditems','packageditems_value','cos_data','dimensions','dimensions_values','type','type_value','service','service_value','handling','returnpolicy','handling_value','returnpolicy_value','charities','handwashed',
 	 'description','description_value','funfacts','funfacts_value','faq','faq_value','cosplaySubCategories','uniqueFashionSubCategories','filmTheatreSubCategories'));
 	}
 	/*
@@ -406,46 +407,40 @@ class CostumeController extends Controller
 		 |@name varchar
 		 |@description text
 		 */
-		/*if (isset($request->keyword) && !empty($request->keyword)) {
-		 	$keywords=$request->keyword;
+ 
 
-		 	$final_keywords = implode(", ", $keywords);
-		}else{
-		 	$final_keywords= "";
-		}*/
-
-		   $final_keywords = array();
-			if($request->has('keyword_10')){
+		    $final_keywords = array();
+			if(!empty($request->keyword_10)){
 				$final_keywords[1] = $request->keyword_10;
 			}
-			if($request->has('keyword_9')){
+			if(!empty($request->keyword_9)){
 				$final_keywords[2] = $request->keyword_9;
 			}
-			if($request->has('keyword_8')){
+			if(!empty($request->keyword_8)){
 				$final_keywords[3] = $request->keyword_8;
 			}
-			if($request->has('keyword_7')){
+			if(!empty($request->keyword_7)){
 				$final_keywords[4] = $request->keyword_7;
 			}
-			if($request->has('keyword_6')){
+			if(!empty($request->keyword_6)){
 				$final_keywords[5] = $request->keyword_6;
 			}
-			if($request->has('keyword_5')){
+			if(!empty($request->keyword_5)){
 				$final_keywords[6] = $request->keyword_5;
 			}
-			if($request->has('keyword_4')){
+			if(!empty($request->keyword_4)){
 				$final_keywords[7] = $request->keyword_4;
 			}
-			if($request->has('keyword_3')){
+			if(!empty($request->keyword_3)){
 				$final_keywords[8] = $request->keyword_3;
 			}
-			if($request->has('keyword_2')){
+			if(!empty($request->keyword_2)){
 				$final_keywords[9] = $request->keyword_2;
 			}
-			if($request->has('keyword_1')){
+			if(!empty($request->keyword_1)){
 				$final_keywords[10] = $request->keyword_1;
 			}
-          $final_keywords = implode(",", $final_keywords);
+			$final_keywords = implode(",", $final_keywords);
 
 		$costume_description = array('costume_id'=>$costume_id,
 									'language_id'=>"1",
@@ -990,7 +985,7 @@ class CostumeController extends Controller
 		/*******Array push for both categories and subcategories displaying code starts here*****/
 		$this->data['categories']=array('modules_result'=>array());
 		/****Getting the hotel feautures code starts here***/
-		$hotelfeautures =\DB::table('category')->where('parent_id','=','0')->get();
+		$hotelfeautures =\DB::table('category')->where('parent_id','=','0')->orderby('sort_order','asc')->get();
 		//print_r($hotelfeautures);exit;
 		 $hotelcount=count($hotelfeautures);
 		if($hotelcount > 0)
@@ -1007,7 +1002,7 @@ class CostumeController extends Controller
 				  $where=array('cc.parent_id'=>$feautures_response->category_id);
 					  $hotelfeautures=\DB::table('category as cc')
 					 ->join('category', 'category.category_id', '=', 'cc.parent_id')
-           ->select('cc.category_id as subcategoryid','cc.name as subcategoryname')->where($where)->get();
+           ->select('cc.category_id as subcategoryid','cc.name as subcategoryname')->where($where)->orderby('cc.sort_order','asc')->get();
 					  $sub_count=count($hotelfeautures);
 					  if($sub_count > 0)
 					  {
@@ -1066,6 +1061,10 @@ class CostumeController extends Controller
 		$this->data['activity_yes_opt'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','28')->first();
 		$this->data['make_costume_time'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','29')->first();
 		$this->data['film_name'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','30')->first();
+
+	$this->data['cos_data'] = DB::table('costume_description')->where('costume_id',$id)->first();
+
+
 		/****Description,funfacts and faq code starts here***/
 		$this->data['descriptions']=DB::table('attributes')
 		->leftJoin('attribute_options','attribute_options.attribute_id','=','attributes.attribute_id')
@@ -1111,11 +1110,7 @@ class CostumeController extends Controller
 		$this->data['faq_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',8)->get();
 		$this->data['faq_value_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',8)->first();
 		$this->data['sub_cat'] = DB::table('costume_to_category')->where('costume_id',$id)->first();
-		/*if ($this->data['costumes_data']->cos_charity_id == 0) {
-			# code...
-			$charity_id =DB::table('charities')->where('costume_id',$id)->first();
-			$this->data['costumes_data']->cos_charity_id = $charity_id->id;
-		}*/
+	 
 
 
 		$this->data['handling_costume'] = DB::table('costumes as c')
@@ -1204,12 +1199,9 @@ class CostumeController extends Controller
 
 
     public function updateCostume(Request $request){
-
-
-
-		$delete_costume_attributes = DB::table('costume_attribute_options')->where('costume_id',$request->costume_id)->delete();
-	 // echo "<pre>";print_r($request->all());die;
-   	$response=array();
+ 
+	$delete_costume_attributes = DB::table('costume_attribute_options')->where('costume_id',$request->costume_id)->delete();
+   	  $response=array();
 	  $req=$request->all();
 	  $userid=Auth::user()->id;
 	  $customer_name=$req['customer_name'];
@@ -1451,38 +1443,38 @@ class CostumeController extends Controller
 	 }*/
 
 
-	 $final_keywords = array();
-			if($request->has('keyword_10')){
+	   $final_keywords = array();
+			if(!empty($request->keyword_10)){
 				$final_keywords[1] = $request->keyword_10;
 			}
-			if($request->has('keyword_9')){
+			if(!empty($request->keyword_9)){
 				$final_keywords[2] = $request->keyword_9;
 			}
-			if($request->has('keyword_8')){
+			if(!empty($request->keyword_8)){
 				$final_keywords[3] = $request->keyword_8;
 			}
-			if($request->has('keyword_7')){
+			if(!empty($request->keyword_7)){
 				$final_keywords[4] = $request->keyword_7;
 			}
-			if($request->has('keyword_6')){
+			if(!empty($request->keyword_6)){
 				$final_keywords[5] = $request->keyword_6;
 			}
-			if($request->has('keyword_5')){
+			if(!empty($request->keyword_5)){
 				$final_keywords[6] = $request->keyword_5;
 			}
-			if($request->has('keyword_4')){
+			if(!empty($request->keyword_4)){
 				$final_keywords[7] = $request->keyword_4;
 			}
-			if($request->has('keyword_3')){
+			if(!empty($request->keyword_3)){
 				$final_keywords[8] = $request->keyword_3;
 			}
-			if($request->has('keyword_2')){
+			if(!empty($request->keyword_2)){
 				$final_keywords[9] = $request->keyword_2;
 			}
-			if($request->has('keyword_1')){
+			if(!empty($request->keyword_1)){
 				$final_keywords[10] = $request->keyword_1;
 			}
-          $final_keywords = implode(",", $final_keywords);
+			$final_keywords = implode(",", $final_keywords);
           
 
 		$costume_description=array(

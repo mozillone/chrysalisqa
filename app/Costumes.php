@@ -22,12 +22,12 @@ class Costumes extends Authenticatable
          'costume_id', 'name', 'sku_no', 'quantity', 'price', 'gender', 'condition', 'sort_order', 'status', 'created_user_group', 'created_by', 'viewed', 'item_location', 'size', 'created_at', 'updated_at'
     ];
     protected function getCategoryInfo($cat_id){
-        $data=DB::Select('SELECT *  FROM `cc_category` WHERE category_id="'.$cat_id.'"');
+        $data=DB::Select('SELECT *  FROM `cc_category` WHERE category_id="'.$cat_id.'" order by sort_order asc');
         return $data;
         
     }
     protected function getParentCategories($parent_cat_id){
-        $data=DB::Select('SELECT *  FROM `cc_category` WHERE parent_id="'.$parent_cat_id.'"');
+        $data=DB::Select('SELECT *  FROM `cc_category` WHERE parent_id="'.$parent_cat_id.' order by sort_order asc"');
         return $data;
         
     }

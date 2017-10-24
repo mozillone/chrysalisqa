@@ -414,12 +414,12 @@ $('#other_organzation_check').css('display','none');
             }
         }*/
 
-          if ($('input[name=make_costume]:checked').val() == 30) {
-              if ($('input[name=make_costume_time]').val() == "") {
-                  $('#usercostumeerror').html('This field is required.');
-                  str = false;
-              }
+      if ($('input[name=make_costume]:checked').val() == 30) {
+          if ($('#make_costume_time1').val() == "" || $("#make_costume_time1").val() == null) {
+              $('#usercostumeerror').text('This field is required.');
+              str = false;
           }
+      }
      
         if (str == true) {
             $('#step3').addClass('active');
@@ -671,10 +671,8 @@ return false;
     {
         var val = $('#keywords_tag').val();
         if(val != ""){
-            var div_cont= $('#count').html().split(' '); 
-            console.log(div_cont[0]);   
+            var div_cont= $('#count').html().split(' ');              
             var total =10-$(".keywords_p").length;
-
             if (total > 0) {
                 if (val.indexOf(',') !== -1) {
                     var segments = val.split(',');
@@ -732,7 +730,7 @@ return false;
 //front view image jquery code
 
 $(document).on("change", "#file1", function() {
-  
+   $("#zoom-level").val('');
     $(".modal-footer").show();
     var imgdata = '';
     var imgVal = $(this).val();
@@ -819,6 +817,7 @@ $(document).on("change", "#file1", function() {
 
 //second file image code starts here
 $(document).on("change", "#file2", function() {
+     $("#zoom-level2").val('');
     $(".modal-footer").show();
     var imgVal = $(this).val();
     if (imgVal != "") {
@@ -906,6 +905,7 @@ $(document).on("change", "#file2", function() {
 //additional file uoploading functionality
 
 $(document).on("change", "#file3", function() {
+     $("#zoom-level3").val('');
     $(".modal-footer").show();
     var imgVal = $(this).val();
     if (imgVal != "") {
@@ -1041,7 +1041,7 @@ $(document).on("click", '#multiCancel', function(){
 //multiple file uploading code
 
 $("#upload-file-selector").on("change",function () {
-
+    slider.val('');
     var imgVal = $(this).val();
     if (imgVal != "") {
         $('#lightbox').modal('show');

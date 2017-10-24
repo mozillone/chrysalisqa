@@ -326,6 +326,13 @@ $('#dynamic_percent_amounts').html("$"+amount);
 		                }
 		            }
 				},
+				make_costume_time:{
+					required: {
+		                depends: function(element) {
+		                    return $("input[name='make_costume']:checked").val() == 30
+		                }
+		            }
+				},
 			},
 			highlight: function(element) {
           	 $(element).closest('.form-control').addClass('error');
@@ -605,6 +612,13 @@ $('#dynamic_percent_amounts').html("$"+amount);
 					required: {
 		                depends: function(element) {
 		                    return $('#size').val() == 'custom' 
+		                }
+		            }
+				},
+				make_costume_time:{
+					required: {
+		                depends: function(element) {
+		                    return $("input[name='make_costume']:checked").val() == 30
 		                }
 		            }
 				},
@@ -962,7 +976,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
     {
         var val = $('#keywords_tag').val();
         if(val != ""){
-            var div_cont= $('#count').html().split(' ');
+            var div_cont= $('#count').html().split(' ');              
             var total =10-$(".keywords_p").length;
             if (total > 0) {
                 if (val.indexOf(',') !== -1) {
@@ -971,100 +985,42 @@ $('#dynamic_percent_amounts').html("$"+amount);
                     $('#count').html(total-count+ " left");
                     if (total == 1) {
                         var hashtag = '#'+segments[0];
-                        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
-                        $('#keywords_tag').prop('value','');
+                        //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
+                        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p> ');
+                        $('#keywords_tag').prop('value','');    
                         $('#input_'+total+'').val(hashtag);
                         $('#count').html(total-1+ " left");
                     }else{
                         $.each(segments,function(i){
                             var hashtag = '#'+segments[i];
-                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
-                            $('#input_'+total+'').val(hashtag);
+                            //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
+                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span></p>');                                                         
+                            $('#input_'+total+'').val(hashtag);       
                             $('#keywords_tag').prop('value','');
                             total--;
                         });
                     }
                 }else{
                     var hashtag = '#'+val;
-                    $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                    //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
+                    $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p><input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
                     $('#keywords_tag').prop('value','');
                     $('#input_'+total+'').val(hashtag);
-                    $('#count').html(total-1+ " left");
+                    $('#count').html(total-1+ " left"); 
                 }
             }else{
                 $('#keywords_add').hide();
-            }
+            } 
         }
     }
     
 
 
-
-
-/*$("#keywords_add").click(function(){
-
-  var val = $('#keywords_tag').val();
-	if (val != "") {
-  var div_cont= $('#count').html().split(' ');
-  var total =div_cont[0];
-  if (total > 0) {
-    if (val.indexOf(',') !== -1) { 
-      var segments = val.split(',');
-      var count=segments.length;
-      $('#count').html(total-count+ " left");
-      if (total == 1) {
-        var hashtag = '#'+segments[0];
-        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
-        $('<input>').attr({
-          id:'input_'+total+'',
-            type: 'hidden',
-            name: 'keyword[]',
-            value:''+hashtag+''
-        }).appendTo('#div');
-        $('#keywords_tag').prop('value','');
-        $('#count').html(total-1+ " left");
-      }else{
-        $.each(segments,function(i){
-        var hashtag = '#'+segments[i];
-        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
-        $('<input>').attr({
-          id:'input_'+total+'',
-            type: 'hidden',
-            name: 'keyword[]',
-            value:''+hashtag+''
-        }).appendTo('#div');
-        $('#keywords_tag').prop('value','');
-        total--;
-        });
-      }
-    }else{
-      var hashtag = '#'+val;
-      $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
-      $('<input>').attr({
-        id:'input_'+total+'',
-          type: 'hidden',
-          name: 'keyword[]',
-          value:''+hashtag+''
-      }).appendTo('#div');
-      $('#keywords_tag').prop('value','');
-      $('#count').html(total-1+ " left");
-    }
-  }else{
-    $('#keywords_add').hide();
-  }
-	}
-  });*/
-
-
-
-
-
   $(document).on('click', '[id^="remove_"]', function(e){
-    e.preventDefault();
+  	e.preventDefault();
     var this_id = $(this).attr('id');
     var split   = this_id.split('_');
     var target = $(e.target).closest( ".p_"+split[1]+"" ).remove();
-
     var target = $("#input_"+split[1]+"").remove();
     var div_cont= $('#count').html().split(' ');
     var total = div_cont[0];
@@ -1073,3 +1029,5 @@ $('#dynamic_percent_amounts').html("$"+amount);
       $('#keywords_add').show();
     }
   });
+
+ 
