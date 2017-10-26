@@ -931,110 +931,247 @@ class CreateCostumeController  extends Controller {
 	  return view('frontend.costumes.requestabag')->with('total_data',$this->data);
 	}
 
+	/* Commented by Gayatri */
+	// public function Postrequestabag(Request $request){
+	// 	//dd($request->all());
+	// 	$cus_email 		= $request->email_address;
+	// 	$email_check    = DB::table('users')->where('email',$cus_email)->count();
+	// 	$user_info = DB::table('users')->where('email',$cus_email)->first();
+	// 	//echo "<pre>";print_r($email_check);die;
+	// 	if ($email_check == 1) {
+	// 		$req_bag_session = Session::get('auth_user_id_req_bag');
+			
+	// 		//if (Auth::check() || isset($req_bag_session) && !empty($req_bag_session)) {
+	// 			$userid 		= (Auth::check()) ? Auth::user()->id : $user_info->id;
+	// 			$is_payout 		= (empty($request->is_payout_no)) ? '1' : '0';
+	// 			$cus_name  		= $request->full_name;
+	// 			$cus_email 		= $request->email_address;
+	// 			$cus_phone 		= $request->phone_number;
+                
+ //                $is_return = "";                
+ //                $is_recycle = "";
+	// 			if (isset($request->is_return)) {
+					
+	// 				if($request->is_return == 1){
+	// 					$is_return = "1";
+	// 					$is_recycle = "0";
+	// 				}else{
+	// 					$is_recycle = "1";
+	// 					$is_return = "0";
+	// 				}
+	// 			}else{
+	// 				$is_return = "0";
+	// 				$is_recycle = "0";
+	// 			}
+	// 			/*
+	// 			if (isset($request->is_recycle) && !empty($request->is_recycle)) {
+	// 				$is_recycle 		= $request->is_recycle;
+	// 			}else{
+	// 				$is_recycle 		= "0";
+	// 			}
+	// 			*/
+	// 			if (isset($request->address2) && !empty($request->address2)) {
+	// 				$address2 		= $request->address2;
+	// 			}else{
+	// 				$address2 		= "";
+	// 			}
+	// 			$addres_array = array('fname'=>$cus_name,
+	// 				'address1'=>$request->address1,
+	// 				'address2'=>$address2,
+	// 				'city'=>$request->city,
+	// 				'state'=>$request->state,
+	// 				'zip_code'=>$request->zipcode,
+	// 				'phone'=>$cus_phone,
+	// 				'user_id'=>$userid,
+	// 				'address_type'=>'request_a_bag','created_on'=>date('y-m-d H:i:s'));
+	// 			$ref_no = mt_rand(10000, 99999);
+	// 			//echo $ref_no;die;
+	// 			$addres_insert=DB::table('address_master')->insertGetId($addres_array);
+
+	// 			$conversation_array = array('type'=>'request_a_bag','user_one'=>$userid,
+	// 				'subject'=>'Request a bag subject',
+	// 				'user_two'=>'1',
+	// 				'status'=>'1',
+	// 				'created_at'=>date('y-m-d H:i:s'));
+	// 			$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
+	// 			$theard_array  = array('message'=>'Hi',
+	// 								'is_seen'=>'0',
+	// 						        'deleted_from_sender'=>'0',
+	// 						        'deleted_from_receiver'=>'0',
+	// 						        'user_id'=>$userid,
+	// 						        'user_name'=>(Auth::check())?Auth::user()->display_name:$user_info->display_name,
+	// 						        'conversation_id'=>$conversation_insert,
+	// 						        'created_at'=>date('y-m-d H:i:s'));
+	// 			$theard = DB::table('messages')->insertGetId($theard_array);
+				
+	// 			$requestabag_array = array('user_id'=>$userid,
+	// 				'ref_no'=>$ref_no,
+	// 				'addres_id'=>$addres_insert,
+	// 				'conversation_id'=>$conversation_insert,
+	// 				'is_payout'=>$is_payout,
+	// 				'is_return'=>$is_return,
+	// 				'is_recycle'=>$is_recycle,
+	// 				'status'=>'requested',
+	// 				'cus_name'=>$cus_name,
+	// 				'cus_email'=>$cus_email,
+	// 				'cus_phone'=>$cus_phone,
+	// 				'created_at'=>date('Y-m-d H:i:s'),
+	// 				);
+
+	// 			$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
+	// 			$conversation_array = array('type_id'=>$ref_no);
+	// 			$conversation_insert=DB::table('conversations')->where('id',$conversation_insert)->update($conversation_array);
+                                
+ //                // send mail
+ //                $bag_url_admin 		= '/process-bag/'.$requestabag_insert;
+ //                $req_subject        = "REQUEST A BAG";
+ //                $req_data           = array('cus_name'=>$cus_name,'bag_url'=>$bag_url_admin);
+ //                $template           = 'emails.reqabag_requestfromuser';
+ //                $req_to             = 'support@chrysaliscostumes.com';
+ //                $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);
+ //            if (Auth::check()){                    
+	// 			return "success";
+	// 		}else{
+	// 			return "login";
+	// 		}
+	// 	}else{
+	// 		Session::put('curentURL',URL::to('costume/successrequestbag'));
+	// 		return "register";
+	// 	}
+	// }
+	
+	/**
+	 * Written by Gayatri
+	 * Storing Request bag data
+	 * @param Request $request [description]
+	 */
 	public function Postrequestabag(Request $request){
-		//dd($request->all());
+		$cus_email = $request->email_address;
+		$email_check = DB::table('users')->where('email',$cus_email)->count();
+		$user_info = DB::table('users')->where('email',$cus_email)->first();
+		
+		$is_payout 		= (empty($request->is_payout_no)) ? '1' : '0';
+		$cus_name  		= $request->full_name;
 		$cus_email 		= $request->email_address;
-		$email_check    = DB::table('users')->where('email',$cus_email)->count();
-		//echo "<pre>";print_r($email_check);die;
+		$cus_phone 		= $request->phone_number;
+        
+        $is_return = "";                
+        $is_recycle = "";
+		if (isset($request->is_return)) {
+			
+			if($request->is_return == 1){
+				$is_return = "1";
+				$is_recycle = "0";
+			}else{
+				$is_recycle = "1";
+				$is_return = "0";
+			}
+		}else{
+			$is_return = "0";
+			$is_recycle = "0";
+		}
+		if (isset($request->address2) && !empty($request->address2)) {
+			$address2 		= $request->address2;
+		}else{
+			$address2 		= "";
+		}
+		$ref_no = mt_rand(10000, 99999);
+
+		$addres_array = array(	
+								'fname'        => $cus_name,
+								'address1'     => $request->address1,
+								'address2'     => $address2,
+								'city'         => $request->city,
+								'state'        => $request->state,
+								'zip_code'     => $request->zipcode,
+								'phone'        => $cus_phone,
+								'user_id'      => '',
+								'address_type' => 'request_a_bag',
+								'created_on'   => date('y-m-d H:i:s')
+							);
+
+		$conversation_array = array('type'=>'request_a_bag','user_one'=>'',
+									'subject'=>'Request a bag subject',
+									'user_two'=>'1',
+									'status'=>'1',
+									'type_id'=>$ref_no,
+									'created_at'=>date('y-m-d H:i:s'));
+
+		$theard_array  = array('message'=>'Hi',
+								'is_seen'=>'0',
+						        'deleted_from_sender'=>'0',
+						        'deleted_from_receiver'=>'0',
+						        'user_id'=>'',
+						        'user_name'=>'',
+						        'conversation_id'=>'',
+						        'created_at'=>date('y-m-d H:i:s'));
+
+		$requestabag_array = array('user_id'=>'',
+									'ref_no'=>$ref_no,
+									'addres_id'=>'',
+									'conversation_id'=>'',
+									'is_payout'=>$is_payout,
+									'is_return'=>$is_return,
+									'is_recycle'=>$is_recycle,
+									'status'=>'requested',
+									'cus_name'=>$cus_name,
+									'cus_email'=>$cus_email,
+									'cus_phone'=>$cus_phone,
+									'created_at'=>date('Y-m-d H:i:s'),
+								);
+
 		if ($email_check == 1) {
 			$req_bag_session = Session::get('auth_user_id_req_bag');
 			
-			if (Auth::check() || isset($req_bag_session) && !empty($req_bag_session)) {
-				$userid 		= Auth::user()->id;
-				$is_payout 		= (empty($request->is_payout_no)) ? '1' : '0';
-				$cus_name  		= $request->full_name;
-				$cus_email 		= $request->email_address;
-				$cus_phone 		= $request->phone_number;
-                
-                $is_return = "";                
-                $is_recycle = "";
-				if (isset($request->is_return)) {
-					
-					if($request->is_return == 1){
-						$is_return = "1";
-						$is_recycle = "0";
-					}else{
-						$is_recycle = "1";
-						$is_return = "0";
-					}
-				}else{
-					$is_return = "0";
-					$is_recycle = "0";
-				}
-				/*
-				if (isset($request->is_recycle) && !empty($request->is_recycle)) {
-					$is_recycle 		= $request->is_recycle;
-				}else{
-					$is_recycle 		= "0";
-				}
-				*/
-				if (isset($request->address2) && !empty($request->address2)) {
-					$address2 		= $request->address2;
-				}else{
-					$address2 		= "";
-				}
-				$addres_array = array('fname'=>$cus_name,
-					'address1'=>$request->address1,
-					'address2'=>$address2,
-					'city'=>$request->city,
-					'state'=>$request->state,
-					'zip_code'=>$request->zipcode,
-					'phone'=>$cus_phone,
-					'user_id'=>$userid,
-					'address_type'=>'request_a_bag','created_on'=>date('y-m-d H:i:s'));
-				$ref_no = mt_rand(10000, 99999);
-				//echo $ref_no;die;
-				$addres_insert=DB::table('address_master')->insertGetId($addres_array);
+			$userid 		= (Auth::check()) ? Auth::user()->id : $user_info->id;
+			$addres_array['user_id'] = $userid;
+			$addres_insert = DB::table('address_master')->insertGetId($addres_array);
 
-				$conversation_array = array('type'=>'request_a_bag','user_one'=>$userid,
-					'subject'=>'Request a bag subject',
-					'user_two'=>'1',
-					'status'=>'1',
-					'created_at'=>date('y-m-d H:i:s'));
-				$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
-				$theard_array  = array('message'=>'Hi',
-									'is_seen'=>'0',
-							        'deleted_from_sender'=>'0',
-							        'deleted_from_receiver'=>'0',
-							        'user_id'=>$userid,
-							        'user_name'=>Auth::user()->display_name,
-							        'conversation_id'=>$conversation_insert,
-							        'created_at'=>date('y-m-d H:i:s'));
-				$theard = DB::table('messages')->insertGetId($theard_array);
-				
-				$requestabag_array = array('user_id'=>$userid,
-					'ref_no'=>$ref_no,
-					'addres_id'=>$addres_insert,
-					'conversation_id'=>$conversation_insert,
-					'is_payout'=>$is_payout,
-					'is_return'=>$is_return,
-					'is_recycle'=>$is_recycle,
-					'status'=>'requested',
-					'cus_name'=>$cus_name,
-					'cus_email'=>$cus_email,
-					'cus_phone'=>$cus_phone,
-					'created_at'=>date('Y-m-d H:i:s'),
-					);
-
-				$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
-				$conversation_array = array('type_id'=>$ref_no);
-				$conversation_insert=DB::table('conversations')->where('id',$conversation_insert)->update($conversation_array);
-                                
-                                // send mail
-                                $bag_url_admin = '/process-bag/'.$requestabag_insert;
-                                $req_subject        = "REQUEST A BAG";
-                                $req_data           = array('cus_name'=>$cus_name,'bag_url'=>$bag_url_admin);
-                                $template           = 'emails.reqabag_requestfromuser';
-                                $req_to             = "ndepa@dotcomweavers.com";//support@chrysaliscostumes.com
-                                $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);
-                                
+			$conversation_array['user_one'] = $userid;
+			$conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
+			
+			$theard_array['user_id'] = $userid;
+			$theard_array['user_name'] = (Auth::check())?Auth::user()->display_name:$user_info->display_name;
+			$theard_array['conversation_id'] = $conversation_insert;
+			$theard = DB::table('messages')->insertGetId($theard_array);
+			
+			$requestabag_array['user_id'] = $userid;
+			$requestabag_array['conversation_id'] = $conversation_insert;
+			$requestabag_array['addres_id'] = $addres_insert;
+			$requestabag_insert = DB::table('request_bags')->insertGetId($requestabag_array);
+			                
+			// send mail to Admin
+			$bag_url_admin 		= '/process-bag/'.$requestabag_insert;
+            $req_subject        = "REQUEST A BAG";
+            $req_data           = array('cus_name'=>$cus_name,'bag_url'=>$bag_url_admin);
+            $template           = 'emails.reqabag_requestfromuser';
+            $req_to             = 'gbhyri@dotcomweavers.com';//"support@chrysaliscostumes.com";
+            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);				                
+            
+            // send mail to user
+            $req_subject        = "REQUEST A BAG";
+            $req_data           = array('cus_name'=>$cus_name,'username'=>(Auth::check())?Auth::user()->username:$user_info->username);
+            $template           = 'emails.reqabag_requestfromuser';
+            $req_to             = (Auth::check())?Auth::user()->email:$user_info->email;//"support@chrysaliscostumes.com";
+            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);
+            if (Auth::check()){
 				return "success";
-
 			}else{
-
 				return "login";
 			}
 		}else{
+			$addres_insert = DB::table('tmp_address_master')->insertGetId($addres_array);
+			
+			$conversation_insert = DB::table('tmp_conversations')->insertGetId($conversation_array);			
+			$theard_array['conversation_id'] = $conversation_insert;
+			$theard = DB::table('tmp_messages')->insertGetId($theard_array);
+			
+			$requestabag_array['conversation_id'] = $conversation_insert;
+			$requestabag_array['addres_id'] = $addres_insert;
+			$requestabag_insert = DB::table('tmp_request_bags')->insertGetId($requestabag_array);
+
+			Session::put('curentURL',URL::to('costume/successrequestbag'));
+
 			return "register";
 		}
 	}

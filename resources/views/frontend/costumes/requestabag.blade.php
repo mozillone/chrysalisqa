@@ -820,7 +820,7 @@
 									window.location.href = "{{URL::to('login#signup_tab')}}";
 									loading = false;
 								}
-								else if (data.trim() == "success") {
+								else if (data == "success") {
 									window.location.href = "{{URL::to('costume/successrequestbag')}}";
 									loading = false;
 								}

@@ -31,7 +31,8 @@ class Order extends Authenticatable
     $this->stripe=new StripeApp();
   }
     protected function placeOrder($req){
-
+      //print_r(explode("_",$req['shipping_type']['107']));
+//echo"<pre>"; print_r($req); exit;
          $api_customer_id=Auth::user()->api_customer_id;
          $total=0;
          try {

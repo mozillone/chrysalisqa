@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use DB;
 use Config;
 use App\Helpers\Site_model;
+use App\Helpers\SiteHelper;
 use Auth;
 
 class Costumes extends Authenticatable
@@ -95,7 +96,7 @@ class Costumes extends Authenticatable
         return $costume_images;
     }
     protected function costumeSellerInfo($user_id){
-        $costumeSellerInfo=DB::Select('select id,display_name,email,phone_number from cc_users where id='.$user_id);
+        $costumeSellerInfo=DB::Select('select id,display_name,username,email,phone_number from cc_users where id='.$user_id);
         $costumeSellerInfo['shipping_location']=DB::Select('select * from cc_address_master where user_id='.$user_id.' and address_type="selling"');
         return $costumeSellerInfo;
     }
@@ -232,5 +233,92 @@ class Costumes extends Authenticatable
         return $a;
     }
     /* End */
+
+    /**
+     * Added by Gayatri
+     */
+    public static function createRequestBag($users)
+    {
+        $get_address_info = DB::table('tmp_address_master')->orderby('address_id','desc')->take(1)->first();
+
+        $get_conversations_info = DB::table('tmp_conversations')->orderby('id','desc')->take(1)->first();
+
+        $get_messages_info = DB::table('tmp_messages')->orderby('id','desc')->take(1)->first();
+
+        $get_request_bags_info = DB::table('tmp_request_bags')->orderby('id','desc')->take(1)->first();
+
+        $insert_address = array(    
+                                'fname'        => $get_address_info->fname,
+                                'address1'     => $get_address_info->address1,
+                                'address2'     => $get_address_info->address2,
+                                'city'         => $get_address_info->city,
+                                'state'        => $get_address_info->state,
+                                'zip_code'     => $get_address_info->zip_code,
+                                'phone'        => $get_address_info->phone,
+                                'user_id'      => $users,
+                                'address_type' => 'request_a_bag',
+                                'created_on'   => date('y-m-d H:i:s')
+                            );
+        $addres_insert = DB::table('address_master')->insertGetId($insert_address);
+
+        $conversation_array = array('type'=>'request_a_bag',
+                                    'user_one'=> $users,
+                                    'subject'=>'Request a bag subject',
+                                    'user_two'=>'1',
+                                    'status'=>'1',
+                                    'type_id'=>$get_conversations_info->type_id,
+                                    'created_at'=>date('y-m-d H:i:s'));
+        $conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
+
+        $theard_array  = array('message'=>'Hi',
+                                'is_seen'=>'0',
+                                'deleted_from_sender'=>'0',
+                                'deleted_from_receiver'=>'0',
+                                'user_id'=>$users,
+                                'user_name'=> $get_messages_info->user_name,
+                                'conversation_id'=> $conversation_insert,
+                                'created_at'=>date('y-m-d H:i:s'));
+        $theard = DB::table('messages')->insertGetId($theard_array);
+
+        $requestabag_array = array('user_id'=>$users,
+                                    'ref_no'=>$get_request_bags_info->ref_no,
+                                    'addres_id'=> $addres_insert,
+                                    'conversation_id'=> $conversation_insert,
+                                    'is_payout'=>$get_request_bags_info->is_payout,
+                                    'is_return'=>$get_request_bags_info->is_return,
+                                    'is_recycle'=>$get_request_bags_info->is_recycle,
+                                    'status'=>'requested',
+                                    'cus_name'=>$get_request_bags_info->cus_name,
+                                    'cus_email'=>$get_request_bags_info->cus_email,
+                                    'cus_phone'=>$get_request_bags_info->cus_phone,
+                                    'created_at'=>date('Y-m-d H:i:s'),
+                                );
+        $requestabag_insert = DB::table('request_bags')->insertGetId($requestabag_array);
+
+        $user_info = DB::table('users')->where('id',$users)->first();
+
+        /* Delete the tmp data in  */
+        DB::table('tmp_address_master')->where('address_id', $get_address_info->address_id)->delete();
+        DB::table('tmp_conversations')->where('id', $get_conversations_info->id)->delete();
+        DB::table('tmp_messages')->where('id', $get_messages_info->id)->delete();
+        DB::table('tmp_request_bags')->where('id', $get_request_bags_info->id)->delete();
+
+        // send mail to admin
+        $bag_url_admin      = '/process-bag/'.$requestabag_insert;
+        $req_subject        = "REQUEST A BAG";
+        $req_data           = array('cus_name'=>$get_request_bags_info->cus_name,'bag_url'=>$bag_url_admin);
+        $template           = 'emails.reqabag_requestfromuser';
+        $req_to             = 'gbhyri@dotcomweavers.com';//"support@chrysaliscostumes.com";
+        $mail_status        = SiteHelper::sendmail($req_to,$req_subject,$template,$req_data);
+
+        // send mail to user
+        $bag_url_admin      = '/process-bag/'.$requestabag_insert;
+        $req_subject        = "REQUEST A BAG";
+        $req_data           = array('cus_name'=>$get_request_bags_info->cus_name,'username'=>$user_info->username);
+        $template           = 'emails.reqabag_requestfromuser';
+        $req_to             = $user_info->email;
+        $mail_status        = SiteHelper::sendmail($req_to,$req_subject,$template,$req_data);
+        
+    }
 
 }

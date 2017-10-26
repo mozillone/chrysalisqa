@@ -1657,6 +1657,10 @@ i.fa.fa-arrow-right{font-size:18px;color:#a09fa0;}
 	.dnt-amcnts {
     padding-left: 15px !important;
 }
+
+.icon_lins.text-right ul li:hover ul.dropdown-menu.cart-products {
+   display: block !important;
+}
     .costume_create_st1 .prog-head{padding-left: 15px;}
 #costume_name{margin-top: 12px;}
 .leadership_slider .sml-media p.mrking{min-height: 57px;}

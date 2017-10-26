@@ -116,7 +116,7 @@ $(function(){
    		 
         });
 
-     $(document).on('click','.mini-cart', function(){
+     $(document).on('click mouseover','.mini-cart', function(){
      	 	var qty=0;
      	 	$.ajax({
 			type: 'GET',

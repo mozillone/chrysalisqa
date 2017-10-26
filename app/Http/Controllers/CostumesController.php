@@ -194,8 +194,9 @@ class CostumesController extends Controller {
 				Meta::set('title', ucfirst($costume_name->name));
 				
 				/* End */		
-				$data['seller_info']=Costumes::costumeSellerInfo($data[0]->created_by);
-                                $data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
+				$data['seller_info'] = Costumes::costumeSellerInfo($data[0]->created_by);
+                
+                $data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
 				//dd(nl2br($data['faq'][0]->attribute_option_value));
 				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2);
 			}else{

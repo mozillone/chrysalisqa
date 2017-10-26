@@ -18,6 +18,7 @@ use Cookie;
 use DB;
 use Meta;
 use Carbon\Carbon;
+use App\Costumes;
 //use App\BraintreeApp;
 use App\Helpers\StripeApp;
 class AuthController extends Controller {
@@ -130,6 +131,7 @@ class AuthController extends Controller {
 	}
  	public function postRegisterUser(Request $request)
 	{
+		//print_r($request->session()->get('curentURL')); //exit;
 		$req = $request->all();
 		//echo "<pre>";print_r($req);die;
 		$rule  =  array(  
@@ -147,7 +149,7 @@ class AuthController extends Controller {
 	    $rand=md5(uniqid(rand(), true));
 	    if(count(Session::get('social_data'))){ $active="1";}else{ $active="0";}
 	    try{
-         $customer=$this->stripe->customers($req['email']);
+         	$customer=$this->stripe->customers($req['email']);
         }catch(Exception $e){
            Session::flash('error', $e->getMessage());
            return Redirect::back();
@@ -171,7 +173,13 @@ class AuthController extends Controller {
 
                          
   		if($users){
+  			$curentURL = '';
+  			if($request->session()->get('curentURL') == URL::to('costume/successrequestbag')){
+  				$curentURL = URL::to('costume/successrequestbag');
+  				Costumes::createRequestBag($users);
+  			}
   			Session::flush();
+  			$request->session()->put('curentURL', $curentURL);
   			if($active){
   				Session::flash('success', 'Your account has been activated. You can login into your account now.');
   			}else{

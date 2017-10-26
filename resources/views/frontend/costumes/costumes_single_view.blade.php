@@ -157,7 +157,7 @@
 									@if(!empty($data['seller_info'][0]))
 										@if($data['seller_info'][0]->id != 1)
 											<p>Name: <span>{{$data['seller_info'][0]->display_name}}</span></p>
-											<p>Email: <span>{{$data['seller_info'][0]->email}}</span></p>
+											<p>Username: <span>{{$data['seller_info'][0]->username}}</span></p>
 											<p>Phone: <span>{{$data['seller_info'][0]->phone_number}}<span></p>
 										@else
 											<p>Name: <span>Chrysalis Support</span></p>
@@ -198,7 +198,7 @@
 										@if($data['seller_info'][0]->id != 1)
 											<p>Name: <span>{{$data['seller_info'][0]->display_name}}</span>
 											</p>
-											<p>Email: <span>{{$data['seller_info'][0]->email}}</span>
+											<p>Username: <span>{{$data['seller_info'][0]->username}}</span>
 											<!--<p>Phone: <span>{{$data['seller_info'][0]->phone_number}}<span></p>-->
 											</p>
 										@else
