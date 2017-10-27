@@ -165,14 +165,14 @@
 									<div class="form-group" >
 										<label for="inputEmail3" class="control-label">Condition <span class="req-field" >*</span></label>
 										<br>
-										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'good') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="good"  value="good">&nbsp;
-											Good&nbsp;
+										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'good') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="good"  value="good">
+											Good
 										</label>
-										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'like_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="likenew"  value="like_new">&nbsp;
-											Like New&nbsp;
+										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'like_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="likenew"  value="like_new">
+											Like New
 										</label>
-										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'brand_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="brandnew"  value="brand_new"> &nbsp;
-											Brand New&nbsp;
+										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'brand_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="brandnew"  value="brand_new">
+											Brand New
 										</label>
 									</div>
 									<span id="costumeconditionerror" style="color:red"></span>
@@ -333,10 +333,15 @@
 										<br>
 										<?php //echo "<pre>";print_r($cosplay_five_value_value);die; ?>
 										@if(!empty($cosplay_five_value_value->attribute_option_value_id))
-										@foreach($cosplay_five_value as $index=>$cosplayfivevalues)
-											<input type="{{$cosplay_five->type}}" @if($cosplay_five_value_value->attribute_option_value_id == $cosplayfivevalues->option_id) checked="checked" @endif name="{{$cosplay_five->code}}" id="{{$cosplay_five->code}}"  value="{{$cosplayfivevalues->option_id}}"  onclick="film_name_yes({{$cosplayfivevalues->option_id}})" class="faq-checkbox">&nbsp;
-											{{$cosplayfivevalues->option_value}}&nbsp;
-										@endforeach
+											@foreach($cosplay_five_value as $index=>$cosplayfivevalues)
+												<input type="{{$cosplay_five->type}}" @if($cosplay_five_value_value->attribute_option_value_id == $cosplayfivevalues->option_id) checked="checked" @endif name="{{$cosplay_five->code}}" id="{{$cosplay_five->code}}"  value="{{$cosplayfivevalues->option_id}}"  onclick="film_name_yes({{$cosplayfivevalues->option_id}})" class="faq-checkbox">&nbsp;
+												{{$cosplayfivevalues->option_value}}&nbsp;
+											@endforeach
+										@else
+											@foreach($cosplay_five_value as $index=>$cosplayfivevalues)
+												<input type="{{$cosplay_five->type}}"  <?php if ($cosplayfivevalues->option_value == "No") {?> checked="checked	" <?php }?>name="{{$cosplay_five->code}}" id="{{$cosplay_five->code}}"  value="{{$cosplayfivevalues->option_id}}" onclick="film_name_yes({{$cosplayfivevalues->option_id}})" class="faq-checkbox" required>&nbsp;
+												{{$cosplayfivevalues->option_value}}&nbsp;
+											@endforeach
 										@endif
 										@if(count($film_name)== 1)
 											<p class="form-rms-small" id="film_text" @if(count($film_name)!= 1) style="display: none;" @endif >Which production was your costume featured in? </p>
@@ -358,10 +363,15 @@
 										<span class="req-field" ></span></label>
 										<br>
 										@if(!empty($cosplay_four_value_value->attribute_option_value_id))
-										@foreach($cosplay_four_value as $index=>$cosplayfourvalues)
-										<input type="{{$cosplay_four->type}}" @if($cosplay_four_value_value->attribute_option_value_id == $cosplayfourvalues->option_id) checked="checked" @endif name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}" onclick="make_costume_yes({{$cosplayfourvalues->option_id}})" class="faq-checkbox">&nbsp;
-										{{$cosplayfourvalues->option_value}}&nbsp;
-										@endforeach
+											@foreach($cosplay_four_value as $index=>$cosplayfourvalues)
+											<input type="{{$cosplay_four->type}}" @if($cosplay_four_value_value->attribute_option_value_id == $cosplayfourvalues->option_id) checked="checked" @endif name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}" onclick="make_costume_yes({{$cosplayfourvalues->option_id}})" class="faq-checkbox">&nbsp;
+											{{$cosplayfourvalues->option_value}}&nbsp;
+											@endforeach
+										@else
+											@foreach($cosplay_four_value as $index=>$cosplayfourvalues)
+												<input type="{{$cosplay_four->type}}"  <?php if ($cosplayfourvalues->option_value == "No") {?> checked="checked" <?php }?>name="{{$cosplay_four->code}}" id="{{$cosplay_four->code}}"  value="{{$cosplayfourvalues->option_id}}" onclick="make_costume_yes({{$cosplayfourvalues->option_id}})" class="faq-checkbox" >&nbsp;
+												{{$cosplayfourvalues->option_value}}&nbsp;
+											@endforeach
 										@endif
 										@if(count($make_costume_time)== 1)
 										<p class="form-rms-small" id="mention_hours" @if(count($make_costume_time)!= 1) style="display: none;" @endif >If yes, how long did it take?</p>
@@ -566,25 +576,33 @@
 													<h2 class="heading-agent">Preferences</h2>
 													<div class="col-md-12">
 														<div class="form-group has-feedback" >
-															<label for="inputEmail3" class="control-label">{{$handling->label}}<span class="req-field" ></span></label>
+															<label for="inputEmail3" class="control-label">{{$handling->label}}<span class="req-field" > *</span></label>
 															<select class="form-control"    name="{{$handling->code}}" id="{{$handling->code}}">
 																<option value="">Select Handling Time</option>
 																@if(!empty($handling_value_value->attribute_option_value))
-																@foreach($handling_value as $index=>$handlingval)
-																	<option <?php if($handling_value_value->attribute_option_value == $handlingval->option_value) {?> selected="selected" <?php } ?> value="{{$handlingval->option_id}}">{{$handlingval->option_value}}</option>
-																@endforeach
+																	@foreach($handling_value as $index=>$handlingval)
+																		<option <?php if($handling_value_value->attribute_option_value == $handlingval->option_value) {?> selected="selected" <?php } ?> value="{{$handlingval->option_id}}">{{$handlingval->option_value}}</option>
+																	@endforeach
+																@else
+																	@foreach($handling_value as $index=>$handlingval)
+																		<option value="{{$handlingval->option_id}}">{{$handlingval->option_value}}</option>
+																	@endforeach
 																@endif
 															</select>
 															<p class="error">{{ $errors->first('name') }}</p>
 														</div>
 														<div class="form-group has-feedback"  style="disply:none">
-															<label for="inputEmail3" class="control-label">{{$returnpolicy->label}}<span class="req-field" ></span></label>
+															<label for="inputEmail3" class="control-label">{{$returnpolicy->label}}<span class="req-field" > *</span></label>
 															<select class="form-control"  name="{{$returnpolicy->code}}" id="{{$returnpolicy->code}}">
 																<option value="">Select Return Policy</option>
 																@if(!empty($returnpolicy_value_value->attribute_option_value))
-																@foreach($returnpolicy_value as $index=>$returnpolicyval)
-																<option <?php if($returnpolicy_value_value->attribute_option_value == $returnpolicyval->option_value) {?> selected="selected" <?php } ?> value="{{$returnpolicyval->option_id}}">{{$returnpolicyval->option_value}}</option>
-																@endforeach
+																	@foreach($returnpolicy_value as $index=>$returnpolicyval)
+																	<option <?php if($returnpolicy_value_value->attribute_option_value == $returnpolicyval->option_value) {?> selected="selected" <?php } ?> value="{{$returnpolicyval->option_id}}">{{$returnpolicyval->option_value}}</option>
+																	@endforeach
+																@else
+																	@foreach($returnpolicy_value as $index=>$returnpolicyval)
+																		<option value="{{$returnpolicyval->option_id}}">{{$returnpolicyval->option_value}}</option>
+																	@endforeach
 																@endif
 															</select>
 															<p class="error">{{ $errors->first('name') }}</p>

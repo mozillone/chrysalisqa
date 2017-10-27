@@ -91,10 +91,9 @@
 	<p class="list-box-search"><input type="text" placeholder="Enter postal code" name="search[zip_code]"><span class="box-search-arrw search"><i class="fa fa-arrow-right" aria-hidden="true"></i></span></p>
 	<h3 class="list-box-subhead">Condition</h3>
 	<ul class="box-list2">
-	<li><input type="checkbox" name="search[condition][]" value="brand_new" class="search"> Brand New</li>
+		<li><input type="checkbox" name="search[condition][]" value="good" class="search"> Good</li>
         <li><input type="checkbox" name="search[condition][]" value="like_new" class="search"> Like New</li>
-        <li><input type="checkbox" name="search[condition][]" value="excellent" class="search"> Excellent</li>
-	<li><input type="checkbox" name="search[condition][]" value="good" class="search"> Good</li>
+		<li><input type="checkbox" name="search[condition][]" value="brand_new" class="search"> Brand New</li>
 	</ul>
 
 	<h3 class="list-box-subhead">Size</h3>
@@ -285,10 +284,9 @@
 														<div class="panel-body">
 															<!--<h3 class="list-box-subhead">Condition</h3>-->
 															<ul class="box-list2">
-																<li><input type="checkbox" name="search[condition][]" value="brand_new" class="search"> Brand New</li>
 																<li><input type="checkbox" name="search[condition][]" value="good" class="search"> Good</li>
 																<li><input type="checkbox" name="search[condition][]" value="like_new" class="search"> Like New</li>
-																<li><input type="checkbox" name="search[condition][]" value="excellent" class="search"> Excellent</li>
+																<li><input type="checkbox" name="search[condition][]" value="brand_new" class="search"> Brand New</li>
 															</ul>
 														</div>
 													</div>

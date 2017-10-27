@@ -24,15 +24,27 @@ Home@parent
 								<div class="img_layer">
 									<a href="/product<?php echo e($cos->url); ?>" style="background-image: url(<?php echo e(asset('costumers_images/Medium')); ?><?php echo "/".$cos->cos_image; ?>)">
 									</a>
-									<div class="hover_box"><p class="like_fav"><a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>1</span></a> <a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a> </p><p class="hover_crt add-cart" data-costume-id="145"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p></div>
+									<div class="hover_box">
+										<p class="like_fav">
+											<a data-toggle="modal" data-target="#login_popup">
+												<span><i aria-hidden="true" class="fa fa-thumbs-up"></i>1</span>
+											</a> 
+											<a data-toggle="modal" data-target="#login_popup">
+												<span><i aria-hidden="true" class="fa fa-heart-o"></i></span>
+											</a>
+										</p>
+										<p class="hover_crt add-cart" data-costume-id="145">
+											<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
+										</p>
+									</div>
 								</div>
 								<div class="slider_cnt <?php if($cos->created_user_group != "admin" ): ?>no_brand <?php endif; ?> <?php if(strlen($cos->cos_name)<20): ?> sml_name <?php endif; ?>">
 									<?php if($cos->created_user_group == "admin"): ?>
-									<?php $is_admin=20;?>
-									<span class="cc_brand"><img src="<?php echo e(asset('img/chrysalis_brand.png')); ?>"></span>
+										<?php $is_admin=20;?>
+										<span class="cc_brand"><img src="<?php echo e(asset('img/chrysalis_brand.png')); ?>"></span>
 									
 									<?php else: ?>
-									<?php $is_admin=40;?>
+										<?php $is_admin=40;?>
 									<?php endif; ?>
 									<?php if(strlen($cos->cos_name) < 20) { ?>
 										

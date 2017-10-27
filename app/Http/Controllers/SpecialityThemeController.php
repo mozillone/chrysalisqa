@@ -39,21 +39,37 @@ class SpecialityThemeController extends Controller {
 		$cosplay=DB::table('category')->select('category_id as categoryid','name as name','thumb_image as image')->where('category_id',147)->first();
 
 		$uniquefashion=DB::table('category')->select('category_id as categoryid','name as name','thumb_image as image')->where('category_id',143)->first();
+
 		$film_theatre=DB::table('category')
 		->select('category_id as categoryid','name as name','thumb_image as image')->where('category_id',78)->first();
-		$cosplay_subcategories=DB::table('category')
+
+		$cosplay_subcategories = DB::table('category')
+		->select('category.category_id as categoryid','category.name as name','category.thumb_image as image','url.type as type','url.url_offset as urloffest','url.url_key as urlkey')
+		->leftJoin('url_rewrites as url','url.url_offset','category.category_id')
+		->where('parent_id',147)
+		->where('category.status','1')
+		->where('url.type',"=","category")
+		->where('url.id', DB::Raw('(select max(id) from cc_url_rewrites where url_offset=`cc_url`.`url_offset`)'))
+		->orderBy('sort_order','asc')
+		->get();
+
+		$uniquefashion_categories = DB::table('category')
 		->select('category.category_id as categoryid','category.name as name','category.thumb_image as image','url.type as type','url.url_offset as urloffest','url.url_key as urlkey')
 		->leftJOin('url_rewrites as url','url.url_offset','category.category_id')
-		->where('parent_id',147)->where('url.type',"=","category")->orderBy('category_id')->get();
-		$uniquefashion_categories=DB::table('category')
-		->select('category.category_id as categoryid','category.name as name','category.thumb_image as image','url.type as type','url.url_offset as urloffest','url.url_key as urlkey')
-		->leftJOin('url_rewrites as url','url.url_offset','category.category_id')
-		->where('parent_id',143)->where('url.type',"=","category")->orderBy('category_id')->get();
-		//print_r($uniquefashion_categories);
+		->where('parent_id',143)
+		->where('url.type',"=","category")
+		->where('url.id', DB::Raw('(select max(id) from cc_url_rewrites where url_offset=`cc_url`.`url_offset`)'))
+		->orderBy('sort_order','asc')
+		->get();
+		
 		$filmtheatrecategories=DB::table('category')
 		->select('category.category_id as categoryid','category.name as name','category.thumb_image as image','url.type as type','url.url_offset as urloffest','url.url_key as urlkey')
 		->leftJOin('url_rewrites as url','url.url_offset','category.category_id')
-		->where('parent_id',78)->where('url.type',"=","category")->orderBy('category_id')->get();
+		->where('parent_id',78)
+		->where('url.type',"=","category")
+		->where('url.id', DB::Raw('(select max(id) from cc_url_rewrites where url_offset=`cc_url`.`url_offset`)'))
+		->orderBy('sort_order','asc')
+		->get();
 		//print_r($filmtheatrecategories);
 		//dd($cosplay_subcategories);
 		return view('frontend.specalitythemes.specialitytheme',compact('cosplaycategories','cosplay_subcategories','uniquefashion_categories','filmtheatrecategories','cosplay','uniquefashion','film_theatre'));
