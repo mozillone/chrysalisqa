@@ -36,6 +36,7 @@ class WishlistCostumesController extends Controller {
         Meta::set('description', 'Favorites - Chrysalis');
 
 		$data=Wishlist::myWishlistList(Auth::user()->id);
+		//echo "<pre>"; print_r($data); exit;
 		return view('frontend.costumes.wishlist.wishlist_list',compact('data',$data));
 	}
 	public function removeWishlistCostume($costume_id){

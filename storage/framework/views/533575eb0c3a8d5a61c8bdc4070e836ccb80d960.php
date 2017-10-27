@@ -90,10 +90,9 @@
 	<p class="list-box-search"><input type="text" placeholder="Enter postal code" name="search[zip_code]"><span class="box-search-arrw search"><i class="fa fa-arrow-right" aria-hidden="true"></i></span></p>
 	<h3 class="list-box-subhead">Condition</h3>
 	<ul class="box-list2">
-	<li><input type="checkbox" name="search[condition][]" value="brand_new" class="search"> Brand New</li>
+		<li><input type="checkbox" name="search[condition][]" value="good" class="search"> Good</li>
         <li><input type="checkbox" name="search[condition][]" value="like_new" class="search"> Like New</li>
-        <li><input type="checkbox" name="search[condition][]" value="excellent" class="search"> Excellent</li>
-	<li><input type="checkbox" name="search[condition][]" value="good" class="search"> Good</li>
+		<li><input type="checkbox" name="search[condition][]" value="brand_new" class="search"> Brand New</li>
 	</ul>
 
 	<h3 class="list-box-subhead">Size</h3>
@@ -109,23 +108,23 @@
 	<input type="hidden" name="search[sizes]"/>
 	</ul>
 	<h3 class="list-box-subhead">Price</h3>
-<div class="list-stl row price-range-slider">
-						<div class="col-sm-12 rng">	
-								
-								<input type="hidden" id="amount2"   name="search[price]" readonly style="border:0; color:#f6931f; font-weight:bold;" value="" class="form-control">
-								
-								 <div id="price-range"></div>
-							      <div class="row price_amt">
-									 <div class="col-md-6 col-xs-6">
-									 <p class="text-left price_min">$0</p>
-									 </div>
-									 <div class="col-md-6 col-xs-6">
-									 <p class="text-right price_max">$10000</p>
-									 </div> 
-                                 </div>
-
-							</div>
+	<div class="list-stl row price-range-slider">
+		<div class="col-sm-12 rng">	
+				
+			<input type="hidden" id="amount2"   name="search[price]" readonly style="border:0; color:#f6931f; font-weight:bold;" value="" class="form-control">
+			
+			<div id="price-range"></div>
+		      	<div class="row price_amt">
+					<div class="col-md-6 col-xs-6">
+					 	<p class="text-left price_min">$0</p>
 					</div>
+					<div class="col-md-6 col-xs-6">
+						<p class="text-right price_max">$10000</p>
+					</div> 
+             	</div>
+
+		</div>
+	</div>
 	</div>
 	</div>
 	<div class="hidden-sm hidden-md hidden-lg col-xs-12 mbl_slct-drp">
@@ -284,10 +283,9 @@
 														<div class="panel-body">
 															<!--<h3 class="list-box-subhead">Condition</h3>-->
 															<ul class="box-list2">
-																<li><input type="checkbox" name="search[condition][]" value="brand_new" class="search"> Brand New</li>
 																<li><input type="checkbox" name="search[condition][]" value="good" class="search"> Good</li>
 																<li><input type="checkbox" name="search[condition][]" value="like_new" class="search"> Like New</li>
-																<li><input type="checkbox" name="search[condition][]" value="excellent" class="search"> Excellent</li>
+																<li><input type="checkbox" name="search[condition][]" value="brand_new" class="search"> Brand New</li>
 															</ul>
 														</div>
 													</div>

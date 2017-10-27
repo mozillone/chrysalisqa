@@ -28,11 +28,9 @@
 				@if(count($data))
 				@foreach($data as $wish)
 
-				<div class="col-md-3 col-sm-4 col-xs-6" >
+					<div class="col-md-3 col-sm-4 col-xs-6" >
 					    <div class="prod_box">
 					        <div class="img_layer">
-					        	
-
 					            <a href="/product{{$wish->url_key}}" style="background-image: url(@if($wish->image!=null && file_exists(public_path
 					            ('costumers_images/Medium/'.$wish->image.''))) /costumers_images/Medium/{{$wish->image}} @else /costumers_images/default-placeholder.jpg @endif)">&nbsp;</a>
 					            <div class="hover_box">
@@ -44,7 +42,11 @@
 					                		<span class="active"><i aria-hidden="true" class="fa fa-heart"></i></span>
 					                	</a>
 					                </p>
-					                <p class="hover_crt add-cart" data-costume-id="{{$wish->costume_id}}"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
+					                @if($wish->quantity>=1)
+					                	<p class="hover_crt add-cart" data-costume-id="{{$wish->costume_id}}"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
+					                @else
+					                	<p class="hover_crt"><i aria-hidden=true class="fa fa-shopping-cart"></i> Out of stock</p>
+					                @endif
 					            </div>
 					        </div>
 					        <div class="slider_cnt">
