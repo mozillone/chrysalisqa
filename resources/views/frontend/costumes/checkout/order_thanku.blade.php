@@ -189,9 +189,14 @@
 					<p class="thankyou-text">In the meantime, <br/>
 					<span class="thankyou-bold">Share Your Purchase!</span></p>
 					<ul class="thankyou-socio">
-					<li><a href="javascript:void(0)" class="icon-fb" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title={{implode(',',$order_id)}} orders review&&u={{URL::to('/')}}')" title="Facebook Share"><img src="{{asset('assets/frontend/img/thnk-fb.png')}}" alt="thnk-fb" /></a></li>
+					<li>
+                        <a href="javascript:void(0)" class="icon-fb" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title={{implode(',',$order_id)}} orders review&&u={{URL::to('/')}}')" title="Facebook Share"><img src="{{asset('assets/frontend/img/thnk-fb.png')}}" alt="thnk-fb" />
+                        </a>
+                    </li>
 					<li><a href="javascript:void(0)" class="icon-tw" onclick="genericSocialShare('http://twitter.com/share?&amp;url={{URL::to('/')}}')" title="Twitter Share"><img src="{{asset('assets/frontend/img/thnk-tw.png')}}" alt="thnk-tw" /></a></li>
-					<li><img src="{{asset('assets/frontend/img/thnk-yt.png')}}" alt="thnk-yt" /></li>
+					<li>
+                        <a href="javascript:void(0)" class="icon-tw" onclick="genericSocialShare('https://plus.google.com/share?url={{URL::to('/')}}')" title="Google+ Share"><img src="{{asset('assets/frontend/img/google-plus-icon.png')}}" alt="thnk-tw" /></a>
+                    </li>
 					</ul>
 
 				</div>

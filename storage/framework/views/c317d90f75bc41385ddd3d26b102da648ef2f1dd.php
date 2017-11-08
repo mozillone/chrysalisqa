@@ -63,13 +63,27 @@
 							<div class="col-md-6 col-sm-6 col-xs-12 single-view_social">
 								<?php if(Auth::check()): ?>
 									<a href="#" onclick="return false;" class="fav_costume" data-costume-id='<?php echo e($data[0]->costume_id); ?>'>
-										<?php else: ?>
-											<a data-toggle="modal" data-target="#login_popup_fav">
-												<?php endif; ?>
-
-												<span <?php if($data[0]->is_fav): ?>  class="active" <?php endif; ?>><?php if($data[0]->is_fav): ?><i aria-hidden=true class="fa fa-heart"></i> <?php else: ?> <i aria-hidden=true class="fa fa-heart-o"></i><?php endif; ?></span></a>
-                                            <a href="#" data-toggle="modal" data-target="#messageModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-											<div class="sharethis-inline-share-buttons"></div>
+										<span <?php if(isset($data[0]->is_fav)): ?> class="active" <?php endif; ?>>
+											<?php if(isset($data[0]->is_fav) && $data[0]->is_fav == 1): ?>
+												<i aria-hidden=true class="fa fa-heart"></i> 
+											<?php else: ?> 
+												<i aria-hidden=true class="fa fa-heart-o"></i>
+											<?php endif; ?>
+										</span>
+									</a>
+								<?php else: ?>
+									<a data-toggle="modal" data-target="#login_popup_fav">
+										<span <?php if(isset($data[0]->is_fav)): ?>  class="active" <?php endif; ?>>
+											<?php if(isset($data[0]->is_fav)): ?>
+												<i aria-hidden=true class="fa fa-heart"></i> 
+											<?php else: ?> 
+												<i aria-hidden=true class="fa fa-heart-o"></i>
+											<?php endif; ?>
+										</span>
+									</a>
+								<?php endif; ?>
+                                <a href="#" data-toggle="modal" data-target="#messageModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+								<div class="sharethis-inline-share-buttons"></div>
 							</div>
 						</h1>
 
@@ -105,7 +119,9 @@
 										<?php if(!Auth::check()): ?>
 											<a data-toggle="modal" data-target="#login_popup" class="buynow-rm">Buy it Now!</a>
 										<?php else: ?>
-											<form action="<?php echo e(route('buy-it-now')); ?>" method="POST"><input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"><input type="hidden" name="costume_id" value="<?php echo e($data[0]->costume_id); ?>">
+											<form action="<?php echo e(route('buy-it-now')); ?>" method="POST">
+												<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+												<input type="hidden" name="costume_id" value="<?php echo e($data[0]->costume_id); ?>">
 												<input type="submit" class="addtocart-rm" value="Buy it Now!">
 											</form>
 										<?php endif; ?>
@@ -119,6 +135,7 @@
 				
 						<?php if(Auth::check() && !empty($data['seller_info']['shipping_location'])  && helper::getSellerShippingAddress($data[0]->created_by) && helper::getUserShippingAddress()): ?>
                             <?php $priority_info=helper::domesticRateSingleCostume($data['seller_info']['shipping_location'][0]->zip_code,helper::getUserShippingAddress()['zip_code'],$data[0]->weight_pounds,$data[0]->weight_ounces);
+                           // dd($priority_info);
                             ?>
 							<div class="shipping_rm">
 								<p class="shipp-rm"><label>Shipping:</label><?php if($priority_info['result']=="1"): ?> $<?php echo e($priority_info['msg']['rate']); ?> Expedited Shipping <?php else: ?> <?php echo e($priority_info['msg']); ?> <?php endif; ?></p>
@@ -228,7 +245,7 @@
 								<?php else: ?>
 									<a data-toggle="modal" data-target="#login_popup"><span class="like-span">Vote Up!<i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></a>
 								<?php endif; ?>
-								<span class="like-span1 <?php if($data[0]->is_like): ?> active <?php endif; ?>"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <?php echo e($data[0]->like_count); ?></span>
+								<span class="like-span1 <?php if(isset($data[0]->is_like)): ?> active <?php endif; ?>"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <?php echo e($data[0]->like_count); ?></span>
 
 							</p>
 
@@ -257,6 +274,9 @@
 															<p class="hover_crt add-cart" data-costume-id="145"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
 														</div>
 													</div>
+													<?php if($rand->film_qlty == '32'): ?>
+														<p class="ystrip-rm"><span><img class="img-responsive" src="http://chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality</span></p>
+													<?php endif; ?>
 													<div class="slider_cnt">
 														<h4><a href="/product<?php echo e($rand->url_key); ?>"><?php echo e($rand->name); ?></a></h4>
 														<p>$<?php echo e(number_format($rand->price, 2, '.', ',')); ?></p>

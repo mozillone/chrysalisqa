@@ -74,6 +74,9 @@ width: 200px;
     font-size: 14px;
     font-family: Proxima-Nova-bold;
 }
+.condition-option .tooltip-inner{text-align: left;background-color: #61c5ac;color: #000;font-family: Proxima-Nova-Regular; font-size: 14px;}
+.condition-option .tooltip.right .tooltip-arrow{    border-right-color: #71cab4;}
+.tooltip.in{    opacity: 1;}
 .r-bag_div .table>tbody>tr>td {
     border-top: 0px solid #fff;
     font-family: Proxima-Nova-bold;    text-align: center;
@@ -143,7 +146,11 @@ div#payouts .col-md-12.col-sm-12 {
 }
 
 @media screen and (max-width:767px){ 
-
+p.price_tip_crsl b a {
+    color: #ef4066;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
 .list_pagination a{    margin-right: 5px !important;    font-size: 12px;padding: 5px;}
 .imageModel .modal-content{    width: 90%;    margin: 0 auto;}
 .r-bag_div ul.nav.nav-pills li a{    font-size: 12px;width: auto;padding: 8px;}

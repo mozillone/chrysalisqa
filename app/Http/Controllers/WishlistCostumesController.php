@@ -6,6 +6,7 @@ use Illuminate\Support\MessageBag;
 use App\Helpers\SiteHelper;
 use Illuminate\Http\Request;
 use App\Wishlist;
+use App\Costumes;
 use Session;
 use DB;
 use Response;
@@ -35,8 +36,11 @@ class WishlistCostumesController extends Controller {
         Meta::set('title', 'Favorites');
         Meta::set('description', 'Favorites - Chrysalis');
 
-		$data=Wishlist::myWishlistList(Auth::user()->id);
-		//echo "<pre>"; print_r($data); exit;
+		$data = Wishlist::myWishlistList(Auth::user()->id);
+		foreach ($data as $key => $value) {
+			$url = url('/').'/product'.$value->url_key;
+			Costumes::facebookDebugger($url);
+		}
 		return view('frontend.costumes.wishlist.wishlist_list',compact('data',$data));
 	}
 	public function removeWishlistCostume($costume_id){

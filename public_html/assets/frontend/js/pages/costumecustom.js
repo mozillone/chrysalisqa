@@ -448,7 +448,7 @@ $(function(){
                         });
                         $(document).on("click", "#crop", function() {
                             $("#myModal").modal('hide');
-                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);                         
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);                         
                             $(".modalOpen1").attr('value',imgdata);
                             $(".result").attr("src", imgdata);
                             $("#og_image").attr('content',imgdata);
@@ -532,7 +532,7 @@ $(function(){
 
                         $(document).on("click", "#crop2", function() {
                             $("#myModal2").modal('hide');
-                            var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
+                            var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                             $(".modalOpen2").attr('value',imgdata);
                             $(".result2").attr("src", imgdata);
                             $(".modalOpen2").width(220);
@@ -616,7 +616,7 @@ $(function(){
                         });
                         $(document).on("click", "#crop3", function() {
                             $("#myModal3").modal('hide');
-                            var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
+                            var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                             $(".modalOpen3").attr('value',imgdata);
                             $(".result3").attr("src", imgdata);
                             $(".result3").css({ "width": "198px", "height": "298px" });
@@ -1080,7 +1080,7 @@ $(function(){
 
     $(document).on("click", ".saveMultiple", function () {
         $cropper_objs.forEach(function($image, index){
-            var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
+            var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
             $('#other_thumbnails').append("<div index='"+index+"' class=\"col-md-4 col-sm-4 col-xs-12 multi_div\"><img src= " + imgdata + " class=\"multi_thumbs pip\">" +
                 "<br/><span class=\"remove\">" +
                 "<i class=\"fa fa-times-circle\"></i>" +

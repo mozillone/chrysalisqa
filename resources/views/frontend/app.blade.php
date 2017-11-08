@@ -5,15 +5,15 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<meta property="fb:app_id" content="1984025911869654"/> 
+		<meta property="fb:app_id" content="300747437108376"/> 
 		<meta property="og:type" content="website">
         {!! Meta::tag('title') !!}
         {!! Meta::tag('description') !!}
         <!-- Added by Gayatri -->
         {!! Meta::tag('url') !!}
         {!! Meta::tag('image') !!}
-		<meta property="og:image:width" content="200">
-		<meta property="og:image:height" content="200">
+		<meta property="og:image:width" content="100">
+		<meta property="og:image:height" content="100">
 		<!-- End  -->
 		<link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
 		<link rel="stylesheet" href="{{ asset('/vendors/bootstrap/dist/css/bootstrap.min.css')}}">

@@ -161,7 +161,7 @@ class Category extends Authenticatable
             $main_cat=$this->specialCharectorsRemove($data[0]->name);
             $url_key='/'.$main_cat;
             /* Added by Gayatri */
-            if($old_name != $new_name){
+            if($old_name != $new_name || $product_added !=""){
 
               $sub_cat = Costumes::getParentCategories($id);
               foreach ($sub_cat as $key => $child_cat) {

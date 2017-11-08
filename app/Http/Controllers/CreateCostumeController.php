@@ -166,7 +166,12 @@ class CreateCostumeController  extends Controller {
 		  	$cosplay = null;
 		  	$fashion = null;
 		  	$activity = null;
-		  	$cleaned = $req['cleaned'];	 
+		  	if(isset($req['cleaned']) && !empty($req['cleaned'])){
+		  		$cleaned = $req['cleaned'];	 
+		  	}else{
+		  		$cleaned = "";	 	
+		  	}
+		  	
 		  	$makecostume=$req['make_costume'];
 		  	$filmquality=$req['fimquality'];
 		  	$description = $req['description'];		  	 
@@ -1328,7 +1333,12 @@ class CreateCostumeController  extends Controller {
 		  	$fashion = null;
 		  	$activity = null;
 
-		  	$cleaned = $req['cleaned'];
+		  	if(isset($req['cleaned']) && !empty($req['cleaned'])){
+		  		$cleaned = $req['cleaned'];	
+		  	}else{
+		  		$cleaned = "";
+		  	}
+		  	
 
 		  	$makecostume=$req['make_costume'];
 		  	$filmquality=$req['fimquality'];
@@ -2011,7 +2021,7 @@ class CreateCostumeController  extends Controller {
 
 			$quote = "I’m selling my ".$charity_info->cos_name." on Chrysalis.\n".$donation;
 
-			//$debugger = Costumes::facebookDebugger($share_url);
+			$debugger = Costumes::facebookDebugger($share_url);
 			$data=Costumes::getCostumeImages($request->costume_id);
 			$pic = asset('/costumers_images/Large').'/'.$data[0]->image;
 			$name_costume = $charity_info->cos_name;

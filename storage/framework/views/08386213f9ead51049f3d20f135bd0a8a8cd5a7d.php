@@ -165,14 +165,14 @@
 									<div class="form-group" >
 										<label for="inputEmail3" class="control-label">Condition <span class="req-field" >*</span></label>
 										<br>
-										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'good') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="good"  value="good">&nbsp;
-											Good&nbsp;
+										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'good') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="good"  value="good">
+											Good
 										</label>
-										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'like_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="likenew"  value="like_new">&nbsp;
-											Like New&nbsp;
+										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'like_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="likenew"  value="like_new">
+											Like New
 										</label>
-										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'brand_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="brandnew"  value="brand_new"> &nbsp;
-											Brand New&nbsp;
+										<label class="radio-inline"><input type="radio" <?php if ($cos_data->cos_condition == 'brand_new') { ?> checked='checked'	 <?php } ?> name="costumecondition" class="conditon_check" id="brandnew"  value="brand_new">
+											Brand New
 										</label>
 									</div>
 									<span id="costumeconditionerror" style="color:red"></span>
@@ -333,10 +333,15 @@
 										<br>
 										<?php //echo "<pre>";print_r($cosplay_five_value_value);die; ?>
 										<?php if(!empty($cosplay_five_value_value->attribute_option_value_id)): ?>
-										<?php $__currentLoopData = $cosplay_five_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$cosplayfivevalues): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-											<input type="<?php echo e($cosplay_five->type); ?>" <?php if($cosplay_five_value_value->attribute_option_value_id == $cosplayfivevalues->option_id): ?> checked="checked" <?php endif; ?> name="<?php echo e($cosplay_five->code); ?>" id="<?php echo e($cosplay_five->code); ?>"  value="<?php echo e($cosplayfivevalues->option_id); ?>"  onclick="film_name_yes(<?php echo e($cosplayfivevalues->option_id); ?>)" class="faq-checkbox">&nbsp;
-											<?php echo e($cosplayfivevalues->option_value); ?>&nbsp;
-										<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+											<?php $__currentLoopData = $cosplay_five_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$cosplayfivevalues): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+												<input type="<?php echo e($cosplay_five->type); ?>" <?php if($cosplay_five_value_value->attribute_option_value_id == $cosplayfivevalues->option_id): ?> checked="checked" <?php endif; ?> name="<?php echo e($cosplay_five->code); ?>" id="<?php echo e($cosplay_five->code); ?>"  value="<?php echo e($cosplayfivevalues->option_id); ?>"  onclick="film_name_yes(<?php echo e($cosplayfivevalues->option_id); ?>)" class="faq-checkbox">&nbsp;
+												<?php echo e($cosplayfivevalues->option_value); ?>&nbsp;
+											<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+										<?php else: ?>
+											<?php $__currentLoopData = $cosplay_five_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$cosplayfivevalues): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+												<input type="<?php echo e($cosplay_five->type); ?>"  <?php if ($cosplayfivevalues->option_value == "No") {?> checked="checked	" <?php }?>name="<?php echo e($cosplay_five->code); ?>" id="<?php echo e($cosplay_five->code); ?>"  value="<?php echo e($cosplayfivevalues->option_id); ?>" onclick="film_name_yes(<?php echo e($cosplayfivevalues->option_id); ?>)" class="faq-checkbox" required>&nbsp;
+												<?php echo e($cosplayfivevalues->option_value); ?>&nbsp;
+											<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 										<?php endif; ?>
 										<?php if(count($film_name)== 1): ?>
 											<p class="form-rms-small" id="film_text" <?php if(count($film_name)!= 1): ?> style="display: none;" <?php endif; ?> >Which production was your costume featured in? </p>
@@ -358,10 +363,15 @@
 										<span class="req-field" ></span></label>
 										<br>
 										<?php if(!empty($cosplay_four_value_value->attribute_option_value_id)): ?>
-										<?php $__currentLoopData = $cosplay_four_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$cosplayfourvalues): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-										<input type="<?php echo e($cosplay_four->type); ?>" <?php if($cosplay_four_value_value->attribute_option_value_id == $cosplayfourvalues->option_id): ?> checked="checked" <?php endif; ?> name="<?php echo e($cosplay_four->code); ?>" id="<?php echo e($cosplay_four->code); ?>"  value="<?php echo e($cosplayfourvalues->option_id); ?>" onclick="make_costume_yes(<?php echo e($cosplayfourvalues->option_id); ?>)" class="faq-checkbox">&nbsp;
-										<?php echo e($cosplayfourvalues->option_value); ?>&nbsp;
-										<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+											<?php $__currentLoopData = $cosplay_four_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$cosplayfourvalues): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+											<input type="<?php echo e($cosplay_four->type); ?>" <?php if($cosplay_four_value_value->attribute_option_value_id == $cosplayfourvalues->option_id): ?> checked="checked" <?php endif; ?> name="<?php echo e($cosplay_four->code); ?>" id="<?php echo e($cosplay_four->code); ?>"  value="<?php echo e($cosplayfourvalues->option_id); ?>" onclick="make_costume_yes(<?php echo e($cosplayfourvalues->option_id); ?>)" class="faq-checkbox">&nbsp;
+											<?php echo e($cosplayfourvalues->option_value); ?>&nbsp;
+											<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+										<?php else: ?>
+											<?php $__currentLoopData = $cosplay_four_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$cosplayfourvalues): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+												<input type="<?php echo e($cosplay_four->type); ?>"  <?php if ($cosplayfourvalues->option_value == "No") {?> checked="checked" <?php }?>name="<?php echo e($cosplay_four->code); ?>" id="<?php echo e($cosplay_four->code); ?>"  value="<?php echo e($cosplayfourvalues->option_id); ?>" onclick="make_costume_yes(<?php echo e($cosplayfourvalues->option_id); ?>)" class="faq-checkbox" >&nbsp;
+												<?php echo e($cosplayfourvalues->option_value); ?>&nbsp;
+											<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 										<?php endif; ?>
 										<?php if(count($make_costume_time)== 1): ?>
 										<p class="form-rms-small" id="mention_hours" <?php if(count($make_costume_time)!= 1): ?> style="display: none;" <?php endif; ?> >If yes, how long did it take?</p>
@@ -568,25 +578,33 @@
 													<h2 class="heading-agent">Preferences</h2>
 													<div class="col-md-12">
 														<div class="form-group has-feedback" >
-															<label for="inputEmail3" class="control-label"><?php echo e($handling->label); ?><span class="req-field" ></span></label>
+															<label for="inputEmail3" class="control-label"><?php echo e($handling->label); ?><span class="req-field" > *</span></label>
 															<select class="form-control"    name="<?php echo e($handling->code); ?>" id="<?php echo e($handling->code); ?>">
 																<option value="">Select Handling Time</option>
 																<?php if(!empty($handling_value_value->attribute_option_value)): ?>
-																<?php $__currentLoopData = $handling_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$handlingval): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-																	<option <?php if($handling_value_value->attribute_option_value == $handlingval->option_value) {?> selected="selected" <?php } ?> value="<?php echo e($handlingval->option_id); ?>"><?php echo e($handlingval->option_value); ?></option>
-																<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+																	<?php $__currentLoopData = $handling_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$handlingval): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+																		<option <?php if($handling_value_value->attribute_option_value == $handlingval->option_value) {?> selected="selected" <?php } ?> value="<?php echo e($handlingval->option_id); ?>"><?php echo e($handlingval->option_value); ?></option>
+																	<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+																<?php else: ?>
+																	<?php $__currentLoopData = $handling_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$handlingval): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+																		<option value="<?php echo e($handlingval->option_id); ?>"><?php echo e($handlingval->option_value); ?></option>
+																	<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 																<?php endif; ?>
 															</select>
 															<p class="error"><?php echo e($errors->first('name')); ?></p>
 														</div>
 														<div class="form-group has-feedback"  style="disply:none">
-															<label for="inputEmail3" class="control-label"><?php echo e($returnpolicy->label); ?><span class="req-field" ></span></label>
+															<label for="inputEmail3" class="control-label"><?php echo e($returnpolicy->label); ?><span class="req-field" > *</span></label>
 															<select class="form-control"  name="<?php echo e($returnpolicy->code); ?>" id="<?php echo e($returnpolicy->code); ?>">
 																<option value="">Select Return Policy</option>
 																<?php if(!empty($returnpolicy_value_value->attribute_option_value)): ?>
-																<?php $__currentLoopData = $returnpolicy_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$returnpolicyval): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-																<option <?php if($returnpolicy_value_value->attribute_option_value == $returnpolicyval->option_value) {?> selected="selected" <?php } ?> value="<?php echo e($returnpolicyval->option_id); ?>"><?php echo e($returnpolicyval->option_value); ?></option>
-																<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+																	<?php $__currentLoopData = $returnpolicy_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$returnpolicyval): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+																	<option <?php if($returnpolicy_value_value->attribute_option_value == $returnpolicyval->option_value) {?> selected="selected" <?php } ?> value="<?php echo e($returnpolicyval->option_id); ?>"><?php echo e($returnpolicyval->option_value); ?></option>
+																	<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+																<?php else: ?>
+																	<?php $__currentLoopData = $returnpolicy_value; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$returnpolicyval): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+																		<option value="<?php echo e($returnpolicyval->option_id); ?>"><?php echo e($returnpolicyval->option_value); ?></option>
+																	<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 																<?php endif; ?>
 															</select>
 															<p class="error"><?php echo e($errors->first('name')); ?></p>

@@ -524,15 +524,44 @@ class UserController extends Controller
   public function adminSettings(){
       $title="Settings";
       $this->data['seller_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
-      $states=Address::getStatesList();
-      $request_bag= Site_model::find_user_and_meta('user_meta',Auth::user()->id);
-     return view('admin.settings.settings')->with($this->data)->with('states',$states)->with('request_bag',$request_bag);
+      $states = Address::getStatesList();
+      $request_bag = Site_model::find_user_and_meta('user_meta',Auth::user()->id);
+      $search_banner_settings = DB::table('search_banner_settings')->first();
+     return view('admin.settings.settings')->with($this->data)->with('states',$states)->with('request_bag',$request_bag)->with('search_banner_settings',$search_banner_settings);
   }
   public function requesBagSettings(Request $request){
-      $req=$request->all();
+      $req = $request->all();
       Site_model::save_meta_for('user_meta',$req['request_bag'],Auth::user()->id);
       Session::flash('success', 'Settings updated successfully');
       return Redirect::back();
+  }
+
+  /**
+   * Created By Gayatri on 2nd Nov 2017
+   * [Adding/Updating a new search banner image]
+   * @param  Request $request [baneer image details]
+   * @return [file]           [image]
+   */
+  public function searchBannerSettings(Request $request)
+  {
+    //echo "<pre>"; print_r($request->all());
+    $request = $request->all();
+    if(isset($request['banner_image'])){
+      $file = $request['banner_image'];
+      $destination_path = public_path('category_images/Banner');
+
+      $file_name = $file->getClientOriginalName();
+      $extension = $file->getClientOriginalExtension() ?: 'png';
+      $safeName = str_random(10).'.'.$extension;
+      $file->move($destination_path,$safeName);
+    }else{
+      $safeName = '';
+    }
+    //echo $safeName; exit;
+    $store_or_update_image = DB::table('search_banner_settings')->update(['file_name' => $safeName]);
+
+    Session::flash('success', 'Settings updated successfully');
+    return Redirect::back();
   }
  
 }

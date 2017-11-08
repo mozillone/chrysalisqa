@@ -19,8 +19,8 @@ $(function() {
 	 $( "div#price-range" ).slider({
 		range: true,
 		min: 0,
-		max: 1000,
-		values: [ 0, 1000],
+		max: 10000,
+		values: [ 0, 10000],
 		slide: function( event, ui ) {
 			$( "#amount2" ).val( +ui.values[ 0 ] + "-" +ui.values[ 1 ] );
 			$(".price_min").html('$'+ui.values[ 0 ]);$(".price_max").html('$'+ui.values[ 1 ]);
@@ -34,12 +34,27 @@ $(function() {
 
 function pagination()
 {
-  $("ul.holder").jPages({
+	$("#per_page").change(function(){
+        /* get new no of items per page */
+      	var newPerPage = parseInt( $(this).val() );
+      	/* destroy jPages and initiate plugin again */
+      	$("ul.holder").jPages("destroy").jPages({
+            containerID   : "itemContainer",
+            perPage       : newPerPage,
+            startPage    : 1,
+	        startRange   : 1,
+	        midRange     : 3,
+	        endRange     : 1,
+	        previous    : "Previous",
+	        next        : "Next",
+        });
+    });
+    $("ul.holder").jPages({
         containerID  : "itemContainer",
         perPage      : 12,
         startPage    : 1,
         startRange   : 1,
-        midRange     : 5,
+        midRange     : 3,
         endRange     : 1,
         previous    : "Previous",
         next        : "Next",
@@ -179,14 +194,25 @@ function searching(search){
 						}else{
 							var cst_name=value.name.substr(0,offset)+"...";
 						}
-						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/product'+link+'"  style="background-image:url('+src+');background-repeat:no-repeat;">&nbsp;</a><div class=hover_box><p class=like_fav>'+like+' '+fav+' '+stock+'</div></div><div class="slider_cnt '+cst_len+'"><span class="cc_brand">'+cc_cos+'</span><h4><a href="/product'+link+'"</a>'+cst_name+'</h4>'+price+'</div></div></div>';
+
+						if(value.film_qlty == '32'){
+							var quality = '<p class="ystrip-rm"><span><img class="img-responsive" src="http://dev.chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality</span></p>';
+						}else{
+							var quality = '';
+						}
+
+						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/product'+link+'"  style="background-image:url('+src+');background-repeat:no-repeat;">&nbsp;</a><div class=hover_box><p class=like_fav>'+like+' '+fav+' '+stock+'</div></div>'+quality+'<div class="slider_cnt '+cst_len+'"><span class="cc_brand">'+cc_cos+'</span><h4><a href="/product'+link+'"</a>'+cst_name+'</h4>'+price+'</div></div></div>';
 				    });
 					$(".pagination").show();
+					$(".show_per_page").removeClass('hidden');
 					$("#itemContainer").append(res);
+					$("ul.holder").removeClass('hidden');
 					pagination();
 				}else{
 					var list=$('#itemContainer').html().length;
-					$("ul.holder").remove();
+					$("ul.holder").addClass('hidden');
+					$(".show_per_page").addClass('hidden');
+					//$("ul.holder").remove();
 					$('#counting').html('')
 				    res='<div class="col-sm-12 col-md-6"><div class="caption">Sorry, we could not find any costumes</div></div>';
 				    $("#itemContainer").html(res);

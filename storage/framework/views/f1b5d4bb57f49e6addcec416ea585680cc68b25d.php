@@ -48,23 +48,34 @@
 					                <?php endif; ?>
 					            </div>
 					        </div>
+					        <p class="ystrip-rm"><span><img class="img-responsive" src="http://dev.chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality</span></p>
 					        <div class="slider_cnt">
 					            <h4><a href="/product<?php echo e($wish->url_key); ?>"></a></h4>
 					            <span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>
 								<p><?php echo e($wish->name); ?></p>
 								<p class="fav-drs-size"><?php echo e(ucfirst($wish->gender)); ?> <?php if($wish->size=="s"): ?> Small <?php elseif($wish->size=="m"): ?> Medium <?php elseif($wish->size=="l"): ?> Large <?php else: ?> <?php echo e(strtoupper($data[0]->size)); ?> <?php endif; ?></p>
 					            <p><?php echo e($wish->price); ?></p>
-								<div class="fav_social">
-								 <!-- <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook fa-1x social"></i></a>
-								<a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter fa-1x social"></i></a>
-								<a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-envelope fa-1x social"></i></a> -->
-								<div class="sharethis-inline-share-buttons" data-url="<?php echo e(URL::to('/product'.$wish->url_key.'')); ?>" data-title="<?php echo e($wish->name); ?>"></div>
 
-								
-					        </div>
+								<div class="fav_social">
+									<a href="javascript:void(0);" class="facebook" class="icoRss" title="Facebook">
+										<i id="social-fb" class="fa fa-facebook fa-1x social"></i>
+										<input type="hidden" name="url_fb" class="url_fb" value="<?php echo e(url('/').'/product'.$wish->url_key); ?>">
+									</a>
+									<a href="javascript:void(0);">
+										<div id="twiter_url" data-network="twitter" class="st-custom-button" data-title="" data-url="">
+											<i id="social-tw" class="fa fa-twitter fa-1x social"></i>
+										</div>
+									</a>
+									<a href="https://plus.google.com/+Bootsnipp-page">
+										<i id="social-gp" class="fa fa-envelope fa-1x social"></i>
+									</a>
+
+									<div class="sharethis-inline-share-buttons" data-url="<?php echo e(URL::to('/product'.$wish->url_key.'')); ?>" data-title="<?php echo e($wish->name); ?>"></div>
+					        	</div>
 							</div>
 					    </div>
 					</div>
+
 				<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 				<?php else: ?>
 					<div  class="col-md-3 col-sm-4 col-xs-6">There are no items in your list.</div>
@@ -87,8 +98,9 @@
 <script src="<?php echo e(asset('/vendors/sweetalert/dist/sweetalert.min.js')); ?>"></script>
 <script src="<?php echo e(asset('/assets/frontend/js/pages/mini_cart.js')); ?>"></script>
 <script src="<?php echo e(asset('/assets/frontend/vendors/lobibox-master/js/notifications.js')); ?>"></script>
+<script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
+<script type="text/javascript" src="<?php echo e(asset('/assets/frontend/js/social_sharing.js')); ?>"></script>
 <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=595c7a060f8114001101959f&product=inline-share-buttons"></script>
-
 
 <?php $__env->stopSection(); ?>
 

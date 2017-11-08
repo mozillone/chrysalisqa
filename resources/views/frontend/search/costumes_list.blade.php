@@ -18,8 +18,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="list-banner search-banner" style=" background-image: url('/category_images/df_img.jpg')">
-
+			<?php if(isset($search_banner_settings->file_name))
+				{
+					$url = '/category_images/Banner/'.$search_banner_settings->file_name;
+				}else{
+					$url = '/category_images/df_img.jpg';
+				}
+			?>
+				<div class="list-banner search-banner" style=" background-image: url(<?php echo $url;  ?>)">
 				</div>
 			</div>
 		</div>
@@ -292,6 +298,15 @@
 	<div class="row" id="itemContainer">
 	</div>
 </div>
+	<div class="show_per_page hidden">
+		<label>Show </label>
+	    <select id="per_page">
+	        <option>4</option>
+	        <option>8</option>
+	        <option selected>12</option>
+	    </select>
+	    <label> per page </label>	
+	</div>
 <ul class="holder list_pagination"></ul>
 
 

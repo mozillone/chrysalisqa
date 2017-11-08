@@ -106,7 +106,6 @@ Category create@parent
                             <label for="inputEmail3" class="control-label">Category Banner Image <span class="req-field" >*</span></label>
                                 <div class="col-md-12">
                                     <div class="form-group">
-
                                       <div class="row upload_bx col-md-4 col-sm-6 col-xs-12">
                                           <div class="">
                                             <div class=" upload_btns">

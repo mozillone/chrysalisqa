@@ -144,7 +144,7 @@
 	<p class="list-sec-rm1">{{strtoupper($data['sub_cat_info'][0]->name)}}</p>
 	<p class="list-sec-rm2"><span>Sort By</span>
 	 <select name="search[sort_by]" class="sort_by">
-		<option value="Recently Listed">Recently Listed</option>
+		<option value="recently_listed">Recently Listed</option>
 		<option value="price_high">Price - High to Low</option>
 		<option value="price_low">Price - Low to High</option>
 		<option value="a-z">A-Z</option>
@@ -356,10 +356,21 @@
 	<div class="row" id="itemContainer">
 	</div>
 </div>
-<ul class="holder list_pagination"></ul>
 
-
+	<div class="show_per_page hidden">
+		<label>Show </label>
+	    <select id="per_page">
+	        <option>4</option>
+	        <option>8</option>
+	        <option selected>12</option>
+	    </select>
+	    <label> per page </label>	
 	</div>
+    
+	<ul class="holder list_pagination"></ul>
+
+
+	</div> 
 </form>
 </div>
 </div>

@@ -84,7 +84,7 @@
 									</div>
 									@if(count($data['basic']))
 									<div class="col-md-3 col-sm-4 col-xs-12">
-										<div class="cart_page_right affix"  data-spy="affix" data-offset-top="230" data-offset-bottom="450">
+										<div class="cart_page_right"  data-spy="" data-offset-top="230" data-offset-bottom="450">
 											@if(Auth::check())<div class="well">
 												<div class="store_credit clearfix">
 													<h3>My Store Credit</h3> 
@@ -147,4 +147,13 @@
 @section('footer_scripts')
 <script src="{{ asset('/assets/frontend/js/pages/cart.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		if($('.cart_page_vew>.well').length >=3){
+			$(".cart_page_right").addClass('affix').attr('data-spy','affix');
+		}else{
+			$(".cart_page_right").removeClass('affix').removeAttr('data-spy','affix');
+		}
+	});
+</script>
 @stop

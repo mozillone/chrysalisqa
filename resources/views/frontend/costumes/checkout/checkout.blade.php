@@ -31,6 +31,9 @@
 											<div class="shipping_div methods">
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<h4>Shipping Address:</h4>
+													<a href="https://plus.google.com/share?url=http://www.chrysaliscostumes.com" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
+  src="{{asset('assets/frontend/img/google-plus-icon.png')}}" alt="Share on Google+"/></a>
 												</div>
 												<div class="col-md-5 col-sm-4 col-xs-12">
 													@if(!empty($data['cart_shipping_address']))

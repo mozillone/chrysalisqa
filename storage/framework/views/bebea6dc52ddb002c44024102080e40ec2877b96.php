@@ -1339,8 +1339,18 @@
 													});
 												}
 												document.getElementById('facebook').onclick = function() {
+
+													FB.api('https://graph.facebook.com/','post',  {
+													        id: $("#url_fb").val(),
+													        scrape: true,
+													        access_token:'EAAcMdgezwNYBAB96ZBPVzNfQGk5lSlV9mVzIQ0COFpNWcSZC1QqxUsM6Jm5hKXfBRwMJ3dy9xkos9AJlBlLHyCetnX7fZAJvyVEdian6K6TmmyWBzqwHvGe5ItK9nrNuJPWjMFUH7zVZBNUI6h9btuWVUJYJ1zMZD'
+													    }, function(response) {
+													        console.log('rescrape!',response);
+
+													    });
+													
 													FB.init({
-														appId      : '1458951657516313',
+														appId      : '1984025911869654',
 														xfbml      : true,
 														version    : 'v2.2'
 													});

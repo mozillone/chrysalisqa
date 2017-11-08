@@ -197,13 +197,22 @@ class CheckoutController extends Controller {
         if($cart_id){
           $qty=Cart::verifyCostumeCartQuantity( $costume_id,$cookie_id);
           $res=Cart::verifyCostumeQuantity( $costume_id,$qty);
-         if(count($res)){
+          /* Added by Gayatri */
+          if((integer)$qty == (integer)$res[0]->quantity){
+              return Redirect::to('/checkout');
+          }else{
+            Cart::updateCartDetails( $costume_id,$cart_id,$qty+1);
+            $res=$this->updateCartDetails( $costume_id,$qty+1);
+            return Redirect::to('/checkout');
+          }
+          /* End */
+         /*if(count($res)){
             Cart::updateCartDetails( $costume_id,$cart_id,$qty+1);
             $res=$this->updateCartDetails( $costume_id,$qty+1);
             return Redirect::to('/checkout');
           }else{
             return Redirect::back();
-          }
+          }*/
         }
         else{
              $cookie_id=$this->currentCookieKey();

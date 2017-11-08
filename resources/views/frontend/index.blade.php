@@ -19,7 +19,7 @@ Home@parent
 				<h2>Featured Costumes</h2>
 				<?php //echo "<pre>";print_r($featured_costumes); ?>
 				<div class="owl-carousel owl-theme">
-					<?php  foreach ($featured_costumes as $cos) { ?>
+					<?php foreach ($featured_costumes as $cos) { ?>
 						<div class="item">
 							<div class="prod_box">
 								<div class="img_layer">
@@ -39,6 +39,9 @@ Home@parent
 										</p>
 									</div>
 								</div>
+								@if($cos->film_qlty == '32')
+									<p class="ystrip-rm"><span><img class="img-responsive" src="http://chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality</span></p>
+								@endif
 								<div class="slider_cnt @if($cos->created_user_group != "admin" )no_brand @endif @if(strlen($cos->cos_name)<20) sml_name @endif">
 									@if($cos->created_user_group == "admin")
 										<?php $is_admin=20;?>
@@ -93,21 +96,22 @@ Home@parent
 	<script src="{{ asset('/assets/frontend/js/pages/home.js') }}"></script>
 		<script>
 			$(document).ready(function() {
-			if (jQuery(window).width() < 767) 
+				$(".owl-controls.clickable").show();
+				if (jQuery(window).width() < 767) 
 				{
-$(".carousel").swipe({
-	
-  swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+					$(".carousel").swipe({
+						
+						swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
 
-    if (direction == 'left') $(this).carousel('next');
-    if (direction == 'right') $(this).carousel('prev');
+					    	if (direction == 'left') $(this).carousel('next');
+					    	if (direction == 'right') $(this).carousel('prev');
 
-  },
-  allowPageScroll:"vertical"
+					  },
+					  allowPageScroll:"vertical"
 
-});
+					});
 				}
 
-		})
+			});
 		</script>
 @stop

@@ -190,9 +190,14 @@
 					<p class="thankyou-text">In the meantime, <br/>
 					<span class="thankyou-bold">Share Your Purchase!</span></p>
 					<ul class="thankyou-socio">
-					<li><a href="javascript:void(0)" class="icon-fb" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title=<?php echo e(implode(',',$order_id)); ?> orders review&&u=<?php echo e(URL::to('/')); ?>')" title="Facebook Share"><img src="<?php echo e(asset('assets/frontend/img/thnk-fb.png')); ?>" alt="thnk-fb" /></a></li>
+					<li>
+                        <a href="javascript:void(0)" class="icon-fb" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title=<?php echo e(implode(',',$order_id)); ?> orders review&&u=<?php echo e(URL::to('/')); ?>')" title="Facebook Share"><img src="<?php echo e(asset('assets/frontend/img/thnk-fb.png')); ?>" alt="thnk-fb" />
+                        </a>
+                    </li>
 					<li><a href="javascript:void(0)" class="icon-tw" onclick="genericSocialShare('http://twitter.com/share?&amp;url=<?php echo e(URL::to('/')); ?>')" title="Twitter Share"><img src="<?php echo e(asset('assets/frontend/img/thnk-tw.png')); ?>" alt="thnk-tw" /></a></li>
-					<li><img src="<?php echo e(asset('assets/frontend/img/thnk-yt.png')); ?>" alt="thnk-yt" /></li>
+					<li>
+                        <a href="javascript:void(0)" class="icon-tw" onclick="genericSocialShare('https://plus.google.com/share?url=<?php echo e(URL::to('/')); ?>')" title="Google+ Share"><img src="<?php echo e(asset('assets/frontend/img/google-plus-icon.png')); ?>" alt="thnk-tw" /></a>
+                    </li>
 					</ul>
 
 				</div>

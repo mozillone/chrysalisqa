@@ -160,15 +160,13 @@ Route::any('/del-rewrites', ['as' => 'del-rewrites','uses'=>'UrlRewritesControll
 Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 /******************************************************************************************************************************/
 
-
-
-
 	Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	  	Route::get('/admin/dashboard', 'DashboardController@dashboard');
 	  	Route::get('/admin/profile', 'UserController@adminProfile');
 	  	Route::post('/admin/profile/post', ['as' => 'admin-profile-update','uses'=>'UserController@adminProfileUpdate']);
 	  	Route::any('/settings', ['as' => 'settings','uses'=>'UserController@adminSettings']);
 	  	Route::post('/request_bag/settings', ['as' => 'request_bag','uses'=>'UserController@requesBagSettings']);
+	  	Route::post('/search_banner/settings', ['as' => 'search_banner','uses'=>'UserController@searchBannerSettings']);
 	   /****************User Management Start Here***************************/
 	    Route::get('customers-list', ['as' => 'customers-list','uses'=>'UserController@customersList']);
 		Route::get('customes-list', ['as' => 'customes-list','uses'=>'UserController@customesList']);

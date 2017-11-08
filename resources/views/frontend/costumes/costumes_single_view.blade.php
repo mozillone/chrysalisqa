@@ -62,13 +62,27 @@
 							<div class="col-md-6 col-sm-6 col-xs-12 single-view_social">
 								@if(Auth::check())
 									<a href="#" onclick="return false;" class="fav_costume" data-costume-id='{{$data[0]->costume_id}}'>
-										@else
-											<a data-toggle="modal" data-target="#login_popup_fav">
-												@endif
-
-												<span @if($data[0]->is_fav)  class="active" @endif>@if($data[0]->is_fav)<i aria-hidden=true class="fa fa-heart"></i> @else <i aria-hidden=true class="fa fa-heart-o"></i>@endif</span></a>
-                                            <a href="#" data-toggle="modal" data-target="#messageModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-											<div class="sharethis-inline-share-buttons"></div>
+										<span @if(isset($data[0]->is_fav)) class="active" @endif>
+											@if(isset($data[0]->is_fav) && $data[0]->is_fav == 1)
+												<i aria-hidden=true class="fa fa-heart"></i> 
+											@else 
+												<i aria-hidden=true class="fa fa-heart-o"></i>
+											@endif
+										</span>
+									</a>
+								@else
+									<a data-toggle="modal" data-target="#login_popup_fav">
+										<span @if(isset($data[0]->is_fav))  class="active" @endif>
+											@if(isset($data[0]->is_fav))
+												<i aria-hidden=true class="fa fa-heart"></i> 
+											@else 
+												<i aria-hidden=true class="fa fa-heart-o"></i>
+											@endif
+										</span>
+									</a>
+								@endif
+                                <a href="#" data-toggle="modal" data-target="#messageModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+								<div class="sharethis-inline-share-buttons"></div>
 							</div>
 						</h1>
 
@@ -104,7 +118,9 @@
 										@if(!Auth::check())
 											<a data-toggle="modal" data-target="#login_popup" class="buynow-rm">Buy it Now!</a>
 										@else
-											<form action="{{route('buy-it-now')}}" method="POST"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="costume_id" value="{{ $data[0]->costume_id }}">
+											<form action="{{route('buy-it-now')}}" method="POST">
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
+												<input type="hidden" name="costume_id" value="{{ $data[0]->costume_id }}">
 												<input type="submit" class="addtocart-rm" value="Buy it Now!">
 											</form>
 										@endif
@@ -118,6 +134,7 @@
 				
 						@if(Auth::check() && !empty($data['seller_info']['shipping_location'])  && helper::getSellerShippingAddress($data[0]->created_by) && helper::getUserShippingAddress())
                             <?php $priority_info=helper::domesticRateSingleCostume($data['seller_info']['shipping_location'][0]->zip_code,helper::getUserShippingAddress()['zip_code'],$data[0]->weight_pounds,$data[0]->weight_ounces);
+                           // dd($priority_info);
                             ?>
 							<div class="shipping_rm">
 								<p class="shipp-rm"><label>Shipping:</label>@if($priority_info['result']=="1") ${{$priority_info['msg']['rate']}} Expedited Shipping @else {{$priority_info['msg']}} @endif</p>
@@ -227,7 +244,7 @@
 								@else
 									<a data-toggle="modal" data-target="#login_popup"><span class="like-span">Vote Up!<i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></a>
 								@endif
-								<span class="like-span1 @if($data[0]->is_like) active @endif"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{$data[0]->like_count}}</span>
+								<span class="like-span1 @if(isset($data[0]->is_like)) active @endif"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{$data[0]->like_count}}</span>
 
 							</p>
 
@@ -256,6 +273,9 @@
 															<p class="hover_crt add-cart" data-costume-id="145"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
 														</div>
 													</div>
+													@if($rand->film_qlty == '32')
+														<p class="ystrip-rm"><span><img class="img-responsive" src="http://chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality</span></p>
+													@endif
 													<div class="slider_cnt">
 														<h4><a href="/product{{$rand->url_key}}">{{$rand->name}}</a></h4>
 														<p>${{number_format($rand->price, 2, '.', ',')}}</p>
