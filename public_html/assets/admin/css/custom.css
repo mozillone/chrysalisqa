@@ -19,6 +19,10 @@ span.logo-lg {width: 57%;    margin: 0 auto;}
 .c_edit_csmts .drop_uploader img {
     background: #fff;
 }
+#search_banner .fileupload.fileupload-new {
+    position: relative;
+    margin-bottom: 15px;
+}
 .c_edit_csmts .drop_uploader {
     position: absolute;
     top: 0;
