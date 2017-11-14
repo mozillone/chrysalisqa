@@ -129,6 +129,68 @@
 								
 							</div>
 						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+							<h2>BILLING ADDRESS</h2></div>
+							<div class="panel-body billing_addres_1">
+								<?php if(isset($default_billing_address) && !empty($default_billing_address) &&  count($default_billing_address)>0){
+									$billing_address = $default_billing_address; 
+									
+									//echo "<pre>";print_r($billing_address);die;
+								?>
+								@foreach ($billing_address as $b_address)
+								<p class="bill_adrs">
+									
+									<span> <strong>{{$b_address->fname}} {{$b_address->lname}}</strong><br>
+										@if(!empty($b_address->address1)){{$b_address->address1}}<br>@endif
+										{{$b_address->address2}}<br>
+										{{$b_address->city}}, @foreach($states as $st) @if($st->name==$b_address->state ){{$st->abbrev}} @endif @endforeach {{$b_address->zip_code}}
+									</span>
+								</p> 
+								<p class="bill_adrs_dlte">
+									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_billing({{$b_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address({{$b_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+								</p>
+								@endforeach
+								<?php }else{
+									$billing_address = "<p>Billing address is not added yet.</p>";
+									echo $billing_address;
+								} ?>
+								<div class="form-group add_new_btn">
+									<a type="submit" id="billing_popup_add" class="btn btn-default">Add New</a>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+							<h2>SHIPPING ADDRESS</h2></div>
+							<div class="panel-body billing_addres_1">
+								<?php if(isset($default_shipping_address) && !empty($default_shipping_address) && count($default_shipping_address)>0  ){
+									$shipping_address = $default_shipping_address; 
+									
+									//echo "<pre>";print_r($states);die;
+								?>
+								@foreach ($shipping_address as $index=>$s_address)
+								<p class="bill_adrs">
+									
+									<span> <strong>{{$s_address->fname}} {{$s_address->lname}}</strong><br>
+										@if(!empty($s_address->address1)){{$s_address->address1}}<br>@endif
+										{{$s_address->address2}}<br>
+										{{$s_address->city}}, @foreach($states as $st) @if($st->name==$s_address->state ){{$st->abbrev}} @endif @endforeach
+									{{$s_address->zip_code}}</span>
+								</p> 
+								<p class="bill_adrs_dlte">
+									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_shipping({{$s_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address({{$s_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+								</p>
+								@endforeach
+								<?php }else{
+									$shipping_address = "<p>Shipping address is not added yet.</p>";
+									echo $shipping_address;
+								} ?>
+								<div class="form-group add_new_btn">
+									<a type="submit" class="btn btn-default" id="shipping_popup_add">Add New</a>
+								</div>
+							</div>
+						</div>
 						<div class="panel panel-default shipping_block">
 							<div class="panel-heading">
 							<h2>SHIPPING SETTINGS</h2></div>
@@ -159,38 +221,6 @@
 								
 							</div>
 						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h2>WHERE WILL YOU BE SHIPPING YOUR COSTUMES FROM?</h2>
-							</div>
-							
-							
-							<div class="panel-body billing_addres_1">
-								@if(count($seller_address))
-								<p class="bill_adrs">
-									
-									<span> <strong>{{$seller_address[0]->fname}} {{$seller_address[0]->lname}}</strong><br>
-										{{$seller_address[0]->address1}}@if(!empty($seller_address[0]->address1))<br>@endif{{$seller_address[0]->address2}}<br>
-										{{$seller_address[0]->city}}, {{$seller_address[0]->state}}
-									{{$seller_address[0]->zip_code}}</span>
-								</p>
-								<p class="bill_adrs_dlte">
-									<span><a href="javascript::void(0);" class="edit_selling_addr"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript::void(0);" onclick="delete_seller_address({{$seller_address[0]->address_id}})" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
-								</p>
-								@else
-								<p class="bill_adrs"><span>No Shipping from location found</span></p>
-								@endif 
-								
-								@if(!count($seller_address))
-								<div class="form-group add_new_btn">
-									<a type="submit" href="javascript::void(0);" class="btn btn-default selling_popup_add">Add New</a>
-								</div>
-								@endif
-								
-								
-							</div>
-						</div>
-						
 						
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -283,66 +313,36 @@
 								</form>
 							</div>
 						</div>
+						
 						<div class="panel panel-default">
 							<div class="panel-heading">
-							<h2>BILLING ADDRESS</h2></div>
-							<div class="panel-body billing_addres_1">
-								<?php if(isset($default_billing_address) && !empty($default_billing_address) &&  count($default_billing_address)>0){
-									$billing_address = $default_billing_address; 
-									
-									//echo "<pre>";print_r($billing_address);die;
-								?>
-								@foreach ($billing_address as $b_address)
-								<p class="bill_adrs">
-									
-									<span> <strong>{{$b_address->fname}} {{$b_address->lname}}</strong><br>
-										@if(!empty($b_address->address1)){{$b_address->address1}}<br>@endif
-										{{$b_address->address2}}<br>
-										{{$b_address->city}}, @foreach($states as $st) @if($st->name==$b_address->state ){{$st->abbrev}} @endif @endforeach {{$b_address->zip_code}}
-									</span>
-								</p> 
-								<p class="bill_adrs_dlte">
-									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_billing({{$b_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address({{$b_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
-								</p>
-								@endforeach
-								<?php }else{
-									$billing_address = "<p>Billing address is not added yet.</p>";
-									echo $billing_address;
-								} ?>
-								<div class="form-group add_new_btn">
-									<a type="submit" id="billing_popup_add" class="btn btn-default">Add New</a>
-								</div>
+								<h2>SHIP FROM ADDRESS</h2>
 							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-							<h2>SHIPPING ADDRESS</h2></div>
+							
+							
 							<div class="panel-body billing_addres_1">
-								<?php if(isset($default_shipping_address) && !empty($default_shipping_address) && count($default_shipping_address)>0  ){
-									$shipping_address = $default_shipping_address; 
-									
-									//echo "<pre>";print_r($states);die;
-								?>
-								@foreach ($shipping_address as $index=>$s_address)
+								@if(count($seller_address))
 								<p class="bill_adrs">
 									
-									<span> <strong>{{$s_address->fname}} {{$s_address->lname}}</strong><br>
-										@if(!empty($s_address->address1)){{$s_address->address1}}<br>@endif
-										{{$s_address->address2}}<br>
-										{{$s_address->city}}, @foreach($states as $st) @if($st->name==$s_address->state ){{$st->abbrev}} @endif @endforeach
-									{{$s_address->zip_code}}</span>
-								</p> 
-								<p class="bill_adrs_dlte">
-									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_shipping({{$s_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address({{$s_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+									<span> <strong>{{$seller_address[0]->fname}} {{$seller_address[0]->lname}}</strong><br>
+										{{$seller_address[0]->address1}}@if(!empty($seller_address[0]->address1))<br>@endif{{$seller_address[0]->address2}}<br>
+										{{$seller_address[0]->city}}, {{$seller_address[0]->state}}
+									{{$seller_address[0]->zip_code}}</span>
 								</p>
-								@endforeach
-								<?php }else{
-									$shipping_address = "<p>Shipping address is not added yet.</p>";
-									echo $shipping_address;
-								} ?>
+								<p class="bill_adrs_dlte">
+									<span><a href="javascript::void(0);" class="edit_selling_addr"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript::void(0);" onclick="delete_seller_address({{$seller_address[0]->address_id}})" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+								</p>
+								@else
+								<p class="bill_adrs"><span>No Shipping from location found</span></p>
+								@endif 
+								
+								@if(!count($seller_address))
 								<div class="form-group add_new_btn">
-									<a type="submit" class="btn btn-default" id="shipping_popup_add">Add New</a>
+									<a type="submit" href="javascript::void(0);" class="btn btn-default selling_popup_add">Add New</a>
 								</div>
+								@endif
+								
+								
 							</div>
 						</div>
 						

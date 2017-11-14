@@ -4,11 +4,20 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		{!! Meta::tag('title') !!}
+        {!! Meta::tag('description') !!}
+        <!-- Added by Gayatri -->
+        {!! Meta::tag('url') !!}
+        {!! Meta::tag('image') !!}
+		<meta property="og:image:width" content="100">
+		<meta property="og:image:height" content="100">
+		<!-- End  -->
 		<link rel="stylesheet" href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/frontend/css/chrysalis.css')}}">
 		<link href="{{asset('assets/frontend/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
 		<!--<link rel="stylesheet" href="{{asset('chat/css/reset.css')}}">-->
 		<link rel="stylesheet" href="{{asset('chat/css/style.css')}}">
+		<link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
 	</head>
 	<body>
 		@include('frontend.partials.header')

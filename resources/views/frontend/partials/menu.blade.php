@@ -7,8 +7,28 @@
 				<div class="col-md-12">
 					<div class="icon_lins text-right">
 						<ul> 
-							<li><a href="{{URL::to('conversations')}}" type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-envelope" aria-hidden="true"></i><br>Messages</a></li>
-							<li><a type="button" class="btn btn-default btn-lg text-center fav-icon-sec" href="{{route('wishlist')}}"><i class="fa fa-heart" aria-hidden="true"></i>@if(Auth::check())<span class="fav_count">{{helper::getMyWishlistCount()}}</span>@endif<br>@if(Auth::check())<a class="fav-style" href="{{route('wishlist')}}">Favorites</a> @else <a class="fav-style" data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </a></li>
+							<li>
+								<a href="{{URL::to('conversations')}}" type="button" class="btn btn-default btn-lg text-center">
+									<i class="fa fa-envelope" aria-hidden="true"></i>
+									@if(Auth::check())
+										<span class="fav_count">{{helper::getMyMessageCount()}}</span>
+									@endif
+									<br>Messages
+								</a>
+							</li>
+							<li>
+								<a type="button" class="btn btn-default btn-lg text-center fav-icon-sec" href="{{route('wishlist')}}">
+									<i class="fa fa-heart" aria-hidden="true"></i>
+									@if(Auth::check())
+										<span class="fav_count">{{helper::getMyWishlistCount()}}</span>
+									@endif<br>
+									@if(Auth::check())
+										<a class="fav-style" href="{{route('wishlist')}}">Favorites</a> 
+									@else 
+										<a class="fav-style" data-toggle="modal" data-target="#login_popup"> Favorites </a> 
+									@endif 
+								</a>
+							</li>
 							<li><button type="button" class="dropdown-toggle btn btn-default btn-lg text-center mini-cart" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart <span class="mini_cart">@if(is_numeric(helper::getCartCount())){{helper::getCartCount()}} @else 0 @endif</span></button>
 								<ul class="dropdown-menu cart-products">
 								</ul>

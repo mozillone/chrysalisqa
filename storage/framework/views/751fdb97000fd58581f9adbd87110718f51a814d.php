@@ -7,8 +7,28 @@
 				<div class="col-md-12">
 					<div class="icon_lins text-right">
 						<ul> 
-							<li><a href="<?php echo e(URL::to('conversations')); ?>" type="button" class="btn btn-default btn-lg text-center"><i class="fa fa-envelope" aria-hidden="true"></i><br>Messages</a></li>
-							<li><a type="button" class="btn btn-default btn-lg text-center fav-icon-sec" href="<?php echo e(route('wishlist')); ?>"><i class="fa fa-heart" aria-hidden="true"></i><?php if(Auth::check()): ?><span class="fav_count"><?php echo e(helper::getMyWishlistCount()); ?></span><?php endif; ?><br><?php if(Auth::check()): ?><a class="fav-style" href="<?php echo e(route('wishlist')); ?>">Favorites</a> <?php else: ?> <a class="fav-style" data-toggle="modal" data-target="#login_popup"> Favorites </a> <?php endif; ?> </a></li>
+							<li>
+								<a href="<?php echo e(URL::to('conversations')); ?>" type="button" class="btn btn-default btn-lg text-center">
+									<i class="fa fa-envelope" aria-hidden="true"></i>
+									<?php if(Auth::check()): ?>
+										<span class="fav_count"><?php echo e(helper::getMyMessageCount()); ?></span>
+									<?php endif; ?>
+									<br>Messages
+								</a>
+							</li>
+							<li>
+								<a type="button" class="btn btn-default btn-lg text-center fav-icon-sec" href="<?php echo e(route('wishlist')); ?>">
+									<i class="fa fa-heart" aria-hidden="true"></i>
+									<?php if(Auth::check()): ?>
+										<span class="fav_count"><?php echo e(helper::getMyWishlistCount()); ?></span>
+									<?php endif; ?><br>
+									<?php if(Auth::check()): ?>
+										<a class="fav-style" href="<?php echo e(route('wishlist')); ?>">Favorites</a> 
+									<?php else: ?> 
+										<a class="fav-style" data-toggle="modal" data-target="#login_popup"> Favorites </a> 
+									<?php endif; ?> 
+								</a>
+							</li>
 							<li><button type="button" class="dropdown-toggle btn btn-default btn-lg text-center mini-cart" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart <span class="mini_cart"><?php if(is_numeric(helper::getCartCount())): ?><?php echo e(helper::getCartCount()); ?> <?php else: ?> 0 <?php endif; ?></span></button>
 								<ul class="dropdown-menu cart-products">
 								</ul>

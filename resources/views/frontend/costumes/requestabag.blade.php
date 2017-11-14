@@ -366,7 +366,7 @@
 											</div>
 										</div>
 										<p class="price_tip_crsl hidden-lg hidden-md hidden-sm">
-										<span><b>*TIP: </b>If your costume is just too awesome, <br>we suggest you <b>UPLOAD IT YOURSLEF</b></span>
+										<span><b>*TIP: </b>If your costume is just too awesome, <br>we suggest you <b><a href="{{URL::to('costume/create')}}">Upload it Yourself!</a></b></span>
 										</p>
 									</div>
 									<!-- Left and right controls -->
@@ -530,7 +530,7 @@
 									</div>
 									<!-- </form> -->
 									<div class="condition-option clearfix">
-										<p><input class="condition-check" type="checkbox" name="quality_standards" value="" checked>All items meet our <a href="#">Quality Standards</a>
+										<p><input class="condition-check" type="checkbox" name="quality_standards" value="" checked>All items meet our   <a href="javascript:void(0)" id="quality_tooltip" data-toggle="tooltip" data-placement="right" data-html="true" title="All costumes must be in excellent condition! <br> <b>Items have no:</b> <br> . Tears/rips/holes<br>. Missing parts<br> . Stains<br> . Significant wear">Quality Standards</a>
 											<span id="quality_standards_error" style="color:red; display: block;"></span>
 										</p>
 										<p><input type="checkbox" name="reject_terms" value="">I have read and agree with Chrysalis' <a href="{{ route('terms-of-use') }}" target="_blank">Terms of Use</a>
@@ -542,7 +542,7 @@
 									<h4>What would you like to do with unaccepted items?</h4>
 									<div class="unaccepted-option">
 										<p class="cst2-rms-chck"><input checked type="radio" name="is_return" value="0">Please responsibly recycle my unaccepted items</p>
-										<p class="cst2-rms-chck"><input type="radio" name="is_return" value="1">Please opt me into Return Assurance and return my unaccepted items for an additional $9.99* (I understand that up to $19.98 could be deducted from mybag earnings). </p>
+										<p class="cst2-rms-chck"><input type="radio" name="is_return" value="1">Please opt me into Return Assurance and return my unaccepted items for an additional $9.99* (I understand that up to $19.98 could be deducted from my bag earnings). </p>
 										<p class="cst2-rms-chck" style="margin-top: 0">*Fee will be deducted from your earnings once your bag is processed.</p>
 										<span id="is_recycle_error" style="color:red; display: block;"></span>
 									</div>
@@ -622,6 +622,49 @@
 					</div>
 				</div>
 			</div>
+			<div class="modal fade" id="request_bag_registration" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog request_login" role="document">
+					<div class="modal-content">
+						<div class=" modal-header indi_close_icons">
+							<!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+						</div>
+					 	<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="report_item_pupup " id="loginModal">
+										<h2>Register</h2>
+									<div id="myTabContent" class="tab-content">
+										<p>The Email address <span id="add_email"></span> does not exist in our records. In order to create account and proceed requesting bag, fill up the following details:</p>
+										<form role="form" action="{{route('register')}}" method="POST" id="reg_form">
+									  		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									  		<input type="hidden" name="email" value="" id="reg_email">
+									  		<input type="hidden" name="reg_full_name" value="" id="reg_full_name">
+									  		<div class="form-group">
+												<label>Username</label>
+												<input type="text" name="username" id="username" class="form-control">
+												<p class="error">{{ $errors->first('email') }}</p>
+											</div>
+											<div class="form-group">
+												<label>Password</label>
+												<input type="password" name="password" id="signup_password" class="form-control input-sm">
+												<p class="error">{{ $errors->first('password') }}</p>
+											</div>
+											<div class="form-group">
+												<div class="login-btn">
+													<img id="loader" class="hidden" src="{{asset('img/ajax-loader.gif')}}" >
+													<button type="submit" class="btn btn-primary" id="reg_submit" >Register</button>
+												</div>
+											</div>
+									  	</form>
+									</div>
+									<div class="text-center close_icon">
+										<button type="button" class="close" id="close_reg" data-dismiss="modal"><span>&times;</span> Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
 		</section>
 		@stop
 		{{-- page level scripts --}}
@@ -663,6 +706,33 @@
 		<script type="text/javascript">
 			$(document).ready(function()
 			{
+				$("#reg_form").validate({
+		            rules: {
+		                username:{
+		                	required: true,
+		                	remote: {url: "/usernameValidation",type: "post"}
+		                },
+		                password:{
+		                 	required:true,
+		                 	minlength:8
+		                }
+		            },
+	                messages:{
+	                 	username:{
+	                 		remote: "Username already taken."
+	                 	}
+	                },
+	                submitHandler: function(form) {
+	                	$('#loader').removeClass('hidden');
+	                	form.submit();
+	                }	
+		        });
+
+				/*$("#reg_submit").click(function(event){
+					$('#loader').removeClass('hidden');
+					return true;
+				});*/
+			$("#quality_tooltip").tooltip();
 				$(".bag_payout_options").change(function() {
 					var checked = $(this).is(':checked');
 					$(".bag_payout_options").prop('checked',false);
@@ -703,6 +773,10 @@
 				$('#close_req').click(function(){
 					$('.modal-backdrop').remove();
 					$('#request_bag_signup_popup').css('display','none');
+				});
+				$('#close_reg').click(function(){
+					$('.modal-backdrop').remove();
+					$('#request_bag_registration').modal('hide');
 				});
 				$('#average_payouts_next').click(function(){
 					$('#choose_an_option_for_bag_div').css('display','none');
@@ -800,6 +874,9 @@
 					if (str == true) {
 						$('#send_my_bag_next').html("Submitting");
 						$('#send_my_bag_next').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
+						$("#reg_email").val($("#email_address").val());
+						$('#add_email').text($("#email_address").val());
+						$("#reg_full_name").val(full_name);
 						$.ajax({
 							url: "{{URL::to('costume/postrequestabag')}}",
 							type: "POST",
@@ -808,7 +885,6 @@
 							cache: false,
 							processData: false,
 							success: function(data){
-							console.log(data);
 								if (data == "login") {
 									$('#send_my_bag_next').html("Next");
 									$('#ajax_loader').remove();
@@ -817,10 +893,14 @@
 									loading = false;
 								}
 								else if(data == "register"){
-									window.location.href = "{{URL::to('login#signup_tab')}}";
+									//window.location.href = "{{URL::to('login#signup_tab')}}";
+									$('#send_my_bag_next').html("Next");
+									$('#ajax_loader').remove();
+									$('#send_my_bag_next').append('<div class="modal-backdrop fade in"></div>');
+									$('#request_bag_registration').modal('show');
 									loading = false;
 								}
-								else if (data == "success") {
+								else if (data.trim() == "success") {
 									window.location.href = "{{URL::to('costume/successrequestbag')}}";
 									loading = false;
 								}
@@ -889,6 +969,8 @@
 						console.log("Invalid input!");
 						this.value = val.substring(0, val.length - 1);
 					}
+				
+
 				});
 			});
 		</script>

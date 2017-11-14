@@ -111,7 +111,27 @@
 											</p>
 									</div>
 								</div>
-
+								@if($data[0]->size == 'custom')
+									<div class="charts_div">
+										<table class="table table-bordered">
+											<tbody>
+												<tr>
+													<td colspan="2">Height</td>
+													<td>Heading</td>
+													<td>Heading</td>
+													<td>Heading</td>
+												</tr>
+												<tr>
+													<td>{{$data[0]->custom_sizes[0]}}</td>
+													<td>{{$data[0]->custom_sizes[1]}}</td>
+													<td>{{$data[0]->custom_sizes[2]}}</td>
+													<td>{{$data[0]->custom_sizes[3]}}</td>
+													<td>{{$data[0]->custom_sizes[4]}}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								@endif
 								<div class="col-md-6 col-xs-12 col-sm-4 viewBtn_rm">
 									@if(helper::verifyCostumeQuantity($data[0]->costume_id,$data[0]->quantity+1) && $data[0]->quantity>0)
 										<button type="button" class="addtocart-rm add-cart" data-costume-id="{{$data[0]->costume_id}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart</button>

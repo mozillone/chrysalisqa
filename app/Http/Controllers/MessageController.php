@@ -46,6 +46,8 @@ class MessageController extends Controller
 
     public function chatHistory($id)
     {  
+        Meta::set('title', 'Messages');
+        Meta::set('description', 'Messages - Chrysalis');
         $this->callPartials();
         $conversations = Talk::getConversationsById($id);
         $user = '';

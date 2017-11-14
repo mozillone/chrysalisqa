@@ -25,6 +25,7 @@ use Config;
 use App\Helpers\FedEx\ShipService,
     App\Helpers\FedEx\ShipService\ComplexType,
     App\Helpers\FedEx\ShipService\SimpleType;  
+use Log;
 
 class RequestabagController extends Controller
 {
@@ -59,11 +60,13 @@ class RequestabagController extends Controller
 	public function processBag($id){
 
 		$this->data = array();
-		$this->data['request_a_bag'] = DB::table('request_bags')->where('request_bags.id',$id)		
-		->leftJoin('address_master','request_bags.addres_id','address_master.address_id')
-		->leftJoin('states','address_master.state','states.abbrev')
-		->select('request_bags.*','address_master.*','states.name','states.abbrev')		 
-		->first();
+		$this->data['request_a_bag'] = DB::table('request_bags')
+										->where('request_bags.id',$id)		
+										->leftJoin('address_master','request_bags.addres_id','address_master.address_id')
+										->leftJoin('states','address_master.state','states.abbrev')
+										->select('request_bags.*','address_master.*','states.name','states.abbrev')		 
+										->first();
+		//echo "<pre>";print_r($this->data['request_a_bag']);exit;										
 		$generated_lables = DB::table('request_shippings')
 							->where('request_id',$id)->get();
 		$count_generated_lable =  count($generated_lables);
@@ -104,19 +107,20 @@ class RequestabagController extends Controller
 			$html = '<p> Return initiated $ '.$return_details->credit.' </p>';
 			$this->data['return_html'] = $html;
 		}
-		$this->data['messagingtheard'] = DB::table('messages')->where('conversation_id',$this->data['request_a_bag']->conversation_id)
-		->orderBy('messages.created_at','ASC')
-		->leftJoin('users','messages.user_id','users.id')
-		->select('users.user_img as user_img','users.display_name as display_name','messages.message as message','messages.created_at')
-		->orderBy('messages.created_at','ASC')->get();
-		//dd($this->data['messagingtheard']);
-		//echo "<pre>";print_r($this->data['messagingtheard']);die;
+
+		$this->data['messagingtheard'] = DB::table('messages')
+					->where('conversation_id',$this->data['request_a_bag']->conversation_id)
+					->orderBy('messages.created_at','ASC')
+					->leftJoin('users','messages.user_id','users.id')
+					->select('users.user_img as user_img','users.display_name as display_name','messages.message as message','messages.created_at')
+					->orderBy('messages.created_at','ASC')->get();
+		
         return view('admin.request-a-bag.processabag')->with('total_data',$this->data)->with('is_label_generated', $count_generated_lable);
 	}
 	public function Getallmanagebags(){
 		$request_bags=DB::Select('SELECT `id`, `user_id`, `conversation_id`, `ref_no`, `addres_id`, `is_payout`, `is_return`, `is_recycle`, `status`, `cus_name`, `cus_email`, `cus_phone`, DATE_FORMAT(`created_at`,"%m/%d/%Y %h:%i %p") as date FROM `cc_request_bags`');
 		
-	return Datatables::of(collect($request_bags))
+		return Datatables::of(collect($request_bags))
         ->addColumn('actions', function ($request_bagso) {
                 return '<a href="/process-bag/'.$request_bagso->id.'" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
             })
@@ -363,12 +367,15 @@ class RequestabagController extends Controller
 
 	public function Generatelables(Request $request){
 		//print_r(Config::get('constants.FedEx_Ship_Url')); exit;
+		//print_r($request->hidden_id); exit;
         try{
 	        $islabelGenerated = DB::table('request_shippings')->where('request_id', $request->hidden_id)->first(); 
+
 		        if(! $islabelGenerated)
 		        {
 			        DB::beginTransaction();
 					$req=$request->all();
+					//print_r($req['hidden_id']); exit;
 					$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
 					$request_bag= Site_model::find_user_and_meta('user_meta',Auth::user()->id);
 					if(isset($request_bag['service'])){ 
@@ -388,20 +395,24 @@ class RequestabagController extends Controller
 					$sellerAddress = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
 					//dd($sellerAddress);
 					$response=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
-//dd($response);
+					//dd($response);
 					if($response['result']=="0"){
 						Session::flash('error',$response['msg']);
 			            return Redirect::back();
 					}
 					$track_id=$response['msg'];
 					$shipping_array_pick = array('request_id'=>$req['hidden_id'],
-						'type'=>'pick',
-						'weight'=>'',
-						'shipping_no'=>$track_id,
-						'created_at'=>date('y-m-d H:i:s'),
-						);
+												'type'=>'pick',
+												'weight'=>'',
+												'shipping_no'=>$track_id,
+												'created_at'=>date('y-m-d H:i:s'),
+												);
+					Log::info($shipping_array_pick);
 					$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
+					Log::info($shpippin_pick_insert);
 					$response=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
+					Log::info('Samrt post');
+					Log::info($response);
 					//dd($response);
 					$track_id=$response['msg'];
 					if($response['result']=="0"){
@@ -414,8 +425,9 @@ class RequestabagController extends Controller
 						'shipping_no'=>$track_id,
 						'created_at'=>date('y-m-d H:i:s'),
 						);
+					Log::info($shipping_array_drop);
 					$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
-			                
+			                Log::info($shpippin_drop_insert);
 					$status_update = DB::table('request_bags')->where('id',$request->hidden_id)->update(['status'=>'shipped']);
 		                
 		            $oRequestBag = DB::table('request_bags')->where('id',$request->hidden_id)->first();
@@ -440,7 +452,6 @@ class RequestabagController extends Controller
     		}   
         }catch(\Exception $e){
             DB::rollBack();
-            //dd($e);
             Session::flash('error',$e->getMessage());
             return Redirect::back();
         }
@@ -547,7 +558,8 @@ class RequestabagController extends Controller
           $shipService = new ShipService\Request();
           
           $shipService->getSoapClient()->__setLocation(Config::get('constants.FedEx_Ship_Url'));
-          //$shipService->getSoapClient()->__setLocation('https://wsbeta.fedex.com:443/web-services/ship');
+          //$shipService->getSoapClient()->__setLocation('https://ws.fedex.com:443/web-services/ship');
+          //dd($shipService);
           $response = $shipService->getProcessShipmentReply($processShipmentRequest);
           //dd($response);
           if($response->HighestSeverity=="SUCCESS"){
@@ -560,7 +572,9 @@ class RequestabagController extends Controller
               //print_r($res);exit;
               return  $res;
           }else{
+          	//echo "string"; exit;
           	$msg = "";
+          	//dd($response);
           	if(is_array($response->Notifications)){
           		$msg = $response->Notifications[0]->Message;
           	}else{
@@ -571,9 +585,9 @@ class RequestabagController extends Controller
           }
         
       }
-       private function smartPost($req,$address,$service,$weight,$sellerAddress){
+       	private function smartPost($req,$address,$service,$weight,$sellerAddress){
         
-          $key = Config::get('constants.FedEx_Key');
+          	$key = Config::get('constants.FedEx_Key');
             $password = Config::get('constants.FedEx_Password');
             $account_number = Config::get('constants.FedEx_SmartPostAccountNumber');
             $meter_number = Config::get('constants.FedEx_SmartPostMeterNumber');
@@ -714,7 +728,7 @@ class RequestabagController extends Controller
 			</soapenv:Envelope>';
 
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://ws.fedex.com:443/web-services');
+            curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services');
             curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
             curl_setopt($ch, CURLOPT_VERBOSE, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);

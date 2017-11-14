@@ -12,6 +12,8 @@ Home@parent
 <?php echo (isset($pageData->description) && !empty($pageData->description) ? $pageData->description : ''); ?>
 <div class="container">
 </div>
+<?php $eid = urlencode('$6$3f38241f88775cb2$2xnc8N.Z3KIVpHmk7IjltMCFfLAVGtT4RrfIhlxHr2eECXGlFhrY.2Uyr8ghWHeH3YuuhuRW1KtXbscKQOPua0');  ?>
+<a href="costume/redirect/{{$eid}}">Click</a>
 <div class="home_product_slider">
 	<div class="container">
 		<div class="row">
@@ -21,6 +23,7 @@ Home@parent
 				<div class="owl-carousel owl-theme">
 					<?php foreach ($featured_costumes as $cos) { ?>
 						<div class="item">
+
 							<div class="prod_box">
 								<div class="img_layer">
 									<a href="/product{{$cos->url}}" style="background-image: url({{asset('costumers_images/Medium')}}<?php echo "/".$cos->cos_image; ?>)">

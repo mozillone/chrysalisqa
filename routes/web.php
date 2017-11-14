@@ -11,6 +11,7 @@
 |
 */
 //Auth::routes();
+Route::get('costume/redirect/{id}', 'CreateCostumeController@redirectToCharity');
 Route::get('sitemap',['as' => 'sitemaps.posts','uses'=> 'SitemapsController@index']);
 Route::get('stripeuserupdate/{email}', ['as' => 'stripe.userupdate','uses'=> 'SitemapsController@stripeUsersUpdate']);
 Route::get('update/subcategories/attributes', ['as' => 'update.subcategories.attributes','uses'=> 'SitemapsController@updateAttributesForSubcategories']);

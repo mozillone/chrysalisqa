@@ -4,11 +4,24 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<?php echo Meta::tag('title'); ?>
+
+        <?php echo Meta::tag('description'); ?>
+
+        <!-- Added by Gayatri -->
+        <?php echo Meta::tag('url'); ?>
+
+        <?php echo Meta::tag('image'); ?>
+
+		<meta property="og:image:width" content="100">
+		<meta property="og:image:height" content="100">
+		<!-- End  -->
 		<link rel="stylesheet" href="<?php echo e(asset('vendors/bootstrap/dist/css/bootstrap.min.css')); ?>">
 		<link rel="stylesheet" href="<?php echo e(asset('assets/frontend/css/chrysalis.css')); ?>">
 		<link href="<?php echo e(asset('assets/frontend/vendors/font-awesome/css/font-awesome.min.css')); ?>" rel="stylesheet">
 		<!--<link rel="stylesheet" href="<?php echo e(asset('chat/css/reset.css')); ?>">-->
 		<link rel="stylesheet" href="<?php echo e(asset('chat/css/style.css')); ?>">
+		<link rel="icon" type="image/png" href="<?php echo e(asset('img/favicon.png')); ?>">
 	</head>
 	<body>
 		<?php echo $__env->make('frontend.partials.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -51,9 +51,24 @@ class Handler extends ExceptionHandler
     // }
     public function render($request, Exception $e)
    {
-          session()->flash('error',$e->getMessage());
-          //return Redirect::back();
-          return parent::render($request, $e);
+          // session()->flash('error',$e->getMessage());
+          // //return Redirect::back();
+          // return parent::render($request, $e);
+        if ($e instanceof ModelNotFoundException)
+        {
+            // Do your stuff here
+            return response()->view('errors.'.'404');
+        }
+        elseif ($this->isHttpException($e))
+        {
+            return $this->renderHttpException($e);
+        }
+        else
+        {
+           return parent::render($request, $e);
+
+           //return redirect()->back()->withInput();
+        }
    }
 
     /**

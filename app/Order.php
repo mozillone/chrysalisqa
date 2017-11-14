@@ -19,6 +19,7 @@ use App\Helpers\StripeApp;
 use Exception;
 use Redirect;
 use Mail;
+use Log;
 
 class Order extends Authenticatable
 {
@@ -634,7 +635,11 @@ protected function orderHistory($order_id,$order_status_id,$notify,$comment){
       Site_model::insert_get_id('order_history',$history);
 }
 private function sellerPayout($amount,$order_id,$key){
-    $amt=($amount * (99.25/100)) - 0.20;
+  Log::info('In Seller Payout');
+
+    $amt = ($amount * (99.25/100)) - 0.20;
+    Log::info($amt);
+
     $seller_payout=array('type'=>"order",
                    'type_id'=>$order_id,
                    'user_id'=>$key,
@@ -642,6 +647,7 @@ private function sellerPayout($amount,$order_id,$key){
                    'status'=>"not_paid",
                    'created_at'=>date('Y-m-d h:i:s')
                       );
+    Log::info($seller_payout);
     Site_model::insert_get_id('paypal_payouts',$seller_payout);
 }
 }

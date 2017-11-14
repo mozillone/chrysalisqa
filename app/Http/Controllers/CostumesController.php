@@ -51,11 +51,9 @@ class CostumesController extends Controller {
 		 }else{
 		 	return Redirect::back();
 		 }
-
 		}
 		else{
 			return view('frontend.404');
-			
 		}
 	}
 	public function costumeListings($slug1,$slug2)
@@ -180,11 +178,28 @@ class CostumesController extends Controller {
 		if(count($cat_info)){
 			$costume_id=$cat_info[0]->url_offset;
 			$data=Costumes::getCostumeDetails($costume_id);
+			//echo "<pre>"; print_r($data); exit;
 			if(isset($data[0])){
-                                
-                                if($data[0]->deleted_status == 1 || $data[0]->cos_act_status == "inactive"){
-                                    return \Redirect::to('/');
-                                }
+				if($data[0]->size == 'custom'){
+					$custom_info = DB::table('costume_attribute_options')
+									->select(DB::Raw('GROUP_CONCAT(attribute_option_value) as dimensions' ))
+									->where('costume_id', $costume_id)
+									->where(function($query){
+						                return $query
+						                    ->where('attribute_id',16)
+											->orWhere('attribute_id',17)
+											->orWhere('attribute_id',18)
+											->orWhere('attribute_id',19)
+											->orWhere('attribute_id',20);
+									});
+					$result = $custom_info->first();
+				}else{
+					$result = '';
+				}
+                           
+                if($data[0]->deleted_status == 1 || $data[0]->cos_act_status == "inactive"){
+                    return \Redirect::to('/');
+                }
 				$data['random_costumes']=Costumes::getRandomCategoyCostumesList($data[0]->category_id,$data[0]->parent_id, $costume_id);
 				$data['images']=Costumes::getCostumeImages($costume_id);
 				/* Code added by Gayatri */
@@ -200,7 +215,9 @@ class CostumesController extends Controller {
 				$data['seller_info'] = Costumes::costumeSellerInfo($data[0]->created_by);
                 
                 $data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
-				//dd(nl2br($data['faq'][0]->attribute_option_value));
+                
+                $data[0]->custom_sizes = explode(',', $result->dimensions);
+
 				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2);
 			}else{
 		     	return view('frontend.404');
