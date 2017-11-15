@@ -129,95 +129,95 @@ class RequestabagController extends Controller
 	public function Payoutamount(Request $request){
 		try{
             DB::beginTransaction();
+			$this->data = array();
+			$get_user_id = DB::table('request_bags')->where('id',$request->type_id)->first();
+			$html = "";
+			if($request->payout_type == "credit"){
+                $is_payout_type = "store_credit";
+                $payout_amount_array = array('user_id'=>$get_user_id->user_id,
+                        'request_id'=>$get_user_id->id,
+                        'type'=>'payout',
+                        'credit'=>$request->payout_amount,
+                        'created_at'=>date('y-m-d H:i:s'),);
+                $credit_array = array('user_id'=>$get_user_id->user_id,
+                        'credit'=>$request->payout_amount,
+                        'request_id'=>$get_user_id->id,
+                        'notes'=>'Store credit',
+                        'created_at'=>date('y-m-d H:i:s'));
+                $credit_log = User::CreditLog($credit_array);
+                $payout_amount_insert = DB::table('request_credits')->insertGetId($payout_amount_array);
+                $userObj = User::where('id', $get_user_id->user_id)->first();
 
-		$this->data = array();
-		$get_user_id = DB::table('request_bags')->where('id',$request->type_id)->first();
-		//echo "<pre>"; print_r($request->all());die;
-		$html = "";
-		if($request->payout_type == "credit"){
-                    $is_payout_type = "store_credit";
-                    $payout_amount_array = array('user_id'=>$get_user_id->user_id,
-                            'request_id'=>$get_user_id->id,
-                            'type'=>'payout',
-                            'credit'=>$request->payout_amount,
-                            'created_at'=>date('y-m-d H:i:s'),);
-                    $credit_array = array('user_id'=>$get_user_id->user_id,
-                            'credit'=>$request->payout_amount,
-                            'request_id'=>$get_user_id->id,
-                            'notes'=>'Store credit',
-                            'created_at'=>date('y-m-d H:i:s'));
-                    $credit_log = User::CreditLog($credit_array);
-                    $payout_amount_insert = DB::table('request_credits')->insertGetId($payout_amount_array);
-                    $userObj = User::where('id', $get_user_id->user_id)->first();
+                $userObj->credits = $userObj->credits+$request->payout_amount;
+                $userObj->save();
+                // send mail
+                $reg_subject        = "Store credit amount";
+                $reg_data           = array('name'=>$get_user_id->cus_name,'amount'=>$request->payout_amount);
+                $template           = 'emails.reqabag_storecredit';
+        		$reg_to             = $get_user_id->cus_email;
+                $mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
+                        // end mail
+                $html = '<p> Payout Amount Credited $ '.$request->payout_amount.' </p>';
+				$this->data['status'] = "Payout Amount Credited.";    
+			}else{
+				$is_payout_type = "paypal_payout";
+                $userObj = User::where('id', $get_user_id->user_id)->first();
+                //Log::info($userObj->paypal_email);
+                if(!empty($userObj->paypal_email)){
+                    $single_payout  = PaypalPayout::SinglePayout($userObj->paypal_email,$request->payout_amount);
+                    Log::info($single_payout);
+                    if($single_payout['status'] == 1){
+                    	Log::info('if');
+                		$output = $single_payout['output'];
+						$payout_batch_id = $output->batch_header->payout_batch_id;
+	                    $batch_status    = $output->batch_header->batch_status;
+	                    $sender_batch_id    = $output->batch_header->sender_batch_header->sender_batch_id;
+	                    $log_array = array('type'=>'request_a_bag',
+	                                'type_id'=>$get_user_id->id,
+	                                'user_id'=>$get_user_id->user_id,
+	                                'note'=>'SinglePayout Request a bag',
+	                                'payout_batch_id'=>$payout_batch_id,
+	                                'batch_status'=>$batch_status,
+	                                'sender_batch_id'=>$sender_batch_id,
+	                                'created_at'=>date('y-m-d H:i:s'));
+	                    $insertin_log   = Site_model::insert_get_id('payout_log',$log_array);
+	                    $credit_array = array('user_id'=>$get_user_id->user_id,
+	                                'amount'=>$request->payout_amount,
+	                                'type_id'=>$get_user_id->id,
+	                                'type'=>'requestabag',
+	                                'note'=>'Paypal Payout credit',
+	                                'status'=>'pending',
+	                                'created_at'=>date('y-m-d H:i:s'),);
+	                    $payout_amount_insert = DB::table('paypal_payouts')->insertGetId($credit_array);
+	                    // send mail
+	                    $reg_subject        = "Paypal payout amount";
+	                    $reg_data           = array('name'=>$get_user_id->cus_name,'amount'=>$request->payout_amount);
+	                    $template           = 'emails.reqabag_paypalpayoutcredit';
+	                    $reg_to             = $get_user_id->cus_email;
+	                    $mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
+	                    // end mail
 
-                    $userObj->credits = $userObj->credits+$request->payout_amount;
-                    $userObj->save();
-                    //dd(323);
-                            // send mail
-                            $reg_subject        = "Store credit amount";
-                            $reg_data           = array('name'=>$get_user_id->cus_name,'amount'=>$request->payout_amount);
-                            $template           = 'emails.reqabag_storecredit';
-                    		$reg_to             = $get_user_id->cus_email;
-                            $mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
-                            // end mail
-                    $html = '<p> Payout Amount Credited $ '.$request->payout_amount.' </p>';
-					$this->data['status'] = "Payout Amount Credited.";
-                        
-		}else{
-			$is_payout_type = "paypal_payout";
-                        $userObj = User::where('id', $get_user_id->user_id)->first();
-                        if(!empty($userObj->paypal_email)){
-                            $single_payout  = PaypalPayout::SinglePayout($userObj->paypal_email,$request->payout_amount);
-			//echo $single_payout;die;
-			$payout_batch_id = $single_payout->batch_header->payout_batch_id;
-                        $batch_status    = $single_payout->batch_header->batch_status;
-                        $sender_batch_id    = $single_payout->batch_header->sender_batch_header->sender_batch_id;
-                        $log_array = array('type'=>'request_a_bag',
-                                'type_id'=>$get_user_id->id,
-                                'user_id'=>$get_user_id->user_id,
-                                'note'=>'SinglePayout Request a bag',
-                                'payout_batch_id'=>$payout_batch_id,
-                                'batch_status'=>$batch_status,
-                                'sender_batch_id'=>$sender_batch_id,
-                                'created_at'=>date('y-m-d H:i:s'));
-                                $insertin_log    = Site_model::insert_get_id('payout_log',$log_array);
-                                $credit_array = array('user_id'=>$get_user_id->user_id,
-                                'amount'=>$request->payout_amount,
-                                'type_id'=>$get_user_id->id,
-                                'type'=>'requestabag',
-                                'note'=>'Paypal Payout credit',
-                                'status'=>'pending',
-                                'created_at'=>date('y-m-d H:i:s'),);
-                                $payout_amount_insert = DB::table('paypal_payouts')->insertGetId($credit_array);
-                                // send mail
-                                $reg_subject        = "Paypal payout amount";
-                                $reg_data           = array('name'=>$get_user_id->cus_name,'amount'=>$request->payout_amount);
-                                $template           = 'emails.reqabag_paypalpayoutcredit';
-                                $reg_to             = $get_user_id->cus_email;
-                                $mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
-                                // end mail
-
-                                $html = '<p> Payout Amount Credited $ '.$request->payout_amount.' </p>';
-                                $this->data['status'] = "Payout Amount Credited.";
-                        }else{
-                            return response()->json(['error' => 'please update paypal email in your dashboard.'], 404);
-                        }
-			
-		}
-		$status_update = DB::table('request_bags')->where('id',$request->type_id)->update(['status'=>'paid','is_payout_type'=>$is_payout_type]);
-		//echo "<pre>";print_r($status_update);die;
-
-		//send mail
-        $reg_subject = "REQUEST A BAG Status";
-        $reg_data = array('name'=>$get_user_id->cus_name,'refno'=>$get_user_id->ref_no, 'status'=>'paid');
-        $template_admin = 'emails.reqabag_status_change_admin';
-        $admin_mail_status = $this->sitehelper->sendmail("ndepa@dotcomweavers.com",$reg_subject,$template_admin,$reg_data);
-
-		$this->data['html'] = $html;
-
-		DB::commit();
-		return $this->data;
-
+	                    $html = '<p> Payout Amount Credited $ '.$request->payout_amount.' </p>';
+	                                $this->data['status'] = "Payout Amount Credited.";
+	                }else{
+	                	Log::info('else');
+	                	$error = $single_payout['output'];
+                		//\Session::flash('error', $error);
+                		return response()->json(['error' => $error],400);
+	                }
+                }else{
+                    return response()->json(['error' => 'please update paypal email in your dashboard.'], 404);
+                }
+			}
+			$status_update = DB::table('request_bags')->where('id',$request->type_id)->update(['status'=>'paid','is_payout_type'=>$is_payout_type]);
+			//send mail
+	        $reg_subject = "REQUEST A BAG Status";
+	        $reg_data = array('name'=>$get_user_id->cus_name,'refno'=>$get_user_id->ref_no, 'status'=>'paid');
+	        $template_admin = 'emails.reqabag_status_change_admin';
+	        $admin_mail_status = $this->sitehelper->sendmail("gbhyri@dotcomweavers.com",$reg_subject,$template_admin,$reg_data);
+			$this->data['html'] = $html;
+			DB::commit();
+			return $this->data;
         }catch(\Exception $e){
             DB::rollBack();
             //$e->getMessage();
