@@ -154,19 +154,29 @@
 						</div>
 				
 						<?php if(Auth::check() && !empty($data['seller_info']['shipping_location'])  && helper::getSellerShippingAddress($data[0]->created_by) && helper::getUserShippingAddress()): ?>
-                            <?php $priority_info=helper::domesticRateSingleCostume($data['seller_info']['shipping_location'][0]->zip_code,helper::getUserShippingAddress()['zip_code'],$data[0]->weight_pounds,$data[0]->weight_ounces);
-                           // dd($priority_info);
-                            ?>
+                            
 							<div class="shipping_rm">
-								<p class="shipp-rm"><label>Shipping:</label><?php if($priority_info['result']=="1"): ?> $<?php echo e($priority_info['msg']['rate']); ?> Expedited Shipping <?php else: ?> <?php echo e($priority_info['msg']); ?> <?php endif; ?></p>
-
+								<p class="shipp-rm">
+									<label>Shipping:</label> $<?php echo e($rate); ?> Expedited Shipping 
+								</p>
 								<p class="shipp-rm1">Item location: <?php echo e($data['seller_info']['shipping_location'][0]->city); ?>, <?php echo e($data['seller_info']['shipping_location'][0]->state); ?> USA <br/>Ships to: <?php echo e(helper::getUserShippingAddress()['city']); ?>, <?php echo e(helper::getUserShippingAddress()['state']); ?> USA</p>
-								<p class="shipp-rm shipp-rm-20"><label>Delivery: &nbsp; </label> <?php if($priority_info['result']=="1"): ?> Est. between <?php echo e(date('D . M . d')); ?>  and <?php echo e(date('D . M .d',strtotime('+'.$priority_info["msg"]["MailService"].' days'))); ?> <?php else: ?> <?php echo e($priority_info['msg']); ?> <?php endif; ?>  <i class="fa fa-info-circle" aria-hidden="true"></i></p>
+								<p class="shipp-rm shipp-rm-20">
+									<label>Delivery: &nbsp; </label> 
+									Est. between <?php echo e($est_delivery_date); ?>
+
+									<i class="fa fa-info-circle" aria-hidden="true"></i>
+								</p>
 							</div>
 						<?php endif; ?>
-<!-- <?php echo nl2br($data['faq'][0]->attribute_option_value); ?>  -->
-						<p class="returns-rm">Returns: <span>Seller <?php if(isset($data['returns'][0])){ echo $data['returns'][0]->attribute_option_value; }else{ echo " Return Not Accepted"; } ?></span></p>
-
+						<p class="returns-rm">Returns: 
+							<span>Seller 
+								<?php if(isset($data['returns'][0])){ 
+										echo $data['returns'][0]->attribute_option_value; 
+									}else{ 
+										echo " Return Not Accepted"; 
+									} ?>
+							</span>
+						</p>
 
 						<div class="viewTabs_rm" style="display:none;">
 							<ul class="nav nav-tabs viewTabs">

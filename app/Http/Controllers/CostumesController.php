@@ -178,7 +178,7 @@ class CostumesController extends Controller {
 		if(count($cat_info)){
 			$costume_id=$cat_info[0]->url_offset;
 			$data=Costumes::getCostumeDetails($costume_id);
-			//echo "<pre>"; print_r($data); exit;
+
 			if(isset($data[0])){
 				if($data[0]->size == 'custom'){
 					$custom_info = DB::table('costume_attribute_options')
@@ -202,6 +202,36 @@ class CostumesController extends Controller {
                 }
 				$data['random_costumes']=Costumes::getRandomCategoyCostumesList($data[0]->category_id,$data[0]->parent_id, $costume_id);
 				$data['images']=Costumes::getCostumeImages($costume_id);
+
+				if($data['est_time']->attribute_option_value == '1-2 Business Days'){
+					$est_date = date('D . M .d',strtotime('+2 days'));
+					$add = 2;
+				}else if($data['est_time']->attribute_option_value == '3-4 Business Days'){
+					$est_date = date('D . M .d',strtotime('+4 days'));
+					$add = 4;
+				}else if($data['est_time']->attribute_option_value == '5-6 Business Days'){
+					$est_date = date('D . M .d',strtotime('+6 days'));
+					$add = 6;
+				}else if($data['est_time']->attribute_option_value == '7 Business Days'){
+					$est_date = date('D . M .d',strtotime('+7 days'));
+					$add = 7;
+				}else{
+					$est_date = date('D . M .d');
+					$add = 0;
+				}
+				
+				$data['seller_info'] = Costumes::costumeSellerInfo($data[0]->created_by);
+				
+				$priority_info = SiteHelper::domesticRateSingleCostume($data['seller_info']['shipping_location'][0]->zip_code,SiteHelper::getUserShippingAddress()['zip_code'],$data[0]->weight_pounds,$data[0]->weight_ounces);
+				
+				if($priority_info['result']=="1"){
+					$est_delivery_date = $est_date.' and '.date('D . M .d',strtotime('+'.($priority_info["msg"]["MailService"]+$add).' days'));
+					$rate = $priority_info['msg']['rate'];
+				}else{
+					$est_delivery_date = $priority_info['msg'];
+					$rate = $priority_info['msg'];
+				}
+
 				/* Code added by Gayatri */
 
 				$costume_name = DB::table('costume_description')->where('costume_id',$costume_id)->first();
@@ -212,13 +242,13 @@ class CostumesController extends Controller {
 				Meta::set('title', ucfirst($costume_name->name));
 				
 				/* End */		
-				$data['seller_info'] = Costumes::costumeSellerInfo($data[0]->created_by);
+				
                 
                 $data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
                 
                 $data[0]->custom_sizes = explode(',', $result->dimensions);
 
-				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2);
+				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2)->with('est_delivery_date', $est_delivery_date)->with('rate', $rate);
 			}else{
 		     	return view('frontend.404');
 			}

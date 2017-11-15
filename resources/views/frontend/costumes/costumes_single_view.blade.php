@@ -153,19 +153,28 @@
 						</div>
 				
 						@if(Auth::check() && !empty($data['seller_info']['shipping_location'])  && helper::getSellerShippingAddress($data[0]->created_by) && helper::getUserShippingAddress())
-                            <?php $priority_info=helper::domesticRateSingleCostume($data['seller_info']['shipping_location'][0]->zip_code,helper::getUserShippingAddress()['zip_code'],$data[0]->weight_pounds,$data[0]->weight_ounces);
-                           // dd($priority_info);
-                            ?>
+                            
 							<div class="shipping_rm">
-								<p class="shipp-rm"><label>Shipping:</label>@if($priority_info['result']=="1") ${{$priority_info['msg']['rate']}} Expedited Shipping @else {{$priority_info['msg']}} @endif</p>
-
+								<p class="shipp-rm">
+									<label>Shipping:</label> ${{$rate}} Expedited Shipping 
+								</p>
 								<p class="shipp-rm1">Item location: {{$data['seller_info']['shipping_location'][0]->city}}, {{$data['seller_info']['shipping_location'][0]->state}} USA <br/>Ships to: {{helper::getUserShippingAddress()['city']}}, {{helper::getUserShippingAddress()['state']}} USA</p>
-								<p class="shipp-rm shipp-rm-20"><label>Delivery: &nbsp; </label> @if($priority_info['result']=="1") Est. between {{date('D . M . d')}}  and {{date('D . M .d',strtotime('+'.$priority_info["msg"]["MailService"].' days'))}} @else {{$priority_info['msg']}} @endif  <i class="fa fa-info-circle" aria-hidden="true"></i></p>
+								<p class="shipp-rm shipp-rm-20">
+									<label>Delivery: &nbsp; </label> 
+									Est. between {{$est_delivery_date}}
+									<i class="fa fa-info-circle" aria-hidden="true"></i>
+								</p>
 							</div>
 						@endif
-<!-- {!! nl2br($data['faq'][0]->attribute_option_value) !!}  -->
-						<p class="returns-rm">Returns: <span>Seller <?php if(isset($data['returns'][0])){ echo $data['returns'][0]->attribute_option_value; }else{ echo " Return Not Accepted"; } ?></span></p>
-
+						<p class="returns-rm">Returns: 
+							<span>Seller 
+								<?php if(isset($data['returns'][0])){ 
+										echo $data['returns'][0]->attribute_option_value; 
+									}else{ 
+										echo " Return Not Accepted"; 
+									} ?>
+							</span>
+						</p>
 
 						<div class="viewTabs_rm" style="display:none;">
 							<ul class="nav nav-tabs viewTabs">

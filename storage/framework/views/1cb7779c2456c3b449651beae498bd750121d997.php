@@ -130,6 +130,69 @@
 								
 							</div>
 						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+							<h2>BILLING ADDRESS</h2></div>
+							<div class="panel-body billing_addres_1">
+								<?php if(isset($default_billing_address) && !empty($default_billing_address) &&  count($default_billing_address)>0){
+									$billing_address = $default_billing_address; 
+									
+									//echo "<pre>";print_r($billing_address);die;
+								?>
+								<?php $__currentLoopData = $billing_address; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b_address): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+								<p class="bill_adrs">
+									
+									<span> <strong><?php echo e($b_address->fname); ?> <?php echo e($b_address->lname); ?></strong><br>
+										<?php if(!empty($b_address->address1)): ?><?php echo e($b_address->address1); ?><br><?php endif; ?>
+										<?php echo e($b_address->address2); ?><br>
+										<?php echo e($b_address->city); ?>, <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?> <?php if($st->name==$b_address->state ): ?><?php echo e($st->abbrev); ?> <?php endif; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?> <?php echo e($b_address->zip_code); ?>
+
+									</span>
+								</p> 
+								<p class="bill_adrs_dlte">
+									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_billing(<?php echo e($b_address->address_id); ?>)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address(<?php echo e($b_address->address_id); ?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+								</p>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+								<?php }else{
+									$billing_address = "<p>Billing address is not added yet.</p>";
+									echo $billing_address;
+								} ?>
+								<div class="form-group add_new_btn">
+									<a type="submit" id="billing_popup_add" class="btn btn-default">Add New</a>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+							<h2>SHIPPING ADDRESS</h2></div>
+							<div class="panel-body billing_addres_1">
+								<?php if(isset($default_shipping_address) && !empty($default_shipping_address) && count($default_shipping_address)>0  ){
+									$shipping_address = $default_shipping_address; 
+									
+									//echo "<pre>";print_r($states);die;
+								?>
+								<?php $__currentLoopData = $shipping_address; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$s_address): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+								<p class="bill_adrs">
+									
+									<span> <strong><?php echo e($s_address->fname); ?> <?php echo e($s_address->lname); ?></strong><br>
+										<?php if(!empty($s_address->address1)): ?><?php echo e($s_address->address1); ?><br><?php endif; ?>
+										<?php echo e($s_address->address2); ?><br>
+										<?php echo e($s_address->city); ?>, <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?> <?php if($st->name==$s_address->state ): ?><?php echo e($st->abbrev); ?> <?php endif; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+									<?php echo e($s_address->zip_code); ?></span>
+								</p> 
+								<p class="bill_adrs_dlte">
+									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_shipping(<?php echo e($s_address->address_id); ?>)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address(<?php echo e($s_address->address_id); ?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+								</p>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+								<?php }else{
+									$shipping_address = "<p>Shipping address is not added yet.</p>";
+									echo $shipping_address;
+								} ?>
+								<div class="form-group add_new_btn">
+									<a type="submit" class="btn btn-default" id="shipping_popup_add">Add New</a>
+								</div>
+							</div>
+						</div>
 						<div class="panel panel-default shipping_block">
 							<div class="panel-heading">
 							<h2>SHIPPING SETTINGS</h2></div>
@@ -160,39 +223,6 @@
 								
 							</div>
 						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h2>WHERE WILL YOU BE SHIPPING YOUR COSTUMES FROM?</h2>
-							</div>
-							
-							
-							<div class="panel-body billing_addres_1">
-								<?php if(count($seller_address)): ?>
-								<p class="bill_adrs">
-									
-									<span> <strong><?php echo e($seller_address[0]->fname); ?> <?php echo e($seller_address[0]->lname); ?></strong><br>
-										<?php echo e($seller_address[0]->address1); ?><?php if(!empty($seller_address[0]->address1)): ?><br><?php endif; ?><?php echo e($seller_address[0]->address2); ?><br>
-										<?php echo e($seller_address[0]->city); ?>, <?php echo e($seller_address[0]->state); ?>
-
-									<?php echo e($seller_address[0]->zip_code); ?></span>
-								</p>
-								<p class="bill_adrs_dlte">
-									<span><a href="javascript::void(0);" class="edit_selling_addr"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript::void(0);" onclick="delete_seller_address(<?php echo e($seller_address[0]->address_id); ?>)" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
-								</p>
-								<?php else: ?>
-								<p class="bill_adrs"><span>No Shipping from location found</span></p>
-								<?php endif; ?> 
-								
-								<?php if(!count($seller_address)): ?>
-								<div class="form-group add_new_btn">
-									<a type="submit" href="javascript::void(0);" class="btn btn-default selling_popup_add">Add New</a>
-								</div>
-								<?php endif; ?>
-								
-								
-							</div>
-						</div>
-						
 						
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -285,67 +315,37 @@
 								</form>
 							</div>
 						</div>
+						
 						<div class="panel panel-default">
 							<div class="panel-heading">
-							<h2>BILLING ADDRESS</h2></div>
-							<div class="panel-body billing_addres_1">
-								<?php if(isset($default_billing_address) && !empty($default_billing_address) &&  count($default_billing_address)>0){
-									$billing_address = $default_billing_address; 
-									
-									//echo "<pre>";print_r($billing_address);die;
-								?>
-								<?php $__currentLoopData = $billing_address; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b_address): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-								<p class="bill_adrs">
-									
-									<span> <strong><?php echo e($b_address->fname); ?> <?php echo e($b_address->lname); ?></strong><br>
-										<?php if(!empty($b_address->address1)): ?><?php echo e($b_address->address1); ?><br><?php endif; ?>
-										<?php echo e($b_address->address2); ?><br>
-										<?php echo e($b_address->city); ?>, <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?> <?php if($st->name==$b_address->state ): ?><?php echo e($st->abbrev); ?> <?php endif; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?> <?php echo e($b_address->zip_code); ?>
-
-									</span>
-								</p> 
-								<p class="bill_adrs_dlte">
-									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_billing(<?php echo e($b_address->address_id); ?>)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address(<?php echo e($b_address->address_id); ?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
-								</p>
-								<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-								<?php }else{
-									$billing_address = "<p>Billing address is not added yet.</p>";
-									echo $billing_address;
-								} ?>
-								<div class="form-group add_new_btn">
-									<a type="submit" id="billing_popup_add" class="btn btn-default">Add New</a>
-								</div>
+								<h2>SHIP FROM ADDRESS</h2>
 							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-							<h2>SHIPPING ADDRESS</h2></div>
+							
+							
 							<div class="panel-body billing_addres_1">
-								<?php if(isset($default_shipping_address) && !empty($default_shipping_address) && count($default_shipping_address)>0  ){
-									$shipping_address = $default_shipping_address; 
-									
-									//echo "<pre>";print_r($states);die;
-								?>
-								<?php $__currentLoopData = $shipping_address; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$s_address): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+								<?php if(count($seller_address)): ?>
 								<p class="bill_adrs">
 									
-									<span> <strong><?php echo e($s_address->fname); ?> <?php echo e($s_address->lname); ?></strong><br>
-										<?php if(!empty($s_address->address1)): ?><?php echo e($s_address->address1); ?><br><?php endif; ?>
-										<?php echo e($s_address->address2); ?><br>
-										<?php echo e($s_address->city); ?>, <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?> <?php if($st->name==$s_address->state ): ?><?php echo e($st->abbrev); ?> <?php endif; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-									<?php echo e($s_address->zip_code); ?></span>
-								</p> 
-								<p class="bill_adrs_dlte">
-									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_shipping(<?php echo e($s_address->address_id); ?>)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address(<?php echo e($s_address->address_id); ?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+									<span> <strong><?php echo e($seller_address[0]->fname); ?> <?php echo e($seller_address[0]->lname); ?></strong><br>
+										<?php echo e($seller_address[0]->address1); ?><?php if(!empty($seller_address[0]->address1)): ?><br><?php endif; ?><?php echo e($seller_address[0]->address2); ?><br>
+										<?php echo e($seller_address[0]->city); ?>, <?php echo e($seller_address[0]->state); ?>
+
+									<?php echo e($seller_address[0]->zip_code); ?></span>
 								</p>
-								<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-								<?php }else{
-									$shipping_address = "<p>Shipping address is not added yet.</p>";
-									echo $shipping_address;
-								} ?>
+								<p class="bill_adrs_dlte">
+									<span><a href="javascript::void(0);" class="edit_selling_addr"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript::void(0);" onclick="delete_seller_address(<?php echo e($seller_address[0]->address_id); ?>)" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+								</p>
+								<?php else: ?>
+								<p class="bill_adrs"><span>No Shipping from location found</span></p>
+								<?php endif; ?> 
+								
+								<?php if(!count($seller_address)): ?>
 								<div class="form-group add_new_btn">
-									<a type="submit" class="btn btn-default" id="shipping_popup_add">Add New</a>
+									<a type="submit" href="javascript::void(0);" class="btn btn-default selling_popup_add">Add New</a>
 								</div>
+								<?php endif; ?>
+								
+								
 							</div>
 						</div>
 						
