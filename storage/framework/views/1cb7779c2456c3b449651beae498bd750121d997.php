@@ -388,8 +388,26 @@
 									<tr> 
 										<td><a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>"><?php echo e(helper::DateFormat($orders->date)); ?></a></td> 
 										<td><a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>"><?php echo e($orders->order_id); ?></a></td> 
-										<td><a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>"><?php if(strlen($orders->seller_name) < 25) {echo ucfirst($orders->seller_name);} else { echo substr(ucfirst($orders->seller_name), 0,25)."..."; } ?></a></td> 
-										<td><a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>"><?php echo e(ucfirst($orders->status)); ?></a></td> 
+										<td>
+											<a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>">
+												<?php if(strlen($orders->seller_name) < 25) {
+														echo ucfirst($orders->seller_name);
+														} else { 
+															echo substr(ucfirst($orders->seller_name), 0,25)."..."; }
+												?>
+											</a>
+										</td> 
+										<td>
+											<?php if($orders->status == 'Shipping'): ?>
+												<?php if($orders->order_cnt == 1): ?>
+													<a href="/sold/order/track-info/download/<?php echo e($orders->label); ?>/<?php echo e($orders->carrier_type); ?>">Print Label</a>
+												<?php else: ?>
+													<a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>#ordersShipping">Print Label</a>
+												<?php endif; ?>
+											<?php else: ?>
+												<a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>"><?php echo e(ucfirst($orders->status)); ?></a>
+											<?php endif; ?>
+										</td> 
 									</tr>
 									<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 									<?php else: ?>

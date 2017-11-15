@@ -385,8 +385,26 @@
 									<tr> 
 										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{helper::DateFormat($orders->date)}}</a></td> 
 										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{$orders->order_id}}</a></td> 
-										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>"><?php if(strlen($orders->seller_name) < 25) {echo ucfirst($orders->seller_name);} else { echo substr(ucfirst($orders->seller_name), 0,25)."..."; } ?></a></td> 
-										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{ucfirst($orders->status)}}</a></td> 
+										<td>
+											<a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">
+												<?php if(strlen($orders->seller_name) < 25) {
+														echo ucfirst($orders->seller_name);
+														} else { 
+															echo substr(ucfirst($orders->seller_name), 0,25)."..."; }
+												?>
+											</a>
+										</td> 
+										<td>
+											@if($orders->status == 'Shipping')
+												@if($orders->order_cnt == 1)
+													<a href="/sold/order/track-info/download/{{$orders->label}}/{{$orders->carrier_type}}">Print Label</a>
+												@else
+													<a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>#ordersShipping">Print Label</a>
+												@endif
+											@else
+												<a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{ucfirst($orders->status)}}</a>
+											@endif
+										</td> 
 									</tr>
 									@endforeach
 									@else

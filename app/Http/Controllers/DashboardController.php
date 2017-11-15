@@ -38,30 +38,30 @@ class DashboardController extends Controller {
 		if(Auth::user()->id!="1"){
     	$this->data = array();
       $this->data['default_billing_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','billing')->get();
-       $this->data['seller_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
+      $this->data['seller_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
 			//print_r($this->data['default_billing_address']);die;
       $this->data['user_details'] = DB::table('users')->where('id',Auth::user()->id)->first();
 			$this->data['default_shipping_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','shipping')->get();
 			$this->data['states']   = Site_model::Fetch_all_data('states', '*');
-    $this->data['countries']   = Site_model::Fetch_all_data('countries', '*');
-    $this->data['recent_orders'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id   where ord.buyer_id='.Auth::user()->id.' ORDER BY `order_id` DESC LIMIt 0,5');
-    $this->data['costumes_sold'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id where ord.seller_id='.Auth::user()->id.' ORDER BY ord.order_id DESC LIMIt 0,5');
-    $this->data['creditcard_list'] = DB::table('creditcard')->where('user_id',Auth::user()->id)->get();
-    $this->data['my_costumes'] = DB::table('costumes')->where('created_by',Auth::user()->id)
-    ->leftJoin('costume_description','costumes.costume_id','costume_description.costume_id')
-    ->take(5)
-    ->where('deleted_status','0')
-    ->orderBy('created_at','DESC')
-    ->get();
-    $states=Address::getStatesList();
-    //echo "<pre>";print_r($this->data['my_costumes']);die; 
-   		return view('frontend.dashboard.dashboard')->with($this->data)->with('states',$states);
-			
+      $this->data['countries']   = Site_model::Fetch_all_data('countries', '*');
+      
+      $this->data['recent_orders'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status, ost.track_no as label,ost.carrier_type as carrier_type, (select count(ostt.order_id) from cc_order_ship_track as ostt where ostt.order_id = ord.order_id) as order_cnt FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id LEFT JOIN cc_order_ship_track as ost on ord.order_id=ost.order_id where ord.buyer_id='.Auth::user()->id.' ORDER BY `order_id` DESC LIMIt 0,5');
+      //echo "<pre>"; print_r($this->data['recent_orders']); exit;
+      $this->data['costumes_sold'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id where ord.seller_id='.Auth::user()->id.' ORDER BY ord.order_id DESC LIMIt 0,5');
+
+      $this->data['creditcard_list'] = DB::table('creditcard')->where('user_id',Auth::user()->id)->get();
+      $this->data['my_costumes'] = DB::table('costumes')->where('created_by',Auth::user()->id)
+                                    ->leftJoin('costume_description','costumes.costume_id','costume_description.costume_id')
+                                    ->take(5)
+                                    ->where('deleted_status','0')
+                                    ->orderBy('created_at','DESC')
+                                    ->get();
+      $states=Address::getStatesList();
+      //echo "<pre>";print_r($this->data['my_costumes']);die; 
+   	  return view('frontend.dashboard.dashboard')->with($this->data)->with('states',$states);
 		}else{
 			return Redirect::to('admin/dashboard');
 		}
-
-		
 	}
 	
 	public function  EditProfile(Request $request)

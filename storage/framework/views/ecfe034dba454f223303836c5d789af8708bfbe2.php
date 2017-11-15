@@ -146,7 +146,7 @@
 													</table>
 												</div>
 											</div>
-											<div class="col-md-6 col-xs-12">
+											<div class="col-md-6 col-xs-12" id="ordersShipping">
 												<div class="rencemt_order_table table-responsive order-smry_view_div">
 													<h2>Shipping Information</h2>
 													<h4>Shipping Info</h4>
@@ -284,5 +284,12 @@
 <?php $__env->startSection('footer_scripts'); ?>
 <script src="<?php echo e(asset('/js/jquery.validate.min.js')); ?>"></script>
 <script src="<?php echo e(asset('/assets/admin/js/pages/order_process.js')); ?>"></script>
+<script type="text/javascript">
+
+	if(window.location.href.indexOf('#') != -1){
+		$('html,body').animate({scrollTop: $('#ordersShipping').offset().top}, 800);
+	}
+
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontend.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
