@@ -28,9 +28,11 @@
 				@if(count($data))
 				@foreach($data as $wish)
 
-					<div class="col-md-3 col-sm-4 col-xs-6" >
+				<div class="col-md-3 col-sm-4 col-xs-6" >
 					    <div class="prod_box">
 					        <div class="img_layer">
+					        	
+
 					            <a href="/product{{$wish->url_key}}" style="background-image: url(@if($wish->image!=null && file_exists(public_path
 					            ('costumers_images/Medium/'.$wish->image.''))) /costumers_images/Medium/{{$wish->image}} @else /costumers_images/default-placeholder.jpg @endif)">&nbsp;</a>
 					            <div class="hover_box">
@@ -42,7 +44,8 @@
 					                		<span class="active"><i aria-hidden="true" class="fa fa-heart"></i></span>
 					                	</a>
 					                </p>
-					                @if($wish->quantity>=1)
+					               <!--  <p class="hover_crt add-cart" data-costume-id="{{$wish->costume_id}}"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p> -->
+					               	@if($wish->quantity>=1)
 					                	<p class="hover_crt add-cart" data-costume-id="{{$wish->costume_id}}"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
 					                @else
 					                	<p class="hover_crt"><i aria-hidden=true class="fa fa-shopping-cart"></i> Out of stock</p>
@@ -56,27 +59,33 @@
 								<p>{{$wish->name}}</p>
 								<p class="fav-drs-size">{{ucfirst($wish->gender)}} @if($wish->size=="s") Small @elseif($wish->size=="m") Medium @elseif($wish->size=="l") Large @else {{strtoupper($data[0]->size)}} @endif</p>
 					            <p>{{$wish->price}}</p>
-
-								<div class="fav_social">
+								<div class="fav_social fav_social_sharing">
 									<a href="javascript:void(0);" class="facebook" class="icoRss" title="Facebook">
 										<i id="social-fb" class="fa fa-facebook fa-1x social"></i>
 										<input type="hidden" name="url_fb" class="url_fb" value="{{url('/').'/product'.$wish->url_key}}">
 									</a>
-									<a href="javascript:void(0);">
-										<div id="twiter_url" data-network="twitter" class="st-custom-button" data-title="" data-url="">
+									<a href="javascript:void(0);" title="Twitter">
+										<div id="twiter_url" data-network="twitter" class="st-custom-button" data-title="" data-url="{{url('/').'/product'.$wish->url_key}}">
 											<i id="social-tw" class="fa fa-twitter fa-1x social"></i>
 										</div>
 									</a>
-									<a href="https://plus.google.com/+Bootsnipp-page">
-										<i id="social-gp" class="fa fa-envelope fa-1x social"></i>
-									</a>
 
-									<div class="sharethis-inline-share-buttons" data-url="{{URL::to('/product'.$wish->url_key.'')}}" data-title="{{$wish->name}}"></div>
+									<a href="javascript:void(0);" class="icoGoogle" title="Pinterest">
+                                		<div id="pin_url" data-network="pinterest" class="st-custom-button" data-url="{{url('/').'/product'.$wish->url_key}}" data-image="{{url('/').'/costumers_images/Small/'.$wish->image}}" data-title="">
+                                			<i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                                		</div>
+                                	</a>
+
+                                	<a href="javascript:void(0);" class="icoLinkedin tumblr_btn" title="Tumblr">
+                                		<i class="fa fa-tumblr" aria-hidden="true"></i>
+                                		<input type="hidden" name="tumblr_url" class="tumblr_url" value="{{url('/').'/costumers_images/Large/'.$wish->image}}" data-url="{{url('/').'/product'.$wish->url_key}}">
+                                	</a>
+									
+									<!-- <div class="sharethis-inline-share-buttons" data-url="{{URL::to('/product'.$wish->url_key.'')}}" data-title="{{$wish->name}}"></div> -->
 					        	</div>
 							</div>
 					    </div>
 					</div>
-
 				@endforeach
 				@else
 					<div  class="col-md-3 col-sm-4 col-xs-6">There are no items in your list.</div>
@@ -102,5 +111,6 @@
 <script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript" src="{{ asset('/assets/frontend/js/social_sharing.js') }}"></script>
 <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=595c7a060f8114001101959f&product=inline-share-buttons"></script>
+
 
 @stop

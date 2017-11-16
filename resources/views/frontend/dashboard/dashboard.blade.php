@@ -385,25 +385,9 @@
 									<tr> 
 										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{helper::DateFormat($orders->date)}}</a></td> 
 										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{$orders->order_id}}</a></td> 
+										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>"><?php if(strlen($orders->seller_name) < 25) {echo ucfirst($orders->seller_name);} else { echo substr(ucfirst($orders->seller_name), 0,25)."..."; } ?></a></td> 
 										<td>
-											<a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">
-												<?php if(strlen($orders->seller_name) < 25) {
-														echo ucfirst($orders->seller_name);
-														} else { 
-															echo substr(ucfirst($orders->seller_name), 0,25)."..."; }
-												?>
-											</a>
-										</td> 
-										<td>
-											@if($orders->status == 'Shipping')
-												@if($orders->order_cnt == 1)
-													<a href="/sold/order/track-info/download/{{$orders->label}}/{{$orders->carrier_type}}">Print Label</a>
-												@else
-													<a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>#ordersShipping">Print Label</a>
-												@endif
-											@else
-												<a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{ucfirst($orders->status)}}</a>
-											@endif
+											<a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{ucfirst($orders->status)}}</a>
 										</td> 
 									</tr>
 									@endforeach
@@ -423,11 +407,21 @@
 								<tbody>
 									@if(count($costumes_sold)) 
 									@foreach ($costumes_sold as $sold_costumes)
-									<tr> 
+									<tr @if($sold_costumes->status == 'Shipping') class="print_bg" @endif> 
 										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{helper::DateFormat($sold_costumes->date)}}</a></td> 
 										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{$sold_costumes->order_id}} </a> </td> 
 										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>"><?php if(strlen($sold_costumes->buyer_name) < 25) {echo ucfirst($sold_costumes->buyer_name);} else { echo substr(ucfirst($sold_costumes->buyer_name), 0,25)."..."; } ?></a></td> 
-										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{ucfirst($sold_costumes->status)}}</a></td> 
+										<td>
+											@if($sold_costumes->status == 'Shipping')
+												@if($sold_costumes->order_cnt == 1)
+													<a href="/sold/order/track-info/download/{{$sold_costumes->label}}/{{$sold_costumes->carrier_type}}">Print Label</a>
+												@else
+													<a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>#ordersShipping">Print Label</a>
+												@endif
+											@else
+												<a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{ucfirst($sold_costumes->status)}}</a>
+											@endif
+										</td> 
 									</tr>
 									@endforeach 
 									@else

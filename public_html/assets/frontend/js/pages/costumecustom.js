@@ -257,14 +257,14 @@ $(function(){
 
    
 
-        if(condition_val == 'good' || condition_val == 'like_new')
+        /*if(condition_val == 'good' || condition_val == 'like_new')
         {
             if(cleaned == "")
             {
                  $('#cleanederror').html('This field is required.');
                  str = false;
             }           
-        }
+        }*/
         var uniquefashion = "";
         if(size == 'custom'){
             if(heightft == ""){
@@ -761,7 +761,7 @@ $(function(){
 
         if(parseInt(donate_charity) == 0 && charity_name != '' ){
             $('#donate_charity').css('border', '1px solid red');
-            $('#donate_charityerror').html('Select Donate Amount');
+            $('#donate_charityerror').html('Select Donation Amount');
             str = false;
         }else if(parseInt(donate_charity) != 0 && charity_name == '' ){
             $('#charity_nameerror').html('Please select any Charity.');
@@ -840,7 +840,7 @@ $(function(){
                         $('#pin_url').attr('data-title', response.quote);
                         $('#pin_url').attr('data-image', response.first_pic);
 
-                        var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.share_url)+"&caption="+encodeURIComponent(response.quote)+"&canonicalUrl="+encodeURIComponent('http://dev.chrysaliscostumes.com/costume/create')+"&shareSource=tumblr_share_button";
+                        var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.first_pic)+"&caption="+encodeURIComponent(response.quote)+"&canonicalUrl="+encodeURIComponent(response.first_pic)+"&shareSource=tumblr_share_button";
                         
                         $('#tumblr_url').val(tumb_url);
                         
