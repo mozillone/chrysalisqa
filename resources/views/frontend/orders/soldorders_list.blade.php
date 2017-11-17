@@ -77,7 +77,7 @@
 									</div>
 								</div> -->
 							</div>
-							<div class="table-responsive auto-scroll-none">
+							<div class="table-responsive auto-scroll-none sold_div">
 								<table datatable dt-options="dtOptions" dt-columns="dtColumns"
 								class="table table-striped" id="dtTable">
 								</table>

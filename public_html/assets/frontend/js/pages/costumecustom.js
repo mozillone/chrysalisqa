@@ -840,7 +840,7 @@ $(function(){
                         $('#pin_url').attr('data-title', response.quote);
                         $('#pin_url').attr('data-image', response.first_pic);
 
-                        var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.share_url)+"&caption="+encodeURIComponent(response.quote)+"&canonicalUrl="+encodeURIComponent('http://dev.chrysaliscostumes.com/costume/create')+"&shareSource=tumblr_share_button";
+                        var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.first_pic)+"&caption="+encodeURIComponent(response.quote)+"&canonicalUrl="+encodeURIComponent(response.first_pic)+"&shareSource=tumblr_share_button";
                         
                         $('#tumblr_url').val(tumb_url);
                         

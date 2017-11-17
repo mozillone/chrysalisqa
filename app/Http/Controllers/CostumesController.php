@@ -89,8 +89,35 @@ class CostumesController extends Controller {
 			 }
 
 			}
-			else{
-				return view('frontend.404');
+			return view('frontend.costumes.costumes_list',compact('data',$data))->with('parent_cat_name',$slug1)->with('categories_list',$categories_list)->with('parent_cat',true);
+		 }else{
+		 	return Redirect::back();
+		 }
+
+		}
+		else{
+			return view('frontend.404');
+			
+		}
+	}
+	public function costumeListings($slug1,$slug2)
+	{
+		Meta::set('title', ucfirst($slug2));
+        Meta::set('description', ucfirst($slug2).' Buy and Sell Affordable, Environment Friendly Costumes');
+        $key_url='/'.$slug1.'/'.$slug2;
+      	$cat_info=Category::getUrlCategoryId($key_url);
+      	//dd($cat_info);
+		if(count($cat_info)){
+			$categories_list=[];
+			$sub_cat_id=$cat_info[0]->url_offset;
+			$data['sub_cat_info']=Costumes::getCategoryInfo($sub_cat_id);
+			//dd($data['sub_cat_info']);
+			$parent_cat_id=$data['sub_cat_info'][0]->parent_id;
+			$sub_cats_list=Costumes::getParentCategories($parent_cat_id);
+			//dd($sub_cats_list);
+			$categories_list[$sub_cats_list[0]->name][]="None";
+			foreach ($sub_cats_list as $subCat) {
+				$link = Category::getUrlLinks($subCat->category_id);
 				
 			}
 		}
@@ -413,13 +440,115 @@ class CostumesController extends Controller {
                     
                     $data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
     				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2);
+=======
+		}
+		if(Auth::check()){
+			$is_login=',if((select count(*) from cc_costumes_like as likes where likes.user_id='.Auth::user()->id.' and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id='.Auth::user()->id.'  and  wsh_lst.costume_id=cst.costume_id )>=1,true,false) as is_fav';
+		}else{
+			$is_login=' ';
+		}
+		$costumes = DB::select('SELECT cst.costume_id,dsr.name,FORMAT(cst.price,2) as price'.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,cst.created_user_group,cst.quantity,link.url_key,created_user_group,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer, cao.attribute_option_value_id as film_qlty FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id LEFT JOIN cc_category as cats on cats.category_id=cat.category_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1"  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id and prom.code="" LEFT JOIN cc_coupon_costumes as cpn_cst on cpn_cst.costume_id=cst.costume_id LEFT JOIN cc_address_master as adder on adder.user_id=cst.created_by and adder.address_type="selling" LEFT JOIN cc_costume_attribute_options as cao on cst.costume_id=cao.costume_id  '.$where.' group by cst.costume_id '.$order_by.' ');
+		//return response()->success(compact('costumes'));
+		return response()->json(['costumes'=>$costumes],200);
+	}
+	
+	public function costumeSingleView($slug1=null,$slug2=null,$slug3=null)
+	{
+	    try
+	    {
+	        Meta::set('description', ucfirst($slug2).' Buy and Sell Affordable, Environment Friendly Costumes');
+            /* Code added by Gayatri */
+            Meta::set('url', url()->current());
+            /* End */
+            $key_url='/'.$slug1.'/'.$slug2.'/'.$slug3;
+                    
+    		$cat_info=Category::getUrlCategoryId($key_url);
+    		if(count($cat_info)){
+    			$costume_id=$cat_info[0]->url_offset;
+    			$data=Costumes::getCostumeDetails($costume_id);
+    			if(isset($data[0])){
+                                    
+                    if($data[0]->deleted_status == 1 || $data[0]->cos_act_status == "inactive"){
+                        return \Redirect::to('/');
+                    }
+    
+                    if($data[0]->size == 'custom'){
+    					$custom_info = DB::table('costume_attribute_options')
+    									->select(DB::Raw('GROUP_CONCAT(attribute_option_value) as dimensions' ))
+    									->where('costume_id', $costume_id)
+    									->where(function($query){
+    						                return $query
+    						                    ->where('attribute_id',16)
+    											->orWhere('attribute_id',17)
+    											->orWhere('attribute_id',18)
+    											->orWhere('attribute_id',19)
+    											->orWhere('attribute_id',20);
+    									});
+    					$result = $custom_info->first();
+    				}else{
+    					$result = '';
+    				}
+    				$data[0]->custom_sizes = !empty($result)?explode(',', $result->dimensions):'';
+    				$data['random_costumes']=Costumes::getRandomCategoyCostumesList($data[0]->category_id,$data[0]->parent_id, $costume_id);
+    				$data['images']=Costumes::getCostumeImages($costume_id);
+
+    				if($data['est_time']->attribute_option_value == '1-2 Business Days'){
+						$est_date = date('D . M .d',strtotime('+2 days'));
+						$add = 2;
+					}else if($data['est_time']->attribute_option_value == '3-4 Business Days'){
+						$est_date = date('D . M .d',strtotime('+4 days'));
+						$add = 4;
+					}else if($data['est_time']->attribute_option_value == '5-6 Business Days'){
+						$est_date = date('D . M .d',strtotime('+6 days'));
+						$add = 6;
+					}else if($data['est_time']->attribute_option_value == '7 Business Days'){
+						$est_date = date('D . M .d',strtotime('+7 days'));
+						$add = 7;
+					}else{
+						$est_date = date('D . M .d');
+						$add = 0;
+					}
+					$data['seller_info'] = Costumes::costumeSellerInfo($data[0]->created_by);
+					$priority_info = SiteHelper::domesticRateSingleCostume($data['seller_info']['shipping_location'][0]->zip_code,SiteHelper::getUserShippingAddress()['zip_code'],$data[0]->weight_pounds,$data[0]->weight_ounces);
+				
+					if($priority_info['result']=="1"){
+						$est_delivery_date = 'Est. between '.$est_date.' and '.date('D . M .d',strtotime('+'.($priority_info["msg"]["MailService"]+$add).' days'));
+						$rate = '$'.$priority_info['msg']['rate'].' Expedited Shipping ';
+					}else{
+						$est_delivery_date = $priority_info['msg'];
+						$rate = $priority_info['msg'];
+					}
+    				/* Code added by Gayatri */
+    
+    				$costume_name = DB::table('costume_description')->where('costume_id',$costume_id)->first();
+    									
+    				$pic = asset('/costumers_images/Small').'/'.$data['images'][0]->image;
+    				
+    				Meta::set('image',$pic);
+    				
+    				if ((stripos( $costume_name->name, 'costume' ) != '') || (stripos( $costume_name->name, 'cosplay' ) != '')) {
+					  	$name = $costume_name->name;
+					}else{
+						$name = $costume_name->name." Costume";
+					}
+
+    				Meta::set('title', ucfirst($name));
+    				
+    				/* End */		
+    				
+                    
+                    $data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
+    				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2)->with('est_delivery_date', $est_delivery_date)->with('rate', $rate);
     			}
     		}
 	    }catch(\Exception $e)
 	    {
 	        return redirect(abort(404));
 	    }        
-		
+	        return view('errors.404');*/
+	                    return redirect(abort(404));
+	    }
+        
 	}
 	public function costumeLike(Request $request){
 		$req=$request->all();

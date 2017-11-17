@@ -121,7 +121,7 @@
                                      </div>
                                 </div>
                             </div>
-                            <div class="payment-sec">
+                            <div class="payment-sec" name="ordersShipping" id="ordersShipping">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h3>Payment Information</h3>

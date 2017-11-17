@@ -2,7 +2,8 @@
   $(document).ready(function(){
       $(".tumblr_btn").click(function(){
         var url = $(this).find(".tumblr_url").val();
-        var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(url)+"&canonicalUrl="+encodeURIComponent(url)+"&shareSource=tumblr_share_button";
+        var href = $(this).find(".tumblr_url").attr('data-url');
+        var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(url)+"&caption="+href+"&canonicalUrl="+encodeURIComponent(url)+"&shareSource=tumblr_share_button";
           window.open(tumb_url, 'Post to Tumblr', 'window settings');
       });
   });

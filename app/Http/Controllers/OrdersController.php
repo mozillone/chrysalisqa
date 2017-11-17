@@ -108,7 +108,7 @@ class OrdersController extends Controller {
           }
         }
         }
-         $orders = DB::select('SELECT DATE_FORMAT(ord.created_at,"%m/%d/%Y %h:%i:%s") as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id  '.$where.' GROUP BY ord.order_id ORDER BY `order_id` DESC');
+         $orders = DB::select('SELECT DATE_FORMAT(ord.created_at,"%m/%d/%Y %h:%i:%s") as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status, ost.track_no as label,ost.carrier_type as carrier_type, (select count(ostt.order_id) from cc_order_ship_track as ostt where ostt.order_id = ord.order_id) as order_cnt FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id LEFT JOIN cc_order_ship_track as ost on ord.order_id=ost.order_id  '.$where.' GROUP BY ord.order_id ORDER BY `order_id` DESC');
         return response()->success(compact('orders'));
   
     }

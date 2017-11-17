@@ -1,12 +1,11 @@
-@extends('/frontend/app')
-@section('styles')
+<?php $__env->startSection('styles'); ?>
 <style type="text/css">
 	.pac-container {
     z-index: 10000 !important;
 	}
 </style>
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <section class="content create_section_page">
 	<div class="container">
 		<div class="row">
@@ -16,32 +15,34 @@
 		</div>
 	</div>
 </section>    
-<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
+<link rel="stylesheet" href="<?php echo e(asset('/vendors/sweetalert/dist/sweetalert.css')); ?>">
 <section class="content ">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				@if (Session::has('error'))
+				<?php if(Session::has('error')): ?>
 				<div class="alert alert-danger alert-dismissable dashboard_eror-paypal">
 					<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-					{{ Session::get('error') }}
+					<?php echo e(Session::get('error')); ?>
+
 				</div>
-				@elseif(Session::has('success'))
+				<?php elseif(Session::has('success')): ?>
 				<div class="alert alert-success alert-dismissable">
 					<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-					{{ Session::get('success') }}
+					<?php echo e(Session::get('success')); ?>
+
 				</div>
-				@endif
+				<?php endif; ?>
 				<div class="dashboard-top-box">
 					<p class="left_heading"><span>MY ACCOUNT</span> Keep your account info up to date for a smooth checkout process!</p>
 					<p class="right_heading">
-						<span class="my_msg"><a href="{{URL::to('conversations')}}"> <i class="fa fa-envelope" aria-hidden="true"></i> My Messages </a></span>
-						<span class="my_facvrs"><a href="{{URL::to('wishlist')}}"><i class="fa fa-heart" aria-hidden="true"></i>  My Favorites </a></span>
+						<span class="my_msg"><a href="<?php echo e(URL::to('conversations')); ?>"> <i class="fa fa-envelope" aria-hidden="true"></i> My Messages </a></span>
+						<span class="my_facvrs"><a href="<?php echo e(URL::to('wishlist')); ?>"><i class="fa fa-heart" aria-hidden="true"></i>  My Favorites </a></span>
 					</p>
 				</div>
 				
 			</div>
-			<div class="col-md-12 pay_main_div" @if(Auth::user()->paypal_verified == "verified") style="display: none;" @endif >
+			<div class="col-md-12 pay_main_div" <?php if(Auth::user()->paypal_verified == "verified"): ?> style="display: none;" <?php endif; ?> >
 				<p class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205">Note: Your paypal account is not verified</p>
 			</div>
 		</div>
@@ -54,19 +55,19 @@
 								<h2>PROFILE DETAILS</h2>
 							</div>
 							<div class="panel-body p_details">
-								<form id="edit_customer" class="form-horizontal defult-form" action="{{route('edit-profile')}}" method="POST" novalidate enctype="multipart/form-data">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+								<form id="edit_customer" class="form-horizontal defult-form" action="<?php echo e(route('edit-profile')); ?>" method="POST" novalidate enctype="multipart/form-data">
+									<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+									<input type="hidden" name="user_id" value="<?php echo e(Auth::user()->id); ?>">
 									
 									<div class="col-md-12 dashboard_md_pflt_0">
 										
 										<div class="col-md-6 col-sm-6 dash_pic_upld">
 											<div class="form-group">
-												@if(!empty($user_details->user_img)) 
+												<?php if(!empty($user_details->user_img)): ?> 
 												<?php $image = URL::asset('profile_img/resize').'/'.$user_details->user_img;   ?>
-												@else 
+												<?php else: ?> 
 												<?php $image = URL::asset('/img/default.png');   ?>
-												@endif
+												<?php endif; ?>
 												<div class="fileupload fileupload-new" data-provides="fileupload" style="background-image: url(<?php echo $image; ?>);"> 
 													
 													<span class="remove_pic" id="profile_X" style="display: none;" ><i class="fa fa-times-circle" aria-hidden="true"></i></span>
@@ -77,7 +78,7 @@
 																	<span class="fileupload-exists"></span>     
 																	<span class="camera-icon"><i class="fa fa-camera" aria-hidden="true"></i></span><br>
 																	<input id="profile_logo" name="avatar" type="file" placeholder="Profile Image" class="form-control">
-																	<input type="hidden" name="is_removed" value="{{$user_details->user_img}}"/>
+																	<input type="hidden" name="is_removed" value="<?php echo e($user_details->user_img); ?>"/>
 																</span> 
 															</div>
 															<!-- <p class="noteices-text">Note: The file could not be exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>  -->
@@ -86,13 +87,13 @@
 													<span class="fileupload-preview"></span>
 													<a href="javascript:void(0);" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
 												</div>
-												<p class="error">{{ $errors->first('avatar') }}</p> 
+												<p class="error"><?php echo e($errors->first('avatar')); ?></p> 
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-6 dash_sr_crdt">
 											<div class="dash_store_box">
 												<p>Chrysalis Store Credit</p>
-												<h3>${{number_format(Auth::user()->credits, 2, '.', ',')}}</h3>
+												<h3>$<?php echo e(number_format(Auth::user()->credits, 2, '.', ',')); ?></h3>
 											</div>
 										</div>
 									</div>
@@ -105,11 +106,11 @@
 									</div>
 									<div class="form-group">
 										<label for="pwd">Username</label>
-										<input type="text" class="form-control" value="{{$user_details->username}}" name="username" id="username">
+										<input type="text" class="form-control" value="<?php echo e($user_details->username); ?>" name="username" id="username">
 									</div>
 									<div class="form-group">
 										<label for="text">Full Name</label>
-										<input type="text" class="form-control" value="{{$user_details->first_name}} {{$user_details->last_name}}" name="last_name" id="last_name">
+										<input type="text" class="form-control" value="<?php echo e($user_details->first_name); ?> <?php echo e($user_details->last_name); ?>" name="last_name" id="last_name">
 									</div>
 									<div class="form-group">
 										<label for="pwd">Password:</label>
@@ -117,7 +118,7 @@
 									</div>
 									<div class="form-group">
 										<label for="pwd">Email Address</label>
-										<input type="text" class="form-control" value="{{$user_details->email}}" name="email" id="email">
+										<input type="text" class="form-control" value="<?php echo e($user_details->email); ?>" name="email" id="email">
 									</div>
 									<div class="form-group">
 									</div>
@@ -138,19 +139,20 @@
 									
 									//echo "<pre>";print_r($billing_address);die;
 								?>
-								@foreach ($billing_address as $b_address)
+								<?php $__currentLoopData = $billing_address; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b_address): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 								<p class="bill_adrs">
 									
-									<span> <strong>{{$b_address->fname}} {{$b_address->lname}}</strong><br>
-										@if(!empty($b_address->address1)){{$b_address->address1}}<br>@endif
-										{{$b_address->address2}}<br>
-										{{$b_address->city}}, @foreach($states as $st) @if($st->name==$b_address->state ){{$st->abbrev}} @endif @endforeach {{$b_address->zip_code}}
+									<span> <strong><?php echo e($b_address->fname); ?> <?php echo e($b_address->lname); ?></strong><br>
+										<?php if(!empty($b_address->address1)): ?><?php echo e($b_address->address1); ?><br><?php endif; ?>
+										<?php echo e($b_address->address2); ?><br>
+										<?php echo e($b_address->city); ?>, <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?> <?php if($st->name==$b_address->state ): ?><?php echo e($st->abbrev); ?> <?php endif; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?> <?php echo e($b_address->zip_code); ?>
+
 									</span>
 								</p> 
 								<p class="bill_adrs_dlte">
-									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_billing({{$b_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address({{$b_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_billing(<?php echo e($b_address->address_id); ?>)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address(<?php echo e($b_address->address_id); ?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
 								</p>
-								@endforeach
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 								<?php }else{
 									$billing_address = "<p>Billing address is not added yet.</p>";
 									echo $billing_address;
@@ -169,19 +171,19 @@
 									
 									//echo "<pre>";print_r($states);die;
 								?>
-								@foreach ($shipping_address as $index=>$s_address)
+								<?php $__currentLoopData = $shipping_address; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index=>$s_address): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 								<p class="bill_adrs">
 									
-									<span> <strong>{{$s_address->fname}} {{$s_address->lname}}</strong><br>
-										@if(!empty($s_address->address1)){{$s_address->address1}}<br>@endif
-										{{$s_address->address2}}<br>
-										{{$s_address->city}}, @foreach($states as $st) @if($st->name==$s_address->state ){{$st->abbrev}} @endif @endforeach
-									{{$s_address->zip_code}}</span>
+									<span> <strong><?php echo e($s_address->fname); ?> <?php echo e($s_address->lname); ?></strong><br>
+										<?php if(!empty($s_address->address1)): ?><?php echo e($s_address->address1); ?><br><?php endif; ?>
+										<?php echo e($s_address->address2); ?><br>
+										<?php echo e($s_address->city); ?>, <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?> <?php if($st->name==$s_address->state ): ?><?php echo e($st->abbrev); ?> <?php endif; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+									<?php echo e($s_address->zip_code); ?></span>
 								</p> 
 								<p class="bill_adrs_dlte">
-									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_shipping({{$s_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address({{$s_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_shipping(<?php echo e($s_address->address_id); ?>)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address(<?php echo e($s_address->address_id); ?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
 								</p>
-								@endforeach
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 								<?php }else{
 									$shipping_address = "<p>Shipping address is not added yet.</p>";
 									echo $shipping_address;
@@ -197,9 +199,9 @@
 							<div class="panel-body billing_addres_1">
 								
 								<p class="bill_adrs">
-									<form id="edit_shipping" class="form-horizontal defult-form" action="{{route('shipping-details')}}" method="POST" novalidate enctype="multipart/form-data">
-										<input type="hidden" name="_token" value="{{ csrf_token() }}">
-										<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+									<form id="edit_shipping" class="form-horizontal defult-form" action="<?php echo e(route('shipping-details')); ?>" method="POST" novalidate enctype="multipart/form-data">
+										<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+										<input type="hidden" name="user_id" value="<?php echo e(Auth::user()->id); ?>">
 										
 										
 										<div class="checkbox">
@@ -207,8 +209,8 @@
 										 Paypal Account <span class="pay_pal_desc">(Do you intend to receive payouts?)</span>
 										<!-- <label>Please enter your PayPal email address to receive payouts.</label> -->
 										<div class="input-group paypal_field">
-											<span class="input-group-addon" id="basic-addon1"><img src="{{URL::asset('assets/frontend/img/paypal.png')}}"></span>
-											<input type="text" class="form-control"  name="paypal_email" value="{{Auth::user()->paypal_email}}" id="paypal_email" placeholder="Paypal email">
+											<span class="input-group-addon" id="basic-addon1"><img src="<?php echo e(URL::asset('assets/frontend/img/paypal.png')); ?>"></span>
+											<input type="text" class="form-control"  name="paypal_email" value="<?php echo e(Auth::user()->paypal_email); ?>" id="paypal_email" placeholder="Paypal email">
 										</div>
 										
 										<div class="form-group ">
@@ -227,18 +229,18 @@
 								<h2>PAYMENT DETAILS</h2>
 							</div>
 							
-							<div class="panel-body pay_details">@if(count($creditcard_list) > 0)
-								@foreach ($creditcard_list as $cc_list)
+							<div class="panel-body pay_details"><?php if(count($creditcard_list) > 0): ?>
+								<?php $__currentLoopData = $creditcard_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cc_list): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 								<div class="checkbox">
 									<?php //print_r($creditcard_list);die; ?>
 									
-									<label><input type="radio" name="cc_radio" id="cc_radio_{{$cc_list->id}}" @if($cc_list->is_default == "1") checked="checked" @endif>{{$cc_list->card_type}} ending in {{$cc_list->last_digits}} @if($cc_list->is_default == "1") (Default)  @endif</label>
-									<p class="pymnt_right_box"><span></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="deleteccard({{$cc_list->id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
+									<label><input type="radio" name="cc_radio" id="cc_radio_<?php echo e($cc_list->id); ?>" <?php if($cc_list->is_default == "1"): ?> checked="checked" <?php endif; ?>><?php echo e($cc_list->card_type); ?> ending in <?php echo e($cc_list->last_digits); ?> <?php if($cc_list->is_default == "1"): ?> (Default)  <?php endif; ?></label>
+									<p class="pymnt_right_box"><span></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="deleteccard(<?php echo e($cc_list->id); ?>)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
 								</div>
-								@endforeach
-								@else
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+								<?php else: ?>
 								No Cards Are Available.
-								@endif
+								<?php endif; ?>
 								<!-- <div class="checkbox">
 									<label><input type="checkbox">Amex ending in 3456</label>
 									<p class="pymnt_right_box"><span><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
@@ -251,8 +253,8 @@
 							
 							<div class="panel-body add_new_card">
 								<div class="panel-heading">ADD NEW CARD</div>
-								<form class="" action="{{route('creditcard-add')}}" method="POST" id="cc_dashboard_form">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<form class="" action="<?php echo e(route('creditcard-add')); ?>" method="POST" id="cc_dashboard_form">
+									<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 									<div class="form-group">
 										<label for="title">Full Name On Card</label>
 										<input type="text" class="form-control" name="cardholder_name" id="cardholder_name">
@@ -281,9 +283,9 @@
 										<div class="col-md-6 col-sm-6 exp_year">
 											<select name="exp_year" class="form-control" id="exp_year">
 												<option value="">YYYY</option>
-												@for($i=0;$i<=30;$i++)
-												<option value="{{date('Y',strtotime('now'))+$i}}">{{date('Y',strtotime('now'))+$i}}</option>
-												@endfor
+												<?php for($i=0;$i<=30;$i++): ?>
+												<option value="<?php echo e(date('Y',strtotime('now'))+$i); ?>"><?php echo e(date('Y',strtotime('now'))+$i); ?></option>
+												<?php endfor; ?>
 											</select>
 										</div>
 										
@@ -321,26 +323,27 @@
 							
 							
 							<div class="panel-body billing_addres_1">
-								@if(count($seller_address))
+								<?php if(count($seller_address)): ?>
 								<p class="bill_adrs">
 									
-									<span> <strong>{{$seller_address[0]->fname}} {{$seller_address[0]->lname}}</strong><br>
-										{{$seller_address[0]->address1}}@if(!empty($seller_address[0]->address1))<br>@endif{{$seller_address[0]->address2}}<br>
-										{{$seller_address[0]->city}}, {{$seller_address[0]->state}}
-									{{$seller_address[0]->zip_code}}</span>
+									<span> <strong><?php echo e($seller_address[0]->fname); ?> <?php echo e($seller_address[0]->lname); ?></strong><br>
+										<?php echo e($seller_address[0]->address1); ?><?php if(!empty($seller_address[0]->address1)): ?><br><?php endif; ?><?php echo e($seller_address[0]->address2); ?><br>
+										<?php echo e($seller_address[0]->city); ?>, <?php echo e($seller_address[0]->state); ?>
+
+									<?php echo e($seller_address[0]->zip_code); ?></span>
 								</p>
 								<p class="bill_adrs_dlte">
-									<span><a href="javascript::void(0);" class="edit_selling_addr"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript::void(0);" onclick="delete_seller_address({{$seller_address[0]->address_id}})" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+									<span><a href="javascript::void(0);" class="edit_selling_addr"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript::void(0);" onclick="delete_seller_address(<?php echo e($seller_address[0]->address_id); ?>)" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
 								</p>
-								@else
+								<?php else: ?>
 								<p class="bill_adrs"><span>No Shipping from location found</span></p>
-								@endif 
+								<?php endif; ?> 
 								
-								@if(!count($seller_address))
+								<?php if(!count($seller_address)): ?>
 								<div class="form-group add_new_btn">
 									<a type="submit" href="javascript::void(0);" class="btn btn-default selling_popup_add">Add New</a>
 								</div>
-								@endif
+								<?php endif; ?>
 								
 								
 							</div>
@@ -352,21 +355,21 @@
 					<div class="dashboad_right_side ">
 						<div class="rencemt_order_table table-responsive">
 							<div class="clearfix">
-								<h2>MY COSTUMES <span class="pull-right"><a href="{{URL::to('my/costumes')}}">View All</a></span></h2>
+								<h2>MY COSTUMES <span class="pull-right"><a href="<?php echo e(URL::to('my/costumes')); ?>">View All</a></span></h2>
 								
 							</div>
 							<table class="table table-striped">
 								<thead> <tr>  <th>Costume Name</th> <th>Status</th>  <th>Created Date</th> </tr> </thead> 
 								<tbody> 
-									@if(count($my_costumes))
-									@foreach ($my_costumes as $orders)
-									<tr> <td><a href="{{URL::to('costume/edit/')}}<?php echo '/'.$orders->costume_id ?>"> <?php if(strlen($orders->name) < 25) {echo $orders->name;} else { echo substr($orders->name, 0,25)."..."; } ?> </a> </td>  
-										<td><a href="{{URL::to('costume/edit/')}}<?php echo '/'.$orders->costume_id ?>">{{ucfirst($orders->status)}} </a></td> 
-									<td><a href="{{URL::to('costume/edit/')}}<?php echo '/'.$orders->costume_id ?>">{{helper::DateFormat($orders->created_at)}}  </a></td> </tr>
-									@endforeach
-									@else
+									<?php if(count($my_costumes)): ?>
+									<?php $__currentLoopData = $my_costumes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $orders): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+									<tr> <td><a href="<?php echo e(URL::to('costume/edit/')); ?><?php echo '/'.$orders->costume_id ?>"> <?php if(strlen($orders->name) < 25) {echo $orders->name;} else { echo substr($orders->name, 0,25)."..."; } ?> </a> </td>  
+										<td><a href="<?php echo e(URL::to('costume/edit/')); ?><?php echo '/'.$orders->costume_id ?>"><?php echo e(ucfirst($orders->status)); ?> </a></td> 
+									<td><a href="<?php echo e(URL::to('costume/edit/')); ?><?php echo '/'.$orders->costume_id ?>"><?php echo e(helper::DateFormat($orders->created_at)); ?>  </a></td> </tr>
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+									<?php else: ?>
 									<tr> <td colspan="3">No Costumes are found</td> </tr>
-									@endif 
+									<?php endif; ?> 
 									
 								</tbody> 
 							</table>
@@ -379,21 +382,37 @@
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Seller</th> <th>Status</th>  </tr> </thead> 
 								<tbody> 
-									@if(count($recent_orders))
-									@foreach ($recent_orders as $orders)
+									<?php if(count($recent_orders)): ?>
+									<?php $__currentLoopData = $recent_orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $orders): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 									
 									<tr> 
-										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{helper::DateFormat($orders->date)}}</a></td> 
-										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{$orders->order_id}}</a></td> 
-										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>"><?php if(strlen($orders->seller_name) < 25) {echo ucfirst($orders->seller_name);} else { echo substr(ucfirst($orders->seller_name), 0,25)."..."; } ?></a></td> 
+										<td><a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>"><?php echo e(helper::DateFormat($orders->date)); ?></a></td> 
+										<td><a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>"><?php echo e($orders->order_id); ?></a></td> 
 										<td>
-											<a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{ucfirst($orders->status)}}</a>
+											<a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>">
+												<?php if(strlen($orders->seller_name) < 25) {
+														echo ucfirst($orders->seller_name);
+														} else { 
+															echo substr(ucfirst($orders->seller_name), 0,25)."..."; }
+												?>
+											</a>
+										</td> 
+										<td>
+											<?php if($orders->status == 'Shipping'): ?>
+												<?php if($orders->order_cnt == 1): ?>
+													<a href="/sold/order/track-info/download/<?php echo e($orders->label); ?>/<?php echo e($orders->carrier_type); ?>">Print Label</a>
+												<?php else: ?>
+													<a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>#ordersShipping">Print Label</a>
+												<?php endif; ?>
+											<?php else: ?>
+												<a href="<?php echo e(URL::to('order/')); ?><?php echo '/'.$orders->order_id; ?>"><?php echo e(ucfirst($orders->status)); ?></a>
+											<?php endif; ?>
 										</td> 
 									</tr>
-									@endforeach
-									@else
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+									<?php else: ?>
 									<tr> <td colspan="4">No Recent Orders are found</td> </tr>
-									@endif 
+									<?php endif; ?> 
 									
 								</tbody> 
 							</table>
@@ -405,28 +424,18 @@
 							<table class="table table-striped">
 								<thead> <tr>  <th>Date</th> <th>Order No.</th> <th>Buyer</th> <th> Status</th>  </tr> </thead> 
 								<tbody>
-									@if(count($costumes_sold)) 
-									@foreach ($costumes_sold as $sold_costumes)
-									<tr @if($sold_costumes->status == 'Shipping') class="print_bg" @endif> 
-										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{helper::DateFormat($sold_costumes->date)}}</a></td> 
-										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{$sold_costumes->order_id}} </a> </td> 
-										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>"><?php if(strlen($sold_costumes->buyer_name) < 25) {echo ucfirst($sold_costumes->buyer_name);} else { echo substr(ucfirst($sold_costumes->buyer_name), 0,25)."..."; } ?></a></td> 
-										<td>
-											@if($sold_costumes->status == 'Shipping')
-												@if($sold_costumes->order_cnt == 1)
-													<a href="/sold/order/track-info/download/{{$sold_costumes->label}}/{{$sold_costumes->carrier_type}}">Print Label</a>
-												@else
-													<a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>#ordersShipping">Print Label</a>
-												@endif
-											@else
-												<a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{ucfirst($sold_costumes->status)}}</a>
-											@endif
-										</td> 
+									<?php if(count($costumes_sold)): ?> 
+									<?php $__currentLoopData = $costumes_sold; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sold_costumes): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+									<tr> 
+										<td><a href="<?php echo e(URL::to('sold/order/')); ?><?php echo '/'.$sold_costumes->order_id; ?>"><?php echo e(helper::DateFormat($sold_costumes->date)); ?></a></td> 
+										<td><a href="<?php echo e(URL::to('sold/order/')); ?><?php echo '/'.$sold_costumes->order_id; ?>"><?php echo e($sold_costumes->order_id); ?> </a> </td> 
+										<td><a href="<?php echo e(URL::to('sold/order/')); ?><?php echo '/'.$sold_costumes->order_id; ?>"><?php if(strlen($sold_costumes->buyer_name) < 25) {echo ucfirst($sold_costumes->buyer_name);} else { echo substr(ucfirst($sold_costumes->buyer_name), 0,25)."..."; } ?></a></td> 
+										<td><a href="<?php echo e(URL::to('sold/order/')); ?><?php echo '/'.$sold_costumes->order_id; ?>"><?php echo e(ucfirst($sold_costumes->status)); ?></a></td> 
 									</tr>
-									@endforeach 
-									@else
+									<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?> 
+									<?php else: ?>
 									<tr> <td colspan="4">No costumes sold are found</td></tr>
-									@endif 
+									<?php endif; ?> 
 									
 								</tbody> 
 							</table>
@@ -445,8 +454,8 @@
 					<h4 class="modal-title">Shipping Address</h4>
 				</div>
 				<div class="modal-body">
-					<form class="" action="{{route('shipping-address')}}" method="POST" id="shipping_address">   
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<form class="" action="<?php echo e(route('shipping-address')); ?>" method="POST" id="shipping_address">   
+						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 						<input type="hidden" name="is_edit" value="no">
 						
 						<div class="col-md-12 col-sm-12 col-xs-12">
@@ -455,12 +464,12 @@
 									<div class="address-form">
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="form-group">
-												<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+												<input type="text" class="form-control" id="shipping_firstname" placeholder="First Name *" name="firstname" value="<?php echo e(Auth::user()->first_name); ?>">
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="form-group">
-												<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+												<input type="text" class="form-control" id="shipping_lastname" placeholder="Last Name" name="lastname" value="<?php echo e(Auth::user()->last_name); ?>">
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
@@ -482,9 +491,9 @@
 											<div class="form-group">
 												<select class="form-control state_dropdown" name="shiping_state_dropdown" id="shiping_state_dropdown">
 													<option value="" selected>State</option>
-													@foreach($states as $st)
-													<option value="{{$st->name}}">{{$st->name}}</option>
-													@endforeach
+													<?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+													<option value="<?php echo e($st->name); ?>"><?php echo e($st->name); ?></option>
+													<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 													
 												</select>
 											</div>
@@ -528,8 +537,8 @@
 					<h4 class="modal-title">Shipping Address</h4>
 				</div>
 				<div class="modal-body">
-					<form class="" action="{{route('shipping-address')}}" method="POST" id="shipping_address1">   
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<form class="" action="<?php echo e(route('shipping-address')); ?>" method="POST" id="shipping_address1">   
+						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 						<input type="hidden" name="is_edit" value="yes">
 						<input type="hidden" name="shipping_address_id" id="shipping_address_id" value="">
 						
@@ -568,9 +577,9 @@
 												
 												<select class="form-control state_dropdown" name="state" id="shipping_state_dropdown_edit">
 													<option value="" >State</option>
-													@foreach($states as $st)
-													<option value="{{$st->name}}">{{$st->name}}</option>
-													@endforeach
+													<?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+													<option value="<?php echo e($st->name); ?>"><?php echo e($st->name); ?></option>
+													<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 													
 												</select>
 												<input type="text" class="form-control normal-states hide" id="shipping_state" placeholder="State *" name="shiping_state_dropdown">
@@ -618,8 +627,8 @@
 					<h4 class="modal-title">Billing Address</h4>
 				</div>
 				<div class="modal-body">
-					<form class="" action="{{route('billing-address')}}" method="POST" id="billing_address">   
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<form class="" action="<?php echo e(route('billing-address')); ?>" method="POST" id="billing_address">   
+						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 						<input type="hidden" name="is_edit" value="no">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="chek-out">
@@ -627,12 +636,12 @@
 									<div class="address-form">
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+												<input type="text" class="form-control" id="billing_firstname" placeholder="First Name *" name="firstname" value="<?php echo e(Auth::user()->first_name); ?>">
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+												<input type="text" class="form-control" id="billing_lastname" placeholder="Last Name" name="lastname" value="<?php echo e(Auth::user()->last_name); ?>">
 											</div>
 										</div>
 										
@@ -655,9 +664,9 @@
 											<div class="form-group">
 												<select class="form-control state_dropdown" name="billing_state_dropdown" id="billing_state_dropdown">
 													<option value="" selected>State</option>
-													@foreach($states as $st)
-													<option value="{{$st->name}}">{{$st->name}}</option>
-													@endforeach
+													<?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+													<option value="<?php echo e($st->name); ?>"><?php echo e($st->name); ?></option>
+													<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 													
 												</select>
 												<input type="text" class="form-control normal-states hide" id="billing_state" placeholder="State *" name="state">
@@ -707,8 +716,8 @@
 					<h4 class="modal-title">Billing Address</h4>
 				</div>
 				<div class="modal-body">
-					<form class="" action="{{route('billing-address')}}" method="POST" id="billing_address1">   
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<form class="" action="<?php echo e(route('billing-address')); ?>" method="POST" id="billing_address1">   
+						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 						<input type="hidden" name="is_edit" value="yes">
 						<input type="hidden" name="billing_address_id" id="billing_address_id"value="">
 						<div class="col-md-12 col-sm-12 col-xs-12">
@@ -717,36 +726,36 @@
 									<div class="address-form">
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_firstname_edit" placeholder="First Name *" name="firstname" value="{{Auth::user()->first_name}}">
+												<input type="text" class="form-control" id="billing_firstname_edit" placeholder="First Name *" name="firstname" value="<?php echo e(Auth::user()->first_name); ?>">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_lastname_edit" placeholder="Last Name" name="lastname" value="{{Auth::user()->last_name}}">
+												<input type="text" class="form-control" id="billing_lastname_edit" placeholder="Last Name" name="lastname" value="<?php echo e(Auth::user()->last_name); ?>">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_address_2_edit" placeholder="Street Address *" name="address_2" value="@if (isset($billing_address->address2)){{$billing_address->address2}}@endif">
+												<input type="text" class="form-control" id="billing_address_2_edit" placeholder="Street Address *" name="address_2" value="<?php if(isset($billing_address->address2)): ?><?php echo e($billing_address->address2); ?><?php endif; ?>">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_address_1_edit" placeholder="Apt or Suite no (Optional)" name="address_1" value="@if (isset($billing_address->address1)){{$billing_address->address1}}@endif">
+												<input type="text" class="form-control" id="billing_address_1_edit" placeholder="Apt or Suite no (Optional)" name="address_1" value="<?php if(isset($billing_address->address1)): ?><?php echo e($billing_address->address1); ?><?php endif; ?>">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_city_edit" placeholder="City *" name="city" value="@if (isset($billing_address->city)){{$billing_address->city}}@endif">
+												<input type="text" class="form-control" id="billing_city_edit" placeholder="City *" name="city" value="<?php if(isset($billing_address->city)): ?><?php echo e($billing_address->city); ?><?php endif; ?>">
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<div class="form-group">
 												<select class="form-control state_dropdown" name="billing_state_dropdown" id="billing_state_dropdown_edit">
 													<option value="" selected>State</option>
-													@foreach($states as $st)
-													<option value="{{$st->name}}">{{$st->name}}</option>
-													@endforeach
+													<?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+													<option value="<?php echo e($st->name); ?>"><?php echo e($st->name); ?></option>
+													<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 													
 												</select>
 												<input type="text" class="form-control normal-states hide" id="billing_state" placeholder="State *" name="state">
@@ -754,7 +763,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<input type="text" class="form-control" id="billing_postcode_edit" placeholder="Zipcode *" name="postcode" value="@if (isset($billing_address->zip_code)){{$billing_address->zip_code}}@endif">
+												<input type="text" class="form-control" id="billing_postcode_edit" placeholder="Zipcode *" name="postcode" value="<?php if(isset($billing_address->zip_code)): ?><?php echo e($billing_address->zip_code); ?><?php endif; ?>">
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -798,8 +807,8 @@
 					<h4 class="modal-title">SHIPPING FROM LOCATION</h4>
 				</div>
 				<div class="modal-body">
-					<form class="" action="{{route('seller-location-address')}}" method="POST" id="seller_address">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<form class="" action="<?php echo e(route('seller-location-address')); ?>" method="POST" id="seller_address">
+						<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="chek-out">
 								<div class="new_address">
@@ -810,7 +819,7 @@
 													<div id="locationField">
 														<input type="text" class="form-control" placeholder="Enter Location"  id="autocomplete" onFocus="geolocate()" >
 														<label class="note">Note: Type the location name and select  to populate in address fields</label>
-														<p class="error">{{ $errors->first('location') }}</p>
+														<p class="error"><?php echo e($errors->first('location')); ?></p>
 														
 													</div>
 													
@@ -819,25 +828,25 @@
 													
 													
 													<input type="hidden" class="field form-control" id="country" name="country">
-													@if(count($seller_address))  <input type="hidden" class="field form-control" name="add_id" value="{{$seller_address[0]->address_id}}">  <input type="hidden" class="field form-control" name="is_edit" value="0"> @endif
+													<?php if(count($seller_address)): ?>  <input type="hidden" class="field form-control" name="add_id" value="<?php echo e($seller_address[0]->address_id); ?>">  <input type="hidden" class="field form-control" name="is_edit" value="0"> <?php endif; ?>
 													
 												</div>
 												<div class="clearfix"></div> 
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<input type="text" class="field form-control" name="address_2" id="route" placeholder="Street Address *" value="@if(count($seller_address)) {{$seller_address[0]->address2}} @endif">
+													<input type="text" class="field form-control" name="address_2" id="route" placeholder="Street Address *" value="<?php if(count($seller_address)): ?> <?php echo e($seller_address[0]->address2); ?> <?php endif; ?>">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<input type="hidden" class="field form-control" id="street_number">
-													<input type="text" class="field form-control" id="" name="address_1" disable="true" placeholder="Apt or Suite no (Optional)" value="@if(count($seller_address)){{$seller_address[0]->address1}}@endif">
+													<input type="text" class="field form-control" id="" name="address_1" disable="true" placeholder="Apt or Suite no (Optional)" value="<?php if(count($seller_address)): ?><?php echo e($seller_address[0]->address1); ?><?php endif; ?>">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<input type="text" class="field form-control" id="locality" name="city" placeholder="City *" value="@if(count($seller_address)) {{$seller_address[0]->city}} @endif">
+													<input type="text" class="field form-control" id="locality" name="city" placeholder="City *" value="<?php if(count($seller_address)): ?> <?php echo e($seller_address[0]->city); ?> <?php endif; ?>">
 												</div>
 											</div>
 											
@@ -845,20 +854,20 @@
 												<div class="form-group">
 													<select class="form-control state_dropdown" id="administrative_area_level_1" name="state" >
 														<option value="" selected>State</option>
-														@foreach($states as $st)
-														<option value="{{$st->abbrev}}" @if(count($seller_address) && $seller_address[0]->state==$st->abbrev) selected @endif>{{$st->name}}</option>
-														@endforeach
+														<?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $st): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+														<option value="<?php echo e($st->abbrev); ?>" <?php if(count($seller_address) && $seller_address[0]->state==$st->abbrev): ?> selected <?php endif; ?>><?php echo e($st->name); ?></option>
+														<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 														
 													</select>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<input type="text" class="field form-control" id="postal_code" name="zipcode" placeholder="Zip code *" value="@if(count($seller_address)){{$seller_address[0]->zip_code}}@endif">
+													<input type="text" class="field form-control" id="postal_code" name="zipcode" placeholder="Zip code *" value="<?php if(count($seller_address)): ?><?php echo e($seller_address[0]->zip_code); ?><?php endif; ?>">
 												</div>
 											</div>
 											<div class="col-md-12">
-												@if(count($seller_address)) <button class="btn btn-primary submit-btn">Update</button> @else <button class="btn btn-primary submit-btn">Submit</button> @endif
+												<?php if(count($seller_address)): ?> <button class="btn btn-primary submit-btn">Update</button> <?php else: ?> <button class="btn btn-primary submit-btn">Submit</button> <?php endif; ?>
 											</div>
 											
 											
@@ -880,13 +889,13 @@
 			</div>
 		</div>
 	</div>
-	@stop
-	{{-- page level scripts --}}
-	@section('footer_scripts')
-	<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
-	<script src="{{ asset('/js/credit-card-validation.js') }}"></script>
-	<script src="{{ asset('/js/dashboard.js') }}"></script>
-	<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+	<?php $__env->stopSection(); ?>
+	
+	<?php $__env->startSection('footer_scripts'); ?>
+	<script src="<?php echo e(asset('/js/jquery.validate.min.js')); ?>"></script>
+	<script src="<?php echo e(asset('/js/credit-card-validation.js')); ?>"></script>
+	<script src="<?php echo e(asset('/js/dashboard.js')); ?>"></script>
+	<script src="<?php echo e(asset('/vendors/sweetalert/dist/sweetalert.min.js')); ?>"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
 	async defer></script>
 	<script>
@@ -910,7 +919,7 @@
 			// Create the autocomplete object, restricting the search to geographical
 			// location types.
 			autocomplete = new google.maps.places.Autocomplete(
-            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+            /** @type  {!HTMLInputElement} */(document.getElementById('autocomplete')),
 				{types: ['geocode']});
 				
 				// When the user selects an address from the dropdown, populate the address
@@ -990,7 +999,7 @@
 				},
 				
 				function(){
-					url = "{{URL::to('/deleteSellerAddress/')}}"+"/"+id;
+					url = "<?php echo e(URL::to('/deleteSellerAddress/')); ?>"+"/"+id;
 					window.location = url;
 					
 				});
@@ -1057,7 +1066,7 @@
 				},
 				
 				function(){
-					url = "{{URL::to('/deleteaddress/')}}"+"/"+id;
+					url = "<?php echo e(URL::to('/deleteaddress/')); ?>"+"/"+id;
 					window.location = url;
 					
 				});
@@ -1076,7 +1085,7 @@
 				},
 				
 				function(){
-					url = "{{URL::to('/deleteccard/')}}"+"/"+id;
+					url = "<?php echo e(URL::to('/deleteccard/')); ?>"+"/"+id;
 					window.location = url;
 					
 				});
@@ -1290,10 +1299,12 @@
 		});
 		$('#profile_X').click(function(){
 			$('#img-chan').val('');
-			$('.fileupload').attr('style', 'background-image: url({{asset("/img/default.png")}})');
+			$('.fileupload').attr('style', 'background-image: url(<?php echo e(asset("/img/default.png")); ?>)');
 			$('#profile_X').css('display','none');
 		});
 	</script>
 	
-	@stop
+	<?php $__env->stopSection(); ?>
 	
+
+<?php echo $__env->make('/frontend/app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

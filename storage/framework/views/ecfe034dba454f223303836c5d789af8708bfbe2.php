@@ -1,19 +1,17 @@
-@extends('frontend.app')
-{{-- Web site Title --}}
-@section('title') View Order #{{$order_id}} @parent @endsection
-{{-- page level styles --}}
-@section('header_styles')
-<link rel="stylesheet" href="{{ asset('/assets/admin/css/pages/order_summary.css')}}">
-@stop
-{{-- Content --}}
-@section('content')
+<?php $__env->startSection('title'); ?> View Order #<?php echo e($order_id); ?> @parent  <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('header_styles'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('/assets/admin/css/pages/order_summary.css')); ?>">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
 <section class="container content-header view-order_tl_div">
   	<div class="row">
 		<div class="col-md-12">
 			<nav class="breadcrumb ">
-				<a class="breadcrumb-item" href="{{url('dashboard')}}">Dashboard &nbsp; ></a>
+				<a class="breadcrumb-item" href="<?php echo e(url('dashboard')); ?>">Dashboard &nbsp; ></a>
 				<a class="breadcrumb-item" href="/my/orders">Orders List &nbsp;>&nbsp;</a>
-				<span class="breadcrumb-item active">View Order #{{$order_id}}</span>
+				<span class="breadcrumb-item active">View Order #<?php echo e($order_id); ?></span>
 			</nav>
 		</div>
 	</div>
@@ -25,7 +23,7 @@
 				<div class="col-md-12">
 					<div class="box box-info view_order_div_blog">
 						<div class="viewTabs_rm">
-							@include('frontend.orders.orders_menu')
+							<?php echo $__env->make('frontend.orders.orders_menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 						</div>
 						<div class="tab-content">
 							<div class="tab-pane active" id="summery">
@@ -39,15 +37,15 @@
 														<tbody>
 															<tr>
 																<td>Order #:</td>
-																<td>{{$order['basic'][0]->order_id}}</td>
+																<td><?php echo e($order['basic'][0]->order_id); ?></td>
 															</tr>
 															<tr>
 																<td>Ordered Date:</td>
-																<td>{{$order['basic'][0]->date}}</td>
+																<td><?php echo e($order['basic'][0]->date); ?></td>
 															</tr>
 															<tr>
 																<td>Status:</td>
-																<td>{{$order['basic'][0]->status}}</td>
+																<td><?php echo e($order['basic'][0]->status); ?></td>
 															</tr>
 														</tbody>
 													</table>
@@ -60,11 +58,11 @@
 														<tbody>
 															<tr>
 																<td>Buyer Name:</td>
-																<td>{{$order['basic'][0]->buyer_name}}</td>
+																<td><?php echo e($order['basic'][0]->buyer_name); ?></td>
 															</tr>
 															<tr>
 																<td>Email:</td>
-																<td>{{$order['basic'][0]->buyer_email}}</td>
+																<td><?php echo e($order['basic'][0]->buyer_email); ?></td>
 															</tr>
 														
 														</tbody>
@@ -78,11 +76,11 @@
 														<tbody>
 															<tr>
 																<td>Seller Name:</td>
-																<td>{{$order['basic'][0]->seller_name}}</td>
+																<td><?php echo e($order['basic'][0]->seller_name); ?></td>
 															</tr>
 															<tr>
 																<td>Email:</td>
-																<td>{{$order['basic'][0]->seller_email}}</td>
+																<td><?php echo e($order['basic'][0]->seller_email); ?></td>
 															</tr>
 															
 														</tbody>
@@ -98,10 +96,10 @@
 													<ul>
 														<li><h2>Billing Address :</h2></li>
 														<li>
-															<p>{{$order['basic'][0]->pay_username}}</p>
-															<p>{{$order['basic'][0]->pay_address_1}} {{$order['basic'][0]->pay_address_2}}</p>
-															<p>{{$order['basic'][0]->pay_city}}</p>
-															<p>{{$order['basic'][0]->pay_state}} {{$order['basic'][0]->pay_zipcode}}</p>
+															<p><?php echo e($order['basic'][0]->pay_username); ?></p>
+															<p><?php echo e($order['basic'][0]->pay_address_1); ?> <?php echo e($order['basic'][0]->pay_address_2); ?></p>
+															<p><?php echo e($order['basic'][0]->pay_city); ?></p>
+															<p><?php echo e($order['basic'][0]->pay_state); ?> <?php echo e($order['basic'][0]->pay_zipcode); ?></p>
 														</li>
 													</ul>
 												</div>
@@ -111,10 +109,10 @@
 													<ul>
 														<li><h2>Shipping Address :</h2></li>
 														<li>
-															<p>{{$order['basic'][0]->ship_username}}</p>
-															<p>{{$order['basic'][0]->shipping_address_1}} {{$order['basic'][0]->shipping_address_2}}</p>
-															<p>{{$order['basic'][0]->shipping_city}}</p>
-															<p>{{$order['basic'][0]->shipping_state}} {{$order['basic'][0]->shipping_postcode}}</p>
+															<p><?php echo e($order['basic'][0]->ship_username); ?></p>
+															<p><?php echo e($order['basic'][0]->shipping_address_1); ?> <?php echo e($order['basic'][0]->shipping_address_2); ?></p>
+															<p><?php echo e($order['basic'][0]->shipping_city); ?></p>
+															<p><?php echo e($order['basic'][0]->shipping_state); ?> <?php echo e($order['basic'][0]->shipping_postcode); ?></p>
 														</li>
 													</ul>
 												</div>
@@ -130,7 +128,7 @@
 														<tbody>
 															<tr>
 																<td>Total Amount:</td>
-																<td>${{$order['basic'][0]->total}}</td>
+																<td>$<?php echo e($order['basic'][0]->total); ?></td>
 															</tr>
 															<tr>
 																<td>Payment Method:</td>
@@ -138,11 +136,11 @@
 															</tr>
 															<tr>
 																<td>Transaction ID:</td>
-																<td>{{$order['basic'][0]->api_transaction_no}}</td>
+																<td><?php echo e($order['basic'][0]->api_transaction_no); ?></td>
 															</tr>
 															<tr>
 																<td>Status:</td>
-																<td>{{$order['basic'][0]->payment_status}}</td>
+																<td><?php echo e($order['basic'][0]->payment_status); ?></td>
 															</tr>
 														</tbody>
 													</table>
@@ -160,22 +158,22 @@
 															</tr>
 														</thead>
 														<tbody>
-															@if(count($order['order_shipping']))
-															@foreach($order['order_shipping'] as $shipping)
+															<?php if(count($order['order_shipping'])): ?>
+															<?php $__currentLoopData = $order['order_shipping']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $shipping): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 															 <tr>
-				                                                <td>{{$shipping->track_no}}</td>
-				                                                @if($shipping->carrier_type=="usps")
-				                                                <td><a href="/sold/order/track-info/download/{{$shipping->track_no}}/usps" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Print Label</a> <a target="_blank" href="https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&text28777=&tLabels=9400111699000840733045%2C" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
-				                                                @else
-				                                                <td><a href="/sold/order/track-info/download/{{$shipping->track_no}}/fedex" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Print Label</a> <a target="_blank" href="https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber=111111111111&cntry_code=in" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
-				                                                @endif
+				                                                <td><?php echo e($shipping->track_no); ?></td>
+				                                                <?php if($shipping->carrier_type=="usps"): ?>
+				                                                <td><a href="/sold/order/track-info/download/<?php echo e($shipping->track_no); ?>/usps" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Print Label</a> <a target="_blank" href="https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&text28777=&tLabels=9400111699000840733045%2C" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
+				                                                <?php else: ?>
+				                                                <td><a href="/sold/order/track-info/download/<?php echo e($shipping->track_no); ?>/fedex" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="left" title="" data-original-title="Download">Print Label</a> <a target="_blank" href="https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber=111111111111&cntry_code=in" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Track">Track</a></td>
+				                                                <?php endif; ?>
 				                                              </tr>
-															@endforeach    
-															@else
+															<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>    
+															<?php else: ?>
 															<tr>
 																<td>No Track information found</td>
 															</tr>
-															@endif                      
+															<?php endif; ?>                      
 														</tbody>
 													</table>
 												</div>
@@ -200,33 +198,33 @@
 														</thead>
 														<tbody>
 															<?php $total=0;?>
-															@foreach($order['items'] as $items)
+															<?php $__currentLoopData = $order['items']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $items): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 															<tr>
-																<td>{{$items->sku}}</td>
-																<td>{{$items->costume_name}}</td>
-																<td>{{$items->weight*$items->qty}} (lbs)</td>						
-																<td>$  {{number_format(($items->price), 2, '.', ',')}}</td>
-																<td>{{$items->qty}}</td>
-																<td>$ <?php $total+=$items->price*$items->qty;?> {{number_format(($items->price*$items->qty), 2, '.', ',')}}</td>
+																<td><?php echo e($items->sku); ?></td>
+																<td><?php echo e($items->costume_name); ?></td>
+																<td><?php echo e($items->weight*$items->qty); ?> (lbs)</td>						
+																<td>$  <?php echo e(number_format(($items->price), 2, '.', ',')); ?></td>
+																<td><?php echo e($items->qty); ?></td>
+																<td>$ <?php $total+=$items->price*$items->qty;?> <?php echo e(number_format(($items->price*$items->qty), 2, '.', ',')); ?></td>
 															</tr>
-															@endforeach
-															@foreach($order['order_amount'] as $amount)
+															<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+															<?php $__currentLoopData = $order['order_amount']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $amount): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 															<tr>
 																<td></td>
 																<td></td>
 																<td></td>
 																<td></td>
-																<td>{{$amount->title}}  @if($amount->title=="Shipping")({{ucfirst($order['basic'][0]->shipping_method)}}) @endif</td>
-																<td>@if($amount->code=="sub")-@endif${{number_format($amount->value, 2, '.', ',')}}</td>
+																<td><?php echo e($amount->title); ?>  <?php if($amount->title=="Shipping"): ?>(<?php echo e(ucfirst($order['basic'][0]->shipping_method)); ?>) <?php endif; ?></td>
+																<td><?php if($amount->code=="sub"): ?>-<?php endif; ?>$<?php echo e(number_format($amount->value, 2, '.', ',')); ?></td>
 															</tr>
-															@endforeach
+															<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 															<tr style="background: white">
 																<td></td>
 																<td></td>
 																<td></td>
 																<td></td>
 																<td>Total Paid</td>
-																<td>${{number_format($order['basic'][0]->total, 2, '.', ',')}}</td>
+																<td>$<?php echo e(number_format($order['basic'][0]->total, 2, '.', ',')); ?></td>
 															</tr>
 														</tbody>
 													</table>
@@ -244,13 +242,13 @@
 															</tr>
 														</thead>
 														<tbody>
-															@foreach($order['order_comment'] as $comments)
+															<?php $__currentLoopData = $order['order_comment']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comments): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 															<tr>
-																<td>{{$comments->comment}}</td>
-																<td>{{$comments->status}}</td>
-																<td>{{$comments->date}}</td>
+																<td><?php echo e($comments->comment); ?></td>
+																<td><?php echo e($comments->status); ?></td>
+																<td><?php echo e($comments->date); ?></td>
 															</tr>
-															@endforeach                          
+															<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>                          
 														</tbody>
 													</table>
 												</div>
@@ -281,10 +279,17 @@
 		</div>
 	</section>
 </div>
-@stop
-{{-- page level scripts --}}
-@section('footer_scripts')
-<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('/assets/admin/js/pages/order_process.js') }}"></script>
+<?php $__env->stopSection(); ?>
 
-@stop
+<?php $__env->startSection('footer_scripts'); ?>
+<script src="<?php echo e(asset('/js/jquery.validate.min.js')); ?>"></script>
+<script src="<?php echo e(asset('/assets/admin/js/pages/order_process.js')); ?>"></script>
+<script type="text/javascript">
+
+	if(window.location.href.indexOf('#') != -1){
+		$('html,body').animate({scrollTop: $('#ordersShipping').offset().top}, 800);
+	}
+
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontend.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
