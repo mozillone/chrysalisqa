@@ -360,12 +360,8 @@ class Cart extends Authenticatable
         $shipping_address=[];
       }
     }
-    else
-    {
-      $shipping_address=[];
-    }      
-    
-    }
+         
+ 
   //  dd($shipping_address);
     if(count($shipping_address)){
       return $shipping_address;

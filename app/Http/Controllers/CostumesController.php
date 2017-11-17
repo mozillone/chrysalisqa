@@ -90,17 +90,13 @@ class CostumesController extends Controller {
 
 			}
 			return view('frontend.costumes.costumes_list',compact('data',$data))->with('parent_cat_name',$slug1)->with('categories_list',$categories_list)->with('parent_cat',true);
-		 }else{
-		 	return Redirect::back();
 		 }
-
-		}
-		else{
-			return view('frontend.404');
-			
-		}
+		catch(\Exception $e)
+		{
+			return redirect(abort(404)); 
+		}			
 	}
-	public function costumeListings($slug1,$slug2)
+	/*public function costumeListings($slug1,$slug2)
 	{
 		Meta::set('title', ucfirst($slug2));
         Meta::set('description', ucfirst($slug2).' Buy and Sell Affordable, Environment Friendly Costumes');
@@ -121,13 +117,9 @@ class CostumesController extends Controller {
 				
 			}
 		}
-		catch(\Exception $e)
-		{
-			throw $e;
-			return redirect(abort(404));
-		}
+		 
 
-	}
+	}*/
 
 
 	public static function searchFilters(Request $request)
@@ -277,8 +269,6 @@ class CostumesController extends Controller {
 				$categories_list[$sub_cats_list[0]->name][]="None";
 				foreach ($sub_cats_list as $subCat) {
 					$link = Category::getUrlLinks($subCat->category_id);
-					
-					//dd($link);
 					$categories_list[$subCat->name]=$link;
 				}
 
@@ -384,7 +374,7 @@ class CostumesController extends Controller {
 		
 	}*/
 	
-	public function costumeSingleView($slug1=null,$slug2=null,$slug3=null)
+	/*public function costumeSingleView($slug1=null,$slug2=null,$slug3=null)
 	{
 	    try
 	    {
@@ -395,9 +385,9 @@ class CostumesController extends Controller {
 				$name = $slug2;
 			}
 	        Meta::set('description', ucfirst($name).' Buy and Sell Affordable, Environment Friendly Costumes');
-            /* Code added by Gayatri */
+           
             Meta::set('url', url()->current());
-            /* End */
+           
             $key_url='/'.$slug1.'/'.$slug2.'/'.$slug3;
                     
     		$cat_info=Category::getUrlCategoryId($key_url);
@@ -427,7 +417,7 @@ class CostumesController extends Controller {
     				$data[0]->custom_sizes = !empty($result)?explode(',', $result->dimensions):'';
     				$data['random_costumes']=Costumes::getRandomCategoyCostumesList($data[0]->category_id,$data[0]->parent_id, $costume_id);
     				$data['images']=Costumes::getCostumeImages($costume_id);
-    				/* Code added by Gayatri */
+    				 
     
     				$costume_name = DB::table('costume_description')->where('costume_id',$costume_id)->first();
     									
@@ -435,12 +425,11 @@ class CostumesController extends Controller {
     				Meta::set('image',$pic);
     				Meta::set('title', ucfirst($costume_name->name));
     				
-    				/* End */		
+    			 	
     				$data['seller_info'] = Costumes::costumeSellerInfo($data[0]->created_by);
                     
                     $data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
-    				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2);
-=======
+ 
 		}
 		if(Auth::check()){
 			$is_login=',if((select count(*) from cc_costumes_like as likes where likes.user_id='.Auth::user()->id.' and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id='.Auth::user()->id.'  and  wsh_lst.costume_id=cst.costume_id )>=1,true,false) as is_fav';
@@ -450,16 +439,21 @@ class CostumesController extends Controller {
 		$costumes = DB::select('SELECT cst.costume_id,dsr.name,FORMAT(cst.price,2) as price'.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,cst.created_user_group,cst.quantity,link.url_key,created_user_group,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer, cao.attribute_option_value_id as film_qlty FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id LEFT JOIN cc_category as cats on cats.category_id=cat.category_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1"  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id and prom.code="" LEFT JOIN cc_coupon_costumes as cpn_cst on cpn_cst.costume_id=cst.costume_id LEFT JOIN cc_address_master as adder on adder.user_id=cst.created_by and adder.address_type="selling" LEFT JOIN cc_costume_attribute_options as cao on cst.costume_id=cao.costume_id  '.$where.' group by cst.costume_id '.$order_by.' ');
 		//return response()->success(compact('costumes'));
 		return response()->json(['costumes'=>$costumes],200);
-	}
+	 }
+	}catch (\Exception $e) {
+			return redirect(abort(404));
+		}	
+
+	}*/
 	
 	public function costumeSingleView($slug1=null,$slug2=null,$slug3=null)
 	{
 	    try
 	    {
 	        Meta::set('description', ucfirst($slug2).' Buy and Sell Affordable, Environment Friendly Costumes');
-            /* Code added by Gayatri */
+          
             Meta::set('url', url()->current());
-            /* End */
+        
             $key_url='/'.$slug1.'/'.$slug2.'/'.$slug3;
                     
     		$cat_info=Category::getUrlCategoryId($key_url);
@@ -545,10 +539,8 @@ class CostumesController extends Controller {
 	    {
 	        return redirect(abort(404));
 	    }        
-	        return view('errors.404');*/
-	                    return redirect(abort(404));
-	    }
-        
+	    
+	    
 	}
 	public function costumeLike(Request $request){
 		$req=$request->all();
