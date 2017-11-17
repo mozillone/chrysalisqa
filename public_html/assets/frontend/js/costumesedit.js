@@ -303,14 +303,14 @@ $('#other_organzation_check').css('display','none');
          
         var condition_val =  $('input[name=condition]:checked').val(); 
         
-        if(condition_val == 'good' || condition_val == 'like_new')
+        /*if(condition_val == 'good' || condition_val == 'like_new')
         {
             if(cleaned == "")
             {
                  $('#cleanederror').html('This field is required.');
                  str = false;
             }           
-        }
+        }*/
 
       if(size == 'custom'){
             if(heightft == ""){
@@ -545,7 +545,7 @@ str=false;
 
         if(parseInt(donate_charity) == 0 && charity_name != '' ){
             $('#donate_charity').css('border', '1px solid red');
-            $('#donate_charityerror').html('Select Donate Amount');
+            $('#donate_charityerror').html('Select Donation Amount');
             str = false;
            // console.log('1');
         }else if(parseInt(donate_charity) != 0 && charity_name == '' ){
@@ -617,7 +617,7 @@ processData: false,
             $('#pin_url').attr('data-title', response.quote);
             $('#pin_url').attr('data-image', response.first_pic);
 
-            var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.share_url)+"&caption="+encodeURIComponent(response.quote)+"&canonicalUrl=http%3A%2F%2Fchrysalisqa.local.dotcomweavers.net%2Fcostume%2Fcreate&shareSource=tumblr_share_button";
+            var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.share_url)+"&caption="+encodeURIComponent(response.quote)+"&canonicalUrl="+encodeURIComponent(response.share_url)+"&shareSource=tumblr_share_button";
             
             $('#tumblr_url').val(tumb_url);
             
@@ -790,7 +790,7 @@ $(document).on("change", "#file1", function() {
                     });
                     $(document).on("click", "#crop", function() {
                         $("#myModal").modal('hide');
-                        imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
+                        imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone1").find("img.result").remove();
                         var FrontView = '<img src="'+imgdata+'" class="result">';
                         $(".drop_zone1").append(FrontView);
@@ -877,7 +877,7 @@ $(document).on("change", "#file2", function() {
 
                     $(document).on("click", "#crop2", function() {
                         $("#myModal2").modal('hide');
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
+                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone2").find("img.result2").remove();
                         var Backview = '<img src="'+imgdata+'" class="result2">';
                         $(".drop_zone2").append(Backview);
@@ -965,7 +965,7 @@ $(document).on("change", "#file3", function() {
                     $(document).on("click", "#crop3", function() {
                         $("#myModal3").modal('hide');
                         $('.Additional').attr('data-value',3);
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
+                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone3").find("img.result3").remove();
                         $(".Additional").attr('value',imgdata);
                         var Additional = '<img src="'+imgdata+'" class="result3">';
@@ -1141,7 +1141,7 @@ $(document).on("input", ".slider", function () {
 
 $(document).on("click", ".saveMultiple", function () {
     $cropper_objs.forEach(function($image, index){
-        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.5);
+        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
         $('#other_thumbnails').append("<div index='"+index+"' class=\"col-md-4 col-sm-4 col-xs-12 multi_div\"><img src= " + imgdata + " class=\"multi_thumbs pip\">" +
             "<br/><span class=\"remove\">" +
             "<i class=\"fa fa-times-circle\"></i>" +

@@ -32,37 +32,8 @@ $(function() {
 	});
     
 
-function pagination()
-{
-	$("#per_page").change(function(){
-        /* get new no of items per page */
-      	var newPerPage = parseInt( $(this).val() );
-      	/* destroy jPages and initiate plugin again */
-      	$("ul.holder").jPages("destroy").jPages({
-            containerID   : "itemContainer",
-            perPage       : newPerPage,
-            startPage    : 1,
-	        startRange   : 1,
-	        midRange     : 3,
-	        endRange     : 1,
-	        previous    : "Previous",
-	        next        : "Next",
-        });
-    });
-    $("ul.holder").jPages({
-        containerID  : "itemContainer",
-        perPage      : 12,
-        startPage    : 1,
-        startRange   : 1,
-        midRange     : 3,
-        endRange     : 1,
-        previous    : "Previous",
-        next        : "Next",
-    });
-
-}
 var search=$('#search_list').serializeArray();
-searching(search);
+/*searching(search);*/
 $(document).on('click','.gender > li',function(){
 	$('.gender li').removeClass('active');
 	$(this).addClass('active');
@@ -125,13 +96,18 @@ function searching(search){
 	}else{
 		filter="";
 	}
-		$.ajax({
+	debugger;
+
+	$("#search_list").submit();
+		/*$.ajax({
 			type: 'POST',
 			url: '/getCostumesData',
 			data: filter,
+			cache:true,
 			success: function(response){
-				if(response.data.costumes.length!=0){
-					　$.each(response.data.costumes,function(index, value) {
+			    
+				if(response.costumes.length!=0){
+					　$.each(response.costumes,function(index, value) {
 						var cst_len="";
 						if(value.image!=null){
 							var path='/costumers_images/Medium/'+value.image;
@@ -222,7 +198,7 @@ function searching(search){
 		    	 $("#itemContainer").removeClass("search_icn_load");
 		      },
 
-		});
+		});*/
 }
 function now()
 {

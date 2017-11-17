@@ -183,7 +183,7 @@
 								<div class="row">
 								<div class="col-md-6">                                  
                                     <div class="form-group has-feedback hide" id="cleaned_select">
-                                     <label for="inputEmail3" class="control-label">How was it cleaned? <span class="req-field" >*</span> <i class="fa fa-info-circle fa-info-rm" aria-hidden="true" data-toggle="tooltip" title="Costumes must be clean and ready for the next user. If you are not able to clean your costume you can always send it to Chrysalis with one of our cleanout bags. There are few materials our state of the art facility cannot clean."></i></label>
+                                     <label for="inputEmail3" class="control-label">How was it cleaned? <span class="req-field" ></span> <i class="fa fa-info-circle fa-info-rm" aria-hidden="true" data-toggle="tooltip" title="Costumes must be clean and ready for the next user. If you are not able to clean your costume you can always send it to Chrysalis with one of our cleanout bags. There are few materials our state of the art facility cannot clean."></i></label>
                                         <p class="form-rms-input">
                                             <select name="cleaned" id="cleaned" class="form-control">
 									<option value="">Select</option>
@@ -952,14 +952,15 @@ $("#freqent").removeClass("hide");
 }
 
 if($("#size").val() == "custom"){
-$(".dimessions").removeClass('hide');
+	$(".dimessions").removeClass('hide');
 }
-
-if(parseInt($("#donate_charity").val())<=10){
-		$("#donate_charity").css({"color":"#000","font-weight":""});
+	if(parseInt($("#donate_charity").val())==10){
+		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
 
-
+	if(parseInt($("#donate_charity").val())<10){
+		$("#donate_charity").css({"color":"#000","font-weight":""});
+	}
 
 	if(parseInt($("#donate_charity").val()) ==15){
 		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
@@ -1062,7 +1063,12 @@ if(parseInt($("#donate_charity").val())<=10){
 
 	            if(currentVal < 10){
            			if(currentVal < max) {
-                   		input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+                   		if(currentVal == 9){
+           					input.val((currentVal + 1)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+           				}else{
+           					input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+           				}
+                   		//input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
                    	}
                    	if(parseInt(input.val()) == max) {
                    		$(this).attr('disabled', true);
@@ -1153,6 +1159,7 @@ if(parseInt($("#donate_charity").val())<=10){
 			else
 			{
 				$(".dimessions").addClass('hide');
+				
 			}
 		});
 	$(".faq-checkbox").change(function(){

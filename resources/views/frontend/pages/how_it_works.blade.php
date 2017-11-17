@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <?= $pageData->description; ?>
-    <div class="container how-it-works-page"> 
+    <div class="container how-it-works-page steps_slider1"> 
         <div class="additional-info">
             <h3>Additional Information</h3>
             @if(count($faqs))
@@ -43,6 +43,34 @@
 				});
 				});
 				</script>
+				
+				
+				<script type="text/javascript">
+	if (jQuery(window).width() < 767) 
+	{
+		var $accordionIO = $('.accordion .pluss');
+		$accordionIO.prev('.infos').hide();
+		
+		$accordionIO.click(function() {
+			$(this).prev('.infoss').slideToggle();
+		});
+		
+		$(".accordion h3").click(function() {
+			//Inner 
+			var jqInner = $(this).next();
+			if (jqInner.is(":visible")) {
+				jqInner.slideUp()
+				
+			} else
+			
+			{
+				jqInner.slideDown()
+				
+			}
+			$(this).toggleClass('pluss minuss');
+		})
+	}
+</script>
     <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('/assets/frontend/js/pages/event.js') }}"></script>
     <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>

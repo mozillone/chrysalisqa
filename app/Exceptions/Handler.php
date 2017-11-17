@@ -8,6 +8,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
+ 
 
 class Handler extends ExceptionHandler
 {
@@ -45,31 +46,38 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    // public function render($request, Exception $exception)
-    // {
-    //     return parent::render($request, $exception);
-    // }
-    public function render($request, Exception $e)
-   {
-          // session()->flash('error',$e->getMessage());
-          // //return Redirect::back();
-          // return parent::render($request, $e);
-        if ($e instanceof ModelNotFoundException)
-        {
-            // Do your stuff here
-            return response()->view('errors.'.'404');
-        }
-        elseif ($this->isHttpException($e))
-        {
-            return $this->renderHttpException($e);
-        }
-        else
-        {
-           return parent::render($request, $e);
 
-           //return redirect()->back()->withInput();
-        }
-   }
+   public function render($request, Exception $e)
+       {
+          
+            /*if ($this->isHttpException($e))
+            {       
+                if($e instanceof NotFoundHttpException)
+                {
+                    return response()->view('errors.404', [], 404);
+                }
+                return $this->renderHttpException($e);
+            }*/
+
+            if ($e instanceof HttpResponseException) {
+                 return $e->getResponse();
+               } elseif ($e instanceof ModelNotFoundException) {
+                   $e = new NotFoundHttpException($e->getMessage(), $e);
+               } elseif ($e instanceof AuthenticationException) {
+                   return $this->unauthenticated($request, $e);
+               } elseif ($e instanceof AuthorizationException) {
+                   $e = new HttpException(403, $e->getMessage());
+               } elseif ($e instanceof ValidationException && $e->getResponse()) {
+                   return $e->getResponse();
+               }
+
+               if ($this->isHttpException($e)) {
+                   return $this->toIlluminateResponse($this->renderHttpException($e), $e);
+               } else {
+                   return $this->toIlluminateResponse($this->convertExceptionToResponse($e), $e);
+            }
+            return parent::render($request, $e);
+       }
 
     /**
      * Convert an authentication exception into an unauthenticated response.

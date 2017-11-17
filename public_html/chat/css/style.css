@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-*, *:before, *:after {
-	box-sizing: border-box;
-}
+*,*:before,*:after{box-sizing:border-box;}
 
 /* body {
 	background: #C5DDEB;
@@ -15,802 +12,126 @@
 	width: 750px;
 	border-radius: 5px;
 } */
-@font-face {
-    font-family: 'Proxima-Nova-Bold';
-    src: url('../fonts/MarkSimonsonProximaNovaBold.eot');
-    src: url('../fonts/MarkSimonsonProximaNovaBold.eot') format('embedded-opentype'),
-	url('../fonts/MarkSimonsonProximaNovaBold.woff2') format('woff2'),
-	url('../fonts/MarkSimonsonProximaNovaBold.woff') format('woff'),
-	url('../fonts/MarkSimonsonProximaNovaBold.ttf') format('truetype'),
-	url('../fonts/MarkSimonsonProximaNovaBold.svg#MarkSimonsonProximaNovaBold') format('svg');
-}
+@font-face{font-family:'Proxima-Nova-Bold';src:url('../fonts/MarkSimonsonProximaNovaBold.eot');src:url('../fonts/MarkSimonsonProximaNovaBold.eot') format('embedded-opentype'),url('../fonts/MarkSimonsonProximaNovaBold.woff2') format('woff2'),url('../fonts/MarkSimonsonProximaNovaBold.woff') format('woff'),url('../fonts/MarkSimonsonProximaNovaBold.ttf') format('truetype'),url('../fonts/MarkSimonsonProximaNovaBold.svg#MarkSimonsonProximaNovaBold') format('svg');}
+@font-face{font-family:'Proxima-Nova-Regular';src:url('../fonts/MarkSimonsonProximaNova.eot');src:url('../fonts/MarkSimonsonProximaNova.eot') format('embedded-opentype'),url('../fonts/MarkSimonsonProximaNova.woff2') format('woff2'),url('../fonts/MarkSimonsonProximaNova.woff') format('woff'),url('../fonts/MarkSimonsonProximaNova.ttf') format('truetype'),url('../fonts/MarkSimonsonProximaNova.svg#MarkSimonsonProximaNova') format('svg');}
+@font-face{font-family:'Proxima-Nova-Extrabold';src:url('../fonts/MarkSimonsonProximaNovaExtrabold.eot');src:url('../fonts/MarkSimonsonProximaNovaExtrabold.eot') format('embedded-opentype'),url('../fonts/MarkSimonsonProximaNovaExtrabold.woff2') format('woff2'),url('../fonts/MarkSimonsonProximaNovaExtrabold.woff') format('woff'),url('../fonts/MarkSimonsonProximaNovaExtrabold.ttf') format('truetype'),url('../fonts/MarkSimonsonProximaNovaExtrabold.svg#MarkSimonsonProximaNovaExtrabold') format('svg');}
+@font-face{font-family:'Proxima-Nova-Medium';src:url('../fonts/MarkSimonsonProximaNovaMedium.eot');src:url('../fonts/MarkSimonsonProximaNovaMedium.eot') format('embedded-opentype'),url('../fonts/MarkSimonsonProximaNovaMedium.woff2') format('woff2'),url('../fonts/MarkSimonsonProximaNovaMedium.woff') format('woff'),url('../fonts/MarkSimonsonProximaNovaMedium.ttf') format('truetype'),url('../fonts/MarkSimonsonProximaNovaMedium.svg#MarkSimonsonProximaNovaMedium') format('svg');}
+@font-face{font-family:'Proxima-Nova-Black';src:url('../fonts/MarkSimonsonProximaNovaBlack.eot');src:url('../fonts/MarkSimonsonProximaNovaBlack.eot') format('embedded-opentype'),url('../fonts/MarkSimonsonProximaNovaBlack.woff2') format('woff2'),url('../fonts/MarkSimonsonProximaNovaBlack.woff') format('woff'),url('../fonts/MarkSimonsonProximaNovaBlack.ttf') format('truetype'),url('../fonts/MarkSimonsonProximaNovaBlack.svg#MarkSimonsonProximaNovaBlack') format('svg');}
+@font-face{font-family:'Proxima-Nova-Semibold';src:url('../fonts/MarkSimonsonProximaNovaSemibold.eot');src:url('../fonts/MarkSimonsonProximaNovaSemibold.eot') format('embedded-opentype'),url('../fonts/MarkSimonsonProximaNovaSemibold.woff2') format('woff2'),url('../fonts/MarkSimonsonProximaNovaSemibold.woff') format('woff'),url('../fonts/MarkSimonsonProximaNovaSemibold.ttf') format('truetype'),url('../fonts/MarkSimonsonProximaNovaSemibold.svg#MarkSimonsonProximaNovaSemibold') format('svg');}
+@font-face{font-family:'manustrialregular';src:url('../fonts/mns_trial-webfont.woff2') format('woff2'),url('../fonts/mns_trial-webfont.woff') format('woff');font-weight:normal;font-style:normal;}
+.body{background:#fff;margin-top:10px;}
+.message-chat-sec .nav-tabs li a:hover{background:none;color:#010101;}
+.container.clearfix.body.message-chat-sec{margin-bottom:30px;}
+.tab-content #inbox_nocon{font-size:14px;padding:15px!important;font-family:Proxima-Nova-Semibold;line-height:35px;}
+.tab-content #sent_nocon{font-size:14px;padding:15px!important;font-family:Proxima-Nova-Semibold;line-height:35px;}
+i.fa.fa-trash-o{cursor:pointer;}
+.header{height:40px;padding-top:10px;padding-bottom:15px;width:100%;background-color:white;top:0;margin-top:0;position:fixed;z-index:999;}
+.header-brand{background-color:white;}
+.header-brand .brand{color:#333333;font-size:18px;text-decoration:none;font-weight:400;}
+.chat .chat-header .chat-about .chat-with span.message-data-name.user-name{width:inherit;float:inherit;}
+.msg_order_imge{width:100%;float:right;padding-right:15px;}
+.people-list{width:100%;padding:22px 41px;}
+p.order_cnt{margin-top:5px;margin-left:20px!important;}
+.people-list .search{padding:20px;}
+form#talkSendMessage {    width: 100% !important;}
+.people-list input{border-radius:3px;border:none;padding:14px;color:white;background:#6A6C75;width:90%;font-size:14px;}
+.people-list .fa-search{position:relative;left:-25px;}
+.people-list ul{padding:20px;}
+.people-list ul li{	/*   padding-bottom: 20px; */}
+.people-list img{border-radius:50%;height:60px;width:60px;}
+.people-list .col-md-2 img{border-radius:0;}
+.people-list .about{float:left;margin-top:8px;}
+.people-list .about{padding-left:8px;}
+.people-list .status{color:#92959E;}
+.chat{width:100%;float:left;background:#fff;color:#434651;border:1px solid #e1e1e1;padding:20px 30px 40px 40px;margin-bottom:30px;}
+.chat .chat-header{border-bottom:1px solid #e1e1e1;}
+.chat .chat-header img{float:left;}
+.chat .chat-message span.message-data-name.user-name{margin-top:25px;}
+.chat .chat-header .chat-about{float:left;padding-left:10px;margin-top:6px;padding-bottom:20px;}
+.chat .chat-header .chat-num-messages{color:#92959E;}
+.chat .chat-header .user-info-sec{float:right;display:inline-flex;list-style-type:none;align-items:center;}
+.chat .chat-header .user-info-sec img{width:70px;height:70px;/*	margin-left: 20px;*/}
+.chat .chat-history{border-bottom:2px solid white;	/* overflow-y: scroll;
+		height: 575px; */}
+	.chat .chat-history .message-data{	/* margin-bottom: 15px; */
+	padding:25px 0;}
+	.chat .chat-history .message-data-time{color:#a8aab1;padding-left:6px;margin-top:20px;font-family:Proxima-Nova-medium;font-size:14px;display:inline-block;float:right;}
+	.chat .chat-history  hr{margin:0;}
+	.chat .chat-history .message{color:#000;font-size:14px;}
 
-@font-face {
-    font-family: 'Proxima-Nova-Regular';
-    src: url('../fonts/MarkSimonsonProximaNova.eot');
-    src: url('../fonts/MarkSimonsonProximaNova.eot') format('embedded-opentype'),
-	url('../fonts/MarkSimonsonProximaNova.woff2') format('woff2'),
-	url('../fonts/MarkSimonsonProximaNova.woff') format('woff'),
-	url('../fonts/MarkSimonsonProximaNova.ttf') format('truetype'),
-	url('../fonts/MarkSimonsonProximaNova.svg#MarkSimonsonProximaNova') format('svg');
-}
+	/* .chat .chat-history .my-message {
+		background: #86BB71;
+	} */
+	.chat .chat-message{padding:20px 0 30px;position:relative;}
+	.chat .chat-message textarea{width:90%;border:2px solid #EBEBEB;padding:10px 20px;font-family:Proxima-Nova-Semibold;margin-bottom:20px;border-radius:2px;margin-top:20px;resize:none;float:right;}
+	.chat .chat-message textarea:focus,.chat .chat-message button{outline:none;}
+	.chat .chat-message .fa-file-o,.chat .chat-message .fa-file-image-o{font-size:16px;color:gray;cursor:pointer;}
+	.chat .chat-message button{color:#ffffff;font-size:18px;border:none;font-family:Proxima-Nova-medium;cursor:pointer;font-weight:bold;background:#60C3AB;position:absolute;right:0;bottom:-10px;padding:10px 35px;border-radius:4px;}
+	.online,.offline,.me{margin-right:3px;font-size:10px;}
+	.online{color:#86BB71;}
+	.offline{color:#E38968;}
+	.me{color:#94C2ED;}
+	.align-left{text-align:left;}
+	.align-right{text-align:right;}
+	.float-right{float:right;}
+	.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+	.name{color:white;}
+	.talkDeleteMessage{color:#563333;}
 
-@font-face {
-    font-family: 'Proxima-Nova-Extrabold';
-    src: url('../fonts/MarkSimonsonProximaNovaExtrabold.eot');
-    src: url('../fonts/MarkSimonsonProximaNovaExtrabold.eot') format('embedded-opentype'),
-	url('../fonts/MarkSimonsonProximaNovaExtrabold.woff2') format('woff2'),
-	url('../fonts/MarkSimonsonProximaNovaExtrabold.woff') format('woff'),
-	url('../fonts/MarkSimonsonProximaNovaExtrabold.ttf') format('truetype'),
-	url('../fonts/MarkSimonsonProximaNovaExtrabold.svg#MarkSimonsonProximaNovaExtrabold') format('svg');
-}
-@font-face {
-	font-family: 'Proxima-Nova-Medium';
-	src: url('../fonts/MarkSimonsonProximaNovaMedium.eot');
-	src: url('../fonts/MarkSimonsonProximaNovaMedium.eot') format('embedded-opentype'),
-	url('../fonts/MarkSimonsonProximaNovaMedium.woff2') format('woff2'),
-	url('../fonts/MarkSimonsonProximaNovaMedium.woff') format('woff'),
-	url('../fonts/MarkSimonsonProximaNovaMedium.ttf') format('truetype'),
-	url('../fonts/MarkSimonsonProximaNovaMedium.svg#MarkSimonsonProximaNovaMedium') format('svg');
-}
+	/* message-page styles */
+	.tabs-left>li,.tabs-right>li{float:none;}
+	.message-chat-sec .nav-tabs{border:1px solid #e1e1e1;padding:20px;}
+	.message-chat-sec .nav>li>a{padding-left:0;font-size:16px;color:#323031;font-family:Proxima-Nova-Medium;}
+	.message-chat-sec .nav-tabs>li.active>a,.nav-tabs>li.active>a:focus,.nav-tabs>li.active>a:hover{border:1px solid transparent;font-family:Proxima-Nova-Extrabold!important;cursor:pointer;}
+	textarea#message-data::-webkit-input-placeholder{color:#323031;}
+	.message-chat-sec .nav-tabs>li>a:hover{border:1px solid transparent;background:transparent!important;}
+	.status_unbold span{font-size:14px;font-family:Proxima-Nova-Semibold;}
+	.message-chat-sec .nav-tabs>li>a:hover,.nav-tabs > li.active > a:focus{background:transparent!important;}
+	.message-chat-sec .nav>li:first-child{border-bottom:2px solid #e1e1e1;}
+	.chat-tl-dv .list-sec-rm{border-top:3px solid #60c5ac;}
+	ul#talkMessages{list-style-type:none;padding-left:0px;}
+	.message-chat-sec i.fa.fa-angle-right{float:right;margin-top:5px;}
+	.messages-chat-list{border:1px solid #e1e1e1;margin-bottom:30px;}
+	.front_chat{margin-top:15px;border-top:1px solid #ccc;}
+	.message-chat-sec .people-list ul{display:flex;align-items:center;font-family:Proxima-Nova-Semibold;color:#323031;}
+	.message-chat-sec .people-list p{margin-bottom:0;font-family:Proxima-Nova-Semibold;color:#323031;text-align:left;margin-left:15px;word-break:break-word;}
+	.front_chat .clearfix.row{border-bottom:1px solid #ccc;padding:40px 0px;}
+	.front_chat .clearfix.row:last-child{border-bottom:none;}
+	.message-chat-sec .people-list ul{padding:0;margin-bottom:0px;list-style-type:none;}
+	.message-chat-sec{margin-top:20px;}
+	.message-chat-sec h4{margin:0;margin-top:15px;margin-bottom:5px;font-family:Proxima-Nova-Semibold;font-size:14px;color:#323031;}
+	.message-header{font-family:Proxima-Nova-Semibold;color:#323031;}
+	.message-chat-sec .people-list li p,.message-chat-sec .people-list li span{margin-left:20px;}
+	.message-chat-sec .people-list li p{color:#ED4266;text-decoration:underline;width:100px;white-space:nowrap;font-family:Proxima-Nova-Semibold;overflow:hidden;text-overflow:ellipsis;}
+	.message-chat-sec .people-list li span{font-family:Proxima-Nova-Semibold;color:#656565;}
+	.chat .chat-history span.message-data-name.user-name{margin-top:20px;}
+	.message-chat-sec .nav-tabs > li.active > a:focus{background:none;color:#323031;border:none;position:relative;}
+	.message-chat-sec .nav>li>a:focus{background:transparent;}
 
-@font-face {
-	font-family: 'Proxima-Nova-Black';
-	src: url('../fonts/MarkSimonsonProximaNovaBlack.eot');
-	src: url('../fonts/MarkSimonsonProximaNovaBlack.eot') format('embedded-opentype'),
-	url('../fonts/MarkSimonsonProximaNovaBlack.woff2') format('woff2'),
-	url('../fonts/MarkSimonsonProximaNovaBlack.woff') format('woff'),
-	url('../fonts/MarkSimonsonProximaNovaBlack.ttf') format('truetype'),
-	url('../fonts/MarkSimonsonProximaNovaBlack.svg#MarkSimonsonProximaNovaBlack') format('svg');
-}
-@font-face {
-    font-family: 'Proxima-Nova-Semibold';
-    src: url('../fonts/MarkSimonsonProximaNovaSemibold.eot');
-    src: url('../fonts/MarkSimonsonProximaNovaSemibold.eot') format('embedded-opentype'),
-	url('../fonts/MarkSimonsonProximaNovaSemibold.woff2') format('woff2'),
-	url('../fonts/MarkSimonsonProximaNovaSemibold.woff') format('woff'),
-	url('../fonts/MarkSimonsonProximaNovaSemibold.ttf') format('truetype'),
-	url('../fonts/MarkSimonsonProximaNovaSemibold.svg#MarkSimonsonProximaNovaSemibold') format('svg');
-}
-
-
-
-@font-face {
-	font-family: 'manustrialregular';
-	src: url('../fonts/mns_trial-webfont.woff2') format('woff2'),
-	url('../fonts/mns_trial-webfont.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-	
-}
-=======
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
- /* body {
-  background: #C5DDEB;
-  font: 14px/20px "Lato", Arial, sans-serif;
-  padding: 40px 0;
-  color: white;
-} 
-
-.container {
-  margin: 0 auto;
-  width: 750px;
-  border-radius: 5px;
-} */
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-.body {
-    background: #fff;
-    margin-top: 10px;
-}
-<<<<<<< HEAD
-.message-chat-sec .nav-tabs li a:hover {
-    background: none;
-    color: #010101;
-}
-.container.clearfix.body.message-chat-sec {
-    margin-bottom: 30px;
-}
-.tab-content #inbox_nocon {
-    font-size: 14px;
-    padding: 15px !important;    font-family: Proxima-Nova-Semibold;
-    line-height: 35px;
-}
-.tab-content #sent_nocon {
-    font-size: 14px;
-    padding: 15px !important;    font-family: Proxima-Nova-Semibold;
-    line-height: 35px;
-}
-
-
-i.fa.fa-trash-o {
-	
-    cursor: pointer;
-}
-=======
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-.header {
-    height: 40px;
-    padding-top:10px;
-    padding-bottom: 15px;
-    width:100%;
-    background-color: white;
-    top: 0;
-    margin-top: 0;
-    position: fixed;
-    z-index: 999;
-}
-
-.header-brand {
-    background-color: white;
-}
-
-.header-brand .brand {
-    color: #333333;
-    font-size: 18px;
-    text-decoration:none;
-    font-weight:400;
-<<<<<<< HEAD
-	
-}
-.chat .chat-header .chat-about .chat-with span.message-data-name.user-name {
-    width: inherit;    float: inherit;
-}
-.msg_order_imge {
-    width: 100%;
-    float: right;
-    padding-right: 15px;
-}
-=======
-
-}
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-.people-list {
-    width: 100%;
-    padding: 22px 41px;
-	
-}
-<<<<<<< HEAD
-p.order_cnt {
-    margin-top: 5px;
-    margin-left: 20px !important;
-}
-.people-list .search {
-	padding: 20px;
-}
-.people-list input {
-	border-radius: 3px;
-	border: none;
-	padding: 14px;
-	color: white;
-	background: #6A6C75;
-	width: 90%;
-	font-size: 14px;
-}
-.people-list .fa-search {
-	position: relative;
-	left: -25px;
-}
-.people-list ul {
-	padding: 20px;
-	
-}
-.people-list ul li {
-	/*   padding-bottom: 20px; */
-=======
-.people-list .search {
-  padding: 20px;
-}
-.people-list input {
-  border-radius: 3px;
-  border: none;
-  padding: 14px;
-  color: white;
-  background: #6A6C75;
-  width: 90%;
-  font-size: 14px;
-}
-.people-list .fa-search {
-  position: relative;
-  left: -25px;
-}
-.people-list ul {
-  padding: 20px;
-  
-}
-.people-list ul li {
-  padding-bottom: 20px;
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-}
-.people-list img {
-    border-radius: 50%;
-    height: 60px;
-    width: 60px;
-}
-.people-list .col-md-2 img {
-	border-radius: 0;
-}
-.people-list .about {
-<<<<<<< HEAD
-	float: left;
-	margin-top: 8px;
-}
-.people-list .about {
-	padding-left: 8px;
-}
-.people-list .status {
-	color: #92959E;
-}
-
-.chat {
-	width: 100%;
-	float: left;
-	background: #fff;
-	color: #434651;
-	border: 1px solid #e1e1e1;
-	padding: 20px 30px 40px 40px;    margin-bottom: 30px;
-}
-.chat .chat-header {
-	border-bottom: 1px solid #e1e1e1;
-}
-.chat .chat-header img {
-	float: left;
-}
-.chat .chat-message span.message-data-name.user-name {
-    margin-top: 25px;
-}
-.chat .chat-header .chat-about {
-	float: left;
-	padding-left: 10px;
-	margin-top: 6px;
-	padding-bottom: 20px;
-}
-
-.chat .chat-header .chat-num-messages {
-	color: #92959E;
-}
-.chat .chat-header .user-info-sec {
-	float: right;
-	display: inline-flex;    list-style-type: none;
-	align-items: center;
-}
-.chat .chat-header .user-info-sec img {
-	width: 70px;
-	height: 70px;
-	margin-left: 20px;
-}
-.chat .chat-history {
-	
-	border-bottom: 2px solid white;
-	/* overflow-y: scroll;
-	height: 575px; */
-}
-.chat .chat-history .message-data {
-	/* margin-bottom: 15px; */
-	padding: 25px 0;
-}
-.chat .chat-history .message-data-time {
-	color: #a8aab1;
-    padding-left: 6px;
-    margin-top: 20px;    font-family: Proxima-Nova-medium;
-    font-size: 14px;
-    display: inline-block;
-	float: right;
-}
-.chat .chat-history  hr {
-	margin:0;
-}
-.chat .chat-history .message {
-	color: #000;
-	font-size: 14px;
-	
-}
-
-/* .chat .chat-history .my-message {
-	background: #86BB71;
-} */
-
-.chat .chat-message {
-	padding: 20px 0 30px;
-	position: relative;
-}
-.chat .chat-message textarea {
-	width: 90%;
-	border: 2px solid #EBEBEB;
-	padding: 10px 20px;
-	font-family:Proxima-Nova-Semibold;
-	margin-bottom: 20px;
-	border-radius: 2px;    margin-top: 20px;
-	resize: none;
-	float: right;
-}
-.chat .chat-message textarea:focus, .chat .chat-message button {
-	outline: none;
-}
-.chat .chat-message .fa-file-o, .chat .chat-message .fa-file-image-o {
-	font-size: 16px;
-	color: gray;
-	cursor: pointer;
-}
-.chat .chat-message button {
-    color: #ffffff;
-    font-size: 18px;
-    border: none;    font-family: Proxima-Nova-medium;
-
-    cursor: pointer;
-    font-weight: bold;
-    background: #60C3AB;
-    position: absolute;
-    right: 0;
-    bottom: -10px;
-	padding: 10px 35px;
-    border-radius: 4px;
-}
-
-
-.online, .offline, .me {
-	margin-right: 3px;
-	font-size: 10px;
-}
-
-.online {
-	color: #86BB71;
-}
-
-.offline {
-	color: #E38968;
-}
-
-.me {
-	color: #94C2ED;
-}
-
-.align-left {
-	text-align: left;
-}
-
-.align-right {
-	text-align: right;
-}
-
-.float-right {
-	float: right;
-}
-
-.clearfix:after {
-	visibility: hidden;
-	display: block;
-	font-size: 0;
-	content: " ";
-	clear: both;
-	height: 0;
-}
-
-.name {
-	color: white;
-=======
-  float: left;
-  margin-top: 8px;
-}
-.people-list .about {
-  padding-left: 8px;
-}
-.people-list .status {
-  color: #92959E;
-}
-
-.chat {
-  width: 100%;
-  float: left;
-  background: #F2F5F8;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  color: #434651;
-}
-.chat .chat-header {
-  padding: 20px;
-  border-bottom: 2px solid white;
-}
-.chat .chat-header img {
-  float: left;
-}
-.chat .chat-header .chat-about {
-  float: left;
-  padding-left: 10px;
-  margin-top: 6px;
-}
-.chat .chat-header .chat-with {
-  font-weight: bold;
-  font-size: 16px;
-}
-.chat .chat-header .chat-num-messages {
-  color: #92959E;
-}
-.chat .chat-header .fa-star {
-  float: right;
-  color: #D8DADF;
-  font-size: 20px;
-  margin-top: 12px;
-}
-.chat .chat-history {
-  padding: 30px 30px 20px;
-  border-bottom: 2px solid white;
-  overflow-y: scroll;
-  height: 575px;
-}
-.chat .chat-history .message-data {
-  margin-bottom: 15px;
-}
-.chat .chat-history .message-data-time {
-  color: #a8aab1;
-  padding-left: 6px;
-}
-.chat .chat-history .message {
-  color: white;
-  padding: 18px 20px;
-  line-height: 26px;
-  font-size: 16px;
-  border-radius: 7px;
-  margin-bottom: 30px;
-  width: 90%;
-  position: relative;
-}
-.chat .chat-history .message:after {
-  bottom: 100%;
-  left: 7%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-bottom-color: #86BB71;
-  border-width: 10px;
-  margin-left: -10px;
-}
-.chat .chat-history .my-message {
-  background: #86BB71;
-}
-.chat .chat-history .other-message {
-  background: #94C2ED;
-}
-.chat .chat-history .other-message:after {
-  border-bottom-color: #94C2ED;
-  left: 93%;
-}
-.chat .chat-message {
-  padding: 30px;
-}
-.chat .chat-message textarea {
-  width: 100%;
-  border: none;
-  padding: 10px 20px;
-  font: 14px/22px "Lato", Arial, sans-serif;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  resize: none;
-}
-.chat .chat-message .fa-file-o, .chat .chat-message .fa-file-image-o {
-  font-size: 16px;
-  color: gray;
-  cursor: pointer;
-}
-.chat .chat-message button {
-  float: right;
-  color: #94C2ED;
-  font-size: 16px;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  background: #F2F5F8;
-}
-.chat .chat-message button:hover {
-  color: #75b1e8;
-}
-
-.online, .offline, .me {
-  margin-right: 3px;
-  font-size: 10px;
-}
-
-.online {
-  color: #86BB71;
-}
-
-.offline {
-  color: #E38968;
-}
-
-.me {
-  color: #94C2ED;
-}
-
-.align-left {
-  text-align: left;
-}
-
-.align-right {
-  text-align: right;
-}
-
-.float-right {
-  float: right;
-}
-
-.clearfix:after {
-  visibility: hidden;
-  display: block;
-  font-size: 0;
-  content: " ";
-  clear: both;
-  height: 0;
-}
-
-.name {
-  color: white;
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-}
-
-.talkDeleteMessage {
-    color: #563333;
-}
-
-/* message-page styles */
-
-
-
-.tabs-left>li, .tabs-right>li {
-<<<<<<< HEAD
-	float: none;
-	
-=======
-  float: none;
- 
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-}
-.message-chat-sec .nav-tabs {
-    border: 1px solid #e1e1e1;
-    padding: 20px;
-}
-.message-chat-sec .nav>li>a {
-	padding-left: 0;
-<<<<<<< HEAD
-    font-size: 16px;color: #323031;
-	font-family: Proxima-Nova-Medium;
-}
-.message-chat-sec .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-	border: 1px solid transparent;font-family: Proxima-Nova-Extrabold !important;
-}
-textarea#message-data::-webkit-input-placeholder {
-    color: #323031;
-}
-.message-chat-sec .nav-tabs>li>a:hover {
-	border: 1px solid transparent; background:transparent !important;
-}
-.status_unbold span {
-    font-size: 14px;
-    font-family: Proxima-Nova-Semibold;
-}
-.message-chat-sec .nav-tabs>li>a:hover, .nav-tabs > li.active > a:focus {
-	background:transparent !important;
-=======
-    font-size: 16px;
-    font-family: Proxima-Nova-Extrabold;
-}
-.message-chat-sec .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-	border: 1px solid transparent;
-}
-.message-chat-sec .nav-tabs>li>a:hover {
-	border: 1px solid transparent;
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-}
-.message-chat-sec .nav>li:first-child {
-    border-bottom: 2px solid #e1e1e1;
-}
-<<<<<<< HEAD
-.chat-tl-dv .list-sec-rm {
-    border-top: 3px solid #60c5ac;
-}
-ul#talkMessages {
-    list-style-type: none;    padding-left: 0px;
-}
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-.message-chat-sec i.fa.fa-angle-right {
-    float: right;
-    margin-top: 5px;
-}
-.messages-chat-list {
-<<<<<<< HEAD
-	border: 1px solid #e1e1e1;    margin-bottom: 30px;
-}
-.front_chat {
-    margin-top: 15px;
-    border-top: 1px solid #ccc;
-}
-.message-chat-sec .people-list ul {
-	display: flex;
-	align-items: center;    font-family: Proxima-Nova-Semibold;
-    color: #323031;
-}
-.message-chat-sec .people-list p{
-	margin-bottom: 0;font-family: Proxima-Nova-Semibold;
-    color: #323031;    text-align: left;
-    margin-left: 15px;
-	word-break: break-word;
-}
-.front_chat .clearfix.row {
-    border-bottom: 1px solid #ccc;    padding: 40px 0px;
-	
-}
-.front_chat .clearfix.row:last-child {
-    border-bottom: none;
-}
-.message-chat-sec .people-list ul {
-	padding: 0;    margin-bottom: 0px;    list-style-type: none;
-=======
-	border: 1px solid #e1e1e1;
-}
-.message-chat-sec .people-list ul {
-	display: flex;
-	align-items: center;
-}
-.message-chat-sec .people-list p{
-	margin-bottom: 0;
-	word-break: break-word;
-}
-.message-chat-sec .people-list ul {
-	padding: 0;
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-}
-
-.message-chat-sec {
-    margin-top: 20px;
-}
-.message-chat-sec h4 {
-<<<<<<< HEAD
-	margin: 0;    margin-top: 15px;
-    margin-bottom: 5px;
-    font-family: Proxima-Nova-Semibold;
-	font-size: 14px;
-    color: #323031;
-}
-.message-header {
-	font-family: Proxima-Nova-Semibold;
-	color: #323031;
-=======
-	margin: 0;
-    margin-bottom: 5px;
-    font-family: Proxima-Nova-Semibold;
-	font-size: 16px;
-}
-.message-header {
-	font-family: Proxima-Nova-Semibold;
-	color: #000;
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-}
-.message-chat-sec .people-list li p, .message-chat-sec .people-list li span {
-	margin-left: 20px;
-}
-.message-chat-sec .people-list li p {
-<<<<<<< HEAD
-    color: #ED4266;
-    text-decoration: underline;
-    width: 100px;
-    white-space: nowrap;    font-family: Proxima-Nova-Semibold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.message-chat-sec .people-list li span {
-    font-family: Proxima-Nova-Semibold;
-    color: #656565;
-}
-.chat .chat-history span.message-data-name.user-name {
-    margin-top: 20px;
-}
-.message-chat-sec .nav-tabs > li.active > a:focus {
-    background: none;
-    color: #323031;
-    border: none;
-    position: relative;
-}
-.message-chat-sec .nav>li>a:focus {
-    background: transparent;
-}
-/* conversation message chat */
-.conversation-chat h4{
-	font-size: 18px;
-    font-family: Proxima-Nova-Extrabold;
-	color: #323031;
-}
-.conversation-chat .message-data-name img, .conversation-chat .chat-message img {
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-}
-.chat .chat-message span {
-    float: left;
-}
-.chat .chat-message span.user-name {
-    float: left;
-}
-ul.user-info-sec p {
-    font-size: 14px;
-    font-family: Proxima-Nova-Semibold;
-}
-span.message-data-name.user-name, .user-name {
-    margin-left: 10px;
-    color: #ED4266;    margin-bottom: 15px;
-	text-decoration: underline;
-    width: 100px;
-    white-space: nowrap;
-    font-family: Proxima-Nova-Semibold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    float: right;
-    margin-top: 0px;
-}
-.chat .chat-history .message {
-    color: #323031;
-    font-size: 14px;
-    font-family: Proxima-Nova-Semibold;
-}
-.chat .chat-header .chat-about .chat-with {
-	font-family: Proxima-Nova-Semibold;
-}
-@media screen and (max-width:1024px){
-	.chat-tl-dv {
-    margin-top: 50px;
+	/* conversation message chat */
+	.conversation-chat h4{font-size:18px;font-family:Proxima-Nova-Extrabold;color:#323031;}
+	.conversation-chat .message-data-name img,.conversation-chat .chat-message img{border-radius:50%;width:70px;height:70px;}
+	.chat .chat-message span{float:left;}
+	.chat .chat-message span.user-name{float:left;}
+	ul.user-info-sec p{font-size:14px;font-family:Proxima-Nova-Semibold;}
+	span.message-data-name.user-name,.user-name{margin-left:10px;color:#ED4266;margin-bottom:15px;text-decoration:underline;width:100px;white-space:nowrap;font-family:Proxima-Nova-Semibold;overflow:hidden;text-overflow:ellipsis;float:right;margin-top:0px;}
+	.chat .chat-history .message{color:#323031;font-size:14px;font-family:Proxima-Nova-Semibold;}
+	.chat .chat-header .chat-about .chat-with{font-family:Proxima-Nova-Semibold;}
+	@media screen and (max-width:1024px){
+		.chat-tl-dv{margin-top:50px;}
 	}
-}
-
-@media screen and (max-width:767px){
-	.message-chat-sec .people-list ul {
-    display: flex;
-    align-items: inherit;
-}
-	.message-chat-sec .people-list li p{width: auto;}
-.chat .chat-header .user-info-sec {
-    float: left;
-    display: inline-flex;
-    list-style-type: none;
-    align-items: center;
-    padding-left: 10px;
-}
-	.chat .chat-message textarea {
-    width: 100%;}
-	.chat{padding:10px 20px 20px 10px;}
-	.message-chat-sec .nav-tabs{margin-bottom:10px;}
-	.message-chat-sec .people-list li span {
-    float: left;
-
-}
-	.message-chat-sec .people-list p{    margin-left: 0px;}
-	.messages-chat-list .people-list {
-		width: 100%;
-		padding: 10px 20px;
+	@media screen and (max-width:767px){
+		.chat .chat-history .message{word-break:break-all;}
+		.message-chat-sec .people-list ul{display:flex;align-items:inherit;}
+		.message-chat-sec .people-list li p{width:auto;}
+		.chat .chat-header .user-info-sec{float:left;display:inline-flex;list-style-type:none;align-items:center;padding-left:10px;}
+		.chat .chat-message textarea{width:100%;}
+		.chat{padding:10px 20px 20px 10px;}
+		.message-chat-sec .nav-tabs{margin-bottom:10px;}
+		.message-chat-sec .people-list li span{float:left;}
+		.message-chat-sec .people-list p{margin-left:0px;}
+		.messages-chat-list .people-list{width:100%;padding:10px 20px;}
 	}
-}
-
-@media (max-width: 480px){
-.col-md-6.text-right.pull-right.back-link {    float: left !important;}
-}
-=======
-	color: #ED4266;
-	text-decoration: underline;
-}
-
-
-
-
-
-
-
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
+	@media (max-width:480px){
+		.col-md-6.text-right.pull-right.back-link{float:left!important;}
+	}

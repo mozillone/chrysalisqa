@@ -148,7 +148,7 @@ class UserController extends Controller
             ->editColumn('credits', function ($usersList) {
                 return '$'.number_format(floatval($usersList->credits),2,'.','');
             })
-            ->editColumn('status', function ($usersList) {
+            ->editColumn('active', function ($usersList) {
                 $a = $usersList->active == '1' ? 'checked' : '';
                 return '<label class="switch">
                                    <input type="checkbox" '.$a.' class="status" id="'. $usersList->id .'" onClick="changeUserStatus('.$usersList->id.','.$usersList->active.');">
@@ -251,6 +251,7 @@ class UserController extends Controller
                                     'role_id'         =>4,
                                     'first_name'      => $req['first_name'],
                                     'last_name'       => $req['last_name'],
+                                    'display_name'    => $req['first_name'].' '.$req['last_name'],
                                     'username'    => $req['username'],
                                     'email'           => $req['email'],
                                     'password'        => Hash::make($req['password']),
@@ -524,18 +525,18 @@ class UserController extends Controller
   public function adminSettings(){
       $title="Settings";
       $this->data['seller_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
-      $states = Address::getStatesList();
-      $request_bag = Site_model::find_user_and_meta('user_meta',Auth::user()->id);
-      $search_banner_settings = DB::table('search_banner_settings')->first();
+      $states=Address::getStatesList();
+      $request_bag= Site_model::find_user_and_meta('user_meta',Auth::user()->id);
+     $search_banner_settings = DB::table('search_banner_settings')->first();
      return view('admin.settings.settings')->with($this->data)->with('states',$states)->with('request_bag',$request_bag)->with('search_banner_settings',$search_banner_settings);
   }
   public function requesBagSettings(Request $request){
-      $req = $request->all();
+      $req=$request->all();
       Site_model::save_meta_for('user_meta',$req['request_bag'],Auth::user()->id);
       Session::flash('success', 'Settings updated successfully');
       return Redirect::back();
   }
-
+  
   /**
    * Created By Gayatri on 2nd Nov 2017
    * [Adding/Updating a new search banner image]
@@ -563,5 +564,4 @@ class UserController extends Controller
     Session::flash('success', 'Settings updated successfully');
     return Redirect::back();
   }
- 
 }

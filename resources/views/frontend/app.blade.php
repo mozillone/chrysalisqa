@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<meta property="fb:app_id" content="300747437108376"/> 
+		<meta property="fb:app_id" content="1984025911869654"/> 
 		<meta property="og:type" content="website">
         {!! Meta::tag('title') !!}
         {!! Meta::tag('description') !!}

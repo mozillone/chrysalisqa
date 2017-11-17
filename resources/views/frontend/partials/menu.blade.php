@@ -16,19 +16,7 @@
 									<br>Messages
 								</a>
 							</li>
-							<li>
-								<a type="button" class="btn btn-default btn-lg text-center fav-icon-sec" href="{{route('wishlist')}}">
-									<i class="fa fa-heart" aria-hidden="true"></i>
-									@if(Auth::check())
-										<span class="fav_count">{{helper::getMyWishlistCount()}}</span>
-									@endif<br>
-									@if(Auth::check())
-										<a class="fav-style" href="{{route('wishlist')}}">Favorites</a> 
-									@else 
-										<a class="fav-style" data-toggle="modal" data-target="#login_popup"> Favorites </a> 
-									@endif 
-								</a>
-							</li>
+							<li><a type="button" class="btn btn-default btn-lg text-center fav-icon-sec" href="{{route('wishlist')}}"><i class="fa fa-heart" aria-hidden="true"></i>@if(Auth::check())<span class="fav_count">{{helper::getMyWishlistCount()}}</span>@endif<br>@if(Auth::check())<a class="fav-style" href="{{route('wishlist')}}">Favorites</a> @else <a class="fav-style" data-toggle="modal" data-target="#login_popup"> Favorites </a> @endif </a></li>
 							<li><button type="button" class="dropdown-toggle btn btn-default btn-lg text-center mini-cart" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart <span class="mini_cart">@if(is_numeric(helper::getCartCount())){{helper::getCartCount()}} @else 0 @endif</span></button>
 								<ul class="dropdown-menu cart-products">
 								</ul>
@@ -92,7 +80,7 @@
 							$main_cat_url=str_replace(" ","-",str_replace(" & ","-", strtolower(str_replace("'","", $key))));
 						?>
 						<li class="dropdown mega-dropdown main_cat_url_class">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-cat-url="/category/<?php echo $main_cat_url; ?>">{{$key}} @if(count($value)>1)<i class="fa fa-chevron-down" aria-hidden="true"></i>@endif</a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-cat-url="/category/<?php echo $main_cat_url; ?>" data-id="">{{$key}} @if(count($value)>1)<i class="fa fa-chevron-down" aria-hidden="true"></i>@endif</a>
 							@if(count($value)>1)
 							<ul class="dropdown-menu mega-dropdown-menu row @if(count($value)<=6) min-menu @endif">
 								@if(count($value)<=6)
@@ -227,7 +215,7 @@
 							<!-- tab content starts -->			  
 							<div class="head-acc-form">
 								<p class="acc-form-rm"><a href="javascript::void(0);"><input type="text" placeholder="{{Auth::user()->display_name}}"></a><span class="acc-form-icn"><i class="fa fa-user" aria-hidden="true"></i></span></p>
-								<p class="acc-form-rm"><a href="{{route('wishlist')}}"><input type="text" placeholder="FAVORITES"></a><span class="acc-form-icn"><i class="fa fa-heart" aria-hidden="true"></i>{{helper::getMyWishlistCount()}}</span></p>			
+								<p class="acc-form-rm"><a href="{{route('wishlist')}}"><input type="text" placeholder="FAVORITES"></a><span class="acc-form-icn"><i class="fa fa-heart" aria-hidden="true"></i>{{helper::getMyWishlistCount()}}</span></p>		
 								<p class="acc-form-rm"><a href="{{URL::to('conversations')}}"><input type="text" placeholder="MESSAGES"></a><span class="acc-form-icn"><i class="fa fa-envelope" aria-hidden="true"></i> {{helper::getMessagesCount()}}</span></p>						
 								<p class="acc-form-rm"><a href="{{route('logout')}}"><input type="text" placeholder="SIGN OUT"> </a><span class="acc-form-icn"><i class="fa fa-sign-out" aria-hidden="true"></i></span></p>			
 							</div>

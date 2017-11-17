@@ -12,7 +12,7 @@ Home@parent
 <?php echo (isset($pageData->description) && !empty($pageData->description) ? $pageData->description : ''); ?>
 <div class="container">
 </div>
-<?php $eid = urlencode('$6$3f38241f88775cb2$2xnc8N.Z3KIVpHmk7IjltMCFfLAVGtT4RrfIhlxHr2eECXGlFhrY.2Uyr8ghWHeH3YuuhuRW1KtXbscKQOPua0');  ?>
+<?php $eid = base64_encode('$6$0adc6212a7d7e99c$x4.VnYDfzEiEyeMV5b0BQM8ZblM.9I6cqcUbB6rDrlNFUeVExEnklUHyHrHHvznnD4ztUw/gHlLNafCwlKyCN.');  ?>
 <a href="costume/redirect/{{$eid}}">Click</a>
 <div class="home_product_slider">
 	<div class="container">
@@ -21,37 +21,24 @@ Home@parent
 				<h2>Featured Costumes</h2>
 				<?php //echo "<pre>";print_r($featured_costumes); ?>
 				<div class="owl-carousel owl-theme">
-					<?php foreach ($featured_costumes as $cos) { ?>
+					<?php  foreach ($featured_costumes as $cos) { ?>
 						<div class="item">
-
 							<div class="prod_box">
 								<div class="img_layer">
 									<a href="/product{{$cos->url}}" style="background-image: url({{asset('costumers_images/Medium')}}<?php echo "/".$cos->cos_image; ?>)">
 									</a>
-									<div class="hover_box">
-										<p class="like_fav">
-											<a data-toggle="modal" data-target="#login_popup">
-												<span><i aria-hidden="true" class="fa fa-thumbs-up"></i>1</span>
-											</a> 
-											<a data-toggle="modal" data-target="#login_popup">
-												<span><i aria-hidden="true" class="fa fa-heart-o"></i></span>
-											</a>
-										</p>
-										<p class="hover_crt add-cart" data-costume-id="145">
-											<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
-										</p>
-									</div>
+									<div class="hover_box"><p class="like_fav"><a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>1</span></a> <a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a> </p><p class="hover_crt add-cart" data-costume-id="145"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p></div>
 								</div>
 								@if($cos->film_qlty == '32')
 									<p class="ystrip-rm"><span><img class="img-responsive" src="http://chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality</span></p>
 								@endif
 								<div class="slider_cnt @if($cos->created_user_group != "admin" )no_brand @endif @if(strlen($cos->cos_name)<20) sml_name @endif">
 									@if($cos->created_user_group == "admin")
-										<?php $is_admin=20;?>
-										<span class="cc_brand"><img src="{{asset('img/chrysalis_brand.png')}}"></span>
+									<?php $is_admin=20;?>
+									<span class="cc_brand"><img src="{{asset('img/chrysalis_brand.png')}}"></span>
 									
 									@else
-										<?php $is_admin=40;?>
+									<?php $is_admin=40;?>
 									@endif
 									<?php if(strlen($cos->cos_name) < 20) { ?>
 										
@@ -68,6 +55,7 @@ Home@parent
 						<?php } ?>
 						
 					</div>
+					<input type="hidden" name="costumes_cnt" id="costumes_cnt" value="{{count($featured_costumes)}}">
 				</div>
 			</div>
 		</div>
@@ -99,22 +87,23 @@ Home@parent
 	<script src="{{ asset('/assets/frontend/js/pages/home.js') }}"></script>
 		<script>
 			$(document).ready(function() {
-				$(".owl-controls.clickable").show();
+				if($("#costumes_cnt").val() > "4"){
+					$(".owl-controls.clickable").show();	
+				}
 				if (jQuery(window).width() < 767) 
 				{
 					$(".carousel").swipe({
 						
-						swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+					  swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
 
-					    	if (direction == 'left') $(this).carousel('next');
-					    	if (direction == 'right') $(this).carousel('prev');
+					    if (direction == 'left') $(this).carousel('next');
+					    if (direction == 'right') $(this).carousel('prev');
 
 					  },
 					  allowPageScroll:"vertical"
 
 					});
 				}
-
 			});
 		</script>
 @stop

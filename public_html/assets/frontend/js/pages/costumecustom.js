@@ -257,14 +257,14 @@ $(function(){
 
    
 
-        if(condition_val == 'good' || condition_val == 'like_new')
+        /*if(condition_val == 'good' || condition_val == 'like_new')
         {
             if(cleaned == "")
             {
                  $('#cleanederror').html('This field is required.');
                  str = false;
             }           
-        }
+        }*/
         var uniquefashion = "";
         if(size == 'custom'){
             if(heightft == ""){
@@ -761,7 +761,7 @@ $(function(){
 
         if(parseInt(donate_charity) == 0 && charity_name != '' ){
             $('#donate_charity').css('border', '1px solid red');
-            $('#donate_charityerror').html('Select Donate Amount');
+            $('#donate_charityerror').html('Select Donation Amount');
             str = false;
         }else if(parseInt(donate_charity) != 0 && charity_name == '' ){
             $('#charity_nameerror').html('Please select any Charity.');

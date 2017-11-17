@@ -31,9 +31,6 @@
 											<div class="shipping_div methods">
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<h4>Shipping Address:</h4>
-													<a href="https://plus.google.com/share?url=http://www.chrysaliscostumes.com" onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
-  src="{{asset('assets/frontend/img/google-plus-icon.png')}}" alt="Share on Google+"/></a>
 												</div>
 												<div class="col-md-5 col-sm-4 col-xs-12">
 													@if(!empty($data['cart_shipping_address']))
@@ -166,7 +163,7 @@
 													?>
 													@if(count($items['address']))
 													<div class="shipping_date">
-														  <span> Selling from  {{$items['address'][0]->city}}, {{$items['address'][0]->state}}
+														  <span> Shipping from  {{$items['address'][0]->city}}, {{$items['address'][0]->state}}
 														  <span class="shi_date_right shi_date_right_{{$cart->created_by}} text-right right">
 														 
 														    <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title=""></i>
@@ -182,11 +179,12 @@
 														</div>
 														<div class="media-body">
 															<h4 class="media-heading"><a href="/product{{$cart->url_key}}">{{$cart->costume_name}}</a></h4>
+															@if($cart->created_user_group=="admin")<span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>@endif
 															<p>@if($cart->is_film=="yes")<p class="f_quality">Film Quality</p> @else  @endif</p>
 															<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
 															<p><b>Size:</b> {{ucfirst($cart->size)}}</p>
 															<p><b>Quantity:</b> {{$cart->qty}}</p>
-															@if($cart->created_user_group=="admin")<span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>@endif
+															
 														</div>
 													</div>
 												</div>
@@ -577,5 +575,4 @@
 <script src="{{ asset('/assets/frontend/js/pages/placeorder.js') }}"></script>
 <script src="{{ asset('/js/credit-card-validation.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
-
 @stop

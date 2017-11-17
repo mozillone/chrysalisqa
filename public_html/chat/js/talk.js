@@ -12,27 +12,28 @@ $(document).ready(function () {
         e.preventDefault();
         str=true;
         if($('textarea#message-data').val() != ""){
-             $('textarea#message-data').css('border','');    
-        var url, request, tag, data;
-        $('#talkSendMessage').append('<div class="modal-backdrop fade in"></div>');
-        tag = $(this);
-        url = __baseUrl + '/ajax/message/send';
-        data = tag.serialize();
-        
-        request = $.ajax({
-            method: "post",
-            url: url,
-            data: data
-        });
+            $('textarea#message-data').css('border','');    
+            var url, request, tag, data;
+            $('#talkSendMessage').append('<div class="modal-backdrop fade in"></div>');
+            
+            tag = $(this);
+            url = __baseUrl + '/ajax/message/send';
+            data = tag.serialize();
+            
+            request = $.ajax({
+                method: "post",
+                url: url,
+                data: data
+            });
 
-        request.done(function (response) {
-            if (response.status == 'success') {
-                $('#talkMessages').append(response.html);
-                $('.modal-backdrop').remove();
-                tag[0].reset();
-                //location.reload();
-            }
-        });
+            request.done(function (response) {
+                if (response.status == 'success') {
+                    $('#talkMessages').append(response.html);
+                    $('.modal-backdrop').remove();
+                    tag[0].reset();
+                    //location.reload();
+                }
+            });
         }
         else{
             $('textarea#message-data').css('border','1px solid red');

@@ -345,7 +345,10 @@ class Cart extends Authenticatable
                               'zip_code'=>$cart_address[0]->shipping_postcode
                             );
     }else{
-    $data=DB::Select('SELECT *  FROM `cc_address_master` WHERE `address_type` = "shipping" AND `user_id` ='.Auth::user()->id );
+
+    if(Auth::check())
+    {
+      $data=DB::Select('SELECT *  FROM `cc_address_master` WHERE `address_type` = "shipping" AND `user_id` ='.Auth::user()->id );
      if(count($data)){
      $shipping_address=array('city'=>$data[0]->city,
                               'state'=>$data[0]->state,
@@ -356,6 +359,12 @@ class Cart extends Authenticatable
 
      }
     }
+    else
+    {
+      $shipping_address=[];
+    }      
+    
+    }
   //  dd($shipping_address);
     if(count($shipping_address)){
       return $shipping_address;
@@ -363,7 +372,8 @@ class Cart extends Authenticatable
       return false;;
     }
 
- }protected function getSellerShippingAddress($user_id){
+ }
+ protected function getSellerShippingAddress($user_id){
     $seller_address=DB::Select('SELECT *  FROM `cc_address_master` WHERE `address_type` = "selling" AND `user_id` ='.$user_id );
     if(count($seller_address)){
       return $seller_address;
@@ -378,8 +388,12 @@ class Cart extends Authenticatable
  }   
     
 protected function getUserCartShippingAddress(){
-    $data=DB::Select('SELECT *  FROM `cc_cart` WHERE `user_id` ='.Auth::user()->id);
-    return $data; 
+    if(Auth::check())
+    {
+       $data=DB::Select('SELECT *  FROM `cc_cart` WHERE `user_id` ='.Auth::user()->id);
+       return $data; 
+    }
+   
 }
 
 }

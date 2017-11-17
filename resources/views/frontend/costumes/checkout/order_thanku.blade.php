@@ -189,14 +189,16 @@
 					<p class="thankyou-text">In the meantime, <br/>
 					<span class="thankyou-bold">Share Your Purchase!</span></p>
 					<ul class="thankyou-socio">
-					<li>
-                        <a href="javascript:void(0)" class="icon-fb" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title={{implode(',',$order_id)}} orders review&&u={{URL::to('/')}}')" title="Facebook Share"><img src="{{asset('assets/frontend/img/thnk-fb.png')}}" alt="thnk-fb" />
-                        </a>
-                    </li>
-					<li><a href="javascript:void(0)" class="icon-tw" onclick="genericSocialShare('http://twitter.com/share?&amp;url={{URL::to('/')}}')" title="Twitter Share"><img src="{{asset('assets/frontend/img/thnk-tw.png')}}" alt="thnk-tw" /></a></li>
-					<li>
-                        <a href="javascript:void(0)" class="icon-tw" onclick="genericSocialShare('https://plus.google.com/share?url={{URL::to('/')}}')" title="Google+ Share"><img src="{{asset('assets/frontend/img/google-plus-icon.png')}}" alt="thnk-tw" /></a>
-                    </li>
+    					<li><a href="javascript:void(0)" class="icon-fb" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title={{implode(',',$order_id)}} orders review&&u={{URL::to('/')}}')" title="Facebook Share"><img src="{{asset('assets/frontend/img/thnk-fb.png')}}" alt="thnk-fb" /></a></li>
+
+    					<li><a href="javascript:void(0)" class="icon-tw" onclick="genericSocialShare('http://twitter.com/share?&amp;url={{URL::to('/')}}')" title="Twitter Share"><img src="{{asset('assets/frontend/img/thnk-tw.png')}}" alt="thnk-tw" /></a></li>
+    					
+                        <!-- <li>
+                            <a class="icon-tw" href="https://plus.google.com/share?url={{url('/')}}" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" title="Google+ Share">
+                                <img src="{{asset('assets/frontend/img/google-plus-icon.png')}}" alt="thnk-yt" />
+                            </a>
+                        </li> -->
 					</ul>
 
 				</div>
