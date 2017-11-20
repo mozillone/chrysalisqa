@@ -12,8 +12,6 @@ Home@parent
 <?php echo (isset($pageData->description) && !empty($pageData->description) ? $pageData->description : ''); ?>
 <div class="container">
 </div>
-<?php $eid = base64_encode('$6$0adc6212a7d7e99c$x4.VnYDfzEiEyeMV5b0BQM8ZblM.9I6cqcUbB6rDrlNFUeVExEnklUHyHrHHvznnD4ztUw/gHlLNafCwlKyCN.');  ?>
-<a href="costume/redirect/{{$eid}}">Click</a>
 <div class="home_product_slider">
 	<div class="container">
 		<div class="row">
