@@ -17,15 +17,7 @@ class HomePageController extends Controller {
 	}
 	public function index()
 	{
-		/*$activation_link=URL::to('/').'/password/change/';
-				 		$data['name']="hai";
-						$data['activation_link']=$activation_link;
-						$email= "";
-						$sent=Mail::send('emails.registration',array("email"=>$data), function ($m) use($email){
-							$m->to("mohan@dotcomweavers.com", "Mruduramai");
-						    $m->subject('Forgot Password');
-
-						});*/
+		
 		Meta::set('title', 'Home');
         Meta::set('description', 'Affordable, Environment Friendly Costumes. Buy and Sell Costumes online.');
 		$featured_costumes = DB::table('costumes')
@@ -40,6 +32,7 @@ class HomePageController extends Controller {
 		->where('costume_image.type',"1")
 		->where('url_rewrites.type','product')
 		->where('cao.attribute_id','21')
+		->where('url_rewrites.id','=',DB::Raw('(select id from cc_url_rewrites where url_offset=cc_costumes.costume_id  order by id desc limit 0,1)'))
 		->select('costume_description.name as cos_name','costumes.created_user_group','costumes.price as cos_price','costume_image.image as cos_image','url_rewrites.url_key as url','costumes.created_by as created_by','cao.attribute_option_value_id as film_qlty')
 		->groupBy('costumes.costume_id')
 		->orderBy('costumes.is_featured_date',"DESC")

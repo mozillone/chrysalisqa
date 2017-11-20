@@ -80,7 +80,7 @@
 							$main_cat_url=str_replace(" ","-",str_replace(" & ","-", strtolower(str_replace("'","", $key))));
 						?>
 						<li class="dropdown mega-dropdown main_cat_url_class">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-cat-url="/category/<?php echo $main_cat_url; ?>">{{$key}} @if(count($value)>1)<i class="fa fa-chevron-down" aria-hidden="true"></i>@endif</a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-cat-url="/category/<?php echo $main_cat_url; ?>" data-id="">{{$key}} @if(count($value)>1)<i class="fa fa-chevron-down" aria-hidden="true"></i>@endif</a>
 							@if(count($value)>1)
 							<ul class="dropdown-menu mega-dropdown-menu row @if(count($value)<=6) min-menu @endif">
 								@if(count($value)<=6)

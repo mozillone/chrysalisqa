@@ -236,6 +236,10 @@ class CategoriesController extends Controller
                     ->where('category_id', $category_id)
                     ->delete();
 
+    $costume_update = DB::table('costumes')
+                    ->where('costume_id',$product_id)
+                    ->update(['cat_id'=>0]);
+
     if($is_deleted){
       Session::flash('success', 'Costume Deleted successfully');
       return redirect()->back();

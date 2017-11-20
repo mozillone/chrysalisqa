@@ -345,6 +345,7 @@ class Cart extends Authenticatable
                               'zip_code'=>$cart_address[0]->shipping_postcode
                             );
     }else{
+<<<<<<< HEAD
     
      if (Auth::check())
     {

@@ -241,11 +241,10 @@ public static function domesticRateSingleCostume($originationZip,$destinationZip
         $collection = new \Illuminate\Support\Collection(json_decode(json_encode(simplexml_load_string(self::removeNamespaceFromXML($output))), true));
 /// Mohan
 //return 1;
-    	if(!isset($collection->toArray()['Number'])){
+    		if(!isset($collection->toArray()['Number'])){
 			if(!isset($collection->toArray()['Package']['Error'])){
         
         			$res=$collection->toArray();
-                    //echo "<pre>"; print_r($res); exit;
         			$est=explode('-',filter_var($res['Package']['Postage']['MailService'], FILTER_SANITIZE_NUMBER_INT));
 	  				$data['rate']=$res['Package']['Postage']['Rate'];
 	  				$data['MailService']=$est[0];
@@ -372,5 +371,6 @@ public static function domesticRateSingleCostume($originationZip,$destinationZip
         //$message_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
         $message_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.' OR cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
         return $message_count[0]->count_dt;
-    }	
+    }   
+	
 }

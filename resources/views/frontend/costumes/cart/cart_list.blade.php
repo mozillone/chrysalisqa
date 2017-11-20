@@ -45,7 +45,11 @@
 														<div class="media-body">
 															<h4 class="media-heading"><a href="/product{{$cart->url_key}}">{{$cart->costume_name}}</a></h4>
 															@if($cart->created_user_group=="admin")<span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>@endif
+<<<<<<< HEAD
 															@if($cart->is_film=="yes")<p class="f_quality"><img class="img-responsive" src="{{asset('assets/frontend/img/film.png')}}"> Film Quality</p> @else  @endif
+=======
+															@if($cart->is_film=="yes")<p class="f_quality">Film Quality</p> @else  @endif
+>>>>>>> 7c2c31293939d55fb48ec64bc57c085c3c2fbb95
 															<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
 															<p><b>Size:</b> {{ucfirst($cart->size)}}</p>
 															<p class="upload_id"><b>Uploaded by</b><span> {{$cart->user_name}}</p>

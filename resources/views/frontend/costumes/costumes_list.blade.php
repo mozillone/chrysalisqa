@@ -23,11 +23,20 @@
 	<div class="prodcut_list_page">
 		<div class="container">
 			<div class="row">
+<<<<<<< HEAD
 				<input type="hidden" name="parent_cat_name" value="{{$parent_cat_name}}"/>
 				<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
 				<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
 				<input type="hidden" name="is_login" value="{{Auth::check()}}"/>
 				<form id="search_list">
+=======
+				
+				<form id="search_list" action="{{url('Filterscategory',$parent_cat_name)}}" method="get">
+					<input type="hidden" name="parent_cat_name" value="{{$parent_cat_name}}"/>
+					<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
+					<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
+					<input type="hidden" name="is_login" value="{{Auth::check()}}"/>
+>>>>>>> 7c2c31293939d55fb48ec64bc57c085c3c2fbb95
 					<input type="hidden" name="cat_id" value="{{$data['sub_cat_info'][0]->category_id}}"/>
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					@if(!empty($parent_cat))<input type="hidden" name="is_main" value="{{ $parent_cat }}"> @endif
@@ -38,7 +47,10 @@
 							<ul class="box-list1 gender">
 								<li data-gender="male">Men's</li>
 								<li data-gender="female">Women's</li>
+<<<<<<< HEAD
 								<!-- <li data-gender="unisex">Both</li> -->
+=======
+>>>>>>> 7c2c31293939d55fb48ec64bc57c085c3c2fbb95
 								<li data-gender="boy">Boys</li>
 								<li data-gender="girl">Girls</li>
 								<li data-gender="baby">Babies</li>
@@ -337,6 +349,7 @@
 									</div>
 								</div>
 							</div>
+<<<<<<< HEAD
 						</div>	
 						@if (Session::has('error'))
 							<div class="alert alert-danger alert-dismissable ">
@@ -365,6 +378,71 @@
 						</div>
 					</div>
 						<ul class="holder list_pagination"></ul>
+=======
+						</div>
+						@if(count($costumes)>0)	
+						<div class="list_products list-img-bg">
+							<div class="row" id="">						 
+							@foreach($costumes as $costume)
+							<div class="col-md-3 col-sm-4 col-xs-6">
+								<div class="prod_box">
+									<div class="img_layer">
+										<a href="/product/classic-activity/film-tv/test-costume13" style="background-image:url(/costumers_images/Medium/{{$costume->image}});background-repeat:no-repeat;">&nbsp;
+										</a>
+											<div class="hover_box">
+												<p class="like_fav">
+													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
+													</a> 
+													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
+												</p>
+												<p class="hover_crt add-cart" data-costume-id="571">
+													<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
+												</p>
+											</div>
+									</div>
+											@if($costume->film_qlty !=0)
+											<p class="ystrip-rm">
+												<span>
+													<img class="img-responsive" src="http://dev.chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality
+												</span>
+											</p>
+											@endif
+											<div class="slider_cnt no_brand sml_name">
+												<span class="cc_brand"></span>
+													<h4>
+														<a href="/product/classic-activity/film-tv/test-costume13" <="" a="">{{$costume->name}}</a>
+													</h4>
+													<p>
+														<a href="/product/classic-activity/film-tv/test-costume13" <="" a="">
+														<span class="new-price">${{$costume->price}}</span>
+														</a>
+													</p>
+											</div>
+									</div>
+							</div>
+							@endforeach
+							</div>
+						</div>
+						@else
+						 <div class="col-md-8">
+						  <p>No Costumes Found under this Category</p>
+						 </div>
+						@endif
+						@if(count($costumes)>=12)
+						<ul class="holder list_pagination">	
+ 							{{$costumes->links()}}	
+							 <div class="pagination_btm">
+							 	<label>Show </label>
+							 	<select id="per_page">
+							 		<option selected>12</option>
+							 		<option>24</option>
+							 		<option>48</option>
+							 	</select>
+							 	<label> per page </label>	
+							 </div>
+						</ul>
+						@endif
+>>>>>>> 7c2c31293939d55fb48ec64bc57c085c3c2fbb95
 					</div>
 				</form>
 			</div>
@@ -377,7 +455,7 @@
 @section('footer_scripts')
 <script src="{{ asset('/assets/frontend/js/jquery-ui.js') }}"></script>
 <script src="{{ asset('/js/ohsnap.js') }}"></script>
-<script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script>
+<!-- <script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script> -->
 <script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
@@ -391,6 +469,43 @@
 				scrollTop: 300
 			}, 700);
 		});
+<<<<<<< HEAD
 	});
 </script>
+=======
+
+		$("#per_page").change(function()
+		{			 
+			var id = $(this).val();			
+			var url = window.location.pathname;	 
+			location.href = url+"?perpage=" + id;
+		});
+
+		$(".gender").click(function()
+		{			 
+			var id = $(this).data('gender');			
+			var url = window.location.pathname;	 
+			$("#search_list").submit();
+		});
+
+		var queryString = window.location.href.slice(window.location.href.indexOf('?'));
+		var res = queryString.substring(9,11);
+		
+		  $("#per_page > option").each(function() {
+		    if (this.value == res) {
+		      this.selected = 'selected';
+		    }
+		  });
+
+		 
+	});
+</script>
+<style type="text/css">
+	.pagination_btm
+	{
+		position: relative !important;
+		top:24px !important;
+	}
+</style>
+>>>>>>> 7c2c31293939d55fb48ec64bc57c085c3c2fbb95
 @stop

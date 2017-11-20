@@ -37,7 +37,7 @@ class SpecailityThemeController extends Controller
     }
     /******Specaility admin view code starts here***/
     public function themePriority(){
-      $categories=DB::table('category')->select('category_id as id','name as name','speciality_theme as priority')->whereIn('category_id', array(147, 78, 143))->get();
+      $categories=DB::table('category')->select('category_id as id','name as name','speciality_theme as priority')->whereIn('category_id', array(147, 67, 143))->get();
 
      // /print_r($categories);
       return view('admin.specialitytheme.themepriority',compact('categories'));

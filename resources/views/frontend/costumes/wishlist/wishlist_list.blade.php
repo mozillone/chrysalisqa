@@ -78,7 +78,7 @@
 
                                 	<a href="javascript:void(0);" class="icoLinkedin tumblr_btn" title="Tumblr">
                                 		<i class="fa fa-tumblr" aria-hidden="true"></i>
-                                		<input type="hidden" name="tumblr_url" class="tumblr_url" value="{{url('/').'/costumers_images/Large/'.$wish->image}}" data-url="{{url('/').'/product'.$wish->url_key}}">
+                                		<input type="hidden" name="tumblr_url" class="tumblr_url" value="{{url('/').'/product'.$wish->url_key}}">
                                 	</a>
 									
 									<!-- <div class="sharethis-inline-share-buttons" data-url="{{URL::to('/product'.$wish->url_key.'')}}" data-title="{{$wish->name}}"></div> -->
