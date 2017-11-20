@@ -129,9 +129,11 @@ function searching(search){
 			type: 'POST',
 			url: '/getCostumesData',
 			data: filter,
+			cache:true,
 			success: function(response){
-				if(response.data.costumes.length!=0){
-					　$.each(response.data.costumes,function(index, value) {
+			    console.log(response);
+				if(response.costumes.length!=0){
+					　$.each(response.costumes,function(index, value) {
 						var cst_len="";
 						if(value.image!=null){
 							var path='/costumers_images/Medium/'+value.image;

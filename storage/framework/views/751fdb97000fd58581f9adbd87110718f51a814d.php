@@ -16,19 +16,7 @@
 									<br>Messages
 								</a>
 							</li>
-							<li>
-								<a type="button" class="btn btn-default btn-lg text-center fav-icon-sec" href="<?php echo e(route('wishlist')); ?>">
-									<i class="fa fa-heart" aria-hidden="true"></i>
-									<?php if(Auth::check()): ?>
-										<span class="fav_count"><?php echo e(helper::getMyWishlistCount()); ?></span>
-									<?php endif; ?><br>
-									<?php if(Auth::check()): ?>
-										<a class="fav-style" href="<?php echo e(route('wishlist')); ?>">Favorites</a> 
-									<?php else: ?> 
-										<a class="fav-style" data-toggle="modal" data-target="#login_popup"> Favorites </a> 
-									<?php endif; ?> 
-								</a>
-							</li>
+							<li><a type="button" class="btn btn-default btn-lg text-center fav-icon-sec" href="<?php echo e(route('wishlist')); ?>"><i class="fa fa-heart" aria-hidden="true"></i><?php if(Auth::check()): ?><span class="fav_count"><?php echo e(helper::getMyWishlistCount()); ?></span><?php endif; ?><br><?php if(Auth::check()): ?><a class="fav-style" href="<?php echo e(route('wishlist')); ?>">Favorites</a> <?php else: ?> <a class="fav-style" data-toggle="modal" data-target="#login_popup"> Favorites </a> <?php endif; ?> </a></li>
 							<li><button type="button" class="dropdown-toggle btn btn-default btn-lg text-center mini-cart" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Cart <span class="mini_cart"><?php if(is_numeric(helper::getCartCount())): ?><?php echo e(helper::getCartCount()); ?> <?php else: ?> 0 <?php endif; ?></span></button>
 								<ul class="dropdown-menu cart-products">
 								</ul>
@@ -227,7 +215,7 @@
 							<!-- tab content starts -->			  
 							<div class="head-acc-form">
 								<p class="acc-form-rm"><a href="javascript::void(0);"><input type="text" placeholder="<?php echo e(Auth::user()->display_name); ?>"></a><span class="acc-form-icn"><i class="fa fa-user" aria-hidden="true"></i></span></p>
-								<p class="acc-form-rm"><a href="<?php echo e(route('wishlist')); ?>"><input type="text" placeholder="FAVORITES"></a><span class="acc-form-icn"><i class="fa fa-heart" aria-hidden="true"></i><?php echo e(helper::getMyWishlistCount()); ?></span></p>			
+								<p class="acc-form-rm"><a href="<?php echo e(route('wishlist')); ?>"><input type="text" placeholder="FAVORITES"></a><span class="acc-form-icn"><i class="fa fa-heart" aria-hidden="true"></i><?php echo e(helper::getMyWishlistCount()); ?></span></p>		
 								<p class="acc-form-rm"><a href="<?php echo e(URL::to('conversations')); ?>"><input type="text" placeholder="MESSAGES"></a><span class="acc-form-icn"><i class="fa fa-envelope" aria-hidden="true"></i> <?php echo e(helper::getMessagesCount()); ?></span></p>						
 								<p class="acc-form-rm"><a href="<?php echo e(route('logout')); ?>"><input type="text" placeholder="SIGN OUT"> </a><span class="acc-form-icn"><i class="fa fa-sign-out" aria-hidden="true"></i></span></p>			
 							</div>

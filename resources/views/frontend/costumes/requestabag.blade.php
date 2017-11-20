@@ -625,9 +625,9 @@
 			<div class="modal fade" id="request_bag_registration" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog request_login" role="document">
 					<div class="modal-content">
-						<div class=" modal-header indi_close_icons">
-							<!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
-						</div>
+					<div class=" modal-header indi_close_icons">
+						<!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+					</div>
 					 	<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="report_item_pupup " id="loginModal">

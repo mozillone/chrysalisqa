@@ -19,17 +19,11 @@
 							</div>
 							<div class="col-md-2 col-sm-2  col-xs-12">
 									<span class="message-data-time" >{{$message->humans_time}} ago</span> &nbsp; &nbsp;
-							</div>
-                            
-                            
-                            
+							</div>  
                         </div>
-						
-                        
                     </li>
 					<hr>
                 @else
-
                     <li id="message-{{$message->id}}">
                         <div class="message-data row">
 							<div class="col-md-3 col-sm-3 col-xs-12">
@@ -44,18 +38,12 @@
 							<div class="col-md-2 col-sm-2 col-xs-12">
 								<span class="message-data-time">{{$message->humans_time}} ago</span>
 							</div>
-                            
-                            
                         </div>
-                        
                     </li>
 					<hr>
                 @endif
             @endforeach
-
-
         </ul>
-
     </div> <!-- end chat-history -->
 
 @endsection

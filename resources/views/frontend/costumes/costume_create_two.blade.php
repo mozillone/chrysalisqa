@@ -746,20 +746,20 @@
 											</div>
 										</div>
 										
-										
 										<div class="form-rms hide" id="cleaned_select">
 											<div class="col-md-4 col-sm-4 pdlft0">
-												<p class="form-rms-que">How was it cleaned?* <i class="fa fa-info-circle fa-info-rm" aria-hidden="true" data-toggle="tooltip" title="Costumes must be clean and ready for the next user. If you are not able to clean your costume you can always send it to Chrysalis with one of our cleanout bags. There are few materials our state of the art facility cannot clean."></i>
+												<p class="form-rms-que">How was it cleaned? <i class="fa fa-info-circle fa-info-rm" aria-hidden="true" data-toggle="tooltip" title="Costumes must be clean and ready for the next user. If you are not able to clean your costume you can always send it to Chrysalis with one of our cleanout bags. There are few materials our state of the art facility cannot clean."></i>
 												</p>
 											</div>
 											<div class="col-md-8 col-sm-8">
 												<p class="form-rms-input">
-													<select name="cleaned" id="cleaned" class="form-control">
-														<option value="">Select</option>
-														@foreach($handwashed as $index=>$handwashed)
-														<option value="{{$handwashed->optionid}}">{{$handwashed->value}}</option>
-														@endforeach
-													</select>
+					<select name="cleaned" id="cleaned" class="form-control">
+						<option value="">Select</option>
+						<option value="129">Hand Washed</option>
+						<option value="130">Machine Washed</option>
+						<option value="131">Professionally Cleaned</option>
+					    
+				    </select>
 												</p>
 												<span id="cleanederror" style="color:red"></span>
 											</div>
@@ -948,9 +948,9 @@
 																	</div>
 																	<div class="col-md-8 col-sm-8">
 																		<div class="form-rms-input dimensions-two dimensions-two-pk_info">
-																			<p class="form-rms-dim"><span class="form-rms-he1"><input id="pounds" name="pounds" type="text" placeholder="0"> <span>lbs</span></span></p>
+																			<p class="form-rms-dim"><span class="form-rms-he1"><input id="pounds" name="pounds" value="0" type="text" placeholder="0"> <span>lbs</span></span></p>
 																			<span id="poundserror" style="color:red"></span>
-																			<p class="form-rms-dim"><span class="form-rms-he1"><input id="ounces" name="ounces" type="text" placeholder="0"> <span>oz </span></span></p>
+																			<p class="form-rms-dim"><span class="form-rms-he1"><input id="ounces" name="ounces"  value="0" type="text" placeholder="0"> <span>oz </span></span></p>
 																			<span id="ounceserror" style="color:red"></span>
 																		</div>
 																	</div>
@@ -1200,12 +1200,12 @@
 													}
 												});
 												
-												if(parseInt($("#donate_charity").val()) == 0){
-													$("#donate_charity").css({"color":"#000","font-weight":"bold"});
+												if(parseInt($("#donate_charity").val()) == 10){
+													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 												}
 												
 												
-												if(parseInt($("#donate_charity").val())<=10){
+												if(parseInt($("#donate_charity").val())<10){
 													$("#donate_charity").css({"color":"#000","font-weight":"bold"});
 												}
 												
@@ -1282,6 +1282,7 @@
 													else
 													{
 														$(".body-dimnets").addClass('hide');
+														$(".body-dimnets input").val('');
 													}
 												});
 												
@@ -1455,7 +1456,12 @@
 															
 															if(currentVal < 10){
 																if(currentVal < input.attr('max')) {
-																	input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+																	//input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+																	if(currentVal == 9){
+	                               					input.val((currentVal + 1)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+	                               				}else{
+	                               					input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+	                               				}
 																}
 																if(parseInt(input.val()) == input.attr('max')) {
 																	$(this).attr('disabled', true);

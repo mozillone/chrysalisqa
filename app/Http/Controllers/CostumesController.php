@@ -14,7 +14,7 @@ use DB;
 use Response;
 use Meta;
 use Debugbar;
-use App\Exceptions\Handler;
+ 
 
 class CostumesController extends Controller {
 
@@ -68,7 +68,6 @@ class CostumesController extends Controller {
         Meta::set('description', ucfirst($slug2).' Buy and Sell Affordable, Environment Friendly Costumes');
         $key_url='/'.$slug1.'/'.$slug2;
       	$cat_info=Category::getUrlCategoryId($key_url);
-      	//dd($cat_info);
 		if(count($cat_info)){
 			$categories_list=[];
 			$sub_cat_id=$cat_info[0]->url_offset;
@@ -175,8 +174,7 @@ class CostumesController extends Controller {
 	
 	public function costumeSingleView($slug1=null,$slug2=null,$slug3=null)
 	{
-	    try
-	    {
+	    
 	        Meta::set('description', ucfirst($slug2).' Buy and Sell Affordable, Environment Friendly Costumes');
             /* Code added by Gayatri */
             Meta::set('url', url()->current());
@@ -230,14 +228,18 @@ class CostumesController extends Controller {
 						$add = 0;
 					}
 					$data['seller_info'] = Costumes::costumeSellerInfo($data[0]->created_by);
-					$priority_info = SiteHelper::domesticRateSingleCostume($data['seller_info']['shipping_location'][0]->zip_code,SiteHelper::getUserShippingAddress()['zip_code'],$data[0]->weight_pounds,$data[0]->weight_ounces);
-				
-					if($priority_info['result']=="1"){
-						$est_delivery_date = 'Est. between '.$est_date.' and '.date('D . M .d',strtotime('+'.($priority_info["msg"]["MailService"]+$add).' days'));
-						$rate = '$'.$priority_info['msg']['rate'].' Expedited Shipping ';
+					if(!empty($data['seller_info']['shipping_location'])){
+						$priority_info = SiteHelper::domesticRateSingleCostume($data['seller_info']['shipping_location'][0]->zip_code,SiteHelper::getUserShippingAddress()['zip_code'],$data[0]->weight_pounds,$data[0]->weight_ounces);
+						if($priority_info['result']=="1"){
+							$est_delivery_date = 'Est. between '.$est_date.' and '.date('D . M .d',strtotime('+'.($priority_info["msg"]["MailService"]+$add).' days'));
+							$rate = '$'.$priority_info['msg']['rate'].' Expedited Shipping ';
+						}else{
+							$est_delivery_date = $priority_info['msg'];
+							$rate = $priority_info['msg'];
+						}
 					}else{
-						$est_delivery_date = $priority_info['msg'];
-						$rate = $priority_info['msg'];
+						$rate = '';
+						$est_delivery_date = '';
 					}
     				/* Code added by Gayatri */
     
@@ -263,13 +265,7 @@ class CostumesController extends Controller {
     				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2)->with('est_delivery_date', $est_delivery_date)->with('rate', $rate);
     			}
     		}
-	    }catch(\Exception $e)
-	    {
-	      /* dd($e->getMessage());
-	        return view('errors.404');*/
-	                    return redirect(abort(404));
-	    }
-        
+	     
 		
 	}
 	public function costumeLike(Request $request){

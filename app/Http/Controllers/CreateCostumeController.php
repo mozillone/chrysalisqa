@@ -921,10 +921,16 @@ class CreateCostumeController  extends Controller {
 			$data=Costumes::getCostumeImages($costume_id);
 			$pic = asset('/costumers_images/Large').'/'.$data[0]->image;
 
+			if ((stripos( $charity_info->cos_name, 'costume' ) != '') || (stripos( $charity_info->cos_name, 'cosplay' ) != '')) {
+			  	$name = $charity_info->cos_name;
+			}else{
+				$name = $charity_info->cos_name." Costume";
+			}
+
 			/* End*/
 
 
-			return response()->json(['msg' => 'success', 'cat_url' => '/category/'.$list_url_arr[1].'/'.$list_url_arr[2], 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$charity_info->cos_name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name) ]);
+			return response()->json(['msg' => 'success', 'cat_url' => '/category/'.$list_url_arr[1].'/'.$list_url_arr[2], 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name) ]);
 
 		}
 	public function requestaBag(){
@@ -2030,9 +2036,15 @@ class CreateCostumeController  extends Controller {
 			$pic = asset('/costumers_images/Large').'/'.$data[0]->image;
 			$name_costume = $charity_info->cos_name;
 			$charity_center = ucfirst($charity_info->name);
+
+			if ((stripos( $charity_info->cos_name, 'costume' ) != '') || (stripos( $charity_info->cos_name, 'cosplay' ) != '')) {
+			  	$name = $charity_info->cos_name;
+			}else{
+				$name = $charity_info->cos_name." Costume";
+			}
 			/* End*/
 
-			return response()->json(['msg'=>'success', 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$charity_info->cos_name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name)]);
+			return response()->json(['msg'=>'success', 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name)]);
 
 			//return "success";
 	}

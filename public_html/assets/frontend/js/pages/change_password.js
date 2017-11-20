@@ -18,7 +18,7 @@
                     remote: "This email is already registered."
                  },
                  messages: {
-						equalTo: "Password doesn't matches."
+						equalTo: "Passwords don't match."
 	  			}
 			}
 		});

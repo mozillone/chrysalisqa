@@ -392,7 +392,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 				var cleaned = $("#cleaned").val();
 				if($('#charity_name').val() != "" && parseInt($("#donate_charity").val()) == 0 )
         		{
-        			$("#don_err").text('This field is required.');
+        			$("#don_err").text('Select Donation Amount');
         			flag = 0;
         			//return true;
         		}else{
@@ -401,7 +401,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 			     	//form.submit();
 				}
 
-				if(condition_val != 'good' ||  condition_val != 'like_new')
+				/*if(condition_val != 'good' ||  condition_val != 'like_new')
         		{
         			if(cleaned == "")
         			{
@@ -422,7 +422,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 						$("#cleanederror").text('');
 			     		flag = 1;
 					}
-				}
+				}*/
 
 
 				if(flag == 1){
@@ -685,7 +685,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 
 			    if($('#charity_name').val() != "" && parseInt($("#donate_charity").val()) == 0 )
         		{
-        			$("#don_err").text('This field is required.');
+        			$("#don_err").text('Donation amount cannot be 0.');
         			return;
         			flag = 0;
         		}else{
@@ -693,7 +693,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 			     	flag = 1;
 				}
 
-				if(condition_val != 'good' || condition_val != 'like_new')
+				/*if(condition_val != 'good' || condition_val != 'like_new')
         		{
         			 if(cleaned == "")
         			 {
@@ -713,7 +713,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 						$("#cleanederror").text('');
 			     		flag = 1;
 					}
-				}
+				}*/
 
 
 

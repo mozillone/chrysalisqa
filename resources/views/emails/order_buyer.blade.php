@@ -27,7 +27,7 @@
     <th style="color:#000; font-size:15px; padding:0px;"><h4 style="margin:20px auto 0px; display:block;">Hey, {{Auth::user()->first_name}}!</h4></th>
 </tr>
 <tr>
-    <th style="color:#6a2b7c;"><h5 style="margin:0px auto 20px; padding:0px; font-size:22px; display:block;">Your order has been accepted.</h5></th>
+    <th style="color:#6a2b7c;"><h5 style="margin:0px auto 20px; padding:0px; font-size:22px; display:block;">Your order has been received.</h5></th>
 </tr>
 <tr>
     <td style="color:#000;"><p style="margin:0px auto 20px; padding:0px; font-size:16px; display:block;">The Seller <span style="text-decoration:underline; color:#f53d68;"> {{$orders['seller_name']}}</span> has been notified and we will update you as soon as they respond.<br/>You can view your order status and history at any time by visiting Your <a href="{{URL::to('/login')}}"style="text-decoration:underline; color:#f53d68;">Account.</a></p></td>

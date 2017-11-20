@@ -142,7 +142,7 @@ span.pip.col-md-3{min-height:298px;background:#ccc;margin-right:15px;width:198px
 .main_navigation{background:#f7f9fc;border-bottom:1px solid #e7e7e7;}
 .icon_lins.text-right ul li .btn{padding:0px;border:none;color:#656465;}
 .icon_lins.text-right{float:right;padding:15px 0px;}
-.icon_lins.text-right ul li:last-child{border-right:0px;margin-right:-15px;}
+.icon_lins.text-right ul li:last-child{border-right:0px;margin-right:-15px; padding-bottom: 5px;}
 .container.main_menu ul li a.dropdown-toggle{font-size:18px;color:#010101;padding-left:24px;padding-right:24px;font-family:Proxima-Nova-Bold;}
 .container.main_menu ul li{position:relative;}
 .main_menu .navbar-default .navbar-nav>.open>a,

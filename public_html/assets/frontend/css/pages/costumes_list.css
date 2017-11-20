@@ -151,7 +151,7 @@ p.price_tip_crsl b a {
     text-transform: uppercase;
     text-decoration: underline;
 }
-.list_pagination a{    margin-right: 5px !important;    font-size: 12px;padding: 5px;}
+.list_pagination a{    margin-right: 5px !important;    font-size: 12px;padding: 5px 10px;}
 .imageModel .modal-content{    width: 90%;    margin: 0 auto;}
 .r-bag_div ul.nav.nav-pills li a{    font-size: 12px;width: auto;padding: 8px;}
 .carousel-cart-img .price-tag{display: none !important;}

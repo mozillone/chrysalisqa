@@ -395,37 +395,35 @@ function PayoutAmount(a){
 		str=false;
 	}
             
-            if (loading) {
-                return ;
-            }
-            loading = true;
-            
+    if (loading) {
+        return ;
+    }
+    loading = true;
 	if (str == true) {
 		$("#req_payout_sub_msg").show();
 		$("#req_payout_err_msg").html('');
         $("#req_payout_err_msg").hide();
 		$.ajax({
-		 url: "{{URL::to('payoutamount')}}",
-		 type: "POST",
-		 data: {payout_amount: payout_amount,type_id:id,payout_type:payout_type},			 
-		 success: function(data){
-		 	$('#enter_payout_amount').css('display','none');
-		 	$('#credited_payout_amount').css('display','block');
-		 	$('#credited_payout_amount').append(data.html);
-		 	$('#dynamic_status').html('');
-			$('#dynamic_status').append(data.status);
-                            loading = false;
-                            $("#req_payout_sub_msg").hide();
-                            $("#req_payout_err_msg").html('');
-                            $("#req_payout_err_msg").hide();
-                        },
-                       error: function(request, status, error) {
-                       		//alert(data);
-                            loading = false;
-                            $("#req_payout_sub_msg").hide();
-                            $("#req_payout_err_msg").html(request.responseText);
-                            $("#req_payout_err_msg").show();
-                       }
+			url: "{{URL::to('payoutamount')}}",
+			type: "POST",
+			data: {payout_amount: payout_amount,type_id:id,payout_type:payout_type},
+			success: function(data){
+			 	$('#enter_payout_amount').css('display','none');
+			 	$('#credited_payout_amount').css('display','block');
+			 	$('#credited_payout_amount').append(data.html);
+			 	$('#dynamic_status').html('');
+				$('#dynamic_status').append(data.status);
+	            loading = false;
+	            $("#req_payout_sub_msg").hide();
+	            $("#req_payout_err_msg").html('');
+	            $("#req_payout_err_msg").hide();
+	        },
+	       	error: function(request, status, error) {	       		
+	            loading = false;
+	            $("#req_payout_sub_msg").hide();
+	            $("#req_payout_err_msg").html(request.responseText);
+	            $("#req_payout_err_msg").show();
+	       	}
 		});
 	}
 }

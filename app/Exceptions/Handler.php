@@ -8,6 +8,8 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
+use Illuminate\Database\QueryException;
+use InvalidArgumentException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,30 +47,30 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    // public function render($request, Exception $exception)
-    // {
-    //     return parent::render($request, $exception);
-    // }
     public function render($request, Exception $e)
-   {
-          // session()->flash('error',$e->getMessage());
-          // //return Redirect::back();
-          // return parent::render($request, $e);
-        if ($e instanceof ModelNotFoundException)
-        {
-            // Do your stuff here
+    {
+        if($e instanceof NotFoundHttpException){
             return response()->view('errors.'.'404');
+        }elseif ($e instanceof ModelNotFoundException) {
+            return response()->view('errors.'.'404');
+        } elseif ($e instanceof AuthenticationException) {
+            return $this->unauthenticated($request, $e);
+        } elseif ($e instanceof AuthorizationException) {
+            return response()->view('errors.'.'404');
+        } elseif ($e instanceof ValidationException && $e->getResponse()) {
+            Session::flash('error',$e->getMessage());
+            return redirect()->back();
+        }elseif($e instanceof InvalidArgumentException) {
+            return response()->view('errors.'.'404');
+        }else if($e instanceof \PDOException){
+            return response()->view('errors.'.'404');
+        }else if($e instanceof \NotFoundHttpException){
+            return response()->view('errors.'.'404');
+        }else{
+            Session::flash('error',$e->getMessage());
+            return redirect()->back();
         }
-        elseif ($this->isHttpException($e))
-        {
-            return $this->renderHttpException($e);
-        }
-        else
-        {
-           return parent::render($request, $e);
-
-           //return redirect()->back()->withInput();
-        }
+        return parent::render($request, $e);
    }
 
     /**

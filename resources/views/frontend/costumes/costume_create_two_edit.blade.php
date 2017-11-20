@@ -362,7 +362,7 @@
 										<i class="fa fa-times-circle" aria-hidden="true"></i>				
 									</span>
 									<div class="up-blog">
-										<!-- <img id="front_image_id" name="file1" src="{{ asset('costumers_images/Medium')}}<?php echo '/'.$front_image->image; ?>"> -->
+										
 										<input type="file" name="file1" accept="image/*" value="1" id="file1">
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 										<?php if(isset($front_image->image) && !empty($front_image->image)){
@@ -900,7 +900,7 @@
 
 								<div class="form-rms hide" id="cleaned_select">
 										<div class="col-md-4 col-sm-4 pdlft0">
-											<p class="form-rms-que">How was it cleaned?*
+											<p class="form-rms-que">How was it cleaned?
 											<i class="fa fa-info-circle fa-info-rm" aria-hidden="true" data-toggle="tooltip" title="Costumes must be clean and ready for the next user. If you are not able to clean your costume you can always send it to Chrysalis with one of our cleanout bags. There are few materials our state of the art facility cannot clean."></i>
 											</p>
 										</div>
@@ -1409,8 +1409,12 @@
 					<script type="text/javascript">
 						$(document).ready(function(){
 							$("input:radio:checked").parent().addClass('active');
-							if(parseInt($("#donate_charity").val())<=10){
+							if(parseInt($("#donate_charity").val())<=9){
 								$("#donate_charity").css({"color":"#000","font-weight":""});
+							}
+
+							if(parseInt($("#donate_charity").val())==10){
+								$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 							}
 
 							if(parseInt($("#donate_charity").val()) ==15){
@@ -1614,7 +1618,11 @@
 	                               	else if(type == 'plus') {
 	                               		if(currentVal < 10){
 	                               			if(currentVal < input.attr('max')) {
-			                               		input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+	                               				if(currentVal == 9){
+	                               					input.val((currentVal + 1)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+	                               				}else{
+	                               					input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+	                               				}
 			                               	}
 			                               	if(parseInt(input.val()) == input.attr('max')) {
 			                               		$(this).attr('disabled', true);

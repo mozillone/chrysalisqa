@@ -66,7 +66,7 @@
 								<div class="col-md-6 col-xs-6 col-sm-3 col-lg-6">
 									<h5>THE CHRYSALIS APP</h5>
 									<p>Browse on the Go!</p>
-									<a href="#" data-toggle="modal" data-target="#coming_soon">
+									<a href="https://itunes.apple.com/in/app/the-chrysalis-app/id1270915543?mt=8" data-toggle="modal" data-target="#coming_soon">
 										<img class="img-responsive" src="<?php echo e(asset('/assets/frontend/img/appstore.png')); ?>">
 									</a>
 									<a href="#">
