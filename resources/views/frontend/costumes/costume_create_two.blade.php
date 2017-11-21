@@ -1,6 +1,5 @@
 @extends('/frontend/app')
 @section('styles')
-
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/media-query.css')}}">
@@ -86,7 +85,6 @@
 	color: #60c5ac;
 	}
 	section.content.create_section_page .modal-body #zoom-level {
-	
 	}
 	section.content.create_section_page .btn-success:active:focus, .btn-success:active:hover{background-color: #60c5ac;
 	border-color: #60c5ac;}
@@ -210,19 +208,16 @@
 	}
 	.img-pp-iner img.img-responsive.crp1 {
 	float: left;margin-top: 3px;
-	
 	margin-right: 6px;
 	}
 	.img-pp-iner img.img-responsive.crp2 {
 	float: right;
-	
 	margin-right: 23px;
 	}
 	.cropper-modal
 	{
 	background: none !important; ;
 	}
-	
 	.media-bg {
 	width: 350px;
 	margin: 0 auto;    margin-top: 15px;
@@ -243,7 +238,6 @@
 	.media.tnks_media .media-left img {
 	border: 1px solid #e2e2e2 ;
 	}
-	
 	.media.tnks_media {
 	width: 550px;
 	margin: 0 auto;
@@ -286,7 +280,6 @@
 	margin-bottom: 30px;
 	}
 	.success_page_final h2{font-family: Proxima-Nova-Extrabold;margin-top: 80px;}
-	
 	@media screen and (max-width:767px){
 	.media.tnks_media {
 	width: auto;}
@@ -297,7 +290,6 @@
 	.pdlftlikenew {
 	padding: 0px;
 	}
-	
 	.modal-footer
 	{
 	border-top:none !important;
@@ -310,15 +302,12 @@
 	{
 	position: fixed !important;
 	}
-	#dynamic_percent_amounts
-	{
-	float:none !important;
-	position:relative !important;
-	left:10px;
-	line-height:63px !important;
-	margin-top: -3px;
-	}
-	
+#dynamic_percent_amounts {
+    margin-top: 17px;
+    margin-left: 16px !important;
+    background-color: white;
+    display: inline-block;
+}
 </style>
 @endsection
 @section('content')
@@ -404,10 +393,8 @@
 							<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 								<div id="other_thumbnails">
 								</div>
-								
 								<div class="multiHidden">
 								</div>
-								
 								<span id="fileselector">
 									<label class="btn btn-default upload_more_btn" for="upload-file-selector">
 										<input id="upload-file-selector" accept="image/*" type="file" name="file4[]" multiple >
@@ -417,10 +404,8 @@
 								<div class=" up_btns_tl col-md-12 col-sm-12 col-xs-12">
 									<a type="button" id="upload_next" class=" upload_sub_btn btn btn-default nxt">Next Step</a>
 								</div>
-								
 							</div>
 						</div>
-						
 						<!-- modal code here multiple images -->
 						<div id="myModal" class="modal fade imageModel and carousel slide" role="dialog" data-backdrop="static">
 							<div class="modal-dialog modal-md">
@@ -513,14 +498,11 @@
 								</div>
 							</div>
 						</div>
-						
 						<!-- multiple file modal -->
-						
 						<div class="modal fade and carousel slide" id="lightbox" data-interval="false" >
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
-										
 										<h4 class="modal-title">Crop Multiple Images</h4>
 									</div>
 									<div class="modal-body">
@@ -546,19 +528,16 @@
 										<button type="button" class="btn btn-success pull-right saveMultiple" >Save</button>
 										<button type="button" class="btn btn-default img_clse" id="multiCancel" data-dismiss="modal">Cancel</button>
 									</div>
-									
 								</div>
 							</div>
 						</div>
 						<!-- ends here -->
-						
 						<div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 cos_desc_div" >
 							<div id="costume_description">
 								<p class="prog-txt desk-pro-text">Please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
 								<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">step 2</h2>
 								<h2 class="prog-head">Costume Description</h2>
 								<p class="prog-txt mobile-pro-text">Please fill in the following fields  <span>as accurately as possible</span> to prevent disputes.</p>
-								
 								<div class="prog-form-rm">
 									<div class="col-md-12 col-sm-12 cret_ctme_1">
 										<!--costume name code starts here-->
@@ -592,7 +571,6 @@
 											</div>
 										</div>
 										<!--category code ends here-->
-										
 										<!--Get subcategory ajax code starts here-->
 										<div class="form-rms ">
 											<div class="col-md-4 col-sm-4 pdlft0">
@@ -607,7 +585,6 @@
 												<span id="subcategoryerror" style="color:red"></span>
 											</div>
 										</div>
-										
 										<!--Gender Code starts here-->
 										<div class="form-rms ">
 											<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
@@ -663,13 +640,9 @@
 												</p>
 												<span id="sizeerror" style="color:red"></span>
 											</div>
-											
 										</div>
 										<!--size code ends here-->
-										
-										
 										<!-- body dimension code stars here-->
-										
 										<div class="form-rms costume-error body-dimnets hide ">
 											<div class="col-md-4 col-sm-4 pdlft0">
 												<p class="form-rms-que">Body &amp; Dimensions *</p>
@@ -684,44 +657,33 @@
 															<span>in</span>
 															<span id="heighterror" style="color:red"></span>
 														</span>
-														
 													</p>
-													
 													<p class="form-rms-dim weight-chest">Weight <br>
 														<span class="form-rms-he1">
 															<input required type="text" name="weight-lbs" id="weight-lbs">
 															<span>lbs</span>
 															<span id="weighterror" style="color:red"></span>
 														</span>
-														
 													</p>
-													
 													<p class="form-rms-dim weight-chest">Chest <br>
 														<span class="form-rms-he1">
 															<input required type="text" name="chest-in" id="chest-in">
 															<span>in </span>
 															<span id="chesterror" style="color:red"></span>
 														</span>
-														
 													</p>
-													
 													<p class="form-rms-dim weight-chest">Waist <br>
 														<span class="form-rms-he1">
 															<input required type="text" name="waist-lbs" id="waist-lbs">
 															<span>in</span>
 															<span id="waisterror" style="color:red"></span>
 														</span>
-														
 													</p>
-													
 													<span id="bodydimensionerror" style="color:red"></span>
 												</div>
 											</div>
 										</div>
 										<!-- ends here -->
-										
-										
-										
 										<!--Get subcategory regarding categories code ends here-->
 										<div class="form-rms costume-error condition_div scrool_top">
 											<div class="col-md-4 col-sm-4 pdlft0">
@@ -745,7 +707,6 @@
 												<span id="costumeconditionerror" style="color:red"></span>
 											</div>
 										</div>
-										
 										<div class="form-rms hide" id="cleaned_select">
 											<div class="col-md-4 col-sm-4 pdlft0">
 												<p class="form-rms-que">How was it cleaned? <i class="fa fa-info-circle fa-info-rm" aria-hidden="true" data-toggle="tooltip" title="Costumes must be clean and ready for the next user. If you are not able to clean your costume you can always send it to Chrysalis with one of our cleanout bags. There are few materials our state of the art facility cannot clean."></i>
@@ -753,13 +714,12 @@
 											</div>
 											<div class="col-md-8 col-sm-8">
 												<p class="form-rms-input">
-					<select name="cleaned" id="cleaned" class="form-control">
-						<option value="">Select</option>
-						<option value="129">Hand Washed</option>
-						<option value="130">Machine Washed</option>
-						<option value="131">Professionally Cleaned</option>
-					    
-				    </select>
+													<select name="cleaned" id="cleaned" class="form-control">
+														<option value="">Select</option>
+														<option value="129">Hand Washed</option>
+														<option value="130">Machine Washed</option>
+														<option value="131">Professionally Cleaned</option>
+													</select>
 												</p>
 												<span id="cleanederror" style="color:red"></span>
 											</div>
@@ -787,8 +747,6 @@
 														</div>
 													</div>
 												</div>
-												
-												
 												<div class="form-rms costume-error scrool_top makeke_costume">
 													<div class="col-md-4 col-sm-4 pdlft0">
 														<p class="form-rms-que">{{$cosplayfour->label}}</p>
@@ -797,12 +755,10 @@
 														<p class="form-rms-input">
 															<div class="col-md-12  col-sm-12">
 																@foreach($cosplayfour_values as $index=>$cosplayfour_val)
-																
 																<div class="col-md-2  col-sm-4 pdlft10">
 																	<input id="{{$cosplayfour_val->optionid}}" class="radio-custom faq-checkbox" name="{{$cosplayfour->code}}" type="{{$cosplayfour->type}}" id="{{$cosplayfour_val->optionid}}" value="{{$cosplayfour_val->optionid}}">
 																	<label for="{{$cosplayfour_val->optionid}}" class="radio-custom-label">{{$cosplayfour_val->value}}</label>
 																</div>
-																
 																@endforeach
 															</div>
 															<div class="col-md-12  col-sm-12 how_div" id="mention_hours" style="display: none">
@@ -813,7 +769,6 @@
 																<span id="usercostumeerror" style="color:red"></span>
 																</div>
 															</div>
-															
 															<div class="form-rms descibr_smte_text " >
 																<div class="col-md-4 col-sm-4 pdlft0">
 																	<p class="form-rms-que form-rms-que1">Keywords</p>
@@ -840,16 +795,11 @@
 																	<input id="input_1" name="keyword_1" value="" type="hidden">
 																</div>
 															</div>
-															
-															
-															
 															<div class="form-rms costume-error describe_cnt scrool_top">
 																<div class="col-md-4 col-sm-4 pdlft0">
 																	<p class="form-rms-que form-rms-que1">Describe your Costume * </p>
-																	
 																	<p>Tell us your costume’s story! How was it made? Is there anything in the photo that is not included? A prop for example? Anything a buyer should know? </p>
 																</div>
-																
 																<div class="col-md-8 col-sm-8">
 																	<p class="form-rms-input">
 																	<textarea placeholder="My costume was commissioned for the production…" name="description" id="description" maxlength="600" class="form-control"></textarea></p>
@@ -858,45 +808,31 @@
 																	<span id="descriptionerror" style="color:red"></span>
 																</div>
 															</div>
-															
-															
 															<div class="form-rms freqently hide" id="freqently">
-																
 																<div class="col-md-4 col-sm-4 pdlft0">
 																	<p class="form-rms-que form-rms-que1">Frequently Asked Questions</p>
 																	<span>Create your own costume FAQ to avoid unnecessary inquiries from potential buyers.</span>
-																	
 																</div>
-																
 																<div class="col-md-8 col-sm-8">
 																	<p class="form-rms-input"><textarea placeholder="- All accessories are included..." name="faq" id="faq" maxlength="600" ></textarea></p>
 																	<span id="faqerror" style="color:red"></span>
 																	<p class="form-rms-sm1">( <span id="max_length_char3"></span> 600 characters)</p>
 																</div>
-																
-																
 															</div>
-															
 															<div class="form-rms-btn step3-last-2">
 																<a type="button" id="costume_description_back" class="btn-rm-back"><span>Back</span></a>
-																
 																<a type="button" id="costume_description_next" class="btn-rm-nxt nxt">Next Step</a>
 															</div>
-															
 														</div>
 													</div>
 												</div>
 												<div class="prog-form-rm" id="pricing_div">
-													
 													<p class="prog-txt hidden-xs  ">Please fill in the following field <span>as accurately</span> as you can.</p>
 													<div class="row">
 														<div class="col-md-12 col-sm-12">
 															<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">STEP 3</h2>
 															<h2 class="prog-head">Pricing & Shipping</h2>
 															<p class="prog-txt hidden-md hidden-lg hidden-sm ">Please fill in the following field <span>as accurately</span> as you can.</p>
-															
-															
-															
 															<div class="form-rms pricess pric_tag_three">
 																<div class="col-md-4 col-sm-4">
 																	<p class="form-rms-que">Price*</p>
@@ -913,9 +849,7 @@
 																	</div>
 																	<span id="priceerror" style="color:red"></span>
 																</div>
-																
 															</div>
-															
 															<div class="form-rms quantity_div">
 																<div class="col-md-4 col-sm-4">
 																	<p class="form-rms-que">Quantity</p>
@@ -983,14 +917,11 @@
 																<a type="button" id="pricing_back" class="btn-rm-back"><span>Back</span></a>
 																<a type="button" id="pricing_next" class="btn-rm-nxt nxt">Next Step</a>
 															</div>
-															
-															
 														</div>
 														<div class="prog-form-rm" id="preferences_div">
 															<p class="prog-txt  hidden-xs">You're almost done! Just a few more questions.</p>
 															<h2 class="prog-stepss  hidden-md hidden-lg hidden-sm">step 3</h2>
 															<h2 class="prog-head">Review Preferences</h2>
-															
 															<p class="prog-txt hidden-md hidden-lg hidden-sm ">You're almost done! Just a few more questions.
 															</p>
 															<div class="form-rms lst-stp_3">
@@ -1013,7 +944,6 @@
 																<div class="col-md-4 col-sm-4 ">
 																	<p class="form-rms-que">Return Policy *</p>
 																</div>
-																
 																<div class="col-md-8 col-sm-8 retrun_plicy">
 																	<p class="form-rms-input ">
 																		@foreach($returnpolicy as $index=>$returnpolicy)
@@ -1026,11 +956,8 @@
 																	<span id="returnpolicyerror" style="color:red"></span>
 																</div>
 															</div>
-															
-															
 															<div class="form-rms lst-stp donate_div">
 																<div class="col-md-4 col-sm-4">
-																	
 																	<p class="form-rms-que form-rms-que1 dnt_br">Donate a Portion to Charity</p>
 																	<p class="ct3-rms-text">Chrysalis charges a 3.5% + .20 cent transaction fee on every sale. However, if you donate 10% or more of your sale to one of our charities we will waive our transaction fee to match your contribution.</p>
 																	<p class="ct3-rms-text">By Choosing to donate, you agree and accept Chrysalis' <a style="border-bottom: 1px solid #ccc" href="{{ route('terms-of-use') }}" target="_blank">Terms & Conditions</a>.</p>
@@ -1038,7 +965,6 @@
 																<div class="col-md-8 col-sm-8 col-xs-12 dnt-amcnts">
 																	<div class="form-rms-input plus_minus_div">
 																		<p class="form-rms-rel111">
-																			
 																			<div class="col-md-3 col-xs-12 pdlft0">
 																				<div class="input-group">
 																					<span class="input-group-btn">
@@ -1063,16 +989,13 @@
 																			</div>
 																			<div class="cst3-textl2" id="dynamic_percent_amounts">
 																				<i class="fa fa-usd" aria-hidden="true">0.00</i>
-																				
 																				<span id="donate_charityerror" style="color:red"></span>
-																				
 																			</div>
 																		</div>
-																		
 																	</div>
 																</div>
 																<div class="lst_spt">
-																	<p class="ct3-rms-head dont_chts">Organization of choice</p>
+																	<p class="ct3-rms-head dont_chts">Our Partners</p>
 																	<ul class="ct3-list ">
 																		@foreach($charities as $index=>$charity)
 																		<li><img class="img-responsive" src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" />
@@ -1081,15 +1004,9 @@
 																		@endforeach
 																		<span id="charity_nameerror" style="color:red"></span>
 																	</ul>
-																	
-																	
 																</div>
-																
 															</div>
-															
-															
 															<div class="col-md-12 col-xs-12 col-sm-12 charity_rigt pdlft0">
-																
 																<div class="form-rms" id="other_organzation_check" style="display: block;">
 																	<p class="ct3-rms-head chartiy_spcy col-md-3 col-sm-3 col-xs-12">Want to suggest a favorite charity
 																		organization? <br> <span class="want-orgo">we will do our best to include it in the future!</span>
@@ -1103,9 +1020,7 @@
 																	<a type="button" id="preferences_back" class="btn-rm-back"><span>Back</span></a>
 																</div>
 															</div>
-															
 														</div>
-														
 													</form>
 												</div>
 												<div id="success_page" style="display: none">
@@ -1119,7 +1034,6 @@
 																	<img class="img-responsive" src="{{URL::asset('assets/frontend/img/tks_crt-img.png')}}">
 																	<p>Howl to your Friends what you're up to!</p>
 																</div>
-																
 																<!-- Left-aligned media object -->
 																<div class="media tnks_media">
 																	<div class="media-left">
@@ -1147,7 +1061,6 @@
 																				</div>
 																			</a>
 																		</li>
-																		
 																		<li>
 																			<a href="javascript:void(0);" class="icoGoogle" title="Pinterest">
 																				<div id="pin_url" data-network="pinterest" class="st-custom-button" data-url="" data-image="" data-title="">
@@ -1163,35 +1076,28 @@
 																		</li>
 																	</ul>
 																</div>
-																
 																<a type="button" id="" href="{{URL::to('/')}}" class="btn-rm-view-finl"> <span>Return Home<span></a>
-																	
 																</div>
 																</div>
 															</div>
 														</div>
-														
 													</div>
 												</div>
 											</div>
 										</section>
-										
 										<!---Second div code ends here-->
 										@stop
 										{{-- page level scripts --}}
 										@section('footer_scripts')
 										<!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
 										<script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
-										
 										<script type="text/javascript" src="{{asset('/assets/frontend/js/cropper.js')}}"></script>
 										<script type="text/javascript" src="{{asset('/assets/frontend/js/pages/costumecustom.js')}}"></script>
-										
 										<script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
 										<script type="text/javascript">
 											$(document).ready(function()
 											{
 												$(".conditon_check").change(function(){
-													
 													if($("#radio-6").prop("checked") || $("#radio-7").prop("checked")){
 														$("#cleaned_select").removeClass("hide");
 														} else{
@@ -1199,78 +1105,59 @@
 														$("#cleaned").val('');
 													}
 												});
-												
 												if(parseInt($("#donate_charity").val()) == 10){
 													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 												}
-												
-												
 												if(parseInt($("#donate_charity").val())<10){
 													$("#donate_charity").css({"color":"#000","font-weight":"bold"});
 												}
-												
 												if(parseInt($("#donate_charity").val()) ==15){
 													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 												}
-												
 												if(parseInt($("#donate_charity").val()) ==25){
 													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 												}
-												
 												if(parseInt($("#donate_charity").val()) == 50){
 													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 												}
-												
 												if(parseInt($("#donate_charity").val()) ==100){
 													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 												}
-												
-												
 												$('#costume_name').data('holder',$('#costume_name').attr('placeholder'));
-												
 												$('#costume_name').focusin(function(){
 													$(this).attr('placeholder','');
 												});
 												$('#costume_name').focusout(function(){
 													$(this).attr('placeholder',$(this).data('holder'));
 												});
-												
 												$('#organzation_name').data('holder',$('#organzation_name').attr('placeholder'));
-												
 												$('#organzation_name').focusin(function(){
 													$(this).attr('placeholder','');
 												});
 												$('#organzation_name').focusout(function(){
 													$(this).attr('placeholder',$(this).data('holder'));
 												});
-												
 												$('#pounds').data('holder',$('#pounds').attr('placeholder'));
-												
 												$('#pounds').focusin(function(){
 													$(this).attr('placeholder','');
 												});
 												$('#pounds').focusout(function(){
 													$(this).attr('placeholder',$(this).data('holder'));
 												});
-												
 												$('#ounces').data('holder',$('#ounces').attr('placeholder'));
-												
 												$('#ounces').focusin(function(){
 													$(this).attr('placeholder','');
 												});
 												$('#ounces').focusout(function(){
 													$(this).attr('placeholder',$(this).data('holder'));
 												});
-												
 												$('textarea').data('holder',$('textarea').attr('placeholder'));
-												
 												$('textarea').focusin(function(){
 													$(this).attr('placeholder','');
 												});
 												$('textarea').focusout(function(){
 													$(this).attr('placeholder',$(this).data('holder'));
 												});
-												
 												//size select custom
 												$("#size").change(function()
 												{
@@ -1285,20 +1172,16 @@
 														$(".body-dimnets input").val('');
 													}
 												});
-												
 												$(".faq-checkbox").change(function(){
-													
 													if($("#30").prop("checked") || $("#32").prop("checked")){
 														$("#freqently").removeClass("hide");
 														} else{
 														$("#freqently").addClass("hide");
 													}
 												});
-												
 												$('#costume_description_next').click(function () {
 													$('html, body').animate({scrollTop:0}, 'fast');
 												});
-												
 												$('#pricing_next').click(function () {
 													$('html, body').animate({scrollTop:0}, 'fast');
 												});
@@ -1306,51 +1189,39 @@
 													window.open($("#tumblr_url").val(), 'Post to Tumblr', 'window settings');
 												});
 												function statusChangeCallback(response) {
-													
 													if (response.status === 'connected') {
 														testAPI();
 														} else if (response.status === 'not_authorized') {
 														FB.login(function(response) {
 															statusChangeCallback2(response);
 														}, {scope: 'public_profile,email'});
-														
 														} else {
-														
 													}
 												}
-												
 												function statusChangeCallback2(response) {
-													
 													if (response.status === 'connected') {
 														testAPI();
-														
 														} else if (response.status === 'not_authorized') {
 														} else {
-														
 													}
 												}
-												
 												function checkLoginState() {
 													FB.getLoginStatus(function(response) {
 														statusChangeCallback(response);
 													});
 												}
-												
 												function testAPI() {
 													FB.api('/me', function(response) {
 													});
 												}
 												document.getElementById('facebook').onclick = function() {
-
 													FB.api('https://graph.facebook.com/','post',  {
-													        id: $("#url_fb").val(),
-													        scrape: true,
-													        access_token:'EAAcMdgezwNYBAB96ZBPVzNfQGk5lSlV9mVzIQ0COFpNWcSZC1QqxUsM6Jm5hKXfBRwMJ3dy9xkos9AJlBlLHyCetnX7fZAJvyVEdian6K6TmmyWBzqwHvGe5ItK9nrNuJPWjMFUH7zVZBNUI6h9btuWVUJYJ1zMZD'
+														id: $("#url_fb").val(),
+														scrape: true,
+														access_token:'EAAcMdgezwNYBAB96ZBPVzNfQGk5lSlV9mVzIQ0COFpNWcSZC1QqxUsM6Jm5hKXfBRwMJ3dy9xkos9AJlBlLHyCetnX7fZAJvyVEdian6K6TmmyWBzqwHvGe5ItK9nrNuJPWjMFUH7zVZBNUI6h9btuWVUJYJ1zMZD'
 													    }, function(response) {
-													        console.log('rescrape!',response);
-
-													    });
-													
+														console.log('rescrape!',response);
+													});
 													FB.init({
 														appId      : '1984025911869654',
 														xfbml      : true,
@@ -1382,7 +1253,6 @@
 													type      = $(this).attr('data-type');
 													var input = $("input[name='"+fieldName+"']");
 													var currentVal = parseInt(input.val());
-													
 													if(type == 'minus') {
 														if(currentVal <= 10){
 															var present = currentVal-1;
@@ -1453,15 +1323,14 @@
 																}
 															}
 															} else if(type == 'plus') {
-															
 															if(currentVal < 10){
 																if(currentVal < input.attr('max')) {
 																	//input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
 																	if(currentVal == 9){
-	                               					input.val((currentVal + 1)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
-	                               				}else{
-	                               					input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
-	                               				}
+																		input.val((currentVal + 1)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+																		}else{
+																		input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+																	}
 																}
 																if(parseInt(input.val()) == input.attr('max')) {
 																	$(this).attr('disabled', true);
@@ -1504,11 +1373,9 @@
 													$(this).data('oldValue', $(this).val());
 												});
 												$('.input-number').change(function() {
-													
 													minValue =  parseInt($(this).attr('min'));
 													maxValue =  parseInt($(this).attr('max'));
 													valueCurrent = parseInt($(this).val());
-													
 													name = $(this).attr('name');
 													if(valueCurrent >= minValue) {
 														$(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
@@ -1539,6 +1406,4 @@
 												});
 											});
 										</script>
-										
 										@stop
-																		
