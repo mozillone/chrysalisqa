@@ -11,7 +11,7 @@
 								<a href="<?php echo e(URL::to('conversations')); ?>" type="button" class="btn btn-default btn-lg text-center">
 									<i class="fa fa-envelope" aria-hidden="true"></i>
 									<?php if(Auth::check()): ?>
-										<span class="fav_count"><?php echo e(helper::getMyMessageCount()); ?></span>
+										<span class="msg_count"><?php echo e(helper::getMyMessageCount()); ?></span>
 									<?php endif; ?>
 									<br>Messages
 								</a>
@@ -80,7 +80,7 @@
 							$main_cat_url=str_replace(" ","-",str_replace(" & ","-", strtolower(str_replace("'","", $key))));
 						?>
 						<li class="dropdown mega-dropdown main_cat_url_class">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-cat-url="/category/<?php echo $main_cat_url; ?>"><?php echo e($key); ?> <?php if(count($value)>1): ?><i class="fa fa-chevron-down" aria-hidden="true"></i><?php endif; ?></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-cat-url="/category/<?php echo $main_cat_url; ?>" data-id=""><?php echo e($key); ?> <?php if(count($value)>1): ?><i class="fa fa-chevron-down" aria-hidden="true"></i><?php endif; ?></a>
 							<?php if(count($value)>1): ?>
 							<ul class="dropdown-menu mega-dropdown-menu row <?php if(count($value)<=6): ?> min-menu <?php endif; ?>">
 								<?php if(count($value)<=6): ?>

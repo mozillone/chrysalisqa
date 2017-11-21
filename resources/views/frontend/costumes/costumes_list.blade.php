@@ -23,20 +23,12 @@
 	<div class="prodcut_list_page">
 		<div class="container">
 			<div class="row">
-<<<<<<< HEAD
-				<input type="hidden" name="parent_cat_name" value="{{$parent_cat_name}}"/>
-				<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
-				<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
-				<input type="hidden" name="is_login" value="{{Auth::check()}}"/>
-				<form id="search_list">
-=======
 				
 				<form id="search_list" action="{{url('Filterscategory',$parent_cat_name)}}" method="get">
 					<input type="hidden" name="parent_cat_name" value="{{$parent_cat_name}}"/>
 					<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
 					<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
 					<input type="hidden" name="is_login" value="{{Auth::check()}}"/>
->>>>>>> 7c2c31293939d55fb48ec64bc57c085c3c2fbb95
 					<input type="hidden" name="cat_id" value="{{$data['sub_cat_info'][0]->category_id}}"/>
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					@if(!empty($parent_cat))<input type="hidden" name="is_main" value="{{ $parent_cat }}"> @endif
@@ -47,10 +39,6 @@
 							<ul class="box-list1 gender">
 								<li data-gender="male">Men's</li>
 								<li data-gender="female">Women's</li>
-<<<<<<< HEAD
-								<!-- <li data-gender="unisex">Both</li> -->
-=======
->>>>>>> 7c2c31293939d55fb48ec64bc57c085c3c2fbb95
 								<li data-gender="boy">Boys</li>
 								<li data-gender="girl">Girls</li>
 								<li data-gender="baby">Babies</li>
@@ -349,45 +337,27 @@
 									</div>
 								</div>
 							</div>
-<<<<<<< HEAD
-						</div>	
+						</div>
 						@if (Session::has('error'))
-							<div class="alert alert-danger alert-dismissable ">
+							<div class="alert alert-danger alert-dismissable exception_case">
 								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
 								{{ Session::get('error') }}
 							</div>
 						@elseif(Session::has('success'))
-							<div class="alert alert-success alert-dismissable">
+							<div class="alert alert-success alert-dismissable exception_case">
 								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
 								{{ Session::get('success') }}
 							</div>
 						@endif
-						<div class="list_products list-img-bg">
-							<div class="row" id="itemContainer">
-							</div>
-						</div>
-							<div class="show_per_page hidden">
-						<div class="pagination_btm">
-							<label>Show </label>
-							<select id="per_page">
-								<option selected>12</option>
-								<option>24</option>
-								<option>48</option>
-							</select>
-							<label> per page </label>	
-						</div>
-					</div>
-						<ul class="holder list_pagination"></ul>
-=======
-						</div>
 						@if(count($costumes)>0)	
 						<div class="list_products list-img-bg">
 							<div class="row" id="">						 
 							@foreach($costumes as $costume)
+						  
 							<div class="col-md-3 col-sm-4 col-xs-6">
 								<div class="prod_box">
 									<div class="img_layer">
-										<a href="/product/classic-activity/film-tv/test-costume13" style="background-image:url(/costumers_images/Medium/{{$costume->image}});background-repeat:no-repeat;">&nbsp;
+										<a href="{{url('product')}}{{$costume->url_key}}" style="background-image:url(/costumers_images/Medium/{{$costume->image}});background-repeat:no-repeat;">&nbsp;
 										</a>
 											<div class="hover_box">
 												<p class="like_fav">
@@ -424,7 +394,7 @@
 							</div>
 						</div>
 						@else
-						 <div class="col-md-8">
+						 <div class="col-md-8 no_lists">
 						  <p>No Costumes Found under this Category</p>
 						 </div>
 						@endif
@@ -442,7 +412,6 @@
 							 </div>
 						</ul>
 						@endif
->>>>>>> 7c2c31293939d55fb48ec64bc57c085c3c2fbb95
 					</div>
 				</form>
 			</div>
@@ -469,10 +438,6 @@
 				scrollTop: 300
 			}, 700);
 		});
-<<<<<<< HEAD
-	});
-</script>
-=======
 
 		$("#per_page").change(function()
 		{			 
@@ -501,11 +466,6 @@
 	});
 </script>
 <style type="text/css">
-	.pagination_btm
-	{
-		position: relative !important;
-		top:24px !important;
-	}
+
 </style>
->>>>>>> 7c2c31293939d55fb48ec64bc57c085c3c2fbb95
 @stop

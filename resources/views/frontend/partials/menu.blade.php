@@ -11,7 +11,7 @@
 								<a href="{{URL::to('conversations')}}" type="button" class="btn btn-default btn-lg text-center">
 									<i class="fa fa-envelope" aria-hidden="true"></i>
 									@if(Auth::check())
-										<span class="fav_count">{{helper::getMyMessageCount()}}</span>
+										<span class="msg_count">{{helper::getMyMessageCount()}}</span>
 									@endif
 									<br>Messages
 								</a>
