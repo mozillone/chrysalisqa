@@ -27,3 +27,4 @@ npm-debug.log
 /.cache
 /.local
 .bash_history
+/storage/framework/views
