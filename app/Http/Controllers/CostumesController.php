@@ -536,10 +536,7 @@ class CostumesController extends Controller {
     				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2)->with('est_delivery_date', $est_delivery_date)->with('rate', $rate);
     			}
     		}
-	    }catch(\Exception $e)
-	    {
-	        return redirect(abort(404));
-	    }
+	    
 	}
 	public function costumeLike(Request $request){
 		$req=$request->all();

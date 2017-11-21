@@ -22,11 +22,12 @@
 	<div class="prodcut_list_page">
 		<div class="container">
 			<div class="row">
-				<input type="hidden" name="parent_cat_name" value="<?php echo e($parent_cat_name); ?>"/>
-				<input type="hidden" name="sub_cat_name" value="<?php echo e($data['sub_cat_info'][0]->name); ?>"/>
-				<input type="hidden" name="sub_cat_name" value="<?php echo e($data['sub_cat_info'][0]->name); ?>"/>
-				<input type="hidden" name="is_login" value="<?php echo e(Auth::check()); ?>"/>
-				<form id="search_list">
+				
+				<form id="search_list" action="<?php echo e(url('Filterscategory',$parent_cat_name)); ?>" method="get">
+					<input type="hidden" name="parent_cat_name" value="<?php echo e($parent_cat_name); ?>"/>
+					<input type="hidden" name="sub_cat_name" value="<?php echo e($data['sub_cat_info'][0]->name); ?>"/>
+					<input type="hidden" name="sub_cat_name" value="<?php echo e($data['sub_cat_info'][0]->name); ?>"/>
+					<input type="hidden" name="is_login" value="<?php echo e(Auth::check()); ?>"/>
 					<input type="hidden" name="cat_id" value="<?php echo e($data['sub_cat_info'][0]->category_id); ?>"/>
 					<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 					<?php if(!empty($parent_cat)): ?><input type="hidden" name="is_main" value="<?php echo e($parent_cat); ?>"> <?php endif; ?>
@@ -37,7 +38,6 @@
 							<ul class="box-list1 gender">
 								<li data-gender="male">Men's</li>
 								<li data-gender="female">Women's</li>
-								<!-- <li data-gender="unisex">Both</li> -->
 								<li data-gender="boy">Boys</li>
 								<li data-gender="girl">Girls</li>
 								<li data-gender="baby">Babies</li>
@@ -336,36 +336,83 @@
 									</div>
 								</div>
 							</div>
-						</div>	
+						</div>
 						<?php if(Session::has('error')): ?>
-							<div class="alert alert-danger alert-dismissable ">
+							<div class="alert alert-danger alert-dismissable exception_case">
 								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
 								<?php echo e(Session::get('error')); ?>
 
 							</div>
 						<?php elseif(Session::has('success')): ?>
-							<div class="alert alert-success alert-dismissable">
+							<div class="alert alert-success alert-dismissable exception_case">
 								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
 								<?php echo e(Session::get('success')); ?>
 
 							</div>
 						<?php endif; ?>
+						<?php if(count($costumes)>0): ?>	
 						<div class="list_products list-img-bg">
-							<div class="row" id="itemContainer">
+							<div class="row" id="">						 
+							<?php $__currentLoopData = $costumes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $costume): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+						  
+							<div class="col-md-3 col-sm-4 col-xs-6">
+								<div class="prod_box">
+									<div class="img_layer">
+										<a href="<?php echo e(url('product')); ?><?php echo e($costume->url_key); ?>" style="background-image:url(/costumers_images/Medium/<?php echo e($costume->image); ?>);background-repeat:no-repeat;">&nbsp;
+										</a>
+											<div class="hover_box">
+												<p class="like_fav">
+													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
+													</a> 
+													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
+												</p>
+												<p class="hover_crt add-cart" data-costume-id="571">
+													<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
+												</p>
+											</div>
+									</div>
+											<?php if($costume->film_qlty !=0): ?>
+											<p class="ystrip-rm">
+												<span>
+													<img class="img-responsive" src="http://dev.chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality
+												</span>
+											</p>
+											<?php endif; ?>
+											<div class="slider_cnt no_brand sml_name">
+												<span class="cc_brand"></span>
+													<h4>
+														<a href="/product/classic-activity/film-tv/test-costume13" <="" a=""><?php echo e($costume->name); ?></a>
+													</h4>
+													<p>
+														<a href="/product/classic-activity/film-tv/test-costume13" <="" a="">
+														<span class="new-price">$<?php echo e($costume->price); ?></span>
+														</a>
+													</p>
+											</div>
+									</div>
+							</div>
+							<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 							</div>
 						</div>
-							<div class="show_per_page hidden">
-						<div class="pagination_btm">
-							<label>Show </label>
-							<select id="per_page">
-								<option selected>12</option>
-								<option>24</option>
-								<option>48</option>
-							</select>
-							<label> per page </label>	
-						</div>
-					</div>
-						<ul class="holder list_pagination"></ul>
+						<?php else: ?>
+						 <div class="col-md-8 no_lists">
+						  <p>No Costumes Found under this Category</p>
+						 </div>
+						<?php endif; ?>
+						<?php if(count($costumes)>=12): ?>
+						<ul class="holder list_pagination">	
+ 							<?php echo e($costumes->links()); ?>	
+							 <div class="pagination_btm">
+							 	<label>Show </label>
+							 	<select id="per_page">
+							 		<option selected>12</option>
+							 		<option>24</option>
+							 		<option>48</option>
+							 	</select>
+							 	<label> per page </label>	
+							 </div>
+						</ul>
+						<?php endif; ?>
 					</div>
 				</form>
 			</div>
@@ -378,7 +425,7 @@
 <?php $__env->startSection('footer_scripts'); ?>
 <script src="<?php echo e(asset('/assets/frontend/js/jquery-ui.js')); ?>"></script>
 <script src="<?php echo e(asset('/js/ohsnap.js')); ?>"></script>
-<script src="<?php echo e(asset('/assets/frontend/js/jPages.js')); ?>"></script>
+<!-- <script src="<?php echo e(asset('/assets/frontend/js/jPages.js')); ?>"></script> -->
 <script src="<?php echo e(asset('/assets/frontend/js/pages/costumes_listing.js')); ?>"></script>
 <script src="<?php echo e(asset('/assets/frontend/js/pages/costume-fav.js')); ?>"></script>
 <script src="<?php echo e(asset('/assets/frontend/js/pages/costume-like.js')); ?>"></script>
@@ -392,7 +439,35 @@
 				scrollTop: 300
 			}, 700);
 		});
+
+		$("#per_page").change(function()
+		{			 
+			var id = $(this).val();			
+			var url = window.location.pathname;	 
+			location.href = url+"?perpage=" + id;
+		});
+
+		$(".gender").click(function()
+		{			 
+			var id = $(this).data('gender');			
+			var url = window.location.pathname;	 
+			$("#search_list").submit();
+		});
+
+		var queryString = window.location.href.slice(window.location.href.indexOf('?'));
+		var res = queryString.substring(9,11);
+		
+		  $("#per_page > option").each(function() {
+		    if (this.value == res) {
+		      this.selected = 'selected';
+		    }
+		  });
+
+		 
 	});
 </script>
+<style type="text/css">
+
+</style>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('/frontend/app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
