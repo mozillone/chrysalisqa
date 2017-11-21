@@ -5,7 +5,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/frontend/css/pages/costume_single.css') }}">
-<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5980685de0404c0012139258&product=inline-share-buttons' async='async'></script>
 <style>
 	.red.sizes_chart{display:block;}
 	div#size-chart label input.size_chekd {    vertical-align: text-bottom;}
@@ -71,6 +70,11 @@
 									</span>
 								</a>
                                 <a href="#" data-toggle="modal" data-target="#messageModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                                <a href="javascript:void(0);" id="facebook" class="icoRss" title="Facebook">
+									<img class="img-responsive" src="{{URL::asset('assets/frontend/img/fb-ic.png')}}">
+									<input type="hidden" name="url_fb" id="url_fb">
+									<input type="hidden" name="quote_fb" id="quote_fb">
+								</a>
 								<!-- <div class="sharethis-inline-share-buttons"></div> -->
 							</div>
 						</h1>

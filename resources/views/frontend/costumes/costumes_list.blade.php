@@ -338,6 +338,7 @@
 								</div>
 							</div>
 						</div>
+<<<<<<< HEAD
 						@if (Session::has('error'))
 							<div class="alert alert-danger alert-dismissable exception_case">
 								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
@@ -349,6 +350,8 @@
 								{{ Session::get('success') }}
 							</div>
 						@endif
+=======
+>>>>>>> chrysalisqa
 						@if(count($costumes)>0)	
 						<div class="list_products list-img-bg">
 							<div class="row" id="">						 
