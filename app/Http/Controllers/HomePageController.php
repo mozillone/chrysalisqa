@@ -6,6 +6,7 @@ use App\Helpers\Site_model;
 use DB;
 use Meta;
 use Sitemap;
+use Config;
 
 
 class HomePageController extends Controller {
@@ -17,7 +18,7 @@ class HomePageController extends Controller {
 	}
 	public function index()
 	{
-		
+		$insta = array();
 		Meta::set('title', 'Home');
         Meta::set('description', 'Affordable, Environment Friendly Costumes. Buy and Sell Costumes online.');
 		$featured_costumes = DB::table('costumes')
@@ -38,15 +39,42 @@ class HomePageController extends Controller {
 		->orderBy('costumes.is_featured_date',"DESC")
 		->take(20)->get();
 
-		
-		//echo "<pre>";print_r($featured_costumes);die;
         $pageData = DB::table('cms_blocks')->where(array('cms_blocks.slug'=>'home','cms_blocks.status'=>1))->first();
+
+        $access_token = Config::get('constants.INSTAGRAM_ACCESS_TOKEN');
+		$username = Config::get('constants.INSTAGRAM_USERNAME');
+
+		$user_search = self::instagramApiCurlConnect("https://api.instagram.com/v1/users/search?q=" . $username . "&access_token=" . $access_token);
+		$user_id = $user_search->data[0]->id; 
+		$return = self::instagramApiCurlConnect("https://api.instagram.com/v1/users/" . $user_id . "/media/recent?access_token=" . $access_token);
+
+		/* Accesing Images & Links from instagram */
+		$i=0;
+		foreach ($return->data as $post) {
+			$insta[$i]['image'] = $post->images->thumbnail->url;
+			$insta[$i]['link'] = $post->link;
+			$i++;
+		}
+		$insta_cnt = 6-$i;
         if (!empty($pageData)){
-            return view('frontend.index')->with(array('featured_costumes'=>$featured_costumes,'pageData'=>$pageData));
+            return view('frontend.index')->with(array('featured_costumes'=>$featured_costumes,'pageData'=>$pageData, 'insta'=>$insta, 'insta_cnt' =>$insta_cnt));
         }else{
             return view('frontend.index')->with(array('featured_costumes'=>$featured_costumes));
         }
-
 	}
-	
+
+	/**
+	 * Connecting Instagram through API for pulling the recently uploaded costumes in Instagram
+	 * @param  [url] $api_url [API url with username & accesstoken for that user]
+	 * @return [json] [User posted feed response]
+	 */
+	private function instagramApiCurlConnect( $api_url ){
+		$connection_c = curl_init(); // initializing
+		curl_setopt( $connection_c, CURLOPT_URL, $api_url ); // API URL to connect
+		curl_setopt( $connection_c, CURLOPT_RETURNTRANSFER, 1 ); // return the result, do not print
+		curl_setopt( $connection_c, CURLOPT_TIMEOUT, 20 );
+		$json_return = curl_exec( $connection_c ); // connect and get json data
+		curl_close( $connection_c ); // close connection
+		return json_decode( $json_return ); // decode and return
+	}	
 }

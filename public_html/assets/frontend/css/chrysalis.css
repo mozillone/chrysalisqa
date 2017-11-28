@@ -19,6 +19,9 @@ a:focus{outline:0px auto -webkit-focus-ring-color;outline-offset:-2px;}
 .top_nav ul{padding-left:0px;}
 .top_nav ul li a{color:#fff;font-family:Proxima-Nova-Regular;font-size:16px}
 .top_nav{text-align:right;}
+.home_product_slider.recently-viewed .prod_box p.ystrip-rm{left:0px;}
+.recently-viewed .owl-carousel.owl-theme .owl-item img{max-height:250px;width:auto;}
+.prod_box .ystrip-rm span img{width:10px!important;}
 .charts_div.clearfix{margin-top:15px;}
 .top_nav ul li a:hover{text-decoration:none;color:#fff;}
 .top_nav ul.dropdown-menu li{padding-bottom:0px;margin-right:0px;}
@@ -664,6 +667,18 @@ a#pricing_next{float:right;}
 div#messageModal .modal-footer .btn.btn-primary{background:#60c4ab;border:1px solid #60c4ab;}
 .form-rms{width:100%;float:left;margin:10px 0;padding-left:0px}
 
+/*instagram css*/
+.instagram_div{background:#f6f8fb;}
+
+.instagram_div{background:#f6f8fb;padding-bottom:30px;margin-bottom:60px;}
+.insta_thumbs .col-md-4 img{margin-bottom:25px; min-height: 160px;}
+.col-md-5.col-sm-4.col-xs-12.insta_main img{height:100%;}
+.col-md-5.col-sm-4.col-xs-12.insta_main{max-height:345px;overflow:hidden;}
+.instagram_div p{text-align:center;width:60%;margin:0 auto;margin-bottom:33px;font-family:Proxima-Nova-Semibold;}
+.instagram_div h2{text-align:center;font-size:24px;margin-top:24px;font-family:Proxima-Nova-Bold;}
+
+/*instagram css end*/
+
 /*.charity_rigt .form-rms.lst-stp{padding-left:27px;}*/
 .form-rms-que{width:100%;float:left;font-size:17px;color:#323031;font-family:Proxima-Nova-Extrabold;margin:15px 0;}
 .form-rms-input input{float:left;height:30px;border:1px solid #e1e1e1;padding:0 10px;font-family:Proxima-Nova-Semibold;font-size:16px;}
@@ -813,6 +828,14 @@ tr.print_bg td a{color:#ee4266!important;}
 .pagination_btm select{padding:6px 6px;font-size:16px;color:#323031;background:none;font-weight:bold;border:1px solid #ccc;}
 .show_per_page{text-align:right;position:relative;}
 ul.holder.list_pagination span{padding-right:10px;line-height:28px;}
+
+
+/*28-nov*/
+.media.tnks_media .media-body p a:nth-child(1){text-decoration: underline;}
+p#amount_charity a {    text-decoration: none;}
+.chek-out .form-group .error {
+    line-height: 15px;
+}
 
 /*06-pagination End*/
 .request_login img#loader{position:absolute;width:160px;bottom:50px;}
@@ -1065,8 +1088,8 @@ span.error{color:red;}
 
 /*22-nov*/
 p.seller_name{float:left;margin-right:15px;}
-a.contact_seller:focus {    text-decoration: none;}
-a.contact_seller{margin-top:0px;height:40px;color: #60c4ab;font-weight:600;padding:6px 20px;line-height:28px;border:2px solid #60C4AB;}
+a.contact_seller:focus{text-decoration:none;}
+a.contact_seller{margin-top:0px;height:40px;color:#60c4ab;font-weight:600;padding:6px 20px;line-height:28px;border:2px solid #60C4AB;}
 div#tab3 p.viewTabs-text{white-space:initial;}
 .blog_main_images p.blog-description{border:none;}
 span.ui-slider-handle.ui-state-default.ui-corner-all:focus{outline:none;}
@@ -1523,6 +1546,11 @@ i.fa.fa-arrow-right{font-size:18px;color:#a09fa0;}
 }
 @media screen and (min-width:1025px){
 
+/*instal css start here*/
+.instagram_div .container{width:975px;}
+/*instal css End here*/
+
+
 	/*22-nov*/
 	.social-icons a{padding-left:6.5px!important;padding-right:6.5px!important;}
 	.jumb-smll a img{padding-right:0px!important;}
@@ -1729,6 +1757,12 @@ i.fa.fa-arrow-right{font-size:18px;color:#a09fa0;}
 	.t-cnt{display:none;}
 }
 @media only screen and (min-device-width:768px) and (max-device-width:1024px){
+.pckge_info p.form-rms-que {
+    margin-top: 20px;
+}
+.how_div p.col-md-4.col-sm-6.mtop10 {
+    width: 100%;
+}
 
 	/*22-nov*/
 	.how_it_wrks_tabs_sect .nav-tabs > li.active > a:hover{background:#521270!important;}
@@ -1743,9 +1777,9 @@ i.fa.fa-arrow-right{font-size:18px;color:#a09fa0;}
 	.how-it-works-page .tab-content .col-md-6:first-child{padding-right:15px;}
 
 	/*.prog-txt{margin-left: 15px;}*/
-	#costume_name{margin-top:60px;}
+	#costume_name{margin-top:10px;}
 	.container.create_edit{margin-top:35px;}
-	.form-rms.costume-error.condition_div .col-md-3.col-sm-4{padding-left:0;padding-right:0px;}
+	.form-rms.costume-error.condition_div .col-md-3.col-sm-4{padding-left:0;padding-right:0px;margin-left:0px!important;}
 	.edit_btns-grp{margin-top:40px!important;}
 	.cret_ctme_1{margin-left:-25px;}
 	p#mention_hours_input{padding-left:0px;margin-left:15px;}
@@ -2737,7 +2771,7 @@ and (max-device-width:568px)
 and (orientation:portrait){
 
 	/*21-nov*/
-	i#social-fb{position:absolute;left:10px;}
+	i#social-fb{position:absolute;left:100px;}
 
 	/*21-nov End*/
 	.list-banner{margin-top:50px!important;}
@@ -2860,6 +2894,14 @@ and (orientation:portrait){
 	.mid_nav form.navbar-form.navbar-left i.fa.fa-search{margin-left:22px;}
 }
 @media only screen and (min-width:992px) and (max-width:1024px){
+		.how_lng_tme .pdlft25:nth-child(1) {padding-left: 0px;}
+	.how_lng_tme .pdlft25:nth-child(2) {    padding-right: 0px;}
+	.theatre_quality .col-md-2.col-sm-4:nth-child(1) {
+    padding-left: 0px;
+}
+	.col-md-8.col-sm-8.pdlft0.how_lng_tme .col-md-2.col-sm-4.pdlft10:nth-child(2){padding-left: 0px;}
+	#genderRadio .col-md-2.col-sm-4 .radio-custom-label{width:100%}
+	.condition_div .col-md-2.col-sm-4{padding-right:0px;}
 	.pagination_btm{position:absolute;right:5px;top:15px;}
 	.create_section_page .checkbox-custom-label,
 	.radio-custom-label{font-size:12px;}
@@ -2868,6 +2910,15 @@ and (orientation:portrait){
 	span.lnth-names{margin-left:10px;}
 }
 @media only screen and (min-width:768px) and (max-width:991px){
+
+
+.pckge_info p.form-rms-que {    margin-top: 15px;}
+
+
+	/*Nov-27 changes*/
+	#preferences_div .return_divs .col-sm-6 + .col-sm-6{padding-right:0px;}
+
+	/*Nov-27 changes done*/
 
 	/*22-nov*/
 	.abt_tags{min-height:80px;}

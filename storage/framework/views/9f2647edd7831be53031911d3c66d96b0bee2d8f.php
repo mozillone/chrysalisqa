@@ -11,6 +11,7 @@ Home@parent
 <?php echo (isset($pageData->description) && !empty($pageData->description) ? $pageData->description : ''); ?>
 <div class="container">
 </div>
+
 <div class="home_product_slider">
 	<div class="container">
 		<div class="row">
@@ -27,7 +28,7 @@ Home@parent
 									<div class="hover_box"><p class="like_fav"><a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>1</span></a> <a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a> </p><p class="hover_crt add-cart" data-costume-id="145"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p></div>
 								</div>
 								<?php if($cos->film_qlty == '32'): ?>
-									<p class="ystrip-rm"><span><img class="img-responsive" src="http://chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality</span></p>
+								<p class="ystrip-rm"><span><img class="img-responsive" src="http://chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality</span></p>
 								<?php endif; ?>
 								<div class="slider_cnt <?php if($cos->created_user_group != "admin" ): ?>no_brand <?php endif; ?> <?php if(strlen($cos->cos_name)<20): ?> sml_name <?php endif; ?>">
 									<?php if($cos->created_user_group == "admin"): ?>
@@ -57,6 +58,40 @@ Home@parent
 			</div>
 		</div>
 	</div>
+	
+	<div class="instagram_div">
+		<div class=" container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h2>Instagram Feed</h2>
+					<p >Siphon cup dark trifecta, foam crema americano robust latte. Half and half galão grinder cream brewed single shot. Grinder aroma crema amerated.</p>
+					<?php 
+					//echo"<pre>"; print_r($insta); exit;?>
+				</div>
+				<div class="col-md-5 col-sm-4 col-xs-12 insta_main">
+					<img class="img-responsive " src="<?php echo e(asset('/assets/frontend/img/insta_main.png')); ?>">
+				</div>
+				<div class="col-md-7 col-sm-4 col-xs-12 insta_thumbs">
+					<div class="row">
+						<?php for($i=0; $i<count($insta); $i++): ?>
+							<div class="col-md-4">
+								<a href="<?php echo e($insta[$i]['link']); ?>" target="_blank">
+									<img class="img-responsive " src="<?php echo e($insta[$i]['image']); ?>">
+								</a>
+							</div>
+						<?php endfor; ?>
+						<?php for($i=1;$i<=$insta_cnt; $i++): ?>
+						<div class="col-md-4">
+							<img class="img-responsive " src="http://via.placeholder.com/160x160">
+						</div>
+						<?php endfor; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
 	<div class="home-adds">
 		<div class="container">
 			<div class="row">
@@ -78,30 +113,30 @@ Home@parent
 	<!-- git -->
 	<?php $__env->stopSection(); ?>
 	<?php $__env->startSection('footer_scripts'); ?>
-
+	
 	<script src="<?php echo e(asset('/assets/frontend/js/jquery.touchSwipe.min.js')); ?>"></script>
 	<script src="<?php echo e(asset('/assets/frontend/js/owl.carousel.min.js')); ?>"></script>
 	<script src="<?php echo e(asset('/assets/frontend/js/pages/home.js')); ?>"></script>
-		<script>
-			$(document).ready(function() {
-				if($("#costumes_cnt").val() > "4"){
-					$(".owl-controls.clickable").show();	
-				}
-				if (jQuery(window).width() < 767) 
-				{
-					$(".carousel").swipe({
+	<script>
+		$(document).ready(function() {
+			if($("#costumes_cnt").val() > "4"){
+				$(".owl-controls.clickable").show();	
+			}
+			if (jQuery(window).width() < 767) 
+			{
+				$(".carousel").swipe({
+					
+					swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
 						
-					  swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-
 					    if (direction == 'left') $(this).carousel('next');
 					    if (direction == 'right') $(this).carousel('prev');
-
-					  },
-					  allowPageScroll:"vertical"
-
-					});
-				}
-			});
-		</script>
+						
+					},
+					allowPageScroll:"vertical"
+					
+				});
+			}
+		});
+	</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('/frontend/app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
