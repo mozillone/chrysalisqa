@@ -55,6 +55,7 @@ class AuthController extends Controller {
    }
    public function postLogin(Request $request)
    {
+
    	$req = $request->all();
    	$rule  =  array(  
 	              'email' => 'required|email',
@@ -107,6 +108,8 @@ class AuthController extends Controller {
 				 }
 				 if(Session::has('is_loginPage')){
 					return Redirect::to('/dashboard')->withCookie($cookie);
+				 }else if($request->session()->get('_previous')['url'] == url('/')){
+				 	return Redirect::to('/dashboard');
 				 }else if(Session::has('is_blog')){
                      return Redirect::to('/blog')->withCookie($cookie);
                  }else if(Session::has('is_event')){
