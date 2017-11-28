@@ -400,7 +400,7 @@
 						@endif
 						@if(count($costumes)>=12)
 						<ul class="holder list_pagination">	
- 							{{$costumes->links()}}	
+ 							{{$costumes->links('/frontend/pagination')}}	
 							 <div class="pagination_btm">
 							 	<label>Show </label>
 							 	<select id="per_page">

@@ -1067,7 +1067,7 @@ class CreateCostumeController  extends Controller {
 		$email_check = DB::table('users')->where('email',$cus_email)->count();
 		$user_info = DB::table('users')->where('email',$cus_email)->first();
 		//print_r($request->is_payout_no); exit;
-		$is_payout 		= (empty($request->is_payout_no)) ? '0' : '1';
+		$is_payout 		= (empty($request->is_payout_no)) ? '1' : '0';
 		$cus_name  		= $request->full_name;
 		$cus_email 		= $request->email_address;
 		$cus_phone 		= $request->phone_number;

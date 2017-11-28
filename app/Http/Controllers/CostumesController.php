@@ -533,7 +533,7 @@ class CostumesController extends Controller {
     				
                     
                     $data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
-    				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2)->with('est_delivery_date', $est_delivery_date)->with('rate', $rate);
+    				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2)->with('est_delivery_date', $est_delivery_date)->with('rate', $rate)->with('costume_detail_name', $name);
     			}
     		}
 	    
@@ -557,9 +557,10 @@ class CostumesController extends Controller {
 	}
 
 	public function inquireCostume(Request $request){
+		$req = Request::all();
 	   try
 	   {
-	   			    $req = $request->all();
+	   			    
 	   		        if(isset($req) && !empty($req)){
 	   		            if(!Auth::check()){
 	   		                $seller_details = DB::table('users')
@@ -653,7 +654,7 @@ class CostumesController extends Controller {
 		           ->where('adder.address_type','selling')
 		           ->orderBy('cst.created_at','ASC')
 		           ->groupBy('cst.costume_id')
-		           ->paginate(15);
+		           ->simplePaginate(15);
 		dd($costumes);           
     }
 
