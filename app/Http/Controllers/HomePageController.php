@@ -53,9 +53,13 @@ class HomePageController extends Controller {
 		foreach ($return->data as $post) {
 			$insta[$i]['image'] = $post->images->thumbnail->url;
 			$insta[$i]['link'] = $post->link;
-			$i++;
+			if($i == 5){
+				break;
+			}else{
+				$i++;
+			}
 		}
-		$insta_cnt = 6-$i;
+		$insta_cnt = 6-count($insta);
         if (!empty($pageData)){
             return view('frontend.index')->with(array('featured_costumes'=>$featured_costumes,'pageData'=>$pageData, 'insta'=>$insta, 'insta_cnt' =>$insta_cnt));
         }else{
