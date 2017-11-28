@@ -249,7 +249,9 @@
 															<!--<p>Phone: <span>{{$data['seller_info'][0]->phone_number}}<span></p>-->
 														</p>
 														@endif
+														@if(Auth::check())
 															<a href="javscript:void(0);" type="button" class="contact_seller" data-toggle="modal" data-target="#messageModal">Contact</a>
+														@endif
 														@else
 														<p class="no-data-tab">No data found</p>
 														@endif

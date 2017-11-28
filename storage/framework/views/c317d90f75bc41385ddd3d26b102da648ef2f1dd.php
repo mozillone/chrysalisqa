@@ -252,7 +252,9 @@
 															<!--<p>Phone: <span><?php echo e($data['seller_info'][0]->phone_number); ?><span></p>-->
 														</p>
 														<?php endif; ?>
+														<?php if(Auth::check()): ?>
 															<a href="javscript:void(0);" type="button" class="contact_seller" data-toggle="modal" data-target="#messageModal">Contact</a>
+														<?php endif; ?>
 														<?php else: ?>
 														<p class="no-data-tab">No data found</p>
 														<?php endif; ?>
