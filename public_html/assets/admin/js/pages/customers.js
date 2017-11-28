@@ -100,7 +100,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 			errorElement: 'span',
        		errorClass: 'error',
 		});
-/*	 $("#customer_edit").validate({
+	 $("#customer_edit").validate({
         	onfocusout: function(element) { $(element).valid(); },
 			rules: {
 				first_name:{
@@ -171,7 +171,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 			},
 			errorElement: 'span',
        		errorClass: 'error',
-		});*/
+		});
 	    sub_cos_counter = 0;
 
 			$("#customer_edit1").validate({

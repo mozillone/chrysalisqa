@@ -60,9 +60,10 @@
 							<a href="javascript:void(0);" class="facebook" class="icoRss" title="Facebook">
 								<i id="social-fb" class="fa fa-facebook fa-1x social"></i>
 								<input type="hidden" name="url_fb" class="url_fb" value="{{Request::fullurl()}}">
+								<input type="hidden" name="quote_fb" class="quote_fb" value="Come check out this {{$costume_detail_name}}">
 							</a>
 							<a href="javascript:void(0);" title="Twitter">
-								<span id="twiter_url" data-network="twitter" class="st-custom-button" data-title="" data-url="{{Request::fullurl()}}">
+								<span id="twiter_url" data-network="twitter" class="st-custom-button" data-title="Come check out this {{$costume_detail_name}}"  data-url="{{Request::fullurl()}}">
 									<i id="social-tw" class="fa fa-twitter fa-1x social"></i>
 								</span>
 							</a>
@@ -80,7 +81,7 @@
 									</span>
 								</a>
 								@if(Auth::check())
-                                	<a href="#" data-toggle="modal" data-target="#messageModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                                	<a href="javscript:void(0);" id="envelope" onclick="showSellerInfo()" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                 @else
                                 	<a href="#" data-toggle="modal" data-target="#login_popup"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                 @endif
@@ -200,19 +201,16 @@
 										<div class="tab-pane" id="viewTabs3">
 											<p class="viewTabs-text">
 												@if(!empty($data['seller_info'][0]))
-												@if($data['seller_info'][0]->id != 1)
-												<p>Name: <span>{{$data['seller_info'][0]->display_name}}</span></p>
-												<p>Username: <span>{{$data['seller_info'][0]->username}}</span></p>
-												<p>Phone: <span>{{$data['seller_info'][0]->phone_number}}<span></p>
+													@if($data['seller_info'][0]->id != 1)
+														<p><span>{{$data['seller_info'][0]->username}}</span></p>
 													@else
-													<p>Name: <span>Chrysalis Support</span></p>
-													<p>Username: <span>ChrysalisCostumes</span></p>
+														<p><span>ChrysalisCostumes</span></p>
 													@endif
-													@else
-													<p class="no-data-tab">No data found</p>
-													@endif
-												</p>
-												</div>
+												@else
+												<p class="no-data-tab">No data found</p>
+												@endif
+											</p>
+										</div>
 												
 											</div>
 											
@@ -242,18 +240,16 @@
 													<p class="viewTabs-text">
 														@if(!empty($data['seller_info'][0]))
 														@if($data['seller_info'][0]->id != 1)
-														<p>Name: <span>{{$data['seller_info'][0]->display_name}}</span>
-														</p>
-														<p>Username: <span>{{$data['seller_info'][0]->username}}</span>
+														
+														<p class="seller_name"><span>{{$data['seller_info'][0]->username}}</span>
 															<!--<p>Phone: <span>{{$data['seller_info'][0]->phone_number}}<span></p>-->
 														</p>
 														@else
-														<p>Name: <span>Chrysalis Support</span>
-														</p>
-														<p>Username: <span>ChrysalisCostumes</span>
+														<p class="seller_name"><span>ChrysalisCostumes</span>
 															<!--<p>Phone: <span>{{$data['seller_info'][0]->phone_number}}<span></p>-->
 														</p>
 														@endif
+															<a href="javscript:void(0);" type="button" class="contact_seller" data-toggle="modal" data-target="#messageModal">Contact</a>
 														@else
 														<p class="no-data-tab">No data found</p>
 														@endif
@@ -935,14 +931,21 @@
 					
 					<!-- size chart modal End  here -->
 					
-					
-					
-					
-					
 					@stop
 					{{-- page level scripts --}}
 					@section('footer_scripts')
 					<script>
+						function showSellerInfo () {
+							$('html, body').animate({
+						        scrollTop: $(".single_view_multi_view_tabs").offset().top
+						    }, 'slow');
+							$('.viewTabs li').removeClass('active');
+							$('.viewTabs li:last-child').addClass('active');
+							$("#tab1").hide();
+							$("#tab2").hide();
+							$('#tab3').show();
+
+						}
 						$(".mobile-plus").click(function(){
 							$(this).toggleClass("mobile-minus");	
 							$(this).parent("li").find(".responsive-inner").toggleClass("none-rm");
@@ -967,7 +970,9 @@
 					<script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
 					<script type="text/javascript" src="{{ asset('/assets/frontend/js/social_sharing.js') }}"></script>
 					<script type="text/javascript">
+
 						$(document).ready(function(){
+
 							$(".size_chekd").click(function(){
 								var inputValue = $(this).attr("value");
 								var targetsizes_chart = $("." + inputValue);

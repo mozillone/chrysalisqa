@@ -173,7 +173,13 @@ print_r($all_data);die;*/
                                 </div>
                                 @if ($label_html != "0")
                                     <div class="box-body" id="tracking_ids">
-                                        <?php echo $label_html; ?>
+                                    	<form action="{{URL::to('generatefedexsmartpost')}}" method="POST" id="label_form">
+                                    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        	<?php echo $label_html; ?>
+                                        	<input type="hidden" name="address_id" id="address_id" value="{{$all_data->address_id}}">
+                                        	<input type="hidden" id="label_type" name="label_type" value="">
+                                        	<input type="hidden" name="request_bag_id" id="requset_bag_id" value="{{$all_data->id}}">    
+                                        </form>
                                     </div>
                                 @else
                                 @if($all_data->status == "Requested")
@@ -299,7 +305,8 @@ print_r($all_data);die;*/
 						</div>
 					</div>
 				@endforeach
-				<textarea id="message_theard" class="form-control" rows="6" cols="50"></textarea>
+				<textarea required="" id="message_theard" class="form-control" rows="6" cols="50"></textarea>
+				<span class="error" id="msg_err"></span>
 				<input type="button" name="theard" id="theard" value="SEND" class="btn btn-primary msg-submit" ></input>
 			
 
@@ -321,6 +328,17 @@ print_r($all_data);die;*/
 <script type="text/javascript">
 $(document).ready(function()
 {
+	$('#fedex_label_generate').click(function(){
+		$("#label_type").val('fedex');
+		$("#label_form").submit();
+	});
+
+	$('#smartpost_label_generate').click(function(){
+		$("#label_type").val('smart_post');
+		$("#label_form").submit();
+	});
+
+
 	$('#generate_lables').click(function(){
 		/*$('#tracking_ids').css('display','block');
 		$('#generate_lables').css('display','none');*/
@@ -351,6 +369,12 @@ $(document).ready(function()
 		//$('#generate_lables').append('<img id="ajax_loader" src="{{asset("img/ajax-loader.gif")}}" >');
 		//$('#generate_lables').append('<div class="modal-backdrop fade in"></div>');
 		var message_theard = $('#message_theard').val();
+		if(message_theard == ''){
+			$('#message_theard').css('border','1px solid red');
+			$("#msg_err").text('This field is required').css({'color':'red','display':'block'});
+			$('#theard').removeAttr('disabled');
+			return false;
+		}
 		var conversation_id = $('#conversation_id').val();
 		var user_id = $('#user_id').val();
 		var hidden_id = $('#hidden_id').val();

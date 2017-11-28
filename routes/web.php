@@ -300,6 +300,8 @@ Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
 	   	Route::any('/generatelables', array('as' => '','uses' => 'RequestabagController@Generatelables'));
+	   	Route::post('/generatefedexsmartpost', array('as' => '','uses' => 'RequestabagController@GenerateFedexSmartPostLabels'));
+	   	
 	   	Route::any('/returnlablegenerate', array('as' => '','uses' => 'RequestabagController@returnLableGenerate'));
 	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
 	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));

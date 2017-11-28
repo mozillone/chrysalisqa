@@ -882,9 +882,9 @@
 																	</div>
 																	<div class="col-md-8 col-sm-8">
 																		<div class="form-rms-input dimensions-two dimensions-two-pk_info">
-																			<p class="form-rms-dim"><span class="form-rms-he1"><input id="pounds" name="pounds" value="0" type="text" placeholder="0"> <span>lbs</span></span></p>
+																			<p class="form-rms-dim"><span class="form-rms-he1"><input id="pounds" name="pounds" type="text" placeholder="0"> <span>lbs</span></span></p>
 																			<span id="poundserror" style="color:red"></span>
-																			<p class="form-rms-dim"><span class="form-rms-he1"><input id="ounces" name="ounces"  value="0" type="text" placeholder="0"> <span>oz </span></span></p>
+																			<p class="form-rms-dim"><span class="form-rms-he1"><input id="ounces" name="ounces"   type="text" placeholder="0"> <span>oz </span></span></p>
 																			<span id="ounceserror" style="color:red"></span>
 																		</div>
 																	</div>
