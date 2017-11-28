@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Illuminate\Database\QueryException;
 use InvalidArgumentException;
+use Log;
 
 class Handler extends ExceptionHandler
 {

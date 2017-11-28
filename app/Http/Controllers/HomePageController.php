@@ -7,7 +7,7 @@ use DB;
 use Meta;
 use Sitemap;
 use Config;
-
+use Log;
 
 class HomePageController extends Controller {
 
@@ -43,23 +43,29 @@ class HomePageController extends Controller {
 
         $access_token = Config::get('constants.INSTAGRAM_ACCESS_TOKEN');
 		$username = Config::get('constants.INSTAGRAM_USERNAME');
+		$insta_cnt = 6;
+		try{
+			$user_search = self::instagramApiCurlConnect("https://api.instagram.com/v1/users/search?q=" . $username . "&access_token=" . $access_token);
+			$user_id = $user_search->data[0]->id; 
+			$return = self::instagramApiCurlConnect("https://api.instagram.com/v1/users/" . $user_id . "/media/recent?access_token=" . $access_token);
 
-		$user_search = self::instagramApiCurlConnect("https://api.instagram.com/v1/users/search?q=" . $username . "&access_token=" . $access_token);
-		$user_id = $user_search->data[0]->id; 
-		$return = self::instagramApiCurlConnect("https://api.instagram.com/v1/users/" . $user_id . "/media/recent?access_token=" . $access_token);
-
-		/* Accesing Images & Links from instagram */
-		$i=0;
-		foreach ($return->data as $post) {
-			$insta[$i]['image'] = $post->images->thumbnail->url;
-			$insta[$i]['link'] = $post->link;
-			if($i == 5){
-				break;
-			}else{
-				$i++;
+			/* Accesing Images & Links from instagram */
+			$i=0;
+			foreach ($return->data as $post) {
+				$insta[$i]['image'] = $post->images->thumbnail->url;
+				$insta[$i]['link'] = $post->link;
+				if($i == 5){
+					break;
+				}else{
+					$i++;
+				}
 			}
+			$insta_cnt = 6-count($insta);	
+		}catch(\Exception $e){
+			Log::info('instagram Exception');
+			Log::info($e->getMessage());
 		}
-		$insta_cnt = 6-count($insta);
+		
         if (!empty($pageData)){
             return view('frontend.index')->with(array('featured_costumes'=>$featured_costumes,'pageData'=>$pageData, 'insta'=>$insta, 'insta_cnt' =>$insta_cnt));
         }else{
