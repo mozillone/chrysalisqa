@@ -280,14 +280,14 @@ class Costumes extends Authenticatable
 
         $conversation_array = array('type'=>'request_a_bag',
                                     'user_one'=> $users,
-                                    'subject'=>'Request a bag subject',
+                                    'subject'=>'Your Bag Created.',
                                     'user_two'=>'1',
                                     'status'=>'1',
                                     'type_id'=>$get_conversations_info->type_id,
                                     'created_at'=>date('y-m-d H:i:s'));
         $conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
 
-        $theard_array  = array('message'=>'Hi',
+        $theard_array  = array('message'=>'',
                                 'is_seen'=>'0',
                                 'deleted_from_sender'=>'0',
                                 'deleted_from_receiver'=>'0',

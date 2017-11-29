@@ -96,8 +96,10 @@
                                         $listingImage = URL::asset('/costumers_images/default-placeholder.png');
                                     }
                                     ?>
-                                    <div class="msg_order_imge"><a href="<?php echo e(URL::to('/product').$inbox->url_key); ?>"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
-                                    <p class="order_cnt"><?php if($inbox->type == "request_a_bag"): ?> Ref no <?php else: ?> Product Id <?php endif; ?> #: <br><?php echo e($inbox->type_id); ?></p>
+                                    <?php if($inbox->type != "order"): ?>
+                                        <div class="msg_order_imge"><a href="<?php echo e(URL::to('/product').$inbox->url_key); ?>"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
+                                    <?php endif; ?>
+                                    <p class="order_cnt"><?php if($inbox->type == "request_a_bag"): ?> Ref no <?php elseif($inbox->type == "order"): ?> Order Id <?php else: ?> Product Id <?php endif; ?> #: <br><?php echo e($inbox->type_id); ?></p>
 
                                 </div>
                                 </a>
@@ -168,19 +170,21 @@
                                 </div>
                                 <div class="col-md-2 col-sm-2 text-center">
                                     <?php
-                                    if(isset($inbox->image) && !empty($inbox->image)){
-                                    $path = '/costumers_images/Small/'.$inbox->image;
-                                    if(file_exists(public_path($path))){
-                                    $listingImage = URL::asset('/costumers_images/Small/'.$inbox->image);
-                                    }else{
-                                    $listingImage = URL::asset('/costumers_images/default-placeholder.png');
-                                    }
-                                    }else{
-                                    $listingImage = URL::asset('/costumers_images/default-placeholder.png');
-                                    }
+                                        if(isset($inbox->image) && !empty($inbox->image)){
+                                        $path = '/costumers_images/Small/'.$inbox->image;
+                                        if(file_exists(public_path($path))){
+                                        $listingImage = URL::asset('/costumers_images/Small/'.$inbox->image);
+                                        }else{
+                                        $listingImage = URL::asset('/costumers_images/default-placeholder.png');
+                                        }
+                                        }else{
+                                        $listingImage = URL::asset('/costumers_images/default-placeholder.png');
+                                        }
                                     ?>
+                                    <?php if($inbox->type != "order"): ?>
                                     <div class="msg_order_imge"><a href="<?php echo e(URL::to('/product').$inbox->url_key); ?>"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
-                                 <p class="order_cnt"><?php if($inbox->type == "request_a_bag"): ?> Ref no <?php else: ?> Product Id <?php endif; ?> #: <br><?php echo e($inbox->type_id); ?></p>
+                                    <?php endif; ?>
+                                 <p class="order_cnt"><?php if($inbox->type == "request_a_bag"): ?> Ref no <?php elseif($inbox->type == "order"): ?> Order Id <?php else: ?> Product Id <?php endif; ?> #: <br><?php echo e($inbox->type_id); ?></p>
 
                                 </div>
                                 </a>

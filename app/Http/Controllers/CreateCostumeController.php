@@ -1108,13 +1108,13 @@ class CreateCostumeController  extends Controller {
 							);
 
 		$conversation_array = array('type'=>'request_a_bag','user_one'=>'',
-									'subject'=>'Request a bag subject',
+									'subject'=>'Your Bag created.',
 									'user_two'=>'1',
 									'status'=>'1',
 									'type_id'=>$ref_no,
 									'created_at'=>date('y-m-d H:i:s'));
 
-		$theard_array  = array('message'=>'Hi',
+		$theard_array  = array('message'=>'',
 								'is_seen'=>'0',
 						        'deleted_from_sender'=>'0',
 						        'deleted_from_receiver'=>'0',
