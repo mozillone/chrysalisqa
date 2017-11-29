@@ -359,14 +359,14 @@ class Order extends Authenticatable
         'status'=>'1',
         'created_at'=>date('Y-m-d h:i:s'));
       $converstion_id = Site_model::insert_get_id('conversations',$converstion_array);
-      $order_url = url('/').'/order/'.$order_id;
+
       $message_array  = array('message'=>'',
         'is_seen'=>'0',
         'deleted_from_sender'=>'0',
         'deleted_from_receiver'=>'0',
         'user_id'=>Auth::user()->id,
         'user_name'=>Auth::user()->display_name,
-        'conversation_id'=>$converstion_id);
+        'conversation_id'=>$converstion_id,'created_at'=>date('Y-m-d h:i:s'));
       $converstion_id = Site_model::insert_get_id('messages',$message_array);
 
       return true;
