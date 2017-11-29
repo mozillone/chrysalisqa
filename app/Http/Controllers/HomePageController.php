@@ -66,7 +66,7 @@ class HomePageController extends Controller {
 				}
 			}
 			$insta_cnt = 7-count($insta);	
-		}catch(\OAuthLimitException $e){
+		}catch(\Exception $e){
 			Log::info('instagram Exception');
 			Log::info($e->getMessage());
 		}

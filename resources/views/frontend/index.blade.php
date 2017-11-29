@@ -6,6 +6,57 @@ Home@parent
 <link rel="stylesheet" href="{{ asset('/assets/frontend/css/pages/home.css')}}">
 <link rel="stylesheet" href="{{ asset('/assets/frontend/css/owl.carousel.min.css')}}">
 <link rel="stylesheet" href="{{ asset('/assets/frontend/css/owl.theme.default.min.css')}}">
+<style>
+    .thumbnail1 {
+   position: relative;
+   overflow: hidden;
+   padding: 0px;
+   border-radius: 0px;
+   border: none; cursor:pointer;
+    }
+    .caption {
+   position:absolute;
+   top:0;
+   right:0;
+   background: rgba(95, 197, 172, 0.60);
+   width:100%;
+   height:100%;
+   display: none;
+   text-align:center;
+   color:#fff !important;
+   z-index:2;
+    }
+    .insta_main .thumbnail1 .caption p a i {
+   font-size: 55px;
+    }
+    .insta_main .thumbnail1 .caption p a {
+   position: absolute;
+   top: 40%;
+   background: transparent;
+   left: 0;
+   right: 0px;
+    }
+    .thumbnail1.mini_thumb {
+   max-height: 160px;margin-bottom: 25px;
+    }
+    .thumbnail1.mini_thumb p a i {
+   font-size: 35px;
+    }
+    
+    .mini_thumb.thumbnail1 .caption p a {
+   position: absolute;
+   top: 40%;
+   background: transparent;
+   left: 0;
+   right: 0px;
+    }
+    .instagram_div h2 i {
+   color: #5fc5ac
+;
+   font-size: 32px;
+   vertical-align: middle;
+}
+</style>
 @endsection
 @section('content')
 <!-- responsive banner start here sample-->
@@ -64,23 +115,46 @@ Home@parent
 		<div class=" container">
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
-					<h2>Instagram Feed</h2>
+					<h2><i class="fa fa-instagram" aria-hidden="true"></i> Instagram Feed</h2>
 					<p >Siphon cup dark trifecta, foam crema americano robust latte. Half and half galão grinder cream brewed single shot. Grinder aroma crema amerated.</p>
 					<?php 
 					//echo"<pre>"; print_r($insta); exit;?>
 				</div>
 				<div class="col-md-5 col-sm-4 col-xs-12 insta_main">
-					<a href="{{$insta[0]['link']}}" target="_blank">
-						<img class="img-responsive " src="{{$insta[0]['image']}}">
-					</a>
+					@if(!empty($insta))
+						<div class="thumbnail1">
+	                        <div class="caption" style="display: none;">
+	                            <p>
+	                            	<a href="" class="label label-danger" rel="tooltip" title="" data-original-title="">
+	                            		<i class="fa fa-instagram" aria-hidden="true"></i>
+	                            	</a>
+	                            </p>
+	                        </div>
+	                        
+							<a href="{{$insta[0]['link']}}" target="_blank">
+								<img class="img-responsive " src="{{$insta[0]['image']}}">
+							</a>
+	                    </div>
+                    @else
+						<img class="img-responsive " src="http://via.placeholder.com/640x640">
+					@endif
 				</div>
 				<div class="col-md-7 col-sm-4 col-xs-12 insta_thumbs">
 					<div class="row">
 						@for($i=1; $i<count($insta); $i++)
 							<div class="col-md-4">
-								<a href="{{$insta[$i]['link']}}" target="_blank">
-									<img class="img-responsive " src="{{$insta[$i]['image']}}">
-								</a>
+								<div class="thumbnail1">
+			                        <div class="caption" style="display: none;">
+			                            <p>
+			                            	<a href="" class="label label-danger" rel="tooltip" title="" data-original-title="">
+			                            		<i class="fa fa-instagram" aria-hidden="true"></i>
+			                            	</a>
+			                            </p>
+			                        </div>
+			                        <a href="{{$insta[$i]['link']}}" target="_blank">
+										<img class="img-responsive " src="{{$insta[$i]['image']}}">
+									</a>
+			                    </div>
 							</div>
 						@endfor
 						@for($i=1;$i<=$insta_cnt; $i++)
@@ -122,6 +196,14 @@ Home@parent
 	<script src="{{ asset('/assets/frontend/js/pages/home.js') }}"></script>
 	<script>
 		$(document).ready(function() {
+			$('.thumbnail1').hover(
+                function(){
+                    $(this).find('.caption').slideDown(250); //.fadeIn(250)
+                },
+                function(){
+                    $(this).find('.caption').slideUp(250); //.fadeOut(205)
+                }
+            ); 
 			if($("#costumes_cnt").val() > "4"){
 				$(".owl-controls.clickable").show();	
 			}
