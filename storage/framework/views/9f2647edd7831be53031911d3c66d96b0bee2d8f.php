@@ -69,11 +69,13 @@ Home@parent
 					//echo"<pre>"; print_r($insta); exit;?>
 				</div>
 				<div class="col-md-5 col-sm-4 col-xs-12 insta_main">
-					<img class="img-responsive " src="<?php echo e(asset('/assets/frontend/img/insta_main.png')); ?>">
+					<a href="<?php echo e($insta[0]['link']); ?>" target="_blank">
+						<img class="img-responsive " src="<?php echo e($insta[0]['image']); ?>">
+					</a>
 				</div>
 				<div class="col-md-7 col-sm-4 col-xs-12 insta_thumbs">
 					<div class="row">
-						<?php for($i=0; $i<count($insta); $i++): ?>
+						<?php for($i=1; $i<count($insta); $i++): ?>
 							<div class="col-md-4">
 								<a href="<?php echo e($insta[$i]['link']); ?>" target="_blank">
 									<img class="img-responsive " src="<?php echo e($insta[$i]['image']); ?>">

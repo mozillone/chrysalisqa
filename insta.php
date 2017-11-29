@@ -24,7 +24,7 @@ $user_id = $user_search->data[0]->id; // or use string 'self' to get your own me
 //print_r($user_id);
 $return = rudr_instagram_api_curl_connect("https://api.instagram.com/v1/users/" . $user_id . "/media/recent?access_token=" . $access_token);
  
-//var_dump( $return ); // if you want to display everything the function returns
+//var_dump( $return ); exit; // if you want to display everything the function returns
  
 foreach ($return->data as $post) {
 	echo "<pre>"; print_r($post); exit;

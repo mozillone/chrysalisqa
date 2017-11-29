@@ -52,16 +52,21 @@ class HomePageController extends Controller {
 			/* Accesing Images & Links from instagram */
 			$i=0;
 			foreach ($return->data as $post) {
-				$insta[$i]['image'] = $post->images->thumbnail->url;
-				$insta[$i]['link'] = $post->link;
-				if($i == 5){
+				if($i == 0){
+					$insta[$i]['image'] = $post->images->standard_resolution->url;
+					$insta[$i]['link'] = $post->link;
+				}else{
+					$insta[$i]['image'] = $post->images->thumbnail->url;
+					$insta[$i]['link'] = $post->link;	
+				}
+				if($i == 6){
 					break;
 				}else{
 					$i++;
 				}
 			}
-			$insta_cnt = 6-count($insta);	
-		}catch(\Exception $e){
+			$insta_cnt = 7-count($insta);	
+		}catch(\OAuthLimitException $e){
 			Log::info('instagram Exception');
 			Log::info($e->getMessage());
 		}

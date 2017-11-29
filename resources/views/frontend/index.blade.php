@@ -70,11 +70,13 @@ Home@parent
 					//echo"<pre>"; print_r($insta); exit;?>
 				</div>
 				<div class="col-md-5 col-sm-4 col-xs-12 insta_main">
-					<img class="img-responsive " src="{{asset('/assets/frontend/img/insta_main.png')}}">
+					<a href="{{$insta[0]['link']}}" target="_blank">
+						<img class="img-responsive " src="{{$insta[0]['image']}}">
+					</a>
 				</div>
 				<div class="col-md-7 col-sm-4 col-xs-12 insta_thumbs">
 					<div class="row">
-						@for($i=0; $i<count($insta); $i++)
+						@for($i=1; $i<count($insta); $i++)
 							<div class="col-md-4">
 								<a href="{{$insta[$i]['link']}}" target="_blank">
 									<img class="img-responsive " src="{{$insta[$i]['image']}}">
