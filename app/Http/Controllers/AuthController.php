@@ -55,6 +55,7 @@ class AuthController extends Controller {
    }
    public function postLogin(Request $request)
    {
+
    	$req = $request->all();
    	$rule  =  array(  
 	              'email' => 'required|email',
@@ -107,6 +108,8 @@ class AuthController extends Controller {
 				 }
 				 if(Session::has('is_loginPage')){
 					return Redirect::to('/dashboard')->withCookie($cookie);
+				 }else if($request->session()->get('_previous')['url'] == url('/')){
+				 	return Redirect::to('/dashboard');
 				 }else if(Session::has('is_blog')){
                      return Redirect::to('/blog')->withCookie($cookie);
                  }else if(Session::has('is_event')){
@@ -129,7 +132,13 @@ class AuthController extends Controller {
 			return Redirect::to('/login');
 		}
 	}
- 	public function postRegisterUser(Request $request)
+	/**
+	 * Edited by Gaytari
+	 * User Registration
+	 * @param  Request $request [description]
+	 * @return login Page           [description]
+	 */
+	public function postRegisterUser(Request $request)
 	{
 		$req = $request->all();
 		$flag = 0;
@@ -233,6 +242,78 @@ class AuthController extends Controller {
 		}
 		return Redirect::to('login'); 
 	}
+
+ 	/*public function postRegisterUser(Request $request){
+		$req = $request->all();
+		//echo "<pre>";print_r($req);die;
+		$rule  =  array(  
+    	              'first_name' => 'required|max:255',
+                      'last_name' => 'required|max:255',
+                      'email' => 'required|email|unique:users|max:255',
+                      'password' => 'required|min:5',
+	                 );
+	    $validator = Validator::make($req,$rule);
+        if ($validator->fails()) {
+			return Redirect::to('login#signup_tab')
+			->withErrors($validator)
+			->withInput()->send();
+		}
+	    $rand=md5(uniqid(rand(), true));
+	    if(count(Session::get('social_data'))){ $active="1";}else{ $active="0";}
+	    try{
+         $customer=$this->stripe->customers($req['email']);
+        }catch(Exception $e){
+           Session::flash('error', $e->getMessage());
+           return Redirect::back();
+        }
+	    $users = User::create([ 'username' =>$req['username'],
+	   							'first_name'      => $req['first_name'],
+			                   'last_name'       => $req['last_name'],
+			                   'display_name'    => trim($req['first_name']).' '.trim($req['last_name']),
+			                   'email'           => $req['email'],
+			                   'password'   => bcrypt($req['password']),
+			                   'active'=>$active,
+							   'activate_hash'=>$rand,
+							    'api_customer_id'=>$customer['id']
+							   ])->id;
+	 //   $customerData = [
+		// 		'firstName' => $req['first_name'],
+		// 		'lastName' => $req['last_name'],
+		// 		'email' => $req['email'],
+		// ];
+	 //    $this->braintreeApi->createCustomer($customerData,$users);
+
+                         
+  		if($users){
+  			//Session::flush();
+  			
+  			$curentURL = '';
+  			if($request->session()->get('curentURL') == URL::to('costume/successrequestbag')){
+  				$curentURL = URL::to('costume/successrequestbag');
+  				Costumes::createRequestBag($users);
+  			}
+  			Session::flush();
+  			$request->session()->put('curentURL', $curentURL);
+  			
+  			if($active){
+  				Session::flash('success', 'Your account has been activated. You can login into your account now.');
+  			}else{
+  				$email['name']=trim($req['first_name']).' '.trim($req['last_name']);
+  				$email['activation_link']=URL::to('/').'/verification/'.$rand;
+				$sent=Mail::send('emails.registration',array("email"=>$email), function ($m) use($req) {
+					$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+					$m->to($req['email'], trim($req['first_name']).' '.trim($req['last_name']));
+				    $m->subject('Activation Link');
+				});
+				Session::flash('success', 'Registration is completed successfully. Activation Link is sent to your registered email.');	
+		 	}
+		}
+		else
+		{
+			 Session::flash('error', 'Registration completed successfully.Due database error');
+		}
+		return Redirect::to('login'); 
+	}*/
     public function redirectToProvider($provider)
     {
         return Socialite::driver($provider)->redirect();

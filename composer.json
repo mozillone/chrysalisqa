@@ -8,6 +8,7 @@
    "require": {
       "php": ">=5.6.4",
       "approached/laravel-image-optimizer": "^2.3",
+      "barryvdh/laravel-debugbar": "~2.4",
       "braintree/braintree_php": "*",
       "cartalyst/stripe-laravel": "5.0.*",
       "guzzle/guzzle": "*",

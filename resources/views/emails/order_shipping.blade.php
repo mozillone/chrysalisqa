@@ -137,7 +137,7 @@ border: 0px; border-radius: 5px; font-size: 16px; cursor:pointer; margin: 20px a
 
 <table style="margin:0 auto; font-size:13px; margin-bottom:30px;">
     <tr>
-        <td>If you have any questions, do not hesitate to <span style="color:#f53d68; text-decoration:underline;">reach out!</span></td>
+        <td>If you have any questions, do not hesitate to <a href="{{URL::to('/contact-support')}}"><span style="color:#f53d68; text-decoration:underline;">reach out!</span></a></td>
     </tr>
 </table>
 <table style="text-align:center;margin:0 auto; padding:15px 0px; font-size:13px; margin-bottom:0px; background:#f6f9fb; width:600px; border-bottom:1.5px solid #ddd;">

@@ -11,7 +11,9 @@
 |
 */
 //Auth::routes();
-Route::get('costume/redirect/{id}', 'CreateCostumeController@redirectToCharity');
+//Route::get('costume/redirect/{id}','');
+Route::any('costume/redirect/{id}', 'CreateCostumeController@redirectToCharity');
+
 Route::get('sitemap',['as' => 'sitemaps.posts','uses'=> 'SitemapsController@index']);
 Route::get('stripeuserupdate/{email}', ['as' => 'stripe.userupdate','uses'=> 'SitemapsController@stripeUsersUpdate']);
 Route::get('update/subcategories/attributes', ['as' => 'update.subcategories.attributes','uses'=> 'SitemapsController@updateAttributesForSubcategories']);
@@ -51,9 +53,14 @@ Route::get('/test', ['as' => '','uses'=>'DashboardController@Test']);
 Route::post('/test', ['as' => 'test','uses'=>'DashboardController@PostTest']);
 
 /** Products list page start here **/
-Route::get('/category/{slug1}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');;
+Route::any('/category/{slug1}/{page?}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');;
+
+Route::any('/Filterscategory/{slug1}','CostumesController@searchFilters');
+
 Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesController@costumeListings'))->where('name', '[A-Za-z]+');;
 Route::any('/product/{slug1?}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
+
+
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
 Route::any('inquire-costume', array('as' => 'inquire-costume','uses' => 'CostumesController@inquireCostume'));
 /** Products list page end here **/
@@ -160,6 +167,9 @@ Route::any('/generate-url-rewrites', ['as' => 'generate-url-rewrites','uses'=>'U
 Route::any('/del-rewrites', ['as' => 'del-rewrites','uses'=>'UrlRewritesController@deleteUrlRewrites']);
 Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 /******************************************************************************************************************************/
+
+
+
 
 	Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
 	  	Route::get('/admin/dashboard', 'DashboardController@dashboard');
@@ -290,6 +300,8 @@ Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
 	   	Route::any('/generatelables', array('as' => '','uses' => 'RequestabagController@Generatelables'));
+	   	Route::post('/generatefedexsmartpost', array('as' => '','uses' => 'RequestabagController@GenerateFedexSmartPostLabels'));
+	   	
 	   	Route::any('/returnlablegenerate', array('as' => '','uses' => 'RequestabagController@returnLableGenerate'));
 	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
 	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
@@ -972,4 +984,11 @@ Route::any('getpaypal', [
     'as' => 'getpaypal',
     'uses' => 'Admin\ReportsController@getallPaypal'
 ]);
+
+Route::get('500', function()
+{
+    abort(404);
+});
+
+Route::any('/testData','CostumesController@test');
 

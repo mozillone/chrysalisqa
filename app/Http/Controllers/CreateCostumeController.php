@@ -921,10 +921,16 @@ class CreateCostumeController  extends Controller {
 			$data=Costumes::getCostumeImages($costume_id);
 			$pic = asset('/costumers_images/Large').'/'.$data[0]->image;
 
+			if ((stripos( $charity_info->cos_name, 'costume' ) != '') || (stripos( $charity_info->cos_name, 'cosplay' ) != '')) {
+			  	$name = $charity_info->cos_name;
+			}else{
+				$name = $charity_info->cos_name." Costume";
+			}
+
 			/* End*/
 
 
-			return response()->json(['msg' => 'success', 'cat_url' => '/category/'.$list_url_arr[1].'/'.$list_url_arr[2], 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$charity_info->cos_name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name) ]);
+			return response()->json(['msg' => 'success', 'cat_url' => '/category/'.$list_url_arr[1].'/'.$list_url_arr[2], 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name) ]);
 
 		}
 	public function requestaBag(){
@@ -1061,7 +1067,7 @@ class CreateCostumeController  extends Controller {
 		$email_check = DB::table('users')->where('email',$cus_email)->count();
 		$user_info = DB::table('users')->where('email',$cus_email)->first();
 		//print_r($request->is_payout_no); exit;
-		$is_payout 		= (empty($request->is_payout_no)) ? '0' : '1';
+		$is_payout 		= (empty($request->is_payout_no)) ? '1' : '0';
 		$cus_name  		= $request->full_name;
 		$cus_email 		= $request->email_address;
 		$cus_phone 		= $request->phone_number;
@@ -2030,9 +2036,15 @@ class CreateCostumeController  extends Controller {
 			$pic = asset('/costumers_images/Large').'/'.$data[0]->image;
 			$name_costume = $charity_info->cos_name;
 			$charity_center = ucfirst($charity_info->name);
+
+			if ((stripos( $charity_info->cos_name, 'costume' ) != '') || (stripos( $charity_info->cos_name, 'cosplay' ) != '')) {
+			  	$name = $charity_info->cos_name;
+			}else{
+				$name = $charity_info->cos_name." Costume";
+			}
 			/* End*/
 
-			return response()->json(['msg'=>'success', 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$charity_info->cos_name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name)]);
+			return response()->json(['msg'=>'success', 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name)]);
 
 			//return "success";
 	}

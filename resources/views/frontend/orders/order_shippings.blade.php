@@ -76,11 +76,4 @@
 	<script src="{{ asset('angular/Frontend/Orders/Controllers/order-shippings.js') }}"></script>
 	<script src="{{ asset('/vendors/datatables/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
-	<script type="text/javascript">
-
-	if(window.location.href.indexOf('#') != -1){
-		$('html,body').animate({scrollTop: $('#ordersShipping').offset().top}, 800);
-	}
-
-</script>
 	@stop

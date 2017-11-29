@@ -7,6 +7,7 @@ $(document).on('click','.fav_costume',function(){
       data: {costume_id:costume_id,_token:token},
       context: this,
       success: function(response){
+        console.log(response);
        if(response.is_user_fav=="1"){
           $(this).find('span').addClass('active');
           $(this).find('span').html('<i aria-hidden=true class="fa fa-heart"></i>');

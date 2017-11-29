@@ -31,6 +31,7 @@ $(document).ready(function () {
                     $('#talkMessages').append(response.html);
                     $('.modal-backdrop').remove();
                     tag[0].reset();
+                    
                     //location.reload();
                 }
             });

@@ -57,6 +57,16 @@
 							<h2>{{$data[0]->name}}</h2>
 						</div>
 						<div class="col-md-6 col-sm-6 col-xs-12 single-view_social">
+							<a href="javascript:void(0);" class="facebook" class="icoRss" title="Facebook">
+								<i id="social-fb" class="fa fa-facebook fa-1x social"></i>
+								<input type="hidden" name="url_fb" class="url_fb" value="{{Request::fullurl()}}">
+								<input type="hidden" name="quote_fb" class="quote_fb" value="Come check out this {{$costume_detail_name}}">
+							</a>
+							<a href="javascript:void(0);" title="Twitter">
+								<span id="twiter_url" data-network="twitter" class="st-custom-button" data-title="Come check out this {{$costume_detail_name}}"  data-url="{{Request::fullurl()}}">
+									<i id="social-tw" class="fa fa-twitter fa-1x social"></i>
+								</span>
+							</a>
 							@if(Auth::check())
 							<a href="#" onclick="return false;" class="fav_costume" data-costume-id='{{$data[0]->costume_id}}'>
 								@else
@@ -70,17 +80,26 @@
 										@endif
 									</span>
 								</a>
+<<<<<<< HEAD
                                 <a href="#" data-toggle="modal" data-target="#messageModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                 <a href="javascript:void(0);" id="facebook" class="icoRss" title="Facebook">
 									<img class="img-responsive" src="{{URL::asset('assets/frontend/img/fb-ic.png')}}">
 									<input type="hidden" name="url_fb" id="url_fb">
 									<input type="hidden" name="quote_fb" id="quote_fb">
 								</a>
+=======
+								@if(Auth::check())
+                                	<a href="javscript:void(0);" id="envelope" onclick="showSellerInfo()" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                                @else
+                                	<a href="#" data-toggle="modal" data-target="#login_popup"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                                @endif
+                                
+                                
+								
+>>>>>>> chrysalisqa
 								<!-- <div class="sharethis-inline-share-buttons"></div> -->
 							</div>
 						</h1>
-						
-						
 						<!---Price section start -->
 						<div class="row">
 							<div class="priceview_rm">
@@ -191,19 +210,16 @@
 										<div class="tab-pane" id="viewTabs3">
 											<p class="viewTabs-text">
 												@if(!empty($data['seller_info'][0]))
-												@if($data['seller_info'][0]->id != 1)
-												<p>Name: <span>{{$data['seller_info'][0]->display_name}}</span></p>
-												<p>Username: <span>{{$data['seller_info'][0]->username}}</span></p>
-												<p>Phone: <span>{{$data['seller_info'][0]->phone_number}}<span></p>
+													@if($data['seller_info'][0]->id != 1)
+														<p><span>{{$data['seller_info'][0]->username}}</span></p>
 													@else
-													<p>Name: <span>Chrysalis Support</span></p>
-													<p>Username: <span>ChrysalisCostumes</span></p>
+														<p><span>ChrysalisCostumes</span></p>
 													@endif
-													@else
-													<p class="no-data-tab">No data found</p>
-													@endif
-												</p>
-												</div>
+												@else
+												<p class="no-data-tab">No data found</p>
+												@endif
+											</p>
+										</div>
 												
 											</div>
 											
@@ -233,17 +249,17 @@
 													<p class="viewTabs-text">
 														@if(!empty($data['seller_info'][0]))
 														@if($data['seller_info'][0]->id != 1)
-														<p>Name: <span>{{$data['seller_info'][0]->display_name}}</span>
-														</p>
-														<p>Username: <span>{{$data['seller_info'][0]->username}}</span>
+														
+														<p class="seller_name"><span>{{$data['seller_info'][0]->username}}</span>
 															<!--<p>Phone: <span>{{$data['seller_info'][0]->phone_number}}<span></p>-->
 														</p>
 														@else
-														<p>Name: <span>Chrysalis Support</span>
-														</p>
-														<p>Username: <span>ChrysalisCostumes</span>
+														<p class="seller_name"><span>ChrysalisCostumes</span>
 															<!--<p>Phone: <span>{{$data['seller_info'][0]->phone_number}}<span></p>-->
 														</p>
+														@endif
+														@if(Auth::check())
+															<a href="javscript:void(0);" type="button" class="contact_seller" data-toggle="modal" data-target="#messageModal">Contact</a>
 														@endif
 														@else
 														<p class="no-data-tab">No data found</p>
@@ -257,7 +273,7 @@
 										</div>
 										<!-- .tab_container_list_view -->
 									
-										
+									
 									
 										<div class="likeview-rm">
 											<p class="likeview-rm1">
@@ -294,7 +310,8 @@
 																	</a>
 																	<div class="hover_box">
 																		<p class="like_fav"><a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-o-up"></i>1</span></a> <a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a> </p>
-																		<p class="hover_crt add-cart" data-costume-id="145"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
+																		
+										<p class="hover_crt add-cart" data-costume-id="145"><i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart</p>
 																	</div>
 																</div>
 																@if($rand->film_qlty == '32')
@@ -319,7 +336,7 @@
 							</div>
 						</div>
 						
-							
+						
 						<div class="modal fade window-popup" id="report_item">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -380,14 +397,15 @@
 						</div>
 					</section>
 						
-				@if(Auth::user() !='')
+				@if(Auth::check())
+			 
 					<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<form action="{{route('inquire-costume')}}" method="POST" id="inquire_costume">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<input type="hidden" name="user_id" value="<?php if(Auth::check()){ echo Auth::user()->id; } ?>">
-									<input type="hidden" name="seller_id" value="{{ $data['seller_info'][0]->id }}">
+									<input type="hidden" name="seller_id" value="{{ $data['seller_info']['shipping_location'][0]->user_id  }}">
 									<input type="hidden" name="costume_name" value="{{ $data[0]->name }}">
 									<input type="hidden" name="costume_id" value="{{ $data[0]->costume_id }}">
 									<input type="hidden" name="type_id" value="{{ $data[0]->sku_no }}">
@@ -426,6 +444,7 @@
 							</div>
 						</div>
 					</div>
+					
 					@endif
 					<!-- size chart modal start here -->
 				
@@ -458,10 +477,7 @@
 												
 												
 												<ul class="nav nav-pills in-tab">
-													<!--	<label><input class="size_chekd"  id="sizechart_1" type="radio" name="colorRadio" value="red" checked> In Inches</label>
-													<label><input class="size_chekd" id="sny1"  type="radio" name="colorRadio" value="green">   Centimeters</label>-->
-													
-												</ul>
+										</ul>
 												
 												<div class="tab-content table-responsive">
 													<div id="home" class="tab-pane fade in sizes_chart red">
@@ -926,14 +942,21 @@
 					
 					<!-- size chart modal End  here -->
 					
-					
-					
-					
-					
 					@stop
 					{{-- page level scripts --}}
 					@section('footer_scripts')
 					<script>
+						function showSellerInfo () {
+							$('html, body').animate({
+						        scrollTop: $(".single_view_multi_view_tabs").offset().top
+						    }, 'slow');
+							$('.viewTabs li').removeClass('active');
+							$('.viewTabs li:last-child').addClass('active');
+							$("#tab1").hide();
+							$("#tab2").hide();
+							$('#tab3').show();
+
+						}
 						$(".mobile-plus").click(function(){
 							$(this).toggleClass("mobile-minus");	
 							$(this).parent("li").find(".responsive-inner").toggleClass("none-rm");
@@ -955,9 +978,12 @@
 					<script src="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.js') }}"></script>
 					<script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
 					<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
-					
+					<script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
+					<script type="text/javascript" src="{{ asset('/assets/frontend/js/social_sharing.js') }}"></script>
 					<script type="text/javascript">
+
 						$(document).ready(function(){
+
 							$(".size_chekd").click(function(){
 								var inputValue = $(this).attr("value");
 								var targetsizes_chart = $("." + inputValue);

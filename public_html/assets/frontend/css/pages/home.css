@@ -1,5 +1,5 @@
 .owl-controls.clickable {
-		display: block;
+/*		display: none;*/
 	}
 @media only screen
     and (min-device-width : 414px)

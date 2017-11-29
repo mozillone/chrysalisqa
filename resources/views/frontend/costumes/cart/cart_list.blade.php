@@ -44,11 +44,12 @@
 														</div>
 														<div class="media-body">
 															<h4 class="media-heading"><a href="/product{{$cart->url_key}}">{{$cart->costume_name}}</a></h4>
-															@if($cart->is_film=="yes")<p class="f_quality">Film Quality</p> @else  @endif
+															@if($cart->created_user_group=="admin")<span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>@endif
+															@if($cart->is_film=="yes")<p class="f_quality"><img class="img-responsive" src="{{asset('assets/frontend/img/film.png')}}"> Film Quality</p> @else  @endif
 															<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
 															<p><b>Size:</b> {{ucfirst($cart->size)}}</p>
 															<p class="upload_id"><b>Uploaded by</b><span> {{$cart->user_name}}</p>
-															@if($cart->created_user_group=="admin")<span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>@endif
+															
 															</div>
 														</div>
 													</div>
@@ -68,7 +69,7 @@
 													</div>
 													<div class="col-md-3 col-sm-6 col-xs-6">
 														<p class="price_right text-right"><span class="check_price">${{number_format(($cart->qty)*($new_price), 2, '.', ',')}}</span> 
-														<span><a href="javascript::void(0);" data-item-id="{{$cart->cart_item_id}}" data-cart_id="{{$cart->cart_id}}" class="delete btn" data-toggle="tooltip" data-placement="right" data-original-title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
+														<span><a href="javascript::void(0);" data-item-id="{{$cart->cart_item_id}}" data-cart_id="{{$cart->cart_id}}" class="delete btn" data-toggle="tooltip" data-placement="right" data-original-title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
 													</div>
 												</div>
 											</div>
@@ -84,7 +85,7 @@
 									</div>
 									@if(count($data['basic']))
 									<div class="col-md-3 col-sm-4 col-xs-12">
-										<div class="cart_page_right"  data-spy="" data-offset-top="230" data-offset-bottom="450">
+										<div class="cart_page_right "  data-spy="" data-offset-top="230" data-offset-bottom="450">
 											@if(Auth::check())<div class="well">
 												<div class="store_credit clearfix">
 													<h3>My Store Credit</h3> 
@@ -148,12 +149,12 @@
 <script src="{{ asset('/assets/frontend/js/pages/cart.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		if($('.cart_page_vew>.well').length >=3){
-			$(".cart_page_right").addClass('affix').attr('data-spy','affix');
-		}else{
-			$(".cart_page_right").removeClass('affix').removeAttr('data-spy','affix');
-		}
-	});
+    $(document).ready(function(){
+        if($('.cart_page_vew>. ').length >=6){
+            $(".cart_page_right").addClass('affix').attr('data-spy','affix');
+        }else{
+            $(".cart_page_right").removeClass('affix').removeAttr('data-spy','affix');
+        }
+    });
 </script>
 @stop
