@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('/assets/frontend/css/pages/costume_single.css')); ?>">
-<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5980685de0404c0012139258&product=inline-share-buttons' async='async'></script>
+
 <style>
 	.red.sizes_chart{display:block;}
 	div#size-chart label input.size_chekd {    vertical-align: text-bottom;}
@@ -81,14 +81,12 @@
 										<?php endif; ?>
 									</span>
 								</a>
+                                
 								<?php if(Auth::check()): ?>
                                 	<a href="javscript:void(0);" id="envelope" onclick="showSellerInfo()" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                 <?php else: ?>
                                 	<a href="#" data-toggle="modal" data-target="#login_popup"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                 <?php endif; ?>
-                                
-                                
-								
 								<!-- <div class="sharethis-inline-share-buttons"></div> -->
 							</div>
 						</h1>

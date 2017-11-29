@@ -80,23 +80,12 @@
 										@endif
 									</span>
 								</a>
-<<<<<<< HEAD
-                                <a href="#" data-toggle="modal" data-target="#messageModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-                                <a href="javascript:void(0);" id="facebook" class="icoRss" title="Facebook">
-									<img class="img-responsive" src="{{URL::asset('assets/frontend/img/fb-ic.png')}}">
-									<input type="hidden" name="url_fb" id="url_fb">
-									<input type="hidden" name="quote_fb" id="quote_fb">
-								</a>
-=======
+                                
 								@if(Auth::check())
                                 	<a href="javscript:void(0);" id="envelope" onclick="showSellerInfo()" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                 @else
                                 	<a href="#" data-toggle="modal" data-target="#login_popup"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                 @endif
-                                
-                                
-								
->>>>>>> chrysalisqa
 								<!-- <div class="sharethis-inline-share-buttons"></div> -->
 							</div>
 						</h1>
