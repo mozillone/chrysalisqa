@@ -4095,7 +4095,6 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-<<<<<<< HEAD
             "version": "4.2.0",
             "source": {
                 "type": "git",
@@ -4106,27 +4105,11 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/66465776cfc249844bde6d117abff1d22e06c2da",
                 "reference": "66465776cfc249844bde6d117abff1d22e06c2da",
-=======
-            "version": "4.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "2d3d238c433cf69caeb4842e97a3223a116f94b2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/2d3d238c433cf69caeb4842e97a3223a116f94b2",
-                "reference": "2d3d238c433cf69caeb4842e97a3223a116f94b2",
->>>>>>> e3b4d0da1987312a8c22b1e6914544a3206da9c3
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
-<<<<<<< HEAD
                 "phpdocumentor/reflection-common": "^1.0.0",
-=======
-                "phpdocumentor/reflection-common": "^1.0@dev",
->>>>>>> e3b4d0da1987312a8c22b1e6914544a3206da9c3
                 "phpdocumentor/type-resolver": "^0.4.0",
                 "webmozart/assert": "^1.0"
             },
@@ -4159,11 +4142,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-<<<<<<< HEAD
             "time": "2017-11-27T17:38:31+00:00"
-=======
-            "time": "2017-08-30T18:51:59+00:00"
->>>>>>> e3b4d0da1987312a8c22b1e6914544a3206da9c3
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -4214,7 +4193,6 @@
         },
         {
             "name": "phpspec/prophecy",
-<<<<<<< HEAD
             "version": "1.7.3",
             "source": {
                 "type": "git",
@@ -4225,18 +4203,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpspec/prophecy/zipball/e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
                 "reference": "e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
-=======
-            "version": "v1.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
-                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
->>>>>>> e3b4d0da1987312a8c22b1e6914544a3206da9c3
                 "shasum": ""
             },
             "require": {
@@ -4286,11 +4252,7 @@
                 "spy",
                 "stub"
             ],
-<<<<<<< HEAD
             "time": "2017-11-24T13:59:53+00:00"
-=======
-            "time": "2017-09-04T11:05:03+00:00"
->>>>>>> e3b4d0da1987312a8c22b1e6914544a3206da9c3
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -4400,11 +4362,7 @@
                 "filesystem",
                 "iterator"
             ],
-<<<<<<< HEAD
             "time": "2017-11-27T13:52:08+00:00"
-=======
-            "time": "2016-10-03T07:40:28+00:00"
->>>>>>> e3b4d0da1987312a8c22b1e6914544a3206da9c3
         },
         {
             "name": "phpunit/php-text-template",
@@ -4498,7 +4456,6 @@
         },
         {
             "name": "phpunit/php-token-stream",
-<<<<<<< HEAD
             "version": "2.0.2",
             "source": {
                 "type": "git",
@@ -4509,18 +4466,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/791198a2c6254db10131eecfe8c06670700904db",
                 "reference": "791198a2c6254db10131eecfe8c06670700904db",
-=======
-            "version": "2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "9a02332089ac48e704c70f6cefed30c224e3c0b0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/9a02332089ac48e704c70f6cefed30c224e3c0b0",
-                "reference": "9a02332089ac48e704c70f6cefed30c224e3c0b0",
->>>>>>> e3b4d0da1987312a8c22b1e6914544a3206da9c3
                 "shasum": ""
             },
             "require": {
@@ -4556,11 +4501,7 @@
             "keywords": [
                 "tokenizer"
             ],
-<<<<<<< HEAD
             "time": "2017-11-27T05:48:46+00:00"
-=======
-            "time": "2017-08-20T05:47:52+00:00"
->>>>>>> e3b4d0da1987312a8c22b1e6914544a3206da9c3
         },
         {
             "name": "phpunit/phpunit",

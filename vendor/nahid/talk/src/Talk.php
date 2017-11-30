@@ -15,8 +15,6 @@ use Illuminate\Contracts\Config\Repository;
 use Nahid\Talk\Conversations\ConversationRepository;
 use Nahid\Talk\Messages\MessageRepository;
 use Nahid\Talk\Live\Broadcast;
-use DB;
-use Auth;
 
 class Talk
 {
@@ -260,22 +258,16 @@ class Talk
      */
     public function sendMessageByUserId($receiverId, $message)
     {
-         //echo "<pre>";print_r($message);die;
-        $conversationId = $message['_id'];
-        $message = $message['message-data'];
-        $message = array(
-            'message' => $message,
-            'conversation_id' => $conversationId,
-            'user_id' => $this->authUserId,
-            'user_name' => Auth::user()->display_name,
-            'is_seen' => 0,
-            'created_at'=>date('y-m-d H:i:s'),
-        );
+        if ($conversationId = $this->isConversationExists($receiverId)) {
+            $message = $this->makeMessage($conversationId, $message);
 
-        $message = DB::table('messages')->insertGetId($message);
-         $get_details =  DB::table('messages')->where('id',$message)->first();  
+            return $message;
+        }
 
-        return $get_details;
+        $convId = $this->newConversation($receiverId);
+        $message = $this->makeMessage($convId, $message);
+
+        return $message;
     }
 
     /**
@@ -339,10 +331,10 @@ class Talk
      *
      * @return \Nahid\Talk\Messages\Message
      */
-    public function getConversationsById($conversationId, $offset = 0, $take = 20000000)
+    public function getConversationsById($conversationId, $offset = 0, $take = 20)
     {
         $conversations = $this->conversation->getMessagesById($conversationId, $this->authUserId, $offset, $take);
-       //  dd($this->makeMessageCollection($conversations));
+
         return $this->makeMessageCollection($conversations);
     }
 

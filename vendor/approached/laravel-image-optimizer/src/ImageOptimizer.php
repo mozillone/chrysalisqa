@@ -25,21 +25,12 @@ class ImageOptimizer extends OptimizerFactory
     {
         $fileExtension = $this->extensions[mime_content_type($filepath)];
 
-        /*$transformHandler = config('imageoptimizer.transform_handler');
+        $transformHandler = config('imageoptimizer.transform_handler');
 
         if (!isset($transformHandler[$fileExtension])) {
             throw new \Exception('TransformHandler for file extension: "' . $fileExtension . '" was not found');
-        }*/
+        }
 
-        if($fileExtension == 'jpg'){
-           $transformHandler["jpg"] = "jpegoptim";
-       }elseif($fileExtension == 'png'){
-           $transformHandler["png"] = "pngquant";
-       }elseif ($fileExtension == 'jpeg') {
-           $transformHandler["jpeg"] = "jpegoptim";
-       }else{
-           $transformHandler["gif"] = "gifsicle";
-       }
         $this->get($transformHandler[$fileExtension])->optimize($filepath);
     }
 

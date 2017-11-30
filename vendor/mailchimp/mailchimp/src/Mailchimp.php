@@ -121,7 +121,7 @@ class Mailchimp {
 
     public function __construct($apikey=null, $opts=array()) {
         if (!$apikey) {
-            $apikey = "7ab41a622265e372b0d1904d3595faa2-us10";
+            $apikey = getenv('MAILCHIMP_APIKEY');
         }
 
         if (!$apikey) {
