@@ -1402,6 +1402,7 @@
 																$(".deletedImages").append(MakeInput);
 															});
 															$('.btn-number').click(function(e){
+															    
 																e.preventDefault();
 																fieldName = $(this).attr('data-field');
 																type      = $(this).attr('data-type');
@@ -1433,9 +1434,12 @@
 																		var present = currentVal+50;
 																	}
 																}
-																var price = $('#price').val();
+															
+																var price1 = $('#price').val();
+																var price = parseInt(price1.replace(/\,/g,''));
 																var total = (price * present) / 100;
 																var amount = parseFloat(total).toFixed(2);
+																 
 																$('#hidden_donation_amounts').val(amount);
 																$('#dynamic_percent_amounts').html("$"+amount);
 																//$('#dynamic_amount').html("<input type='hidden' name='donation_amount_val' id='hidden_donation_amount' value='"+parseFloat(total).toFixed(2)+"'>");

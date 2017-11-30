@@ -360,7 +360,7 @@ class Order extends Authenticatable
         'created_at'=>date('Y-m-d h:i:s'));
       $converstion_id = Site_model::insert_get_id('conversations',$converstion_array);
 
-      $message_array  = array('message'=>'',
+      $message_array  = array('message'=>'Your Order is under process.',
         'is_seen'=>'0',
         'deleted_from_sender'=>'0',
         'deleted_from_receiver'=>'0',

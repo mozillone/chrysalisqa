@@ -287,7 +287,7 @@ class Costumes extends Authenticatable
                                     'created_at'=>date('y-m-d H:i:s'));
         $conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
 
-        $theard_array  = array('message'=>'',
+        $theard_array  = array('message'=>'Your Bag is under process.',
                                 'is_seen'=>'0',
                                 'deleted_from_sender'=>'0',
                                 'deleted_from_receiver'=>'0',
