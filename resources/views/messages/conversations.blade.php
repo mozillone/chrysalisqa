@@ -97,8 +97,10 @@
                                         $listingImage = URL::asset('/costumers_images/default-placeholder.png');
                                     }
                                     ?>
+                                    @if($inbox->type != "order")
                                     <div class="msg_order_imge"><a href="{{ URL::to('/product').$inbox->url_key }}"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
-                                    <p class="order_cnt">@if($inbox->type == "request_a_bag") Ref no @else Product Id @endif #: <br>{{$inbox->type_id}}</p>
+                                    @endif
+                                    <p class="order_cnt">@if($inbox->type == "request_a_bag") Ref no  @elseif($inbox->type == "order") Order Id @else Product Id @endif #: <br>{{$inbox->type_id}}</p>
 
                                 </div>
                                 </a>
@@ -180,8 +182,10 @@
                                     $listingImage = URL::asset('/costumers_images/default-placeholder.png');
                                     }
                                     ?>
+                                    @if($inbox->type != "order")
                                     <div class="msg_order_imge"><a href="{{ URL::to('/product').$inbox->url_key }}"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
-                                 <p class="order_cnt">@if($inbox->type == "request_a_bag") Ref no @else Product Id @endif #: <br>{{$inbox->type_id}}</p>
+                                    @endif
+                                 <p class="order_cnt">@if($inbox->type == "request_a_bag") Ref no  @elseif($inbox->type == "order") Order Id @else Product Id @endif #: <br>{{$inbox->type_id}}</p>
 
                                 </div>
                                 </a>
@@ -217,7 +221,7 @@
         var id=$(this).attr('id');
         swal({
             title: "Are you sure want to delete?",
-            text: "You will not be able to recover this Listing!",
+            text: "You will not be able to recover this Conversation!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",

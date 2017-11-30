@@ -78,14 +78,14 @@ class Costumes extends Authenticatable
             $is_login='';
         }
         //dd('SELECT *  FROM `cc_costume_attribute_options` WHERE `costume_id` ='.$costume_id.' AND `attribute_id` = '.Config::get('constants.FAQ_ID').' AND `attribute_option_value_id` = '.Config::get('constants.FAQ_OPTION_VALUE').'');
-        $data = DB::Select('SELECT cats.category_id,cats.parent_id,cats.name as cat_name,cats.description,cst.costume_id,cst.weight_pounds,cst.weight_ounces,dsr.name,dsr.description,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,cst.created_user_group,cst.deleted_status,cst.status as cos_act_status '.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer FROM `cc_costume_to_category` as cat JOIN cc_costumes as cst on cst.costume_id=cat.costume_id JOIN cc_category  as cats on cats.category_id=cat.category_id LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id where cat.costume_id='.$costume_id.'  group by cat.costume_id');
-
+        $data=DB::Select('SELECT cats.category_id,cats.parent_id,cats.name as cat_name,cats.description,cst.costume_id,cst.weight_pounds,cst.weight_ounces,dsr.name,dsr.description,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,cst.created_user_group,cst.deleted_status,cst.status as cos_act_status '.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer FROM `cc_costume_to_category` as cat JOIN cc_costumes as cst on cst.costume_id=cat.costume_id JOIN cc_category  as cats on cats.category_id=cat.category_id LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id where cat.costume_id='.$costume_id.' group by cat.costume_id');
+        /* Added by Gayatri*/
         $data['est_time'] = DB::table('costume_attribute_options')
                                 ->where('costume_attribute_options.attribute_id', '=', 14)
                                 ->where('costume_attribute_options.costume_id','=', $costume_id)
                                 ->select('attribute_option_value')
                                 ->first();
-
+        /* End */
         $data['faq']=DB::Select('SELECT *  FROM `cc_costume_attribute_options` WHERE `costume_id` ='.$costume_id.' AND `attribute_id` = '.Config::get('constants.FAQ_ID').' AND `attribute_option_value_id` = '.Config::get('constants.FAQ_OPTION_VALUE').'');
         $data['returns']=DB::Select('SELECT *  FROM `cc_costume_attribute_options` WHERE `costume_id` ='.$costume_id.' AND `attribute_id` = '.Config::get('constants.IS_Returns').'');
         return $data;
@@ -280,14 +280,14 @@ class Costumes extends Authenticatable
 
         $conversation_array = array('type'=>'request_a_bag',
                                     'user_one'=> $users,
-                                    'subject'=>'Request a bag subject',
+                                    'subject'=>'Your Bag Created.',
                                     'user_two'=>'1',
                                     'status'=>'1',
                                     'type_id'=>$get_conversations_info->type_id,
                                     'created_at'=>date('y-m-d H:i:s'));
         $conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
 
-        $theard_array  = array('message'=>'Hi',
+        $theard_array  = array('message'=>'Your Bag is under process.',
                                 'is_seen'=>'0',
                                 'deleted_from_sender'=>'0',
                                 'deleted_from_receiver'=>'0',

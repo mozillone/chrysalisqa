@@ -1,0 +1,95 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+//Auth::routes();
+    
+Route::get('/', ['as' => '','uses'=>'HomePageController@index']);
+Route::get('/login', ['as' => 'login','uses'=>'AuthController@getSignin']);
+Route::post('/login', ['as' => 'login.post','uses'=>'AuthController@postLogin']);
+Route::post('/register', ['as' => 'register','uses'=>'AuthController@postRegisterUser']);
+Route::any('admin', 'AuthController@getAdminSignin');
+Route::post('/admin/login', ['as' => 'admin.login.post','uses'=>'AuthController@postAdminSignin']);
+Route::get('social/login/redirect/{provider}', ['uses' => 'AuthController@redirectToProvider', 'as' => 'social.login']);
+Route::get('social/login/{provider}', 'AuthController@handleProviderCallback');
+Route::get('/logout', ['as' => 'logout','uses'=>'AuthController@logout']);
+Route::get('/verification/{verification}', ['as' => '','uses'=>'AuthController@verification']);
+Route::any('/forgetPassword', ['as' => 'forgotpassword.post','uses'=>'AuthController@forgotPassword']);
+Route::any('/password/change/{verification?}', ['as' => 'forgotpassword.change','uses'=>'AuthController@forgotPasswordChange']);
+Route::any('/emailValidation', array('as' => '','uses' => 'AuthController@EmailNameCheck'));
+Route::any('/forgot/emailVerification', array('as' => '','uses' => 'AuthController@forgorpasswordEmailCheck'));
+Route::get('/dashboard', ['as' => 'dashboard','uses'=>'DashboardController@dashboard']);
+Route::any('/edit/profile', ['as' => 'edit-profile','uses'=>'UserController@EditProfile']);
+
+/** Products list page start here **/
+Route::any('/shop/{cat_id}/{slug1}/{slug2?}', array('as' => '','uses' => 'CostumesController@costumeListings'));
+Route::any('/shop/{cat_id}/{slug1}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
+Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
+/** Products list page end here **/
+
+/** Costume Like page start here **/
+Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
+/** Costume Like page end here **/
+
+/** Costume Like page start here **/
+Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
+/** Costume Like page end here **/
+
+
+Route::group(['namespace' => 'Admin', 'middleware' => 'admin',], function() {
+	  	Route::get('/admin/dashboard', 'DashboardController@dashboard');
+	  	Route::get('/admin/profile', 'UserController@adminProfile');
+	  	Route::post('/admin/profile/post', ['as' => 'admin-profile-update','uses'=>'UserController@adminProfileUpdate']);
+	   /****************User Management Start Here***************************/
+	    Route::get('customers-list', ['as' => 'customers-list','uses'=>'UserController@customersList']);
+	    Route::any('/customers/list', 'UserController@customersListData');
+		Route::get('/user-costumes-list/{id}', ['as' => 'user-costumes-list','uses'=>'UserController@userCostumes']);
+		Route::get('/user-costumessold-list/{id}', ['as' => 'user-costumessold-list','uses'=>'UserController@userSoldcostumes']);
+		Route::get('/user-recentorders-list/{id}', ['as' => 'user-recentorders-list','uses'=>'UserController@recentOrders']);
+	    Route::get('/user-credithistory-list/{id}', ['as' => 'user-credithistory-list','uses'=>'UserController@creditHistory']);
+		Route::get('/user-payementprofiles-list/{id}', ['as' => 'user-payement_profiles-list','uses'=>'UserController@payementProfiles']);
+		Route::any('/customer-add', ['as' => 'customer-create','uses'=>'UserController@customerAdd']);
+	    Route::any('/customer-edit/{id}', ['as' => '','uses'=>'UserController@customerEdit']);
+	    Route::any('/customer-update', ['as' => 'customer-update','uses'=>'UserController@customerUpdated']);
+	    Route::any('/customer-delete/{id}', 'UserController@customerDelete');
+	    Route::any('/status/change', 'UserController@changeUserStatus');
+	    Route::any('/customer/emailValidation', array('as' => '','uses' => 'UserController@EmailNameCheck'));
+	    /****************User Management End Here***************************/
+
+		/****************Costumes Management Code Starts Here*********************/
+		Route::get('costumes-list', ['as' => 'costumes-list','uses'=>'CostumeController@costumesList']);
+		/****************Costumes Managemnet Code Ends Here***********************/
+
+		/****************Attributes Management Starts Here*********************/
+		Route::any('/attributes/create', ['as' => 'attributes-create','uses'=>'AttributeController@createAttributes']);
+	    Route::any('/attribute/edit/{id?}', ['as' => 'attribute-edit','uses'=>'AttributeController@editAttribute']);
+	    Route::any('/attribute-delete/{id}', ['as' => '','uses'=>'AttributeController@deleteAttributes']);
+	    Route::any('/attributes', ['as' => 'attributes-list','uses'=>'AttributeController@attributesList']);
+	    Route::any('/attributes-list', ['as' => '','uses'=>'AttributeController@attributesData']);
+	
+		Route::any('/attributes/value/create', ['as' => 'attribute-value-create','uses'=>'AttributeController@createAttributesValue']);
+	    Route::any('/attribute/value/edit/{id?}', ['as' => 'attribute-value-edit','uses'=>'AttributeController@editAttributeValue']);
+	    Route::any('/attribute-value-delete/{id}', ['as' => '','uses'=>'AttributeController@deleteAttributesValue']);
+	    Route::any('/attributes/values', ['as' => 'attributes-values-list','uses'=>'AttributeController@attributesValuesList']);
+	    Route::any('/attributes-values-list', ['as' => '','uses'=>'AttributeController@attributesValuesData']);
+		/****************Attributes Management Ends Here***********************/
+
+
+		/****************Categories Management Starts Here*********************/
+		Route::any('/category/create', ['as' => 'categories-create','uses'=>'CategoriesController@createCategories']);
+	    Route::any('/category/edit/{id?}', ['as' => 'categories-edit','uses'=>'CategoriesController@editCategories']);
+	    Route::any('/category-delete/{id}', ['as' => '','uses'=>'CategoriesController@deleteCategory']);
+	    Route::any('/categories', ['as' => 'attributes-list','uses'=>'CategoriesController@categoriesList']);
+	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
+	    Route::any('/getCostumesList', ['as' => '','uses'=>'CategoriesController@getCostumesList']);
+		/****************Categories Management Ends Here***********************/
+});
+

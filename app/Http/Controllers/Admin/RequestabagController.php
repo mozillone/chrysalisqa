@@ -69,21 +69,32 @@ class RequestabagController extends Controller
 		//echo "<pre>";print_r($this->data['request_a_bag']);exit;										
 		$generated_lables = DB::table('request_shippings')
 							->where('request_id',$id)->get();
+							//dd($generated_lables);
 		$count_generated_lable =  count($generated_lables);
 		$this->data['generated_lables_html'] = '0';
 		if ($count_generated_lable != 0) {
-		
 			$html = '<div>';
-			foreach ($generated_lables as $label_html) {
-				if ($label_html->type == 'pick') {
-					$html .= '<p>Empty Bag Tracking Number: <a href="/request-bag/label/'.$label_html->shipping_no.'">UX'.$label_html->shipping_no.'</a> <i> via FedEx generated '.$label_html->created_at.' </i> </p> ';
-				}else if($label_html->type == 'drop'){
-					$html .= '<p>Customer Tracking Number: <a href="/request-bag/label/'.$label_html->shipping_no.'">UX'.$label_html->shipping_no.'</a> <i> via FedEx SmartPost generated '.$label_html->created_at.'</i> </p>';
-				}				
+			if($count_generated_lable == 2){
+				foreach ($generated_lables as $label_html) {
+					if ($label_html->type == 'pick') {
+						$html .= '<p>Empty Bag Tracking Number: <a href="/request-bag/label/'.$label_html->shipping_no.'">UX'.$label_html->shipping_no.'</a> <i> via FedEx generated '.$label_html->created_at.' </i> </p> ';
+					}else if($label_html->type == 'drop'){
+						$html .= '<p>Customer Tracking Number: <a href="/request-bag/label/'.$label_html->shipping_no.'">UX'.$label_html->shipping_no.'</a> <i> via FedEx SmartPost generated '.$label_html->created_at.'</i> </p>';
+					}
+				}
+			}else if($generated_lables[0]->type == 'pick'){
+				$html .= '<p>Empty Bag Tracking Number: <a href="/request-bag/label/'.$generated_lables[0]->shipping_no.'">UX'.$generated_lables[0]->shipping_no.'</a> <i> via FedEx generated '.$generated_lables[0]->created_at.' </i> </p> ';
+
+				$html .= '<p>Customer Tracking Number: <a href="javascript::void(0);"  id="smartpost_label_generate">Generate</a></p>';
+			}else if($generated_lables[0]->type == 'drop'){
+				$html .= '<p>Empty Bag Tracking Number: <a href="javascript::void(0);"  id="fedex_label_generate">Generate</a></p>';
+
+				$html .= '<p>Customer Tracking Number: <a href="/request-bag/label/'.$generated_lables[0]->shipping_no.'">UX'.$generated_lables[0]->shipping_no.'</a> <i> via FedEx SmartPost generated '.$generated_lables[0]->created_at.'</i> </p>';
 			}
 			$html .= '</div>';
-		$this->data['generated_lables_html'] = $html;
+			$this->data['generated_lables_html'] = $html;
 		}
+		//echo "<pre>"; print_r($this->data['generated_lables_html']); exit;
 		$store_payout_details = DB::table('request_credits')->where('request_id',$id)->first();
 		$store_count_payout = count($store_payout_details);
 		$paypal_payout_details = DB::table('paypal_payouts')->where('type_id',$id)->first();
@@ -228,7 +239,7 @@ class RequestabagController extends Controller
         
     public function Returnamount(Request $request){
         try{
-	       DB::beginTransaction();
+	        DB::beginTransaction();
 			$this->data = array();
 			$get_user_id = DB::table('request_bags')->where('id',$request->type_id)->first();
                         
@@ -365,69 +376,189 @@ class RequestabagController extends Controller
       return "success";
 	}
 
+	public function GenerateFedexSmartPostLabels(Request $request){
+		$req = $request->all();
+		$address = Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
+		$request_bag = Site_model::find_user_and_meta('user_meta',Auth::user()->id);
+		// For Fedex
+		if(isset($request_bag['service'])){ 
+			$service = $request_bag['service'];
+		}else{
+			$service = "";
+		}
+		// For Smart Post
+		if(isset($request_bag['weight'])){ 
+			$weight = $request_bag['weight'];
+		}else{
+			$weight = "0";
+		}
+
+		$sellerAddress = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
+
+		if($req['label_type'] == 'fedex'){
+			$response_fedex=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
+			$response = $this->labelResponse($response_fedex, 'fedex', $req['request_bag_id']);
+		}else if($req['label_type'] == 'smart_post'){
+			$response_smartpost=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
+			$response = $this->labelResponse($response_smartpost, 'smart_post', $req['request_bag_id']);
+		}
+		if(empty($response)){
+			Session::flash('success','Label generated successfully');
+		}else{
+			Session::flash('error',$response);
+		}
+		return Redirect::back();
+	}
+
+	private function labelResponse($label_response, $label_type, $request_id)
+	{
+		//echo "<pre>"; print_r($label_response);exit;
+		$fedex_error = 0; $smart_post_error = 0; $label_error = '';
+		if($label_type == 'fedex'){
+			if($label_response['result']=="0"){
+				$fedex_error = 1;
+				$label_error = $label_response['msg'];
+			}else{
+				$fedex_track_id=$label_response['msg'];
+				$shipping_array_pick = array('request_id'=>$request_id,
+											'type'=>'pick',
+											'weight'=>'',
+											'shipping_no'=>$fedex_track_id,
+											'created_at'=>date('y-m-d H:i:s'),
+										);
+				$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
+				//DB::table('request_shippings')->insert($shipping_array_pick);
+			}
+		}else if($label_type == 'smart_post'){
+			if($label_response['result']=="0"){
+				$smart_post_error = 1;
+				$label_error = $label_response['msg'];
+			}else{
+				$smart_post_track_id=$label_response['msg'];
+			
+				$shipping_array_drop = array('request_id'=>$request_id,
+											'type'=>'drop',
+											'weight'=>'',
+											'shipping_no'=>$smart_post_track_id,
+											'created_at'=>date('y-m-d H:i:s'),
+										);
+
+				$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
+			}
+		}
+		return $label_error;
+	}
+
 	public function Generatelables(Request $request){
 		//print_r(Config::get('constants.FedEx_Ship_Url')); exit;
 		//print_r($request->hidden_id); exit;
+		$fedex_error = 0; $smart_post_error = 0;
         try{
 	        $islabelGenerated = DB::table('request_shippings')->where('request_id', $request->hidden_id)->first(); 
 
 		        if(! $islabelGenerated)
 		        {
 			        DB::beginTransaction();
-					$req=$request->all();
-					//print_r($req['hidden_id']); exit;
-					$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
-					$request_bag= Site_model::find_user_and_meta('user_meta',Auth::user()->id);
+					$req = $request->all();
+					$address = Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
+					$request_bag = Site_model::find_user_and_meta('user_meta',Auth::user()->id);
 					if(isset($request_bag['service'])){ 
-						$service=$request_bag['service'];
+						$service = $request_bag['service'];
 					}else{
-						$service="";
+						$service = "";
 					}
 					if(isset($request_bag['weight'])){ 
-						$weight=$request_bag['weight'];
+						$weight = $request_bag['weight'];
 					}else{
-						$weight="0";
+						$weight = "0";
 					}
 			     	$this->data = array();
 					$random_drop = str_random(13);
 					$random_pick = str_random(13);
 					$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
 					$sellerAddress = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
-					//dd($sellerAddress);
-					$response=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
-					//dd($response);
-					if($response['result']=="0"){
-						Session::flash('error',$response['msg']);
-			            return Redirect::back();
+					
+					/*
+						generating Fedex Label
+					 */
+					try{
+						$response_fedex=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
+						if($response_fedex['result']=="0"){
+							$fedex_error = 1;
+							// Session::flash('error',$response_fedex['msg']);
+				   			//return Redirect::back();
+						}else{
+							$fedex_track_id=$response_fedex['msg'];
+							$shipping_array_pick = array('request_id'=>$req['hidden_id'],
+														'type'=>'pick',
+														'weight'=>'',
+														'shipping_no'=>$fedex_track_id,
+														'created_at'=>date('y-m-d H:i:s'),
+													);
+							$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
+						}
+					}catch(\Exception $e){
+						
 					}
-					$track_id=$response['msg'];
-					$shipping_array_pick = array('request_id'=>$req['hidden_id'],
-												'type'=>'pick',
-												'weight'=>'',
-												'shipping_no'=>$track_id,
-												'created_at'=>date('y-m-d H:i:s'),
+					
+
+					/*
+						generating Smart post Label
+					*/
+					try{
+						$response_smartpost=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
+						if($response_smartpost['result']=="0"){
+						$smart_post_error = 1;
+							//Session::flash('error',$response_smartpost['msg']);
+				      		//return Redirect::back();
+						}else{
+							$smart_post_track_id=$response_smartpost['msg'];
+						
+							$shipping_array_drop = array('request_id'=>$req['hidden_id'],
+								'type'=>'drop',
+								'weight'=>'',
+								'shipping_no'=>$smart_post_track_id,
+								'created_at'=>date('y-m-d H:i:s'),
+								);
+
+							$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
+						}
+					}catch(\Exception $e){
+						//dd($e);
+					}
+
+					if($response_fedex['result']=="0"){
+						$fedex_error = 1;
+						// Session::flash('error',$response_fedex['msg']);
+			   			//return Redirect::back();
+					}else{
+						$fedex_track_id=$response_fedex['msg'];
+						$shipping_array_pick = array('request_id'=>$req['hidden_id'],
+													'type'=>'pick',
+													'weight'=>'',
+													'shipping_no'=>$fedex_track_id,
+													'created_at'=>date('y-m-d H:i:s'),
 												);
-					Log::info($shipping_array_pick);
-					$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
-					Log::info($shpippin_pick_insert);
-					$response=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
-					Log::info('Samrt post');
-					Log::info($response);
-					//dd($response);
-					$track_id=$response['msg'];
-					if($response['result']=="0"){
-						 Session::flash('error',$response['msg']);
-			      		 return Redirect::back();
+						$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
 					}
-					$shipping_array_drop = array('request_id'=>$req['hidden_id'],
-						'type'=>'drop',
-						'weight'=>'',
-						'shipping_no'=>$track_id,
-						'created_at'=>date('y-m-d H:i:s'),
-						);
-					Log::info($shipping_array_drop);
-					$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
-			                Log::info($shpippin_drop_insert);
+
+					if($response_smartpost['result']=="0"){
+						$smart_post_error = 1;
+						//Session::flash('error',$response_smartpost['msg']);
+			      		//return Redirect::back();
+					}else{
+						$smart_post_track_id=$response_smartpost['msg'];
+					
+						$shipping_array_drop = array('request_id'=>$req['hidden_id'],
+							'type'=>'drop',
+							'weight'=>'',
+							'shipping_no'=>$smart_post_track_id,
+							'created_at'=>date('y-m-d H:i:s'),
+							);
+
+						$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
+					}
+					
 					$status_update = DB::table('request_bags')->where('id',$request->hidden_id)->update(['status'=>'shipped']);
 		                
 		            $oRequestBag = DB::table('request_bags')->where('id',$request->hidden_id)->first();
@@ -443,7 +574,19 @@ class RequestabagController extends Controller
 		            // end mail
 		            
 		            DB::commit();
-					Session::flash('success','Label generated successfully');
+
+		            if($fedex_error == 0 && $smart_post_error == 0){
+		            	Session::flash('success','Label generated successfully');	
+		            }else if($fedex_error == 0){
+		            	Session::flash('success','Empty Bag Tracking Number generated successfully.');
+		            }else if($smart_post_error == 0){
+		            	Session::flash('success','Customer Tracking Number generated successfully.');
+		            }else if($fedex_error != 0){
+		            	Session::flash('error',$response_fedex['msg']);
+		            }else if($smart_post_error != 0){
+		            	Session::flash('error',$response_smartpost['msg']);
+		            }
+					
 		            return Redirect::back();
 		    }
 		    else{
@@ -458,7 +601,6 @@ class RequestabagController extends Controller
 	}
 
 	 private function fedex($req,$address,$service,$sellerAddress){
- 
           $userCredential = new ComplexType\WebAuthenticationCredential();
           $userCredential
               ->setKey(Config::get('constants.FedEx_Key'))

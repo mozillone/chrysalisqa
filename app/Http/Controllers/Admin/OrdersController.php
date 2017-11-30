@@ -684,7 +684,7 @@ class OrdersController extends Controller {
     public function orderTransactionsData(Request $request,$order_id)
     {
         $req=$request->all();   
-        $transactions = DB::select('SELECT id,CONCAT(UCASE(LEFT(type, 1)), SUBSTRING(type, 2)) as transaction_type,CONCAT(UCASE(LEFT(status, 1)), SUBSTRING(status, 2)) as transaction_status,DATE_FORMAT(created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",FORMAT(amount,2)) as price  FROM `cc_transactions` WHERE `order_id`='.$order_id.' ORDER BY `id` DESC');
+        $transactions = DB::select('SELECT id,CONCAT(UCASE(LEFT(type, 1)), SUBSTRING(type, 2)) as transaction_type,CONCAT(UCASE(LEFT(status, 1)), SUBSTRING(status, 2)) as transaction_status,DATE_FORMAT(created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",FORMAT(amount,2)) as price  FROM `cc_transactions` WHERE `order_id`='.$order_id.' Group BY order_id ORDER BY `id` DESC');
         return response()->success(compact('transactions'));
   
     }

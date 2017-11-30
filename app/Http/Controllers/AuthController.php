@@ -107,6 +107,8 @@ class AuthController extends Controller {
 				 }
 				 if(Session::has('is_loginPage')){
 					return Redirect::to('/dashboard')->withCookie($cookie);
+				 }else if($request->session()->get('_previous')['url'] == url('/')){
+				 	return Redirect::to('/dashboard');
 				 }else if(Session::has('is_blog')){
                      return Redirect::to('/blog')->withCookie($cookie);
                  }else if(Session::has('is_event')){
@@ -381,6 +383,7 @@ class AuthController extends Controller {
 		              'email' => 'required|email',
 	                  'password' => 'required',
 	                 );
+
 	    $validator = Validator::make($req,$rule);
 	    if ($validator->fails()) {
 			return Redirect::back()
@@ -709,13 +712,13 @@ class AuthController extends Controller {
 							$addres_insert=DB::table('address_master')->insertGetId($addres_array);
 
 							$conversation_array = array('type'=>'request_a_bag','user_one'=>$userid,
-								'subject'=>'Request a bag subject',
+								'subject'=>'Your Bag created.',
 								'user_two'=>'1',
 								'status'=>'1',
 								'created_at'=>date('y-m-d H:i:s'));
 							$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
 
-							$theard_array  = array('message'=>'Hi login',
+							$theard_array  = array('message'=>'Your Bag is under process.',
 									'is_seen'=>'0',
 							        'deleted_from_sender'=>'0',
 							        'deleted_from_receiver'=>'0',

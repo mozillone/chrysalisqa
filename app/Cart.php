@@ -11,7 +11,6 @@ use Auth;
 use Cookie;
 use Session;
 use Config;
-use Log;
 
 
 class Cart extends Authenticatable
@@ -346,27 +345,30 @@ class Cart extends Authenticatable
                               'zip_code'=>$cart_address[0]->shipping_postcode
                             );
     }else{
-      if(Auth::check()){
-        $data=DB::Select('SELECT *  FROM `cc_address_master` WHERE `address_type` = "shipping" AND `user_id` ='.Auth::user()->id );
-        if(count($data)){
-          $shipping_address=array('city'=>$data[0]->city,
-                                  'state'=>$data[0]->state,
-                                  'zip_code'=>$data[0]->zip_code
-                                );
-        }else{
-          $shipping_address=[];
-        }
-      }else{
-        $shipping_address=[];
-      }
+    
+     if (Auth::check())
+    {
+         $data=DB::Select('SELECT *  FROM `cc_address_master` WHERE `address_type` = "shipping" AND `user_id` ='.Auth::user()->id );
+     if(count($data)){
+     $shipping_address=array('city'=>$data[0]->city,
+                              'state'=>$data[0]->state,
+                              'zip_code'=>$data[0]->zip_code
+                            );
+     }else{
+      $shipping_address=[];
+
+     }
+    }else{
+      $shipping_address=[];
+
+     }
+    
     }
-         
- 
-  //  dd($shipping_address);
+
     if(count($shipping_address)){
       return $shipping_address;
     }else{
-      return false;
+      return false;;
     }
 
  }
@@ -385,14 +387,12 @@ class Cart extends Authenticatable
  }   
     
 protected function getUserCartShippingAddress(){
-  if(Auth::check()){
-      $data=DB::Select('SELECT *  FROM `cc_cart` WHERE `user_id` ='.Auth::user()->id);
-      return $data;
-  }else{
-    return ;
-  }
-    
-    //return $data; 
+    if (Auth::check())
+    {
+        $data=DB::Select('SELECT *  FROM `cc_cart` WHERE `user_id` ='.Auth::user()->id);
+    return $data; 
+    }
+     
 }
 
 }

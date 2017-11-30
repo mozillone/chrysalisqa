@@ -38,7 +38,7 @@
 				<div class="col-md-10 col-xs-12">
 					<div class="chat conversation-chat">
 						<div class="chat-header clearfix">
-							<?php //echo $user;die; ?>
+							<?php //echo"<pre>"; print_r($get_con); exit; ?>
 							<div class="chat-about">
 								<h4>{{@$get_con->subject}}</h4>
 								@if(isset($user))
@@ -66,8 +66,10 @@
                                     $listingImage = URL::asset('/costumers_images/default-placeholder.png');
                                 }
                                 ?>
+                                @if($get_con->type != "order")
 								<div class="msg_order_imge"><a href="{{ URL::to('/product').$get_con->url_key }}"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
-								<li><p class="orders_singles_views">@if($get_con->type == 'request_a_bag') Ref no @else Product @endif#: <br>{{@$get_con->type_id}}</p></li>
+								@endif
+								<li><p class="orders_singles_views">@if($get_con->type == 'request_a_bag') Ref no @elseif($get_con->type == "order") Order Id @else Product Id @endif#: <br> {{@$get_con->type_id}}</p></li>
 							</ul>
 						</div> <!-- end chat-header -->
 						@yield('content')

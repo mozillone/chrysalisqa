@@ -1107,5 +1107,11 @@ $(function(){
         activeCropperObjIndex = 0;
         $(".modal-footer").hide();
     }
+    
+    /*$(document).on("click",".img_clse",function()
+    {
+       $(this).parents().find('#dvPreview').children('.item.active').remove(); 
+    });*/
+    
 });
  

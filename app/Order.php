@@ -354,16 +354,18 @@ class Order extends Authenticatable
     private function converstionTheard($order_id,$seller_id){
       $converstion_array = array('type'=>'order','user_one'=>Auth::user()->id,
         'user_two'=>$seller_id,
+        'subject' =>'Your Order been placed.',
+        'type_id' => $order_id,
         'status'=>'1',
         'created_at'=>date('Y-m-d h:i:s'));
       $converstion_id = Site_model::insert_get_id('conversations',$converstion_array);
-      $message_array  = array('message'=>'Hi',
+      $message_array  = array('message'=>'Your Order is under process.',
         'is_seen'=>'0',
         'deleted_from_sender'=>'0',
         'deleted_from_receiver'=>'0',
         'user_id'=>Auth::user()->id,
         'user_name'=>Auth::user()->display_name,
-        'conversation_id'=>$converstion_id);
+        'conversation_id'=>$converstion_id,'created_at'=>date('Y-m-d h:i:s'));
       $converstion_id = Site_model::insert_get_id('messages',$message_array);
 
       return true;

@@ -59,6 +59,7 @@ class MessageController extends Controller
         $get_con = DB::table('conversations')
             ->leftjoin('url_rewrites','url_rewrites.url_offset','=','conversations.costume_id')
             ->leftjoin('costume_image','costume_image.costume_id','=','conversations.costume_id')
+            ->select('conversations.type','conversations.type_id','conversations.subject', 'costume_image.image', 'url_rewrites.url_key', 'conversations.user_one', 'conversations.user_two', 'conversations.costume_id')
             ->where('conversations.id',$id)->first();
 
         $make_seen = DB::table('messages')->where('conversation_id',$id)->update(['is_seen'=>'1']);

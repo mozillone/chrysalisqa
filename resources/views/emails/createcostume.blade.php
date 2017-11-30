@@ -8,7 +8,7 @@
 						<h1 style="color:#333;font-size:16px;font-weight:bold;line-height:24px">Hi {{$name}},<br />
 						</h1>
 
-						<div>You have created a costume name as <strong>{{$costume_name}}</strong></div>
+						<div>You have created a costume named as <strong>{{$costume_name}}</strong></div>
 						</td>
 					</tr>
 				</tbody>

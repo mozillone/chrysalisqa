@@ -75,5 +75,5 @@
     <script src="{{ asset('/assets/frontend/js/pages/event.js') }}"></script>
     <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
     <script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
-    <script src="http://chrysalisqa.local.dotcomweavers.net/assets/frontend/js/owl.carousel.min.js"></script>
+<script src="{{ asset('assets/frontend/js/owl.carousel.min.js')}}"></script>
 @stop

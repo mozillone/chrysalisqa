@@ -29,7 +29,8 @@ i.fa.fa-trash-o{cursor:pointer;}
 .header-brand{background-color:white;}
 .header-brand .brand{color:#333333;font-size:18px;text-decoration:none;font-weight:400;}
 .chat .chat-header .chat-about .chat-with span.message-data-name.user-name{width:inherit;float:inherit;}
-.msg_order_imge{width:100%;float:right;padding-right:15px;}
+.msg_order_imge{width:100%;float:right;padding-right:15px;    max-height: 60px;
+    overflow: hidden;}
 .people-list{width:100%;padding:22px 41px;}
 p.order_cnt{margin-top:5px;margin-left:20px!important;}
 .people-list .search{padding:20px;}
@@ -38,7 +39,7 @@ form#talkSendMessage {    width: 100% !important;}
 .people-list .fa-search{position:relative;left:-25px;}
 .people-list ul{padding:20px;}
 .people-list ul li{	/*   padding-bottom: 20px; */}
-.people-list img{border-radius:50%;height:60px;width:60px;}
+.people-list img{border-radius:50%;/*height:60px;*/width:60px;}
 .people-list .col-md-2 img{border-radius:0;}
 .people-list .about{float:left;margin-top:8px;}
 .people-list .about{padding-left:8px;}
@@ -50,14 +51,14 @@ form#talkSendMessage {    width: 100% !important;}
 .chat .chat-header .chat-about{float:left;padding-left:10px;margin-top:6px;padding-bottom:20px;}
 .chat .chat-header .chat-num-messages{color:#92959E;}
 .chat .chat-header .user-info-sec{float:right;display:inline-flex;list-style-type:none;align-items:center;}
-.chat .chat-header .user-info-sec img{width:70px;height:70px;/*	margin-left: 20px;*/}
+.chat .chat-header .user-info-sec img{width:70px;/*height:70px;*//*	margin-left: 20px;*/}
 .chat .chat-history{border-bottom:2px solid white;	/* overflow-y: scroll;
 		height: 575px; */}
 	.chat .chat-history .message-data{	/* margin-bottom: 15px; */
 	padding:25px 0;}
 	.chat .chat-history .message-data-time{color:#a8aab1;padding-left:6px;margin-top:20px;font-family:Proxima-Nova-medium;font-size:14px;display:inline-block;float:right;}
 	.chat .chat-history  hr{margin:0;}
-	.chat .chat-history .message{color:#000;font-size:14px;}
+	.chat .chat-history .message{color:#000;font-size:14px;margin-top: 22px;}
 
 	/* .chat .chat-history .my-message {
 		background: #86BB71;
@@ -94,7 +95,7 @@ form#talkSendMessage {    width: 100% !important;}
 	.messages-chat-list{border:1px solid #e1e1e1;margin-bottom:30px;}
 	.front_chat{margin-top:15px;border-top:1px solid #ccc;}
 	.message-chat-sec .people-list ul{display:flex;align-items:center;font-family:Proxima-Nova-Semibold;color:#323031;}
-	.message-chat-sec .people-list p{margin-bottom:0;font-family:Proxima-Nova-Semibold;color:#323031;text-align:left;margin-left:15px;word-break:break-word;}
+	.message-chat-sec .people-list p{margin-bottom:0;font-family:Proxima-Nova-Semibold;color:#323031;text-align:left;margin-left:15px !important;word-break:break-word;}
 	.front_chat .clearfix.row{border-bottom:1px solid #ccc;padding:40px 0px;}
 	.front_chat .clearfix.row:last-child{border-bottom:none;}
 	.message-chat-sec .people-list ul{padding:0;margin-bottom:0px;list-style-type:none;}
@@ -109,11 +110,12 @@ form#talkSendMessage {    width: 100% !important;}
 	.message-chat-sec .nav>li>a:focus{background:transparent;}
 
 	/* conversation message chat */
+	.chat .chat-message span{margin-right: 15px;}
 	.conversation-chat h4{font-size:18px;font-family:Proxima-Nova-Extrabold;color:#323031;}
 	.conversation-chat .message-data-name img,.conversation-chat .chat-message img{border-radius:50%;width:70px;height:70px;}
 	.chat .chat-message span{float:left;}
 	.chat .chat-message span.user-name{float:left;}
-	ul.user-info-sec p{font-size:14px;font-family:Proxima-Nova-Semibold;}
+	ul.user-info-sec p{font-size:14px;font-family:Proxima-Nova-Semibold;white-space: pre;}
 	span.message-data-name.user-name,.user-name{margin-left:10px;color:#ED4266;margin-bottom:15px;text-decoration:underline;width:100px;white-space:nowrap;font-family:Proxima-Nova-Semibold;overflow:hidden;text-overflow:ellipsis;float:right;margin-top:0px;}
 	.chat .chat-history .message{color:#323031;font-size:14px;font-family:Proxima-Nova-Semibold;}
 	.chat .chat-header .chat-about .chat-with{font-family:Proxima-Nova-Semibold;}

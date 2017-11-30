@@ -8,7 +8,8 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
- 
+use Illuminate\Database\QueryException;
+use InvalidArgumentException;
 
 class Handler extends ExceptionHandler
 {
@@ -49,7 +50,7 @@ class Handler extends ExceptionHandler
 
    public function render($request, Exception $e)
        {
-          
+           
             /*if ($this->isHttpException($e))
             {       
                 if($e instanceof NotFoundHttpException)
@@ -57,24 +58,29 @@ class Handler extends ExceptionHandler
                     return response()->view('errors.404', [], 404);
                 }
                 return $this->renderHttpException($e);
-            }*/
-
-            if ($e instanceof HttpResponseException) {
-                 return $e->getResponse();
-               } elseif ($e instanceof ModelNotFoundException) {
-                   $e = new NotFoundHttpException($e->getMessage(), $e);
-               } elseif ($e instanceof AuthenticationException) {
-                   return $this->unauthenticated($request, $e);
-               } elseif ($e instanceof AuthorizationException) {
-                   $e = new HttpException(403, $e->getMessage());
-               } elseif ($e instanceof ValidationException && $e->getResponse()) {
-                   return $e->getResponse();
-               }
-
-               if ($this->isHttpException($e)) {
-                   return $this->toIlluminateResponse($this->renderHttpException($e), $e);
-               } else {
-                   return $this->toIlluminateResponse($this->convertExceptionToResponse($e), $e);
+            }
+            return parent::render($request, $e);*/
+            if($e instanceof NotFoundHttpException){
+                return response()->view('errors.'.'404');
+            }elseif ($e instanceof ModelNotFoundException) {
+                return response()->view('errors.'.'404');
+            } elseif ($e instanceof AuthenticationException) {
+                return $this->unauthenticated($request, $e);
+            } elseif ($e instanceof AuthorizationException) {
+                return response()->view('errors.'.'404');
+            } elseif ($e instanceof ValidationException && $e->getResponse()) {
+                Session::flash('error',$e->getMessage());
+                return redirect()->back();
+            }elseif($e instanceof InvalidArgumentException) {
+                return response()->view('errors.'.'404');
+            }else if($e instanceof \PDOException){
+                return response()->view('errors.'.'404');
+            }else if($e instanceof \NotFoundHttpException){
+                return response()->view('errors.'.'404');
+            }else{
+                Session::flash('error',$e->getMessage());
+                return redirect()->back();
+                //return response()->view('errors.'.'404');
             }
             return parent::render($request, $e);
        }

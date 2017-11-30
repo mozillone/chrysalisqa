@@ -12,11 +12,14 @@
         <!-- Added by Gayatri -->
         {!! Meta::tag('url') !!}
         {!! Meta::tag('image') !!}
+        <meta property="og:image:type" content="image/jpg" />
+        <meta property="og:image:alt" content="Chrysalis Costumes">
 		<meta property="og:image:width" content="100">
 		<meta property="og:image:height" content="100">
 		<!-- End  -->
 		<link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
 		<link rel="stylesheet" href="{{ asset('/vendors/bootstrap/dist/css/bootstrap.min.css')}}">
+		<link rel="canonical" href="{{url()->current()}}" />
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/css/chrysalis.css')}}">
 		<link href="{{ asset('/assets/frontend/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">

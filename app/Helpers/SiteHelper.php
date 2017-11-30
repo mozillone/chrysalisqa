@@ -40,11 +40,24 @@ class SiteHelper  {
 
 			//$getSubCategories = Site_model::Fetch_data('category','*',$cond);
 			$categories_list[$menus->name][]="None";
+            $catids = array();
+            $subcat_names = array();
 			foreach ($getSubCategories as $subCat) {
-				$link=Category::getUrlLinks($subCat->category_id);
-				$categories_list[$menus->name][]=$link.'_'.$subCat->name;
+                $catids[] = $subCat->category_id;
+				$subcat_names[]  = $subCat->name;
 				//$categories_list[$menus->name][]=$subCat->category_id.'_'.$subCat->name;
 			}
+            $cat_ids_implode = implode(",", $catids);
+            
+            $links =Category::getUrlLinksMulti($cat_ids_implode);
+            
+            $uTemp = 0;
+            foreach($links  as $link_name)
+            {
+                 $categories_list[$menus->name][]= $link_name.'_'.$subcat_names[$uTemp];  
+                 $uTemp++;
+            }
+           
 			
 		}
 	
