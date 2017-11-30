@@ -32,37 +32,8 @@ $(function() {
 	});
     
 
-function pagination()
-{
-	$("#per_page").change(function(){
-        /* get new no of items per page */
-      	var newPerPage = parseInt( $(this).val() );
-      	/* destroy jPages and initiate plugin again */
-      	$("ul.holder").jPages("destroy").jPages({
-            containerID   : "itemContainer",
-            perPage       : newPerPage,
-            startPage    : 1,
-	        startRange   : 1,
-	        midRange     : 3,
-	        endRange     : 1,
-	        previous    : "Previous",
-	        next        : "Next",
-        });
-    });
-    $("ul.holder").jPages({
-        containerID  : "itemContainer",
-        perPage      : 12,
-        startPage    : 1,
-        startRange   : 1,
-        midRange     : 3,
-        endRange     : 1,
-        previous    : "Previous",
-        next        : "Next",
-    });
-
-}
 var search=$('#search_list').serializeArray();
-searching(search);
+//searching(search);
 $(document).on('click','.gender > li',function(){
 	$('.gender li').removeClass('active');
 	$(this).addClass('active');
@@ -110,9 +81,29 @@ $(document).on('click','.mbl_sort',function(){
 	 	var search=$('#search_list').serializeArray();
 	 	searching(search);
 	}
-})
+});
+
+$(document).on("click",".pagination li a",function(e)
+{ 
+       e.preventDefault();
+     var anchor = $(this).attr('href');
+     var queryString = anchor.split('?', 2)[1] || '';
+     var id =  queryString.split('=',2)[1];
+     $("#page").val(id);
+     searching(search);
+});
+
+$(document).on("change",".per_page",function(e)
+{ 
+     e.preventDefault();
+     var id = $(this).val();
+     $("#perpage").val(id);
+     searching(search);
+});
+
 function searching(search){
 	var filter=$('#search_list').serializeArray();
+	debugger;
 	var res="";
 	var cat_id=$('input[name="cat_id"]').val();
 	var parent_cat_name=$('input[name="parent_cat_name"]').val();
@@ -120,101 +111,20 @@ function searching(search){
 	var is_login=$('input[name="is_login"]').val();
 	$("#itemContainer").html("");
 	$("#itemContainer").addClass("search_icn_load");
+	var search=$('#search_list').serializeArray();
 	if(search!=null){
 		filter=search;
 	}else{
-		filter="";
+		//filter="";
 	}
+	  var url = $("#search_list").attr('action');
+	  
 		$.ajax({
 			type: 'POST',
-			url: '/getSearchCostumesData',
+			url: url,
 			data: filter,
 			success: function(response){
-				if(response.data.costumes.length!=0){
-					　$.each(response.data.costumes,function(index, value) {
-						var cst_len="";
-						if(value.image!=null){
-							var path='/costumers_images/Medium/'+value.image;
-							if(fileExists(path)){
-								var src=path;
-							}else{
-								var src="/costumers_images/default-placeholder.jpg";
-							}
-						}else{
-							var src="/costumers_images/default-placeholder.jpg";
-						}
-						if(value.url_key!=null){
-							var link=value.url_key;
-						}else{
-							var link="";
-						}
-						if(value.is_like=="1"){
-							var is_like='class="active"';
-						}else{
-							var is_like=' ';
-						}
-						if(value.is_fav=="1"){
-							var is_fav='class="active"';
-							var icon='<i aria-hidden=true class="fa fa-heart"></i>';
-						}else{
-							var is_fav=' ';
-							var icon='<i aria-hidden=true class="fa fa-heart-o"></i>';
-						}
-						if (value.created_user_group=="admin") {
-							var cc_cos = '<img src="/img/chrysalis_brand.png"></span>';
-						}else{
-							var cc_cos = '';
-							cst_len="no_brand";
-						}
-						if(value.created_user_group=="admin" && value.discount!=null && value.uses_customer<value.uses_total && now()>=value.date_start && now()<=value.date_end){
-							var discount=(value.price/100)*value.discount;
-							var new_price=value.price-discount;
-							var price='<p><span class="old-price"><strike>$'+addCommas(value.price)+'</strike></span> <span class="new-price">$'+addCommas(new_price)+'</span></p>';
-					
-						}else{
-							var price='<p><span class="new-price">$'+addCommas(value.price)+'</span></p>';
-						}
-						if(is_login){
-							var like='<a href="#" onclick="return false;" class="like_costume" data-costume-id='+value.costume_id+'><span '+is_like+'><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span></a>';
-							var fav='<a href="#" onclick="return false;" class="fav_costume" data-costume-id='+value.costume_id+'><span '+is_fav+'>'+icon+'</span></a>';
-						}else{
-							var like='<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden=true class="fa fa-thumbs-up"></i>'+value.like_count+'</span></a>';
-							var fav='<a data-toggle="modal" data-target="#login_popup"><span '+is_fav+'>'+icon+'</span></a>';
-						}
-						if(value.quantity>=1){
-							var stock='<p class="hover_crt add-cart" data-costume-id="'+value.costume_id+'"><i aria-hidden=true class="fa fa-shopping-cart"></i> Add to Cart</p>';
-						}else{
-							var stock='<p class="hover_crt"><i aria-hidden=true class="fa fa-shopping-cart"></i> Out of stock</p>';
-						}
-						if(value.name.length<=30){
-							var cst_name=value.name;
-							cst_len+=" sml_name";
-						}else{
-							var cst_name=value.name.substr(0,30)+"...";
-						}
-
-						if(value.film_qlty == '32'){
-							var quality = '<p class="ystrip-rm"><span><img class="img-responsive" src="http://dev.chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality</span></p>';
-						}else{
-							var quality = '';
-						}
-
-						res+='<div class="col-md-3 col-sm-4 col-xs-6"><div class=prod_box><div class=img_layer><a href="/product'+link+'"  style="background-image:url('+src+');background-repeat:no-repeat;">&nbsp;</a><div class=hover_box><p class=like_fav>'+like+' '+fav+' '+stock+'</div></div>'+quality+'<div class="slider_cnt  '+cst_len+'"><span class="cc_brand">'+cc_cos+'</span><h4><a href="/product'+link+'"</a>'+cst_name+'</h4>'+price+'</div></div></div>';
-				    });
-					$(".pagination").show();
-					$(".show_per_page").removeClass('hidden');
-					$("#itemContainer").append(res);
-					$("ul.holder").removeClass('hidden');
-					pagination();
-				}else{
-					var list=$('#itemContainer').html().length;
-					//$("ul.holder").remove();
-					$("ul.holder").addClass('hidden');
-					$(".show_per_page").addClass('hidden');
-					$('#counting').html('')
-				    res='<div class="col-sm-12 col-md-6"><div class="caption">Sorry, we could not find any costumes</div></div>';
-				    $("#itemContainer").html(res);
-				 }
+			    $("#search-container").html(response);
 			},
 		     complete: function(jqXHR, textStatus) {
 		    	 $("#itemContainer").removeClass("search_icn_load");

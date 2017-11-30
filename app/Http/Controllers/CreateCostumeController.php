@@ -151,7 +151,7 @@ class CreateCostumeController  extends Controller {
 
 
 			$req=$request->all();
-
+           
 			$userid=Auth::user()->id;
 
 		  	$costume_name=$req['costume_name'];
@@ -919,6 +919,7 @@ class CreateCostumeController  extends Controller {
 			}else{
 				$name = $charity_info->cos_name." Costume";
 			}
+
 			$quote = "I’m selling my ".ucfirst($name)." on Chrysalis.\n".$donation." Check it out!";
 
 			$debugger = Costumes::facebookDebugger($share_url);
@@ -1108,7 +1109,7 @@ class CreateCostumeController  extends Controller {
 							);
 
 		$conversation_array = array('type'=>'request_a_bag','user_one'=>'',
-									'subject'=>'Your Bag has been created.',
+									'subject'=>'Your Bag created.',
 									'user_two'=>'1',
 									'status'=>'1',
 									'type_id'=>$ref_no,
@@ -1319,15 +1320,13 @@ class CreateCostumeController  extends Controller {
 
 	public function EditCostumeAdd(Request $request){
  
-	  
+	    
 		$userid=Auth::user()->id;
-// echo
-		//echo "<pre>";print_r($request->all());die;
 		$delete_costume_attributes = DB::table('costume_attribute_options')->where('costume_id',$request->costume_id)->delete();
 	 
 		$delete_costume_attributes = DB::table('costume_to_category')->where('costume_id',$request->costume_id)->delete();
 			$req=$request->all();
- 
+		
 			$costume_name=$req['costume_name'];
 		  	$categoryname=$req['categoryname'];
 		  	$costume_condition=$req['condition'];
@@ -1371,7 +1370,6 @@ class CreateCostumeController  extends Controller {
 			'condition_type' =>$cleaned,
 			'dynamic_percent'=>$request->dynamic_percent_amount,
 			'created_by'=>$userid,
-			'created_at'=>date('y-m-d H:i:s'),
 			'updated_at'=>date('y-m-d H:i:s'),
 			);
 
@@ -1728,43 +1726,6 @@ class CreateCostumeController  extends Controller {
 			'attribute_option_value'=>$waistlbs,
 			);
 			$waist_lbs_insert=DB::table('costume_attribute_options')->insert($waist_lbs);
-			//echo "<pre>";print_r("hello");die;
-
-			/*
-		|Table:costume_attribute_options
-		|Costume FAQ (used for cosplay ?,is your costume have unique fashion?,used for an activity?,you make the costume?,Is the costume fit for film quality?)
-		|@costume_id
-		|@attribute_id
-		|@attribute_option_value_id
-		|@attribute_option_value
-		*/
-			/*switch($cosplay){ case '7': $cosplay_value="yes"; break; case '8': $cosplay_value="No"; break; }
-			$cosplay_value=array('costume_id'=>$request->costume_id,
-			'attribute_id'=>'2',
-			'attribute_option_value_id'=>$cosplay,
-			'attribute_option_value'=>$cosplay_value,
-			);
-			$cosplay_value_insert=DB::table('costume_attribute_options')->insert($cosplay_value);
-			//uniquefashion insertion
-			switch($fashion){ case '9': $fashion_val="yes"; break; case '10': $fashion_val="No"; break; }
-			$unique_fashion=array('costume_id'=>$request->costume_id,
-			'attribute_id'=>'3',
-			'attribute_option_value_id'=>$fashion,
-			'attribute_option_value'=>$fashion_val,
-			);
-			$unique_fashion_insert=DB::table('costume_attribute_options')->insert($unique_fashion);
-			//Activity
-			switch($activity){ case '11': $activity_value="yes"; break; case '12': $activity_value="No"; break; }
-			$activity_val=array('costume_id'=>$request->costume_id,
-			'attribute_id'=>'4',
-			'attribute_option_value_id'=>$activity,
-			'attribute_option_value'=>$activity_value,
-			);
-			$activity_val_insert=DB::table('costume_attribute_options')->insert($activity_val);
-			//User Costumes
-			*/
-			//film Quality
-
 
 			switch($makecostume){ case '30': $makecostume_value="yes"; break; case '31': $makecostume_value="No"; break; }
 			$user_costume=array('costume_id'=>$request->costume_id,
@@ -1813,18 +1774,13 @@ class CreateCostumeController  extends Controller {
 			$faq_insert=DB::table('costume_attribute_options')->insert($faq_value);
 			// costume description end
 			// pricing insertion
-
-			$price=$req['price'];
+			$price1=$req['price'];
+			$price = str_replace(",","",$price1);
 		  	$quantity=$req['quantity'];
-		  	//$shipping=$req['shipping'];
-		  	//$packageitems = $req['packageditems'];
 		  	$length = $req['Length'];
 		  	$width = $req['Width'];
 		  	$height = $req['Height'];
-		  	//$type = $req['type'];
-		  	//$service = $req['service'];
-
-			/*
+		 /*
 		 |Tbale:costumes
 		 |@price varchar
 		 |@quantity  enum
@@ -1835,10 +1791,10 @@ class CreateCostumeController  extends Controller {
 			'quantity'=>$quantity,
 			'updated_at'=>date('y-m-d H:i:s'),
 			);
-
+           
 			$update_costume = DB::table('costumes')->where('costume_id',$request->costume_id)->update($costume);
 
-			/*
+		/*
 		|Table:costume_attribute_options
 		|Package Information
 		|@costume_id 
@@ -1846,17 +1802,6 @@ class CreateCostumeController  extends Controller {
 		|@attribute_option_value_id
 		|@attribute_option_value
 		*/
-
-		 
-
-			/*//weight of packaged items
-			switch($packageitems){ case '17': $package="1+ -20lbs"; break; case '18': $package="2+ -201lbs"; break; }
-			$package_val=array('costume_id'=>$costume_id,
-				'attribute_id'=>'10',
-				'attribute_option_value_id'=>$packageitems,
-				'attribute_option_value'=>$package,
-				);
-			$insert_package=DB::table('costume_attribute_options')->insert($package_val);*/
 
 			//length
 			if(!empty($length)){
@@ -1886,11 +1831,6 @@ class CreateCostumeController  extends Controller {
 				);
 			$width_db=DB::table('costume_attribute_options')->insert($height);
 			}
-				
-
-			
-
-
 			//end pricing insertion
 
 			$req=$request->all();
@@ -1914,20 +1854,7 @@ class CreateCostumeController  extends Controller {
 								->where('attribute_id','=','14')
 								->where('option_id',$handlingtime)
 								->first();
-			/*switch($handlingtime){ 
-				case '26': 
-						$handling_name->value =="Same Business Day"
-						break; 	
-				case '27': 
-						$handling_name =="10 Business Days"; 
-						break; 
-				case '28': 
-						$handlingtime =="10 Business Days"; 
-						break; 
-				case '29': 
-						$handlingtime =="10 Business Days"; 
-						break; 
-				}*/
+	
 			$handlingtime_val=array('costume_id'=>$request->costume_id,
 				'attribute_id'=>'14',
 				'attribute_option_value_id'=>$handlingtime,
@@ -1935,7 +1862,6 @@ class CreateCostumeController  extends Controller {
 				);
 			$insert_handlingtime=DB::table('costume_attribute_options')->insert($handlingtime_val);
 			//Return Policy
-			/*switch($returnpolicy){ case '30': $returnpolicy_name="Return Accepted"; break; case '31': $returnpolicy_name="Return Not Accepted "; break; }*/
 
 			$returnpolicy_name = DB::table('attribute_options')
 								->select('option_value as value')
@@ -1953,8 +1879,8 @@ class CreateCostumeController  extends Controller {
 		 	|Tbale:costumes
 		 	|@donation_amount float
 		 	|@charity_id  int
-		 
 		 	*/
+		 	
 			//Check whether the costume inserted by admin or not if the user is selected insert the user id else insert the admin as costumer
 			if (isset($req['charity_name']) && !empty($req['charity_name'])) {
 				
@@ -2028,11 +1954,13 @@ class CreateCostumeController  extends Controller {
 				
 				$is_amount = 1;
 			}
+
 			if ((stripos( $charity_info->cos_name, 'costume' ) != '') || (stripos( $charity_info->cos_name, 'cosplay' ) != '')) {
 			  	$name = $charity_info->cos_name;
 			}else{
 				$name = $charity_info->cos_name." Costume";
 			}
+
 			$quote = "I’m selling my ".ucfirst($name)." on Chrysalis.\n".$donation." Check it out!";
 
 			$debugger = Costumes::facebookDebugger($share_url);

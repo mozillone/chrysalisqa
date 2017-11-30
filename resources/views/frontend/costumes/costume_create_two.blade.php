@@ -629,7 +629,7 @@
 														<option value="1sz">1SZ</option>
 														<option value="xxs">XXS</option>
 														<option value="xs">XS</option>
-														<option value="xs">S</option>
+														<option value="s">S</option>
 														<option value="m">M</option>
 														<option value="l">L</option>
 														<option value="xl">XL</option>
