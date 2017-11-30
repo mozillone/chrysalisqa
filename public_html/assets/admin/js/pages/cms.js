@@ -100,7 +100,11 @@ $(function(){
             if(element.parent('.input-group').length) {
                 error.insertAfter($(element).parents('div.input-group'));
             }else{
-                error.insertAfter(element);
+                if($("#page_desc").val() === ""){
+                    error.insertAfter("#cke_page_desc");
+                }else{
+                    error.insertAfter(element);    
+                }
             }
         },
         messages: {

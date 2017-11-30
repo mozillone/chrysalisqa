@@ -132,8 +132,8 @@ $(function(){
 					}else{
 						var src='/costumers_images/default-placeholder.jpg';
 					}
-					
-					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" ></div><div class="media-body"><h4 class="media-heading"><a href="/product'+value.url_key+'">'+value.costume_name+'</a></h4><p><b>Item Condition : </b>'+capitalization(value.condition)+'</p><p><b>Size : </b>'+capitalization(value.size)+'</p></div></div></div>'
+                    
+					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" ></div><div class="media-body"><h4 class="media-heading"><a href="/product'+value.url_key+'">'+value.costume_name+'</a></h4><p><b>Condition : </b>'+capitalizationCondition(value.condition)+'</p><p><b>Size : </b>'+capitalization(value.size)+'</p></div></div></div>'
 				});
 				cart+='</div></div><div class="chk-out"><a href="/checkout">Proceed to Checkout</a></div></div>';
 				}else{
@@ -167,14 +167,22 @@ $(function(){
         $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
         //$('.accordion-heading i').toggleClass('fa-chevron-right fa-chevron-down');
     });
-    function capitalization(name){
-    	firstChar = name.substring( 0, 1 ); 
+    function capitalizationCondition(name){
+        return name.replace(/_/g, ' ').replace(/\b./g, function(m){ return m.toUpperCase(); });
+    	/*firstChar = name.substring( 0, 1 ); 
     	firstChar.toUpperCase();
 		tail = name.substring( 1 ); 
 		name = firstChar.toUpperCase() + tail;
-		return name;
+		return name;*/
     }
 	
+    function capitalization(name){
+        firstChar = name.substring( 0, 1 ); 
+        firstChar.toUpperCase();
+        tail = name.substring( 1 ); 
+        name = firstChar.toUpperCase() + tail;
+        return name;
+    }
 
 
 

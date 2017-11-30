@@ -7,54 +7,68 @@ Home@parent
 <link rel="stylesheet" href="<?php echo e(asset('/assets/frontend/css/owl.theme.default.min.css')); ?>">
 <style>
     .thumbnail1 {
-   position: relative;
-   overflow: hidden;
-   padding: 0px;
-   border-radius: 0px;
-   border: none; cursor:pointer;
-    }
-    .caption {
-   position:absolute;
-   top:0;
-   right:0;
-   background: rgba(95, 197, 172, 0.60);
-   width:100%;
-   height:100%;
-   display: none;
-   text-align:center;
-   color:#fff !important;
-   z-index:2;
-    }
-    .insta_main .thumbnail1 .caption p a i {
-   font-size: 55px;
-    }
-    .insta_main .thumbnail1 .caption p a {
-   position: absolute;
-   top: 40%;
-   background: transparent;
-   left: 0;
-   right: 0px;
-    }
-    .thumbnail1.mini_thumb {
-   max-height: 160px;margin-bottom: 25px;
-    }
-    .thumbnail1.mini_thumb p a i {
-   font-size: 35px;
-    }
-    
-    .mini_thumb.thumbnail1 .caption p a {
-   position: absolute;
-   top: 40%;
-   background: transparent;
-   left: 0;
-   right: 0px;
-    }
-    .instagram_div h2 i {
-   color: #5fc5ac
-;
-   font-size: 32px;
-   vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    border-radius: 0px;
+    border: none; cursor:pointer;
+	}
+	.caption {
+    position:absolute;
+    top:0;
+    right:0;
+    background: rgba(95, 197, 172, 0.60);
+    width:100%;
+    height:100%;
+    display: none;
+    text-align:center;
+    color:#fff !important;
+    z-index:2;
+	}
+	.insta_main .thumbnail1 .caption p a i {
+    font-size: 55px;
+	}
+	.insta_main .thumbnail1 .caption p a {
+    position: absolute;
+    top: 0%;
+    background: transparent;
+    left: 0;    height: 100%;
+    right: 0px;
+	}
+	.thumbnail1.mini_thumb {
+    max-height: 160px;margin-bottom: 25px;
+	}
+	.thumbnail1.mini_thumb p a i {
+    font-size: 35px;
+	}
+	.mini_thumb.thumbnail1 .caption p a {
+    position: absolute;
+    top: 0%;
+    background: transparent;
+    left: 0;
+    right: 0px;    height: 100%;
+	}
+	.instagram_div h2 i {
+    color: #5fc5ac;
+    font-size: 32px;
+    vertical-align: middle;
+	}
+	.thumbnail1 a {
+    width: 100%;
+    display: block;
 }
+.insta_main .thumbnail1 .caption p a i {
+    position: absolute;    left: 0;
+    right: 0px;
+    top: 40%;
+}
+.thumbnail1.mini_thumb p a i {
+    position: absolute;
+    left: 0;
+    right: 0px;
+    top: 40%;
+}
+
 </style>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -62,7 +76,6 @@ Home@parent
 <?php echo (isset($pageData->description) && !empty($pageData->description) ? $pageData->description : ''); ?>
 <div class="container">
 </div>
-
 <div class="home_product_slider">
 	<div class="container">
 		<div class="row">
@@ -85,79 +98,73 @@ Home@parent
 									<?php if($cos->created_user_group == "admin"): ?>
 									<?php $is_admin=20;?>
 									<span class="cc_brand"><img src="<?php echo e(asset('img/chrysalis_brand.png')); ?>"></span>
-									
 									<?php else: ?>
 									<?php $is_admin=40;?>
 									<?php endif; ?>
 									<?php if(strlen($cos->cos_name) < 20) { ?>
-										
 										<h4><a href="/product<?php echo e($cos->url); ?>"><?php echo e($cos->cos_name); ?></a></h4>
 										<?php } else { ?>
 										<h4><a href="/product<?php echo e($cos->url); ?>"><?php echo e(substr($cos->cos_name, 0,$is_admin)."..."); ?></a></h4>
 									<?php } ?>
-									
-									
 									<p>$<?php echo e(number_format($cos->cos_price, 2, '.', ',')); ?></p>
 								</div>
 								</div>
 							</div>
 						<?php } ?>
-						
 					</div>
 					<input type="hidden" name="costumes_cnt" id="costumes_cnt" value="<?php echo e(count($featured_costumes)); ?>">
 				</div>
 			</div>
 		</div>
 	</div>
-	
 	<div class="instagram_div">
 		<div class=" container">
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<h2><i class="fa fa-instagram" aria-hidden="true"></i> Instagram Feed</h2>
-					<p >Siphon cup dark trifecta, foam crema americano robust latte. Half and half galão grinder cream brewed single shot. Grinder aroma crema amerated.</p>
+					<p >Join the Costume Revolution - follow us on Instagram!</p>
 					<?php 
 					//echo"<pre>"; print_r($insta); exit;?>
 				</div>
-				<div class="col-md-5 col-sm-4 col-xs-12 insta_main">
+				<div class="col-md-5 col-sm-12 col-xs-12 insta_main">
 					<?php if(!empty($insta)): ?>
-						<div class="thumbnail1">
-	                        <div class="caption" style="display: none;">
-	                            <p>
-	                            	<a href="" class="label label-danger" rel="tooltip" title="" data-original-title="">
-	                            		<i class="fa fa-instagram" aria-hidden="true"></i>
-	                            	</a>
-	                            </p>
-	                        </div>
-	                        
-							<a href="<?php echo e($insta[0]['link']); ?>" target="_blank">
-								<img class="img-responsive " src="<?php echo e($insta[0]['image']); ?>">
-							</a>
-	                    </div>
-                    <?php else: ?>
-						<img class="img-responsive " src="http://via.placeholder.com/640x640">
+					<div class="thumbnail1">
+						<a href="<?php echo e($insta[0]['link']); ?>" target="_blank">
+							<img class="img-responsive " src="<?php echo e($insta[0]['image']); ?>">
+						</a>
+						<div class="caption" style="display: none;">
+							<p>
+								<a href="<?php echo e($insta[0]['link']); ?>" class="label label-danger" rel="tooltip" title="" data-original-title=""target="_blank">
+									<i class="fa fa-instagram" aria-hidden="true"></i>
+								</a>
+							</p>
+						</div>
+					</div>	
+					<?php else: ?>
+				<img class="img-responsive " src="http://via.placeholder.com/640x640">
 					<?php endif; ?>
 				</div>
-				<div class="col-md-7 col-sm-4 col-xs-12 insta_thumbs">
+				<div class="col-md-7 col-sm-12 col-xs-12 insta_thumbs">
 					<div class="row">
 						<?php for($i=1; $i<count($insta); $i++): ?>
-							<div class="col-md-4">
-								<div class="thumbnail1">
-			                        <div class="caption" style="display: none;">
-			                            <p>
-			                            	<a href="" class="label label-danger" rel="tooltip" title="" data-original-title="">
-			                            		<i class="fa fa-instagram" aria-hidden="true"></i>
-			                            	</a>
-			                            </p>
-			                        </div>
-			                        <a href="<?php echo e($insta[$i]['link']); ?>" target="_blank">
-										<img class="img-responsive " src="<?php echo e($insta[$i]['image']); ?>">
-									</a>
-			                    </div>
+						<div class="col-md-4 col-sm-4 col-xs-6">
+							<div class="thumbnail1 mini_thumb">
+								<a href="<?php echo e($insta[$i]['link']); ?>" target="_blank">
+									<img class="img-responsive " src="<?php echo e($insta[$i]['image']); ?>">
+								</a>
+								<div class="caption" style="display: none;">
+									<p>
+										<a href="<?php echo e($insta[$i]['link']); ?>" class="label label-danger" target="_blank" rel="tooltip" title="" data-original-title="">
+											<i class="fa fa-instagram" aria-hidden="true"></i>
+										</a>
+									</p>
+								</div>
+							
 							</div>
+						</div>
 						<?php endfor; ?>
 						<?php for($i=1;$i<=$insta_cnt; $i++): ?>
-						<div class="col-md-4">
+						<div class="col-md-4 col-sm-4 col-xs-6">
 							<img class="img-responsive " src="http://via.placeholder.com/160x160">
 						</div>
 						<?php endfor; ?>
@@ -165,62 +172,67 @@ Home@parent
 				</div>
 			</div>
 		</div>
-		
 	</div>
-	
-	<div class="home-adds">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8  add1">
-					<a href="/pages/how-it-works">
-						<img class="img-responsive hidden-sm hidden-xs" src="<?php echo e(asset('/assets/frontend/img/add11.png')); ?>">
-						<img class="img-responsive hidden-md hidden-lg" src="<?php echo e(asset('/assets/frontend/img/home-mini1.png')); ?>">
-					</a>
-				</div>
-				<div class="col-md-4 add2">
-					<a href="/giving-back">
-						<img class="img-responsive hidden-sm hidden-xs" src="<?php echo e(asset('/assets/frontend/img/add22.png')); ?>">
-						<img class="img-responsive hidden-md hidden-lg" src="<?php echo e(asset('/assets/frontend/img/home-mini2.png')); ?>">
-					</a>
-				</div>
+</div>
+<div class="home-adds">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8  add1">
+				<a href="/pages/how-it-works">
+					<img class="img-responsive hidden-sm hidden-xs" src="<?php echo e(asset('/assets/frontend/img/add11.png')); ?>">
+					<img class="img-responsive hidden-md hidden-lg" src="<?php echo e(asset('/assets/frontend/img/home-mini1.png')); ?>">
+				</a>
+			</div>
+			<div class="col-md-4 add2">
+				<a href="/giving-back">
+					<img class="img-responsive hidden-sm hidden-xs" src="<?php echo e(asset('/assets/frontend/img/add22.png')); ?>">
+					<img class="img-responsive hidden-md hidden-lg" src="<?php echo e(asset('/assets/frontend/img/home-mini2.png')); ?>">
+				</a>
 			</div>
 		</div>
-	</div> 
-	<!-- git -->
-	<?php $__env->stopSection(); ?>
-	<?php $__env->startSection('footer_scripts'); ?>
-	
-	<script src="<?php echo e(asset('/assets/frontend/js/jquery.touchSwipe.min.js')); ?>"></script>
-	<script src="<?php echo e(asset('/assets/frontend/js/owl.carousel.min.js')); ?>"></script>
-	<script src="<?php echo e(asset('/assets/frontend/js/pages/home.js')); ?>"></script>
-	<script>
-		$(document).ready(function() {
-			$('.thumbnail1').hover(
-                function(){
-                    $(this).find('.caption').slideDown(250); //.fadeIn(250)
-                },
-                function(){
-                    $(this).find('.caption').slideUp(250); //.fadeOut(205)
-                }
-            ); 
-			if($("#costumes_cnt").val() > "4"){
-				$(".owl-controls.clickable").show();	
-			}
-			if (jQuery(window).width() < 767) 
-			{
-				$(".carousel").swipe({
-					
-					swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-						
-					    if (direction == 'left') $(this).carousel('next');
-					    if (direction == 'right') $(this).carousel('prev');
-						
-					},
-					allowPageScroll:"vertical"
-					
-				});
-			}
-		});
-	</script>
+	</div>
+</div> 
+<!-- git -->
 <?php $__env->stopSection(); ?>
+<?php $__env->startSection('footer_scripts'); ?>
+<script src="<?php echo e(asset('/assets/frontend/js/jquery.touchSwipe.min.js')); ?>"></script>
+<script src="<?php echo e(asset('/assets/frontend/js/owl.carousel.min.js')); ?>"></script>
+<script src="<?php echo e(asset('/assets/frontend/js/pages/home.js')); ?>"></script>
+<script>
+	$(document).ready(function() {
+		$('.thumbnail1').hover(
+		function(){
+			$(this).find('.caption').fadeIn(250); //.fadeIn(250)
+		},
+		function(){
+			$(this).find('.caption').fadeOut(250); //.fadeOut(205)
+		}
+		); 
+		if($("#costumes_cnt").val() > "4"){
+			$(".owl-controls.clickable").show();	
+		}
+		if (jQuery(window).width() < 767) 
+		{
+			$(".carousel").swipe({
+				swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+					if (direction == 'left') $(this).carousel('next');
+					if (direction == 'right') $(this).carousel('prev');
+				},
+				allowPageScroll:"vertical"
+			});
+		}
+	});
+	$( document ).ready(function() {
+		$("[rel='tooltip']").tooltip();    
+		$('.thumbnail1').hover(
+		function(){
+			$(this).find('.caption').fadeIn(250);
+		},
+		function(){
+			$(this).find('.caption').fadeOut(250);
+		}
+		); 
+	});
+</script>
+<?php $__env->stopSection(); ?>				
 <?php echo $__env->make('/frontend/app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

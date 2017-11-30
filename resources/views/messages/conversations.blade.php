@@ -221,7 +221,7 @@
         var id=$(this).attr('id');
         swal({
             title: "Are you sure want to delete?",
-            text: "You will not be able to recover this Listing!",
+            text: "You will not be able to recover this Converstaion!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
