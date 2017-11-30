@@ -357,7 +357,6 @@
 								{{ Session::get('success') }}
 							</div>
 						@endif
-                        
 						@if(count($costumes)>0)	
 						
 						<div id="filter-container">
@@ -365,6 +364,7 @@
 							<div class="row" id="">	
 						
 							@foreach($costumes as $costume)
+						  
 							<div class="col-md-3 col-sm-4 col-xs-6">
 								<div class="prod_box">
 									<div class="img_layer">
@@ -419,14 +419,18 @@
 						</div>
 						@else
 						 <div class="col-md-8 no_lists">
+
 						  <p>Sorry, we could not find any costumes</p>
+
 						 </div>
 						@endif
 						
 						<ul class="holder list_pagination">	
+
  							{{$costumes->links('/frontend/pagination')}}
  							 
  							@if($count>12)
+
 							 <div class="pagination_btm">
 							 	<label>Show </label>
 							 	<select class="per_page">

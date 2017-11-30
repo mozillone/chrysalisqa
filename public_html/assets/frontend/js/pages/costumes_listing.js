@@ -111,6 +111,7 @@ function searching(search){
 	var is_login=$('input[name="is_login"]').val();
 	$("#itemContainer").html("");
 	$("#itemContainer").addClass("search_icn_load");
+ 
     var url = $("#search_list").attr('action');
 	$.ajax({
 			type: 'POST',
@@ -126,6 +127,7 @@ function searching(search){
 		      },
 
 		});
+ 
 }
 function now()
 {

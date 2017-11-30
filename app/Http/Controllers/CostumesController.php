@@ -34,12 +34,14 @@ class CostumesController extends Controller {
 
 	public function categoryCostumeListings(Request $request,$slug1)
 	{
+
 	    $req=Request::all();
 		Meta::set('title', ucfirst($slug1));
         Meta::set('description', ucfirst($slug1).' Buy and Sell Affordable, Environment Friendly Costumes');
         $key_url='/'.$slug1;
 		$cat_info=Category::getUrlCategoryId($key_url);
         $search = '';
+
 		if(count($cat_info)){
 			$categories_list=[];
 			$sub_cat_id=$cat_info[0]->url_offset;
@@ -334,10 +336,12 @@ class CostumesController extends Controller {
 
 	public function costumeSingleView($slug1=null,$slug2=null,$slug3=null)
 	{
+
 	     
 	    try
 	    {
 	        
+
 	        Meta::set('description', ucfirst($slug2).' Buy and Sell Affordable, Environment Friendly Costumes');
             /* Code added by Gayatri */
             Meta::set('url', url()->current());
@@ -427,6 +431,7 @@ class CostumesController extends Controller {
     				$data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
     				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2)->with('est_delivery_date', $est_delivery_date)->with('rate', $rate)->with('costume_detail_name', $name);
                     
+
     			}
     		}
     		else
@@ -439,7 +444,7 @@ class CostumesController extends Controller {
 	    }
 	        
 	     
-		
+
 	}
 	public function costumeLike(Request $request){
 		$req=$request->all();
@@ -460,6 +465,7 @@ class CostumesController extends Controller {
 	}
 
 	public function inquireCostume(Request $request){
+
 	    $req = Request::all();
         if(isset($req) && !empty($req)){
             if(!Auth::check()){
@@ -476,7 +482,6 @@ class CostumesController extends Controller {
                     'costume_name'=>$req['costume_name'],
                     'user_message'=>$req['user_message']
                 );
-
                 $template           = 'emails.inquire_costume';
                 //---- send mail
                 $reg_to             = $seller_details->email;
@@ -526,7 +531,5 @@ class CostumesController extends Controller {
             }
         }
     }
-    
-     
 
 }

@@ -38,8 +38,7 @@ return array(
 
 	'FedEx_SmartPostAccountNumber'=>env('FEDEX_SMARTPOST_ACCOUNT_NUMBER'),
 	'FedEx_SmartPostMeterNumber'=>env('FEDEX_SMARTPOST_METER_NUMBER'),
-	'FedEx_SmartPostHubId'=>env('FEDEX_SMARTPOST_HUBID'),
-
+	'FedEx_SmartPostHubId'=>env('FEDEX_SMARTPOST_HUBID'), 
         'ENDICIA_REQUESTERID'=>env('ENDICIA_REQUESTER_ID'),
         'ENDICIA_ACCOUNTID'=>env('ENDICIA_ACCOUNT_ID'),
         'ENDICIA_PASSPHRASE'=>env('ENDICIA_PASS_PHRASE'),
@@ -54,4 +53,5 @@ return array(
 
         'INSTAGRAM_ACCESS_TOKEN'=>env('INSTAGRAM_ACCESS_TOKEN'),
     	'INSTAGRAM_USERNAME'=>env('INSTAGRAM_USERNAME')
+ 
 );

@@ -117,19 +117,9 @@ $(function(){
 					}else{
 						var src='/costumers_images/default-placeholder.jpg';
 					}
-<<<<<<< HEAD
 					
 					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" ></div><div class="media-body"><h4 class="media-heading"><a href="/product'+value.url_key+'">'+value.costume_name+'</a></h4><p><b>Item Condition : </b>'+capitalization(value.condition)+'</p><p><b>Size : </b>'+capitalization(value.size)+'</p></div></div></div>'
-=======
-					if (value.created_by == 1) {
-						//var cc_cos = '<img src="/img/chrysalis_brand.png" >';
-						var cc_cos = '';
-					}else{
-						var cc_cos = '';
 
-					}
-					cart+='<div class="col-md-12 col-sm-12 col-xs-12"><div class=""><div class="media-left"><img src='+src+' class="media-object" ></div><div class="media-body"><h4 class="media-heading"><a href="/product'+value.url_key+'">'+value.costume_name+'</a> '+cc_cos+'</h4><p><b>Item Condition : </b>'+capitalization(value.condition)+'</p><p><b>Size : </b>'+capitalization(value.size)+'</p></div></div></div>'
->>>>>>> 52fd46414ec57dc6fa3e154458c82f9ae4891ab9
 				});
 				cart+='</div></div><div class="chk-out"><a href="/checkout">Proceed to Checkout</a></div></div>';
 				}else{

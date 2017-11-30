@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend/vendors/jquery.bxslider/jquery.bxslider.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/frontend/css/pages/costume_single.css') }}">
-<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5980685de0404c0012139258&product=inline-share-buttons' async='async'></script>
+
 <style>
 	.red.sizes_chart{display:block;}
 	div#size-chart label input.size_chekd {    vertical-align: text-bottom;}
@@ -60,10 +60,12 @@
 							<a href="javascript:void(0);" class="facebook" class="icoRss" title="Facebook">
 								<i id="social-fb" class="fa fa-facebook fa-1x social"></i>
 								<input type="hidden" name="url_fb" class="url_fb" value="{{Request::fullurl()}}">
+
 								<input type="hidden"  id="quote_fb" name="quote_fb" class="quote_fb" value="Come check out this {{$costume_detail_name}}!">
 							</a>
 							<a href="javascript:void(0);" title="Twitter">
 								<span id="twiter_url" data-network="twitter" class="st-custom-button" data-title="Come check out this {{$costume_detail_name}}!" data-url="{{Request::fullurl()}}">
+
 									<i id="social-tw" class="fa fa-twitter fa-1x social"></i>
 								</span>
 							</a>
@@ -80,6 +82,7 @@
 										@endif
 									</span>
 								</a>
+
 								@if(Auth::check())
                                 	<a href="javscript::void(0);" id="envelope" onclick="showSellerInfo()" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                 @else
@@ -87,7 +90,7 @@
                                 @endif
                                 
                                 
-								
+
 								<!-- <div class="sharethis-inline-share-buttons"></div> -->
 							</div>
 						</h1>
@@ -276,6 +279,7 @@
 														@endif
 														@if(Auth::check())
 															<a href="javscript::void(0);" type="button" class="contact_seller" data-toggle="modal" data-target="#messageModal">Contact</a>
+
 														@endif
 														@else
 														<p class="no-data-tab">No data found</p>
@@ -352,7 +356,7 @@
 							</div>
 						</div>
 						
-							
+						
 						<div class="modal fade window-popup" id="report_item">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -418,6 +422,7 @@
 				@if(!empty($data['seller_info']['shipping_location']))			
 				@if(Auth::check())
 	                <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<form action="{{route('inquire-costume')}}" method="POST" id="inquire_costume">
@@ -461,8 +466,7 @@
 								</form>
 							</div>
 						</div>
-					</div>
-					
+					</div>	
 					@endif
 					@endif
 					<!-- size chart modal start here -->

@@ -55,6 +55,7 @@ class AuthController extends Controller {
    }
    public function postLogin(Request $request)
    {
+
    	$req = $request->all();
    	$rule  =  array(  
 	              'email' => 'required|email',
@@ -712,7 +713,9 @@ class AuthController extends Controller {
 							$addres_insert=DB::table('address_master')->insertGetId($addres_array);
 
 							$conversation_array = array('type'=>'request_a_bag','user_one'=>$userid,
+
 								'subject'=>'Your Bag created.',
+
 								'user_two'=>'1',
 								'status'=>'1',
 								'created_at'=>date('y-m-d H:i:s'));

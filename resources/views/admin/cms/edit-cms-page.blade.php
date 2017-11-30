@@ -80,7 +80,7 @@
                                             <label for="page_desc" class="control-label">Page Description<span class="req-field" >*</span></label>
                                             <textarea id="page_desc" class="form-control" name="page_desc">{{ $page->description }}</textarea>
                                             <p class="error">{{ $errors->first('description') }}</p>
-                                            <span id="page_desc_error" style="color:red"></span>
+                                           
                                         </div>
                                     </div>
                                

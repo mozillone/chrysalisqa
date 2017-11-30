@@ -76,7 +76,7 @@
 									  </div>
 									  <div class="col-md-12">
                                     <div class="form-group has-feedback">
-                                        <label for="description" class="control-label">Page Description<span class="req-field" >*</span></label>
+                                        <label for="description" class="control-label">Block Description<span class="req-field" >*</span></label>
                                         <textarea id="description" class="form-control" name="description"></textarea>
                                         <p class="error">{{ $errors->first('description') }}</p>
                                         <span id="page_desc_error" style="color:red"></span>
