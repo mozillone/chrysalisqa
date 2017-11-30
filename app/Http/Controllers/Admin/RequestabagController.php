@@ -525,7 +525,6 @@ class RequestabagController extends Controller
 						}
 					}catch(\Exception $e){
 						//dd($e);
-
 					}
 
 					if($response_fedex['result']=="0"){
@@ -560,7 +559,6 @@ class RequestabagController extends Controller
 						$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
 					}
 					
-
 					$status_update = DB::table('request_bags')->where('id',$request->hidden_id)->update(['status'=>'shipped']);
 		                
 		            $oRequestBag = DB::table('request_bags')->where('id',$request->hidden_id)->first();
@@ -704,7 +702,6 @@ class RequestabagController extends Controller
           $shipService->getSoapClient()->__setLocation(Config::get('constants.FedEx_Ship_Url'));
           //$shipService->getSoapClient()->__setLocation('https://ws.fedex.com:443/web-services/ship');
           //dd($shipService);
-         
           $response = $shipService->getProcessShipmentReply($processShipmentRequest);
           //dd($response);
           if($response->HighestSeverity=="SUCCESS"){
@@ -890,7 +887,6 @@ class RequestabagController extends Controller
             if(!isset($result['SOAPENVBody']['SOAPENVFault'])){
 
             	$track_id=$result['SOAPENVBody']['ProcessShipmentReply']['CompletedShipmentDetail']['CompletedPackageDetails']['TrackingIds']['TrackingNumber'];
-
               $fileName = 'fedexlabel/'.$track_id.".pdf";
               $fp = fopen($fileName, 'wb');   
                $array_text = array("_");

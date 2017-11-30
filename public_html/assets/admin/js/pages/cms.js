@@ -20,23 +20,22 @@ $(function(){
                   required: true,
             },
             page_desc:{
-                         required: function() 
-                        {
-                         CKEDITOR.instances.page_desc.updateElement();
-                        },
-
-            },
-            
-            
+                required: function() 
+                {
+                 CKEDITOR.instances.page_desc.updateElement();
+                },
+            },            
         },
         highlight: function(element) {
             $(element).closest('.form-control').addClass('error');
         },
         errorPlacement: function(error, element) {
-            if(element.parent('.input-group').length) {
+            if(element.attr("name") == 'page_desc'){
+                error.insertAfter("#cke_page_desc");
+            }else if(element.attr("name") == 'url'){
                 error.insertAfter($(element).parents('div.input-group'));
             }else{
-                error.insertAfter(element);
+                error.insertAfter(element); 
             }
         },
         messages: {
@@ -97,7 +96,7 @@ $(function(){
             $(element).closest('.form-control').addClass('error');
         },
         errorPlacement: function(error, element) {
-            if(element.parent('.input-group').length) {
+            /*if(element.parent('.input-group').length) {
                 error.insertAfter($(element).parents('div.input-group'));
             }else{
                 if($("#page_desc").val() === ""){
@@ -105,6 +104,13 @@ $(function(){
                 }else{
                     error.insertAfter(element);    
                 }
+            }*/
+            if(element.attr("name") == 'page_desc'){
+                error.insertAfter("#cke_page_desc");
+            }else if(element.attr("name") == 'page_url'){
+                error.insertAfter($(element).parents('div.input-group'));
+            }else{
+                error.insertAfter(element); 
             }
         },
         messages: {
@@ -159,10 +165,17 @@ $(function(){
             $(element).closest('.form-control').addClass('error');
         },
         errorPlacement: function(error, element) {
-            if(element.parent('.input-group').length) {
+            /*if(element.parent('.input-group').length) {
                 error.insertAfter($(element).parents('div.input-group'));
             }else{
                 error.insertAfter(element);
+            }*/
+            if(element.attr("name") == 'description'){
+                error.insertAfter("#cke_description");
+            }else if(element.attr("name") == 'page_url'){
+                error.insertAfter($(element).parents('div.input-group'));
+            }else{
+                error.insertAfter(element); 
             }
         },
         messages: {
@@ -212,10 +225,17 @@ $(function(){
             $(element).closest('.form-control').addClass('error');
         },
         errorPlacement: function(error, element) {
-            if(element.parent('.input-group').length) {
+            /*if(element.parent('.input-group').length) {
                 error.insertAfter($(element).parents('div.input-group'));
             }else{
                 error.insertAfter(element);
+            }*/
+            if(element.attr("name") == 'description'){
+                error.insertAfter("#cke_description");
+            }else if(element.attr("name") == 'page_url'){
+                error.insertAfter($(element).parents('div.input-group'));
+            }else{
+                error.insertAfter(element); 
             }
         },
         messages: {
