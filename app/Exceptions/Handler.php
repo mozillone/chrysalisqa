@@ -50,6 +50,7 @@ public function report(Exception $exception)
 
     public function render($request, Exception $e)
     {
+        echo "string"; exit;
         dd($e);
         if($e instanceof NotFoundHttpException){
             return response()->view('errors.'.'404');
