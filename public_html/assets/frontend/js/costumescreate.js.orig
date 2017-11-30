@@ -627,6 +627,7 @@ $("#keywords_add").click(function(){
         var hashtag = '#'+segments[0];
         $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         $('<input>').attr({
           id:'input_'+total+'',
@@ -635,6 +636,9 @@ $("#keywords_add").click(function(){
             value:''+hashtag+''
         }).appendTo('#div');
 >>>>>>> 8e7cf8400f7931ca95ce879d54c221c6c0b69cc6
+=======
+
+>>>>>>> 0a5687e8aaa053ff4556ff8914322bea7374966a
         $('#keywords_tag').prop('value','');
         $('#input_'+total+'').val(hashtag);
         $('#count').html(total-1+ " left");
@@ -642,6 +646,7 @@ $("#keywords_add").click(function(){
         $.each(segments,function(i){
         var hashtag = '#'+segments[i];
         $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+<<<<<<< HEAD
 <<<<<<< HEAD
         $('#input_'+total+'').val(hashtag);
 =======
@@ -652,12 +657,18 @@ $("#keywords_add").click(function(){
             value:''+hashtag+''
         }).appendTo('#div');
 >>>>>>> 8e7cf8400f7931ca95ce879d54c221c6c0b69cc6
+=======
+
+        $('#input_'+total+'').val(hashtag);
+
+>>>>>>> 0a5687e8aaa053ff4556ff8914322bea7374966a
         $('#keywords_tag').prop('value','');
         total--;
         });
       }
     }else{
       var hashtag = '#'+val;
+<<<<<<< HEAD
       $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
 <<<<<<< HEAD
 =======
@@ -668,6 +679,9 @@ $("#keywords_add").click(function(){
           value:''+hashtag+''
       }).appendTo('#div');
 >>>>>>> 8e7cf8400f7931ca95ce879d54c221c6c0b69cc6
+=======
+      $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </
+>>>>>>> 0a5687e8aaa053ff4556ff8914322bea7374966a
       $('#keywords_tag').prop('value','');
       $('#input_'+total+'').val(hashtag);
       $('#count').html(total-1+ " left");

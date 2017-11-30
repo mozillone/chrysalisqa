@@ -32,8 +32,9 @@ $(function() {
 	});
     
 
+
 var search=$('#search_list').serializeArray();
-/*searching(search);*/
+//searching(search);
 $(document).on('click','.gender > li',function(){
 	$('.gender li').removeClass('active');
 	$(this).addClass('active');
@@ -58,7 +59,7 @@ $(document).on('click','.sizes > li',function(){
 	$('input[name="search[sizes]"').val(sizes);
 	 var search=$('#search_list').serializeArray();
 	 searching(search);
-})
+});
 $(document).on('click','.search',function(){
 	var search=$('#search_list').serializeArray();
 	searching(search);
@@ -81,24 +82,52 @@ $(document).on('click','.mbl_sort',function(){
 	 	var search=$('#search_list').serializeArray();
 	 	searching(search);
 	}
-})
+});
+
+
+$(document).on("click",".pagination li a",function(e)
+{ 
+     e.preventDefault();
+     var anchor = $(this).attr('href');
+     var queryString = anchor.split('?', 2)[1] || '';
+     var id =  queryString.split('=',2)[1];
+     $("#page").val(id);
+     searching(search);
+});
+
+$(document).on("change",".per_page",function(e)
+{ 
+     e.preventDefault();
+     var id = $(this).val();
+     $("#perpage").val(id);
+     searching(search);
+});
+
 function searching(search){
 	var filter=$('#search_list').serializeArray();
-	var res="";
 	var cat_id=$('input[name="cat_id"]').val();
 	var parent_cat_name=$('input[name="parent_cat_name"]').val();
 	var sub_cat_name=$('input[name="sub_cat_name"]').val();
 	var is_login=$('input[name="is_login"]').val();
 	$("#itemContainer").html("");
 	$("#itemContainer").addClass("search_icn_load");
-	if(search!=null){
-		filter=search;
-	}else{
-		filter="";
-	}
-	debugger;
+ 
+    var url = $("#search_list").attr('action');
+	$.ajax({
+			type: 'POST',
+			url: url,
+			cache: true,
+			data: filter,
+            async:false,
+			success: function(response){
+				$("#filter-container").html(response);
+			},
+		     complete: function(jqXHR, textStatus) {
+		    	 $("#itemContainer").removeClass("search_icn_load");
+		      },
 
-	$("#search_list").submit();
+		});
+ 
 }
 function now()
 {

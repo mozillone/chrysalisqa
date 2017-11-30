@@ -53,14 +53,15 @@ Route::get('/test', ['as' => '','uses'=>'DashboardController@Test']);
 Route::post('/test', ['as' => 'test','uses'=>'DashboardController@PostTest']);
 
 /** Products list page start here **/
-Route::any('/category/{slug1}/{page?}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');;
+Route::get('/category/{slug1}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');
+Route::post('/category/{slug1}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');
+Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesController@costumeListings'))->where('name', '[A-Za-z]+');
 
 Route::any('/Filterscategory/{slug1}','CostumesController@searchFilters');
+ 
 
-Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesController@costumeListings'))->where('name', '[A-Za-z]+');;
+
 Route::any('/product/{slug1?}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
-
-
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
 Route::any('inquire-costume', array('as' => 'inquire-costume','uses' => 'CostumesController@inquireCostume'));
 /** Products list page end here **/
@@ -301,7 +302,6 @@ Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
 	   	Route::any('/generatelables', array('as' => '','uses' => 'RequestabagController@Generatelables'));
 	   	Route::post('/generatefedexsmartpost', array('as' => '','uses' => 'RequestabagController@GenerateFedexSmartPostLabels'));
-	   	
 	   	Route::any('/returnlablegenerate', array('as' => '','uses' => 'RequestabagController@returnLableGenerate'));
 	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
 	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
@@ -989,6 +989,3 @@ Route::get('500', function()
 {
     abort(404);
 });
-
-Route::any('/testData','CostumesController@test');
-

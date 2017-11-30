@@ -79,7 +79,8 @@
       method: 'share',
       display: 'popup',
       title: 'Spider man costume - Chrysalis',
-      href: url
+      href: url,
+      quote: $("#quote_fb").val()
   	}, function(response){});		  
     
 	});

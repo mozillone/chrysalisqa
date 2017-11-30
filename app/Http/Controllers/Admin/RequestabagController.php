@@ -525,11 +525,48 @@ class RequestabagController extends Controller
 						}
 					}catch(\Exception $e){
 						//dd($e);
+<<<<<<< HEAD
+					}
+
+					if($response_fedex['result']=="0"){
+						$fedex_error = 1;
+						// Session::flash('error',$response_fedex['msg']);
+			   			//return Redirect::back();
+					}else{
+						$fedex_track_id=$response_fedex['msg'];
+						$shipping_array_pick = array('request_id'=>$req['hidden_id'],
+													'type'=>'pick',
+													'weight'=>'',
+													'shipping_no'=>$fedex_track_id,
+													'created_at'=>date('y-m-d H:i:s'),
+												);
+						$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
+					}
+
+					if($response_smartpost['result']=="0"){
+						$smart_post_error = 1;
+						//Session::flash('error',$response_smartpost['msg']);
+			      		//return Redirect::back();
+					}else{
+						$smart_post_track_id=$response_smartpost['msg'];
+					
+						$shipping_array_drop = array('request_id'=>$req['hidden_id'],
+							'type'=>'drop',
+							'weight'=>'',
+							'shipping_no'=>$smart_post_track_id,
+							'created_at'=>date('y-m-d H:i:s'),
+							);
+
+						$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
+					}
+					
+=======
 					}
 					
 
 					
 					
+>>>>>>> e3b4d0da1987312a8c22b1e6914544a3206da9c3
 					$status_update = DB::table('request_bags')->where('id',$request->hidden_id)->update(['status'=>'shipped']);
 		                
 		            $oRequestBag = DB::table('request_bags')->where('id',$request->hidden_id)->first();

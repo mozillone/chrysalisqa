@@ -179,7 +179,7 @@
 								</div>
 
 
-
+                                
 								<div class="row">
 								<div class="col-md-6">                                  
                                     <div class="form-group has-feedback hide" id="cleaned_select">
@@ -227,6 +227,8 @@
 										</div>
 										</div>
 								</div>
+								
+@if($costumes_data->cos_size == 'custom')								
 <div class="dimessions hide">
 	<h4>Body & Dimensions <span class="req-field">*</span></h4></hr>
 	<div class="row" >
@@ -240,7 +242,7 @@
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field"></span></label>
 				<div class="input-group">
-					<input type="{{$bd_height->type}}" class="form-control"  value="@if(!empty($bd_height_value->attribute_option_value)){{$bd_height_value->attribute_option_value}}@endif" name="{{$bd_height->code}}" id="{{$bd_height->code}}">
+					<input type="{{$bd_height->type}}" class="form-control"  value="@if(!empty($bd_height_value->attribute_option_value)){{$bd_height_value->attribute_option_value}} @else{{$bd_height_value->attribute_option_value}}@endif" name="{{$bd_height->code}}" id="{{$bd_height->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
 				</div>
 				<span id="heightfterror" style="color:red"></span>
@@ -256,7 +258,7 @@
 				?>
 				<label for="inputEmail3" class="control-label"></label>
 				<div class="input-group">
-					<input type="{{$bd_height_in->type}}"  class="form-control" value="@if(!empty($bd_height_in_value->attribute_option_value)){{$bd_height_in_value->attribute_option_value}}@endif"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
+					<input type="{{$bd_height_in->type}}"  class="form-control" value="@if(!empty($bd_height_in_value->attribute_option_value)){{$bd_height_in_value->attribute_option_value}} @else {{$bd_height_in_value->attribute_option_value}} @endif"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1;?></span>
 				</div>
 				<span id="heightinerror" style="color:red"></span>
@@ -274,7 +276,7 @@
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute2;?><span class="req-field" ></span></label>
 				<div class="input-group">
-					<input type="{{$bd_weight->type}}" value="@if(!empty($bd_weight_value->attribute_option_value)){{$bd_weight_value->attribute_option_value}}@endif" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
+					<input type="{{$bd_weight->type}}" value="@if(!empty($bd_weight_value->attribute_option_value)){{$bd_weight_value->attribute_option_value}} @else {{$bd_weight_value->attribute_option_value}} @endif" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue2;?></span>
 				</div>
 				<span id="weightlbserror" style="color:red"></span>
@@ -290,7 +292,7 @@
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute3;?><span class="req-field" ></span></label>
 				<div class="input-group">
-					<input type="{{$bd_chest->type}}" class="form-control" value="@if(!empty($bd_chest_value->attribute_option_value)){{$bd_chest_value->attribute_option_value}}@endif"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
+					<input type="{{$bd_chest->type}}" class="form-control" value="@if(!empty($bd_chest_value->attribute_option_value)){{$bd_chest_value->attribute_option_value}} @else {{$bd_chest_value->attribute_option_value}} @endif"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue3;?></span>
 				</div>
 				<span id="chestinerror" style="color:red"></span>
@@ -308,7 +310,7 @@
 					?>
 					<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field" ></span></label>
 					<div class="input-group">
-						<input type="{{$bd_waist->type}}" class="form-control" value="@if(!empty($bd_waist_value->attribute_option_value)){{$bd_waist_value->attribute_option_value}}@endif" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
+						<input type="{{$bd_waist->type}}" class="form-control" value="@if(!empty($bd_waist_value->attribute_option_value)){{$bd_waist_value->attribute_option_value}} @else {{$bd_waist_value->attribute_option_value}} @endif" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
 						<span class="input-group-addon" id="basic-addon2">in</span>
 					</div>
 					<span id="waistlbserror" style="color:red"></span>
@@ -317,10 +319,104 @@
 		</div>
 		
 	</div>
+	
+	@elseif($costumes_data->cos_size !='custom')
+	   <div class="dimessions hide">
+	<h4>Body & Dimensions<span class="req-field">*</span> </h4></hr>
+	<div class="row" >
+		<div class="col-md-6" >
+			<div class="form-group has-feedback " >
+				<?php
+					$height           = $bd_height->label;
+					$heightattributes = explode('-', $height);
+					$attribute        = ucfirst($heightattributes[0]);
+					$attributevalue   = $heightattributes[1];
+				?>
+				<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field"></span></label>
+				<div class="input-group">
+					<input type="{{$bd_height->type}}" class="form-control"   name="{{$bd_height->code}}" id="{{$bd_height->code}}">
+					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
+				</div>
+				<span id="heightfterror" style="color:red"></span>
+			</div>
+		</div>
+		<div class="col-md-6 dimsn-bknd" >
+			<div class="form-group has-feedback" >
+				<?php
+				$height1           = $bd_height_in->label;
+				$heightattributes1 = explode('-', $height1);
+				$attribute1        = ucfirst($heightattributes1[0]);
+				$attributevalue1   = $heightattributes1[1];
+				?>
+				<label for="inputEmail3" class="control-label"></label>
+				<div class="input-group">
+					<input type="{{$bd_height_in->type}}"  class="form-control"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
+					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1;?></span>
+				</div>
+				<span id="heightinerror" style="color:red"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6" >
+			<div class="form-group has-feedback" >
+				<?php
+				$height2           = $bd_weight->label;
+				$heightattributes2 = explode('-', $height2);
+				$attribute2        = ucfirst($heightattributes2[0]);
+				$attributevalue2   = $heightattributes2[1];
+				?>
+				<label for="inputEmail3" class="control-label"><?php echo $attribute2;?><span class="req-field" ></span></label>
+				<div class="input-group">
+					<input type="{{$bd_weight->type}}" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
+					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue2;?></span>
+				</div>
+				<span id="weightlbserror" style="color:red"></span>
+			</div>
+		</div>
+		<div class="col-md-6" >
+			<div class="form-group has-feedback" >
+				<?php
+				$height3           = $bd_chest->label;
+				$heightattributes3 = explode('-', $height3);
+				$attribute3        = ucfirst($heightattributes3[0]);
+				$attributevalue3   = $heightattributes3[1];
+				?>
+				<label for="inputEmail3" class="control-label"><?php echo $attribute3;?><span class="req-field" ></span></label>
+				<div class="input-group">
+					<input type="{{$bd_chest->type}}" class="form-control"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
+					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue3;?></span>
+				</div>
+				<span id="chestinerror" style="color:red"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row1" >
+		<div class="col-md-6" >
+			<div class="form-group has-feedback" >
+				<?php
+				$height           = $bd_waist->label;
+				$heightattributes = explode('-', $height);
+				$attribute        = ucfirst($heightattributes[0]);
+				$attributevalue   = $heightattributes[1];
+				?>
+				<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field" ></span></label>
+				<div class="input-group">
+					<input type="{{$bd_waist->type}}" class="form-control" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
+					<span class="input-group-addon" id="basic-addon2">in</span>
+				</div>
+				<span id="waistlbserror" style="color:red"></span>
+			</div>
+		</div>
+	</div>
+</div>	
+	@endif
+	
+
 							</div>
 						</div>
 
-
+	
 						<div class="col-md-6 crt_right_alng">
 							<h2 class="heading-agent">Costume FAQ</h2>
 							<div class="col-md-12">
@@ -356,6 +452,8 @@
 										@endif
 									</div>
 								</div>
+								
+								
 								<div class="form-group has-feedback" >
 									<div class="form-group" >
 										<label for="inputEmail3" class="control-label">
@@ -373,17 +471,21 @@
 												{{$cosplayfourvalues->option_value}}&nbsp;
 											@endforeach
 										@endif
-										@if(count($make_costume_time)== 1)
-										<p class="form-rms-small" id="mention_hours" @if(count($make_costume_time)!= 1) style="display: none;" @endif >If yes, how long did it take?</p>
-										<p class="ct1-rms-rel" id="mention_hours_input" @if(count($make_costume_time)!= 1) style="display: none;" @endif><input type="text" name="make_costume_time" id="make_costume_time" value="{{$make_costume_time->attribute_option_value}}" class="input-rm100"> <span>hours<span>
-										</p>
-										@else
-										<p class="form-rms-small" id="mention_hours" style="display: none;" >If yes, how long did it take?</p>
-										<p class="ct1-rms-rel" id="mention_hours_input" style="display: none;"><input type="text" name="make_costume_time" id="make_costume_time" value="" class="input-rm100"> <span>hours<span>
-										</p>
+										@if($cosplay_four_value_value->attribute_option_value_id == 30)
+        										@if(count($make_costume_time)== 1)
+        										<p class="form-rms-small" id="mention_hours" @if(count($make_costume_time)!= 1) style="display: none;" @endif >If yes, how long did it take?</p>
+        										<p class="ct1-rms-rel" id="mention_hours_input" @if(count($make_costume_time)!= 1) style="display: none;" @endif><input type="text" name="make_costume_time" id="make_costume_time" value="{{$make_costume_time->attribute_option_value}}" class="input-rm100"> <span>hours<span>
+        										</p>
+        										@else
+        										<p class="form-rms-small" id="mention_hours" style="display: none;" >If yes, how long did it take?</p>
+        										<p class="ct1-rms-rel" id="mention_hours_input" style="display: none;"><input type="text" name="make_costume_time" id="make_costume_time" value="" class="input-rm100"> <span>hours<span>
+        										</p>
+        										@endif
 										@endif
                                         </div>
 										</div>
+										
+										
 										</div>
 										<div class="form-group has-feedback" >
 											<label for="inputEmail3" class="control-label kyword">Keywords</p><p> Please enter a maximum of 10 keywords to describe the categories in which your costume could belong to.</p>
@@ -488,6 +590,8 @@
 															</div>
 													</div>
 												</div> -->
+												
+											
 												<div class="col-md-6 pckg_right">
 													<h2 class="heading-agent">Pricing & Shipping</h2>
 													<div class="col-md-12">
@@ -572,6 +676,7 @@
 														</div>
 													</div>
 												</div>
+												
 												<div class="col-md-6">
 													<h2 class="heading-agent">Preferences</h2>
 													<div class="col-md-12">
@@ -609,6 +714,8 @@
 														</div>
 													</div>
 												</div>
+												
+												
 												<div class="col-md-6">
 													<h2 class="heading-agent">Donation Info</h2>
 													<div class="col-md-12">
@@ -1330,16 +1437,15 @@ if($("#size").val() == "custom"){
 											$(document).on("click",".remove_pic",function()
 											{
 												
-											    var cur_val = $(this).attr('data-id');		 
+											    var cur_val = $(this).attr('data-id');
 												var cur_rem_val = $(this).parents().attr('style');
 												var last_one = cur_rem_val.substr(cur_rem_val.length - 15);
-
 												var remove_org_val = last_one.slice(0,-1);
-
 												var MakeInput = '';
 												  removeValue =  $("#"+cur_val).val();
-												  //console.log(removeValue);
-												 $(this).parents("div#"+cur_val).remove();
+												
+												$("#"+cur_val).remove();
+												 //$(this).parents().find("#"+cur_val).remove();
 												//$("#"+cur_val).parents().find("div.multi_div").remove();
 												allRemove.push(remove_org_val);
 												

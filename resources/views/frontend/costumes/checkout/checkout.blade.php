@@ -32,7 +32,7 @@
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<h4>Shipping Address:</h4>
 												</div>
-												<div class="col-md-5 col-sm-4 col-xs-12">
+												<div class="col-md-5 col-sm-4 col-xs-10">
 													@if(!empty($data['cart_shipping_address']))
 													<input type="hidden" value="{{$data['cart_shipping_address'][0]->shipping_address_2}}" name="shipping_address_2" data-cart="true"data-address="{{json_encode($data['cart_shipping_address'][0])}}">
 														<div class="shipping_add">
@@ -57,7 +57,7 @@
 													<span class="error">{{ $errors->first('shipping_address_1') }}</span>
 													
 												</div>
-												<div class="col-md-3 col-sm-4 col-xs-12">
+												<div class="col-md-3 col-sm-4 col-xs-2">
 													@if(!empty($data['shipping_address']) || !empty($data['cart_shipping_address']))
 														<p class="cehck_edit"><a href="javascript::void(0);" class="shipping_popup" data-address-id="">Edit</a></p>
 													@else
@@ -71,7 +71,7 @@
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<h4>Billing Address:</h4>
 												</div>
-												<div class="col-md-5 col-sm-4 col-xs-12">
+												<div class="col-md-5 col-sm-4 col-xs-10">
 												@if(!empty($data['cart_billing_address']))
 												<input type="hidden" name="pay_address_2" value="{{$data['cart_billing_address'][0]->pay_address_2}}" data-cart="true" data-address="{{json_encode($data['cart_billing_address'][0])}}"/>
 													<div class="billing_add">
@@ -97,7 +97,7 @@
 												@endif
 												<span class="error">{{ $errors->first('pay_address_1') }}</span>
 												</div>
-												<div class="col-md-3 col-sm-4 col-xs-12">
+												<div class="col-md-3 col-sm-4 col-xs-2">
 												@if(!empty($data['billing_address']) || !empty($data['cart_billing_address']))
 													<p class="cehck_edit"><a href="javascript::void(0);" class="billing_popup">Edit</a></p>
 												@else
@@ -180,7 +180,7 @@
 														<div class="media-body">
 															<h4 class="media-heading"><a href="/product{{$cart->url_key}}">{{$cart->costume_name}}</a></h4>
 															@if($cart->created_user_group=="admin")<span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>@endif
-															<p>@if($cart->is_film=="yes")<p class="f_quality">Film Quality</p> @else  @endif</p>
+															<p>@if($cart->is_film=="yes")<p class="f_quality"><img class="img-responsive" src="{{asset('assets/frontend/img/film.png')}}"> Film Quality</p> @else  @endif</p>
 															<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
 															<p><b>Size:</b> {{ucfirst($cart->size)}}</p>
 															<p><b>Quantity:</b> {{$cart->qty}}</p>
@@ -197,7 +197,7 @@
 															 <?php $new_price=$cart->price;?>
 													@endif
 													${{number_format(($cart->qty)*($new_price), 2, '.', ',')}}</span>
-													<span><a data-item-id="{{$cart->cart_item_id}}" data-cart_id="{{$cart->cart_id}}" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></span></p>
+													<span><a data-item-id="{{$cart->cart_item_id}}" data-cart_id="{{$cart->cart_id}}" class="delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
 												</div>
 											</div>
 											<?php  $seller_id=$cart->created_by;

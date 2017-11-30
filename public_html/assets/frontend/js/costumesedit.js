@@ -506,6 +506,7 @@ $('#preferences_div').css('display','none');
 });
 
 $('#preferences_finished').click(function(a){
+    
 a.preventDefault();
 str=true;
 
@@ -517,32 +518,6 @@ var donate_charity = $('#donate_charity').val();
 var atLeastOneIsChecked = $('input[name="another_charity"]:checked').length > 0;
 var charity_name = $('input[name="charity_name"]:checked').length > 0;
 var organzation_name = $('#organzation_name').val();
-
-
-// if (donate_charity == 0) {
-// /*$('#donate_charity').css('border','1px solid red');
-// $('#donate_charityerror').html('Select Donate Amount');*/
-// str=true;
-// }
-// if (donate_charity != "" && donate_charity != 0) {
-//         $('#charity_nameerror').html('Please select any Charity.');
-//         str=false;
-//       if (charity_name == true) {
-//            $('#charity_nameerror').html('');
-//          str=true; 
-//         }
-//       else if($('#another_charity').prop("checked") == true){
-//       	$('#charity_nameerror').html('');
-//          str=true;
-//       }
-//     }
-/*if($('input[name=charity_name]:checked').length<=0){
-$('#charity_name').css('border','1px solid red');
-$('#charity_nameerror').html('Select Donate to');
-str=false;
-
-}*/
-
         if(parseInt(donate_charity) == 0 && charity_name != '' ){
             $('#donate_charity').css('border', '1px solid red');
             $('#donate_charityerror').html('Select Donation Amount');
@@ -580,6 +555,7 @@ str = true;
 if (str == true) {
 $('#preferences_finished').html("Submitting");
 
+
  
 $('#ajax_loader').css('display','block');
 $.ajax({
@@ -591,7 +567,6 @@ cache: false,
 processData: false,
     success: function(response) {
         if (response.msg == "success") {
-   
             $('#ajax_loader').hide();
             $('#success_page').css('display','block');
             $('#upload_div').css('display','none');
