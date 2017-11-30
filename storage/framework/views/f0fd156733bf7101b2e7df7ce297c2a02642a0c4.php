@@ -358,7 +358,6 @@
 
 							</div>
 						<?php endif; ?>
-                        
 						<?php if(count($costumes)>0): ?>	
 						
 						<div id="filter-container">
@@ -366,6 +365,7 @@
 							<div class="row" id="">	
 						
 							<?php $__currentLoopData = $costumes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $costume): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+						  
 							<div class="col-md-3 col-sm-4 col-xs-6">
 								<div class="prod_box">
 									<div class="img_layer">
@@ -420,15 +420,19 @@
 						</div>
 						<?php else: ?>
 						 <div class="col-md-8 no_lists">
+
 						  <p>Sorry, we could not find any costumes</p>
+
 						 </div>
 						<?php endif; ?>
 						
 						<ul class="holder list_pagination">	
+
  							<?php echo e($costumes->links('/frontend/pagination')); ?>
 
  							 
  							<?php if($count>12): ?>
+
 							 <div class="pagination_btm">
 							 	<label>Show </label>
 							 	<select class="per_page">
