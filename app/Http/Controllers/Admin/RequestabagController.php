@@ -525,7 +525,7 @@ class RequestabagController extends Controller
 						}
 					}catch(\Exception $e){
 						//dd($e);
-<<<<<<< HEAD
+
 					}
 
 					if($response_fedex['result']=="0"){
@@ -560,13 +560,7 @@ class RequestabagController extends Controller
 						$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
 					}
 					
-=======
-					}
-					
 
-					
-					
->>>>>>> e3b4d0da1987312a8c22b1e6914544a3206da9c3
 					$status_update = DB::table('request_bags')->where('id',$request->hidden_id)->update(['status'=>'shipped']);
 		                
 		            $oRequestBag = DB::table('request_bags')->where('id',$request->hidden_id)->first();
