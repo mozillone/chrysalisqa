@@ -22,7 +22,7 @@
 	<div class="prodcut_list_page">
 		<div class="container">
 			<div class="row">
-				
+			 
 				<form id="search_list" action="<?php echo e(url('Filterscategory',$parent_cat_name)); ?>" method="get">
 					<input type="hidden" name="parent_cat_name" value="<?php echo e($parent_cat_name); ?>"/>
 					<input type="hidden" name="sub_cat_name" value="<?php echo e($data['sub_cat_info'][0]->name); ?>"/>
@@ -30,6 +30,7 @@
 					<input type="hidden" name="is_login" value="<?php echo e(Auth::check()); ?>"/>
 					<input type="hidden" name="cat_id" value="<?php echo e($data['sub_cat_info'][0]->category_id); ?>"/>
 					<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+				    
 					<?php if(!empty($parent_cat)): ?><input type="hidden" name="is_main" value="<?php echo e($parent_cat); ?>"> <?php endif; ?>
 					<div class="col-md-3 col-sm-4 list_view_left_view clearfix hidden-xs">
 						<?php if($parent_cat_name == "kids"): ?>    
@@ -42,24 +43,28 @@
 								<li data-gender="girl">Girls</li>
 								<li data-gender="baby">Babies</li>
 							</ul>
-							<input type="hidden" name="search[gender]" class="search"/>
+							
+							 <input type="hidden" name="search[gender]" class="search"/>
+							
 						</div>
 						<?php endif; ?>
 						<?php if($parent_cat_name != "mens" && $parent_cat_name != "womens" && $parent_cat_name != "pets" && $parent_cat_name != "kids"): ?>
 						<div class="list-box-rm list-box-rma">
 							<h2 class="list-box-head">GENDER COSTUMES</h2>
 							<ul class="box-list1 gender">
-								<li data-gender="" class="active">See All</li>
+							    <li data-gender="" class="active">See All</li>
 								<li data-gender="male">Men's</li>
 								<li data-gender="female">Women's</li>
-								<!-- <li data-gender="unisex">Both</li> -->
 								<li data-gender="boy">Boys</li>
 								<li data-gender="girl">Girls</li>
 								<li data-gender="baby">Babies</li>
 							</ul>
-							<input type="hidden" name="search[gender]" class="search"/>
+						  
+							 <input type="hidden" name="search[gender]" class="search"/>
+						
 						</div>
 						<?php endif; ?>
+						
 						<div class="list-box-rm">
 							<h2 class="list-box-head">THEMES</h2>
 							<ul class="box-list1">
@@ -74,13 +79,14 @@
 									<label><input type="checkbox" name="search[created_user_group][]" value="user" class="search">Homemade Costumes</label>
 								</div>
 								<div class="checkbox">
-									<label><input type="checkbox" name="search[created_user_group][]" value="admin" class="search">Chrysalis Costumes</label>
+									<label><input type="checkbox" name="search[created_user_group][]" value="admin" class="search" >Chrysalis Costumes</label>
 								</div>
 							</div>
 							<h2 class="list-box-head filter">FILTER</h2>
 							<h3 class="list-box-subhead">Zipcode</h3>
 							<p class="list-box-texti">Search for costumes close to you!</p>
-							<p class="list-box-search"><input type="text" placeholder="Enter postal code" name="search[zip_code]"><span class="box-search-arrw search"><i class="fa fa-arrow-right" aria-hidden="true"></i></span></p>
+							<p class="list-box-search">
+							    <input type="text" placeholder="Enter postal code" name="search[zip_code]"><span class="box-search-arrw search"><i class="fa fa-arrow-right" aria-hidden="true"></i></span></p>
 							<h3 class="list-box-subhead">Condition</h3>
 							<ul class="box-list2">
 								<li><input type="checkbox" name="search[condition][]" value="good" class="search"> Good</li>
@@ -89,14 +95,16 @@
 							</ul>
 							<h3 class="list-box-subhead">Size</h3>
 							<ul class="box-list3 sizes">
+							   
 								<li data-size="1sz">1SZ</li>
-								<li data-size="xxs" class="middle">XXS</li>
+								
+								<li data-size="xxs" id="middle-xxs">XXS</li>
 								<li data-size="xs">XS</li>
 								<li data-size="s">S</li>
-								<li data-size="m" class="middle">M</li>
-								<li data-size="l">L</li>
+								<li data-size="m" id="middle-m" >M</li>
+								<li data-size="l" >L</li>
 								<li data-size="xl">XL</li>
-								<li data-size="xxl" class="middle">XXL</li>
+								<li data-size="xxl" id="middle-xxl">XXL</li>
 								<li data-size="std">STD</li>
 								<input type="hidden" name="search[sizes]"/>
 							</ul>
@@ -351,8 +359,11 @@
 							</div>
 						<?php endif; ?>
 						<?php if(count($costumes)>0): ?>	
+						
+						<div id="filter-container">
 						<div class="list_products list-img-bg">
-							<div class="row" id="">						 
+							<div class="row" id="">	
+						
 							<?php $__currentLoopData = $costumes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $costume): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 						  
 							<div class="col-md-3 col-sm-4 col-xs-6">
@@ -360,31 +371,44 @@
 									<div class="img_layer">
 										<a href="<?php echo e(url('product')); ?><?php echo e($costume->url_key); ?>" style="background-image:url(/costumers_images/Medium/<?php echo e($costume->image); ?>);background-repeat:no-repeat;">&nbsp;
 										</a>
-											<div class="hover_box">
-												<p class="like_fav">
-													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
+										<?php if(Auth::check()): ?>
+										<div class="hover_box">
+										<p class="like_fav">
+													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i><?php echo e($costume->like_count); ?></span>
 													</a> 
-													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
+										<a href="#" onclick="return false;" class="fav_costume " data-like="<?php echo e($costume->is_fav); ?>" data-costume-id="<?php echo e($costume->costume_id); ?>" ><span class="<?php if($costume->is_fav): ?> active <?php endif; ?>"><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
 												</p>
-												<p class="hover_crt add-cart" data-costume-id="571">
+												<p class="hover_crt add-cart" data-costume-id="<?php echo e($costume->costume_id); ?>">
 													<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
 												</p>
-											</div>
+										</div>
+										<?php else: ?>
+										<div class="hover_box">
+										<p class="like_fav">
+													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
+													</a> 
+										<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
+												</p>
+												<p class="hover_crt add-cart" data-costume-id="<?php echo e($costume->costume_id); ?>">
+													<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
+												</p>
+										</div>
+										<?php endif; ?>
 									</div>
-											<?php if($costume->film_qlty !=0): ?>
+										<?php if($costume->film_qlty == 32): ?>
 											<p class="ystrip-rm">
 												<span>
-													<img class="img-responsive" src="http://dev.chrysaliscostumes.com/assets/frontend/img/film.png"> Film Quality
+													<img class="img-responsive" src="<?php echo e(url('assets/frontend/img/film.png')); ?>"> Film Quality
 												</span>
 											</p>
-											<?php endif; ?>
+										<?php endif; ?>
 											<div class="slider_cnt no_brand sml_name">
 												<span class="cc_brand"></span>
 													<h4>
-														<a href="/product/classic-activity/film-tv/test-costume13" <="" a=""><?php echo e($costume->name); ?></a>
+														<a href="<?php echo e(url('product')); ?><?php echo e($costume->url_key); ?>"><?php echo e($costume->name); ?></a>
 													</h4>
 													<p>
-														<a href="/product/classic-activity/film-tv/test-costume13" <="" a="">
+														<a href="<?php echo e(url('product')); ?><?php echo e($costume->url_key); ?>">
 														<span class="new-price">$<?php echo e($costume->price); ?></span>
 														</a>
 													</p>
@@ -396,28 +420,42 @@
 						</div>
 						<?php else: ?>
 						 <div class="col-md-8 no_lists">
-						  <p>No Costumes Found under this Category</p>
+
+						  <p>Sorry, we could not find any costumes</p>
+
 						 </div>
 						<?php endif; ?>
-						<?php if(count($costumes)>=12): ?>
+						
 						<ul class="holder list_pagination">	
- 							<?php echo e($costumes->links('/frontend/pagination')); ?>	
+
+ 							<?php echo e($costumes->links('/frontend/pagination')); ?>
+
+ 							 
+ 							<?php if($count>12): ?>
+
 							 <div class="pagination_btm">
 							 	<label>Show </label>
-							 	<select id="per_page">
-							 		<option selected>12</option>
-							 		<option>24</option>
-							 		<option>48</option>
+							 	<select class="per_page">
+							 		<option value="12">12</option>
+							 		<option value="24">24</option>
+							 		<option value="48">48</option>
 							 	</select>
 							 	<label> per page </label>	
 							 </div>
+							 <?php endif; ?>
 						</ul>
-						<?php endif; ?>
+						</div>	
 					</div>
+					<input type="hidden" id="page" name="page" class="ses_val" value="">
+					<input type="hidden" name="perpage" id="perpage" class="perpage_val" value="">
 				</form>
+				
+
 			</div>
 		</div>
 	</div>
+	
+	 
 	<!--  	list- container html End here -->
 </section>    
 <?php $__env->stopSection(); ?>
@@ -434,40 +472,29 @@
 <script type="text/javascript">
 	$(document).ready(function()
 	{
-		$(document).on("click", ".holder a.jp-current ,.jp-next,.jp-previous",function () {
+	    
+	    if( $("ul.pagination").length == 0)
+	    {
+	        $(".holder.list_pagination").css({"border":"none"});
+	    }
+		$(document).on("click", ".pagination li a",function () {
 			$('html,body').animate({
 				scrollTop: 300
 			}, 700);
 		});
-
-		$("#per_page").change(function()
-		{			 
-			var id = $(this).val();			
-			var url = window.location.pathname;	 
-			location.href = url+"?perpage=" + id;
-		});
-
-		$(".gender").click(function()
-		{			 
-			var id = $(this).data('gender');			
-			var url = window.location.pathname;	 
-			$("#search_list").submit();
-		});
-
 		var queryString = window.location.href.slice(window.location.href.indexOf('?'));
 		var res = queryString.substring(9,11);
+		var filter_url = location.href.split("?")[0];
 		
 		  $("#per_page > option").each(function() {
 		    if (this.value == res) {
 		      this.selected = 'selected';
 		    }
 		  });
-
-		 
+		  
+		 $(".per_page").val("<?php echo e(session('perpage')===null ? 12 : session('perpage')); ?>");
 	});
 </script>
-<style type="text/css">
 
-</style>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('/frontend/app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

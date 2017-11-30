@@ -451,11 +451,18 @@ class CostumesController extends Controller {
 		$res=Costumes::costumeLike($req['costume_id'],Auth::user()->id);
 		return Response::JSON($res);
 	}
-	public function costumeFavourite(Request $request){
-		$req=$request->all();
-		$res=Costumes::costumeFavourite($req['costume_id'],Auth::user()->id);
+
+	public function costumeFavourite($id){
+		$res=Costumes::costumeFavourite($id,Auth::user()->id);
 		return Response::JSON($res);
 	}
+
+	/*public function costumeFavourite(Request $request){
+		$req=$request->all();
+		//echo "<pre>"; print_r($request->input('costume_id'));exit;
+		$res=Costumes::costumeFavourite($req['costume_id'],Auth::user()->id);
+		return Response::JSON($res);
+	}*/
 	public function costumeReport(Request $request){
 		$req=$request->all();
 		$res=Costumes::costumeReport($req);

@@ -129,8 +129,12 @@ Route::post('/postrequestabaglogin', ['as' => 'requestabaglogin.post','uses'=>'A
 /* Request a bag ends here*/
 
 /** Costume Like page start here **/
-Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
+//Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
 /** Costume Like page end here **/
+
+
+Route::get('/costume/favourite/{id}', 'CostumesController@costumeFavourite');
+
 
 Route::get('/wishlist', ['as' => 'wishlist','uses'=>'WishlistCostumesController@myWishlistList']);
 Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostumesController@removeWishlistCostume']);
