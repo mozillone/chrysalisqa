@@ -910,22 +910,24 @@ class CreateCostumeController  extends Controller {
 				//$amount = $charity_info->donation_amount*100;
 				$amount = number_format($charity_info->donation_amount,2);
 				if($amount > 0){
-					$donation.= $charity_info->donating_percent.'% of the sale goes to '.ucfirst($charity_info->name);
+					$donation.= $charity_info->donating_percent.'% of the sale goes to '.ucfirst($charity_info->name).".";
 				}
 				$is_amount = 1;
 			}
 
-			$quote = "I’m selling my ".$charity_info->cos_name." on Chrysalis.\n".$donation.". Check it out!";
-
-			$debugger = Costumes::facebookDebugger($share_url);
-			$data=Costumes::getCostumeImages($costume_id);
-			$pic = asset('/costumers_images/Large').'/'.$data[0]->image;
 
 			if ((stripos( $charity_info->cos_name, 'costume' ) != '') || (stripos( $charity_info->cos_name, 'cosplay' ) != '')) {
 			  	$name = $charity_info->cos_name;
 			}else{
 				$name = $charity_info->cos_name." Costume";
 			}
+			$quote = "I’m selling my ".ucfirst($name)." on Chrysalis.\n".$donation." Check it out!";
+
+			$debugger = Costumes::facebookDebugger($share_url);
+			$data=Costumes::getCostumeImages($costume_id);
+			$pic = asset('/costumers_images/Large').'/'.$data[0]->image;
+
+			
 
 			/* End*/
 
@@ -1108,13 +1110,13 @@ class CreateCostumeController  extends Controller {
 							);
 
 		$conversation_array = array('type'=>'request_a_bag','user_one'=>'',
-									'subject'=>'Your Bag created.',
+									'subject'=>'Your Bag has been created.',
 									'user_two'=>'1',
 									'status'=>'1',
 									'type_id'=>$ref_no,
 									'created_at'=>date('y-m-d H:i:s'));
 
-		$theard_array  = array('message'=>'',
+		$theard_array  = array('message'=>'Your Bag is under process.',
 								'is_seen'=>'0',
 						        'deleted_from_sender'=>'0',
 						        'deleted_from_receiver'=>'0',
@@ -2023,13 +2025,17 @@ class CreateCostumeController  extends Controller {
 				//$amount = $charity_info->donation_amount*100;
 				$amount = number_format($charity_info->donation_amount,2);
 				if($amount > 0){
-					$donation.= $charity_info->donating_percent.'% of the sale goes to '.ucfirst($charity_info->name) ;	
+					$donation.= $charity_info->donating_percent.'% of the sale goes to '.ucfirst($charity_info->name)."." ;	
 				}
 				
 				$is_amount = 1;
 			}
-
-			$quote = "I’m selling my ".$charity_info->cos_name." on Chrysalis.\n".$donation.". Check it out!";
+			if ((stripos( $charity_info->cos_name, 'costume' ) != '') || (stripos( $charity_info->cos_name, 'cosplay' ) != '')) {
+			  	$name = $charity_info->cos_name;
+			}else{
+				$name = $charity_info->cos_name." Costume";
+			}
+			$quote = "I’m selling my ".ucfirst($name)." on Chrysalis.\n".$donation." Check it out!";
 
 			$debugger = Costumes::facebookDebugger($share_url);
 			$data=Costumes::getCostumeImages($request->costume_id);
@@ -2037,11 +2043,7 @@ class CreateCostumeController  extends Controller {
 			$name_costume = $charity_info->cos_name;
 			$charity_center = ucfirst($charity_info->name);
 
-			if ((stripos( $charity_info->cos_name, 'costume' ) != '') || (stripos( $charity_info->cos_name, 'cosplay' ) != '')) {
-			  	$name = $charity_info->cos_name;
-			}else{
-				$name = $charity_info->cos_name." Costume";
-			}
+			
 			/* End*/
 
 			return response()->json(['msg'=>'success', 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name)]);
