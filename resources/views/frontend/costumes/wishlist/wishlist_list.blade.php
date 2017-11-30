@@ -57,7 +57,15 @@
 					            <h4><a href="/product{{$wish->url_key}}"></a></h4>
 					            <span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>
 								<p>{{$wish->name}}</p>
-								<p class="fav-drs-size">{{ucfirst($wish->gender)}} @if($wish->size=="s") Small @elseif($wish->size=="m") Medium @elseif($wish->size=="l") Large @else {{strtoupper($data[0]->size)}} @endif</p>
+								<p class="fav-drs-size">{{ucfirst($wish->gender)}} @if($wish->size=="s") 
+									Small 
+								@elseif($wish->size=="m") 
+									Medium 
+								@elseif($wish->size=="l") 
+									Large 
+								@else 
+									{{strtoupper($wish->size)}} 
+								@endif</p>
 					            <p>{{$wish->price}}</p>
 								<div class="fav_social fav_social_sharing">
 									<a href="javascript:void(0);" class="facebook" class="icoRss" title="Facebook">

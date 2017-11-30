@@ -16,7 +16,7 @@
 	</div>
 </section>    
 <link rel="stylesheet" href="<?php echo e(asset('/vendors/sweetalert/dist/sweetalert.css')); ?>">
-<section class="content ">
+<section class="content my_dashboad_div">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
