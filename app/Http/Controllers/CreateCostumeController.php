@@ -915,7 +915,7 @@ class CreateCostumeController  extends Controller {
 				$is_amount = 1;
 			}
 
-			$quote = "I’m selling my ".$charity_info->cos_name." on Chrysalis.\n".$donation;
+			$quote = "I’m selling my ".$charity_info->cos_name." on Chrysalis.\n".$donation.". Check it out!";
 
 			$debugger = Costumes::facebookDebugger($share_url);
 			$data=Costumes::getCostumeImages($costume_id);
@@ -2023,13 +2023,13 @@ class CreateCostumeController  extends Controller {
 				//$amount = $charity_info->donation_amount*100;
 				$amount = number_format($charity_info->donation_amount,2);
 				if($amount > 0){
-					$donation.= $charity_info->donating_percent.'% of the sale goes to '.ucfirst($charity_info->name).". Check it out!" ;	
+					$donation.= $charity_info->donating_percent.'% of the sale goes to '.ucfirst($charity_info->name) ;	
 				}
 				
 				$is_amount = 1;
 			}
 
-			$quote = "I’m selling my ".$charity_info->cos_name." on Chrysalis.\n".$donation;
+			$quote = "I’m selling my ".$charity_info->cos_name." on Chrysalis.\n".$donation.". Check it out!";
 
 			$debugger = Costumes::facebookDebugger($share_url);
 			$data=Costumes::getCostumeImages($request->costume_id);
