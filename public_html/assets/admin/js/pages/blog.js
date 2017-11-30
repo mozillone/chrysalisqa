@@ -22,11 +22,10 @@ $(function(){
                 required: true
             },
             post_desc:{
-                         required: function() 
-                        {
-                         CKEDITOR.instances.post_desc.updateElement();
-                        },
-
+                required: function() 
+                {
+                    CKEDITOR.instances.post_desc.updateElement();
+                },
             },
            
         },
@@ -34,24 +33,43 @@ $(function(){
             $(element).closest('.form-control').addClass('error');
         },
         errorPlacement: function(error, element) {
-            if(element.parent('.input-group').length) {
+            if(element.attr("name") == 'blogTags'){
+                error.insertAfter(".selectize-control");
+            }else if(element.attr("name") == 'category'){
+                error.insertAfter(".blog-categories");
+            }else if(element.attr("name") == 'post_desc'){
+                error.insertAfter("#cke_post_desc");
+            }else if(element.attr('name') == 'blogImage'){
+                error.insertAfter(".fileupload");
+            }else if(element.parent('.input-group').length){
                 error.insertAfter($(element).parents('div.input-group'));
             }else{
                 error.insertAfter(element);
             }
+            /*if(element.parent('.input-group').length) {
+                error.insertAfter($(element).parents('div.input-group'));
+            }else{
+                error.insertAfter(element);
+            }*/
         },
         messages: {
             title:{
                 required: "Enter Blog Post Title",
             },
-            description:{
+            post_desc:{
                 required: "Enter Blog Post Description",
             },
             status:{
-                required: "Please Select The Blog Post Status",
+                required: "Select Blog Post Status",
             },
             category:{
-                required: "Please Select The Blog Post Category",
+                required: "Select Blog Post Category",
+            },
+            blogTags:{
+                required: "Enter Blog Tags"
+            },
+            blogImage:{
+                required: "Select Blog Image"
             }
         },
         errorElement: 'span',
@@ -97,24 +115,43 @@ $(function(){
             $(element).closest('.form-control').addClass('error');
         },
         errorPlacement: function(error, element) {
-            if(element.parent('.input-group').length) {
+            if(element.attr("name") == 'blogTags'){
+                error.insertAfter(".selectize-control");
+            }else if(element.attr("name") == 'category'){
+                error.insertAfter(".blog-categories");
+            }else if(element.attr("name") == 'post_desc'){
+                error.insertAfter("#cke_post_desc");
+            }else if(element.attr('name') == 'blogImage'){
+                error.insertAfter(".fileupload");
+            }else if(element.parent('.input-group').length){
                 error.insertAfter($(element).parents('div.input-group'));
             }else{
                 error.insertAfter(element);
             }
+           /* if(element.parent('.input-group').length) {
+                error.insertAfter($(element).parents('div.input-group'));
+            }else{
+                error.insertAfter(element);
+            }*/
         },
         messages: {
             title:{
                 required: "Enter Blog Post Title",
             },
-            description:{
+            post_desc:{
                 required: "Enter Blog Post Description",
             },
             status:{
-                required: "Please Select The Blog Post Status",
+                required: "Select Blog Post Status",
             },
             category:{
-                required: "Please Select The Blog Post Category",
+                required: "Select Blog Post Category",
+            },
+            blogTags:{
+                required: "Enter Blog Tags"
+            },
+            blogImage:{
+                required: "Select Blog Image"
             }
         },
         errorElement: 'span',

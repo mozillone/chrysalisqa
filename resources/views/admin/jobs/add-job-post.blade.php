@@ -89,16 +89,6 @@
                                     <textarea id="postDesc" name="postDesc"></textarea>
                                     <p class="error">{{ $errors->first('postDesc') }}</p> 
                                 </div>
-
-
-                                
-
-                                
-                                
-                          
-                             
-                        
-                        
                 </div>   
                 
                 
@@ -153,23 +143,41 @@ $(document).ready(function(){
                 debug: false,
                 rules: { 
 
+                    jobtitle:{
+                        required:true,
+                    },
+                    jobcode:{
+                        required:true,
+                    },
                     postDesc:{
-                         required: function() 
+                        required: function() 
                         {
                          CKEDITOR.instances.postDesc.updateElement();
                         },
-
-                         minlength:10
+                        minlength:10
+                    }
+                }, 
+                highlight: function(element) {
+                    $(element).closest('.form-control').addClass('error');
+                },
+                errorPlacement: function(error, element) {
+                    if(element.attr("name") == 'postDesc'){
+                        error.insertAfter("#cke_postDesc");
+                    }else{
+                        error.insertAfter(element); 
                     }
                 },
                 messages:
                     {
-
+                    jobcode:{
+                        required:"Enter Job Code",
+                    },
+                    jobtitle:{
+                        required:"Enter Job Title",
+                    },
                     postDesc:{
                         required:"Please enter Text",
                         minlength:"Please enter 10 characters"
-
-
                     }
                 }
             });
