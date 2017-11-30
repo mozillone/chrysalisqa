@@ -303,10 +303,10 @@
 										@if(Auth::check())
 										<div class="hover_box">
 										<p class="like_fav">
-													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
-													</a> 
-										<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
-												</p>
+											<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
+											</a> 
+											<a href="#" onclick="return false;" class="fav_costume" data-costume-id="{{$costume->costume_id}}" ><span class="@if($costume->is_fav) active @endif"><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
+										</p>
 												<p class="hover_crt add-cart" data-costume-id="{{$costume->costume_id}}">
 													<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
 												</p>
