@@ -98,9 +98,9 @@
                                     }
                                     ?>
                                     @if($inbox->type != "order")
-                                        <div class="msg_order_imge"><a href="{{ URL::to('/product').$inbox->url_key }}"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
+                                    <div class="msg_order_imge"><a href="{{ URL::to('/product').$inbox->url_key }}"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
                                     @endif
-                                    <p class="order_cnt">@if($inbox->type == "request_a_bag") Ref no @elseif($inbox->type == "order") Order Id @else Product Id @endif #: <br>{{$inbox->type_id}}</p>
+                                    <p class="order_cnt">@if($inbox->type == "request_a_bag") Ref no  @elseif($inbox->type == "order") Order Id @else Product Id @endif #: <br>{{$inbox->type_id}}</p>
 
                                 </div>
                                 </a>
@@ -171,21 +171,21 @@
                                 </div>
                                 <div class="col-md-2 col-sm-2 text-center">
                                     <?php
-                                        if(isset($inbox->image) && !empty($inbox->image)){
-                                        $path = '/costumers_images/Small/'.$inbox->image;
-                                        if(file_exists(public_path($path))){
-                                        $listingImage = URL::asset('/costumers_images/Small/'.$inbox->image);
-                                        }else{
-                                        $listingImage = URL::asset('/costumers_images/default-placeholder.png');
-                                        }
-                                        }else{
-                                        $listingImage = URL::asset('/costumers_images/default-placeholder.png');
-                                        }
+                                    if(isset($inbox->image) && !empty($inbox->image)){
+                                    $path = '/costumers_images/Small/'.$inbox->image;
+                                    if(file_exists(public_path($path))){
+                                    $listingImage = URL::asset('/costumers_images/Small/'.$inbox->image);
+                                    }else{
+                                    $listingImage = URL::asset('/costumers_images/default-placeholder.png');
+                                    }
+                                    }else{
+                                    $listingImage = URL::asset('/costumers_images/default-placeholder.png');
+                                    }
                                     ?>
                                     @if($inbox->type != "order")
                                     <div class="msg_order_imge"><a href="{{ URL::to('/product').$inbox->url_key }}"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
                                     @endif
-                                 <p class="order_cnt">@if($inbox->type == "request_a_bag") Ref no @elseif($inbox->type == "order") Order Id @else Product Id @endif #: <br>{{$inbox->type_id}}</p>
+                                 <p class="order_cnt">@if($inbox->type == "request_a_bag") Ref no  @elseif($inbox->type == "order") Order Id @else Product Id @endif #: <br>{{$inbox->type_id}}</p>
 
                                 </div>
                                 </a>
@@ -221,7 +221,7 @@
         var id=$(this).attr('id');
         swal({
             title: "Are you sure want to delete?",
-            text: "You will not be able to recover this Converstaion!",
+            text: "You will not be able to recover this Conversation!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",

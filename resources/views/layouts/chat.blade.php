@@ -38,7 +38,7 @@
 				<div class="col-md-10 col-xs-12">
 					<div class="chat conversation-chat">
 						<div class="chat-header clearfix">
-							<?php //echo $user;die; ?>
+							<?php //echo"<pre>"; print_r($get_con); exit; ?>
 							<div class="chat-about">
 								<h4>{{@$get_con->subject}}</h4>
 								@if(isset($user))

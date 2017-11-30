@@ -3,7 +3,7 @@
 @section('content')
     <div class="chat-history">
         <ul id="talkMessages">
-            <?php 	//echo "<pre>";print_r($user);die; ?>
+            <?php 	//echo "<pre>";print_r($messages);die; ?>
             @foreach($messages as $message)
                 @if($message->sender->id == auth()->user()->id)
                     <li class="clearfix" id="message-{{$message->id}}">

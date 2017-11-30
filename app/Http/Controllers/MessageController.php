@@ -54,7 +54,7 @@ class MessageController extends Controller
             $user = User::find($id);
         } else {
             $user = $conversations->withUser;
-            $messages = $conversations->messages;
+            $messages = $conversations->Messages;
         }
         $get_con = DB::table('conversations')
             ->leftjoin('url_rewrites','url_rewrites.url_offset','=','conversations.costume_id')
