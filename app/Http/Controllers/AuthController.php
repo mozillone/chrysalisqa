@@ -712,11 +712,11 @@ class AuthController extends Controller {
 							//echo $ref_no;die;
 							$addres_insert=DB::table('address_master')->insertGetId($addres_array);
 
-							$conversation_array = array('type'=>'request_a_bag','user_one'=>$userid,
+							$conversation_array = array('type'=>'request_a_bag','user_one'=>'1',
 
 								'subject'=>'Your Bag created.',
 
-								'user_two'=>'1',
+								'user_two'=>$userid,
 								'status'=>'1',
 								'created_at'=>date('y-m-d H:i:s'));
 							$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
@@ -725,8 +725,8 @@ class AuthController extends Controller {
 									'is_seen'=>'0',
 							        'deleted_from_sender'=>'0',
 							        'deleted_from_receiver'=>'0',
-							        'user_id'=>$userid,
-							        'user_name'=>Auth::user()->display_name,
+							        'user_id'=>'1',
+							        'user_name'=>User::find(1)->pluck('display_name')->first(),
 							        'conversation_id'=>$conversation_insert,
 							        'created_at'=>date('y-m-d H:i:s'));
 							$theard = DB::table('messages')->insertGetId($theard_array);
