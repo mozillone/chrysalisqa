@@ -101,7 +101,7 @@ $(document).on("change",".per_page",function(e)
 { 
      e.preventDefault();
      var id = $(this).val();
-     $("#perpage").val(id);
+     $("#perpage").val(id); 
      searching(search);
 });
 
