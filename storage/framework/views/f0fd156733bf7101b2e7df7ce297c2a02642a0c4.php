@@ -44,7 +44,7 @@
 								<li data-gender="baby">Babies</li>
 							</ul>
 							
-							 <input type="hidden" name="search[gender]" class="search"/>
+							 <input type="hidden" name="search[gender]" id="gender" class="search"/>
 							
 						</div>
 						<?php endif; ?>
