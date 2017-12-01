@@ -61,8 +61,9 @@ class MessageController extends Controller
             ->leftjoin('costume_image','costume_image.costume_id','=','conversations.costume_id')
             ->select('conversations.type','conversations.type_id','conversations.subject', 'costume_image.image', 'url_rewrites.url_key', 'conversations.user_one', 'conversations.user_two', 'conversations.costume_id')
             ->where('conversations.id',$id)->first();
-
-        $make_seen = DB::table('messages')->where('conversation_id',$id)->update(['is_seen'=>'1']);
+        if($get_con->user_two == Auth::user()->id){
+            $make_seen = DB::table('messages')->where('conversation_id',$id)->update(['is_seen'=>'1']);
+        }
         return view('messages.message', compact('messages', 'user','get_con'));
     }
 
@@ -141,11 +142,12 @@ class MessageController extends Controller
             $messages = $conversations->messages;
         }*/
         $this->data = array();
-        $this->data['conversations_sent'] = DB::Select('SELECT usr.first_name,usr.last_name,cnvs.id,cnvs.created_at,cnvs.subject,cnvs.type_id,cnvs.costume_id,cnvs.type,msg.is_seen,msg.user_id,msg.conversation_id,costume_image.image,costume_url.url_key,(SELECT cm1.message FROM cc_messages as cm1  WHERE cnvs.id = cm1.conversation_id ORDER BY created_at DESC LIMIT 1) as message FROM `cc_conversations` as cnvs LEFT JOIN cc_messages as msg on msg.conversation_id=cnvs.id LEFT JOIN cc_costume_image as costume_image on costume_image.costume_id=cnvs.costume_id LEFT JOIN cc_url_rewrites as costume_url on costume_url.url_offset=cnvs.costume_id LEFT JOIN cc_users as usr on usr.id=cnvs.user_one where cnvs.user_one='.Auth::user()->id.' group by cnvs.id order by cnvs.id desc');
-        $this->data['conversations_inbox'] = DB::Select('SELECT usr.first_name,usr.last_name,cnvs.id,cnvs.created_at,cnvs.subject,cnvs.type_id,cnvs.costume_id,cnvs.type,msg.is_seen,msg.user_id,msg.conversation_id,costume_image.image,costume_url.url_key,(SELECT cm1.message FROM cc_messages as cm1  WHERE cnvs.id = cm1.conversation_id ORDER BY created_at DESC LIMIT 1) as message FROM `cc_conversations` as cnvs LEFT JOIN cc_messages as msg on msg.conversation_id=cnvs.id LEFT JOIN cc_costume_image as costume_image on costume_image.costume_id=cnvs.costume_id LEFT JOIN cc_url_rewrites as costume_url on costume_url.url_offset=cnvs.costume_id LEFT JOIN cc_users as usr on usr.id=cnvs.user_one where cnvs.user_two='.Auth::user()->id.' group by cnvs.id order by cnvs.id desc');
-        $msgs_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.' OR cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        $this->data['conversations_sent'] = DB::Select('SELECT usr.display_name,usr.user_img,usr.first_name,usr.last_name,cnvs.id,cnvs.created_at,cnvs.subject,cnvs.type_id,cnvs.costume_id,cnvs.type,msg.is_seen,msg.user_id,msg.conversation_id,costume_image.image,costume_url.url_key,(SELECT cm1.message FROM cc_messages as cm1  WHERE cnvs.id = cm1.conversation_id ORDER BY created_at DESC LIMIT 1) as message FROM `cc_conversations` as cnvs LEFT JOIN cc_messages as msg on msg.conversation_id=cnvs.id LEFT JOIN cc_costume_image as costume_image on costume_image.costume_id=cnvs.costume_id LEFT JOIN cc_url_rewrites as costume_url on costume_url.url_offset=cnvs.costume_id LEFT JOIN cc_users as usr on usr.id=cnvs.user_one where cnvs.user_one='.Auth::user()->id.' group by cnvs.id order by cnvs.id desc');
+        //dd($this->data['conversations_sent']);
+        $this->data['conversations_inbox'] = DB::Select('SELECT usr.display_name,usr.user_img,usr.first_name,usr.last_name,cnvs.id,cnvs.created_at,cnvs.subject,cnvs.type_id,cnvs.costume_id,cnvs.type,msg.is_seen,msg.user_id,msg.conversation_id,costume_image.image,costume_url.url_key,(SELECT cm1.message FROM cc_messages as cm1  WHERE cnvs.id = cm1.conversation_id ORDER BY created_at DESC LIMIT 1) as message FROM `cc_conversations` as cnvs LEFT JOIN cc_messages as msg on msg.conversation_id=cnvs.id LEFT JOIN cc_costume_image as costume_image on costume_image.costume_id=cnvs.costume_id LEFT JOIN cc_url_rewrites as costume_url on costume_url.url_offset=cnvs.costume_id LEFT JOIN cc_users as usr on usr.id=cnvs.user_one where cnvs.user_two='.Auth::user()->id.' group by cnvs.id order by cnvs.id desc');
+        $msgs_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.' OR cnvs.user_one = 1) and msg.user_id != '.Auth::user()->id.'');
         $msgs_inbox = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
-        $msgs_sent = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        $msgs_sent = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_one = '.Auth::user()->id.') and msg.user_id = '.Auth::user()->id.'');
        // echo "<pre>";print_r($this->data);die;
         //echo "<pre>";print_r($this->data['conversations_inbox']);die;
         /*$this->data['conversations_inbox'] = DB::table('conversations')

@@ -39,7 +39,9 @@ $(document).on('click','.gender > li',function(){
 	$('.gender li').removeClass('active');
 	$(this).addClass('active');
 	var gender=$(this).attr('data-gender');	
-	$('input[name="search[gender]"').val(gender);
+	console.log(gender);
+	// $('input[name="search[gender]"').val(gender);
+	$('.search_gender').val(gender);
 	var search=$('#search_list').serializeArray();
 	searching(search);
 })
