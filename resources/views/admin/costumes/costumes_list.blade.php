@@ -130,152 +130,156 @@
 
 
 <script type="text/javascript">
-   function changeCostumeStatus(id, status) {
-        $.ajax({
-            type: "POST",
-            url: "{!! URL::to('changecostumestatus') !!}",
-            data: {'id':id,'status':status},
-            dataType: 'json',
-            success: function(response) {
-                if(response){
-                    table.ajax.reload();
-                }
-            }
-        });
-        }
-        function changeFeaturedStatus(id, status) {
-        $.ajax({
-            type: "POST",
-            url: "{!! URL::to('changefeaturestatus') !!}",
-            data: {'id':id,'status':status},
-            dataType: 'json',
-            success: function(response) {
-                if(response){
-                    table.ajax.reload();
-                }
-            }
-        });
-        }
-        var table = '';
-  $(function() {
-            table = $('#customes-list-table').DataTable({
-      "ajax": {
-            "url" : "getallcostumes",
-           "type": "GET",
-         },
-      "searching": false,
-      "pageLength": 25,
-      "bLengthChange": false,
-      "order": [ 6, 'DESC'],
-      "columnDefs": [{
-      "targets": [ 7 ],
-      "visible": false,
-      "searchable": false
-      },{
-        'bSortable' : false,
-        'aTargets' : [ -3, -2, -1 ]
-      }],
-       dom: 'Bfrtip',
-       buttons: [
-                  {
-                    extend: 'csv',
-                    title: 'Costumes List',
-                    exportOptions: {
-                       columns: ':not(:nth-child(8)):not(:nth-child(9)):not(:nth-child(10)):not(:nth-child(11))'
+   $(document).ready(function()
+   {  
+       function changeCostumeStatus(id, status) {
+            $.ajax({
+                type: "POST",
+                url: "{!! URL::to('changecostumestatus') !!}",
+                data: {'id':id,'status':status},
+                dataType: 'json',
+                success: function(response) {
+                    if(response){
+                        table.ajax.reload();
                     }
                 }
-            ],
-      
-      "columns": [
-        { data: 'sku_no', name: 'sku_no'},
-        { data: 'custome_name', name: 'custome_name'},
-        { data: 'customer_name', name: 'customer_name'},
-        { data: 'cat_name', name: 'cat_name'},
-        { data: 'custome_condition', name: 'custome_condition'},
-        { data: 'price', name: 'price'},
-        { data: 'custome_created_at', name: 'custome_created_at'},
-        { data: 'custome_status', name: 'custome_status'},
-        { data: 'status', name: 'status'},
-        { data: 'is_featured', name: 'is_featured'},
-        { data: 'actions', name: 'actions'}
-      ]
-    });
-
-
-  }); 
-
-  $("#search").click(function(){
-    table.destroy();
-       var sku=$("#sku").val();
-       var costume_name=$("#costume_name").val();
-       var customer_name=$("#customer_name").val();
-       var condition=$('#condition').val();
-       var status=$('#status').val();
-       table = $('#customes-list-table').DataTable({
-      "ajax": {
-            "url" : "getallsearchcostumes",
-           "type": "POST",
-             "data": {sku:sku,costume_name:costume_name,customer_name:customer_name,condition:condition,status:status}
-         },
-      "searching": false,
-      "pageLength": 25,
-      "bLengthChange": false,
-      "order": [ 6, 'DESC'],
-      "columnDefs": [{
-      "targets": [ 7 ],
-      "visible": false,
-      "searchable": false
-      },{
-        'bSortable' : false,
-        'aTargets' : [ -3, -2, -1 ]
-      }],
-      dom: 'Bfrtip',
-       buttons: [
-                  {
-                    extend: 'csv',
-                    title: 'Costumes List',
-                    exportOptions: {
-                       columns: ':not(:nth-child(8)):not(:nth-child(9)):not(:nth-child(10))'
+            });
+            }
+            function changeFeaturedStatus(id, status) {
+            $.ajax({
+                type: "POST",
+                url: "{!! URL::to('changefeaturestatus') !!}",
+                data: {'id':id,'status':status},
+                dataType: 'json',
+                success: function(response) {
+                    if(response){
+                        table.ajax.reload();
                     }
                 }
-            ],
-      "columns": [
-        { data: 'sku_no', name: 'sku_no'},
-        { data: 'custome_name', name: 'custome_name'},
-        { data: 'customer_name', name: 'customer_name'},
-        { data: 'cat_name', name: 'cat_name'},
-        { data: 'custome_condition', name: 'custome_condition'},
-        { data: 'price', name: 'price'},
-        { data: 'custome_created_at', name: 'custome_created_at'},
-        { data: 'custome_status', name: 'custome_status'},
-        { data: 'status', name: 'status'},
-        { data: 'is_featured', name: 'is_featured'},
-        { data: 'actions', name: 'actions'}
-      ]
-    });
+            });
+            }
+            var table = '';
+      $(function() {
+                table = $('#customes-list-table').DataTable({
+          "ajax": {
+                "url" : "getallcostumes",
+               "type": "GET",
+             },
+          "searching": false,
+          "pageLength": 25,
+          "bLengthChange": false,
+          "order": [ 6, 'DESC'],
+          "columnDefs": [{
+          "targets": [ 7 ],
+          "visible": false,
+          "searchable": false
+          },{
+            'bSortable' : false,
+            'aTargets' : [ -3, -2, -1 ]
+          }],
+           dom: 'Bfrtip',
+           buttons: [
+                      {
+                        extend: 'csv',
+                        title: 'Costumes List',
+                        exportOptions: {
+                           columns: ':not(:nth-child(8)):not(:nth-child(9)):not(:nth-child(10)):not(:nth-child(11))'
+                        }
+                    }
+                ],
+          
+          "columns": [
+            { data: 'sku_no', name: 'sku_no'},
+            { data: 'custome_name', name: 'custome_name'},
+            { data: 'customer_name', name: 'customer_name'},
+            { data: 'cat_name', name: 'cat_name'},
+            { data: 'custome_condition', name: 'custome_condition'},
+            { data: 'price', name: 'price'},
+            { data: 'custome_created_at', name: 'custome_created_at'},
+            { data: 'custome_status', name: 'custome_status'},
+            { data: 'status', name: 'status'},
+            { data: 'is_featured', name: 'is_featured'},
+            { data: 'actions', name: 'actions'}
+          ]
+        });
 
-    });
+
+      }); 
+
+      $("#search").click(function(){
+        table.destroy();
+           var sku=$("#sku").val();
+           var costume_name=$("#costume_name").val();
+           var customer_name=$("#customer_name").val();
+           var condition=$('#condition').val();
+           var status=$('#status').val();
+           table = $('#customes-list-table').DataTable({
+          "ajax": {
+                "url" : "getallsearchcostumes",
+               "type": "POST",
+                 "data": {sku:sku,costume_name:costume_name,customer_name:customer_name,condition:condition,status:status}
+             },
+          "searching": false,
+          "pageLength": 25,
+          "bLengthChange": false,
+          "order": [ 6, 'DESC'],
+          "columnDefs": [{
+          "targets": [ 7 ],
+          "visible": false,
+          "searchable": false
+          },{
+            'bSortable' : false,
+            'aTargets' : [ -3, -2, -1 ]
+          }],
+          dom: 'Bfrtip',
+           buttons: [
+                      {
+                        extend: 'csv',
+                        title: 'Costumes List',
+                        exportOptions: {
+                           columns: ':not(:nth-child(8)):not(:nth-child(9)):not(:nth-child(10))'
+                        }
+                    }
+                ],
+          "columns": [
+            { data: 'sku_no', name: 'sku_no'},
+            { data: 'custome_name', name: 'custome_name'},
+            { data: 'customer_name', name: 'customer_name'},
+            { data: 'cat_name', name: 'cat_name'},
+            { data: 'custome_condition', name: 'custome_condition'},
+            { data: 'price', name: 'price'},
+            { data: 'custome_created_at', name: 'custome_created_at'},
+            { data: 'custome_status', name: 'custome_status'},
+            { data: 'status', name: 'status'},
+            { data: 'is_featured', name: 'is_featured'},
+            { data: 'actions', name: 'actions'}
+          ]
+        });
+
+        });
 
 
-        function deletecostume($id){
-        var id=$id;
+            function deletecostume($id){
+            var id=$id;
 
-    swal({
-       title: "Are you sure want to delete this Costume?",
-                  showCancelButton: true,
-                 confirmButtonColor: "#DD6B55 ",
-                 confirmButtonText: "Yes, delete",
-                 closeOnConfirm: false,
-                 closeOnCancel: true
-               },
+        swal({
+           title: "Are you sure want to delete this Costume?",
+                      showCancelButton: true,
+                     confirmButtonColor: "#DD6B55 ",
+                     confirmButtonText: "Yes, delete",
+                     closeOnConfirm: false,
+                     closeOnCancel: true
+                   },
 
-               function(){
-               url = "/deletecostume/"+id+"";
-                window.location = url;
-               });
+                   function(){
+                   url = "/deletecostume/"+id+"";
+                    window.location = url;
+                   });
 
 
-   }
+       }
+       init();
+   });
 
 </script>
 
