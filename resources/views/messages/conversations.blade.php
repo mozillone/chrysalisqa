@@ -62,10 +62,10 @@
                                     <div class="col-md-3 col-sm-4">
                                         <ul>
                                             <li>
-                                                <img src="{{isset($inbox->user_img) && !empty($inbox->user_img)?url('/profile_img/'.$inbox->user_img):url('/profile_img/default.jpg')}}" alt="avatar" />      
+                                               <img src="{{isset($inbox->user_img) && !empty($inbox->user_img)?url('/profile_img/resize/'.$inbox->user_img):url('/profile_img/default.jpg')}}" alt="avatar" />         
                                             </li>
                                             <li>
-                                                <p>{{$inbox->first_name}}</p>
+                                                <p>{{$inbox->display_name}}</p>
                                                 <span>{{ date('m-d-y', strtotime($inbox->created_at))}}</span>
                                             </li>
 
@@ -150,7 +150,7 @@
                                 <img src="{{isset($inbox->user_img) && !empty($inbox->user_img)?url('/profile_img/resize/'.$inbox->user_img):url('/profile_img/default.jpg')}}" alt="avatar" />      
                                 </li>
                                 <li>
-                                <p>{{$inbox->first_name}}</p>
+                                <p>{{$inbox->display_name}}</p>
                                 <span>{{ date('m-d-y', strtotime($inbox->created_at))}}</span>
                                 </li>
 
