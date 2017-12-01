@@ -241,7 +241,7 @@ div#freqently {
 .multi_thumbs{width: 197px !important; margin: 0 auto;}
 
 a#costume_description_next, a#pricing_next{width: auto;}
-.form-rms-input textarea{top: 10px;}
+.form-rms-input textarea{/* top: 10px; */}
 .keywords_div {
     float: left;
 }

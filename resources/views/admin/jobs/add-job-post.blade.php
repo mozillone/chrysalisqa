@@ -176,7 +176,7 @@ $(document).ready(function(){
                         required:"Enter Job Title",
                     },
                     postDesc:{
-                        required:"Please enter Text",
+                        required:"Enter Job Description",
                         minlength:"Please enter 10 characters"
                     }
                 }

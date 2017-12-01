@@ -38,7 +38,7 @@ var search=$('#search_list').serializeArray();
 $(document).on('click','.gender > li',function(){
 	$('.gender li').removeClass('active');
 	$(this).addClass('active');
-	var gender=$(this).attr('data-gender');
+	var gender=$(this).attr('data-gender');	
 	$('input[name="search[gender]"').val(gender);
 	var search=$('#search_list').serializeArray();
 	searching(search);
@@ -110,15 +110,14 @@ function searching(search){
 	var sub_cat_name=$('input[name="sub_cat_name"]').val();
 	var is_login=$('input[name="is_login"]').val();
 	$("#itemContainer").html("");
-	$("#itemContainer").addClass("search_icn_load");
- 
+	$("#itemContainer").addClass("search_icn_load"); 
     var url = $("#search_list").attr('action');
 	$.ajax({
 			type: 'POST',
 			url: url,
 			cache: true,
 			data: filter,
-            async:false,
+            async:true,
 			success: function(response){
 				$("#filter-container").html(response);
 			},
