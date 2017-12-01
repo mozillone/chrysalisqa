@@ -40,7 +40,7 @@ $(document).on('click','.gender > li',function(){
 	$(this).addClass('active');
 	var gender=$(this).attr('data-gender');	
 	debugger;
-	$('input[name="search[gender]"]').val(gender);
+	$('input[name="search[gender\]"]').val(gender);
 
 	//$('#gender_list').val(gender);	 
 	var search=$('#search_list').serializeArray();
