@@ -1,7 +1,5 @@
 $(function(){
 
-
-
     $("#add_cms_page").validate({
         onfocusout: function(element) { $(element).valid(); },
         rules: {
