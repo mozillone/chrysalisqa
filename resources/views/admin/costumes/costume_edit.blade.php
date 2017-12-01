@@ -1302,175 +1302,175 @@ if($("#size").val() == "custom"){
 	$("#submit").click(function(a) {                                                     
 	if($("input[name=Imagecrop1]").attr('data-id') == "")
 	{
+		$('input[name=file1]').css('border', '1px solid red');
+		$('#file1_error').html('Upload Front View');
+		return false;                                          
+	}
+	});																							
+	$(document).on("click",".img_clse",function()
+	{ 												
+	   $("#drag_n_drop_1").hide();
+	   $("#drag_n_drop_2").hide();
+	   $("#drag_n_drop_3").hide();
+	});
+	var hidden_file4 = $('#hidden_file4').val();
+	if (hidden_file4 == "") {
+		$('#drag_n_drop_3').css('display','none');
+	}
+	var hidden_file5 = $('#hidden_file5').val();
+	if (hidden_file5 == "") {
+		$('#drag_n_drop_2').css('display','none');
+	}
+	$('#drag_n_drop_1').click(function(){
+		
+		swal({
+		  title: "Are you sure?",
+		  text: "You will not be able to recover this Image!",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonClass: "btn-danger",
+		  confirmButtonText: "Yes, delete",
+		  cancelButtonText: "No, cancel",
+		  closeOnConfirm: false,
+		  closeOnCancel: false
+		},
+		function(isConfirm) {
+		  if (isConfirm) {
+		  	var imageName = '<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){echo $costume_image1->image; }; ?>';
+		  	var imageType = 1;
+		  	if(imageName.length>0){
+		  		deleteCostumeImage(imageName,imageType);
+		  	}
+		  	$('#front_view').find('li').remove();
+		  	$('#drag_n_drop_1').css('display','none');													 
+		  	$("input[name=file1]").attr('style',''); 
+		  	$('input[name=file1]').val('');
+		  	$('input[name=file1]').attr('value','');
+		    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+		  } else {
+		    swal("Cancelled", "Your imaginary file is safe :)", "error");
+		  }
+		});
 
-	$('input[name=file1]').css('border', '1px solid red');
-	$('#file1_error').html('Upload Front View');
-	return false;                                          
-
-	}                                                    
 
 	});
-																							
-												$(document).on("click",".img_clse",function()
-												{ 												
-												   $("#drag_n_drop_1").hide();
-												   $("#drag_n_drop_2").hide();
-												   $("#drag_n_drop_3").hide();
-												});
-												 
-												//donate amount percentage calculation
-												/*$('#charity_amount').change(function(){
-													var donate_percent = $(this).val();
-													var price = $('#price').val();
-													var total = (price*donate_percent)/100;
-													if (donate_percent=="none") {
-														var total = 0.00;
-													}
-													$('#hidden_donation_amount').val(parseFloat(total).toFixed(2));
-													$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
-												});*/
-												 
-												var hidden_file4 = $('#hidden_file4').val();
-												if (hidden_file4 == "") {
-													$('#drag_n_drop_3').css('display','none');
-												}
-												var hidden_file5 = $('#hidden_file5').val();
-												if (hidden_file5 == "") {
-													$('#drag_n_drop_2').css('display','none');
-												}
-												$('#drag_n_drop_1').click(function(){
-													var imageName = '<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){echo $costume_image1->image; }; ?>';
-													var imageType = 1;
-													if(imageName.length>0){
-														deleteCostumeImage(imageName,imageType);
-													}
-													$('#front_view').find('li').remove();
-													$('#drag_n_drop_1').css('display','none');													 
-													$("input[name=file1]").attr('style',''); 
-													$('input[name=file1]').val('');
-													$('input[name=file1]').attr('value','');
-												});
-												$('#drag_n_drop_2').click(function(){
-													var imageName = '<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){echo $costume_image2->image; }; ?>';
-													var imageType = 2;
-													if(imageName.length>0){
-														deleteCostumeImage(imageName,imageType);
-													}
-													$('#back_view').find('li').remove();
-													$('#drag_n_drop_2').css('display','none');
-													$("input[name=file2]").attr('style',''); 
-													$('input[name=file2]').val('');
-													$('input[name=file2]').attr('value','');
-												});
-												$('#drag_n_drop_3').click(function(){
-													var imageName = '<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){echo $costume_image3->image; }; ?>';
-													var imageType = 3;
-													if(imageName.length>0){
-													deleteCostumeImage(imageName,imageType);                }
-													$('#details_view').find('li').remove();
-													$('#drag_n_drop_3').css('display','none');
-													$("input[name=file3]").attr('style',''); 
-													$('input[name=file3]').val('');
-													$('input[name=file3]').attr('value','');
-												});
-												$(".remove").click(function(){
-													$(this).parent(".pip").remove();
-												});
-											});
-											function cosplay_yes(id){
-												if (id == 7) {
-													$('#cosplayplay_yes_div').css('display','block');
-													}else{
-													$('#cosplayplay_yes_div').css('display','none');
-													$('input[name=cosplayplay_yes_opt]').attr('checked',false);
-												}
-											}
-											function uniquefashion_yes(id){
-												if (id == 9) {
-													$('#uniquefashion_yes_div').css('display','block');
-													}else{
-													$('#uniquefashion_yes_div').css('display','none');
-													$('input[name=uniquefashion_yes_opt]').attr('checked',false);
-												}
-											}
-											function activity_yes(id){
-												if (id == 11) {
-													$('#activity_yes_div').css('display','block');
-													}else{
-													$('#activity_yes_div').css('display','none');
-													$('input[name=activity_yes_opt]').attr('checked',false);
-												}
-											}
-											function make_costume_yes(id){
-												if (id == 30) {
-													$('#mention_hours').css('display','block');
-													$('#mention_hours_input').css('display','block');
-													}else{
-													$('#mention_hours').css('display','none');
-													$('#mention_hours_input').css('display','none');
-													$('#mention_hours_input').val('');
-													$('#make_costume_time').attr('value','');
-												}
-											}
-											function film_name_yes(id){
-												if (id == 32) {
-													$('#film_text').css('display','block');
-													$('#film_text_input').css('display','block');
-													}else{
-													$('#film_text').css('display','none');
-													$('#film_text_input').css('display','none');
-													$('#film_text_input').val('');
-												}
-											}
-											function deleteCostumeImage(imageName,imageType){
-												$.ajax({
-													type: "POST",
-													url: '{!! url('delete-costume-image') !!}',
-													data: {'image_name':imageName,image_type:imageType},
-													dataType: 'JSON',
-													success: function(response) {
-													}
-												});
-											}
-											//delete multiple selected images code
-											var allRemove = [];
-											$(document).on("click",".remove_pic",function()
-											{
-												
-											    var cur_val = $(this).attr('data-id');
-												var cur_rem_val = $(this).parents().attr('style');
-												var last_one = cur_rem_val.substr(cur_rem_val.length - 15);
-												var remove_org_val = last_one.slice(0,-1);
-												var MakeInput = '';
-												  removeValue =  $("#"+cur_val).val();
-												
-												$("#"+cur_val).remove();
-												 //$(this).parents().find("#"+cur_val).remove();
-												//$("#"+cur_val).parents().find("div.multi_div").remove();
-												allRemove.push(remove_org_val);
-												
-												$.each( allRemove, function( key, value ) {
-													MakeInput =  '<input type="hidden" name="multiple[]" value="'+value+'">';
-												});
-												$(".deletedImages").append(MakeInput);
-											});
-										</script>
-										<script type="text/javascript">
-											$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensionsdimensionsWidth,#dimensionsdimensionsLength,#dimensionsdimensionsLength,#make_costume_time").on("keyup", function(){
-												var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
-												val = this.value;
-												if(!valid){
-													//console.log("Invalid input!");
-													this.value = val.substring(0, val.length - 1);
-												}
-											});
-											$("#price,#donate_charity").on("keyup", function(){
-												var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
-												val = this.value;
-												if(!valid){
-													//console.log("Invalid input!");
-													this.value = val.substring(0, val.length - 1);
-												}
-											});
-										</script>
-									@stop									
+	$('#drag_n_drop_2').click(function(){
+		var imageName = '<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){echo $costume_image2->image; }; ?>';
+		var imageType = 2;
+		if(imageName.length>0){
+			deleteCostumeImage(imageName,imageType);
+		}
+		$('#back_view').find('li').remove();
+		$('#drag_n_drop_2').css('display','none');
+		$("input[name=file2]").attr('style',''); 
+		$('input[name=file2]').val('');
+		$('input[name=file2]').attr('value','');
+	});
+	$('#drag_n_drop_3').click(function(){
+		var imageName = '<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){echo $costume_image3->image; }; ?>';
+		var imageType = 3;
+		if(imageName.length>0){
+		deleteCostumeImage(imageName,imageType);                }
+		$('#details_view').find('li').remove();
+		$('#drag_n_drop_3').css('display','none');
+		$("input[name=file3]").attr('style',''); 
+		$('input[name=file3]').val('');
+		$('input[name=file3]').attr('value','');
+	});
+	$(".remove").click(function(){
+		$(this).parent(".pip").remove();
+	});
+});
+function cosplay_yes(id){
+	if (id == 7) {
+		$('#cosplayplay_yes_div').css('display','block');
+		}else{
+		$('#cosplayplay_yes_div').css('display','none');
+		$('input[name=cosplayplay_yes_opt]').attr('checked',false);
+	}
+}
+function uniquefashion_yes(id){
+	if (id == 9) {
+		$('#uniquefashion_yes_div').css('display','block');
+		}else{
+		$('#uniquefashion_yes_div').css('display','none');
+		$('input[name=uniquefashion_yes_opt]').attr('checked',false);
+	}
+}
+function activity_yes(id){
+	if (id == 11) {
+		$('#activity_yes_div').css('display','block');
+		}else{
+		$('#activity_yes_div').css('display','none');
+		$('input[name=activity_yes_opt]').attr('checked',false);
+	}
+}
+function make_costume_yes(id){
+	if (id == 30) {
+		$('#mention_hours').css('display','block');
+		$('#mention_hours_input').css('display','block');
+		}else{
+		$('#mention_hours').css('display','none');
+		$('#mention_hours_input').css('display','none');
+		$('#mention_hours_input').val('');
+		$('#make_costume_time').attr('value','');
+	}
+}
+function film_name_yes(id){
+	if (id == 32) {
+		$('#film_text').css('display','block');
+		$('#film_text_input').css('display','block');
+		}else{
+		$('#film_text').css('display','none');
+		$('#film_text_input').css('display','none');
+		$('#film_text_input').val('');
+	}
+}
+function deleteCostumeImage(imageName,imageType){
+	$.ajax({
+		type: "POST",
+		url: '{!! url('delete-costume-image') !!}',
+		data: {'image_name':imageName,image_type:imageType},
+		dataType: 'JSON',
+		success: function(response) {
+		}
+	});
+}
+//delete multiple selected images code
+var allRemove = [];
+$(document).on("click",".remove_pic",function()
+{
+	
+    var cur_val = $(this).attr('data-id');
+	var cur_rem_val = $(this).parents().attr('style');
+	var last_one = cur_rem_val.substr(cur_rem_val.length - 15);
+	var remove_org_val = last_one.slice(0,-1);
+	var MakeInput = '';
+	  removeValue =  $("#"+cur_val).val();	
+	$("#"+cur_val).remove();
+	allRemove.push(remove_org_val);	
+	$.each( allRemove, function( key, value ) {
+		MakeInput =  '<input type="hidden" name="multiple[]" value="'+value+'">';
+	});
+	$(".deletedImages").append(MakeInput);
+});
+</script>
+<script type="text/javascript">
+$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensionsdimensionsWidth,#dimensionsdimensionsLength,#dimensionsdimensionsLength,#make_costume_time").on("keyup", function(){
+	var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
+	val = this.value;
+	if(!valid){
+		//console.log("Invalid input!");
+		this.value = val.substring(0, val.length - 1);
+	}
+});
+$("#price,#donate_charity").on("keyup", function(){
+	var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
+	val = this.value;
+	if(!valid){
+		//console.log("Invalid input!");
+		this.value = val.substring(0, val.length - 1);
+	}
+});
+</script>
+@stop									
