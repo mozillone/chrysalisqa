@@ -61,8 +61,9 @@ class MessageController extends Controller
             ->leftjoin('costume_image','costume_image.costume_id','=','conversations.costume_id')
             ->select('conversations.type','conversations.type_id','conversations.subject', 'costume_image.image', 'url_rewrites.url_key', 'conversations.user_one', 'conversations.user_two', 'conversations.costume_id')
             ->where('conversations.id',$id)->first();
-
-        $make_seen = DB::table('messages')->where('conversation_id',$id)->update(['is_seen'=>'1']);
+        if($get_con->user_two == Auth::user()->id){
+            $make_seen = DB::table('messages')->where('conversation_id',$id)->update(['is_seen'=>'1']);
+        }
         return view('messages.message', compact('messages', 'user','get_con'));
     }
 
