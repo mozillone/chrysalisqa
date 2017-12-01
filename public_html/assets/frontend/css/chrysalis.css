@@ -1162,12 +1162,12 @@ i#social-tw{margin-left:10px;margin-right:10px;}
 /*21-nov end*/
 .col-md-8.col-sm-8.pdlft0.how_lng_tme{margin-left:-10px;margin-top:10px;}
 p#mention_hours{margin-top:10px;font-family:Proxima-Nova-semibold;color:#323031;}
-.how_div span{margin-left:10px;font-size:14px;}
+.how_div span{margin-left:5px;font-size:14px;}
 .make_costume #make_costume_time1{/*    width: 60px;*/
 border:1px solid #e1e1e1;padding-left:5px;}
 input#film_name{height:40px;}
 p#mention_hours{margin-top:10px;}
-p#mention_hours_input{padding-left:0px;margin-left:-25px;}
+p#mention_hours_input{padding-left:0px;margin-left:-35px;}
 .dimensions-two-pk_info span.form-rms-he1{display:block;width:100%;float:left;}
 span.lnth-names{margin-left:27px;}
 .dnt-amcnts{margin-top:35px;}
@@ -1563,6 +1563,12 @@ i.fa.fa-arrow-right{font-size:18px;color:#a09fa0;}
 	.steps_slider1.owl-carousel .owl-item{float:left;width:270px!important;margin-left:25px;}
 }
 @media screen and (min-width:1025px){
+
+/* 	1-dec */
+	p.form-rms-sm1.max_lnths {    width: auto;}
+
+/* 	1-dec end */
+
 
 	/*insta css*/
 	.insta_main{max-height:345px;overflow:hidden;}
@@ -2028,8 +2034,8 @@ i.fa.fa-arrow-right{font-size:18px;color:#a09fa0;}
 @media screen and (max-width:767px){
 
 /* 1-dec */
-
-how_lng_tme span#usercostumeerror {
+	.cos_desc_div{text-align: left;}
+.how_lng_tme span#usercostumeerror {
     margin-left: 10px;
 }
 .form-rms-input textarea{margin-top: 5px;}
@@ -2663,7 +2669,8 @@ how_lng_tme span#usercostumeerror {
 	.form-rms-que{text-indent:inherit;text-align:left;}
 	.form-rms-small{text-align:left;padding-left:0px;font-size:14px;}
 	.form-rms{padding-left:0px;}
-	div#total_forms_div{text-align:left;margin-top:60px;}
+
+	div#total_forms_div{text-align:center;margin-top:60px;}
 	.form-rms-input input{width:100%;}
 	.form-rms-input select{width:100%;float:left;height:30px;border:1px solid #e1e1e1;padding:0 10px;font-family:Proxima-Nova-Semibold;font-size:16px;}
 	h2.prog-stepss{text-align:center;margin-top:0px;color:#000;text-transform:uppercase;font-size:16px;margin-bottom:5px;font-family:Proxima-Nova-Extrabold;}
