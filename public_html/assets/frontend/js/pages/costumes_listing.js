@@ -40,7 +40,8 @@ $(document).on('click','.gender > li',function(){
 	$(this).addClass('active');
 	var gender=$(this).attr('data-gender');	
 	console.log(gender);
-	$('input[name="search[gender]"').val(gender);	 
+	$('input[name="search[gender]"]').val(gender);
+	//$('#gender_list').val(gender);	 
 	var search=$('#search_list').serializeArray();
 	searching(search);
 })
@@ -113,6 +114,7 @@ function searching(search){
 	$("#itemContainer").html("");
 	$("#itemContainer").addClass("search_icn_load"); 
     var url = $("#search_list").attr('action');
+
 	$.ajax({
 			type: 'POST',
 			url: url,
