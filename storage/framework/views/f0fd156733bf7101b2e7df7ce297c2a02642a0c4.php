@@ -44,7 +44,7 @@
 								<li data-gender="baby">Babies</li>
 							</ul>
 							
-							 <input type="hidden" name="search[gender]" id="gender" class="search"/>
+							 <input type="hidden" name="search[gender]" id="gender_list_2" class="search search_gender"/>
 							
 						</div>
 						<?php endif; ?>
@@ -60,7 +60,7 @@
 								<li data-gender="baby">Babies</li>
 							</ul>
 						  
-							 <input type="hidden" name="search[gender]" class="search"/>
+							 <input type="hidden" name="search[gender]" id="gender_list" class="search search_gender"/>
 						
 						</div>
 						<?php endif; ?>
@@ -195,7 +195,7 @@
 															</ul>
 														</div>
 													</div>
-													<input type="hidden" name="search[gender]" class="search"/>
+													<input type="hidden" name="search[gender]" id='gender_list_1' class="search search_gender"/>
 												</div>
 												<?php endif; ?>
 												<?php if($parent_cat_name != "mens" && $parent_cat_name != "womens" && $parent_cat_name != "pets" && $parent_cat_name != "kids"): ?>
@@ -224,7 +224,7 @@
 															</ul>
 														</div>
 													</div>
-													<input type="hidden" name="search[gender]" class="search"/>
+													<input type="hidden" name="search[gender]" class="search search_gender"/>
 												</div>
 												<?php endif; ?>
 												<div class="list-box-rm ">
