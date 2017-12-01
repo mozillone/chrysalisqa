@@ -147,7 +147,7 @@
                                 <div class="col-md-3 col-sm-4">
                                 <ul>
                                 <li>
-                                <img src="{{isset(Auth::user()->user_img) && !empty(Auth::user()->user_img)?url('/profile_img/resize/'.Auth::user()->user_img):url('/profile_img/default.jpg')}}" alt="avatar" />      
+                                <img src="{{isset($inbox->user_img) && !empty($inbox->user_img)?url('/profile_img/resize/'.$inbox->user_img):url('/profile_img/default.jpg')}}" alt="avatar" />      
                                 </li>
                                 <li>
                                 <p>{{$inbox->first_name}}</p>
