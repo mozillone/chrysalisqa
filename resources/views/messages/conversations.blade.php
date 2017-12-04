@@ -13,7 +13,7 @@
         <div class="col-md-12 col-sm-12">
                 <div class="list-sec-rm">
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <p class="list-sec-rm1 fav_costume">MY MESSAGES ({{$msgs_count[0]->count_dt}})</p>
+                        <p class="list-sec-rm1 fav_costume">MY MESSAGES</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 text-right pull-right back-link bck_mycnt">
                         <a href="{{URL::to('/dashboard')}}">Back to My Account</a>
