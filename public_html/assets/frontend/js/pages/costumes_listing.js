@@ -39,7 +39,7 @@ $(document).on('click','.gender > li',function(){
 	$('.gender li').removeClass('active');
 	$(this).addClass('active');
 	var gender=$(this).attr('data-gender');	
-	debugger;
+	
 	$('input[name="search[gender\]"]').val(gender);
 
 	//$('#gender_list').val(gender);	 
@@ -59,7 +59,7 @@ $(document).on('click','.sizes > li',function(){
 		}
 	});
 
-	$('input[name="search[sizes]"').val(sizes);
+	$('input[name="search[sizes\]"]').val(sizes);
 	 var search=$('#search_list').serializeArray();
 	 searching(search);
 });
