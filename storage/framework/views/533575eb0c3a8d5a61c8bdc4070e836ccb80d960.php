@@ -44,7 +44,7 @@
 								<li data-gender="baby">Babies</li>
 							</ul>
 							
-							 <input type="hidden" name="search[gender]" class="search"/>
+							 <input type="hidden" name="search[gender]" id="gender_list_2" class="search search_gender"/>
 							
 						</div>
 						<?php endif; ?>
@@ -60,7 +60,7 @@
 								<li data-gender="baby">Babies</li>
 							</ul>
 						  
-							 <input type="hidden" name="search[gender]" class="search"/>
+							 <input type="hidden" name="search[gender]" id="gender_list" class="search search_gender"/>
 						
 						</div>
 						<?php endif; ?>
@@ -195,7 +195,7 @@
 															</ul>
 														</div>
 													</div>
-													<input type="hidden" name="search[gender]" class="search"/>
+													<input type="hidden" name="search[gender]" id='gender_list_1' class="search search_gender"/>
 												</div>
 												<?php endif; ?>
 												<?php if($parent_cat_name != "mens" && $parent_cat_name != "womens" && $parent_cat_name != "pets" && $parent_cat_name != "kids"): ?>
@@ -224,7 +224,7 @@
 															</ul>
 														</div>
 													</div>
-													<input type="hidden" name="search[gender]" class="search"/>
+													<input type="hidden" name="search[gender]" class="search search_gender"/>
 												</div>
 												<?php endif; ?>
 												<div class="list-box-rm ">
@@ -373,25 +373,25 @@
 										</a>
 										<?php if(Auth::check()): ?>
 										<div class="hover_box">
-										<p class="like_fav">
-											<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i><?php echo e($costume->like_count); ?></span>
-											</a> 
-											<a href="#" onclick="return false;" class="fav_costume" data-costume-id="<?php echo e($costume->costume_id); ?>" ><span class="<?php if($costume->is_fav): ?> active <?php endif; ?>"><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
-										</p>
+											<p class="like_fav">
+												<a href="#" onclick="return false;" class="like_costume" data-costume-id='<?php echo e($costume->costume_id); ?>'><span class="<?php if($costume->is_like): ?> active <?php endif; ?>"><i aria-hidden="true" class="fa fa-thumbs-up"></i><?php echo e($costume->like_count); ?></span>
+												</a> 
+												<a href="#" onclick="return false;" class="fav_costume" data-costume-id="<?php echo e($costume->costume_id); ?>" ><span class="<?php if($costume->is_fav): ?> active <?php endif; ?>"><i aria-hidden="true" class="<?php if($costume->is_fav): ?> fa fa-heart <?php else: ?> fa fa-heart-o <?php endif; ?>"></i></span></a>
+											</p>
 											<p class="hover_crt add-cart" data-costume-id="<?php echo e($costume->costume_id); ?>">
 												<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
 											</p>
 										</div>
 										<?php else: ?>
 										<div class="hover_box">
-										<p class="like_fav">
-													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
-													</a> 
-										<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
-												</p>
-												<p class="hover_crt add-cart" data-costume-id="<?php echo e($costume->costume_id); ?>">
-													<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
-												</p>
+											<p class="like_fav">
+												<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
+												</a> 
+												<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
+											</p>
+											<p class="hover_crt add-cart" data-costume-id="<?php echo e($costume->costume_id); ?>">
+												<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
+											</p>
 										</div>
 										<?php endif; ?>
 									</div>
