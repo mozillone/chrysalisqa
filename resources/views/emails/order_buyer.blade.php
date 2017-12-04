@@ -170,7 +170,7 @@ margin: 20px 0px;">
 <table style="text-align:center;margin:0 auto; padding:5px 0px; font-size:13px; margin-bottom:30px; background:#f6f9fb; width:600px;">
 <tbody>
     <tr>
-        <td>&copy; 2017 <span style="padding:0px 10px;">|</span> Chrysalis</td>
+        <td><p>© 2017 CHRYSALIS. ALL RIGHTS RESERVED​​​​​​​ | <a href="/pages/terms-of-use/" style="color: #000;">TERMS OF USE</a> | <a href="/pages/privacy-policy/" style="color: #000;"> PRIVACY POLICY </a></p></td>
     </tr>   
 </tbody>
 </table>
