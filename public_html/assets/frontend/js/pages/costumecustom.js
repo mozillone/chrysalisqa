@@ -174,36 +174,23 @@ $(function(){
     $('#30').click(function() {
         $('#mention_hours').css('display', 'block');
         $('#mention_hours_input').css('display', 'block');
-<<<<<<< HEAD
-        //$("#freqently").show();
-=======
->>>>>>> f1a7787a4a40e32a81ae6c4e8a6596e8b21976ab
     });
     $('#33').click(function() {
         $('#film_text').css('display', 'none');
         $('#film_text_input').css('display', 'none');
         $('#film_text_input').val('');
-<<<<<<< HEAD
-         //$("#freqently").hide();
-=======
->>>>>>> f1a7787a4a40e32a81ae6c4e8a6596e8b21976ab
+
     });
     $('#32').click(function() {
         $('#film_text').css('display', 'block');
         $('#film_text_input').css('display', 'block');
-<<<<<<< HEAD
-        //$("#freqently").show();
-=======
->>>>>>> f1a7787a4a40e32a81ae6c4e8a6596e8b21976ab
+
     });
     $('#31').click(function() {
         $('#mention_hours').css('display', 'none');
         $('#mention_hours_input').css('display', 'none');
         $('#mention_hours_input').val('');
-<<<<<<< HEAD
-         //$("#freqently").hide();
-=======
->>>>>>> f1a7787a4a40e32a81ae6c4e8a6596e8b21976ab
+
     });
 
     $('#another_charity').click(function() {
