@@ -9,7 +9,7 @@
 <style>
 	.red.sizes_chart{display:block;}
 	div#size-chart label input.size_chekd {    vertical-align: text-bottom;}
-	div#size-chart label{ margin-right: 15px; }
+	div#size-chart label{ margin-right: 15px; }come
 </style>
 @endsection
 @section('content')
@@ -60,10 +60,12 @@
 							<a href="javascript:void(0);" class="facebook" class="icoRss" title="Facebook">
 								<i id="social-fb" class="fa fa-facebook fa-1x social"></i>
 								<input type="hidden" name="url_fb" class="url_fb" value="{{Request::fullurl()}}">
-								<input type="hidden" name="quote_fb" class="quote_fb" value="Come check out this {{$costume_detail_name}}">
+
+								<input type="hidden"  id="quote_fb" name="quote_fb" class="quote_fb" value="Come check out this {{$costume_detail_name}}!">
 							</a>
 							<a href="javascript:void(0);" title="Twitter">
-								<span id="twiter_url" data-network="twitter" class="st-custom-button" data-title="Come check out this {{$costume_detail_name}}"  data-url="{{Request::fullurl()}}">
+								<span id="twiter_url" data-network="twitter" class="st-custom-button" data-title="Come check out this {{$costume_detail_name}}!" data-url="{{Request::fullurl()}}">
+
 									<i id="social-tw" class="fa fa-twitter fa-1x social"></i>
 								</span>
 							</a>
@@ -80,12 +82,15 @@
 										@endif
 									</span>
 								</a>
-                                
+
 								@if(Auth::check())
-                                	<a href="javscript:void(0);" id="envelope" onclick="showSellerInfo()" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                                	<a href="javscript::void(0);" id="envelope" onclick="showSellerInfo()" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                 @else
                                 	<a href="#" data-toggle="modal" data-target="#login_popup"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                                 @endif
+                                
+                                
+
 								<!-- <div class="sharethis-inline-share-buttons"></div> -->
 							</div>
 						</h1>
@@ -124,12 +129,34 @@
 																<td>Waist</td>
 															</tr>
 															<tr>
-																<td class="text-center">{{$data[0]->custom_sizes[0]}} ft</td>
-																<td class="text-center">{{$data[0]->custom_sizes[1]}} in</td>
-																<td class="text-center">{{$data[0]->custom_sizes[2]}} lbs</td>
-																<td class="text-center">{{$data[0]->custom_sizes[3]}} in</td>
-																<td class="text-center">{{$data[0]->custom_sizes[4]}} in</td>
-															</tr>
+    														    @if(!empty($data[0]->custom_sizes[0]))
+    															<td class="text-center">{{$data[0]->custom_sizes[0]}} ft</td>
+    															@else
+    															<td class="text-center">0 ft</td>
+    															@endif
+    															@if(!empty($data[0]->custom_sizes[1]))
+    															<td class="text-center">{{$data[0]->custom_sizes[1]}} in</td>
+    															@else
+    															 <td class="text-center">0 in</td>
+    															@endif
+    															@if(!empty($data[0]->custom_sizes[2]))
+    															<td class="text-center">{{$data[0]->custom_sizes[2]}} lbs</td>
+    															@else
+    															 <td class="text-center">0 lbs</td>
+    															@endif
+    															
+    															@if(!empty($data[0]->custom_sizes[3]))
+    															<td class="text-center">{{$data[0]->custom_sizes[3]}} in</td>
+    															@else
+    															 <td class="text-center">0 in</td>
+    															@endif
+    															
+    															@if(!empty($data[0]->custom_sizes[4]))
+    															<td class="text-center">{{$data[0]->custom_sizes[4]}} in</td>
+    															@else
+    															 <td class="text-center">0 in</td>
+    															@endif
+														   </tr>
 														</tbody>
 													</table>
 												</div>
@@ -154,6 +181,8 @@
 										
 									</div>
 								</div>
+								
+							
 								
 								@if(Auth::check() && !empty($data['seller_info']['shipping_location'])  && helper::getSellerShippingAddress($data[0]->created_by) && helper::getUserShippingAddress())
 								
@@ -215,6 +244,7 @@
 											
 										</div>
 										
+										 
 										<!-- .tab_container_list_view -->
 										<div class="single_view_multi_view_tabs">
 											<ul class="mobile_list_tabs nav nav-tabs viewTabs">
@@ -248,7 +278,8 @@
 														</p>
 														@endif
 														@if(Auth::check())
-															<a href="javscript:void(0);" type="button" class="contact_seller" data-toggle="modal" data-target="#messageModal">Contact</a>
+															<a href="javscript::void(0);" type="button" class="contact_seller" data-toggle="modal" data-target="#messageModal">Contact</a>
+
 														@endif
 														@else
 														<p class="no-data-tab">No data found</p>
@@ -282,7 +313,7 @@
 										
 									</div>
 								</div>
-								
+							
 								<div class="clearfix"></div>
 								<div class="col-md-12 detailes_view_slider">
 									<h2 class="viewHead-rm">People Also Viewing</h2>
@@ -335,7 +366,7 @@
 									<div class="row">
 										<div class="col-md-12 col-sm-12 col-xs-12">
 											<div class="report_item_pupup" id="loginModal">
-												
+											
 												<div id="myTabContent" class="tab-content">
 													<h2>Report Item</h2>
 													
@@ -353,6 +384,8 @@
 																<input type="text"  name="email" placeholder="Enter your email" class="form-control" @if(Auth::check()) value="{{Auth::user()->email}}" @endif>
 																<p class="error">{{ $errors->first('email') }}</p>
 															</div>
+															
+															
 															<div class="form-group">
 																<label>Phone</label>
 																<input type="text" name="phone" placeholder="Enter phone number" class="form-control" @if(Auth::check()) value="{{Auth::user()->phone_number}}" @endif>
@@ -385,10 +418,11 @@
 							</div>
 						</div>
 					</section>
-						
+				
+				@if(!empty($data['seller_info']['shipping_location']))			
 				@if(Auth::check())
-			 
-					<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	                <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<form action="{{route('inquire-costume')}}" method="POST" id="inquire_costume">
@@ -402,7 +436,7 @@
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 										<h4 class="modal-title" id="myModalLabel">Contact About {{ $data[0]->name }}</h4>
 									</div>
-									
+										
 									<div class="modal-body">
 										<div class="row">
 											<div class="col-md-12">
@@ -432,11 +466,11 @@
 								</form>
 							</div>
 						</div>
-					</div>
-					
+					</div>	
+					@endif
 					@endif
 					<!-- size chart modal start here -->
-				
+			
 					<div id="size-chart"  class="modal fade" role="dialog">
 						<div class="modal-dialog">
 							
@@ -944,7 +978,6 @@
 							$("#tab1").hide();
 							$("#tab2").hide();
 							$('#tab3').show();
-
 						}
 						$(".mobile-plus").click(function(){
 							$(this).toggleClass("mobile-minus");	

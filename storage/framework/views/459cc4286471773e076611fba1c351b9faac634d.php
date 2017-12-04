@@ -42,18 +42,18 @@
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-xs-12">
          <form  action="<?php echo e(url('/admin/login')); ?>" method="post" class="validation" id="login" name="login">
          <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
           <div class="form-group has-feedback" ng-init="<?php echo e(old('email')); ?>">
-            <input class="form-control" placeholder="Email" name="email" id="email">
-            <p class="error"><?php echo e($errors->first('email')); ?></p>
-            
-		 <i class="fa fa-envelope form-control-feedback" aria-hidden="true"></i>
+            <input class="form-control" placeholder="Email" name="email" id="email" value="<?php echo e(old('email')); ?>">
+            <p class="error"><?php echo e($errors->first('email')); ?></p>            
+		      <i class="fa fa-envelope form-control-feedback" aria-hidden="true"></i>
           </div>
           <div class="form-group has-feedback">
-            <input class="form-control" placeholder="Password"  id="password" name="password" type="password">
+            <input class="form-control" placeholder="Password"  id="password" name="password" type="password" value="<?php echo e(old('password')); ?>">
              <p class="error"><?php echo e($errors->first('password')); ?></p>
             <i class="fa fa-lock form-control-feedback" aria-hidden="true"></i>
           </div>

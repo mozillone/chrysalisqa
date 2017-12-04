@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Illuminate\Database\QueryException;
 use InvalidArgumentException;
-use Log;
 
 class Handler extends ExceptionHandler
 {
@@ -36,7 +35,7 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $exception)
+public function report(Exception $exception)
     {
         parent::report($exception);
     }
@@ -48,9 +47,10 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
+
     public function render($request, Exception $e)
     {
-       dd($e);
+
         if($e instanceof NotFoundHttpException){
             return response()->view('errors.'.'404');
         }elseif ($e instanceof ModelNotFoundException) {
@@ -74,8 +74,7 @@ class Handler extends ExceptionHandler
         }
         return parent::render($request, $e);
    }
-
-    /**
+   /**
      * Convert an authentication exception into an unauthenticated response.
      *
      * @param  \Illuminate\Http\Request  $request

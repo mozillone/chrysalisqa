@@ -17,7 +17,7 @@
 	</div>
 </section>    
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
-<section class="content ">
+<section class="content my_dashboad_div">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -916,236 +916,229 @@
 				// When the user selects an address from the dropdown, populate the address
 				// fields in the form.
 				autocomplete.addListener('place_changed', fillInAddress);
+		}
+			
+		function fillInAddress() {
+			// Get the place details from the autocomplete object.
+			var place = autocomplete.getPlace();
+			
+			for (var component in componentForm) {
+				console.log(document.getElementById(component).value);
+				document.getElementById(component).value = '';
+				document.getElementById(component).disabled = false;
 			}
 			
-			function fillInAddress() {
-				// Get the place details from the autocomplete object.
-				var place = autocomplete.getPlace();
-				
-				for (var component in componentForm) {
-					console.log(document.getElementById(component).value);
-					document.getElementById(component).value = '';
-					document.getElementById(component).disabled = false;
-				}
-				
-				// Get each component of the address from the place details
-				// and fill the corresponding field on the form.
-				for (var i = 0; i < place.address_components.length; i++) {
-					var addressType = place.address_components[i].types[0];
-					if (componentForm[addressType]) {
-						var val = place.address_components[i][componentForm[addressType]];
-						if(addressType=="route"){
-							$('#route').val($('#street_number').val()+" "+val);
-						}
-						else if(addressType=="administrative_area_level_1"){
-							$("#administrative_area_level_1").val(val);
-							}else{
-							document.getElementById(addressType).value = val;
-						}
+			// Get each component of the address from the place details
+			// and fill the corresponding field on the form.
+			for (var i = 0; i < place.address_components.length; i++) {
+				var addressType = place.address_components[i].types[0];
+				if (componentForm[addressType]) {
+					var val = place.address_components[i][componentForm[addressType]];
+					if(addressType=="route"){
+						$('#route').val($('#street_number').val()+" "+val);
+					}
+					else if(addressType=="administrative_area_level_1"){
+						$("#administrative_area_level_1").val(val);
+						}else{
+						document.getElementById(addressType).value = val;
 					}
 				}
 			}
+		}
 			
 			// Bias the autocomplete object to the user's geographical location,
 			// as supplied by the browser's 'navigator.geolocation' object.
-			function geolocate() {
-				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(function(position) {
-						var geolocation = {
-							lat: position.coords.latitude,
-							lng: position.coords.longitude
-						};
-						var circle = new google.maps.Circle({
-							center: geolocation,
-							radius: position.coords.accuracy
-						});
-						autocomplete.setBounds(circle.getBounds());
+		function geolocate() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var geolocation = {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					};
+					var circle = new google.maps.Circle({
+						center: geolocation,
+						radius: position.coords.accuracy
 					});
-				}
+					autocomplete.setBounds(circle.getBounds());
+				});
 			}
-		</script>
+		}
+	</script>
 		
-		<script type="text/javascript">
+	<script type="text/javascript">
+			
+		var shipping_address=$("#seller_address").validate({ignore: ":hidden" });
 			
 			
-			var shipping_address=$("#seller_address").validate({ignore: ":hidden" });
+		//$("#street_number").rules("add", {required:true,maxlength: 100});
+		$("#route").rules("add", {required:true,maxlength: 100});
+		$("#locality").rules("add", {required:true});
+		$("#postal_code").rules("add", {required:true,number:true});
+		$("#administrative_area_level_1").rules("add", {required:true,maxlength:100});
 			
+		function delete_seller_address($id){
+			var id=$id;
 			
-			//$("#street_number").rules("add", {required:true,maxlength: 100});
-			$("#route").rules("add", {required:true,maxlength: 100});
-			$("#locality").rules("add", {required:true});
-			$("#postal_code").rules("add", {required:true,number:true});
-			$("#administrative_area_level_1").rules("add", {required:true,maxlength:100});
+			swal({
+				title: "Are you sure want to delete this Address?",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55 ",
+				confirmButtonText: "Yes, delete",
+				closeOnConfirm: false,
+				closeOnCancel: true
+			},
 			
-			function delete_seller_address($id){
-				var id=$id;
+			function(){
+				url = "{{URL::to('/deleteSellerAddress/')}}"+"/"+id;
+				window.location = url;
 				
-				swal({
-					title: "Are you sure want to delete this Address?",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55 ",
-					confirmButtonText: "Yes, delete",
-					closeOnConfirm: false,
-					closeOnCancel: true
-				},
-				
-				function(){
-					url = "{{URL::to('/deleteSellerAddress/')}}"+"/"+id;
-					window.location = url;
-					
-				});
+			});
+		}
+			
+		$(document).on('change','#shipping_country,#billing_country',function(){
+			if($(this).val()!="United States"){
+				$('.state_dropdown').addClass('hide');
+				$('.normal-states').removeClass('hide');
+				}else{
+				$('.state_dropdown').removeClass('hide');
+				$('.normal-states').addClass('hide');
 			}
-			
-			$(document).on('change','#shipping_country,#billing_country',function(){
-				if($(this).val()!="United States"){
-					$('.state_dropdown').addClass('hide');
-					$('.normal-states').removeClass('hide');
-					}else{
-					$('.state_dropdown').removeClass('hide');
-					$('.normal-states').addClass('hide');
+		});
+		
+		function  edit_shipping(id){
+			$.ajax({
+				type: 'GET',
+				url: '/getAddressInfo/'+id,
+				success: function(response){
+					$('#shipping_address_id').val(response[0].address_id);
+					$("#shipping_address_1_edit").val(response[0].address1);
+					$("#shipping_address_2_edit").val(response[0].address2);
+					$("#shipping_firstname_edit").val(response[0].fname);
+					$("#shipping_lastname_edit").val(response[0].lname);
+					$("#shipping_city_edit").val(response[0].city);
+					$("#shipping_postcode_edit").val(response[0].zip_code);
+					$("#shipping_state_dropdown_edit").val(response[0].state);
+					$("#shipping_state_hidden_edit").val(response[0].state);
+					
 				}
-			});
-			function  edit_shipping(id){
-				$.ajax({
-					type: 'GET',
-					url: '/getAddressInfo/'+id,
-					success: function(response){
-						$('#shipping_address_id').val(response[0].address_id);
-						$("#shipping_address_1_edit").val(response[0].address1);
-						$("#shipping_address_2_edit").val(response[0].address2);
-						$("#shipping_firstname_edit").val(response[0].fname);
-						$("#shipping_lastname_edit").val(response[0].lname);
-						$("#shipping_city_edit").val(response[0].city);
-						$("#shipping_postcode_edit").val(response[0].zip_code);
-						$("#shipping_state_dropdown_edit").val(response[0].state);
-						$("#shipping_state_hidden_edit").val(response[0].state);
-						
-					}
-				});	
-				$("#shipping_popup_edit").modal("show");
-			}
-			function  edit_billing(id){
-				$.ajax({
-					type: 'GET',
-					url: '/getAddressInfo/'+id,
-					success: function(response){
-						$('#billing_address_id').val(response[0].address_id);
-						$("#billing_address_1_edit").val(response[0].address1);
-						$("#billing_address_2_edit").val(response[0].address2);
-						$("#billing_firstname_edit").val(response[0].fname);
-						$("#billing_lastname_edit").val(response[0].lname);
-						$("#billing_city_edit").val(response[0].city);
-						$("#billing_postcode_edit").val(response[0].zip_code);
-						$("#billing_state_dropdown_edit").val(response[0].state);
-						$("#billing_state_hidden_edit").val(response[0].state);
-						
-					}
-				});	
-				$("#billing_popup_edit").modal("show");
-			}
-			
-			function delete_address($id){
-				var id=$id;
-				
-				swal({
-					title: "Are you sure want to delete this Address?",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55 ",
-					confirmButtonText: "Yes, delete",
-					closeOnConfirm: false,
-					closeOnCancel: true
-				},
-				
-				function(){
-					url = "{{URL::to('/deleteaddress/')}}"+"/"+id;
-					window.location = url;
+			});	
+			$("#shipping_popup_edit").modal("show");
+		}
+		
+		function  edit_billing(id){
+			$.ajax({
+				type: 'GET',
+				url: '/getAddressInfo/'+id,
+				success: function(response){
+					$('#billing_address_id').val(response[0].address_id);
+					$("#billing_address_1_edit").val(response[0].address1);
+					$("#billing_address_2_edit").val(response[0].address2);
+					$("#billing_firstname_edit").val(response[0].fname);
+					$("#billing_lastname_edit").val(response[0].lname);
+					$("#billing_city_edit").val(response[0].city);
+					$("#billing_postcode_edit").val(response[0].zip_code);
+					$("#billing_state_dropdown_edit").val(response[0].state);
+					$("#billing_state_hidden_edit").val(response[0].state);
 					
-				});
-			}
+				}
+			});	
+			$("#billing_popup_edit").modal("show");
+		}
 			
-			function deleteccard($id){
-				var id=$id;
-				
-				swal({
-					title: "Are you sure want to delete this Card?",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55 ",
-					confirmButtonText: "Yes, delete",
-					closeOnConfirm: false,
-					closeOnCancel: true
-				},
-				
-				function(){
-					url = "{{URL::to('/deleteccard/')}}"+"/"+id;
-					window.location = url;
-					
-				});
-			}
-			$(document).ready(function(){
-				$('[data-toggle="tooltip"]').tooltip(); 
-				
-				$('#shipping_popup_add').click(function(){
-					$('#shipping_popup').css('display','block');
-					$('#shipping_popup').addClass('in');
-					$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
-				});
-				$('#billing_popup_add').click(function(){
-					$('#billing_popup').css('display','block');
-					$('#billing_popup').addClass('in');
-					$('#billing_popup_add').append('<div class="modal-backdrop fade in"></div>');
-				});
-				$('#shipping_close,#shi_close,#billing_close,#bil_close').click(function(){
-					$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').css('display','none');
-					$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').removeClass('in');
-					$('.modal-backdrop').remove();
-				});
-				var cc_details=$("#cc_dashboard_form").validate();
-				$("#cardholder_name").rules("add", {required:true,maxlength: 50});
-				$("#exp_month").rules("add", {required:true});
-				$("#exp_year").rules("add", {required:true});
-				$("#cc_number").rules("add", {required:true,cc_chk:true});
-				$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
+		function delete_address($id){
+			var id=$id;
+			
+			swal({
+				title: "Are you sure want to delete this Address?",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55 ",
+				confirmButtonText: "Yes, delete",
+				closeOnConfirm: false,
+				closeOnCancel: true
+			},
+			
+			function(){
+				url = "{{URL::to('/deleteaddress/')}}"+"/"+id;
+				window.location = url;
 				
 			});
-			jQuery.validator.addMethod("cc_chk", function(value, element) 
+		}
+			
+		function deleteccard($id){
+			var id=$id;
+			
+			swal({
+				title: "Are you sure want to delete this Card?",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55 ",
+				confirmButtonText: "Yes, delete",
+				closeOnConfirm: false,
+				closeOnCancel: true
+			},
+			
+			function(){
+				url = "{{URL::to('/deleteccard/')}}"+"/"+id;
+				window.location = url;
+				
+			});
+		}
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip(); 
+				
+			$('#shipping_popup_add').click(function(){
+				$('#shipping_popup').css('display','block');
+				$('#shipping_popup').addClass('in');
+				$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
+			});
+			
+			$('#billing_popup_add').click(function(){
+				$('#billing_popup').css('display','block');
+				$('#billing_popup').addClass('in');
+				$('#billing_popup_add').append('<div class="modal-backdrop fade in"></div>');
+			});
+			
+			$('#shipping_close,#shi_close,#billing_close,#bil_close').click(function(){
+				$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').css('display','none');
+				$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').removeClass('in');
+				$('.modal-backdrop').remove();
+			});
+			
+			var cc_details = $("#cc_dashboard_form").validate();
+			$("#cardholder_name").rules("add", {required:true,maxlength: 50});
+			$("#exp_month").rules("add", {required:true});
+			$("#exp_year").rules("add", {required:true});
+			$("#cc_number").rules("add", {required:true,cc_chk:true});
+			$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
+				
+		});
+		jQuery.validator.addMethod("cc_chk", function(value, element){
+			result = $('#cc_number').validateCreditCard();
+			if(result.valid  == true)
 			{
+				var name = result.card_type.name
 				
-				result = $('#cc_number').validateCreditCard();
-				
-				if(result.valid  == true)
+				if(name == 'amex')
 				{
-					
-					var name 		= result.card_type.name
-					
-					if(name == 'amex')
-					{
-						name = 'American Express';	
-					}
-					else if(name == 'visa')
-					{
-						name = 'Visa';	
-					}
-					else if(name == 'mastercard')
-					{
-						name = 'MasterCard';	
-					}		
-					
-					
-					
-					return true;
+					name = 'American Express';	
 				}
-				else
+				else if(name == 'visa')
 				{
-					$.validator.messages.cc_chk =  "Please enter valid credit card.";
-					
-					return false;
+					name = 'Visa';	
 				}
+				else if(name == 'mastercard')
+				{
+					name = 'MasterCard';	
+				}	
+				return true;
+			}
+			else
+			{
+				$.validator.messages.cc_chk =  "Please enter valid credit card.";
+				return false;
+			}
 				
-				
-				
-				
-				
-			}, 	 $.validator.messages.cc_chk);
+		}, 	$.validator.messages.cc_chk);
+
 			input_credit_card = function(input)
 			{
 				var format_and_pos = function(char, backspace)
@@ -1256,11 +1249,11 @@
 					setTimeout(function(){ format_and_pos(''); }, 50);
 				});
 				
-				input.addEventListener('blur', function()
+				/*input.addEventListener('blur', function()
 				{
 					// reformat onblur just in case (optional)
 					format_and_pos(this, false);
-				});
+				});*/
 			};
 			
 			input_credit_card(document.getElementById('cc_number'));	

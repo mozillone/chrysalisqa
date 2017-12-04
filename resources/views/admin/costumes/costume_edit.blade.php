@@ -179,7 +179,7 @@
 								</div>
 
 
-
+                                
 								<div class="row">
 								<div class="col-md-6">                                  
                                     <div class="form-group has-feedback hide" id="cleaned_select">
@@ -227,6 +227,8 @@
 										</div>
 										</div>
 								</div>
+								
+@if($costumes_data->cos_size == 'custom')								
 <div class="dimessions hide">
 	<h4>Body & Dimensions <span class="req-field">*</span></h4></hr>
 	<div class="row" >
@@ -240,7 +242,7 @@
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field"></span></label>
 				<div class="input-group">
-					<input type="{{$bd_height->type}}" class="form-control"  value="@if(!empty($bd_height_value->attribute_option_value)){{$bd_height_value->attribute_option_value}}@endif" name="{{$bd_height->code}}" id="{{$bd_height->code}}">
+					<input type="{{$bd_height->type}}" class="form-control"  value="@if(!empty($bd_height_value->attribute_option_value)){{$bd_height_value->attribute_option_value}} @else{{$bd_height_value->attribute_option_value}}@endif" name="{{$bd_height->code}}" id="{{$bd_height->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
 				</div>
 				<span id="heightfterror" style="color:red"></span>
@@ -256,7 +258,7 @@
 				?>
 				<label for="inputEmail3" class="control-label"></label>
 				<div class="input-group">
-					<input type="{{$bd_height_in->type}}"  class="form-control" value="@if(!empty($bd_height_in_value->attribute_option_value)){{$bd_height_in_value->attribute_option_value}}@endif"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
+					<input type="{{$bd_height_in->type}}"  class="form-control" value="@if(!empty($bd_height_in_value->attribute_option_value)){{$bd_height_in_value->attribute_option_value}} @else {{$bd_height_in_value->attribute_option_value}} @endif"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1;?></span>
 				</div>
 				<span id="heightinerror" style="color:red"></span>
@@ -274,7 +276,7 @@
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute2;?><span class="req-field" ></span></label>
 				<div class="input-group">
-					<input type="{{$bd_weight->type}}" value="@if(!empty($bd_weight_value->attribute_option_value)){{$bd_weight_value->attribute_option_value}}@endif" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
+					<input type="{{$bd_weight->type}}" value="@if(!empty($bd_weight_value->attribute_option_value)){{$bd_weight_value->attribute_option_value}} @else {{$bd_weight_value->attribute_option_value}} @endif" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue2;?></span>
 				</div>
 				<span id="weightlbserror" style="color:red"></span>
@@ -290,7 +292,7 @@
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute3;?><span class="req-field" ></span></label>
 				<div class="input-group">
-					<input type="{{$bd_chest->type}}" class="form-control" value="@if(!empty($bd_chest_value->attribute_option_value)){{$bd_chest_value->attribute_option_value}}@endif"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
+					<input type="{{$bd_chest->type}}" class="form-control" value="@if(!empty($bd_chest_value->attribute_option_value)){{$bd_chest_value->attribute_option_value}} @else {{$bd_chest_value->attribute_option_value}} @endif"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue3;?></span>
 				</div>
 				<span id="chestinerror" style="color:red"></span>
@@ -308,7 +310,7 @@
 					?>
 					<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field" ></span></label>
 					<div class="input-group">
-						<input type="{{$bd_waist->type}}" class="form-control" value="@if(!empty($bd_waist_value->attribute_option_value)){{$bd_waist_value->attribute_option_value}}@endif" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
+						<input type="{{$bd_waist->type}}" class="form-control" value="@if(!empty($bd_waist_value->attribute_option_value)){{$bd_waist_value->attribute_option_value}} @else {{$bd_waist_value->attribute_option_value}} @endif" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
 						<span class="input-group-addon" id="basic-addon2">in</span>
 					</div>
 					<span id="waistlbserror" style="color:red"></span>
@@ -317,10 +319,104 @@
 		</div>
 		
 	</div>
+	
+	@elseif($costumes_data->cos_size !='custom')
+	   <div class="dimessions hide">
+	<h4>Body & Dimensions<span class="req-field">*</span> </h4></hr>
+	<div class="row" >
+		<div class="col-md-6" >
+			<div class="form-group has-feedback " >
+				<?php
+					$height           = $bd_height->label;
+					$heightattributes = explode('-', $height);
+					$attribute        = ucfirst($heightattributes[0]);
+					$attributevalue   = $heightattributes[1];
+				?>
+				<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field"></span></label>
+				<div class="input-group">
+					<input type="{{$bd_height->type}}" class="form-control"   name="{{$bd_height->code}}" id="{{$bd_height->code}}">
+					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
+				</div>
+				<span id="heightfterror" style="color:red"></span>
+			</div>
+		</div>
+		<div class="col-md-6 dimsn-bknd" >
+			<div class="form-group has-feedback" >
+				<?php
+				$height1           = $bd_height_in->label;
+				$heightattributes1 = explode('-', $height1);
+				$attribute1        = ucfirst($heightattributes1[0]);
+				$attributevalue1   = $heightattributes1[1];
+				?>
+				<label for="inputEmail3" class="control-label"></label>
+				<div class="input-group">
+					<input type="{{$bd_height_in->type}}"  class="form-control"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
+					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1;?></span>
+				</div>
+				<span id="heightinerror" style="color:red"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6" >
+			<div class="form-group has-feedback" >
+				<?php
+				$height2           = $bd_weight->label;
+				$heightattributes2 = explode('-', $height2);
+				$attribute2        = ucfirst($heightattributes2[0]);
+				$attributevalue2   = $heightattributes2[1];
+				?>
+				<label for="inputEmail3" class="control-label"><?php echo $attribute2;?><span class="req-field" ></span></label>
+				<div class="input-group">
+					<input type="{{$bd_weight->type}}" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
+					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue2;?></span>
+				</div>
+				<span id="weightlbserror" style="color:red"></span>
+			</div>
+		</div>
+		<div class="col-md-6" >
+			<div class="form-group has-feedback" >
+				<?php
+				$height3           = $bd_chest->label;
+				$heightattributes3 = explode('-', $height3);
+				$attribute3        = ucfirst($heightattributes3[0]);
+				$attributevalue3   = $heightattributes3[1];
+				?>
+				<label for="inputEmail3" class="control-label"><?php echo $attribute3;?><span class="req-field" ></span></label>
+				<div class="input-group">
+					<input type="{{$bd_chest->type}}" class="form-control"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
+					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue3;?></span>
+				</div>
+				<span id="chestinerror" style="color:red"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row1" >
+		<div class="col-md-6" >
+			<div class="form-group has-feedback" >
+				<?php
+				$height           = $bd_waist->label;
+				$heightattributes = explode('-', $height);
+				$attribute        = ucfirst($heightattributes[0]);
+				$attributevalue   = $heightattributes[1];
+				?>
+				<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field" ></span></label>
+				<div class="input-group">
+					<input type="{{$bd_waist->type}}" class="form-control" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
+					<span class="input-group-addon" id="basic-addon2">in</span>
+				</div>
+				<span id="waistlbserror" style="color:red"></span>
+			</div>
+		</div>
+	</div>
+</div>	
+	@endif
+	
+
 							</div>
 						</div>
 
-
+	
 						<div class="col-md-6 crt_right_alng">
 							<h2 class="heading-agent">Costume FAQ</h2>
 							<div class="col-md-12">
@@ -356,6 +452,8 @@
 										@endif
 									</div>
 								</div>
+								
+								
 								<div class="form-group has-feedback" >
 									<div class="form-group" >
 										<label for="inputEmail3" class="control-label">
@@ -373,17 +471,21 @@
 												{{$cosplayfourvalues->option_value}}&nbsp;
 											@endforeach
 										@endif
-										@if(count($make_costume_time)== 1)
-										<p class="form-rms-small" id="mention_hours" @if(count($make_costume_time)!= 1) style="display: none;" @endif >If yes, how long did it take?</p>
-										<p class="ct1-rms-rel" id="mention_hours_input" @if(count($make_costume_time)!= 1) style="display: none;" @endif><input type="text" name="make_costume_time" id="make_costume_time" value="{{$make_costume_time->attribute_option_value}}" class="input-rm100"> <span>hours<span>
-										</p>
-										@else
-										<p class="form-rms-small" id="mention_hours" style="display: none;" >If yes, how long did it take?</p>
-										<p class="ct1-rms-rel" id="mention_hours_input" style="display: none;"><input type="text" name="make_costume_time" id="make_costume_time" value="" class="input-rm100"> <span>hours<span>
-										</p>
+										@if($cosplay_four_value_value->attribute_option_value_id == 30)
+        										@if(count($make_costume_time)== 1)
+        										<p class="form-rms-small" id="mention_hours" @if(count($make_costume_time)!= 1) style="display: none;" @endif >If yes, how long did it take?</p>
+        										<p class="ct1-rms-rel" id="mention_hours_input" @if(count($make_costume_time)!= 1) style="display: none;" @endif><input type="text" name="make_costume_time" id="make_costume_time" value="{{$make_costume_time->attribute_option_value}}" class="input-rm100"> <span>hours<span>
+        										</p>
+        										@else
+        										<p class="form-rms-small" id="mention_hours" style="display: none;" >If yes, how long did it take?</p>
+        										<p class="ct1-rms-rel" id="mention_hours_input" style="display: none;"><input type="text" name="make_costume_time" id="make_costume_time" value="" class="input-rm100"> <span>hours<span>
+        										</p>
+        										@endif
 										@endif
                                         </div>
 										</div>
+										
+										
 										</div>
 										<div class="form-group has-feedback" >
 											<label for="inputEmail3" class="control-label kyword">Keywords</p><p> Please enter a maximum of 10 keywords to describe the categories in which your costume could belong to.</p>
@@ -488,6 +590,8 @@
 															</div>
 													</div>
 												</div> -->
+												
+											
 												<div class="col-md-6 pckg_right">
 													<h2 class="heading-agent">Pricing & Shipping</h2>
 													<div class="col-md-12">
@@ -572,6 +676,7 @@
 														</div>
 													</div>
 												</div>
+												
 												<div class="col-md-6">
 													<h2 class="heading-agent">Preferences</h2>
 													<div class="col-md-12">
@@ -609,6 +714,8 @@
 														</div>
 													</div>
 												</div>
+												
+												
 												<div class="col-md-6">
 													<h2 class="heading-agent">Donation Info</h2>
 													<div class="col-md-12">
@@ -1195,176 +1302,175 @@ if($("#size").val() == "custom"){
 	$("#submit").click(function(a) {                                                     
 	if($("input[name=Imagecrop1]").attr('data-id') == "")
 	{
+		$('input[name=file1]').css('border', '1px solid red');
+		$('#file1_error').html('Upload Front View');
+		return false;                                          
+	}
+	});																							
+	$(document).on("click",".img_clse",function()
+	{ 												
+	   $("#drag_n_drop_1").hide();
+	   $("#drag_n_drop_2").hide();
+	   $("#drag_n_drop_3").hide();
+	});
+	var hidden_file4 = $('#hidden_file4').val();
+	if (hidden_file4 == "") {
+		$('#drag_n_drop_3').css('display','none');
+	}
+	var hidden_file5 = $('#hidden_file5').val();
+	if (hidden_file5 == "") {
+		$('#drag_n_drop_2').css('display','none');
+	}
+	$('#drag_n_drop_1').click(function(){
+		
+		swal({
+		  title: "Are you sure?",
+		  text: "You will not be able to recover this Image!",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonClass: "btn-danger",
+		  confirmButtonText: "Yes, delete",
+		  cancelButtonText: "No, cancel",
+		  closeOnConfirm: false,
+		  closeOnCancel: false
+		},
+		function(isConfirm) {
+		  if (isConfirm) {
+		  	var imageName = '<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){echo $costume_image1->image; }; ?>';
+		  	var imageType = 1;
+		  	if(imageName.length>0){
+		  		deleteCostumeImage(imageName,imageType);
+		  	}
+		  	$('#front_view').find('li').remove();
+		  	$('#drag_n_drop_1').css('display','none');													 
+		  	$("input[name=file1]").attr('style',''); 
+		  	$('input[name=file1]').val('');
+		  	$('input[name=file1]').attr('value','');
+		    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+		  } else {
+		    swal("Cancelled", "Your imaginary file is safe :)", "error");
+		  }
+		});
 
-	$('input[name=file1]').css('border', '1px solid red');
-	$('#file1_error').html('Upload Front View');
-	return false;                                          
-
-	}                                                    
 
 	});
-																							
-												$(document).on("click",".img_clse",function()
-												{ 												
-												   $("#drag_n_drop_1").hide();
-												   $("#drag_n_drop_2").hide();
-												   $("#drag_n_drop_3").hide();
-												});
-												 
-												//donate amount percentage calculation
-												/*$('#charity_amount').change(function(){
-													var donate_percent = $(this).val();
-													var price = $('#price').val();
-													var total = (price*donate_percent)/100;
-													if (donate_percent=="none") {
-														var total = 0.00;
-													}
-													$('#hidden_donation_amount').val(parseFloat(total).toFixed(2));
-													$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
-												});*/
-												 
-												var hidden_file4 = $('#hidden_file4').val();
-												if (hidden_file4 == "") {
-													$('#drag_n_drop_3').css('display','none');
-												}
-												var hidden_file5 = $('#hidden_file5').val();
-												if (hidden_file5 == "") {
-													$('#drag_n_drop_2').css('display','none');
-												}
-												$('#drag_n_drop_1').click(function(){
-													var imageName = '<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){echo $costume_image1->image; }; ?>';
-													var imageType = 1;
-													if(imageName.length>0){
-														deleteCostumeImage(imageName,imageType);
-													}
-													$('#front_view').find('li').remove();
-													$('#drag_n_drop_1').css('display','none');													 
-													$("input[name=file1]").attr('style',''); 
-													$('input[name=file1]').val('');
-													$('input[name=file1]').attr('value','');
-												});
-												$('#drag_n_drop_2').click(function(){
-													var imageName = '<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){echo $costume_image2->image; }; ?>';
-													var imageType = 2;
-													if(imageName.length>0){
-														deleteCostumeImage(imageName,imageType);
-													}
-													$('#back_view').find('li').remove();
-													$('#drag_n_drop_2').css('display','none');
-													$("input[name=file2]").attr('style',''); 
-													$('input[name=file2]').val('');
-													$('input[name=file2]').attr('value','');
-												});
-												$('#drag_n_drop_3').click(function(){
-													var imageName = '<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){echo $costume_image3->image; }; ?>';
-													var imageType = 3;
-													if(imageName.length>0){
-													deleteCostumeImage(imageName,imageType);                }
-													$('#details_view').find('li').remove();
-													$('#drag_n_drop_3').css('display','none');
-													$("input[name=file3]").attr('style',''); 
-													$('input[name=file3]').val('');
-													$('input[name=file3]').attr('value','');
-												});
-												$(".remove").click(function(){
-													$(this).parent(".pip").remove();
-												});
-											});
-											function cosplay_yes(id){
-												if (id == 7) {
-													$('#cosplayplay_yes_div').css('display','block');
-													}else{
-													$('#cosplayplay_yes_div').css('display','none');
-													$('input[name=cosplayplay_yes_opt]').attr('checked',false);
-												}
-											}
-											function uniquefashion_yes(id){
-												if (id == 9) {
-													$('#uniquefashion_yes_div').css('display','block');
-													}else{
-													$('#uniquefashion_yes_div').css('display','none');
-													$('input[name=uniquefashion_yes_opt]').attr('checked',false);
-												}
-											}
-											function activity_yes(id){
-												if (id == 11) {
-													$('#activity_yes_div').css('display','block');
-													}else{
-													$('#activity_yes_div').css('display','none');
-													$('input[name=activity_yes_opt]').attr('checked',false);
-												}
-											}
-											function make_costume_yes(id){
-												if (id == 30) {
-													$('#mention_hours').css('display','block');
-													$('#mention_hours_input').css('display','block');
-													}else{
-													$('#mention_hours').css('display','none');
-													$('#mention_hours_input').css('display','none');
-													$('#mention_hours_input').val('');
-													$('#make_costume_time').attr('value','');
-												}
-											}
-											function film_name_yes(id){
-												if (id == 32) {
-													$('#film_text').css('display','block');
-													$('#film_text_input').css('display','block');
-													}else{
-													$('#film_text').css('display','none');
-													$('#film_text_input').css('display','none');
-													$('#film_text_input').val('');
-												}
-											}
-											function deleteCostumeImage(imageName,imageType){
-												$.ajax({
-													type: "POST",
-													url: '{!! url('delete-costume-image') !!}',
-													data: {'image_name':imageName,image_type:imageType},
-													dataType: 'JSON',
-													success: function(response) {
-													}
-												});
-											}
-											//delete multiple selected images code
-											var allRemove = [];
-											$(document).on("click",".remove_pic",function()
-											{
-												
-											    var cur_val = $(this).attr('data-id');		 
-												var cur_rem_val = $(this).parents().attr('style');
-												var last_one = cur_rem_val.substr(cur_rem_val.length - 15);
-
-												var remove_org_val = last_one.slice(0,-1);
-
-												var MakeInput = '';
-												  removeValue =  $("#"+cur_val).val();
-												  //console.log(removeValue);
-												 $(this).parents("div#"+cur_val).remove();
-												//$("#"+cur_val).parents().find("div.multi_div").remove();
-												allRemove.push(remove_org_val);
-												
-												$.each( allRemove, function( key, value ) {
-													MakeInput =  '<input type="hidden" name="multiple[]" value="'+value+'">';
-												});
-												$(".deletedImages").append(MakeInput);
-											});
-										</script>
-										<script type="text/javascript">
-											$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensionsdimensionsWidth,#dimensionsdimensionsLength,#dimensionsdimensionsLength,#make_costume_time").on("keyup", function(){
-												var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
-												val = this.value;
-												if(!valid){
-													//console.log("Invalid input!");
-													this.value = val.substring(0, val.length - 1);
-												}
-											});
-											$("#price,#donate_charity").on("keyup", function(){
-												var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
-												val = this.value;
-												if(!valid){
-													//console.log("Invalid input!");
-													this.value = val.substring(0, val.length - 1);
-												}
-											});
-										</script>
-									@stop									
+	$('#drag_n_drop_2').click(function(){
+		var imageName = '<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){echo $costume_image2->image; }; ?>';
+		var imageType = 2;
+		if(imageName.length>0){
+			deleteCostumeImage(imageName,imageType);
+		}
+		$('#back_view').find('li').remove();
+		$('#drag_n_drop_2').css('display','none');
+		$("input[name=file2]").attr('style',''); 
+		$('input[name=file2]').val('');
+		$('input[name=file2]').attr('value','');
+	});
+	$('#drag_n_drop_3').click(function(){
+		var imageName = '<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){echo $costume_image3->image; }; ?>';
+		var imageType = 3;
+		if(imageName.length>0){
+		deleteCostumeImage(imageName,imageType);                }
+		$('#details_view').find('li').remove();
+		$('#drag_n_drop_3').css('display','none');
+		$("input[name=file3]").attr('style',''); 
+		$('input[name=file3]').val('');
+		$('input[name=file3]').attr('value','');
+	});
+	$(".remove").click(function(){
+		$(this).parent(".pip").remove();
+	});
+});
+function cosplay_yes(id){
+	if (id == 7) {
+		$('#cosplayplay_yes_div').css('display','block');
+		}else{
+		$('#cosplayplay_yes_div').css('display','none');
+		$('input[name=cosplayplay_yes_opt]').attr('checked',false);
+	}
+}
+function uniquefashion_yes(id){
+	if (id == 9) {
+		$('#uniquefashion_yes_div').css('display','block');
+		}else{
+		$('#uniquefashion_yes_div').css('display','none');
+		$('input[name=uniquefashion_yes_opt]').attr('checked',false);
+	}
+}
+function activity_yes(id){
+	if (id == 11) {
+		$('#activity_yes_div').css('display','block');
+		}else{
+		$('#activity_yes_div').css('display','none');
+		$('input[name=activity_yes_opt]').attr('checked',false);
+	}
+}
+function make_costume_yes(id){
+	if (id == 30) {
+		$('#mention_hours').css('display','block');
+		$('#mention_hours_input').css('display','block');
+		}else{
+		$('#mention_hours').css('display','none');
+		$('#mention_hours_input').css('display','none');
+		$('#mention_hours_input').val('');
+		$('#make_costume_time').attr('value','');
+	}
+}
+function film_name_yes(id){
+	if (id == 32) {
+		$('#film_text').css('display','block');
+		$('#film_text_input').css('display','block');
+		}else{
+		$('#film_text').css('display','none');
+		$('#film_text_input').css('display','none');
+		$('#film_text_input').val('');
+	}
+}
+function deleteCostumeImage(imageName,imageType){
+	$.ajax({
+		type: "POST",
+		url: '{!! url('delete-costume-image') !!}',
+		data: {'image_name':imageName,image_type:imageType},
+		dataType: 'JSON',
+		success: function(response) {
+		}
+	});
+}
+//delete multiple selected images code
+var allRemove = [];
+$(document).on("click",".remove_pic",function()
+{
+	
+    var cur_val = $(this).attr('data-id');
+	var cur_rem_val = $(this).parents().attr('style');
+	var last_one = cur_rem_val.substr(cur_rem_val.length - 15);
+	var remove_org_val = last_one.slice(0,-1);
+	var MakeInput = '';
+	  removeValue =  $("#"+cur_val).val();	
+	$("#"+cur_val).remove();
+	allRemove.push(remove_org_val);	
+	$.each( allRemove, function( key, value ) {
+		MakeInput =  '<input type="hidden" name="multiple[]" value="'+value+'">';
+	});
+	$(".deletedImages").append(MakeInput);
+});
+</script>
+<script type="text/javascript">
+$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensionsdimensionsWidth,#dimensionsdimensionsLength,#dimensionsdimensionsLength,#make_costume_time").on("keyup", function(){
+	var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
+	val = this.value;
+	if(!valid){
+		//console.log("Invalid input!");
+		this.value = val.substring(0, val.length - 1);
+	}
+});
+$("#price,#donate_charity").on("keyup", function(){
+	var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
+	val = this.value;
+	if(!valid){
+		//console.log("Invalid input!");
+		this.value = val.substring(0, val.length - 1);
+	}
+});
+</script>
+@stop									

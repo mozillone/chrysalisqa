@@ -45,7 +45,7 @@
 							{{ $faq->title }}
 							<span class="more-expnd">
 								<i class="more-less1 glyphicon glyphicon-plus hidden-sm hidden-md hidden-lg"></i>
-								<i class="more-less glyphicon glyphicon-triangle-top "></i>
+								<i class="more-less glyphicon glyphicon-triangle-bottom "></i>
 							</span>
 						</a>
 					</h4>

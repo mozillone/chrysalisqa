@@ -36,7 +36,7 @@
 	<div class="container">
 		<div class="row">
 			<input type="hidden" name="is_login" value="{{Auth::check()}}"/>
-			<form id="search_list">
+			<form id="search_list" action="{{url('getSearchCostumesData')}}"  method="get">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" name="key" value="{{ $_GET['key'] }}">
 				<div class="col-md-3 col-sm-4 list_view_left_view clearfix hidden-xs">
@@ -278,23 +278,88 @@
 							</div>
 						</div>
 					</div>	
-					<div class="list_products list-img-bg">
-						<div class="row" id="itemContainer">
+						@if (Session::has('error'))
+							<div class="alert alert-danger alert-dismissable exception_case">
+								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+								{{ Session::get('error') }}
+							</div>
+						@elseif(Session::has('success'))
+							<div class="alert alert-success alert-dismissable exception_case">
+								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+								{{ Session::get('success') }}
+							</div>
+						@endif
+                      
+						@if(count($costumes)>0)
+						<div id="search-container">
+						<div class="list_products list-img-bg">
+							<div class="row" id="">						 
+							@foreach($costumes as $costume)
+							<div class="col-md-3 col-sm-4 col-xs-6">
+								<div class="prod_box">
+									<div class="img_layer">
+										<a href="{{url('product')}}{{$costume->url_key}}" style="background-image:url(/costumers_images/Medium/{{$costume->image}});background-repeat:no-repeat;">&nbsp;
+										</a>
+										@if(Auth::check())
+										<div class="hover_box">
+										<p class="like_fav">
+											<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
+											</a> 
+											<a href="#" onclick="return false;" class="fav_costume" data-costume-id="{{$costume->costume_id}}" ><span class="@if($costume->is_fav) active @endif"><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
+										</p>
+												<p class="hover_crt add-cart" data-costume-id="{{$costume->costume_id}}">
+													<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
+												</p>
+										</div>
+										@endif
+									</div>
+										@if($costume->film_qlty ==32)
+											<p class="ystrip-rm">
+												<span>
+													<img class="img-responsive" src="{{url('assets/frontend/img/film.png')}}"> Film Quality
+												</span>
+											</p>
+										@endif
+											<div class="slider_cnt no_brand sml_name">
+												<span class="cc_brand"></span>
+													<h4>
+														<a href="{{url('product')}}{{$costume->url_key}}">{{$costume->name}}</a>
+													</h4>
+													<p>
+														<a href="{{url('product')}}{{$costume->url_key}}">
+														<span class="new-price">${{$costume->price}}</span>
+														</a>
+													</p>
+											</div>
+									</div>
+							</div>
+							@endforeach
+							</div>
 						</div>
-					</div>
-					<div class="show_per_page hidden">
-						<div class="pagination_btm">
-							<label>Show </label>
-							<select id="per_page">
-								<option selected>12</option>
-								<option>24</option>
-								<option>48</option>
-							</select>
-							<label> per page </label>	
+						@else
+						 <div class="col-md-8 no_lists">
+						  <p>Sorry, we could not find any costumes</p>
+						 </div>
+						@endif
+						
+						<ul class="holder list_pagination">	
+ 								{{$costumes->links('/frontend/pagination')}}
+ 								@if($count>12)
+							 <div class="pagination_btm">
+							 	<label>Show </label>
+							 	<select class="per_page">
+							 		<option value="12">12</option>
+							 		<option value="24">24</option>
+							 		<option value="48">48</option>
+							 	</select>
+							 	<label> per page </label>	
+							 </div>
+							@endif
+						</ul>
 						</div>
-					</div>
-					<ul class="holder list_pagination"></ul>
 				</div>
+					<input type="hidden" id="page" name="page" class="ses_val" value="">
+					<input type="hidden" name="perpage" id="perpage" class="perpage_val" value="">
 			</form>
 		</div>
 	</div>
@@ -306,10 +371,36 @@
 @section('footer_scripts')
 <script src="{{ asset('/assets/frontend/js/jquery-ui.js') }}"></script>
 <script src="{{ asset('/js/ohsnap.js') }}"></script>
-<script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/search_costumes_listing.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
 <script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
 <script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+	    
+	    if( $("ul.pagination").length == 0)
+	    {
+	        $(".holder.list_pagination").css({"border":"none"});
+	    }
+		$(document).on("click", ".pagination li a",function () {
+			$('html,body').animate({
+				scrollTop: 300
+			}, 700);
+		});
+		var queryString = window.location.href.slice(window.location.href.indexOf('?'));
+		var res = queryString.substring(9,11);
+		var filter_url = location.href.split("?")[0];
+		
+		  $("#per_page > option").each(function() {
+		    if (this.value == res) {
+		      this.selected = 'selected';
+		    }
+		  });
+		  
+		 $(".per_page").val("{{session('perpage')===null ? 12 : session('perpage')}}");
+	});
+</script>
+
 @stop

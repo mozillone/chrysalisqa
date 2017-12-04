@@ -167,12 +167,19 @@ class OrdersController extends Controller {
         $RequesterID = env('ENDICIA_REQUESTER_ID', 'lxxx');
         $AccountID = env('ENDICIA_ACCOUNT_ID','2541903'); 
         $PassPhrase = env('ENDICIA_PASS_PHRASE','Dotcom123');
+
+        
+
+        
+
         /*
         //LIVE Credentials
         $RequesterID = env('ENDICIA_REQUESTER_ID', '1234');
         $AccountID = env('ENDICIA_ACCOUNT_ID','1246166'); 
-        $PassPhrase = env('ENDICIA_PASS_PHRASE','ChrysalisCostumes29'); 
+        $PassPhrase = env('ENDICIA_PASS_PHRASE','ChrysalisCostumes29');  
+
         */
+
         $endicia_xml = '<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lab="www.envmgr.com/LabelService">
         <x:Header/>
         <x:Body>

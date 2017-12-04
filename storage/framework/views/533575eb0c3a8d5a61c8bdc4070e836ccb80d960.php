@@ -374,6 +374,7 @@
 										<?php if(Auth::check()): ?>
 										<div class="hover_box">
 										<p class="like_fav">
+<<<<<<< HEAD
 													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i><?php echo e($costume->like_count); ?></span>
 													</a> 
 										<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
@@ -381,6 +382,15 @@
 												<p class="hover_crt add-cart" data-costume-id="<?php echo e($costume->costume_id); ?>">
 													<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
 												</p>
+=======
+											<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i><?php echo e($costume->like_count); ?></span>
+											</a> 
+											<a href="#" onclick="return false;" class="fav_costume" data-costume-id="<?php echo e($costume->costume_id); ?>" ><span class="<?php if($costume->is_fav): ?> active <?php endif; ?>"><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
+										</p>
+											<p class="hover_crt add-cart" data-costume-id="<?php echo e($costume->costume_id); ?>">
+												<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
+											</p>
+>>>>>>> chrysalisqa
 										</div>
 										<?php else: ?>
 										<div class="hover_box">
@@ -420,15 +430,29 @@
 						</div>
 						<?php else: ?>
 						 <div class="col-md-8 no_lists">
+<<<<<<< HEAD
 						  <p>Sorry, we could not find any costumes</p>
+=======
+
+						  <p>Sorry, we could not find any costumes</p>
+
+>>>>>>> chrysalisqa
 						 </div>
 						<?php endif; ?>
 						
 						<ul class="holder list_pagination">	
+<<<<<<< HEAD
+=======
+
+>>>>>>> chrysalisqa
  							<?php echo e($costumes->links('/frontend/pagination')); ?>
 
  							 
  							<?php if($count>12): ?>
+<<<<<<< HEAD
+=======
+
+>>>>>>> chrysalisqa
 							 <div class="pagination_btm">
 							 	<label>Show </label>
 							 	<select class="per_page">

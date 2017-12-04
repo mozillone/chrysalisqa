@@ -223,6 +223,36 @@ class Category extends Authenticatable
         }
         return $url_key;
     }
+
+
+
+    protected function getUrlLinksMulti($ids){
+
+      $data=$this->getUrlCategoryInfoMulti($ids);
+
+      foreach($data as $data_res){
+
+        if($data_res->parent_id !="0"){
+            $main_cat=$this->specialCharectorsRemove($data_res->parent_cat_name);
+            $sub_cat=$this->specialCharectorsRemove($data_res->sub_cat_name);
+            $url_keys[$data_res->category_id] ='/'.$main_cat.'/'.$sub_cat;
+        }else{
+            $main_cat=$this->specialCharectorsRemove($data_res->sub_cat_name);
+            $url_keys[$data_res->category_id] ='/'.$main_cat;
+        }
+        
+      }
+      return $url_keys;
+    }
+
+    private function getUrlCategoryInfoMulti($cat_ids){
+      
+        $res=DB::Select('SELECT cat1.category_id,cat1.name as sub_cat_name,cat2.name as parent_cat_name,cat1.parent_id FROM cc_category as cat1 LEFT JOIN cc_category as cat2 on cat2.category_id=cat1.parent_id WHERE cat1.category_id  IN ('.$cat_ids.')');
+       
+         return $res;
+    }
+
+
      protected function getCategoriesCostumes($cat_id){
        $costumes=DB::Select('SELECT name FROM `cc_costume_to_category` as cats LEFT JOIN cc_costume_description as cst on cst.costume_id=cats.costume_id where cats.category_id='.$cat_id);
         return $costumes;

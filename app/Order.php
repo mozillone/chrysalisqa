@@ -352,22 +352,41 @@ class Order extends Authenticatable
        return true;
     }
     private function converstionTheard($order_id,$seller_id){
-      $converstion_array = array('type'=>'order','user_one'=>Auth::user()->id,
+      /*Message To Seller From Admin Start Here*/
+      $converstion_array = array('type'=>'order','user_one'=>'1',
         'user_two'=>$seller_id,
-        'subject' =>'Your Order been placed.',
+        'subject' =>'Your Costume has been ordered.',
         'type_id' => $order_id,
         'status'=>'1',
         'created_at'=>date('Y-m-d h:i:s'));
       $converstion_id = Site_model::insert_get_id('conversations',$converstion_array);
+      $message_array  = array('message'=>'We have received an order for your costume.',
+        'is_seen'=>'0',
+        'deleted_from_sender'=>'0',
+        'deleted_from_receiver'=>'0',
+        'user_id'=> "1",
+        'user_name'=> \App\User::find(1)->pluck("display_name")->first(),
+        'conversation_id'=>$converstion_id,'created_at'=>date('Y-m-d h:i:s'));
+      $converstion_id = Site_model::insert_get_id('messages',$message_array);
+      /*Message To Seller From Admin Start Here*/
 
+      /*Message To Buyer From Admin Start Here*/
+      $converstion_array = array('type'=>'order','user_one'=>'1',
+        'user_two'=>Auth::user()->id,
+        'subject' =>'Your Order has been placed.',
+        'type_id' => $order_id,
+        'status'=>'1',
+        'created_at'=>date('Y-m-d h:i:s'));
+      $converstion_id = Site_model::insert_get_id('conversations',$converstion_array);
       $message_array  = array('message'=>'Your Order is under process.',
         'is_seen'=>'0',
         'deleted_from_sender'=>'0',
         'deleted_from_receiver'=>'0',
-        'user_id'=>Auth::user()->id,
-        'user_name'=>Auth::user()->display_name,
+        'user_id'=>'1',
+        'user_name'=>\App\User::find(1)->pluck("display_name")->first(),
         'conversation_id'=>$converstion_id,'created_at'=>date('Y-m-d h:i:s'));
       $converstion_id = Site_model::insert_get_id('messages',$message_array);
+      /*Message To Buyer From Admin End Here*/
 
       return true;
     }

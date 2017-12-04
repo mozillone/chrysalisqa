@@ -60,8 +60,9 @@
 								<li data-gender="girl">Girls</li>
 								<li data-gender="baby">Babies</li>
 							</ul>
-						  
+
 							 <input type="hidden" name="search[gender]" class="search"/>
+
 						
 						</div>
 						@endif
@@ -196,7 +197,7 @@
 															</ul>
 														</div>
 													</div>
-													<input type="hidden" name="search[gender]" class="search"/>
+													<input type="hidden" name="search[gender]" id='gender_list_1' class="search search_gender"/>
 												</div>
 												@endif
 												@if($parent_cat_name != "mens" && $parent_cat_name != "womens" && $parent_cat_name != "pets" && $parent_cat_name != "kids")
@@ -225,7 +226,7 @@
 															</ul>
 														</div>
 													</div>
-													<input type="hidden" name="search[gender]" class="search"/>
+													<input type="hidden" name="search[gender]" class="search search_gender"/>
 												</div>
 												@endif
 												<div class="list-box-rm ">
@@ -373,13 +374,14 @@
 										@if(Auth::check())
 										<div class="hover_box">
 										<p class="like_fav">
-													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>{{$costume->like_count}}</span>
-													</a> 
-										<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
-												</p>
-												<p class="hover_crt add-cart" data-costume-id="{{$costume->costume_id}}">
-													<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
-												</p>
+
+											<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>{{$costume->like_count}}</span>
+											</a> 
+											<a href="#" onclick="return false;" class="fav_costume" data-costume-id="{{$costume->costume_id}}" ><span class="@if($costume->is_fav) active @endif"><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
+										</p>
+											<p class="hover_crt add-cart" data-costume-id="{{$costume->costume_id}}">
+												<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
+											</p>
 										</div>
 										@else
 										<div class="hover_box">
@@ -420,10 +422,12 @@
 						@else
 						 <div class="col-md-8 no_lists">
 						  <p>Sorry, we could not find any costumes</p>
+
 						 </div>
 						@endif
 						
 						<ul class="holder list_pagination">	
+
  							{{$costumes->links('/frontend/pagination')}}
  							 
  							@if($count>12)

@@ -40,11 +40,24 @@ class SiteHelper  {
 
 			//$getSubCategories = Site_model::Fetch_data('category','*',$cond);
 			$categories_list[$menus->name][]="None";
+            $catids = array();
+            $subcat_names = array();
 			foreach ($getSubCategories as $subCat) {
-				$link=Category::getUrlLinks($subCat->category_id);
-				$categories_list[$menus->name][]=$link.'_'.$subCat->name;
+                $catids[] = $subCat->category_id;
+				$subcat_names[]  = $subCat->name;
 				//$categories_list[$menus->name][]=$subCat->category_id.'_'.$subCat->name;
 			}
+            $cat_ids_implode = implode(",", $catids);
+            
+            $links =Category::getUrlLinksMulti($cat_ids_implode);
+            
+            $uTemp = 0;
+            foreach($links  as $link_name)
+            {
+                 $categories_list[$menus->name][]= $link_name.'_'.$subcat_names[$uTemp];  
+                 $uTemp++;
+            }
+           
 			
 		}
 	
@@ -369,7 +382,8 @@ public static function domesticRateSingleCostume($originationZip,$destinationZip
     public static function getMyMessageCount()
     {
         //$message_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
-        $message_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.' OR cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        /*$message_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.' OR cnvs.user_one = 1) and msg.user_id != '.Auth::user()->id.'');*/
+        $message_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
         return $message_count[0]->count_dt;
     }   
 	
