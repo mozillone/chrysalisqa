@@ -18,7 +18,7 @@
 				<div class="col-md-12 col-sm-12 col-xs-12 chat-tl-dv">
 					<div class="list-sec-rm">
 						<div class="col-md-6">
-							<p class="list-sec-rm1 fav_costume">MY MESSAGES</p>
+							<p class="list-sec-rm1 fav_costume">MY MESSAGES ({{ $msg_count }})</p>
 						</div>
 						<div class="col-md-6 text-right pull-right back-link">
 							<a href="/dashboard">Back to My Account</a>
@@ -31,8 +31,8 @@
 			<div class="row">
 				<div class="col-md-2 col-xs-12">
 					<ul class="nav nav-tabs tabs-left">
-						<li id="inbox_sidebar" class="active"><a href="{{URL::to('conversations')}}" data-toggle="tab">Inbox<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-						<li id="sent_sidebar" ><a href="{{URL::to('conversations')}}" data-toggle="tab">Sent<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+						<li id="inbox_sidebar" class="active"><a href="{{URL::to('conversations')}}" data-toggle="tab">Inbox ({{$msgs_inbox[0]->count_dt}})<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+						<li id="sent_sidebar" ><a href="{{URL::to('conversations')}}" data-toggle="tab">Sent ({{$msgs_sent[0]->count_dt}})<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 				<div class="col-md-10 col-xs-12">
