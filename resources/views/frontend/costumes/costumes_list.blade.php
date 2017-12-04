@@ -372,25 +372,25 @@
 										</a>
 										@if(Auth::check())
 										<div class="hover_box">
-										<p class="like_fav">
-											<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>{{$costume->like_count}}</span>
-											</a> 
-											<a href="#" onclick="return false;" class="fav_costume" data-costume-id="{{$costume->costume_id}}" ><span class="@if($costume->is_fav) active @endif"><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
-										</p>
+											<p class="like_fav">
+												<a href="#" onclick="return false;" class="like_costume" data-costume-id='{{$costume->costume_id}}'><span class="@if($costume->is_like) active @endif"><i aria-hidden="true" class="fa fa-thumbs-up"></i>{{$costume->like_count}}</span>
+												</a> 
+												<a href="#" onclick="return false;" class="fav_costume" data-costume-id="{{$costume->costume_id}}" ><span class="@if($costume->is_fav) active @endif"><i aria-hidden="true" class="@if($costume->is_fav) fa fa-heart @else fa fa-heart-o @endif"></i></span></a>
+											</p>
 											<p class="hover_crt add-cart" data-costume-id="{{$costume->costume_id}}">
 												<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
 											</p>
 										</div>
 										@else
 										<div class="hover_box">
-										<p class="like_fav">
-													<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
-													</a> 
-										<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
-												</p>
-												<p class="hover_crt add-cart" data-costume-id="{{$costume->costume_id}}">
-													<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
-												</p>
+											<p class="like_fav">
+												<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
+												</a> 
+												<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
+											</p>
+											<p class="hover_crt add-cart" data-costume-id="{{$costume->costume_id}}">
+												<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
+											</p>
 										</div>
 										@endif
 									</div>

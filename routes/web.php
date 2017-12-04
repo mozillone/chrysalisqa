@@ -103,7 +103,9 @@ Route::any('/get/billing-adress', array('as' => 'billing_address.post','uses' =>
 
 
 /** Costume Like page start here **/
-Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
+/*Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));*/
+Route::get('/costume/like/{id}', 'CostumesController@costumeLike');
+
 /** Costume Like page end here **/
 /****costume create page 2 routes starts here***/
 Route::any('/costume/sell-a-costume', array('as' => '','uses' => 'CmsController@viewSellACostume'));
