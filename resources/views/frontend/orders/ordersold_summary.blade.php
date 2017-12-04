@@ -83,10 +83,10 @@
                                             <td>Email</td>
                                             <td>{{$order['basic'][0]->buyer_email}}</td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <td>Phone #:</td>
                                             <td>{{$order['basic'][0]->buyer_phone}}</td>
-                                        </tr>
+                                        </tr> -->
                                         </tbody>
                                     </table>
 									</div>
@@ -104,10 +104,10 @@
                                             <td>Email</td>
                                             <td>{{$order['basic'][0]->seller_email}}</td>
                                         </tr>
-                                        <tr>
+                                       <!--  <tr>
                                             <td>Phone #:</td>
                                             <td>{{$order['basic'][0]->seller_phone}}</td>
-                                        </tr>
+                                        </tr> -->
                                         </tbody>
                                     </table>
 									</div>
