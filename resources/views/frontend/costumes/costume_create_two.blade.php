@@ -1174,10 +1174,13 @@
 												});
 												$(".faq-checkbox").change(function(){
 													if($("#30").prop("checked") || $("#32").prop("checked")){
-														$("#freqently").removeClass("hide");
-														} else{
-														$("#freqently").addClass("hide");
-													}
+
+															$("#freqently").removeClass("hide");
+															$("#freqently").removeAttr('style');
+														} 
+														else{
+															$("#freqently").addClass("hide");
+														}
 												});
 												$('#costume_description_next').click(function () {
 													$('html, body').animate({scrollTop:0}, 'fast');
