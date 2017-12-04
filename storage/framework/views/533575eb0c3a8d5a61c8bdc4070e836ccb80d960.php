@@ -1,19 +1,18 @@
-@extends('/frontend/app')
-@section('styles')
-<link rel="stylesheet" href="{{asset('assets/frontend/css/jquery-ui.css')}}">
-<link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
-<link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
+<?php $__env->startSection('styles'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('assets/frontend/css/jquery-ui.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('assets/frontend/css/pages/costumes_list.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css')); ?>">
 <style>
 </style>
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 <section class="content create_section_page">
  	<div id="ohsnap"></div>
 	<!--  	list-banner container html start here -->
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-xs-12 col-sm-12"" ">
-				<div class="list-banner" @if(empty($data['sub_cat_info'][0]->banner_image) || !file_exists(public_path('category_images/Banner/'.$data["sub_cat_info"][0]->banner_image.''))) style=" background-image: url('/category_images/df_img.jpg')" @else style=" background-image: url('/category_images/Banner/{{$data['sub_cat_info'][0]->banner_image}}')" @endif>
+				<div class="list-banner" <?php if(empty($data['sub_cat_info'][0]->banner_image) || !file_exists(public_path('category_images/Banner/'.$data["sub_cat_info"][0]->banner_image.''))): ?> style=" background-image: url('/category_images/df_img.jpg')" <?php else: ?> style=" background-image: url('/category_images/Banner/<?php echo e($data['sub_cat_info'][0]->banner_image); ?>')" <?php endif; ?>>
 				</div>
 			</div>
 		</div>
@@ -24,17 +23,17 @@
 		<div class="container">
 			<div class="row">
 			 
-				<form id="search_list" action="{{url('Filterscategory',$parent_cat_name)}}" method="get">
-					<input type="hidden" name="parent_cat_name" value="{{$parent_cat_name}}"/>
-					<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
-					<input type="hidden" name="sub_cat_name" value="{{$data['sub_cat_info'][0]->name}}"/>
-					<input type="hidden" name="is_login" value="{{Auth::check()}}"/>
-					<input type="hidden" name="cat_id" value="{{$data['sub_cat_info'][0]->category_id}}"/>
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<form id="search_list" action="<?php echo e(url('Filterscategory',$parent_cat_name)); ?>" method="get">
+					<input type="hidden" name="parent_cat_name" value="<?php echo e($parent_cat_name); ?>"/>
+					<input type="hidden" name="sub_cat_name" value="<?php echo e($data['sub_cat_info'][0]->name); ?>"/>
+					<input type="hidden" name="sub_cat_name" value="<?php echo e($data['sub_cat_info'][0]->name); ?>"/>
+					<input type="hidden" name="is_login" value="<?php echo e(Auth::check()); ?>"/>
+					<input type="hidden" name="cat_id" value="<?php echo e($data['sub_cat_info'][0]->category_id); ?>"/>
+					<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 				    
-					@if(!empty($parent_cat))<input type="hidden" name="is_main" value="{{ $parent_cat }}"> @endif
+					<?php if(!empty($parent_cat)): ?><input type="hidden" name="is_main" value="<?php echo e($parent_cat); ?>"> <?php endif; ?>
 					<div class="col-md-3 col-sm-4 list_view_left_view clearfix hidden-xs">
-						@if($parent_cat_name == "kids")    
+						<?php if($parent_cat_name == "kids"): ?>    
 						<div class="list-box-rm list-box-rma">
 							<h2 class="list-box-head">KIDS COSTUMES</h2>
 							<ul class="box-list1 gender">
@@ -45,11 +44,11 @@
 								<li data-gender="baby">Babies</li>
 							</ul>
 							
-							 <input type="hidden" name="search[gender]" class="search"/>
+							 <input type="hidden" name="search[gender]" id="gender_list_2" class="search search_gender"/>
 							
 						</div>
-						@endif
-						@if($parent_cat_name != "mens" && $parent_cat_name != "womens" && $parent_cat_name != "pets" && $parent_cat_name != "kids")
+						<?php endif; ?>
+						<?php if($parent_cat_name != "mens" && $parent_cat_name != "womens" && $parent_cat_name != "pets" && $parent_cat_name != "kids"): ?>
 						<div class="list-box-rm list-box-rma">
 							<h2 class="list-box-head">GENDER COSTUMES</h2>
 							<ul class="box-list1 gender">
@@ -60,20 +59,19 @@
 								<li data-gender="girl">Girls</li>
 								<li data-gender="baby">Babies</li>
 							</ul>
-
-							 <input type="hidden" name="search[gender]" class="search"/>
-
+						  
+							 <input type="hidden" name="search[gender]" id="gender_list" class="search search_gender"/>
 						
 						</div>
-						@endif
+						<?php endif; ?>
 						
 						<div class="list-box-rm">
 							<h2 class="list-box-head">THEMES</h2>
 							<ul class="box-list1">
-								<li @if(Request::url()==URL::to("category/".$parent_cat_name)) class="active" @endif><a href="/category/{{$parent_cat_name}}">See All</a></li>
-								@foreach($categories_list as $key=>$sub_cats_list)
-								<li @if(Request::url()==URL::to("category".$sub_cats_list)) class="active" @endif ><a href="/category{{$sub_cats_list}}">{{$key}}</a></li>
-								@endforeach
+								<li <?php if(Request::url()==URL::to("category/".$parent_cat_name)): ?> class="active" <?php endif; ?>><a href="/category/<?php echo e($parent_cat_name); ?>">See All</a></li>
+								<?php $__currentLoopData = $categories_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$sub_cats_list): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+								<li <?php if(Request::url()==URL::to("category".$sub_cats_list)): ?> class="active" <?php endif; ?> ><a href="/category<?php echo e($sub_cats_list); ?>"><?php echo e($key); ?></a></li>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 							</ul>
 							<h2 class="list-box-head narrow-head">NARROW BY</h2>
 							<div class="box-list1 narrow">
@@ -128,18 +126,18 @@
 						</div>
 					</div>
 					<div class="hidden-sm hidden-md hidden-lg col-xs-12 mbl_slct-drp">
-						<p class="list-sec-rm1 mobile_heading_list">{{strtoupper($data['sub_cat_info'][0]->name)}}</p>
+						<p class="list-sec-rm1 mobile_heading_list"><?php echo e(strtoupper($data['sub_cat_info'][0]->name)); ?></p>
 						<select class="form-control" id="theams">
-							<!-- <li @if(Request::url()==URL::to("category/".$parent_cat_name)) class="active" @endif><a href="/category/{{$parent_cat_name}}">See All</a></li> -->
-							<option value="/category/{{$parent_cat_name}}" @if(Request::url()==URL::to("category".$parent_cat_name)) selected="" @endif >See All</option>
-							@foreach($categories_list as $key=>$sub_cats_list)
-							<option value="/category{{$sub_cats_list}}" @if(Request::url()==URL::to("category".$sub_cats_list)) selected="" @endif >{{$key}}</option>
-							@endforeach
+							<!-- <li <?php if(Request::url()==URL::to("category/".$parent_cat_name)): ?> class="active" <?php endif; ?>><a href="/category/<?php echo e($parent_cat_name); ?>">See All</a></li> -->
+							<option value="/category/<?php echo e($parent_cat_name); ?>" <?php if(Request::url()==URL::to("category".$parent_cat_name)): ?> selected="" <?php endif; ?> >See All</option>
+							<?php $__currentLoopData = $categories_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$sub_cats_list): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+							<option value="/category<?php echo e($sub_cats_list); ?>" <?php if(Request::url()==URL::to("category".$sub_cats_list)): ?> selected="" <?php endif; ?> ><?php echo e($key); ?></option>
+							<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 						</select>
 					</div>
 					<div class="col-md-9 col-sm-8 col-xs-12">
 						<div class="list-sec-rm hidden-xs ">
-							<p class="list-sec-rm1">{{strtoupper($data['sub_cat_info'][0]->name)}}</p>
+							<p class="list-sec-rm1"><?php echo e(strtoupper($data['sub_cat_info'][0]->name)); ?></p>
 							<p class="list-sec-rm2"><span>Sort By</span>
 								<select name="search[sort_by]" class="sort_by">
 									<option value="recently_listed">Recently Listed</option>
@@ -171,7 +169,7 @@
 									<div class="mobile_list_filers_sider clearfix">
 										<div class="panel-group1" id="accordion-fl">
 											<div class="panel panel-default">
-												@if($parent_cat_name == "kids")
+												<?php if($parent_cat_name == "kids"): ?>
 												<div class="list-box-rm list-box-rma">
 													<div class="panel-heading1">
 														<h4 class="panel-title">
@@ -199,8 +197,8 @@
 													</div>
 													<input type="hidden" name="search[gender]" id='gender_list_1' class="search search_gender"/>
 												</div>
-												@endif
-												@if($parent_cat_name != "mens" && $parent_cat_name != "womens" && $parent_cat_name != "pets" && $parent_cat_name != "kids")
+												<?php endif; ?>
+												<?php if($parent_cat_name != "mens" && $parent_cat_name != "womens" && $parent_cat_name != "pets" && $parent_cat_name != "kids"): ?>
 												<div class="list-box-rm list-box-rma">
 													<div class="panel-heading1">
 														<h4 class="panel-title">
@@ -228,7 +226,7 @@
 													</div>
 													<input type="hidden" name="search[gender]" class="search search_gender"/>
 												</div>
-												@endif
+												<?php endif; ?>
 												<div class="list-box-rm ">
 													<div class="panel-heading1">
 														<h4 class="panel-title">
@@ -347,89 +345,94 @@
 								</div>
 							</div>
 						</div>
-						@if (Session::has('error'))
+						<?php if(Session::has('error')): ?>
 							<div class="alert alert-danger alert-dismissable exception_case">
 								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-								{{ Session::get('error') }}
+								<?php echo e(Session::get('error')); ?>
+
 							</div>
-						@elseif(Session::has('success'))
+						<?php elseif(Session::has('success')): ?>
 							<div class="alert alert-success alert-dismissable exception_case">
 								<a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-								{{ Session::get('success') }}
+								<?php echo e(Session::get('success')); ?>
+
 							</div>
-						@endif
-                        
-						@if(count($costumes)>0)	
+						<?php endif; ?>
+						<?php if(count($costumes)>0): ?>	
 						
 						<div id="filter-container">
 						<div class="list_products list-img-bg">
 							<div class="row" id="">	
 						
-							@foreach($costumes as $costume)
+							<?php $__currentLoopData = $costumes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $costume): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+						  
 							<div class="col-md-3 col-sm-4 col-xs-6">
 								<div class="prod_box">
 									<div class="img_layer">
-										<a href="{{url('product')}}{{$costume->url_key}}" style="background-image:url(/costumers_images/Medium/{{$costume->image}});background-repeat:no-repeat;">&nbsp;
+										<a href="<?php echo e(url('product')); ?><?php echo e($costume->url_key); ?>" style="background-image:url(/costumers_images/Medium/<?php echo e($costume->image); ?>);background-repeat:no-repeat;">&nbsp;
 										</a>
-										@if(Auth::check())
+										<?php if(Auth::check()): ?>
 										<div class="hover_box">
 											<p class="like_fav">
-												<a href="#" onclick="return false;" class="like_costume" data-costume-id='{{$costume->costume_id}}'><span class="@if($costume->is_like) active @endif"><i aria-hidden="true" class="fa fa-thumbs-up"></i>{{$costume->like_count}}</span>
+												<a href="#" onclick="return false;" class="like_costume" data-costume-id='<?php echo e($costume->costume_id); ?>'><span class="<?php if($costume->is_like): ?> active <?php endif; ?>"><i aria-hidden="true" class="fa fa-thumbs-up"></i><?php echo e($costume->like_count); ?></span>
 												</a> 
-												<a href="#" onclick="return false;" class="fav_costume" data-costume-id="{{$costume->costume_id}}" ><span class="@if($costume->is_fav) active @endif"><i aria-hidden="true" class="@if($costume->is_fav) fa fa-heart @else fa fa-heart-o @endif"></i></span></a>
+												<a href="#" onclick="return false;" class="fav_costume" data-costume-id="<?php echo e($costume->costume_id); ?>" ><span class="<?php if($costume->is_fav): ?> active <?php endif; ?>"><i aria-hidden="true" class="<?php if($costume->is_fav): ?> fa fa-heart <?php else: ?> fa fa-heart-o <?php endif; ?>"></i></span></a>
 											</p>
-											<p class="hover_crt add-cart" data-costume-id="{{$costume->costume_id}}">
+											<p class="hover_crt add-cart" data-costume-id="<?php echo e($costume->costume_id); ?>">
 												<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
 											</p>
 										</div>
-										@else
+										<?php else: ?>
 										<div class="hover_box">
 											<p class="like_fav">
 												<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-thumbs-up"></i>0</span>
 												</a> 
 												<a data-toggle="modal" data-target="#login_popup"><span><i aria-hidden="true" class="fa fa-heart-o"></i></span></a>
 											</p>
-											<p class="hover_crt add-cart" data-costume-id="{{$costume->costume_id}}">
+											<p class="hover_crt add-cart" data-costume-id="<?php echo e($costume->costume_id); ?>">
 												<i aria-hidden="true" class="fa fa-shopping-cart"></i> Add to Cart
 											</p>
 										</div>
-										@endif
+										<?php endif; ?>
 									</div>
-										@if($costume->film_qlty == 32)
+										<?php if($costume->film_qlty == 32): ?>
 											<p class="ystrip-rm">
 												<span>
-													<img class="img-responsive" src="{{url('assets/frontend/img/film.png')}}"> Film Quality
+													<img class="img-responsive" src="<?php echo e(url('assets/frontend/img/film.png')); ?>"> Film Quality
 												</span>
 											</p>
-										@endif
+										<?php endif; ?>
 											<div class="slider_cnt no_brand sml_name">
 												<span class="cc_brand"></span>
 													<h4>
-														<a href="{{url('product')}}{{$costume->url_key}}">{{$costume->name}}</a>
+														<a href="<?php echo e(url('product')); ?><?php echo e($costume->url_key); ?>"><?php echo e($costume->name); ?></a>
 													</h4>
 													<p>
-														<a href="{{url('product')}}{{$costume->url_key}}">
-														<span class="new-price">${{$costume->price}}</span>
+														<a href="<?php echo e(url('product')); ?><?php echo e($costume->url_key); ?>">
+														<span class="new-price">$<?php echo e($costume->price); ?></span>
 														</a>
 													</p>
 											</div>
 									</div>
 							</div>
-							@endforeach
+							<?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
 							</div>
 						</div>
-						@else
+						<?php else: ?>
 						 <div class="col-md-8 no_lists">
+
 						  <p>Sorry, we could not find any costumes</p>
 
 						 </div>
-						@endif
+						<?php endif; ?>
 						
 						<ul class="holder list_pagination">	
 
- 							{{$costumes->links('/frontend/pagination')}}
+ 							<?php echo e($costumes->links('/frontend/pagination')); ?>
+
  							 
- 							@if($count>12)
+ 							<?php if($count>12): ?>
+
 							 <div class="pagination_btm">
 							 	<label>Show </label>
 							 	<select class="per_page">
@@ -439,7 +442,7 @@
 							 	</select>
 							 	<label> per page </label>	
 							 </div>
-							 @endif
+							 <?php endif; ?>
 						</ul>
 						</div>	
 					</div>
@@ -455,17 +458,17 @@
 	 
 	<!--  	list- container html End here -->
 </section>    
-@stop
-{{-- page level scripts --}}
-@section('footer_scripts')
-<script src="{{ asset('/assets/frontend/js/jquery-ui.js') }}"></script>
-<script src="{{ asset('/js/ohsnap.js') }}"></script>
-<!-- <script src="{{ asset('/assets/frontend/js/jPages.js') }}"></script> -->
-<script src="{{ asset('/assets/frontend/js/pages/costumes_listing.js') }}"></script>
-<script src="{{ asset('/assets/frontend/js/pages/costume-fav.js') }}"></script>
-<script src="{{ asset('/assets/frontend/js/pages/costume-like.js') }}"></script>
-<script src="{{ asset('/assets/frontend/js/pages/mini_cart.js') }}"></script>
-<script src="{{ asset('/assets/frontend/vendors/lobibox-master/js/notifications.js') }}"></script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('footer_scripts'); ?>
+<script src="<?php echo e(asset('/assets/frontend/js/jquery-ui.js')); ?>"></script>
+<script src="<?php echo e(asset('/js/ohsnap.js')); ?>"></script>
+<!-- <script src="<?php echo e(asset('/assets/frontend/js/jPages.js')); ?>"></script> -->
+<script src="<?php echo e(asset('/assets/frontend/js/pages/costumes_listing.js')); ?>"></script>
+<script src="<?php echo e(asset('/assets/frontend/js/pages/costume-fav.js')); ?>"></script>
+<script src="<?php echo e(asset('/assets/frontend/js/pages/costume-like.js')); ?>"></script>
+<script src="<?php echo e(asset('/assets/frontend/js/pages/mini_cart.js')); ?>"></script>
+<script src="<?php echo e(asset('/assets/frontend/vendors/lobibox-master/js/notifications.js')); ?>"></script>
 <script type="text/javascript">
 	$(document).ready(function()
 	{
@@ -489,8 +492,9 @@
 		    }
 		  });
 		  
-		 $(".per_page").val("{{session('perpage')===null ? 12 : session('perpage')}}");
+		 $(".per_page").val("<?php echo e(session('perpage')===null ? 12 : session('perpage')); ?>");
 	});
 </script>
 
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('/frontend/app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

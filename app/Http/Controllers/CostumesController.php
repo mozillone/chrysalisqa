@@ -446,9 +446,14 @@ class CostumesController extends Controller {
 	     
 
 	}
-	public function costumeLike(Request $request){
+	/*public function costumeLike(Request $request){
 		$req=$request->all();
 		$res=Costumes::costumeLike($req['costume_id'],Auth::user()->id);
+		return Response::JSON($res);
+	}*/
+
+	public function costumeLike($id){
+		$res=Costumes::costumeLike($id,Auth::user()->id);
 		return Response::JSON($res);
 	}
 
