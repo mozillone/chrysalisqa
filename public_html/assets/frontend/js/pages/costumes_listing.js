@@ -39,8 +39,10 @@ $(document).on('click','.gender > li',function(){
 	$('.gender li').removeClass('active');
 	$(this).addClass('active');
 	var gender=$(this).attr('data-gender');	
-	
-	$('#gender').val(gender);
+	debugger;
+	$('input[name="search[gender\]"]').val(gender);
+
+	//$('#gender_list').val(gender);	 
 	var search=$('#search_list').serializeArray();
 	searching(search);
 })
@@ -100,7 +102,7 @@ $(document).on("change",".per_page",function(e)
 { 
      e.preventDefault();
      var id = $(this).val();
-     $("#perpage").val(id);
+     $("#perpage").val(id); 
      searching(search);
 });
 
@@ -113,6 +115,7 @@ function searching(search){
 	$("#itemContainer").html("");
 	$("#itemContainer").addClass("search_icn_load"); 
     var url = $("#search_list").attr('action');
+
 	$.ajax({
 			type: 'POST',
 			url: url,

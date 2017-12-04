@@ -641,11 +641,11 @@ input_credit_card = function(input)
         setTimeout(function(){ format_and_pos(''); }, 50);
     });
     
-    input.addEventListener('blur', function()
+    /*input.addEventListener('blur', function()
     {
     	// reformat onblur just in case (optional)
         format_and_pos(this, false);
-    });
+    });*/
 };
 
 input_credit_card(document.getElementById('cc_number'));
