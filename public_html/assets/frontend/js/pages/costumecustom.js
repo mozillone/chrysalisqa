@@ -442,6 +442,7 @@ $(function(){
                             return false;
                         });
                            $(document).on("input", "#zoom-level", function() {
+                            debugger
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
