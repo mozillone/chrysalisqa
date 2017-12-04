@@ -64,7 +64,11 @@ class MessageController extends Controller
         if($get_con->user_two == Auth::user()->id || $get_con->user_one == Auth::user()->id){
             $make_seen = DB::table('messages')->where([['conversation_id',$id],["user_id","<>",Auth::user()->id]])->update(['is_seen'=>'1']);
         }
-        return view('messages.message', compact('messages', 'user','get_con'));
+        $msgs_inbox = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        $msgs_sent = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        $conversations = DB::table("conversations")->where("user_one",Auth::user()->id)->orWhere("user_two",Auth::user()->id)->count();
+
+        return view('messages.message', compact('messages', 'user','get_con'))->with('msg_count',$conversations)->with('msgs_inbox',$msgs_inbox)->with('msgs_sent',$msgs_sent);
     }
 
     public function ajaxSendMessage(Request $request)
@@ -147,7 +151,7 @@ class MessageController extends Controller
         $this->data['conversations_inbox'] = DB::Select('SELECT usr.display_name,usr.user_img,usr.first_name,usr.last_name,cnvs.id,cnvs.created_at,cnvs.subject,cnvs.type_id,cnvs.costume_id,cnvs.type,msg.is_seen,msg.user_id,msg.conversation_id,costume_image.image,costume_url.url_key,(SELECT cm1.message FROM cc_messages as cm1  WHERE cnvs.id = cm1.conversation_id ORDER BY created_at DESC LIMIT 1) as message FROM `cc_conversations` as cnvs LEFT JOIN cc_messages as msg on msg.conversation_id=cnvs.id LEFT JOIN cc_costume_image as costume_image on costume_image.costume_id=cnvs.costume_id LEFT JOIN cc_url_rewrites as costume_url on costume_url.url_offset=cnvs.costume_id LEFT JOIN cc_users as usr on usr.id=cnvs.user_one where cnvs.user_two='.Auth::user()->id.' group by cnvs.id order by cnvs.id desc');
         $msgs_inbox = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
         $msgs_sent = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
-        $msgs_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.' OR cnvs.user_one ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        $conversations = DB::table("conversations")->where("user_one",Auth::user()->id)->orWhere("user_two",Auth::user()->id)->count();
        // echo "<pre>";print_r($this->data);die;
         //echo "<pre>";print_r($this->data['conversations_inbox']);die;
         /*$this->data['conversations_inbox'] = DB::table('conversations')
@@ -158,7 +162,7 @@ class MessageController extends Controller
         ->limit(1)
         ->get();*/
      //   dd($msgs_count);
-        return view('messages.conversations')->with($this->data)->with('msgs_count',$msgs_count)->with('msgs_inbox',$msgs_inbox)->with('msgs_sent',$msgs_sent);
+        return view('messages.conversations')->with($this->data)->with('msgs_count',$conversations)->with('msgs_inbox',$msgs_inbox)->with('msgs_sent',$msgs_sent);
     }
 
     public function converstationsDelete(Request $request){

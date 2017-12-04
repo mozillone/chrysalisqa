@@ -1322,64 +1322,162 @@ if($("#size").val() == "custom"){
 		$('#drag_n_drop_2').css('display','none');
 	}
 	$('#drag_n_drop_1').click(function(){
-		
-		swal({
-		  title: "Are you sure?",
-		  text: "You will not be able to recover this Image!",
-		  type: "warning",
-		  showCancelButton: true,
-		  confirmButtonClass: "btn-danger",
-		  confirmButtonText: "Yes, delete",
-		  cancelButtonText: "No, cancel",
-		  closeOnConfirm: false,
-		  closeOnCancel: false
-		},
-		function(isConfirm) {
-		  if (isConfirm) {
-		  	var imageName = '<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){echo $costume_image1->image; }; ?>';
-		  	var imageType = 1;
-		  	if(imageName.length>0){
-		  		deleteCostumeImage(imageName,imageType);
-		  	}
-		  	$('#front_view').find('li').remove();
-		  	$('#drag_n_drop_1').css('display','none');													 
-		  	$("input[name=file1]").attr('style',''); 
-		  	$('input[name=file1]').val('');
-		  	$('input[name=file1]').attr('value','');
-		    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-		  } else {
-		    swal("Cancelled", "Your imaginary file is safe :)", "error");
-		  }
-		});
+		var Fimage = $("input[name=Imagecrop1]").attr('data-id');
+		if(Fimage == ""){
+			$('#front_image_id').remove();
+		    $('#front_view').find('ul').remove();
+		    $('#drag_n_drop_1').css('display','none');
+		    $('input[name=file1]').val('');
+		    $('input[name=hidden]').attr('value','');
+		    $(".Backview").attr('value','');
+		    $(".drop_uploader").addClass('Front1');
+		}
+		else{
+			swal({
+			  title: "Are you sure?",
+			  text: "You will not be able to recover this Image!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonClass: "btn-danger",
+			  confirmButtonText: "Yes, delete",
+			  cancelButtonText: "No, cancel",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm) {
+			  if (isConfirm) {
+			  	var imageName = '<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){echo $costume_image1->image; }; ?>';
+			  	var imageType = 1;
+			  	if(imageName.length>0){
+			  		deleteCostumeImage(imageName,imageType);
+			  	}
+			  	$('#front_view').find('li').remove();
+			  	$('#drag_n_drop_1').css('display','none');													 
+			  	$("input[name=file1]").attr('style',''); 
+			  	$('input[name=file1]').val('');
+			  	$('input[name=file1]').attr('value','');
+
+			  	/*Copied from costumedit.js*/
+			  	$('#front_image_id').remove();
+			    $('#front_view').find('ul').remove();
+			    $('#drag_n_drop_1').css('display','none');
+			    $('input[name=file1]').val('');
+			    $('input[name=hidden]').attr('value','');
+			    $(".Backview").attr('value','');
+			    $(".drop_uploader").addClass('Front1');
+
+			    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+			  } else {
+			    swal("Cancelled", "Your imaginary file is safe :)", "error");
+			  }
+			});
+		}
 
 
 	});
 	$('#drag_n_drop_2').click(function(){
-		var imageName = '<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){echo $costume_image2->image; }; ?>';
-		var imageType = 2;
-		if(imageName.length>0){
-			deleteCostumeImage(imageName,imageType);
+		var Bimage = $("input[name=Imagecrop2]").attr('data-id');
+		if(Bimage == ""){
+			$('#back_image_id').remove();
+		    $('#back_view').find('ul').remove();
+		    $('#drag_n_drop_2').css('display','none');
+		    $('input[name=file2]').val('');
+		    $('input[name=hidden]').attr('value','');
+		    $(".drop_uploader").addClass('Back1');
 		}
-		$('#back_view').find('li').remove();
-		$('#drag_n_drop_2').css('display','none');
-		$("input[name=file2]").attr('style',''); 
-		$('input[name=file2]').val('');
-		$('input[name=file2]').attr('value','');
+		else{
+			swal({
+			  title: "Are you sure?",
+			  text: "You will not be able to recover this Image!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonClass: "btn-danger",
+			  confirmButtonText: "Yes, delete",
+			  cancelButtonText: "No, cancel",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm) {
+				if (isConfirm) {
+					var imageName = '<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){echo $costume_image2->image; }; ?>';
+					var imageType = 2;
+					if(imageName.length>0){
+						deleteCostumeImage(imageName,imageType);
+					}
+					$('#back_view').find('li').remove();
+					$('#drag_n_drop_2').css('display','none');
+					$("input[name=file2]").attr('style',''); 
+					$('input[name=file2]').val('');
+					$('input[name=file2]').attr('value','');
+
+					/*Copied from costumeedit.js*/
+					$('#back_image_id').remove();
+				    $('#back_view').find('ul').remove();
+				    $('#drag_n_drop_2').css('display','none');
+				    $('input[name=file2]').val('');
+				    $('input[name=hidden]').attr('value','');
+				    $(".drop_uploader").addClass('Back1');
+
+					swal("Deleted!", "Your imaginary file has been deleted.", "success");
+				}
+				else {
+					swal("Cancelled", "Your imaginary file is safe :)", "error");
+				}
+			});
+		}
 	});
 	$('#drag_n_drop_3').click(function(){
-		var imageName = '<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){echo $costume_image3->image; }; ?>';
-		var imageType = 3;
-		if(imageName.length>0){
-		deleteCostumeImage(imageName,imageType);                }
-		$('#details_view').find('li').remove();
-		$('#drag_n_drop_3').css('display','none');
-		$("input[name=file3]").attr('style',''); 
-		$('input[name=file3]').val('');
-		$('input[name=file3]').attr('value','');
+		var Aimage = $("input[name=Imagecrop3]").attr('data-id');
+		if(Aimage == ""){
+			$('#details_image_id').remove();
+		    $('#details_view').find('ul').remove();
+		    $('#drag_n_drop_3').css('display','none');
+		    $('input[name=file3]').val('');
+		    $('input[name=file3]').attr('value','');
+		    $(".drop_uploader").addClass('additional');
+		}
+		else{
+			swal({
+			  title: "Are you sure?",
+			  text: "You will not be able to recover this Image!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonClass: "btn-danger",
+			  confirmButtonText: "Yes, delete",
+			  cancelButtonText: "No, cancel",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+			},
+			function(isConfirm) {
+				if (isConfirm) {
+					var imageName = '<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){echo $costume_image3->image; }; ?>';
+					var imageType = 3;
+					if(imageName.length>0){
+					deleteCostumeImage(imageName,imageType);                }
+					$('#details_view').find('li').remove();
+					$('#drag_n_drop_3').css('display','none');
+					$("input[name=file3]").attr('style',''); 
+					$('input[name=file3]').val('');
+					$('input[name=file3]').attr('value','');
+					/*Copied from costumedit.js*/
+					$('#details_image_id').remove();
+				    $('#details_view').find('ul').remove();
+				    $('#drag_n_drop_3').css('display','none');
+				    $('input[name=file3]').val('');
+				    $('input[name=file3]').attr('value','');
+				    $(".drop_uploader").addClass('additional');
+
+					swal("Deleted!", "Your imaginary file has been deleted.", "success");
+				}
+				else {
+					swal("Cancelled", "Your imaginary file is safe :)", "error");
+				}
+			});
+		}
 	});
-	$(".remove").click(function(){
+	/*$(".remove").click(function(){
 		$(this).parent(".pip").remove();
-	});
+	});*/
 });
 function cosplay_yes(id){
 	if (id == 7) {

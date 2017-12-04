@@ -371,7 +371,7 @@ class Order extends Authenticatable
       /*Message To Seller From Admin Start Here*/
 
       /*Message To Buyer From Admin Start Here*/
-      $converstion_array = array('type'=>'order','user_one'=>'1',
+      /*$converstion_array = array('type'=>'order','user_one'=>'1',
         'user_two'=>Auth::user()->id,
         'subject' =>'Your Order has been placed.',
         'type_id' => $order_id,
@@ -385,7 +385,7 @@ class Order extends Authenticatable
         'user_id'=>'1',
         'user_name'=>\App\User::find(1)->pluck("display_name")->first(),
         'conversation_id'=>$converstion_id,'created_at'=>date('Y-m-d h:i:s'));
-      $converstion_id = Site_model::insert_get_id('messages',$message_array);
+      $converstion_id = Site_model::insert_get_id('messages',$message_array);*/
       /*Message To Buyer From Admin End Here*/
 
       return true;

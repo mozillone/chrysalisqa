@@ -21,7 +21,7 @@ $('input[name=file1]').change(function(){
 $('input[name=file2]').change(function(){
     $('#drag_n_drop_2').css('display','block');
 });
-$('#drag_n_drop_1').click(function(){
+/*$('#drag_n_drop_1').click(function(){
     $('#front_image_id').remove();
     $('#front_view').find('ul').remove();
     $('#drag_n_drop_1').css('display','none');
@@ -29,7 +29,7 @@ $('#drag_n_drop_1').click(function(){
     $('input[name=hidden]').attr('value','');
     $(".Backview").attr('value','');
     $(".drop_uploader").addClass('Front1');
-});
+});*/
 
 $('#shipping').change(function(){
     if($(this).val() == 16){
@@ -42,7 +42,7 @@ $('#free_shipping').click(function(){
     $('#service_div').css('display','none');
     $('#shipping').val('16');
 });
-$('#drag_n_drop_2').click(function(){
+/*$('#drag_n_drop_2').click(function(){
 
 
     $('#back_image_id').remove();
@@ -52,7 +52,7 @@ $('#drag_n_drop_2').click(function(){
     $('input[name=hidden]').attr('value','');
     $(".drop_uploader").addClass('Back1');
 
-});
+});*/
 
 
 
@@ -60,14 +60,14 @@ $('#drag_n_drop_2').click(function(){
 $('input[name=file3]').change(function(){
     $('#drag_n_drop_3').css('display','block');
 });
-$('#drag_n_drop_3').click(function(){
+/*$('#drag_n_drop_3').click(function(){
     $('#details_image_id').remove();
     $('#details_view').find('ul').remove();
     $('#drag_n_drop_3').css('display','none');
     $('input[name=file3]').val('');
     $('input[name=file3]').attr('value','');
     $(".drop_uploader").addClass('additional');
-});
+});*/
 
 
 //front view image jquery code
