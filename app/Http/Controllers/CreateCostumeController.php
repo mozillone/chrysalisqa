@@ -1108,9 +1108,9 @@ class CreateCostumeController  extends Controller {
 								'created_on'   => date('y-m-d H:i:s')
 							);
 
-		$conversation_array = array('type'=>'request_a_bag','user_one'=>'',
+		$conversation_array = array('type'=>'request_a_bag','user_one'=>'1',
 									'subject'=>'Your Bag created.',
-									'user_two'=>'1',
+									'user_two'=>'',
 									'status'=>'1',
 									'type_id'=>$ref_no,
 									'created_at'=>date('y-m-d H:i:s'));
@@ -1145,11 +1145,11 @@ class CreateCostumeController  extends Controller {
 			$addres_array['user_id'] = $userid;
 			$addres_insert = DB::table('address_master')->insertGetId($addres_array);
 
-			$conversation_array['user_one'] = $userid;
+			$conversation_array['user_two'] = $userid;
 			$conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
 			
-			$theard_array['user_id'] = $userid;
-			$theard_array['user_name'] = (Auth::check())?Auth::user()->display_name:$user_info->display_name;
+			$theard_array['user_id'] = "1";
+			$theard_array['user_name'] = User::find(1)->pluck('display_name')->first();
 			$theard_array['conversation_id'] = $conversation_insert;
 			$theard = DB::table('messages')->insertGetId($theard_array);
 			
