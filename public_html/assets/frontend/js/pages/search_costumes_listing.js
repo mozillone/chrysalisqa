@@ -38,7 +38,7 @@ $(document).on('click','.gender > li',function(){
 	$('.gender li').removeClass('active');
 	$(this).addClass('active');
 	var gender=$(this).attr('data-gender');
-	$('input[name="search[gender]"').val(gender);
+	$('input[name="search[gender]"]').val(gender);
 	var search=$('#search_list').serializeArray();
 	searching(search);
 })
@@ -55,7 +55,7 @@ $(document).on('click','.sizes > li',function(){
 		}
 	});
 
-	$('input[name="search[sizes]"').val(sizes);
+	$('input[name="search[sizes]"]').val(sizes);
 	 var search=$('#search_list').serializeArray();
 	 searching(search);
 })
