@@ -18,7 +18,7 @@
 				<div class="col-md-12 col-sm-12 col-xs-12 chat-tl-dv">
 					<div class="list-sec-rm">
 						<div class="col-md-6">
-							<p class="list-sec-rm1 fav_costume">MY MESSAGES (0)</p>
+							<p class="list-sec-rm1 fav_costume">MY MESSAGES</p>
 						</div>
 						<div class="col-md-6 text-right pull-right back-link">
 							<a href="/dashboard">Back to My Account</a>
