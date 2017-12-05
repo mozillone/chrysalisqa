@@ -202,12 +202,12 @@ Home@parent
 <script>
 	$(document).ready(function() {
 		$('.thumbnail1').hover(
-		function(){
-			$(this).find('.caption').fadeIn(250); //.fadeIn(250)
-		},
-		function(){
-			$(this).find('.caption').fadeOut(250); //.fadeOut(205)
-		}
+			function(){
+				$(this).find('.caption').fadeIn(250); //.fadeIn(250)
+			},
+			function(){
+				$(this).find('.caption').fadeOut(250); //.fadeOut(205)
+			}
 		); 
 		if($("#costumes_cnt").val() > "4"){
 			$(".owl-controls.clickable").show();	
