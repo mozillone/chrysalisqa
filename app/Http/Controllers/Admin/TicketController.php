@@ -66,11 +66,22 @@ class TicketController extends Controller
                     ';
       })
       ->editColumn('status', function ($ticket) {
-        $a = $ticket->ticket_status == 1?'checked':'';
+        /*$a = $ticket->ticket_status == 1?'checked':'';
+        
         return '<label class="switch">
                                     <input type="checkbox" '.$a.' class="status" id="'.$ticket->id.'" onClick="ticketStatus('.$ticket->id.','.$ticket->ticket_status.');">
                                     <div class="slider round"></div>
-                                </label>';
+                                </label>';*/
+        if($ticket->ticket_status == '1'){
+          $status = "Open";
+        }
+        else if($ticket->ticket_status == '0'){
+          $status = "Pending";
+        }
+        else{
+          $status = "Closed";
+        }
+        return "<span>".$status."</span>";
       })
       ->make(true);
 
@@ -200,11 +211,21 @@ public function insertSupportMessage(Request $request){
                     ';
       })
       ->editColumn('status', function ($ticket) {
-        $a = $ticket->ticket_status == 1?'checked':'';
+        /*$a = $ticket->ticket_status == 1?'checked':'';
         return '<label class="switch">
                                     <input type="checkbox" '.$a.' class="status" id="'.$ticket->id.'" onClick="ticketStatus('.$ticket->id.','.$ticket->ticket_status.');">
                                     <div class="slider round"></div>
-                                </label>';
+                                </label>';*/
+        if($ticket->ticket_status == '1'){
+          $status = "Open";
+        }
+        else if($ticket->ticket_status == '0'){
+          $status = "Pending";
+        }
+        else{
+          $status = "Closed";
+        }
+        return "<span>".$status."</span>";
       })
       ->make(true);
 

@@ -118,8 +118,8 @@ input#update_support_status {
                 <select name="status" id="status" class="form-control">
                        <option value="">Select Status</option>
                        <option <?php $status == "1"? 'selected':'' ?>   value="1">Open</option>
-                       <option <?php $status == "1"? 'selected':'' ?>  value="0">Pending</option>
-                        <option <?php $status == "1"? 'selected':'' ?>  value="2">Closed</option>
+                       <option <?php $status == "0"? 'selected':'' ?>  value="0">Pending</option>
+                        <option <?php $status == "2"? 'selected':'' ?>  value="2">Closed</option>
 
                 </select>
                  <?php 
@@ -183,7 +183,7 @@ input#update_support_status {
                   @if(($assigneduser != '0' && Auth::user()->id == $assigneduser) || ($assigneduser == '0'))
                   <div class="media-body">
                   <div class="col-md-8 msg_text_div">
-            <textarea name="support_message" id="support_message" class="Form-control" cols="10" rows="5"></textarea>
+            <textarea name="support_message" id="support_message" class="Form-control" cols="10" rows="5" placeholder="Type your message here....."></textarea>
            <input type="hidden" name="conversation_id" id="conversation_id" value="{{$coversationid}}">
           <input type="button" name="support" id="support" value="Send" class="btn btn-primary msg-btn" >
         </div>

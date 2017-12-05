@@ -70,8 +70,8 @@
                         <select  class="form-control" name="status" id="status" >
                         <option value="">Select Status</option>
                         <option value="">All</option>
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
+                        <option value="1">Open</option>
+                        <option value="0">Pending</option>
                         <option value="2">Closed</option>
                     </select>
                       </td>
@@ -131,7 +131,7 @@
       "searching": false,
       "pageLength": 25,
       "bLengthChange": false,
-      
+      "order": [[ 4, "desc" ]],
       "columns": [
         { data: 'ticketid', name: 'ticketid'},
         { data: 'customer_name', name: 'customer_name'},
