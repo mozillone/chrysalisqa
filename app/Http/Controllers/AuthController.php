@@ -745,6 +745,15 @@ class AuthController extends Controller {
 								);
 
 							$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
+							/*Storing Status In Logs Starts Here*/
+								DB::table("reqbag_status_log")->insert([
+									"user_id" => Auth::user()->id,
+									"bag_id" => $requestabag_insert,
+									"process" => "Create Request",
+									"status" => "Bag has been created with #".$requestabag_insert,
+									"created_at" => Carbon::now()
+								]);
+							/*Storing Status In Logs Ends Here*/
 							$conversation_array = array('type_id'=>$requestabag_insert);
 				$conversation_insert=DB::table('conversations')->where('id',$conversation_insert)->update($conversation_array);
 
