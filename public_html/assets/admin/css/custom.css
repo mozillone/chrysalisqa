@@ -19,6 +19,9 @@ span.logo-lg {width: 57%;    margin: 0 auto;}
 .c_edit_csmts .drop_uploader img {
     background: #fff;
 }
+.col-md-12.profile_pic_admin span.btn.btn-default.btn-file {
+   margin-left: 25px !important;
+}
 #search_banner .fileupload.fileupload-new {
     position: relative;
     margin-bottom: 15px;
