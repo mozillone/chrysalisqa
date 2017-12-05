@@ -371,7 +371,7 @@
 								</tbody> 
 							</table>
 						</div>
-						<div class="rencemt_order_table">
+						<div class="rencemt_order_table table-responsive">
 							<div>
 								<h2>RECENT ORDERS <span class="pull-right"><a href="/my/orders">View All</a></span></h2>
 								
@@ -398,7 +398,7 @@
 								</tbody> 
 							</table>
 						</div>
-						<div class="rencemt_order_table">
+						<div class="rencemt_order_table table-responsive" >
 							<div>
 								<h2>COSTUMES SOLD <span class="pull-right"><a href="/my/costumes-slod">View All</a></span></</h2>
 							</div>
