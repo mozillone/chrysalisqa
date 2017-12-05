@@ -248,7 +248,7 @@ class UserController extends Controller
            return Redirect::back();
         }
        $users = User::create([
-                                    'role_id'         =>4,
+                                    'role_id'         =>$req['role'],
                                     'first_name'      => $req['first_name'],
                                     'last_name'       => $req['last_name'],
                                     'display_name'    => $req['first_name'].' '.$req['last_name'],
