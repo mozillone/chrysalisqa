@@ -551,7 +551,7 @@ $(document).on("click",".remove_pic",function()
     $(this).parent().find("input[type='file']").show();
 });
 */
-$(document).on("click","#drag_n_drop_1,#drag_n_drop_2,#drag_n_drop_3",function()
+/*$(document).on("click","#drag_n_drop_1,#drag_n_drop_2,#drag_n_drop_3",function()
 {
 
     $(this).siblings().find('img').remove();
@@ -560,4 +560,4 @@ $(document).on("click","#drag_n_drop_1,#drag_n_drop_2,#drag_n_drop_3",function()
 
 
 
-});
+});*/

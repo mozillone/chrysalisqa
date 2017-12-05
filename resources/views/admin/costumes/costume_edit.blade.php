@@ -1332,6 +1332,9 @@ if($("#size").val() == "custom"){
 		    $(".Backview").attr('value','');
 		    $(".drop_uploader").addClass('Front1');
 		    $("#file1").css("display",'block');
+		    $(this).siblings().find('img').remove();
+		    $(this).siblings().find("input[type='hidden']").val('');
+		    $(this).siblings().find("input[type='hidden']").attr('data-id','');
 		}
 		else{
 			swal({
@@ -1386,6 +1389,9 @@ if($("#size").val() == "custom"){
 		    $('input[name=hidden]').attr('value','');
 		    $(".drop_uploader").addClass('Back1');
 		    $("#file2").css("display",'block');
+		    $(this).siblings().find('img').remove();
+		    $(this).siblings().find("input[type='hidden']").val('');
+		    $(this).siblings().find("input[type='hidden']").attr('data-id','');
 		}
 		else{
 			swal({
@@ -1438,6 +1444,9 @@ if($("#size").val() == "custom"){
 		    $('input[name=file3]').attr('value','');
 		    $(".drop_uploader").addClass('additional');
 		    $("#file3").css("display",'block');
+		    $(this).siblings().find('img').remove();
+		    $(this).siblings().find("input[type='hidden']").val('');
+		    $(this).siblings().find("input[type='hidden']").attr('data-id','');
 		}
 		else{
 			swal({
