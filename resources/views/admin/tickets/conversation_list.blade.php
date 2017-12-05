@@ -180,13 +180,14 @@ input#update_support_status {
                 <div class="row">
                   <div class="media-left">
                   </div>
+                  @if(($assigneduser != '0' && Auth::user()->id == $assigneduser) || ($assigneduser == '0'))
                   <div class="media-body">
                   <div class="col-md-8 msg_text_div">
             <textarea name="support_message" id="support_message" class="Form-control" cols="10" rows="5"></textarea>
            <input type="hidden" name="conversation_id" id="conversation_id" value="{{$coversationid}}">
-          <input type="button" name="support" id="support" value="Send" class="btn btn-primary msg-btn" ></input>
+          <input type="button" name="support" id="support" value="Send" class="btn btn-primary msg-btn" >
         </div>
-            </div>  </div></div>
+            </div>@endif  </div></div>
         </div>
     </div>
 </section>
