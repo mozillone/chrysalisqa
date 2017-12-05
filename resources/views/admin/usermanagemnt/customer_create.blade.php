@@ -56,6 +56,18 @@
 							<h2 class="heading-agent">User Info</h2>
 							<div class="col-md-12">
 								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="inputEmail3" class="control-label">Role<span class="req-field" >*</span></label>
+											<select name="role" required class="form-control">
+												<option value="1">Admin</option>
+												<option value="2">Support</option>
+												<option value="4" selected="">Regular User</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="inputEmail3" class="control-label">First Name<span class="req-field" >*</span></label>
