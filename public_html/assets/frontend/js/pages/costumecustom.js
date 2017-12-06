@@ -380,8 +380,7 @@ $(function(){
         $('#preferences_div').css('display', 'none');
     });
     //front view image adding code here
-    $(document).on("change", "#file1", function() {
-
+    $(document).on("change", "#file1", function(evt) {
         $("#zoom-level").val('');
         $(".modal-footer").show();
         var imgdata = '';
@@ -397,11 +396,10 @@ $(function(){
                     var reader = new FileReader();
                     
                     reader.onload = function (e) {
-                        
+
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
-                        //$("<img src='' class='result' >").insertAfter("div #file1");
                         var image = img.attr("src", e.target.result);
                         carouselItems.append(image);
                         dvPreview.append(carouselItems);
@@ -445,8 +443,7 @@ $(function(){
                         $("img").mousedown(function(){
                             return false;
                         });
-
-                        $(document).on("change", "#zoom-level", function() {
+                        $(document).on("input", "#zoom-level", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -477,7 +474,7 @@ $(function(){
 
     //second file image code starts here
     $(document).on("change", "#file2", function() {
-        $("#zoom-level2").val('');
+         $("#zoom-level2").val('');
         $(".modal-footer").show();
         var imgVal = $(this).val();
         if (imgVal != "") {
@@ -492,8 +489,6 @@ $(function(){
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
-                        //var image = img.attr("src", e.target.result);
-                        
                         var image = img.attr("src", e.target.result);
                         carouselItems.append(image);
                         dvPreview.append(carouselItems);
@@ -533,7 +528,7 @@ $(function(){
                             });
                         }, 1000);
 
-                        $(document).on("change", "#zoom-level2", function() {
+                        $(document).on("input", "#zoom-level2", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -566,7 +561,7 @@ $(function(){
     //additional file uoploading functionality
 
     $(document).on("change", "#file3", function() {
-        $("#zoom-level3").val('');
+         $("#zoom-level3").val('');
         $(".modal-footer").show();
         var imgVal = $(this).val();
         if (imgVal != "") {
@@ -620,7 +615,7 @@ $(function(){
                             });
                         }, 1000);
 
-                        $(document).on("change", "#zoom-level3", function() {
+                        $(document).on("input", "#zoom-level3", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -1084,7 +1079,7 @@ $(function(){
         }
     });
 
-    $(document).on("change", ".slider", function () {
+    $(document).on("input", ".slider", function () {
         $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
         var current_zoom = $(this).val();
         zooms[activeCropperObjIndex] = current_zoom;
