@@ -435,12 +435,11 @@
           </li>
         </ul>
       </li>
-        <?php } ?>
-        <?php  if(($roleid=="2") || ($roleid=="1")) {  ?>
       <li <?php echo e((Request::is('support-users') ? 'class=active' : '')); ?> <?php echo e((Request::is('tickets-list') ? 'class=active' : '')); ?> <?php echo e((Request::is('manage-tickets/*') ? 'class=active' : '')); ?> <?php echo e((Request::is('promotion/create') ? 'class=active' : '')); ?> <?php echo e((Request::is('promotion/edit/*') ? 'class=active' : '')); ?>>
         <a href="javascript:void(0)">
           <i class="fa fa-diamond" aria-hidden="true"></i> <span>Support</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
+        <?php if($roleid=="1"): ?>
         <ul class="treeview-menu menu">
           <li <?php echo e((Request::is('support-users') ? 'class=active' : '')); ?>>
             <a href="<?php echo e(route('support-users')); ?>">
@@ -449,6 +448,7 @@
             </a>
           </li>
         </ul>
+        <?php endif; ?>
         <ul class="treeview-menu menu">
           <li <?php echo e((Request::is('tickets-list') ? 'class=active' : '')); ?> <?php echo e((Request::is('manage-tickets/*') ? 'class=active' : '')); ?>>
             <a href="<?php echo e(route('tickets-list')); ?>">
@@ -456,8 +456,53 @@
         </a>
           </li>
         </ul>
+      </li>
+        <?php } ?>
+        <?php  if(($roleid=="2")) {  ?>
+        <li <?php echo e((Request::is('support-users') ? 'class=active' : '')); ?> <?php echo e((Request::is('tickets-list') ? 'class=active' : '')); ?> <?php echo e((Request::is('manage-tickets/*') ? 'class=active' : '')); ?> <?php echo e((Request::is('promotion/create') ? 'class=active' : '')); ?> <?php echo e((Request::is('promotion/edit/*') ? 'class=active' : '')); ?>>
+          <a href="javascript:void(0)">
+            <i class="fa fa-diamond" aria-hidden="true"></i> <span>Support</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu menu">
+            <li <?php echo e((Request::is('tickets-list') ? 'class=active' : '')); ?> <?php echo e((Request::is('manage-tickets/*') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(route('tickets-list')); ?>">
+                <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Support Tickets</span>
+          </a>
+            </li>
+          </ul>
+
+        </li>
+      <li <?php echo e((Request::is('manage-bags') ? 'class=active' : '')); ?><?php echo e((Request::is('process-bag/*') ? 'class=active' : '')); ?>>
+        <a href="javascript:void(0)">
+          <i class="fa fa-suitcase" aria-hidden="true"></i><span>Request a Bag</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu">
+          <li <?php echo e((Request::is('manage-bags') ? 'class=active' : '')); ?><?php echo e((Request::is('process-bag/*') ? 'class=active' : '')); ?>>
+            <a href="<?php echo e(route('manage-bags')); ?>">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Manage Bags</span>
+            </a>
+          </li>
+        </ul>
 
       </li>
+      <li <?php echo e((Request::is('orders') ? 'class=active' : '')); ?> <?php echo e((Request::is('transactions') ? 'class=active' : '')); ?>  >
+        <a href="javascript:void(0)">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i><span>Orders</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu">
+          <li <?php echo e((Request::is('orders') ? 'class=active' : '')); ?> >
+            <a href="<?php echo e(route('orders-list')); ?>">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Orders List</span>
+            </a>
+          </li>
+          <li <?php echo e((Request::is('transactions') ? 'class=active' : '')); ?> >
+            <a href="<?php echo e(route('transactions-list')); ?>">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Transactions List</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      
         <?php } ?>
 
     </ul>

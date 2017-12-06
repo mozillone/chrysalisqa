@@ -8,11 +8,11 @@
                 @if($message->sender->id == auth()->user()->id)
                     <li class="clearfix" id="message-{{$message->id}}">
                         <div class="message-data row">
-							<div class="col-md-3 col-sm-3 col-xs-12 ">
+							<div class="col-md-3 col-sm-4 col-xs-12 ">
 									<span class="message-data-name" >@if(!empty($message->sender->user_img)) <img src="{{asset('profile_img/resize')}}<?php echo '/'.$message->sender->user_img; ?>"> @else <img src="{{asset('profile_img/default.jpg')}}"> @endif</span>
 									<span class="message-data-name user-name" >{{$message->user_name}}</span>
 							</div>
-							<div class="col-md-7 col-sm-7 col-xs-12">
+							<div class="col-md-7 col-sm-6 col-xs-12">
 								<div class="message other-message">
 									{{$message->message}}
 								</div>
@@ -26,11 +26,11 @@
                 @else
                     <li id="message-{{$message->id}}">
                         <div class="message-data row">
-							<div class="col-md-3 col-sm-3 col-xs-12">
+							<div class="col-md-3 col-sm-4 col-xs-12">
 								<span class="message-data-name">@if(!empty($message->sender->user_img)) <img src="{{asset('profile_img/resize')}}<?php echo '/'.$message->sender->user_img; ?>"> @else <img src="{{asset('profile_img/default.jpg')}}"> @endif</span>
 								<span class="message-data-name user-name">{{$message->user_name}}</span>
 							</div>
-							<div class="col-md-7 col-sm-7 col-xs-12">
+							<div class="col-md-7 col-sm-6 col-xs-12">
 								<div class="message my-message">
 									{{$message->message}}
 								</div>

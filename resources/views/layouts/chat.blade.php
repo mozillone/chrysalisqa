@@ -112,7 +112,7 @@
         var msgshow = function(data) {
             var html = '<hr><li id="message-' + data.id + '">' +
 			'<div class="message-data row">' +
-			'<div class="col-md-3 col-sm-3 col-xs-12">' +
+			'<div class="col-md-3 col-sm-4 col-xs-12">' +
 			'<span class="message-data-name" >' +
 			'@if(!empty('+ Auth::user()->user_img +')) '+
 			'<img src="{{asset("profile_img/resize")}}<?php echo "/".'+ Auth::user()->user_img +' ?>"> ' +
@@ -121,7 +121,7 @@
 			'</span>' +
 			'<span class="message-data-name user-name1111" >'+ data.sender.display_name +'</span>' +
 			'</div>' +
-			'<div class="col-md-7 col-sm-7 col-xs-12">' +
+			'<div class="col-md-7 col-sm-6 col-xs-12">' +
 			'<div class="message other-message">' +
 			'' + data.message +'' +
 			'</div>' +
