@@ -3071,7 +3071,7 @@ and (orientation:portrait){
 	.form-rms-input.plus_minus_div .col-md-3{width:50%;}
 	span.lnth-names{margin-left:0px;}
 	.form-rms-dim .form-rms-he1 input{width:40px;}
-	.upload-photo-blogs .up-blog img{background:#fff;width:100%!important;}
+	.upload-photo-blogs .up-blog img{background:transparent;width:100%!important;}
 	.single-view_social span.glyphicon.glyphicon-envelope{float:left!important;}
 	.social-media-sec i.fa.fa-heart-o{float:left;}
 	.sharethis-inline-share-buttons{float:left!important;}
