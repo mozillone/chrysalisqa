@@ -520,6 +520,8 @@ input#event_image {
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
+    max-height: 298px;
+    overflow: hidden;
 }
 div#tracking_ids {
     text-align: left;
