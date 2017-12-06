@@ -1,5 +1,4 @@
 $(function(){
-
     $(document).on('change','#price', function(){
         var number = $('#price').val(); 
         if(number.indexOf('.') == "-1"){
@@ -77,18 +76,6 @@ $(function(){
         $('#drag_n_drop_1').css('display', 'none');
         $('input[name=file1]').val('');
     });
-
-    $('#shipping').change(function() {
-        if ($(this).val() == 16) {
-            $('#service_div').css('display', 'none');
-        } else {
-            $('#service_div').css('display', 'block');
-        }
-    });
-    $('#free_shipping').click(function() {
-        $('#service_div').css('display', 'none');
-        $('#shipping').val('16');
-    });
     $('#drag_n_drop_2').click(function() {
         $('#back_view').find('li').remove();
         $('#drag_n_drop_2').css('display', 'none');
@@ -104,8 +91,19 @@ $(function(){
         $('#drag_n_drop_3').css('display', 'none');
         $('input[name=file3]').val('');
     });
-    
 
+    $('#shipping').change(function() {
+        if ($(this).val() == 16) {
+            $('#service_div').css('display', 'none');
+        } else {
+            $('#service_div').css('display', 'block');
+        }
+    });
+    $('#free_shipping').click(function() {
+        $('#service_div').css('display', 'none');
+        $('#shipping').val('16');
+    });
+    
     $('#price').keyup(function() {
         var donate_percent = $('#donate_charity').val();
         var price = $('#price').val();
@@ -383,10 +381,12 @@ $(function(){
     });
     //front view image adding code here
     $(document).on("change", "#file1", function() {
+
         $("#zoom-level").val('');
         $(".modal-footer").show();
         var imgdata = '';
         var imgVal = $(this).val();
+        
         if (imgVal != "") {
             $('#myModal').modal('show');
             if (typeof (FileReader) != "undefined") {
@@ -395,7 +395,9 @@ $(function(){
                 $($(this)[0].files).each(function (index, element ) {
                     var file = $(this);
                     var reader = new FileReader();
+                    
                     reader.onload = function (e) {
+
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
@@ -423,7 +425,8 @@ $(function(){
                                 aspectRatio: 3 / 5,
                                 autoCropArea: 0.80,
                                 center:true,
-
+                                rotatable: true,
+                                checkOrientation: true,
                                 data: {
                                     width: 220,
                                     height:298
@@ -438,10 +441,10 @@ $(function(){
                                 imageSmoothingQuality: 'high',
                             });
                         }, 1000);
-                            $("img").mousedown(function(){
+                        $("img").mousedown(function(){
                             return false;
                         });
-                           $(document).on("input", "#zoom-level", function() {
+                        $(document).on("input", "#zoom-level", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -510,6 +513,8 @@ $(function(){
                                 setDragMode:'move',
                                 aspectRatio: 3 / 5,
                                 center:false,
+                                rotatable: true,
+                                checkOrientation: true,
                                 data: {
                                     width: 198,
                                     height:298
@@ -595,6 +600,8 @@ $(function(){
                                 setDragMode:'move',
                                 aspectRatio: 3 / 5,
                                 center:false,
+                                rotatable: true,
+                                checkOrientation: true,
                                 data: {
                                     width: 198,
                                     height:298
@@ -1041,6 +1048,8 @@ $(function(){
                                 aspectRatio: 3 / 5,
                                 center: false,
                                 responsive:true,
+                                rotatable: true,
+                                checkOrientation: true,
                                 data: {
                                     width: 198,
                                     height: 298
