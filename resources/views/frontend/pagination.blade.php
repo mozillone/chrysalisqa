@@ -2,9 +2,11 @@
     <ul class="pagination">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <li class="disabled"><span>Previous</span></li>
+            <li class="hidden-md hidden-lg"><span><<</span></li>
+            <li class="hidden-xs hidden-sm  disabled"><span>Previous</span></li>
         @else
-            <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev">Previous</a></li>
+             <li class="hidden-md hidden-lg"><a href="{{ $paginator->previousPageUrl() }}" rel="prev"><<</a></li>
+            <li class="hidden-xs hidden-sm"><a href="{{ $paginator->previousPageUrl() }}" rel="prev">Previous</a></li>
         @endif
 
         {{-- Pagination Elements --}}
@@ -29,12 +31,15 @@
         @if($paginator->currentPage() < $paginator->lastPage() - 2)
             <li class="hidden-xs"><a href="{{ $paginator->url($paginator->lastPage()) }}">{{ $paginator->lastPage() }}</a></li>
         @endif
-
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <li><a href="{{ $paginator->nextPageUrl() }}" rel="next">Next</a></li>
+
+            <li class="hidden-md hidden-lg"><a href="{{ $paginator->nextPageUrl() }}" rel="next">>></a></li>
+
+            <li class="hidden-xs hidden-sm"><a href="{{ $paginator->nextPageUrl() }}" rel="next">Next</a></li>
         @else
-            <li class="disabled"><span>Next</span></li>
+            <li class="hidden-md hidden-lg disabled"><span>>></span></li>
+            <li class="hidden-sm hidden-sm disabled"><span>Next</span></li>
         @endif
     </ul>
 @endif

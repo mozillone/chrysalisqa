@@ -117,9 +117,9 @@ input#update_support_status {
                 <li>Status</li>
                 <select name="status" id="status" class="form-control">
                        <option value="">Select Status</option>
-                       <option <?php $status == "1"? 'selected':'' ?>   value="1">Open</option>
-                       <option <?php $status == "0"? 'selected':'' ?>  value="0">Pending</option>
-                        <option <?php $status == "2"? 'selected':'' ?>  value="2">Closed</option>
+                       <option @if($status == '1') selected @endif value="1">Open</option>
+                       <option @if($status == '0') selected @endif value="0">Pending</option>
+                        <option @if($status == '2') selected @endif  value="2">Closed</option>
 
                 </select>
                  <?php 
@@ -131,7 +131,7 @@ input#update_support_status {
               </ul>
               <ul>
                 <li>Priority</li>
-                <select name="priority" id="priority" class="form-control">
+                <select name="priority" id="priority" class="form-control" @if($role_user =='2') disabled="" @endif>
                        <option value="">Select Priority</option>
                        <option {{$priority == "1"? 'selected':''}} value="1">Major</option>
                        <option {{$priority == "2"? 'selected':''}} value="2">Minor</option>
@@ -142,7 +142,7 @@ input#update_support_status {
                 <li>
                      
                       
-                     <select name="supportuser" id="supportuser" class="form-control">
+                     <select name="supportuser" id="supportuser" class="form-control" @if($role_user =='2') disabled="" @endif>
                       <option value="">Select Support User</option>
                       @foreach($supportusers as $index=>$support)
                       <option {{$assigneduser == $support->id? 'selected':''}} value="{{$support->id}}">{{$support->display_name}}</option> 
@@ -156,7 +156,7 @@ input#update_support_status {
               </ul>
               <ul>
                 <li>Order #</li>
-                <li><input type="orderid" name="orderid" class="form-control" value="{{$orderid}}"></li>
+                <li><input type="orderid" name="orderid" class="form-control" value="{{$orderid}}" @if($role_user =='2') disabled="" @endif></li>
                 <input type="hidden" name="main_ticketid" id="main_ticketid" value="{{$main_ticketid}}">
               </ul>
               <ul>
@@ -227,10 +227,11 @@ $('#update_support_status').click(function(){
  var status=$('#status').val();
 
  var ticketid=$('#main_ticketid').val();
+ var token = "{{ csrf_token() }}";
 $.ajax({
        url: "{{URL::to('update_suport_status')}}",
        type: "POST",
-       data: {status: status,ticketid:ticketid},      
+       data: {status: status,ticketid:ticketid, _token:token},      
        success: function(data){
         if (data = "success") {
           $('#support_message').val('');
