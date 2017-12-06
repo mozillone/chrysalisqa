@@ -1705,7 +1705,11 @@ i.fa.fa-arrow-right{font-size:18px;color:#a09fa0;}
 	.footer_head p{display:block!important;}
 }
 @media screen and (max-width:1024px){
-
+	/* 06-dec Start */
+	.list_pagination .pagination>li>a{    padding: 5px 8px !important;}
+	ul.holder.list_pagination{border:1px solid #e2e2e2
+	;width:100%;display:flex;padding: 15px 0px;position:relative;}
+	/* 06-dec End */
 	/*30-NOV start*/
 
 	.login-register-main{margin:60px auto;}
@@ -3038,6 +3042,9 @@ and (orientation:portrait){
 	span.lnth-names{margin-left:10px;}
 }
 @media only screen and (min-width:768px) and (max-width:991px){
+	/* 06 Dec Start */
+	.pagination_btm{position:absolute;left:5px;top:70px !important;}
+	/*  End */
 	.pckge_info p.form-rms-que{margin-top:15px;font-size:16px;}
 
 	/*Nov-27 changes*/
