@@ -93,14 +93,14 @@ input#update_support_status {
                   </div>
                   <p>{{$message->usermessage}}</p>
                   
-                  <ul>
+                  <!-- <ul>
                     <?php $userid=$message->roleid;
                     if($userid =='2'){ ?>
                   <li>{{$message->username}}</li>  
                   <li>{{$message->email}}</li>  
                   <li>Phone: {{$message->phone}}</li>  
                   <?php } ?>
-                </ul>
+                </ul> -->
                 </div>
                 
                 </div>
@@ -156,7 +156,7 @@ input#update_support_status {
               </ul>
               <ul>
                 <li>Order #</li>
-                <li><input type="orderid" name="orderid" class="form-control" value="{{$orderid}}" @if($role_user =='2') disabled="" @endif></li>
+                <li><input type="orderid" name="orderid" class="form-control" value="{{$orderid}}" readonly=""></li>
                 <input type="hidden" name="main_ticketid" id="main_ticketid" value="{{$main_ticketid}}">
               </ul>
               <ul>
