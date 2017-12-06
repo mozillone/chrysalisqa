@@ -21,6 +21,7 @@ use Meta;
 use Mail;
 use URL;
 use App\Helpers\Site_model;
+use Carbon\Carbon;
 
 class CreateCostumeController  extends Controller {
 
@@ -1157,7 +1158,17 @@ class CreateCostumeController  extends Controller {
 			$requestabag_array['conversation_id'] = $conversation_insert;
 			$requestabag_array['addres_id'] = $addres_insert;
 			$requestabag_insert = DB::table('request_bags')->insertGetId($requestabag_array);
-			                
+			
+			/*Storing Status In Logs Starts Here*/
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => Auth::user()->id,
+				"bag_id" => $requestabag_insert,
+				"process" => "Create Request",
+				"status" => "Bag has been created with #".$requestabag_insert,
+				"created_at" => Carbon::now()
+			]);
+			/*Storing Status In Logs Ends Here*/   
+
 			// send mail to Admin
 			$bag_url_admin 		= '/process-bag/'.$requestabag_insert;
             $req_subject        = "REQUEST A BAG";

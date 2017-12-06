@@ -305,7 +305,7 @@ print_r($all_data);die;*/
 						</div>
 					</div>
 				@endforeach
-				<textarea required="" id="message_theard" class="form-control" rows="6" cols="50"></textarea>
+				<textarea required="" id="message_theard" class="form-control" rows="6" cols="50" placeholder="Type your message here...."></textarea>
 				<span class="error" id="msg_err"></span>
 				<input type="button" name="theard" id="theard" value="SEND" class="btn btn-primary msg-submit" ></input>
 			
