@@ -30,13 +30,16 @@ class UserController extends Controller
       $this->csv = new ExportFile();
       $this->sitehelper = new SiteHelper();
       //$this->braintreeApi = new BraintreeApp();
-       $this->stripe=new StripeApp();
+      $this->stripe=new StripeApp();
       $this->middleware(function ($request, $next) {
           if(!Auth::check()){
             return Redirect::to('/admin/login')->send();
           }
           else{
-               return $next($request);
+              if(Auth::user()->role_id != 1){
+                return Redirect::to('no-access');  
+              }
+              return $next($request);
           }
       });
     }

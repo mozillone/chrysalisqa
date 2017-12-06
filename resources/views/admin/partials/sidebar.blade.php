@@ -416,12 +416,11 @@
           </li>
         </ul>
       </li>
-        <?php } ?>
-        <?php  if(($roleid=="2") || ($roleid=="1")) {  ?>
       <li {{ (Request::is('support-users') ? 'class=active' : '') }} {{ (Request::is('tickets-list') ? 'class=active' : '') }} {{ (Request::is('manage-tickets/*') ? 'class=active' : '') }} {{ (Request::is('promotion/create') ? 'class=active' : '') }} {{ (Request::is('promotion/edit/*') ? 'class=active' : '') }}>
         <a href="javascript:void(0)">
           <i class="fa fa-diamond" aria-hidden="true"></i> <span>Support</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
+        @if($roleid=="1")
         <ul class="treeview-menu menu">
           <li {{ (Request::is('support-users') ? 'class=active' : '') }}>
             <a href="{{route('support-users')}}">
@@ -430,6 +429,7 @@
             </a>
           </li>
         </ul>
+        @endif
         <ul class="treeview-menu menu">
           <li {{ (Request::is('tickets-list') ? 'class=active' : '') }} {{ (Request::is('manage-tickets/*') ? 'class=active' : '') }}>
             <a href="{{route('tickets-list')}}">
@@ -437,8 +437,53 @@
         </a>
           </li>
         </ul>
+      </li>
+        <?php } ?>
+        <?php  if(($roleid=="2")) {  ?>
+        <li {{ (Request::is('support-users') ? 'class=active' : '') }} {{ (Request::is('tickets-list') ? 'class=active' : '') }} {{ (Request::is('manage-tickets/*') ? 'class=active' : '') }} {{ (Request::is('promotion/create') ? 'class=active' : '') }} {{ (Request::is('promotion/edit/*') ? 'class=active' : '') }}>
+          <a href="javascript:void(0)">
+            <i class="fa fa-diamond" aria-hidden="true"></i> <span>Support</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu menu">
+            <li {{ (Request::is('tickets-list') ? 'class=active' : '') }} {{ (Request::is('manage-tickets/*') ? 'class=active' : '') }}>
+              <a href="{{route('tickets-list')}}">
+                <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Support Tickets</span>
+          </a>
+            </li>
+          </ul>
+
+        </li>
+      <li {{ (Request::is('manage-bags') ? 'class=active' : '') }}{{ (Request::is('process-bag/*') ? 'class=active' : '') }}>
+        <a href="javascript:void(0)">
+          <i class="fa fa-suitcase" aria-hidden="true"></i><span>Request a Bag</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu">
+          <li {{ (Request::is('manage-bags') ? 'class=active' : '') }}{{ (Request::is('process-bag/*') ? 'class=active' : '') }}>
+            <a href="{{route('manage-bags')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Manage Bags</span>
+            </a>
+          </li>
+        </ul>
 
       </li>
+      <li {{ (Request::is('orders') ? 'class=active' : '') }} {{ (Request::is('transactions') ? 'class=active' : '')  }}  >
+        <a href="javascript:void(0)">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i><span>Orders</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu menu">
+          <li {{ (Request::is('orders') ? 'class=active' : '') }} >
+            <a href="{{route('orders-list')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Orders List</span>
+            </a>
+          </li>
+          <li {{ (Request::is('transactions') ? 'class=active' : '') }} >
+            <a href="{{route('transactions-list')}}">
+              <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Transactions List</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      
         <?php } ?>
 
     </ul>
