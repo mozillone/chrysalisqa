@@ -446,7 +446,7 @@ $(function(){
                             return false;
                         });
 
-                        $(document).on("click", "#zoom-level", function() {
+                        $(document).on("change", "#zoom-level", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -533,7 +533,7 @@ $(function(){
                             });
                         }, 1000);
 
-                        $(document).on("click", "#zoom-level2", function() {
+                        $(document).on("change", "#zoom-level2", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -620,7 +620,7 @@ $(function(){
                             });
                         }, 1000);
 
-                        $(document).on("click", "#zoom-level3", function() {
+                        $(document).on("change", "#zoom-level3", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -1085,7 +1085,7 @@ $(function(){
         }
     });
 
-    $(document).on("input", ".slider", function () {
+    $(document).on("change", ".slider", function () {
         $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
         var current_zoom = $(this).val();
         zooms[activeCropperObjIndex] = current_zoom;
