@@ -2,9 +2,11 @@
     <ul class="pagination">
         
         <?php if($paginator->onFirstPage()): ?>
-            <li class="disabled"><span>Previous</span></li>
+            <li class="hidden-md hidden-lg"><span><<</span></li>
+            <li class="hidden-xs hidden-sm  disabled"><span>Previous</span></li>
         <?php else: ?>
-            <li><a href="<?php echo e($paginator->previousPageUrl()); ?>" rel="prev">Previous</a></li>
+             <li class="hidden-md hidden-lg"><a href="<?php echo e($paginator->previousPageUrl()); ?>" rel="prev"><<</a></li>
+            <li class="hidden-xs hidden-sm"><a href="<?php echo e($paginator->previousPageUrl()); ?>" rel="prev">Previous</a></li>
         <?php endif; ?>
 
         
@@ -29,12 +31,15 @@
         <?php if($paginator->currentPage() < $paginator->lastPage() - 2): ?>
             <li class="hidden-xs"><a href="<?php echo e($paginator->url($paginator->lastPage())); ?>"><?php echo e($paginator->lastPage()); ?></a></li>
         <?php endif; ?>
-
         
         <?php if($paginator->hasMorePages()): ?>
-            <li><a href="<?php echo e($paginator->nextPageUrl()); ?>" rel="next">Next</a></li>
+
+            <li class="hidden-md hidden-lg"><a href="<?php echo e($paginator->nextPageUrl()); ?>" rel="next">>></a></li>
+
+            <li class="hidden-xs hidden-sm"><a href="<?php echo e($paginator->nextPageUrl()); ?>" rel="next">Next</a></li>
         <?php else: ?>
-            <li class="disabled"><span>Next</span></li>
+            <li class="hidden-md hidden-lg disabled"><span>>></span></li>
+            <li class="hidden-sm hidden-sm disabled"><span>Next</span></li>
         <?php endif; ?>
     </ul>
 <?php endif; ?>

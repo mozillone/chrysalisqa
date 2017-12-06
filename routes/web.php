@@ -12,6 +12,9 @@
 */
 //Auth::routes();
 //Route::get('costume/redirect/{id}','');
+Route::get("/no-access",function(){
+	return view("errors.404");
+});
 Route::any('costume/redirect/{id}', 'CreateCostumeController@redirectToCharity');
 
 Route::get('sitemap',['as' => 'sitemaps.posts','uses'=> 'SitemapsController@index']);

@@ -60,17 +60,32 @@ class TicketController extends Controller
 
 
 		 return Datatables::of($tickets)
-      ->addColumn('actions', function ($ticket) {
-        return '<a href="/manage-tickets/'.$ticket->id.'" class="btn btn-xs btn-primary" ><i class="fa fa-pencil-square-o"></i> </a>
-                     <a href="javascript:void(0);"  class="btn btn-xs btn-danger delete_user" onClick="deletTicket('.$ticket->id.');" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i> </a>
-                    ';
-      })
+      
+        ->addColumn('actions', function ($ticket) {
+          if(Auth::user()->role_id == "2"){
+          return '<a href="/manage-tickets/'.$ticket->id.'" class="btn btn-xs btn-primary" ><i class="fa fa-pencil-square-o"></i> </a>';
+          }
+          return '<a href="/manage-tickets/'.$ticket->id.'" class="btn btn-xs btn-primary" ><i class="fa fa-pencil-square-o"></i> </a>
+                       <a href="javascript:void(0);"  class="btn btn-xs btn-danger delete_user" onClick="deletTicket('.$ticket->id.');" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i> </a>
+                      ';
+        })
       ->editColumn('status', function ($ticket) {
-        $a = $ticket->ticket_status == 1?'checked':'';
+        /*$a = $ticket->ticket_status == 1?'checked':'';
+        
         return '<label class="switch">
                                     <input type="checkbox" '.$a.' class="status" id="'.$ticket->id.'" onClick="ticketStatus('.$ticket->id.','.$ticket->ticket_status.');">
                                     <div class="slider round"></div>
-                                </label>';
+                                </label>';*/
+        if($ticket->ticket_status == '1'){
+          $status = "Open";
+        }
+        else if($ticket->ticket_status == '0'){
+          $status = "Pending";
+        }
+        else{
+          $status = "Closed";
+        }
+        return "<span>".$status."</span>";
       })
       ->make(true);
 
@@ -200,11 +215,21 @@ public function insertSupportMessage(Request $request){
                     ';
       })
       ->editColumn('status', function ($ticket) {
-        $a = $ticket->ticket_status == 1?'checked':'';
+        /*$a = $ticket->ticket_status == 1?'checked':'';
         return '<label class="switch">
                                     <input type="checkbox" '.$a.' class="status" id="'.$ticket->id.'" onClick="ticketStatus('.$ticket->id.','.$ticket->ticket_status.');">
                                     <div class="slider round"></div>
-                                </label>';
+                                </label>';*/
+        if($ticket->ticket_status == '1'){
+          $status = "Open";
+        }
+        else if($ticket->ticket_status == '0'){
+          $status = "Pending";
+        }
+        else{
+          $status = "Closed";
+        }
+        return "<span>".$status."</span>";
       })
       ->make(true);
 
@@ -303,13 +328,12 @@ public function insertSupportMessage(Request $request){
   /*****Update Support Message given by supporter***/
   public function updateSupportMessage(Request $request){
      $req=$request->all();
-    
      $status=$request->status;
      $ticketid=$request->ticketid;
-     $where=array('id'=>$ticketid);
-     $updatearray=array('ticket_status'=>$status,
-      'ticket_updateddate'=>date("Y-m-d H:i:s"));
-     $update_ticket=DB::table('tickets')->where($where)->update($updatearray);
+     $update_ticket = DB::table("tickets")->where("id",$ticketid)->update([
+        'ticket_status'=>$status,
+        'ticket_updateddate'=>date("Y-m-d H:i:s")
+      ]);
      if($update_ticket){
       Session::flash('success', 'Status Updated Successfully');
       return "success";

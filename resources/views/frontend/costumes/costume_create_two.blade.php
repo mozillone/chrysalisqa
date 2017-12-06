@@ -302,12 +302,12 @@
 	{
 	position: fixed !important;
 	}
-#dynamic_percent_amounts {
-    margin-top: 17px;
-    margin-left: 16px !important;
-    background-color: white;
-    display: inline-block;
-}
+	#dynamic_percent_amounts {
+	    margin-top: 17px;
+	    margin-left: 16px !important;
+	    background-color: white;
+	    display: inline-block;
+	}
 </style>
 @endsection
 @section('content')
@@ -355,10 +355,10 @@
 									<span class="remove_pic" id="drag_n_drop_1" style="display: none;" >
 										<i class="fa fa-times-circle" aria-hidden="true"></i>
 									</span>
-									<div class=" up-blog">
+									<div class="up-blog">
 										<input type="file" name="file1" accept="image/*" id="file1" >
 										<input type="hidden" class="modalOpen1" name="Imagecrop1">
-										<img src="" class="result" >
+										<img name="file1_name" src="" class="result" >
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 									</div>
 									<span id="file1_error" style="color:red"></span>
@@ -978,11 +978,11 @@
 																							<span class="glyphicon glyphicon-plus"></span>
 																						</button>
 																					</span>
-																				</div>
-																			</div>
-																			<div class="clearfix"></div>
-																		</p>
-																		<div class="col-md-5 donation_amt pdlft0">
+	</div>
+	</div>
+	<div class="clearfix"></div>
+	</p>
+	<div class="col-md-5 donation_amt pdlft0">
 																			<p class="ct3-rms-head">Donation Amount</p>
 																			<div id="dynamic_amount">
 																				<input type="hidden" name="hidden_donation_amount" id="hidden_donation_amounts" value="0.00">
@@ -1088,325 +1088,326 @@
 										<!---Second div code ends here-->
 										@stop
 										{{-- page level scripts --}}
-										@section('footer_scripts')
-										<!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
-										<script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
-										<script type="text/javascript" src="{{asset('/assets/frontend/js/cropper.js')}}"></script>
-										<script type="text/javascript" src="{{asset('/assets/frontend/js/pages/costumecustom.js')}}"></script>
-										<script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
-										<script type="text/javascript">
-											$(document).ready(function()
-											{
-												$(".conditon_check").change(function(){
-													if($("#radio-6").prop("checked") || $("#radio-7").prop("checked")){
-														$("#cleaned_select").removeClass("hide");
-														} else{
-														$("#cleaned_select").addClass("hide");
-														$("#cleaned").val('');
-													}
-												});
-												if(parseInt($("#donate_charity").val()) == 10){
-													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
-												}
-												if(parseInt($("#donate_charity").val())<10){
-													$("#donate_charity").css({"color":"#000","font-weight":"bold"});
-												}
-												if(parseInt($("#donate_charity").val()) ==15){
-													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
-												}
-												if(parseInt($("#donate_charity").val()) ==25){
-													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
-												}
-												if(parseInt($("#donate_charity").val()) == 50){
-													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
-												}
-												if(parseInt($("#donate_charity").val()) ==100){
-													$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
-												}
-												$('#costume_name').data('holder',$('#costume_name').attr('placeholder'));
-												$('#costume_name').focusin(function(){
-													$(this).attr('placeholder','');
-												});
-												$('#costume_name').focusout(function(){
-													$(this).attr('placeholder',$(this).data('holder'));
-												});
-												$('#organzation_name').data('holder',$('#organzation_name').attr('placeholder'));
-												$('#organzation_name').focusin(function(){
-													$(this).attr('placeholder','');
-												});
-												$('#organzation_name').focusout(function(){
-													$(this).attr('placeholder',$(this).data('holder'));
-												});
-												$('#pounds').data('holder',$('#pounds').attr('placeholder'));
-												$('#pounds').focusin(function(){
-													$(this).attr('placeholder','');
-												});
-												$('#pounds').focusout(function(){
-													$(this).attr('placeholder',$(this).data('holder'));
-												});
-												$('#ounces').data('holder',$('#ounces').attr('placeholder'));
-												$('#ounces').focusin(function(){
-													$(this).attr('placeholder','');
-												});
-												$('#ounces').focusout(function(){
-													$(this).attr('placeholder',$(this).data('holder'));
-												});
-												$('textarea').data('holder',$('textarea').attr('placeholder'));
-												$('textarea').focusin(function(){
-													$(this).attr('placeholder','');
-												});
-												$('textarea').focusout(function(){
-													$(this).attr('placeholder',$(this).data('holder'));
-												});
-												//size select custom
-												$("#size").change(function()
-												{
-													var val = $(this).val();
-													if(val == 'custom')
-													{
-														$(".body-dimnets").removeClass('hide');
-													}
-													else
-													{
-														$(".body-dimnets").addClass('hide');
-														$(".body-dimnets input").val('');
-													}
-												});
-												$(".faq-checkbox").change(function(){
-													if($("#30").prop("checked") || $("#32").prop("checked")){
+@section('footer_scripts')
+<!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
+<script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
+<script type="text/javascript" src="{{asset('/assets/frontend/js/cropper.js')}}"></script>
+<script type="text/javascript" src="{{asset('/assets/frontend/js/load-image.all.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('/assets/frontend/js/pages/costumecustom.js')}}"></script>
+<script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$(".conditon_check").change(function(){
+			if($("#radio-6").prop("checked") || $("#radio-7").prop("checked")){
+				$("#cleaned_select").removeClass("hide");
+				} else{
+				$("#cleaned_select").addClass("hide");
+				$("#cleaned").val('');
+			}
+		});
+		if(parseInt($("#donate_charity").val()) == 10){
+			$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+		}
+		if(parseInt($("#donate_charity").val())<10){
+			$("#donate_charity").css({"color":"#000","font-weight":"bold"});
+		}
+		if(parseInt($("#donate_charity").val()) ==15){
+			$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+		}
+		if(parseInt($("#donate_charity").val()) ==25){
+			$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+		}
+		if(parseInt($("#donate_charity").val()) == 50){
+			$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+		}
+		if(parseInt($("#donate_charity").val()) ==100){
+			$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+		}
+		$('#costume_name').data('holder',$('#costume_name').attr('placeholder'));
+		$('#costume_name').focusin(function(){
+			$(this).attr('placeholder','');
+		});
+		$('#costume_name').focusout(function(){
+			$(this).attr('placeholder',$(this).data('holder'));
+		});
+		$('#organzation_name').data('holder',$('#organzation_name').attr('placeholder'));
+		$('#organzation_name').focusin(function(){
+			$(this).attr('placeholder','');
+		});
+		$('#organzation_name').focusout(function(){
+			$(this).attr('placeholder',$(this).data('holder'));
+		});
+		$('#pounds').data('holder',$('#pounds').attr('placeholder'));
+		$('#pounds').focusin(function(){
+			$(this).attr('placeholder','');
+		});
+		$('#pounds').focusout(function(){
+			$(this).attr('placeholder',$(this).data('holder'));
+		});
+		$('#ounces').data('holder',$('#ounces').attr('placeholder'));
+		$('#ounces').focusin(function(){
+			$(this).attr('placeholder','');
+		});
+		$('#ounces').focusout(function(){
+			$(this).attr('placeholder',$(this).data('holder'));
+		});
+		$('textarea').data('holder',$('textarea').attr('placeholder'));
+		$('textarea').focusin(function(){
+			$(this).attr('placeholder','');
+		});
+		$('textarea').focusout(function(){
+			$(this).attr('placeholder',$(this).data('holder'));
+		});
+		//size select custom
+		$("#size").change(function(){
+			var val = $(this).val();
+			if(val == 'custom')
+			{
+				$(".body-dimnets").removeClass('hide');
+			}
+			else
+			{
+				$(".body-dimnets").addClass('hide');
+				$(".body-dimnets input").val('');
+			}
+		});
+		$(".faq-checkbox").change(function(){
+			if($("#30").prop("checked") || $("#32").prop("checked")){
 
-															$("#freqently").removeClass("hide");
-															$("#freqently").removeAttr('style');
-														} 
-														else{
-															$("#freqently").addClass("hide");
-														}
-												});
-												$('#costume_description_next').click(function () {
-													$('html, body').animate({scrollTop:0}, 'fast');
-												});
-												$('#pricing_next').click(function () {
-													$('html, body').animate({scrollTop:0}, 'fast');
-												});
-												$("#tumblr_btn").click(function(){
-													window.open($("#tumblr_url").val(), 'Post to Tumblr', 'window settings');
-												});
-												function statusChangeCallback(response) {
-													if (response.status === 'connected') {
-														testAPI();
-														} else if (response.status === 'not_authorized') {
-														FB.login(function(response) {
-															statusChangeCallback2(response);
-														}, {scope: 'public_profile,email'});
-														} else {
-													}
-												}
-												function statusChangeCallback2(response) {
-													if (response.status === 'connected') {
-														testAPI();
-														} else if (response.status === 'not_authorized') {
-														} else {
-													}
-												}
-												function checkLoginState() {
-													FB.getLoginStatus(function(response) {
-														statusChangeCallback(response);
-													});
-												}
-												function testAPI() {
-													FB.api('/me', function(response) {
-													});
-												}
-												document.getElementById('facebook').onclick = function() {
-													FB.api('https://graph.facebook.com/','post',  {
-														id: $("#url_fb").val(),
-														scrape: true,
-														access_token:'EAAcMdgezwNYBAB96ZBPVzNfQGk5lSlV9mVzIQ0COFpNWcSZC1QqxUsM6Jm5hKXfBRwMJ3dy9xkos9AJlBlLHyCetnX7fZAJvyVEdian6K6TmmyWBzqwHvGe5ItK9nrNuJPWjMFUH7zVZBNUI6h9btuWVUJYJ1zMZD'
-													    }, function(response) {
-														console.log('rescrape!',response);
-													});
-													FB.init({
-														appId      : '1984025911869654',
-														xfbml      : true,
-														version    : 'v2.2'
-													});
-													checkLoginState();
-													FB.ui({
-														method: 'share',
-														display: 'popup',
-														href: $("#url_fb").val(),
-														quote: $("#quote_fb").val()
-													}, function(response){});
-												}
-												var selector = '.ct3-list  li';
-												$(selector).on("click",function()
-												{
-													$(selector).removeClass('active');
-													$(this).addClass('active');
-													var r = $(this).find('input[type=radio]');
-													$(r).prop('checked',true);
-												});
-												//code to should not allow characters for price field only allow numbers
-												$('#price').on('keydown', function(e){-1!==$.inArray(e.keyCode,[46,8,9,27,13,110,190])||/65|67|86|88/.test(e.keyCode)&&(!0===e.ctrlKey||!0===e.metaKey)||35<=e.keyCode&&40>=e.keyCode||(e.shiftKey||48>e.keyCode||57<e.keyCode)&&(96>e.keyCode||105<e.keyCode)&&e.preventDefault()});
-												//jquery for price number increment field
-												var total_val = "0.00";
-												$('.btn-number').click(function(e){
-													e.preventDefault();
-													fieldName = $(this).attr('data-field');
-													type      = $(this).attr('data-type');
-													var input = $("input[name='"+fieldName+"']");
-													var currentVal = parseInt(input.val());
-													if(type == 'minus') {
-														if(currentVal <= 10){
-															var present = currentVal-1;
-															}else if(currentVal == 15){
-															var present = currentVal-5;
-															}else if(currentVal == 25){
-															var present = currentVal-10;
-															}else if(currentVal == 50){
-															var present = currentVal-25;
-															}else if(currentVal == 100){
-															var present = currentVal-50;
-														}
-													}
-													else if(type == 'plus') {
-														if(currentVal < 10){
-															var present = currentVal+1;
-															}else if(currentVal == 10 ){
-															var present = currentVal+5;
-															}else if(currentVal == 15 ){
-															var present = currentVal+10;
-															}else if(currentVal == 25 ){
-															var present = currentVal+25;
-															}else if(currentVal>=50){
-															var present = currentVal+50;
-														}
-													}
-													var price = $('#price').val();
-													var total = (price * present) / 100;
-													var amount = parseFloat(total).toFixed(2);
-													$('#hidden_donation_amounts').val(amount);
-													$('#dynamic_percent_amounts').html("$"+amount);
-													if (!isNaN(currentVal)) {
-														if(type == 'minus') {
-															if(currentVal <= 10){
-																if(currentVal > input.attr('min')) {
-																	input.val((currentVal - 1)+" %").css({"color":"#000","font-weight":""}).change();
-																}
-																if(parseInt(input.val()) == input.attr('min')) {
-																	$(this).attr('disabled', true);
-																}
-																}else if(currentVal == 15 ){
-																if(currentVal > input.attr('min')) {
-																	input.val((currentVal - 5)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
-																}
-																if(parseInt(input.val()) == input.attr('min')) {
-																	$(this).attr('disabled', true);
-																}
-																}else if(currentVal == 25 ){
-																if(currentVal > input.attr('min')) {
-																	input.val((currentVal - 10)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
-																}
-																if(parseInt(input.val()) == input.attr('min')) {
-																	$(this).attr('disabled', true);
-																}
-																}else if(currentVal == 50 ){
-																if(currentVal > input.attr('min')) {
-																	input.val((currentVal - 25)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
-																}
-																if(parseInt(input.val()) == input.attr('min')) {
-																	$(this).attr('disabled', true);
-																}
-																}else if(currentVal<=100){
-																if(currentVal <= input.attr('max')) {
-																	input.val((currentVal - 50)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
-																}
-																if(parseInt(input.val()) == input.attr('max')) {
-																	$(this).attr('disabled', true);
-																}
-															}
-															} else if(type == 'plus') {
-															if(currentVal < 10){
-																if(currentVal < input.attr('max')) {
-																	//input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
-																	if(currentVal == 9){
-																		input.val((currentVal + 1)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
-																		}else{
-																		input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
-																	}
-																}
-																if(parseInt(input.val()) == input.attr('max')) {
-																	$(this).attr('disabled', true);
-																}
-																}else if(currentVal == 10 ){
-																if(currentVal < input.attr('max')) {
-																	input.val((currentVal + 5)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
-																}
-																if(parseInt(input.val()) == input.attr('max')) {
-																	$(this).attr('disabled', true);
-																}
-																}else if(currentVal == 15 ){
-																if(currentVal < input.attr('max')) {
-																	input.val((currentVal + 10)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
-																}
-																if(parseInt(input.val()) == input.attr('max')) {
-																	$(this).attr('disabled', true);
-																}
-																}else if(currentVal == 25 ){
-																if(currentVal < input.attr('max')) {
-																	input.val((currentVal + 25)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
-																}
-																if(parseInt(input.val()) == input.attr('max')) {
-																	$(this).attr('disabled', true);
-																}
-																}else if(currentVal>=50){
-																if(currentVal < input.attr('max')) {
-																	input.val((currentVal + 50)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
-																}
-																if(parseInt(input.val()) == input.attr('max')) {
-																	$(this).attr('disabled', true);
-																}
-															}
-														}
-														} else {
-														input.val(0);
-													}
-												});
-												$('.input-number').focusin(function(){
-													$(this).data('oldValue', $(this).val());
-												});
-												$('.input-number').change(function() {
-													minValue =  parseInt($(this).attr('min'));
-													maxValue =  parseInt($(this).attr('max'));
-													valueCurrent = parseInt($(this).val());
-													name = $(this).attr('name');
-													if(valueCurrent >= minValue) {
-														$(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
-														} else {
-														alert('Sorry, the minimum value was reached');
-														$(this).val($(this).data('oldValue'));
-													}
-													if(valueCurrent <= maxValue) {
-														$(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
-														} else {
-														alert('Sorry, the maximum value was reached');
-														$(this).val($(this).data('oldValue'));
-													}
-												});
-												$(".input-number").keydown(function (e) {
-													if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-													(e.keyCode == 65 && e.ctrlKey === true) ||
-													(e.keyCode >= 35 && e.keyCode <= 39)) {
-														return;
-													}
-													if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-														e.preventDefault();
-													}
-												});
-												$(document).on("click","#cancel2",function()
-												{
-													$(".remove_pic").css({"display":"block !important"});
-												});
-											});
-										</script>
-										@stop
+					$("#freqently").removeClass("hide");
+					$("#freqently").removeAttr('style');
+				} 
+				else{
+					$("#freqently").addClass("hide");
+				}
+		});
+		$('#costume_description_next').click(function () {
+			$('html, body').animate({scrollTop:0}, 'fast');
+		});
+		$('#pricing_next').click(function () {
+			$('html, body').animate({scrollTop:0}, 'fast');
+		});
+		$("#tumblr_btn").click(function(){
+			window.open($("#tumblr_url").val(), 'Post to Tumblr', 'window settings');
+		});
+		function statusChangeCallback(response) {
+			if (response.status === 'connected') {
+				testAPI();
+				} else if (response.status === 'not_authorized') {
+				FB.login(function(response) {
+					statusChangeCallback2(response);
+				}, {scope: 'public_profile,email'});
+				} else {
+			}
+		}
+		function statusChangeCallback2(response) {
+			if (response.status === 'connected') {
+				testAPI();
+				} else if (response.status === 'not_authorized') {
+				} else {
+			}
+		}
+		function checkLoginState() {
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		}
+		function testAPI() {
+			FB.api('/me', function(response) {
+			});
+		}
+		document.getElementById('facebook').onclick = function() {
+			FB.api('https://graph.facebook.com/','post',  {
+				id: $("#url_fb").val(),
+				scrape: true,
+				access_token:'EAAcMdgezwNYBAB96ZBPVzNfQGk5lSlV9mVzIQ0COFpNWcSZC1QqxUsM6Jm5hKXfBRwMJ3dy9xkos9AJlBlLHyCetnX7fZAJvyVEdian6K6TmmyWBzqwHvGe5ItK9nrNuJPWjMFUH7zVZBNUI6h9btuWVUJYJ1zMZD'
+			    }, function(response) {
+				console.log('rescrape!',response);
+			});
+			FB.init({
+				appId      : '1984025911869654',
+				xfbml      : true,
+				version    : 'v2.2'
+			});
+			checkLoginState();
+			FB.ui({
+				method: 'share',
+				display: 'popup',
+				href: $("#url_fb").val(),
+				quote: $("#quote_fb").val()
+			}, function(response){});
+		}
+		var selector = '.ct3-list  li';
+		$(selector).on("click",function()
+		{
+			$(selector).removeClass('active');
+			$(this).addClass('active');
+			var r = $(this).find('input[type=radio]');
+			$(r).prop('checked',true);
+		});
+		//code to should not allow characters for price field only allow numbers
+		$('#price').on('keydown', function(e){-1!==$.inArray(e.keyCode,[46,8,9,27,13,110,190])||/65|67|86|88/.test(e.keyCode)&&(!0===e.ctrlKey||!0===e.metaKey)||35<=e.keyCode&&40>=e.keyCode||(e.shiftKey||48>e.keyCode||57<e.keyCode)&&(96>e.keyCode||105<e.keyCode)&&e.preventDefault()});
+		//jquery for price number increment field
+		var total_val = "0.00";
+		$('.btn-number').click(function(e){
+			e.preventDefault();
+			fieldName = $(this).attr('data-field');
+			type      = $(this).attr('data-type');
+			var input = $("input[name='"+fieldName+"']");
+			var currentVal = parseInt(input.val());
+			if(type == 'minus') {
+				if(currentVal <= 10){
+					var present = currentVal-1;
+					}else if(currentVal == 15){
+					var present = currentVal-5;
+					}else if(currentVal == 25){
+					var present = currentVal-10;
+					}else if(currentVal == 50){
+					var present = currentVal-25;
+					}else if(currentVal == 100){
+					var present = currentVal-50;
+				}
+			}
+			else if(type == 'plus') {
+				if(currentVal < 10){
+					var present = currentVal+1;
+					}else if(currentVal == 10 ){
+					var present = currentVal+5;
+					}else if(currentVal == 15 ){
+					var present = currentVal+10;
+					}else if(currentVal == 25 ){
+					var present = currentVal+25;
+					}else if(currentVal>=50){
+					var present = currentVal+50;
+				}
+			}
+			var price = $('#price').val();
+			var total = (price * present) / 100;
+			var amount = parseFloat(total).toFixed(2);
+			$('#hidden_donation_amounts').val(amount);
+			$('#dynamic_percent_amounts').html("$"+amount);
+			if (!isNaN(currentVal)) {
+				if(type == 'minus') {
+					if(currentVal <= 10){
+						if(currentVal > input.attr('min')) {
+							input.val((currentVal - 1)+" %").css({"color":"#000","font-weight":""}).change();
+						}
+						if(parseInt(input.val()) == input.attr('min')) {
+							$(this).attr('disabled', true);
+						}
+						}else if(currentVal == 15 ){
+						if(currentVal > input.attr('min')) {
+							input.val((currentVal - 5)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+						}
+						if(parseInt(input.val()) == input.attr('min')) {
+							$(this).attr('disabled', true);
+						}
+						}else if(currentVal == 25 ){
+						if(currentVal > input.attr('min')) {
+							input.val((currentVal - 10)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+						}
+						if(parseInt(input.val()) == input.attr('min')) {
+							$(this).attr('disabled', true);
+						}
+						}else if(currentVal == 50 ){
+						if(currentVal > input.attr('min')) {
+							input.val((currentVal - 25)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+						}
+						if(parseInt(input.val()) == input.attr('min')) {
+							$(this).attr('disabled', true);
+						}
+						}else if(currentVal<=100){
+						if(currentVal <= input.attr('max')) {
+							input.val((currentVal - 50)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+						}
+						if(parseInt(input.val()) == input.attr('max')) {
+							$(this).attr('disabled', true);
+						}
+					}
+					} else if(type == 'plus') {
+					if(currentVal < 10){
+						if(currentVal < input.attr('max')) {
+							//input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+							if(currentVal == 9){
+								input.val((currentVal + 1)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+								}else{
+								input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
+							}
+						}
+						if(parseInt(input.val()) == input.attr('max')) {
+							$(this).attr('disabled', true);
+						}
+						}else if(currentVal == 10 ){
+						if(currentVal < input.attr('max')) {
+							input.val((currentVal + 5)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+						}
+						if(parseInt(input.val()) == input.attr('max')) {
+							$(this).attr('disabled', true);
+						}
+						}else if(currentVal == 15 ){
+						if(currentVal < input.attr('max')) {
+							input.val((currentVal + 10)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+						}
+						if(parseInt(input.val()) == input.attr('max')) {
+							$(this).attr('disabled', true);
+						}
+						}else if(currentVal == 25 ){
+						if(currentVal < input.attr('max')) {
+							input.val((currentVal + 25)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+						}
+						if(parseInt(input.val()) == input.attr('max')) {
+							$(this).attr('disabled', true);
+						}
+						}else if(currentVal>=50){
+						if(currentVal < input.attr('max')) {
+							input.val((currentVal + 50)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
+						}
+						if(parseInt(input.val()) == input.attr('max')) {
+							$(this).attr('disabled', true);
+						}
+					}
+				}
+				} else {
+				input.val(0);
+			}
+		});
+		$('.input-number').focusin(function(){
+			$(this).data('oldValue', $(this).val());
+		});
+		$('.input-number').change(function() {
+			minValue =  parseInt($(this).attr('min'));
+			maxValue =  parseInt($(this).attr('max'));
+			valueCurrent = parseInt($(this).val());
+			name = $(this).attr('name');
+			if(valueCurrent >= minValue) {
+				$(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+				} else {
+				alert('Sorry, the minimum value was reached');
+				$(this).val($(this).data('oldValue'));
+			}
+			if(valueCurrent <= maxValue) {
+				$(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+				} else {
+				alert('Sorry, the maximum value was reached');
+				$(this).val($(this).data('oldValue'));
+			}
+		});
+		$(".input-number").keydown(function (e) {
+			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+			(e.keyCode == 65 && e.ctrlKey === true) ||
+			(e.keyCode >= 35 && e.keyCode <= 39)) {
+				return;
+			}
+			if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				e.preventDefault();
+			}
+		});
+		$(document).on("click","#cancel2",function()
+		{
+			$(".remove_pic").css({"display":"block !important"});
+		});
+	});
+</script>
+
+@stop

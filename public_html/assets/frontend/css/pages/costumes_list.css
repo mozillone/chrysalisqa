@@ -33,7 +33,7 @@
   background-color: #E9573F;
 }
 
-		.r-bag_div ul.nav.nav-pills {
+        .r-bag_div ul.nav.nav-pills {
     border-bottom: 2px solid #3eb699;
 }
 .r-bag_div ul.nav.nav-pills li a {
@@ -43,7 +43,7 @@
 width: 200px;
     text-align: center;
     font-size: 16px;
-	    font-family: Proxima-Nova-bold;
+        font-family: Proxima-Nova-bold;
 }
 
 .r-bag_div ul.nav.nav-pills li.active a {
@@ -58,8 +58,8 @@ width: 200px;
 }
 .costumes-label{padding-left: 0px;
     padding-right: 0px;}
-	.costumes-label{color:#000;}
-	div#payouts .col-md-12.col-sm-12 {
+    .costumes-label{color:#000;}
+    div#payouts .col-md-12.col-sm-12 {
     padding-left: 0px;
 }
 .costumes-label span:last-child{    margin-right: -15px;}
@@ -260,7 +260,7 @@ img#ajax_loader {
     right: 167px;
 }
 .img-pp-iner {
-    width: 100% !important;
+/*     width: 100% !important; */
     margin: 0 auto;
     margin-top: 20px !important;
     margin-bottom: 10px;    padding-bottom: 0px !important;

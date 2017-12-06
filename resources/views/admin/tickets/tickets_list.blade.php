@@ -54,8 +54,8 @@
                   <tbody>
                     <tr>
                       <input type="hidden" name="token" id="token" value='{{ csrf_field()}}'>
-                       <td><input type="text" class="form-control"  name="keyword" id="keyword" ></td>
-                      <td><input type="text" class="form-control"  name="customername"  id="customername"></td>
+                       <td><input type="text" class="form-control"  name="keyword" id="keyword" placeholder="keywords"></td>
+                      <td><input type="text" class="form-control"  name="customername"  id="customername" placeholder="Customer Name"></td>
                      
                       <td>
                         <select  class="form-control" name="ticket_type" id="ticket_type" >
@@ -70,8 +70,8 @@
                         <select  class="form-control" name="status" id="status" >
                         <option value="">Select Status</option>
                         <option value="">All</option>
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
+                        <option value="1">Open</option>
+                        <option value="0">Pending</option>
                         <option value="2">Closed</option>
                     </select>
                       </td>
@@ -131,7 +131,7 @@
       "searching": false,
       "pageLength": 25,
       "bLengthChange": false,
-      
+      "order": [[ 4, "desc" ]],
       "columns": [
         { data: 'ticketid', name: 'ticketid'},
         { data: 'customer_name', name: 'customer_name'},

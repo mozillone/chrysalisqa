@@ -140,15 +140,15 @@
 					<a href="/cart" type="button" class="navbar-toggle respnsive-ser-rm sell mbl_crt_icon" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 					</a>
-					<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+					<span type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 						<a href="<?php echo e(URL::to('conversations')); ?>" type="button" class=""><i class="fa fa-envelope" aria-hidden="true"></i></a>
-					</button>
-					<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+					</span>
+					<span type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 						<a data-toggle="modal" <?php if(!Auth::check()): ?> data-target="#login_popup" <?php else: ?> href="/dashboard" <?php endif; ?>><i class="fa fa-user" aria-hidden="true"></i></a>
-					</button>
-					<button type="button" class="navbar-toggle respnsive-ser-rm mb-searchs" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+					</span>
+					<span type="button" class="navbar-toggle respnsive-ser-rm mb-searchs" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 						<i class="fa fa-search"></i>
-					</button>
+					</span>
 					<a href="<?php echo e(URL::to('costume/sell-a-costume')); ?>" type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 						<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
 					</a>

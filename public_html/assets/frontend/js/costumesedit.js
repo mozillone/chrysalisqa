@@ -744,6 +744,8 @@ $(document).on("change", "#file1", function() {
                             viewMode:1,
                             aspectRatio: 3 / 5,
                             center:false,
+                            rotatable: true,
+                            checkOrientation: true,
                             data: {
                                 width: 198,
                                 height:298
@@ -830,6 +832,8 @@ $(document).on("change", "#file2", function() {
                             viewMode:1,
                             aspectRatio: 3 / 5,
                             center:false,
+                            rotatable: true,
+                            checkOrientation: true,
                             data: {
                                 width: 198,
                                 height:298
@@ -918,6 +922,8 @@ $(document).on("change", "#file3", function() {
                             viewMode:1,
                             aspectRatio: 3 / 5,
                             center:false,
+                            rotatable: true,
+                            checkOrientation: true,
                             data: {
                                 width: 198,
                                 height:298
@@ -1080,6 +1086,8 @@ $("#upload-file-selector").on("change",function () {
                             viewMode:1,
                             aspectRatio: 3 / 5,
                             center: false,
+                            rotatable: true,
+                            checkOrientation: true,
                             data: {
                                 width: 198,
                                 height: 298
