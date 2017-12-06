@@ -428,7 +428,7 @@ ul.bxslider li{height:100%;cursor:pointer;min-height:650px;overflow:hidden;backg
 .img-pp-iner input#zoom-level{height:auto;}
 .img-pp-iner input#zoom-level2{height:auto;}
 .img-pp-iner input#zoom-level3{height:auto;}
-.upload-photo-blogs .up-blog img{background:#fff;}
+.upload-photo-blogs .up-blog img{background:transparent;}
 span#max_length_char1{line-height:38px;}
 .bx-wrapper{width:100%;border:none!important;box-shadow:none!important;padding:0px!important;}
 .bx-wrapper.bx-wrapper-rm .bx-pager.bx-default-pager{display:none;}
