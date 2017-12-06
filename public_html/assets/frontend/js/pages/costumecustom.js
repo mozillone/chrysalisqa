@@ -619,11 +619,19 @@ $(function(){
                             });
                         }, 1000);
 
-                        $(document).on("change", "#zoom-level3", function() {
+                        /*$(document).on("change", "#zoom-level3", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
-                        });
+                        });*/
+                            var html = document.getElementsByTagName("html")[0];
+                            var slider1 = document.getElementById("zoom-level3");
+                            var input = (html.classList.contains("ie")) ? "change" : "input";
+                            slider1.addEventListener(input, function () {
+                                $image.cropper('zoomTo', 0.1);
+                                var current_zoom = $(this).val();
+                                $image.cropper('zoom', current_zoom);
+                            });
                         $(document).on("click", "#crop3", function() {
                             $("#myModal3").modal('hide');
                             var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
@@ -1083,13 +1091,18 @@ $(function(){
             alert('select Proper Image');
         }
     });
-
-    $(document).on("change", ".slider", function () {
+    var html = document.getElementsByTagName("html")[0];
+    var slider1 = document.getElementsByClassName("slider")[0];
+    var input = (html.classList.contains("ie")) ? "change" : "input";
+    slider1.addEventListener(input, function () {
         $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
         var current_zoom = $(this).val();
         zooms[activeCropperObjIndex] = current_zoom;
         $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
     });
+   /* $(document).on(input, ".slider", function () {
+        
+    });*/
 
     $(document).on("click", ".saveMultiple", function () {
         $cropper_objs.forEach(function($image, index){
