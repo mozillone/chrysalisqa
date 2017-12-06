@@ -397,10 +397,11 @@ $(function(){
                     var reader = new FileReader();
                     
                     reader.onload = function (e) {
-                        $("<img src='' class='result' >").insertAfter("#file1");
+                        
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
+                        //$("<img src='' class='result' >").insertAfter("div #file1");
                         var image = img.attr("src", e.target.result);
                         carouselItems.append(image);
                         dvPreview.append(carouselItems);
@@ -476,7 +477,7 @@ $(function(){
 
     //second file image code starts here
     $(document).on("change", "#file2", function() {
-         $("#zoom-level2").val('');
+        $("#zoom-level2").val('');
         $(".modal-footer").show();
         var imgVal = $(this).val();
         if (imgVal != "") {
@@ -565,7 +566,7 @@ $(function(){
     //additional file uoploading functionality
 
     $(document).on("change", "#file3", function() {
-         $("#zoom-level3").val('');
+        $("#zoom-level3").val('');
         $(".modal-footer").show();
         var imgVal = $(this).val();
         if (imgVal != "") {
@@ -648,7 +649,7 @@ $(function(){
     //remove hidden seleted pic and file input base 64 data
     $(document).on("click", ".remove_pic", function() {
         $(this).siblings().find('img').attr('src', '').removeAttr('style');
-        $(this).siblings().find('img').remove();
+        $(this).siblings().find('img').addClass('hidden');
         $(this).siblings().find("input[type='hidden']").val('');
         $(this).siblings().find("input[type='file']").show();
     });

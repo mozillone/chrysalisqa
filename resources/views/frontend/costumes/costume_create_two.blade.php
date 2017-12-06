@@ -358,6 +358,7 @@
 									<div class="up-blog">
 										<input type="file" name="file1" accept="image/*" id="file1" >
 										<input type="hidden" class="modalOpen1" name="Imagecrop1">
+										<img src="" class="result" >
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 									</div>
 									<span id="file1_error" style="color:red"></span>
