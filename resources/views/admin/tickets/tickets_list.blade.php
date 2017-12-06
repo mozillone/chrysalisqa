@@ -54,8 +54,8 @@
                   <tbody>
                     <tr>
                       <input type="hidden" name="token" id="token" value='{{ csrf_field()}}'>
-                       <td><input type="text" class="form-control"  name="keyword" id="keyword" ></td>
-                      <td><input type="text" class="form-control"  name="customername"  id="customername"></td>
+                       <td><input type="text" class="form-control"  name="keyword" id="keyword" placeholder="keywords"></td>
+                      <td><input type="text" class="form-control"  name="customername"  id="customername" placeholder="Customer Name"></td>
                      
                       <td>
                         <select  class="form-control" name="ticket_type" id="ticket_type" >
