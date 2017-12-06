@@ -383,6 +383,7 @@ $(function(){
     });
     //front view image adding code here
     $(document).on("change", "#file1", function() {
+
         $("#zoom-level").val('');
         $(".modal-footer").show();
         var imgdata = '';
@@ -442,7 +443,8 @@ $(function(){
                             $("img").mousedown(function(){
                             return false;
                         });
-                           $(document).on("input", "#zoom-level", function() {
+   
+                        $(document).on("input", "#zoom-level", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -488,6 +490,8 @@ $(function(){
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
+                        //var image = img.attr("src", e.target.result);
+                        
                         var image = img.attr("src", e.target.result);
                         carouselItems.append(image);
                         dvPreview.append(carouselItems);
@@ -645,6 +649,7 @@ $(function(){
         $(this).siblings().find('img').attr('src', '').removeAttr('style');
         $(this).siblings().find("input[type='hidden']").val('');
         $(this).siblings().find("input[type='file']").show();
+    $(this).siblings().find('img').attr('src', '').removeAttr('style');
     });
 
     $(document).on("click", "#cancel1", function() {
