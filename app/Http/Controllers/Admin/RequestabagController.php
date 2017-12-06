@@ -303,7 +303,7 @@ class RequestabagController extends Controller
 	                }else{
 	                	$error = $single_payout['output'];
 	                	$er = json_decode($error);
-	                	$err_msg = $er->error_description;
+	                	$err_msg = $er->name;
 	                	try{
 	                		$insert_arr = array(
 								"user_id" => $get_user_id->user_id,
