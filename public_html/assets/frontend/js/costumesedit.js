@@ -758,7 +758,7 @@ $(document).on("change", "#file1", function() {
                         });
                     }, 1000);
 
-                    $(document).on("change", "#zoom-level", function() {
+                    $(document).on("input", "#zoom-level", function() {
                         $image.cropper('zoomTo', 0.1);
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
@@ -844,7 +844,7 @@ $(document).on("change", "#file2", function() {
                         });
                     }, 1000);
 
-                    $(document).on("change", "#zoom-level2", function() {
+                    $(document).on("input", "#zoom-level2", function() {
                         $image.cropper('zoomTo', 0.1);
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
@@ -932,7 +932,7 @@ $(document).on("change", "#file3", function() {
                         });
                     }, 1000);
 
-                    $(document).on("change", "#zoom-level3", function() {
+                    $(document).on("input", "#zoom-level3", function() {
                         $image.cropper('zoomTo', 0.1);
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
@@ -1107,7 +1107,7 @@ $("#upload-file-selector").on("change",function () {
     }
 });
 
-$(document).on("change", ".slider", function () {
+$(document).on("input", ".slider", function () {
     $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
     var current_zoom = $(this).val();
     zooms[activeCropperObjIndex] = current_zoom;

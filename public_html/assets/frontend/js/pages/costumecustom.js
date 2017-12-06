@@ -444,9 +444,8 @@ $(function(){
                         $("img").mousedown(function(){
                             return false;
                         });
-                        var ua = window.navigator.userAgent;
-                        var msie = ua.indexOf("MSIE ");
-                        $(document).on(msie > 0 ? "change":"input", "#zoom-level", function() {
+                        
+                        $(document).on("input", "#zoom-level", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -533,7 +532,7 @@ $(function(){
                             });
                         }, 1000);
 
-                        $(document).on("change", "#zoom-level2", function() {
+                        $(document).on("input", "#zoom-level2", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -620,7 +619,7 @@ $(function(){
                             });
                         }, 1000);
 
-                        $(document).on("change", "#zoom-level3", function() {
+                        $(document).on("input", "#zoom-level3", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -1087,9 +1086,7 @@ $(function(){
             alert('select Proper Image');
         }
     });
-    var ua = window.navigator.userAgent;
-    var msie = ua.indexOf("MSIE ");
-    $(document).on(msie > 0 ? "change":"input", ".slider", function () {
+    $(document).on("input", ".slider", function () {
         $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
         var current_zoom = $(this).val();
         zooms[activeCropperObjIndex] = current_zoom;
