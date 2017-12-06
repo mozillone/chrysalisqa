@@ -397,7 +397,7 @@ $(function(){
                     var reader = new FileReader();
                     
                     reader.onload = function (e) {
-
+                        $("<img src='' class='result' >").insertAfter("#file1");
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
@@ -490,6 +490,8 @@ $(function(){
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
+                        //var image = img.attr("src", e.target.result);
+                        
                         var image = img.attr("src", e.target.result);
                         carouselItems.append(image);
                         dvPreview.append(carouselItems);
@@ -645,6 +647,7 @@ $(function(){
     //remove hidden seleted pic and file input base 64 data
     $(document).on("click", ".remove_pic", function() {
         $(this).siblings().find('img').attr('src', '').removeAttr('style');
+        $(this).siblings().find('img').remove();
         $(this).siblings().find("input[type='hidden']").val('');
         $(this).siblings().find("input[type='file']").show();
     });

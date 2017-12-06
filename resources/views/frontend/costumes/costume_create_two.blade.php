@@ -355,10 +355,9 @@
 									<span class="remove_pic" id="drag_n_drop_1" style="display: none;" >
 										<i class="fa fa-times-circle" aria-hidden="true"></i>
 									</span>
-									<div class=" up-blog">
+									<div class="up-blog">
 										<input type="file" name="file1" accept="image/*" id="file1" >
 										<input type="hidden" class="modalOpen1" name="Imagecrop1">
-										<img src="" class="result" >
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 									</div>
 									<span id="file1_error" style="color:red"></span>
