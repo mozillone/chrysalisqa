@@ -81,6 +81,10 @@ class PayPalPayout
       $final_output['status'] = 0;
       $final_output['output'] = $ex->getData();
       $api_data['api_response'] = json_encode($ex->getData());    
+    }catch (\PayPal\Exception\PayPalInvalidCredentialException $ex) {
+      $final_output['status'] = 0;
+      $final_output['output'] = $ex->getData();
+      $api_data['api_response'] = json_encode($ex->getData());    
     }catch (\Exception $ex) {
       $final_output['status'] = 0;
       $final_output['output'] = $ex->getMessage();
@@ -88,7 +92,8 @@ class PayPalPayout
     }
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
     //echo $output;die;
-    //$a = DB::table('api_log')->insert($api_data);
+    $a = DB::table('api_log')->insert($api_data);
+
           Log::info($final_output['output']);
 
     $insertin_log = Site_model::insert_get_id('api_log',$api_data);

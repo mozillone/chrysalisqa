@@ -259,9 +259,7 @@ class RequestabagController extends Controller
                 //Log::info($userObj->paypal_email);
                 if(!empty($userObj->paypal_email)){
                     $single_payout  = PaypalPayout::SinglePayout($userObj->paypal_email,$request->payout_amount);
-                    Log::info($single_payout);
                     if($single_payout['status'] == 1){
-                    	Log::info('if');
                 		$output = $single_payout['output'];
 						$payout_batch_id = $output->batch_header->payout_batch_id;
 	                    $batch_status    = $output->batch_header->batch_status;
@@ -303,19 +301,24 @@ class RequestabagController extends Controller
 						]);
 						/*Storing Status In Logs Ends Here*/
 	                }else{
-	                	Log::info('else');
 	                	$error = $single_payout['output'];
+	                	$er = json_decode($error);
+	                	$err_msg = $er->error_description;
+	                	try{
+	                		$insert_arr = array(
+								"user_id" => $get_user_id->user_id,
+								"bag_id" => $request->type_id,
+								"process" => "Payout",
+								"status" => $error,
+								"created_at" => Carbon::now());
+	                		DB::table("reqbag_status_log")->insert($insert_arr);	
+	                	}catch(\Exeception $e){
+	                		Log::info($e);
+	                	}
 	                	/*Storing Status In Logs Starts Here*/
-						DB::table("reqbag_status_log")->insert([
-							"user_id" => $get_user_id->user_id,
-							"bag_id" => $request->type_id,
-							"process" => "Payout",
-							"status" => $error,
-							"created_at" => Carbon::now()
-						]);
+							
 						/*Storing Status In Logs Ends Here*/
-                		//\Session::flash('error', $error);
-                		return response()->json(['error' => $error],400);
+                		return response()->json(['error' => $er->error_description],400);
 	                }
                 }else{
                     return response()->json(['error' => 'please update paypal email in your dashboard.'], 404);

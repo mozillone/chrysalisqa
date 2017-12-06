@@ -443,7 +443,7 @@ function PayoutAmount(a){
 	            $("#req_payout_err_msg").html('');
 	            $("#req_payout_err_msg").hide();
 	        },
-	       	error: function(request, status, error) {	       		
+	       	error: function(request, status, error) {
 	            loading = false;
 	            $("#req_payout_sub_msg").hide();
 	            $("#req_payout_err_msg").html(request.responseText);

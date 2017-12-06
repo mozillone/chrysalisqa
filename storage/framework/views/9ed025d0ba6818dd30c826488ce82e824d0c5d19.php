@@ -27,7 +27,7 @@
     <th style="color:#6a2b7c;"><h5 style="margin:0px auto 20px; padding:0px; font-size:22px; display:block;">Your Chrysalis order has been received.</h5></th>
 </tr>
 <tr>
-    <td style="color:#000;"><p style="margin:0px auto 20px; padding:0px; font-size:16px; display:block;"><span style="text-decoration:underline; color:#f53d68;"><?php echo e($mail_order['seller_name']); ?></span> has been notified of your order and<br/>you will be notofied as soon as she responds.<br/>Don't forget You can view your order status and history at any time by visiting <a href="<?php echo e(URL::to('/login')); ?>"><span style="text-decoration:underline; color:#f53d68;">My Account.</span></a></p></td>
+    <td style="color:#000;"><p style="margin:0px auto 20px; padding:0px; font-size:16px; display:block;"><span style="text-decoration:underline; color:#f53d68;"><?php echo e($mail_order['seller_name']); ?></span> has been notified of your order and<br/>you will be notified as soon as they respond.<br/>Don't forget You can view your order status and history at any time by visiting <a href="<?php echo e(URL::to('/login')); ?>"><span style="text-decoration:underline; color:#f53d68;">My Account.</span></a></p></td>
 </tr>
 <tr>
     <td style="color:#000;">
@@ -139,23 +139,25 @@ border: 0px; border-radius: 5px; font-size: 16px; cursor:pointer; margin: 20px a
 
 <table style="margin:0 auto; font-size:13px; margin-bottom:30px;">
     <tr>
-        <td>If you have any questions, do not hesitate to <span style="color:#f53d68; text-decoration:underline;">reach out!</span></td>
+        <td>If you have any questions, do not hesitate to <a href="<?php echo e(URL::to('/contact-support')); ?>"><span style="color:#f53d68; text-decoration:underline;">reach out!</span></a></td>
     </tr>
 </table>
 <table style="text-align:center;margin:0 auto; padding:15px 0px; font-size:13px; margin-bottom:0px; background:#f6f9fb; width:600px; border-bottom:1.5px solid #ddd;">
 <tbody>
     <tr>
-        <td><a style="padding:0px 10px" href="https://www.facebook.com/Chrysalis-Costumes-1571674966183606/"><img src="https://image.ibb.co/iPORQv/group_211.png" alt="group_211" border="0"></a>
-        <a style="padding:0px 10px" href="https://imgbb.com/"><img src="https://image.ibb.co/jCEpdF/group_212.png" alt="group_212" border="0"></a>
-        <a style="padding:0px 10px" href="https://www.instagram.com/chrysaliscostumes/?hl=en%2F"><img src="https://image.ibb.co/mGSWsa/group_214.png" alt="group_214" border="0"></a>
-        <a  style="padding:0px 10px" href="https://imgbb.com/"><img src="https://image.ibb.co/kABfkv/group_233.png" alt="group_233" border="0"></a></td>
+
+       <td><a style="padding:0px 10px" href="https://twitter.com/MaxGarweg"><img src="<?php echo e(asset('/assets/frontend/img/twitter_email.png')); ?>" alt="twitter" border="0"></a>
+
+            <a style="padding:0px 10px" href="https://www.facebook.com/Chrysalis-Costumes-1571674966183606/"><img src="<?php echo e(asset('/assets/frontend/img/facebook_email.png')); ?>" alt="facebook" border="0"></a>
+            <a style="padding:0px 10px" href="https://www.instagram.com/chrysaliscostumes/?hl=en%2F"><img src="<?php echo e(asset('/assets/frontend/img/insta_email.png')); ?>" alt="instagram" border="0"></a>
+            <a style="padding:0px 10px" href="https://www.youtube.com/channel/UCZgeZrAV1UCoCXSWd75DNsw"><img src="<?php echo e(asset('/assets/frontend/img/youtube_email.png')); ?>" alt="youtube" border="0"></a></td>
     </tr>   
 </tbody>
 </table>
 <table style="text-align:center;margin:0 auto; padding:5px 0px; font-size:13px; margin-bottom:30px; background:#f6f9fb; width:600px;">
 <tbody>
     <tr>
-        <td>&copy; 2017 <span style="padding:0px 10px;">|</span> Chrysalis</td>
+        <td><p>© 2017 CHRYSALIS. ALL RIGHTS RESERVED​​​​​​​ | <a href="<?php echo e(URL::to('/pages/terms-of-use/')); ?>" style="color: #000;">TERMS OF USE</a> | <a href="<?php echo e(URL::to('/pages/privacy-policy/')); ?>" style="color: #000;"> PRIVACY POLICY </a></p></td>
     </tr>   
 </tbody>
 </table>
