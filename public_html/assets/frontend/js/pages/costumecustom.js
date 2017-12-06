@@ -380,7 +380,8 @@ $(function(){
         $('#preferences_div').css('display', 'none');
     });
     //front view image adding code here
-    $(document).on("change", "#file1", function(evt) {
+    $(document).on("change", "#file1", function() {
+
         $("#zoom-level").val('');
         $(".modal-footer").show();
         var imgdata = '';
@@ -396,7 +397,7 @@ $(function(){
                     var reader = new FileReader();
                     
                     reader.onload = function (e) {
-
+                        $("<img src='' class='result' >").insertAfter("#file1");
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
@@ -443,7 +444,9 @@ $(function(){
                         $("img").mousedown(function(){
                             return false;
                         });
-                        $(document).on("input", "#zoom-level", function() {
+                        var ua = window.navigator.userAgent;
+                        var msie = ua.indexOf("MSIE ");
+                        $(document).on(msie > 0 ? "change":"input", "#zoom-level", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -489,6 +492,8 @@ $(function(){
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
+                        //var image = img.attr("src", e.target.result);
+                        
                         var image = img.attr("src", e.target.result);
                         carouselItems.append(image);
                         dvPreview.append(carouselItems);
@@ -528,7 +533,7 @@ $(function(){
                             });
                         }, 1000);
 
-                        $(document).on("input", "#zoom-level2", function() {
+                        $(document).on("change", "#zoom-level2", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -615,19 +620,11 @@ $(function(){
                             });
                         }, 1000);
 
-                        /*$(document).on("change", "#zoom-level3", function() {
+                        $(document).on("change", "#zoom-level3", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
-                        });*/
-                            var html = document.getElementsByTagName("html")[0];
-                            var slider1 = document.getElementById("zoom-level3");
-                            var input = (html.classList.contains("ie")) ? "change" : "input";
-                            slider1.addEventListener(input, function () {
-                                $image.cropper('zoomTo', 0.1);
-                                var current_zoom = $(this).val();
-                                $image.cropper('zoom', current_zoom);
-                            });
+                        });
                         $(document).on("click", "#crop3", function() {
                             $("#myModal3").modal('hide');
                             var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
@@ -652,6 +649,7 @@ $(function(){
     //remove hidden seleted pic and file input base 64 data
     $(document).on("click", ".remove_pic", function() {
         $(this).siblings().find('img').attr('src', '').removeAttr('style');
+        $(this).siblings().find('img').remove();
         $(this).siblings().find("input[type='hidden']").val('');
         $(this).siblings().find("input[type='file']").show();
     });
@@ -1086,19 +1084,14 @@ $(function(){
             alert('select Proper Image');
         }
     });
-
-    var html = document.getElementsByTagName("html")[0];
-    var slider1 = document.getElementsByClassName("slider")[0];
-    var input = (html.classList.contains("ie")) ? "change" : "input";
-    slider1.addEventListener(input, function () {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+    $(document).on(msie > 0 ? "change":"input", ".slider", function () {
         $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
         var current_zoom = $(this).val();
         zooms[activeCropperObjIndex] = current_zoom;
         $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
     });
-   /* $(document).on(input, ".slider", function () {
-        
-    });*/
 
     $(document).on("click", ".saveMultiple", function () {
         $cropper_objs.forEach(function($image, index){
