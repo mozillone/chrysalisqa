@@ -1084,7 +1084,7 @@ $(function(){
         }
     });
 
-    $(document).on("input", ".slider", function () {
+    $(document).on("change", ".slider", function () {
         $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
         var current_zoom = $(this).val();
         zooms[activeCropperObjIndex] = current_zoom;
