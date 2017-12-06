@@ -52,6 +52,7 @@ margin: 0px;
 	@else
 		<?php 	$return_html = ""; ?>
 	@endif
+	
 <section class="content-header">
 <h1>Manage Request A Bag</h1>
 <ol class="breadcrumb">
