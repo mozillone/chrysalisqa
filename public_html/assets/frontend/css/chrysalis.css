@@ -3043,7 +3043,7 @@ and (orientation:portrait){
 }
 @media only screen and (min-width:768px) and (max-width:991px){
 	/* 06 Dec Start */
-	.pagination_btm{position:absolute;left:5px;top:70px;}
+	.pagination_btm{position:absolute;left:5px;top:70px !important;}
 	/*  End */
 	.pckge_info p.form-rms-que{margin-top:15px;font-size:16px;}
 
