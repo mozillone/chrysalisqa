@@ -643,7 +643,10 @@ $(function(){
 
     //remove hidden seleted pic and file input base 64 data
     $(document).on("click", ".remove_pic", function() {
-        $(this).siblings().find('img').attr('src', '').removeAttr('style');
+        var ele = $(this).siblings();
+        ele.find('img').attr('src','');
+        ele.find('img').removeAttr('style');
+        //$(this).siblings().find('img').attr('src', '').removeAttr('style');
         $(this).siblings().find("input[type='hidden']").val('');
         $(this).siblings().find("input[type='file']").show();
     });
