@@ -12,7 +12,10 @@ use Redirect;
 use App\Conversations;
 use Session;
 use DB;
+use URL;
 use Meta;
+use App\Helpers\SiteHelper;
+
 class MessageController extends Controller
 {
     protected $auth;
@@ -27,7 +30,7 @@ class MessageController extends Controller
                  return $next($request);
             }
         });
-
+        $this->sitehelper = new SiteHelper();
         Meta::title('Chrysalis');
         Meta::set('robots', 'index,follow');
         
@@ -95,19 +98,19 @@ class MessageController extends Controller
     public function sendMessageByUserId($receiverId, $message)
     {
          //echo "<pre>";print_r($message);die;
+        $comments = $message['message-data'];
         $conversationId = $message['_id'];
-        $message = $message['message-data'];
+        $user_message = $message['message-data'];
         $message = array(
-            'message' => $message,
+            'message' => $user_message,
             'conversation_id' => $conversationId,
             'user_id' => Auth::user()->id,
             'user_name' => Auth::user()->display_name,
             'is_seen' => 0,
             'created_at'=>date('y-m-d H:i:s'),
         );
-
         $message = DB::table('messages')->insertGetId($message);
-         $get_details =  DB::table('messages')->where('id',$message)->first();  
+        $get_details =  DB::table('messages')->where('id',$message)->first();  
 
         return $get_details;
     }

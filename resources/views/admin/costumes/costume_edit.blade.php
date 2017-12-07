@@ -1369,7 +1369,7 @@ if($("#size").val() == "custom"){
 			    $('input[name=hidden]').attr('value','');
 			    $(".Backview").attr('value','');
 			    $(".drop_uploader").addClass('Front1');
-
+			    $("input[name=Imagecrop1]").attr('data-id',"");
 			    swal("Deleted!", "Your imaginary file has been deleted.", "success");
 			  } else {
 			    swal("Cancelled", "Your imaginary file is safe :)", "error");
@@ -1425,6 +1425,7 @@ if($("#size").val() == "custom"){
 				    $('input[name=file2]').val('');
 				    $('input[name=hidden]').attr('value','');
 				    $(".drop_uploader").addClass('Back1');
+				    $("input[name=Imagecrop2]").attr('data-id',"");
 
 					swal("Deleted!", "Your imaginary file has been deleted.", "success");
 				}
@@ -1478,6 +1479,7 @@ if($("#size").val() == "custom"){
 				    $('input[name=file3]').val('');
 				    $('input[name=file3]').attr('value','');
 				    $(".drop_uploader").addClass('additional');
+				    $("input[name=Imagecrop3]").attr('data-id',"");
 
 					swal("Deleted!", "Your imaginary file has been deleted.", "success");
 				}
