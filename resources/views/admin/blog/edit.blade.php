@@ -13,9 +13,13 @@
     <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
     <link rel="stylesheet" href="{{ asset('/assets/admin/css/selectize.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/admin/css/selectize.default.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/taginput/bootstrap-tagsinput.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/admin/css/selectize.bootstrap3.css') }}">
     <script src="{{ asset('/assets/admin/js/fileinput.js') }}"></script>
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+    <style type="text/css">
+        .bootstrap-tagsinput .label-info{background-color: #5fc5ac !important;}
+    </style>
 
 @stop
 
@@ -56,7 +60,7 @@
                             </div>
                         @endif
 
-                        <form id="edit_blog_post" class="form-horizontal defult-form" name="addCmsPage" action="/update-blog-post/{{ $blogPost->id }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                        <form id="add_blog_post" class="form-horizontal defult-form" name="addCmsPage" action="/update-blog-post/{{ $blogPost->id }}" method="POST" autocomplete="off" enctype="multipart/form-data">
 
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="posted_by" value="{{ $blogPost->posted_by }}">
@@ -80,7 +84,7 @@
 
                                     <div class="form-group has-feedback">
                                         <label for="blog_image" class="control-label image-label">Upload<span class="req-field" >*</span></label>
-                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="fileupload fileupload-new rmvimg" data-provides="fileupload">
                                             <?php
                                                 $blogImage = $blogPost->img;
                                                 $filesource = null;
@@ -99,9 +103,12 @@
 
                                             ?>
                                             <img  src="<?=$filesource?>" class="img-pview img-responsive" id="img-chan" name="img-chan">
-                                            <span class="remove_pic">
+                                            @if(isset($filesource))
+                                             <span class="remove_pic" id="removeImg">
                                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                                             </span>
+                                            @endif
+                                           
 
                                             <span class="btn btn-default btn-file">
                                                 <span class="fileupload-new" style="float:right">Upload Photo</span>
@@ -169,7 +176,7 @@
 
                     <div class="box-footer">
                         <div class="pull-right">
-                            <a href="/cms-pages" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
+                            <a href="/blog-posts" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
                             <button type="submit" class="btn btn-info pull-right save-page">Update</button>
                         </div>
                     </div>
@@ -210,6 +217,7 @@
     <script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
     <script src="{{asset('ckeditor/ckeditor/ckeditor.js')}}"></script>
     <script src="{{ asset('/assets/admin/js/selectize.js') }}"></script>
+    <script src="{{ asset('/assets/admin/vendors/taginput/bootstrap-tagsinput.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -221,7 +229,8 @@
             var categoryId = '<?=(($blogPost->category_id == 0) ? '' : $blogPost->category_id);?>';
             $("input[name=category][value="+categoryId+"]").prop("checked", true);
 
-            $('#blog-tags').selectize({
+            $("#blog-tags").tagsinput({maxChars: 50,maxTags: 10});
+            /*$('#blog-tags').selectize({
                 delimiter: ',',
                 persist: false,
                 create: function(input) {
@@ -230,7 +239,7 @@
                         text: input
                     }
                 }
-            });
+            });*/
 
             $('.save-category').on('click', function () {
                 var categoryName = $('#blogCategory').val();

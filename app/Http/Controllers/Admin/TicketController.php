@@ -309,11 +309,11 @@ public function insertSupportMessage(Request $request){
 
 
           /*****Mail to admin code starts here****/
-          $sent=Mail::send('emails.tickets_status',array("data"=>$all_data), function ($message) use($req) {
+          /*$sent=Mail::send('emails.tickets_status',array("data"=>$all_data), function ($message) use($req) {
               $mailTo = config('services.chyrsalis_mail_add.support_email');
           $message->to($mailTo);
           $message->subject('Tickets');
-          });
+          });*/
           /*****Mail to support users code starts here****/
           $support_email = $ticket_details->support_email;
           $sent=Mail::send('emails.ticket_assigned',array("data"=>$all_data), function ($message) use($support_email) {

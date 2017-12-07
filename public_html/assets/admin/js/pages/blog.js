@@ -2,7 +2,7 @@ $(function(){
 
 
     $("#add_blog_post").validate({
-        onfocusout: function(element) { $(element).valid(); },
+        /*onfocusout: function(element) { $(element).valid(); },*/
         rules: {
             title:{
                 required: true,
@@ -203,7 +203,8 @@ $(function(){
         var imgPath = $(this)[0].value;
         var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
         var image_holder = $("#img-chan");
-        image_holder.empty();
+        //image_holder.empty();
+        $(".rmvimg").append('<span class="remove_pic" id="removeImg"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
         var size = parseFloat($("#blog_image")[0].files[0].size / 1024).toFixed(2);
         if (extn == "jpg" || extn == "jpeg" || extn == "png") {
             if(size<10000)
@@ -258,6 +259,13 @@ $(function(){
         $('#img-chan').attr('src',"/blog_images/preview_placeholder.png");
         $('input[type="file"]').val('');
         $('input[name="imageExists"]').val("removed");
+        $("#removeImg").remove();
+    });
+    $(document).on('click','#removeImg',function(){
+        $('#img-chan').attr('src',"/blog_images/preview_placeholder.png");
+        $('input[type="file"]').val('');
+        $('input[name="imageExists"]').val("removed");
+        $("#removeImg").remove();
     });
 
 });
