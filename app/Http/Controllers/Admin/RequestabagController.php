@@ -302,23 +302,20 @@ class RequestabagController extends Controller
 						/*Storing Status In Logs Ends Here*/
 	                }else{
 	                	$error = $single_payout['output'];
-	                	$er = json_decode($error);
-	                	$err_msg = $er->name;
-	                	try{
-	                		$insert_arr = array(
-								"user_id" => $get_user_id->user_id,
-								"bag_id" => $request->type_id,
-								"process" => "Payout",
-								"status" => $error,
-								"created_at" => Carbon::now());
-	                		DB::table("reqbag_status_log")->insert($insert_arr);	
-	                	}catch(\Exeception $e){
-	                		Log::info($e);
-	                	}
+	                	$err = json_decode($error);
+	                	$err_msg = $err->name;
 	                	/*Storing Status In Logs Starts Here*/
-							
+						DB::table("reqbag_status_log")->insert([
+							"user_id" => $get_user_id->user_id,
+							"bag_id" => $request->type_id,
+							"process" => "Payout",
+							"status" => $error,
+							"created_at" => Carbon::now()
+						]);
+						DB::commit();
 						/*Storing Status In Logs Ends Here*/
-                		return response()->json(['error' => $er->error_description],400);
+                		//\Session::flash('error', $error);
+                		return response()->json(['error' => $err_msg],400);
 	                }
                 }else{
                     return response()->json(['error' => 'please update paypal email in your dashboard.'], 404);
