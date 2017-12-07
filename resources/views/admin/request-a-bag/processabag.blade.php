@@ -229,7 +229,7 @@ print_r($all_data);die;*/
 
 		                            <input type="text" name="payout_amount" id="payout_amount" placeholder="Amount">
 		                            <div id="payout_amount_error" style="color:red"></div>
-		                            <a style="margin-top: 10px"  class="btn btn-primary submit" onclick="PayoutAmount()">Save</a>
+		                            <a style="margin-top: 10px" class="btn btn-primary submit" onclick="PayoutAmount()">Save</a>
 		                        </div>
 	                        	<div id="req_payout_sub_msg" style="display:none;">submitting...</div>
 	                        	<div id="req_payout_err_msg" style="display:none;"></div>
@@ -401,10 +401,13 @@ document.getElementById("message_theard").value = "";
 window.onload = init;
 var loading = false;
 
-$('#payout_amount,#return_amount').keypress(function(event) {
-  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-    event.preventDefault();
-  }
+$('#payout_amount,#return_amount').keypress(function(evt) {
+	evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)&&(evt.which != 46 || $('#refAmount').val().indexOf('.') != -1)) {
+        return false;
+    }
+    return true;
 });
 
 function PayoutAmount(a){
@@ -426,7 +429,6 @@ function PayoutAmount(a){
 		$('#payout_amount_error').html('This field is required.');
 		str=false;
 	}
-            
     if (loading) {
         return ;
     }
