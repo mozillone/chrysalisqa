@@ -679,7 +679,7 @@ class OrdersController extends Controller {
     public function orderTransactionsData(Request $request,$order_id)
     {
        $req=$request->all();   
-        $transactions = DB::select('SELECT id,CONCAT(UCASE(LEFT(type, 1)), SUBSTRING(type, 2)) as transaction_type,CONCAT(UCASE(LEFT(status, 1)), SUBSTRING(status, 2)) as transaction_status,DATE_FORMAT(created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",FORMAT(amount,2)) as price  FROM `cc_transactions` WHERE `order_id`='.$order_id.' ORDER BY `id` DESC');
+        $transactions = DB::select('SELECT id,CONCAT(UCASE(LEFT(type, 1)), SUBSTRING(type, 2)) as transaction_type,CONCAT(UCASE(LEFT(status, 1)), SUBSTRING(status, 2)) as transaction_status,DATE_FORMAT(created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",FORMAT(amount,2)) as price  FROM `cc_transactions` WHERE `order_id`='.$order_id.'GROUP BY order_id ORDER BY `id` DESC');
         return response()->success(compact('transactions'));
   
     }
@@ -690,8 +690,8 @@ class OrdersController extends Controller {
         $where='where cst.created_by='.Auth::user()->id.' and cst.deleted_status = 0 ';
         $having='';
         if(!empty($req['search'])){
-           if(!empty($req['search']['costume_name']) ){
-              $where.=' AND dscr.name LIKE "%'.$req['search']['costume_name'].'%"';
+          if(!empty($req['search']['costume_name']) ){
+            $where.=' AND dscr.name LIKE "%'.$req['search']['costume_name'].'%"';
           }
           if (!empty($req['search']['from_date'])) {
             $where .= ' AND  cst.created_at >="'.date('Y-m-d 00:00:01', strtotime($req['search']['from_date'])).'"';
@@ -700,10 +700,10 @@ class OrdersController extends Controller {
             $where .= ' AND  cst.created_at  <= "'.date('Y-m-d 23:59:59', strtotime($req['search']['date_end'])).'"';
           }
           if(isset($req['search']['status'])){
-          if($req['search']['status']!=""){
-              $where.=' AND cst.status="'.$req['search']['status'].'"';
+            if($req['search']['status']!=""){
+                $where.=' AND cst.status="'.$req['search']['status'].'"';
+            }
           }
-        }
         }
        $my_costumes = DB::Select('SELECT cst.costume_id,dscr.name,CONCAT(UCASE(LEFT(cst.status, 1)),LCASE(SUBSTRING(cst.status, 2))) as status,DATE_FORMAT(cst.created_at,"%m/%d/%Y %h:%i:%s") as date from cc_costumes as cst LEFT JOIN cc_costume_description as dscr on dscr.costume_id=cst.costume_id '.$where.'');
         return response()->success(compact('my_costumes'));
