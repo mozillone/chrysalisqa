@@ -449,6 +449,11 @@ $(function(){
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+                        $(document).on("change", "#zoom-level", function() {
+                            $image.cropper('zoomTo', 0.1);
+                            var current_zoom = $(this).val();
+                            $image.cropper('zoom', current_zoom);
+                        });
                         $(document).on("click", "#crop", function() {
                             $("#myModal").modal('hide');
                             imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);                         
@@ -536,6 +541,11 @@ $(function(){
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+                        $(document).on("change", "#zoom-level2", function() {
+                            $image.cropper('zoomTo', 0.1);
+                            var current_zoom = $(this).val();
+                            $image.cropper('zoom', current_zoom);
+                        });
 
                         $(document).on("click", "#crop2", function() {
                             $("#myModal2").modal('hide');
@@ -619,6 +629,11 @@ $(function(){
                         }, 1000);
 
                         $(document).on("input", "#zoom-level3", function() {
+                            $image.cropper('zoomTo', 0.1);
+                            var current_zoom = $(this).val();
+                            $image.cropper('zoom', current_zoom);
+                        });
+                        $(document).on("change", "#zoom-level3", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
@@ -1084,6 +1099,12 @@ $(function(){
     });
 
     $(document).on("input", ".slider", function () {
+        $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
+        var current_zoom = $(this).val();
+        zooms[activeCropperObjIndex] = current_zoom;
+        $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
+    });
+    $(document).on("change", ".slider", function () {
         $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
         var current_zoom = $(this).val();
         zooms[activeCropperObjIndex] = current_zoom;
