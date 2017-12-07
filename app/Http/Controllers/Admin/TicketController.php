@@ -17,6 +17,7 @@ use Illuminate\Filesystem\Filesystem;
 use App\Costumes;
 use App\Helpers\Site_model;
 use Mail;
+use App\User;
 
 class TicketController extends Controller
 {
@@ -293,7 +294,7 @@ public function insertSupportMessage(Request $request){
         't.ticket_type as ticket_type',
         't.ticket_status as ticket_status',
         't.ticket_priority as ticket_priority',
-        'u.display_name as username'
+        'u.display_name as username','u.email as support_email'
         )
       ->where('t.id',$ticketid)->first();
       
@@ -313,6 +314,14 @@ public function insertSupportMessage(Request $request){
           $message->to($mailTo);
           $message->subject('Tickets');
           });
+          /*****Mail to support users code starts here****/
+          $support_email = $ticket_details->support_email;
+          $sent=Mail::send('emails.ticket_assigned',array("data"=>$all_data), function ($message) use($support_email) {
+          $message->to($support_email);
+          $message->subject('Tickets');
+          });
+          
+
       Session::flash('success', 'Ticket Assigned Successfully');
       return Redirect::back();
 
@@ -327,26 +336,46 @@ public function insertSupportMessage(Request $request){
   }
   /*****Update Support Message given by supporter***/
   public function updateSupportMessage(Request $request){
-     $req=$request->all();
-     $status=$request->status;
-     $ticketid=$request->ticketid;
-     $update_ticket = DB::table("tickets")->where("id",$ticketid)->update([
-        'ticket_status'=>$status,
-        'ticket_updateddate'=>date("Y-m-d H:i:s")
-      ]);
-     if($update_ticket){
+    $req=$request->all();
+    $status=$request->status;
+    $ticketid=$request->ticketid;
+    $update_ticket = DB::table("tickets")->where("id",$ticketid)->update([
+      'ticket_status'=>$status,
+      'ticket_updateddate'=>date("Y-m-d H:i:s")
+    ]);
+    if($update_ticket){
+      $ticket_details=DB::table('tickets as t')
+        ->leftJoin('users as u','u.id','=','t.ticket_assigned_to')
+        ->select('t.ticket_id as ticket_id',
+        't.order_id as order_id',
+        't.ticket_type as ticket_type',
+        't.ticket_status as ticket_status',
+        't.ticket_priority as ticket_priority',
+        'u.display_name as username','u.email as support_email'
+        )
+        ->where('t.id',$ticketid)->first();
+
+      $all_data = array();  
+      $all_data['ticket_id'] = $ticket_details->ticket_id;
+      $all_data['order_id'] = $ticket_details->order_id;
+      $all_data['ticket_type'] = $ticket_details->ticket_type;
+      $all_data['ticket_status'] = $ticket_details->ticket_status;
+      $all_data['ticket_priority']=$ticket_details->ticket_priority;
+      $all_data['username']=$ticket_details->username;
+
+      $sent=Mail::send('emails.tickets_status',array("data"=>$all_data), function ($message) use($req) {
+      $mailTo = config('services.chyrsalis_mail_add.support_email');
+      $message->to($mailTo);
+      $message->subject('Tickets');
+      });
       Session::flash('success', 'Status Updated Successfully');
       return "success";
-     }else{
+    }
+    else{
       Session::flash('success', 'Unable To Update Status');
       return "fail";
-      
-
     }
-
-  }
-
-    
+  } 
 }
 
 
