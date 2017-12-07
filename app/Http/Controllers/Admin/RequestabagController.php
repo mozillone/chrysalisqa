@@ -303,7 +303,14 @@ class RequestabagController extends Controller
 	                }else{
 	                	$error = $single_payout['output'];
 	                	$err = json_decode($error);
-	                	$err_msg = $err->name;
+	                	
+	                	if(isset($err->name)){
+	                		$err_msg = $err->name;
+	                	}else if(isset($err->error_description)){
+	                		$err_msg = $err->error_description;
+	                	}
+	                	
+	                	//$err_msg = $err->name;
 	                	/*Storing Status In Logs Starts Here*/
 						DB::table("reqbag_status_log")->insert([
 							"user_id" => $get_user_id->user_id,
@@ -331,6 +338,7 @@ class RequestabagController extends Controller
 			DB::commit();
 			return $this->data;
         }catch(\Exception $e){
+        	print_r($e->getMessage()); exit;
             DB::rollBack();
             /*Storing Status In Logs Starts Here*/
 			DB::table("reqbag_status_log")->insert([

@@ -400,6 +400,13 @@ document.getElementById("message_theard").value = "";
 }
 window.onload = init;
 var loading = false;
+
+$('#payout_amount,#return_amount').keypress(function(event) {
+  if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+    event.preventDefault();
+  }
+});
+
 function PayoutAmount(a){
 	str=true;
 	var payout_amount = $('#payout_amount').val();
