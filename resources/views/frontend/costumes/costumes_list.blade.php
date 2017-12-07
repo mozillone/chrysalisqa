@@ -45,7 +45,7 @@
 								<li data-gender="baby">Babies</li>
 							</ul>
 							
-							 <input type="hidden" name="search[gender]" id="gender_list_2" class="search search_gender"/>
+							 <input type="hidden" name="search[gender]" class="search"/>
 							
 						</div>
 						@endif
@@ -60,8 +60,9 @@
 								<li data-gender="girl">Girls</li>
 								<li data-gender="baby">Babies</li>
 							</ul>
-						  
-							 <input type="hidden" name="search[gender]" id="gender_list" class="search search_gender"/>
+
+							 <input type="hidden" name="search[gender]" class="search"/>
+
 						
 						</div>
 						@endif
@@ -357,6 +358,7 @@
 								{{ Session::get('success') }}
 							</div>
 						@endif
+                        
 						@if(count($costumes)>0)	
 						
 						<div id="filter-container">
@@ -364,7 +366,6 @@
 							<div class="row" id="">	
 						
 							@foreach($costumes as $costume)
-						  
 							<div class="col-md-3 col-sm-4 col-xs-6">
 								<div class="prod_box">
 									<div class="img_layer">
@@ -419,7 +420,6 @@
 						</div>
 						@else
 						 <div class="col-md-8 no_lists">
-
 						  <p>Sorry, we could not find any costumes</p>
 
 						 </div>
@@ -430,7 +430,6 @@
  							{{$costumes->links('/frontend/pagination')}}
  							 
  							@if($count>12)
-
 							 <div class="pagination_btm">
 							 	<label>Show </label>
 							 	<select class="per_page">

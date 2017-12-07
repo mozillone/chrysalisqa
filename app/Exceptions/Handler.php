@@ -50,7 +50,7 @@ public function report(Exception $exception)
 
     public function render($request, Exception $e)
     {
-        dd($e);
+
         if($e instanceof NotFoundHttpException){
             return response()->view('errors.'.'404');
         }elseif ($e instanceof ModelNotFoundException) {

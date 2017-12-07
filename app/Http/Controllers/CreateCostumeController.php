@@ -1109,6 +1109,7 @@ class CreateCostumeController  extends Controller {
 								'created_on'   => date('y-m-d H:i:s')
 							);
 
+
 		$conversation_array = array('type'=>'request_a_bag','user_one'=>'1',
 									'subject'=>'Your Bag created.',
 									'user_two'=>'',
