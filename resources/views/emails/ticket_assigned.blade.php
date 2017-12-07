@@ -8,10 +8,9 @@
 				<tbody>
 					<tr>
 						<td style="border-collapse:collapse;border:0;margin:0;padding:18px;color:#333;font-family:Arial,sans-serif;font-size:16px;line-height:24px;background-color:#eeeeee;">
-						<h1 style="color:#333;font-size:16px;font-weight:bold;line-height:24px">Hi {{$data['username']}},<br />
-						Greetings.</h1>
+						<h1 style="color:#333;font-size:16px;font-weight:bold;line-height:24px">Hi {{$data['username']}},<br /></h1>
 						<p>Ticket ID {{$data['ticket_id']}} has been assigned to you.</p>
-						<p>The Below Are The Details</p>
+						<p>Below are the details</p>
 						<?php
 						$status=$data['ticket_status'];
 						switch($status){

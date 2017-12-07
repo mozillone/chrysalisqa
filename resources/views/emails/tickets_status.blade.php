@@ -9,9 +9,9 @@
 					<tr>
 						<td style="border-collapse:collapse;border:0;margin:0;padding:18px;color:#333;font-family:Arial,sans-serif;font-size:16px;line-height:24px;background-color:#eeeeee;">
 						<h1 style="color:#333;font-size:16px;font-weight:bold;line-height:24px">Hi Admin,<br />
-						Greetings.</h1>
-						<p>Ticket ID {{$data['ticket_id']}} Assigned To {{$data['username']}}</p>
-						<p>The Below Are The Details</p>
+						</h1>
+						<p>{{$data['username']}} has updated the status of Ticket ID {{$data['ticket_id']}}.</p>
+						<p>Below are the details</p>
 						<?php
 						$status=$data['ticket_status'];
 						switch($status){

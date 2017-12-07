@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
     <link rel="stylesheet" href="{{ asset('/assets/admin/css/selectize.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/admin/css/selectize.default.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/taginput/bootstrap-tagsinput.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/admin/css/selectize.bootstrap3.css') }}">
     <script src="{{ asset('/assets/admin/js/fileinput.js') }}"></script>
     <style>
@@ -20,6 +21,7 @@
             float: right;
             margin-left: 25px;
         }
+        .bootstrap-tagsinput .label-info{background-color: #5fc5ac !important;}
     </style>
 @stop
 
@@ -81,13 +83,10 @@
 
                                     <div class="form-group has-feedback">
                                         <label for="blog_image" class="control-label image-label">Upload<span class="req-field" >*</span></label>
-                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="fileupload fileupload-new rmvimg" data-provides="fileupload">
                                             <img src="../blog_images/preview_placeholder.png" class="img-pview img-responsive" id="img-chan" name="img-chan" >
 
-                                            <span class="remove_pic">
-                                                <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                            </span>
-
+                                            
                                             <span class="btn btn-default btn-file">
                                                 <span class="fileupload-new" style="float:right">Upload Photo</span>
                                                 <span class="fileupload-exists"></span>
@@ -105,7 +104,7 @@
 
                                     <div class="form-group has-feedback blog-tags" >
                                         <label for="blog-tags" class="control-label">Blog Tags<span class="req-field" >*</span></label>
-                                        <input type="text" name="blogTags" class="form-control" id="blog-tags"/>
+                                        <input type="text" name="blogTags" class="form-control" id="blog-tags" data-role="tagsinput"/>
                                         <p class="error">{{ $errors->first('blogTags') }}</p>
                                         <span id="page_desc_error" style="color:red"></span>
                                     </div>
@@ -152,7 +151,7 @@
 
                     <div class="box-footer">
                         <div class="pull-right">
-                            <a href="/cms-pages" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
+                            <a href="/blog-posts" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
                             <button type="submit" class="btn btn-info pull-right save-page">Submit</button>
                         </div>
                     </div>
@@ -193,6 +192,7 @@
     <script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
     <script src="{{asset('ckeditor/ckeditor/ckeditor.js')}}"></script>
     <script src="{{ asset('/assets/admin/js/selectize.js') }}"></script>
+    <script src="{{ asset('/assets/admin/vendors/taginput/bootstrap-tagsinput.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -243,8 +243,8 @@
                     }
                 });
             });
-
-            $('#blog-tags').selectize({
+            $("#blog-tags").tagsinput({maxChars: 50,maxTags: 10});
+            /*$('#blog-tags').selectize({
                 delimiter: ',',
                 persist: false,
                 create: function(input) {
@@ -253,7 +253,7 @@
                         text: input
                     }
                 }
-            });
+            });*/
 
         });
 

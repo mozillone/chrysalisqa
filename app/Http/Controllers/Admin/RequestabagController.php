@@ -302,23 +302,20 @@ class RequestabagController extends Controller
 						/*Storing Status In Logs Ends Here*/
 	                }else{
 	                	$error = $single_payout['output'];
-	                	$er = json_decode($error);
-	                	$err_msg = $er->name;
-	                	try{
-	                		$insert_arr = array(
-								"user_id" => $get_user_id->user_id,
-								"bag_id" => $request->type_id,
-								"process" => "Payout",
-								"status" => $error,
-								"created_at" => Carbon::now());
-	                		DB::table("reqbag_status_log")->insert($insert_arr);	
-	                	}catch(\Exeception $e){
-	                		Log::info($e);
-	                	}
+	                	$err = json_decode($error);
+	                	$err_msg = $err->name;
 	                	/*Storing Status In Logs Starts Here*/
-							
+						DB::table("reqbag_status_log")->insert([
+							"user_id" => $get_user_id->user_id,
+							"bag_id" => $request->type_id,
+							"process" => "Payout",
+							"status" => $error,
+							"created_at" => Carbon::now()
+						]);
+						DB::commit();
 						/*Storing Status In Logs Ends Here*/
-                		return response()->json(['error' => $er->error_description],400);
+                		//\Session::flash('error', $error);
+                		return response()->json(['error' => $err_msg],400);
 	                }
                 }else{
                     return response()->json(['error' => 'please update paypal email in your dashboard.'], 404);
@@ -335,6 +332,16 @@ class RequestabagController extends Controller
 			return $this->data;
         }catch(\Exception $e){
             DB::rollBack();
+            /*Storing Status In Logs Starts Here*/
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => $get_user_id->user_id,
+				"bag_id" => $request->type_id,
+				"process" => "Payout",
+				"status" => $e->getMessage(),
+				"created_at" => Carbon::now()
+			]);
+			DB::commit();
+			/*Storing Status In Logs Ends Here*/
             //$e->getMessage();
             return response()->json(['error' => 'Something went wrong.'], 404);
         }
@@ -352,7 +359,17 @@ class RequestabagController extends Controller
 			$userObj = User::where('id', $get_user_id->user_id)->first();
             
 			if ($userObj->credits == 0) {
-                                return response()->json(['error' => 'No Credit Amount'], 404);
+				/*Storing Status In Logs Starts Here*/
+				DB::table("reqbag_status_log")->insert([
+					"user_id" => $get_user_id->user_id,
+					"bag_id" => $request->type_id,
+					"process" => "Return Items",
+					"status" => json_encode(['error' => 'No Credit Amount.']),
+					"created_at" => Carbon::now()
+				]);
+				DB::commit();	
+				/*Storing Status In Logs Ends Here*/
+                return response()->json(['error' => 'No Credit Amount'], 404);
 			}
 			if ($request->checkbox_value == 0) {
 				if($userObj->credits >= 9.99){
@@ -368,7 +385,17 @@ class RequestabagController extends Controller
 		//dd($sellerAddress);
 		$response=$this->fedex($request->all(),$address[0],$service,$sellerAddress[0]);
 		if($response['result']=="0"){
-                        return response()->json(['error' => $response['msg']], 404);
+			/*Storing Status In Logs Starts Here*/
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => $get_user_id->user_id,
+				"bag_id" => $request->type_id,
+				"process" => "Return Items",
+				"status" => $response['msg'],
+				"created_at" => Carbon::now()
+			]);
+			DB::commit();	
+			/*Storing Status In Logs Ends Here*/
+            return response()->json(['error' => $response['msg']], 404);
 		}
 		$track_id=$response['msg'];
 		$shipping_array_pick = array('request_id'=>$request->type_id,
@@ -382,7 +409,17 @@ class RequestabagController extends Controller
                         $userObj->credits = $userObj->credits-9.99;
                         $userObj->save();
 				}else{
-                                    return response()->json(['error' => 'No Credit Amount.'], 404);
+					/*Storing Status In Logs Starts Here*/
+					DB::table("reqbag_status_log")->insert([
+						"user_id" => $get_user_id->user_id,
+						"bag_id" => $request->type_id,
+						"process" => "Return Items",
+						"status" => json_encode(['error' => 'No Credit Amount.']),
+						"created_at" => Carbon::now()
+					]);
+					DB::commit();	
+					/*Storing Status In Logs Ends Here*/
+                    return response()->json(['error' => 'No Credit Amount.'], 404);
 				}
 			}
 			
@@ -406,6 +443,7 @@ class RequestabagController extends Controller
 				"status" => $this->data['status'],
 				"created_at" => Carbon::now()
 			]);
+			DB::commit();	
 			/*Storing Status In Logs Ends Here*/
 
 		// send mail
@@ -425,6 +463,16 @@ class RequestabagController extends Controller
 			return $this->data;
 		}catch(\Exception $e){
             DB::rollBack();
+            /*Storing Status In Logs Starts Here*/
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => $get_user_id->user_id,
+				"bag_id" => $request->type_id,
+				"process" => "Return Items",
+				"status" => $e->getMessage(),
+				"created_at" => Carbon::now()
+			]);
+			DB::commit();	
+			/*Storing Status In Logs Ends Here*/
             //$e->getMessage();
             return response()->json(['error' => $e->getMessage()], 404);
         }
@@ -441,7 +489,7 @@ class RequestabagController extends Controller
 		DB::table("reqbag_status_log")->insert([
 			"user_id" => $get_user_id->user_id,
 			"bag_id" => $request->type_id,
-			"process" => "Return Items",
+			"process" => "Close Bag",
 			"status" => $this->data['status'],
 			"created_at" => Carbon::now()
 		]);
@@ -804,6 +852,17 @@ class RequestabagController extends Controller
 						Log::info($response_fedex);
 						if($response_fedex['result']=="0"){
 							$fedex_error = 1;
+							/*Storing Status In Logs Starts Here*/
+	 						$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+	 						DB::table("reqbag_status_log")->insert([
+	 							"user_id" => $user->user_id,
+	 							"bag_id" => $req['hidden_id'],
+	 							"process" => "Generate Lables:Fedex (pickup)",
+	 							"status" => $response_fedex['msg'],
+	 							"created_at" => Carbon::now()
+	 						]);
+	 						DB::commit();
+	 						/*Storing Status In Logs Ends Here*/
 							// Session::flash('error',$response_fedex['msg']);
 				   			//return Redirect::back();
 						}else{
@@ -815,10 +874,32 @@ class RequestabagController extends Controller
 														'created_at'=>date('y-m-d H:i:s'),
 													);
 							$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
+							/*Storing Status In Logs Starts Here*/
+							$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+							DB::table("reqbag_status_log")->insert([
+								"user_id" => $user->user_id,
+								"bag_id" => $req['hidden_id'],
+								"process" => "Generate Lables:Fedex (pickup)",
+								"status" => "Label has been generated with tracking #".$fedex_track_id,
+								"created_at" => Carbon::now()
+							]);
+							DB::commit();
+	 						/*Storing Status In Logs Ends Here*/
 						}
 					}catch(\Exception $e){
 						$fedex_error = 1;
 						Log::info($e);
+						/*Storing Status In Logs Starts Here*/
+ 						$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+ 						DB::table("reqbag_status_log")->insert([
+ 							"user_id" => $user->user_id,
+ 							"bag_id" => $req['hidden_id'],
+ 							"process" => "Generate Lables:Fedex (pickup)",
+ 							"status" => $e->getMessage(),
+ 							"created_at" => Carbon::now()
+ 						]);
+ 						DB::commit();
+ 						/*Storing Status In Logs Ends Here*/
 						$response_fedex['msg'] = $e->getMessage();
 					}
 					
@@ -831,6 +912,17 @@ class RequestabagController extends Controller
 						Log::info($response_smartpost);
 						if($response_smartpost['result']=="0"){
 							$smart_post_error = 1;
+							/*Storing Status In Logs Starts Here*/
+							$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+							DB::table("reqbag_status_log")->insert([
+								"user_id" => $user->user_id,
+								"bag_id" => $req['hidden_id'],
+								"process" => "Generate Lables:Smart Post (drop)",
+								"status" => $response_smartpost['msg'],
+								"created_at" => Carbon::now()
+							]);
+							DB::commit();
+	 						/*Storing Status In Logs Ends Here*/
 							//Session::flash('error',$response_smartpost['msg']);
 				      		//return Redirect::back();
 						}else{
@@ -844,11 +936,33 @@ class RequestabagController extends Controller
 								);
 
 							$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
+							/*Storing Status In Logs Starts Here*/
+							$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+							DB::table("reqbag_status_log")->insert([
+								"user_id" => $user->user_id,
+								"bag_id" => $req['hidden_id'],
+								"process" => "Generate Lables:Smart Post (drop)",
+								"status" => "Label has been generated with tracking #".$smart_post_track_id,
+								"created_at" => Carbon::now()
+							]);
+							DB::commit();
+	 						/*Storing Status In Logs Ends Here*/
 						}
 					}catch(\Exception $e){
 						//dd($e);
 						Log::info($e);
 						$smart_post_error = 1;
+						/*Storing Status In Logs Starts Here*/
+						$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+						DB::table("reqbag_status_log")->insert([
+							"user_id" => $user->user_id,
+							"bag_id" => $req['hidden_id'],
+							"process" => "Generate Lables:Smart Post (drop)",
+							"status" => $e->getMessage(),
+							"created_at" => Carbon::now()
+						]);
+						DB::commit();
+ 						/*Storing Status In Logs Ends Here*/
 						$response_smartpost['msg'] = $e->getMessage();
 					}
 					
@@ -888,6 +1002,18 @@ class RequestabagController extends Controller
     		}   
         }catch(\Exception $e){
             DB::rollBack();
+            /*Storing Status In Logs Starts Here*/
+            $req = $request->all();
+			$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => $user->user_id,
+				"bag_id" => $req['hidden_id'],
+				"process" => "Generate Lables",
+				"status" => $e->getMessage(),
+				"created_at" => Carbon::now()
+			]);
+			DB::commit();
+			/*Storing Status In Logs Ends Here*/
             Session::flash('error',$e->getMessage());
             return Redirect::back();
         }
