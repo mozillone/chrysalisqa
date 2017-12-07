@@ -186,7 +186,6 @@ class RequestabagController extends Controller
                 //Log::info($userObj->paypal_email);
                 if(!empty($userObj->paypal_email)){
                     $single_payout  = PaypalPayout::SinglePayout($userObj->paypal_email,$request->payout_amount);
-                    Log::info($single_payout);
                     if($single_payout['status'] == 1){
                     	Log::info('if');
                 		$output = $single_payout['output'];
@@ -230,8 +229,9 @@ class RequestabagController extends Controller
 						]);
 						/*Storing Status In Logs Ends Here*/
 	                }else{
-	                	Log::info('else');
 	                	$error = $single_payout['output'];
+	                	$err = json_decode($error);
+	                	$err_msg = $err->name;
 	                	/*Storing Status In Logs Starts Here*/
 						DB::table("reqbag_status_log")->insert([
 							"user_id" => $get_user_id->user_id,
@@ -240,9 +240,10 @@ class RequestabagController extends Controller
 							"status" => $error,
 							"created_at" => Carbon::now()
 						]);
+						DB::commit();
 						/*Storing Status In Logs Ends Here*/
                 		//\Session::flash('error', $error);
-                		return response()->json(['error' => $error],400);
+                		return response()->json(['error' => $err_msg],400);
 	                }
                 }else{
                     return response()->json(['error' => 'please update paypal email in your dashboard.'], 404);
