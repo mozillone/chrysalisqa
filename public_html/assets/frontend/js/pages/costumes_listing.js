@@ -102,7 +102,8 @@ $(document).on("change",".per_page",function(e)
 { 
      e.preventDefault();
      var id = $(this).val();
-     $("#perpage").val(id); 
+     $("#perpage").val(id);
+
      searching(search);
 });
 
@@ -113,6 +114,7 @@ function searching(search){
 	var sub_cat_name=$('input[name="sub_cat_name"]').val();
 	var is_login=$('input[name="is_login"]').val();
 	$("#itemContainer").html("");
+
 	$("#itemContainer").addClass("search_icn_load"); 
     var url = $("#search_list").attr('action');
 
@@ -130,7 +132,6 @@ function searching(search){
 		      },
 
 		});
- 
 }
 function now()
 {
