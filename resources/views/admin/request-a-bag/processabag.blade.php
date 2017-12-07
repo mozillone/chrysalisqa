@@ -12,6 +12,15 @@ Manage Bag@parent
 <link rel="stylesheet" href="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}">
 
 <style type="text/css">
+div#payout_err a {
+    padding-right: 25px;
+    opacity: 0.9;
+    color: #fff;
+    text-decoration: none;
+}
+div#payout_err {
+    padding: 5px !important;
+}
 #dtTable tr>th:first-child{
 display: none;
 }
@@ -69,16 +78,16 @@ margin: 0px;
 <div class="row">
 	<div class="col-sm-12 col-md-12">
 	 @if (Session::has('error'))
-                <div class="alert alert-danger alert-dismissable">
-                    <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-                    {{ Session::get('error') }}
-                </div>
-                @elseif(Session::has('success'))
-                <div class="alert alert-success alert-dismissable">
-                    <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-                    {{ Session::get('success') }}
-                </div>
-                @endif
+        <div class="alert alert-danger alert-dismissable">
+            <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+            {{ Session::get('error') }}
+        </div>
+    @elseif(Session::has('success'))
+        <div class="alert alert-success alert-dismissable">
+            <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+            {{ Session::get('success') }}
+        </div>
+    @endif
 		<div class="box box-primary">
 		
 <?php 
@@ -220,6 +229,7 @@ print_r($all_data);die;*/
 	                        @else
 		                    	<div class="" id="enter_payout_amount">
 		                            <p>Customer has Requested a Payout.</p>
+		                            
 		                            <select id="payout_type" name="payout_type">
 		                                <option value="">Select Payout Type</option>
 		                                <option value="credit">Store Credit</option>
@@ -231,7 +241,7 @@ print_r($all_data);die;*/
 		                            <div id="payout_amount_error" style="color:red"></div>
 		                            <a style="margin-top: 10px" class="btn btn-primary submit" onclick="PayoutAmount()">Save</a>
 		                        </div>
-	                        	<div id="req_payout_sub_msg" style="display:none;">submitting...</div>
+	                        	<div id="req_payout_sub_msg" style="display:none;">Submitting...</div>
 	                        	<div id="req_payout_err_msg" style="display:none;"></div>
 	                        	<div class="" id="credited_payout_amount" style="display: none;"></div>
 	                        @endif
@@ -256,7 +266,7 @@ print_r($all_data);die;*/
 							</div>
 							<a class="btn btn-primary submit" onclick="ReturnAmount()">Save</a>
 						</div>
-						<div id="req_return_sub_msg" style="display:none;">submitting...</div>
+						<div id="req_return_sub_msg" style="display:none;">Submitting...</div>
 	                    <div id="req_return_err_msg" style="display:none;"></div>
 						<div class="box-body" id="credited_return_amount" style="display: none;"></div>
 						<?php } ?>
@@ -309,14 +319,7 @@ print_r($all_data);die;*/
 				<textarea required="" id="message_theard" class="form-control" rows="6" cols="50" placeholder="Type your message here...."></textarea>
 				<span class="error" id="msg_err"></span>
 				<input type="button" name="theard" id="theard" value="SEND" class="btn btn-primary msg-submit" ></input>
-			
-
-				
-				
 			</div>
-			
-			
-			
 		</div>
 		</div>
 		
@@ -454,16 +457,20 @@ function PayoutAmount(a){
 	        },
 	       	error: function(request, status, error) {
 	            loading = false;
+	            var error = request.responseText;
+	            var a = error.replace( /[,."{}]/g, "" );
+	            var err = a.split(':');
 	            $("#req_payout_sub_msg").hide();
-	            $("#req_payout_err_msg").html(request.responseText);
-	            $("#req_payout_err_msg").show();
+	            $('<div class="alert alert-danger alert-dismissable" id="payout_err"><a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a> '+err[err.length-1]+'</div>').insertAfter('#enter_payout_amount p');
+	           /* $("#req_payout_err_msg").html(err[err.length-1]);
+	            $("#req_payout_err_msg").show();*/
 	       	}
 		});
 	}
 }
 
     
-    function ReturnAmount(a){
+function ReturnAmount(a){
 	str=true;
 	var return_amount = $('#return_amount').val();
 	var checkbox = "1";
@@ -502,13 +509,17 @@ function PayoutAmount(a){
                         $("#req_return_err_msg").html('');
                         $("#req_return_err_msg").hide();
                  },
-          error: function(request, status, error) {
+          		error: function(request, status, error) {
                     //alert(data);
-               loading = false;
-               $("#req_return_sub_msg").hide();
-               $("#req_return_err_msg").html(request.responseText);
-               $("#req_return_err_msg").show();
-          }
+	               	loading = false;
+	               	var error = request.responseText;
+		            var a = error.replace( /[,."{}]/g, "" );
+		            var err = a.split(':');
+	               	$("#req_return_sub_msg").hide();
+	               	$('<div class="alert alert-danger alert-dismissable" id="payout_err"><a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a> '+err[err.length-1]+'</div>').insertAfter('#enter_return_amount p');
+	               /*	$("#req_return_err_msg").html(request.responseText);
+	               	$("#req_return_err_msg").show();*/
+	          	}
             });
         }
 }
