@@ -31,7 +31,6 @@ class Order extends Authenticatable
     $this->stripe=new StripeApp();
   }
     protected function placeOrder($req){
-
          $api_customer_id=Auth::user()->api_customer_id;
          $total=0;
          try {
@@ -44,9 +43,10 @@ class Order extends Authenticatable
         if(!$coupan_code){
           $data=Cart::getCartProducts();
         }else{
-          $data=Cart::getCartProductswithCoupan($coupan_code);
+          $res=Promotions::verifyCoupanCode($coupan_code);
+          $data=Cart::getCartProductswithCoupan($coupan_code, $res[0]->coupon_id);
         }
-         foreach($data['basic'] as $cart){
+        foreach($data['basic'] as $cart){
          if(array_key_exists($cart->created_by,$req['shipping_type'])){
             $costumer_costumes[$cart->created_by][]=$cart;
             $total=$cart->total;
@@ -235,12 +235,13 @@ class Order extends Authenticatable
                         'submitForSettlement' => False
                       ]];
               //  $order_info=$this->braintreeApi->transactionCreate($order_data);
-                 $api_amount=number_format($amount,1);
+                 $api_amount=number_format($amount,2);
                  $api_currency="usd";
                  $api_card_id=$token;
                  $api_desc="This transaction is uncaptured";
                  $capture=false;
                 $order_info=$this->stripe->charge_capture($api_amount,$api_currency,$api_customer_id,$api_card_id,$api_desc,$capture);
+                //echo "<pre>"; print_r($order_info); exit;
                 $this->insertTransaction($order_info,$order_id,$cart->cc_id);
                 Site_model::insert_get_id('order_total',$order_subtotal);
                 $this->sellerPayout($api_amount,$order_id,$key);
@@ -258,7 +259,7 @@ class Order extends Authenticatable
                 if($coupon_amount!="0.00"){
                 $order_coupon=array('order_id'=>$order_id,
                               'code'=>"sub",
-                              'title'=>"Coupon code",
+                              'title'=>"Discount Amount",
                               'value'=>$coupon_amount,
                               'sort_order'=>"3",
                       );
