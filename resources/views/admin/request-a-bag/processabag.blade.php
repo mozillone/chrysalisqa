@@ -458,7 +458,7 @@ function PayoutAmount(a){
 	       	error: function(request, status, error) {
 	            loading = false;
 	            var error = request.responseText;
-	            var a = error.replace( /[,."{}]/g, "" );
+	            var a = error.replace( /["{}]/g, "" );
 	            var err = a.split(':');
 	            $("#req_payout_sub_msg").hide();
 	            $('<div class="alert alert-danger alert-dismissable" id="payout_err"><a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a> '+err[err.length-1]+'</div>').insertAfter('#enter_payout_amount p');
@@ -513,7 +513,7 @@ function ReturnAmount(a){
                     //alert(data);
 	               	loading = false;
 	               	var error = request.responseText;
-		            var a = error.replace( /[,."{}]/g, "" );
+		            var a = error.replace( /["{}]/g, "" );
 		            var err = a.split(':');
 	               	$("#req_return_sub_msg").hide();
 	               	$('<div class="alert alert-danger alert-dismissable" id="payout_err"><a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a> '+err[err.length-1]+'</div>').insertAfter('#enter_return_amount p');

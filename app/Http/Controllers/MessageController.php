@@ -165,7 +165,13 @@ class MessageController extends Controller
         ->limit(1)
         ->get();*/
      //   dd($msgs_count);
-        return view('messages.conversations')->with($this->data)->with('msgs_count',$conversations)->with('msgs_inbox',$msgs_inbox)->with('msgs_sent',$msgs_sent);
+        $route = \Request::path();
+        if($route == "conversations"){
+            return view('messages.inbox')->with($this->data)->with('msgs_count',$conversations)->with('msgs_inbox',$msgs_inbox)->with('msgs_sent',$msgs_sent);
+        }
+        else if($route == "sendbox"){
+            return view('messages.send')->with($this->data)->with('msgs_count',$conversations)->with('msgs_inbox',$msgs_inbox)->with('msgs_sent',$msgs_sent);
+        }
     }
 
     public function converstationsDelete(Request $request){
