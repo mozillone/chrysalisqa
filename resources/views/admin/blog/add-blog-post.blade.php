@@ -166,7 +166,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close category-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add Blog Category</h4>
+                    <h4 class="modal-title" id="model_title">Add Blog Category</h4>
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-danger alert-dismissable category-alert" style="display: none;">
@@ -201,6 +201,7 @@
             $("#add_cat").click(function(){
                 $("#blogCategory").val('');
                 $("#blogCategory").attr('data-edited',0);
+                $("#model_title").text('Add Blog Category');
             });
 
             $('.save-category').on('click', function () {
@@ -317,7 +318,7 @@
                     url: 'edit-blog-category/'+categoryId,
                     dataType: 'JSON',
                     success: function(response) {
-                        $("#model_title").html('Edit Blog Category');
+                        $("#model_title").text('Edit Blog Category');
                         $("#blogCategory").val(response.name);
                         $("#blogCategory").attr('data-edited',response.id);
                         $("#blogCategory").attr('data-oldname',response.name);
