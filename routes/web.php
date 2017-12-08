@@ -632,7 +632,8 @@ Route::any('faq-search', [
 /****************Messaging Starts Here*********************/
 
 Route::any('message/{id}', 'MessageController@chatHistory')->name('message.read');
-Route::get('conversations', 'MessageController@converstationsofUser');
+Route::get('conversations', ["as" => "conversations", "uses" => 'MessageController@converstationsofUser']);
+Route::get('sendbox', ["as" => "sendbox","uses" => 'MessageController@converstationsofUser']);
 Route::post('conversation/delete', 'MessageController@converstationsDelete');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
