@@ -1061,28 +1061,33 @@ $("#freqent").removeClass("hide");
 if($("#size").val() == "custom"){
 	$(".dimessions").removeClass('hide');
 }
+	if($("#donate_charity").val() == 0){
+		$("#dynamic_percent_amounts").html("$0.00");
+		$("#donate_charity").val($("#donate_charity").val()+" %");
+	}
+
+	if($("#donate_charity").val() == "0 %"){
+		$("#dynamic_percent_amounts").html("$0.00");
+		//$("#donate_charity").val($("#donate_charity").val()+" %");
+	}
+
+	if(parseInt($("#donate_charity").val())<=9){
+		$("#donate_charity").css({"color":"#000","font-weight":""});
+	}
 	if(parseInt($("#donate_charity").val())==10){
 		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
-
-	if(parseInt($("#donate_charity").val())<10){
-		$("#donate_charity").css({"color":"#000","font-weight":""});
-	}
-
 	if(parseInt($("#donate_charity").val()) ==15){
-		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
+		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
-
 	if(parseInt($("#donate_charity").val()) ==25){
-		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
+		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
-
-	if(parseInt($("#donate_charity").val()) ==50){
-		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
+	if(parseInt($("#donate_charity").val()) == 50){
+		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
-
 	if(parseInt($("#donate_charity").val()) ==100){
-		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
+		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
 
  	var total_val = "0.00";
