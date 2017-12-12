@@ -1141,10 +1141,12 @@ $(function(){
         $(".modal-footer").hide();
     }
     
-    /*$(document).on("click",".img_clse",function()
+    $(document).on("click",".img_clse",function()
     {
        $(this).parents().find('#dvPreview').children('.item.active').remove(); 
-    });*/
+       $("#"+$(this).attr("file-id")).val("");
+
+    });
     
 });
  
