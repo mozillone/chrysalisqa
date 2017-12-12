@@ -1063,7 +1063,7 @@ if($("#size").val() == "custom"){
 }
 	if($("#donate_charity").val() == 0){
 		$("#dynamic_percent_amounts").html("$0.00");
-		$("#donate_charity").val($("#donate_charity").val()+" %");
+		$("#donate_charity").val("0 %");
 	}
 
 	if($("#donate_charity").val() == "0 %"){
