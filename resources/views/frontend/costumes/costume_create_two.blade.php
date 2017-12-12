@@ -358,7 +358,7 @@
 									<div class="up-blog">
 										<input type="file" name="file1" accept="image/*" id="file1" >
 										<input type="hidden" class="modalOpen1" name="Imagecrop1">
-										<img name="file1_name" src="" class="result" >
+										<!-- <img name="file1_name" src="" class="result" > -->
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 									</div>
 									<span id="file1_error" style="color:red"></span>
@@ -368,10 +368,10 @@
 									<span class="remove_pic" id="drag_n_drop_2" style="display: none;" >
 										<i class="fa fa-times-circle" aria-hidden="true"></i>
 									</span>
-									<div class=" up-blog">
+									<div class="up-blog">
 										<input type="file" name="file2" accept="image/*" id="file2" >
 										<input type="hidden" class="modalOpen2" name="Imagecrop2">
-										<img src="" class="result2" >
+										<!-- <img src="" class="result2" > -->
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 									</div>
 									<span id="file2_error" style="color:red"></span>
@@ -381,10 +381,10 @@
 									<span class="remove_pic" id="drag_n_drop_3" style="display: none;">
 										<i class="fa fa-times-circle" aria-hidden="true"></i>
 									</span>
-									<div class=" up-blog">
+									<div class="up-blog">
 										<input type="file" name="file3" accept="image/*" id="file3" >
 										<input type="hidden" class="modalOpen3" name="Imagecrop3" >
-										<img src="" class="result3" >
+										<!-- <img src="" class="result3" > -->
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 									</div>
 									<span id="file3_error" style="color:red"></span>
