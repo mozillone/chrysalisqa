@@ -793,7 +793,7 @@
 																				<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 																				<input type="hidden" name="Imagecrop1" class="Forntview" data-id="" value="">
 																				<div class="drop_uploader drop_zone1">
-																					<img src="" class="result" >
+																					<!-- <img src="" class="result" > -->
 																				</div>
 																				<?php
 																				} ?>
@@ -822,7 +822,7 @@
 																			<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 																			<input type="hidden" name="Imagecrop2" class="Backview" value="" data-id="">
 																			<div class="drop_uploader drop_zone2">
-																				<img src="" class="result2" >
+																				<!-- <img src="" class="result2" > -->
 																			</div>
 																			<?php
 																			} ?>
@@ -850,7 +850,7 @@
 																			<input type="hidden" name="Imagecrop3" class="Additional" value="" data-id="">
 																			<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 																			<div class="drop_uploader drop_zone3">
-																				<img src="" class="result3" >
+																				<!-- <img src="" class="result3" > -->
 																			</div>
 																			<?php
 																			} ?>
