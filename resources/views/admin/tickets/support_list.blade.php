@@ -55,7 +55,7 @@
                   <tr>
                       <th>Name</th>
                       <th>Email</th>
-                      <th>Phone # </th>
+                      <!-- <th>Phone # </th> -->
                       <th>Is Seller?  </th>
                       <th> Last Login Time</th>
                       <th>Credit</th>
@@ -100,7 +100,7 @@
       "columns": [
         { data: 'display_name', name: 'display_name'},
         { data: 'email', name: 'email'},
-        { data: 'phone_number', name: 'phone_number'},
+        /*{ data: 'phone_number', name: 'phone_number'},*/
         { data: 'isseller', name: 'isseller'},
         { data: 'date_format', name: 'date_format'},
         { data: 'credit', name: 'credit'},
