@@ -1181,6 +1181,8 @@ $(document).on("click", ".saveMultiple", function () {
 
 $(document).on("click",".remove",function()
 {
+    $("#upload-file-selector").val('');
+    $("#dvPreviewMultiple").html('');
     var index = $(this).parent().attr("index");
 
     $cropper_objs.splice(index, 1);
@@ -1277,6 +1279,5 @@ $(document).on("click","#drag_n_drop_3",function()
     $(document).on("click", "#multiCancel", function() {
         $("#upload-file-selector").val('');
         $("#dvPreviewMultiple").html('');
-        $(this).parents().find("#details_view").children("#drag_n_drop_3").addClass('hide');
     });
     
