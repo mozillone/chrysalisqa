@@ -82,8 +82,8 @@ $(document).on("change", "#file1", function() {
         if (typeof (FileReader) != "undefined") {
             var dvPreview = $("#dvPreview");
             dvPreview.html("");
-            $($(this)[0].files).each(function (index, element ) {
-                var file = $(this);
+            //$($(this)[0].files).each(function (index, element ) {
+                var file = this.files[0];
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var carouselItems = $("<div class='item'></div>");
@@ -137,8 +137,14 @@ $(document).on("change", "#file1", function() {
                         $image.cropper('zoom', current_zoom);
                     });
                     $(document).on("click", "#crop", function() {
+                        if($image.cropper('getCroppedCanvas')==null){
+                            imgdata = reader.readAsDataURL(file);
+                        }else{
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                        }
+                        //$("#dvPreview div.item").remove();
                         $("#myModal").modal('hide');
-                        imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
+                        //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone1").find("img.result").remove();
                         var FrontView = '<img src="'+imgdata+'" class="result">';
                         $(".drop_zone1").append(FrontView);
@@ -150,7 +156,7 @@ $(document).on("change", "#file1", function() {
                         //$(".result").css({ "width": "198px", "height": "298px" });
                         $(".result").css({ "width": "198px", "height": "298px","position":"relative"});
                         }                        
-                        $("#file1").hide();
+                        //$("#file1").hide();
                         $(this).parents().find("#front_view").children("#drag_n_drop_1").removeClass('hide');
                         if($(".drop_zone1").hasClass('Front1'))
                         {
@@ -160,8 +166,8 @@ $(document).on("change", "#file1", function() {
                     });
 
                 }
-                reader.readAsDataURL(file[0]);
-            });
+                reader.readAsDataURL(file);
+            //});
         } else {
             alert("This browser does not support HTML5 FileReader.");
         }
@@ -180,8 +186,8 @@ $(document).on("change", "#file2", function() {
         if (typeof (FileReader) != "undefined") {
             var dvPreview = $("#dvPreview2");
             dvPreview.html("");
-            $($(this)[0].files).each(function (index, element ) {
-                var file = $(this);
+            //$($(this)[0].files).each(function (index, element ) {
+                var file = this.files[0];
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var carouselItems = $("<div class='item'></div>");
@@ -236,8 +242,13 @@ $(document).on("change", "#file2", function() {
                     });
 
                     $(document).on("click", "#crop2", function() {
+                        if($image.cropper('getCroppedCanvas')==null){
+                            imgdata = reader.readAsDataURL(file);
+                        }else{
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                        }
                         $("#myModal2").modal('hide');
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
+                        //var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone2").find("img.result2").remove();
                         var Backview = '<img src="'+imgdata+'" class="result2">';
                         $(".drop_zone2").append(Backview);
@@ -247,7 +258,7 @@ $(document).on("change", "#file2", function() {
                         if (!$(".drop_zone1").hasClass("Back1")) {
                           $(".result2").css({ "width": "198px", "height": "298px","position":"relative" });
                         }
-                        $("#file2").hide();
+                        //$("#file2").hide();
                         $(this).parents().find("#back_view").children("#drag_n_drop_2").removeClass('hide');
                         if($(".drop_zone2").hasClass('Back1'))
                         {
@@ -257,8 +268,8 @@ $(document).on("change", "#file2", function() {
                     });
 
                 }
-                reader.readAsDataURL(file[0]);
-            });
+                reader.readAsDataURL(file);
+            //});
         } else {
             alert("This browser does not support HTML5 FileReader.");
         }
@@ -278,8 +289,8 @@ $(document).on("change", "#file3", function() {
         if (typeof (FileReader) != "undefined") {
             var dvPreview = $("#dvPreview3");
             dvPreview.html("");
-            $($(this)[0].files).each(function (index, element ) {
-                var file = $(this);
+            //$($(this)[0].files).each(function (index, element ) {
+                var file = this.files[0];
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var carouselItems = $("<div class='item'></div>");
@@ -333,8 +344,13 @@ $(document).on("change", "#file3", function() {
                         $image.cropper('zoom', current_zoom);
                     });
                     $(document).on("click", "#crop3", function() {
+                        if($image.cropper('getCroppedCanvas')==null){
+                            imgdata = reader.readAsDataURL(file);
+                        }else{
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                        }
                         $("#myModal3").modal('hide');
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
+                        //var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone3").find("img.result3").remove();
                         $(".Additional").attr('value',imgdata);
                         var Additional = '<img src="'+imgdata+'" class="result3">';
@@ -350,8 +366,8 @@ $(document).on("change", "#file3", function() {
                         }
                     });
                 };
-                reader.readAsDataURL(file[0]);
-            });
+                reader.readAsDataURL(file);
+            //});
         } else {
             alert("This browser does not support HTML5 FileReader.");
         }

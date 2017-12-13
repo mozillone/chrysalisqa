@@ -741,30 +741,30 @@ $dimensionvalue     = $heightattributes[1];
 <h2 class="heading-agent">Upload Images</h2>
 <div class="row">
 <div class="threeblogs upload-photo-blogs">
-<div class="col-md-3 col-sm-4 col-xs-12" id="front_view">
-<h2 class="box-title col-md-12 heading-agent pro-imgs text-center">Front</h2>
-<div class="main_upload_blogs clearfix">
-<span class="remove_pic" id="drag_n_drop_1" style="display: none;">
-<i class="fa fa-times-circle" aria-hidden="true"></i>				
-</span>
-<div class=" up-blog">
-<input type="file" accept="image/*" name="img_chan" id="file1" >
-<input type="hidden" class="modalOpen1" name="Imagecrop1">
-<img src="" class="result" >
-<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
-</div>
-</div>
-</div>
+	<div class="col-md-3 col-sm-4 col-xs-12" id="front_view">
+		<h2 class="box-title col-md-12 heading-agent pro-imgs text-center">Front</h2>
+		<div class="main_upload_blogs clearfix">
+			<span class="remove_pic" id="drag_n_drop_1" style="display: none;">
+			<i class="fa fa-times-circle" aria-hidden="true"></i>				
+			</span>
+			<div class="up-blog">
+				<input type="file" accept="image/*" name="img_chan" id="file1" >
+				<input type="hidden" class="modalOpen1" name="Imagecrop1">
+				<!-- <img src="" class="result" > -->
+				<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
+			</div>
+		</div>
+	</div>
 <div class="col-md-3 col-sm-4 col-xs-12" id="back_view">
 <h2 class="box-title col-md-12 heading-agent pro-imgs text-center">Back</h2>
 <div class="main_upload_blogs clearfix">
 <span class="remove_pic" id="drag_n_drop_2" style="display: none;">
 <i class="fa fa-times-circle" aria-hidden="true"></i>				
 </span>
-<div class=" up-blog">
+<div class="up-blog">
 <input type="file" accept="image/*" name="img_chan1" id="file2" >
 <input type="hidden" class="modalOpen2" name="Imagecrop2">
-<img src="" class="result2" >
+<!-- <img src="" class="result2" > -->
 <span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 </div>
 </div>
@@ -775,10 +775,10 @@ $dimensionvalue     = $heightattributes[1];
 <span class="remove_pic" id="drag_n_drop_3" style="display: none;">
 <i class="fa fa-times-circle" aria-hidden="true"></i>					
 </span>
-<div class=" up-blog">
+<div class="up-blog">
 <input type="file" name="img_chan2" id="file3">
 <input type="hidden" class="modalOpen3" name="Imagecrop3" >
-<img src="" class="result3" >
+<!-- <img src="" class="result3" > -->
 <span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 </div>
 </div>

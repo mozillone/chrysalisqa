@@ -1328,7 +1328,8 @@ if($("#size").val() == "custom"){
 	}
 	$('#drag_n_drop_1').click(function(){
 		var Fimage = $("input[name=Imagecrop1]").attr('data-id');
-		if(Fimage == ""){
+		debugger;
+		if(Fimage == "1" || Fimage == ""){
 			$('#front_image_id').remove();
 		    $('#front_view').find('ul').remove();
 		    $('#drag_n_drop_1').css('display','none');
@@ -1386,7 +1387,7 @@ if($("#size").val() == "custom"){
 	});
 	$('#drag_n_drop_2').click(function(){
 		var Bimage = $("input[name=Imagecrop2]").attr('data-id');
-		if(Bimage == ""){
+		if(Bimage == "" || Bimage =="1"){
 			$('#back_image_id').remove();
 		    $('#back_view').find('ul').remove();
 		    $('#drag_n_drop_2').css('display','none');
@@ -1442,7 +1443,7 @@ if($("#size").val() == "custom"){
 	});
 	$('#drag_n_drop_3').click(function(){
 		var Aimage = $("input[name=Imagecrop3]").attr('data-id');
-		if(Aimage == ""){
+		if(Aimage == "" || Aimage == "1"){
 			$('#details_image_id').remove();
 		    $('#details_view').find('ul').remove();
 		    $('#drag_n_drop_3').css('display','none');
