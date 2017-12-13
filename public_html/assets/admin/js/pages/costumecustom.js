@@ -359,17 +359,28 @@ $(function(){
 
     $(document).on("click","#cancel1",function()
     {
+        $("#file1").val('');
+        $("#dvPreview").html('');
          $("#drag_n_drop_1").hide();
     });
-     $(document).on("click","#cancel2",function()
+    $(document).on("click","#cancel2",function()
     {
-        console.log('hi');
-         $("#drag_n_drop_2").hide();
+        $("#file2").val('');
+        $("#dvPreview2").html('');
+        $("#drag_n_drop_2").hide();
     });
-      $(document).on("click","#cancel3",function()
+    $(document).on("click","#cancel3",function()
     {
-         $("#drag_n_drop_3").hide();
+        $("#file3").val('');
+        $("#dvPreview3").html('');
+        $("#drag_n_drop_3").hide();
     });
+    $(document).on("click","#multiCancel",function()
+    {
+        $("#upload-file-selector").val('');
+        $("#dvPreviewMultiple").html('');
+    });
+      
 
    /* $(document).on("click", "#closeModal1,.img_clse", function() {
         $(this).parents().find("#front_view").children("#drag_n_drop_1").addClass('hide');

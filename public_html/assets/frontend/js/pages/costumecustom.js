@@ -705,22 +705,27 @@ $(function(){
     });
 
     $(document).on("click", "#cancel1", function() {
-        
+        $("#file1").val('');
         $('#dvPreview div.item').remove();
         $(this).parents().find("#front_view").children("#drag_n_drop_1").addClass('hide');
     });
 
     $(document).on("click", "#cancel2", function() {
-
+        $("#file2").val('');
         $('#dvPreview2 div.item').remove();
         $(this).parents().find("#back_view").children("#drag_n_drop_2").addClass('hide');
     });
 
     $(document).on("click", "#cancel3", function() {
+        $("#file3").val('');
         $('#dvPreview3 div.item').remove();
         $(this).parents().find("#details_view").children("#drag_n_drop_3").addClass('hide');
     });
-
+    $(document).on("click","#multiCancel",function()
+    {
+        $("#upload-file-selector").val('');
+        $("#dvPreviewMultiple").html('');
+    });
 
     //category code
 

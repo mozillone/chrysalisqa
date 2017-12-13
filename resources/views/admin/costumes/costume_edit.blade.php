@@ -923,7 +923,7 @@
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-success pull-right save" id="crop">Save</button>
-															<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel1">Cancel</button>
 														</div>
 													</div>
 												</div>
@@ -953,7 +953,7 @@
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-success pull-right save" id="crop2">Save</button>
-															<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel2">Cancel</button>
 														</div>
 													</div>
 												</div>
@@ -984,7 +984,7 @@
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-success pull-right save" id="crop3">Save</button>
-															<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel3">Cancel</button>
 														</div>
 													</div>
 												</div>
@@ -1018,7 +1018,7 @@
 														</div>
 														<div class="modal-footer" style="display:none;">
 															<button type="button" class="btn btn-success pull-right saveMultiple" >Save</button>
-															<button type="button" class="btn btn-default img_clse" id="multiCancel" data-dismiss="modal">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" id="multiCancel" data-dismiss="modal" id="cancelMultiple">Cancel</button>
 														</div>
 													</div><!-- /.modal-content -->
 												</div><!-- /.modal-dialog -->
@@ -1317,6 +1317,26 @@ if($("#size").val() == "custom"){
 	   $("#drag_n_drop_1").hide();
 	   $("#drag_n_drop_2").hide();
 	   $("#drag_n_drop_3").hide();
+	});
+	$("#cancel1").on("click",function(){
+		$("#file1").val('');
+		$("#dvPreview").html('');
+		
+	});
+	$("#cancel2").on("click",function(){
+		$("#file2").val('');
+		$("#dvPreview2").html('');
+		
+	});
+	$("#cancel3").on("click",function(){
+		$("#file1").val('');
+		$("#dvPreview3").html('');
+		
+	});
+	$("#cancelMultiple").on("click",function(){
+		$("#upload-file-selector").val('');
+		$("#dvPreviewMultiple").html('');
+		
 	});
 	var hidden_file4 = $('#hidden_file4').val();
 	if (hidden_file4 == "") {
