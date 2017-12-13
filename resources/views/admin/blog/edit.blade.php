@@ -103,7 +103,7 @@
 
                                             ?>
                                             <img  src="<?=$filesource?>" class="img-pview img-responsive" id="img-chan" name="img-chan">
-                                            @if(isset($filesource))
+                                            @if($fileExist)
                                              <span class="remove_pic" id="removeImg">
                                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                                             </span>
