@@ -1160,6 +1160,13 @@ $(function(){
 
     $(document).on("click", ".saveMultiple", function () {
         $cropper_objs.forEach(function($image, index){
+            var length = $("#other_thumbnails").find("div").length;
+            if(length == 0){
+                index = 1;
+            }
+            else{
+                index = length + 1;
+            }
             var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
             $('#other_thumbnails').append("<div index='"+index+"' class=\"col-md-4 col-sm-4 col-xs-12 multi_div\"><img src= " + imgdata + " class=\"multi_thumbs pip\">" +
                 "<br/><span class=\"remove\">" +
