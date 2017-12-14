@@ -959,6 +959,16 @@ $(document).ready(function () {
         }
     });
 
+    if($("#donate_charity").val() == 0){
+		$("#dynamic_percent_amounts").html("$0.00");
+		$("#donate_charity").val("0 %");
+	}
+
+	if($("#donate_charity").val() == "0 %"){
+		$("#dynamic_percent_amounts").html("$0.00");
+		//$("#donate_charity").val($("#donate_charity").val()+" %");
+	}
+
 	if(parseInt($("#donate_charity").val())==10){
 		$("#donate_charity").val($("#donate_charity").val()+" %").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
