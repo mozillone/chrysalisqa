@@ -2,6 +2,12 @@
 @section('styles')
 <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
+<style>
+.costume-error_dup{margin-top:10px !important;}
+.costume-error_dup .form-rms-input{display: initial;}
+.costume-error_dup .form-rms-input input + label{font-size:12px; }	
+
+</style>
 @endsection
 @section('content')
 <?php 
@@ -14,6 +20,7 @@
 		print_r($all_details['get_details']);
 	die;*/
 ?>
+
 <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="request_a_bag_form" id="request_a_bag_form" method="post">
 	<section class="request_bag_page">
 		<div class="container" id="process_bar_hide">
@@ -489,18 +496,27 @@
 										<p class="form-rms-input"><input type="text" name="full_name" id="full_name" value="<?php if (isset($all_details['get_details']->display_name) && !empty($all_details['get_details']->display_name)) { echo $all_details['get_details']->display_name; } ?>" tab-index="1" ></p>
 										<span id="fullname_error" style="color:red"></span>
 									</div>
+									<div class="form-rms costume-error costume-error_dup">
+										<p class="form-rms-input">
+											<input type="text" class="form-control" placeholder="Enter Location"  id="autocomplete" onFocus="geolocate()" tab-index="1"  >
+											<label >Note: Type the location name and select  to populate in address fields</label>
+											<input type="hidden" class="field form-control" id="country" name="country">
+										</p>
+									</div>
 									<div class="form-rms costume-error">
+										
 										<p class="form-rms-que">Address 1</p>
-										<p class="form-rms-input"><input type="text" name="address1" id="address1" value="<?php if (isset($all_details['basic_address']->address1) && !empty($all_details['basic_address']->address1)) { echo $all_details['basic_address']->address1; } ?>" tab-index="1" ></p>
+										<p class="form-rms-input"><input type="text" name="address1" id="route" value="<?php if (isset($all_details['basic_address']->address1) && !empty($all_details['basic_address']->address1)) { echo $all_details['basic_address']->address1; } ?>" tab-index="1" ></p>
 										<span id="address1_error" style="color:red"></span>
 									</div>
 									<div class="form-rms costume-error">
+										<input type="hidden" class="field form-control" id="street_number">
 										<p class="form-rms-que">Address 2 (Optional)</p>
 										<p class="form-rms-input"><input type="text" value="<?php if (isset($all_details['basic_address']->address2) && !empty($all_details['basic_address']->address2)) { echo $all_details['basic_address']->address2; } ?>" name="address2" id="address2"  tab-index="1" ></p>
 									</div>
 									<div class="form-rms costume-error">
 										<p class="form-rms-que">City</p>
-										<p class="form-rms-input"><input type="text" name="city" id="city" value="<?php if (isset($all_details['basic_address']->city) && !empty($all_details['basic_address']->city)) { echo $all_details['basic_address']->city; } ?>" tab-index="1" ></p>
+										<p class="form-rms-input"><input type="text" name="city" id="locality" value="<?php if (isset($all_details['basic_address']->city) && !empty($all_details['basic_address']->city)) { echo $all_details['basic_address']->city; } ?>" tab-index="1" ></p>
 										<span id="city_error" style="color:red"></span>
 									</div>
 									<div class="form-rms form-align costume-error">
@@ -509,8 +525,8 @@
 											<?php if (isset($all_details['basic_address']->state) && !empty($all_details['basic_address']->state)) {
 												$db_state = $all_details['basic_address']->state;
 											} ?>
-											<select name="state" id="state">
-												<option value="">Select a State</option>
+											<select name="state" id="administrative_area_level_1">
+												<option value="" selected>Select a State</option>
 												@foreach($all_details['state_table'] as $state)
 												<option <?php if (!empty($db_state) == $state->abbrev): ?>
 												selected="selected"
@@ -520,7 +536,7 @@
 										</p>
 										<span id="state_error" style="color:red"></span>
 										<p class="form-rms-que">Zip Code</p>
-										<p class="form-rms-input"><input type="text" name="zipcode" id="zipcode" value="<?php if (isset($all_details['basic_address']->zip_code) && !empty($all_details['basic_address']->zip_code)) { echo $all_details['basic_address']->zip_code; } ?>" tab-index="1" ></p>
+										<p class="form-rms-input"><input type="text" name="zipcode" id="postal_code" value="<?php if (isset($all_details['basic_address']->zip_code) && !empty($all_details['basic_address']->zip_code)) { echo $all_details['basic_address']->zip_code; } ?>" tab-index="1" ></p>
 										<span id="zipcode_error" style="color:red"></span>
 									</div>
 									<div class="form-rms costume-error">
@@ -703,6 +719,82 @@
 			});
 			});
 		</script> -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
+	async defer></script>
+		<script>
+			$(document).on('click','.selling_popup_add',function(){
+				$('#selling_popup_add').modal('show'); 
+			});
+			$(document).on('click','.edit_selling_addr',function(){
+				$('#selling_popup_add').modal('show'); 
+			});
+			var placeSearch, autocomplete;
+			var componentForm = {
+				street_number: 'short_name',
+				route: 'long_name',
+				locality: 'long_name',
+				administrative_area_level_1: 'short_name',
+				country: 'long_name',
+				postal_code: 'short_name'
+			};
+			
+			function initAutocomplete() {
+				// Create the autocomplete object, restricting the search to geographical
+				// location types.
+				autocomplete = new google.maps.places.Autocomplete(
+	            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+					{types: ['geocode']});
+					
+					// When the user selects an address from the dropdown, populate the address
+					// fields in the form.
+					autocomplete.addListener('place_changed', fillInAddress);
+			}
+				
+			function fillInAddress() {
+				// Get the place details from the autocomplete object.
+				var place = autocomplete.getPlace();
+				for (var component in componentForm) {
+					document.getElementById(component).value = '';
+					document.getElementById(component).disabled = false;
+
+				}
+				$("#address2").val("");
+				// Get each component of the address from the place details
+				// and fill the corresponding field on the form.
+				for (var i = 0; i < place.address_components.length; i++) {
+					var addressType = place.address_components[i].types[0];
+					if (componentForm[addressType]) {
+						var val = place.address_components[i][componentForm[addressType]];
+						if(addressType=="route"){
+							$('#route').val($('#street_number').val()+" "+val);
+						}
+						else if(addressType=="administrative_area_level_1"){
+							$("#administrative_area_level_1").val(val);
+							}else{
+							document.getElementById(addressType).value = val;
+						}
+					}
+				}
+			}
+				
+				// Bias the autocomplete object to the user's geographical location,
+				// as supplied by the browser's 'navigator.geolocation' object.
+			function geolocate() {
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function(position) {
+						var geolocation = {
+							lat: position.coords.latitude,
+							lng: position.coords.longitude
+						};
+						var circle = new google.maps.Circle({
+							center: geolocation,
+							radius: position.coords.accuracy
+						});
+						autocomplete.setBounds(circle.getBounds());
+					});
+				}
+			}
+		</script>
 		<script type="text/javascript">
 			$(document).ready(function()
 			{
@@ -794,14 +886,14 @@
 					a.preventDefault();
 					str=true;
 					var full_name = $('#full_name').val();
-					var address1  = $('#address1').val();
-					var city      = $('#city').val();
-					var state     = $('#state').val();
-					var zipcode   = $('#zipcode').val();
+					var address1  = $('#route').val();
+					var city      = $('#locality').val();
+					var state     = $('#administrative_area_level_1').val();
+					var zipcode   = $('#postal_code').val();
 					var phone_number = $('#phone_number').val();
 					var len_phone    = $('#phone_number').val().length;
 					var email_address = $('#email_address').val();
-					$('#full_name,#address1,#city,#state,#zipcode,#phone_number,#email_address').css('border','');
+					$('#full_name,#route,#locality,#administrative_area_level_1,#postal_code,#phone_number,#email_address').css('border','');
 					$('#fullname_error,#address1_error,#city_error,#state_error,#zipcode_error,#phone_number_error,#quality_standards_error,#reject_terms_error,#email_address_error,#is_return_error,#is_recycle_error').html('');
 					if(full_name == ""){
 						$('#full_name').css('border','1px solid red');
@@ -809,22 +901,22 @@
 						str=false;			
 					}
 					if(address1 == ""){
-						$('#address1').css('border','1px solid red');
+						$('#route').css('border','1px solid red');
 						$('#address1_error').html('This field is required.');
 						str=false;			
 					}
 					if (city == "") {
-						$('#city').css('border','1px solid red');
+						$('#locality').css('border','1px solid red');
 						$('#city_error').html('This field is required.');
 						str=false;
 					}
 					if (state == "") {
-						$('#state').css('border','1px solid red');
+						$('#administrative_area_level_1').css('border','1px solid red');
 						$('#state_error').html('This field is required.');
 						str=false;
 					}
 					if (zipcode == "") {
-						$('#zipcode').css('border','1px solid red');
+						$('#postal_code').css('border','1px solid red');
 						$('#zipcode_error').html('This field is required.');
 						str=false;
 					}
@@ -960,11 +1052,11 @@
 						var is_recycle = "1";
 					}
 					var full_name = $('#full_name').val();
-					var address1  = $('#address1').val();
+					var address1  = $('#route').val();
 					var address2  = $('#address2').val();
-					var city      = $('#city').val();
-					var state     = $('#state').val();
-					var  zipcode  = $('#zipcode').val();
+					var city      = $('#locality').val();
+					var state     = $('#administrative_area_level_1').val();
+					var  zipcode  = $('#postal_code').val();
 					var phone_number = $('#phone_number').val();
 					var email_address = $('#email_address').val(); 
 					var total_data    = {email: loginpopup_email,password:loginopup_password,is_payout: is_payout,full_name: full_name,address1: address1,address2:address2,city: city,state: state,zipcode: zipcode,phone_number: phone_number,is_return: is_return,is_recycle: is_recycle,email_address: email_address}
@@ -991,7 +1083,7 @@
 					}
 				});
 				//numeric condition
-				$("#zipcode").on("keyup", function(){
+				$("#postal_code").on("keyup", function(){
 					var valid = /^\d{0,10}(\.\d{0,10})?$/.test(this.value),
 					val = this.value;
 					if(!valid){
