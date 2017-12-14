@@ -9,7 +9,7 @@ $(function(){
                 maxlength: 255,
             },
 
-            blogImage:{
+            imageExists:{
                 required: true,
             },
             status:{
@@ -68,7 +68,7 @@ $(function(){
             dummyBlogTags:{
                 required: "Enter Blog Tags"
             },
-            blogImage:{
+            imageExists:{
                 required: "Select Blog Image"
             }
         },
@@ -217,6 +217,7 @@ $(function(){
                         reader.onload = function(e) {
 
                             $('#img-chan').attr('src',e.target.result);
+                            $('input[name="imageExists"]').val("1");
 
                         }
                         image_holder.show();
@@ -260,13 +261,13 @@ $(function(){
     $(".remove_pic").on("click",function(){
         $('#img-chan').attr('src',"/blog_images/preview_placeholder.png");
         $('input[type="file"]').val('');
-        $('input[name="imageExists"]').val("removed");
+        $('input[name="imageExists"]').val("");
         $("#removeImg").remove();
     });
     $(document).on('click','#removeImg',function(){
         $('#img-chan').attr('src',"/blog_images/preview_placeholder.png");
         $('input[type="file"]').val('');
-        $('input[name="imageExists"]').val("removed");
+        $('input[name="imageExists"]').val("");
         $("#removeImg").remove();
     });
     $('#blog-tags').on('itemRemoved', function(event) {

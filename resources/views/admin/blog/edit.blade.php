@@ -21,6 +21,8 @@
         .bootstrap-tagsinput .label-info{background-color: #5fc5ac !important;}
         .form-group.has-feedback.blog-tags{position: relative;}
         .form-group.has-feedback.blog-tags span.error{position: absolute; top:100%; left:0;}
+        .fileupload.fileupload-new.rmvimg span.error{width:100%; float:left;}
+
     </style>
 
 @stop
@@ -115,14 +117,15 @@
                                             <span class="btn btn-default btn-file">
                                                 <span class="fileupload-new" style="float:right">Upload Photo</span>
                                                 <span class="fileupload-exists"></span>
-                                                <input name="imageExists" value="<? echo (!empty($imageExists) ? $imageExists : '')?>" type="hidden">
                                                 <input id="blog_image" name="blogImage" type="file" placeholder="Blog Image" class="form-control">
+
                                             </span>
+
 
                                             <p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
 
                                             <span class="fileupload-preview"></span>
-
+                                             <input id="imageExists" name="imageExists" value="<?php echo (!empty($imageExists) ? $imageExists : '')?>" type="hidden">
                                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                         </div>
                                         <p class="error">{{ $errors->first('blogImage') }}</p>
