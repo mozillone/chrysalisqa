@@ -127,9 +127,9 @@
                                         <div class="input-group blog-categories">
                                             @foreach($blogCategories as $category)
                                                 <div class="form-input" data-id="{{$category->id}}">
-                                                    <input type="radio" name="category" value="{{$category->id}}"> {{$category->name}}
+                                                    <input type="radio" name="category" value="{{$category->id}}"><span> {{$category->name}} </span>
                                                     <a href="javascript:void(0);" onclick="deleteCategory({{$category->id}})" class="btn btn-xs btn-danger "><i class="fa fa-trash-o"></i></a>
-                                                    <a href="javascript:void(0);" onclick="editCategory({{$category->id}})" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i></a>
+                                                    <a href="javascript:void(0);" onclick="editCategory({{$category->id}},this)" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i></a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -139,7 +139,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <button type="button" data-toggle="modal" data-target="#addCategory" class="btn btn-default ad_cate_btn"><i class="fa fa-plus" aria-hidden="true"></i> Add Category</button>
+                                                <button type="button" id="add_cat" data-toggle="modal" data-target="#addCategory" class="btn btn-default ad_cate_btn"><i class="fa fa-plus" aria-hidden="true"></i> Add Category</button>
                                             </div>
                                         </div>
                                     </div>
@@ -166,7 +166,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close category-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add Blog Category</h4>
+                    <h4 class="modal-title" id="model_title">Add Blog Category</h4>
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-danger alert-dismissable category-alert" style="display: none;">
@@ -174,7 +174,7 @@
                     </div>
                     <div class="form-group category-name-container has-feedback">
                         <label for="blogCategory">Blog Category</label>
-                        <input type="text" class="form-control" id="blogCategory" name="name" placeholder="Enter Blog Category">
+                        <input type="text" class="form-control" id="blogCategory" name="name" placeholder="Enter Blog Category" data-edited="0" data-oldname="">
                         <p class="error">{{ $errors->first('blog_category') }}</p>
                         <span id="page_desc_error" style="color:red"></span>
                     </div>
@@ -198,50 +198,86 @@
 
             CKEDITOR.replace( 'post_desc' );
 
+            $("#add_cat").click(function(){
+                $("#blogCategory").val('');
+                $("#blogCategory").attr('data-edited',0);
+                $("#model_title").text('Add Blog Category');
+            });
+
             $('.save-category').on('click', function () {
                 var categoryName = $('#blogCategory').val();
-
-                $.ajax({
-                    type: "GET",
-                    url: '{!! url('blog-category-availability') !!}',
-                    data: {'name':categoryName},
-                    dataType: 'JSON',
-                    success: function(response) {
-                        if(response > 0){
-                            $('.category-alert').show();
-                            $('.category-alert').html('Category name already taken. Pls enter new one.');
-                            setTimeout(function() {
-                                $('.category-alert').fadeOut('fast');
-                            }, 4000);
-                        }else{
-                            $.ajax({
-                                type: "POST",
-                                url: '{!! url('add-blog-category') !!}',
-                                data: {'name':categoryName},
-                                dataType: 'JSON',
-                                success: function(response) {
-                                    if(response){
-                                        var categoryId = response.id;
-                                        var categoryName = response.name;
-                                        var categoryRadio = $("<input type='radio' name='category' value='"+categoryId+"'><span>"+categoryName+' '+"</span>");
-                                        var deleteRadio = $("<a href='javascript:void(0);' onclick='deleteCategory("+categoryId+")' class='btn btn-xs btn-danger'><i class='fa fa-trash-o'></i></a>");
-                                        var categoryDiv = $("<div class='form-input' data-id="+categoryId+"></div>").appendTo(".blog-categories");
-                                        categoryRadio.appendTo(categoryDiv);
-                                        deleteRadio.appendTo(categoryDiv);
-                                        $('.category-close').trigger('click');
+                var edit_or_add = $('#blogCategory').attr('data-edited');
+                var old_name = $("#blogCategory").attr('data-oldname');
+                if(old_name != categoryName){
+                    $.ajax({
+                        type: "GET",
+                        url: '{!! url('blog-category-availability') !!}',
+                        data: {'name':categoryName},
+                        dataType: 'JSON',
+                        success: function(response) {
+                            if(response > 0){
+                                $('.category-alert').show();
+                                $('.category-alert').html('Category name already taken. Pls enter new one.');
+                                setTimeout(function() {
+                                    $('.category-alert').fadeOut('fast');
+                                }, 4000);
+                            }else{
+                                if(edit_or_add == '0'){
+                                    $.ajax({
+                                        type: "POST",
+                                        url: '{!! url('add-blog-category') !!}',
+                                        data: {'name':categoryName},
+                                        dataType: 'JSON',
+                                        success: function(response) {
+                                            if(response){
+                                                var categoryId = response.id;
+                                                var categoryName = response.name;
+                                                var categoryRadio = $("<input type='radio' name='category' value='"+categoryId+"'><span>"+categoryName+' '+"</span>");
+                                                var editRadio = $('<a href="javascript:void(0);" onclick="editCategory('+categoryId+',this)" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i></a>');
+                                                var deleteRadio = $("<a href='javascript:void(0);' onclick='deleteCategory("+categoryId+")' class='btn btn-xs btn-danger'><i class='fa fa-trash-o'></i></a>");
+                                                var categoryDiv = $("<div class='form-input' data-id="+categoryId+"></div>").appendTo(".blog-categories");
+                                                categoryRadio.appendTo(categoryDiv);
+                                                deleteRadio.appendTo(categoryDiv);
+                                                editRadio.appendTo(categoryDiv);
+                                                $('.category-close').trigger('click');
+                                            }
+                                        },
+                                        error: function () {
+                                            $('.category-alert').show();
+                                            $('.category-alert').html('Category could not be saved. Pls try again.');
+                                            setTimeout(function() {
+                                                $('.category-alert').fadeOut('fast');
+                                            }, 4000);
+                                        }
+                                    });
+                                }else{
+                                    if(old_name != categoryName){
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "{!! url('update-blog-category') !!}",
+                                            data: {'id':edit_or_add,'name':categoryName},
+                                            dataType: 'JSON',
+                                            success: function(response) {
+                                                $(".lastClicked").closest('div').find('span').text(response.name);
+                                                $('.category-close').trigger('click');
+                                            },
+                                            error: function () {
+                                                $('.category-alert').show();
+                                                $('.category-alert').html('Category could not be saved. Pls try again.');
+                                                setTimeout(function() {
+                                                    $('.category-alert').fadeOut('fast');
+                                                }, 4000);
+                                            }
+                                        });
                                     }
-                                },
-                                error: function () {
-                                    $('.category-alert').show();
-                                    $('.category-alert').html('Category could not be saved. Pls try again.');
-                                    setTimeout(function() {
-                                        $('.category-alert').fadeOut('fast');
-                                    }, 4000);
                                 }
-                            });
+                                
+                            }
                         }
-                    }
-                });
+                    });
+                }else{
+                    $('.category-close').trigger('click');
+                }
             });
             $("#blog-tags").tagsinput({maxChars: 50,maxTags: 10});
             /*$('#blog-tags').selectize({
@@ -275,8 +311,20 @@
 
         }
 
-        function editCategory(categoryId){
-
+        function editCategory(categoryId,obj){
+            $(obj).addClass('lastClicked');
+            $.ajax({
+                    type: "GET",
+                    url: 'edit-blog-category/'+categoryId,
+                    dataType: 'JSON',
+                    success: function(response) {
+                        $("#model_title").text('Edit Blog Category');
+                        $("#blogCategory").val(response.name);
+                        $("#blogCategory").attr('data-edited',response.id);
+                        $("#blogCategory").attr('data-oldname',response.name);
+                        $('#addCategory').modal('show');
+                    }
+                });
         }
     </script>
 

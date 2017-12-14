@@ -358,7 +358,7 @@
 									<div class="up-blog">
 										<input type="file" name="file1" accept="image/*" id="file1" >
 										<input type="hidden" class="modalOpen1" name="Imagecrop1">
-										<img name="file1_name" src="" class="result" >
+										<!-- <img name="file1_name" src="" class="result" > -->
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 									</div>
 									<span id="file1_error" style="color:red"></span>
@@ -368,10 +368,10 @@
 									<span class="remove_pic" id="drag_n_drop_2" style="display: none;" >
 										<i class="fa fa-times-circle" aria-hidden="true"></i>
 									</span>
-									<div class=" up-blog">
+									<div class="up-blog">
 										<input type="file" name="file2" accept="image/*" id="file2" >
 										<input type="hidden" class="modalOpen2" name="Imagecrop2">
-										<img src="" class="result2" >
+										<!-- <img src="" class="result2" > -->
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 									</div>
 									<span id="file2_error" style="color:red"></span>
@@ -381,10 +381,10 @@
 									<span class="remove_pic" id="drag_n_drop_3" style="display: none;">
 										<i class="fa fa-times-circle" aria-hidden="true"></i>
 									</span>
-									<div class=" up-blog">
+									<div class="up-blog">
 										<input type="file" name="file3" accept="image/*" id="file3" >
 										<input type="hidden" class="modalOpen3" name="Imagecrop3" >
-										<img src="" class="result3" >
+										<!-- <img src="" class="result3" > -->
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 									</div>
 									<span id="file3_error" style="color:red"></span>
@@ -431,7 +431,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-success pull-right save" id="crop">Save</button>
-										<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel1">Cancel</button>
+										<button type="button" class="btn btn-default img_clse" file-id="file1" data-dismiss="modal" id="cancel1">Cancel</button>
 									</div>
 								</div>
 							</div>
@@ -462,7 +462,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-success pull-right save" id="crop2">Save</button>
-										<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel2">Cancel</button>
+										<button type="button" class="btn btn-default img_clse" file-id="file2" data-dismiss="modal" id="cancel2">Cancel</button>
 									</div>
 								</div>
 							</div>
@@ -493,7 +493,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-success pull-right save" id="crop3">Save</button>
-										<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel3">Cancel</button>
+										<button type="button" class="btn btn-default img_clse" file-id="file3" data-dismiss="modal" id="cancel3">Cancel</button>
 									</div>
 								</div>
 							</div>

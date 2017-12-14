@@ -2,7 +2,7 @@ $(function(){
 
 
     $("#add_blog_post").validate({
-        /*onfocusout: function(element) { $(element).valid(); },*/
+        onfocusout: function(element) { $(element).valid(); },
         rules: {
             title:{
                 required: true,
@@ -217,9 +217,11 @@ $(function(){
                         reader.onload = function(e) {
 
                             $('#img-chan').attr('src',e.target.result);
+
                         }
                         image_holder.show();
                         reader.readAsDataURL($(this)[0].files[i]);
+                        $(".fileupload").next().remove();
                     }
                 } else {
                     swal("This browser does not support FileReader.");

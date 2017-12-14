@@ -714,8 +714,8 @@ $(document).on("change", "#file1", function() {
         if (typeof (FileReader) != "undefined") {
             var dvPreview = $("#dvPreview");
             dvPreview.html("");
-            $($(this)[0].files).each(function (index, element ) {
-                var file = $(this);
+            //$($(this)[0].files).each(function (index, element ) {
+                var file = this.files[0];
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var carouselItems = $("<div class='item'></div>");
@@ -765,10 +765,21 @@ $(document).on("change", "#file1", function() {
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+                    $(document).on("change", "#zoom-level", function() {
+                        $image.cropper('zoomTo', 0.1);
+                        var current_zoom = $(this).val();
+                        $image.cropper('zoom', current_zoom);
+                    });
                     $(document).on("click", "#crop", function() {
+                        if($image.cropper('getCroppedCanvas')==null){
+                            imgdata = reader.readAsDataURL(file);
+                        }else{
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                        }
                         $("#myModal").modal('hide');
-                        imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
+                        //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone1").find("img.result").remove();
+                        $(".drop_zone1").html("<img class='result'>");
                         var FrontView = '<img src="'+imgdata+'" class="result">';
                         $(".drop_zone1").append(FrontView);
                         $(".Forntview").attr('value',imgdata);
@@ -782,8 +793,8 @@ $(document).on("change", "#file1", function() {
                     });
 
                 }
-                reader.readAsDataURL(file[0]);
-            });
+                reader.readAsDataURL(file);
+            //});
         } else {
             alert("This browser does not support HTML5 FileReader.");
         }
@@ -802,8 +813,8 @@ $(document).on("change", "#file2", function() {
         if (typeof (FileReader) != "undefined") {
             var dvPreview = $("#dvPreview2");
             dvPreview.html("");
-            $($(this)[0].files).each(function (index, element ) {
-                var file = $(this);
+            //$($(this)[0].files).each(function (index, element ) {
+                var file = this.files[0];
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var carouselItems = $("<div class='item'></div>");
@@ -853,10 +864,23 @@ $(document).on("change", "#file2", function() {
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+                    $(document).on("change", "#zoom-level2", function() {
+                        $image.cropper('zoomTo', 0.1);
+                        var current_zoom = $(this).val();
+                        $image.cropper('zoom', current_zoom);
+                    });
 
                     $(document).on("click", "#crop2", function() {
+                        if($image.cropper('getCroppedCanvas')==null){
+                            imgdata = reader.readAsDataURL(file);
+                        }else{
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                        }
                         $("#myModal2").modal('hide');
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
+                        //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
+                        $(".drop_zone2").find("img.result2").remove();
+                        $(".drop_zone2").html("<img class='result2'>");
+                        //var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone2").find("img.result2").remove();
                         var Backview = '<img src="'+imgdata+'" class="result2">';
                         $(".drop_zone2").append(Backview);
@@ -871,8 +895,8 @@ $(document).on("change", "#file2", function() {
                     });
 
                 }
-                reader.readAsDataURL(file[0]);
-            });
+                reader.readAsDataURL(file);
+            //});
         } else {
             alert("This browser does not support HTML5 FileReader.");
         }
@@ -892,8 +916,8 @@ $(document).on("change", "#file3", function() {
         if (typeof (FileReader) != "undefined") {
             var dvPreview = $("#dvPreview3");
             dvPreview.html("");
-            $($(this)[0].files).each(function (index, element ) {
-                var file = $(this);
+            //$($(this)[0].files).each(function (index, element ) {
+                var file = this.files[0];
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var carouselItems = $("<div class='item'></div>");
@@ -943,10 +967,23 @@ $(document).on("change", "#file3", function() {
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+                    $(document).on("change", "#zoom-level3", function() {
+                        $image.cropper('zoomTo', 0.1);
+                        var current_zoom = $(this).val();
+                        $image.cropper('zoom', current_zoom);
+                    });
                     $(document).on("click", "#crop3", function() {
+                        if($image.cropper('getCroppedCanvas')==null){
+                            imgdata = reader.readAsDataURL(file);
+                        }else{
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                        }
                         $("#myModal3").modal('hide');
+                        //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
+                        $(".drop_zone3").find("img.result3").remove();
+                        $(".drop_zone3").html("<img class='result3'>");
                         $('.Additional').attr('data-value',3);
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
+                        //var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone3").find("img.result3").remove();
                         $(".Additional").attr('value',imgdata);
                         var Additional = '<img src="'+imgdata+'" class="result3">';
@@ -962,8 +999,8 @@ $(document).on("change", "#file3", function() {
                         }
                     });
                 };
-                reader.readAsDataURL(file[0]);
-            });
+                reader.readAsDataURL(file);
+            //});
         } else {
             alert("This browser does not support HTML5 FileReader.");
         }
@@ -1121,6 +1158,12 @@ $(document).on("input", ".slider", function () {
     zooms[activeCropperObjIndex] = current_zoom;
     $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
 });
+$(document).on("change", ".slider", function () {
+    $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
+    var current_zoom = $(this).val();
+    zooms[activeCropperObjIndex] = current_zoom;
+    $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
+});
 
 $(document).on("click", ".saveMultiple", function () {
     $cropper_objs.forEach(function($image, index){
@@ -1138,6 +1181,8 @@ $(document).on("click", ".saveMultiple", function () {
 
 $(document).on("click",".remove",function()
 {
+    $("#upload-file-selector").val('');
+    $("#dvPreviewMultiple").html('');
     var index = $(this).parent().attr("index");
 
     $cropper_objs.splice(index, 1);
@@ -1180,6 +1225,7 @@ $(document).on("click","#drag_n_drop_1",function()
     $(this).siblings.find("#file1").removeattr('style');
     $(this).siblings().find('img').remove();
     $(this).siblings().find("input[type='hidden']").attr('value','');
+    $(".result").find("img").remove();
 
 });
 
@@ -1195,6 +1241,7 @@ $(document).on("click","#drag_n_drop_2",function()
     $(this).siblings().find("input[type='hidden']").attr('data-id','');
     $(this).siblings().find("input[type='hidden']").attr('data-value','');
     $("#file2").css({"display":"block !important"});
+    $(".result2").find("img").remove();
 });
 
 
@@ -1208,17 +1255,29 @@ $(document).on("click","#drag_n_drop_3",function()
     $(this).siblings().find("input[type='hidden']").attr('data-id','');
     $(this).siblings().find("input[type='hidden']").attr('data-value','');
     $("#file3").css({"display":"block !important"});
+    $(".result3").find("img").remove();
 });
 
 
    $(document).on("click", "#cancel1", function() {
+        $("#file1").val('');
+        $("#dvPreview").html('');
         $(this).parents().find("#front_view").children("#drag_n_drop_1").addClass('hide');
     });
 
     $(document).on("click", "#cancel2", function() {
+        $("#file2").val('');
+        $("#dvPreview2").html('');
         $(this).parents().find("#back_view").children("#drag_n_drop_2").addClass('hide');
     });
 
     $(document).on("click", "#cancel3", function() {
+        $("#file3").val('');
+        $("#dvPreview3").html('');
         $(this).parents().find("#details_view").children("#drag_n_drop_3").addClass('hide');
     });
+    $(document).on("click", "#multiCancel", function() {
+        $("#upload-file-selector").val('');
+        $("#dvPreviewMultiple").html('');
+    });
+    

@@ -419,7 +419,7 @@
 										<i class="fa fa-times-circle" aria-hidden="true"></i>					
 									</span>
 									<div class="up-blog">
-										<input type="file" name="file3" accept="image/*" id="file3" value="1">
+										<!-- <input type="file" name="file3" accept="image/*" id="file3" value="1"> -->
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 										<?php if(isset($details_image->image) && !empty($details_image->image)){
 										?>

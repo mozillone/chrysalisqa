@@ -457,9 +457,13 @@ Route::any('add-blog-category', [
    'as' => 'add-blog-category',
    'uses' => 'BlogController@addBlogCategory'
 ]);
-Route::any('edit-blog-category', [
+Route::any('edit-blog-category/{id}', [
     'as' => 'edit-blog-category',
     'uses' => 'BlogController@editBlogCategory'
+]);
+Route::any('update-blog-category', [
+   'as' => 'update-blog-category',
+   'uses' => 'BlogController@updateBlogCategory'
 ]);
 Route::any('blog-category-availability', [
    'as' => 'blog-category-availability',
@@ -632,7 +636,8 @@ Route::any('faq-search', [
 /****************Messaging Starts Here*********************/
 
 Route::any('message/{id}', 'MessageController@chatHistory')->name('message.read');
-Route::get('conversations', 'MessageController@converstationsofUser');
+Route::get('conversations', ["as" => "conversations", "uses" => 'MessageController@converstationsofUser']);
+Route::get('sendbox', ["as" => "sendbox","uses" => 'MessageController@converstationsofUser']);
 Route::post('conversation/delete', 'MessageController@converstationsDelete');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {

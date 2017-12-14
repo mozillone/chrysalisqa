@@ -204,7 +204,9 @@ public function insertSupportMessage(Request $request){
         $ticketslist->where('users.display_name', 'LIKE', "%".$customer_name."%");
       }
       if($keyword!=""){
-        $ticketslist->where('tickets.ticket_reason', 'LIKE', "%".$keyword."%");
+        //$ticketslist->where('tickets.ticket_reason', 'LIKE', "%".$keyword."%");
+        $ticketslist->where('tickets.order_id', 'LIKE', "%".$keyword."%");
+        
       }
       $tickets=$ticketslist->get();
 

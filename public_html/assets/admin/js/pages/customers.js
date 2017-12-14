@@ -771,7 +771,10 @@ $('#dynamic_percent_amounts').html("$"+amount);
 		var imgPath = $(this)[0].value;
 		var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
 		var image_holder = $("#img-chan");
-		image_holder.empty();
+		//MSN
+		//image_holder.empty();
+		$(".rmvimg").append('<span class="remove_pic" id="removeImg"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
+		//MSN
 		var size = parseFloat($("#profile_logo")[0].files[0].size / 1024).toFixed(2);
 		if (extn == "jpg" || extn == "jpeg" || extn == "png") {
 			if(size<10000)
@@ -784,7 +787,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 					reader.onload = function(e) {
 						
 						$('#img-chan').attr('src',e.target.result);
-						$('.pic').after('<span class="remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
+						//$('.pic').after('<span class="remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
 					}
 					image_holder.show();
 					reader.readAsDataURL($(this)[0].files[i]);
@@ -936,11 +939,11 @@ $('#dynamic_percent_amounts').html("$"+amount);
 		   	$('input[name="avatar2"]').val("1");
 			}
 		 }); 
-		$(document).on("click",".remove_pic",function(){
+		/*$(document).on("click",".remove_pic",function(){
 		$('#img-chan').attr('src',"/img/default.png");
 		$('input[type="file"]').val('');
 		$('input[name="is_removed"]').val("1");
-	  });
+	  });*/
 	  $(".remove_pic1").on("click",function(){
 		$('#img-chan1').attr('src',"/img/default.png");
 		$('input[type="file"]').val('');
@@ -951,6 +954,20 @@ $('#dynamic_percent_amounts').html("$"+amount);
 		$('input[type="file"]').val('');
 		$('input[name="is_removed"]').val("1");
 	  });
+	/*MSN*/
+	$(".remove_pic").on("click",function(){
+        $('#img-chan').attr('src',"/img/default.png");
+		$('input[type="file"]').val('');
+		$('input[name="is_removed"]').val("1");
+        $("#removeImg").remove();
+    });
+    $(document).on('click','#removeImg',function(){
+        $('#img-chan').attr('src',"/img/default.png");
+		$('input[type="file"]').val('');
+		$('input[name="is_removed"]').val("1");
+        $("#removeImg").remove();
+    });
+    /*MSN*/
 
 });
 
