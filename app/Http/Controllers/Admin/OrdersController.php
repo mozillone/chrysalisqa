@@ -746,6 +746,7 @@ class OrdersController extends Controller {
       $cc_details=DB::Select('SELECT *  FROM `cc_creditcard` WHERE `id` ='.$order_info[0]->cc_id)[0];
       $price=DB::Select('SELECT *  FROM `cc_order_total` WHERE `order_id` ='.$order_id);
       $items=DB::Select('SELECT *  FROM `cc_order_items` WHERE `order_id` ='.$order_id);
+      $j = 0;
       foreach ($items as $key => $value) {
         $costumes=DB::Select('SELECT dsr.name as costume_name,cst.*,cstopt.attribute_option_value  as is_film,img.image,itms.*,ord.shipping_est FROM cc_costumes as cst LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id  LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="'.Config::get('constants.IS_FILMY').'" LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1" RIGHT JOIN cc_order_items as itms on itms.costume_id=cst.costume_id and itms.order_id='.$order_id.' LEFT JOIN cc_order as ord on ord.order_id=itms.order_id WHERE cst.costume_id='.$value->costume_id);
         $mail_costumes=array('costume_name'=>$costumes[0]->costume_name, 
@@ -755,11 +756,18 @@ class OrdersController extends Controller {
                                  'price'=>$costumes[0]->price, 
                                  'order_id'=>  $order_id, 
                                   'qty'=> $costumes[0]->qty, 
-                                 'image'=>$costumes[0]->image,
-                                 'shipping_est'=>$costumes[0]->shipping_est,
+                                 'image'=>$costumes[0]->image
                         );
-     
+        $shiping_est = explode(',', $costumes[0]->shipping_est);
+        if(count($shiping_est)>0){
+          for ($i=0; $i < count($shiping_est); $i++) { 
+            $mail_costumes['shipping_est'] = $shiping_est[$j];
+          }  
+        }else{
+          $mail_costumes['shipping_est']=$costumes[0]->shipping_est;
+        }
         $mail_order['items'][]= $mail_costumes;
+        $j++;
       }
       foreach($price as $prc){
         if($prc->title=="Subtotal"){
