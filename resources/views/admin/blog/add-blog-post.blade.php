@@ -24,6 +24,7 @@
         .bootstrap-tagsinput .label-info{background-color: #5fc5ac !important;}
         .form-group.has-feedback.blog-tags{position: relative;}
         .form-group.has-feedback.blog-tags span.error{position: absolute; top:100%; left:0;}
+        .fileupload.fileupload-new.rmvimg span.error{width:100%; float:left;}
     </style>
 @stop
 
@@ -98,7 +99,7 @@
                                             <p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
 
                                             <span class="fileupload-preview"></span>
-
+                                            <input id="imageExists" name="imageExists" value="" type="hidden">
                                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                         </div>
                                         <p class="error">{{ $errors->first('blogImage') }}</p>
