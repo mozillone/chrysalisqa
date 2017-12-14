@@ -22,6 +22,9 @@
             margin-left: 25px;
         }
         .bootstrap-tagsinput .label-info{background-color: #5fc5ac !important;}
+        .form-group.has-feedback.blog-tags{position: relative;}
+        .form-group.has-feedback.blog-tags span.error{position: absolute; top:100%; left:0;}
+        .fileupload.fileupload-new.rmvimg span.error{width:100%; float:left;}
     </style>
 @stop
 
@@ -96,7 +99,7 @@
                                             <p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
 
                                             <span class="fileupload-preview"></span>
-
+                                            <input id="imageExists" name="imageExists" value="" type="hidden">
                                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                         </div>
                                         <p class="error">{{ $errors->first('blogImage') }}</p>
@@ -105,6 +108,7 @@
                                     <div class="form-group has-feedback blog-tags" >
                                         <label for="blog-tags" class="control-label">Blog Tags<span class="req-field" >*</span></label>
                                         <input type="text" name="blogTags" class="form-control" id="blog-tags" data-role="tagsinput"/>
+                                        <input id="dummyBlogTags" name="dummyBlogTags" type="hidden"/>
                                         <p class="error">{{ $errors->first('blogTags') }}</p>
                                         <span id="page_desc_error" style="color:red"></span>
                                     </div>

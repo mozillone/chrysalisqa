@@ -311,7 +311,14 @@ class UserController extends Controller
 	
 		}
 		else{
-			$file_name=$name->user_img;
+      $file_name=$name->user_img;
+      if($request->is_removed == "1"){
+        \File::delete(public_path('profile_img/resize/'.$file_name));
+        \File::delete(public_path('profile_img/original/'.$file_name));
+        \File::delete(public_path('profile_img/thumbs/'.$file_name));
+        $file_name = null;
+      }
+			
 		}
     $vacation_from = date('Y-m-d',strtotime($req['date_timepicker_end_ticket']));
     $vacation_to = date('Y-m-d',strtotime($req['date_timepicker_end1_ticket']));
