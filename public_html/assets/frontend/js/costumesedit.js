@@ -887,7 +887,7 @@ $(document).on("change", "#file2", function() {
                         $(".Backview").attr('value',imgdata);
                         $(".result2").attr("src", imgdata);
                         $("#selected_file_1").remove();
-                        $(".result2").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
+                        $(".result2").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
                         //$("#file2").hide();
                         $(this).parents().find("#back_view").children("#drag_n_drop_2").removeClass('hide');
                         $('.Backview').attr('data-value',2);
