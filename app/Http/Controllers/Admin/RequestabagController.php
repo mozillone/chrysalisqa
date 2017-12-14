@@ -823,8 +823,8 @@ class RequestabagController extends Controller
 	// }
 	// 
 	public function Generatelables(Request $request){
-		//print_r(Config::get('constants.FedEx_Ship_Url')); exit;
-		//print_r($request->hidden_id); exit;
+		// print_r(Config::get('constants.FedEx_Ship_Url'));
+		// print_r($request->hidden_id); exit;
 		$fedex_error = 0; $smart_post_error = 0;
         try{
 	        $islabelGenerated = DB::table('request_shippings')->where('request_id', $request->hidden_id)->first(); 
@@ -857,6 +857,7 @@ class RequestabagController extends Controller
 					 */
 					try{
 						$response_fedex=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
+						dd($response_fedex);
 						Log::info($response_fedex);
 						if($response_fedex['result']=="0"){
 							$fedex_error = 1;
@@ -1128,9 +1129,9 @@ class RequestabagController extends Controller
           
           $shipService->getSoapClient()->__setLocation(Config::get('constants.FedEx_Ship_Url'));
           //$shipService->getSoapClient()->__setLocation('https://ws.fedex.com:443/web-services/ship');
+          //dd($processShipmentRequest);
           Log::debug((array)$processShipmentRequest);
           $response = $shipService->getProcessShipmentReply($processShipmentRequest);
-          //dd($response);
           if($response->HighestSeverity=="SUCCESS"){
               $track_id=$response->CompletedShipmentDetail->CompletedPackageDetails->TrackingIds->TrackingNumber;
               $amount=$response->CompletedShipmentDetail->ShipmentRating->ShipmentRateDetails->TotalNetChargeWithDutiesAndTaxes->Amount;

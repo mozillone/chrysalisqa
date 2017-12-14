@@ -159,9 +159,10 @@ class Order extends Authenticatable
                  $subtotal=0;
                  $coupon_amount="0.00";
                //  echo "********************************************<br>";
+                $j = 0;
                  foreach($costumer as $cart){
-                 $user_type=$cart->created_user_group;
-                 if($user_type=="admin"){
+                   $user_type=$cart->created_user_group;
+                   if($user_type=="admin"){
                      // echo $cart->price."/100"."*".$cart->discount;
                        $discount=($cart->price/100*$cart->qty)*$cart->discount;
                        $coupon_amount+=$discount;
@@ -188,16 +189,23 @@ class Order extends Authenticatable
                                  'order_id'=> $order_id, 
                                  'qty'=> $cart->qty, 
                                  'weight'=> $cart->weight, 
-                                 'image'=>$cart->image,
-                                 'shipping'=>$shipping[2]
+                                 'image'=>$cart->image
                         );
+                      $shiping_est = explode(',', $shipping[2]);
+                      if(count($shiping_est)>0){
+                        for ($i=0; $i < count($shiping_est); $i++) { 
+                          $mail_costumes['shipping'] = $shiping_est[$j];
+                        }  
+                      }else{
+                        $mail_costumes['shipping']=$shipping[2];
+                      }
                        Site_model::insert_get_id('order_items',$costume_info);
                        DB::Update('update `cc_costumes` SET quantity=quantity-'.$cart->qty.' WHERE costume_id='.$cart->costume_id.'');
                       $subtotal+=$cart->price*$cart->qty;
 
                      $mail_order[$order_id]['items'][]= $mail_costumes;
 
-                     
+                     $j++;
                  }
                  // echo "********************************************";    
                       $total_shiping=$shipping[0];
@@ -310,6 +318,7 @@ class Order extends Authenticatable
                      $order_data['seller_name']=$seller_info[0]->first_name." ".$seller_info[0]->last_name;
                      $order_data['items']=$mail_order[$order_id]['items'];
                      $order_data['order_id'] = $order_id;
+                     
                      $sent=Mail::send('emails.order_seller',array("order_info"=>$order_data), function ($m) use($seller_info) {
                      $m->to($seller_info[0]->email,$seller_info[0]->first_name." ".$seller_info[0]->last_name);
                     $m->subject("Congratulations! Your Costume Sold!");
@@ -326,7 +335,9 @@ class Order extends Authenticatable
              DB::Update('update `cc_users` SET credits=credits-'.$store_credits.' WHERE id='.Auth::user()->id.'');
 
              $sent=Mail::send('emails.order_buyer',array("mail_order"=>$mail_order), function ($m) {
+                
                 $admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+                
                 $m->to(Auth::user()->email, Auth::user()->first_name." ".Auth::user()->last_name);
                     $m->subject('Order Details');
                 });
