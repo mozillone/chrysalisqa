@@ -18,7 +18,7 @@ $(function(){
             category: {
                 required: true
             },
-            blogTags:{
+            dummyBlogTags:{
                 required: true
             },
             post_desc:{
@@ -65,7 +65,7 @@ $(function(){
             category:{
                 required: "Select Blog Post Category",
             },
-            blogTags:{
+            dummyBlogTags:{
                 required: "Enter Blog Tags"
             },
             blogImage:{
@@ -268,6 +268,13 @@ $(function(){
         $('input[type="file"]').val('');
         $('input[name="imageExists"]').val("removed");
         $("#removeImg").remove();
+    });
+    $('#blog-tags').on('itemRemoved', function(event) {
+        $('#dummyBlogTags').val($('#blog-tags').val());
+        
+    });
+    $('input').on('itemAdded', function(event) {
+        $('#dummyBlogTags').val($('#blog-tags').val());
     });
 
 });
