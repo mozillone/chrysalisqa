@@ -577,9 +577,11 @@ class RequestabagController extends Controller
 
 		if($req['label_type'] == 'fedex'){
 			$response_fedex=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
+			Log::info($response_fedex);
 			$response = $this->labelResponse($response_fedex, 'fedex', $req['request_bag_id']);
 		}else if($req['label_type'] == 'smart_post'){
 			$response_smartpost=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
+			Log::info($response_smartpost);
 			$response = $this->labelResponse($response_smartpost, 'smart_post', $req['request_bag_id']);
 		}
 		if(empty($response)){
@@ -857,7 +859,6 @@ class RequestabagController extends Controller
 					 */
 					try{
 						$response_fedex=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
-						dd($response_fedex);
 						Log::info($response_fedex);
 						if($response_fedex['result']=="0"){
 							$fedex_error = 1;
