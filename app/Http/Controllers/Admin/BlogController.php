@@ -277,8 +277,21 @@ class BlogController extends Controller {
         }
     }
 
-    public function editBlogCategory(Request $request, $id){
+    public function editBlogCategory( $id){
+        $category = DB::table('blog_categories')->find($id);
+        return json_encode($category);
+    }
 
+    public function updateBlogCategory(Request $request)
+    {
+        $req = $request->all();
+        $check_categories = DB::table('blog_categories')->where('name',$request->input('name'))->first();
+        if(!$check_categories){
+            DB::table('blog_categories')->where('id',$request->input('id'))->update(['name' => $request->input('name')]);
+            return json_encode(DB::table('blog_categories')->find($request->input('id')));    
+        }else{
+            return false;
+        }
     }
 
     public function checkBlogCategory(Request $request){

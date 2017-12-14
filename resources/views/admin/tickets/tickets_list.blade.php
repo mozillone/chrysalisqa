@@ -45,7 +45,7 @@
         <div class="table-responsive">
                 <table class="table table-striped table-bordered user-list-table">
                   <thead>
-                    <th>Keyword</th>
+                    <th>Order#</th>
                     <th>Customer Name</th>
                     <th>Ticket Type</th>
                     <th>Status</th>
@@ -54,7 +54,7 @@
                   <tbody>
                     <tr>
                       <input type="hidden" name="token" id="token" value='{{ csrf_field()}}'>
-                       <td><input type="text" class="form-control"  name="keyword" id="keyword" placeholder="keywords"></td>
+                       <td><input type="text" class="form-control"  name="keyword" id="keyword" placeholder="Order#"></td>
                       <td><input type="text" class="form-control"  name="customername"  id="customername" placeholder="Customer Name"></td>
                      
                       <td>

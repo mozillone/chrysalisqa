@@ -793,7 +793,7 @@
 																				<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 																				<input type="hidden" name="Imagecrop1" class="Forntview" data-id="" value="">
 																				<div class="drop_uploader drop_zone1">
-																					<img src="" class="result" >
+																					<!-- <img src="" class="result" > -->
 																				</div>
 																				<?php
 																				} ?>
@@ -822,7 +822,7 @@
 																			<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 																			<input type="hidden" name="Imagecrop2" class="Backview" value="" data-id="">
 																			<div class="drop_uploader drop_zone2">
-																				<img src="" class="result2" >
+																				<!-- <img src="" class="result2" > -->
 																			</div>
 																			<?php
 																			} ?>
@@ -850,7 +850,7 @@
 																			<input type="hidden" name="Imagecrop3" class="Additional" value="" data-id="">
 																			<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 																			<div class="drop_uploader drop_zone3">
-																				<img src="" class="result3" >
+																				<!-- <img src="" class="result3" > -->
 																			</div>
 																			<?php
 																			} ?>
@@ -923,7 +923,7 @@
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-success pull-right save" id="crop">Save</button>
-															<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel1">Cancel</button>
 														</div>
 													</div>
 												</div>
@@ -953,7 +953,7 @@
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-success pull-right save" id="crop2">Save</button>
-															<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel2">Cancel</button>
 														</div>
 													</div>
 												</div>
@@ -984,7 +984,7 @@
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-success pull-right save" id="crop3">Save</button>
-															<button type="button" class="btn btn-default img_clse" data-dismiss="modal">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel3">Cancel</button>
 														</div>
 													</div>
 												</div>
@@ -1018,7 +1018,7 @@
 														</div>
 														<div class="modal-footer" style="display:none;">
 															<button type="button" class="btn btn-success pull-right saveMultiple" >Save</button>
-															<button type="button" class="btn btn-default img_clse" id="multiCancel" data-dismiss="modal">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" id="multiCancel" data-dismiss="modal" id="cancelMultiple">Cancel</button>
 														</div>
 													</div><!-- /.modal-content -->
 												</div><!-- /.modal-dialog -->
@@ -1070,28 +1070,24 @@ if($("#size").val() == "custom"){
 		$("#dynamic_percent_amounts").html("$0.00");
 		//$("#donate_charity").val($("#donate_charity").val()+" %");
 	}
+
+	if(parseInt($("#donate_charity").val())<=9){
+		$("#donate_charity").css({"color":"#000","font-weight":""});
+	}
 	if(parseInt($("#donate_charity").val())==10){
 		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
-
-	if(parseInt($("#donate_charity").val())<10){
-		$("#donate_charity").css({"color":"#000","font-weight":""});
-	}
-
 	if(parseInt($("#donate_charity").val()) ==15){
-		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
+		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
-
 	if(parseInt($("#donate_charity").val()) ==25){
-		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
+		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
-
-	if(parseInt($("#donate_charity").val()) ==50){
-		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
+	if(parseInt($("#donate_charity").val()) == 50){
+		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
-
 	if(parseInt($("#donate_charity").val()) ==100){
-		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
+		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
 
  	var total_val = "0.00";
@@ -1322,6 +1318,26 @@ if($("#size").val() == "custom"){
 	   $("#drag_n_drop_2").hide();
 	   $("#drag_n_drop_3").hide();
 	});
+	$("#cancel1").on("click",function(){
+		$("#file1").val('');
+		$("#dvPreview").html('');
+		
+	});
+	$("#cancel2").on("click",function(){
+		$("#file2").val('');
+		$("#dvPreview2").html('');
+		
+	});
+	$("#cancel3").on("click",function(){
+		$("#file1").val('');
+		$("#dvPreview3").html('');
+		
+	});
+	$("#cancelMultiple").on("click",function(){
+		$("#upload-file-selector").val('');
+		$("#dvPreviewMultiple").html('');
+		
+	});
 	var hidden_file4 = $('#hidden_file4').val();
 	if (hidden_file4 == "") {
 		$('#drag_n_drop_3').css('display','none');
@@ -1332,7 +1348,8 @@ if($("#size").val() == "custom"){
 	}
 	$('#drag_n_drop_1').click(function(){
 		var Fimage = $("input[name=Imagecrop1]").attr('data-id');
-		if(Fimage == ""){
+		debugger;
+		if(Fimage == "1" || Fimage == ""){
 			$('#front_image_id').remove();
 		    $('#front_view').find('ul').remove();
 		    $('#drag_n_drop_1').css('display','none');
@@ -1390,7 +1407,7 @@ if($("#size").val() == "custom"){
 	});
 	$('#drag_n_drop_2').click(function(){
 		var Bimage = $("input[name=Imagecrop2]").attr('data-id');
-		if(Bimage == ""){
+		if(Bimage == "" || Bimage =="1"){
 			$('#back_image_id').remove();
 		    $('#back_view').find('ul').remove();
 		    $('#drag_n_drop_2').css('display','none');
@@ -1446,7 +1463,7 @@ if($("#size").val() == "custom"){
 	});
 	$('#drag_n_drop_3').click(function(){
 		var Aimage = $("input[name=Imagecrop3]").attr('data-id');
-		if(Aimage == ""){
+		if(Aimage == "" || Aimage == "1"){
 			$('#details_image_id').remove();
 		    $('#details_view').find('ul').remove();
 		    $('#drag_n_drop_3').css('display','none');

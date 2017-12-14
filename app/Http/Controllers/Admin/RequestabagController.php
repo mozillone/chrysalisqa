@@ -1128,7 +1128,7 @@ class RequestabagController extends Controller
           
           $shipService->getSoapClient()->__setLocation(Config::get('constants.FedEx_Ship_Url'));
           //$shipService->getSoapClient()->__setLocation('https://ws.fedex.com:443/web-services/ship');
-          //dd($shipService);
+          Log::debug((array)$processShipmentRequest);
           $response = $shipService->getProcessShipmentReply($processShipmentRequest);
           //dd($response);
           if($response->HighestSeverity=="SUCCESS"){
@@ -1304,8 +1304,11 @@ class RequestabagController extends Controller
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
+            Log::debug('xml');
+            Log::debug($ch);
             $result_xml = curl_exec($ch);
-
+            Log::debug('response');
+            Log::debug($result_xml);
             // remove colons and dashes to simplify the xml
             $result_xml = str_replace(array(':','-'), '', $result_xml);
             $response = @simplexml_load_string($result_xml);

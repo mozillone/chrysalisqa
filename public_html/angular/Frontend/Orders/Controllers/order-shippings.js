@@ -18,7 +18,6 @@ app.controller('OrderShippingsController', function($scope,DTOptionsBuilder, DTC
                       DTColumnBuilder.newColumn(null).withTitle('Shipping Method').renderWith(shippingMethod),
                       DTColumnBuilder.newColumn('is_notified').withTitle('Is Customer Notified?'),
                       DTColumnBuilder.newColumn('date').withTitle('Shipped On'),
-                      DTColumnBuilder.newColumn('price').withTitle('Amount'),
                                   ], 
     $scope.displayTable = true;
     function shippingMethod(data, type, full, meta) {

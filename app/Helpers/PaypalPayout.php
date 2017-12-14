@@ -29,7 +29,16 @@ class PayPalPayout
             Config::get('constants.PAYPAL_OAUTHSECRET')
         )
     );
-    
+
+    /*$apiContext->setConfig(
+      array(
+        'mode' => 'live',
+      )
+    );*/
+
+
+    // Config::get('constants.PAYPAL_OAUTHTOKEN'),
+    //         Config::get('constants.PAYPAL_OAUTHSECRET')
     $senderBatchHeader->setSenderBatchId(uniqid())
         ->setEmailSubject("You have a payment");
     // #### Sender Item
@@ -141,6 +150,7 @@ class PayPalPayout
 
       try{
           $output = \PayPal\Api\Payout::get($payoutBatchId, $apiContext);
+
           $final_output['status'] = 1;
           $final_output['output'] = $output;
 

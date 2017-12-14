@@ -457,9 +457,13 @@ Route::any('add-blog-category', [
    'as' => 'add-blog-category',
    'uses' => 'BlogController@addBlogCategory'
 ]);
-Route::any('edit-blog-category', [
+Route::any('edit-blog-category/{id}', [
     'as' => 'edit-blog-category',
     'uses' => 'BlogController@editBlogCategory'
+]);
+Route::any('update-blog-category', [
+   'as' => 'update-blog-category',
+   'uses' => 'BlogController@updateBlogCategory'
 ]);
 Route::any('blog-category-availability', [
    'as' => 'blog-category-availability',

@@ -895,6 +895,7 @@ cc_costume_description ON cc_costume_description.costume_id = cc_costumes.costum
     public static function getStatusChange()
     {
         $get_batch_id = DB::table('payout_log')->where('batch_status', 'PENDING')->get();
+        //print_r($get_batch_id); exit;
         foreach ($get_batch_id as $key => $batch_id) {
             $get_status = PayPalPayout::getPayoutStatus($batch_id->payout_batch_id);
             if($get_status['status'] == 1){
