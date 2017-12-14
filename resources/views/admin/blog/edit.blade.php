@@ -131,7 +131,7 @@
                                     <div class="form-group has-feedback blog-tags" >
                                         <label for="blog-tags" class="control-label">Blog Tags<span class="req-field" >*</span></label>
                                         <input type="text" name="blogTags" class="form-control" id="blog-tags" value="{{ $blogPost->tags }}"/>
-                                        <input id="dummyBlogTags" name="dummyBlogTags" type="hidden"/>
+                                        <input id="dummyBlogTags" name="dummyBlogTags" type="hidden" value="{{ $blogPost->tags }}" />
                                         <p class="error">{{ $errors->first('blogTags') }}</p>
                                         <span id="page_desc_error" style="color:red"></span>
                                     </div>
