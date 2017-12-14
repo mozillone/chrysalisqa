@@ -4,8 +4,9 @@
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
 <style>
 .costume-error_dup{margin-top:10px !important;}
-.costume-error_dup .form-rms-input{display: initial;}
+.costume-error_dup .form-rms-input{display: initial; }
 .costume-error_dup .form-rms-input input + label{font-size:12px; }	
+.costume-error_dup .form-rms-input input{box-shadow: 0px 0px 0px; border-radius: 0px;   color: #333;}
 
 </style>
 @endsection
