@@ -19,6 +19,8 @@
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
     <style type="text/css">
         .bootstrap-tagsinput .label-info{background-color: #5fc5ac !important;}
+        .form-group.has-feedback.blog-tags{position: relative;}
+        .form-group.has-feedback.blog-tags span.error{position: absolute; top:100%; left:0;}
     </style>
 
 @stop
@@ -129,6 +131,7 @@
                                     <div class="form-group has-feedback blog-tags" >
                                         <label for="blog-tags" class="control-label">Blog Tags<span class="req-field" >*</span></label>
                                         <input type="text" name="blogTags" class="form-control" id="blog-tags" value="{{ $blogPost->tags }}"/>
+                                        <input id="dummyBlogTags" name="dummyBlogTags" type="hidden"/>
                                         <p class="error">{{ $errors->first('blogTags') }}</p>
                                         <span id="page_desc_error" style="color:red"></span>
                                     </div>
