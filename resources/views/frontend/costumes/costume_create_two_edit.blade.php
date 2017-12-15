@@ -1297,7 +1297,7 @@
 													<!--<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
 													<script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
 													<script type="text/javascript" src="{{asset('/assets/frontend/js/cropper.js')}}"></script>
-													<script type="text/javascript" src="{{asset('/assets/frontend/js/costumesedit.js')}}"></script>
+													<script type="text/javascript" src="{{asset('/assets/frontend/js/costumesedit.js')}}?v=<?php echo date('dmYHims')?>"></script>
 													<script type="text/javascript">
 														$(document).ready(function(){
 															$("input:radio:checked").parent().addClass('active');

@@ -943,7 +943,7 @@ $dimensionvalue     = $heightattributes[1];
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 <script src="{{ asset('/assets/admin/js/pages/customers.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.0.0/cropper.js"></script>
-<script src="{{ asset('/assets/admin/js/pages/costumecustom.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/pages/costumecustom.js') }}?v=<?php echo date('dmYHims')?>"></script>
 <script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
 <script type="text/javascript">
 $(document).ready(function () {
