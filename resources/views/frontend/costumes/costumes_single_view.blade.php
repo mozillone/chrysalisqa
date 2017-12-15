@@ -18,7 +18,7 @@
 		<div class="row">
 			<nav class="breadcrumb">
 				<a class="breadcrumb-item" href="/">Home &nbsp;&nbsp;>&nbsp;&nbsp;</a>
-				<a class="breadcrumb-item" href="/category/{{$parent_cat_name}}/{{$sub_cat_name}}">{{$data[0]->cat_name}} &nbsp;&nbsp;> &nbsp;</a>
+				<a class="breadcrumb-item" href="/category/{{$parent_cat_name}}/{{$sub_cat_name}}">{{$data[0]->main_cat_name}} &nbsp;&nbsp;> &nbsp;</a>
 				<span class="breadcrumb-item active">{{$data[0]->name}}</span>
 			</nav>
 			<div class="col-md-5 col-sm-5 col-xs-12 carousel-bg-style bxslider-strt">

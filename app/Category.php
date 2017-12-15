@@ -374,7 +374,6 @@ class Category extends Authenticatable
     	//dd($key_url);
            $data=DB::Select('SELECT  * FROM `cc_url_rewrites` where url_key="'.$key_url.'"');
            return $data;
-
     }
 
 }
