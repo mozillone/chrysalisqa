@@ -887,7 +887,7 @@ $(document).on("change", "#file2", function() {
                         $(".Backview").attr('value',imgdata);
                         $(".result2").attr("src", imgdata);
                         $("#selected_file_1").remove();
-                        $(".result2").css({ "width": "198px", "height": "298px", "position": "absolute", "top": "-10px","left":"0px" });
+                        $(".result2").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
                         //$("#file2").hide();
                         $(this).parents().find("#back_view").children("#drag_n_drop_2").removeClass('hide');
                         $('.Backview').attr('data-value',2);
@@ -990,13 +990,13 @@ $(document).on("change", "#file3", function() {
                         $(".drop_zone3").append(Additional);
                         $(".result3").attr("src", imgdata);
                         $("#selected_file_2").remove();
-                        $(".result3").css({ "width": "198px", "height": "298px","position":"relative","bottom":"280px" });
+                        $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
                         //$("#file3").hide();
                         $(this).parents().find("#details_view").children("#drag_n_drop_3").removeClass('hide');
-                        if($(".drop_zone3").hasClass('additional'))
+                        /*if($(".drop_zone3").hasClass('additional'))
                         {
-                          $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
-                        }
+                          $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
+                        }*/
                     });
                 };
                 reader.readAsDataURL(file);
@@ -1053,9 +1053,9 @@ var zooms = [];
 var activeCropperObjIndex = 0;
 var slider = $(".slider");
 
-$(document).on("click", '#multiCancel', function(){
-    resetCropperValues();
-});
+/*$(document).on("click", '#multiCancel', function(){
+    
+});*/
 //multiple file uploading code
 
 $("#upload-file-selector").on("change",function () {
@@ -1286,5 +1286,6 @@ $(document).on("click","#drag_n_drop_3",function()
     $(document).on("click", "#multiCancel", function() {
         $("#upload-file-selector").val('');
         $("#dvPreviewMultiple").html('');
+        resetCropperValues();
     });
     
