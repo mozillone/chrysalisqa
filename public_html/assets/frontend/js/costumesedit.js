@@ -1053,7 +1053,7 @@ var zooms = [];
 var activeCropperObjIndex = 0;
 var slider = $(".slider");
 
-$(document).on("click", '#multiCancel', function(){
+$("#cancelMultiple").on("click",function(){
     $("#upload-file-selector").val('');
     $("#dvPreviewMultiple").html('');
     resetCropperValues();
