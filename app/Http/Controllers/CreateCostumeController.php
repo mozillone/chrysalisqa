@@ -944,7 +944,7 @@ class CreateCostumeController  extends Controller {
 		if (Auth::check()){
 			$userid 		= Auth::user()->id;
 			$this->data['get_details']    = DB::table('users')->where('id',$userid)->first();
-			$this->data['basic_address']  = Db::table('address_master')->where('user_id',$userid)->where('address_type','request_a_bag')->first();
+			$this->data['basic_address']  = DB::table('address_master')->where('user_id',$userid)->where('address_type','request_a_bag')->orderby("address_id","desc")->first();
 
 		}
 	  return view('frontend.costumes.requestabag')->with('total_data',$this->data);

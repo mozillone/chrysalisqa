@@ -487,7 +487,7 @@ $(function(){
                             $(".modalOpen1").width(220);
                             $(".modalOpen1").height(298);
                             $(".result").css({ "width": "198px", "height": "298px" });
-                            //$("#file1").hide();
+                            $("#file1").hide();
                             $(this).parents().find("#front_view").children("#drag_n_drop_1").removeClass('hide');
                             
                         });

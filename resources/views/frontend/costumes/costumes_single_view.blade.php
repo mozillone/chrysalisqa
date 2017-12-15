@@ -18,7 +18,7 @@
 		<div class="row">
 			<nav class="breadcrumb">
 				<a class="breadcrumb-item" href="/">Home &nbsp;&nbsp;>&nbsp;&nbsp;</a>
-				<a class="breadcrumb-item" href="/category/{{$parent_cat_name}}/{{$sub_cat_name}}">{{$data[0]->cat_name}} &nbsp;&nbsp;> &nbsp;</a>
+				<a class="breadcrumb-item" href="/category/{{$parent_cat_name}}/{{$sub_cat_name}}">{{$data[0]->main_cat_name}} &nbsp;&nbsp;> &nbsp;</a>
 				<span class="breadcrumb-item active">{{$data[0]->name}}</span>
 			</nav>
 			<div class="col-md-5 col-sm-5 col-xs-12 carousel-bg-style bxslider-strt">
@@ -461,7 +461,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-										<button type="submit" class="btn btn-primary">Send Message</button>
+										<button type="submit" class="btn btn-primary" id="contact_send">Send Message</button>
 									</div>
 									
 								</form>
@@ -970,6 +970,10 @@
 					{{-- page level scripts --}}
 					@section('footer_scripts')
 					<script>
+						$('#contact_send').on('click', function() {
+						    $(this).prop('disabled', true);
+						    $("#inquire_costume").submit();
+						});
 						function showSellerInfo () {
 							$('html, body').animate({
 						        scrollTop: $(".single_view_multi_view_tabs").offset().top
