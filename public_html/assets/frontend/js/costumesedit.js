@@ -1053,11 +1053,9 @@ var zooms = [];
 var activeCropperObjIndex = 0;
 var slider = $(".slider");
 
-$("#cancelMultiple").on("click",function(){
-    $("#upload-file-selector").val('');
-    $("#dvPreviewMultiple").html('');
-    resetCropperValues();
-});
+/*$(document).on("click", '#multiCancel', function(){
+    
+});*/
 //multiple file uploading code
 
 $("#upload-file-selector").on("change",function () {
@@ -1288,5 +1286,6 @@ $(document).on("click","#drag_n_drop_3",function()
     $(document).on("click", "#multiCancel", function() {
         $("#upload-file-selector").val('');
         $("#dvPreviewMultiple").html('');
+        resetCropperValues();
     });
     
