@@ -497,17 +497,11 @@
 										<p class="form-rms-input"><input type="text" name="full_name" id="full_name" value="<?php if (isset($all_details['get_details']->display_name) && !empty($all_details['get_details']->display_name)) { echo $all_details['get_details']->display_name; } ?>" tab-index="1" ></p>
 										<span id="fullname_error" style="color:red"></span>
 									</div>
-									<div class="form-rms costume-error costume-error_dup">
-										<p class="form-rms-input">
-											<input type="text" class="form-control" placeholder="Enter Location"  id="autocomplete" onFocus="geolocate()" tab-index="1"  >
-											<label >Note: Type the location name and select  to populate in address fields</label>
-											<input type="hidden" class="field form-control" id="country" name="country">
-										</p>
-									</div>
+
 									<div class="form-rms costume-error">
-										
 										<p class="form-rms-que">Address 1</p>
-										<p class="form-rms-input"><input type="text" name="address1" id="route" value="<?php if (isset($all_details['basic_address']->address1) && !empty($all_details['basic_address']->address1)) { echo $all_details['basic_address']->address1; } ?>" tab-index="1" ></p>
+										<input type="hidden" class="field form-control" id="country" name="country">
+										<p class="form-rms-input"><input type="text" name="address1" id="route" value="<?php if (isset($all_details['basic_address']->address1) && !empty($all_details['basic_address']->address1)) { echo $all_details['basic_address']->address1; } ?>" tab-index="1" onFocus="geolocate()"></p>
 										<span id="address1_error" style="color:red"></span>
 									</div>
 									<div class="form-rms costume-error">
@@ -742,8 +736,9 @@
 			function initAutocomplete() {
 				// Create the autocomplete object, restricting the search to geographical
 				// location types.
+				$("#route").attr("placeholder","");
 				autocomplete = new google.maps.places.Autocomplete(
-	            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+	            /** @type {!HTMLInputElement} */(document.getElementById('route')),
 					{types: ['geocode']});
 					
 					// When the user selects an address from the dropdown, populate the address
@@ -754,6 +749,7 @@
 			function fillInAddress() {
 				// Get the place details from the autocomplete object.
 				var place = autocomplete.getPlace();
+				debugger;
 				for (var component in componentForm) {
 					document.getElementById(component).value = '';
 					document.getElementById(component).disabled = false;
