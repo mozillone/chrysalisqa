@@ -1018,7 +1018,7 @@
 														</div>
 														<div class="modal-footer" style="display:none;">
 															<button type="button" class="btn btn-success pull-right saveMultiple" >Save</button>
-															<button type="button" class="btn btn-default img_clse" id="multiCancel" data-dismiss="modal" id="cancelMultiple">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancelMultiple">Cancel</button>
 														</div>
 													</div><!-- /.modal-content -->
 												</div><!-- /.modal-dialog -->
@@ -1333,11 +1333,11 @@ if($("#size").val() == "custom"){
 		$("#dvPreview3").html('');
 		
 	});
-	$("#cancelMultiple").on("click",function(){
+	/*$("#cancelMultiple").on("click",function(){
 		$("#upload-file-selector").val('');
 		$("#dvPreviewMultiple").html('');
 		
-	});
+	});*/
 	var hidden_file4 = $('#hidden_file4').val();
 	if (hidden_file4 == "") {
 		$('#drag_n_drop_3').css('display','none');
