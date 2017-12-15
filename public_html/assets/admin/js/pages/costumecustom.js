@@ -142,7 +142,7 @@ $(function(){
                             $(".modalOpen1").attr('value',imgdata);
                             $(".result").attr("src", imgdata);
                             $(".result").css({ "width": "263px", "height": "298px" });
-                            //$("#file1").hide();
+                            $("#file1").hide();
                             $(this).parents().find("#front_view").children("#drag_n_drop_1").removeClass('hide');
                             $("#drag_n_drop_1").show();
 
