@@ -461,7 +461,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-										<button type="submit" class="btn btn-primary">Send Message</button>
+										<button type="submit" class="btn btn-primary" id="contact_send">Send Message</button>
 									</div>
 									
 								</form>
@@ -970,6 +970,10 @@
 					{{-- page level scripts --}}
 					@section('footer_scripts')
 					<script>
+						$('#contact_send').on('click', function() {
+						    $(this).prop('disabled', true);
+						    $("#inquire_costume").submit();
+						});
 						function showSellerInfo () {
 							$('html, body').animate({
 						        scrollTop: $(".single_view_multi_view_tabs").offset().top
