@@ -75,7 +75,7 @@ $('#drag_n_drop_1').click(function(){
     $('input[name=file1]').val('');
     $('input[name=hidden]').attr('value','');
     $(".Backview").attr('value','');
-    $("#file1").removeattr('style');
+    $("#file1").removeAttr('style');
 });
 
 $('#shipping').change(function(){
@@ -91,12 +91,12 @@ $('#shipping').val('16');
 });
 $('#drag_n_drop_2').click(function(){
 
-
 $('#back_image_id').remove();
 $('#back_view').find('li').remove();
 $('#drag_n_drop_2').css('display','none');
 $('input[name=file2]').val('');
 $('input[name=hidden]').attr('value','');
+$("#file2").removeAttr('style');
 
 });
 
@@ -113,6 +113,7 @@ $('#drag_n_drop_3').css('display','none');
 $('input[name=file3]').val('');
 $('input[name=file3]').attr('value','');
 $(".drop_uploader").addClass('additional');
+$("#file3").removeAttr('style');
 });
 //donate amount percentage calculation
 /*$('#donate_charity').change(function(){
