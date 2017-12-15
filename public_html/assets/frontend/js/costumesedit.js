@@ -1054,6 +1054,8 @@ var activeCropperObjIndex = 0;
 var slider = $(".slider");
 
 $(document).on("click", '#multiCancel', function(){
+    $("#upload-file-selector").val('');
+    $("#dvPreviewMultiple").html('');
     resetCropperValues();
 });
 //multiple file uploading code
