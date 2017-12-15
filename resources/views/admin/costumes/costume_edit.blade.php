@@ -1329,7 +1329,7 @@ if($("#size").val() == "custom"){
 		
 	});
 	$("#cancel3").on("click",function(){
-		$("#file1").val('');
+		$("#file3").val('');
 		$("#dvPreview3").html('');
 		
 	});
