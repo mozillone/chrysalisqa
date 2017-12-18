@@ -162,6 +162,7 @@ $(document).on("change", "#file1", function() {
                         {
                           $(".result").css({ "width": "198px", "height": "298px","position":"relative"});
                         }
+                        $('#file1_error').html("");
 
                     });
 
