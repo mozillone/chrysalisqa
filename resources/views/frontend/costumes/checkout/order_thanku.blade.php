@@ -94,8 +94,11 @@
             margin-bottom: 0;
         }
 
-        .range-slider .currency-bar li {
+/*        .range-slider .currency-bar li {
                padding: 0 6.7%;
+        }*/
+                .range-slider .currency-bar li {
+               padding: 0 5.3%;
         }
 
         .range-slider .currency-bar li:first-child {
