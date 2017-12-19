@@ -506,7 +506,7 @@ $(document).ready(function() {
     	$('#is_shipping').attr('checked',false);
     	$('#is_billing').attr('checked',false);
     }
-     $(document).on('click', '.delete', function(){ 
+    $(document).on('click', '.delete', function(){ 
       var item_id=$(this).attr('data-item-id');
       var cart_id=$(this).attr('data-cart_id');
       swal({   

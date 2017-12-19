@@ -1162,6 +1162,7 @@ class RequestabagController extends Controller
             $password = Config::get('constants.FedEx_Password');
             $account_number = Config::get('constants.FedEx_SmartPostAccountNumber');
             $meter_number = Config::get('constants.FedEx_SmartPostMeterNumber');
+            $hub_id = Config::get('constants.FedEx_SmartPostHubId');
 
             $xml = '<?xml version="1.0" encoding="UTF-8"?>
             <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v17="http://fedex.com/ws/ship/v17">
@@ -1269,7 +1270,7 @@ class RequestabagController extends Controller
 			            </v17:SpecialServicesRequested>
 			            <v17:SmartPostDetail>
 			               <v17:Indicia>PARCEL_RETURN</v17:Indicia>
-			               <v17:HubId>5531</v17:HubId>
+			               <v17:HubId>'.$hub_id.'</v17:HubId>
 			            </v17:SmartPostDetail>
 			            <v17:LabelSpecification>
 			               <v17:LabelFormatType>COMMON2D</v17:LabelFormatType>
