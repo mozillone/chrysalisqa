@@ -1,4 +1,4 @@
-@extends('/frontend/email_main')
+@extends('frontend.email_main')
 @section('content')
 <table style="font-weight:normal;border-collapse:collapse;border:0;padding:0;margin-top:0;width:640px; margin:0 auto;">
 	<tbody>

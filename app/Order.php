@@ -152,7 +152,7 @@ class Order extends Authenticatable
                                  'created_at'=>date('Y-m-d h:i:s'),
                                 );
                  $order_id=Site_model::insert_get_id('order',$order_info);
-                 $this->converstionTheard($order_id,$key);
+                 //$this->converstionTheard($order_id,$key);
                  $this->orderStatusInserted($order_id,Config::get('constants.Processing'));
                  $price=0;
                  $total_shiping=0;

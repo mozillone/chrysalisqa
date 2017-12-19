@@ -971,8 +971,10 @@
 					@section('footer_scripts')
 					<script>
 						$('#contact_send').on('click', function() {
-						    $(this).prop('disabled', true);
-						    $("#inquire_costume").submit();
+							if($("#inquire_costume").valid()){
+							    $(this).prop('disabled', true);
+							    $("#inquire_costume").submit();
+							}
 						});
 						function showSellerInfo () {
 							$('html, body').animate({

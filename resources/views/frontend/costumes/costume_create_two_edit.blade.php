@@ -356,7 +356,7 @@
 										<i class="fa fa-times-circle" aria-hidden="true"></i>				
 									</span>
 									<div class="up-blog">
-										<input type="file" name="file1" accept="image/*" value="1" id="file1">
+										<input type="file" name="file1" accept="image/*" value="1" id="file1" @if(isset($front_image->image)) style="display: none;" @endif>
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 										<?php if(isset($front_image->image) && !empty($front_image->image)){
 										?>
@@ -388,7 +388,7 @@
 										<i class="fa fa-times-circle" aria-hidden="true"></i>				
 									</span>
 									<div class="up-blog">
-										<input type="file" name="file2" accept="image/*" id="file2" value="1">
+										<input type="file" name="file2" accept="image/*" id="file2" value="1" @if(isset($back_image->image)) style="display: none;" @endif>
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 										<?php if(isset($back_image->image) && !empty($back_image->image)){
 										?>
@@ -415,11 +415,11 @@
 								</div>
 								<div class="col-md-3 col-sm-3 col-xs-12 rc_pic " id="details_view">
 									<h4>03. Detail </h4>
-									<span class="remove_pic" id="drag_n_drop_3" @if(empty($details_image->image)) style="display: none;" @endif>
+									<span class="remove_pic" id="drag_n_drop_3">
 										<i class="fa fa-times-circle" aria-hidden="true"></i>					
 									</span>
 									<div class="up-blog">
-										<input type="file" name="file3" accept="image/*" id="file3" value="1">
+										<input type="file" name="file3" accept="image/*" id="file3" value="1" @if(isset($details_image->image)) style="display: none;" @endif>
 										<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 										<?php if(isset($details_image->image) && !empty($details_image->image)){
 										?>
