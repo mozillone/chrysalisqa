@@ -85,7 +85,7 @@ $('.add-prod').click(function(){
   if(sku_no.length){
   	if(jQuery.inArray(product_id,products)==-1 || products.length==0){
     products.push(product_id);
-   	$('.assigned-products').append('<tr><td>'+product_name+'</td><td>'+sku_no+'</td><td>$'+price+'</td><td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='+product_id+'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>')
+   	$('.assigned-products').prepend('<tr><td>'+product_name+'</td><td>'+sku_no+'</td><td>$'+price+'</td><td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='+product_id+'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>')
   	$('#products_list').val("");
   	}
   }
