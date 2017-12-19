@@ -1297,7 +1297,7 @@ class RequestabagController extends Controller
 			      </v17:ProcessShipmentRequest>
 			   </soapenv:Body>
 			</soapenv:Envelope>';
-
+Log::debug($xml);
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services');
             curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
