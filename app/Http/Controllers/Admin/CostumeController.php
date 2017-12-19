@@ -183,6 +183,11 @@ class CostumeController extends Controller
 		//dd($final_keywords);
 		$userid = Auth::user()->id;
 		$customer_name=$req['customer_name'];
+		if($customer_name == 1){
+			$customer_group = "admin";
+		}else{
+			$customer_group = "user";
+		}
 		$costume_name=$req['costume_name'];
 		$costume_cost=$req['costume_cost'];
 		$gender=$req['gender'];
@@ -224,7 +229,6 @@ class CostumeController extends Controller
 		$frontview = $req['img_chan'];
 		
 		$customerid = $customer_name;
-		$customer_group = "admin";
 		$costume = array(
 			'weight_pounds'=>$req['pounds'],
 			'weight_ounces'=>$req['ounces'],
@@ -1214,6 +1218,12 @@ class CostumeController extends Controller
 		//echo "<pre>"; print_r($req); exit;
 		$userid=Auth::user()->id;
 		$customer_name=$req['customer_name'];
+		
+		if($customer_name == 1){
+			$customer_group = "admin";
+		}else{
+			$customer_group = "user";
+		}
 		$costume_name=$req['costume_name'];
 		$costume_cost=$req['costume_cost'];
 		$gender=$req['gender'];
@@ -1274,7 +1284,6 @@ class CostumeController extends Controller
 		//Check whether the costume inserted by admin or not if the user is selected insert the user id else insert the admin as costumer
 		
 		$customerid=$customer_name;
-		$customer_group="admin";
 		
         $costume=array(
 			'weight_pounds'=>$req['pounds'],
