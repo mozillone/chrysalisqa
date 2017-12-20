@@ -235,15 +235,20 @@
                                         <div class="col-md-12 file-ups">
                                             <div class="form-group">
                                                 <label for="Image" class="control-label">Upload Image<span class="req-field"> * </span></label>
-                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="fileupload fileupload-new rmvimg" data-provides="fileupload">
                                                     <img  style="width:160px;height:160px;"  src="{{ isset($users->user_img) && ($users->user_img!='default.jpg') ? URL::asset('event_images/'.$users->user_img) : URL::asset('default_pic.png') }}" class="img-pview img-responsive" id="img-chan" name="img-chan" style=" alt="" riot"="" >
-                                                    <span class="remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+                                                    @if(isset($users->user_img))
+                                                    <span class="remove_pic" id="removeImg"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+                                                    <input id="imageExists" name="imageExists" value="1" type="hidden">
+                                                    @else
+                                                    <input id="imageExists" name="imageExists" type="hidden">
+                                                    @endif
                                                     <span class="fileupload-exists"></span>
-                                                        <input id="event_image" name="event_image" placeholder="Profile Image" class="form-control" type="file">
+                                                    <input id="event_image" name="event_image" placeholder="Profile Image" class="form-control" type="file">
 
                                                     <input type="hidden" name="img_removed" class="img_removed">
-                                <input type="hidden" class="name_img" class="find_img" value="{{ isset($users->user_img) && ($users->user_img!='default_pic.png') ? $users->user_img : 'default_pic.png' }}">
-                                <span class="fileupload-preview"></span>
+                                                    <input type="hidden" class="name_img" class="find_img" value="{{ isset($users->user_img) && ($users->user_img!='default_pic.png') ? $users->user_img : 'default_pic.png' }}">
+                                                    <span class="fileupload-preview"></span>
                                                     <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                                 </div>
                                                 <p ><b>Note:</b> The file could not be exceed above 10MB and allowed only .JPG, .JPEG, .PNG format.</p>
