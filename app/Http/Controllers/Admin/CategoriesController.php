@@ -89,7 +89,6 @@ class CategoriesController extends Controller
    }
     public function editCategories(Request $request,$cat_id=null)
     {
-
       $req=$request->all();
 
       if(count($req))

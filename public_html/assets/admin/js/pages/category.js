@@ -75,6 +75,7 @@ var products=[];
 $('.costume_id').each(function(i,v){
 	products.push($(this).val());
 });
+
 $('.add-prod').click(function(){
   $("#elements_change").val("1");
   var product_name=$('#cst_name').val();
@@ -90,10 +91,11 @@ $('.add-prod').click(function(){
   	}
   }
 });
+
 $('form').submit(function(eventObj) {
-       $.each(products,function(i,value){
-     $('form').append('<input type="hidden" value="'+value+'" name="costume_list[]"/> ');
-   });
+    $.each(products,function(i,value){
+      $('form').append('<input type="hidden" value="'+value+'" name="costume_list[]"/> ');
+    });
     return true;
 });
 
