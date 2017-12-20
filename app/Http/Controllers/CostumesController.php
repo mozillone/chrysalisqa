@@ -489,7 +489,7 @@ class CostumesController extends Controller {
 	}*/
 	public function costumeReport(Request $request){
 
-		$req=$request->all();
+		$req=Request::all();
 		$res=Costumes::costumeReport($req);
 		Session::flash('success', 'Your report is sent to admin.');
         return Redirect::back();

@@ -184,6 +184,7 @@
            },
         "searching": false,
         "pageLength": 10,
+        "order": [[ 1, "desc" ]],
         "bLengthChange": false,
         "columns": [
          { data: 'press_title', name: 'press_title' },
