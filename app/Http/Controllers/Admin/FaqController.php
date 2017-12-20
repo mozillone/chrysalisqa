@@ -73,6 +73,13 @@ class FaqController extends Controller  {
             } else {
                 $faqStatus = 1;
 
+                $inc_sort_no = DB::table('faqs')->where('sort_no', '>=', $req['sort_no'])->where('block', $req['block'])->get();
+                
+                foreach ($inc_sort_no as $key => $value) {
+                    $sort_number = $value->sort_no+1;
+                    DB::table('faqs')->where('id', $value->id)->update(['sort_no'=>$sort_number]);
+                }
+                
                 $data = array(
                     'title'      => $req['title'],
                     'block'      => $req['block'],
@@ -113,13 +120,20 @@ class FaqController extends Controller  {
                 return Redirect::back()->withErrors($validator->messages())->withInput();
             } else {
 
+                $inc_sort_no = DB::table('faqs')->where('sort_no', '>=', $req['sort_no'])->where('block', $req['block'])->get();
+                
+                foreach ($inc_sort_no as $key => $value) {
+                    $sort_number = $value->sort_no+1;
+                    DB::table('faqs')->where('id', $value->id)->update(['sort_no'=>$sort_number]);
+                }
+
                 $faqData = array(
-                    'title'      => $req['title'],
-                    'block'      => $req['block'],
-                    'description'        => $req['faq_description'],
-                    'sort_no'        => $req['sort_no'],
-                    'status' => $req['status'],
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'title'         => $req['title'],
+                    'block'         => $req['block'],
+                    'description'   => $req['faq_description'],
+                    'sort_no'       => $req['sort_no'],
+                    'status'        => $req['status'],
+                    'updated_at'    => date('Y-m-d H:i:s')
                 );
 
                 $condition = array('id' => $id);
