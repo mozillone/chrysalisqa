@@ -8,9 +8,6 @@ $(document).ready(function(){
 					required: true,
 					email: true,
 				},
-				phone: {
-					required: true,
-				},
 				reason: {
 					required: true
 				}
