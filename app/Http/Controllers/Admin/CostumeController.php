@@ -890,7 +890,7 @@ class CostumeController extends Controller
 					$where.=' AND report.name LIKE "%'.$req['search']['user_name'].'%"';
 			}
 		}
-		$costume_reports = DB::select('SELECT cst.costume_id,cst.sku_no,dsc.name as cst_name ,report.name as user_name,report.phn_no,report.email,report.reason,DATE_FORMAT(report.created_at,"%m/%d/%Y %h:%i %p") as date FROM `cc_reported_costumes` as report LEFT JOIN cc_costumes as cst on cst.costume_id=report.costume_id LEFT JOIN cc_costume_description as dsc on dsc.costume_id=cst.costume_id '.$where.'');
+		$costume_reports = DB::select('SELECT cst.costume_id,cst.sku_no,dsc.name as cst_name ,report.name as user_name,report.phn_no,report.email,report.reason,DATE_FORMAT(report.created_at,"%m/%d/%Y %h:%i %p") as date FROM `cc_reported_costumes` as report LEFT JOIN cc_costumes as cst on cst.costume_id=report.costume_id LEFT JOIN cc_costume_description as dsc on dsc.costume_id=cst.costume_id '.$where.' order by report.id desc');
 		return response()->success(compact('costume_reports'));
 	}
 
