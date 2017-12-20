@@ -118,7 +118,9 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
       $('input[name="charity_id"]').val(id);
       $('#charity_heading').html('Edit '+name);
       if(image.length){
+        $(".rmvimg").append('<span class="remove_pic" id="removeImg"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
         $('#img-chan1').attr('src','/charities_images/'+image);
+        $("#imageExists").val(image);
       }
       $('#charity_name').val(name);
       $('#charity_edit_popup').modal('show');
@@ -198,6 +200,7 @@ $("#edit_img_pic").on('change', function() {
       var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
       var image_holder = $("#img-chan1");
       //image_holder.empty();
+      $(".rmvimg").append('<span class="remove_pic" id="removeImg"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
       if (extn == "jpg" || extn == "jpeg" || extn == "png") {
         if (typeof(FileReader) != "undefined") {
           //loop for each file selected for uploaded.
@@ -220,7 +223,8 @@ $("#edit_img_pic").on('change', function() {
               reader.onload = function(e) {
                 $('#img-chan1').attr('src',e.target.result);
                 $('.edit_remove_pic').remove();
-                  $('.img-pview').after('<span class="edit_remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
+                $('input[name="imageExists"]').val("image.png");
+                  //$('.img-pview').after('<span class="edit_remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
            
               }
               image_holder.show();
@@ -266,15 +270,39 @@ $("#charity-create").validate({
                 }
   
         });
+$("#editCharity").click(function(){
+  if($("#charity-edit").valid()){
+    $("#charity-edit").submit();
+  }
+});
+$(function(){
+
 $("#charity-edit").validate({
-            rules: {
-                charity_name:{
-                        required: true,
-                        maxlength: 50
-                    },
-                image:{
-                        extension: "png,jpg"
-                    },
-                }
-  
-        });
+  rules: {
+      charity_name:{
+              required: true,
+              maxlength: 50
+          },
+      imageExists:{
+            required: true,
+              extension: "png,jpg"
+          },
+      }
+
+});
+});
+
+$(".remove_pic").on("click",function(){
+  $('#img-chan1').attr('src',"/blog_images/preview_placeholder.png");
+  $('input[type="file"]').val('');
+  $('input[name="is_removed"]').val("1");
+  $('input[name="imageExists"]').val("");
+  $("#removeImg").remove();
+});
+$(document).on('click','#removeImg',function(){
+  $('#img-chan1').attr('src',"/blog_images/preview_placeholder.png");
+  $('input[type="file"]').val('');
+  $('input[name="is_removed"]').val("1");
+  $('input[name="imageExists"]').val("");
+  $("#removeImg").remove();
+});

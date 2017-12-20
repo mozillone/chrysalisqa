@@ -217,7 +217,12 @@ class EventController extends Controller {
 
             if(count($req)){
                 if (!empty($req['event_image'])) {
-
+                    /*Removing Prev Image From File Directory*/
+                    $pressimage=DB::table('events')->select('user_img as image')->where('event_id',$req['eventid'])->first();
+                    $file_name=$pressimage->image;
+                    \File::delete(public_path("event_images/thumbs/".$file_name));
+                    \File::delete(public_path("event_images/".$file_name));
+                    /*Removing Prev Image From File Directory*/
                     $profile_img = $req['event_image'];
                     $oldimage    = $req['img_removed'];
                     $file_name   = str_random(10).'.'.$req['event_image']->getClientOriginalExtension();
@@ -231,10 +236,14 @@ class EventController extends Controller {
                     $whereimage = array('event_id' => $req['eventid']);
                     $user_metaq = Site_model::update_data('events', $image, $whereimage);
                 }
-                else if(isset($req['is_removed'])){ 
-                    $pressimage=DB::table('events')->select('user_img as image')->
-                    where('event_id',$req['event_id'])->first();
+                else if(isset($req['img_removed']) && $req["img_removed"] == "1"){ 
+                    /*Removing Prev Image From File Directory*/
+                    $pressimage=DB::table('events')->select('user_img as image')->where('event_id',$req['eventid'])->first();
                     $file_name=$pressimage->image;
+                    \File::delete(public_path("event_images/thumbs/".$file_name));
+                    \File::delete(public_path("event_images/".$file_name));
+                    /*Removing Prev Image From File Directory*/
+
                 }else {
 
                     /*****updating image code starts here***/

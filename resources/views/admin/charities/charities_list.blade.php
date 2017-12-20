@@ -186,11 +186,12 @@ display: none;
                                             <span class="fileupload-exists"></span>
                                             <input id="edit_img_pic" name="image" type="file" placeholder="Profile Image" class="img-responsivel">
                                             <input type="hidden" name="is_removed"/>
+                                            <input id="imageExists" name="imageExists" value="" type="hidden">
                                   </span>
                                   </div>
                                 </div>
                           </div>
-                          <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new" data-provides="fileupload">
+                          <div class="col-md-6 col-sm-6 col-xs-12 fileupload fileupload-new rmvimg" data-provides="fileupload">
                             <img src="{{asset('/charities_images/default-placeholder.jpg')}}" class="img-pview img-responsive"  id="img-chan1">
 
 
@@ -203,7 +204,7 @@ display: none;
 
             <!-- Modal Footer -->
             <div class="modal-footer">
-                <input type="submit" class="btn btn-primary" value="Submit"/>
+                <input id="editCharity" type="button" class="btn btn-primary" value="Submit"/>
                 <button type="button" class="btn btn-default"
                         data-dismiss="modal">
                             Close
