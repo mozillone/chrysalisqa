@@ -1260,7 +1260,7 @@ class CreateCostumeController  extends Controller {
 
 		$costume_description = DB::table('costume_description')->where('costume_id',$id)->first();
 		$costume_category_1 = DB::table('costume_to_category')->where('costume_id',$id)->where('sort_no','1')->first();
-		$costume_category_2 = DB::table('costume_to_category')->where('costume_id',$id)->where('sort_no','1')->first();
+		$costume_category_2 = DB::table('costume_to_category')->where('costume_id',$id)->first();
 		$costume_details = DB::table('costumes')->where('costume_id',$id)->first();
 		$db_body_height_ft = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','16')->first();
 		 
@@ -1314,7 +1314,8 @@ class CreateCostumeController  extends Controller {
 		$handwashed=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','31')->get();
 
-
+// echo "<pre>"; //print_r($db_subcategoryname); 
+// print_r($costume_category_2); exit;
 
 
 		return view('frontend.costumes.costume_create_two_edit',compact('categories','bodyanddimensions','bodydimensions_val','body_height_ft',

@@ -68,7 +68,7 @@ die;*/
                     </div>
                     @endif 
                     
-                    <form id="press-update" class="form-horizontal defult-form" name="userForm" action="/admin/updatepress" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
+                    <form id="press-create" class="form-horizontal defult-form" name="userForm" action="/admin/updatepress" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
                     {{ csrf_field() }}
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         
@@ -114,12 +114,13 @@ die;*/
                                 <div class="box-body">
                                         <div class="col-md-12 file-ups">
                                             <div class="form-group">
-                                                <label for="Image" class="control-label">Upload Image<span class="required"> * </span></label>
-                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <label for="Image" class="control-label">Upload Image<span class="req-field" >*</span></label>
+                                                <div class="fileupload fileupload-new rmvimg" data-provides="fileupload">
                                                     <?php
                                                     $pressImage = $categories->user_img;
                                                     $filesource = null;
                                                     $imageExists = null;
+                                                    $fileExist = null;
                                                     if(!empty($pressImage)){
                                                         $fileExist = file_exists(public_path('/press_images/'.$categories->user_img));
                                                         if($fileExist){
@@ -134,9 +135,13 @@ die;*/
 
                                                     ?>
                                                     <img  style="width:160px;height:160px;"  src="<?=$filesource?>" class="img-pview img-responsive" id="img-chan" name="img-chan" style=" alt="" riot"="" >
-                                                    <span class="remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+                                                    @if($fileExist)
+                                                     <span class="remove_pic" id="removeImg">
+                                                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                                    </span>
+                                                    @endif
                                                     <span class="fileupload-exists"></span>
-                                                    <input name="imageExists" value="<? echo (!empty($imageExists) ? $imageExists : '')?>" type="hidden">
+                                                    <input id="imageExists" name="imageExists" value="<?php echo (!empty($imageExists) ? $imageExists : '')?>" type="hidden">
                                                     <input id="press_image" name="press_image" placeholder="Profile Image" style="margin-top: 15px;" class="form-control" type="file">
                                                     <span class="fileupload-preview"></span>
                                                     <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
@@ -191,11 +196,18 @@ $(document).ready(function() {
         CKEDITOR.replace( 'postDesc' );
     });
 });
- $(".remove_pic").on("click",function(){
-        $('#img-chan').attr('src',"/default_pic.png");
-        $('input[type="file"]').val('');
-     $('input[name="imageExists"]').val("removed");
-    });
+$(".remove_pic").on("click",function(){
+    $('#img-chan').attr('src',"/press_images/listing_placeholder.png");
+    $('input[type="file"]').val('');
+    $('input[name="imageExists"]').val("");
+    $("#removeImg").remove();
+});
+$(document).on('click','#removeImg',function(){
+    $('#img-chan').attr('src',"/press_images/listing_placeholder.png");
+    $('input[type="file"]').val('');
+    $('input[name="imageExists"]').val("");
+    $("#removeImg").remove();
+});
 </script>
 
 

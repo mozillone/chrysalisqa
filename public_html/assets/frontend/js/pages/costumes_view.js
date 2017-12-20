@@ -8,12 +8,6 @@ $(document).ready(function(){
 					required: true,
 					email: true,
 				},
-				phone: {
-					//required: true,
-					number: true,
-					minlength:10,
-					maxlength:10
-				},
 				reason: {
 					required: true
 				}

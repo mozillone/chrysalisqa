@@ -155,7 +155,7 @@ Category edit@parent
 
                       <div class="col-md-6">
                                     <div class="form-group has-feedback" >
-                                        <label for="inputEmail3" class="control-label">Sort Order <span class="req-field" >*</span></label>
+                                        <label for="inputEmail3" class="control-label">Sort Order <span class="req-field" ></span></label>
                                             <input type="text" class="form-control" placeholder="Sort Order"  name="sort" id="name" value="{{$cat_data[0]->sort_order}}">                                       
                                     </div>                                    
                       </div> 
@@ -173,7 +173,7 @@ Category edit@parent
                                                  <input type="hidden"  id="products_id">
                                                  <input type="hidden"  id="sku_no">
                                                  <input type="hidden"  id="price">
-                                                 <span>Note: Type the product name to autopopulate</span>
+                                                 <span>Note: Type the product name to autopopulate<br/><span style="color:red">Costumes added to this Category will be deleted in the other Categories.</span></span>
                                         </div>
                                 </div> 
                             <div class="col-md-2 col-sm-2 col-xs-4">
