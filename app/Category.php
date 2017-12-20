@@ -354,6 +354,10 @@ class Category extends Authenticatable
         if(isset($req['costume_list']) && $parent_id!="0"){
           Site_model::delete_single('costume_to_category',$cond);
           foreach(array_unique($req['costume_list']) as $key=>$value){
+            DB::table('costume_to_category')
+                ->where('costume_id', $value)
+                ->where('category_id', '!=', $req['category_id'])
+                ->delete();
             $category_coustume=array('costume_id'=>$value,
                    'category_id'=>$req['category_id'],
                    'sort_no'=>$key,
