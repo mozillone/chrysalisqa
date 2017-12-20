@@ -9,7 +9,7 @@ $("#press-create").validate({
             required: true,
             url: true
         },
-        press_image:{
+        imageExists:{
             required: true
         },
         postDesc:{
@@ -74,7 +74,8 @@ $("#press_image").on('change', function(){
     var imgPath = $(this)[0].value;
     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
     var image_holder = $("#img-chan");
-    image_holder.empty();
+    //image_holder.empty();
+    $(".rmvimg").append('<span class="remove_pic" id="removeImg"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
     var size = parseFloat($("#press_image")[0].files[0].size / 1024).toFixed(2);
     if (extn == "jpg" || extn == "jpeg" || extn == "png") {
         if(size<10000)
@@ -87,9 +88,11 @@ $("#press_image").on('change', function(){
                     reader.onload = function(e) {
 
                         $('#img-chan').attr('src',e.target.result);
+                        $('input[name="imageExists"]').val("1");
                     }
                     image_holder.show();
                     reader.readAsDataURL($(this)[0].files[i]);
+                    $(".remove_pic").next().remove();
                 }
             } else {
                 swal("This browser does not support FileReader.");
@@ -125,10 +128,18 @@ $("#press_image").on('change', function(){
     }
 
    $(".remove_pic").on("click",function(){
-        $('#img-chan').attr('src',"/default_pic.png");
+        $('#img-chan').attr('src',"/blog_images/preview_placeholder.png");
         $('input[type="file"]').val('');
-       $('input[name="imageExists"]').val("removed");
+        $('input[name="imageExists"]').val("");
+        $("#removeImg").remove();
     });
+    $(document).on('click','#removeImg',function(){
+        $('#img-chan').attr('src',"/blog_images/preview_placeholder.png");
+        $('input[type="file"]').val('');
+        $('input[name="imageExists"]').val("");
+        $("#removeImg").remove();
+    });
+    
 
 
 });

@@ -371,16 +371,16 @@
 													<h2>Report Item</h2>
 													
 													<div class="tab-pane active in" id="login_tab1">
-														<form class="" action="{{route('report.post')}}" method="POST" id="report">
+														<form class="" action="{{url('costume-report')}}" method="POST" id="report">
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
 															<input type="hidden" name="costume_id" value="{{$data[0]->costume_id}}">
 															<div class="form-group">
-																<label>Name</label>
+																<label>Name<span style="color: red" >*</span></label>
 																<input type="text"  name="name" placeholder="Enter your name" class="form-control" @if(Auth::check()) value="{{Auth::user()->display_name}}" @endif>
 																<p class="error">{{ $errors->first('name') }}</p>
 															</div>
 															<div class="form-group">
-																<label>Email</label>
+																<label>Email<span style="color: red" >*</span></label>
 																<input type="text"  name="email" placeholder="Enter your email" class="form-control" @if(Auth::check()) value="{{Auth::user()->email}}" @endif>
 																<p class="error">{{ $errors->first('email') }}</p>
 															</div>
@@ -388,11 +388,11 @@
 															
 															<div class="form-group">
 																<label>Phone</label>
-																<input type="text" name="phone" placeholder="Enter phone number" class="form-control" @if(Auth::check()) value="{{Auth::user()->phone_number}}" @endif>
+																<input type="text" name="phone" id="phone_num" placeholder="Enter phone number" class="form-control" @if(Auth::check()) value="{{Auth::user()->phone_number}}" @endif>
 																<p class="error">{{ $errors->first('phone') }}</p>
 															</div>
 															<div class="form-group">
-																<label>Reason</label>
+																<label>Reason<span style="color: red" >*</span></label>
 																<select class="form-control" name="reason">
 																	<option value="">--Select--</option>
 																	<option value="Technical issue">Technical issue</option>
@@ -442,17 +442,17 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group has-feedback">
-													<label>Name</label>
+													<label>Name<span style="color: red" >*</span></label>
 													<input type="text" name="user_name" class="form-control" value="<?php if(Auth::check()){ echo Auth::user()->display_name; } ?>">
 													<p class="error">{{ $errors->first('user_name') }}</p>
 												</div>
 												<div class="form-group has-feedback">
-													<label>Email</label>
+													<label>Email<span style="color: red" >*</span></label>
 													<input type="email" name="user_email" class="form-control" value="<?php if(Auth::check()){ echo Auth::user()->email; } ?>">
 													<p class="error">{{ $errors->first('user_email') }}</p>
 												</div>
 												<div class="form-group has-feedback">
-													<label>Message</label>
+													<label>Message<span style="color: red" >*</span></label>
 													<textarea rows="5" name="user_message" class="form-control"></textarea>
 													<p class="error">{{ $errors->first('user_message') }}</p>
 												</div>
@@ -970,6 +970,35 @@
 					{{-- page level scripts --}}
 					@section('footer_scripts')
 					<script>
+						$(function() {
+						    $("#phone_num").on("keyup paste", function() {
+						      // Remove invalid chars from the input
+						      var input = this.value.replace(/[^0-9\(\)\s\-]/g, "");
+						      var inputlen = input.length;
+						      // Get just the numbers in the input
+						      var numbers = this.value.replace(/\D/g,'');
+						      var numberslen = numbers.length;
+						      // Value to store the masked input
+						      var newval = "";
+
+						      // Loop through the existing numbers and apply the mask
+						      for(var i=0;i<numberslen;i++){
+						          if(i==0) newval="("+numbers[i];
+						          else if(i==3) newval+=") "+numbers[i];
+						          else if(i==6) newval+="-"+numbers[i];
+						          else newval+=numbers[i];
+						      }
+
+						      // Re-add the non-digit characters to the end of the input that the user entered and that match the mask.
+						      if(inputlen>=1&&numberslen==0&&input[0]=="(") newval="(";
+						      else if(inputlen>=6&&numberslen==3&&input[4]==")"&&input[5]==" ") newval+=") ";
+						      else if(inputlen>=5&&numberslen==3&&input[4]==")") newval+=")";
+						      else if(inputlen>=6&&numberslen==3&&input[5]==" ") newval+=" ";
+						      else if(inputlen>=10&&numberslen==6&&input[9]=="-") newval+="-";
+
+						      $(this).val(newval.substring(0,14));
+						   	});
+						});
 						$('#contact_send').on('click', function() {
 							if($("#inquire_costume").valid()){
 							    $(this).prop('disabled', true);

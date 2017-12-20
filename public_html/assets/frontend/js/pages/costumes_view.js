@@ -9,10 +9,7 @@ $(document).ready(function(){
 					email: true,
 				},
 				phone: {
-					//required: true,
-					number: true,
-					minlength:10,
-					maxlength:10
+					required: true,
 				},
 				reason: {
 					required: true
