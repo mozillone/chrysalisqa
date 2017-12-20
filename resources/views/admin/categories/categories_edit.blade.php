@@ -155,7 +155,7 @@ Category edit@parent
 
                       <div class="col-md-6">
                                     <div class="form-group has-feedback" >
-                                        <label for="inputEmail3" class="control-label">Sort Order <span class="req-field" >*</span></label>
+                                        <label for="inputEmail3" class="control-label">Sort Order <span class="req-field" ></span></label>
                                             <input type="text" class="form-control" placeholder="Sort Order"  name="sort" id="name" value="{{$cat_data[0]->sort_order}}">                                       
                                     </div>                                    
                       </div> 
