@@ -50,7 +50,7 @@ class CategoriesController extends Controller
    public function createCategories(Request $request)
    {
          $req=$request->all();
-       //  dd($req);
+        //dd($req);
          if(count($req))
          {
             $rule  = array('name' => 'required|max:50','desc' => 'required|max:200','cat_image' => 'required','banner_image'=>'required');
