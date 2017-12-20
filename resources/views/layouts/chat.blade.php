@@ -67,9 +67,9 @@
                                     $listingImage = URL::asset('/costumers_images/default-placeholder.png');
                                 }
                                 ?>
-                                @if($get_con->type != "order")
+                                <!-- @if($get_con->type != "order")
 								<div class="msg_order_imge"><a href="{{ URL::to('/product').$get_con->url_key }}"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
-								@endif
+								@endif -->
 								<li><p class="orders_singles_views">@if($get_con->type == 'request_a_bag') Ref no @elseif($get_con->type == "order") Order Id @else Product Id @endif#: <br> {{@$get_con->type_id}}</p></li>
 							</ul>
 						</div> <!-- end chat-header -->

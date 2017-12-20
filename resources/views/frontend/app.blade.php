@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<meta property="fb:app_id" content="1984025911869654"/> 
+		<meta property="fb:app_id" content="381073025662941"/> 
 		<meta property="og:type" content="website">
         {!! Meta::tag('title') !!}
         {!! Meta::tag('description') !!}
@@ -23,9 +23,8 @@
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/css/chrysalis.css')}}">
 		<link href="{{ asset('/assets/frontend/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
-		<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59ca6d8233c1af00121cdbbe&product=unknown' async='async'></script>
-		<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59ca6d8233c1af00121cdbbe&product=custom-share-buttons"></script>
-		
+		<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59c36f9960e956001167a176&product=unknown"></script>
+		<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59c36f9960e956001167a176&product=custom-share-buttons"></script>		
 		@yield('styles')
 	</head>
 	<body ng-app="app">

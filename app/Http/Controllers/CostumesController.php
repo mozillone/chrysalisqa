@@ -18,6 +18,7 @@ use App\Exceptions\Handler;
 use Illuminate\Support\Facades\Input;
 use URL;
 
+
 class CostumesController extends Controller {
 
 	protected $messageBag = null;
@@ -487,7 +488,8 @@ class CostumesController extends Controller {
 		return Response::JSON($res);
 	}*/
 	public function costumeReport(Request $request){
-		$req=$request->all();
+
+		$req=Request::all();
 		$res=Costumes::costumeReport($req);
 		Session::flash('success', 'Your report is sent to admin.');
         return Redirect::back();
