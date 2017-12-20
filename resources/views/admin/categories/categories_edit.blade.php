@@ -173,7 +173,7 @@ Category edit@parent
                                                  <input type="hidden"  id="products_id">
                                                  <input type="hidden"  id="sku_no">
                                                  <input type="hidden"  id="price">
-                                                 <span>Note: Type the product name to autopopulate</span>
+                                                 <span>Note: Type the product name to autopopulate<br/><span style="color:red">Costumes added to this Category will be deleted in the other Categories.</span></span>
                                         </div>
                                 </div> 
                             <div class="col-md-2 col-sm-2 col-xs-4">

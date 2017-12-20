@@ -75,6 +75,7 @@ var products=[];
 $('.costume_id').each(function(i,v){
 	products.push($(this).val());
 });
+
 $('.add-prod').click(function(){
   $("#elements_change").val("1");
   var product_name=$('#cst_name').val();
@@ -85,15 +86,16 @@ $('.add-prod').click(function(){
   if(sku_no.length){
   	if(jQuery.inArray(product_id,products)==-1 || products.length==0){
     products.push(product_id);
-   	$('.assigned-products').append('<tr><td>'+product_name+'</td><td>'+sku_no+'</td><td>$'+price+'</td><td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='+product_id+'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>')
+   	$('.assigned-products').prepend('<tr><td>'+product_name+'</td><td>'+sku_no+'</td><td>$'+price+'</td><td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='+product_id+'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>')
   	$('#products_list').val("");
   	}
   }
 });
+
 $('form').submit(function(eventObj) {
-       $.each(products,function(i,value){
-     $('form').append('<input type="hidden" value="'+value+'" name="costume_list[]"/> ');
-   });
+    $.each(products,function(i,value){
+      $('form').append('<input type="hidden" value="'+value+'" name="costume_list[]"/> ');
+    });
     return true;
 });
 

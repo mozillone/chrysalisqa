@@ -403,7 +403,11 @@
 											</p>
 										@endif
 											<div class="slider_cnt no_brand sml_name">
-												<span class="cc_brand"></span>
+												<span class="cc_brand">
+													@if($costume->created_user_group == 'admin')
+														<img src="/img/chrysalis_brand.png">
+													@endif
+												</span>
 													<h4>
 														<a href="{{url('product')}}{{$costume->url_key}}">{{$costume->name}}</a>
 													</h4>

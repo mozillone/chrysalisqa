@@ -278,7 +278,6 @@ class CheckoutController extends Controller {
       //$mail_service_days = 1;
       $costume_id = explode(',', $costume_id);
       $est_delivery_date = array();
-      
       $costume_handling_time = DB::table('costume_attribute_options')
                                 ->where('costume_attribute_options.attribute_id', '=', 14)
                                 ->whereIn('costume_attribute_options.costume_id', $costume_id)

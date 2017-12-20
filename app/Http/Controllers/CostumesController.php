@@ -35,7 +35,6 @@ class CostumesController extends Controller {
 
 	public function categoryCostumeListings(Request $request,$slug1)
 	{
-
 	    $req=Request::all();
 		Meta::set('title', ucfirst($slug1));
         Meta::set('description', ucfirst($slug1).' Buy and Sell Affordable, Environment Friendly Costumes');
@@ -294,8 +293,9 @@ class CostumesController extends Controller {
 		           
 		           
 		    $where='where cat.category_id='.$sub_cat_id.' and deleted_status="0"';
-            $where.=' AND cst.deleted_status=0 AND cst.status="active" AND cao.attribute_id=21  AND link.id=(select id from cc_url_rewrites where url_offset=cst.costume_id  order by id desc limit 0,1)';
-            
+            $where.=' AND cst.deleted_status=0 AND cst.status="active" AND cao.attribute_id=21 AND link.id=(select 
+            id from cc_url_rewrites where url_offset=cst.costume_id  order by id desc limit 0,1)';
+
 			if(Auth::check()){
 					$is_login=',if((select count(*) from cc_costumes_like as likes where likes.user_id='.Auth::user()->id.' and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id='.Auth::user()->id.'  and  wsh_lst.costume_id=cst.costume_id )>=1,true,false) as is_fav';
 				}else{
@@ -304,7 +304,17 @@ class CostumesController extends Controller {
 			   
 	           $order_by='order by cst.created_at DESC';
 	           
-		       $costumes = DB::select('SELECT cst.costume_id,dsr.name,FORMAT(cst.price,2) as price'.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,cst.created_user_group,cst.quantity,link.url_key,created_user_group,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer, cao.attribute_option_value_id as film_qlty FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id LEFT JOIN cc_category as cats on cats.category_id=cat.category_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1"  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id  LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id LEFT JOIN cc_coupon_costumes as cpn_cst on cpn_cst.costume_id=cst.costume_id LEFT JOIN cc_address_master as adder on adder.user_id=cst.created_by and adder.address_type="selling" LEFT JOIN cc_costume_attribute_options as cao on cst.costume_id=cao.costume_id  '.$where.' group by cst.costume_id '.$order_by.' ');
+		       $costumes = DB::select('SELECT cst.costume_id,dsr.name,FORMAT(cst.price,2) as price'.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,cst.created_user_group,cst.quantity,link.url_key,created_user_group,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer, cao.attribute_option_value_id as film_qlty,cat.category_id FROM `cc_costumes` as cst 
+		       	LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id 
+		       	LEFT JOIN cc_category as cats on cats.category_id=cat.category_id  
+		       	LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1"  
+		       	LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id 
+		       	LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id 
+		       	LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id 
+		       	LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id 
+		       	LEFT JOIN cc_coupon_costumes as cpn_cst on cpn_cst.costume_id=cst.costume_id 
+		       	LEFT JOIN cc_address_master as adder on adder.user_id=cst.created_by and adder.address_type="selling" 
+		       	LEFT JOIN cc_costume_attribute_options as cao on cst.costume_id=cao.costume_id  '.$where.' group by cst.costume_id '.$order_by.'');
 		         $total_count = count($costumes);
 		       $page = Input::get('page', 1); 
 		        
@@ -337,24 +347,33 @@ class CostumesController extends Controller {
 
 	public function costumeSingleView($slug1=null,$slug2=null,$slug3=null)
 	{
+		/*$key_url='/'.$slug1.'/'.$slug2;
+		echo $key_url;
+		$data=DB::Select('SELECT cats.category_id,cats.parent_id,cats.name as cat_name,cats.description,cst.costume_id,cst.weight_pounds,cst.weight_ounces,dsr.name,dsr.description,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,cst.created_user_group,cst.deleted_status,cst.status as cos_act_status,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,(select a.name from cc_url_rewrites, cc_category as a where url_key="'.$key_url.'" and type="category" and a.category_id = cc_url_rewrites.url_offset group by url_key) as main_cat_name  
+            FROM `cc_costume_to_category` as cat 
+            JOIN cc_costumes as cst on cst.costume_id=cat.costume_id 
+            JOIN cc_category  as cats on cats.category_id=cat.category_id 
+            LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id 
+            LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id  
+            LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id 
+            where cat.costume_id=342 group by cat.costume_id');
+        echo "<pre>"; print_r($data); exit;*/
 
-	     
 	    try
 	    {
-	        
-
 	        Meta::set('description', ucfirst($slug2).' Buy and Sell Affordable, Environment Friendly Costumes');
             /* Code added by Gayatri */
             Meta::set('url', url()->current());
             /* End */
             $key_url='/'.$slug1.'/'.$slug2.'/'.$slug3;
-                    
-    		$cat_info=Category::getUrlCategoryId($key_url);
-    		 
+            $cat_url='/'.$slug1.'/'.$slug2;
+            
+            $cat_info=Category::getUrlCategoryId($key_url);
+    		
     		if(count($cat_info)){
     			$costume_id=$cat_info[0]->url_offset;
-    			$data=Costumes::getCostumeDetails($costume_id);
-    		    
+    			$data=Costumes::getCostumeDetails($costume_id,$cat_url);
+
     			if(isset($data[0])){
                                     
                     if($data[0]->deleted_status == 1 && $data[0]->cos_act_status == "inactive"){
@@ -430,14 +449,13 @@ class CostumesController extends Controller {
     				
     				/* End */		
     				$data['is_film_quality_cos'] = (\DB::table('costume_attribute_options')->where('costume_id', $costume_id)->where('attribute_option_value_id', 32)->first()) ? 'yes' : '';
-    				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2)->with('est_delivery_date', $est_delivery_date)->with('rate', $rate)->with('costume_detail_name', $name);
-                    
 
+    				return view('frontend.costumes.costumes_single_view',compact('data',$data))->with('parent_cat_name',$slug1)->with('sub_cat_name',$slug2)->with('est_delivery_date', $est_delivery_date)->with('rate', $rate)->with('costume_detail_name', $name);
     			}
     		}
     		else
     		{
-    		     return view('errors.404');
+    		    return view('errors.404');
     		}
 	    }catch(\Exception $e)
 	    {
