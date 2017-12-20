@@ -48,16 +48,16 @@ class SiteHelper  {
 				//$categories_list[$menus->name][]=$subCat->category_id.'_'.$subCat->name;
 			}
             $cat_ids_implode = implode(",", $catids);
-            
-            $links =Category::getUrlLinksMulti($cat_ids_implode);
-            
-            $uTemp = 0;
-            foreach($links  as $link_name)
-            {
-                 $categories_list[$menus->name][]= $link_name.'_'.$subcat_names[$uTemp];  
-                 $uTemp++;
+            if(!empty($cat_ids_implode)){
+                $links =Category::getUrlLinksMulti($cat_ids_implode);
+                
+                $uTemp = 0;
+                foreach($links  as $link_name)
+                {
+                     $categories_list[$menus->name][]= $link_name.'_'.$subcat_names[$uTemp];  
+                     $uTemp++;
+                }
             }
-           
 			
 		}
 	

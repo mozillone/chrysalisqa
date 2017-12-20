@@ -156,12 +156,13 @@ $(document).on("change", "#file1", function() {
                         //$(".result").css({ "width": "198px", "height": "298px" });
                         $(".result").css({ "width": "198px", "height": "298px","position":"relative"});
                         }                        
-                        //$("#file1").hide();
+                        $("#file1").hide();
                         $(this).parents().find("#front_view").children("#drag_n_drop_1").removeClass('hide');
                         if($(".drop_zone1").hasClass('Front1'))
                         {
                           $(".result").css({ "width": "198px", "height": "298px","position":"relative"});
                         }
+                        $('#file1_error').html("");
 
                     });
 
@@ -258,7 +259,7 @@ $(document).on("change", "#file2", function() {
                         if (!$(".drop_zone1").hasClass("Back1")) {
                           $(".result2").css({ "width": "198px", "height": "298px","position":"relative" });
                         }
-                        //$("#file2").hide();
+                        $("#file2").hide();
                         $(this).parents().find("#back_view").children("#drag_n_drop_2").removeClass('hide');
                         if($(".drop_zone2").hasClass('Back1'))
                         {
@@ -427,9 +428,12 @@ var zooms = [];
 var activeCropperObjIndex = 0;
 var slider = $(".slider");
 
-$(document).on("click", '#multiCancel', function(){
+$("#cancelMultiple").on("click",function(){
+    $("#upload-file-selector").val('');
+    $("#dvPreviewMultiple").html('');
     resetCropperValues();
 });
+
 //multiple file uploading code
 
 $("#upload-file-selector").on("change",function () {

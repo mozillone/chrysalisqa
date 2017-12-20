@@ -134,15 +134,14 @@ $(function(){
                             }else{
                                 imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
                             }
-                            debugger;
-                            $('<img id="file1_name" class="result" >').insertBefore('#front_view > div.main_upload_blogs > div.up-blog span'); 
+                            $('<img id="file1_name" class="result" >').insertBefore('#front_view > div.main_upload_blogs > div.up-blog > span.cam_icon'); 
                             //$("#dvPreview div.item").remove();
                             $("#myModal").modal('hide');
                             //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                             $(".modalOpen1").attr('value',imgdata);
                             $(".result").attr("src", imgdata);
                             $(".result").css({ "width": "263px", "height": "298px" });
-                            //$("#file1").hide();
+                            $("#file1").hide();
                             $(this).parents().find("#front_view").children("#drag_n_drop_1").removeClass('hide');
                             $("#drag_n_drop_1").show();
 
@@ -231,7 +230,7 @@ $(function(){
                             }else{
                                 imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
                             }
-                            $('<img id="file2_name" class="result2" >').insertBefore('#back_view > div.main_upload_blogs > div.up-blog span'); 
+                            $('<img id="file2_name" class="result2" >').insertBefore('#back_view > div.main_upload_blogs > div.up-blog > span.cam_icon'); 
                             //$("#dvPreview div.item").remove();
                             $("#myModal2").modal('hide');
                             //var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
@@ -327,7 +326,7 @@ $(function(){
                             }else{
                                 imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
                             }
-                            $('<img id="file3_name" class="result3" >').insertBefore('#details_view > div.main_upload_blogs > div.up-blog span'); 
+                            $('<img id="file3_name" class="result3" >').insertBefore('#details_view > div.main_upload_blogs > div.up-blog > span.cam_icon'); 
                             //$("#dvPreview div.item").remove();
                             $("#myModal3").modal('hide');
                             //var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);

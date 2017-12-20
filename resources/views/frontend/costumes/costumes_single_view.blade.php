@@ -18,7 +18,7 @@
 		<div class="row">
 			<nav class="breadcrumb">
 				<a class="breadcrumb-item" href="/">Home &nbsp;&nbsp;>&nbsp;&nbsp;</a>
-				<a class="breadcrumb-item" href="/category/{{$parent_cat_name}}/{{$sub_cat_name}}">{{$data[0]->cat_name}} &nbsp;&nbsp;> &nbsp;</a>
+				<a class="breadcrumb-item" href="/category/{{$parent_cat_name}}/{{$sub_cat_name}}">{{$data[0]->main_cat_name}} &nbsp;&nbsp;> &nbsp;</a>
 				<span class="breadcrumb-item active">{{$data[0]->name}}</span>
 			</nav>
 			<div class="col-md-5 col-sm-5 col-xs-12 carousel-bg-style bxslider-strt">
@@ -419,7 +419,7 @@
 						</div>
 					</section>
 				
-				@if(!empty($data['seller_info']['shipping_location']))			
+					
 				@if(Auth::check())
 	                <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
@@ -428,7 +428,8 @@
 								<form action="{{route('inquire-costume')}}" method="POST" id="inquire_costume">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<input type="hidden" name="user_id" value="<?php if(Auth::check()){ echo Auth::user()->id; } ?>">
-									<input type="hidden" name="seller_id" value="{{ $data['seller_info']['shipping_location'][0]->user_id  }}">
+
+									<input type="hidden" name="seller_id" value="{{ $data['seller_info'][0]->id  }}">
 									<input type="hidden" name="costume_name" value="{{ $data[0]->name }}">
 									<input type="hidden" name="costume_id" value="{{ $data[0]->costume_id }}">
 									<input type="hidden" name="type_id" value="{{ $data[0]->sku_no }}">
@@ -460,15 +461,15 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-										<button type="submit" class="btn btn-primary">Send Message</button>
+										<button type="submit" class="btn btn-primary" id="contact_send">Send Message</button>
 									</div>
 									
 								</form>
 							</div>
 						</div>
 					</div>	
-					@endif
-					@endif
+				@endif
+				
 					<!-- size chart modal start here -->
 			
 					<div id="size-chart"  class="modal fade" role="dialog">
@@ -969,6 +970,12 @@
 					{{-- page level scripts --}}
 					@section('footer_scripts')
 					<script>
+						$('#contact_send').on('click', function() {
+							if($("#inquire_costume").valid()){
+							    $(this).prop('disabled', true);
+							    $("#inquire_costume").submit();
+							}
+						});
 						function showSellerInfo () {
 							$('html, body').animate({
 						        scrollTop: $(".single_view_multi_view_tabs").offset().top

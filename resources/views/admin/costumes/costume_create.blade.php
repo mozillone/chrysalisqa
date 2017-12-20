@@ -751,7 +751,7 @@ $dimensionvalue     = $heightattributes[1];
 				<input type="file" accept="image/*" name="img_chan" id="file1" >
 				<input type="hidden" class="modalOpen1" name="Imagecrop1">
 				<!-- <img src="" class="result" > -->
-				<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
+				<span class="text cam_icon"> <a href="#" class="button button-primary file_browse"></a></span>
 			</div>
 		</div>
 	</div>
@@ -765,7 +765,7 @@ $dimensionvalue     = $heightattributes[1];
 <input type="file" accept="image/*" name="img_chan1" id="file2" >
 <input type="hidden" class="modalOpen2" name="Imagecrop2">
 <!-- <img src="" class="result2" > -->
-<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
+<span class="text cam_icon"> <a href="#" class="button button-primary file_browse"></a></span>
 </div>
 </div>
 </div>
@@ -779,7 +779,7 @@ $dimensionvalue     = $heightattributes[1];
 <input type="file" name="img_chan2" id="file3">
 <input type="hidden" class="modalOpen3" name="Imagecrop3" >
 <!-- <img src="" class="result3" > -->
-<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
+<span class="text cam_icon"> <a href="#" class="button button-primary file_browse"></a></span>
 </div>
 </div>
 </div>
@@ -943,7 +943,7 @@ $dimensionvalue     = $heightattributes[1];
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 <script src="{{ asset('/assets/admin/js/pages/customers.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.0.0/cropper.js"></script>
-<script src="{{ asset('/assets/admin/js/pages/costumecustom.js') }}"></script>
+<script src="{{ asset('/assets/admin/js/pages/costumecustom.js') }}?v=<?php echo date('dmYHims')?>"></script>
 <script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
 <script type="text/javascript">
 $(document).ready(function () {

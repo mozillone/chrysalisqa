@@ -506,7 +506,7 @@ $(document).ready(function() {
     	$('#is_shipping').attr('checked',false);
     	$('#is_billing').attr('checked',false);
     }
-     $(document).on('click', '.delete', function(){ 
+    $(document).on('click', '.delete', function(){ 
       var item_id=$(this).attr('data-item-id');
       var cart_id=$(this).attr('data-cart_id');
       swal({   
@@ -711,11 +711,11 @@ if(coupan_price){var cpn=coupan_price;}else{var cpn="0";}
 if(str_price){var str=str_price;}else{var str="0";}
 		
 		$(document).on('change','.shipping_amount',function(){
-			$(this).attr('checked',true);
 			var seller_no=$(this).attr('data-seller-id');
 			var type=$(this).attr('data-type');
 			var shipping_days=$(this).attr('data-shipping-days');
 			var costume_id=$(this).attr('data-costume-id').split(',');	
+			console.log(costume_id);
 			$('.shi_date_right_'+seller_no).html("");
 
 			$.ajax({
@@ -723,7 +723,7 @@ if(str_price){var str=str_price;}else{var str="0";}
 				url: '/getestimationdate/'+costume_id+'/'+shipping_days,
 				async: false,
 				success: function(response){
-					
+					console.log(response);
 					if(type=="free"){
 						for (var i = 0; i<costume_id.length; i++) {
 							$('.shi_date_right_'+costume_id[i]).html(response[i]);

@@ -779,7 +779,7 @@
 																			<i class="fa fa-times-circle" aria-hidden="true"></i>				
 																		</span>
 																		<div class=" up-blog">
-																			<input type="file" name="file1"  id="file1" value="1"  >
+																			<input type="file" name="file1"  id="file1" value="1"  @if(isset($costume_image1->image)) style="display: none !important;" @endif>
 																			<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){
 																			?>
 																			<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
@@ -810,7 +810,7 @@
 																		<input type="hidden"  id="hidden_file5" value="<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){
 																		?>{{$costume_image2->image}} <?php } ?>">
 																		<div class=" up-blog">
-																			<input type="file" name="file2"  id="file2" value="1">
+																			<input type="file" name="file2"  id="file2" value="1" @if(isset($costume_image2->image)) style="display: none;" @endif>
 																			<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){
 																			?>
 																			<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
@@ -838,7 +838,7 @@
 																		<input type="hidden"  id="hidden_file4" value="<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){
 																		?>{{$costume_image3->image}} <?php } ?>">
 																		<div class=" up-blog">
-																			<input type="file" name="file3" id="file3" value="1">
+																			<input type="file" name="file3" id="file3" value="1" @if(isset($costume_image3->image)) style="display: none;" @endif>
 																			<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){
 																			?>
 																			<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
@@ -1018,7 +1018,7 @@
 														</div>
 														<div class="modal-footer" style="display:none;">
 															<button type="button" class="btn btn-success pull-right saveMultiple" >Save</button>
-															<button type="button" class="btn btn-default img_clse" id="multiCancel" data-dismiss="modal" id="cancelMultiple">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancelMultiple">Cancel</button>
 														</div>
 													</div><!-- /.modal-content -->
 												</div><!-- /.modal-dialog -->
@@ -1033,7 +1033,7 @@
 										<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 										<script src="{{ asset('/assets/admin/js/pages/customers.js') }}"></script>
 										<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.0.0/cropper.js"></script>
-										<script src="{{ asset('/assets/admin/js/costumeedit.js') }}"></script>
+										<script src="{{ asset('/assets/admin/js/costumeedit.js') }}?v=<?php echo date('dmYHims')?>"></script>
 										<script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
 <script type="text/javascript">
 
@@ -1312,32 +1312,35 @@ if($("#size").val() == "custom"){
 		return false;                                          
 	}
 	});																							
-	$(document).on("click",".img_clse",function()
+	/*$(document).on("click",".img_clse",function()
 	{ 												
 	   $("#drag_n_drop_1").hide();
 	   $("#drag_n_drop_2").hide();
 	   $("#drag_n_drop_3").hide();
-	});
+	});*/
 	$("#cancel1").on("click",function(){
+		$("#drag_n_drop_1").hide();
 		$("#file1").val('');
 		$("#dvPreview").html('');
 		
 	});
 	$("#cancel2").on("click",function(){
+		$("#drag_n_drop_2").hide();
 		$("#file2").val('');
 		$("#dvPreview2").html('');
 		
 	});
 	$("#cancel3").on("click",function(){
-		$("#file1").val('');
+		$("#drag_n_drop_3").hide();
+		$("#file3").val('');
 		$("#dvPreview3").html('');
 		
 	});
-	$("#cancelMultiple").on("click",function(){
+	/*$("#cancelMultiple").on("click",function(){
 		$("#upload-file-selector").val('');
 		$("#dvPreviewMultiple").html('');
 		
-	});
+	});*/
 	var hidden_file4 = $('#hidden_file4').val();
 	if (hidden_file4 == "") {
 		$('#drag_n_drop_3').css('display','none');

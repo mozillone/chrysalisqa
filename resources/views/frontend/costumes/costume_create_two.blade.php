@@ -1093,7 +1093,7 @@
 <script type="text/javascript" src="{{asset('/assets/frontend/vendors/drop_uploader/drop_uploader.js')}}"></script>
 <script type="text/javascript" src="{{asset('/assets/frontend/js/cropper.js')}}"></script>
 <script type="text/javascript" src="{{asset('/assets/frontend/js/load-image.all.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('/assets/frontend/js/pages/costumecustom.js')}}"></script>
+<script type="text/javascript" src="{{asset('/assets/frontend/js/pages/costumecustom.js')}}?v=<?php echo date('dmYHims')?>"></script>
 <script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript">
 	$(document).ready(function()

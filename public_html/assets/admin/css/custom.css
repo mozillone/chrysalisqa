@@ -42,7 +42,9 @@ display: none;
 */
 /*******************/
 
-
+/*Dec-15 changes*/
+.threeblogs.edit_admin_cstume .edit_thumbs{width: 100% !important; max-height: 100%;    overflow: initial;}
+/*Dec-15 changes Done*/ 
 
 
 
