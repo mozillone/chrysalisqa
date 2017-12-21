@@ -51,14 +51,45 @@
 		<script src="{{ asset('/assets/frontend/autozoom/jquery.fancybox.js?v=2') }}"></script>-->
 		<script src="{{ asset('/assets/frontend/fancybox/jquery.fancybox.js?v=2') }}"></script>
 		<script type="text/javascript">
+
             $(function(){
+            	(function ($, F) {
+				    F.transitions.resizeIn = function() {
+				        var previous = F.previous,
+				            current  = F.current,
+				            startPos = previous.wrap.stop(true).position(),
+				            endPos   = $.extend({opacity : 1}, current.pos);
+
+				        startPos.width  = previous.wrap.width();
+				        startPos.height = previous.wrap.height();
+
+				        previous.wrap.stop(true).trigger('onReset').remove();
+
+				        delete endPos.position;
+
+				        current.inner.hide();
+
+				        current.wrap.css(startPos).animate(endPos, {
+				            duration : current.nextSpeed,
+				            easing   : current.nextEasing,
+				            step     : F.transitions.step,
+				            complete : function() {
+				                F._afterZoomIn();
+
+				                current.inner.fadeIn("fast");
+				            }
+				        });
+				    };
+
+				}(jQuery, jQuery.fancybox));
                 $(".costume_images").fancybox({
                 	padding:0,
-                    maxWidth: 568,
-                    maxHeight:568,
                     closeBtn  : true,
 				    arrows    : true,
 				    nextClick : true,
+				    nextMethod : 'resizeIn',
+			        nextSpeed  : 250,
+			        prevMethod : false,
                     afterShow: function(){
                         var $image = $('.fancybox-image');
                         //$image.CloudZoom({zoomPosition:'inside', zoomOffsetX:0});
@@ -67,7 +98,11 @@
                         $(".fancybox-image").attr("data-zoom-image",this.element[0].attributes[1].value);
            				$image.elevateZoom({ 
 					        zoomType: "inner",
-							zoomWindowOffetx:0
+							zoomWindowOffetx:0,
+							easing:true,
+							responsive:true,
+							zoomWindowFadeIn:100,
+							zoomWindowFadeOut:100
 					    });
                     },
                     beforeLoad: function(){
@@ -79,6 +114,10 @@
                         	$('.zoomContainer').remove();
                         }*/
                     },
+                    beforeShow : function(){
+                    	debugger;
+				   		this.title =  $(this.element).data("caption");
+				  	},
                     beforeClose: function(){
                         var $image = $('.fancybox-image');
                         //if ($image.data('CloudZoom')) $image.data('CloudZoom').destroy();

@@ -91,7 +91,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
           $scope.dtOptions = DTOptionsBuilder.newOptions()
           .withOption('data',response.data.data.charities)
           .withOption('createdRow', createdRow)
-            .withOption('order', [ ])
+            .withOption('order', [4, 'desc'])
             .withOption('responsive', true)
             .withOption('bFilter', false)
             .withOption('lengthChange', false);
