@@ -27,7 +27,6 @@
 		<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59ca6d8233c1af00121cdbbe&product=custom-share-buttons"></script>
 		<!-- <link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/jquery.fancybox.css??v=1') }}">
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/cloudzoom.css') }}"> -->
-		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/cloudzoom.css') }}">
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/fancy.css') }}">
 		
 		@yield('styles')
@@ -53,7 +52,6 @@
 		<script type="text/javascript">
             $(function(){
                 $(".costume_images").fancybox({
-                	padding:0,
                     maxWidth: 568,
                     maxHeight:568,
                     closeBtn  : true,
