@@ -181,6 +181,7 @@ var table = '';
         "searching": false,
         "pageLength": 50,
         "bLengthChange": false,
+        "order": [ 2, 'DESC'],
         "columns": [
           { data: 'code', name: 'code' },
           { data: 'title', name: 'title' },
