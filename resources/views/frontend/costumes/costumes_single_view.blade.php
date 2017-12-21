@@ -25,7 +25,7 @@
 				
 				<ul class="bxslider">
 					@foreach($data['images'] as $images)
-					<li><img class="img-responsive" src="{{asset('/costumers_images/Large')}}/<?= $images->image?>"></li>
+					<li><a class="costume_images" data-zoom-image="{{asset('/costumers_images/ExLarge')}}/<?= $images->image?>" rel="gal" href="{{asset('/costumers_images/Large')}}/<?= $images->image?>"><img class="img-responsive elevatezoom" src="{{asset('/costumers_images/Large')}}/<?= $images->image?>" data-zoom-image="{{asset('/costumers_images/Original')}}/<?= $images->image?>"></a></li>
 					@endforeach
 				</ul>
 				
