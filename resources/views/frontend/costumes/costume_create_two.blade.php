@@ -1098,6 +1098,7 @@
 <script type="text/javascript">
 	$(document).ready(function()
 	{
+		$("#donate_charity").val('0 %');
 		$(".conditon_check").change(function(){
 			if($("#radio-6").prop("checked") || $("#radio-7").prop("checked")){
 				$("#cleaned_select").removeClass("hide");

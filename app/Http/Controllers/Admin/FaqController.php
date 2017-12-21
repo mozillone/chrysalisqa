@@ -73,12 +73,21 @@ class FaqController extends Controller  {
             } else {
                 $faqStatus = 1;
 
-                $inc_sort_no = DB::table('faqs')->where('sort_no', '>=', $req['sort_no'])->where('block', $req['block'])->get();
-                
-                foreach ($inc_sort_no as $key => $value) {
-                    $sort_number = $value->sort_no+1;
-                    DB::table('faqs')->where('id', $value->id)->update(['sort_no'=>$sort_number]);
+                $inc_sort_no = DB::table('faqs')->where('sort_no','>=', $req['sort_no'])->where('block', $req['block'])->get();
+                if($inc_sort_no){
+                    foreach ($inc_sort_no as $key => $value) {
+                        $sort_number = $value->sort_no+1;
+                        DB::table('faqs')->where('id', $value->id)->update(['sort_no'=>$sort_number]);
+                    }    
                 }
+                
+
+                /*$inc_sort_no = DB::table('faqs')->where('sort_no', $req['sort_no'])->where('block', $req['block'])->first();
+
+                if($inc_sort_no){
+                   $b = DB::table('faqs')->where('id', $id)->first();
+                    $a = DB::table('faqs')->where('id',$inc_sort_no->id)->update(['sort_no' => $b->sort_no]);    
+                }*/
                 
                 $data = array(
                     'title'      => $req['title'],
@@ -120,13 +129,19 @@ class FaqController extends Controller  {
                 return Redirect::back()->withErrors($validator->messages())->withInput();
             } else {
 
-                $inc_sort_no = DB::table('faqs')->where('sort_no', '>=', $req['sort_no'])->where('block', $req['block'])->get();
-                
-                foreach ($inc_sort_no as $key => $value) {
+                $inc_sort_no = DB::table('faqs')->where('sort_no', $req['sort_no'])->where('block', $req['block'])->first();
+
+                if($inc_sort_no){
+                   $b = DB::table('faqs')->where('id', $id)->first();
+                    $a = DB::table('faqs')->where('id',$inc_sort_no->id)->update(['sort_no' => $b->sort_no]);    
+                }
+                //echo "<pre>"; print_r($a); exit;
+
+                /*foreach ($inc_sort_no as $key => $value) {
                     $sort_number = $value->sort_no+1;
                     DB::table('faqs')->where('id', $value->id)->update(['sort_no'=>$sort_number]);
                 }
-
+*/
                 $faqData = array(
                     'title'         => $req['title'],
                     'block'         => $req['block'],

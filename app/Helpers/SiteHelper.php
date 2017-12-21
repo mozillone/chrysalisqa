@@ -14,6 +14,7 @@ use Config;
 use DateTime;
 use DB;
 use Mail;
+use Log;
 class SiteHelper  {
 
 	public static function getMenus(){
@@ -345,11 +346,18 @@ public static function domesticRateSingleCostume($originationZip,$destinationZip
     public static function sendmail($to,$subject,$template,$mail_data){
         $contact_email = (string)$to;
         $mail_subject = (string)$subject;
-        $mail_status    = Mail::send($template, $mail_data, function ($message)  use ($contact_email, $mail_subject)
-        {
-            $message->from('support@chrysaliscostumes.com', 'Chrysalis');
-            $message->to($contact_email)->subject($mail_subject);
-        });
+
+        try{
+            $mail_status    = Mail::send($template, $mail_data, function ($message)  use ($contact_email, $mail_subject)
+            {
+                $message->from('support@chrysaliscostumes.com', 'Chrysalis');
+                $message->to($contact_email)->subject($mail_subject);
+            });    
+        }catch(\Swift_TransportException $e){
+            Log::info($e->getMessage());
+            return true;
+        }
+        
         return $mail_status;
    }
 

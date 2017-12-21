@@ -6,8 +6,6 @@ use Illuminate\Support\MessageBag;
 use App\Helpers\SiteHelper;
 use Illuminate\Http\Request;
 use App\Costumes;
-
-
 use Image;
 use Session;
 use Hash;
@@ -22,6 +20,8 @@ use Mail;
 use URL;
 use App\Helpers\Site_model;
 use Carbon\Carbon;
+use Exeception;
+use Log;
 
 class CreateCostumeController  extends Controller {
 
@@ -1931,15 +1931,7 @@ class CreateCostumeController  extends Controller {
 					$organzation_name=DB::table('charities')->where('costume_id',$request->costume_id)->update($arrayName);
 				}
 			}
-			// send mail
-			$reg_subject        = "Costume Edited";
-			$reg_data           = array('name'=>Auth::user()->display_name,'costume_name'=>$costume_name);
-			$template           = 'emails.editcostume';
-	         //---- send mail
-			$reg_to             = Auth::user()->email;
-			$mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
-			// end mail
-			//dd($request->costume_id);
+
 			/* Added by Gayatri*/
 			$listUrlObj = \DB::table('url_rewrites')->where('type', 'product')->where('url_offset', $request->costume_id)->first();
 
@@ -1984,6 +1976,17 @@ class CreateCostumeController  extends Controller {
 
 			
 			/* End*/
+
+			// send mail
+			$reg_subject        = "Costume Edited";
+			$reg_data           = array('name'=>Auth::user()->display_name,'costume_name'=>$costume_name);
+			$template           = 'emails.editcostume';
+	         //---- send mail
+			$reg_to             = Auth::user()->email;
+
+			
+			$mail_status = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);	
+			
 
 			return response()->json(['msg'=>'success', 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name)]);
 
