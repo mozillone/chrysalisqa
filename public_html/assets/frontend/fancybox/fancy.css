@@ -24,6 +24,7 @@
 }
 
 .fancybox-skin {
+	padding: 18px 0px !important;
 	position: relative;
 	background: #f9f9f9;
 	color: #444;
@@ -187,7 +188,7 @@
 	left: 0;
 	overflow: hidden;
 	display: none;
-	z-index: 8010;
+	z-index: 99999;
 	background: url('fancybox_overlay.png');
 }
 
