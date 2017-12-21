@@ -25,10 +25,9 @@
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
 		<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59ca6d8233c1af00121cdbbe&product=unknown' async='async'></script>
 		<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59ca6d8233c1af00121cdbbe&product=custom-share-buttons"></script>
-		<!-- <link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/jquery.fancybox.css??v=1') }}">
-		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/cloudzoom.css') }}"> -->
+		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/jquery.fancybox.css??v=1') }}">
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/cloudzoom.css') }}">
-		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/fancy.css') }}">
+		<!-- <link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/fancy.css') }}"> -->
 		
 		@yield('styles')
 	</head>
@@ -44,87 +43,44 @@
 		<div class="img-loading hide"><img src="/img/chackout.gif"/></div>
       		
 		<script src="{{ asset('/js/jquery-2.2.4.js')}}"></script>
-<!-- 
-<script src="http://www.elevateweb.co.uk/wp-content/themes/radial/jquery.elevatezoom.min.js" type="text/javascript"></script> -->
-		<script src="{{ asset('/assets/frontend/fancybox/jquery.elevatezoom.min.js') }}"></script>
-		<!-- <script src="{{ asset('/assets/frontend/autozoom/cloudzoom.js') }}"></script> 
-		<script src="{{ asset('/assets/frontend/autozoom/jquery.fancybox.js?v=2') }}"></script>-->
+		
+		 <script src="{{ asset('/assets/frontend/fancybox/cloudzoom.js') }}"></script> 
 		<script src="{{ asset('/assets/frontend/fancybox/jquery.fancybox.js?v=2') }}"></script>
+		<!--<script src="{{ asset('/assets/frontend/fancybox/jquery.elevatezoom.min.js') }}"></script>
+		 <script src="{{ asset('/assets/frontend/fancybox/jquery.fancybox.js?v=2') }}"></script> -->
 		<script type="text/javascript">
-
             $(function(){
-            	(function ($, F) {
-				    F.transitions.resizeIn = function() {
-				        var previous = F.previous,
-				            current  = F.current,
-				            startPos = previous.wrap.stop(true).position(),
-				            endPos   = $.extend({opacity : 1}, current.pos);
-
-				        startPos.width  = previous.wrap.width();
-				        startPos.height = previous.wrap.height();
-
-				        previous.wrap.stop(true).trigger('onReset').remove();
-
-				        delete endPos.position;
-
-				        current.inner.hide();
-
-				        current.wrap.css(startPos).animate(endPos, {
-				            duration : current.nextSpeed,
-				            easing   : current.nextEasing,
-				            step     : F.transitions.step,
-				            complete : function() {
-				                F._afterZoomIn();
-
-				                current.inner.fadeIn("fast");
-				            }
-				        });
-				    };
-
-				}(jQuery, jQuery.fancybox));
                 $(".costume_images").fancybox({
-                	padding:0,
+                    maxWidth: 1200,
+                    maxHeight:1247,
+                    autoSize : false,
                     closeBtn  : true,
 				    arrows    : true,
 				    nextClick : true,
-				    nextMethod : 'resizeIn',
-			        nextSpeed  : 250,
-			        prevMethod : false,
                     afterShow: function(){
                         var $image = $('.fancybox-image');
-                        //$image.CloudZoom({zoomPosition:'inside', zoomOffsetX:0});
+                        $(".fancybox-image").attr("data-cloudzoom","zoomImage:'"+this.element[0].attributes[1].value+"',zoomPosition:'inside', zoomOffsetX:0");
+                        $image.CloudZoom({zoomPosition:'inside', zoomOffsetX:0});
+                        
                         //$image.elevateZoom({zoomType: "inner", cursor: "crosshair"});
-                        $('.zoomContainer').remove();
+                        /*$('.zoomContainer').remove();
                         $(".fancybox-image").attr("data-zoom-image",this.element[0].attributes[1].value);
            				$image.elevateZoom({ 
 					        zoomType: "inner",
-							zoomWindowOffetx:0,
-							easing:true,
-							responsive:true,
-							zoomWindowFadeIn:100,
-							zoomWindowFadeOut:100
-					    });
+
+					    });*/
                     },
                     beforeLoad: function(){
                         var $image = $('.fancybox-image');
-                        //if ($image.data('CloudZoom')) $image.data('CloudZoom').destroy();
-                        $('.zoomContainer').remove();
-                       /* if ($image.data('elevateZoom')){
-                        	$.removeData($image, 'elevateZoom');
-                        	$('.zoomContainer').remove();
-                        }*/
+                        if ($image.data('CloudZoom')) $image.data('CloudZoom').destroy();
+                        //$('.zoomContainer').remove();
+                       
                     },
-                    beforeShow : function(){
-				   		this.title =  $(this.element).data("caption");
-				  	},
                     beforeClose: function(){
                         var $image = $('.fancybox-image');
-                        //if ($image.data('CloudZoom')) $image.data('CloudZoom').destroy();
-                        $('.zoomContainer').remove();
-                        /*if ($image.data('elevateZoom')){
-                        	$.removeData($image, 'elevateZoom');
-                        	$('.zoomContainer').remove();
-                        } */
+                        if ($image.data('CloudZoom')) $image.data('CloudZoom').destroy();
+                        //$('.zoomContainer').remove();
+                        
         				
                     }
                 });

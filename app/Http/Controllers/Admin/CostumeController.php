@@ -277,6 +277,10 @@ class CostumeController extends Controller
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
 
+				$ExLargeresizeimg = Image::make($originalPath);
+			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
+
 
 				if($OriginalImage)
 				{
@@ -317,6 +321,10 @@ class CostumeController extends Controller
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
 
+				$ExLargeresizeimg = Image::make($originalPath1);
+			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
+
 				//$file2 = Imageresize::CreateCostumeFrontend2($request->file2);
 
 				if($OriginalImage2)
@@ -356,6 +364,10 @@ class CostumeController extends Controller
 				$Largeresizeimg->resize(475, 650);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
+
+				$ExLargeresizeimg = Image::make($originalPath2);
+			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 
 				//$file3 = Imageresize::CreateCostumeFrontend3($request->file3);
 
@@ -400,6 +412,10 @@ class CostumeController extends Controller
 					$Largeresizeimg->resize(475, 650);
 
 					$Largeresizeimg->save(public_path('costumers_images/Large/').$Multiplerand);
+
+					$ExLargeresizeimg = Image::make($originalPath);
+				    $ExLargeresizeimg->resize(889, 1217);
+				    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Multiplerand);
 
 					$file_db_array4 = array('costume_id'=>$costume_id,
 						'image'=>$multidata,
@@ -1323,6 +1339,10 @@ class CostumeController extends Controller
 				$Largeresizeimg = Image::make($originalPath);
 				$Largeresizeimg->resize(475, 650);
 				$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
+
+				$ExLargeresizeimg = Image::make($originalPath);
+			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 				if ($OriginalImage) {
 					$file_db_array1 = array('costume_id' => $costume_id,
 						'image' => $data1,
@@ -1351,6 +1371,9 @@ class CostumeController extends Controller
 				$Largeresizeimg = Image::make($originalPath1);
 				$Largeresizeimg->resize(475, 650);
 				$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
+				$ExLargeresizeimg = Image::make($originalPath1);
+			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 				if ($OriginalImage2) {
 					$file_db_array2 = array('costume_id' => $costume_id,
 						'image' => $data2,
@@ -1386,6 +1409,10 @@ class CostumeController extends Controller
 				$Largeresizeimg->resize(475, 650);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
+
+				$ExLargeresizeimg = Image::make($originalPath2);
+			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 
 				//$file3 = Imageresize::CreateCostumeFrontend3($request->file3);
 
@@ -1437,6 +1464,10 @@ class CostumeController extends Controller
 					$Largeresizeimg->resize(475, 650);
 
 					$Largeresizeimg->save(public_path('costumers_images/Large/').$Multiplerand);
+
+					$ExLargeresizeimg = Image::make($originalPath);
+				    $ExLargeresizeimg->resize(889, 1217);
+				    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Multiplerand);
 
 					$file_db_array4 = array('costume_id'=>$costume_id,
 						'image'=>$multidata,
