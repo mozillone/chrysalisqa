@@ -1250,6 +1250,7 @@ class CreateCostumeController  extends Controller {
 		$cosplayfive=DB::table('attributes')->select('attribute_id as attributeid','code as code','label as label','type as type')->where('attribute_id','21')->first();
 		$cosplayfive_values=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attributeid','option_value as value')->where('attribute_id','21')->get();
 		$categories=DB::table('category')->select('category_id as categoryid','name as categoryname')->where('status','=','1')->where('parent_id','=','0')->orderby('sort_order','asc')->get();
+		//echo "<pre>"; print_r($categories); exit;
 		$shippingoptions=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','9')->get();
 		$packageditems=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
@@ -1274,9 +1275,10 @@ class CreateCostumeController  extends Controller {
 		$more_image = DB::table('costume_image')->where('costume_id',$id)->where('type','4')->get();
 
 		$costume_description = DB::table('costume_description')->where('costume_id',$id)->first();
-		$costume_category_1 = DB::table('costume_to_category')->where('costume_id',$id)->where('sort_no','1')->first();
+		$costume_category_1 = DB::table('costume_to_category')->where('costume_id',$id)->first();
 		$costume_category_2 = DB::table('costume_to_category')->where('costume_id',$id)->first();
 		$costume_details = DB::table('costumes')->where('costume_id',$id)->first();
+		//echo "<pre>"; print_r($costume_details); exit;
 		$db_body_height_ft = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','16')->first();
 		 
 		$db_body_height_in = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','17')->first();

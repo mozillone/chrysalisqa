@@ -229,6 +229,7 @@ class CostumeController extends Controller
 		$frontview = $req['img_chan'];
 		
 		$customerid = $customer_name;
+		$get_cat_id = DB::table('category')->where('category_id',$category)->first();
 		$costume = array(
 			'weight_pounds'=>$req['pounds'],
 			'weight_ounces'=>$req['ounces'],
@@ -240,6 +241,7 @@ class CostumeController extends Controller
 			'condition_type' => $cleaned,
 			'created_by'=>$customerid,
 			'created_at'=>date('y-m-d H:i:s'),
+			'cat_id'=>$get_cat_id->parent_id
 		);
        
 		$costume_id = DB::table('costumes')->insertGetId($costume);
