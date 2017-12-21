@@ -115,7 +115,6 @@
                         }*/
                     },
                     beforeShow : function(){
-                    	debugger;
 				   		this.title =  $(this.element).data("caption");
 				  	},
                     beforeClose: function(){
