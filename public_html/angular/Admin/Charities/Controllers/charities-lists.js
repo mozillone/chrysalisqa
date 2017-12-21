@@ -57,7 +57,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
            }); 
     }
     function imageHtml(data, type, full, meta) {
-        if(data!=null){
+        if(data!=null && data!=""){
             return '<img  class="img-responsive"  src="/charities_images/'+data+'" width="50px">'
         }else{
           return '<img  class="img-responsive"  src="/charities_images/default-placeholder.jpg" width="50px">'
