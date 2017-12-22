@@ -53,13 +53,11 @@ class CreateCostumeController  extends Controller {
 	}
 	/***create costume step 2 code starts here***/
 	public function createCostumestep2(){
-	    
 	  
         if(!Auth::check()){
           	Session::put('curentURL',URL::current());
           	return Redirect::to('/login')->send();
         }
-	            
 	    
 		Meta::set('title', 'Costume Create');
         Meta::set('description', '');
