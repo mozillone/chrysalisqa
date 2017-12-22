@@ -29,11 +29,13 @@ $("#category-edit").validate({
                         required: true,
                         maxlength: 200
                     },
-                cat_image:{
+                cat_imageExists:{
+                      required: true,
                        extension: "png,jpg"
                     },
-                 banner_image:{
-                        extension: "png,jpg"
+                 banner_imageExists:{
+                      required: true,
+                      extension: "png,jpg"
                     },
                 }
  	
@@ -163,6 +165,7 @@ $("#cat_image").on('change', function() {
               reader.readAsDataURL($(this)[0].files[i]);
               reader.onload = function(e) {
                 $('#img-chan1').attr('src',e.target.result);
+                $('input[name="cat_imageExists"]').val("image.png");
                 $('.cat_img').after('<span class="remove_pic_cat"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
            
               }
@@ -212,6 +215,7 @@ $("#banner_image").on('change', function() {
               reader.readAsDataURL($(this)[0].files[i]);
               reader.onload = function(e) {
                 $('#img-chan2').attr('src',e.target.result);
+                 $('input[name="banner_imageExists"]').val("image.png");
                 $('.ban_img').after('<span class="remove_pic_banner"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
               }
               image_holder.show();
@@ -237,12 +241,13 @@ $(document).on("click",".remove_pic_cat",function(){
   $('#img-chan1').attr('src',"/category_images/df_img.jpg");
   $('input[name="cat_image"]').val('');
   $('input[name="is_removed"]').val("1");
+  $('input[name="cat_imageExists"]').val("");
   $(this).remove();
   });
 $(document).on("click",".remove_pic_banner",function(){
   $('#img-chan2').attr('src',"/category_images/df_img.jpg");
   $('input[name="banner_image"]').val('');
   $('input[name="is_removed"]').val("1");
+  $('input[name="banner_imageExists"]').val("");
   $(this).remove();
   });
-    

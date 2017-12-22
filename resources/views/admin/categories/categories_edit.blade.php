@@ -113,11 +113,16 @@ Category edit@parent
                                       </div>
 									  <div class="col-md-6 col-sm-6 col-xs-12 ">
                                       <div class="cat_img fileupload fileupload-new" data-provides="fileupload"> 
-                                          <img @if(file_exists( public_path('category_images/Normal/'.$cat_data[0]->thumb_image)))) src="/category_images/Normal/{{$cat_data[0]->thumb_image}}" @else  src="/category_images/df_img.jpg" @endif  class="img-responsive"  id="img-chan1">
+                                          <img @if(file_exists(public_path('category_images/Normal/'.$cat_data[0]->thumb_image)))) src="/category_images/Normal/{{$cat_data[0]->thumb_image}}" @else  src="/category_images/df_img.jpg" @endif  class="img-responsive"  id="img-chan1">
                                       
-                         
+                                        <input type="hidden" name="cat_imageExists" @if(isset($cat_data[0]->thumb_image)) value="{{$cat_data[0]->thumb_image}}" @endif>
                                         <span class="fileupload-preview"></span>
                                         <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+                                        @if(isset($cat_data[0]->thumb_image))
+                                        <span class="remove_pic_cat" id="remove_pic_cat">
+                                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                        </span>
+                                        @endif
                                       </div>
 												   </div>
                                     </div>
@@ -141,11 +146,16 @@ Category edit@parent
                                       </div>
 									  <div class="col-md-6 col-sm-6 col-xs-12">
                                       <div class="ban_img fileupload fileupload-new" data-provides="fileupload"> 
-                                          <img @if(file_exists( public_path('category_images/Banner/'.$cat_data[0]->banner_image)))) src="/category_images/Banner/{{$cat_data[0]->banner_image}}" @else  src="/category_images/df_img.jpg" @endif class="img-responsive"  id="img-chan2">
+                                          <img @if(file_exists(public_path('category_images/Banner/'.$cat_data[0]->banner_image)))) src="/category_images/Banner/{{$cat_data[0]->banner_image}}" @else  src="/category_images/df_img.jpg" @endif class="img-responsive"  id="img-chan2">
                                  
-                         
+                                        <input type="hidden" name="banner_imageExists" @if(isset($cat_data[0]->banner_image)) value="{{$cat_data[0]->banner_image}}" @endif>
                                         <span class="fileupload-preview"></span>
                                         <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+                                        @if(isset($cat_data[0]->banner_image))
+                                        <span class="remove_pic_banner" id="remove_pic_banner">
+                                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                        </span>
+                                        @endif
                                       </div>
 										    </div>
                                     </div>
