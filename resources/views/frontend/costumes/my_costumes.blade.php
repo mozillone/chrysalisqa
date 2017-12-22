@@ -56,7 +56,7 @@
                       <td><input type="text" class="form-control" ng-model="search.costume_name"  placeholder=""></td>
                       <td>
                         <select class="form-control" ng-model="search.status">
-                          <option value="">Select Status</option>
+                          <option value="">All</option>
                           <option value="active">Active</option>
                           <option value="inactive">Inactive</option>
                         </select>
