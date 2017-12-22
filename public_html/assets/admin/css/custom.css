@@ -813,8 +813,9 @@ a.remove_product.btn.btn-danger {
 }
 span.remove_pic_banner {
     position: absolute;
-    top: -7px;    color: red;
-    right: 0px;
+    top: 0px;    color: red;
+    right: 5px;
+    cursor: pointer;
 }
 .btn-warning.active.focus, .btn-warning.active:focus, .btn-warning.active:hover, .btn-warning:active.focus, .btn-warning:active:focus, .btn-warning:active:hover, .open>.dropdown-toggle.btn-warning.focus, .open>.dropdown-toggle.btn-warning:focus, .open>.dropdown-toggle.btn-warning:hover {
     color: #fff;
@@ -964,7 +965,7 @@ h3.box-title{width:100%; float:left;}
 #agent_edit_from .form-group{margin-right:0px; margin-left:0px;}
 #agent_edit_from input, #agent_edit_from select{border:1px solid #ccc;}
 #agent_edit_from p{margin:0;font-size:11px}
-span.remove_pic_cat {    position: absolute;    top: -7px;    color: red;    right: 0px;}
+span.remove_pic_cat {    position: absolute;    top: 0px;    color: red;    right: 5px; cursor: pointer;}
 .sidebar-menu .treeview-menu{padding-left: 25px !important;}
 .sidebar-collapse .sidebar-menu .treeview-menu{padding-left: 0px !important;}
 .login-box-body form .btn.btn-flat, .login-box-body form .form-control{border-radius: 2px;}
