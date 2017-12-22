@@ -493,13 +493,13 @@
 									<!--  <form> -->
 									<h4>Send My Bag To...</h4>
 									<div class="form-rms costume-error">
-										<p class="form-rms-que">Full Name</p>
+										<p class="form-rms-que">Full Name<span style="color: red">*</span></p>
 										<p class="form-rms-input"><input type="text" name="full_name" id="full_name" value="<?php if (isset($all_details['get_details']->display_name) && !empty($all_details['get_details']->display_name)) { echo $all_details['get_details']->display_name; } ?>" tab-index="1" ></p>
 										<span id="fullname_error" style="color:red"></span>
 									</div>
 
 									<div class="form-rms costume-error">
-										<p class="form-rms-que">Address 1</p>
+										<p class="form-rms-que">Address 1<span style="color: red">*</span></p>
 										<input type="hidden" class="field form-control" id="country" name="country">
 										<p class="form-rms-input"><input type="text" name="address1" id="route" value="<?php if (isset($all_details['basic_address']->address1) && !empty($all_details['basic_address']->address1)) { echo $all_details['basic_address']->address1; } ?>" tab-index="1" onFocus="geolocate()"></p>
 										<span id="address1_error" style="color:red"></span>
@@ -510,12 +510,12 @@
 										<p class="form-rms-input"><input type="text" value="<?php if (isset($all_details['basic_address']->address2) && !empty($all_details['basic_address']->address2)) { echo $all_details['basic_address']->address2; } ?>" name="address2" id="address2"  tab-index="1" ></p>
 									</div>
 									<div class="form-rms costume-error">
-										<p class="form-rms-que">City</p>
+										<p class="form-rms-que">City<span style="color: red">*</span></p>
 										<p class="form-rms-input"><input type="text" name="city" id="locality" value="<?php if (isset($all_details['basic_address']->city) && !empty($all_details['basic_address']->city)) { echo $all_details['basic_address']->city; } ?>" tab-index="1" ></p>
 										<span id="city_error" style="color:red"></span>
 									</div>
 									<div class="form-rms form-align costume-error">
-										<p class="form-rms-que">State</p>
+										<p class="form-rms-que">State<span style="color: red">*</span></p>
 										<p class="form-rms-input">
 											<?php if (isset($all_details['basic_address']->state) && !empty($all_details['basic_address']->state)) {
 												$db_state = $all_details['basic_address']->state;
@@ -530,12 +530,12 @@
 											</select>
 										</p>
 										<span id="state_error" style="color:red"></span>
-										<p class="form-rms-que">Zip Code</p>
+										<p class="form-rms-que">Zip Code<span style="color: red">*</span></p>
 										<p class="form-rms-input"><input type="text" name="zipcode" id="postal_code" value="<?php if (isset($all_details['basic_address']->zip_code) && !empty($all_details['basic_address']->zip_code)) { echo $all_details['basic_address']->zip_code; } ?>" tab-index="1" ></p>
 										<span id="zipcode_error" style="color:red"></span>
 									</div>
 									<div class="form-rms costume-error">
-										<p class="form-rms-que">Phone Number</p>
+										<p class="form-rms-que">Phone Number<span style="color: red">*</span></p>
 										<p class="form-rms-input"><input type="text" name="phone_number" id="phone_number" value="<?php if (isset($all_details['get_details']->phone_number) && !empty($all_details['get_details']->phone_number)) { echo $all_details['get_details']->phone_number; } ?>" tab-index="1" ></p>
 										<span id="phone_number_error" style="color:red"></span>
 									</div>
@@ -560,7 +560,7 @@
 									<h4>Have you registered yet? Add your email!</h4>
 									<!-- <form> -->
 									<div class="form-rms" style="margin-bottom: 18px">
-										<p class="form-rms-que">Email Address</p>
+										<p class="form-rms-que">Email Address<span style="color: red">*</span></p>
 										<p class="form-rms-input"><input type="text" name="email_address" id="email_address" value="<?php if (isset($all_details['get_details']->email) && !empty($all_details['get_details']->email)) { echo $all_details['get_details']->email; } ?>" <?php if (isset($all_details['get_details']->email) && !empty($all_details['get_details']->email)) {  ?> readonly <?php } ?> tab-index="1" ></p>
 										<span id="email_address_error" style="color:red"></span>
 										<!-- </form> -->

@@ -24,7 +24,7 @@
 }
 
 .fancybox-skin {
-	padding: 18px 0px !important;
+	/*padding: 18px 0px !important;*/
 	position: relative;
 	background: #f9f9f9;
 	color: #444;
@@ -36,7 +36,7 @@
 
 .fancybox-opened {
 	z-index: 8030;
-	min-width: 450px
+	/*min-width: 450px*/
 }
 
 .fancybox-opened .fancybox-skin {
@@ -78,6 +78,7 @@
 .fancybox-image {
 	max-width: 100%;
 	max-height: 100%;
+	border: 15px solid #fff;
 }
 
 #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
@@ -144,12 +145,12 @@
 }
 
 .fancybox-prev span {
-	left: 10px;
+	left: 0px;
 	background-position: 0 -36px;
 }
 
 .fancybox-next span {
-	right: 10px;
+	right: 0px;
 	background-position: 0 -72px;
 }
 
@@ -269,12 +270,16 @@
 	   only screen and (min-device-pixel-ratio: 1.5){
 
 	#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-		background-image: url('fancybox_sprite@2x.png');
+/*		background-image: url('fancybox_sprite@2x.png');
+		background-size: 44px 152px;*/ /*The size of the normal image, half the size of the hi-res image*/
+				background-image: url('fancybox_sprite.png');
 		background-size: 44px 152px; /*The size of the normal image, half the size of the hi-res image*/
+	visibility: visible;
 	}
 
 	#fancybox-loading div {
 		background-image: url('fancybox_loading@2x.gif');
+	
 		background-size: 24px 24px; /*The size of the normal image, half the size of the hi-res image*/
 	}
 }
@@ -343,4 +348,12 @@
 /* elevate zoom */
 .zoomContainer { 
 	z-index: 100000;
+}
+
+@media screen and (max-width: 767px){
+.fancybox-opened {
+	z-index: 8030;
+	min-width: initial;
+}
+
 }
