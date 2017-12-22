@@ -705,7 +705,7 @@ class OrdersController extends Controller {
             }
           }
         }
-       $my_costumes = DB::Select('SELECT cst.costume_id,dscr.name,CONCAT(UCASE(LEFT(cst.status, 1)),LCASE(SUBSTRING(cst.status, 2))) as status,DATE_FORMAT(cst.created_at,"%m/%d/%Y %h:%i:%s") as date from cc_costumes as cst LEFT JOIN cc_costume_description as dscr on dscr.costume_id=cst.costume_id '.$where.'');
+       $my_costumes = DB::Select('SELECT cst.costume_id,dscr.name,CONCAT(UCASE(LEFT(cst.status, 1)),LCASE(SUBSTRING(cst.status, 2))) as status,DATE_FORMAT(cst.created_at,"%m/%d/%Y %h:%i:%s") as date from cc_costumes as cst LEFT JOIN cc_costume_description as dscr on dscr.costume_id=cst.costume_id '.$where.' order by cst.costume_id desc');
         return response()->success(compact('my_costumes'));
   
     }
