@@ -28,7 +28,7 @@
 		<!-- <link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/jquery.fancybox.css??v=1') }}">
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/cloudzoom.css') }}"> -->
 		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/cloudzoom.css') }}">
-		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/fancy.css') }}">
+		<link rel="stylesheet" href="{{ asset('/assets/frontend/fancybox/fancy.css') }}?v=<?php echo date('dmYHims')?>">
 		
 		@yield('styles')
 	</head>
@@ -46,10 +46,10 @@
 		<script src="{{ asset('/js/jquery-2.2.4.js')}}"></script>
 <!-- 
 <script src="http://www.elevateweb.co.uk/wp-content/themes/radial/jquery.elevatezoom.min.js" type="text/javascript"></script> -->
-		<script src="{{ asset('/assets/frontend/fancybox/jquery.elevatezoom.min.js') }}"></script>
+		<script src="{{ asset('/assets/frontend/fancybox/jquery.elevatezoom.min.js') }}?v=<?php echo date('dmYHims')?>"></script>
 		<!-- <script src="{{ asset('/assets/frontend/autozoom/cloudzoom.js') }}"></script> 
 		<script src="{{ asset('/assets/frontend/autozoom/jquery.fancybox.js?v=2') }}"></script>-->
-		<script src="{{ asset('/assets/frontend/fancybox/jquery.fancybox.js?v=2') }}"></script>
+		<script src="{{ asset('/assets/frontend/fancybox/jquery.fancybox.js') }}?v=<?php echo date('dmYHims')?>"></script>
 		<script type="text/javascript">
 
             $(function(){
