@@ -42,7 +42,7 @@ class CreateCostumeController  extends Controller {
             else{
                  return $next($request);
             }
-        }, ['except' => ['requestaBag','Postrequestabag','Successrequestbag', 'redirectToCharity']]);
+        }, ['except' => ['requestaBag','Postrequestabag','Successrequestbag', 'redirectToCharity','GenerateExLarge']]);
 	}
 	public function costumeListings($sub_cat_id,$parent_cat_name)
 	{
@@ -2059,6 +2059,26 @@ class CreateCostumeController  extends Controller {
 		$user = User::where('id',$costume_info->created_by)->first();
 		Auth::login($user, true);
 		return Redirect::to('/costume/edit/'.$costume_info->costume_id.'/charity');
+	}
+
+	public function GenerateExLarge()
+	{
+		ini_set('max_execution_time', -1);
+		$directory = public_path('costumers_images/Original');
+		$files = \File::allFiles($directory);
+		foreach ($files as $file)
+		{
+			try{
+				$name = pathinfo($file)['basename'];
+			    $originalPath = public_path('costumers_images/Original/').$name;
+				$ExLargeresizeimg = Image::make($originalPath);
+				$ExLargeresizeimg->resize(889, 1217);
+				$ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$name);
+			}catch(\Exception $e){
+				\Log::info("Failed to Generate X-Large ".pathinfo($file)['basename']);
+			}
+		}
+		
 	}
 
 }
