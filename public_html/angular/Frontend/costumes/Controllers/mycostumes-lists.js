@@ -14,6 +14,7 @@ app.controller('MycostumesController', function($scope,DTOptionsBuilder, DTColum
       .withOption('lengthChange', false);
        $scope.dtColumns = [
                       DTColumnBuilder.newColumn('name').withTitle('Costume Name').notSortable(),
+                      DTColumnBuilder.newColumn('status').withTitle('Status'),
                       DTColumnBuilder.newColumn('date').withTitle('Created Date'),
                       DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
                       .renderWith(actionsHtml)
@@ -38,6 +39,7 @@ app.controller('MycostumesController', function($scope,DTOptionsBuilder, DTColum
             .withOption('lengthChange', false);
              $scope.dtColumns = [
                       DTColumnBuilder.newColumn('name').withTitle('Costume Name').notSortable(),
+                      DTColumnBuilder.newColumn('status').withTitle('Status'),
                       DTColumnBuilder.newColumn('date').withTitle('Created Date'),
                       DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
                       .renderWith(actionsHtml)
