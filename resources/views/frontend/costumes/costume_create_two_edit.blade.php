@@ -352,9 +352,11 @@ top: 0;
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-12  c_pic " id="front_view">
 					<h4>01. Front </h4>
+					@if(isset($front_image->image))
 					<span class="remove_pic" id="drag_n_drop_1" >
 						<i class="fa fa-times-circle" aria-hidden="true"></i>				
 					</span>
+					@endif
 					<div class="up-blog">
 						<input type="file" name="file1" accept="image/*" id="file1" @if(isset($front_image->image)) style="display: none;" value="1" @endif>
 						<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
@@ -384,9 +386,11 @@ top: 0;
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-12 rc_pic" id="back_view">
 					<h4>02. Back </h4>
+					@if(isset($back_image->image))
 					<span class="remove_pic" id="drag_n_drop_2" >
 						<i class="fa fa-times-circle" aria-hidden="true"></i>				
 					</span>
+					@endif
 					<div class="up-blog">
 						<input type="file" name="file2" accept="image/*" id="file2" @if(isset($back_image->image)) style="display: none;" value="1" @endif>
 						<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
@@ -415,9 +419,11 @@ top: 0;
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-12 rc_pic " id="details_view">
 					<h4>03. Detail </h4>
+					@if(isset($details_image->image))
 					<span class="remove_pic" id="drag_n_drop_3">
 						<i class="fa fa-times-circle" aria-hidden="true"></i>					
 					</span>
+					@endif
 					<div class="up-blog">
 						<input type="file" name="file3" accept="image/*" id="file3" @if(isset($details_image->image)) style="display: none;" value="1" @endif>
 						<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>

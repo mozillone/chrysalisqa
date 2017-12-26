@@ -265,6 +265,7 @@ $(document).on("change", "#file2", function() {
                         {
                           $(".result2").css({ "width": "198px", "height": "298px","position":"relative"});
                         }
+                        $('#file2_error').html("");
 
                     });
 
