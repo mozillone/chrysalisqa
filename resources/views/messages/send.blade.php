@@ -97,9 +97,9 @@
                                     $listingImage = URL::asset('/costumers_images/default-placeholder.png');
                                     }
                                     ?>
-                                    @if($inbox->type != "order")
+                                    <!-- @if($inbox->type != "order")
                                     <div class="msg_order_imge"><a href="{{ URL::to('/product').$inbox->url_key }}"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
-                                    @endif
+                                    @endif -->
                                  <p class="order_cnt">@if($inbox->type == "request_a_bag") Ref no  @elseif($inbox->type == "order") Order Id @else Product Id @endif #: <br>{{$inbox->type_id}}</p>
 
                                 </div>
