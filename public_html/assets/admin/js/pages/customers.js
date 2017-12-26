@@ -285,7 +285,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 				  	accept: "jpg|jpeg|png|gif",
 				},
 				img_chan1:{
-				  	required: false,
+				  	required: true,
 				  	accept: "jpg|jpeg|png|gif",
 				},
 				"files[]":{

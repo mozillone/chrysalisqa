@@ -254,6 +254,7 @@ $(document).on("change", "#file2", function() {
                         var Backview = '<img src="'+imgdata+'" class="result2">';
                         $(".drop_zone2").append(Backview);
                         $(".Backview").attr('value',imgdata);
+                        $(".Backview").attr('data-id',1);
                         $(".result2").attr("src", imgdata);
                         $("#selected_file_1").remove();
                         if (!$(".drop_zone1").hasClass("Back1")) {

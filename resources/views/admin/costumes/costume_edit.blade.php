@@ -815,7 +815,7 @@
 																			?>
 																			<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 																			<div class="drop_uploader drop_zone drop_zone2"><ul class="files thumb"><li id="selected_file_1"><div class="thumbnail" style="background-image: url({{ asset('costumers_images/Medium')}}<?php echo '/'.$costume_image2->image; ?>)"></div></li></ul></div>
-																			<input type="hidden" name="Imagecrop2" id="hidden_file2"  data-id ={{$costume_image2->image}} class="Backview" value="">
+																			<input type="hidden" name="Imagecrop2" id="hidden_file2"  data-id ="{{$costume_image2->image}}" class="Backview" value="">
 																			<?php
 																			}else { ?>
 																			{{--<input type="file" name="file2"   id="file2" value="1">--}}
