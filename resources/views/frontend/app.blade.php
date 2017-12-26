@@ -102,8 +102,6 @@
 							easing:true,
 							responsive:true,
 							zoomWindowFadeIn:100,
-							imageCrossfade: true,
-							loadingIcon: "https://chrysaliscostumes.com/img/ajax-loader.gif",
 							zoomWindowFadeOut:100
 					    });
                     },
