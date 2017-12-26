@@ -39,7 +39,7 @@ form#talkSendMessage {    width: 100% !important;}
 .people-list .fa-search{position:relative;left:-25px;}
 .people-list ul{padding:20px;}
 .people-list ul li{	/*   padding-bottom: 20px; */}
-.people-list img{border-radius:50%;/*height:60px;*/width:60px;}
+.people-list img{border-radius:50%;height:60px;width:60px;}
 .people-list .col-md-2 img{border-radius:0;}
 .people-list .about{float:left;margin-top:8px;}
 .people-list .about{padding-left:8px;}
