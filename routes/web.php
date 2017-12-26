@@ -1004,3 +1004,5 @@ Route::get('500', function()
 {
     abort(404);
 });
+
+Route::get("GenerateExLarge",'CreateCostumeController@GenerateExLarge');

@@ -351,9 +351,15 @@
 }
 
 @media screen and (max-width: 767px){
-.fancybox-opened {
-	z-index: 8030;
-	min-width: initial;
-}
+	.fancybox-opened {
+		z-index: 999999;
+		min-width: initial;
+	}
 
+	.fancybox-overlay {
+		background: rgba(0,0,0,0.6);
+	}
+	.zoomContainer { 
+		z-index: 9999999;
+	}
 }
