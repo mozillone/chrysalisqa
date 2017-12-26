@@ -985,7 +985,7 @@ $(document).on("change", "#file3", function() {
                         $(".drop_zone3").append(Additional);
                         //$(".result3").attr("src", imgdata);
                         $("#selected_file_2").remove();
-                        $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
+                        $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
                         //$("#file3").hide();
                         $(this).parents().find("#details_view").children("#drag_n_drop_3").removeClass('hide');
                         /*if($(".drop_zone3").hasClass('additional'))

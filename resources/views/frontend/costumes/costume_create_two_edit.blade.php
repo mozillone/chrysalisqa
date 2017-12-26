@@ -419,11 +419,9 @@ top: 0;
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-12 rc_pic " id="details_view">
 					<h4>03. Detail </h4>
-					@if(isset($details_image->image))
-					<span class="remove_pic" id="drag_n_drop_3">
+					<span class="remove_pic" id="drag_n_drop_3" @if(empty($details_image->image)) style="display: none;" @endif>
 						<i class="fa fa-times-circle" aria-hidden="true"></i>					
 					</span>
-					@endif
 					<div class="up-blog">
 						<input type="file" name="file3" accept="image/*" id="file3" @if(isset($details_image->image)) style="display: none;" value="1" @endif>
 						<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
