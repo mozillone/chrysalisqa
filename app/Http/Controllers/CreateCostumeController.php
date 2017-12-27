@@ -1488,7 +1488,7 @@ class CreateCostumeController  extends Controller {
 
 
 		if($request->Imagecrop3 != "" || !empty($request->Imagecrop3)) {
-			$file_db = DB::table('costume_image')->where('costume_id', $request->costume_id)->where('type', '2')->delete();
+			$file_db = DB::table('costume_image')->where('costume_id', $request->costume_id)->where('type', '3')->delete();
 			$Imagecrop1 = $request->Imagecrop3;
 			$img = str_replace('data:image/jpeg;base64,', '', $Imagecrop1);
 			$img = str_replace(' ', '+', $img);
