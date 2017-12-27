@@ -2072,18 +2072,28 @@ class CreateCostumeController  extends Controller {
 	public function GenerateExLarge()
 	{
 		ini_set('max_execution_time', -1);
-		$directory = public_path('costumers_images/Original');
-		$files = \File::allFiles($directory);
-		foreach ($files as $file)
+		ini_set('memory_limit', -1);
+		//$directory = public_path('costumers_images/Original');
+		//$files = \File::allFiles($directory);
+		$files = DB::table("costume_image")
+			->leftjoin("costumes","costumes.costume_id","=","costume_image.costume_id")
+			->where([["costumes.deleted_status","0"],["costume_image.isOptimized","N"]])
+			->select("costume_image.costume_image_id","costume_image.image")
+			->get();
+		foreach ($files as $costume)
 		{
 			try{
-				$name = pathinfo($file)['basename'];
+				//$name = pathinfo($file)['basename'];
+				$name = $costume->image;
+				$imageId = $costume->costume_image_id;
 			    $originalPath = public_path('costumers_images/Original/').$name;
 				$ExLargeresizeimg = Image::make($originalPath);
 				$ExLargeresizeimg->resize(889, 1217);
 				$ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$name);
+				chmod(public_path('costumers_images/ExLarge/').$name, 0777);
+				DB::table("costume_image")->where("costume_image_id",$imageId)->update(["isOptimized" => "Y"]);
 			}catch(\Exception $e){
-				\Log::info("Failed to Generate X-Large ".pathinfo($file)['basename']);
+				\Log::info("Failed to Generate X-Large for ". $name);
 			}
 		}
 		
