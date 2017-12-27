@@ -3,7 +3,13 @@
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
  <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
   <link rel="stylesheet" href="{{ asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css') }}">
-
+  <style type="text/css">
+ul.holder .pagination li, ul.holder .pagination li a{width:32px; text-align: center;}
+ul.holder .pagination li:last-child a, ul.holder .pagination li:last-child span{position: relative; width:60px;}
+ul.holder .pagination li:first-child a, ul.holder .pagination li:first-child span{height:29px;position: relative; width:80px;}
+ul.holder .pagination li:last-child ::after{position: absolute; content:"Next";  width:100%; left: 0;background: #fff;}
+ul.holder .pagination li:first-child ::before{position: absolute; content:"Previous"; width:100%;left: 0;background: #fff;}
+  </style>
  @endsection
 @section('content')
  	<section class="content create_section_page">
@@ -95,6 +101,8 @@
 					    </div>
 					</div>
 				@endforeach
+				<ul class="holder list_pagination">{{ $data->links() }}</ul>
+				
 				@else
 					<div  class="col-md-3 col-sm-4 col-xs-6">There are no items in your list.</div>
 				@endif
