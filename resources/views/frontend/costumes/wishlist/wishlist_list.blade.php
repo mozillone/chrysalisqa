@@ -6,7 +6,7 @@
   <style type="text/css">
 ul.holder .pagination li, ul.holder .pagination li a{width:32px; text-align: center;}
 ul.holder .pagination li:last-child a, ul.holder .pagination li:last-child span{position: relative; width:60px;}
-ul.holder .pagination li:first-child a, ul.holder .pagination li:first-child span{height:29px;position: relative; width:80px;}
+ul.holder .pagination li:first-child a, ul.holder .pagination li:first-child span{position: relative; width:80px;}
 ul.holder .pagination li:last-child ::after{position: absolute; content:"Next";  width:100%; left: 0;background: #fff;}
 ul.holder .pagination li:first-child ::before{position: absolute; content:"Previous"; width:100%;left: 0;background: #fff;}
   </style>
