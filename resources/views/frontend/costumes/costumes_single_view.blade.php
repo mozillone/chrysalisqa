@@ -103,7 +103,7 @@
 							<div class="priceview_rm">
 								<div class="col-xs-12 col-md-6 col-sm-8 viewpr_rm">
 									<div class="mobile_list_view">
-										<h2>@if($data[0]->created_user_group=="admin" && $data[0]->discount!=null && $data[0]->uses_customer<$data[0]->uses_total && date('Y-m-d',strtotime("now"))>=date('Y-m-d',strtotime($data[0]->date_start)) && date('Y-m-d',strtotime("now"))<=date('Y-m-d',strtotime($data[0]->date_end)))
+										<h2>@if($data[0]->created_user_group=="admin" && $data[0]->discount!=null && $data[0]->uses_customer<$data[0]->uses_total && date('Y-m-d',strtotime("now"))>=date('Y-m-d',strtotime($data[0]->date_start)) && date('Y-m-d',strtotime("now"))<=date('Y-m-d',strtotime($data[0]->date_end)) && $data[0]->discount_status!=0)
 											<?php $discount=($data[0]->price/100)*($data[0]->discount);
                                                 $new_price=$data[0]->price-$discount;
 											?>
