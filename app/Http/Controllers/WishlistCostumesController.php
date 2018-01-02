@@ -41,6 +41,7 @@ class WishlistCostumesController extends Controller {
 			$url = url('/').'/product'.$value->url_key;
 			Costumes::facebookDebugger($url);
 		}
+		//echo "<pre>"; print_r($data); exit;
 		return view('frontend.costumes.wishlist.wishlist_list',compact('data',$data));
 	}
 	public function removeWishlistCostume($costume_id){
