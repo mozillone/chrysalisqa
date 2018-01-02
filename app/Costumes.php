@@ -78,7 +78,7 @@ class Costumes extends Authenticatable
             $is_login='';
         }
 
-        $data=DB::Select('SELECT cats.category_id,cats.parent_id,cats.name as cat_name,cats.description,cst.costume_id,cst.weight_pounds,cst.weight_ounces,dsr.name,dsr.description,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,cst.created_user_group,cst.deleted_status,cst.status as cos_act_status '.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,(select a.name from cc_url_rewrites, cc_category as a where url_key="'.$key_url.'" and type="category" and a.category_id = cc_url_rewrites.url_offset group by url_key) as main_cat_name  
+        $data=DB::Select('SELECT cats.category_id,cats.parent_id,cats.name as cat_name,cats.description,cst.costume_id,cst.weight_pounds,cst.weight_ounces,dsr.name,dsr.description,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,cst.created_user_group,cst.deleted_status,cst.status as cos_act_status '.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,prom.status as discount_status,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,(select a.name from cc_url_rewrites, cc_category as a where url_key="'.$key_url.'" and type="category" and a.category_id = cc_url_rewrites.url_offset group by url_key) as main_cat_name  
             FROM `cc_costume_to_category` as cat 
             JOIN cc_costumes as cst on cst.costume_id=cat.costume_id 
             JOIN cc_category  as cats on cats.category_id=cat.category_id 

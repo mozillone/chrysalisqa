@@ -9,7 +9,11 @@
 <style>
 	.red.sizes_chart{display:block;}
 	div#size-chart label input.size_chekd {    vertical-align: text-bottom;}
-	div#size-chart label{ margin-right: 15px; }come
+	div#size-chart label{ margin-right: 15px; }
+	.zoom_pin{    position: absolute;    top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;
+    background: rgba(0,0,0,0.6); color: #fff;    padding: 10px;    font-size: 18px; font-weight: bold;  transition: all 0.5s linear; display: none;}
+    ul.bxslider li a:hover .zoom_pin{display: block; transition: all 0.5s linear;}
+    .zoomWindowContainer > div{cursor: zoom-in !important;}
 </style>
 @endsection
 @section('content')
@@ -25,7 +29,7 @@
 				
 				<ul class="bxslider">
 					@foreach($data['images'] as $images)
-					<li><a class="costume_images" data-zoom-image="{{asset('/costumers_images/ExLarge')}}/<?= $images->image?>" rel="gal" data-caption="{{$data[0]->name}}" href="{{asset('/costumers_images/Large')}}/<?= $images->image?>"><img class="img-responsive elevatezoom" src="{{asset('/costumers_images/Large')}}/<?= $images->image?>" data-zoom-image="{{asset('/costumers_images/Original')}}/<?= $images->image?>"></a></li>
+					<li><a class="costume_images" data-zoom-image="{{asset('/costumers_images/ExLarge')}}/<?= $images->image?>" rel="gal" data-caption="{{$data[0]->name}}" href="{{asset('/costumers_images/Large')}}/<?= $images->image?>"><img class="img-responsive elevatezoom" src="{{asset('/costumers_images/Large')}}/<?= $images->image?>"><p class="zoom_pin">Click to Zoom</p></a> </li>
 					@endforeach
 				</ul>
 				
@@ -99,10 +103,14 @@
 							<div class="priceview_rm">
 								<div class="col-xs-12 col-md-6 col-sm-8 viewpr_rm">
 									<div class="mobile_list_view">
-										<h2>@if($data[0]->created_user_group=="admin" && $data[0]->discount!=null && $data[0]->uses_customer<$data[0]->uses_total && date('Y-m-d',strtotime("now"))>=date('Y-m-d',strtotime($data[0]->date_start)) && date('Y-m-d',strtotime("now"))<=date('Y-m-d',strtotime($data[0]->date_end)))
+										<h2>@if($data[0]->created_user_group!="admin" && $data[0]->discount!=null && $data[0]->uses_customer<$data[0]->uses_total && date('Y-m-d',strtotime("now"))>=date('Y-m-d',strtotime($data[0]->date_start)) && date('Y-m-d',strtotime("now"))<=date('Y-m-d',strtotime($data[0]->date_end)) && $data[0]->discount_status!=0)
+											@if($data[0]->type == "percentage")
 											<?php $discount=($data[0]->price/100)*($data[0]->discount);
                                                 $new_price=$data[0]->price-$discount;
 											?>
+											@else
+											<?php $new_price=$data[0]->price-$data[0]->discount;?>
+											@endif
 											<p><span class="old-price"><strike>${{number_format($data[0]->price,2, '.', ',')}}</strike></span> <span class="new-price">${{number_format($new_price,2, '.', ',')}}</span></p>
 											@else
 											<p><span class="new-price">${{number_format($data[0]->price,2, '.', ',')}}</span></p>

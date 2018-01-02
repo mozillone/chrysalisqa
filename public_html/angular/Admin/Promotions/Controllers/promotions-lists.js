@@ -34,7 +34,7 @@ app.controller('PromotionsController', function($scope,DTOptionsBuilder, DTColum
         $compile(angular.element(row).contents())($scope);
     }
     function discount(data, type, full, meta){
-        if(full.type=="percentage"){
+        if(full.type !="percentage"){
             return "$ "+parseInt(full.discount).toFixed(2);
         }else{
              return parseInt(full.discount)+"%";

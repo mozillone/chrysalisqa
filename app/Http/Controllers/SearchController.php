@@ -130,6 +130,7 @@ class SearchController extends Controller {
 	{
 	    
 		$req=Request::all();
+		//echo "<pre>"; print_r($req); exit;
 		$where='where (MATCH (dsr.name,dsr.description) AGAINST ("'.$req['key'].'") or dsr.name  LIKE "%'.$req['key'].'%" or dsr.description LIKE "%'.$req['key'].'%" or cst.condition LIKE "%'.$req['key'].'%" or gender LIKE "%'.$req['key'].'%" or dsr.keywords LIKE "%'.$req['key'].'%" or cst.price LIKE "%'.$req['key'].'%")';
 		$order_by='order by cst.created_at ASC';
                 
@@ -199,8 +200,7 @@ class SearchController extends Controller {
 		}
 			$costumes = DB::select('SELECT cst.costume_id,dsr.name,FORMAT(cst.price,2) as price'.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,img.image,cst.created_user_group,cst.quantity,(select url_key from cc_url_rewrites where url_offset=cst.costume_id order by id desc limit 0,1) as url_key,created_user_group,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer, cao.attribute_option_value_id as film_qlty FROM `cc_costumes` as cst LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1"  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id and prom.code="" LEFT JOIN cc_coupon_costumes as cpn_cst on cpn_cst.costume_id=cst.costume_id LEFT JOIN cc_address_master as adder on adder.user_id=cst.created_by and adder.address_type="selling" LEFT JOIN cc_costume_attribute_options as cao on cst.costume_id=cao.costume_id '.$where.' group by cst.costume_id '.$order_by.' ');
 			
-			     $total = count($costumes);
-			     
+			    $total = count($costumes);
 			    if(!empty($req['page']))
 			    {
 			        $page = $req['page'];
@@ -220,7 +220,6 @@ class SearchController extends Controller {
 				}
 	         	$offSet = ($page * $paginate) - $paginate;
 	         	$itemsForCurrentPage = array_slice($costumes, $offSet, $paginate, true);
-	         	
 	         	if(count($itemsForCurrentPage) == 0)
 	         	{
 	         	    $page = 1;
@@ -230,7 +229,7 @@ class SearchController extends Controller {
 	         	$costumes = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, count($costumes), $paginate, $page);
 	         	
 	            //$costumes = $costumes->setPath(Request::url());
-	            
+	            echo "<pre>"; print_r($costumes); exit;
 	          	$view = view('frontend.costumes.filter-costumes')->with('costumes',$costumes)->with('count',$total)->render();
 	         	return response()->json($view, 200);
 	         	

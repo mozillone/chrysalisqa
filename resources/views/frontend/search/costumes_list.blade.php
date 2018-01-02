@@ -343,9 +343,9 @@
 						@endif
 						
 						<ul class="holder list_pagination">	
- 								{{$costumes->links('/frontend/pagination')}}
- 								@if($count>12)
-							 <div class="pagination_btm">
+ 							{{$costumes->links('/frontend/pagination')}}
+ 							@if($count>12)
+							<div class="pagination_btm">
 							 	<label>Show </label>
 							 	<select class="per_page">
 							 		<option value="12">12</option>
@@ -353,7 +353,7 @@
 							 		<option value="48">48</option>
 							 	</select>
 							 	<label> per page </label>	
-							 </div>
+							</div>
 							@endif
 						</ul>
 						</div>

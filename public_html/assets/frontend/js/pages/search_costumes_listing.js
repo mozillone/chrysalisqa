@@ -103,7 +103,6 @@ $(document).on("change",".per_page",function(e)
 
 function searching(search){
 	var filter=$('#search_list').serializeArray();
-	debugger;
 	var res="";
 	var cat_id=$('input[name="cat_id"]').val();
 	var parent_cat_name=$('input[name="parent_cat_name"]').val();
@@ -124,6 +123,7 @@ function searching(search){
 			url: url,
 			data: filter,
 			success: function(response){
+				console.log(response);
 			    $("#search-container").html(response);
 			},
 		     complete: function(jqXHR, textStatus) {

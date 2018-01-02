@@ -95,7 +95,7 @@
                         //$image.CloudZoom({zoomPosition:'inside', zoomOffsetX:0});
                         //$image.elevateZoom({zoomType: "inner", cursor: "crosshair"});
                         $('.zoomContainer').remove();
-                        $(".fancybox-image").attr("data-zoom-image",this.element[0].attributes[1].value);
+                        /*$(".fancybox-image").attr("data-zoom-image",this.element[0].attributes[1].value);*/
            				$image.elevateZoom({ 
 					        zoomType: "inner",
 							zoomWindowOffetx:0,
@@ -116,6 +116,7 @@
                     },
                     beforeShow : function(){
 				   		this.title =  $(this.element).data("caption");
+				   		$(".fancybox-image").attr("data-zoom-image",$(this.element).data("zoom-image"));
 				  	},
                     beforeClose: function(){
                         var $image = $('.fancybox-image');

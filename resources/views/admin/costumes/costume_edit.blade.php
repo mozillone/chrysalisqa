@@ -815,7 +815,7 @@
 																			?>
 																			<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
 																			<div class="drop_uploader drop_zone drop_zone2"><ul class="files thumb"><li id="selected_file_1"><div class="thumbnail" style="background-image: url({{ asset('costumers_images/Medium')}}<?php echo '/'.$costume_image2->image; ?>)"></div></li></ul></div>
-																			<input type="hidden" name="Imagecrop2" id="hidden_file2"  data-id ={{$costume_image2->image}} class="Backview" value="">
+																			<input type="hidden" name="Imagecrop2" id="hidden_file2"  data-id ="{{$costume_image2->image}}" class="Backview" value="">
 																			<?php
 																			}else { ?>
 																			{{--<input type="file" name="file2"   id="file2" value="1">--}}
@@ -827,6 +827,7 @@
 																			<?php
 																			} ?>
 																		</div>
+																		<span id="file2_error" style="color:red"></span>
 																	</div>
 																</div>
 																<div class="col-md-3 col-sm-4 col-xs-12 " id="details_view">
@@ -1304,13 +1305,24 @@ if($("#size").val() == "custom"){
 	$("#drag_n_drop_3").hide();
 	}
 
-	$("#submit").click(function(a) {                                                     
-	if($("input[name=Imagecrop1]").attr('data-id') == "")
-	{
-		$('input[name=file1]').css('border', '1px solid red');
-		$('#file1_error').html('Upload Front View');
-		return false;                                          
-	}
+	$("#submit").click(function(a) {  
+		if($("input[name=Imagecrop1]").attr('data-id') == "" && $("input[name=Imagecrop2]").attr('data-id') == ""){
+			$('#file1_error').html('Upload Front View');
+			$('#file2_error').html('Upload Back View');
+			return false;
+		}                                                   
+		if($("input[name=Imagecrop1]").attr('data-id') == "")
+		{
+			$('input[name=file1]').css('border', '1px solid red');
+			$('#file1_error').html('Upload Front View');
+			return false;                                          
+		}
+		if($("input[name=Imagecrop2]").attr('data-id') == "")
+		{
+			$('input[name=file2]').css('border', '1px solid red');
+			$('#file2_error').html('Upload Back View');
+			return false;                                          
+		}
 	});																							
 	/*$(document).on("click",".img_clse",function()
 	{ 												

@@ -42,7 +42,7 @@ class CreateCostumeController  extends Controller {
             else{
                  return $next($request);
             }
-        }, ['except' => ['requestaBag','Postrequestabag','Successrequestbag', 'redirectToCharity']]);
+        }, ['except' => ['requestaBag','Postrequestabag','Successrequestbag', 'redirectToCharity','GenerateExLarge']]);
 	}
 	public function costumeListings($sub_cat_id,$parent_cat_name)
 	{
@@ -232,6 +232,7 @@ class CreateCostumeController  extends Controller {
 		    $ExLargeresizeimg = Image::make($originalPath);
 		    $ExLargeresizeimg->resize(889, 1217);
 		    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
+		    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
 
 			if($OriginalImage)
@@ -277,6 +278,7 @@ class CreateCostumeController  extends Controller {
 			$ExLargeresizeimg = Image::make($originalPath1);
 		    $ExLargeresizeimg->resize(889, 1217);
 		    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
+		    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 	            
 			//$file2 = Imageresize::CreateCostumeFrontend2($request->file2);
 
@@ -320,6 +322,7 @@ class CreateCostumeController  extends Controller {
 				$ExLargeresizeimg = Image::make($originalPath2);
 			    $ExLargeresizeimg->resize(889, 1217);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
+			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
 				if($OriginalImage3)
 				{
@@ -371,6 +374,7 @@ class CreateCostumeController  extends Controller {
 					$ExLargeresizeimg = Image::make($originalPath);
 				    $ExLargeresizeimg->resize(889, 1217);
 				    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Multiplerand);
+				    chmod(public_path('costumers_images/ExLarge/').$Multiplerand, 0777);
 
 					$file_db_array4 = array('costume_id'=>$costume_id,
 						'image'=>$multidata,
@@ -1430,6 +1434,7 @@ class CreateCostumeController  extends Controller {
 				$ExLargeresizeimg = Image::make($originalPath);
 			    $ExLargeresizeimg->resize(889, 1217);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
+			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 				if ($OriginalImage) {
 					$file_db_array1 = array('costume_id' => $costume_id,
 						'image' => $data1,
@@ -1465,6 +1470,7 @@ class CreateCostumeController  extends Controller {
 			$ExLargeresizeimg = Image::make($originalPath);
 		    $ExLargeresizeimg->resize(889, 1217);
 		    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
+		    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
 			if ($OriginalImage) {
 				$file_db_array2 = array('costume_id' => $costume_id,
@@ -1480,7 +1486,7 @@ class CreateCostumeController  extends Controller {
 
 
 		if($request->Imagecrop3 != "" || !empty($request->Imagecrop3)) {
-			$file_db = DB::table('costume_image')->where('costume_id', $request->costume_id)->where('type', '2')->delete();
+			$file_db = DB::table('costume_image')->where('costume_id', $request->costume_id)->where('type', '3')->delete();
 			$Imagecrop1 = $request->Imagecrop3;
 			$img = str_replace('data:image/jpeg;base64,', '', $Imagecrop1);
 			$img = str_replace(' ', '+', $img);
@@ -1501,6 +1507,7 @@ class CreateCostumeController  extends Controller {
 			$ExLargeresizeimg = Image::make($originalPath);
 		    $ExLargeresizeimg->resize(889, 1217);
 		    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
+		    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 			if ($OriginalImage) {
 				$file_db_array2 = array('costume_id' => $costume_id,
 					'image' => $data1,
@@ -1568,6 +1575,7 @@ class CreateCostumeController  extends Controller {
 				$ExLargeresizeimg = Image::make($originalPath);
 				$ExLargeresizeimg->resize(889, 1217);
 				$ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Multiplerand);
+				chmod(public_path('costumers_images/ExLarge/').$Multiplerand, 0777);
 
 				$file_db_array4 = array('costume_id'=>$costume_id,
 					'image'=>$multidata,
@@ -2062,6 +2070,36 @@ class CreateCostumeController  extends Controller {
 		$user = User::where('id',$costume_info->created_by)->first();
 		Auth::login($user, true);
 		return Redirect::to('/costume/edit/'.$costume_info->costume_id.'/charity');
+	}
+
+	public function GenerateExLarge()
+	{
+		ini_set('max_execution_time', -1);
+		ini_set('memory_limit', -1);
+		//$directory = public_path('costumers_images/Original');
+		//$files = \File::allFiles($directory);
+		$files = DB::table("costume_image")
+			->leftjoin("costumes","costumes.costume_id","=","costume_image.costume_id")
+			->where([["costumes.deleted_status","0"],["costume_image.isOptimized","N"]])
+			->select("costume_image.costume_image_id","costume_image.image")
+			->get();
+		foreach ($files as $costume)
+		{
+			try{
+				//$name = pathinfo($file)['basename'];
+				$name = $costume->image;
+				$imageId = $costume->costume_image_id;
+			    $originalPath = public_path('costumers_images/Original/').$name;
+				$ExLargeresizeimg = Image::make($originalPath);
+				$ExLargeresizeimg->resize(889, 1217);
+				$ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$name);
+				chmod(public_path('costumers_images/ExLarge/').$name, 0777);
+				DB::table("costume_image")->where("costume_image_id",$imageId)->update(["isOptimized" => "Y"]);
+			}catch(\Exception $e){
+				\Log::info("Failed to Generate X-Large for ". $name);
+			}
+		}
+		
 	}
 
 }

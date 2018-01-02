@@ -96,6 +96,7 @@ $('#back_view').find('li').remove();
 $('#drag_n_drop_2').css('display','none');
 $('input[name=file2]').val('');
 $('input[name=hidden]').attr('value','');
+$(".drop_zone2").addClass('additional');
 $("#file2").removeAttr('style');
 
 });
@@ -112,7 +113,7 @@ $('#details_view').find('li').remove();
 $('#drag_n_drop_3').css('display','none');
 $('input[name=file3]').val('');
 $('input[name=file3]').attr('value','');
-$(".drop_uploader").addClass('additional');
+$(".drop_zone3").addClass('additional');
 $("#file3").removeAttr('style');
 });
 //donate amount percentage calculation
@@ -780,11 +781,10 @@ $(document).on("change", "#file1", function() {
                         $("#myModal").modal('hide');
                         //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone1").find("img.result").remove();
-                        $(".drop_zone1").html("<img class='result'>");
                         var FrontView = '<img src="'+imgdata+'" class="result">';
                         $(".drop_zone1").append(FrontView);
                         $(".Forntview").attr('value',imgdata);
-                        $(".result").attr("src", imgdata);
+                        //$(".result").attr("src", imgdata);
                         $("#selected_file_0").remove();
                         $(".result").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
                         //$("#file1").hide();
@@ -880,18 +880,19 @@ $(document).on("change", "#file2", function() {
                         $("#myModal2").modal('hide');
                         //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone2").find("img.result2").remove();
-                        $(".drop_zone2").html("<img class='result2'>");
-                        //var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
-                        $(".drop_zone2").find("img.result2").remove();
                         var Backview = '<img src="'+imgdata+'" class="result2">';
                         $(".drop_zone2").append(Backview);
                         $(".Backview").attr('value',imgdata);
-                        $(".result2").attr("src", imgdata);
+                        //$(".result2").attr("src", imgdata);
                         $("#selected_file_1").remove();
-                        $(".result2").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
+                        $(".result2").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
                         //$("#file2").hide();
                         $(this).parents().find("#back_view").children("#drag_n_drop_2").removeClass('hide');
                         $('.Backview').attr('data-value',2);
+                        if($(".drop_zone2").hasClass('additional'))
+                        {
+                          $(".result2").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
+                        }
 
                     });
 
@@ -982,22 +983,20 @@ $(document).on("change", "#file3", function() {
                         $("#myModal3").modal('hide');
                         //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone3").find("img.result3").remove();
-                        $(".drop_zone3").html("<img class='result3'>");
                         $('.Additional').attr('data-value',3);
                         //var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
-                        $(".drop_zone3").find("img.result3").remove();
                         $(".Additional").attr('value',imgdata);
                         var Additional = '<img src="'+imgdata+'" class="result3">';
                         $(".drop_zone3").append(Additional);
-                        $(".result3").attr("src", imgdata);
+                        //$(".result3").attr("src", imgdata);
                         $("#selected_file_2").remove();
-                        $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
+                        $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
                         //$("#file3").hide();
                         $(this).parents().find("#details_view").children("#drag_n_drop_3").removeClass('hide');
-                        /*if($(".drop_zone3").hasClass('additional'))
+                        if($(".drop_zone3").hasClass('additional'))
                         {
                           $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
-                        }*/
+                        }
                     });
                 };
                 reader.readAsDataURL(file);

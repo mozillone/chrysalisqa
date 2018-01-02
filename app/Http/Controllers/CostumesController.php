@@ -36,6 +36,7 @@ class CostumesController extends Controller {
 	public function categoryCostumeListings(Request $request,$slug1)
 	{
 	    $req=Request::all();
+	    //echo '<pre>'; print_r($req); exit;
 		Meta::set('title', ucfirst($slug1));
         Meta::set('description', ucfirst($slug1).' Buy and Sell Affordable, Environment Friendly Costumes');
         $key_url='/'.$slug1;
@@ -110,6 +111,7 @@ class CostumesController extends Controller {
 		try
 		{
 			$req=Request::all();
+			//echo "<pre>"; print_r($req); exit;
 			$key_url='/'.$req['parent_cat_name'];
 			$cat_info=Category::getUrlCategoryId($key_url);
 			if(count($cat_info)){
