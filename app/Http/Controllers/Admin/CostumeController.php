@@ -1237,7 +1237,6 @@ class CostumeController extends Controller
 		$delete_costume_attributes = DB::table('costume_attribute_options')->where('costume_id',$request->costume_id)->delete();
 		$response=array();
 		$req=$request->all();
-		//echo "<pre>"; print_r($req); exit;
 		$userid=Auth::user()->id;
 		$customer_name=$req['customer_name'];
 		
@@ -1351,13 +1350,15 @@ class CostumeController extends Controller
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 				if ($OriginalImage) {
+					DB::table('costume_image')->where('costume_id',$costume_id)->where('type',1)->delete();
 					$file_db_array1 = array('costume_id' => $costume_id,
 						'image' => $data1,
 						'type' => 1,
 						'sort_order' => 0,
 					);
+					//echo "<pre>"; print_r($file_db_array1); exit;
 					$file_db = DB::table('costume_image')->insert($file_db_array1);
-				}
+				}//print_r($file_db);exit;
 			}
 			if (isset($request['Imagecrop2']) && !empty($request['Imagecrop2'])) {
 				$Imagecrop2 = $request->Imagecrop2;
@@ -1383,6 +1384,7 @@ class CostumeController extends Controller
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 				if ($OriginalImage2) {
+					DB::table('costume_image')->where('costume_id',$costume_id)->where('type',2)->delete();
 					$file_db_array2 = array('costume_id' => $costume_id,
 						'image' => $data2,
 						'type' => 2,
@@ -1424,7 +1426,7 @@ class CostumeController extends Controller
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
 				//$file3 = Imageresize::CreateCostumeFrontend3($request->file3);
-
+			    DB::table('costume_image')->where('costume_id',$costume_id)->where('type',3)->delete();
 				//inserting in db
 				$file_db_array3 = array('costume_id'=>$costume_id,
 					'image'=>$data3,
