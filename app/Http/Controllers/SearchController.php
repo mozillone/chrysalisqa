@@ -229,7 +229,6 @@ class SearchController extends Controller {
 	         	$costumes = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, count($costumes), $paginate, $page);
 	         	
 	            //$costumes = $costumes->setPath(Request::url());
-	            echo "<pre>"; print_r($costumes); exit;
 	          	$view = view('frontend.costumes.filter-costumes')->with('costumes',$costumes)->with('count',$total)->render();
 	         	return response()->json($view, 200);
 	         	

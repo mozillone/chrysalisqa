@@ -1158,19 +1158,18 @@ class RequestabagController extends Controller
       }
        	private function smartPost($req,$address,$service,$weight,$sellerAddress){
         
-          	$key = Config::get('constants.FedEx_Key');
-            $password = Config::get('constants.FedEx_Password');
+          	$key = Config::get('constants.FedEx_SmartPostKey');
+            $password = Config::get('constants.FedEx_SmartPostPassword');
             $account_number = Config::get('constants.FedEx_SmartPostAccountNumber');
             $meter_number = Config::get('constants.FedEx_SmartPostMeterNumber');
             $hub_id = Config::get('constants.FedEx_SmartPostHubId');
-
+            $fedex_url = Config::get('constants.FedEx_Ship_Url');
             $xml = '<?xml version="1.0" encoding="UTF-8"?>
             <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v17="http://fedex.com/ws/ship/v17">
 			   <soapenv:Header/>
 			   <soapenv:Body>
 			      <v17:ProcessShipmentRequest>
 			         <v17:WebAuthenticationDetail>
-			           
 			            <v17:UserCredential>
 			               <v17:Key>'.$key.'</v17:Key>
 			               <v17:Password>'.$password.'</v17:Password>
@@ -1300,7 +1299,7 @@ class RequestabagController extends Controller
 			</soapenv:Envelope>';
 Log::debug($xml);
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services');
+            curl_setopt($ch, CURLOPT_URL, $fedex_url);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
             curl_setopt($ch, CURLOPT_VERBOSE, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
