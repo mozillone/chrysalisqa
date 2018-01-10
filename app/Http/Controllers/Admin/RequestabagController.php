@@ -1274,7 +1274,7 @@ class RequestabagController extends Controller
 			            <v17:LabelSpecification>
 			               <v17:LabelFormatType>COMMON2D</v17:LabelFormatType>
 			               <v17:ImageType>PDF</v17:ImageType>
-			               <v17:LabelStockType>PAPER_8.5X11_TOP_HALF_LABEL</v17:LabelStockType>
+			               <v17:LabelStockType>PRINT_4X6</v17:LabelStockType>
 			            </v17:LabelSpecification>
 			            <v17:RateRequestTypes>LIST</v17:RateRequestTypes>
 			            <v17:PackageCount>1</v17:PackageCount>
@@ -1319,7 +1319,7 @@ Log::debug($xml);
             if(!isset($result['SOAPENVBody']['SOAPENVFault'])){
 
             	$track_id=$result['SOAPENVBody']['ProcessShipmentReply']['CompletedShipmentDetail']['CompletedPackageDetails']['TrackingIds']['TrackingNumber'];
-              $fileName = 'fedexlabel/'.$track_id.".pdf";
+              $fileName = 'fedexlabel/'.$track_id.".zpl";
               $fp = fopen($fileName, 'wb');   
                $array_text = array("_");
             $array_replace =  "+";
