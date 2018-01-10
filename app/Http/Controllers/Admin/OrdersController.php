@@ -497,18 +497,14 @@ class OrdersController extends Controller {
          
           $userCredential = new ComplexType\WebAuthenticationCredential();
           $userCredential
-              //->setKey(Config::get('constants.FedEx_Key'))
-              //->setPassword(Config::get('constants.FedEx_Password'));
-              ->setKey(env('FEDEX_KEY','Jrgrh9ckHvvUhvvF'))
-              ->setPassword(env('FEDEX_PASSWORD','azVVnJyD7ehrYQKfpDjhBTKRA'));
+              ->setKey(Config::get('constants.FedEx_Key'))
+              ->setPassword(Config::get('constants.FedEx_Password'));
           $webAuthenticationDetail = new ComplexType\WebAuthenticationDetail();
           $webAuthenticationDetail->setUserCredential($userCredential);
           $clientDetail = new ComplexType\ClientDetail();
           $clientDetail
-              // ->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
-              // ->setMeterNumber(Config::get('constants.FedEx_MeterNumber'));
-              ->setAccountNumber(env('FEDEX_ACCOUNT_NUMBER','510087720'))
-              ->setMeterNumber(env('FEDEX_METER_NUMBER','100336246'));
+               ->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
+               ->setMeterNumber(Config::get('constants.FedEx_MeterNumber'));
           $version = new ComplexType\VersionId();
           $version
               ->setMajor(12)
@@ -530,8 +526,8 @@ class OrdersController extends Controller {
               ->setPhoneNumber($seller_phone_no);
           $shipper = new ComplexType\Party();
           $shipper
-              //->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
-              ->setAccountNumber(env('FEDEX_ACCOUNT_NUMBER','510087720'))
+              ->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
+              //->setAccountNumber(env('FEDEX_ACCOUNT_NUMBER','510087720'))
               ->setAddress($shipperAddress)
               ->setContact($shipperContact);
           $recipientAddress = new ComplexType\Address();
@@ -551,7 +547,7 @@ class OrdersController extends Controller {
               ->setContact($recipientContact);
           $labelSpecification = new ComplexType\LabelSpecification();
           $labelSpecification
-              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_7X4point75))
+              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_4X6))
               ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PDF))
               ->setLabelFormatType(new SimpleType\LabelFormatType(SimpleType\LabelFormatType::_COMMON2D));
           $packageLineItem1 = new ComplexType\RequestedPackageLineItem();
