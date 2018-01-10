@@ -349,19 +349,7 @@ class CostumesController extends Controller {
 
 	public function costumeSingleView($slug1=null,$slug2=null,$slug3=null)
 	{
-		/*$key_url='/'.$slug1.'/'.$slug2;
-		echo $key_url;
-		$data=DB::Select('SELECT cats.category_id,cats.parent_id,cats.name as cat_name,cats.description,cst.costume_id,cst.weight_pounds,cst.weight_ounces,dsr.name,dsr.description,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,cst.created_user_group,cst.deleted_status,cst.status as cos_act_status,(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,(select a.name from cc_url_rewrites, cc_category as a where url_key="'.$key_url.'" and type="category" and a.category_id = cc_url_rewrites.url_offset group by url_key) as main_cat_name  
-            FROM `cc_costume_to_category` as cat 
-            JOIN cc_costumes as cst on cst.costume_id=cat.costume_id 
-            JOIN cc_category  as cats on cats.category_id=cat.category_id 
-            LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id 
-            LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id  
-            LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id 
-            where cat.costume_id=342 group by cat.costume_id');
-        echo "<pre>"; print_r($data); exit;*/
-
-	    try
+		try
 	    {
 	        Meta::set('description', ucfirst($slug2).' Buy and Sell Affordable, Environment Friendly Costumes');
             /* Code added by Gayatri */
