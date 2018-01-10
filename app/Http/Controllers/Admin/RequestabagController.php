@@ -1082,8 +1082,8 @@ class RequestabagController extends Controller
               ->setContact($recipientContact);
           $labelSpecification = new ComplexType\LabelSpecification();
           $labelSpecification
-              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_4X6))
-              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PDF))
+              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_STOCK_4X6))
+              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_ZPLII))
               ->setLabelFormatType(new SimpleType\LabelFormatType(SimpleType\LabelFormatType::_COMMON2D));
           $packageLineItem1 = new ComplexType\RequestedPackageLineItem();
           $packageLineItem1
@@ -1136,7 +1136,7 @@ class RequestabagController extends Controller
           if($response->HighestSeverity=="SUCCESS"){
               $track_id=$response->CompletedShipmentDetail->CompletedPackageDetails->TrackingIds->TrackingNumber;
               $amount=$response->CompletedShipmentDetail->ShipmentRating->ShipmentRateDetails->TotalNetChargeWithDutiesAndTaxes->Amount;
-              $fileName = 'fedexlabel/'.$track_id.".pdf";
+              $fileName = 'fedexlabel/'.$track_id.".zpl";
               $fp = fopen($fileName, 'wb');   
               fwrite($fp, $response->CompletedShipmentDetail->CompletedPackageDetails->Label->Parts->Image);
               $res=array('result'=>'1', 'msg'=> $track_id); 
@@ -1273,8 +1273,8 @@ class RequestabagController extends Controller
 			            </v17:SmartPostDetail>
 			            <v17:LabelSpecification>
 			               <v17:LabelFormatType>COMMON2D</v17:LabelFormatType>
-			               <v17:ImageType>PDF</v17:ImageType>
-			               <v17:LabelStockType>PRINT_4X6</v17:LabelStockType>
+			               <v17:ImageType>ZPLII</v17:ImageType>
+			               <v17:LabelStockType>STOCK_4X6</v17:LabelStockType>
 			            </v17:LabelSpecification>
 			            <v17:RateRequestTypes>LIST</v17:RateRequestTypes>
 			            <v17:PackageCount>1</v17:PackageCount>
@@ -1334,7 +1334,7 @@ Log::debug($xml);
         
       }
        public function downlaodRequestBagLabels($track_id){
-          $file=public_path("fedexlabel/".$track_id.".pdf");
+          $file=public_path("fedexlabel/".$track_id.".zpl");
           return Response::download($file);
     }
 
