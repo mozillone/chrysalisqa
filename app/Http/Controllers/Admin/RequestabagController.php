@@ -1082,7 +1082,7 @@ class RequestabagController extends Controller
               ->setContact($recipientContact);
           $labelSpecification = new ComplexType\LabelSpecification();
           $labelSpecification
-              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_7X4point75))
+              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_4X6))
               ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PDF))
               ->setLabelFormatType(new SimpleType\LabelFormatType(SimpleType\LabelFormatType::_COMMON2D));
           $packageLineItem1 = new ComplexType\RequestedPackageLineItem();
