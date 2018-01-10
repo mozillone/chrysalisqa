@@ -1274,7 +1274,7 @@ class RequestabagController extends Controller
 			            <v17:LabelSpecification>
 			               <v17:LabelFormatType>COMMON2D</v17:LabelFormatType>
 			               <v17:ImageType>PDF</v17:ImageType>
-			               <v17:LabelStockType>PRINT_4X6</v17:LabelStockType>
+			               <v17:LabelStockType>PAPER_4X6</v17:LabelStockType>
 			            </v17:LabelSpecification>
 			            <v17:RateRequestTypes>LIST</v17:RateRequestTypes>
 			            <v17:PackageCount>1</v17:PackageCount>
