@@ -548,7 +548,7 @@ class OrdersController extends Controller {
           $labelSpecification = new ComplexType\LabelSpecification();
           $labelSpecification
               ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_4X6))
-              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PDF))
+              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PNG))
               ->setLabelFormatType(new SimpleType\LabelFormatType(SimpleType\LabelFormatType::_COMMON2D));
           $packageLineItem1 = new ComplexType\RequestedPackageLineItem();
           $packageLineItem1
@@ -597,7 +597,7 @@ class OrdersController extends Controller {
           if($response->HighestSeverity=="SUCCESS"){
               $track_id=$response->CompletedShipmentDetail->CompletedPackageDetails->TrackingIds->TrackingNumber;
               $amount=$response->CompletedShipmentDetail->ShipmentRating->ShipmentRateDetails->TotalNetChargeWithDutiesAndTaxes->Amount;
-              $fileName = 'fedexlabel/'.$track_id.".pdf";
+              $fileName = 'fedexlabel/'.$track_id.".png";
               $fp = fopen($fileName, 'wb');   
               fwrite($fp, $response->CompletedShipmentDetail->CompletedPackageDetails->Label->Parts->Image);
               Order::orderShippingmentProcess($req,$track_id,$amount);
@@ -656,7 +656,7 @@ class OrdersController extends Controller {
           return Response::download($file);
         }
         if($type=="fedex"){
-          $file=public_path("fedexlabel/".$track_id.".pdf");
+          $file=public_path("fedexlabel/".$track_id.".png");
           return Response::download($file);
         }
     }

@@ -1083,7 +1083,7 @@ class RequestabagController extends Controller
           $labelSpecification = new ComplexType\LabelSpecification();
           $labelSpecification
               ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_4X6))
-              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PDF))
+              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PNG))
               ->setLabelFormatType(new SimpleType\LabelFormatType(SimpleType\LabelFormatType::_COMMON2D));
           $packageLineItem1 = new ComplexType\RequestedPackageLineItem();
           $packageLineItem1
@@ -1136,7 +1136,7 @@ class RequestabagController extends Controller
           if($response->HighestSeverity=="SUCCESS"){
               $track_id=$response->CompletedShipmentDetail->CompletedPackageDetails->TrackingIds->TrackingNumber;
               $amount=$response->CompletedShipmentDetail->ShipmentRating->ShipmentRateDetails->TotalNetChargeWithDutiesAndTaxes->Amount;
-              $fileName = 'fedexlabel/'.$track_id.".pdf";
+              $fileName = 'fedexlabel/'.$track_id.".png";
               $fp = fopen($fileName, 'wb');   
               fwrite($fp, $response->CompletedShipmentDetail->CompletedPackageDetails->Label->Parts->Image);
               $res=array('result'=>'1', 'msg'=> $track_id); 
@@ -1273,7 +1273,7 @@ class RequestabagController extends Controller
 			            </v17:SmartPostDetail>
 			            <v17:LabelSpecification>
 			               <v17:LabelFormatType>COMMON2D</v17:LabelFormatType>
-			               <v17:ImageType>PDF</v17:ImageType>
+			               <v17:ImageType>PNG</v17:ImageType>
 			               <v17:LabelStockType>PAPER_4X6</v17:LabelStockType>
 			            </v17:LabelSpecification>
 			            <v17:RateRequestTypes>LIST</v17:RateRequestTypes>
@@ -1319,7 +1319,7 @@ Log::debug($xml);
             if(!isset($result['SOAPENVBody']['SOAPENVFault'])){
 
             	$track_id=$result['SOAPENVBody']['ProcessShipmentReply']['CompletedShipmentDetail']['CompletedPackageDetails']['TrackingIds']['TrackingNumber'];
-              $fileName = 'fedexlabel/'.$track_id.".pdf";
+              $fileName = 'fedexlabel/'.$track_id.".png";
               $fp = fopen($fileName, 'wb');   
                $array_text = array("_");
             $array_replace =  "+";
@@ -1334,7 +1334,7 @@ Log::debug($xml);
         
       }
        public function downlaodRequestBagLabels($track_id){
-          $file=public_path("fedexlabel/".$track_id.".pdf");
+          $file=public_path("fedexlabel/".$track_id.".png");
           return Response::download($file);
     }
 
