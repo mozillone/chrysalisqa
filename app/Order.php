@@ -343,11 +343,15 @@ class Order extends Authenticatable
                 });
 
               $admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
-                    $sent=Mail::send('emails.order_admin',array("mail_order"=>$mail_order), function ($m) {
-                    $admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
-                    $m->to($admin_settings[0]->email, $admin_settings[0]->first_name." ".$admin_settings[0]->last_name);
-                        $m->subject("Congratulations! Your Costume Sold!");
-                    });
+              
+              $sent=Mail::send('emails.order_admin',array("mail_order"=>$mail_order), function ($m) {
+              
+                $admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+                
+                $m->to($admin_settings[0]->email, $admin_settings[0]->first_name." ".$admin_settings[0]->last_name);
+                
+                $m->subject("Congratulations! Your Costume Sold!");
+              });
              $this->orderHistory($order_id,Config::get('constants.Processing'),"1","Order Created");
              $result=array('result'=>1,'message'=>$orders);
 

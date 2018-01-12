@@ -62,8 +62,6 @@ p.list-sec-rm1.fav_costume sapn.active {
 				<div class="col-md-3 col-sm-4 col-xs-6" >
 					    <div class="prod_box">
 					        <div class="img_layer">
-					        	
-
 					            <a href="/product{{$wish->url_key}}" style="background-image: url(@if($wish->image!=null && file_exists(public_path
 					            ('costumers_images/Medium/'.$wish->image.''))) /costumers_images/Medium/{{$wish->image}} @else /costumers_images/default-placeholder.jpg @endif)">&nbsp;</a>
 					            <div class="hover_box">
@@ -96,10 +94,11 @@ p.list-sec-rm1.fav_costume sapn.active {
 					    </div>
 					</div>
 				@endforeach
+				
 				@else
 					<div  class="col-md-3 col-sm-4 col-xs-6">There are no items in your list.</div>
 				@endif
-
+{{ $data->links() }}
 				</div>
 			</div>
 	</div>

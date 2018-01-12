@@ -35,9 +35,9 @@ class Wishlist extends Authenticatable
         $paginate = 10;
         $offSet = ($page * $paginate) - $paginate;
         $itemsForCurrentPage = array_slice($wish_list, $offSet, $paginate, true);
+
         $wish_list = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, count($wish_list), $paginate, $page);
         $wish_list = $wish_list->setPath(Request::Url());
-       // echo "<pre>"; print_r($wish_list); exit;
         return $wish_list;
     }
     protected function removeWishlistCostume($user_id,$costume_id){

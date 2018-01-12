@@ -147,8 +147,6 @@ class CreateCostumeController  extends Controller {
 	public function Costumecreate(Request $request){
 		 	//echo ini_get('post_max_size');
 		 	//exit;
-
-
 			$req=$request->all();
            
 			$userid=Auth::user()->id;
@@ -500,7 +498,7 @@ class CreateCostumeController  extends Controller {
 			$insert_costume_category=DB::table('costume_to_category')->insertGetId($costume_category);
 			
 			/**** Url create start here ***/
-			Costumes::urlRewrites($insert_costume,'insert');
+			//Costumes::urlRewrites($insert_costume,'insert');
 			/**** Url create end here ***/
 				
 
@@ -1229,7 +1227,6 @@ class CreateCostumeController  extends Controller {
 	}
 
 	public function EditCostume($id){
-
        
 		//echo "<pre>";print_r("hello");die;
 		/***Getting categories code starts here***/
@@ -1333,8 +1330,8 @@ class CreateCostumeController  extends Controller {
 		$handwashed=DB::table('attribute_options')->select('option_id as optionid','attribute_id as attribute_id','option_value as value')
 		->where('attribute_id','=','31')->get();
 
-// echo "<pre>"; //print_r($db_subcategoryname); 
-// print_r($costume_category_2); exit;
+		// echo "<pre>"; //print_r($db_subcategoryname); 
+		// print_r($costume_category_2); exit;
 
 
 		return view('frontend.costumes.costume_create_two_edit',compact('categories','bodyanddimensions','bodydimensions_val','body_height_ft',
@@ -1352,7 +1349,8 @@ class CreateCostumeController  extends Controller {
 
 	public function EditCostumeAdd(Request $request){
  
-	    
+	    $start = microtime(true);
+
 		$userid=Auth::user()->id;
 		$delete_costume_attributes = DB::table('costume_attribute_options')->where('costume_id',$request->costume_id)->delete();
 	 
@@ -1647,7 +1645,7 @@ class CreateCostumeController  extends Controller {
 			'category_id'=>$subcategory,'sort_no'=>'1');
 			$insert_costume_category=DB::table('costume_to_category')->insertGetId($costume_category);
 			/**** Url create start here ***/
-			//Costumes::urlRewrites($insert_costume,'insert');
+			Costumes::urlRewrites($insert_costume,'insert');
 			/**** Url create end here ***/
 			
 
@@ -2025,7 +2023,12 @@ class CreateCostumeController  extends Controller {
 			
 			$mail_status = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);	
 			
-
+			$time_elapsed_secs = microtime(true) - $start;
+			$hours = (int)($time_elapsed_secs/60/60);
+			$minutes = (int)($time_elapsed_secs/60)-$hours*60;
+			$seconds = (int)$time_elapsed_secs/60-$hours*60*60-$minutes*60;
+			Log::info('seconds=');
+			Log::info($seconds);
 			return response()->json(['msg'=>'success', 'share_url' => $share_url, 'quote' => $quote, 'first_pic'=> $pic, 'costume_name'=>$name, 'amount'=>$charity_info->donating_percent, 'charity_center'=>ucfirst($charity_info->name)]);
 
 			//return "success";

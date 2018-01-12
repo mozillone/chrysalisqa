@@ -1082,8 +1082,8 @@ class RequestabagController extends Controller
               ->setContact($recipientContact);
           $labelSpecification = new ComplexType\LabelSpecification();
           $labelSpecification
-              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_7X4point75))
-              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PDF))
+              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_4X6))
+              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PNG))
               ->setLabelFormatType(new SimpleType\LabelFormatType(SimpleType\LabelFormatType::_COMMON2D));
           $packageLineItem1 = new ComplexType\RequestedPackageLineItem();
           $packageLineItem1
@@ -1136,7 +1136,7 @@ class RequestabagController extends Controller
           if($response->HighestSeverity=="SUCCESS"){
               $track_id=$response->CompletedShipmentDetail->CompletedPackageDetails->TrackingIds->TrackingNumber;
               $amount=$response->CompletedShipmentDetail->ShipmentRating->ShipmentRateDetails->TotalNetChargeWithDutiesAndTaxes->Amount;
-              $fileName = 'fedexlabel/'.$track_id.".pdf";
+              $fileName = 'fedexlabel/'.$track_id.".png";
               $fp = fopen($fileName, 'wb');   
               fwrite($fp, $response->CompletedShipmentDetail->CompletedPackageDetails->Label->Parts->Image);
               $res=array('result'=>'1', 'msg'=> $track_id); 
@@ -1158,19 +1158,18 @@ class RequestabagController extends Controller
       }
        	private function smartPost($req,$address,$service,$weight,$sellerAddress){
         
-          	$key = Config::get('constants.FedEx_Key');
-            $password = Config::get('constants.FedEx_Password');
+          	$key = Config::get('constants.FedEx_SmartPostKey');
+            $password = Config::get('constants.FedEx_SmartPostPassword');
             $account_number = Config::get('constants.FedEx_SmartPostAccountNumber');
             $meter_number = Config::get('constants.FedEx_SmartPostMeterNumber');
             $hub_id = Config::get('constants.FedEx_SmartPostHubId');
-
+            $fedex_url = Config::get('constants.FedEx_Ship_Url');
             $xml = '<?xml version="1.0" encoding="UTF-8"?>
             <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v17="http://fedex.com/ws/ship/v17">
 			   <soapenv:Header/>
 			   <soapenv:Body>
 			      <v17:ProcessShipmentRequest>
 			         <v17:WebAuthenticationDetail>
-			           
 			            <v17:UserCredential>
 			               <v17:Key>'.$key.'</v17:Key>
 			               <v17:Password>'.$password.'</v17:Password>
@@ -1274,8 +1273,8 @@ class RequestabagController extends Controller
 			            </v17:SmartPostDetail>
 			            <v17:LabelSpecification>
 			               <v17:LabelFormatType>COMMON2D</v17:LabelFormatType>
-			               <v17:ImageType>PDF</v17:ImageType>
-			               <v17:LabelStockType>PAPER_8.5X11_TOP_HALF_LABEL</v17:LabelStockType>
+			               <v17:ImageType>PNG</v17:ImageType>
+			               <v17:LabelStockType>PAPER_4X6</v17:LabelStockType>
 			            </v17:LabelSpecification>
 			            <v17:RateRequestTypes>LIST</v17:RateRequestTypes>
 			            <v17:PackageCount>1</v17:PackageCount>
@@ -1300,7 +1299,7 @@ class RequestabagController extends Controller
 			</soapenv:Envelope>';
 Log::debug($xml);
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services');
+            curl_setopt($ch, CURLOPT_URL, $fedex_url);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
             curl_setopt($ch, CURLOPT_VERBOSE, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -1320,7 +1319,7 @@ Log::debug($xml);
             if(!isset($result['SOAPENVBody']['SOAPENVFault'])){
 
             	$track_id=$result['SOAPENVBody']['ProcessShipmentReply']['CompletedShipmentDetail']['CompletedPackageDetails']['TrackingIds']['TrackingNumber'];
-              $fileName = 'fedexlabel/'.$track_id.".pdf";
+              $fileName = 'fedexlabel/'.$track_id.".png";
               $fp = fopen($fileName, 'wb');   
                $array_text = array("_");
             $array_replace =  "+";
@@ -1335,7 +1334,7 @@ Log::debug($xml);
         
       }
        public function downlaodRequestBagLabels($track_id){
-          $file=public_path("fedexlabel/".$track_id.".pdf");
+          $file=public_path("fedexlabel/".$track_id.".png");
           return Response::download($file);
     }
 
