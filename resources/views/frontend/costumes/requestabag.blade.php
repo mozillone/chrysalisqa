@@ -501,7 +501,7 @@
 									<div class="form-rms costume-error">
 										<p class="form-rms-que">Address 1<span style="color: red">*</span></p>
 										<input type="hidden" class="field form-control" id="country" name="country">
-										<p class="form-rms-input"><input type="text" name="address1" id="route" value="<?php if (isset($all_details['basic_address']->address1) && !empty($all_details['basic_address']->address1)) { echo $all_details['basic_address']->address1; } ?>" tab-index="1" onFocus="geolocate()"></p>
+										<p class="form-rms-input"><input autocomplete="off" type="text" name="address1" id="route" value="<?php if (isset($all_details['basic_address']->address1) && !empty($all_details['basic_address']->address1)) { echo $all_details['basic_address']->address1; } ?>" tab-index="1" onFocus="geolocate()"></p>
 										<span id="address1_error" style="color:red"></span>
 									</div>
 									<div class="form-rms costume-error">
@@ -514,6 +514,7 @@
 										<p class="form-rms-input"><input type="text" name="city" id="locality" value="<?php if (isset($all_details['basic_address']->city) && !empty($all_details['basic_address']->city)) { echo $all_details['basic_address']->city; } ?>" tab-index="1" ></p>
 										<span id="city_error" style="color:red"></span>
 										<input type="hidden" name="administrative_area_level_3" id= "administrative_area_level_3">
+										<input type="hidden" name="sublocality_level_1" id="sublocality_level_1">
 									</div>
 									<div class="form-rms form-align costume-error">
 										<p class="form-rms-que">State<span style="color: red">*</span></p>
@@ -732,7 +733,8 @@
 				administrative_area_level_1: 'short_name',
 				country: 'long_name',
 				postal_code: 'short_name',
-				administrative_area_level_3: 'short_name'
+				administrative_area_level_3: 'short_name',
+				sublocality_level_1: 'long_name'
 			};
 			
 			function initAutocomplete() {
@@ -751,6 +753,7 @@
 			function fillInAddress() {
 				// Get the place details from the autocomplete object.
 				var place = autocomplete.getPlace();
+
 				for (var component in componentForm) {
 					document.getElementById(component).value = '';
 					document.getElementById(component).disabled = false;
@@ -773,9 +776,13 @@
 						}
 					}
 				}
-				if($("#locality").val() == ""){
+				if($("#locality").val() == "" && $("#administrative_area_level_3").val() != ""){
 					$("#locality").val($("#administrative_area_level_3").val());
 				}
+				else if($("#locality").val() == "" && $("#sublocality_level_1").val() != ""){
+					$("#locality").val($("#sublocality_level_1").val());
+				}
+				console.log(place.address_components);
 			}
 				
 				// Bias the autocomplete object to the user's geographical location,
