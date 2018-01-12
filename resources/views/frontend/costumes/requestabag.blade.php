@@ -513,6 +513,7 @@
 										<p class="form-rms-que">City<span style="color: red">*</span></p>
 										<p class="form-rms-input"><input type="text" name="city" id="locality" value="<?php if (isset($all_details['basic_address']->city) && !empty($all_details['basic_address']->city)) { echo $all_details['basic_address']->city; } ?>" tab-index="1" ></p>
 										<span id="city_error" style="color:red"></span>
+										<input type="hidden" name="administrative_area_level_3" id= "administrative_area_level_3">
 									</div>
 									<div class="form-rms form-align costume-error">
 										<p class="form-rms-que">State<span style="color: red">*</span></p>
@@ -730,7 +731,8 @@
 				locality: 'long_name',
 				administrative_area_level_1: 'short_name',
 				country: 'long_name',
-				postal_code: 'short_name'
+				postal_code: 'short_name',
+				administrative_area_level_3: 'short_name'
 			};
 			
 			function initAutocomplete() {
@@ -770,6 +772,9 @@
 							document.getElementById(addressType).value = val;
 						}
 					}
+				}
+				if($("#locality").val() == ""){
+					$("#locality").val($("#administrative_area_level_3").val());
 				}
 			}
 				
