@@ -1145,9 +1145,8 @@ top: 0;
 													<div class="form-rms lst-stp donate_div">
 														<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 															<p class="form-rms-que form-rms-que1 dnt_br">Donate a Portion to Charity</p>
-															<p class="ct3-rms-text">Chrysalis charges a 3.5% + .20 cent transaction fee on every sale. However, if you donate 10% or more of your sale to one of our charities we will waive our transaction fee to match your contribution.
-															.</p>
-															<p class="ct3-rms-text">By Choosing to donate, you agree and accept Chrysalis' <a style="border-bottom: 1px solid #ccc">Terms & Conditions</a>.</p>
+															<p class="ct3-rms-text">Chrysalis charges a 3.5% + .20 cent transaction fee on every sale. However, if you donate 10% or more of your sale to one of our charities we will waive our transaction fee to match your contribution.</p>
+															<p class="ct3-rms-text">By Choosing to donate, you agree and accept Chrysalis' <a style="border-bottom: 1px solid #ccc" href="{{ route('terms-of-use') }}" target="_blank">Terms & Conditions</a>.</p>
 														</div>
 														<div class="col-md-8 col-sm-8 col-xs-12 dnt-amcnts">
 															<div class="form-rms-input plus_minus_div">
