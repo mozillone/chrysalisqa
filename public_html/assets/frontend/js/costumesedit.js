@@ -947,7 +947,7 @@ $(document).on("change", "#file3", function() {
                             setDragMode:'move',
                             viewMode:1,
                             aspectRatio: 3 / 5,
-                            center:false,
+                            center:true,
                             rotatable: true,
                             checkOrientation: true,
                             data: {
