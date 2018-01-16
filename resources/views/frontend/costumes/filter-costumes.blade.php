@@ -46,7 +46,7 @@
 													@endif
 												</span>
 													<h4>
-														<a href="{{url('product')}}{{$costume->url_key}}">{{$costume->name}}</a>
+														<a href="{{url('product')}}{{$costume->url_key}}">{{substr($costume->name, 0, 35)}}</a>
 													</h4>
 													<p>
 														<a href="{{url('product')}}{{$costume->url_key}}">
