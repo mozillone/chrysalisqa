@@ -498,7 +498,7 @@ class CreateCostumeController  extends Controller {
 			$insert_costume_category=DB::table('costume_to_category')->insertGetId($costume_category);
 			
 			/**** Url create start here ***/
-			//Costumes::urlRewrites($insert_costume,'insert');
+			Costumes::urlRewrites($insert_costume,'insert');
 			/**** Url create end here ***/
 				
 
@@ -633,64 +633,6 @@ class CreateCostumeController  extends Controller {
 			$waist_lbs_insert=DB::table('costume_attribute_options')->insert($waist_lbs);
 			//echo "<pre>";print_r("hello");die;
 
-			/*
-			|Table:costume_attribute_options
-			|Costume FAQ (used for cosplay ?,is your costume have unique fashion?,used for an activity?,you make the costume?,Is the costume fit for film quality?)
-			|@costume_id
-			|@attribute_id
-			|@attribute_option_value_id
-			|@attribute_option_value
-			*/
-			/*switch($cosplay){ case '7': $cosplay_value="yes"; break; case '8': $cosplay_value="No"; break; }
-			$cosplay_value=array('costume_id'=>$insert_costume,
-			'attribute_id'=>'2',
-			'attribute_option_value_id'=>$cosplay,
-			'attribute_option_value'=>$cosplay_value,
-			);
-			$cosplay_value_insert=DB::table('costume_attribute_options')->insert($cosplay_value);
-			//uniquefashion insertion
-			switch($fashion){ case '9': $fashion_val="yes"; break; case '10': $fashion_val="No"; break; }
-			$unique_fashion=array('costume_id'=>$insert_costume,
-			'attribute_id'=>'3',
-			'attribute_option_value_id'=>$fashion,
-			'attribute_option_value'=>$fashion_val,
-			);
-			$unique_fashion_insert=DB::table('costume_attribute_options')->insert($unique_fashion);
-			//Activity
-			switch($activity){ case '11': $activity_value="yes"; break; case '12': $activity_value="No"; break; }
-			$activity_val=array('costume_id'=>$insert_costume,
-			'attribute_id'=>'4',
-			'attribute_option_value_id'=>$activity,
-			'attribute_option_value'=>$activity_value,
-			);
-			$activity_val_insert=DB::table('costume_attribute_options')->insert($activity_val);
-			//User Costumes
-			switch($makecostume){ case '30': $makecostume_value="yes"; break; case '31': $makecostume_value="No"; break; }
-			$user_costume=array('costume_id'=>$insert_costume,
-			'attribute_id'=>'5',
-			'attribute_option_value_id'=>$makecostume,
-			'attribute_option_value'=>$makecostume_value,
-			);
-			$user_costume_insert=DB::table('costume_attribute_options')->insert($user_costume);
-			//film Quality
-			switch($filmquality){ case '32': $filmquality_value="yes"; break; case '33': $filmquality_value="No"; break; }
-			$film_quality=array('costume_id'=>$insert_costume,
-			'attribute_id'=>'21',
-			'attribute_option_value_id'=>$filmquality,
-			'attribute_option_value'=>$filmquality_value,
-			);
-			$filmquality_insert=DB::table('costume_attribute_options')->insert($film_quality);*/
-
-			/*
-			|Table:costume_attribute_options
-			|Costume Description,costume funfacts abd costume faq
-			|@costume_id
-			|@attribute_id
-			|@attribute_option_value_id
-			|@attribute_option_value
-			*/
-
-
 			switch($makecostume){ case '30': $makecostume_value="yes"; break; case '31': $makecostume_value="No"; break; }
 			$user_costume=array('costume_id'=>$insert_costume,
 			'attribute_id'=>'5',
@@ -789,8 +731,6 @@ class CreateCostumeController  extends Controller {
 			$width_db=DB::table('costume_attribute_options')->insert($height);
 			}
 				
-
-			
 			//end pricing insertion
 
 			$req=$request->all();
@@ -808,16 +748,7 @@ class CreateCostumeController  extends Controller {
 			|@attribute_option_value_id
 			|@attribute_option_value
 			*/
-			//Handling Time
-			/*switch($handlingtime)
-			{ 
-				case '26': 
-							$handlingtime ="Same Business Day"; 
-							break; 
-				case '27': 
-							$handlingtime ="10 Business Days"; 
-							break; 
-			}*/
+
 
 			$handling_name = DB::table('attribute_options')
 								->select('option_value as value')
@@ -832,14 +763,6 @@ class CreateCostumeController  extends Controller {
 				);
 			$insert_handlingtime=DB::table('costume_attribute_options')->insert($handlingtime_val);
 			//Return Policy
-			/*switch($returnpolicy){ 
-					case '28': 
-								$returnpolicy_name="Return Accepted"; 
-								break; 
-					case '29': 
-								$returnpolicy_name="Return Not Accepted "; 
-								break; 
-			}*/
 
 			$returnpolicy_name = DB::table('attribute_options')
 								->select('option_value as value')
