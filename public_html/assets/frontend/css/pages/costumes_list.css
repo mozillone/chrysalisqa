@@ -202,7 +202,7 @@ input#keywords_tag{border-radius: 0px !important; box-shadow: none;}
 }*/
 #dynamic_percent_amounts {
      position: relative !important;
-    left: 10px;
+    left: 0px;
  width: auto;
  float: left;
     text-align: left;
