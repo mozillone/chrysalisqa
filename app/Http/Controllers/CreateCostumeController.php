@@ -1049,13 +1049,13 @@ class CreateCostumeController  extends Controller {
 
 
 		$conversation_array = array('type'=>'request_a_bag','user_one'=>'1',
-									'subject'=>'Your Bag created.',
+									'subject'=>'Bag Request Successful',
 									'user_two'=>'',
 									'status'=>'1',
 									'type_id'=>$ref_no,
 									'created_at'=>date('y-m-d H:i:s'));
 
-		$theard_array  = array('message'=>'Your Bag is under process.',
+		$theard_array  = array('message'=>'Your bag is being processed',
 								'is_seen'=>'0',
 						        'deleted_from_sender'=>'0',
 						        'deleted_from_receiver'=>'0',

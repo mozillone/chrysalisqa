@@ -714,14 +714,14 @@ class AuthController extends Controller {
 
 							$conversation_array = array('type'=>'request_a_bag','user_one'=>'1',
 
-								'subject'=>'Your Bag created.',
+								'subject'=>'Bag Request Successful',
 
 								'user_two'=>$userid,
 								'status'=>'1',
 								'created_at'=>date('y-m-d H:i:s'));
 							$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
 
-							$theard_array  = array('message'=>'Your Bag is under process.',
+							$theard_array  = array('message'=>'Your bag is being processed',
 									'is_seen'=>'0',
 							        'deleted_from_sender'=>'0',
 							        'deleted_from_receiver'=>'0',

@@ -37,7 +37,7 @@
                     <div class="tab-pane active" id="Inbox">
                         @if(count($conversations_inbox)>0)
                             <div class="people-list" id="people-list">
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="message-header">
                                         <div class="col-md-3 col-sm-3">
                                             Sender
@@ -52,7 +52,7 @@
                                             Action
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="list front_chat" id="myUL">
                                     @foreach($conversations_inbox as $inbox)
                                     <div class="clearfix row" attr-to="{{$inbox->conversation_id}}" >

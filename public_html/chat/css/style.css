@@ -93,7 +93,7 @@ form#talkSendMessage {    width: 100% !important;}
 	ul#talkMessages{list-style-type:none;padding-left:0px;}
 	.message-chat-sec i.fa.fa-angle-right{float:right;margin-top:5px;}
 	.messages-chat-list{border:1px solid #e1e1e1;margin-bottom:30px;}
-	.front_chat{margin-top:15px;border-top:1px solid #ccc;}
+	/* .front_chat{margin-top:15px;border-top:1px solid #ccc;} */
 	.message-chat-sec .people-list ul{display:flex;align-items:center;font-family:Proxima-Nova-Semibold;color:#323031;}
 	.message-chat-sec .people-list p{padding-left:5px; margin-bottom:0;font-family:Proxima-Nova-Semibold;color:#323031;text-align:left;margin-left:15px !important;word-break:break-word;}
 	.front_chat .clearfix.row{border-bottom:1px solid #ccc;padding:40px 0px;}

@@ -37,7 +37,7 @@
                     <div>
                         @if(count($conversations_sent)>0)
                             <div class="people-list" id="people-list">
-                            <div class="row">
+                           <!--  <div class="row">
                                 <div class="message-header">
                                     <div class="col-md-3 col-sm-3">
                                         Sender
@@ -52,7 +52,7 @@
                                         Action
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="list front_chat" id="myUL">
                                 <?php //echo "<pre>";print_r($conversations_sent);die; ?>
                                 @foreach($conversations_sent as $inbox)
