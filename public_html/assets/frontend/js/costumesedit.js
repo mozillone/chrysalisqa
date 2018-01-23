@@ -20,7 +20,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 $('#categoryname').on('change',function(){
 
 var id=$(this).val();//catgeory id
- if(id == 74){
+    if(id == 74){
       	$("#gender option[value='pet']").remove();
     }else{
 		if ( $("#gender option[value='pet']").length == 0 ){
@@ -570,6 +570,7 @@ processData: false,
     success: function(response) {
         if (response.msg == "success") {
             $('#ajax_loader').hide();
+            $("#progressbar_maintitle").hide();
             $('#success_page').css('display','block');
             $('#upload_div').css('display','none');
             $('#costume_description').css('display','none');
