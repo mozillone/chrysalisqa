@@ -1185,7 +1185,7 @@ top: 0;
 																<?php //echo $costume_details->charity_id;die; ?>
 																@foreach($charities as $index=>$charity)
 																<li>
-																	<img class="img-responsive" src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" />
+																	<img class="img-responsive" src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{$charity->name}}" />
 																<input type="radio" id="{{$charity->name}}" @if($costume_details->charity_id == $charity->id) checked="checked" @endif value="{{$charity->id}}" name="charity_name" /></li>
 																@endforeach
 															</ul>
@@ -1303,6 +1303,7 @@ top: 0;
 									<script type="text/javascript" src="{{asset('/assets/frontend/js/costumesedit.js')}}?v=<?php echo date('dmYHims')?>"></script>
 									<script type="text/javascript">
 										$(document).ready(function(){
+											$('[data-toggle="tooltip"]').tooltip(); 
 											if(parseInt($("#donate_charity").val()) == 0 || $("#donate_charity").val() == ''){
 												$("#donate_charity").val('0 %');
 											}
