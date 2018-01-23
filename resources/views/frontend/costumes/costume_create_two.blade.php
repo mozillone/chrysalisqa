@@ -316,7 +316,7 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12 costume_create_st1">
 				<!--- progressbar section starts -->
-				<div class="progressbar_main " >
+				<div class="progressbar_main " id="progressbar_maintitle" >
 					<h2>UPLOAD A COSTUME</h2>
 					<ul id="progressbar" class="progressbar_rm hidden-xs">
 						<li class="active" id="step1"><span class="s-head">Step 1</span> <span>Upload <br/>Photos</span></li>

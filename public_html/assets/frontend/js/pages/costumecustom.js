@@ -885,6 +885,7 @@ $(function(){
                     if (response.msg == "success") {
                         $('#ajax_loader').remove();
                         $("#costume_view_my_listing").attr("href", response.cat_url);
+                        $("#progressbar_maintitle").hide();
                         $('#success_page').css('display', 'block');
                         $('#upload_div').css('display', 'none');
                         $('#costume_description').css('display', 'none');
