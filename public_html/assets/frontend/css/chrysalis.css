@@ -2162,7 +2162,14 @@ div#lightbox {    margin-top: 40px;}
 	.edit_return_p .col-md-4.col-sm-6{padding-left:0px;}
 	div#mention_hours{padding-left:0px;}
 	.dnt-amcnts{margin-top:5px;padding-left:0px;}
-	.form-rms-input.plus_minus_div .col-md-3{width:250px;}
+	/*jan-18 changes*/
+		/*	.form-rms-input.plus_minus_div .col-md-3{width:250px;}*/
+		.form-rms-input.plus_minus_div .col-md-3{width:250px; top: 50px;    position: relative;}
+		.form-rms-input.plus_minus_div .donation_amt{position: relative;    top: -70px;}	
+	/*jan-18 changes done*/
+
+
+
 	.form-rms.costume-error.condition_div .col-md-12.col-sm-12.col-xs-12.pdlft0{padding-left:0px;}
 	.form-rms.film_quality_div .col-md-8.col-sm-8.col-xs-12.pdlft0{padding-left:0px;}
 	.form-rms-input textarea{margin-bottom:5px;}
@@ -2663,7 +2670,12 @@ div#lightbox {    margin-top: 40px;}
 	.responsive-inner{padding-left:0px;}
 	.form-group.loign-adtnl.forgot.mbl-frgt_sign label{display:block!important;}
 	p.ct3-rms-head.chartiy_spcy{color:#666;font-size:16px;margin-bottom:0px;}
-	.ct3-list li{margin-bottom:50px;}
+	/*jan-18 chnages*/
+/*	.ct3-list li{margin-bottom:50px;}*/
+		.ct3-list li{margin-bottom:0px; min-height: 150px !important;}
+		.charity_rigt #other_organzation_check p.ct3-rms-head{margin-top: 0px;}
+/*jan-18 chnages Done*/
+
 	a.navbar-toggle.respnsive-ser-rm.sell span{font-family:Proxima-Nova-Bold;padding-left:4px;}
 	.up-blog .text_wrapper{padding-bottom:96%;}
 	.dnt_br{border-bottom:1px solid #000}
@@ -2785,6 +2797,9 @@ div#lightbox {    margin-top: 40px;}
 	.home_steps{padding:0px;}
 	.main_banner .jumb-bnr{margin-bottom:15px;}
 	.jumb-smll a img{max-height:180px;padding-right:0px;width:100%;}
+
+
+
 }
 @media screen and (max-width:374px){
 

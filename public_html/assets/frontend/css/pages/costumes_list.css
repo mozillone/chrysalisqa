@@ -192,12 +192,22 @@ input#keywords_tag{border-radius: 0px !important; box-shadow: none;}
     height: auto;
     min-height: auto;
     max-height: 95px;}
-#dynamic_percent_amounts {
+/*jan 18 chnages*/
+
+/*#dynamic_percent_amounts {
     float: none !important;
     position: relative !important;
     left: 10px;
     text-align: left;
+}*/
+#dynamic_percent_amounts {
+     position: relative !important;
+    left: 0px;
+ width: auto;
+ float: left;
+    text-align: left;
 }
+/*jan 18 chnages Done*/
 .return_divs .col-md-4.col-sm-6 {
     padding-left: 0px;
 }
