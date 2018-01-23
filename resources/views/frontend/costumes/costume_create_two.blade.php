@@ -998,7 +998,7 @@
 																	<p class="ct3-rms-head dont_chts">Our Partners</p>
 																	<ul class="ct3-list ">
 																		@foreach($charities as $index=>$charity)
-																		<li><img class="img-responsive" src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" />
+																		<li><img class="img-responsive" src="@if(isset($charity->image) && !empty($charity->image)){{URL::asset('/charities_images/')}}/{{$charity->image}} @else {{ URL::asset('/img/default.png')}} @endif" alt="{{$charity->name}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{$charity->name}}"/>
 																			<p>{{$charity->name}}</p>
 																		<input type="radio" id="{{$charity->name}}" value="{{$charity->id}}" name="charity_name" /></li>
 																		@endforeach
@@ -1098,6 +1098,7 @@
 <script type="text/javascript">
 	$(document).ready(function()
 	{
+		$('[data-toggle="tooltip"]').tooltip(); 
 		$("#donate_charity").val('0 %');
 		$(".conditon_check").change(function(){
 			if($("#radio-6").prop("checked") || $("#radio-7").prop("checked")){
