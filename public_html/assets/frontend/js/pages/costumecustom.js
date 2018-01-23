@@ -757,15 +757,15 @@ $(function(){
 
         a.preventDefault();
         str = true;
-        $('#price,#quantity,#Length,#Width,#Height,#pounds#ounces').css('border', '');
-        $('#priceerror,#quantityerror,#dimensionserror,#poundserror,#ounceserror').html('');
+        $('#price,#quantity,#Length,#Width,#Height,#pounds').css('border', '');
+        $('#priceerror,#quantityerror,#dimensionserror,#poundserror').html('');
         var price = $('#price').val();
         var quantity = $('#quantity').val();
         var Length = $('#Length').val();
         var Width = $('#Width').val();
         var Height = $('#Height').val();;
         var pounds = $('#pounds').val();
-        var ounces = $('#ounces').val();
+        //var ounces = $('#ounces').val();
         
         if (price == "") {
             $('#price').css('border', '1px solid red');
@@ -777,11 +777,11 @@ $(function(){
             $('#poundserror').html('This field is required.');
             str = false;
         }
-        if (ounces == "") {
+        /*if (ounces == "") {
             $('#ounces').css('border', '1px solid red');
             $('#ounceserror').html('This field is required.');
             str = false;
-        }
+        }*/
 
         if (str == true) {
 

@@ -1073,8 +1073,8 @@ top: 0;
 															<div class="form-rms-input dimensions-two dimensions-two-pk_info">
 																<p class="form-rms-dim"><span class="form-rms-he1"><input id="pounds" name="pounds" value="{{$costume_details->weight_pounds}}" type="text" placeholder="0"> <span>lbs</span></span></p>
 																<span id="poundserror" style="color:red"></span>
-																<p class="form-rms-dim"><span class="form-rms-he1"><input id="ounces" name="ounces" value="{{$costume_details->weight_ounces}}" type="text" placeholder="0"> <span>oz </span></span></p>
-																<span id="ounceserror" style="color:red"></span>
+																<!-- <p class="form-rms-dim"><span class="form-rms-he1"><input id="ounces" name="ounces" value="{{$costume_details->weight_ounces}}" type="text" placeholder="0"> <span>oz </span></span></p>
+																<span id="ounceserror" style="color:red"></span> -->
 															</div>
 															<p class="ct3-rms-text">Note: Weight is applicable for one costume ONLY.</p>
 														</div>

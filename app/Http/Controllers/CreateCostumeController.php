@@ -177,10 +177,14 @@ class CreateCostumeController  extends Controller {
 		  	$description = $req['description'];		  	 
 		  	$faq = $req['faq'];  		  
 		  	$customer_group="user";
-
+		  	if(isset($req['ounces'])){
+		  		$weight_ounces = $req['ounces'];	
+		  	}else{
+		  		$weight_ounces = 0;
+		  	}
 		 	$costume=array(
 			'weight_pounds'=>$req['pounds'],
-			'weight_ounces'=>$req['ounces'],
+			'weight_ounces'=>$weight_ounces,
 			'gender'=>$gender,
 			'condition'=>$costume_condition,
 			'created_user_group'=>$customer_group,
@@ -1309,7 +1313,12 @@ class CreateCostumeController  extends Controller {
 		  	
 		  	$faq = $req['faq'];
 		  	$weight_pounds = $req['pounds'];
-		  	$weight_ounces = $req['ounces'];
+		  	if(isset($req['ounces'])){
+		  		$weight_ounces = $req['ounces'];	
+		  	}else{
+		  		$weight_ounces = 0;
+		  	}
+		  	
 		  	$customer_group="user";
 			//Check whether the costume inserted by admin or not if the user is selected insert the user id else insert the admin as costumer
 			$costume=array(

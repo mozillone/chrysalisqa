@@ -212,8 +212,12 @@ class CostumeController extends Controller
 		$charity_name=$req['charity_name'];
 
 		$weight_pounds = $req['pounds'];
-		$weight_ounces = $req['ounces'];
-
+		if(isset($req['ounces'])){
+	  		$weight_ounces = $req['ounces'];	
+	  	}else{
+	  		$weight_ounces = 0;
+	  	}
+		
 		if($request->has('dimensionsdimensionsLength')){
 			$length = $req['dimensionsdimensionsLength'];	
 		}
@@ -232,7 +236,7 @@ class CostumeController extends Controller
 		$get_cat_id = DB::table('category')->where('category_id',$category)->first();
 		$costume = array(
 			'weight_pounds'=>$req['pounds'],
-			'weight_ounces'=>$req['ounces'],
+			'weight_ounces'=>$weight_ounces,
 			'gender'=>$gender,
 			'condition'=>$costume_condition,
 			'created_user_group'=>$customer_group,
@@ -1278,7 +1282,11 @@ class CostumeController extends Controller
 		//$backview=$req['img_chan1'];
 		//$details_accessories=$req['img_chan2'];
 		$weight_pounds = $req['pounds'];
-		$weight_ounces = $req['ounces'];
+		if(isset($req['ounces'])){
+	  		$weight_ounces = $req['ounces'];	
+	  	}else{
+	  		$weight_ounces = 0;
+	  	}
 
 	  //$cleaned = $req['cleaned'];
 	  	if(isset($req['cleaned']) && !empty($req['cleaned'])){
@@ -1308,7 +1316,7 @@ class CostumeController extends Controller
 		
         $costume=array(
 			'weight_pounds'=>$req['pounds'],
-			'weight_ounces'=>$req['ounces'],
+			'weight_ounces'=>$weight_ounces,
 			'gender'=>$gender,
 			'condition'=>$costume_condition,
 			'created_user_group'=>$customer_group,

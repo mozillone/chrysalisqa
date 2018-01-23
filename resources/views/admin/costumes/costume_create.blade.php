@@ -635,12 +635,12 @@
 <span class="input-group-addon" id="basic-addon2">lbs</span>
 </div>
 </div>
-<div class="col-md-6">
+<!-- <div class="col-md-6">
 <div class="input-group">
 <input type="text" class="form-control" placeholder="Ounces" name="ounces" id="ounces">
 <span class="input-group-addon" id="basic-addon2">oz</span>
 </div>
-</div>
+</div> -->
 </div>
 <p class="error">{{ $errors->first('name') }}</p>
 </div>

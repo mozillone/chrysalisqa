@@ -463,7 +463,7 @@ var Width = $('#Width').val();
 var Height = $('#Height').val();
 
 var pounds = $('#pounds').val();
-    var ounces = $('#ounces').val();
+    //var ounces = $('#ounces').val();
 if (price == "") {
 $('#price').css('border','1px solid red');
 $('#priceerror').html('This field is required.');
@@ -475,11 +475,11 @@ str=false;
       $('#poundserror').html('This field is required.');
       str=false;
     }
-    if (ounces == "") {
+    /*if (ounces == "") {
       $('#ounces').css('border','1px solid red');
       $('#ounceserror').html('This field is required.');
       str=false;
-    }
+    }*/
 
 if (str == true) {
     $('#step4').addClass('active');

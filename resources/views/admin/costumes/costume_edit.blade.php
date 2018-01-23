@@ -642,12 +642,12 @@
 																		<span class="input-group-addon" id="basic-addon2">lbs</span>
 																	</div>
 																</div>
-																<div class="col-md-6 col-sm-6 col-xs-12">
+																<!-- <div class="col-md-6 col-sm-6 col-xs-12">
 																	<div class="input-group">
 																		<input type="text" class="form-control" placeholder="Ounces" value="{{$cos_data->weight_ounces}}" name="ounces" id="ounces">
 																		<span class="input-group-addon" id="basic-addon2">oz</span>
 																	</div>
-																</div>
+																</div> -->
 															</div>
 															<p class="error">{{ $errors->first('name') }}</p>
 														</div>
