@@ -61,8 +61,6 @@ Route::post('/category/{slug1}', array('as' => '','uses' => 'CostumesController@
 Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesController@costumeListings'))->where('name', '[A-Za-z]+');
 
 Route::any('/Filterscategory/{slug1}','CostumesController@searchFilters');
- 
-
 
 Route::any('/product/{slug1?}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));

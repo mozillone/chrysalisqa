@@ -1237,10 +1237,11 @@ class CostumeController extends Controller
 
 
     public function updateCostume(Request $request){
- 	
+ 		$req=$request->all();
+ 		//echo "<pre>"; print_r($req); exit;
 		$delete_costume_attributes = DB::table('costume_attribute_options')->where('costume_id',$request->costume_id)->delete();
 		$response=array();
-		$req=$request->all();
+		
 		$userid=Auth::user()->id;
 		$customer_name=$req['customer_name'];
 		
@@ -1402,7 +1403,7 @@ class CostumeController extends Controller
 				}
 			}
 
-			if (isset($request['Imagecrop3']) && !empty($request['Imagecrop3'])) {
+			if (isset($request['Imagecrop3']) && !empty($request['Imagecrop3'])){
 
 				$Imagecrop3 = $request->Imagecrop3;
 				$img2 = str_replace('data:image/jpeg;base64,', '', $Imagecrop3);
@@ -1442,6 +1443,8 @@ class CostumeController extends Controller
 					'sort_order'=>0,
 				);
 				$file_db=DB::table('costume_image')->insert($file_db_array3);
+			}else{
+				DB::table('costume_image')->where('costume_id',$costume_id)->where('type',3)->delete();
 			}
 
 			//remove uploaded images
