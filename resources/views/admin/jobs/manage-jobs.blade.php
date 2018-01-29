@@ -143,7 +143,7 @@ var table = '';
            "type": "GET",
          },
       "searching": false,
-      "pageLength": 50,
+      "pageLength": 15,
       "bLengthChange": false,
       "order": [ 2, 'DESC'],
 
