@@ -13,13 +13,13 @@ class HomePageController extends Controller {
 
 	public function __construct()
 	{
-		Meta::title('Chrysalis');
+		//Meta::title('Chrysalis');
     	Meta::set('robots', 'index,follow');
 	}
 	public function index()
 	{
 		$insta = array();
-		Meta::set('title', "The Costume Enthusiast's Marketplace");
+		Meta::set('title', "Chrysalis - The Costume Enthusiast's Marketplace");
         Meta::set('description', 'Affordable, Environment Friendly Costumes. Buy and Sell Costumes online.');
 		$featured_costumes = DB::table('costumes')
 		->leftJoin('costume_description','costumes.costume_id','costume_description.costume_id')

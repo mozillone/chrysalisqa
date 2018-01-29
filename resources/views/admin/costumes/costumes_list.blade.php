@@ -138,7 +138,7 @@
             dataType: 'json',
             success: function(response) {
                 if(response){
-                    table.ajax.reload();
+                    table.ajax.reload(null,false);
                 }
             }
         });
@@ -158,11 +158,11 @@
         }
         var table = '';
   $(function() {
-            table = $('#customes-list-table').DataTable({
+    table = $('#customes-list-table').DataTable({
       "ajax": {
             "url" : "getallcostumes",
            "type": "GET",
-         },
+        },
       "searching": false,
       "pageLength": 25,
       "bLengthChange": false,
