@@ -209,7 +209,7 @@
             dataType: 'json',
             success: function(response) {
                 if(response){
-                    table.ajax.reload();
+                    table.ajax.reload(null,false);
                     console.log( table.row( this ).data().status );
                     $('.box-body').before('<div class="callout callout-success">Status is Updated.</div>');
                     setTimeout(function() {

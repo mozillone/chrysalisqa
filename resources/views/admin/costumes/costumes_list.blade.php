@@ -151,7 +151,7 @@
             dataType: 'json',
             success: function(response) {
                 if(response){
-                    table.ajax.reload();
+                    table.ajax.reload(null,false);
                 }
             }
         });
