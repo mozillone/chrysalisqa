@@ -688,7 +688,7 @@ class AuthController extends Controller {
 							$cus_email 		= $request->email_address;
 							$cus_phone 		= $request->phone_number;
 							
-							if (isset($request->is_return) && !empty($request->is_return)) {
+							/*if (isset($request->is_return) && !empty($request->is_return)) {
 								$is_return 		= $request->is_return;
 							}else{
 								$is_return 		= "0";
@@ -697,6 +697,21 @@ class AuthController extends Controller {
 								$is_recycle 		= $request->is_recycle;
 							}else{
 								$is_recycle 		= "0";
+							}*/
+							$is_return = "";                
+					        $is_recycle = "";
+							if (isset($request->is_return)) {
+								
+								if($request->is_return == 1){
+									$is_return = "1";
+									$is_recycle = "0";
+								}else{
+									$is_recycle = "1";
+									$is_return = "0";
+								}
+							}else{
+								$is_return = "0";
+								$is_recycle = "0";
 							}
 							if (isset($request->address2) && !empty($request->address2)) {
 								$address2 		= $request->address2;
