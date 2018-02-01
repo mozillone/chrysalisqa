@@ -1052,7 +1052,8 @@ class CreateCostumeController  extends Controller {
 							);
 
 
-		$conversation_array = array('type'=>'request_a_bag','user_one'=>'1',
+		$conversation_array = array('type'=>'request_a_bag',
+									'user_one'=>'1',
 									'subject'=>'Bag Request Successful',
 									'user_two'=>'',
 									'status'=>'1',

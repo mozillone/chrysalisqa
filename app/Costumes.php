@@ -287,20 +287,20 @@ class Costumes extends Authenticatable
         $addres_insert = DB::table('address_master')->insertGetId($insert_address);
 
         $conversation_array = array('type'=>'request_a_bag',
-                                    'user_one'=> $users,
-                                    'subject'=>'Your Bag Created.',
-                                    'user_two'=>'1',
+                                    'user_one'=>'1' ,
+                                    'subject'=>'Bag Request Successful',
+                                    'user_two'=>$users,
                                     'status'=>'1',
                                     'type_id'=>$get_conversations_info->type_id,
                                     'created_at'=>date('y-m-d H:i:s'));
         $conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
 
-        $theard_array  = array('message'=>'Your Bag is under process.',
+        $theard_array  = array('message'=>'Your bag is being processed',
                                 'is_seen'=>'0',
                                 'deleted_from_sender'=>'0',
                                 'deleted_from_receiver'=>'0',
-                                'user_id'=>$users,
-                                'user_name'=> $get_messages_info->user_name,
+                                'user_id'=>'1',
+                                'user_name'=> User::find(1)->pluck('display_name')->first(),
                                 'conversation_id'=> $conversation_insert,
                                 'created_at'=>date('y-m-d H:i:s'));
         $theard = DB::table('messages')->insertGetId($theard_array);
