@@ -1127,6 +1127,7 @@ class CreateCostumeController  extends Controller {
 	            $template           = 'emails.reqabag_requestfromuser';
 	            $req_to             = (Auth::check())?Auth::user()->email:$user_info->email;//"support@chrysaliscostumes.com";
 	            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);
+	            return "success";
 			}else{
 				return "login";
 			}
