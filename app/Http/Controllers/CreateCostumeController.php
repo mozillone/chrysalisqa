@@ -1104,7 +1104,7 @@ class CreateCostumeController  extends Controller {
 			
 			/*Storing Status In Logs Starts Here*/
 			DB::table("reqbag_status_log")->insert([
-				"user_id" => Auth::user()->id,
+				"user_id" => $userid,
 				"bag_id" => $requestabag_insert,
 				"process" => "Create Request",
 				"status" => "Bag has been created with #".$requestabag_insert,
