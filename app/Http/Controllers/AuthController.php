@@ -212,12 +212,16 @@ class AuthController extends Controller {
 
 	  			$email['name'] = $display_name;
   				$email['activation_link'] = URL::to('/').'/verification/'.$rand;
-				$sent = Mail::send('emails.registration',array("email"=>$email), function ($m) use($req, $display_name) {
-					$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
-					$m->to($req['email'], $display_name);
-				    $m->subject('Activation Link');
-				});
-				return Redirect::to('costume/successrequestbag'); 
+				try{
+					$sent = Mail::send('emails.registration',array("email"=>$email), function ($m) use($req, $display_name) {
+						$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+						$m->to($req['email'], $display_name);
+					    $m->subject('Activation Link');
+					});
+					return Redirect::to('costume/successrequestbag'); 
+				}catch(\Exception $e){
+		            return Redirect::to('costume/successrequestbag'); 
+		        }
   			}else{
   				Session::flush();
 	  			//$request->session()->put('curentURL', $curentURL);
