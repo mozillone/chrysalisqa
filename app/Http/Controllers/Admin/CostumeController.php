@@ -265,26 +265,26 @@ class CostumeController extends Controller
 
 				$Mediumresizeimg = Image::make($originalPath);
 				//$Mrand = str_random(10) . '.png';
-				$Mediumresizeimg->resize(260, 356);
+				$Mediumresizeimg->resize(260, 434);
 
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 
 
 				$Smallresizeimg = Image::make($originalPath);
 				//$Srand = str_random(10) . '.png';
-				$Smallresizeimg->resize(140, 190);
+				$Smallresizeimg->resize(140, 233);
 
 				$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 
 
 				$Largeresizeimg = Image::make($originalPath);
 				//$Lrand = str_random(10) . '.png';
-				$Largeresizeimg->resize(475, 650);
+				$Largeresizeimg->resize(475, 792);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
 
 				$ExLargeresizeimg = Image::make($originalPath);
-			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->resize(889, 1482);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
@@ -312,24 +312,24 @@ class CostumeController extends Controller
 
 				$Mediumresizeimg = Image::make($originalPath1);
 				//$Mrand = str_random(10) . '.png';
-				$Mediumresizeimg->resize(260, 356);
+				$Mediumresizeimg->resize(260, 434);
 
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 
 				$Smallresizeimg = Image::make($originalPath1);
 				//$Srand = str_random(10) . '.png';
-				$Smallresizeimg->resize(140, 190);
+				$Smallresizeimg->resize(140, 233);
 
 				$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 
 				$Largeresizeimg = Image::make($originalPath1);
 				//$Lrand = str_random(10) . '.png';
-				$Largeresizeimg->resize(475, 650);
+				$Largeresizeimg->resize(475, 792);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
 
 				$ExLargeresizeimg = Image::make($originalPath1);
-			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->resize(889, 1482);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
@@ -360,21 +360,21 @@ class CostumeController extends Controller
 				$OriginalImage2 = file_put_contents($originalPath2, $data2);
 				$Mediumresizeimg = Image::make($originalPath2);
 				//$Mrand = str_random(10) . '.png';
-				$Mediumresizeimg->resize(260, 356);
+				$Mediumresizeimg->resize(260, 434);
 
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 				$Smallresizeimg = Image::make($originalPath2);
 				//$Srand = str_random(10) . '.png';
-				$Smallresizeimg->resize(140, 190);
+				$Smallresizeimg->resize(140, 233);
 				$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 				$Largeresizeimg = Image::make($originalPath2);
 				//$Lrand = str_random(10) . '.png';
-				$Largeresizeimg->resize(475, 650);
+				$Largeresizeimg->resize(475, 792);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
 
 				$ExLargeresizeimg = Image::make($originalPath2);
-			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->resize(889, 1482);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
@@ -404,26 +404,26 @@ class CostumeController extends Controller
 
 					$Mediumresizeimg = Image::make($originalPath);
 					//$Mrand = str_random(10) . '.png';
-					$Mediumresizeimg->resize(260, 356);
+					$Mediumresizeimg->resize(260, 434);
 
 					$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Multiplerand);
 
 
 					$Smallresizeimg = Image::make($originalPath);
 					//$Srand = str_random(10) . '.png';
-					$Smallresizeimg->resize(140, 190);
+					$Smallresizeimg->resize(140, 233);
 
 					$Smallresizeimg->save(public_path('costumers_images/Small/').$Multiplerand);
 
 
 					$Largeresizeimg = Image::make($originalPath);
 					//$Lrand = str_random(10) . '.png';
-					$Largeresizeimg->resize(475, 650);
+					$Largeresizeimg->resize(475, 792);
 
 					$Largeresizeimg->save(public_path('costumers_images/Large/').$Multiplerand);
 
 					$ExLargeresizeimg = Image::make($originalPath);
-				    $ExLargeresizeimg->resize(889, 1217);
+				    $ExLargeresizeimg->resize(889, 1482);
 				    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Multiplerand);
 				    chmod(public_path('costumers_images/ExLarge/').$Multiplerand, 0777);
 
@@ -1345,17 +1345,17 @@ class CostumeController extends Controller
 				$data1 = $Orand;
 				$OriginalImage = file_put_contents($originalPath, $data);
 				$Mediumresizeimg = Image::make($originalPath);
-				$Mediumresizeimg->resize(260, 356);
+				$Mediumresizeimg->resize(260, 434);
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/') . $Orand);
 				$Smallresizeimg = Image::make($originalPath);
-				$Smallresizeimg->resize(140, 190);
+				$Smallresizeimg->resize(140, 233);
 				$Smallresizeimg->save(public_path('costumers_images/Small/') . $Orand);
 				$Largeresizeimg = Image::make($originalPath);
-				$Largeresizeimg->resize(475, 650);
+				$Largeresizeimg->resize(475, 792);
 				$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
 
 				$ExLargeresizeimg = Image::make($originalPath);
-			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->resize(889, 1482);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 				if ($OriginalImage) {
@@ -1380,16 +1380,16 @@ class CostumeController extends Controller
 				$data2 = $Orand;
 				$OriginalImage2 = file_put_contents($originalPath1, $data1);
 				$Mediumresizeimg = Image::make($originalPath1);
-				$Mediumresizeimg->resize(260, 356);
+				$Mediumresizeimg->resize(260, 434);
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/') . $Orand);
 				$Smallresizeimg = Image::make($originalPath1);
-				$Smallresizeimg->resize(140, 190);
+				$Smallresizeimg->resize(140, 233);
 				$Smallresizeimg->save(public_path('costumers_images/Small/') . $Orand);
 				$Largeresizeimg = Image::make($originalPath1);
-				$Largeresizeimg->resize(475, 650);
+				$Largeresizeimg->resize(475, 792);
 				$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
 				$ExLargeresizeimg = Image::make($originalPath1);
-			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->resize(889, 1482);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 				if ($OriginalImage2) {
@@ -1416,21 +1416,21 @@ class CostumeController extends Controller
 				$OriginalImage2 = file_put_contents($originalPath2, $data2);
 				$Mediumresizeimg = Image::make($originalPath2);
 				//$Mrand = str_random(10) . '.png';
-				$Mediumresizeimg->resize(260, 356);
+				$Mediumresizeimg->resize(260, 434);
 
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 				$Smallresizeimg = Image::make($originalPath2);
 				//$Srand = str_random(10) . '.png';
-				$Smallresizeimg->resize(140, 190);
+				$Smallresizeimg->resize(140, 233);
 				$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 				$Largeresizeimg = Image::make($originalPath2);
 				//$Lrand = str_random(10) . '.png';
-				$Largeresizeimg->resize(475, 650);
+				$Largeresizeimg->resize(475, 792);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
 
 				$ExLargeresizeimg = Image::make($originalPath2);
-			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->resize(889, 1482);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
@@ -1469,26 +1469,26 @@ class CostumeController extends Controller
 
 					$Mediumresizeimg = Image::make($originalPath);
 					//$Mrand = str_random(10) . '.png';
-					$Mediumresizeimg->resize(260, 356);
+					$Mediumresizeimg->resize(260, 434);
 
 					$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Multiplerand);
 
 
 					$Smallresizeimg = Image::make($originalPath);
 					//$Srand = str_random(10) . '.png';
-					$Smallresizeimg->resize(140, 190);
+					$Smallresizeimg->resize(140, 233);
 
 					$Smallresizeimg->save(public_path('costumers_images/Small/').$Multiplerand);
 
 
 					$Largeresizeimg = Image::make($originalPath);
 					//$Lrand = str_random(10) . '.png';
-					$Largeresizeimg->resize(475, 650);
+					$Largeresizeimg->resize(475, 792);
 
 					$Largeresizeimg->save(public_path('costumers_images/Large/').$Multiplerand);
 
 					$ExLargeresizeimg = Image::make($originalPath);
-				    $ExLargeresizeimg->resize(889, 1217);
+				    $ExLargeresizeimg->resize(889, 1482);
 				    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Multiplerand);
 				    chmod(public_path('costumers_images/ExLarge/').$Multiplerand, 0777);
 
