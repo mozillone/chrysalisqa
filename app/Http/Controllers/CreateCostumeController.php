@@ -177,14 +177,10 @@ class CreateCostumeController  extends Controller {
 		  	$description = $req['description'];		  	 
 		  	$faq = $req['faq'];  		  
 		  	$customer_group="user";
-		  	if(isset($req['ounces'])){
-		  		$weight_ounces = $req['ounces'];	
-		  	}else{
-		  		$weight_ounces = 0;
-		  	}
+
 		 	$costume=array(
 			'weight_pounds'=>$req['pounds'],
-			'weight_ounces'=>$weight_ounces,
+			'weight_ounces'=>$req['ounces'],
 			'gender'=>$gender,
 			'condition'=>$costume_condition,
 			'created_user_group'=>$customer_group,
@@ -215,26 +211,26 @@ class CreateCostumeController  extends Controller {
 
 			$Mediumresizeimg = Image::make($originalPath);
 		    //$Mrand = str_random(10) . '.png';
-		    $Mediumresizeimg->resize(260, 356);
+		    $Mediumresizeimg->resize(260, 434);
 
 		    $Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 
 
 			$Smallresizeimg = Image::make($originalPath);
 			//$Srand = str_random(10) . '.png';
-		    $Smallresizeimg->resize(140, 190);
+		    $Smallresizeimg->resize(140, 233);
 
 		    $Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 
 
 			$Largeresizeimg = Image::make($originalPath);
 			//$Lrand = str_random(10) . '.png';
-		    $Largeresizeimg->resize(475, 650);
+		    $Largeresizeimg->resize(475, 792);
 
 		    $Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
 
 		    $ExLargeresizeimg = Image::make($originalPath);
-		    $ExLargeresizeimg->resize(889, 1217);
+		    $ExLargeresizeimg->resize(889, 1482);
 		    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 		    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
@@ -262,25 +258,25 @@ class CreateCostumeController  extends Controller {
 
 			$Mediumresizeimg = Image::make($originalPath1);
 			//$Mrand = str_random(10) . '.png';
-			$Mediumresizeimg->resize(260, 356);
+			$Mediumresizeimg->resize(260, 434);
 
 			$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 
 
 			$Smallresizeimg = Image::make($originalPath1);
 			//$Srand = str_random(10) . '.png';
-			$Smallresizeimg->resize(140, 190);
+			$Smallresizeimg->resize(140, 233);
 
 			$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 
 
 			$Largeresizeimg = Image::make($originalPath1);
 			//$Lrand = str_random(10) . '.png';
-			$Largeresizeimg->resize(475, 650);
+			$Largeresizeimg->resize(475, 792);
 
 			$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
 			$ExLargeresizeimg = Image::make($originalPath1);
-		    $ExLargeresizeimg->resize(889, 1217);
+		    $ExLargeresizeimg->resize(889, 1482);
 		    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 		    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 	            
@@ -310,21 +306,21 @@ class CreateCostumeController  extends Controller {
 				$OriginalImage3 = file_put_contents($originalPath2, $data2);
 				$Mediumresizeimg = Image::make($originalPath2);
 				//$Mrand = str_random(10) . '.png';
-				$Mediumresizeimg->resize(260, 356);
+				$Mediumresizeimg->resize(260, 434);
 
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 				$Smallresizeimg = Image::make($originalPath2);
 				//$Srand = str_random(10) . '.png';
-				$Smallresizeimg->resize(140, 190);
+				$Smallresizeimg->resize(140, 233);
 				$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 				$Largeresizeimg = Image::make($originalPath2);
 				//$Lrand = str_random(10) . '.png';
-				$Largeresizeimg->resize(475, 650);
+				$Largeresizeimg->resize(475, 792);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
 
 				$ExLargeresizeimg = Image::make($originalPath2);
-			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->resize(889, 1482);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
@@ -357,26 +353,26 @@ class CreateCostumeController  extends Controller {
 
 					$Mediumresizeimg = Image::make($originalPath);
 					//$Mrand = str_random(10) . '.png';
-					$Mediumresizeimg->resize(260, 356);
+					$Mediumresizeimg->resize(260, 434);
 
 					$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Multiplerand);
 
 
 					$Smallresizeimg = Image::make($originalPath);
 					//$Srand = str_random(10) . '.png';
-					$Smallresizeimg->resize(140, 190);
+					$Smallresizeimg->resize(140, 233);
 
 					$Smallresizeimg->save(public_path('costumers_images/Small/').$Multiplerand);
 
 
 					$Largeresizeimg = Image::make($originalPath);
 					//$Lrand = str_random(10) . '.png';
-					$Largeresizeimg->resize(475, 650);
+					$Largeresizeimg->resize(475, 792);
 
 					$Largeresizeimg->save(public_path('costumers_images/Large/').$Multiplerand);
 
 					$ExLargeresizeimg = Image::make($originalPath);
-				    $ExLargeresizeimg->resize(889, 1217);
+				    $ExLargeresizeimg->resize(889, 1482);
 				    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Multiplerand);
 				    chmod(public_path('costumers_images/ExLarge/').$Multiplerand, 0777);
 
@@ -1052,8 +1048,7 @@ class CreateCostumeController  extends Controller {
 							);
 
 
-		$conversation_array = array('type'=>'request_a_bag',
-									'user_one'=>'1',
+		$conversation_array = array('type'=>'request_a_bag','user_one'=>'1',
 									'subject'=>'Bag Request Successful',
 									'user_two'=>'',
 									'status'=>'1',
@@ -1084,51 +1079,51 @@ class CreateCostumeController  extends Controller {
 								);
 
 		if ($email_check == 1) {
-			if(Auth::check()){
-				$req_bag_session = Session::get('auth_user_id_req_bag');
+			$req_bag_session = Session::get('auth_user_id_req_bag');
 			
-				$userid 		= (Auth::check()) ? Auth::user()->id : $user_info->id;
-				$addres_array['user_id'] = $userid;
-				$addres_insert = DB::table('address_master')->insertGetId($addres_array);
+			$userid 		= (Auth::check()) ? Auth::user()->id : $user_info->id;
+			$addres_array['user_id'] = $userid;
+			$addres_insert = DB::table('address_master')->insertGetId($addres_array);
 
-				$conversation_array['user_two'] = $userid;
-				$conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
-				
-				$theard_array['user_id'] = "1";
-				$theard_array['user_name'] = User::find(1)->pluck('display_name')->first();
-				$theard_array['conversation_id'] = $conversation_insert;
-				$theard = DB::table('messages')->insertGetId($theard_array);
-				
-				$requestabag_array['user_id'] = $userid;
-				$requestabag_array['conversation_id'] = $conversation_insert;
-				$requestabag_array['addres_id'] = $addres_insert;
-				$requestabag_insert = DB::table('request_bags')->insertGetId($requestabag_array);
-				
-				/*Storing Status In Logs Starts Here*/
-				DB::table("reqbag_status_log")->insert([
-					"user_id" => $userid,
-					"bag_id" => $requestabag_insert,
-					"process" => "Create Request",
-					"status" => "Bag has been created with #".$requestabag_insert,
-					"created_at" => Carbon::now()
-				]);
-				/*Storing Status In Logs Ends Here*/   
+			$conversation_array['user_two'] = $userid;
+			$conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
+			
+			$theard_array['user_id'] = "1";
+			$theard_array['user_name'] = User::find(1)->pluck('display_name')->first();
+			$theard_array['conversation_id'] = $conversation_insert;
+			$theard = DB::table('messages')->insertGetId($theard_array);
+			
+			$requestabag_array['user_id'] = $userid;
+			$requestabag_array['conversation_id'] = $conversation_insert;
+			$requestabag_array['addres_id'] = $addres_insert;
+			$requestabag_insert = DB::table('request_bags')->insertGetId($requestabag_array);
+			
+			/*Storing Status In Logs Starts Here*/
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => Auth::user()->id,
+				"bag_id" => $requestabag_insert,
+				"process" => "Create Request",
+				"status" => "Bag has been created with #".$requestabag_insert,
+				"created_at" => Carbon::now()
+			]);
+			/*Storing Status In Logs Ends Here*/   
 
-				// send mail to Admin
-				$bag_url_admin 		= '/process-bag/'.$requestabag_insert;
-	            $req_subject        = "REQUEST A BAG";
-	            $req_data           = array('cus_name'=>$cus_name,'bag_url'=>$bag_url_admin);
-	            $template           = 'emails.reqabag_requestfromuser';
-	            $req_to             = 'gbhyri@dotcomweavers.com';//"support@chrysaliscostumes.com";
-	            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);				                
-	            
-	            // send mail to user
-	            $req_subject        = "REQUEST A BAG";
-	            $req_data           = array('cus_name'=>$cus_name,'username'=>(Auth::check())?Auth::user()->username:$user_info->username);
-	            $template           = 'emails.reqabag_requestfromuser';
-	            $req_to             = (Auth::check())?Auth::user()->email:$user_info->email;//"support@chrysaliscostumes.com";
-	            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);
-	            return "success";
+			// send mail to Admin
+			$bag_url_admin 		= '/process-bag/'.$requestabag_insert;
+            $req_subject        = "REQUEST A BAG";
+            $req_data           = array('cus_name'=>$cus_name,'bag_url'=>$bag_url_admin);
+            $template           = 'emails.reqabag_requestfromuser';
+            $req_to             = 'gbhyri@dotcomweavers.com';//"support@chrysaliscostumes.com";
+            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);				                
+            
+            // send mail to user
+            $req_subject        = "REQUEST A BAG";
+            $req_data           = array('cus_name'=>$cus_name,'username'=>(Auth::check())?Auth::user()->username:$user_info->username);
+            $template           = 'emails.reqabag_requestfromuser';
+            $req_to             = (Auth::check())?Auth::user()->email:$user_info->email;//"support@chrysaliscostumes.com";
+            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);
+            if (Auth::check()){
+				return "success";
 			}else{
 				return "login";
 			}
@@ -1314,12 +1309,7 @@ class CreateCostumeController  extends Controller {
 		  	
 		  	$faq = $req['faq'];
 		  	$weight_pounds = $req['pounds'];
-		  	if(isset($req['ounces'])){
-		  		$weight_ounces = $req['ounces'];	
-		  	}else{
-		  		$weight_ounces = 0;
-		  	}
-		  	
+		  	$weight_ounces = $req['ounces'];
 		  	$customer_group="user";
 			//Check whether the costume inserted by admin or not if the user is selected insert the user id else insert the admin as costumer
 			$costume=array(
@@ -1356,16 +1346,16 @@ class CreateCostumeController  extends Controller {
 				$data1 = $Orand;
 				$OriginalImage = file_put_contents($originalPath, $data);
 				$Mediumresizeimg = Image::make($originalPath);
-				$Mediumresizeimg->resize(214, 356);
+				$Mediumresizeimg->resize(260, 434);
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/') . $Orand);
 				$Smallresizeimg = Image::make($originalPath);
-				$Smallresizeimg->resize(114, 190);
+				$Smallresizeimg->resize(140, 233);
 				$Smallresizeimg->save(public_path('costumers_images/Small/') . $Orand);
 				$Largeresizeimg = Image::make($originalPath);
-				$Largeresizeimg->resize(390, 650);
+				$Largeresizeimg->resize(475, 792);
 				$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
 				$ExLargeresizeimg = Image::make($originalPath);
-			    $ExLargeresizeimg->resize(730, 1217);
+			    $ExLargeresizeimg->resize(889, 1482);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 				if ($OriginalImage) {
@@ -1391,17 +1381,17 @@ class CreateCostumeController  extends Controller {
 			$data1 = $Orand;
 			$OriginalImage = file_put_contents($originalPath, $data);
 			$Mediumresizeimg = Image::make($originalPath);
-			$Mediumresizeimg->resize(214, 356);
+			$Mediumresizeimg->resize(260, 434);
 			$Mediumresizeimg->save(public_path('costumers_images/Medium/') . $Orand);
 			$Smallresizeimg = Image::make($originalPath);
-			$Smallresizeimg->resize(114, 190);
+			$Smallresizeimg->resize(140, 233);
 			$Smallresizeimg->save(public_path('costumers_images/Small/') . $Orand);
 			$Largeresizeimg = Image::make($originalPath);
-			$Largeresizeimg->resize(390, 650);
+			$Largeresizeimg->resize(475, 792);
 			$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
 
 			$ExLargeresizeimg = Image::make($originalPath);
-		    $ExLargeresizeimg->resize(730, 1217);
+		    $ExLargeresizeimg->resize(889, 1482);
 		    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 		    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
@@ -1429,16 +1419,16 @@ class CreateCostumeController  extends Controller {
 			$data1 = $Orand;
 			$OriginalImage = file_put_contents($originalPath, $data);
 			$Mediumresizeimg = Image::make($originalPath);
-			$Mediumresizeimg->resize(214, 356);
+			$Mediumresizeimg->resize(260, 434);
 			$Mediumresizeimg->save(public_path('costumers_images/Medium/') . $Orand);
 			$Smallresizeimg = Image::make($originalPath);
-			$Smallresizeimg->resize(114, 190);
+			$Smallresizeimg->resize(140, 233);
 			$Smallresizeimg->save(public_path('costumers_images/Small/') . $Orand);
 			$Largeresizeimg = Image::make($originalPath);
-			$Largeresizeimg->resize(390, 650);
+			$Largeresizeimg->resize(475, 792);
 			$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
 			$ExLargeresizeimg = Image::make($originalPath);
-		    $ExLargeresizeimg->resize(730, 1217);
+		    $ExLargeresizeimg->resize(889, 1482);
 		    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 		    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 			if ($OriginalImage) {
@@ -1493,20 +1483,20 @@ class CreateCostumeController  extends Controller {
 
 				$Mediumresizeimg = Image::make($originalPath);
 				//$Mrand = str_random(10) . '.png';
-				$Mediumresizeimg->resize(260, 356);
+				$Mediumresizeimg->resize(260, 434);
 
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Multiplerand);
 				$Smallresizeimg = Image::make($originalPath);
 				//$Srand = str_random(10) . '.png';
-				$Smallresizeimg->resize(140, 190);
+				$Smallresizeimg->resize(140, 233);
 				$Smallresizeimg->save(public_path('costumers_images/Small/').$Multiplerand);
 				$Largeresizeimg = Image::make($originalPath);
 				//$Lrand = str_random(10) . '.png';
-				$Largeresizeimg->resize(475, 650);
+				$Largeresizeimg->resize(475, 792);
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Multiplerand);
 
 				$ExLargeresizeimg = Image::make($originalPath);
-				$ExLargeresizeimg->resize(889, 1217);
+				$ExLargeresizeimg->resize(889, 1482);
 				$ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Multiplerand);
 				chmod(public_path('costumers_images/ExLarge/').$Multiplerand, 0777);
 
@@ -2024,7 +2014,7 @@ class CreateCostumeController  extends Controller {
 				$imageId = $costume->costume_image_id;
 			    $originalPath = public_path('costumers_images/Original/').$name;
 				$ExLargeresizeimg = Image::make($originalPath);
-				$ExLargeresizeimg->resize(889, 1217);
+				$ExLargeresizeimg->resize(889, 1482);
 				$ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$name);
 				chmod(public_path('costumers_images/ExLarge/').$name, 0777);
 				DB::table("costume_image")->where("costume_image_id",$imageId)->update(["isOptimized" => "Y"]);
