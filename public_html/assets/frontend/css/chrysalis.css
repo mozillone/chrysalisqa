@@ -1071,7 +1071,7 @@ a:active{text-decoration:none!important;color:#323031;cursor:pointer;}
 input.addtocart-rm{width:180px;height:45px;float:right;line-height:45px;color:#fff;font-size:20px;font-family:Proxima-Nova-Extrabold;margin:0 0 10px;background:#ee4266;border:none;outline:none;border-radius:5px;}
 .back-link a{color:#323031;border-bottom:1px solid #bfbfbf;font-family:Proxima-Nova-Semibold;display:inline-block;padding-top:3px;font-size:16px;}
 .carousel-bg-style.bxslider-strt .bx-wrapper{max-width:100%;position:relative;cursor:pointer;min-height:650px;overflow:hidden;background:transparent;vertical-align:middle;display:flex;justify-content:center;align-items:center;margin-bottom:35px;}
-.carousel-bg-style.bxslider-strt .bx-wrapper img{margin:0 auto;max-height:650px;}
+.carousel-bg-style.bxslider-strt .bx-wrapper img{margin:0 auto;/*max-height:650px;*/}
 .carousel-bg-style.bxslider-strt .bx-wrapper.bx-wrapper-rm{position:relative;cursor:pointer;min-height:auto;overflow:hidden;background:transparent;vertical-align:middle;display:flex;justify-content:center;/* max-width:100% !important; */align-items:center;}
 .carousel-bg-style.bxslider-strt #bx-pager a{cursor:pointer;min-height:140px;max-height:140px;overflow:hidden;background:transparent;vertical-align:middle;display:flex;justify-content:center;align-items:baseline;margin-bottom:35px;}
 .carousel-bg-style.bxslider-strt #bx-pager a img{overflow:hidden;}

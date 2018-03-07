@@ -177,10 +177,14 @@ class CreateCostumeController  extends Controller {
 		  	$description = $req['description'];		  	 
 		  	$faq = $req['faq'];  		  
 		  	$customer_group="user";
-
+		  	if(isset($req['ounces'])){
+		  		$weight_ounces = $req['ounces'];	
+		  	}else{
+		  		$weight_ounces = 0;
+		  	}
 		 	$costume=array(
 			'weight_pounds'=>$req['pounds'],
-			'weight_ounces'=>$req['ounces'],
+			'weight_ounces'=>$weight_ounces,
 			'gender'=>$gender,
 			'condition'=>$costume_condition,
 			'created_user_group'=>$customer_group,
@@ -1048,7 +1052,8 @@ class CreateCostumeController  extends Controller {
 							);
 
 
-		$conversation_array = array('type'=>'request_a_bag','user_one'=>'1',
+		$conversation_array = array('type'=>'request_a_bag',
+									'user_one'=>'1',
 									'subject'=>'Bag Request Successful',
 									'user_two'=>'',
 									'status'=>'1',
@@ -1079,51 +1084,51 @@ class CreateCostumeController  extends Controller {
 								);
 
 		if ($email_check == 1) {
-			$req_bag_session = Session::get('auth_user_id_req_bag');
+			if(Auth::check()){
+				$req_bag_session = Session::get('auth_user_id_req_bag');
 			
-			$userid 		= (Auth::check()) ? Auth::user()->id : $user_info->id;
-			$addres_array['user_id'] = $userid;
-			$addres_insert = DB::table('address_master')->insertGetId($addres_array);
+				$userid 		= (Auth::check()) ? Auth::user()->id : $user_info->id;
+				$addres_array['user_id'] = $userid;
+				$addres_insert = DB::table('address_master')->insertGetId($addres_array);
 
-			$conversation_array['user_two'] = $userid;
-			$conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
-			
-			$theard_array['user_id'] = "1";
-			$theard_array['user_name'] = User::find(1)->pluck('display_name')->first();
-			$theard_array['conversation_id'] = $conversation_insert;
-			$theard = DB::table('messages')->insertGetId($theard_array);
-			
-			$requestabag_array['user_id'] = $userid;
-			$requestabag_array['conversation_id'] = $conversation_insert;
-			$requestabag_array['addres_id'] = $addres_insert;
-			$requestabag_insert = DB::table('request_bags')->insertGetId($requestabag_array);
-			
-			/*Storing Status In Logs Starts Here*/
-			DB::table("reqbag_status_log")->insert([
-				"user_id" => Auth::user()->id,
-				"bag_id" => $requestabag_insert,
-				"process" => "Create Request",
-				"status" => "Bag has been created with #".$requestabag_insert,
-				"created_at" => Carbon::now()
-			]);
-			/*Storing Status In Logs Ends Here*/   
+				$conversation_array['user_two'] = $userid;
+				$conversation_insert = DB::table('conversations')->insertGetId($conversation_array);
+				
+				$theard_array['user_id'] = "1";
+				$theard_array['user_name'] = User::find(1)->pluck('display_name')->first();
+				$theard_array['conversation_id'] = $conversation_insert;
+				$theard = DB::table('messages')->insertGetId($theard_array);
+				
+				$requestabag_array['user_id'] = $userid;
+				$requestabag_array['conversation_id'] = $conversation_insert;
+				$requestabag_array['addres_id'] = $addres_insert;
+				$requestabag_insert = DB::table('request_bags')->insertGetId($requestabag_array);
+				
+				/*Storing Status In Logs Starts Here*/
+				DB::table("reqbag_status_log")->insert([
+					"user_id" => $userid,
+					"bag_id" => $requestabag_insert,
+					"process" => "Create Request",
+					"status" => "Bag has been created with #".$requestabag_insert,
+					"created_at" => Carbon::now()
+				]);
+				/*Storing Status In Logs Ends Here*/   
 
-			// send mail to Admin
-			$bag_url_admin 		= '/process-bag/'.$requestabag_insert;
-            $req_subject        = "REQUEST A BAG";
-            $req_data           = array('cus_name'=>$cus_name,'bag_url'=>$bag_url_admin);
-            $template           = 'emails.reqabag_requestfromuser';
-            $req_to             = 'gbhyri@dotcomweavers.com';//"support@chrysaliscostumes.com";
-            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);				                
-            
-            // send mail to user
-            $req_subject        = "REQUEST A BAG";
-            $req_data           = array('cus_name'=>$cus_name,'username'=>(Auth::check())?Auth::user()->username:$user_info->username);
-            $template           = 'emails.reqabag_requestfromuser';
-            $req_to             = (Auth::check())?Auth::user()->email:$user_info->email;//"support@chrysaliscostumes.com";
-            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);
-            if (Auth::check()){
-				return "success";
+				// send mail to Admin
+				$bag_url_admin 		= '/process-bag/'.$requestabag_insert;
+	            $req_subject        = "REQUEST A BAG";
+	            $req_data           = array('cus_name'=>$cus_name,'bag_url'=>$bag_url_admin);
+	            $template           = 'emails.reqabag_requestfromuser';
+	            $req_to             = 'gbhyri@dotcomweavers.com';//"support@chrysaliscostumes.com";
+	            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);				                
+	            
+	            // send mail to user
+	            $req_subject        = "REQUEST A BAG";
+	            $req_data           = array('cus_name'=>$cus_name,'username'=>(Auth::check())?Auth::user()->username:$user_info->username);
+	            $template           = 'emails.reqabag_requestfromuser';
+	            $req_to             = (Auth::check())?Auth::user()->email:$user_info->email;//"support@chrysaliscostumes.com";
+	            $mail_status        = $this->sitehelper->sendmail($req_to,$req_subject,$template,$req_data);
+	            return "success";
 			}else{
 				return "login";
 			}
@@ -1309,7 +1314,12 @@ class CreateCostumeController  extends Controller {
 		  	
 		  	$faq = $req['faq'];
 		  	$weight_pounds = $req['pounds'];
-		  	$weight_ounces = $req['ounces'];
+		  	if(isset($req['ounces'])){
+		  		$weight_ounces = $req['ounces'];	
+		  	}else{
+		  		$weight_ounces = 0;
+		  	}
+		  	
 		  	$customer_group="user";
 			//Check whether the costume inserted by admin or not if the user is selected insert the user id else insert the admin as costumer
 			$costume=array(
