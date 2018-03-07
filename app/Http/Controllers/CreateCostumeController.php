@@ -1356,16 +1356,16 @@ class CreateCostumeController  extends Controller {
 				$data1 = $Orand;
 				$OriginalImage = file_put_contents($originalPath, $data);
 				$Mediumresizeimg = Image::make($originalPath);
-				$Mediumresizeimg->resize(260, 356);
+				$Mediumresizeimg->resize(214, 356);
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/') . $Orand);
 				$Smallresizeimg = Image::make($originalPath);
-				$Smallresizeimg->resize(140, 190);
+				$Smallresizeimg->resize(114, 190);
 				$Smallresizeimg->save(public_path('costumers_images/Small/') . $Orand);
 				$Largeresizeimg = Image::make($originalPath);
-				$Largeresizeimg->resize(475, 650);
+				$Largeresizeimg->resize(390, 650);
 				$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
 				$ExLargeresizeimg = Image::make($originalPath);
-			    $ExLargeresizeimg->resize(889, 1217);
+			    $ExLargeresizeimg->resize(730, 1217);
 			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 				if ($OriginalImage) {
@@ -1391,17 +1391,17 @@ class CreateCostumeController  extends Controller {
 			$data1 = $Orand;
 			$OriginalImage = file_put_contents($originalPath, $data);
 			$Mediumresizeimg = Image::make($originalPath);
-			$Mediumresizeimg->resize(260, 356);
+			$Mediumresizeimg->resize(214, 356);
 			$Mediumresizeimg->save(public_path('costumers_images/Medium/') . $Orand);
 			$Smallresizeimg = Image::make($originalPath);
-			$Smallresizeimg->resize(140, 190);
+			$Smallresizeimg->resize(114, 190);
 			$Smallresizeimg->save(public_path('costumers_images/Small/') . $Orand);
 			$Largeresizeimg = Image::make($originalPath);
-			$Largeresizeimg->resize(475, 650);
+			$Largeresizeimg->resize(390, 650);
 			$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
 
 			$ExLargeresizeimg = Image::make($originalPath);
-		    $ExLargeresizeimg->resize(889, 1217);
+		    $ExLargeresizeimg->resize(730, 1217);
 		    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 		    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
@@ -1429,16 +1429,16 @@ class CreateCostumeController  extends Controller {
 			$data1 = $Orand;
 			$OriginalImage = file_put_contents($originalPath, $data);
 			$Mediumresizeimg = Image::make($originalPath);
-			$Mediumresizeimg->resize(260, 356);
+			$Mediumresizeimg->resize(214, 356);
 			$Mediumresizeimg->save(public_path('costumers_images/Medium/') . $Orand);
 			$Smallresizeimg = Image::make($originalPath);
-			$Smallresizeimg->resize(140, 190);
+			$Smallresizeimg->resize(114, 190);
 			$Smallresizeimg->save(public_path('costumers_images/Small/') . $Orand);
 			$Largeresizeimg = Image::make($originalPath);
-			$Largeresizeimg->resize(475, 650);
+			$Largeresizeimg->resize(390, 650);
 			$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
 			$ExLargeresizeimg = Image::make($originalPath);
-		    $ExLargeresizeimg->resize(889, 1217);
+		    $ExLargeresizeimg->resize(730, 1217);
 		    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
 		    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 			if ($OriginalImage) {
