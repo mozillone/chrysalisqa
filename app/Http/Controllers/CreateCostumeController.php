@@ -2034,5 +2034,61 @@ class CreateCostumeController  extends Controller {
 		}
 		
 	}
+	public function ReGenerateImages()
+	{
+		ini_set('max_execution_time', -1);
+		ini_set('memory_limit', -1);
+		//$directory = public_path('costumers_images/Original');
+		//$files = \File::allFiles($directory);
+		$files = DB::table("costume_image")
+			->leftjoin("costumes","costumes.costume_id","=","costume_image.costume_id")
+			->where([["costumes.deleted_status","0"],["costume_image.isRegenerated","N"]])
+			->select("costume_image.costume_image_id","costume_image.image")
+			//->take(5)
+			->get();
+		//dd($files);
+		foreach ($files as $costume)
+		{
+			try{
+				//$name = pathinfo($file)['basename'];
+				$name = $costume->image;
+				$imageId = $costume->costume_image_id;
+			    $originalPath = public_path('costumers_images/Original/').$name;
+
+			    $Smallresizeimg = Image::make($originalPath);
+				$Smallresizeimg->resize(140, 233);
+				$Smallresizeimg->save(public_path('costumers_images/Small/').$name);
+
+			    $Mediumresizeimg = Image::make($originalPath);
+			    $Mediumresizeimg->resize(260, 434);
+				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$name);
+
+				$Largeresizeimg = Image::make($originalPath);
+				$Largeresizeimg->resize(475, 792);
+				$Largeresizeimg->save(public_path('costumers_images/Large/').$name);
+
+				$ExLargeresizeimg = Image::make($originalPath);
+				$ExLargeresizeimg->resize(889, 1482);
+				$ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$name);
+
+				$res = DB::table("costume_image")->where("costume_image_id",$imageId)->update(["isRegenerated" => "Y"]);
+
+				chmod(public_path('costumers_images/Small/').$name, 0777);
+				chmod(public_path('costumers_images/Medium/').$name, 0777);
+				chmod(public_path('costumers_images/Large/').$name, 0777);
+				chmod(public_path('costumers_images/ExLarge/').$name, 0777);
+				
+				
+			}catch(\Exception $e){
+				if($res == 1){
+					\Log::info('Regenerated with error '.$e->getMessage());
+				}	
+				else{
+					\Log::info($e->getMessage());
+				}			
+			}
+		}
+		
+	}
 
 }

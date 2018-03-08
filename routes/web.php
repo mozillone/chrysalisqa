@@ -1004,3 +1004,4 @@ Route::get('500', function()
 });
 
 Route::get("GenerateExLarge",'CreateCostumeController@GenerateExLarge');
+Route::get("ReGenerateImages",'CreateCostumeController@ReGenerateImages');
