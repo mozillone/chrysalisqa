@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "cb9fd38755b838ee5860bf2789b21b54",
-=======
     "content-hash": "742f364174c3578a355f1209dd3a8cb0",
->>>>>>> chrysalisdev
     "packages": [
         {
             "name": "approached/laravel-image-optimizer",
@@ -109,18 +105,6 @@
         },
         {
             "name": "braintree/braintree_php",
-<<<<<<< HEAD
-            "version": "3.25.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/braintree/braintree_php.git",
-                "reference": "8c8785b8876d5b2f4b4f78c5768ad245a7c43feb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/braintree/braintree_php/zipball/8c8785b8876d5b2f4b4f78c5768ad245a7c43feb",
-                "reference": "8c8785b8876d5b2f4b4f78c5768ad245a7c43feb",
-=======
             "version": "3.26.0",
             "source": {
                 "type": "git",
@@ -131,7 +115,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/braintree/braintree_php/zipball/184bbdd65951a3ad766992ef73bb6e93aeba82b7",
                 "reference": "184bbdd65951a3ad766992ef73bb6e93aeba82b7",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -165,11 +148,7 @@
                 }
             ],
             "description": "Braintree PHP Client Library",
-<<<<<<< HEAD
-            "time": "2017-08-25T19:38:09+00:00"
-=======
             "time": "2017-11-17T21:47:27+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "cartalyst/collections",
@@ -590,11 +569,7 @@
                 "web service"
             ],
             "abandoned": "guzzlehttp/guzzle",
-<<<<<<< HEAD
-            "time": "2015-03-18T18:23:50+00:00"
-=======
             "time": "2014-01-28T22:29:15+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2005,18 +1980,6 @@
         },
         {
             "name": "nikic/php-parser",
-<<<<<<< HEAD
-            "version": "v3.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "a1e8e1a30e1352f118feff1a8481066ddc2f234a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a1e8e1a30e1352f118feff1a8481066ddc2f234a",
-                "reference": "a1e8e1a30e1352f118feff1a8481066ddc2f234a",
-=======
             "version": "v3.1.2",
             "source": {
                 "type": "git",
@@ -2027,7 +1990,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/08131e7ff29de6bb9f12275c7d35df71f25f4d89",
                 "reference": "08131e7ff29de6bb9f12275c7d35df71f25f4d89",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -2065,11 +2027,7 @@
                 "parser",
                 "php"
             ],
-<<<<<<< HEAD
-            "time": "2017-09-02T17:10:46+00:00"
-=======
             "time": "2017-11-04T11:48:34+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "paragonie/random_compat",
@@ -2121,18 +2079,6 @@
         },
         {
             "name": "paypal/rest-api-sdk-php",
-<<<<<<< HEAD
-            "version": "1.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
-                "reference": "0925b11ee2261fe369f2bd7a6abfc1bf322a6601"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/0925b11ee2261fe369f2bd7a6abfc1bf322a6601",
-                "reference": "0925b11ee2261fe369f2bd7a6abfc1bf322a6601",
-=======
             "version": "1.13.0",
             "source": {
                 "type": "git",
@@ -2143,7 +2089,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/192e217beed14c8e75624e821fdc8ec51e2a21f5",
                 "reference": "192e217beed14c8e75624e821fdc8ec51e2a21f5",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -2179,11 +2124,7 @@
                 "rest",
                 "sdk"
             ],
-<<<<<<< HEAD
-            "time": "2017-07-11T19:16:53+00:00"
-=======
             "time": "2017-11-13T19:21:59+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "phpoffice/phpexcel",
@@ -2390,18 +2331,6 @@
         },
         {
             "name": "psy/psysh",
-<<<<<<< HEAD
-            "version": "v0.8.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "b193cd020e8c6b66cea6457826ae005e94e6d2c0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/b193cd020e8c6b66cea6457826ae005e94e6d2c0",
-                "reference": "b193cd020e8c6b66cea6457826ae005e94e6d2c0",
-=======
             "version": "v0.8.15",
             "source": {
                 "type": "git",
@@ -2412,7 +2341,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bobthecow/psysh/zipball/b1d289c2cb03a2f8249912c53e96ced38f879926",
                 "reference": "b1d289c2cb03a2f8249912c53e96ced38f879926",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -2472,11 +2400,7 @@
                 "interactive",
                 "shell"
             ],
-<<<<<<< HEAD
-            "time": "2017-07-29T19:30:02+00:00"
-=======
             "time": "2017-11-16T14:29:51+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "pusher/pusher-php-server",
@@ -2920,18 +2844,6 @@
         },
         {
             "name": "symfony/event-dispatcher",
-<<<<<<< HEAD
-            "version": "v2.8.28",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "7fe089232554357efb8d4af65ce209fc6e5a2186"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/7fe089232554357efb8d4af65ce209fc6e5a2186",
-                "reference": "7fe089232554357efb8d4af65ce209fc6e5a2186",
-=======
             "version": "v3.3.13",
             "source": {
                 "type": "git",
@@ -2942,7 +2854,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/271d8c27c3ec5ecee6e2ac06016232e249d638d9",
                 "reference": "271d8c27c3ec5ecee6e2ac06016232e249d638d9",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -2992,11 +2903,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
-            "time": "2017-10-01T21:00:16+00:00"
-=======
             "time": "2017-11-05T15:47:03+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "symfony/finder",
@@ -3184,18 +3091,6 @@
         },
         {
             "name": "symfony/options-resolver",
-<<<<<<< HEAD
-            "version": "v3.3.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "ee4e22978fe885b54ee5da8c7964f0a5301abfb6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/ee4e22978fe885b54ee5da8c7964f0a5301abfb6",
-                "reference": "ee4e22978fe885b54ee5da8c7964f0a5301abfb6",
-=======
             "version": "v3.3.13",
             "source": {
                 "type": "git",
@@ -3206,7 +3101,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/options-resolver/zipball/623d9c210a137205f7e6e98166105625402cbb2f",
                 "reference": "623d9c210a137205f7e6e98166105625402cbb2f",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -3247,22 +3141,6 @@
                 "configuration",
                 "options"
             ],
-<<<<<<< HEAD
-            "time": "2017-07-29T21:54:42+00:00"
-        },
-        {
-            "name": "symfony/polyfill-mbstring",
-            "version": "v1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
-                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
-=======
             "time": "2017-11-05T15:47:03+00:00"
         },
         {
@@ -3277,7 +3155,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
                 "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -3289,11 +3166,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
-                    "dev-master": "1.5-dev"
-=======
                     "dev-master": "1.6-dev"
->>>>>>> chrysalisdev
                 }
             },
             "autoload": {
@@ -3327,22 +3200,6 @@
                 "portable",
                 "shim"
             ],
-<<<<<<< HEAD
-            "time": "2017-06-14T15:44:48+00:00"
-        },
-        {
-            "name": "symfony/polyfill-php56",
-            "version": "v1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "e85ebdef569b84e8709864e1a290c40f156b30ca"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/e85ebdef569b84e8709864e1a290c40f156b30ca",
-                "reference": "e85ebdef569b84e8709864e1a290c40f156b30ca",
-=======
             "time": "2017-10-11T12:05:26+00:00"
         },
         {
@@ -3357,7 +3214,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/265fc96795492430762c29be291a371494ba3a5b",
                 "reference": "265fc96795492430762c29be291a371494ba3a5b",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -3367,11 +3223,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
-                    "dev-master": "1.5-dev"
-=======
                     "dev-master": "1.6-dev"
->>>>>>> chrysalisdev
                 }
             },
             "autoload": {
@@ -3404,22 +3256,6 @@
                 "portable",
                 "shim"
             ],
-<<<<<<< HEAD
-            "time": "2017-06-14T15:44:48+00:00"
-        },
-        {
-            "name": "symfony/polyfill-util",
-            "version": "v1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-util.git",
-                "reference": "67925d1cf0b84bd234a83bebf26d4eb281744c6d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/67925d1cf0b84bd234a83bebf26d4eb281744c6d",
-                "reference": "67925d1cf0b84bd234a83bebf26d4eb281744c6d",
-=======
             "time": "2017-10-11T12:05:26+00:00"
         },
         {
@@ -3434,7 +3270,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/6e719200c8e540e0c0effeb31f96bdb344b94176",
                 "reference": "6e719200c8e540e0c0effeb31f96bdb344b94176",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -3443,11 +3278,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
-                    "dev-master": "1.5-dev"
-=======
                     "dev-master": "1.6-dev"
->>>>>>> chrysalisdev
                 }
             },
             "autoload": {
@@ -3477,11 +3308,7 @@
                 "polyfill",
                 "shim"
             ],
-<<<<<<< HEAD
-            "time": "2017-07-05T15:09:33+00:00"
-=======
             "time": "2017-10-11T12:05:26+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "symfony/process",
@@ -4210,11 +4037,7 @@
                 "object",
                 "object graph"
             ],
-<<<<<<< HEAD
-            "time": "2017-04-12T18:52:22+00:00"
-=======
             "time": "2017-10-19T19:58:43+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -4272,18 +4095,6 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-<<<<<<< HEAD
-            "version": "4.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "2d3d238c433cf69caeb4842e97a3223a116f94b2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/2d3d238c433cf69caeb4842e97a3223a116f94b2",
-                "reference": "2d3d238c433cf69caeb4842e97a3223a116f94b2",
-=======
             "version": "4.2.0",
             "source": {
                 "type": "git",
@@ -4294,16 +4105,11 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/66465776cfc249844bde6d117abff1d22e06c2da",
                 "reference": "66465776cfc249844bde6d117abff1d22e06c2da",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
-<<<<<<< HEAD
-                "phpdocumentor/reflection-common": "^1.0@dev",
-=======
                 "phpdocumentor/reflection-common": "^1.0.0",
->>>>>>> chrysalisdev
                 "phpdocumentor/type-resolver": "^0.4.0",
                 "webmozart/assert": "^1.0"
             },
@@ -4336,11 +4142,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-<<<<<<< HEAD
-            "time": "2017-08-30T18:51:59+00:00"
-=======
             "time": "2017-11-27T17:38:31+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -4391,18 +4193,6 @@
         },
         {
             "name": "phpspec/prophecy",
-<<<<<<< HEAD
-            "version": "v1.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
-                "reference": "c9b8c6088acd19d769d4cc0ffa60a9fe34344bd6",
-=======
             "version": "1.7.3",
             "source": {
                 "type": "git",
@@ -4413,7 +4203,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpspec/prophecy/zipball/e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
                 "reference": "e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -4463,11 +4252,7 @@
                 "spy",
                 "stub"
             ],
-<<<<<<< HEAD
-            "time": "2017-09-04T11:05:03+00:00"
-=======
             "time": "2017-11-24T13:59:53+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -4577,11 +4362,7 @@
                 "filesystem",
                 "iterator"
             ],
-<<<<<<< HEAD
-            "time": "2016-10-03T07:40:28+00:00"
-=======
             "time": "2017-11-27T13:52:08+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "phpunit/php-text-template",
@@ -4675,18 +4456,6 @@
         },
         {
             "name": "phpunit/php-token-stream",
-<<<<<<< HEAD
-            "version": "2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "9a02332089ac48e704c70f6cefed30c224e3c0b0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/9a02332089ac48e704c70f6cefed30c224e3c0b0",
-                "reference": "9a02332089ac48e704c70f6cefed30c224e3c0b0",
-=======
             "version": "2.0.2",
             "source": {
                 "type": "git",
@@ -4697,7 +4466,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/791198a2c6254db10131eecfe8c06670700904db",
                 "reference": "791198a2c6254db10131eecfe8c06670700904db",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -4733,22 +4501,6 @@
             "keywords": [
                 "tokenizer"
             ],
-<<<<<<< HEAD
-            "time": "2017-08-20T05:47:52+00:00"
-        },
-        {
-            "name": "phpunit/phpunit",
-            "version": "5.7.22",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "10df877596c9906d4110b5b905313829043f2ada"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/10df877596c9906d4110b5b905313829043f2ada",
-                "reference": "10df877596c9906d4110b5b905313829043f2ada",
-=======
             "time": "2017-11-27T05:48:46+00:00"
         },
         {
@@ -4763,7 +4515,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4b1c822a68ae6577df38a59eb49b046712ec0f6a",
                 "reference": "4b1c822a68ae6577df38a59eb49b046712ec0f6a",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -4832,11 +4583,7 @@
                 "testing",
                 "xunit"
             ],
-<<<<<<< HEAD
-            "time": "2017-09-24T07:23:38+00:00"
-=======
             "time": "2017-11-14T14:50:51+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -5468,18 +5215,6 @@
         },
         {
             "name": "symfony/yaml",
-<<<<<<< HEAD
-            "version": "v3.3.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "8c7bf1e7d5d6b05a690b715729cb4cd0c0a99c46"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/8c7bf1e7d5d6b05a690b715729cb4cd0c0a99c46",
-                "reference": "8c7bf1e7d5d6b05a690b715729cb4cd0c0a99c46",
-=======
             "version": "v3.3.13",
             "source": {
                 "type": "git",
@@ -5490,7 +5225,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/yaml/zipball/0938408c4faa518d95230deabb5f595bf0de31b9",
                 "reference": "0938408c4faa518d95230deabb5f595bf0de31b9",
->>>>>>> chrysalisdev
                 "shasum": ""
             },
             "require": {
@@ -5532,11 +5266,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
-            "time": "2017-10-05T14:43:42+00:00"
-=======
             "time": "2017-11-10T18:26:04+00:00"
->>>>>>> chrysalisdev
         },
         {
             "name": "webmozart/assert",
