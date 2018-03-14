@@ -1041,55 +1041,55 @@
       $(this).val(newval.substring(0,14));
    });
 });
-	$('#request_a_bag_login').click(function(){
-		var loginpopup_email = $('#loginpopup_email').val();
-		var loginopup_password = $('#loginopup_password').val();
-		if($('input[name=is_payout]:checked').length<=0){
-			var is_payout = "0";		
-			}else{
-			var is_payout = "1";
-		}
-		if($('input[name=is_return]:checked').length<=0){
-			var is_return = "0";		
-			}else{
-			var is_return = "1";
-		}
-		if($('input[name=is_recycle]:checked').length<=0){
-			var is_recycle = "0";		
-			}else{
-			var is_recycle = "1";
-		}
-		var full_name = $('#full_name').val();
-		var address1  = $('#route').val();
-		var address2  = $('#address2').val();
-		var city      = $('#locality').val();
-		var state     = $('#administrative_area_level_1').val();
-		var  zipcode  = $('#postal_code').val();
-		var phone_number = $('#phone_number').val();
-		var email_address = $('#email_address').val(); 
-		var total_data    = {email: loginpopup_email,password:loginopup_password,is_payout: is_payout,full_name: full_name,address1: address1,address2:address2,city: city,state: state,zipcode: zipcode,phone_number: phone_number,is_return: is_return,is_recycle: is_recycle,email_address: email_address}
-		if (loginpopup_email != "" && loginopup_password !="") {
-			$.ajax({
-				url: "{{URL::to('/postrequestabaglogin')}}",
-				type: "POST",
-				data: total_data,
-				success: function(data){
-					if (data == "login_sucess") {
-						$('#ajax_loader').remove();
-						$('#send_my_bag_next').html("Next");
-						$('#modal-backdrop').remove();
-						$('#request_bag_signup_popup').css('display','none');
+				$('#request_a_bag_login').click(function(){
+					var loginpopup_email = $('#loginpopup_email').val();
+					var loginopup_password = $('#loginopup_password').val();
+					if($('input[name=is_payout]:checked').length<=0){
+						var is_payout = "0";		
+						}else{
+						var is_payout = "1";
 					}
-					else if (data == "success") {
-						window.location.href = "{{URL::to('costume/successrequestbag')}}";
+					if($('input[name=is_return]:checked').length<=0){
+						var is_return = "0";		
+						}else{
+						var is_return = "1";
 					}
-					else{
-						window.location.href = "{{URL::to('/login')}}";
+					if($('input[name=is_recycle]:checked').length<=0){
+						var is_recycle = "0";		
+						}else{
+						var is_recycle = "1";
 					}
-				}
-			}); 
-		}
-	});
+					var full_name = $('#full_name').val();
+					var address1  = $('#route').val();
+					var address2  = $('#address2').val();
+					var city      = $('#locality').val();
+					var state     = $('#administrative_area_level_1').val();
+					var  zipcode  = $('#postal_code').val();
+					var phone_number = $('#phone_number').val();
+					var email_address = $('#email_address').val(); 
+					var total_data    = {email: loginpopup_email,password:loginopup_password,is_payout: is_payout,full_name: full_name,address1: address1,address2:address2,city: city,state: state,zipcode: zipcode,phone_number: phone_number,is_return: is_return,is_recycle: is_recycle,email_address: email_address}
+					if (loginpopup_email != "" && loginopup_password !="") {
+						$.ajax({
+							url: "{{URL::to('/postrequestabaglogin')}}",
+							type: "POST",
+							data: total_data,
+							success: function(data){
+								if (data == "login_sucess") {
+									$('#ajax_loader').remove();
+									$('#send_my_bag_next').html("Next");
+									$('#modal-backdrop').remove();
+									$('#request_bag_signup_popup').css('display','none');
+								}
+								else if (data == "success") {
+									window.location.href = "{{URL::to('costume/successrequestbag')}}";
+								}
+								else{
+									window.location.href = "{{URL::to('/login')}}";
+								}
+							}
+						}); 
+					}
+				});
 				//numeric condition
 				$("#postal_code").on("keyup", function(){
 					var valid = /^\d{0,10}(\.\d{0,10})?$/.test(this.value),
