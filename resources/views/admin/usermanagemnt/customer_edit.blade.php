@@ -193,9 +193,16 @@ View User |@parent
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									
 									<div class="fileupload fileupload-new" data-provides="fileupload"> 
-									<div class="userpic">
+									<!-- MSN -->
+									<div class="userpic rmvimg">
 										<img  @if(empty($user->user_img)) src="{{asset('/img/default.png')}}" @else src="{{asset('profile_img/resize/'.$user->user_img)}}" @endif class="img-pview img-responsive img-circle pic" id="img-chan" name="img-chan">
-										</div>
+										@if(!empty($user->user_img))
+										<span class="remove_pic" id="removeImg">
+											<i class="fa fa-times-circle" aria-hidden="true"></i>
+										</span>
+										@endif
+									</div>
+									<!-- MSN -->
 										<span class="btn btn-default btn-file">
 											<span class="fileupload-new">Upload Photo</span>
 											<span class="fileupload-exists"></span>     

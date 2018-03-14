@@ -59,16 +59,23 @@ class CartController extends Controller {
                 $cart_id=Cart::verifyCostumeCart($costume_id,$cookie_id);
                 if($cart_id){
                   $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
-                 $res=Cart::verifyCostumeQuantity($costume_id,$qty);
-                  if(count($res)){
+                  $res=Cart::verifyCostumeQuantity($costume_id,$qty);
+                  if((integer)$qty == (integer)$res[0]->quantity){
+                    return response('out of stock');
+                  }else{
+                    Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
+                    $res=$this->updateCartDetails($costume_id,$qty+1);
+                    $count=Cart::getCartCount($cookie_id);
+                    return response($count)->cookie($res);
+                  }
+                  /*if(count($res)){
                     Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
                     $res=$this->updateCartDetails($costume_id,$qty+1);
                     $count=Cart::getCartCount($cookie_id);
                     return response($count)->cookie($res);
                   }else{
                     return response('out of stock');
-
-                  }
+                  }*/
                 }else{
                    $cookie_id=$this->currentCookieKey();
                    $costume_id=$req['costume_id'];

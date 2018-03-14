@@ -100,7 +100,7 @@
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									
 									<div class="fileupload fileupload-new" data-provides="fileupload"> 
-										<img  @if(empty($user->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/{{$user->user_img}}" @endif class="img-pview img-responsive" id="img-chan" name="img-chan">
+										<img  @if(empty(Auth::user()->user_img)) src="{{asset('/img/default.png')}}" @else src="/profile_img/resize/{{Auth::user()->user_img}}" @endif class="img-pview img-responsive" id="img-chan" name="img-chan">
 										<span class="remove_pic">
 											<i class="fa fa-times-circle" aria-hidden="true"></i>
 										</span>

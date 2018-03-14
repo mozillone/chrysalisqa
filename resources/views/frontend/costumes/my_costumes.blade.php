@@ -8,7 +8,7 @@
 @section('styles')
 <link rel="stylesheet" href="{{ asset('/assets/admin/vendors/AdminLTE-master/plugins/datatables/dataTables.bootstrap.css')}}">
 <link rel="stylesheet" href="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}">
-
+<link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
 @stop
 
 {{-- Page content --}}
@@ -44,7 +44,8 @@
 				<div class="table-responsive auto-scroll-none">
                 <table class="table table-striped user-list-table">
                   <thead>
-                    <th>Costume Name.</th>
+                    <th>Costume Name</th>
+                    <th>Status</th>
                     <th>From</th>
                     <th>To</th>
                    <th></th>
@@ -53,7 +54,14 @@
                     <tr>
                       <input type="hidden" class="form-control token"  name="csrf-token" value="{{ csrf_token() }}">
                       <td><input type="text" class="form-control" ng-model="search.costume_name"  placeholder=""></td>
-                        <td><input type="text" class="form-control" datepicker ng-model="search.from_date" placeholder="Created From"></td>
+                      <td>
+                        <select class="form-control" ng-model="search.status">
+                          <option value="">All</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>
+                        </select>
+                      </td>
+                      <td><input type="text" class="form-control" datepicker ng-model="search.from_date" placeholder="Created From"></td>
                       <td><input type="text" class="form-control" datepicker ng-model="search.date_end" placeholder="Created To"></td>
              
                       <td><button class="btn btn-primary user-list-search order-filter-btn" ng-click="seachCostumes(search)">Search</button></td>
@@ -90,7 +98,7 @@
 <script src="{{ asset('angular/Frontend/costumes/Services/costumes.js') }}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
 <script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
-
+<script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 @stop
 
 

@@ -19,6 +19,7 @@ use DB;
 use Meta;
 use Carbon\Carbon;
 //use App\BraintreeApp;
+use App\Costumes;
 use App\Helpers\StripeApp;
 class AuthController extends Controller {
 
@@ -54,6 +55,7 @@ class AuthController extends Controller {
    }
    public function postLogin(Request $request)
    {
+
    	$req = $request->all();
    	$rule  =  array(  
 	              'email' => 'required|email',
@@ -94,18 +96,20 @@ class AuthController extends Controller {
 				   	Cart::updateCartToUser();
 				  }
 				 $cookie = \Cookie::forget('min-cart');
-				 $fav_url_redirect=strrev(explode("/",strrev(URL::previous()))[3]);
+				 /*$fav_url_redirect=strrev(explode("/",strrev(URL::previous()))[3]);
 				 if(!empty($req['costume_id']) && $fav_url_redirect=="product"){
 				 	return Redirect::to('/buy-it-now/'.trim($req['costume_id']));
 				 }
 				 if(!empty($req['is_cart']) && $fav_url_redirect!="product"){
 				 	return Redirect::to('/checkout');
-				 }
+				 }*/
 				 if(Session::has('curentURL')){
 				 	return Redirect::to(Session::get('curentURL'))->withCookie($cookie);
 				 }
 				 if(Session::has('is_loginPage')){
 					return Redirect::to('/dashboard')->withCookie($cookie);
+				 }else if($request->session()->get('_previous')['url'] == url('/')){
+				 	return Redirect::to('/dashboard');
 				 }else if(Session::has('is_blog')){
                      return Redirect::to('/blog')->withCookie($cookie);
                  }else if(Session::has('is_event')){
@@ -128,8 +132,122 @@ class AuthController extends Controller {
 			return Redirect::to('/login');
 		}
 	}
- 	public function postRegisterUser(Request $request)
+	/**
+	 * Edited by Gaytari
+	 * User Registration
+	 * @param  Request $request [description]
+	 * @return login Page           [description]
+	 */
+	public function postRegisterUser(Request $request)
 	{
+		$req = $request->all();
+		$flag = 0;
+
+		if($request->session()->get('curentURL') == URL::to('costume/successrequestbag')){
+			$flag = 1;
+			$rule  =  array(
+                      'email' => 'required|email|unique:users|max:255',
+                      'password' => 'required|min:5',
+	                 );
+		}else{
+			$rule  =  array(  
+    	              'first_name' => 'required|max:255',
+                      'last_name' => 'required|max:255',
+                      'email' => 'required|email|unique:users|max:255',
+                      'password' => 'required|min:5',
+	                 );
+		}
+		
+	    $validator = Validator::make($req,$rule);
+        if ($validator->fails()) {
+			return Redirect::to('login#signup_tab')
+			->withErrors($validator)
+			->withInput()->send();
+		}
+	    
+	    $rand = md5(uniqid(rand(), true));
+	    
+	    if(count(Session::get('social_data'))){ 
+	    	$active = "1";
+	    }else{ 
+	    	$active = "0";
+	    }
+
+	    try{
+         $customer = $this->stripe->customers($req['email']);
+        }catch(Exception $e){
+           Session::flash('error', $e->getMessage());
+           return Redirect::back();
+        }
+        if($flag == 0){
+        	$display_name = trim($req['first_name']).' '.trim($req['last_name']);
+        	$first_name = $req['first_name'];
+        	$last_name = $req['last_name'];
+        }else{
+        	$uname = explode(" ", $req['reg_full_name'], 2);
+        	$display_name = $req['reg_full_name'];
+        	$first_name = $uname[0];
+        	$last_name = (count($uname)>1)? end($uname): '';
+        }
+        
+	    $users = User::create([ 'username' =>	$req['username'],
+	   							'first_name' => $first_name,
+			                    'last_name' => $last_name,
+			                    'display_name' => $display_name,
+			                    'email' => $req['email'],
+			                    'password' => bcrypt($req['password']),
+			                    'active' => $active,
+							    'activate_hash' => $rand,
+							    'api_customer_id' => $customer['id']
+							])->id;
+
+  		if($users){
+  			/* Added by Gayatri */
+  			$curentURL = '';
+  			if($request->session()->get('curentURL') == URL::to('costume/successrequestbag')){
+  				$curentURL = URL::to('costume/successrequestbag');
+  				Costumes::createRequestBag($users);
+  				Session::flush();
+	  			//$request->session()->put('curentURL', $curentURL);
+
+	  			$email['name'] = $display_name;
+  				$email['activation_link'] = URL::to('/').'/verification/'.$rand;
+				try{
+					$sent = Mail::send('emails.registration',array("email"=>$email), function ($m) use($req, $display_name) {
+						$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+						$m->to($req['email'], $display_name);
+					    $m->subject('Activation Link');
+					});
+					return Redirect::to('costume/successrequestbag'); 
+				}catch(\Exception $e){
+		            return Redirect::to('costume/successrequestbag'); 
+		        }
+  			}else{
+  				Session::flush();
+	  			//$request->session()->put('curentURL', $curentURL);
+	  			/* End */
+	  			if($active){
+	  				Session::flash('success', 'Your account has been activated. You can login into your account now.');
+	  			}else{
+	  				$email['name'] = $display_name;
+	  				$email['activation_link'] = URL::to('/').'/verification/'.$rand;
+					$sent = Mail::send('emails.registration',array("email"=>$email), function ($m) use($req, $display_name) {
+						$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+						$m->to($req['email'], $display_name);
+					    $m->subject('Activation Link');
+					});
+					Session::flash('success', 'Registration is completed successfully. Activation Link is sent to your registered email.');	
+			 	}
+			}
+		}
+		else
+		{
+			 Session::flash('error', 'Registration completed successfully.Due database error');
+		}
+		return Redirect::to('login'); 
+	}
+
+ 	/*public function postRegisterUser(Request $request){
 		$req = $request->all();
 		//echo "<pre>";print_r($req);die;
 		$rule  =  array(  
@@ -171,7 +289,16 @@ class AuthController extends Controller {
 
                          
   		if($users){
+  			//Session::flush();
+  			
+  			$curentURL = '';
+  			if($request->session()->get('curentURL') == URL::to('costume/successrequestbag')){
+  				$curentURL = URL::to('costume/successrequestbag');
+  				Costumes::createRequestBag($users);
+  			}
   			Session::flush();
+  			$request->session()->put('curentURL', $curentURL);
+  			
   			if($active){
   				Session::flash('success', 'Your account has been activated. You can login into your account now.');
   			}else{
@@ -190,7 +317,7 @@ class AuthController extends Controller {
 			 Session::flash('error', 'Registration completed successfully.Due database error');
 		}
 		return Redirect::to('login'); 
-	}
+	}*/
     public function redirectToProvider($provider)
     {
         return Socialite::driver($provider)->redirect();
@@ -261,6 +388,7 @@ class AuthController extends Controller {
 		              'email' => 'required|email',
 	                  'password' => 'required',
 	                 );
+
 	    $validator = Validator::make($req,$rule);
 	    if ($validator->fails()) {
 			return Redirect::back()
@@ -560,7 +688,7 @@ class AuthController extends Controller {
 							$cus_email 		= $request->email_address;
 							$cus_phone 		= $request->phone_number;
 							
-							if (isset($request->is_return) && !empty($request->is_return)) {
+							/*if (isset($request->is_return) && !empty($request->is_return)) {
 								$is_return 		= $request->is_return;
 							}else{
 								$is_return 		= "0";
@@ -569,6 +697,21 @@ class AuthController extends Controller {
 								$is_recycle 		= $request->is_recycle;
 							}else{
 								$is_recycle 		= "0";
+							}*/
+							$is_return = "";                
+					        $is_recycle = "";
+							if (isset($request->is_return)) {
+								
+								if($request->is_return == 1){
+									$is_return = "1";
+									$is_recycle = "0";
+								}else{
+									$is_recycle = "1";
+									$is_return = "0";
+								}
+							}else{
+								$is_return = "0";
+								$is_recycle = "0";
 							}
 							if (isset($request->address2) && !empty($request->address2)) {
 								$address2 		= $request->address2;
@@ -588,19 +731,21 @@ class AuthController extends Controller {
 							//echo $ref_no;die;
 							$addres_insert=DB::table('address_master')->insertGetId($addres_array);
 
-							$conversation_array = array('type'=>'request_a_bag','user_one'=>$userid,
-								'subject'=>'Request a bag subject',
-								'user_two'=>'1',
+							$conversation_array = array('type'=>'request_a_bag','user_one'=>'1',
+
+								'subject'=>'Bag Request Successful',
+
+								'user_two'=>$userid,
 								'status'=>'1',
 								'created_at'=>date('y-m-d H:i:s'));
 							$conversation_insert=DB::table('conversations')->insertGetId($conversation_array);
 
-							$theard_array  = array('message'=>'Hi login',
+							$theard_array  = array('message'=>'Your bag is being processed',
 									'is_seen'=>'0',
 							        'deleted_from_sender'=>'0',
 							        'deleted_from_receiver'=>'0',
-							        'user_id'=>$userid,
-							        'user_name'=>Auth::user()->display_name,
+							        'user_id'=>'1',
+							        'user_name'=>User::find(1)->pluck('display_name')->first(),
 							        'conversation_id'=>$conversation_insert,
 							        'created_at'=>date('y-m-d H:i:s'));
 							$theard = DB::table('messages')->insertGetId($theard_array);
@@ -619,6 +764,15 @@ class AuthController extends Controller {
 								);
 
 							$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
+							/*Storing Status In Logs Starts Here*/
+								DB::table("reqbag_status_log")->insert([
+									"user_id" => Auth::user()->id,
+									"bag_id" => $requestabag_insert,
+									"process" => "Create Request",
+									"status" => "Bag has been created with #".$requestabag_insert,
+									"created_at" => Carbon::now()
+								]);
+							/*Storing Status In Logs Ends Here*/
 							$conversation_array = array('type_id'=>$requestabag_insert);
 				$conversation_insert=DB::table('conversations')->where('id',$conversation_insert)->update($conversation_array);
 

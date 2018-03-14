@@ -24,13 +24,13 @@
     <th style="color:#000; font-size:50px; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;"><a href="{{URL::to('/')}}"><img class="img-responsive" src="{{asset('assets/frontend/img/brand.png')}}"  width="150px;"></a></th>
 </tr>
 <tr>
-    <th style="color:#000; font-size:15px; padding:0px;"><h4 style="margin:20px auto 0px; display:block;">Hey, {{Auth::user()->first_name}} {{Auth::user()->last_name}}!</h4></th>
+    <th style="color:#000; font-size:15px; padding:0px;"><h4 style="margin:20px auto 0px; display:block;">Hey, {{Auth::user()->first_name}}!</h4></th>
 </tr>
 <tr>
-    <th style="color:#6a2b7c;"><h5 style="margin:0px auto 20px; padding:0px; font-size:22px; display:block;">Your Chrysalis order has been accepted.</h5></th>
+    <th style="color:#6a2b7c;"><h5 style="margin:0px auto 20px; padding:0px; font-size:22px; display:block;">Your order has been received.</h5></th>
 </tr>
 <tr>
-    <td style="color:#000;"><p style="margin:0px auto 20px; padding:0px; font-size:16px; display:block;"><span style="text-decoration:underline; color:#f53d68;">{{$orders['seller_name']}}</span> has been notified of your order and<br/>you will be notified as soon as it is ships.<br/>Don't forget You can view your order status and history at any time by visiting <a href="{{URL::to('/login')}}"style="text-decoration:underline; color:#f53d68;">My Account.</a></p></td>
+    <td style="color:#000;"><p style="margin:0px auto 20px; padding:0px; font-size:16px; display:block;">The Seller <span style="text-decoration:underline; color:#f53d68;"> {{$orders['seller_name']}}</span> has been notified and we will update you as soon as they respond.<br/>You can view your order status and history at any time by visiting Your <a href="{{URL::to('/login')}}"style="text-decoration:underline; color:#f53d68;">Account.</a></p></td>
 </tr>
 <tr>
     <td style="color:#000;">
@@ -158,17 +158,19 @@ margin: 20px 0px;">
 <table style="text-align:center;margin:0 auto; padding:15px 0px; font-size:13px; margin-bottom:0px; background:#f6f9fb; width:600px; border-bottom:1.5px solid #ddd;">
 <tbody>
     <tr>
-        <td><a style="padding:0px 10px" href="https://www.facebook.com/Chrysalis-Costumes-1571674966183606/"><img src="https://image.ibb.co/iPORQv/group_211.png" alt="group_211" border="0"></a>
-        <a style="padding:0px 10px" href="https://imgbb.com/"><img src="https://image.ibb.co/jCEpdF/group_212.png" alt="group_212" border="0"></a>
-        <a style="padding:0px 10px" href="https://www.instagram.com/chrysaliscostumes/?hl=en%2F"><img src="https://image.ibb.co/mGSWsa/group_214.png" alt="group_214" border="0"></a>
-        <a  style="padding:0px 10px" href="https://imgbb.com/"><img src="https://image.ibb.co/kABfkv/group_233.png" alt="group_233" border="0"></a></td>
+
+        <td><a style="padding:0px 10px" href="https://twitter.com/MaxGarweg"><img src="{{asset('/assets/frontend/img/twitter_email.png')}}" alt="twitter" border="0"></a>
+            <a style="padding:0px 10px" href="https://www.facebook.com/Chrysalis-Costumes-1571674966183606/"><img src="{{asset('/assets/frontend/img/facebook_email.png')}}" alt="facebook" border="0"></a>
+            <a style="padding:0px 10px" href="https://www.instagram.com/chrysaliscostumes/?hl=en%2F"><img src="{{asset('/assets/frontend/img/insta_email.png')}}" alt="instagram" border="0"></a>
+            <a style="padding:0px 10px" href="https://www.youtube.com/channel/UCZgeZrAV1UCoCXSWd75DNsw"><img src="{{asset('/assets/frontend/img/youtube_email.png')}}" alt="youtube" border="0"></a></td>
+
     </tr>   
 </tbody>
 </table>
 <table style="text-align:center;margin:0 auto; padding:5px 0px; font-size:13px; margin-bottom:30px; background:#f6f9fb; width:600px;">
 <tbody>
     <tr>
-        <td>&copy; 2017 <span style="padding:0px 10px;">|</span> Chrysalis</td>
+        <td><p>© 2017 CHRYSALIS. ALL RIGHTS RESERVED​​​​​​​ | <a href="{{URL::to('/pages/terms-of-use/')}}" style="color: #000;">TERMS OF USE</a> | <a href="{{URL::to('/pages/privacy-policy/')}}" style="color: #000;"> PRIVACY POLICY </a></p></td>
     </tr>   
 </tbody>
 </table>

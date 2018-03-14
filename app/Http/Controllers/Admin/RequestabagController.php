@@ -25,6 +25,7 @@ use Config;
 use App\Helpers\FedEx\ShipService,
     App\Helpers\FedEx\ShipService\ComplexType,
     App\Helpers\FedEx\ShipService\SimpleType;  
+use Log;
 
 class RequestabagController extends Controller
 {
@@ -56,31 +57,44 @@ class RequestabagController extends Controller
 	Method Name : processBag()()
 	Purpose :
 	*/
-	public function processBag($id){
+	/*public function processBag($id){
 
 		$this->data = array();
-		$this->data['request_a_bag'] = DB::table('request_bags')->where('request_bags.id',$id)		
-		->leftJoin('address_master','request_bags.addres_id','address_master.address_id')
-		->leftJoin('states','address_master.state','states.abbrev')
-		->select('request_bags.*','address_master.*','states.name','states.abbrev')		 
-		->first();
+		$this->data['request_a_bag'] = DB::table('request_bags')
+										->where('request_bags.id',$id)		
+										->leftJoin('address_master','request_bags.addres_id','address_master.address_id')
+										->leftJoin('states','address_master.state','states.abbrev')
+										->select('request_bags.*','address_master.*','states.name','states.abbrev')		 
+										->first();
+		//echo "<pre>";print_r($this->data['request_a_bag']);exit;										
 		$generated_lables = DB::table('request_shippings')
 							->where('request_id',$id)->get();
+							//dd($generated_lables);
 		$count_generated_lable =  count($generated_lables);
 		$this->data['generated_lables_html'] = '0';
 		if ($count_generated_lable != 0) {
-		
 			$html = '<div>';
-			foreach ($generated_lables as $label_html) {
-				if ($label_html->type == 'pick') {
-					$html .= '<p>Empty Bag Tracking Number: <a href="/request-bag/label/'.$label_html->shipping_no.'">UX'.$label_html->shipping_no.'</a> <i> via FedEx generated '.$label_html->created_at.' </i> </p> ';
-				}else if($label_html->type == 'drop'){
-					$html .= '<p>Customer Tracking Number: <a href="/request-bag/label/'.$label_html->shipping_no.'">UX'.$label_html->shipping_no.'</a> <i> via FedEx SmartPost generated '.$label_html->created_at.'</i> </p>';
-				}				
+			if($count_generated_lable == 2){
+				foreach ($generated_lables as $label_html) {
+					if ($label_html->type == 'pick') {
+						$html .= '<p>Empty Bag Tracking Number: <a href="/request-bag/label/'.$label_html->shipping_no.'">UX'.$label_html->shipping_no.'</a> <i> via FedEx generated '.$label_html->created_at.' </i> </p> ';
+					}else if($label_html->type == 'drop'){
+						$html .= '<p>Customer Tracking Number: <a href="/request-bag/label/'.$label_html->shipping_no.'">UX'.$label_html->shipping_no.'</a> <i> via FedEx SmartPost generated '.$label_html->created_at.'</i> </p>';
+					}
+				}
+			}else if($generated_lables[0]->type == 'pick'){
+				$html .= '<p>Empty Bag Tracking Number: <a href="/request-bag/label/'.$generated_lables[0]->shipping_no.'">UX'.$generated_lables[0]->shipping_no.'</a> <i> via FedEx generated '.$generated_lables[0]->created_at.' </i> </p> ';
+
+				$html .= '<p>Customer Tracking Number: <a href="javascript::void(0);"  id="smartpost_label_generate">Generate</a></p>';
+			}else if($generated_lables[0]->type == 'drop'){
+				$html .= '<p>Empty Bag Tracking Number: <a href="javascript::void(0);"  id="fedex_label_generate">Generate</a></p>';
+
+				$html .= '<p>Customer Tracking Number: <a href="/request-bag/label/'.$generated_lables[0]->shipping_no.'">UX'.$generated_lables[0]->shipping_no.'</a> <i> via FedEx SmartPost generated '.$generated_lables[0]->created_at.'</i> </p>';
 			}
 			$html .= '</div>';
-		$this->data['generated_lables_html'] = $html;
+			$this->data['generated_lables_html'] = $html;
 		}
+		//echo "<pre>"; print_r($this->data['generated_lables_html']); exit;
 		$store_payout_details = DB::table('request_credits')->where('request_id',$id)->first();
 		$store_count_payout = count($store_payout_details);
 		$paypal_payout_details = DB::table('paypal_payouts')->where('type_id',$id)->first();
@@ -104,19 +118,93 @@ class RequestabagController extends Controller
 			$html = '<p> Return initiated $ '.$return_details->credit.' </p>';
 			$this->data['return_html'] = $html;
 		}
-		$this->data['messagingtheard'] = DB::table('messages')->where('conversation_id',$this->data['request_a_bag']->conversation_id)
-		->orderBy('messages.created_at','ASC')
-		->leftJoin('users','messages.user_id','users.id')
-		->select('users.user_img as user_img','users.display_name as display_name','messages.message as message','messages.created_at')
-		->orderBy('messages.created_at','ASC')->get();
-		//dd($this->data['messagingtheard']);
-		//echo "<pre>";print_r($this->data['messagingtheard']);die;
+
+		$this->data['messagingtheard'] = DB::table('messages')
+					->where('conversation_id',$this->data['request_a_bag']->conversation_id)
+					->orderBy('messages.created_at','ASC')
+					->leftJoin('users','messages.user_id','users.id')
+					->select('users.user_img as user_img','users.display_name as display_name','messages.message as message','messages.created_at')
+					->orderBy('messages.created_at','ASC')->get();
+		
+        return view('admin.request-a-bag.processabag')->with('total_data',$this->data)->with('is_label_generated', $count_generated_lable);
+	}*/
+
+	public function processBag($id){
+
+		$this->data = array();
+		$this->data['request_a_bag'] = DB::table('request_bags')
+										->where('request_bags.id',$id)		
+										->leftJoin('address_master','request_bags.addres_id','address_master.address_id')
+										->leftJoin('states','address_master.state','states.abbrev')
+										->select('request_bags.*','address_master.*','states.name','states.abbrev')		 
+										->first();
+		//echo "<pre>";print_r($this->data['request_a_bag']);exit;										
+		$generated_lables = DB::table('request_shippings')
+							->where('request_id',$id)->get();
+							//dd($generated_lables);
+		$count_generated_lable =  count($generated_lables);
+		$this->data['generated_lables_html'] = '0';
+		if ($count_generated_lable != 0) {
+			$html = '<div>';
+			if($count_generated_lable == 2){
+				foreach ($generated_lables as $label_html) {
+					if ($label_html->type == 'pick') {
+						$html .= '<p>Empty Bag Tracking Number: <a href="/request-bag/label/'.$label_html->shipping_no.'">UX'.$label_html->shipping_no.'</a> <i> via FedEx generated '.$label_html->created_at.' </i> </p> ';
+					}else if($label_html->type == 'drop'){
+						$html .= '<p>Customer Tracking Number: <a href="/request-bag/label/'.$label_html->shipping_no.'">UX'.$label_html->shipping_no.'</a> <i> via FedEx SmartPost generated '.$label_html->created_at.'</i> </p>';
+					}
+				}
+			}else if($generated_lables[0]->type == 'pick'){
+				$html .= '<p>Empty Bag Tracking Number: <a href="/request-bag/label/'.$generated_lables[0]->shipping_no.'">UX'.$generated_lables[0]->shipping_no.'</a> <i> via FedEx generated '.$generated_lables[0]->created_at.' </i> </p> ';
+
+				$html .= '<p>Customer Tracking Number: <a href="javascript::void(0);"  id="smartpost_label_generate">Generate</a></p>';
+			}else if($generated_lables[0]->type == 'drop'){
+				$html .= '<p>Empty Bag Tracking Number: <a href="javascript::void(0);"  id="fedex_label_generate">Generate</a></p>';
+
+				$html .= '<p>Customer Tracking Number: <a href="/request-bag/label/'.$generated_lables[0]->shipping_no.'">UX'.$generated_lables[0]->shipping_no.'</a> <i> via FedEx SmartPost generated '.$generated_lables[0]->created_at.'</i> </p>';
+			}
+			$html .= '</div>';
+			$this->data['generated_lables_html'] = $html;
+		}
+		//echo "<pre>"; print_r($this->data['generated_lables_html']); exit;
+		$store_payout_details = DB::table('request_credits')->where('request_id',$id)->first();
+		$store_count_payout = count($store_payout_details);
+		$paypal_payout_details = DB::table('paypal_payouts')->where('type_id',$id)->first();
+		$paypal_count_payout = count($paypal_payout_details);
+		$this->data['payout_html'] = "0";
+		if ($store_count_payout != 0 || $paypal_count_payout != 0) {
+			$html = "";
+			if ($store_count_payout != 0) {
+				$credit = $store_payout_details->credit;
+				$html = '<p> Payout Amount Credited $ '.$credit.' </p>';
+			}else if($paypal_count_payout != 0){
+				$credit = $paypal_payout_details->amount;
+				$html = '<p> Payout Amount Credited $ '.$credit.' </p>';				
+			}
+			$this->data['payout_html'] = $html;
+		}
+		$return_details = DB::table('request_credits')->where('request_id',$id)->where('type','return')->first();
+		$count_return = count($return_details);
+		$this->data['return_html'] = "0";
+		if ($count_return != 0 ) {
+			$html = '<p> Return initiated $ '.$return_details->credit.' </p>';
+			$this->data['return_html'] = $html;
+		}
+
+		$this->data['messagingtheard'] = DB::table('messages')
+					->where('conversation_id',$this->data['request_a_bag']->conversation_id)
+					->orderBy('messages.created_at','ASC')
+					->leftJoin('users','messages.user_id','users.id')
+					->select('users.user_img as user_img','users.display_name as display_name','messages.message as message','messages.created_at')
+					->orderBy('messages.created_at','ASC')->get();
+		
         return view('admin.request-a-bag.processabag')->with('total_data',$this->data)->with('is_label_generated', $count_generated_lable);
 	}
+
 	public function Getallmanagebags(){
 		$request_bags=DB::Select('SELECT `id`, `user_id`, `conversation_id`, `ref_no`, `addres_id`, `is_payout`, `is_return`, `is_recycle`, `status`, `cus_name`, `cus_email`, `cus_phone`, DATE_FORMAT(`created_at`,"%m/%d/%Y %h:%i %p") as date FROM `cc_request_bags`');
 		
-	return Datatables::of(collect($request_bags))
+		return Datatables::of(collect($request_bags))
         ->addColumn('actions', function ($request_bagso) {
                 return '<a href="/process-bag/'.$request_bagso->id.'" class="btn btn-xs  btn-warning" data-toggle="tooltip" data-placement="right" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
             })
@@ -125,97 +213,143 @@ class RequestabagController extends Controller
 	public function Payoutamount(Request $request){
 		try{
             DB::beginTransaction();
+			$this->data = array();
+			$get_user_id = DB::table('request_bags')->where('id',$request->type_id)->first();
+			$html = "";
+			if($request->payout_type == "credit"){
+                $is_payout_type = "store_credit";
+                $payout_amount_array = array('user_id'=>$get_user_id->user_id,
+                        'request_id'=>$get_user_id->id,
+                        'type'=>'payout',
+                        'credit'=>$request->payout_amount,
+                        'created_at'=>date('y-m-d H:i:s'),);
+                $credit_array = array('user_id'=>$get_user_id->user_id,
+                        'credit'=>$request->payout_amount,
+                        'request_id'=>$get_user_id->id,
+                        'notes'=>'Store credit',
+                        'created_at'=>date('y-m-d H:i:s'));
+                $credit_log = User::CreditLog($credit_array);
+                $payout_amount_insert = DB::table('request_credits')->insertGetId($payout_amount_array);
+                $userObj = User::where('id', $get_user_id->user_id)->first();
 
-		$this->data = array();
-		$get_user_id = DB::table('request_bags')->where('id',$request->type_id)->first();
-		//echo "<pre>"; print_r($request->all());die;
-		$html = "";
-		if($request->payout_type == "credit"){
-                    $is_payout_type = "store_credit";
-                    $payout_amount_array = array('user_id'=>$get_user_id->user_id,
-                            'request_id'=>$get_user_id->id,
-                            'type'=>'payout',
-                            'credit'=>$request->payout_amount,
-                            'created_at'=>date('y-m-d H:i:s'),);
-                    $credit_array = array('user_id'=>$get_user_id->user_id,
-                            'credit'=>$request->payout_amount,
-                            'request_id'=>$get_user_id->id,
-                            'notes'=>'Store credit',
-                            'created_at'=>date('y-m-d H:i:s'));
-                    $credit_log = User::CreditLog($credit_array);
-                    $payout_amount_insert = DB::table('request_credits')->insertGetId($payout_amount_array);
-                    $userObj = User::where('id', $get_user_id->user_id)->first();
+                $userObj->credits = $userObj->credits+$request->payout_amount;
+                $userObj->save();
+                // send mail
+                $reg_subject        = "Store credit amount";
+                $reg_data           = array('name'=>$get_user_id->cus_name,'amount'=>$request->payout_amount);
+                $template           = 'emails.reqabag_storecredit';
+        		$reg_to             = $get_user_id->cus_email;
+                $mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
+                        // end mail
+                $html = '<p> Payout Amount Credited $ '.$request->payout_amount.' </p>';
+				$this->data['status'] = "Payout Amount Credited.";
 
-                    $userObj->credits = $userObj->credits+$request->payout_amount;
-                    $userObj->save();
-                    //dd(323);
-                            // send mail
-                            $reg_subject        = "Store credit amount";
-                            $reg_data           = array('name'=>$get_user_id->cus_name,'amount'=>$request->payout_amount);
-                            $template           = 'emails.reqabag_storecredit';
-                    		$reg_to             = $get_user_id->cus_email;
-                            $mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
-                            // end mail
-                    $html = '<p> Payout Amount Credited $ '.$request->payout_amount.' </p>';
-					$this->data['status'] = "Payout Amount Credited.";
-                        
-		}else{
-			$is_payout_type = "paypal_payout";
-                        $userObj = User::where('id', $get_user_id->user_id)->first();
-                        if(!empty($userObj->paypal_email)){
-                            $single_payout  = PaypalPayout::SinglePayout($userObj->paypal_email,$request->payout_amount);
-			//echo $single_payout;die;
-			$payout_batch_id = $single_payout->batch_header->payout_batch_id;
-                        $batch_status    = $single_payout->batch_header->batch_status;
-                        $sender_batch_id    = $single_payout->batch_header->sender_batch_header->sender_batch_id;
-                        $log_array = array('type'=>'request_a_bag',
-                                'type_id'=>$get_user_id->id,
-                                'user_id'=>$get_user_id->user_id,
-                                'note'=>'SinglePayout Request a bag',
-                                'payout_batch_id'=>$payout_batch_id,
-                                'batch_status'=>$batch_status,
-                                'sender_batch_id'=>$sender_batch_id,
-                                'created_at'=>date('y-m-d H:i:s'));
-                                $insertin_log    = Site_model::insert_get_id('payout_log',$log_array);
-                                $credit_array = array('user_id'=>$get_user_id->user_id,
-                                'amount'=>$request->payout_amount,
-                                'type_id'=>$get_user_id->id,
-                                'type'=>'requestabag',
-                                'note'=>'Paypal Payout credit',
-                                'status'=>'pending',
-                                'created_at'=>date('y-m-d H:i:s'),);
-                                $payout_amount_insert = DB::table('paypal_payouts')->insertGetId($credit_array);
-                                // send mail
-                                $reg_subject        = "Paypal payout amount";
-                                $reg_data           = array('name'=>$get_user_id->cus_name,'amount'=>$request->payout_amount);
-                                $template           = 'emails.reqabag_paypalpayoutcredit';
-                                $reg_to             = $get_user_id->cus_email;
-                                $mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
-                                // end mail
+				/*Storing Status In Logs Starts Here*/
+				DB::table("reqbag_status_log")->insert([
+					"user_id" => $get_user_id->user_id,
+					"bag_id" => $request->type_id,
+					"process" => "Payout (Store credit)",
+					"status" => 'Payout Amount Credited $ '.$request->payout_amount,
+					"created_at" => Carbon::now()
+				]);
+				/*Storing Status In Logs Ends Here*/    
+			}else{
+				$is_payout_type = "paypal_payout";
+                $userObj = User::where('id', $get_user_id->user_id)->first();
+                //Log::info($userObj->paypal_email);
+                if(!empty($userObj->paypal_email)){
+                    $single_payout  = PaypalPayout::SinglePayout($userObj->paypal_email,$request->payout_amount);
+                    if($single_payout['status'] == 1){
+                		$output = $single_payout['output'];
+						$payout_batch_id = $output->batch_header->payout_batch_id;
+	                    $batch_status    = $output->batch_header->batch_status;
+	                    $sender_batch_id    = $output->batch_header->sender_batch_header->sender_batch_id;
+	                    $log_array = array('type'=>'request_a_bag',
+	                                'type_id'=>$get_user_id->id,
+	                                'user_id'=>$get_user_id->user_id,
+	                                'note'=>'SinglePayout Request a bag',
+	                                'payout_batch_id'=>$payout_batch_id,
+	                                'batch_status'=>$batch_status,
+	                                'sender_batch_id'=>$sender_batch_id,
+	                                'created_at'=>date('y-m-d H:i:s'));
+	                    $insertin_log   = Site_model::insert_get_id('payout_log',$log_array);
+	                    $credit_array = array('user_id'=>$get_user_id->user_id,
+	                                'amount'=>$request->payout_amount,
+	                                'type_id'=>$get_user_id->id,
+	                                'type'=>'requestabag',
+	                                'note'=>'Paypal Payout credit',
+	                                'status'=>'pending',
+	                                'created_at'=>date('y-m-d H:i:s'),);
+	                    $payout_amount_insert = DB::table('paypal_payouts')->insertGetId($credit_array);
+	                    // send mail
+	                    $reg_subject        = "Paypal payout amount";
+	                    $reg_data           = array('name'=>$get_user_id->cus_name,'amount'=>$request->payout_amount);
+	                    $template           = 'emails.reqabag_paypalpayoutcredit';
+	                    $reg_to             = $get_user_id->cus_email;
+	                    $mail_status        = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
+	                    // end mail
 
-                                $html = '<p> Payout Amount Credited $ '.$request->payout_amount.' </p>';
-                                $this->data['status'] = "Payout Amount Credited.";
-                        }else{
-                            return response()->json(['error' => 'please update paypal email in your dashboard.'], 404);
-                        }
-			
-		}
-		$status_update = DB::table('request_bags')->where('id',$request->type_id)->update(['status'=>'paid','is_payout_type'=>$is_payout_type]);
-		//echo "<pre>";print_r($status_update);die;
-
-		//send mail
-        $reg_subject = "REQUEST A BAG Status";
-        $reg_data = array('name'=>$get_user_id->cus_name,'refno'=>$get_user_id->ref_no, 'status'=>'paid');
-        $template_admin = 'emails.reqabag_status_change_admin';
-        $admin_mail_status = $this->sitehelper->sendmail("ndepa@dotcomweavers.com",$reg_subject,$template_admin,$reg_data);
-
-		$this->data['html'] = $html;
-
-		DB::commit();
-		return $this->data;
-
+	                    $html = '<p> Payout Amount Credited $ '.$request->payout_amount.' </p>';
+	                                $this->data['status'] = "Payout Amount Credited.";
+	                    /*Storing Status In Logs Starts Here*/
+						DB::table("reqbag_status_log")->insert([
+							"user_id" => $get_user_id->user_id,
+							"bag_id" => $request->type_id,
+							"process" => "Payout (Paypal)",
+							"status" => 'Payout Amount Credited $ '.$request->payout_amount,
+							"created_at" => Carbon::now()
+						]);
+						/*Storing Status In Logs Ends Here*/
+	                }else{
+	                	$error = $single_payout['output'];
+	                	$err = json_decode($error);
+	                	
+	                	if(isset($err->name)){
+	                		$err_msg = $err->name;
+	                	}else if(isset($err->error_description)){
+	                		$err_msg = $err->error_description;
+	                	}
+	                	
+	                	//$err_msg = $err->name;
+	                	/*Storing Status In Logs Starts Here*/
+						DB::table("reqbag_status_log")->insert([
+							"user_id" => $get_user_id->user_id,
+							"bag_id" => $request->type_id,
+							"process" => "Payout",
+							"status" => $error,
+							"created_at" => Carbon::now()
+						]);
+						DB::commit();
+						/*Storing Status In Logs Ends Here*/
+                		//\Session::flash('error', $error);
+                		return response()->json(['error' => $err_msg],400);
+	                }
+                }else{
+                    return response()->json(['error' => 'please update paypal email in your dashboard.'], 404);
+                }
+			}
+			$status_update = DB::table('request_bags')->where('id',$request->type_id)->update(['status'=>'paid','is_payout_type'=>$is_payout_type]);
+			//send mail
+	        $reg_subject = "REQUEST A BAG Status";
+	        $reg_data = array('name'=>$get_user_id->cus_name,'refno'=>$get_user_id->ref_no, 'status'=>'paid');
+	        $template_admin = 'emails.reqabag_status_change_admin';
+	        $admin_mail_status = $this->sitehelper->sendmail("gbhyri@dotcomweavers.com",$reg_subject,$template_admin,$reg_data);
+			$this->data['html'] = $html;
+			DB::commit();
+			return $this->data;
         }catch(\Exception $e){
+        	print_r($e->getMessage()); exit;
             DB::rollBack();
+            /*Storing Status In Logs Starts Here*/
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => $get_user_id->user_id,
+				"bag_id" => $request->type_id,
+				"process" => "Payout",
+				"status" => $e->getMessage(),
+				"created_at" => Carbon::now()
+			]);
+			DB::commit();
+			/*Storing Status In Logs Ends Here*/
             //$e->getMessage();
             return response()->json(['error' => 'Something went wrong.'], 404);
         }
@@ -224,7 +358,7 @@ class RequestabagController extends Controller
         
     public function Returnamount(Request $request){
         try{
-	       DB::beginTransaction();
+	        DB::beginTransaction();
 			$this->data = array();
 			$get_user_id = DB::table('request_bags')->where('id',$request->type_id)->first();
                         
@@ -233,7 +367,17 @@ class RequestabagController extends Controller
 			$userObj = User::where('id', $get_user_id->user_id)->first();
             
 			if ($userObj->credits == 0) {
-                                return response()->json(['error' => 'No Credit Amount'], 404);
+				/*Storing Status In Logs Starts Here*/
+				DB::table("reqbag_status_log")->insert([
+					"user_id" => $get_user_id->user_id,
+					"bag_id" => $request->type_id,
+					"process" => "Return Items",
+					"status" => json_encode(['error' => 'No Credit Amount.']),
+					"created_at" => Carbon::now()
+				]);
+				DB::commit();	
+				/*Storing Status In Logs Ends Here*/
+                return response()->json(['error' => 'No Credit Amount'], 404);
 			}
 			if ($request->checkbox_value == 0) {
 				if($userObj->credits >= 9.99){
@@ -249,7 +393,17 @@ class RequestabagController extends Controller
 		//dd($sellerAddress);
 		$response=$this->fedex($request->all(),$address[0],$service,$sellerAddress[0]);
 		if($response['result']=="0"){
-                        return response()->json(['error' => $response['msg']], 404);
+			/*Storing Status In Logs Starts Here*/
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => $get_user_id->user_id,
+				"bag_id" => $request->type_id,
+				"process" => "Return Items",
+				"status" => $response['msg'],
+				"created_at" => Carbon::now()
+			]);
+			DB::commit();	
+			/*Storing Status In Logs Ends Here*/
+            return response()->json(['error' => $response['msg']], 404);
 		}
 		$track_id=$response['msg'];
 		$shipping_array_pick = array('request_id'=>$request->type_id,
@@ -263,7 +417,17 @@ class RequestabagController extends Controller
                         $userObj->credits = $userObj->credits-9.99;
                         $userObj->save();
 				}else{
-                                    return response()->json(['error' => 'No Credit Amount.'], 404);
+					/*Storing Status In Logs Starts Here*/
+					DB::table("reqbag_status_log")->insert([
+						"user_id" => $get_user_id->user_id,
+						"bag_id" => $request->type_id,
+						"process" => "Return Items",
+						"status" => json_encode(['error' => 'No Credit Amount.']),
+						"created_at" => Carbon::now()
+					]);
+					DB::commit();	
+					/*Storing Status In Logs Ends Here*/
+                    return response()->json(['error' => 'No Credit Amount.'], 404);
 				}
 			}
 			
@@ -278,6 +442,18 @@ class RequestabagController extends Controller
 			$html = '<p> Return initiated </p>';
 			$this->data['html'] = $html;
 			$this->data['status'] = "Return initiated.";
+
+			/*Storing Status In Logs Starts Here*/
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => $get_user_id->user_id,
+				"bag_id" => $request->type_id,
+				"process" => "Return Items",
+				"status" => $this->data['status'],
+				"created_at" => Carbon::now()
+			]);
+			DB::commit();	
+			/*Storing Status In Logs Ends Here*/
+
 		// send mail
 			$reg_subject        = "Return initiated";
 			$reg_data           = array('name'=>$get_user_id->cus_name);
@@ -295,6 +471,16 @@ class RequestabagController extends Controller
 			return $this->data;
 		}catch(\Exception $e){
             DB::rollBack();
+            /*Storing Status In Logs Starts Here*/
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => $get_user_id->user_id,
+				"bag_id" => $request->type_id,
+				"process" => "Return Items",
+				"status" => $e->getMessage(),
+				"created_at" => Carbon::now()
+			]);
+			DB::commit();	
+			/*Storing Status In Logs Ends Here*/
             //$e->getMessage();
             return response()->json(['error' => $e->getMessage()], 404);
         }
@@ -307,6 +493,15 @@ class RequestabagController extends Controller
 		$get_user_id = DB::table('request_bags')->where('id',$request->type_id)->first();
 		$status_update = DB::table('request_bags')->where('user_id',$get_user_id->user_id)->where('id',$get_user_id->id)->update(['status'=>'closed']);
 		$this->data['status'] = "Request Closed";
+		/*Storing Status In Logs Starts Here*/
+		DB::table("reqbag_status_log")->insert([
+			"user_id" => $get_user_id->user_id,
+			"bag_id" => $request->type_id,
+			"process" => "Close Bag",
+			"status" => $this->data['status'],
+			"created_at" => Carbon::now()
+		]);
+		/*Storing Status In Logs Ends Here*/
 		// send mail
 			$reg_subject        = "Request Closed";
 			$reg_data           = array('name'=>$get_user_id->cus_name,'amount'=>$request->return_amount);
@@ -361,79 +556,480 @@ class RequestabagController extends Controller
       return "success";
 	}
 
-		public function Generatelables(Request $request){
-            try{
-        $islabelGenerated = DB::table('request_shippings')->where('request_id', $request->hidden_id)->first(); if(! $islabelGenerated){
-        		DB::beginTransaction();
-		$req=$request->all();
-		$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
-		$request_bag= Site_model::find_user_and_meta('user_meta',Auth::user()->id);
-		if(isset($request_bag['service'])){ $service=$request_bag['service'];}else{$service="";}
-		if(isset($request_bag['weight'])){ $weight=$request_bag['weight'];}else{$weight="0";}
-     	$this->data = array();
-		$random_drop = str_random(13);
-		$random_pick = str_random(13);
-		$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
+	public function GenerateFedexSmartPostLabels(Request $request){
+		$req = $request->all();
+		$address = Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
+		$request_bag = Site_model::find_user_and_meta('user_meta',Auth::user()->id);
+		// For Fedex
+		if(isset($request_bag['service'])){ 
+			$service = $request_bag['service'];
+		}else{
+			$service = "";
+		}
+		// For Smart Post
+		if(isset($request_bag['weight'])){ 
+			$weight = $request_bag['weight'];
+		}else{
+			$weight = "0";
+		}
+
 		$sellerAddress = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
-		//dd($sellerAddress);
-		$response=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
-		if($response['result']=="0"){
-			 Session::flash('error',$response['msg']);
-                         return Redirect::back();
+
+		if($req['label_type'] == 'fedex'){
+			$response_fedex=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
+			Log::info($response_fedex);
+			$response = $this->labelResponse($response_fedex, 'fedex', $req['request_bag_id']);
+		}else if($req['label_type'] == 'smart_post'){
+			$response_smartpost=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
+			Log::info($response_smartpost);
+			$response = $this->labelResponse($response_smartpost, 'smart_post', $req['request_bag_id']);
 		}
-		$track_id=$response['msg'];
-		$shipping_array_pick = array('request_id'=>$req['hidden_id'],
-			'type'=>'pick',
-			'weight'=>'',
-			'shipping_no'=>$track_id,
-			'created_at'=>date('y-m-d H:i:s'),
-			);
-		$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
-		$response=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
-		$track_id=$response['msg'];
-		if($response['result']=="0"){
-			 Session::flash('error',$response['msg']);
-      		 return Redirect::back();
+		if(empty($response)){
+			Session::flash('success','Label generated successfully');
+		}else{
+			Session::flash('error',$response);
 		}
-		$shipping_array_drop = array('request_id'=>$req['hidden_id'],
-			'type'=>'drop',
-			'weight'=>'',
-			'shipping_no'=>$track_id,
-			'created_at'=>date('y-m-d H:i:s'),
-			);
-		$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
-                
-		$status_update = DB::table('request_bags')->where('id',$request->hidden_id)->update(['status'=>'shipped']);
-                
-                $oRequestBag = DB::table('request_bags')->where('id',$request->hidden_id)->first();
-                
-                //send mail
-                $reg_subject = "REQUEST A BAG Status";
-                $reg_data = array('name'=>$oRequestBag->cus_name,'refno'=>$oRequestBag->ref_no, 'status'=>'shipped');
-                $template = 'emails.reqabag_statusshipped';
-	        	$reg_to = $oRequestBag->cus_email;
-                $mail_status = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
-                $template_admin = 'emails.reqabag_status_change_admin';
-                $admin_mail_status = $this->sitehelper->sendmail("ndepa@dotcomweavers.com",$reg_subject,$template_admin,$reg_data);
-                // end mail
-                
-                DB::commit();
-				Session::flash('success','Label generated successfully');
-                return Redirect::back();
-        	}else{
-        		Session::flash('error','Label already generated.');
-                return Redirect::back();
-        	}   
-            }catch(\Exception $e){
-                DB::rollBack();
-                //dd($e);
-                Session::flash('error',$e->getMessage());
-                return Redirect::back();
-            }
+		return Redirect::back();
+	}
+
+	private function labelResponse($label_response, $label_type, $request_id)
+	{
+		//echo "<pre>"; print_r($label_response);exit;
+		$fedex_error = 0; $smart_post_error = 0; $label_error = '';
+		if($label_type == 'fedex'){
+			if($label_response['result']=="0"){
+				$fedex_error = 1;
+				$label_error = $label_response['msg'];
+			}else{
+				$fedex_track_id=$label_response['msg'];
+				$shipping_array_pick = array('request_id'=>$request_id,
+											'type'=>'pick',
+											'weight'=>'',
+											'shipping_no'=>$fedex_track_id,
+											'created_at'=>date('y-m-d H:i:s'),
+										);
+				$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
+				//DB::table('request_shippings')->insert($shipping_array_pick);
+			}
+		}else if($label_type == 'smart_post'){
+			if($label_response['result']=="0"){
+				$smart_post_error = 1;
+				$label_error = $label_response['msg'];
+			}else{
+				$smart_post_track_id=$label_response['msg'];
+			
+				$shipping_array_drop = array('request_id'=>$request_id,
+											'type'=>'drop',
+											'weight'=>'',
+											'shipping_no'=>$smart_post_track_id,
+											'created_at'=>date('y-m-d H:i:s'),
+										);
+
+				$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
+			}
+		}
+		return $label_error;
+	}
+
+	// public function Generatelables(Request $request){
+	// 	//print_r(Config::get('constants.FedEx_Ship_Url')); exit;
+	// 	//print_r($request->hidden_id); exit;
+	// 	$fedex_error = 0; $smart_post_error = 0;
+ //        try{
+	//         $islabelGenerated = DB::table('request_shippings')->where('request_id', $request->hidden_id)->first(); 
+
+	// 	        if(! $islabelGenerated)
+	// 	        {
+	// 		        DB::beginTransaction();
+	// 				$req = $request->all();
+	// 				$address = Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
+	// 				$request_bag = Site_model::find_user_and_meta('user_meta',Auth::user()->id);
+	// 				if(isset($request_bag['service'])){ 
+	// 					$service = $request_bag['service'];
+	// 				}else{
+	// 					$service = "";
+	// 				}
+	// 				if(isset($request_bag['weight'])){ 
+	// 					$weight = $request_bag['weight'];
+	// 				}else{
+	// 					$weight = "0";
+	// 				}
+	// 		     	$this->data = array();
+	// 				$random_drop = str_random(13);
+	// 				$random_pick = str_random(13);
+	// 				$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
+	// 				$sellerAddress = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
+					
+	// 				/*
+	// 					generating Fedex Label
+	// 				 */
+	// 				try{
+	// 					$response_fedex=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
+	// 					if($response_fedex['result']=="0"){
+	// 						$fedex_error = 1;
+	// 						// Session::flash('error',$response_fedex['msg']);
+	// 			   			//return Redirect::back();
+	// 			   			/*Storing Status In Logs Starts Here*/
+	// 						$user = DB::table("reqbag_status_log")->where("bag_id",$req['hidden_id'])->first();
+	// 						DB::table("reqbag_status_log")->insert([
+	// 							"user_id" => $user->user_id,
+	// 							"bag_id" => $req['hidden_id'],
+	// 							"process" => "Generate Lables:Fedex (pickup)",
+	// 							"status" => $response_fedex['msg'],
+	// 							"created_at" => Carbon::now()
+	// 						]);
+	// 						/*Storing Status In Logs Ends Here*/
+	// 					}else{
+	// 						$fedex_track_id=$response_fedex['msg'];
+	// 						$shipping_array_pick = array('request_id'=>$req['hidden_id'],
+	// 													'type'=>'pick',
+	// 													'weight'=>'',
+	// 													'shipping_no'=>$fedex_track_id,
+	// 													'created_at'=>date('y-m-d H:i:s'),
+	// 												);
+	// 						$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
+
+	// 						/*Storing Status In Logs Starts Here*/
+	// 						$user = DB::table("reqbag_status_log")->where("bag_id",$req['hidden_id'])->first();
+	// 						DB::table("reqbag_status_log")->insert([
+	// 							"user_id" => $user->user_id,
+	// 							"bag_id" => $req['hidden_id'],
+	// 							"process" => "Generate Lables:Fedex (pickup)",
+	// 							"status" => "Label has been generated with tracking #".$fedex_track_id,
+	// 							"created_at" => Carbon::now()
+	// 						]);
+	// 						/*Storing Status In Logs Ends Here*/
+	// 					}
+	// 				}catch(\Exception $e){
+						
+	// 				}
+					
+
+	// 				/*
+	// 					generating Smart post Label
+	// 				*/
+	// 				try{
+	// 					$response_smartpost=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
+	// 					if($response_smartpost['result']=="0"){
+	// 					$smart_post_error = 1;
+	// 						/*Storing Status In Logs Starts Here*/
+	// 						$user = DB::table("reqbag_status_log")->where("bag_id",$req['hidden_id'])->first();
+	// 						DB::table("reqbag_status_log")->insert([
+	// 							"user_id" => $user->user_id,
+	// 							"bag_id" => $req['hidden_id'],
+	// 							"process" => "Generate Lables:Smart Post (drop)",
+	// 							"status" => $response_smartpost['msg'],
+	// 							"created_at" => Carbon::now()
+	// 						]);
+	// 						/*Storing Status In Logs Ends Here*/
+
+	// 						//Session::flash('error',$response_smartpost['msg']);
+	// 			      		//return Redirect::back();
+	// 					}else{
+	// 						$smart_post_track_id=$response_smartpost['msg'];
+						
+	// 						$shipping_array_drop = array('request_id'=>$req['hidden_id'],
+	// 							'type'=>'drop',
+	// 							'weight'=>'',
+	// 							'shipping_no'=>$smart_post_track_id,
+	// 							'created_at'=>date('y-m-d H:i:s'),
+	// 							);
+
+	// 						$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
+	// 						/*Storing Status In Logs Starts Here*/
+	// 						$user = DB::table("reqbag_status_log")->where("bag_id",$req['hidden_id'])->first();
+	// 						DB::table("reqbag_status_log")->insert([
+	// 							"user_id" => $user->user_id,
+	// 							"bag_id" => $req['hidden_id'],
+	// 							"process" => "Generate Lables:Smart Post (drop)",
+	// 							"status" => "Label has been generated with tracking #".$smart_post_track_id,
+	// 							"created_at" => Carbon::now()
+	// 						]);
+	// 						/*Storing Status In Logs Ends Here*/
+	// 					}
+	// 				}catch(\Exception $e){
+	// 					//dd($e);
+	// 				}
+
+	// 				if($response_fedex['result']=="0"){
+	// 					$fedex_error = 1;
+	// 					// Session::flash('error',$response_fedex['msg']);
+	// 		   			//return Redirect::back();
+	// 				}else{
+	// 					$fedex_track_id=$response_fedex['msg'];
+	// 					$shipping_array_pick = array('request_id'=>$req['hidden_id'],
+	// 												'type'=>'pick',
+	// 												'weight'=>'',
+	// 												'shipping_no'=>$fedex_track_id,
+	// 												'created_at'=>date('y-m-d H:i:s'),
+	// 											);
+	// 					$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
+	// 				}
+
+	// 				if($response_smartpost['result']=="0"){
+	// 					$smart_post_error = 1;
+	// 					//Session::flash('error',$response_smartpost['msg']);
+	// 		      		//return Redirect::back();
+	// 				}else{
+	// 					$smart_post_track_id=$response_smartpost['msg'];
+					
+	// 					$shipping_array_drop = array('request_id'=>$req['hidden_id'],
+	// 						'type'=>'drop',
+	// 						'weight'=>'',
+	// 						'shipping_no'=>$smart_post_track_id,
+	// 						'created_at'=>date('y-m-d H:i:s'),
+	// 						);
+
+	// 					$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
+	// 				}
+					
+	// 				$status_update = DB::table('request_bags')->where('id',$request->hidden_id)->update(['status'=>'shipped']);
+		                
+	// 	            $oRequestBag = DB::table('request_bags')->where('id',$request->hidden_id)->first();
+		            
+	// 	            //send mail
+	// 	            $reg_subject = "REQUEST A BAG Status";
+	// 	            $reg_data = array('name'=>$oRequestBag->cus_name,'refno'=>$oRequestBag->ref_no, 'status'=>'shipped');
+	// 	            $template = 'emails.reqabag_statusshipped';
+	// 	        	$reg_to = $oRequestBag->cus_email;
+	// 	            $mail_status = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
+	// 	            $template_admin = 'emails.reqabag_status_change_admin';
+	// 	            $admin_mail_status = $this->sitehelper->sendmail("ndepa@dotcomweavers.com",$reg_subject,$template_admin,$reg_data);
+	// 	            // end mail
+		            
+	// 	            DB::commit();
+
+	// 	            if($fedex_error == 0 && $smart_post_error == 0){
+	// 	            	Session::flash('success','Label generated successfully');	
+	// 	            }else if($fedex_error == 0){
+	// 	            	Session::flash('success','Empty Bag Tracking Number generated successfully.');
+	// 	            }else if($smart_post_error == 0){
+	// 	            	Session::flash('success','Customer Tracking Number generated successfully.');
+	// 	            }else if($fedex_error != 0){
+	// 	            	Session::flash('error',$response_fedex['msg']);
+	// 	            }else if($smart_post_error != 0){
+	// 	            	Session::flash('error',$response_smartpost['msg']);
+	// 	            }
+					
+	// 	            return Redirect::back();
+	// 	    }
+	// 	    else{
+ //    			Session::flash('error','Label already generated.');
+ //            	return Redirect::back();
+ //    		}   
+ //        }catch(\Exception $e){
+ //            DB::rollBack();
+ //            Session::flash('error',$e->getMessage());
+ //            return Redirect::back();
+ //        }
+	// }
+	// 
+	public function Generatelables(Request $request){
+		// print_r(Config::get('constants.FedEx_Ship_Url'));
+		// print_r($request->hidden_id); exit;
+		$fedex_error = 0; $smart_post_error = 0;
+        try{
+	        $islabelGenerated = DB::table('request_shippings')->where('request_id', $request->hidden_id)->first(); 
+
+		        if(! $islabelGenerated)
+		        {
+			        DB::beginTransaction();
+					$req = $request->all();
+					$address = Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
+					$request_bag = Site_model::find_user_and_meta('user_meta',Auth::user()->id);
+					if(isset($request_bag['service'])){ 
+						$service = $request_bag['service'];
+					}else{
+						$service = "";
+					}
+					if(isset($request_bag['weight'])){ 
+						$weight = $request_bag['weight'];
+					}else{
+						$weight = "0";
+					}
+			     	$this->data = array();
+					$random_drop = str_random(13);
+					$random_pick = str_random(13);
+					$address=Site_model::Fetch_data('address_master','*',array('address_id'=>$req['address_id']));
+					$sellerAddress = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
+					Log::info('b4 fedex');
+					
+					/*
+						generating Fedex Label
+					 */
+					try{
+						$response_fedex=$this->fedex($req,$address[0],$service,$sellerAddress[0]);
+						Log::info($response_fedex);
+						if($response_fedex['result']=="0"){
+							$fedex_error = 1;
+							/*Storing Status In Logs Starts Here*/
+	 						$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+	 						DB::table("reqbag_status_log")->insert([
+	 							"user_id" => $user->user_id,
+	 							"bag_id" => $req['hidden_id'],
+	 							"process" => "Generate Lables:Fedex (pickup)",
+	 							"status" => $response_fedex['msg'],
+	 							"created_at" => Carbon::now()
+	 						]);
+	 						DB::commit();
+	 						/*Storing Status In Logs Ends Here*/
+							// Session::flash('error',$response_fedex['msg']);
+				   			//return Redirect::back();
+						}else{
+							$fedex_track_id=$response_fedex['msg'];
+							$shipping_array_pick = array('request_id'=>$req['hidden_id'],
+														'type'=>'pick',
+														'weight'=>'',
+														'shipping_no'=>$fedex_track_id,
+														'created_at'=>date('y-m-d H:i:s'),
+													);
+							$shpippin_pick_insert = DB::table('request_shippings')->insertGetId($shipping_array_pick);
+							/*Storing Status In Logs Starts Here*/
+							$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+							DB::table("reqbag_status_log")->insert([
+								"user_id" => $user->user_id,
+								"bag_id" => $req['hidden_id'],
+								"process" => "Generate Lables:Fedex (pickup)",
+								"status" => "Label has been generated with tracking #".$fedex_track_id,
+								"created_at" => Carbon::now()
+							]);
+							DB::commit();
+	 						/*Storing Status In Logs Ends Here*/
+						}
+					}catch(\Exception $e){
+						$fedex_error = 1;
+						Log::info($e);
+						/*Storing Status In Logs Starts Here*/
+ 						$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+ 						DB::table("reqbag_status_log")->insert([
+ 							"user_id" => $user->user_id,
+ 							"bag_id" => $req['hidden_id'],
+ 							"process" => "Generate Lables:Fedex (pickup)",
+ 							"status" => $e->getMessage(),
+ 							"created_at" => Carbon::now()
+ 						]);
+ 						DB::commit();
+ 						/*Storing Status In Logs Ends Here*/
+						$response_fedex['msg'] = $e->getMessage();
+					}
+					
+					Log::info('b4 smart post');
+					/*
+						generating Smart post Label
+					*/
+					try{
+						$response_smartpost=$this->smartPost($req,$address[0],'SMART_POST',$weight,$sellerAddress[0]);
+						Log::info($response_smartpost);
+						if($response_smartpost['result']=="0"){
+							$smart_post_error = 1;
+							/*Storing Status In Logs Starts Here*/
+							$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+							DB::table("reqbag_status_log")->insert([
+								"user_id" => $user->user_id,
+								"bag_id" => $req['hidden_id'],
+								"process" => "Generate Lables:Smart Post (drop)",
+								"status" => $response_smartpost['msg'],
+								"created_at" => Carbon::now()
+							]);
+							DB::commit();
+	 						/*Storing Status In Logs Ends Here*/
+							//Session::flash('error',$response_smartpost['msg']);
+				      		//return Redirect::back();
+						}else{
+							$smart_post_track_id=$response_smartpost['msg'];
+						
+							$shipping_array_drop = array('request_id'=>$req['hidden_id'],
+								'type'=>'drop',
+								'weight'=>'',
+								'shipping_no'=>$smart_post_track_id,
+								'created_at'=>date('y-m-d H:i:s'),
+								);
+
+							$shpippin_drop_insert = DB::table('request_shippings')->insertGetId($shipping_array_drop);
+							/*Storing Status In Logs Starts Here*/
+							$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+							DB::table("reqbag_status_log")->insert([
+								"user_id" => $user->user_id,
+								"bag_id" => $req['hidden_id'],
+								"process" => "Generate Lables:Smart Post (drop)",
+								"status" => "Label has been generated with tracking #".$smart_post_track_id,
+								"created_at" => Carbon::now()
+							]);
+							DB::commit();
+	 						/*Storing Status In Logs Ends Here*/
+						}
+					}catch(\Exception $e){
+						//dd($e);
+						Log::info($e);
+						$smart_post_error = 1;
+						/*Storing Status In Logs Starts Here*/
+						$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+						DB::table("reqbag_status_log")->insert([
+							"user_id" => $user->user_id,
+							"bag_id" => $req['hidden_id'],
+							"process" => "Generate Lables:Smart Post (drop)",
+							"status" => $e->getMessage(),
+							"created_at" => Carbon::now()
+						]);
+						DB::commit();
+ 						/*Storing Status In Logs Ends Here*/
+						$response_smartpost['msg'] = $e->getMessage();
+					}
+					
+					$status_update = DB::table('request_bags')->where('id',$request->hidden_id)->update(['status'=>'shipped']);
+		                
+		            $oRequestBag = DB::table('request_bags')->where('id',$request->hidden_id)->first();
+		            
+		            //send mail
+		            $reg_subject = "REQUEST A BAG Status";
+		            $reg_data = array('name'=>$oRequestBag->cus_name,'refno'=>$oRequestBag->ref_no, 'status'=>'shipped');
+		            $template = 'emails.reqabag_statusshipped';
+		        	$reg_to = $oRequestBag->cus_email;
+		            $mail_status = $this->sitehelper->sendmail($reg_to,$reg_subject,$template,$reg_data);
+		            $template_admin = 'emails.reqabag_status_change_admin';
+		            $admin_mail_status = $this->sitehelper->sendmail("gbhyri@dotcomweavers.com",$reg_subject,$template_admin,$reg_data);
+		            // end mail
+		            
+		            DB::commit();
+
+		            if($fedex_error == 0 && $smart_post_error == 0){
+		            	Session::flash('success','Label generated successfully');	
+		            }else if($fedex_error == 0){
+		            	Session::flash('success','Empty Bag Tracking Number generated successfully.');
+		            }else if($smart_post_error == 0){
+		            	Session::flash('success','Customer Tracking Number generated successfully.');
+		            }else if($fedex_error != 0){
+		            	Session::flash('error',$response_fedex['msg']);
+		            }else if($smart_post_error != 0){
+		            	Session::flash('error',$response_smartpost['msg']);
+		            }
+					
+		            return Redirect::back();
+		    }
+		    else{
+    			Session::flash('error','Label already generated.');
+            	return Redirect::back();
+    		}   
+        }catch(\Exception $e){
+            DB::rollBack();
+            /*Storing Status In Logs Starts Here*/
+            $req = $request->all();
+			$user = DB::table("request_bags")->where("id",$req['hidden_id'])->first();
+			DB::table("reqbag_status_log")->insert([
+				"user_id" => $user->user_id,
+				"bag_id" => $req['hidden_id'],
+				"process" => "Generate Lables",
+				"status" => $e->getMessage(),
+				"created_at" => Carbon::now()
+			]);
+			DB::commit();
+			/*Storing Status In Logs Ends Here*/
+            Session::flash('error',$e->getMessage());
+            return Redirect::back();
+        }
 	}
 
 	 private function fedex($req,$address,$service,$sellerAddress){
- 
           $userCredential = new ComplexType\WebAuthenticationCredential();
           $userCredential
               ->setKey(Config::get('constants.FedEx_Key'))
@@ -486,8 +1082,8 @@ class RequestabagController extends Controller
               ->setContact($recipientContact);
           $labelSpecification = new ComplexType\LabelSpecification();
           $labelSpecification
-              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_7X4point75))
-              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PDF))
+              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_4X6))
+              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PNG))
               ->setLabelFormatType(new SimpleType\LabelFormatType(SimpleType\LabelFormatType::_COMMON2D));
           $packageLineItem1 = new ComplexType\RequestedPackageLineItem();
           $packageLineItem1
@@ -523,25 +1119,33 @@ class RequestabagController extends Controller
               $packageLineItem1
           ]);
           $requestedShipment->setShippingChargesPayment($shippingChargesPayment);
+         
           $processShipmentRequest = new ComplexType\ProcessShipmentRequest();
           $processShipmentRequest->setWebAuthenticationDetail($webAuthenticationDetail);
           $processShipmentRequest->setClientDetail($clientDetail);
           $processShipmentRequest->setVersion($version);
           $processShipmentRequest->setRequestedShipment($requestedShipment);
+          //dd($processShipmentRequest);
           $shipService = new ShipService\Request();
-          $shipService->getSoapClient()->__setLocation('https://wsbeta.fedex.com:443/web-services/ship');
+          
+          $shipService->getSoapClient()->__setLocation(Config::get('constants.FedEx_Ship_Url'));
+          //$shipService->getSoapClient()->__setLocation('https://ws.fedex.com:443/web-services/ship');
+          //dd($processShipmentRequest);
+          Log::debug((array)$processShipmentRequest);
           $response = $shipService->getProcessShipmentReply($processShipmentRequest);
-          //dd($response);
           if($response->HighestSeverity=="SUCCESS"){
               $track_id=$response->CompletedShipmentDetail->CompletedPackageDetails->TrackingIds->TrackingNumber;
               $amount=$response->CompletedShipmentDetail->ShipmentRating->ShipmentRateDetails->TotalNetChargeWithDutiesAndTaxes->Amount;
-              $fileName = 'fedexlabel/'.$track_id.".pdf";
+              $fileName = 'fedexlabel/'.$track_id.".png";
               $fp = fopen($fileName, 'wb');   
               fwrite($fp, $response->CompletedShipmentDetail->CompletedPackageDetails->Label->Parts->Image);
               $res=array('result'=>'1', 'msg'=> $track_id); 
+              //print_r($res);exit;
               return  $res;
           }else{
+          	//echo "string"; exit;
           	$msg = "";
+          	//dd($response);
           	if(is_array($response->Notifications)){
           		$msg = $response->Notifications[0]->Message;
           	}else{
@@ -552,20 +1156,20 @@ class RequestabagController extends Controller
           }
         
       }
-       private function smartPost($req,$address,$service,$weight,$sellerAddress){
+       	private function smartPost($req,$address,$service,$weight,$sellerAddress){
         
-          $key = Config::get('constants.FedEx_Key');
-            $password = Config::get('constants.FedEx_Password');
+          	$key = Config::get('constants.FedEx_SmartPostKey');
+            $password = Config::get('constants.FedEx_SmartPostPassword');
             $account_number = Config::get('constants.FedEx_SmartPostAccountNumber');
             $meter_number = Config::get('constants.FedEx_SmartPostMeterNumber');
-
+            $hub_id = Config::get('constants.FedEx_SmartPostHubId');
+            $fedex_url = Config::get('constants.FedEx_Ship_Url');
             $xml = '<?xml version="1.0" encoding="UTF-8"?>
             <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v17="http://fedex.com/ws/ship/v17">
 			   <soapenv:Header/>
 			   <soapenv:Body>
 			      <v17:ProcessShipmentRequest>
 			         <v17:WebAuthenticationDetail>
-			           
 			            <v17:UserCredential>
 			               <v17:Key>'.$key.'</v17:Key>
 			               <v17:Password>'.$password.'</v17:Password>
@@ -665,12 +1269,12 @@ class RequestabagController extends Controller
 			            </v17:SpecialServicesRequested>
 			            <v17:SmartPostDetail>
 			               <v17:Indicia>PARCEL_RETURN</v17:Indicia>
-			               <v17:HubId>5531</v17:HubId>
+			               <v17:HubId>'.$hub_id.'</v17:HubId>
 			            </v17:SmartPostDetail>
 			            <v17:LabelSpecification>
 			               <v17:LabelFormatType>COMMON2D</v17:LabelFormatType>
-			               <v17:ImageType>PDF</v17:ImageType>
-			               <v17:LabelStockType>PAPER_8.5X11_TOP_HALF_LABEL</v17:LabelStockType>
+			               <v17:ImageType>PNG</v17:ImageType>
+			               <v17:LabelStockType>PAPER_4X6</v17:LabelStockType>
 			            </v17:LabelSpecification>
 			            <v17:RateRequestTypes>LIST</v17:RateRequestTypes>
 			            <v17:PackageCount>1</v17:PackageCount>
@@ -693,25 +1297,29 @@ class RequestabagController extends Controller
 			      </v17:ProcessShipmentRequest>
 			   </soapenv:Body>
 			</soapenv:Envelope>';
-
+Log::debug($xml);
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://wsbeta.fedex.com:443/web-services');
+            curl_setopt($ch, CURLOPT_URL, $fedex_url);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
             curl_setopt($ch, CURLOPT_VERBOSE, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
+            Log::debug('xml');
+            Log::debug($ch);
             $result_xml = curl_exec($ch);
-
+            Log::debug('response');
+            Log::debug($result_xml);
             // remove colons and dashes to simplify the xml
             $result_xml = str_replace(array(':','-'), '', $result_xml);
-             $response = @simplexml_load_string($result_xml);
-             $result=json_decode(json_encode($response), TRUE);
-             
-             if(!isset($result['SOAPENVBody']['SOAPENVFault'])){
-             $track_id=$result['SOAPENVBody']['ProcessShipmentReply']['CompletedShipmentDetail']['CompletedPackageDetails']['TrackingIds']['TrackingNumber'];
-              $fileName = 'fedexlabel/'.$track_id.".pdf";
+            $response = @simplexml_load_string($result_xml);
+            $result=json_decode(json_encode($response), TRUE);
+             //dd($result);
+            if(!isset($result['SOAPENVBody']['SOAPENVFault'])){
+
+            	$track_id=$result['SOAPENVBody']['ProcessShipmentReply']['CompletedShipmentDetail']['CompletedPackageDetails']['TrackingIds']['TrackingNumber'];
+              $fileName = 'fedexlabel/'.$track_id.".png";
               $fp = fopen($fileName, 'wb');   
                $array_text = array("_");
             $array_replace =  "+";
@@ -726,7 +1334,7 @@ class RequestabagController extends Controller
         
       }
        public function downlaodRequestBagLabels($track_id){
-          $file=public_path("fedexlabel/".$track_id.".pdf");
+          $file=public_path("fedexlabel/".$track_id.".png");
           return Response::download($file);
     }
 

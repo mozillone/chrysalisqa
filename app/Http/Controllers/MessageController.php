@@ -12,7 +12,10 @@ use Redirect;
 use App\Conversations;
 use Session;
 use DB;
+use URL;
 use Meta;
+use App\Helpers\SiteHelper;
+
 class MessageController extends Controller
 {
     protected $auth;
@@ -27,7 +30,7 @@ class MessageController extends Controller
                  return $next($request);
             }
         });
-
+        $this->sitehelper = new SiteHelper();
         Meta::title('Chrysalis');
         Meta::set('robots', 'index,follow');
         
@@ -36,7 +39,7 @@ class MessageController extends Controller
       public function callPartials()
     {
          Talk::setAuthUserId(Auth::user()->id);
-
+//echo "string"; exit;
         View::composer('partials.peoplelist', function($view) {
             $threads = Talk::threads();
 
@@ -45,8 +48,7 @@ class MessageController extends Controller
     }
 
     public function chatHistory($id)
-    {   
-        
+    {  
         $this->callPartials();
         $conversations = Talk::getConversationsById($id);
         $user = '';
@@ -60,9 +62,16 @@ class MessageController extends Controller
         $get_con = DB::table('conversations')
             ->leftjoin('url_rewrites','url_rewrites.url_offset','=','conversations.costume_id')
             ->leftjoin('costume_image','costume_image.costume_id','=','conversations.costume_id')
+            ->select('conversations.type','conversations.type_id','conversations.subject', 'costume_image.image', 'url_rewrites.url_key', 'conversations.user_one', 'conversations.user_two', 'conversations.costume_id')
             ->where('conversations.id',$id)->first();
-        $make_seen = DB::table('messages')->where('conversation_id',$id)->update(['is_seen'=>'1']);
-        return view('messages.message', compact('messages', 'user','get_con'));
+        if($get_con->user_two == Auth::user()->id || $get_con->user_one == Auth::user()->id){
+            $make_seen = DB::table('messages')->where([['conversation_id',$id],["user_id","<>",Auth::user()->id]])->update(['is_seen'=>'1']);
+        }
+        $msgs_inbox = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        $msgs_sent = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        $conversations = DB::table("conversations")->where("user_one",Auth::user()->id)->orWhere("user_two",Auth::user()->id)->count();
+
+        return view('messages.message', compact('messages', 'user','get_con'))->with('msg_count',$conversations)->with('msgs_inbox',$msgs_inbox)->with('msgs_sent',$msgs_sent);
     }
 
     public function ajaxSendMessage(Request $request)
@@ -89,19 +98,19 @@ class MessageController extends Controller
     public function sendMessageByUserId($receiverId, $message)
     {
          //echo "<pre>";print_r($message);die;
+        $comments = $message['message-data'];
         $conversationId = $message['_id'];
-        $message = $message['message-data'];
+        $user_message = $message['message-data'];
         $message = array(
-            'message' => $message,
+            'message' => $user_message,
             'conversation_id' => $conversationId,
             'user_id' => Auth::user()->id,
             'user_name' => Auth::user()->display_name,
             'is_seen' => 0,
             'created_at'=>date('y-m-d H:i:s'),
         );
-
         $message = DB::table('messages')->insertGetId($message);
-         $get_details =  DB::table('messages')->where('id',$message)->first();  
+        $get_details =  DB::table('messages')->where('id',$message)->first();  
 
         return $get_details;
     }
@@ -140,13 +149,14 @@ class MessageController extends Controller
             $messages = $conversations->messages;
         }*/
         $this->data = array();
-        $this->data['conversations_sent'] = DB::Select('SELECT usr.first_name,usr.last_name,cnvs.id,cnvs.created_at,cnvs.subject,cnvs.type_id,cnvs.costume_id,cnvs.type,msg.is_seen,msg.user_id,msg.conversation_id,costume_image.image,costume_url.url_key,(SELECT cm1.message FROM cc_messages as cm1  WHERE cnvs.id = cm1.conversation_id ORDER BY created_at DESC LIMIT 1) as message FROM `cc_conversations` as cnvs LEFT JOIN cc_messages as msg on msg.conversation_id=cnvs.id LEFT JOIN cc_costume_image as costume_image on costume_image.costume_id=cnvs.costume_id LEFT JOIN cc_url_rewrites as costume_url on costume_url.url_offset=cnvs.costume_id LEFT JOIN cc_users as usr on usr.id=cnvs.user_one where cnvs.user_one='.Auth::user()->id.' group by cnvs.id');
-        $this->data['conversations_inbox'] = DB::Select('SELECT usr.first_name,usr.last_name,cnvs.id,cnvs.created_at,cnvs.subject,cnvs.type_id,cnvs.costume_id,cnvs.type,msg.is_seen,msg.user_id,msg.conversation_id,costume_image.image,costume_url.url_key,(SELECT cm1.message FROM cc_messages as cm1  WHERE cnvs.id = cm1.conversation_id ORDER BY created_at DESC LIMIT 1) as message FROM `cc_conversations` as cnvs LEFT JOIN cc_messages as msg on msg.conversation_id=cnvs.id LEFT JOIN cc_costume_image as costume_image on costume_image.costume_id=cnvs.costume_id LEFT JOIN cc_url_rewrites as costume_url on costume_url.url_offset=cnvs.costume_id LEFT JOIN cc_users as usr on usr.id=cnvs.user_one where cnvs.user_two='.Auth::user()->id.' group by cnvs.id');
-        $msgs_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.' OR cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        $this->data['conversations_sent'] = DB::Select('SELECT usr.display_name,usr.user_img,usr.first_name,usr.last_name,cnvs.id,cnvs.created_at,cnvs.subject,cnvs.type_id,cnvs.costume_id,cnvs.type,msg.is_seen,msg.user_id,msg.conversation_id,costume_image.image,costume_url.url_key,(SELECT cm1.message FROM cc_messages as cm1  WHERE cnvs.id = cm1.conversation_id ORDER BY created_at DESC LIMIT 1) as message FROM `cc_conversations` as cnvs LEFT JOIN cc_messages as msg on msg.conversation_id=cnvs.id LEFT JOIN cc_costume_image as costume_image on costume_image.costume_id=cnvs.costume_id LEFT JOIN cc_url_rewrites as costume_url on costume_url.url_offset=cnvs.costume_id LEFT JOIN cc_users as usr on usr.id=cnvs.user_one where cnvs.user_one='.Auth::user()->id.' group by cnvs.id order by cnvs.id desc');
+        //dd($this->data['conversations_sent']);
+        $this->data['conversations_inbox'] = DB::Select('SELECT usr.display_name,usr.user_img,usr.first_name,usr.last_name,cnvs.id,cnvs.created_at,cnvs.subject,cnvs.type_id,cnvs.costume_id,cnvs.type,msg.is_seen,msg.user_id,msg.conversation_id,costume_image.image,costume_url.url_key,(SELECT cm1.message FROM cc_messages as cm1  WHERE cnvs.id = cm1.conversation_id ORDER BY created_at DESC LIMIT 1) as message FROM `cc_conversations` as cnvs LEFT JOIN cc_messages as msg on msg.conversation_id=cnvs.id LEFT JOIN cc_costume_image as costume_image on costume_image.costume_id=cnvs.costume_id LEFT JOIN cc_url_rewrites as costume_url on costume_url.url_offset=cnvs.costume_id LEFT JOIN cc_users as usr on usr.id=cnvs.user_one where cnvs.user_two='.Auth::user()->id.' group by cnvs.id order by cnvs.id desc');
         $msgs_inbox = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
         $msgs_sent = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        $conversations = DB::table("conversations")->where("user_one",Auth::user()->id)->orWhere("user_two",Auth::user()->id)->count();
        // echo "<pre>";print_r($this->data);die;
-        //echo "<pre>";print_r($this->data['conversations_sent']);die;
+        //echo "<pre>";print_r($this->data['conversations_inbox']);die;
         /*$this->data['conversations_inbox'] = DB::table('conversations')
         ->where('conversations.user_two' ,$id)
         ->leftJoin('messages','conversations.id','messages.conversation_id')
@@ -155,7 +165,13 @@ class MessageController extends Controller
         ->limit(1)
         ->get();*/
      //   dd($msgs_count);
-        return view('messages.conversations')->with($this->data)->with('msgs_count',$msgs_count)->with('msgs_inbox',$msgs_inbox)->with('msgs_sent',$msgs_sent);
+        $route = \Request::path();
+        if($route == "conversations"){
+            return view('messages.inbox')->with($this->data)->with('msgs_count',$conversations)->with('msgs_inbox',$msgs_inbox)->with('msgs_sent',$msgs_sent);
+        }
+        else if($route == "sendbox"){
+            return view('messages.send')->with($this->data)->with('msgs_count',$conversations)->with('msgs_inbox',$msgs_inbox)->with('msgs_sent',$msgs_sent);
+        }
     }
 
     public function converstationsDelete(Request $request){

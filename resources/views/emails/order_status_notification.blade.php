@@ -20,7 +20,11 @@
 						<h1 style="color:#333;font-size:16px;font-weight:bold;line-height:24px">Hi {{$order['basic'][0]->buyer_name}},<br />
 						</h1>
 
-						<div> Your order #{{$order['basic'][0]->order_id}} status({{$order['basic'][0]->status}}) changed to {{$order['status']}}</div>
+						<div>
+							Your order #{{$order['basic'][0]->order_id}} status({{$order['basic'][0]->status}}) changed to {{$order['status']}}
+							<p>Comment: {{ $order['comment'] }}</p>
+
+						</div>
 						</td>
 					</tr>
 				</tbody>

@@ -143,8 +143,9 @@ var table = '';
            "type": "GET",
          },
       "searching": false,
-      "pageLength": 50,
+      "pageLength": 15,
       "bLengthChange": false,
+      "order": [ 2, 'DESC'],
 
       "columns": [
          
@@ -178,8 +179,9 @@ var table = '';
              "data": {jobcode:jobcode,jobtitle:jobtitle,fromdate:fromdate,todate:todate,status:status}
            },
         "searching": false,
-        "pageLength": 50,
+        "pageLength": 15,
         "bLengthChange": false,
+        "order": [ 2, 'DESC'],
         "columns": [
           { data: 'code', name: 'code' },
           { data: 'title', name: 'title' },
@@ -199,7 +201,7 @@ var table = '';
             dataType: 'json',
             success: function(response) {
                 if(response){
-                    table.ajax.reload();
+                    table.ajax.reload(null,false);
                     console.log( table.row( this ).data().status );
                     $('.box-body').before('<div class="callout callout-success">Status is Updated.</div>');
                     setTimeout(function() {

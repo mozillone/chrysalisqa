@@ -17,7 +17,7 @@
 	</div>
 </section>    
 <link rel="stylesheet" href="{{ asset('/vendors/sweetalert/dist/sweetalert.css')}}">
-<section class="content ">
+<section class="content my_dashboad_div">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -129,6 +129,68 @@
 								
 							</div>
 						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+							<h2>BILLING ADDRESS</h2></div>
+							<div class="panel-body billing_addres_1">
+								<?php if(isset($default_billing_address) && !empty($default_billing_address) &&  count($default_billing_address)>0){
+									$billing_address = $default_billing_address; 
+									
+									//echo "<pre>";print_r($billing_address);die;
+								?>
+								@foreach ($billing_address as $b_address)
+								<p class="bill_adrs">
+									
+									<span> <strong>{{$b_address->fname}} {{$b_address->lname}}</strong><br>
+										@if(!empty($b_address->address1)){{$b_address->address1}}<br>@endif
+										{{$b_address->address2}}<br>
+										{{$b_address->city}}, @foreach($states as $st) @if($st->name==$b_address->state ){{$st->abbrev}} @endif @endforeach {{$b_address->zip_code}}
+									</span>
+								</p> 
+								<p class="bill_adrs_dlte">
+									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_billing({{$b_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address({{$b_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+								</p>
+								@endforeach
+								<?php }else{
+									$billing_address = "<p>Billing address is not added yet.</p>";
+									echo $billing_address;
+								} ?>
+								<div class="form-group add_new_btn">
+									<a type="submit" id="billing_popup_add" class="btn btn-default">Add New</a>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+							<h2>SHIPPING ADDRESS</h2></div>
+							<div class="panel-body billing_addres_1">
+								<?php if(isset($default_shipping_address) && !empty($default_shipping_address) && count($default_shipping_address)>0  ){
+									$shipping_address = $default_shipping_address; 
+									
+									//echo "<pre>";print_r($states);die;
+								?>
+								@foreach ($shipping_address as $index=>$s_address)
+								<p class="bill_adrs">
+									
+									<span> <strong>{{$s_address->fname}} {{$s_address->lname}}</strong><br>
+										@if(!empty($s_address->address1)){{$s_address->address1}}<br>@endif
+										{{$s_address->address2}}<br>
+										{{$s_address->city}}, @foreach($states as $st) @if($st->name==$s_address->state ){{$st->abbrev}} @endif @endforeach
+									{{$s_address->zip_code}}</span>
+								</p> 
+								<p class="bill_adrs_dlte">
+									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_shipping({{$s_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address({{$s_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+								</p>
+								@endforeach
+								<?php }else{
+									$shipping_address = "<p>Shipping address is not added yet.</p>";
+									echo $shipping_address;
+								} ?>
+								<div class="form-group add_new_btn">
+									<a type="submit" class="btn btn-default" id="shipping_popup_add">Add New</a>
+								</div>
+							</div>
+						</div>
 						<div class="panel panel-default shipping_block">
 							<div class="panel-heading">
 							<h2>SHIPPING SETTINGS</h2></div>
@@ -142,8 +204,13 @@
 										
 										<div class="checkbox">
 										<label class="shiping_checkbox"><input type="checkbox" <?php if (Auth::user()->is_free == 1) { ?> checked="checked" <?php } ?> name="free_shipping" id="free_shipping">I want to Offer Free Shipping</label></div>
-										<label>Please enter your PayPal email address to receive payouts.</label>
-										<input type="text" class="form-control"  name="paypal_email" value="{{Auth::user()->paypal_email}}" id="paypal_email" placeholder="Paypal email">
+										 Paypal Account <span class="pay_pal_desc">(Do you intend to receive payouts?)</span>
+										<!-- <label>Please enter your PayPal email address to receive payouts.</label> -->
+										<div class="input-group paypal_field">
+											<span class="input-group-addon" id="basic-addon1"><img src="{{URL::asset('assets/frontend/img/paypal.png')}}"></span>
+											<input type="text" class="form-control"  name="paypal_email" value="{{Auth::user()->paypal_email}}" id="paypal_email" placeholder="Paypal email">
+										</div>
+										
 										<div class="form-group ">
 										</div>
 										<div class="form-group update_btn">
@@ -154,38 +221,6 @@
 								
 							</div>
 						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h2>WHERE WILL YOU BE SHIPPING YOUR COSTUMES FROM?</h2>
-							</div>
-							
-							
-							<div class="panel-body billing_addres_1">
-								@if(count($seller_address))
-								<p class="bill_adrs">
-									
-									<span> <strong>{{$seller_address[0]->fname}} {{$seller_address[0]->lname}}</strong><br>
-										{{$seller_address[0]->address1}}@if(!empty($seller_address[0]->address1))<br>@endif{{$seller_address[0]->address2}}<br>
-										{{$seller_address[0]->city}}, {{$seller_address[0]->state}}
-									{{$seller_address[0]->zip_code}}</span>
-								</p>
-								<p class="bill_adrs_dlte">
-									<span><a href="javascript::void(0);" class="edit_selling_addr"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript::void(0);" onclick="delete_seller_address({{$seller_address[0]->address_id}})" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
-								</p>
-								@else
-								<p class="bill_adrs"><span>No Shipping from location found</span></p>
-								@endif 
-								
-								@if(!count($seller_address))
-								<div class="form-group add_new_btn">
-									<a type="submit" href="javascript::void(0);" class="btn btn-default selling_popup_add">Add New</a>
-								</div>
-								@endif
-								
-								
-							</div>
-						</div>
-						
 						
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -278,66 +313,36 @@
 								</form>
 							</div>
 						</div>
+						
 						<div class="panel panel-default">
 							<div class="panel-heading">
-							<h2>BILLING ADDRESS</h2></div>
-							<div class="panel-body billing_addres_1">
-								<?php if(isset($default_billing_address) && !empty($default_billing_address) &&  count($default_billing_address)>0){
-									$billing_address = $default_billing_address; 
-									
-									//echo "<pre>";print_r($billing_address);die;
-								?>
-								@foreach ($billing_address as $b_address)
-								<p class="bill_adrs">
-									
-									<span> <strong>{{$b_address->fname}} {{$b_address->lname}}</strong><br>
-										@if(!empty($b_address->address1)){{$b_address->address1}}<br>@endif
-										{{$b_address->address2}}<br>
-										{{$b_address->city}}, @foreach($states as $st) @if($st->name==$b_address->state ){{$st->abbrev}} @endif @endforeach {{$b_address->zip_code}}
-									</span>
-								</p> 
-								<p class="bill_adrs_dlte">
-									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_billing({{$b_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address({{$b_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
-								</p>
-								@endforeach
-								<?php }else{
-									$billing_address = "<p>Billing address is not added yet.</p>";
-									echo $billing_address;
-								} ?>
-								<div class="form-group add_new_btn">
-									<a type="submit" id="billing_popup_add" class="btn btn-default">Add New</a>
-								</div>
+								<h2>SHIP FROM ADDRESS</h2>
 							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-							<h2>SHIPPING ADDRESS</h2></div>
+							
+							
 							<div class="panel-body billing_addres_1">
-								<?php if(isset($default_shipping_address) && !empty($default_shipping_address) && count($default_shipping_address)>0  ){
-									$shipping_address = $default_shipping_address; 
-									
-									//echo "<pre>";print_r($states);die;
-								?>
-								@foreach ($shipping_address as $index=>$s_address)
+								@if(count($seller_address))
 								<p class="bill_adrs">
 									
-									<span> <strong>{{$s_address->fname}} {{$s_address->lname}}</strong><br>
-										@if(!empty($s_address->address1)){{$s_address->address1}}<br>@endif
-										{{$s_address->address2}}<br>
-										{{$s_address->city}}, @foreach($states as $st) @if($st->name==$s_address->state ){{$st->abbrev}} @endif @endforeach
-									{{$s_address->zip_code}}</span>
-								</p> 
-								<p class="bill_adrs_dlte">
-									<span><a href="javascript:void(0);" data-toggle="tooltip" title="Edit" onclick="edit_shipping({{$s_address->address_id}})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript:void(0);" data-toggle="tooltip" title="Delete" onclick="delete_address({{$s_address->address_id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+									<span> <strong>{{$seller_address[0]->fname}} {{$seller_address[0]->lname}}</strong><br>
+										{{$seller_address[0]->address1}}@if(!empty($seller_address[0]->address1))<br>@endif{{$seller_address[0]->address2}}<br>
+										{{$seller_address[0]->city}}, {{$seller_address[0]->state}}
+									{{$seller_address[0]->zip_code}}</span>
 								</p>
-								@endforeach
-								<?php }else{
-									$shipping_address = "<p>Shipping address is not added yet.</p>";
-									echo $shipping_address;
-								} ?>
+								<p class="bill_adrs_dlte">
+									<span><a href="javascript::void(0);" class="edit_selling_addr"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span> <span><a href="javascript::void(0);" onclick="delete_seller_address({{$seller_address[0]->address_id}})" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></span>
+								</p>
+								@else
+								<p class="bill_adrs"><span>No Shipping from location found</span></p>
+								@endif 
+								
+								@if(!count($seller_address))
 								<div class="form-group add_new_btn">
-									<a type="submit" class="btn btn-default" id="shipping_popup_add">Add New</a>
+									<a type="submit" href="javascript::void(0);" class="btn btn-default selling_popup_add">Add New</a>
 								</div>
+								@endif
+								
+								
 							</div>
 						</div>
 						
@@ -366,7 +371,7 @@
 								</tbody> 
 							</table>
 						</div>
-						<div class="rencemt_order_table">
+						<div class="rencemt_order_table table-responsive">
 							<div>
 								<h2>RECENT ORDERS <span class="pull-right"><a href="/my/orders">View All</a></span></h2>
 								
@@ -381,7 +386,9 @@
 										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{helper::DateFormat($orders->date)}}</a></td> 
 										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{$orders->order_id}}</a></td> 
 										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>"><?php if(strlen($orders->seller_name) < 25) {echo ucfirst($orders->seller_name);} else { echo substr(ucfirst($orders->seller_name), 0,25)."..."; } ?></a></td> 
-										<td><a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{ucfirst($orders->status)}}</a></td> 
+										<td>
+											<a href="{{URL::to('order/')}}<?php echo '/'.$orders->order_id; ?>">{{ucfirst($orders->status)}}</a>
+										</td> 
 									</tr>
 									@endforeach
 									@else
@@ -391,7 +398,7 @@
 								</tbody> 
 							</table>
 						</div>
-						<div class="rencemt_order_table">
+						<div class="rencemt_order_table table-responsive" >
 							<div>
 								<h2>COSTUMES SOLD <span class="pull-right"><a href="/my/costumes-slod">View All</a></span></</h2>
 							</div>
@@ -400,11 +407,21 @@
 								<tbody>
 									@if(count($costumes_sold)) 
 									@foreach ($costumes_sold as $sold_costumes)
-									<tr> 
+									<tr @if($sold_costumes->status == 'Shipping') class="print_bg" @endif> 
 										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{helper::DateFormat($sold_costumes->date)}}</a></td> 
 										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{$sold_costumes->order_id}} </a> </td> 
 										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>"><?php if(strlen($sold_costumes->buyer_name) < 25) {echo ucfirst($sold_costumes->buyer_name);} else { echo substr(ucfirst($sold_costumes->buyer_name), 0,25)."..."; } ?></a></td> 
-										<td><a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{ucfirst($sold_costumes->status)}}</a></td> 
+										<td>
+											@if($sold_costumes->status == 'Shipping')
+												@if($sold_costumes->order_cnt == 1)
+													<a href="/sold/order/track-info/download/{{$sold_costumes->label}}/{{$sold_costumes->carrier_type}}">Print Label</a>
+												@else
+													<a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>#ordersShipping">Print Label</a>
+												@endif
+											@else
+												<a href="{{URL::to('sold/order/')}}<?php echo '/'.$sold_costumes->order_id; ?>">{{ucfirst($sold_costumes->status)}}</a>
+											@endif
+										</td> 
 									</tr>
 									@endforeach 
 									@else
@@ -899,236 +916,229 @@
 				// When the user selects an address from the dropdown, populate the address
 				// fields in the form.
 				autocomplete.addListener('place_changed', fillInAddress);
+		}
+			
+		function fillInAddress() {
+			// Get the place details from the autocomplete object.
+			var place = autocomplete.getPlace();
+			
+			for (var component in componentForm) {
+				console.log(document.getElementById(component).value);
+				document.getElementById(component).value = '';
+				document.getElementById(component).disabled = false;
 			}
 			
-			function fillInAddress() {
-				// Get the place details from the autocomplete object.
-				var place = autocomplete.getPlace();
-				
-				for (var component in componentForm) {
-					console.log(document.getElementById(component).value);
-					document.getElementById(component).value = '';
-					document.getElementById(component).disabled = false;
-				}
-				
-				// Get each component of the address from the place details
-				// and fill the corresponding field on the form.
-				for (var i = 0; i < place.address_components.length; i++) {
-					var addressType = place.address_components[i].types[0];
-					if (componentForm[addressType]) {
-						var val = place.address_components[i][componentForm[addressType]];
-						if(addressType=="route"){
-							$('#route').val($('#street_number').val()+" "+val);
-						}
-						else if(addressType=="administrative_area_level_1"){
-							$("#administrative_area_level_1").val(val);
-							}else{
-							document.getElementById(addressType).value = val;
-						}
+			// Get each component of the address from the place details
+			// and fill the corresponding field on the form.
+			for (var i = 0; i < place.address_components.length; i++) {
+				var addressType = place.address_components[i].types[0];
+				if (componentForm[addressType]) {
+					var val = place.address_components[i][componentForm[addressType]];
+					if(addressType=="route"){
+						$('#route').val($('#street_number').val()+" "+val);
+					}
+					else if(addressType=="administrative_area_level_1"){
+						$("#administrative_area_level_1").val(val);
+						}else{
+						document.getElementById(addressType).value = val;
 					}
 				}
 			}
+		}
 			
 			// Bias the autocomplete object to the user's geographical location,
 			// as supplied by the browser's 'navigator.geolocation' object.
-			function geolocate() {
-				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(function(position) {
-						var geolocation = {
-							lat: position.coords.latitude,
-							lng: position.coords.longitude
-						};
-						var circle = new google.maps.Circle({
-							center: geolocation,
-							radius: position.coords.accuracy
-						});
-						autocomplete.setBounds(circle.getBounds());
+		function geolocate() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var geolocation = {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					};
+					var circle = new google.maps.Circle({
+						center: geolocation,
+						radius: position.coords.accuracy
 					});
-				}
+					autocomplete.setBounds(circle.getBounds());
+				});
 			}
-		</script>
+		}
+	</script>
 		
-		<script type="text/javascript">
+	<script type="text/javascript">
+			
+		var shipping_address=$("#seller_address").validate({ignore: ":hidden" });
 			
 			
-			var shipping_address=$("#seller_address").validate({ignore: ":hidden" });
+		//$("#street_number").rules("add", {required:true,maxlength: 100});
+		$("#route").rules("add", {required:true,maxlength: 100});
+		$("#locality").rules("add", {required:true});
+		$("#postal_code").rules("add", {required:true,number:true});
+		$("#administrative_area_level_1").rules("add", {required:true,maxlength:100});
 			
+		function delete_seller_address($id){
+			var id=$id;
 			
-			//$("#street_number").rules("add", {required:true,maxlength: 100});
-			$("#route").rules("add", {required:true,maxlength: 100});
-			$("#locality").rules("add", {required:true});
-			$("#postal_code").rules("add", {required:true,number:true});
-			$("#administrative_area_level_1").rules("add", {required:true,maxlength:100});
+			swal({
+				title: "Are you sure want to delete this Address?",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55 ",
+				confirmButtonText: "Yes, delete",
+				closeOnConfirm: false,
+				closeOnCancel: true
+			},
 			
-			function delete_seller_address($id){
-				var id=$id;
+			function(){
+				url = "{{URL::to('/deleteSellerAddress/')}}"+"/"+id;
+				window.location = url;
 				
-				swal({
-					title: "Are you sure want to delete this Address?",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55 ",
-					confirmButtonText: "Yes, delete",
-					closeOnConfirm: false,
-					closeOnCancel: true
-				},
-				
-				function(){
-					url = "{{URL::to('/deleteSellerAddress/')}}"+"/"+id;
-					window.location = url;
-					
-				});
+			});
+		}
+			
+		$(document).on('change','#shipping_country,#billing_country',function(){
+			if($(this).val()!="United States"){
+				$('.state_dropdown').addClass('hide');
+				$('.normal-states').removeClass('hide');
+				}else{
+				$('.state_dropdown').removeClass('hide');
+				$('.normal-states').addClass('hide');
 			}
-			
-			$(document).on('change','#shipping_country,#billing_country',function(){
-				if($(this).val()!="United States"){
-					$('.state_dropdown').addClass('hide');
-					$('.normal-states').removeClass('hide');
-					}else{
-					$('.state_dropdown').removeClass('hide');
-					$('.normal-states').addClass('hide');
+		});
+		
+		function  edit_shipping(id){
+			$.ajax({
+				type: 'GET',
+				url: '/getAddressInfo/'+id,
+				success: function(response){
+					$('#shipping_address_id').val(response[0].address_id);
+					$("#shipping_address_1_edit").val(response[0].address1);
+					$("#shipping_address_2_edit").val(response[0].address2);
+					$("#shipping_firstname_edit").val(response[0].fname);
+					$("#shipping_lastname_edit").val(response[0].lname);
+					$("#shipping_city_edit").val(response[0].city);
+					$("#shipping_postcode_edit").val(response[0].zip_code);
+					$("#shipping_state_dropdown_edit").val(response[0].state);
+					$("#shipping_state_hidden_edit").val(response[0].state);
+					
 				}
-			});
-			function  edit_shipping(id){
-				$.ajax({
-					type: 'GET',
-					url: '/getAddressInfo/'+id,
-					success: function(response){
-						$('#shipping_address_id').val(response[0].address_id);
-						$("#shipping_address_1_edit").val(response[0].address1);
-						$("#shipping_address_2_edit").val(response[0].address2);
-						$("#shipping_firstname_edit").val(response[0].fname);
-						$("#shipping_lastname_edit").val(response[0].lname);
-						$("#shipping_city_edit").val(response[0].city);
-						$("#shipping_postcode_edit").val(response[0].zip_code);
-						$("#shipping_state_dropdown_edit").val(response[0].state);
-						$("#shipping_state_hidden_edit").val(response[0].state);
-						
-					}
-				});	
-				$("#shipping_popup_edit").modal("show");
-			}
-			function  edit_billing(id){
-				$.ajax({
-					type: 'GET',
-					url: '/getAddressInfo/'+id,
-					success: function(response){
-						$('#billing_address_id').val(response[0].address_id);
-						$("#billing_address_1_edit").val(response[0].address1);
-						$("#billing_address_2_edit").val(response[0].address2);
-						$("#billing_firstname_edit").val(response[0].fname);
-						$("#billing_lastname_edit").val(response[0].lname);
-						$("#billing_city_edit").val(response[0].city);
-						$("#billing_postcode_edit").val(response[0].zip_code);
-						$("#billing_state_dropdown_edit").val(response[0].state);
-						$("#billing_state_hidden_edit").val(response[0].state);
-						
-					}
-				});	
-				$("#billing_popup_edit").modal("show");
-			}
-			
-			function delete_address($id){
-				var id=$id;
-				
-				swal({
-					title: "Are you sure want to delete this Address?",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55 ",
-					confirmButtonText: "Yes, delete",
-					closeOnConfirm: false,
-					closeOnCancel: true
-				},
-				
-				function(){
-					url = "{{URL::to('/deleteaddress/')}}"+"/"+id;
-					window.location = url;
+			});	
+			$("#shipping_popup_edit").modal("show");
+		}
+		
+		function  edit_billing(id){
+			$.ajax({
+				type: 'GET',
+				url: '/getAddressInfo/'+id,
+				success: function(response){
+					$('#billing_address_id').val(response[0].address_id);
+					$("#billing_address_1_edit").val(response[0].address1);
+					$("#billing_address_2_edit").val(response[0].address2);
+					$("#billing_firstname_edit").val(response[0].fname);
+					$("#billing_lastname_edit").val(response[0].lname);
+					$("#billing_city_edit").val(response[0].city);
+					$("#billing_postcode_edit").val(response[0].zip_code);
+					$("#billing_state_dropdown_edit").val(response[0].state);
+					$("#billing_state_hidden_edit").val(response[0].state);
 					
-				});
-			}
+				}
+			});	
+			$("#billing_popup_edit").modal("show");
+		}
 			
-			function deleteccard($id){
-				var id=$id;
-				
-				swal({
-					title: "Are you sure want to delete this Card?",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55 ",
-					confirmButtonText: "Yes, delete",
-					closeOnConfirm: false,
-					closeOnCancel: true
-				},
-				
-				function(){
-					url = "{{URL::to('/deleteccard/')}}"+"/"+id;
-					window.location = url;
-					
-				});
-			}
-			$(document).ready(function(){
-				$('[data-toggle="tooltip"]').tooltip(); 
-				
-				$('#shipping_popup_add').click(function(){
-					$('#shipping_popup').css('display','block');
-					$('#shipping_popup').addClass('in');
-					$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
-				});
-				$('#billing_popup_add').click(function(){
-					$('#billing_popup').css('display','block');
-					$('#billing_popup').addClass('in');
-					$('#billing_popup_add').append('<div class="modal-backdrop fade in"></div>');
-				});
-				$('#shipping_close,#shi_close,#billing_close,#bil_close').click(function(){
-					$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').css('display','none');
-					$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').removeClass('in');
-					$('.modal-backdrop').remove();
-				});
-				var cc_details=$("#cc_dashboard_form").validate();
-				$("#cardholder_name").rules("add", {required:true,maxlength: 50});
-				$("#exp_month").rules("add", {required:true});
-				$("#exp_year").rules("add", {required:true});
-				$("#cc_number").rules("add", {required:true,cc_chk:true});
-				$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
+		function delete_address($id){
+			var id=$id;
+			
+			swal({
+				title: "Are you sure want to delete this Address?",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55 ",
+				confirmButtonText: "Yes, delete",
+				closeOnConfirm: false,
+				closeOnCancel: true
+			},
+			
+			function(){
+				url = "{{URL::to('/deleteaddress/')}}"+"/"+id;
+				window.location = url;
 				
 			});
-			jQuery.validator.addMethod("cc_chk", function(value, element) 
+		}
+			
+		function deleteccard($id){
+			var id=$id;
+			
+			swal({
+				title: "Are you sure want to delete this Card?",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55 ",
+				confirmButtonText: "Yes, delete",
+				closeOnConfirm: false,
+				closeOnCancel: true
+			},
+			
+			function(){
+				url = "{{URL::to('/deleteccard/')}}"+"/"+id;
+				window.location = url;
+				
+			});
+		}
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip(); 
+				
+			$('#shipping_popup_add').click(function(){
+				$('#shipping_popup').css('display','block');
+				$('#shipping_popup').addClass('in');
+				$('#shipping_popup_add').append('<div class="modal-backdrop fade in"></div>');
+			});
+			
+			$('#billing_popup_add').click(function(){
+				$('#billing_popup').css('display','block');
+				$('#billing_popup').addClass('in');
+				$('#billing_popup_add').append('<div class="modal-backdrop fade in"></div>');
+			});
+			
+			$('#shipping_close,#shi_close,#billing_close,#bil_close').click(function(){
+				$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').css('display','none');
+				$('#shipping_popup,#billing_popup,#shipping_popup_edit,#billing_popup_edit').removeClass('in');
+				$('.modal-backdrop').remove();
+			});
+			
+			var cc_details = $("#cc_dashboard_form").validate();
+			$("#cardholder_name").rules("add", {required:true,maxlength: 50});
+			$("#exp_month").rules("add", {required:true});
+			$("#exp_year").rules("add", {required:true});
+			$("#cc_number").rules("add", {required:true,cc_chk:true});
+			$("#cvn_pin").rules("add", {required: true,number:true,minlength:3,maxlength: 4});
+				
+		});
+		jQuery.validator.addMethod("cc_chk", function(value, element){
+			result = $('#cc_number').validateCreditCard();
+			if(result.valid  == true)
 			{
+				var name = result.card_type.name
 				
-				result = $('#cc_number').validateCreditCard();
-				
-				if(result.valid  == true)
+				if(name == 'amex')
 				{
-					
-					var name 		= result.card_type.name
-					
-					if(name == 'amex')
-					{
-						name = 'American Express';	
-					}
-					else if(name == 'visa')
-					{
-						name = 'Visa';	
-					}
-					else if(name == 'mastercard')
-					{
-						name = 'MasterCard';	
-					}		
-					
-					
-					
-					return true;
+					name = 'American Express';	
 				}
-				else
+				else if(name == 'visa')
 				{
-					$.validator.messages.cc_chk =  "Please enter valid credit card.";
-					
-					return false;
+					name = 'Visa';	
 				}
+				else if(name == 'mastercard')
+				{
+					name = 'MasterCard';	
+				}	
+				return true;
+			}
+			else
+			{
+				$.validator.messages.cc_chk =  "Please enter valid credit card.";
+				return false;
+			}
 				
-				
-				
-				
-				
-			}, 	 $.validator.messages.cc_chk);
+		}, 	$.validator.messages.cc_chk);
+
 			input_credit_card = function(input)
 			{
 				var format_and_pos = function(char, backspace)
@@ -1239,11 +1249,11 @@
 					setTimeout(function(){ format_and_pos(''); }, 50);
 				});
 				
-				input.addEventListener('blur', function()
+				/*input.addEventListener('blur', function()
 				{
 					// reformat onblur just in case (optional)
 					format_and_pos(this, false);
-				});
+				});*/
 			};
 			
 			input_credit_card(document.getElementById('cc_number'));	

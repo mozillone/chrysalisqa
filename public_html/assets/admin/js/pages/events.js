@@ -89,6 +89,9 @@ $("#events-update").validate({
         toTime:{
             required: true
         },
+        imageExists:{
+              required: true,
+          },
         eventDesc:{
             required: function()
             {
@@ -123,7 +126,8 @@ $("#event_image").on('change', function(){
     var imgPath = $(this)[0].value;
     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
     var image_holder = $("#img-chan");
-    image_holder.empty();
+    //image_holder.empty();
+    $(".rmvimg").append('<span class="remove_pic" id="removeImg"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
     var size = parseFloat($("#event_image")[0].files[0].size / 1024).toFixed(2);
     if (extn == "jpg" || extn == "jpeg" || extn == "png") {
         if(size < 10000)
@@ -136,6 +140,7 @@ $("#event_image").on('change', function(){
                     reader.onload = function(e) {
 
                         $('#img-chan').attr('src',e.target.result);
+                        $('input[name="imageExists"]').val("1");
                     }
                     image_holder.show();
                     reader.readAsDataURL($(this)[0].files[i]);
@@ -173,10 +178,18 @@ $("#event_image").on('change', function(){
         $('input[name="avatar"]').val("1");
     }
 });
-
 $(".remove_pic").on("click",function(){
-    $('#img-chan').attr('src',"/press_images/default_pic.png");
-    $('input[type="file"]').val('');
-    $('input[name="is_removed"]').val("1");
-});
+        $('#img-chan').attr('src',"/blog_images/preview_placeholder.png");
+        $('input[type="file"]').val('');
+        $('input[name="imageExists"]').val("");
+        $('input[name="img_removed"]').val("1");
+        $("#removeImg").remove();
+    });
+    $(document).on('click','#removeImg',function(){
+        $('#img-chan').attr('src',"/blog_images/preview_placeholder.png");
+        $('input[type="file"]').val('');
+        $('input[name="imageExists"]').val("");
+        $('input[name="img_removed"]').val("1");
+        $("#removeImg").remove();
+    });
 });

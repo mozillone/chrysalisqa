@@ -2118,12 +2118,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 }
 
 @media screen and (min-width:768px){
-<<<<<<< HEAD
-=======
-#report_item .modal-dialog {
-    width: 500px;
-}
->>>>>>> chrysalisqa
+ 
 	p#other_thumbnails {
     width: 650px;
     margin: 0 auto;
@@ -2171,12 +2166,7 @@ section.main_banner{background:#f7f9fc;margin-top:75px;}
 
 
 @media screen and (max-width:767px){
-<<<<<<< HEAD
-=======
-    .costumes-desktop {
-        display: none;
-    }
->>>>>>> chrysalisqa
+ 
 	p.support-rm.support-rm2.mobile_adrss{	font-family: Proxima-Nova-Semibold;}
 .head-support p {
     	font-family: Proxima-Nova-Extrabold;

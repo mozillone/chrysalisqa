@@ -11,6 +11,12 @@
 |
 */
 //Auth::routes();
+//Route::get('costume/redirect/{id}','');
+Route::get("/no-access",function(){
+	return view("errors.404");
+});
+Route::any('costume/redirect/{id}', 'CreateCostumeController@redirectToCharity');
+
 Route::get('sitemap',['as' => 'sitemaps.posts','uses'=> 'SitemapsController@index']);
 Route::get('stripeuserupdate/{email}', ['as' => 'stripe.userupdate','uses'=> 'SitemapsController@stripeUsersUpdate']);
 Route::get('update/subcategories/attributes', ['as' => 'update.subcategories.attributes','uses'=> 'SitemapsController@updateAttributesForSubcategories']);
@@ -50,8 +56,12 @@ Route::get('/test', ['as' => '','uses'=>'DashboardController@Test']);
 Route::post('/test', ['as' => 'test','uses'=>'DashboardController@PostTest']);
 
 /** Products list page start here **/
-Route::get('/category/{slug1}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');;
-Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesController@costumeListings'))->where('name', '[A-Za-z]+');;
+Route::get('/category/{slug1}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');
+Route::post('/category/{slug1}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');
+Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesController@costumeListings'))->where('name', '[A-Za-z]+');
+
+Route::any('/Filterscategory/{slug1}','CostumesController@searchFilters');
+
 Route::any('/product/{slug1?}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
 Route::any('inquire-costume', array('as' => 'inquire-costume','uses' => 'CostumesController@inquireCostume'));
@@ -71,6 +81,7 @@ Route::get('/getMiniCartProducts', array('as' => '','uses' => 'CartController@ge
 
 /*******************Checkout Functionality stat here *********/
 Route::any('checkout', array('as' => '','uses' => 'CheckoutController@checkout'));
+Route::get('getestimationdate/{costume_id}/{mail_service_days}','CheckoutController@getEstimationDeliveryDate');
 Route::any('/checkout/placeorder', array('as' => 'place-order','uses' => 'CheckoutController@placeOrder'));
 Route::post('/add/credit-card', array('as' => 'add-credit-card','uses' => 'CheckoutController@addCreditCard'));
 Route::post('/add/shipping-adress', array('as' => 'shipping_address.post','uses' => 'CheckoutController@addShippingAddress'));
@@ -94,7 +105,9 @@ Route::any('/get/billing-adress', array('as' => 'billing_address.post','uses' =>
 
 
 /** Costume Like page start here **/
-Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
+/*Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));*/
+Route::get('/costume/like/{id}', 'CostumesController@costumeLike');
+
 /** Costume Like page end here **/
 /****costume create page 2 routes starts here***/
 Route::any('/costume/sell-a-costume', array('as' => '','uses' => 'CmsController@viewSellACostume'));
@@ -105,6 +118,10 @@ Route::any('/costume/createfour', array('as' => '','uses' => 'CreateCostumeContr
 Route::any('/costume/ajaxsubcategory', array('as' => '','uses' => 'CreateCostumeController@ajaxSubCategory'));
 
 Route::any('/costume/costumecreate', array('as' => '','uses' => 'CreateCostumeController@Costumecreate'));
+
+/* Added by Gayatri */
+Route::any('/costumedelete/{id}', 'CreateCostumeController@deleteCostume');
+/* End */
 /****costume create page 2 code ends here***/
 
 /* Request a bag starts here*/
@@ -116,8 +133,12 @@ Route::post('/postrequestabaglogin', ['as' => 'requestabaglogin.post','uses'=>'A
 /* Request a bag ends here*/
 
 /** Costume Like page start here **/
-Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
+//Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
 /** Costume Like page end here **/
+
+
+Route::get('/costume/favourite/{id}', 'CostumesController@costumeFavourite');
+
 
 Route::get('/wishlist', ['as' => 'wishlist','uses'=>'WishlistCostumesController@myWishlistList']);
 Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostumesController@removeWishlistCostume']);
@@ -165,6 +186,7 @@ Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 	  	Route::post('/admin/profile/post', ['as' => 'admin-profile-update','uses'=>'UserController@adminProfileUpdate']);
 	  	Route::any('/settings', ['as' => 'settings','uses'=>'UserController@adminSettings']);
 	  	Route::post('/request_bag/settings', ['as' => 'request_bag','uses'=>'UserController@requesBagSettings']);
+	  	Route::post('/search_banner/settings', ['as' => 'search_banner','uses'=>'UserController@searchBannerSettings']);
 	   /****************User Management Start Here***************************/
 	    Route::get('customers-list', ['as' => 'customers-list','uses'=>'UserController@customersList']);
 		Route::get('customes-list', ['as' => 'customes-list','uses'=>'UserController@customesList']);
@@ -230,6 +252,9 @@ Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 	    Route::any('/categories', ['as' => 'categories-list','uses'=>'CategoriesController@categoriesList']);
 	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
 	    Route::any('/getCostumesList', ['as' => '','uses'=>'CategoriesController@getCostumesList']);
+	    Route::get('/delete/categorycostume/{pid}/{cid}', 'CategoriesController@deleteCategoryCostume');
+	    //Route::get('/abc', 'CategoriesController@deleteCategoryCostume');
+	    
 		/****************Categories Management Ends Here***********************/
 
 		/****************Promotions Management Starts Here*********************/
@@ -284,6 +309,7 @@ Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 	   	Route::any('/process-bag/{id}', ['as' => '','uses'=>'RequestabagController@processBag']);
 	   	Route::get('/getallmanagebags', array('as' => '','uses' => 'RequestabagController@Getallmanagebags'));
 	   	Route::any('/generatelables', array('as' => '','uses' => 'RequestabagController@Generatelables'));
+	   	Route::post('/generatefedexsmartpost', array('as' => '','uses' => 'RequestabagController@GenerateFedexSmartPostLabels'));
 	   	Route::any('/returnlablegenerate', array('as' => '','uses' => 'RequestabagController@returnLableGenerate'));
 	   	Route::any('/payoutamount', array('as' => '','uses' => 'RequestabagController@Payoutamount'));
 	   	Route::any('/returnamount', array('as' => '','uses' => 'RequestabagController@Returnamount'));
@@ -430,9 +456,13 @@ Route::any('add-blog-category', [
    'as' => 'add-blog-category',
    'uses' => 'BlogController@addBlogCategory'
 ]);
-Route::any('edit-blog-category', [
+Route::any('edit-blog-category/{id}', [
     'as' => 'edit-blog-category',
     'uses' => 'BlogController@editBlogCategory'
+]);
+Route::any('update-blog-category', [
+   'as' => 'update-blog-category',
+   'uses' => 'BlogController@updateBlogCategory'
 ]);
 Route::any('blog-category-availability', [
    'as' => 'blog-category-availability',
@@ -605,7 +635,8 @@ Route::any('faq-search', [
 /****************Messaging Starts Here*********************/
 
 Route::any('message/{id}', 'MessageController@chatHistory')->name('message.read');
-Route::get('conversations', 'MessageController@converstationsofUser');
+Route::get('conversations', ["as" => "conversations", "uses" => 'MessageController@converstationsofUser']);
+Route::get('sendbox', ["as" => "sendbox","uses" => 'MessageController@converstationsofUser']);
 Route::post('conversation/delete', 'MessageController@converstationsDelete');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
@@ -967,3 +998,10 @@ Route::any('getpaypal', [
     'uses' => 'Admin\ReportsController@getallPaypal'
 ]);
 
+Route::get('500', function()
+{
+    abort(404);
+});
+
+Route::get("GenerateExLarge",'CreateCostumeController@GenerateExLarge');
+Route::get("ReGenerateImages",'CreateCostumeController@ReGenerateImages');

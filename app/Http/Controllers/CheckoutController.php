@@ -19,6 +19,7 @@ use App\Helpers\StripeApp;
 use Meta;
 use URL;
 use App\Promotions;
+use DB;
 
 class CheckoutController extends Controller {
 
@@ -41,7 +42,7 @@ class CheckoutController extends Controller {
     Meta::set('robots', 'index,follow');
 	}
   public function checkout(){
-     $coupan_code=Cart::verifyCoupanCode();
+    $coupan_code=Cart::verifyCoupanCode();
     if(!$coupan_code){
       $data['basic']=Cart::getCartProducts();
     }else{
@@ -59,8 +60,8 @@ class CheckoutController extends Controller {
          $costumer_costumes[$cart->user_name]['products'][]=$cart;
          $costumer_costumes[$cart->user_name]['address']=Address::getUserSellerAddress($cart->created_by); 
         
-     }
-   //  dd($costumer_costumes);
+    }
+      //echo "<pre>"; print_r($costumer_costumes); exit;
     $states   = Site_model::Fetch_all_data('states', '*');
     $countries   = Site_model::Fetch_all_data('countries', '*');
     if(count($data['basic']['basic'])){
@@ -85,13 +86,14 @@ class CheckoutController extends Controller {
     }else{
        return Redirect::to('/');
    }
-//dd($costumer_costumes);
+   //dd($costumer_costumes);
    Meta::set('title', 'Checkout');
   return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries)->with('states',$states)->with('costumer_costumes',$costumer_costumes);
   }
   public function placeOrder(Request $request){
+    //echo "string"; exit;
      $req=$request->all();
-   //  dd($req);
+     //dd($req);
      if(!isset($req['shipping_type'])){
        Session::flash('error','Shipping methods are not found');
        return Redirect::back();
@@ -161,10 +163,11 @@ class CheckoutController extends Controller {
   }
   public function orderCharityFund(Request $request){
     $req=$request->all();
+    //echo "<pre>"; print_r($req); exit;
     if(!count($req)){
       return Redirect::to('/');
     }
-    $charity_info=Order::orderCharityFund($req);
+    $charity_info = Order::orderCharityFund($req);
     if(count($charity_info)){
       Session::flash('success','Your fund transfer to '.$charity_info[0]->name.' is successful');
       $charities_list=Order::getCharitiesList(); 
@@ -195,13 +198,22 @@ class CheckoutController extends Controller {
         if($cart_id){
           $qty=Cart::verifyCostumeCartQuantity( $costume_id,$cookie_id);
           $res=Cart::verifyCostumeQuantity( $costume_id,$qty);
-         if(count($res)){
+          /* Added by Gayatri */
+          if((integer)$qty == (integer)$res[0]->quantity){
+              return Redirect::to('/checkout');
+          }else{
+            Cart::updateCartDetails( $costume_id,$cart_id,$qty+1);
+            $res=$this->updateCartDetails( $costume_id,$qty+1);
+            return Redirect::to('/checkout');
+          }
+          /* End */
+         /*if(count($res)){
             Cart::updateCartDetails( $costume_id,$cart_id,$qty+1);
             $res=$this->updateCartDetails( $costume_id,$qty+1);
             return Redirect::to('/checkout');
           }else{
             return Redirect::back();
-          }
+          }*/
         }
         else{
              $cookie_id=$this->currentCookieKey();
@@ -257,5 +269,41 @@ class CheckoutController extends Controller {
         }else{
           return $this->cookieKeyGenarater();
         }
+    }
+
+    public function getEstimationDeliveryDate($costume_id, $mail_service_days)
+    {
+      //$costume_id = '('.$costume_id.')';
+     // $costume_id = ['562','579'];
+      //$mail_service_days = 1;
+      $costume_id = explode(',', $costume_id);
+      $est_delivery_date = array();
+      $costume_handling_time = DB::table('costume_attribute_options')
+                                ->where('costume_attribute_options.attribute_id', '=', 14)
+                                ->whereIn('costume_attribute_options.costume_id', $costume_id)
+                                ->select('attribute_option_value')
+                                ->get();
+                                //echo "<pre>"; print_r($costume_handling_time);exit;
+      for ($i=0; $i < count($costume_handling_time) ; $i++) {
+        if($costume_handling_time[$i]->attribute_option_value == '1-2 Business Days'){
+          $est_date = date('D . M .d',strtotime('+2 days'));
+          $add = 2;
+        }else if($costume_handling_time[$i]->attribute_option_value == '3-4 Business Days'){
+          $est_date = date('D . M .d',strtotime('+4 days'));
+          $add = 4;
+        }else if($costume_handling_time[$i]->attribute_option_value == '5-6 Business Days'){
+          $est_date = date('D . M .d',strtotime('+6 days'));
+          $add = 6;
+        }else if($costume_handling_time[$i]->attribute_option_value == '7 Business Days'){
+          $est_date = date('D . M .d',strtotime('+7 days'));
+          $add = 7;
+        }else{
+          $est_date = date('D . M .d');
+          $add = 0;
+        }
+        $est_delivery_date[$i] = 'Est. between '.$est_date.' and '.date('D . M .d',strtotime('+'.($mail_service_days+$add).' days')); 
+      }                                
+             
+      return $est_delivery_date;                        
     }
 }

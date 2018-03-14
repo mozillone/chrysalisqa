@@ -14,3 +14,161 @@
 [24-Aug-2017 03:43:11 America/New_York] PHP Fatal error:  Cannot declare class App\Http\Controllers\Admin\OrdersController, because the name is already in use in /home/devchrysa/app/Http/Controllers/OrdersController.php on line 0
 [24-Aug-2017 03:43:18 America/New_York] PHP Fatal error:  Cannot declare class App\Http\Controllers\Admin\OrdersController, because the name is already in use in /home/devchrysa/app/Http/Controllers/OrdersController.php on line 0
 [24-Aug-2017 03:43:35 America/New_York] PHP Fatal error:  Cannot declare class App\Http\Controllers\Admin\OrdersController, because the name is already in use in /home/devchrysa/app/Http/Controllers/OrdersController.php on line 0
+[06-Oct-2017 07:41:30 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/storage/framework/views/d998ef81f32f04d093d45de1811ea75ba9217b49.php on line 991
+[06-Oct-2017 07:41:30 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/vendor/symfony/http-foundation/Response.php on line 365
+[06-Oct-2017 07:41:30 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608515584 bytes) in Unknown on line 0
+[06-Oct-2017 07:41:31 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/storage/framework/views/d998ef81f32f04d093d45de1811ea75ba9217b49.php on line 991
+[06-Oct-2017 07:41:31 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/vendor/symfony/http-foundation/Response.php on line 365
+[06-Oct-2017 07:41:31 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608515584 bytes) in Unknown on line 0
+[06-Oct-2017 07:41:35 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/storage/framework/views/d998ef81f32f04d093d45de1811ea75ba9217b49.php on line 991
+[06-Oct-2017 07:41:35 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/vendor/symfony/http-foundation/Response.php on line 365
+[06-Oct-2017 07:41:35 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608515584 bytes) in Unknown on line 0
+[06-Oct-2017 07:41:46 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/storage/framework/views/d998ef81f32f04d093d45de1811ea75ba9217b49.php on line 991
+[06-Oct-2017 07:41:46 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/vendor/symfony/http-foundation/Response.php on line 365
+[06-Oct-2017 07:41:46 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608515584 bytes) in Unknown on line 0
+[06-Oct-2017 07:42:52 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/storage/framework/views/d998ef81f32f04d093d45de1811ea75ba9217b49.php on line 992
+[06-Oct-2017 07:42:52 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/vendor/symfony/http-foundation/Response.php on line 365
+[06-Oct-2017 07:42:52 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608515584 bytes) in Unknown on line 0
+[06-Oct-2017 07:43:00 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/storage/framework/views/d998ef81f32f04d093d45de1811ea75ba9217b49.php on line 992
+[06-Oct-2017 07:43:00 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608531968 bytes) in /home/devchrysa/vendor/symfony/http-foundation/Response.php on line 365
+[06-Oct-2017 07:43:00 America/New_York] PHP Fatal error:  Allowed memory size of 2147483648 bytes exhausted (tried to allocate 1608515584 bytes) in Unknown on line 0
+[13-Nov-2017 04:20:35 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Foundation\Application::error() in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:237
+Stack trace:
+#0 /home/devchrysa/app/Exceptions/Handler.php(59): Illuminate\Support\Facades\Facade::__callStatic('error', Array)
+#1 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(107): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#2 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(84): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#3 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#4 {main}
+  thrown in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 237
+[13-Nov-2017 04:20:35 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Foundation\Application::error() in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:237
+Stack trace:
+#0 /home/devchrysa/app/Exceptions/Handler.php(59): Illuminate\Support\Facades\Facade::__callStatic('error', Array)
+#1 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(107): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#2 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(84): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#3 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(118): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#4 [internal f in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 237
+[13-Nov-2017 04:22:07 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Foundation\Application::missing() in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:237
+Stack trace:
+#0 /home/devchrysa/app/Exceptions/Handler.php(59): Illuminate\Support\Facades\Facade::__callStatic('missing', Array)
+#1 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(107): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#2 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(84): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#3 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#4 {main}
+  thrown in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 237
+[13-Nov-2017 04:22:07 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Foundation\Application::missing() in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:237
+Stack trace:
+#0 /home/devchrysa/app/Exceptions/Handler.php(59): Illuminate\Support\Facades\Facade::__callStatic('missing', Array)
+#1 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(107): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#2 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(84): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#3 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(118): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#4 [intern in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 237
+[13-Nov-2017 04:22:10 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Foundation\Application::missing() in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:237
+Stack trace:
+#0 /home/devchrysa/app/Exceptions/Handler.php(59): Illuminate\Support\Facades\Facade::__callStatic('missing', Array)
+#1 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(107): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#2 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(84): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#3 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#4 {main}
+  thrown in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 237
+[13-Nov-2017 04:22:10 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined method Illuminate\Foundation\Application::missing() in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:237
+Stack trace:
+#0 /home/devchrysa/app/Exceptions/Handler.php(59): Illuminate\Support\Facades\Facade::__callStatic('missing', Array)
+#1 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(107): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#2 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(84): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#3 /home/devchrysa/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(118): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Symfony\Component\Debug\Exception\FatalErrorException))
+#4 [intern in /home/devchrysa/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 237
+[13-Nov-2017 04:56:31 America/New_York] PHP Parse error:  syntax error, unexpected '$e' (T_VARIABLE), expecting ',' or ')' in /home/devchrysa/app/Exceptions/Handler.php on line 55
+[13-Nov-2017 04:56:31 America/New_York] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+[13-Nov-2017 04:56:31 America/New_York] PHP Parse error:  syntax error, unexpected '$e' (T_VARIABLE), expecting ',' or ')' in /home/devchrysa/app/Exceptions/Handler.php on line 55
+[13-Nov-2017 04:56:31 America/New_York] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+[13-Nov-2017 04:56:50 America/New_York] PHP Parse error:  syntax error, unexpected '$e' (T_VARIABLE), expecting ',' or ')' in /home/devchrysa/app/Exceptions/Handler.php on line 55
+[13-Nov-2017 04:56:50 America/New_York] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+[13-Nov-2017 04:56:50 America/New_York] PHP Parse error:  syntax error, unexpected '$e' (T_VARIABLE), expecting ',' or ')' in /home/devchrysa/app/Exceptions/Handler.php on line 55
+[13-Nov-2017 04:56:50 America/New_York] PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+[22-Nov-2017 05:00:26 America/New_York] PHP Warning:  Unterminated comment starting line 580 in /home/devchrysa/routes/web.php on line 580
+[22-Nov-2017 13:23:45 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:45 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:46 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:46 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:46 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:47 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:47 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:47 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:48 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:48 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:49 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:49 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:49 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:50 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:50 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:50 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:51 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:51 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:52 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:52 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:52 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:53 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:23:58 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:24:06 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:24:26 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:24:39 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[22-Nov-2017 13:25:07 America/New_York] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Input as Input because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 13
+[23-Nov-2017 05:05:56 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:05:57 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:05:57 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:05:57 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:05:58 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:05:58 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:05:59 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:05:59 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:05:59 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:05:59 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:05:59 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:00 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:00 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:00 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:00 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:01 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:01 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:06 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:06 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:06 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:06 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:07 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:07 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:07 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:08 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:08 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:08 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:09 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:09 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:09 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:10 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:10 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:10 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:11 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:11 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:11 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:12 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:12 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:12 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:13 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:13 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:13 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:14 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:14 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:14 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:15 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:15 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:15 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:16 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:16 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:17 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:17 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:17 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:18 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:19 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:27 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:06:59 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:07:05 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15
+[23-Nov-2017 05:07:25 America/New_York] PHP Fatal error:  Cannot use Request as Request because the name is already in use in /home/devchrysa/app/Http/Controllers/SearchController.php on line 15

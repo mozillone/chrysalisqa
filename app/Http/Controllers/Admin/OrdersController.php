@@ -497,18 +497,14 @@ class OrdersController extends Controller {
          
           $userCredential = new ComplexType\WebAuthenticationCredential();
           $userCredential
-              //->setKey(Config::get('constants.FedEx_Key'))
-              //->setPassword(Config::get('constants.FedEx_Password'));
-              ->setKey(env('FEDEX_KEY','Jrgrh9ckHvvUhvvF'))
-              ->setPassword(env('FEDEX_PASSWORD','azVVnJyD7ehrYQKfpDjhBTKRA'));
+              ->setKey(Config::get('constants.FedEx_Key'))
+              ->setPassword(Config::get('constants.FedEx_Password'));
           $webAuthenticationDetail = new ComplexType\WebAuthenticationDetail();
           $webAuthenticationDetail->setUserCredential($userCredential);
           $clientDetail = new ComplexType\ClientDetail();
           $clientDetail
-              // ->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
-              // ->setMeterNumber(Config::get('constants.FedEx_MeterNumber'));
-              ->setAccountNumber(env('FEDEX_ACCOUNT_NUMBER','510087720'))
-              ->setMeterNumber(env('FEDEX_METER_NUMBER','100336246'));
+               ->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
+               ->setMeterNumber(Config::get('constants.FedEx_MeterNumber'));
           $version = new ComplexType\VersionId();
           $version
               ->setMajor(12)
@@ -530,8 +526,8 @@ class OrdersController extends Controller {
               ->setPhoneNumber($seller_phone_no);
           $shipper = new ComplexType\Party();
           $shipper
-              //->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
-              ->setAccountNumber(env('FEDEX_ACCOUNT_NUMBER','510087720'))
+              ->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
+              //->setAccountNumber(env('FEDEX_ACCOUNT_NUMBER','510087720'))
               ->setAddress($shipperAddress)
               ->setContact($shipperContact);
           $recipientAddress = new ComplexType\Address();
@@ -551,8 +547,8 @@ class OrdersController extends Controller {
               ->setContact($recipientContact);
           $labelSpecification = new ComplexType\LabelSpecification();
           $labelSpecification
-              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_7X4point75))
-              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PDF))
+              ->setLabelStockType(new SimpleType\LabelStockType(SimpleType\LabelStockType::_PAPER_4X6))
+              ->setImageType(new SimpleType\ShippingDocumentImageType(SimpleType\ShippingDocumentImageType::_PNG))
               ->setLabelFormatType(new SimpleType\LabelFormatType(SimpleType\LabelFormatType::_COMMON2D));
           $packageLineItem1 = new ComplexType\RequestedPackageLineItem();
           $packageLineItem1
@@ -601,7 +597,7 @@ class OrdersController extends Controller {
           if($response->HighestSeverity=="SUCCESS"){
               $track_id=$response->CompletedShipmentDetail->CompletedPackageDetails->TrackingIds->TrackingNumber;
               $amount=$response->CompletedShipmentDetail->ShipmentRating->ShipmentRateDetails->TotalNetChargeWithDutiesAndTaxes->Amount;
-              $fileName = 'fedexlabel/'.$track_id.".pdf";
+              $fileName = 'fedexlabel/'.$track_id.".png";
               $fp = fopen($fileName, 'wb');   
               fwrite($fp, $response->CompletedShipmentDetail->CompletedPackageDetails->Label->Parts->Image);
               Order::orderShippingmentProcess($req,$track_id,$amount);
@@ -660,7 +656,7 @@ class OrdersController extends Controller {
           return Response::download($file);
         }
         if($type=="fedex"){
-          $file=public_path("fedexlabel/".$track_id.".pdf");
+          $file=public_path("fedexlabel/".$track_id.".png");
           return Response::download($file);
         }
     }
@@ -684,7 +680,7 @@ class OrdersController extends Controller {
     public function orderTransactionsData(Request $request,$order_id)
     {
         $req=$request->all();   
-        $transactions = DB::select('SELECT id,CONCAT(UCASE(LEFT(type, 1)), SUBSTRING(type, 2)) as transaction_type,CONCAT(UCASE(LEFT(status, 1)), SUBSTRING(status, 2)) as transaction_status,DATE_FORMAT(created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",FORMAT(amount,2)) as price  FROM `cc_transactions` WHERE `order_id`='.$order_id.' ORDER BY `id` DESC');
+        $transactions = DB::select('SELECT id,CONCAT(UCASE(LEFT(type, 1)), SUBSTRING(type, 2)) as transaction_type,CONCAT(UCASE(LEFT(status, 1)), SUBSTRING(status, 2)) as transaction_status,DATE_FORMAT(created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",FORMAT(amount,2)) as price  FROM `cc_transactions` WHERE `order_id`='.$order_id.' GROUP BY order_id ORDER BY `id` DESC');
         return response()->success(compact('transactions'));
   
     }
@@ -746,6 +742,7 @@ class OrdersController extends Controller {
       $cc_details=DB::Select('SELECT *  FROM `cc_creditcard` WHERE `id` ='.$order_info[0]->cc_id)[0];
       $price=DB::Select('SELECT *  FROM `cc_order_total` WHERE `order_id` ='.$order_id);
       $items=DB::Select('SELECT *  FROM `cc_order_items` WHERE `order_id` ='.$order_id);
+      $j = 0;
       foreach ($items as $key => $value) {
         $costumes=DB::Select('SELECT dsr.name as costume_name,cst.*,cstopt.attribute_option_value  as is_film,img.image,itms.*,ord.shipping_est FROM cc_costumes as cst LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id  LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="'.Config::get('constants.IS_FILMY').'" LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1" RIGHT JOIN cc_order_items as itms on itms.costume_id=cst.costume_id and itms.order_id='.$order_id.' LEFT JOIN cc_order as ord on ord.order_id=itms.order_id WHERE cst.costume_id='.$value->costume_id);
         $mail_costumes=array('costume_name'=>$costumes[0]->costume_name, 
@@ -755,11 +752,18 @@ class OrdersController extends Controller {
                                  'price'=>$costumes[0]->price, 
                                  'order_id'=>  $order_id, 
                                   'qty'=> $costumes[0]->qty, 
-                                 'image'=>$costumes[0]->image,
-                                 'shipping_est'=>$costumes[0]->shipping_est,
+                                 'image'=>$costumes[0]->image
                         );
-     
+        $shiping_est = explode(',', $costumes[0]->shipping_est);
+        if(count($shiping_est)>0){
+          for ($i=0; $i < count($shiping_est); $i++) { 
+            $mail_costumes['shipping_est'] = $shiping_est[$j];
+          }  
+        }else{
+          $mail_costumes['shipping_est']=$costumes[0]->shipping_est;
+        }
         $mail_order['items'][]= $mail_costumes;
+        $j++;
       }
       foreach($price as $prc){
         if($prc->title=="Subtotal"){

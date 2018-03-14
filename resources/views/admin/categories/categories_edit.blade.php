@@ -34,9 +34,20 @@ Category edit@parent
                     <h3 class="box-title col-md-12 heading-agent">Edit {{$cat_data[0]->name}}</h3>
                 </div>
                 <div class="box-body">
+                  @if (Session::has('error'))
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        {{ Session::get('error') }}
+                    </div>
+                  @elseif(Session::has('success'))
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        {{ Session::get('success') }}
+                    </div>
+                  @endif
                      <form id="category-edit" class="form-horizontal defult-form" name="userForm" action="{{route('categories-edit')}}" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-                        <input type="hidden" name="category_id" value="{{$cat_data[0]->category_id}}"> 
+                        <input type="hidden" name="category_id" id="category_id" value="{{$cat_data[0]->category_id}}"> 
                         <div class="col-md-12">
                             <h4>Basic Information</h4>
                             <hr>
@@ -44,7 +55,8 @@ Category edit@parent
                                     <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Category Name <span class="req-field" >*</span></label>
                                             <input type="text" class="form-control" placeholder="Enter category name"  name="name" id="name" value="{{$cat_data[0]->name}}">
-                                        <p class="error">{{ $errors->first('name') }}</p> 
+                                        <p class="error">{{ $errors->first('name') }}</p>
+                                        <input type="hidden" name="old_category" value="{{$cat_data[0]->name}}"> 
                                     </div>
                                     <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Parent Category</label>
@@ -60,7 +72,7 @@ Category edit@parent
                                     </div>
                                      <div class="form-group has-feedback" >
                                         <label for="inputEmail3" class="control-label">Category Description<span class="req-field" >*</span></label>
-                                            <textarea class="form-control" placeholder="Enter category description"  name="desc">{{$cat_data[0]->description}}</textarea> 
+                                            <textarea class="form-control" placeholder="Enter category description"  name="desc" id="cos_desc">{{$cat_data[0]->description}}</textarea> 
                                         <p class="error">{{ $errors->first('desc') }}</p> 
                                     </div>
                                 </div> 
@@ -101,11 +113,16 @@ Category edit@parent
                                       </div>
 									  <div class="col-md-6 col-sm-6 col-xs-12 ">
                                       <div class="cat_img fileupload fileupload-new" data-provides="fileupload"> 
-                                          <img @if(file_exists( public_path('category_images/Normal/'.$cat_data[0]->thumb_image)))) src="/category_images/Normal/{{$cat_data[0]->thumb_image}}" @else  src="/category_images/df_img.jpg" @endif  class="img-responsive"  id="img-chan1">
+                                          <img @if(file_exists(public_path('category_images/Normal/'.$cat_data[0]->thumb_image)))) src="/category_images/Normal/{{$cat_data[0]->thumb_image}}" @else  src="/category_images/df_img.jpg" @endif  class="img-responsive"  id="img-chan1">
                                       
-                         
+                                        <input type="hidden" name="cat_imageExists" @if(isset($cat_data[0]->thumb_image)) value="{{$cat_data[0]->thumb_image}}" @endif>
                                         <span class="fileupload-preview"></span>
                                         <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+                                        @if(isset($cat_data[0]->thumb_image))
+                                        <span class="remove_pic_cat" id="remove_pic_cat">
+                                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                        </span>
+                                        @endif
                                       </div>
 												   </div>
                                     </div>
@@ -129,11 +146,16 @@ Category edit@parent
                                       </div>
 									  <div class="col-md-6 col-sm-6 col-xs-12">
                                       <div class="ban_img fileupload fileupload-new" data-provides="fileupload"> 
-                                          <img @if(file_exists( public_path('category_images/Banner/'.$cat_data[0]->banner_image)))) src="/category_images/Banner/{{$cat_data[0]->banner_image}}" @else  src="/category_images/df_img.jpg" @endif class="img-responsive"  id="img-chan2">
+                                          <img @if(file_exists(public_path('category_images/Banner/'.$cat_data[0]->banner_image)))) src="/category_images/Banner/{{$cat_data[0]->banner_image}}" @else  src="/category_images/df_img.jpg" @endif class="img-responsive"  id="img-chan2">
                                  
-                         
+                                        <input type="hidden" name="banner_imageExists" @if(isset($cat_data[0]->banner_image)) value="{{$cat_data[0]->banner_image}}" @endif>
                                         <span class="fileupload-preview"></span>
                                         <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+                                        @if(isset($cat_data[0]->banner_image))
+                                        <span class="remove_pic_banner" id="remove_pic_banner">
+                                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                        </span>
+                                        @endif
                                       </div>
 										    </div>
                                     </div>
@@ -143,7 +165,7 @@ Category edit@parent
 
                       <div class="col-md-6">
                                     <div class="form-group has-feedback" >
-                                        <label for="inputEmail3" class="control-label">Sort Order <span class="req-field" >*</span></label>
+                                        <label for="inputEmail3" class="control-label">Sort Order <span class="req-field" ></span></label>
                                             <input type="text" class="form-control" placeholder="Sort Order"  name="sort" id="name" value="{{$cat_data[0]->sort_order}}">                                       
                                     </div>                                    
                       </div> 
@@ -161,7 +183,7 @@ Category edit@parent
                                                  <input type="hidden"  id="products_id">
                                                  <input type="hidden"  id="sku_no">
                                                  <input type="hidden"  id="price">
-                                                 <span>Note: Type the product name to autopopulate</span>
+                                                 <span>Note: Type the product name to autopopulate<br/><span style="color:red">Costumes added to this Category will be deleted in the other Categories.</span></span>
                                         </div>
                                 </div> 
                             <div class="col-md-2 col-sm-2 col-xs-4">
@@ -185,7 +207,7 @@ Category edit@parent
                                         <td><input type="hidden" value="{{$cst->costume_id}}" name="costume_list[]" class="costume_id"/>{{$cst->cst_name}}</td>
                                         <td>{{$cst->sku_no}}</td>
                                         <td>${{$cst->price}}</td>
-                                        <td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='{{$cst->costume_id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                        <td><a href="/delete/categorycostume/{{$cst->costume_id}}/{{$cat_data[0]->category_id}}" class="remove_cost"  data-cost-id='{{$cst->costume_id}}'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                         </tr>
                                     @endforeach
                                   </tbody>
@@ -198,6 +220,7 @@ Category edit@parent
                             <button type="submit" class="btn btn-primary pull-right">Update</button>
                         </div>
                     </div>
+                    <input type="hidden" name="elements_change" id="elements_change" value="">
                 </form>
                 </div>
                     
@@ -213,5 +236,13 @@ Category edit@parent
 <script src ="{{ asset('/vendors/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{ asset('/assets/admin/js/pages/category.js') }}"></script>
 <script src="{{ asset('/js/validator-addtional-methods.js')}}"></script>
+<script type="text/javascript">
 
+  $('#category-edit').on('keyup change', ':input', function(){
+    if($(this).attr('id') != "cos_desc"){
+      $("#elements_change").val("1");
+    }
+  });
+
+</script>
 @stop

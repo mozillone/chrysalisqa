@@ -152,7 +152,7 @@
           <?php }  } ?>
           <?php  if($categoryid=="143") { ?>
           <div class="row">
-             <?php $count=count($filmtheatrecategories);
+             <?php $count=count($uniquefashion_categories);
             if($count > 0){ ?>
              @foreach($uniquefashion_categories as $unique_fashion)
              <?php 

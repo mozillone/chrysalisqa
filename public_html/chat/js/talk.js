@@ -7,52 +7,38 @@ $(document).ready(function () {
 
 
     $('#talkSendMessage').on('submit', function(e) {
-<<<<<<< HEAD
         //$('#talkSendMessage').append("<img id='ajax_loader' src='{{asset('img/ajax-loader.gif')}}' >");
         $('textarea#message-data').css('border','');    
         e.preventDefault();
         str=true;
         if($('textarea#message-data').val() != ""){
-             $('textarea#message-data').css('border','');    
-        var url, request, tag, data;
-        $('#talkSendMessage').append('<div class="modal-backdrop fade in"></div>');
-        tag = $(this);
-        url = __baseUrl + '/ajax/message/send';
-        data = tag.serialize();
-        
-=======
-        e.preventDefault();
-        var url, request, tag, data;
-        tag = $(this);
-        url = __baseUrl + '/ajax/message/send';
-        data = tag.serialize();
+            $('textarea#message-data').css('border','');    
+            var url, request, tag, data;
+            $('#talkSendMessage').append('<div class="modal-backdrop fade in"></div>');
+            
+            tag = $(this);
+            url = __baseUrl + '/ajax/message/send';
+            data = tag.serialize();
+            
+            request = $.ajax({
+                method: "post",
+                url: url,
+                data: data
+            });
 
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-        request = $.ajax({
-            method: "post",
-            url: url,
-            data: data
-        });
-
-        request.done(function (response) {
-            if (response.status == 'success') {
-                $('#talkMessages').append(response.html);
-<<<<<<< HEAD
-                $('.modal-backdrop').remove();
-                tag[0].reset();
-                //location.reload();
-            }
-        });
+            request.done(function (response) {
+                if (response.status == 'success') {
+                    $('#talkMessages').append(response.html);
+                    $('.modal-backdrop').remove();
+                    tag[0].reset();
+                    //location.reload();
+                }
+            });
         }
         else{
             $('textarea#message-data').css('border','1px solid red');
             str=false;
         }
-=======
-                tag[0].reset();
-            }
-        });
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 
     });
 

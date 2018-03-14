@@ -148,7 +148,7 @@
 													</table>
 												</div>
 											</div>
-											<div class="col-md-6 col-xs-12">
+											<div class="col-md-6 col-xs-12" id="ordersShipping">
 												<div class="rencemt_order_table table-responsive order-smry_view_div">
 													<h2>Shipping Information</h2>
 													<h4>Shipping Info</h4>
@@ -286,4 +286,5 @@
 @section('footer_scripts')
 <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/pages/order_process.js') }}"></script>
+
 @stop

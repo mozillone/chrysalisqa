@@ -40,18 +40,18 @@
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-xs-12">
          <form  action="{{url('/admin/login')}}" method="post" class="validation" id="login" name="login">
          <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group has-feedback" ng-init="{{ old('email')}}">
-            <input class="form-control" placeholder="Email" name="email" id="email">
-            <p class="error">{{ $errors->first('email') }}</p>
-            
-		 <i class="fa fa-envelope form-control-feedback" aria-hidden="true"></i>
+            <input class="form-control" placeholder="Email" name="email" id="email" value="{{old('email')}}">
+            <p class="error">{{ $errors->first('email') }}</p>            
+		      <i class="fa fa-envelope form-control-feedback" aria-hidden="true"></i>
           </div>
           <div class="form-group has-feedback">
-            <input class="form-control" placeholder="Password"  id="password" name="password" type="password">
+            <input class="form-control" placeholder="Password"  id="password" name="password" type="password" value="{{old('password')}}">
              <p class="error">{{ $errors->first('password') }}</p>
             <i class="fa fa-lock form-control-feedback" aria-hidden="true"></i>
           </div>

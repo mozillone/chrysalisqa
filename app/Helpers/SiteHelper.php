@@ -14,6 +14,7 @@ use Config;
 use DateTime;
 use DB;
 use Mail;
+use Log;
 class SiteHelper  {
 
 	public static function getMenus(){
@@ -40,11 +41,24 @@ class SiteHelper  {
 
 			//$getSubCategories = Site_model::Fetch_data('category','*',$cond);
 			$categories_list[$menus->name][]="None";
+            $catids = array();
+            $subcat_names = array();
 			foreach ($getSubCategories as $subCat) {
-				$link=Category::getUrlLinks($subCat->category_id);
-				$categories_list[$menus->name][]=$link.'_'.$subCat->name;
+                $catids[] = $subCat->category_id;
+				$subcat_names[]  = $subCat->name;
 				//$categories_list[$menus->name][]=$subCat->category_id.'_'.$subCat->name;
 			}
+            $cat_ids_implode = implode(",", $catids);
+            if(!empty($cat_ids_implode)){
+                $links =Category::getUrlLinksMulti($cat_ids_implode);
+                
+                $uTemp = 0;
+                foreach($links  as $link_name)
+                {
+                     $categories_list[$menus->name][]= $link_name.'_'.$subcat_names[$uTemp];  
+                     $uTemp++;
+                }
+            }
 			
 		}
 	
@@ -332,11 +346,18 @@ public static function domesticRateSingleCostume($originationZip,$destinationZip
     public static function sendmail($to,$subject,$template,$mail_data){
         $contact_email = (string)$to;
         $mail_subject = (string)$subject;
-        $mail_status    = Mail::send($template, $mail_data, function ($message)  use ($contact_email, $mail_subject)
-        {
-            $message->from('support@chrysaliscostumes.com', 'Chrysalis');
-            $message->to($contact_email)->subject($mail_subject);
-        });
+
+        try{
+            $mail_status    = Mail::send($template, $mail_data, function ($message)  use ($contact_email, $mail_subject)
+            {
+                $message->from('support@chrysaliscostumes.com', 'Chrysalis');
+                $message->to($contact_email)->subject($mail_subject);
+            });    
+        }catch(\Swift_TransportException $e){
+            Log::info($e->getMessage());
+            return true;
+        }
+        
         return $mail_status;
    }
 
@@ -366,6 +387,13 @@ public static function domesticRateSingleCostume($originationZip,$destinationZip
         return $url_count;
     }
 
-
+    public static function getMyMessageCount()
+    {
+        //$message_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        /*$message_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.' OR cnvs.user_one = 1) and msg.user_id != '.Auth::user()->id.'');*/
+        /*$message_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');*/
+        $message_count = DB::Select('SELECT count(cnvs.id) as count_dt FROM cc_messages as msg LEFT JOIN `cc_conversations` as cnvs on msg.conversation_id=cnvs.id where msg.is_seen="0" AND (cnvs.user_two ='.Auth::user()->id.' OR cnvs.user_one = '.Auth::user()->id.') and msg.user_id != '.Auth::user()->id.'');
+        return $message_count[0]->count_dt;
+    }   
 	
 }

@@ -103,16 +103,16 @@
                               <div class="box-body">
                                         <div class="col-md-12 file-ups">
                                             <div class="form-group {{ $errors->has('profile_img') ? ' has-error' : '' }}" >
-                                                <label for="Image" class="control-label">Upload Image <span class="required"> * </span></label>
-                                                <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                   <img src="http://chrysalis.com/default_pic.png" class="img-pview img-responsive" id="img-chan" name="img-chan" style="alt=;width: 160px;height: 160px;" "="" riot"="">
-                                                    <span class="remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
-
-                                                        <input id="press_image" name="press_image" placeholder="Profile Image" class="form-control" type="file" style="margin-top: 15px;">
+                                                <label for="Image" class="control-label">Upload Image <span class="req-field" >*</span></label>
+                                                <div class="fileupload fileupload-new rmvimg" data-provides="fileupload">
+                                                   <img src="{{ asset('press_images/listing_placeholder.png') }}" class="img-pview img-responsive" id="img-chan" name="img-chan" style="alt=;width: 160px;height: 160px;" "="" riot"="">
+                                                    
+                                                    <input id="press_image" name="press_image" placeholder="Profile Image" class="form-control" type="file" style="margin-top: 15px;">
 
                                                     <input type="hidden" name="img_removed" class="img_removed">
-                                <input type="hidden" class="name_img" class="find_img" value="{{ isset($user->profile_img) && ($user->profile_img!='default.jpg') ? $user->profile_img : 'default_pic.png' }}">
-                                <span class="fileupload-preview"></span>
+                                                    <input id="imageExists" name="imageExists" value="" type="hidden">
+                                                   <!--  <input type="hidden" class="name_img" class="find_img" value="{{ isset($user->profile_img) && ($user->profile_img!='default.jpg') ? $user->profile_img : 'default_pic.png' }}"> -->
+                                                    <span class="fileupload-preview"></span>
                                                     <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                                 </div>
                                                 <p><b>Note:</b> The file could not be exceed above 10MB and allowed only .JPG, .JPEG, .PNG format.</p>

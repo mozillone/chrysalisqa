@@ -8,7 +8,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
       })
       .withDataProp('data.charities')
       .withOption('createdRow', createdRow)
-      .withOption('order', [3])
+       .withOption('order', [4, 'desc'])
       .withOption('responsive', true)
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
@@ -57,7 +57,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
            }); 
     }
     function imageHtml(data, type, full, meta) {
-        if(data!=null){
+        if(data!=null && data!=""){
             return '<img  class="img-responsive"  src="/charities_images/'+data+'" width="50px">'
         }else{
           return '<img  class="img-responsive"  src="/charities_images/default-placeholder.jpg" width="50px">'
@@ -91,7 +91,7 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
           $scope.dtOptions = DTOptionsBuilder.newOptions()
           .withOption('data',response.data.data.charities)
           .withOption('createdRow', createdRow)
-            .withOption('order', [ ])
+            .withOption('order', [4, 'desc'])
             .withOption('responsive', true)
             .withOption('bFilter', false)
             .withOption('lengthChange', false);
@@ -118,14 +118,13 @@ app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumn
       $('input[name="charity_id"]').val(id);
       $('#charity_heading').html('Edit '+name);
       if(image.length){
+        $(".rmvimg").append('<span class="remove_pic" id="removeImg"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
         $('#img-chan1').attr('src','/charities_images/'+image);
+        $("#imageExists").val(image);
       }
       $('#charity_name').val(name);
       $('#charity_edit_popup').modal('show');
-<<<<<<< HEAD
  
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
      
      
  });
@@ -201,6 +200,7 @@ $("#edit_img_pic").on('change', function() {
       var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
       var image_holder = $("#img-chan1");
       //image_holder.empty();
+      $(".rmvimg").append('<span class="remove_pic" id="removeImg"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
       if (extn == "jpg" || extn == "jpeg" || extn == "png") {
         if (typeof(FileReader) != "undefined") {
           //loop for each file selected for uploaded.
@@ -223,7 +223,8 @@ $("#edit_img_pic").on('change', function() {
               reader.onload = function(e) {
                 $('#img-chan1').attr('src',e.target.result);
                 $('.edit_remove_pic').remove();
-                  $('.img-pview').after('<span class="edit_remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
+                $('input[name="imageExists"]').val("image.png");
+                  //$('.img-pview').after('<span class="edit_remove_pic"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
            
               }
               image_holder.show();
@@ -249,10 +250,7 @@ $(document).on("click",".remove_pic",function(){
   $('#img-chan').attr('src',"/charities_images/default-placeholder.jpg");
   $('input[type="file"]').val('');
   $('input[name="is_removed"]').val("1");
-<<<<<<< HEAD
   $(this).remove();
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
   });
 $(document).on("click",".edit_remove_pic",function(){
   $('#img-chan1').attr('src',"/charities_images/default-placeholder.jpg");
@@ -272,19 +270,39 @@ $("#charity-create").validate({
                 }
   
         });
+$("#editCharity").click(function(){
+  if($("#charity-edit").valid()){
+    $("#charity-edit").submit();
+  }
+});
+$(function(){
+
 $("#charity-edit").validate({
-            rules: {
-                charity_name:{
-                        required: true,
-                        maxlength: 50
-                    },
-                image:{
-                        extension: "png,jpg"
-                    },
-                }
-  
-<<<<<<< HEAD
-        });
-=======
-        });
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
+  rules: {
+      charity_name:{
+              required: true,
+              maxlength: 50
+          },
+      imageExists:{
+            required: true,
+              extension: "png,jpg"
+          },
+      }
+
+});
+});
+
+$(".remove_pic").on("click",function(){
+  $('#img-chan1').attr('src',"/blog_images/preview_placeholder.png");
+  $('input[type="file"]').val('');
+  $('input[name="is_removed"]').val("1");
+  $('input[name="imageExists"]').val("");
+  $("#removeImg").remove();
+});
+$(document).on('click','#removeImg',function(){
+  $('#img-chan1').attr('src',"/blog_images/preview_placeholder.png");
+  $('input[type="file"]').val('');
+  $('input[name="is_removed"]').val("1");
+  $('input[name="imageExists"]').val("");
+  $("#removeImg").remove();
+});

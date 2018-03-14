@@ -12,7 +12,7 @@
     max-width: 100px;
     overflow: hidden;
 }
-.img-loading {
+.img-loading { 
     position: absolute;
     left: 0px;
     right: 0px;
@@ -26,7 +26,7 @@
 }
 .well .shipping_date span{color: #010101;}
 .check_out_page_left h2{    padding-bottom: 20px;}
-.checkout_idi_box {    display: inline-block;    margin-bottom: 50px;}
+.checkout_idi_box {    display: inline-block;    margin-bottom: 30px;}
 .well .shipping_date i {
     color: #8f8d8f;
 }
@@ -44,3 +44,4 @@
     right: 0px;
     text-align: center;
     top: 550px;
+}

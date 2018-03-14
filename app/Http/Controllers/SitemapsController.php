@@ -99,8 +99,6 @@ class SitemapsController extends Controller
             $currentTrack->appendChild($domtree->createElement('priority','0.7'));   
         }
 
-        
-
         $domtree->save("sitemap.xml");
 
         echo"Sitemap Genrated";

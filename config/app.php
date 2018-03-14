@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -191,7 +191,8 @@ return [
         //Skovmand\Mailchimp\MailchimpServiceProvider::class,
         Eusonlito\LaravelMeta\MetaServiceProvider::class,
         //Watson\Sitemap\SitemapServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
        
     ],
@@ -253,7 +254,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Meta'    => Eusonlito\LaravelMeta\Facade::class,
         'Sitemap' => Watson\Sitemap\Facades\Sitemap::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
         
 

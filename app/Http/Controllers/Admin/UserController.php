@@ -30,13 +30,16 @@ class UserController extends Controller
       $this->csv = new ExportFile();
       $this->sitehelper = new SiteHelper();
       //$this->braintreeApi = new BraintreeApp();
-       $this->stripe=new StripeApp();
+      $this->stripe=new StripeApp();
       $this->middleware(function ($request, $next) {
           if(!Auth::check()){
             return Redirect::to('/admin/login')->send();
           }
           else{
-               return $next($request);
+              if(Auth::user()->role_id != 1){
+                return Redirect::to('no-access');  
+              }
+              return $next($request);
           }
       });
     }
@@ -148,7 +151,7 @@ class UserController extends Controller
             ->editColumn('credits', function ($usersList) {
                 return '$'.number_format(floatval($usersList->credits),2,'.','');
             })
-            ->editColumn('status', function ($usersList) {
+            ->editColumn('active', function ($usersList) {
                 $a = $usersList->active == '1' ? 'checked' : '';
                 return '<label class="switch">
                                    <input type="checkbox" '.$a.' class="status" id="'. $usersList->id .'" onClick="changeUserStatus('.$usersList->id.','.$usersList->active.');">
@@ -248,9 +251,10 @@ class UserController extends Controller
            return Redirect::back();
         }
        $users = User::create([
-                                    'role_id'         =>4,
+                                    'role_id'         =>$req['role'],
                                     'first_name'      => $req['first_name'],
                                     'last_name'       => $req['last_name'],
+                                    'display_name'    => $req['first_name'].' '.$req['last_name'],
                                     'username'    => $req['username'],
                                     'email'           => $req['email'],
                                     'password'        => Hash::make($req['password']),
@@ -307,7 +311,14 @@ class UserController extends Controller
 	
 		}
 		else{
-			$file_name=$name->user_img;
+      $file_name=$name->user_img;
+      if($request->is_removed == "1"){
+        \File::delete(public_path('profile_img/resize/'.$file_name));
+        \File::delete(public_path('profile_img/original/'.$file_name));
+        \File::delete(public_path('profile_img/thumbs/'.$file_name));
+        $file_name = null;
+      }
+			
 		}
     $vacation_from = date('Y-m-d',strtotime($req['date_timepicker_end_ticket']));
     $vacation_to = date('Y-m-d',strtotime($req['date_timepicker_end1_ticket']));
@@ -526,7 +537,8 @@ class UserController extends Controller
       $this->data['seller_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
       $states=Address::getStatesList();
       $request_bag= Site_model::find_user_and_meta('user_meta',Auth::user()->id);
-     return view('admin.settings.settings')->with($this->data)->with('states',$states)->with('request_bag',$request_bag);
+     $search_banner_settings = DB::table('search_banner_settings')->first();
+     return view('admin.settings.settings')->with($this->data)->with('states',$states)->with('request_bag',$request_bag)->with('search_banner_settings',$search_banner_settings);
   }
   public function requesBagSettings(Request $request){
       $req=$request->all();
@@ -534,5 +546,32 @@ class UserController extends Controller
       Session::flash('success', 'Settings updated successfully');
       return Redirect::back();
   }
- 
+  
+  /**
+   * Created By Gayatri on 2nd Nov 2017
+   * [Adding/Updating a new search banner image]
+   * @param  Request $request [baneer image details]
+   * @return [file]           [image]
+   */
+  public function searchBannerSettings(Request $request)
+  {
+    //echo "<pre>"; print_r($request->all());
+    $request = $request->all();
+    if(isset($request['banner_image'])){
+      $file = $request['banner_image'];
+      $destination_path = public_path('category_images/Banner');
+
+      $file_name = $file->getClientOriginalName();
+      $extension = $file->getClientOriginalExtension() ?: 'png';
+      $safeName = str_random(10).'.'.$extension;
+      $file->move($destination_path,$safeName);
+    }else{
+      $safeName = '';
+    }
+    //echo $safeName; exit;
+    $store_or_update_image = DB::table('search_banner_settings')->update(['file_name' => $safeName]);
+
+    Session::flash('success', 'Settings updated successfully');
+    return Redirect::back();
+  }
 }

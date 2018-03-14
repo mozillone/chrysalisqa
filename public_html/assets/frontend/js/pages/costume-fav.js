@@ -2,9 +2,8 @@ $(document).on('click','.fav_costume',function(){
   var costume_id=$(this).attr('data-costume-id');
   var token=$('input[name="_token"]').val();
   $.ajax({
-      type: 'POST',
-      url: '/costume/favourite',
-      data: {costume_id:costume_id,_token:token},
+      type: 'GET',
+      url: '/costume/favourite/'+costume_id,
       context: this,
       success: function(response){
        if(response.is_user_fav=="1"){

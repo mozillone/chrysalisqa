@@ -18,7 +18,7 @@
 				<div class="col-md-12 col-sm-12 col-xs-12 chat-tl-dv">
 					<div class="list-sec-rm">
 						<div class="col-md-6">
-							<p class="list-sec-rm1 fav_costume">MY MESSAGES (0)</p>
+							<p class="list-sec-rm1 fav_costume">MY MESSAGES ({{ $msg_count }})</p>
 						</div>
 						<div class="col-md-6 text-right pull-right back-link">
 							<a href="/dashboard">Back to My Account</a>
@@ -31,18 +31,25 @@
 			<div class="row">
 				<div class="col-md-2 col-xs-12">
 					<ul class="nav nav-tabs tabs-left">
-						<li id="inbox_sidebar" class="active"><a href="{{URL::to('conversations')}}" data-toggle="tab">Inbox<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-						<li id="sent_sidebar" ><a href="{{URL::to('conversations')}}" data-toggle="tab">Sent<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+						@php($prev_route = app('router')->getRoutes()->match(app('request')->create(URL::previous()))->getName())
+						<li id="inbox_sidebar" @if($prev_route  == 'conversations') class="active" @endif><a href="{{ url('conversations') }}">Inbox ({{$msgs_inbox[0]->count_dt}})<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+						<li id="sent_sidebar" @if($prev_route == 'sendbox') class="active" @endif><a href="{{ url('sendbox') }}">Sent ({{$msgs_sent[0]->count_dt}})<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
 					</ul>
 				</div>
 				<div class="col-md-10 col-xs-12">
 					<div class="chat conversation-chat">
 						<div class="chat-header clearfix">
-							<?php //echo $user;die; ?>
+							<?php //echo"<pre>"; print_r($get_con); exit; ?>
 							<div class="chat-about">
 								<h4>{{@$get_con->subject}}</h4>
 								@if(isset($user))
-								<div class="chat-with">Between you and <span class="message-data-name user-name"> {{@$user->display_name}} </span></div>
+								<div class="chat-with">Between you and <span class="message-data-name user-name"> 
+									@if(!empty($user->display_name))
+										{{@$user->display_name}}
+									@else
+										{{@$user->username}}
+									@endif
+								 </span></div>
 								@else
 								<div class="chat-with">No Thread Selected</div>
 								@endif
@@ -60,8 +67,10 @@
                                     $listingImage = URL::asset('/costumers_images/default-placeholder.png');
                                 }
                                 ?>
+                                <!-- @if($get_con->type != "order")
 								<div class="msg_order_imge"><a href="{{ URL::to('/product').$get_con->url_key }}"><img src="<?=$listingImage;?>" alt="avatar"></a></div>
-								<li><p class="orders_singles_views">@if($get_con->type == 'request_a_bag') Ref no @else Product @endif#: <br>{{@$get_con->type_id}}</p></li>
+								@endif -->
+								<li><p class="orders_singles_views">@if($get_con->type == 'request_a_bag') Ref no @elseif($get_con->type == "order") Order Id @else Product Id @endif#: <br> {{@$get_con->type_id}}</p></li>
 							</ul>
 						</div> <!-- end chat-header -->
 						@yield('content')
@@ -102,9 +111,9 @@
             alert(data.sender.name + " - '" + data.message + "'");
 		}
         var msgshow = function(data) {
-            var html = '<li id="message-' + data.id + '">' +
+            var html = '<hr><li id="message-' + data.id + '">' +
 			'<div class="message-data row">' +
-			'<div class="col-md-3 col-sm-3 col-xs-12">' +
+			'<div class="col-md-3 col-sm-4 col-xs-12">' +
 			'<span class="message-data-name" >' +
 			'@if(!empty('+ Auth::user()->user_img +')) '+
 			'<img src="{{asset("profile_img/resize")}}<?php echo "/".'+ Auth::user()->user_img +' ?>"> ' +
@@ -113,7 +122,7 @@
 			'</span>' +
 			'<span class="message-data-name user-name1111" >'+ data.sender.display_name +'</span>' +
 			'</div>' +
-			'<div class="col-md-7 col-sm-7 col-xs-12">' +
+			'<div class="col-md-7 col-sm-6 col-xs-12">' +
 			'<div class="message other-message">' +
 			'' + data.message +'' +
 			'</div>' +
@@ -122,7 +131,7 @@
 			'<span class="message-data-time" >1 Second ago</span> &nbsp; &nbsp;' +
 			'</div>' +
 			'</div> ' +       
-			'</li>';
+			'</li><hr>';
             $('#talkMessages').append(html);
 		}
         $('#sent_sidebar').click(function(){

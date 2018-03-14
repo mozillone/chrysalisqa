@@ -108,7 +108,7 @@ class OrdersController extends Controller {
           }
         }
         }
-         $orders = DB::select('SELECT DATE_FORMAT(ord.created_at,"%m/%d/%Y %h:%i:%s") as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id  '.$where.' GROUP BY ord.order_id ORDER BY `order_id` DESC');
+         $orders = DB::select('SELECT DATE_FORMAT(ord.created_at,"%m/%d/%Y %h:%i:%s") as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status, ost.track_no as label,ost.carrier_type as carrier_type, (select count(ostt.order_id) from cc_order_ship_track as ostt where ostt.order_id = ord.order_id) as order_cnt FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id LEFT JOIN cc_order_ship_track as ost on ord.order_id=ost.order_id  '.$where.' GROUP BY ord.order_id ORDER BY `order_id` DESC');
         return response()->success(compact('orders'));
   
     }
@@ -679,7 +679,7 @@ class OrdersController extends Controller {
     public function orderTransactionsData(Request $request,$order_id)
     {
        $req=$request->all();   
-        $transactions = DB::select('SELECT id,CONCAT(UCASE(LEFT(type, 1)), SUBSTRING(type, 2)) as transaction_type,CONCAT(UCASE(LEFT(status, 1)), SUBSTRING(status, 2)) as transaction_status,DATE_FORMAT(created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",FORMAT(amount,2)) as price  FROM `cc_transactions` WHERE `order_id`='.$order_id.' ORDER BY `id` DESC');
+        $transactions = DB::select('SELECT id,CONCAT(UCASE(LEFT(type, 1)), SUBSTRING(type, 2)) as transaction_type,CONCAT(UCASE(LEFT(status, 1)), SUBSTRING(status, 2)) as transaction_status,DATE_FORMAT(created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",FORMAT(amount,2)) as price  FROM `cc_transactions` WHERE `order_id`='.$order_id.' GROUP BY order_id ORDER BY `id` DESC');
         return response()->success(compact('transactions'));
   
     }
@@ -687,11 +687,12 @@ class OrdersController extends Controller {
     public function myCostumesListData(Request $request)
     {
         $req=$request->all();
-        $where='where cst.created_by='.Auth::user()->id.'';
+        //echo "<pre>"; print_r($req); exit;
+        $where='where cst.created_by='.Auth::user()->id.' and cst.deleted_status = 0 ';
         $having='';
         if(!empty($req['search'])){
-           if(!empty($req['search']['costume_name']) ){
-              $where.=' AND dscr.name LIKE "%'.$req['search']['costume_name'].'%"';
+          if(!empty($req['search']['costume_name']) ){
+            $where.=' AND dscr.name LIKE "%'.$req['search']['costume_name'].'%"';
           }
           if (!empty($req['search']['from_date'])) {
             $where .= ' AND  cst.created_at >="'.date('Y-m-d 00:00:01', strtotime($req['search']['from_date'])).'"';
@@ -700,12 +701,12 @@ class OrdersController extends Controller {
             $where .= ' AND  cst.created_at  <= "'.date('Y-m-d 23:59:59', strtotime($req['search']['date_end'])).'"';
           }
           if(isset($req['search']['status'])){
-          if($req['search']['status']!=""){
-              $where.=' AND cst.status="'.$req['search']['status'].'"';
+            if($req['search']['status']!=""){
+                $where.=' AND cst.status="'.$req['search']['status'].'"';
+            }
           }
         }
-        }
-       $my_costumes = DB::Select('SELECT cst.costume_id,dscr.name,CONCAT(UCASE(LEFT(cst.status, 1)),LCASE(SUBSTRING(cst.status, 2))) as status,DATE_FORMAT(cst.created_at,"%m/%d/%Y %h:%i:%s") as date from cc_costumes as cst LEFT JOIN cc_costume_description as dscr on dscr.costume_id=cst.costume_id '.$where.'');
+       $my_costumes = DB::Select('SELECT cst.costume_id,dscr.name,CONCAT(UCASE(LEFT(cst.status, 1)),LCASE(SUBSTRING(cst.status, 2))) as status,DATE_FORMAT(cst.created_at,"%m/%d/%Y %h:%i:%s") as date from cc_costumes as cst LEFT JOIN cc_costume_description as dscr on dscr.costume_id=cst.costume_id '.$where.' order by cst.costume_id desc');
         return response()->success(compact('my_costumes'));
   
     }

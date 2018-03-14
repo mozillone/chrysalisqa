@@ -17,6 +17,7 @@ use Illuminate\Filesystem\Filesystem;
 use App\Costumes;
 use App\Helpers\Site_model;
 use Mail;
+use App\User;
 
 class TicketController extends Controller
 {
@@ -60,17 +61,32 @@ class TicketController extends Controller
 
 
 		 return Datatables::of($tickets)
-      ->addColumn('actions', function ($ticket) {
-        return '<a href="/manage-tickets/'.$ticket->id.'" class="btn btn-xs btn-primary" ><i class="fa fa-pencil-square-o"></i> </a>
-                     <a href="javascript:void(0);"  class="btn btn-xs btn-danger delete_user" onClick="deletTicket('.$ticket->id.');" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i> </a>
-                    ';
-      })
+      
+        ->addColumn('actions', function ($ticket) {
+          if(Auth::user()->role_id == "2"){
+          return '<a href="/manage-tickets/'.$ticket->id.'" class="btn btn-xs btn-primary" ><i class="fa fa-pencil-square-o"></i> </a>';
+          }
+          return '<a href="/manage-tickets/'.$ticket->id.'" class="btn btn-xs btn-primary" ><i class="fa fa-pencil-square-o"></i> </a>
+                       <a href="javascript:void(0);"  class="btn btn-xs btn-danger delete_user" onClick="deletTicket('.$ticket->id.');" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i> </a>
+                      ';
+        })
       ->editColumn('status', function ($ticket) {
-        $a = $ticket->ticket_status == 1?'checked':'';
+        /*$a = $ticket->ticket_status == 1?'checked':'';
+        
         return '<label class="switch">
                                     <input type="checkbox" '.$a.' class="status" id="'.$ticket->id.'" onClick="ticketStatus('.$ticket->id.','.$ticket->ticket_status.');">
                                     <div class="slider round"></div>
-                                </label>';
+                                </label>';*/
+        if($ticket->ticket_status == '1'){
+          $status = "Open";
+        }
+        else if($ticket->ticket_status == '0'){
+          $status = "Pending";
+        }
+        else{
+          $status = "Closed";
+        }
+        return "<span>".$status."</span>";
       })
       ->make(true);
 
@@ -188,7 +204,9 @@ public function insertSupportMessage(Request $request){
         $ticketslist->where('users.display_name', 'LIKE', "%".$customer_name."%");
       }
       if($keyword!=""){
-        $ticketslist->where('tickets.ticket_reason', 'LIKE', "%".$keyword."%");
+        //$ticketslist->where('tickets.ticket_reason', 'LIKE', "%".$keyword."%");
+        $ticketslist->where('tickets.order_id', 'LIKE', "%".$keyword."%");
+        
       }
       $tickets=$ticketslist->get();
 
@@ -200,11 +218,21 @@ public function insertSupportMessage(Request $request){
                     ';
       })
       ->editColumn('status', function ($ticket) {
-        $a = $ticket->ticket_status == 1?'checked':'';
+        /*$a = $ticket->ticket_status == 1?'checked':'';
         return '<label class="switch">
                                     <input type="checkbox" '.$a.' class="status" id="'.$ticket->id.'" onClick="ticketStatus('.$ticket->id.','.$ticket->ticket_status.');">
                                     <div class="slider round"></div>
-                                </label>';
+                                </label>';*/
+        if($ticket->ticket_status == '1'){
+          $status = "Open";
+        }
+        else if($ticket->ticket_status == '0'){
+          $status = "Pending";
+        }
+        else{
+          $status = "Closed";
+        }
+        return "<span>".$status."</span>";
       })
       ->make(true);
 
@@ -268,7 +296,7 @@ public function insertSupportMessage(Request $request){
         't.ticket_type as ticket_type',
         't.ticket_status as ticket_status',
         't.ticket_priority as ticket_priority',
-        'u.display_name as username'
+        'u.display_name as username','u.email as support_email'
         )
       ->where('t.id',$ticketid)->first();
       
@@ -283,11 +311,19 @@ public function insertSupportMessage(Request $request){
 
 
           /*****Mail to admin code starts here****/
-          $sent=Mail::send('emails.tickets_status',array("data"=>$all_data), function ($message) use($req) {
+          /*$sent=Mail::send('emails.tickets_status',array("data"=>$all_data), function ($message) use($req) {
               $mailTo = config('services.chyrsalis_mail_add.support_email');
           $message->to($mailTo);
           $message->subject('Tickets');
+          });*/
+          /*****Mail to support users code starts here****/
+          $support_email = $ticket_details->support_email;
+          $sent=Mail::send('emails.ticket_assigned',array("data"=>$all_data), function ($message) use($support_email) {
+          $message->to($support_email);
+          $message->subject('Tickets');
           });
+          
+
       Session::flash('success', 'Ticket Assigned Successfully');
       return Redirect::back();
 
@@ -302,27 +338,46 @@ public function insertSupportMessage(Request $request){
   }
   /*****Update Support Message given by supporter***/
   public function updateSupportMessage(Request $request){
-     $req=$request->all();
-    
-     $status=$request->status;
-     $ticketid=$request->ticketid;
-     $where=array('id'=>$ticketid);
-     $updatearray=array('ticket_status'=>$status,
-      'ticket_updateddate'=>date("Y-m-d H:i:s"));
-     $update_ticket=DB::table('tickets')->where($where)->update($updatearray);
-     if($update_ticket){
+    $req=$request->all();
+    $status=$request->status;
+    $ticketid=$request->ticketid;
+    $update_ticket = DB::table("tickets")->where("id",$ticketid)->update([
+      'ticket_status'=>$status,
+      'ticket_updateddate'=>date("Y-m-d H:i:s")
+    ]);
+    if($update_ticket){
+      $ticket_details=DB::table('tickets as t')
+        ->leftJoin('users as u','u.id','=','t.ticket_assigned_to')
+        ->select('t.ticket_id as ticket_id',
+        't.order_id as order_id',
+        't.ticket_type as ticket_type',
+        't.ticket_status as ticket_status',
+        't.ticket_priority as ticket_priority',
+        'u.display_name as username','u.email as support_email'
+        )
+        ->where('t.id',$ticketid)->first();
+
+      $all_data = array();  
+      $all_data['ticket_id'] = $ticket_details->ticket_id;
+      $all_data['order_id'] = $ticket_details->order_id;
+      $all_data['ticket_type'] = $ticket_details->ticket_type;
+      $all_data['ticket_status'] = $ticket_details->ticket_status;
+      $all_data['ticket_priority']=$ticket_details->ticket_priority;
+      $all_data['username']=$ticket_details->username;
+
+      $sent=Mail::send('emails.tickets_status',array("data"=>$all_data), function ($message) use($req) {
+      $mailTo = config('services.chyrsalis_mail_add.support_email');
+      $message->to($mailTo);
+      $message->subject('Tickets');
+      });
       Session::flash('success', 'Status Updated Successfully');
       return "success";
-     }else{
+    }
+    else{
       Session::flash('success', 'Unable To Update Status');
       return "fail";
-      
-
     }
-
-  }
-
-    
+  } 
 }
 
 

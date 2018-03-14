@@ -1,7 +1,26 @@
+$(document).on('change','#price', function(){
+        var number = $('#price').val(); 
+        if(number.indexOf('.') == "-1"){
+            $(this).val($(this).val()+".00");
+        }
+
+var donate_percent = $('#donate_charity').val();
+var cuurent_one = donate_percent.replace("%",'');
+var str = cuurent_one.replace(/\s/g, ''); 
+var price = $('#price').val();
+var total = (price*str)/100;
+if (donate_percent=="none") {
+var total = 0.00;
+}
+var amount = parseFloat(total).toFixed(2);
+$('#hidden_donation_amounts').val(amount);
+$('#dynamic_percent_amounts').html("$"+amount);
+});
+
 $('#categoryname').on('change',function(){
 
 var id=$(this).val();//catgeory id
- if(id == 74){
+    if(id == 74){
       	$("#gender option[value='pet']").remove();
     }else{
 		if ( $("#gender option[value='pet']").length == 0 ){
@@ -56,7 +75,7 @@ $('#drag_n_drop_1').click(function(){
     $('input[name=file1]').val('');
     $('input[name=hidden]').attr('value','');
     $(".Backview").attr('value','');
-    $("#file1").removeattr('style');
+    $("#file1").removeAttr('style');
 });
 
 $('#shipping').change(function(){
@@ -72,12 +91,13 @@ $('#shipping').val('16');
 });
 $('#drag_n_drop_2').click(function(){
 
-
 $('#back_image_id').remove();
 $('#back_view').find('li').remove();
 $('#drag_n_drop_2').css('display','none');
 $('input[name=file2]').val('');
 $('input[name=hidden]').attr('value','');
+$(".drop_zone2").addClass('additional');
+$("#file2").removeAttr('style');
 
 });
 
@@ -93,10 +113,11 @@ $('#details_view').find('li').remove();
 $('#drag_n_drop_3').css('display','none');
 $('input[name=file3]').val('');
 $('input[name=file3]').attr('value','');
-$(".drop_uploader").addClass('additional');
+$(".drop_zone3").addClass('additional');
+$("#file3").removeAttr('style');
 });
 //donate amount percentage calculation
-$('#donate_charity').change(function(){
+/*$('#donate_charity').change(function(){
 var donate_percent = $(this).val();
 var price = $('#price').val();
 var total = (price*donate_percent)/100;
@@ -106,16 +127,8 @@ var total = 0.00;
 $('#hidden_donation_amount').val(parseFloat(total).toFixed(2));
 $('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
 });
-$('#price').keyup(function(){
-var donate_percent = $('#donate_charity').val();
-var price = $('#price').val();
-var total = (price*donate_percent)/100;
-if (donate_percent=="none") {
-var total = 0.00;
-}
-$('#hidden_donation_amount').val(parseFloat(total).toFixed(2));
-$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
-});
+*/
+ 
 //numeric condition
 $("#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#Length,#Width,#Height,#make_costume_time1").on("keyup", function(){
 var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
@@ -220,12 +233,12 @@ $('#other_organzation_check').css('display','none');
 
         if (file1 == '') {
             $('input[name=file1]').css('border', '1px solid red');
-            $('#file1_error').html('Upload Front View');
+            $('#file1_error').html('Upload Front');
             str = false;
         }
         if (file2 == '') {
             $('input[name=file2]').css('border', '1px solid red');
-            $('#file2_error').html('Upload Back View');
+            $('#file2_error').html('Upload Back');
             str = false;
         }
          
@@ -280,7 +293,7 @@ $('#other_organzation_check').css('display','none');
         var heightin = $('#height-in').val();
         var weightlbs = $('#weight-lbs').val();
         var chestin = $('#chest-in').val();
-        var waistlbs = $('#waist-lbs').val();
+        var waistlbs = $('#waist-inches').val();
         var costumecondition = "";
         var qualitycostume = "";
         var usercostume = "";
@@ -288,13 +301,55 @@ $('#other_organzation_check').css('display','none');
         //var cosplay = "";
         var uniquefashion = "";
 
-      
-        if(category == 68){
+        var cleaned = $("#cleaned").val();
+         
+        var condition_val =  $('input[name=condition]:checked').val(); 
+        
+        /*if(condition_val == 'good' || condition_val == 'like_new')
+        {
+            if(cleaned == "")
+            {
+                 $('#cleanederror').html('This field is required.');
+                 str = false;
+            }           
+        }*/
+
+      if(size == 'custom'){
+            if(heightft == ""){
+                $('#height-ft').css('border', '1px solid red');
+                $('#heighterror').html('This field is required.');
+                str = false;
+            }
+            if(heightin == ""){
+                $('#height-in').css('border', '1px solid red');
+                $('#heighterror').html('This field is required.');
+                str = false;
+            }
+
+            if(weightlbs == ""){
+                $('#weight-lbs').css('border', '1px solid red');
+                $('#weighterror').html('This field is required.');
+                str = false;
+            }
+
+            if(chestin == ""){
+                $('#chest-in').css('border', '1px solid red');
+                $('#chesterror').html('This field is required.');
+                str = false;
+            }
+
+            if(waistlbs == ""){
+                $('#waist-inches').css('border', '1px solid red');
+                $('#waisterror').html('This field is required.');
+                str = false;
+            }
+        }
+        /*if(category == 68){
             if($('input[name="fimquality"]:checked').next().html() == 'No'){
                 $('#qualityerror').html('The Film Production category is limited to costumes that have been used on Film and Television sets.');
                 str = false;
             }
-        }
+        }*/
 
         if (subcategory == "") {
             $('#subcategory').css('border', '1px solid red');
@@ -361,12 +416,12 @@ $('#other_organzation_check').css('display','none');
             }
         }*/
 
-          if ($('input[name=make_costume]:checked').val() == 30) {
-              if ($('input[name=make_costume_time]').val() == "") {
-                  $('#usercostumeerror').html('This field is required.');
-                  str = false;
-              }
+      if ($('input[name=make_costume]:checked').val() == 30) {
+          if ($('#make_costume_time1').val() == "" || $("#make_costume_time1").val() == null) {
+              $('#usercostumeerror').text('This field is required.');
+              str = false;
           }
+      }
      
         if (str == true) {
             $('#step3').addClass('active');
@@ -408,7 +463,7 @@ var Width = $('#Width').val();
 var Height = $('#Height').val();
 
 var pounds = $('#pounds').val();
-    var ounces = $('#ounces').val();
+    //var ounces = $('#ounces').val();
 if (price == "") {
 $('#price').css('border','1px solid red');
 $('#priceerror').html('This field is required.');
@@ -420,11 +475,11 @@ str=false;
       $('#poundserror').html('This field is required.');
       str=false;
     }
-    if (ounces == "") {
+    /*if (ounces == "") {
       $('#ounces').css('border','1px solid red');
       $('#ounceserror').html('This field is required.');
       str=false;
-    }
+    }*/
 
 if (str == true) {
     $('#step4').addClass('active');
@@ -453,51 +508,42 @@ $('#preferences_div').css('display','none');
 });
 
 $('#preferences_finished').click(function(a){
+    
 a.preventDefault();
 str=true;
 
 $('#handlingtime,#returnpolicy,#donate_charity,#charity_name,#organzation_name').css('border','');
 $('#handlingtimeerror,#returnpolicyerror,#donate_charityerror,#charity_nameerror,#organzation_nameerror').html('');
 var handlingtime  = $('#handlingtime').val();
-var returnpolicy  = $('#returnpolicy').val();
+var returnpolicy  = $('input[name=returnpolicy]:checked').val();
 var donate_charity = $('#donate_charity').val();
 var atLeastOneIsChecked = $('input[name="another_charity"]:checked').length > 0;
 var charity_name = $('input[name="charity_name"]:checked').length > 0;
 var organzation_name = $('#organzation_name').val();
-
-if (handlingtime == "") {
-$('#handlingtime').css('border','1px solid red');
-$('#handlingtimeerror').html('This field is required.');
-str=false;
-}
-if (returnpolicy == "") {
-$('#returnpolicy').css('border','1px solid red');
-$('#returnpolicyerror').html('This field is required.');
-str=false;
-}
-if (donate_charity == 0) {
-/*$('#donate_charity').css('border','1px solid red');
-$('#donate_charityerror').html('Select Donate Amount');*/
-str=true;
-}
-if (donate_charity != "" && donate_charity != 0) {
-        $('#charity_nameerror').html('Please select any Charity.');
-        str=false;
-      if (charity_name == true) {
-           $('#charity_nameerror').html('');
-         str=true; 
+        if(parseInt(donate_charity) == 0 && charity_name != '' ){
+            $('#donate_charity').css('border', '1px solid red');
+            $('#donate_charityerror').html('Select Donation Amount');
+            str = false;
+           // console.log('1');
+        }else if(parseInt(donate_charity) != 0 && charity_name == '' ){
+            $('#charity_nameerror').html('Please select any Charity.');
+            str = false;
+            //console.log('2');
         }
-      else if($('#another_charity').prop("checked") == true){
-      	$('#charity_nameerror').html('');
-         str=true;
-      }
-    }
-/*if($('input[name=charity_name]:checked').length<=0){
-$('#charity_name').css('border','1px solid red');
-$('#charity_nameerror').html('Select Donate to');
-str=false;
 
-}*/
+        if (handlingtime == '' || handlingtime == null) {
+            $('#handlingtime').css('border', '1px solid red');
+            $('#handlingtimeerror').html('This field is required.');
+            str = false;
+            //console.log('3');
+        }
+
+        if (returnpolicy == undefined || returnpolicy == '' || returnpolicy == null) {
+            $('#returnpolicyerror').html('This field is required.');
+            str = false;
+            //console.log('4');
+        }
+        //console.log('str='+str); return false;
 if (atLeastOneIsChecked == true) {
 $('#organzation_name').css('border','1px solid red');
 $('#organzation_nameerror').html('This field is required.');
@@ -511,6 +557,7 @@ str = true;
 if (str == true) {
 $('#preferences_finished').html("Submitting");
 
+
  
 $('#ajax_loader').css('display','block');
 $.ajax({
@@ -522,8 +569,8 @@ cache: false,
 processData: false,
     success: function(response) {
         if (response.msg == "success") {
-   
             $('#ajax_loader').hide();
+            $("#progressbar_maintitle").hide();
             $('#success_page').css('display','block');
             $('#upload_div').css('display','none');
             $('#costume_description').css('display','none');
@@ -548,7 +595,7 @@ processData: false,
             $('#pin_url').attr('data-title', response.quote);
             $('#pin_url').attr('data-image', response.first_pic);
 
-            var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.share_url)+"&caption="+encodeURIComponent(response.quote)+"&canonicalUrl=http%3A%2F%2Fchrysalisqa.local.dotcomweavers.net%2Fcostume%2Fcreate&shareSource=tumblr_share_button";
+            var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.first_pic)+"&caption="+encodeURIComponent(response.quote+" "+response.share_url)+"&canonicalUrl="+encodeURIComponent(response.first_pic)+"&shareSource=tumblr_share_button";
             
             $('#tumblr_url').val(tumb_url);
             
@@ -583,10 +630,10 @@ $("html, body").animate({ scrollTop: 70 }, "slow");
 return false;
 });
 
-$('input[name=charity_name]').click(function(){
+/*$('input[name=charity_name]').click(function(){
   $('#another_charity').prop('checked','');
   $('#other_organzation_check').css('display','none');
-});
+});*/
 
 
     $('#keywords_tag').keydown(function(e){
@@ -602,10 +649,8 @@ $('input[name=charity_name]').click(function(){
     {
         var val = $('#keywords_tag').val();
         if(val != ""){
-            var div_cont= $('#count').html().split(' '); 
-            console.log(div_cont[0]);   
+            var div_cont= $('#count').html().split(' ');              
             var total =10-$(".keywords_p").length;
-
             if (total > 0) {
                 if (val.indexOf(',') !== -1) {
                     var segments = val.split(',');
@@ -613,15 +658,16 @@ $('input[name=charity_name]').click(function(){
                     $('#count').html(total-count+ " left");
                     if (total == 1) {
                         var hashtag = '#'+segments[0];
+                        //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
                         $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p> ');
-                        $('#keywords_tag').prop('value','');
-                       // $(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
+                        $('#keywords_tag').prop('value','');    
                         $('#input_'+total+'').val(hashtag);
                         $('#count').html(total-1+ " left");
                     }else{
                         $.each(segments,function(i){
                             var hashtag = '#'+segments[i];
-                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span></p>');                           
+                            //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
+                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span></p>');                                                         
                             $('#input_'+total+'').val(hashtag);       
                             $('#keywords_tag').prop('value','');
                             total--;
@@ -629,11 +675,11 @@ $('input[name=charity_name]').click(function(){
                     }
                 }else{
                     var hashtag = '#'+val;
+                    //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
                     $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p><input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
-                    
                     $('#keywords_tag').prop('value','');
                     $('#input_'+total+'').val(hashtag);
-                    $('#count').html(total-1+ " left");
+                    $('#count').html(total-1+ " left"); 
                 }
             }else{
                 $('#keywords_add').hide();
@@ -662,7 +708,7 @@ $('input[name=charity_name]').click(function(){
 //front view image jquery code
 
 $(document).on("change", "#file1", function() {
-  
+   $("#zoom-level").val('');
     $(".modal-footer").show();
     var imgdata = '';
     var imgVal = $(this).val();
@@ -671,8 +717,8 @@ $(document).on("change", "#file1", function() {
         if (typeof (FileReader) != "undefined") {
             var dvPreview = $("#dvPreview");
             dvPreview.html("");
-            $($(this)[0].files).each(function (index, element ) {
-                var file = $(this);
+            //$($(this)[0].files).each(function (index, element ) {
+                var file = this.files[0];
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var carouselItems = $("<div class='item'></div>");
@@ -701,6 +747,8 @@ $(document).on("change", "#file1", function() {
                             viewMode:1,
                             aspectRatio: 3 / 5,
                             center:false,
+                            rotatable: true,
+                            checkOrientation: true,
                             data: {
                                 width: 198,
                                 height:298
@@ -720,14 +768,24 @@ $(document).on("change", "#file1", function() {
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+                    $(document).on("change", "#zoom-level", function() {
+                        $image.cropper('zoomTo', 0.1);
+                        var current_zoom = $(this).val();
+                        $image.cropper('zoom', current_zoom);
+                    });
                     $(document).on("click", "#crop", function() {
+                        if($image.cropper('getCroppedCanvas')==null){
+                            imgdata = reader.readAsDataURL(file);
+                        }else{
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                        }
                         $("#myModal").modal('hide');
-                        imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                        //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone1").find("img.result").remove();
                         var FrontView = '<img src="'+imgdata+'" class="result">';
                         $(".drop_zone1").append(FrontView);
                         $(".Forntview").attr('value',imgdata);
-                        $(".result").attr("src", imgdata);
+                        //$(".result").attr("src", imgdata);
                         $("#selected_file_0").remove();
                         $(".result").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
                         //$("#file1").hide();
@@ -737,8 +795,8 @@ $(document).on("change", "#file1", function() {
                     });
 
                 }
-                reader.readAsDataURL(file[0]);
-            });
+                reader.readAsDataURL(file);
+            //});
         } else {
             alert("This browser does not support HTML5 FileReader.");
         }
@@ -749,6 +807,7 @@ $(document).on("change", "#file1", function() {
 
 //second file image code starts here
 $(document).on("change", "#file2", function() {
+     $("#zoom-level2").val('');
     $(".modal-footer").show();
     var imgVal = $(this).val();
     if (imgVal != "") {
@@ -756,8 +815,8 @@ $(document).on("change", "#file2", function() {
         if (typeof (FileReader) != "undefined") {
             var dvPreview = $("#dvPreview2");
             dvPreview.html("");
-            $($(this)[0].files).each(function (index, element ) {
-                var file = $(this);
+            //$($(this)[0].files).each(function (index, element ) {
+                var file = this.files[0];
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var carouselItems = $("<div class='item'></div>");
@@ -786,6 +845,8 @@ $(document).on("change", "#file2", function() {
                             viewMode:1,
                             aspectRatio: 3 / 5,
                             center:false,
+                            rotatable: true,
+                            checkOrientation: true,
                             data: {
                                 width: 198,
                                 height:298
@@ -805,26 +866,40 @@ $(document).on("change", "#file2", function() {
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+                    $(document).on("change", "#zoom-level2", function() {
+                        $image.cropper('zoomTo', 0.1);
+                        var current_zoom = $(this).val();
+                        $image.cropper('zoom', current_zoom);
+                    });
 
                     $(document).on("click", "#crop2", function() {
+                        if($image.cropper('getCroppedCanvas')==null){
+                            imgdata = reader.readAsDataURL(file);
+                        }else{
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                        }
                         $("#myModal2").modal('hide');
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                        //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone2").find("img.result2").remove();
                         var Backview = '<img src="'+imgdata+'" class="result2">';
                         $(".drop_zone2").append(Backview);
                         $(".Backview").attr('value',imgdata);
-                        $(".result2").attr("src", imgdata);
+                        //$(".result2").attr("src", imgdata);
                         $("#selected_file_1").remove();
-                        $(".result2").css({ "width": "198px", "height": "298px", "position": "absolute", "top": "-10px","left":"0px" });
+                        $(".result2").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
                         //$("#file2").hide();
                         $(this).parents().find("#back_view").children("#drag_n_drop_2").removeClass('hide');
                         $('.Backview').attr('data-value',2);
+                        if($(".drop_zone2").hasClass('additional'))
+                        {
+                          $(".result2").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
+                        }
 
                     });
 
                 }
-                reader.readAsDataURL(file[0]);
-            });
+                reader.readAsDataURL(file);
+            //});
         } else {
             alert("This browser does not support HTML5 FileReader.");
         }
@@ -836,6 +911,7 @@ $(document).on("change", "#file2", function() {
 //additional file uoploading functionality
 
 $(document).on("change", "#file3", function() {
+     $("#zoom-level3").val('');
     $(".modal-footer").show();
     var imgVal = $(this).val();
     if (imgVal != "") {
@@ -843,8 +919,8 @@ $(document).on("change", "#file3", function() {
         if (typeof (FileReader) != "undefined") {
             var dvPreview = $("#dvPreview3");
             dvPreview.html("");
-            $($(this)[0].files).each(function (index, element ) {
-                var file = $(this);
+            //$($(this)[0].files).each(function (index, element ) {
+                var file = this.files[0];
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var carouselItems = $("<div class='item'></div>");
@@ -870,9 +946,11 @@ $(document).on("change", "#file3", function() {
                             cropBoxResizable:false,
                             zoomOnTouch:false,
                             setDragMode:'move',
-                             viewMode:1,
+                            viewMode:1,
                             aspectRatio: 3 / 5,
-                            center:false,
+                            center:true,
+                            rotatable: true,
+                            checkOrientation: true,
                             data: {
                                 width: 198,
                                 height:298
@@ -892,27 +970,38 @@ $(document).on("change", "#file3", function() {
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+                    $(document).on("change", "#zoom-level3", function() {
+                        $image.cropper('zoomTo', 0.1);
+                        var current_zoom = $(this).val();
+                        $image.cropper('zoom', current_zoom);
+                    });
                     $(document).on("click", "#crop3", function() {
+                        if($image.cropper('getCroppedCanvas')==null){
+                            imgdata = reader.readAsDataURL(file);
+                        }else{
+                            imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                        }
                         $("#myModal3").modal('hide');
-                        $('.Additional').attr('data-value',3);
-                        var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                        //imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".drop_zone3").find("img.result3").remove();
+                        $('.Additional').attr('data-value',3);
+                        //var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
                         $(".Additional").attr('value',imgdata);
                         var Additional = '<img src="'+imgdata+'" class="result3">';
                         $(".drop_zone3").append(Additional);
-                        $(".result3").attr("src", imgdata);
+                        //$(".result3").attr("src", imgdata);
                         $("#selected_file_2").remove();
-                        $(".result3").css({ "width": "198px", "height": "298px","position":"relative","bottom":"280px" });
+                        $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
                         //$("#file3").hide();
                         $(this).parents().find("#details_view").children("#drag_n_drop_3").removeClass('hide');
                         if($(".drop_zone3").hasClass('additional'))
                         {
-                          $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "0px","left":"0px"});
+                          $(".result3").css({ "width": "198px", "height": "298px","position": "absolute", "top": "-10px","left":"0px"});
                         }
                     });
                 };
-                reader.readAsDataURL(file[0]);
-            });
+                reader.readAsDataURL(file);
+            //});
         } else {
             alert("This browser does not support HTML5 FileReader.");
         }
@@ -942,6 +1031,10 @@ $(document).on('slid.bs.carousel', '.carousel', function () {
     var active_item_index = getActiveItemIndex(items);
     activeCropperObjIndex = active_item_index;
     slider.val(zooms[active_item_index]);
+    if(activeCropperObjIndex >0)
+    {
+        slider.val(2);
+    }
     if(zooms[activeCropperObjIndex] !== -100){
         slider.trigger("input");
     }
@@ -961,13 +1054,13 @@ var zooms = [];
 var activeCropperObjIndex = 0;
 var slider = $(".slider");
 
-$(document).on("click", '#multiCancel', function(){
-    resetCropperValues();
-});
+/*$(document).on("click", '#multiCancel', function(){
+    
+});*/
 //multiple file uploading code
 
 $("#upload-file-selector").on("change",function () {
-
+    slider.val('');
     var imgVal = $(this).val();
     if (imgVal != "") {
         $('#lightbox').modal('show');
@@ -1028,9 +1121,11 @@ $("#upload-file-selector").on("change",function () {
                             cropBoxResizable: false,
                             zoomOnTouch: false,
                             setDragMode: 'move',
-                             viewMode:1,
+                            viewMode:1,
                             aspectRatio: 3 / 5,
                             center: false,
+                            rotatable: true,
+                            checkOrientation: true,
                             data: {
                                 width: 198,
                                 height: 298
@@ -1064,10 +1159,23 @@ $(document).on("input", ".slider", function () {
     zooms[activeCropperObjIndex] = current_zoom;
     $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
 });
+$(document).on("change", ".slider", function () {
+    $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
+    var current_zoom = $(this).val();
+    zooms[activeCropperObjIndex] = current_zoom;
+    $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
+});
 
 $(document).on("click", ".saveMultiple", function () {
     $cropper_objs.forEach(function($image, index){
-        var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+        var length = $("#other_thumbnails").find("div").length;
+        if(length == 0){
+            index = 1;
+        }
+        else{
+            index = length + 1;
+        }
+        var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
         $('#other_thumbnails').append("<div index='"+index+"' class=\"col-md-4 col-sm-4 col-xs-12 multi_div\"><img src= " + imgdata + " class=\"multi_thumbs pip\">" +
             "<br/><span class=\"remove\">" +
             "<i class=\"fa fa-times-circle\"></i>" +
@@ -1081,6 +1189,8 @@ $(document).on("click", ".saveMultiple", function () {
 
 $(document).on("click",".remove",function()
 {
+    $("#upload-file-selector").val('');
+    $("#dvPreviewMultiple").html('');
     var index = $(this).parent().attr("index");
 
     $cropper_objs.splice(index, 1);
@@ -1123,6 +1233,7 @@ $(document).on("click","#drag_n_drop_1",function()
     $(this).siblings.find("#file1").removeattr('style');
     $(this).siblings().find('img').remove();
     $(this).siblings().find("input[type='hidden']").attr('value','');
+    $(".result").find("img").remove();
 
 });
 
@@ -1138,6 +1249,7 @@ $(document).on("click","#drag_n_drop_2",function()
     $(this).siblings().find("input[type='hidden']").attr('data-id','');
     $(this).siblings().find("input[type='hidden']").attr('data-value','');
     $("#file2").css({"display":"block !important"});
+    $(".result2").find("img").remove();
 });
 
 
@@ -1151,17 +1263,30 @@ $(document).on("click","#drag_n_drop_3",function()
     $(this).siblings().find("input[type='hidden']").attr('data-id','');
     $(this).siblings().find("input[type='hidden']").attr('data-value','');
     $("#file3").css({"display":"block !important"});
+    $(".result3").find("img").remove();
 });
 
 
    $(document).on("click", "#cancel1", function() {
+        $("#file1").val('');
+        $("#dvPreview").html('');
         $(this).parents().find("#front_view").children("#drag_n_drop_1").addClass('hide');
     });
 
     $(document).on("click", "#cancel2", function() {
+        $("#file2").val('');
+        $("#dvPreview2").html('');
         $(this).parents().find("#back_view").children("#drag_n_drop_2").addClass('hide');
     });
 
     $(document).on("click", "#cancel3", function() {
+        $("#file3").val('');
+        $("#dvPreview3").html('');
         $(this).parents().find("#details_view").children("#drag_n_drop_3").addClass('hide');
     });
+    $(document).on("click", "#multiCancel", function() {
+        $("#upload-file-selector").val('');
+        $("#dvPreviewMultiple").html('');
+        resetCropperValues();
+    });
+    

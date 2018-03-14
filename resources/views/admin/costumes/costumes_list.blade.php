@@ -15,7 +15,7 @@
 {{-- Page content --}}
 @section('content')
  <section class="content-header">
-    <h1>Customes</h1>
+    <h1>Costumes</h1>
     <ol class="breadcrumb">
     <li>
         <a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
@@ -138,7 +138,7 @@
             dataType: 'json',
             success: function(response) {
                 if(response){
-                    table.ajax.reload();
+                    table.ajax.reload(null,false);
                 }
             }
         });
@@ -151,18 +151,18 @@
             dataType: 'json',
             success: function(response) {
                 if(response){
-                    table.ajax.reload();
+                    table.ajax.reload(null,false);
                 }
             }
         });
         }
         var table = '';
   $(function() {
-            table = $('#customes-list-table').DataTable({
+    table = $('#customes-list-table').DataTable({
       "ajax": {
             "url" : "getallcostumes",
            "type": "GET",
-         },
+        },
       "searching": false,
       "pageLength": 25,
       "bLengthChange": false,
@@ -225,7 +225,7 @@
       "targets": [ 7 ],
       "visible": false,
       "searchable": false
-      },{
+     },{
         'bSortable' : false,
         'aTargets' : [ -3, -2, -1 ]
       }],
@@ -280,13 +280,6 @@
 </script>
 
 @stop
-
-
-
-
-
-
-
 
 
 

@@ -13,28 +13,21 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-               DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
-<<<<<<< HEAD
-                             DTColumnBuilder.newColumn('username').withTitle('User Name'),
-                      DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
+              DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+              DTColumnBuilder.newColumn('username').withTitle('User Name'),
+              DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  //DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
-=======
-                             DTColumnBuilder.newColumn('display_name').withTitle('Name'),
-                      DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
-					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					//  DTColumnBuilder.newColumn(null).withTitle('testing').notSortable().renderWith(phone),,
-					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
-					   DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login Time'),
-					  DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
-					  DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
-                      DTColumnBuilder.newColumn(null).withTitle('Status').notSortable().renderWith(activeHtml),,
-                      DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
-                      .renderWith(actionsHtml)
+              DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
+              DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login Time'),
+					    DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
+              DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
+              DTColumnBuilder.newColumn(null).withTitle('Status').notSortable().renderWith(activeHtml),,
+              DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().renderWith(actionsHtml)
                     ], 
     $scope.displayTable = true;
-     function getCheckboxes(data) {
+    function getCheckboxes(data) {
        return '<input type="checkbox" class="rowsChecked" name="user_checkboxes" value='+data.id+' checked>' 
     }
 
@@ -42,7 +35,7 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
          var records='<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="left" title="" href="/customer-edit/'+data.id+'" data-original-title="Edit"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;<a class="btn btn-xs btn-warning delete" data-toggle="tooltip" data-placement="top" title="" href="javascript:void(0);" data-original-title="Delete" data-id="'+data.id+'"><i class="fa fa-trash"></i></a>';
          return records;
     }
-   function activeHtml(data, type, full, meta) {
+    function activeHtml(data, type, full, meta) {
       if(data.active!="1"){
     	  return '<label class="switch"><input type="checkbox" ng-click="changeStatus('+data.id+', '+data.active+')" ><div class="slider round"></div></div></label>';
       }else{
@@ -54,17 +47,15 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
 	 return '$0.00';
 	}
 	function isseller(data){
-	
 		 return "No";
-	 
 	}
 	
 	
    
-    function createdRow(row, data, dataIndex) {
-        $compile(angular.element(row).contents())($scope);
-    }
-    $scope.changeStatus=function(userId, status) {
+  function createdRow(row, data, dataIndex) {
+    $compile(angular.element(row).contents())($scope);
+  }
+  $scope.changeStatus=function(userId, status) {
     if(status=="1"){
     	 var user_status = "0";
     }else{
@@ -72,15 +63,12 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
     }
     var params = {"id":userId, "status":user_status};
     UserManagement.changeStatus(params).then(function(response){
-<<<<<<< HEAD
       
-=======
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
     	
     });
   }
     $scope.status = [{'name':"Active",'value':"1"},{'name':"Inactive",'value':"0"}];
-       $scope.usersExportCSV = function(){
+  $scope.usersExportCSV = function(){
           
           var checkboxes = document.getElementsByName("user_checkboxes");
           
@@ -108,40 +96,43 @@ app.controller('UsersController', function($scope,DTOptionsBuilder, DTColumnBuil
               a.click(); 
              
            }); 
+  }
+	$scope.seachUsers= function(search){
+    	UserManagement.getCustomersSearchlist(search).then(function(response){
+    	$scope.dtOptions = DTOptionsBuilder.newOptions()
+    	.withOption('data',response.data.data.users)
+    	.withOption('createdRow', createdRow)
+        .withOption('order', [ ])
+        .withOption('responsive', true)
+        .withOption('bFilter', false)
+        .withOption('lengthChange', false);
+         $scope.dtColumns = [
+             DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
+                     DTColumnBuilder.newColumn('username').withTitle('User Name'),
+                  DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
+			  //DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
+			 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
+			  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),
+			  DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login'),
+			  DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),
+			  DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
+            DTColumnBuilder.newColumn(null).withTitle('Status').notSortable().renderWith(activeSearchHtml),
+            DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
+                  .renderWith(actionsHtml)
+                      ],
+      $scope.displayTable = true;
+
+      });
+  } 
+
+  function activeSearchHtml(data, type, full, meta) {
+      if(data.active!="1"){
+        return '<label class="switch"><input type="checkbox" ng-click="changeStatus('+data.id+', '+data.active+')" ><div class="slider round"></div></div></label>';
+      }else{
+        return '<label class="switch"><input type="checkbox" checked="checked"  ng-click="changeStatus('+data.id+', '+data.active+')" ><div class="slider round"></div></div></label>';
+        
+      }
     }
-    	$scope.seachUsers= function(search){
-        	UserManagement.getCustomersSearchlist(search).then(function(response){
-        	$scope.dtOptions = DTOptionsBuilder.newOptions()
-        	.withOption('data',response.data.data.users)
-        	.withOption('createdRow', createdRow)
-            .withOption('order', [ ])
-            .withOption('responsive', true)
-            .withOption('bFilter', false)
-            .withOption('lengthChange', false);
-             $scope.dtColumns = [
-                 DTColumnBuilder.newColumn(null).withTitle('<input type="checkbox" id="check_all_users" value="0">').renderWith(getCheckboxes).notSortable(),
-<<<<<<< HEAD
-                         DTColumnBuilder.newColumn('username').withTitle('User Name'),
-                      DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
-					  //DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
-=======
-                         DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
-                      DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
-					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
-					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
-					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
-					  DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login'),
-					  DTColumnBuilder.newColumn(null).withTitle('Credit').notSortable().renderWith(credit),,
-					  DTColumnBuilder.newColumn('date_format').withTitle('Created Date'),
-                      DTColumnBuilder.newColumn(null).withTitle('Status').notSortable().renderWith(activeHtml),,
-                      DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
-                      .renderWith(actionsHtml)
-                          ],
-          $scope.displayTable = true;
-    
-          });
-        } 
 
 }); 
 app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,UserManagement) 
@@ -159,15 +150,9 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
       .withOption('bFilter', false)
       .withOption('lengthChange', false);
        $scope.dtColumns = [
-<<<<<<< HEAD
                       DTColumnBuilder.newColumn('user').withTitle('User Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 					  //DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
-=======
-                      DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
-                      DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
-					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					//  DTColumnBuilder.newColumn(null).withTitle('testing').notSortable().renderWith(phone),,
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
@@ -229,11 +214,7 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
              $scope.dtColumns = [
                             DTColumnBuilder.newColumn('display_name').withTitle('User Name'),
                       DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
-<<<<<<< HEAD
 					  //DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
-=======
-					  DTColumnBuilder.newColumn('phone_number').withTitle('Phone #').notSortable(),
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 					 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
 					  DTColumnBuilder.newColumn('lastlogin').withTitle('Last Login'),
@@ -326,11 +307,7 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
             .withOption('lengthChange', false);
              $scope.dtColumns = [
                             DTColumnBuilder.newColumn('display_name').withTitle('Customer Name'),
-<<<<<<< HEAD
 							//DTColumnBuilder.newColumn('phone_number').withTitle('Phone No.').notSortable(),
-=======
-							DTColumnBuilder.newColumn('phone_number').withTitle('Phone No.').notSortable(),
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
                            DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
 						 // DTColumnBuilder.newColumn('phone_number').withTitle('Is Seller?').notSortable(),
 					  DTColumnBuilder.newColumn(null).withTitle('Is Seller?').notSortable().renderWith(isseller),,
@@ -347,7 +324,8 @@ app.controller('CostumesController', function($scope,DTOptionsBuilder, DTColumnB
         } 
 
 }); 
- $(document).on('click', '.delete', function(){ 
+
+$(document).on('click', '.delete', function(){ 
       var id=$(this).attr('data-id');
       swal({   
               title: "Are you sure want to delete this User?",   

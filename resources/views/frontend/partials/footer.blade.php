@@ -66,7 +66,7 @@
 								<div class="col-md-6 col-xs-6 col-sm-3 col-lg-6">
 									<h5>THE CHRYSALIS APP</h5>
 									<p>Browse on the Go!</p>
-									<a href="#" data-toggle="modal" data-target="#coming_soon">
+									<a href="https://itunes.apple.com/in/app/the-chrysalis-app/id1270915543?mt=8" data-toggle="modal" data-target="#coming_soon">
 										<img class="img-responsive" src="{{asset('/assets/frontend/img/appstore.png')}}">
 									</a>
 									<a href="#">
@@ -132,30 +132,30 @@
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group">
 										<div class="form-group">
-											<label>Username</label>
+											<label>Username<span style="color: red">*</span></label>
 											<input type="text" id="pop_username" name="username"  class="form-control">
 										</div>
-										<label>First Name</label>
+										<label>First Name<span style="color: red">*</span></label>
 										<input type="text" name="first_name" id="pop_first_name" class="form-control " >
 									</div>
 									<div class="form-group">
-										<label>Last Name</label>
+										<label>Last Name<span style="color: red">*</span></label>
 										<input type="text" name="last_name" id="pop_last_name" class="form-control " >
 									</div>
 									<div class="form-group">
-										<label>Email</label>
+										<label>Email<span style="color: red">*</span></label>
 										<input type="text" id="popup_email" name="email"  class="form-control">
 									</div>
 									<div class="row sinup-pswrd"> 
 										<div class="col-md-12 col-sm-12 col-xs-12 "> 
 											<div class="form-group">
-												<label>Password</label>
+												<label>Password<span style="color: red">*</span></label>
 												<input type="password" id="popup_password" name="password" class="form-control">
 											</div>
 										</div>
 										<div class="col-md-12 col-sm-12 col-xs-12 "> 
 											<div class="form-group">
-												<label>Confirm Password</label>
+												<label>Confirm Password<span style="color: red">*</span></label>
 												<input type="password" id="pop_cpassword"  name="cpassword"  class="form-control">
 											</div>
 										</div>
@@ -373,31 +373,31 @@
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="form-group">
 										<div class="form-group">
-											<label>Username</label>
+											<label>Username<span style="color: red">*</span></label>
 											<input type="text" id="pop_username" name="username"  class="form-control">
 										</div>
 										<div class="form-group">
-											<label>First Name</label>
+											<label>First Name<span style="color: red">*</span></label>
 											<input type="text" name="first_name" id="first_name" class="form-control " >
 										</div>
 										<div class="form-group">
-											<label>Last Name</label>
+											<label>Last Name<span style="color: red">*</span></label>
 											<input type="text" name="last_name" id="last_name" class="form-control " >
 										</div>
 										<div class="form-group">
-											<label>Email</label>
+											<label>Email<span style="color: red">*</span></label>
 											<input type="text" id="email" name="email"  class="form-control">
 										</div>
 										<div class="row sinup-pswrd"> 
 											<div class="col-md-12 col-sm-12 col-xs-12 "> 
 												<div class="form-group">
-													<label>Password</label>
+													<label>Password<span style="color: red">*</span></label>
 													<input type="password" id="password1" name="password" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-12 col-sm-12 col-xs-12 "> 
 												<div class="form-group">
-													<label>Confirm Password</label>
+													<label>Confirm Password<span style="color: red">*</span></label>
 													<input type="password" id="cpassword1"  name="cpassword"  class="form-control">
 												</div>
 											</div>

@@ -29,11 +29,13 @@ $("#category-edit").validate({
                         required: true,
                         maxlength: 200
                     },
-                cat_image:{
+                cat_imageExists:{
+                      required: true,
                        extension: "png,jpg"
                     },
-                 banner_image:{
-                        extension: "png,jpg"
+                 banner_imageExists:{
+                      required: true,
+                      extension: "png,jpg"
                     },
                 }
  	
@@ -75,30 +77,34 @@ var products=[];
 $('.costume_id').each(function(i,v){
 	products.push($(this).val());
 });
+
 $('.add-prod').click(function(){
+  $("#elements_change").val("1");
   var product_name=$('#cst_name').val();
 	var sku_no=$('#sku_no').val();
 	var price=parseFloat($('#price').val()).toFixed(2);
 	var product_id=$('#products_id').val();
+  var cat_id = $("#category_id").val();
   if(sku_no.length){
   	if(jQuery.inArray(product_id,products)==-1 || products.length==0){
     products.push(product_id);
-   	$('.assigned-products').append('<tr><td>'+product_name+'</td><td>'+sku_no+'</td><td>$'+price+'</td><td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='+product_id+'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>')
+   	$('.assigned-products').prepend('<tr><td>'+product_name+'</td><td>'+sku_no+'</td><td>$'+price+'</td><td><a href="javascript::void(0);" class="remove_cost"  data-cost-id='+product_id+'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>')
   	$('#products_list').val("");
   	}
   }
 });
+
 $('form').submit(function(eventObj) {
-       $.each(products,function(i,value){
-     $('form').append('<input type="hidden" value="'+value+'" name="costume_list[]"/> ');
-   });
+    $.each(products,function(i,value){
+      $('form').append('<input type="hidden" value="'+value+'" name="costume_list[]"/> ');
+    });
     return true;
 });
 
 $(document).on('click','.remove_cost',function(){
 	var productid=$(this).attr('data-cost-id');
   products.splice( $.inArray(productid, products), 1 );
-	$(this).closest('tr').remove();
+  $(this).closest('tr').remove();
 })
 $( "#reorder" ).sortable({
 	items: "tr",
@@ -115,7 +121,7 @@ $( "#reorder" ).sortable({
            	        url: "/ticket/task/position/update",
            	        method:"POST",
            	        data:{new_position:new_position,old_position:old_position,oservice_id:oservice_id,task_id:task_id,limit:limit,_token:_token},
-           	 		async: true,
+           	 		     async: true,
            	        success: function( response ) {
            	        	tasks_success_ajax(response);
            	        }
@@ -159,6 +165,7 @@ $("#cat_image").on('change', function() {
               reader.readAsDataURL($(this)[0].files[i]);
               reader.onload = function(e) {
                 $('#img-chan1').attr('src',e.target.result);
+                $('input[name="cat_imageExists"]').val("image.png");
                 $('.cat_img').after('<span class="remove_pic_cat"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
            
               }
@@ -208,6 +215,7 @@ $("#banner_image").on('change', function() {
               reader.readAsDataURL($(this)[0].files[i]);
               reader.onload = function(e) {
                 $('#img-chan2').attr('src',e.target.result);
+                 $('input[name="banner_imageExists"]').val("image.png");
                 $('.ban_img').after('<span class="remove_pic_banner"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
               }
               image_holder.show();
@@ -233,12 +241,13 @@ $(document).on("click",".remove_pic_cat",function(){
   $('#img-chan1').attr('src',"/category_images/df_img.jpg");
   $('input[name="cat_image"]').val('');
   $('input[name="is_removed"]').val("1");
+  $('input[name="cat_imageExists"]').val("");
   $(this).remove();
   });
 $(document).on("click",".remove_pic_banner",function(){
   $('#img-chan2').attr('src',"/category_images/df_img.jpg");
   $('input[name="banner_image"]').val('');
   $('input[name="is_removed"]').val("1");
+  $('input[name="banner_imageExists"]').val("");
   $(this).remove();
   });
-    

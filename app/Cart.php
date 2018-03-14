@@ -244,6 +244,7 @@ class Cart extends Authenticatable
            	return $cart_products;
     }
     protected function getCartProductswithCoupan($code,$coupon_id="0"){
+      //echo $coupon_id; exit;
        $currentCookieKeyID=SiteHelper::currentCookieKey();
         if(Auth::check()){
           $where="where crt.user_id=".Auth::user()->id.'';
@@ -251,13 +252,16 @@ class Cart extends Authenticatable
           $where="where crt.cookie_id='".$currentCookieKeyID."'";
         }
         $cart_products['basic']=DB::Select('SELECT itms.*,img.image,cst.condition,cst.size,cst.weight_pounds,cst.weight_ounces,concat(usr.first_name," ",usr.last_name) as user_name,usr.is_free,cstopt.attribute_option_value  as is_film,crt.total,crt.coupan_code,crt.coupon_amount,crt.cc_id,crt.store_credits,link.url_key,created_user_group,cst.created_by,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,addr.city,addr.state,addr.country,addr.*,(SELECT attribute_option_value  FROM `cc_costume_attribute_options` WHERE `costume_id` = cst.costume_id and attribute_id='.Config::get('constants.Shipping_id').') as shipping,cst.item_location  FROM `cc_cart` as crt RIGHT JOIN cc_cart_items as itms on itms.cart_id=crt.cart_id LEFT JOIN cc_costume_image as img on img.costume_id=itms.costume_id and img.type="1" LEFT JOIN cc_costumes as cst on cst.costume_id=itms.costume_id LEFT JOIN cc_users as usr on usr.id=cst.created_by LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="'.Config::get('constants.IS_FILMY').'" LEFT JOIN cc_url_rewrites as link on link.url_offset=cst.costume_id and link.type="product" LEFT JOIN cc_costume_to_category as cat on cat.costume_id=cst.costume_id  LEFT JOIN cc_coupon_category as cpn_cat on cpn_cat.category_id=cat.category_id LEFT JOIN cc_promotion_coupon as prom on prom.coupon_id=cpn_cat.coupon_id and prom.code="'.$code.'" LEFT JOIN cc_address_master as addr on addr.user_id=cst.created_by and addr.address_type="selling" '.$where.' group by itms.cart_item_id');
+
          DB::Update('UPDATE `cc_cart` SET `coupan_code`="'.$code.'",coupon_id="'.$coupon_id.'"  WHERE cart_id="'.$cart_products['basic'][0]->cart_id.'"');
-            $data=DB::Select('SELECT cart_id,coupan_code,store_credits from cc_cart as crt '.$where.'');
-            $cart_products['credits']=$data[0]->store_credits;
+          
+          $data=DB::Select('SELECT cart_id,coupan_code,store_credits from cc_cart as crt '.$where.'');
+          
+          $cart_products['credits']=$data[0]->store_credits;
           $count=0;
           $total=0;
-          $discount = \DB::table('promotion_coupon')->where('coupon_id', $coupon_id)->value('discount');
           
+          $discount = \DB::table('promotion_coupon')->where('coupon_id', $coupon_id)->value('discount');
           foreach( $cart_products['basic'] as $cart){
             // echo "<pre>";
             // print_r($cart);
@@ -271,7 +275,7 @@ class Cart extends Authenticatable
             }
          
           }
-          
+
           $res=$this->verifyCouponCreditsSubZero($cart_products['basic'][0]->cart_id,$total);
           $cart_products['dis_total']=$total;
           $cart_products['seller_add']=DB::Select('select * from cc_address_master where user_id='.$cart_products['basic'][0]->created_by.' and address_type="selling"');
@@ -345,7 +349,10 @@ class Cart extends Authenticatable
                               'zip_code'=>$cart_address[0]->shipping_postcode
                             );
     }else{
-    $data=DB::Select('SELECT *  FROM `cc_address_master` WHERE `address_type` = "shipping" AND `user_id` ='.Auth::user()->id );
+    
+     if (Auth::check())
+    {
+         $data=DB::Select('SELECT *  FROM `cc_address_master` WHERE `address_type` = "shipping" AND `user_id` ='.Auth::user()->id );
      if(count($data)){
      $shipping_address=array('city'=>$data[0]->city,
                               'state'=>$data[0]->state,
@@ -355,15 +362,21 @@ class Cart extends Authenticatable
       $shipping_address=[];
 
      }
+    }else{
+      $shipping_address=[];
+
+     }
+    
     }
-  //  dd($shipping_address);
+
     if(count($shipping_address)){
       return $shipping_address;
     }else{
       return false;;
     }
 
- }protected function getSellerShippingAddress($user_id){
+ }
+ protected function getSellerShippingAddress($user_id){
     $seller_address=DB::Select('SELECT *  FROM `cc_address_master` WHERE `address_type` = "selling" AND `user_id` ='.$user_id );
     if(count($seller_address)){
       return $seller_address;
@@ -378,8 +391,12 @@ class Cart extends Authenticatable
  }   
     
 protected function getUserCartShippingAddress(){
-    $data=DB::Select('SELECT *  FROM `cc_cart` WHERE `user_id` ='.Auth::user()->id);
+    if (Auth::check())
+    {
+        $data=DB::Select('SELECT *  FROM `cc_cart` WHERE `user_id` ='.Auth::user()->id);
     return $data; 
+    }
+     
 }
 
 }

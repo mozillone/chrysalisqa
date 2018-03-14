@@ -506,7 +506,7 @@ $(document).ready(function() {
     	$('#is_shipping').attr('checked',false);
     	$('#is_billing').attr('checked',false);
     }
-     $(document).on('click', '.delete', function(){ 
+    $(document).on('click', '.delete', function(){ 
       var item_id=$(this).attr('data-item-id');
       var cart_id=$(this).attr('data-cart_id');
       swal({   
@@ -641,11 +641,11 @@ input_credit_card = function(input)
         setTimeout(function(){ format_and_pos(''); }, 50);
     });
     
-    input.addEventListener('blur', function()
+    /*input.addEventListener('blur', function()
     {
     	// reformat onblur just in case (optional)
         format_and_pos(this, false);
-    });
+    });*/
 };
 
 input_credit_card(document.getElementById('cc_number'));
@@ -709,62 +709,65 @@ var coupan_price=$('.coupan-p').attr('data-coupan');
 var str_price=$('.str-credts').attr('data-credits');
 if(coupan_price){var cpn=coupan_price;}else{var cpn="0";}
 if(str_price){var str=str_price;}else{var str="0";}
-$(document).on('change','.shipping_amount',function(){
-			 var seller_no=$(this).attr('data-seller-id');
-			 var type=$(this).attr('data-type');
-			 var shipping_days=$(this).attr('data-shipping-days');
-			 var date = new Date();
-			 var today=$.datepicker.formatDate('D M d', date);	
-			 $('.shi_date_right_'+seller_no).html("");
-			 if(type=="free"){
-			 	 var delivery_date = new Date(date);
-			 	 delivery_date.setDate(date.getDate()+3);
-			     delivery_date.toLocaleDateString();	
-			 	 var delvdate=$.datepicker.formatDate('D M d', delivery_date);
-			 	$('.shi_date_right_'+seller_no).html(' Est delivery between '+today+' and '+delvdate+'');
-			 	$('.shipping_amount').each(function(){
-			 		if($(this).attr('data-seller-id')==seller_no){
-			 			if($(this).is(":checked")){
-			 				var shipping=$(this).val()+"_"+'Est delivery between '+today+' and '+delvdate;
-			 				var shipping=$(this).val(shipping);
-			 			}
-			 		}
-			 	});
-			 }
-			 if(type=="priority"){
-			 	 var delivery_date = new Date(date);
-			 	 delivery_date.setDate(date.getDate()+parseInt(shipping_days));
-			     delivery_date.toLocaleDateString();	
-			 	 var delvdate=$.datepicker.formatDate('D M d', delivery_date);
-			 	$('.shi_date_right_'+seller_no).html(' Est delivery between '+today+' and '+delvdate+'');
-			 	$('.shipping_amount').each(function(){
-			 		if($(this).attr('data-seller-id')==seller_no){
-			 			if($(this).is(":checked")){
-			 				var shipping=$(this).val()+"_"+'Est delivery between '+today+' and '+delvdate;
-			 				var shipping=$(this).val(shipping);
-			 			}
-			 		}
-			 	});
-			 	//html(' Est delivery between '+today+' and '+delvdate+'');
-			 }
-			 if(type=="express"){
-			 	 var delivery_date = new Date(date);
-			 	 delivery_date.setDate(date.getDate()+parseInt(shipping_days));
-			     delivery_date.toLocaleDateString();	
-			 	 var delvdate=$.datepicker.formatDate('D M d', delivery_date);
-			 	$('.shi_date_right_'+seller_no).html(' Est delivery between '+today+' and '+delvdate+'');
-			 	$('.shipping_amount').each(function(){
-			 		if($(this).attr('data-seller-id')==seller_no){
-			 			if($(this).is(":checked")){
-			 				var shipping=$(this).val()+"_"+'Est delivery between '+today+' and '+delvdate;
-			 				var shipping=$(this).val(shipping);
-			 			}
-			 		}
-			 	});
-			 }
+		
+		$(document).on('change','.shipping_amount',function(){
+			var seller_no=$(this).attr('data-seller-id');
+			var type=$(this).attr('data-type');
+			var shipping_days=$(this).attr('data-shipping-days');
+			var costume_id=$(this).attr('data-costume-id').split(',');	
+			console.log(costume_id);
+			$('.shi_date_right_'+seller_no).html("");
+
+			$.ajax({
+				type: 'GET',
+				url: '/getestimationdate/'+costume_id+'/'+shipping_days,
+				async: false,
+				success: function(response){
+					console.log(response);
+					if(type=="free"){
+						for (var i = 0; i<costume_id.length; i++) {
+							$('.shi_date_right_'+costume_id[i]).html(response[i]);
+						};
+					 	$('.shipping_amount').each(function(){
+							if($(this).attr('data-seller-id')==seller_no){
+								if($(this).is(":checked")){
+									$(this).val($(this).attr('data-free-value')+"_"+response.toString());
+								}
+							}
+						});
+					}
+
+					if(type=="priority"){
+						for (var i = 0; i<costume_id.length; i++) {
+							$('.shi_date_right_'+costume_id[i]).html(response[i]);
+						};
+						$('.shipping_amount').each(function(){
+							if($(this).attr('data-seller-id')==seller_no){
+								if($(this).is(":checked")){
+									$(this).val($(this).attr('data-priority-value')+"_"+response.toString());
+								}
+							}
+						});
+					}
+
+					if(type=="express"){
+					 	for (var i = 0; i<costume_id.length; i++) {
+							$('.shi_date_right_'+costume_id[i]).html(response[i]);
+						};
+					 	$('.shipping_amount').each(function(){
+							if($(this).attr('data-seller-id')==seller_no){
+								if($(this).is(":checked")){
+									$(this).val($(this).attr('data-express-value')+"_"+response.toString());
+								}
+							}
+						});
+					}
+				}
+			});
+			
 			var total=parseFloat(sub_total)+parseFloat($('.shipping_total').text()-parseFloat(cpn)-parseFloat(str));
 			$('.total-amount').text(total.toFixed(2))
 			$('#sipping_'+seller_no).remove();
-});
+		});
 
 });

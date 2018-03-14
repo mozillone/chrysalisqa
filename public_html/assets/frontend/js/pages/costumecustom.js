@@ -1,6 +1,26 @@
 $(function(){
 
+    $(document).on('change','#price', function(){
+        var number = $('#price').val(); 
+        if(number.indexOf('.') == "-1"){
+            $(this).val($(this).val()+".00");
+        }
 
+
+        var donate_percent = $('#donate_charity').val();
+        var cuurent_one = donate_percent.replace("%",'');
+        var str = cuurent_one.replace(/\s/g, ''); 
+        var price = $('#price').val();
+        var total = (price*str)/100;
+        if (donate_percent=="none") {
+        var total = 0.00;
+        }
+        var amount = parseFloat(total).toFixed(2);
+        $('#hidden_donation_amounts').val(amount);
+        $('#dynamic_percent_amounts').html("$"+amount);
+
+
+    });
     var imgdata;
     $("#upload_next").click(function(a) {
         a.preventDefault();
@@ -14,19 +34,14 @@ $(function(){
 
         if (file1 == '') {
             $('input[name=file1]').css('border', '1px solid red');
-            $('#file1_error').html('Upload Front View');
+            $('#file1_error').html('Upload Front');
             str = false;
         }
         if (file2 == '') {
             $('input[name=file2]').css('border', '1px solid red');
-            $('#file2_error').html('Upload Back View');
+            $('#file2_error').html('Upload Back');
             str = false;
         }
-        /*if(file3==''){
-         $('input[name=file3]').css('border','1px solid red');
-         $('#file3_error').html('Upload Detail/Accessories');
-         str=false;
-         }*/
         if (str == true) {
             $('#step2').addClass('active');
             $('#upload_div').css('display', 'none');
@@ -58,9 +73,15 @@ $(function(){
         $('#drag_n_drop_2').css('display', 'block');
     });
     $('#drag_n_drop_1').click(function() {
+        
+        $("#front_view > .up-blog").find("img").remove();
+        //$('#dvPreview div.item img').cropper('destroy');
+        //$('#dvPreview div.item').remove();
         $('#front_view').find('li').remove();
         $('#drag_n_drop_1').css('display', 'none');
         $('input[name=file1]').val('');
+        //$('input[name=file1_name]').val('');
+        //$('input[name=Imagecrop1]').val('');
     });
 
     $('#shipping').change(function() {
@@ -75,6 +96,8 @@ $(function(){
         $('#shipping').val('16');
     });
     $('#drag_n_drop_2').click(function() {
+        $("#back_view > .up-blog").find("img").remove();
+        //$('#dvPreview2 div.item').remove();
         $('#back_view').find('li').remove();
         $('#drag_n_drop_2').css('display', 'none');
         $('input[name=file2]').val('');
@@ -85,6 +108,8 @@ $(function(){
         $('#drag_n_drop_3').css('display', 'block');
     });
     $('#drag_n_drop_3').click(function() {
+        $("#details_view > .up-blog").find("img").remove();
+        //$('#dvPreview3 div.item').remove();
         $('#details_view').find('li').remove();
         $('#drag_n_drop_3').css('display', 'none');
         $('input[name=file3]').val('');
@@ -159,24 +184,23 @@ $(function(){
     $('#30').click(function() {
         $('#mention_hours').css('display', 'block');
         $('#mention_hours_input').css('display', 'block');
-        //$("#freqently").show();
     });
     $('#33').click(function() {
         $('#film_text').css('display', 'none');
         $('#film_text_input').css('display', 'none');
         $('#film_text_input').val('');
-         //$("#freqently").hide();
+
     });
     $('#32').click(function() {
         $('#film_text').css('display', 'block');
         $('#film_text_input').css('display', 'block');
-        //$("#freqently").show();
+
     });
     $('#31').click(function() {
         $('#mention_hours').css('display', 'none');
         $('#mention_hours_input').css('display', 'none');
         $('#mention_hours_input').val('');
-         //$("#freqently").hide();
+
     });
 
     $('#another_charity').click(function() {
@@ -206,7 +230,7 @@ $(function(){
         }
     });
 
-   
+    $(".freqently").hide();
 
     $('#costume_description_next').click(function(a) {
 
@@ -216,11 +240,12 @@ $(function(){
         $('#costume_name,#categoryname,#subcategory,#gender,#size,#description,#funfcats,#faq,#height-ft,#height-in,#weight-lbs,#chest-in,#waist-lbs,#funfacts').css('border', '');
         $('#costumename_error,#subcategoryerror,#categoryerror,#gendererror,#sizeerror,#uniquefashionerror,#cosplayerror,#costumeconditionerror,#descriptionerror,#facterror,#faqerror,#activityerror,#bodydimensionerror,#qualityerror,#usercostumeerror').html('');
         var costumename = $('#costume_name').val();
-        console.log(costumename);
+       
         var category = $('#categoryname').val();
         //var gender = $('#gender').val();
         var gender = '';
         var size = $('#size').val();
+
         var subcategory = $('#subcategory').val();
 
         var description = $('#description').val();
@@ -234,16 +259,55 @@ $(function(){
         var costumecondition = "";
         var qualitycostume = "";
         var usercostume = "";
-        //var activity = "";
-        //var cosplay = "";
+        var cleaned = $("#cleaned").val();
+
+
+        var condition_val =  $('input[name=condition]:checked').val();
+
+   
+
+        /*if(condition_val == 'good' || condition_val == 'like_new')
+        {
+            if(cleaned == "")
+            {
+                 $('#cleanederror').html('This field is required.');
+                 str = false;
+            }           
+        }*/
         var uniquefashion = "";
-      
-        if(category == 68){
+        if(size == 'custom'){
+            if(heightft == ""){
+                $('#height-ft').css('border', '1px solid red');
+                $('#heighterror').html('This field is required.');
+                str = false;
+            }
+            if(heightin == ""){
+                $('#height-in').css('border', '1px solid red');
+                $('#heighterror').html('This field is required.');
+                str = false;
+            }
+            if(weightlbs == ""){
+                $('#weight-lbs').css('border', '1px solid red');
+                $('#weighterror').html('This field is required.');
+                str = false;
+            }
+            if(chestin == ""){
+                $('#chest-in').css('border', '1px solid red');
+                $('#chesterror').html('This field is required.');
+                str = false;
+            }
+            if(waistlbs == ""){
+                $('#waist-lbs').css('border', '1px solid red');
+                $('#waisterror').html('This field is required.');
+                str = false;
+            }
+        }
+       /* if(category == 68){
             if($('input[name="fimquality"]:checked').next().html() == 'No'){
                 $('#qualityerror').html('The Film Production category is limited to costumes that have been used on Film and Television sets.');
                 str = false;
             }
-        }
+        }*/
 
         if (subcategory == '') {
             $('#subcategory').css('border', '1px solid red');
@@ -261,30 +325,24 @@ $(function(){
             $('#categoryerror').html('This field is required.');
             str = false;
         }
-
         if ($('input[name=gender]:checked').length <= 0) {
             $('#gendererror').html('This field is required.');
             str = false;
-
         }
-
         if ($('input[name=gender]:checked').val() == null || $('input[name=gender]:checked').val() == '') {
             $('#gendererror').html('This field is required.');
             str = false;
-
         }        
         if (size == '') {
             $('#size').css('border', '1px solid red');
             $('#sizeerror').html('This field is required.');
             str = false;
-        } 
-        
+        }
         if (description == "") {
             $('#description').css('border', '1px solid red');
             $('#descriptionerror').html('This field is required.');
             str = false;
         }
- 
         if ($('input[name=condition]:checked').length <= 0) {
             $('#costumeconditionerror').html('This field is required.');
             str = false;
@@ -298,9 +356,7 @@ $(function(){
         if ($('input[name=make_costume]:checked').length <= 0) {
             $('#usercostumeerror').html('This field is required.');
             str = false;
-
         }
-
         /*if ($('input[name=fimquality]:checked').val() == 32) {
             if ($('input[name=film_name]').val() == "") {
                 $('#qualityerror').html('This field is required.');
@@ -308,14 +364,13 @@ $(function(){
                 str = false;
             }
         }*/
-
         if ($('input[name=make_costume]:checked').val() == 30) {
             if ($('input[name=make_costume_time1]').val() == "") {
-                $('#usercostumeerror').html('This field is required.');                 
+                $('#usercostumeerror').html('This field is required.');
+                $(".freqently").show();
                 str = false;
             }
-        }
-       console.log(str);
+        }     
         if (str == true) {
             $('#step3').addClass('active');
             $('#upload_div').css('display', 'none');
@@ -329,9 +384,6 @@ $(function(){
         $(window).scrollTop(scrollPos);
         return str;
     });
-
-   
-    
     $('#costume_description_back').click(function() {
         $('#step2').removeClass('active');
         $('#upload_div').css('display', 'block');
@@ -339,9 +391,10 @@ $(function(){
         $('#pricing_div').css('display', 'none');
         $('#preferences_div').css('display', 'none');
     });
-
     //front view image adding code here
     $(document).on("change", "#file1", function() {
+
+        $("#zoom-level").val('');
         $(".modal-footer").show();
         var imgdata = '';
         var imgVal = $(this).val();
@@ -350,10 +403,14 @@ $(function(){
             if (typeof (FileReader) != "undefined") {
                 var dvPreview = $("#dvPreview");
                 dvPreview.html("");
-                $($(this)[0].files).each(function (index, element ) {
-                    var file = $(this);
+                //alert(this.files.length);
+                //$($(this)[0].files).each(function (index, element ) {
+                    
+                    
+                    var file = this.files[0];
                     var reader = new FileReader();
                     reader.onload = function (e) {
+                        //$("#dvPreview div.item").cropper("destroy");
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
@@ -363,6 +420,7 @@ $(function(){
                         var $image = $('#dvPreview div.item img');
                         var total = $image.length;
                         $('#dvPreview div.item:first-child').addClass('active');
+                        //$image.cropper();
                         setTimeout(function(){
                             $image.cropper({
                                 movable: true,
@@ -371,18 +429,20 @@ $(function(){
                                 scalable: false,
                                 zoomOnWheel:false,
                                 dragMode:'move',
-                                minCropBoxWidth:198,
+                                viewMode:1,
+                                minCropBoxWidth:220,
                                 minCropBoxHeight:298,
                                 cropBoxMovable:true,
                                 cropBoxResizable:false,
                                 zoomOnTouch:false,
-                                viewMode:1,
-                                setDragMode:'none',
+                                setDragMode:'move',
                                 aspectRatio: 3 / 5,
-                                center:false,
-
+                                autoCropArea: 0.80,
+                                center:true,
+                                rotatable: true,
+                                checkOrientation: true,
                                 data: {
-                                    width: 198,
+                                    width: 220,
                                     height:298
                                 },
                             });
@@ -393,33 +453,47 @@ $(function(){
                                 imageSmoothingEnabled: false,
                                 imageSmoothingQuality: 'high',
                             });
-                        }, 1000);
 
+                        }, 1000);
                         $("img").mousedown(function(){
-    return false;
-});
+                            return false;
+                        });
+   
                         $(document).on("input", "#zoom-level", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+                        $(document).on("change", "#zoom-level", function() {
+                            $image.cropper('zoomTo', 0.1);
+                            var current_zoom = $(this).val();
+                            $image.cropper('zoom', current_zoom);
+                        });
                         $(document).on("click", "#crop", function() {
-                            $("#myModal").modal('hide');
-                            imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+                            
+                            $("#front_view > .up-blog").find("img").remove();
+                            if($image.cropper('getCroppedCanvas')==null){
+                                imgdata = reader.readAsDataURL(file);
+                            }else{
+                                imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                            }
+                            $('<img id="file1_name" class="result" >').insertBefore('#front_view > .up-blog span'); 
+                            //$("#dvPreview div.item").remove();
+                            $("#myModal").modal('hide');                     
                             $(".modalOpen1").attr('value',imgdata);
                             $(".result").attr("src", imgdata);
                             $("#og_image").attr('content',imgdata);
                             $("#success_page").children().find(".media-object").attr('src',imgdata);
-
+                            $(".modalOpen1").width(220);
+                            $(".modalOpen1").height(298);
                             $(".result").css({ "width": "198px", "height": "298px" });
                             $("#file1").hide();
                             $(this).parents().find("#front_view").children("#drag_n_drop_1").removeClass('hide');
-
+                            
                         });
-
                     }
-                    reader.readAsDataURL(file[0]);
-                });
+                    reader.readAsDataURL(file);
+                //});
             } else {
                 alert("This browser does not support HTML5 FileReader.");
             }
@@ -430,6 +504,7 @@ $(function(){
 
     //second file image code starts here
     $(document).on("change", "#file2", function() {
+         $("#zoom-level2").val('');
         $(".modal-footer").show();
         var imgVal = $(this).val();
         if (imgVal != "") {
@@ -437,13 +512,15 @@ $(function(){
             if (typeof (FileReader) != "undefined") {
                 var dvPreview = $("#dvPreview2");
                 dvPreview.html("");
-                $($(this)[0].files).each(function (index, element ) {
-                    var file = $(this);
+                //$($(this)[0].files).each(function (index, element ) {
+                    var file = this.files[0];
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
+                        //var image = img.attr("src", e.target.result);
+                        
                         var image = img.attr("src", e.target.result);
                         carouselItems.append(image);
                         dvPreview.append(carouselItems);
@@ -467,6 +544,8 @@ $(function(){
                                 setDragMode:'move',
                                 aspectRatio: 3 / 5,
                                 center:false,
+                                rotatable: true,
+                                checkOrientation: true,
                                 data: {
                                     width: 198,
                                     height:298
@@ -486,12 +565,25 @@ $(function(){
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+                        $(document).on("change", "#zoom-level2", function() {
+                            $image.cropper('zoomTo', 0.1);
+                            var current_zoom = $(this).val();
+                            $image.cropper('zoom', current_zoom);
+                        });
 
                         $(document).on("click", "#crop2", function() {
+                            $("#back_view > .up-blog").find("img").remove();
+                            if($image.cropper('getCroppedCanvas')==null){
+                                imgdata = reader.readAsDataURL(file);
+                            }else{
+                                imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                            }
+                            $('<img id="file2_name" class="result2" >').insertBefore('#back_view > .up-blog span'); 
                             $("#myModal2").modal('hide');
-                            var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
                             $(".modalOpen2").attr('value',imgdata);
                             $(".result2").attr("src", imgdata);
+                            $(".modalOpen2").width(220);
+                            $(".modalOpen2").height(298);
                             $(".result2").css({ "width": "198px", "height": "298px" });
                             $("#file2").hide();
                             $(this).parents().find("#back_view").children("#drag_n_drop_2").removeClass('hide');
@@ -499,8 +591,8 @@ $(function(){
                         });
 
                     }
-                    reader.readAsDataURL(file[0]);
-                });
+                    reader.readAsDataURL(file);
+                //});
             } else {
                 alert("This browser does not support HTML5 FileReader.");
             }
@@ -512,6 +604,7 @@ $(function(){
     //additional file uoploading functionality
 
     $(document).on("change", "#file3", function() {
+         $("#zoom-level3").val('');
         $(".modal-footer").show();
         var imgVal = $(this).val();
         if (imgVal != "") {
@@ -519,8 +612,8 @@ $(function(){
             if (typeof (FileReader) != "undefined") {
                 var dvPreview = $("#dvPreview3");
                 dvPreview.html("");
-                $($(this)[0].files).each(function (index, element ) {
-                    var file = $(this);
+                //$($(this)[0].files).each(function (index, element ) {
+                    var file = this.files[0];
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         var carouselItems = $("<div class='item'></div>");
@@ -549,6 +642,8 @@ $(function(){
                                 setDragMode:'move',
                                 aspectRatio: 3 / 5,
                                 center:false,
+                                rotatable: true,
+                                checkOrientation: true,
                                 data: {
                                     width: 198,
                                     height:298
@@ -568,9 +663,20 @@ $(function(){
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+                        $(document).on("change", "#zoom-level3", function() {
+                            $image.cropper('zoomTo', 0.1);
+                            var current_zoom = $(this).val();
+                            $image.cropper('zoom', current_zoom);
+                        });
                         $(document).on("click", "#crop3", function() {
+                            $("#details_view > .up-blog").find("img").remove();
+                            if($image.cropper('getCroppedCanvas')==null){
+                                imgdata = reader.readAsDataURL(file);
+                            }else{
+                                imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);        
+                            }
+                            $('<img id="file3_name" class="result3" >').insertBefore('#details_view > .up-blog span'); 
                             $("#myModal3").modal('hide');
-                            var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
                             $(".modalOpen3").attr('value',imgdata);
                             $(".result3").attr("src", imgdata);
                             $(".result3").css({ "width": "198px", "height": "298px" });
@@ -578,8 +684,8 @@ $(function(){
                             $(this).parents().find("#details_view").children("#drag_n_drop_3").removeClass('hide');
                         });
                     };
-                    reader.readAsDataURL(file[0]);
-                });
+                    reader.readAsDataURL(file);
+                //});
             } else {
                 alert("This browser does not support HTML5 FileReader.");
             }
@@ -591,23 +697,35 @@ $(function(){
 
     //remove hidden seleted pic and file input base 64 data
     $(document).on("click", ".remove_pic", function() {
+        
         $(this).siblings().find('img').attr('src', '').removeAttr('style');
         $(this).siblings().find("input[type='hidden']").val('');
         $(this).siblings().find("input[type='file']").show();
+        $(this).siblings().find('img').attr('src', '').removeAttr('style');
     });
 
     $(document).on("click", "#cancel1", function() {
+        $("#file1").val('');
+        $('#dvPreview div.item').remove();
         $(this).parents().find("#front_view").children("#drag_n_drop_1").addClass('hide');
     });
 
     $(document).on("click", "#cancel2", function() {
+        $("#file2").val('');
+        $('#dvPreview2 div.item').remove();
         $(this).parents().find("#back_view").children("#drag_n_drop_2").addClass('hide');
     });
 
     $(document).on("click", "#cancel3", function() {
+        $("#file3").val('');
+        $('#dvPreview3 div.item').remove();
         $(this).parents().find("#details_view").children("#drag_n_drop_3").addClass('hide');
     });
-
+    $(document).on("click","#multiCancel",function()
+    {
+        $("#upload-file-selector").val('');
+        $("#dvPreviewMultiple").html('');
+    });
 
     //category code
 
@@ -639,15 +757,16 @@ $(function(){
 
         a.preventDefault();
         str = true;
-        $('#price,#quantity,#Length,#Width,#Height,#pounds#ounces').css('border', '');
-        $('#priceerror,#quantityerror,#dimensionserror,#poundserror,#ounceserror').html('');
+        $('#price,#quantity,#Length,#Width,#Height,#pounds').css('border', '');
+        $('#priceerror,#quantityerror,#dimensionserror,#poundserror').html('');
         var price = $('#price').val();
         var quantity = $('#quantity').val();
         var Length = $('#Length').val();
         var Width = $('#Width').val();
         var Height = $('#Height').val();;
         var pounds = $('#pounds').val();
-        var ounces = $('#ounces').val();
+        //var ounces = $('#ounces').val();
+        
         if (price == "") {
             $('#price').css('border', '1px solid red');
             $('#priceerror').html('This field is required.');
@@ -658,11 +777,11 @@ $(function(){
             $('#poundserror').html('This field is required.');
             str = false;
         }
-        if (ounces == "") {
+        /*if (ounces == "") {
             $('#ounces').css('border', '1px solid red');
             $('#ounceserror').html('This field is required.');
             str = false;
-        }
+        }*/
 
         if (str == true) {
 
@@ -710,48 +829,29 @@ $(function(){
         var atLeastOneIsChecked = $('input[name="another_charity"]:checked').length > 0;
         var charity_name = $('input[name="charity_name"]:checked').length > 0;
         var organzation_name = $('#organzation_name').val();
+    
 
-        if (handlingtime == "") {
+        if(parseInt(donate_charity) == 0 && charity_name != '' ){
+            $('#donate_charity').css('border', '1px solid red');
+            $('#donate_charityerror').html('Select Donation Amount');
+            str = false;
+        }else if(parseInt(donate_charity) != 0 && charity_name == '' ){
+            $('#charity_nameerror').html('Please select any Charity.');
+            str = false;
+        }
+
+        if (handlingtime == '' || handlingtime == null) {
             $('#handlingtime').css('border', '1px solid red');
             $('#handlingtimeerror').html('This field is required.');
             str = false;
         }
-        if (returnpolicy == undefined || returnpolicy == '') {
-            //$('#returnpolicy').css('border', '1px solid red');
+
+        if (returnpolicy == undefined || returnpolicy == '' || returnpolicy == null) {
             $('#returnpolicyerror').html('This field is required.');
             str = false;
         }
-        if (donate_charity == 0) {
-            /*$('#donate_charity').css('border', '1px solid red');
-            $('#donate_charityerror').html('Select Donate Amount');*/
-            str = true;
-        }
-
        
-
-        if (donate_charity != "" && donate_charity != 0) {
-            $('#charity_nameerror').html('Please select any Charity.');
-            str = false;
-            if (charity_name == true) {
-                $('#charity_nameerror').html('');
-                str = true;
-            };
-        }
-
-        if (charity_name == true) {
-            if (donate_charity == "" || donate_charity == 0) {
-                //$('#donate_charity').css('border', '1px solid red');
-                $('#donate_charityerror').html('Select Donate Amount');
-                $('#charity_nameerror').html('');
-                str = false;
-            }
-        }
-        /*if($('input[name=charity_name]:checked').length<=0){
-         $('#charity_name').css('border','1px solid red');
-         $('#charity_nameerror').html('Select Donate to');
-         str=false;
-
-         }*/
+         
         if (atLeastOneIsChecked == true) {
             $('#organzation_name').css('border', '1px solid red');
             $('#organzation_nameerror').html('This field is required.');
@@ -766,11 +866,12 @@ $(function(){
         if (loading) {
             return;
         }
-
         if (str == true) {
             loading = true;
             $('#preferences_finished').html("Submitting");
+
             $('#ajax_loader').css('display', 'block');
+          
             $.ajax({
                 url: "/costume/costumecreate",
                 type: "POST",
@@ -780,11 +881,11 @@ $(function(){
                 processData: false,
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
-                    //console.log(response.cat_url);
+          
                     if (response.msg == "success") {
                         $('#ajax_loader').remove();
                         $("#costume_view_my_listing").attr("href", response.cat_url);
+                        $("#progressbar_maintitle").hide();
                         $('#success_page').css('display', 'block');
                         $('#upload_div').css('display', 'none');
                         $('#costume_description').css('display', 'none');
@@ -799,7 +900,7 @@ $(function(){
                         if(response.amount == 0.00){
                             $("#amount_charity").css({'visibility':'hidden'});  
                         }else{
-                            $("#amount").text(response.amount+"%");
+                            $("#amount").text('$'+response.amount);
                             $("#charity_center").text(response.charity_center);  
                             
                         }
@@ -812,7 +913,7 @@ $(function(){
                         $('#pin_url').attr('data-title', response.quote);
                         $('#pin_url').attr('data-image', response.first_pic);
 
-                        var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.share_url)+"&caption="+encodeURIComponent(response.quote)+"&canonicalUrl="+encodeURIComponent('http://dev.chrysaliscostumes.com/costume/create')+"&shareSource=tumblr_share_button";
+                        var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.first_pic)+"&caption="+encodeURIComponent(response.quote+" "+response.share_url)+"&canonicalUrl="+encodeURIComponent(response.first_pic)+"&shareSource=tumblr_share_button";
                         
                         $('#tumblr_url').val(tumb_url);
                         
@@ -916,6 +1017,10 @@ $(function(){
         var active_item_index = getActiveItemIndex(items);
         activeCropperObjIndex = active_item_index;
         slider.val(zooms[active_item_index]);
+        if(activeCropperObjIndex >0)
+        {
+            slider.val(2);
+        }
         if(zooms[activeCropperObjIndex] !== -100){
             slider.trigger("input");
         }
@@ -941,7 +1046,7 @@ $(function(){
     //multiple file uploading code
 
     $("#upload-file-selector").on("change",function () {
-
+        slider.val('');
         var imgVal = $(this).val();
         if (imgVal != "") {
             $('#lightbox').modal('show');
@@ -955,6 +1060,7 @@ $(function(){
                     $(".modal-footer").show();
                 }
                 $($(this)[0].files).each(function (index, element) {
+
                     var file = $(this);
                     var reader = new FileReader();
                     reader.onload = function (e) {
@@ -998,13 +1104,18 @@ $(function(){
                                 dragMode: 'move',
                                 minCropBoxWidth: 198,
                                 minCropBoxHeight: 298,
+                                minCanvasWidth:198,
+                                minCanvasHeight:298,
                                 cropBoxMovable: true,
                                 cropBoxResizable: false,
                                 zoomOnTouch: false,
-                                  viewMode:1,
+                                viewMode:1,
                                 setDragMode: 'move',
                                 aspectRatio: 3 / 5,
                                 center: false,
+                                responsive:true,
+                                rotatable: true,
+                                checkOrientation: true,
                                 data: {
                                     width: 198,
                                     height: 298
@@ -1016,7 +1127,10 @@ $(function(){
                                 fillColor: '#fff',
                                 imageSmoothingEnabled: false,
                                 imageSmoothingQuality: 'high',
+                                 minWidth: 220,
+                                 minHeight: 298,
                             });
+
                             $cropper_objs.push($image);
                             zooms.push(-100);
                         }, 1000);
@@ -1038,10 +1152,23 @@ $(function(){
         zooms[activeCropperObjIndex] = current_zoom;
         $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
     });
+    $(document).on("change", ".slider", function () {
+        $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
+        var current_zoom = $(this).val();
+        zooms[activeCropperObjIndex] = current_zoom;
+        $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
+    });
 
     $(document).on("click", ".saveMultiple", function () {
         $cropper_objs.forEach(function($image, index){
-            var imgdata = $image.cropper('getCroppedCanvas').toDataURL();
+            var length = $("#other_thumbnails").find("div").length;
+            if(length == 0){
+                index = 1;
+            }
+            else{
+                index = length + 1;
+            }
+            var imgdata = $image.cropper('getCroppedCanvas').toDataURL('image/jpeg', 0.9);
             $('#other_thumbnails').append("<div index='"+index+"' class=\"col-md-4 col-sm-4 col-xs-12 multi_div\"><img src= " + imgdata + " class=\"multi_thumbs pip\">" +
                 "<br/><span class=\"remove\">" +
                 "<i class=\"fa fa-times-circle\"></i>" +
@@ -1055,6 +1182,8 @@ $(function(){
 
     $(document).on("click",".remove",function()
     {
+        $("#upload-file-selector").val('');
+        $("#dvPreviewMultiple").html('');
         var index = $(this).parent().attr("index");
         $cropper_objs.splice(index, 1);
         $(this).parent().remove();
@@ -1068,7 +1197,13 @@ $(function(){
         activeCropperObjIndex = 0;
         $(".modal-footer").hide();
     }
+    
+    $(document).on("click",".img_clse",function()
+    {
+       $(this).parents().find('#dvPreview').children('.item.active').remove(); 
+       $("#"+$(this).attr("file-id")).val("");
 
-
+    });
+    
 });
-
+ 

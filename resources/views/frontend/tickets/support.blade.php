@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/costumes_list.css')}}">
 <style type="text/css">.cstm-alrt {
-    padding: 15px;    margin-bottom: 30px;}
+    padding: 15px;    margin-bottom: 30px;position: relative;right: 0;float: unset;}
 	.alrt-div{clear: left;}
 </style>
 @endsection
@@ -18,12 +18,12 @@
 		</div>
 		<div  class="alrt-div col-md-12 col-sm-12 col-xs-12   ">
 			@if (Session::has('error'))
-			<div class=" cstm-alrt alert-danger alert-dismissable">
+			<div class="cstm-alrt alert alert-danger alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 				{{ Session::get('error') }}
 			</div>
 			@elseif(Session::has('success'))
-			<div class=" cstm-alrt  alert-success alert-dismissable">
+			<div class="cstm-alrt alert alert-success alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 				{{ Session::get('success') }}
 			</div>
@@ -45,7 +45,7 @@
 							{{ $faq->title }}
 							<span class="more-expnd">
 								<i class="more-less1 glyphicon glyphicon-plus hidden-sm hidden-md hidden-lg"></i>
-								<i class="more-less glyphicon glyphicon-triangle-top "></i>
+								<i class="more-less glyphicon glyphicon-triangle-bottom "></i>
 							</span>
 						</a>
 					</h4>

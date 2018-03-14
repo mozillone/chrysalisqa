@@ -26,5 +26,14 @@ npm-debug.log
 /tmp
 /.cache
 /.local
+/storage/framework/views
+/public_html/fedexlabel/*
 .bash_history
-
+/public_html/costumers_images/Large/*
+/public_html/costumers_images/Small/*
+/public_html/costumers_images/Medium/*
+/public_html/costumers_images/Original/*
+/public_html/category_images/Banner/*
+/public_html/press_images/original/*
+/public_html/uspslabel/*
+/public_html/costumers_images/ExLarge/*

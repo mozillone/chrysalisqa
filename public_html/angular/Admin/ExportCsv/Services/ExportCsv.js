@@ -14,7 +14,6 @@ app.factory('Exports', function($http){
 	          url: '/charities/csvExport',
 	          data:{data:data}   
 	       })
-<<<<<<< HEAD
 	     } 
 	     
    fac.transactionsExportCSV=function(data){ 
@@ -32,9 +31,6 @@ app.factory('Exports', function($http){
 	          data:{data:data}   
 	       })
 	     } 	     
-=======
-	     }  
->>>>>>> 7cf720f54d5179fec7049e4569c6e1bc2a5e80b3
 	
 
   return fac;

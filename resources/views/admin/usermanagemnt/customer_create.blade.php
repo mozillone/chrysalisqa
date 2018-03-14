@@ -56,6 +56,18 @@
 							<h2 class="heading-agent">User Info</h2>
 							<div class="col-md-12">
 								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="inputEmail3" class="control-label">Role<span class="req-field" >*</span></label>
+											<select name="role" required class="form-control">
+												<option value="1">Admin</option>
+												<option value="2">Support</option>
+												<option value="4" selected="">Regular User</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="inputEmail3" class="control-label">First Name<span class="req-field" >*</span></label>
@@ -124,13 +136,13 @@
 								<div class="form-group"> 
 									<label for="inputEmail3" class="control-label image-label">Upload</label>
 									<div class="fileupload fileupload-new" data-provides="fileupload"> 
-									<div class="photo_uploads">
+									<div class="photo_uploads rmvimg">
 										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan" name="img-chan" >
-									
-										<span class="remove_pic">
+										<!-- MSN Added id rmvimg -->
+										<!-- <span class="remove_pic">
 											<i class="fa fa-times-circle" aria-hidden="true"></i>
-										</span>
-											</div>
+										</span> -->
+									</div>
 										<span class="btn btn-default btn-file">
 											<span class="fileupload-new" style="float:right">Upload Photo</span>
 											<span class="fileupload-exists"></span>     
