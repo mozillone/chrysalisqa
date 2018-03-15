@@ -51,7 +51,7 @@ class CmsController extends Controller
         Meta::set('title', 'How It Works');
         Meta::set('description', 'How It Works');
         $pageData = DB::table('cms_pages')->where(array('cms_pages.url'=>'how-it-works','cms_pages.status'=>1))->first();
-        $faqs = DB::table('faqs')->where(array('faqs.status'=>1,'faqs.block'=>'how-it-works'))->orderby('sort_no', 'asc')->get();
+        $faqs = DB::table('faqs')->where(array('faqs.status'=>1,'faqs.block'=>'how-it-works'))->get();
         if(!empty($pageData) && !empty($faqs)){
             return view('frontend.pages.how_it_works')->with(array('pageData'=>$pageData,'faqs'=>$faqs));
         }else{
@@ -112,7 +112,7 @@ class CmsController extends Controller
 
     public function viewSellACostume(){
         $pageData = DB::table('cms_blocks')->where(array('cms_blocks.slug'=>'sell-a-costume','cms_blocks.status'=>1))->first();
-        $faqs = DB::table('faqs')->where(array('faqs.status'=>1,'faqs.block'=>'sell-a-costume'))->orderby('sort_no','asc')->get();
+        $faqs = DB::table('faqs')->where(array('faqs.status'=>1,'faqs.block'=>'sell-a-costume'))->get();
         if(!empty($pageData) && !empty($faqs)){
             return view('frontend.costumes.sellacostume')->with(array('pageData'=>$pageData,'faqs'=>$faqs));
         }else{

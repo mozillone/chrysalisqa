@@ -64,7 +64,7 @@
                                         <span id="block_title_error" style="color:red"></span>
                                     </div>
                                     <div class="form-group has-feedback" >
-                                        <label for="pages" class="control-label">Blocks<span class="req-field" >*</span></label>
+                                        <label for="pages" class="control-label">Blocks<span class="req-field" ></span></label>
                                         <select class="form-control" id="pages" disabled="disabled">
 
                                             <option value="{{ $cmsBlock->slug }}">{{ $pagesData[$cmsBlock->slug] }}</option>

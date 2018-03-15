@@ -66,11 +66,12 @@
                   </div>
                   <div class="form-group has-feedback page-url-container" >
                     <label for="page_url" class="control-label">Page URL<span class="req-field" >*</span></label>
-                      <div class="input-group page_route">
+                      <div class="input-group">
                           <div class="input-group-addon"><?=URL::to('/pages').'/';?></div>
                           <input type="text" class="form-control page-url" id="page_url" name="url" placeholder="Enter Page URL">
                       </div>
                     <p class="error">{{ $errors->first('url') }}</p>
+                    <span id="page_url_error" style="color:red"></span>
                   </div>
 				  </div>
 				   <div class="col-md-12">

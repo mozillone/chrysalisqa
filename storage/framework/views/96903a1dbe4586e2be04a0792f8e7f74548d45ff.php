@@ -5,8 +5,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<meta property="fb:app_id" content="1984025911869654"/> 
+		<meta property="fb:app_id" content="1458951657516313"/> 
 		<meta property="og:type" content="website">
+		<meta name="twitter:card" content="summary">
         <?php echo Meta::tag('title'); ?>
 
         <?php echo Meta::tag('description'); ?>
@@ -16,22 +17,34 @@
 
         <?php echo Meta::tag('image'); ?>
 
-        <meta property="og:image:type" content="image/jpg" />
-        <meta property="og:image:alt" content="Chrysalis Costumes">
-		<meta property="og:image:width" content="100">
-		<meta property="og:image:height" content="100">
+
+		<meta property="og:image:width" content="200">
+		<meta property="og:image:height" content="200">
+		<!-- Google Analytics -->
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-108166847-1', 'auto');
+			ga('send', 'pageview');
+		</script>
+		<!-- End Google Analytics -->
+		
+
 		<!-- End  -->
 		<link rel="icon" type="image/png" href="<?php echo e(asset('img/favicon.png')); ?>">
 		<link rel="stylesheet" href="<?php echo e(asset('/vendors/bootstrap/dist/css/bootstrap.min.css')); ?>">
-		<link rel="canonical" href="<?php echo e(url()->current()); ?>" />
 		<link rel="stylesheet" href="<?php echo e(asset('/assets/frontend/css/chrysalis.css')); ?>">
 		<link href="<?php echo e(asset('/assets/frontend/vendors/font-awesome/css/font-awesome.min.css')); ?>" rel="stylesheet">
 		<link rel="stylesheet" href="<?php echo e(asset('/assets/frontend/vendors/lobibox-master/css/lobibox.css')); ?>">
-		<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59ca6d8233c1af00121cdbbe&product=unknown' async='async'></script>
-		<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59ca6d8233c1af00121cdbbe&product=custom-share-buttons"></script>
+		<!-- Added by Gayatri -->
+		<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59c35d4902a91700118cb868&product=unknown' async='async'></script>
+		<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59c35d4902a91700118cb868&product=custom-share-buttons"></script>
+		<!-- End  -->
 		<link rel="stylesheet" href="<?php echo e(asset('/assets/frontend/fancybox/cloudzoom.css')); ?>">
 		<link rel="stylesheet" href="<?php echo e(asset('/assets/frontend/fancybox/fancy.css')); ?>?v=<?php echo date('dmYHims')?>">
-		
 		<?php echo $__env->yieldContent('styles'); ?>
 	</head>
 	<body ng-app="app">
@@ -46,9 +59,9 @@
 		<div class="img-loading hide"><img src="/img/chackout.gif"/></div>
       		
 		<script src="<?php echo e(asset('/js/jquery-2.2.4.js')); ?>"></script>
-
 		<script src="<?php echo e(asset('/assets/frontend/fancybox/jquery.elevatezoom.min.js')); ?>?v=<?php echo date('dmYHims')?>"></script>
-
+		<!-- <script src="<?php echo e(asset('/assets/frontend/autozoom/cloudzoom.js')); ?>"></script> 
+		<script src="<?php echo e(asset('/assets/frontend/autozoom/jquery.fancybox.js?v=2')); ?>"></script>-->
 		<script src="<?php echo e(asset('/assets/frontend/fancybox/jquery.fancybox.js')); ?>?v=<?php echo date('dmYHims')?>"></script>
 		<script type="text/javascript">
 
@@ -101,8 +114,8 @@
 							zoomWindowOffetx:0,
 							easing:true,
 							responsive:true,
-							zoomWindowFadeIn:100,
-							zoomWindowFadeOut:100
+							zoomWindowFadeIn: 100,
+							zoomWindowFadeOut: 100
 					    });
                     },
                     beforeLoad: function(){

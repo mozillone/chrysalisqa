@@ -21,6 +21,8 @@ use Carbon\Carbon;
 //use App\BraintreeApp;
 use App\Costumes;
 use App\Helpers\StripeApp;
+use Log;
+
 class AuthController extends Controller {
 
 	protected $auth;
@@ -55,7 +57,6 @@ class AuthController extends Controller {
    }
    public function postLogin(Request $request)
    {
-
    	$req = $request->all();
    	$rule  =  array(  
 	              'email' => 'required|email',
@@ -132,121 +133,6 @@ class AuthController extends Controller {
 			return Redirect::to('/login');
 		}
 	}
-	/**
-	 * Edited by Gaytari
-	 * User Registration
-	 * @param  Request $request [description]
-	 * @return login Page           [description]
-	 */
-	public function postRegisterUser(Request $request)
-	{
-		$req = $request->all();
-		$flag = 0;
-
-		if($request->session()->get('curentURL') == URL::to('costume/successrequestbag')){
-			$flag = 1;
-			$rule  =  array(
-                      'email' => 'required|email|unique:users|max:255',
-                      'password' => 'required|min:5',
-	                 );
-		}else{
-			$rule  =  array(  
-    	              'first_name' => 'required|max:255',
-                      'last_name' => 'required|max:255',
-                      'email' => 'required|email|unique:users|max:255',
-                      'password' => 'required|min:5',
-	                 );
-		}
-		
-	    $validator = Validator::make($req,$rule);
-        if ($validator->fails()) {
-			return Redirect::to('login#signup_tab')
-			->withErrors($validator)
-			->withInput()->send();
-		}
-	    
-	    $rand = md5(uniqid(rand(), true));
-	    
-	    if(count(Session::get('social_data'))){ 
-	    	$active = "1";
-	    }else{ 
-	    	$active = "0";
-	    }
-
-	    try{
-         $customer = $this->stripe->customers($req['email']);
-        }catch(Exception $e){
-           Session::flash('error', $e->getMessage());
-           return Redirect::back();
-        }
-        if($flag == 0){
-        	$display_name = trim($req['first_name']).' '.trim($req['last_name']);
-        	$first_name = $req['first_name'];
-        	$last_name = $req['last_name'];
-        }else{
-        	$uname = explode(" ", $req['reg_full_name'], 2);
-        	$display_name = $req['reg_full_name'];
-        	$first_name = $uname[0];
-        	$last_name = (count($uname)>1)? end($uname): '';
-        }
-        
-	    $users = User::create([ 'username' =>	$req['username'],
-	   							'first_name' => $first_name,
-			                    'last_name' => $last_name,
-			                    'display_name' => $display_name,
-			                    'email' => $req['email'],
-			                    'password' => bcrypt($req['password']),
-			                    'active' => $active,
-							    'activate_hash' => $rand,
-							    'api_customer_id' => $customer['id']
-							])->id;
-
-  		if($users){
-  			/* Added by Gayatri */
-  			$curentURL = '';
-  			if($request->session()->get('curentURL') == URL::to('costume/successrequestbag')){
-  				$curentURL = URL::to('costume/successrequestbag');
-  				Costumes::createRequestBag($users);
-  				Session::flush();
-	  			//$request->session()->put('curentURL', $curentURL);
-
-	  			$email['name'] = $display_name;
-  				$email['activation_link'] = URL::to('/').'/verification/'.$rand;
-				try{
-					$sent = Mail::send('emails.registration',array("email"=>$email), function ($m) use($req, $display_name) {
-						$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
-						$m->to($req['email'], $display_name);
-					    $m->subject('Activation Link');
-					});
-					return Redirect::to('costume/successrequestbag'); 
-				}catch(\Exception $e){
-		            return Redirect::to('costume/successrequestbag'); 
-		        }
-  			}else{
-  				Session::flush();
-	  			//$request->session()->put('curentURL', $curentURL);
-	  			/* End */
-	  			if($active){
-	  				Session::flash('success', 'Your account has been activated. You can login into your account now.');
-	  			}else{
-	  				$email['name'] = $display_name;
-	  				$email['activation_link'] = URL::to('/').'/verification/'.$rand;
-					$sent = Mail::send('emails.registration',array("email"=>$email), function ($m) use($req, $display_name) {
-						$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
-						$m->to($req['email'], $display_name);
-					    $m->subject('Activation Link');
-					});
-					Session::flash('success', 'Registration is completed successfully. Activation Link is sent to your registered email.');	
-			 	}
-			}
-		}
-		else
-		{
-			 Session::flash('error', 'Registration completed successfully.Due database error');
-		}
-		return Redirect::to('login'); 
-	}
-
  	/*public function postRegisterUser(Request $request){
 		$req = $request->all();
 		//echo "<pre>";print_r($req);die;
@@ -289,16 +175,7 @@ class AuthController extends Controller {
 
                          
   		if($users){
-  			//Session::flush();
-  			
-  			$curentURL = '';
-  			if($request->session()->get('curentURL') == URL::to('costume/successrequestbag')){
-  				$curentURL = URL::to('costume/successrequestbag');
-  				Costumes::createRequestBag($users);
-  			}
   			Session::flush();
-  			$request->session()->put('curentURL', $curentURL);
-  			
   			if($active){
   				Session::flash('success', 'Your account has been activated. You can login into your account now.');
   			}else{
@@ -318,6 +195,118 @@ class AuthController extends Controller {
 		}
 		return Redirect::to('login'); 
 	}*/
+
+	 	public function postRegisterUser(Request $request)
+		{
+			$req = $request->all();
+			$flag = 0;
+
+			if($request->session()->get('curentURL') == URL::to('costume/successrequestbag')){
+				$flag = 1;
+				$rule  =  array(
+	                      'email' => 'required|email|unique:users|max:255',
+	                      'password' => 'required|min:5',
+		                 );
+			}else{
+				$rule  =  array(  
+	    	              'first_name' => 'required|max:255',
+	                      'last_name' => 'required|max:255',
+	                      'email' => 'required|email|unique:users|max:255',
+	                      'password' => 'required|min:5',
+		                 );
+			}
+			
+		    $validator = Validator::make($req,$rule);
+	        if ($validator->fails()) {
+				return Redirect::to('login#signup_tab')
+				->withErrors($validator)
+				->withInput()->send();
+			}
+		    
+		    $rand = md5(uniqid(rand(), true));
+		    
+		    if(count(Session::get('social_data'))){ 
+		    	$active = "1";
+		    }else{ 
+		    	$active = "0";
+		    }
+
+		    try{
+	         $customer = $this->stripe->customers($req['email']);
+	        }catch(Exception $e){
+	           Session::flash('error', $e->getMessage());
+	           return Redirect::back();
+	        }
+	        if($flag == 0){
+	        	$display_name = trim($req['first_name']).' '.trim($req['last_name']);
+	        	$first_name = $req['first_name'];
+	        	$last_name = $req['last_name'];
+	        }else{
+	        	$uname = explode(" ", $req['reg_full_name'], 2);
+	        	$display_name = $req['reg_full_name'];
+	        	$first_name = $uname[0];
+	        	$last_name = (count($uname)>1)? end($uname): '';
+	        }
+	        
+		    $users = User::create([ 'username' =>	$req['username'],
+		   							'first_name' => $first_name,
+				                    'last_name' => $last_name,
+				                    'display_name' => $display_name,
+				                    'email' => $req['email'],
+				                    'password' => bcrypt($req['password']),
+				                    'active' => $active,
+								    'activate_hash' => $rand,
+								    'api_customer_id' => $customer['id']
+								])->id;
+
+	  		if($users){
+	  			/* Added by Gayatri */
+	  			$curentURL = '';
+	  			if($request->session()->get('curentURL') == URL::to('costume/successrequestbag')){
+	  				$curentURL = URL::to('costume/successrequestbag');
+	  				Costumes::createRequestBag($users);
+	  				Session::flush();
+		  			//$request->session()->put('curentURL', $curentURL);
+
+		  			$email['name'] = $display_name;
+	  				$email['activation_link'] = URL::to('/').'/verification/'.$rand;
+	  				try{
+						$sent = Mail::send('emails.registration',array("email"=>$email), function ($m) use($req, $display_name) {
+							$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+							$m->to($req['email'], $display_name);
+						    $m->subject('Activation Link');
+						});
+						return Redirect::to('costume/successrequestbag'); 
+					}catch(\Exception $e){
+			            return Redirect::to('costume/successrequestbag'); 
+			        }
+					
+	  			}else{
+	  				Session::flush();
+		  			//$request->session()->put('curentURL', $curentURL);
+		  			/* End */
+		  			if($active){
+		  				Session::flash('success', 'Your account has been activated. You can login into your account now.');
+		  			}else{
+		  				$email['name'] = $display_name;
+		  				$email['activation_link'] = URL::to('/').'/verification/'.$rand;
+						$sent = Mail::send('emails.registration',array("email"=>$email), function ($m) use($req, $display_name) {
+							$admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+							$m->to($req['email'], $display_name);
+						    $m->subject('Activation Link');
+						});
+						Session::flash('success', 'Registration is completed successfully. Activation Link is sent to your registered email.');	
+				 	}
+				}
+			}
+			else
+			{
+				 Session::flash('error', 'Registration completed successfully.Due database error');
+			}
+			return Redirect::to('login'); 
+		}
+
+
     public function redirectToProvider($provider)
     {
         return Socialite::driver($provider)->redirect();
@@ -327,8 +316,6 @@ class AuthController extends Controller {
        	if (!$request->has('code') || $request->has('denied')) {
            return redirect('/login');
        }
-
-
          try {
 
            $user = Socialite::driver($provider)->user();
@@ -363,6 +350,18 @@ class AuthController extends Controller {
     }
     public function getAdminSignin()
     {
+
+    	
+    	$base_url = url('/');
+    	//dd($base_url);
+    	 $chrysalis_url   =   array('https://www.chrysaliscostumes.com/', 'https://www.chrysaliscostumes.com','http://www.chrysaliscostumes.com/','http://www.chrysaliscostumes.com','www.chrysaliscostumes.com/','www.chrysaliscostumes.com','chrysaliscostumes.com/', 'chrysaliscostumes.com');
+       
+       /*if(in_array($base_url, $chrysalis_url))
+       {
+           return Redirect::to('http://admin.chrysaliscostumes.com/admin');
+           
+       }*/
+		
     	if (Auth::check())
     	{
     		if(Auth::user()->role_id==1)
@@ -388,7 +387,6 @@ class AuthController extends Controller {
 		              'email' => 'required|email',
 	                  'password' => 'required',
 	                 );
-
 	    $validator = Validator::make($req,$rule);
 	    if ($validator->fails()) {
 			return Redirect::back()
@@ -732,9 +730,7 @@ class AuthController extends Controller {
 							$addres_insert=DB::table('address_master')->insertGetId($addres_array);
 
 							$conversation_array = array('type'=>'request_a_bag','user_one'=>'1',
-
 								'subject'=>'Bag Request Successful',
-
 								'user_two'=>$userid,
 								'status'=>'1',
 								'created_at'=>date('y-m-d H:i:s'));
@@ -764,15 +760,6 @@ class AuthController extends Controller {
 								);
 
 							$requestabag_insert=DB::table('request_bags')->insertGetId($requestabag_array);
-							/*Storing Status In Logs Starts Here*/
-								DB::table("reqbag_status_log")->insert([
-									"user_id" => Auth::user()->id,
-									"bag_id" => $requestabag_insert,
-									"process" => "Create Request",
-									"status" => "Bag has been created with #".$requestabag_insert,
-									"created_at" => Carbon::now()
-								]);
-							/*Storing Status In Logs Ends Here*/
 							$conversation_array = array('type_id'=>$requestabag_insert);
 				$conversation_insert=DB::table('conversations')->where('id',$conversation_insert)->update($conversation_array);
 

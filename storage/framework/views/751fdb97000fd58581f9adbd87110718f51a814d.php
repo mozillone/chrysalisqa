@@ -107,7 +107,7 @@
 									<ul>
 										<?php for($j=$menu1;$j<$menu2;$j++): ?>
 										<?php $res=explode("_", $value[$j]);?>
-										<li><a href="/category<?php echo e($res[0]); ?>"><?php if(isset($res[1])): ?><?php echo e($res[1]); ?><?php endif; ?></a></li>
+										<li><a href="/category<?php echo e($res[0]); ?>"><?php echo e($res[1]); ?></a></li>
 										<?php endfor; ?>
 									</ul>
 								</li>
@@ -140,20 +140,20 @@
 					<a href="/cart" type="button" class="navbar-toggle respnsive-ser-rm sell mbl_crt_icon" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 					</a>
-					<span type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+					<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 						<a href="<?php echo e(URL::to('conversations')); ?>" type="button" class=""><i class="fa fa-envelope" aria-hidden="true"></i></a>
-					</span>
-					<span type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+					</button>
+					<button type="button" class="navbar-toggle respnsive-ser-rm" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 						<a data-toggle="modal" <?php if(!Auth::check()): ?> data-target="#login_popup" <?php else: ?> href="/dashboard" <?php endif; ?>><i class="fa fa-user" aria-hidden="true"></i></a>
-					</span>
-					<span type="button" class="navbar-toggle respnsive-ser-rm mb-searchs" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
+					</button>
+					<button type="button" class="navbar-toggle respnsive-ser-rm mb-searchs" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 						<i class="fa fa-search"></i>
-					</span>
+					</button>
 					<a href="<?php echo e(URL::to('costume/sell-a-costume')); ?>" type="button" class="navbar-toggle respnsive-ser-rm sell" data-toggle="collapse" data-target=".nav-search" data-collapse-group="myDivs">
 						<i class="fa fa-tag" aria-hidden="true"><span>Sell</span></i>
 					</a>
 				</div>
-				<form class="navbar-form navbar-left mble_srch-div" role="search" action="/search/q" method="GET" style="display:none;">
+				<form class="navbar-form navbar-left mble_srch-div" id="search_show" role="search" action="/search/q" method="GET" style="display:none;">
 					<div class="col-xs-12">
 						<div class="form-group">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -177,7 +177,6 @@
 							<div class="tab-pane active" id="category1">
 								<!--  tab content starts  -->
 								<ul class="responsive-rm">
-								<!--	<li>CATEGORIES <span class="mobile-plus"><i class="fa fa-plus" aria-hidden="true"></i></span>-->
 									<li> <span class="mobile-plus"><span class="main_cate">CATEGORIES</span> <i class="fa fa-plus" aria-hidden="true"></i></span>
 										<!--inner menu start-->
 										<ul class="responsive-inner none-rm">
@@ -215,7 +214,7 @@
 							<!-- tab content starts -->			  
 							<div class="head-acc-form">
 								<p class="acc-form-rm"><a href="javascript::void(0);"><input type="text" placeholder="<?php echo e(Auth::user()->display_name); ?>"></a><span class="acc-form-icn"><i class="fa fa-user" aria-hidden="true"></i></span></p>
-								<p class="acc-form-rm"><a href="<?php echo e(route('wishlist')); ?>"><input type="text" placeholder="FAVORITES"></a><span class="acc-form-icn"><i class="fa fa-heart" aria-hidden="true"></i><?php echo e(helper::getMyWishlistCount()); ?></span></p>		
+								<p class="acc-form-rm"><a href="<?php echo e(route('wishlist')); ?>"><input type="text" placeholder="FAVORITES"></a><span class="acc-form-icn"><i class="fa fa-heart" aria-hidden="true"></i><?php echo e(helper::getMyWishlistCount()); ?></span></p>			
 								<p class="acc-form-rm"><a href="<?php echo e(URL::to('conversations')); ?>"><input type="text" placeholder="MESSAGES"></a><span class="acc-form-icn"><i class="fa fa-envelope" aria-hidden="true"></i> <?php echo e(helper::getMessagesCount()); ?></span></p>						
 								<p class="acc-form-rm"><a href="<?php echo e(route('logout')); ?>"><input type="text" placeholder="SIGN OUT"> </a><span class="acc-form-icn"><i class="fa fa-sign-out" aria-hidden="true"></i></span></p>			
 							</div>

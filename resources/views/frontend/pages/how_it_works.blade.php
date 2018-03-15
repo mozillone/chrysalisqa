@@ -1,30 +1,36 @@
 @extends('/frontend/app')
 @section('styles')
     <link rel="stylesheet" href="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/assets/frontend/css/owl.carousel.min.css')}}">
+	    <link rel="stylesheet" href="{{ asset('/assets/frontend/css/owl.theme.default.min.css')}}">
     <meta name="{{ $pageData->meta_title }}" content="{{ $pageData->meta_desc }}" />
 @endsection
 @section('content')
-    <?= $pageData->description; ?>
-    <div class="container how-it-works-page steps_slider1"> 
-        <div class="additional-info">
-            <h3>Additional Information</h3>
-            @if(count($faqs))
-                @foreach($faqs as $faq)
-            <p>{{ $faq->title }}</p>
-            <div class="panel-body">
-                {!! $faq->description !!}
-            </div>
-                @endforeach
-            @else
-                <div>No Results Found</div>
-            @endif
-        </div>
-    </div>
+<?= $pageData->description; ?>
+<div class="container how-it-works-page steps_slider1"> 
+	<div class="additional-infos">
+		<h3>Additional information</h3>
+		@if(count($faqs))
+		@foreach($faqs as $faq)
+		<div class="accordion">
+			<h3 class="pluss">
+		<p class="accordion_head ">{{ $faq->title }}</p>
+		</h3>
+		<div class="infoss">
+		<div class="panel-body accordion_body">
+			{!! $faq->description !!}
+		</div>
+		</div>
+		</div>
+		@endforeach
+		@else
+		<div>No Results Found</div>
+		@endif
+	</div>
+</div>
 @stop
 @section('footer_scripts')
-				<script>
+<script>
 				$(document).ready(function() {
 				$('.steps_slider1.owl-carousel').owlCarousel({
 					loop:true,
@@ -71,9 +77,10 @@
 		})
 	}
 </script>
-    <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('/assets/frontend/js/pages/event.js') }}"></script>
-    <script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
-    <script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
+
+<script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('/vendors/bootstrap-datetimepicker/moment.js')}}"></script>
+<script src="{{ asset('/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
 <script src="{{ asset('assets/frontend/js/owl.carousel.min.js')}}"></script>
+
 @stop

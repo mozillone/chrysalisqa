@@ -39,12 +39,12 @@ class User extends Authenticatable
         $getdetails = DB::table('users')->where('id',$data['user_id'])->first();
         $users_update = array('is_free'=>$is_free,
                 'updated_at'=>date('y-m-d H:i:s'));
-            $sd_id = DB::table('users')->where('id',$data['user_id'])->update($users_update);
+        $sd_id = DB::table('users')->where('id',$data['user_id'])->update($users_update);
         $data['fname'] = $getdetails->first_name;
         $data['lname'] = $getdetails->last_name;
-        $paypal_email_verify = Paypal::checkPaypalId($data);
+        //$paypal_email_verify = Paypal::checkPaypalId($data);
         //echo "<pre>";print_r($paypal_email_verify);die;
-        if ($paypal_email_verify['status'] == "Success") {
+        /*if ($paypal_email_verify['status'] == "Success") {
             $users_update = array('paypal_verified'=>'verified',
                 'paypal_email'=>$data['paypal_email'],
                 'updated_at'=>date('y-m-d H:i:s'));
@@ -52,7 +52,12 @@ class User extends Authenticatable
             return $sd_id;
         }else{
            return $paypal_email_verify['error'];
-        }
+        }*/
+        $users_update = array('paypal_verified'=>'verified',
+                'paypal_email'=>$data['paypal_email'],
+                'updated_at'=>date('y-m-d H:i:s'));
+            $sd_id = DB::table('users')->where('id',$data['user_id'])->update($users_update);
+            return $sd_id;
     }
 
     protected function CreditLog($data){

@@ -1,5 +1,4 @@
-    <?php
-
+<?php
 return [
     
    
@@ -121,7 +120,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -164,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
        
         /*
          * Package Service Providers...
@@ -186,13 +186,11 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Usps\UspsServiceProvider::class,
         Nahid\Talk\TalkServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-		Approached\LaravelImageOptimizer\ServiceProvider::class,
+        
+        Approached\LaravelImageOptimizer\ServiceProvider::class,
         //Skovmand\Mailchimp\MailchimpServiceProvider::class,
         Eusonlito\LaravelMeta\MetaServiceProvider::class,
-        //Watson\Sitemap\SitemapServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+        //Watson\Sitemap\SitemapServiceProvider::class
 
        
     ],
@@ -254,8 +252,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Meta'    => Eusonlito\LaravelMeta\Facade::class,
         'Sitemap' => Watson\Sitemap\Facades\Sitemap::class,
-        'Image' => Intervention\Image\Facades\Image::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class
 
         
 

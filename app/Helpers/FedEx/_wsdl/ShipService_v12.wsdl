@@ -1,4 +1,3 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://fedex.com/ws/ship/v12" xmlns:s1="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://fedex.com/ws/ship/v12" name="ShipServiceDefinitions">
   <types>
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://fedex.com/ws/ship/v12">
@@ -6092,7 +6091,7 @@
   </binding>
   <service name="ShipService">
     <port name="ShipServicePort" binding="ns:ShipServiceSoapBinding">
-      <s1:address location="https://wsbeta.fedex.com:443/web-services/ship"/>
+      <s1:address location="https://ws.fedex.com:443/web-services/ship"/>
     </port>
   </service>
 </definitions>

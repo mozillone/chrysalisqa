@@ -323,7 +323,7 @@
 												<div class="slider_cnt no_brand sml_name">
 													<span class="cc_brand"></span>
 														<h4>
-															<a href="{{url('product')}}{{$costume->url_key}}">{{$costume->name}}</a>
+															<a href="{{url('product')}}{{$costume->url_key}}">{{substr($costume->name, 0, 40)}}</a>
 														</h4>
 														<p>
 															<a href="{{url('product')}}{{$costume->url_key}}">

@@ -62,16 +62,8 @@ ul.holder .pagination li:first-child ::before{position: absolute; content:"Previ
 					        <div class="slider_cnt">
 					            <h4><a href="/product{{$wish->url_key}}"></a></h4>
 					            <span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>
-								<p>{{$wish->name}}</p>
-								<p class="fav-drs-size">{{ucfirst($wish->gender)}} @if($wish->size=="s") 
-									Small 
-								@elseif($wish->size=="m") 
-									Medium 
-								@elseif($wish->size=="l") 
-									Large 
-								@else 
-									{{strtoupper($wish->size)}} 
-								@endif</p>
+								<p class="whish_disp">{{$wish->name}}</p>
+								<p class="fav-drs-size">{{ucfirst($wish->gender)}} @if($wish->size=="s") Small @elseif($wish->size=="m") Medium @elseif($wish->size=="l") Large @else {{strtoupper($wish->size)}} @endif</p>
 					            <p>{{$wish->price}}</p>
 								<div class="fav_social fav_social_sharing">
 									<a href="javascript:void(0);" class="facebook" class="icoRss" title="Facebook">
@@ -79,7 +71,7 @@ ul.holder .pagination li:first-child ::before{position: absolute; content:"Previ
 										<input type="hidden" name="url_fb" class="url_fb" value="{{url('/').'/product'.$wish->url_key}}">
 									</a>
 									<a href="javascript:void(0);" title="Twitter">
-										<div id="twiter_url" data-network="twitter" class="st-custom-button" data-title="" data-url="{{url('/').'/product'.$wish->url_key}}">
+										<div id="twiter_url" data-network="twitter" class="st-custom-button" data-title="" data-url="{{url('/').'/product'.$wish->url_key}}" >
 											<i id="social-tw" class="fa fa-twitter fa-1x social"></i>
 										</div>
 									</a>
@@ -95,14 +87,13 @@ ul.holder .pagination li:first-child ::before{position: absolute; content:"Previ
                                 		<input type="hidden" name="tumblr_url" class="tumblr_url" value="{{url('/').'/costumers_images/Large/'.$wish->image}}" data-url="{{url('/').'/product'.$wish->url_key}}">
                                 	</a>
 									
-									<!-- <div class="sharethis-inline-share-buttons" data-url="{{URL::to('/product'.$wish->url_key.'')}}" data-title="{{$wish->name}}"></div> -->
+									<div class="sharethis-inline-share-buttons" data-url="{{URL::to('/product'.$wish->url_key.'')}}" data-title="{{$wish->name}}"></div>
 					        	</div>
 							</div>
 					    </div>
 					</div>
 				@endforeach
 				<ul class="holder list_pagination">{{ $data->links() }}</ul>
-				
 				@else
 					<div  class="col-md-3 col-sm-4 col-xs-6">There are no items in your list.</div>
 				@endif

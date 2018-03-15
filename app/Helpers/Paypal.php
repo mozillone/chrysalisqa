@@ -3,6 +3,7 @@
 use Config;
 use DB;
 use App\Helpers\Site_model;
+use Log;
 class Paypal  {
     public static function checkPaypalId($data)
        {  
@@ -17,7 +18,7 @@ class Paypal  {
             $paypalFirstName = $data['fname'];
             $paypalLastName = $data['lname'];            
              // echo "<pre>";print_r($data);die;
-            $mode = "sandbox";
+            $mode = "live";
             try{            
                 $sandbox="sandbox";
                 $apiAppID = "APP-80W284485P519543T";
@@ -25,18 +26,33 @@ class Paypal  {
                 {
                    // $apiAppID = "APP-80W284485P519543T";
                     $url = trim("https://svcs.".$sandbox.".paypal.com/AdaptiveAccounts/GetVerifiedStatus");
+
+                        //echo $url;die;
+                    $apiUserName = 'sbasireddy_api1.dotcomweavers.com'; // Put Api user name here
+                    $apiPassword =  'ZFVZNUDSPSJJ5WXV'; // Put Api password here
+                    $apiSignature =  'AFcWxV21C7fd0v3bYYYRCpSSRl31A376jcebKr6QW7ZvLOrsncZxqe6a'; // Put Api Signature here
+                    //Default App ID for Sandbox    
                 }
                 else
                 {
                     //$apiAppID = "APP-80W284485P519543T"; // put production appId here
                     $url = trim("https://svcs.paypal.com/AdaptiveAccounts/GetVerifiedStatus");
+
+                          //echo $url;die;
+                    $apiUserName = 'max_api1.chrysaliscostumes.com'; // Put Api user name here
+                    $apiPassword =  'T3EVG48KLGQUK72F'; // Put Api password here
+                    $apiSignature =  'AiPC9BjkCyDFQXbSkoZcgqH3hpacA9wbOTVWoxe3MM5zxq4wIaS-sBgD'; // Put Api Signature here
+                    //Default App ID for LIVE
                 }
+
                 $url = Config::get('constants.PAYPAL_USERVERIFY_URL');
+                
                 //echo $url;die;
                 $apiUserName = Config::get('constants.PAYPAL_APIUSERNAME'); // Put Api user name here
                 $apiPassword =  Config::get('constants.PAYPAL_APIPASSWORD'); // Put Api password here
                 $apiSignature =  Config::get('constants.PAYPAL_APISIGNATURE'); // Put Api Signature here
                 //Default App ID for Sandbox    
+
                 
                 $apiRequestFormat = "NV";
                 $apiResponseFormat = "JSON";
@@ -57,7 +73,7 @@ class Paypal  {
                 "X-PAYPAL-RESPONSE-DATA-FORMAT: ".$apiResponseFormat,
                 "X-PAYPAL-APPLICATION-ID: ".'APP-80W284485P519543T',
                 );
-                  
+                  Log::info($headers);
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -67,6 +83,7 @@ class Paypal  {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyData);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 $keyArray = json_decode(curl_exec($ch), true);
+                Log::info($keyArray);
                 //echo "<pre>";print_r($keyArray);die;
                 if (curl_errno($ch) != 0)
                 {

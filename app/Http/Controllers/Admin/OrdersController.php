@@ -238,7 +238,6 @@ class OrdersController extends Controller {
     }
       
     private function endiciaUsps($req){
-    
       $order=Order::orderSummary($req['order_id']);
       $seller_address=Address::getUserSellerAddress($order['basic'][0]->seller_id);
       $from_state=$seller_address[0]->state;
@@ -266,28 +265,25 @@ class OrdersController extends Controller {
         $container = "VARIABLE";
         $size = "REGULAR";
         $insured_amount = 0;
-        $weight_in_ounces = round($req['weight']) ;
+        $weight_in_ounces = $req['weight'] ;
         $service_type =$req['method'];
-         
-        // $RequesterID = Config::get('constants.ENDICIA_REQUESTERID'); 
-        // $AccountID = Config::get('constants.ENDICIA_ACCOUNTID'); 
-        // $PassPhrase = Config::get('constants.ENDICIA_PASSPHRASE');
-        
-        // TESTING Credentials 
+        /*
+              // TESTING Credentials 
         $RequesterID = env('ENDICIA_REQUESTER_ID', 'lxxx');
         $AccountID = env('ENDICIA_ACCOUNT_ID','2541903'); 
         $PassPhrase = env('ENDICIA_PASS_PHRASE','Dotcom123');
 
+        */
+
         
 
-        /*
+        
         //LIVE Credentials
          $RequesterID = env('ENDICIA_REQUESTER_ID', '1234');
         $AccountID = env('ENDICIA_ACCOUNT_ID','1246166'); 
-        $PassPhrase = env('ENDICIA_PASS_PHRASE','ChrysalisCostumes29');*/
+        $PassPhrase = env('ENDICIA_PASS_PHRASE','ChrysalisCostumes29');
 
-
-        $endicia_xml = '<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lab="www.envmgr.com/LabelService" >
+        $endicia_xml = '<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lab="www.envmgr.com/LabelService">
         <x:Header/>
         <x:Body>
             <lab:GetPostageLabel>
@@ -301,14 +297,14 @@ class OrdersController extends Controller {
                     <lab:PartnerTransactionID>200</lab:PartnerTransactionID>
                     <lab:FromName>'.$from['from_name'].'</lab:FromName>
                     <lab:FromCompany></lab:FromCompany>
-                    <lab:ReturnAddress1>'.trim($from['from_address2']).'</lab:ReturnAddress1>
+                    <lab:ReturnAddress1>'.$from['from_address2'].'</lab:ReturnAddress1>
                     <lab:ReturnAddress2>'.$from['from_address1'].'</lab:ReturnAddress2>
                     <lab:FromCity>'.$from['from_city'].'</lab:FromCity>
                     <lab:FromState>'.$from['from_state'].'</lab:FromState>
                     <lab:FromPostalCode>'.$from['from_zip5'].'</lab:FromPostalCode>
-                    <lab:ToName>'.trim($to['to_name']).'</lab:ToName>
+                    <lab:ToName>'.$to['to_name'].'</lab:ToName>
                     <lab:ToCompany></lab:ToCompany>
-                    <lab:ToAddress1>'.trim($to['to_address2']).'</lab:ToAddress1>
+                    <lab:ToAddress1>'.$to['to_address2'].'</lab:ToAddress1>
                     <lab:ToAddress2>'.$to['to_address1'].'</lab:ToAddress2>
                     <lab:ToCity>'.$to['to_city'].'</lab:ToCity>
                     <lab:ToState>'.$to['to_state'].'</lab:ToState>
@@ -317,16 +313,16 @@ class OrdersController extends Controller {
             </lab:GetPostageLabel>
             </x:Body>
         </x:Envelope>';
-       // echo "<pre>";
-       // print_r($endicia_xml);
-        //  echo "</pre>";
         
-        //$endicia_api_endpoint = Config::get('constants.ENDICIA_APIENDPOINT');
+        //dd($endicia_xml);
+        
+         //$endicia_api_endpoint = Config::get('constants.ENDICIA_APIENDPOINT');
        //TEST Credentials
-       $endicia_api_endpoint = env('ENDICIA_API_ENDPOINT','http://elstestserver.endicia.com/LabelService/EwsLabelService.asmx');
+       //$endicia_api_endpoint = env('ENDICIA_API_ENDPOINT','http://elstestserver.endicia.com/LabelService/EwsLabelService.asmx');
 
           // LIVE Credentials
-         //$endicia_api_endpoint = env('ENDICIA_API_ENDPOINT','https://labelserver.endicia.com/LabelService/EwsLabelService.asmx');
+         $endicia_api_endpoint = env('ENDICIA_API_ENDPOINT','https://labelserver.endicia.com/LabelService/EwsLabelService.asmx');
+
         try {
             $ch = curl_init();
 
@@ -348,6 +344,7 @@ class OrdersController extends Controller {
             
             $plainXML = $this->mungXML($namespaceResponse);
             $arrayResult = json_decode(json_encode(SimpleXML_Load_String($plainXML, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
+
             if(isset($arrayResult['soap_Body']['GetPostageLabelResponse']['LabelRequestResponse']['Status'])){
                 if($arrayResult['soap_Body']['GetPostageLabelResponse']['LabelRequestResponse']['Status'] == 0){
                     $resArr = $arrayResult['soap_Body']['GetPostageLabelResponse']['LabelRequestResponse'];
@@ -360,19 +357,18 @@ class OrdersController extends Controller {
                     if($req['status']=="authorized"){
                         $this->submitForSettlement($req);
                     }
-                     $this->my_api_log("Generated Label for Order #".$req['order_id'], $endicia_xml, $response, "Endicia");
+
+                    $this->my_api_log("Generated Label for Order #".$req['order_id'], $endicia_xml, $response, "Endicia");
                     $this->shippingMail($req,$track_id,'USPS');
                     Session::flash('success', 'Order Shipping process started'); 
                     return true;
                 }else{
-                     $this->my_api_log("Error in generating Label for Order #".$req['order_id'].". Error:".$arrayResult['soap_Body']['GetPostageLabelResponse']['LabelRequestResponse']['ErrorMessage'], $endicia_xml, $response, "Endicia");
-                    Session::flash('error', $arrayResult['soap_Body']['GetPostageLabelResponse']['LabelRequestResponse']['ErrorMessage']); 
+                    $this->my_api_log("Error in generating Label for Order #".$req['order_id'].". Error:".$arrayResult['soap_Body']['GetPostageLabelResponse']['LabelRequestResponse']['ErrorMessage'], $endicia_xml, $response, "Endicia");
                     Session::flash('error', $arrayResult['soap_Body']['GetPostageLabelResponse']['LabelRequestResponse']['ErrorMessage']); 
                     return true;
                 }
             }else{
-                 $this->my_api_log("Error in generating Label for Order #".$req['order_id'].". Error:".$arrayResult['soap_Body']['GetPostageLabelResponse']['LabelRequestResponse']['ErrorMessage'], $endicia_xml, $response, "Endicia");
-                    Session::flash('error', $arrayResult['soap_Body']['GetPostageLabelResponse']['LabelRequestResponse']['ErrorMessage']); 
+                $this->my_api_log("Error in generating Label for Order #".$req['order_id'].". Error:".$arrayResult['soap_Body']['GetPostageLabelResponse']['LabelRequestResponse']['ErrorMessage'], $endicia_xml, $response, "Endicia");
                 Session::flash('error', 'label not generated. Try Again'); 
                 return true;
             }
@@ -386,7 +382,7 @@ class OrdersController extends Controller {
             return true;
         }
       }  
-      
+
 
       public function  my_api_log($message, $api_request, $api_result, $api_type)
       {
@@ -421,8 +417,7 @@ class OrdersController extends Controller {
             );
         $savePostData =DB::table('api_log')->insert($api_data);
       }
-
-
+      
       // FUNCTION TO MUNG THE XML SO WE DO NOT HAVE TO DEAL WITH NAMESPACE
       private function mungXML($xml)
       {
@@ -495,6 +490,7 @@ class OrdersController extends Controller {
           $to_state=$shipping_state;
           $to_zip_code=$order['basic'][0]->shipping_postcode;
          
+          
           $userCredential = new ComplexType\WebAuthenticationCredential();
           $userCredential
               ->setKey(Config::get('constants.FedEx_Key'))
@@ -503,8 +499,8 @@ class OrdersController extends Controller {
           $webAuthenticationDetail->setUserCredential($userCredential);
           $clientDetail = new ComplexType\ClientDetail();
           $clientDetail
-               ->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
-               ->setMeterNumber(Config::get('constants.FedEx_MeterNumber'));
+              ->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
+              ->setMeterNumber(Config::get('constants.FedEx_MeterNumber'));
           $version = new ComplexType\VersionId();
           $version
               ->setMajor(12)
@@ -527,7 +523,6 @@ class OrdersController extends Controller {
           $shipper = new ComplexType\Party();
           $shipper
               ->setAccountNumber(Config::get('constants.FedEx_AccountNumber'))
-              //->setAccountNumber(env('FEDEX_ACCOUNT_NUMBER','510087720'))
               ->setAddress($shipperAddress)
               ->setContact($shipperContact);
           $recipientAddress = new ComplexType\Address();
@@ -561,10 +556,9 @@ class OrdersController extends Controller {
               //     'Units' => SimpleType\LinearUnits::_IN
               // )))
               ->setWeight(new ComplexType\Weight(array(
-                  'Value' => round($req['weight']),
+                  'Value' => $req['weight'],
                   'Units' => SimpleType\WeightUnits::_LB
               )));
-
           $shippingChargesPayor = new ComplexType\Payor();
           $shippingChargesPayor->setResponsibleParty($shipper);
           $shippingChargesPayment = new ComplexType\Payment();
@@ -591,9 +585,9 @@ class OrdersController extends Controller {
           $processShipmentRequest->setVersion($version);
           $processShipmentRequest->setRequestedShipment($requestedShipment);
           $shipService = new ShipService\Request();
-          $shipService->getSoapClient()->__setLocation(env('FEDEX_SHIP_URL','https://wsbeta.fedex.com:443/web-services/ship'));
+          $shipService->getSoapClient()->__setLocation(Config::get('constants.FedEx_Ship_Url'));
           $response = $shipService->getProcessShipmentReply($processShipmentRequest);
-          //dd($response);
+
           if($response->HighestSeverity=="SUCCESS"){
               $track_id=$response->CompletedShipmentDetail->CompletedPackageDetails->TrackingIds->TrackingNumber;
               $amount=$response->CompletedShipmentDetail->ShipmentRating->ShipmentRateDetails->TotalNetChargeWithDutiesAndTaxes->Amount;
@@ -604,7 +598,7 @@ class OrdersController extends Controller {
               if($req['status']=="authorized"){
                 $this->submitForSettlement($req);
               }
-              //$this->shippingMail($req,$track_id,"FedEx");
+              $this->shippingMail($req,$track_id,"FedEx");
              Session::flash('success', 'Order Shipping process started'); 
              return true;
           }else{
@@ -680,7 +674,7 @@ class OrdersController extends Controller {
     public function orderTransactionsData(Request $request,$order_id)
     {
         $req=$request->all();   
-        $transactions = DB::select('SELECT id,CONCAT(UCASE(LEFT(type, 1)), SUBSTRING(type, 2)) as transaction_type,CONCAT(UCASE(LEFT(status, 1)), SUBSTRING(status, 2)) as transaction_status,DATE_FORMAT(created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",FORMAT(amount,2)) as price  FROM `cc_transactions` WHERE `order_id`='.$order_id.' GROUP BY order_id ORDER BY `id` DESC');
+        $transactions = DB::select('SELECT id,CONCAT(UCASE(LEFT(type, 1)), SUBSTRING(type, 2)) as transaction_type,CONCAT(UCASE(LEFT(status, 1)), SUBSTRING(status, 2)) as transaction_status,DATE_FORMAT(created_at,"%m/%d/%Y %h:%i %p") as date,concat("$",FORMAT(amount,2)) as price  FROM `cc_transactions` WHERE `order_id`='.$order_id.' ORDER BY `id` DESC');
         return response()->success(compact('transactions'));
   
     }
@@ -742,7 +736,6 @@ class OrdersController extends Controller {
       $cc_details=DB::Select('SELECT *  FROM `cc_creditcard` WHERE `id` ='.$order_info[0]->cc_id)[0];
       $price=DB::Select('SELECT *  FROM `cc_order_total` WHERE `order_id` ='.$order_id);
       $items=DB::Select('SELECT *  FROM `cc_order_items` WHERE `order_id` ='.$order_id);
-      $j = 0;
       foreach ($items as $key => $value) {
         $costumes=DB::Select('SELECT dsr.name as costume_name,cst.*,cstopt.attribute_option_value  as is_film,img.image,itms.*,ord.shipping_est FROM cc_costumes as cst LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id  LEFT JOIN cc_costume_attribute_options as cstopt on cstopt.costume_id=cst.costume_id and cstopt.attribute_id="'.Config::get('constants.IS_FILMY').'" LEFT JOIN cc_costume_image as img on img.costume_id=cst.costume_id and img.type="1" RIGHT JOIN cc_order_items as itms on itms.costume_id=cst.costume_id and itms.order_id='.$order_id.' LEFT JOIN cc_order as ord on ord.order_id=itms.order_id WHERE cst.costume_id='.$value->costume_id);
         $mail_costumes=array('costume_name'=>$costumes[0]->costume_name, 
@@ -752,18 +745,11 @@ class OrdersController extends Controller {
                                  'price'=>$costumes[0]->price, 
                                  'order_id'=>  $order_id, 
                                   'qty'=> $costumes[0]->qty, 
-                                 'image'=>$costumes[0]->image
+                                 'image'=>$costumes[0]->image,
+                                 'shipping_est'=>$costumes[0]->shipping_est,
                         );
-        $shiping_est = explode(',', $costumes[0]->shipping_est);
-        if(count($shiping_est)>0){
-          for ($i=0; $i < count($shiping_est); $i++) { 
-            $mail_costumes['shipping_est'] = $shiping_est[$j];
-          }  
-        }else{
-          $mail_costumes['shipping_est']=$costumes[0]->shipping_est;
-        }
+     
         $mail_order['items'][]= $mail_costumes;
-        $j++;
       }
       foreach($price as $prc){
         if($prc->title=="Subtotal"){
