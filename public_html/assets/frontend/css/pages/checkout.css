@@ -45,3 +45,6 @@
     text-align: center;
     top: 550px;
 }
+.range-slider .currency-bar li {
+   padding: 0 4.5% !important;
+}
