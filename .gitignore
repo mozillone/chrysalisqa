@@ -38,3 +38,4 @@ npm-debug.log
 /public_html/uspslabel/*
 /public_html/costumers_images/ExLarge/*
 composer.lock
+/public_html/.htaccess
