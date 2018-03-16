@@ -131,6 +131,12 @@ Category create@parent
                                     </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                                    <div class="form-group has-feedback" >
+                                        <label for="inputEmail3" class="control-label">Sort Order  </label>
+                                            <input type="text" class="form-control" placeholder="Sort Order"  name="sort" id="name" value="0">                                       
+                                    </div>                                    
+                      </div>
                     </div>
                      <div class="col-md-12 costumes hide">
                             <h4>Category Costumes</h4>

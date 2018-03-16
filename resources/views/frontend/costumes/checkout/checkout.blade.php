@@ -147,73 +147,71 @@
 												 
 										?>
 											@foreach($costumer_costumes as $key=>$items)
-												<div class="checkout_idi_box">
-													<div class="well">
-														<h3>Costumes by: {{$key}}</h3>
-														<?php $shipping_priority_amount=0;
-													  			  $shipping_express_amount=0;
-													  			  $pounds=0;
-																  $ounce=0;
-															?>
-															<?php
+											<div class="checkout_idi_box">
+												<div class="well">
+													<h3>Costumes by: {{$key}}</h3>
+													<?php $shipping_priority_amount=0;
+												  			  $shipping_express_amount=0;
+												  			  $pounds=0;
+															  $ounce=0;
+														?>
+														<?php
 																$costume_id='';
 																for ($i=0; $i < count($items['products']); $i++) { 
 																	$costume_id.=$items['products'][$i]->costume_id.',';
 																}
 																$costume_id = rtrim($costume_id,',');
 															?>
-														@foreach($items['products'] as $type=>$cart)
-															<?php 
-																	$costumes_count+=$cart->qty;
-																  $shipping_amount++;
-																  $pounds+=($cart->weight_pounds*$cart->qty);
-																  $ounce+=($cart->weight_ounces*$cart->qty);
-															?>
-															@if(count($items['address']))
-																<div class="shipping_date">
-																	  <span> Shipping from  {{$items['address'][0]->city}}, {{$items['address'][0]->state}}
-																	  <span class="shi_date_right shi_date_right_{{$cart->costume_id}} text-right right">
-																	 
-																	    <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title=""></i>
-																	</span>
-																	</span>
-																</div>
-															@endif 
-															<div class="row">
-																<div class="col-md-9 col-sm-9 col-xs-12">
-																	<div class="media">
-																		<div class="media-left">
-																			@if($cart->image!=null && file_exists(public_path('/costumers_images/Medium/'.$cart->image)))<img src="costumers_images/Medium/{{$cart->image}}" class="media-object"> @else <img src="costumers_images/default-placeholder.jpg" class="media-object"> @endif
-																		</div>
-																		<div class="media-body">
-																			<h4 class="media-heading"><a href="/product{{$cart->url_key}}">{{$cart->costume_name}}</a></h4>
-																			@if($cart->created_user_group=="admin")<span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>@endif
-																			<p>@if($cart->is_film=="yes")<p class="f_quality"><img class="img-responsive" src="{{asset('assets/frontend/img/film.png')}}"> Film Quality</p> @else  @endif</p>
-																			<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
-																			<p><b>Size:</b> {{ucfirst($cart->size)}}</p>
-																			<p><b>Quantity:</b> {{$cart->qty}}</p>
-																			
-																		</div>
-																	</div>
-																</div>
-																<div class="col-md-3 col-sm-3 col-xs-12">
-																	<p class="price_right text-right"><span class="check_price">@if($cart->created_user_group=="admin" && $cart->discount!=null && $cart->uses_customer<$cart->uses_total && date('Y-m-d H:i:s')>=$cart->date_start && date('Y-m-d H:i:s')<=$cart->date_end)
-																		<?php $discount=($cart->price/100)*$cart->discount;
-																			   $new_price=$cart->price-$discount;
-																	    ?>
-																	  @else
-																			 <?php $new_price=$cart->price;?>
-																	@endif
-																	${{number_format(($cart->qty)*($new_price), 2, '.', ',')}}</span>
-																	<span><a data-item-id="{{$cart->cart_item_id}}" data-cart_id="{{$cart->cart_id}}" class="delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
-																</div>
-															</div>
-															<?php $seller_id=$cart->created_by; 
+													@foreach($items['products'] as $type=>$cart)
+													<?php $costumes_count+=$cart->qty;
+														  $shipping_amount++;
+														  $pounds+=($cart->weight_pounds*$cart->qty);
+														  $ounce+=($cart->weight_ounces*$cart->qty);
+													?>
+													@if(count($items['address']))
+													<div class="shipping_date">
+														  <span> Shipping from  {{$items['address'][0]->city}}, {{$items['address'][0]->state}}
+														  <span class="shi_date_right shi_date_right_{{$cart->costume_id}} text-right right">
+														 
+														    <i class="fa fa-exclamation-circle" aria-hidden="true" data-toggle="tooltip" title=""></i>
+														</span>
+														</span>
+													</div>
+													 @endif 
+													<div class="row">
+												<div class="col-md-9 col-sm-9 col-xs-12">
+													<div class="media">
+														<div class="media-left">
+															@if($cart->image!=null && file_exists(public_path('/costumers_images/Medium/'.$cart->image)))<img src="costumers_images/Medium/{{$cart->image}}" class="media-object"> @else <img src="costumers_images/default-placeholder.jpg" class="media-object"> @endif
+														</div>
+														<div class="media-body">
+															<h4 class="media-heading"><a href="/product{{$cart->url_key}}">{{$cart->costume_name}}</a></h4>
+															@if($cart->created_user_group=="admin")<span class="cc_brand"><img src="/img/chrysalis_brand.png"></span>@endif
+															<p>@if($cart->is_film=="yes")<p class="f_quality"><img class="img-responsive" src="{{asset('assets/frontend/img/film.png')}}"> Film Quality</p> @else  @endif</p>
+															<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
+															<p><b>Size:</b> {{ucfirst($cart->size)}}</p>
+															<p><b>Quantity:</b> {{$cart->qty}}</p>
 															
-																//print_r($costume_id);
-																//die();
-															?>
-														@endforeach
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-12">
+													<p class="price_right text-right"><span class="check_price">@if($cart->created_user_group=="admin" && $cart->discount!=null && $cart->uses_customer<$cart->uses_total && date('Y-m-d H:i:s')>=$cart->date_start && date('Y-m-d H:i:s')<=$cart->date_end)
+														<?php $discount=($cart->price/100)*$cart->discount;
+															   $new_price=$cart->price-$discount;
+													    ?>
+													  @else
+															 <?php $new_price=$cart->price;?>
+													@endif
+													${{number_format(($cart->qty)*($new_price), 2, '.', ',')}}</span>
+													<span><a data-item-id="{{$cart->cart_item_id}}" data-cart_id="{{$cart->cart_id}}" class="delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></span></p>
+												</div>
+											</div>
+											<?php  $seller_id=$cart->created_by;
+											//echo $seller_id;
+										//die();
+											?>
+													@endforeach
 												</div>
 												<div class="pull-right">
 														<h2>Select Shipping Options</h2>
@@ -267,8 +265,7 @@
 											<p class="sub-all"><span>Subtotal: </span> <span class="sub-price">$<span class="sub-total sub-p" data-subtotal="{{$data['basic']['basic'][0]->total}}">{{number_format($data['basic']['basic'][0]->total, 2, '.', ',')}}</span> <em>({{$costumes_count}} Items)</em></span></p>
 											<p class="sub-all"><span>Shipping: </span> <span class="sub-price">$
 											<span class="shipping_total">0.00</span><em>({{$costumes_count}} Items)</em></span></p>
-											@if(!empty($data['basic']['dis_count']))  <p class="sub-all"><span>Discount Amount: </span> <span class="sub-price coupan-p" data-coupan="{{$data['basic']['dis_total']}}">- ${{number_format($data['basic']['dis_total'], 2, '.', ',')}} <em>({{$data['basic']['dis_count']}} Items)</em></span></p><input type="hidden" name="discount_amt" value="{{$data['basic']['dis_total']}}">@endif
-											
+											@if(!empty($data['basic']['dis_count']))  <p class="sub-all"><span>Discount Amount: </span> <span class="sub-price coupan-p" data-coupan="{{$data['basic']['dis_total']}}">- ${{number_format($data['basic']['dis_total'], 2, '.', ',')}} <em>({{$data['basic']['dis_count']}} Items)</em></span></p>@endif
 											<p class="sub-all s_credit"><span>Store Credit Applied: </span> <span class="sub-price str-credts" data-credits="{{$data['basic']['basic'][0]->store_credits}}">- ${{number_format($data['basic']['basic'][0]->store_credits, 2, '.', ',')}} </span></p>
 											<p class="sub-all total_price"><span>Total: </span> <span class="sub-price">@if(!empty($data['basic']['dis_count']))$<span class="total-amount">{{number_format($data['basic']['basic'][0]->total-$data['basic']['dis_total']-$data['basic']['basic'][0]->store_credits, 2, '.', ',')}}</span> @else $<span class="total-amount">{{number_format($data['basic']['basic'][0]->total-$data['basic']['basic'][0]->store_credits, 2, '.', ',')}}</span>@endif </span></p>
 											<button class="btn btn-primary submit-order">Place Order</button>
@@ -548,7 +545,7 @@
 									</div>
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<div class="form-group">
-											<input type="text" class="form-control" id="cvn_pin" placeholder="CVN Code*" name="cvn_pin">
+											<input type="password" class="form-control" id="cvn_pin" placeholder="CVN Code*" name="cvn_pin">
 										</div>
 									</div>
 									<div class="col-md-12 col-sm-12 col-xs-12">
@@ -585,4 +582,5 @@
 <script src="{{ asset('/assets/frontend/js/pages/placeorder.js') }}"></script>
 <script src="{{ asset('/js/credit-card-validation.js') }}"></script>
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
+
 @stop

@@ -61,7 +61,6 @@ margin: 0px;
 	@else
 		<?php 	$return_html = ""; ?>
 	@endif
-	
 <section class="content-header">
 <h1>Manage Request A Bag</h1>
 <ol class="breadcrumb">
@@ -78,16 +77,16 @@ margin: 0px;
 <div class="row">
 	<div class="col-sm-12 col-md-12">
 	 @if (Session::has('error'))
-        <div class="alert alert-danger alert-dismissable">
-            <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-            {{ Session::get('error') }}
-        </div>
-    @elseif(Session::has('success'))
-        <div class="alert alert-success alert-dismissable">
-            <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
-            {{ Session::get('success') }}
-        </div>
-    @endif
+                <div class="alert alert-danger alert-dismissable">
+                    <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+                    {{ Session::get('error') }}
+                </div>
+                @elseif(Session::has('success'))
+                <div class="alert alert-success alert-dismissable">
+                    <a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a>
+                    {{ Session::get('success') }}
+                </div>
+                @endif
 		<div class="box box-primary">
 		
 <?php 
@@ -229,7 +228,6 @@ print_r($all_data);die;*/
 	                        @else
 		                    	<div class="" id="enter_payout_amount">
 		                            <p>Customer has Requested a Payout.</p>
-		                            
 		                            <select id="payout_type" name="payout_type">
 		                                <option value="">Select Payout Type</option>
 		                                <option value="credit">Store Credit</option>
@@ -239,7 +237,7 @@ print_r($all_data);die;*/
 
 		                            <input type="text" name="payout_amount" id="payout_amount" placeholder="Amount">
 		                            <div id="payout_amount_error" style="color:red"></div>
-		                            <a style="margin-top: 10px" class="btn btn-primary submit" onclick="PayoutAmount()">Save</a>
+		                            <a style="margin-top: 10px"  class="btn btn-primary submit" onclick="PayoutAmount()">Save</a>
 		                        </div>
 	                        	<div id="req_payout_sub_msg" style="display:none;">Submitting...</div>
 	                        	<div id="req_payout_err_msg" style="display:none;"></div>
@@ -316,10 +314,17 @@ print_r($all_data);die;*/
 						</div>
 					</div>
 				@endforeach
-				<textarea required="" id="message_theard" class="form-control" rows="6" cols="50" placeholder="Type your message here...."></textarea>
+				<textarea required="" id="message_theard" class="form-control" rows="6" cols="50"></textarea>
 				<span class="error" id="msg_err"></span>
 				<input type="button" name="theard" id="theard" value="SEND" class="btn btn-primary msg-submit" ></input>
+			
+
+				
+				
 			</div>
+			
+			
+			
 		</div>
 		</div>
 		
@@ -332,6 +337,14 @@ print_r($all_data);die;*/
 <script type="text/javascript">
 $(document).ready(function()
 {
+	$('#payout_amount,#return_amount').keypress(function(evt) {
+		evt = (evt) ? evt : window.event;
+	    var charCode = (evt.which) ? evt.which : evt.keyCode;
+	    if (charCode > 31 && (charCode < 48 || charCode > 57)&&(evt.which != 46 || $('#refAmount').val().indexOf('.') != -1)) {
+	        return false;
+	    }
+	    return true;
+	});
 	$('#fedex_label_generate').click(function(){
 		$("#label_type").val('fedex');
 		$("#label_form").submit();
@@ -403,16 +416,6 @@ document.getElementById("message_theard").value = "";
 }
 window.onload = init;
 var loading = false;
-
-$('#payout_amount,#return_amount').keypress(function(evt) {
-	evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)&&(evt.which != 46 || $('#refAmount').val().indexOf('.') != -1)) {
-        return false;
-    }
-    return true;
-});
-
 function PayoutAmount(a){
 	str=true;
 	var payout_amount = $('#payout_amount').val();
@@ -432,6 +435,7 @@ function PayoutAmount(a){
 		$('#payout_amount_error').html('This field is required.');
 		str=false;
 	}
+            
     if (loading) {
         return ;
     }
@@ -455,22 +459,23 @@ function PayoutAmount(a){
 	            $("#req_payout_err_msg").html('');
 	            $("#req_payout_err_msg").hide();
 	        },
-	       	error: function(request, status, error) {
+	       	error: function(request, status, error) {	       		
 	            loading = false;
+	            /*$("#req_payout_sub_msg").hide();
+	            $("#req_payout_err_msg").html(request.responseText);
+	            $("#req_payout_err_msg").show();*/
 	            var error = request.responseText;
 	            var a = error.replace( /["{}]/g, "" );
 	            var err = a.split(':');
 	            $("#req_payout_sub_msg").hide();
 	            $('<div class="alert alert-danger alert-dismissable" id="payout_err"><a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a> '+err[err.length-1]+'</div>').insertAfter('#enter_payout_amount p');
-	           /* $("#req_payout_err_msg").html(err[err.length-1]);
-	            $("#req_payout_err_msg").show();*/
 	       	}
 		});
 	}
 }
 
     
-function ReturnAmount(a){
+    function ReturnAmount(a){
 	str=true;
 	var return_amount = $('#return_amount').val();
 	var checkbox = "1";
@@ -509,17 +514,18 @@ function ReturnAmount(a){
                         $("#req_return_err_msg").html('');
                         $("#req_return_err_msg").hide();
                  },
-          		error: function(request, status, error) {
+          error: function(request, status, error) {
                     //alert(data);
-	               	loading = false;
-	               	var error = request.responseText;
-		            var a = error.replace( /["{}]/g, "" );
-		            var err = a.split(':');
-	               	$("#req_return_sub_msg").hide();
-	               	$('<div class="alert alert-danger alert-dismissable" id="payout_err"><a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a> '+err[err.length-1]+'</div>').insertAfter('#enter_return_amount p');
-	               /*	$("#req_return_err_msg").html(request.responseText);
-	               	$("#req_return_err_msg").show();*/
-	          	}
+               	loading = false;
+               /*$("#req_return_sub_msg").hide();
+               $("#req_return_err_msg").html(request.responseText);
+               $("#req_return_err_msg").show();*/
+               	var error = request.responseText;
+	            var a = error.replace( /["{}]/g, "" );
+	            var err = a.split(':');
+               	$("#req_return_sub_msg").hide();
+               	$('<div class="alert alert-danger alert-dismissable" id="payout_err"><a type="button" class="close" data-dismiss="alert" aria-hidden="true">×</a> '+err[err.length-1]+'</div>').insertAfter('#enter_return_amount p');
+          }
             });
         }
 }

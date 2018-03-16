@@ -36,23 +36,23 @@ class TicketController extends Controller
           }
       });
     }
-	/*
-	Method Name : costumesList()
-	Purpose :costumesList Method is  used to get the data of all costumes from the database.
-	*/
-	public function ticketsList(){
-	   /*****Costumes View Page***/
+  /*
+  Method Name : costumesList()
+  Purpose :costumesList Method is  used to get the data of all costumes from the database.
+  */
+  public function ticketsList(){
+     /*****Costumes View Page***/
       
-	    $title=Auth::user()->display_name." Support List";
+      $title=Auth::user()->display_name." Support List";
         return view('admin.tickets.tickets_list',compact('title'));
-	}
-	public function getallTickets(Request $request){
+  }
+  public function getallTickets(Request $request){
        $roleid=Auth::user()->role_id;
        $userid=Auth::user()->id;
-     	$ticketslist = DB::table('tickets')
-				->leftjoin('users', 'tickets.ticket_userid', '=', 'users.id')
-				->select('tickets.id as id','tickets.ticket_status as ticket_status','tickets.order_id as orderid','tickets.ticket_type as type','tickets.ticket_id as ticketid','users.display_name as customer_name',DB::Raw('DATE_FORMAT(cc_tickets.ticket_createddate,"%m/%d/%y %h:%i %p") as createdate'));
-			switch($roleid){
+      $ticketslist = DB::table('tickets')
+        ->leftjoin('users', 'tickets.ticket_userid', '=', 'users.id')
+        ->select('tickets.id as id','tickets.ticket_status as ticket_status','tickets.order_id as orderid','tickets.ticket_type as type','tickets.ticket_id as ticketid','users.display_name as customer_name',DB::Raw('DATE_FORMAT(cc_tickets.ticket_createddate,"%m/%d/%y %h:%i %p") as createdate'));
+      switch($roleid){
         case '2':
         $ticketslist->where('tickets.ticket_assigned_to',$userid);
         break;
@@ -60,7 +60,7 @@ class TicketController extends Controller
       $tickets=$ticketslist->get();
 
 
-		 return Datatables::of($tickets)
+     return Datatables::of($tickets)
       
         ->addColumn('actions', function ($ticket) {
           if(Auth::user()->role_id == "2"){
@@ -91,7 +91,7 @@ class TicketController extends Controller
       ->make(true);
 
            
-	}
+  }
   /*******mnaage tickets code starts here***/
   public function manageTickets($id){
 
@@ -206,7 +206,6 @@ public function insertSupportMessage(Request $request){
       if($keyword!=""){
         //$ticketslist->where('tickets.ticket_reason', 'LIKE', "%".$keyword."%");
         $ticketslist->where('tickets.order_id', 'LIKE', "%".$keyword."%");
-        
       }
       $tickets=$ticketslist->get();
 

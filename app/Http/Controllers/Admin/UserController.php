@@ -250,7 +250,7 @@ class UserController extends Controller
            Session::flash('error', $e->getMessage());
            return Redirect::back();
         }
-       $users = User::create([
+        $users = User::create([
                                     'role_id'         =>$req['role'],
                                     'first_name'      => $req['first_name'],
                                     'last_name'       => $req['last_name'],
@@ -311,14 +311,13 @@ class UserController extends Controller
 	
 		}
 		else{
-      $file_name=$name->user_img;
+			$file_name=$name->user_img;
       if($request->is_removed == "1"){
         \File::delete(public_path('profile_img/resize/'.$file_name));
         \File::delete(public_path('profile_img/original/'.$file_name));
         \File::delete(public_path('profile_img/thumbs/'.$file_name));
         $file_name = null;
       }
-			
 		}
     $vacation_from = date('Y-m-d',strtotime($req['date_timepicker_end_ticket']));
     $vacation_to = date('Y-m-d',strtotime($req['date_timepicker_end1_ticket']));
@@ -537,7 +536,7 @@ class UserController extends Controller
       $this->data['seller_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','selling')->get();
       $states=Address::getStatesList();
       $request_bag= Site_model::find_user_and_meta('user_meta',Auth::user()->id);
-     $search_banner_settings = DB::table('search_banner_settings')->first();
+      $search_banner_settings = DB::table('search_banner_settings')->first();
      return view('admin.settings.settings')->with($this->data)->with('states',$states)->with('request_bag',$request_bag)->with('search_banner_settings',$search_banner_settings);
   }
   public function requesBagSettings(Request $request){
@@ -546,7 +545,7 @@ class UserController extends Controller
       Session::flash('success', 'Settings updated successfully');
       return Redirect::back();
   }
-  
+
   /**
    * Created By Gayatri on 2nd Nov 2017
    * [Adding/Updating a new search banner image]
@@ -574,4 +573,5 @@ class UserController extends Controller
     Session::flash('success', 'Settings updated successfully');
     return Redirect::back();
   }
+ 
 }

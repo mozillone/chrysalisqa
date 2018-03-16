@@ -111,7 +111,7 @@ Category edit@parent
                                               </div>
                                             </div>
                                       </div>
-									  <div class="col-md-6 col-sm-6 col-xs-12 ">
+                    <div class="col-md-6 col-sm-6 col-xs-12 ">
                                       <div class="cat_img fileupload fileupload-new" data-provides="fileupload"> 
                                           <img @if(file_exists(public_path('category_images/Normal/'.$cat_data[0]->thumb_image)))) src="/category_images/Normal/{{$cat_data[0]->thumb_image}}" @else  src="/category_images/df_img.jpg" @endif  class="img-responsive"  id="img-chan1">
                                       
@@ -124,7 +124,7 @@ Category edit@parent
                                         </span>
                                         @endif
                                       </div>
-												   </div>
+                           </div>
                                     </div>
                             </div>  
                         </div>
@@ -144,7 +144,7 @@ Category edit@parent
                                               </div>
                                             </div>
                                       </div>
-									  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
                                       <div class="ban_img fileupload fileupload-new" data-provides="fileupload"> 
                                           <img @if(file_exists(public_path('category_images/Banner/'.$cat_data[0]->banner_image)))) src="/category_images/Banner/{{$cat_data[0]->banner_image}}" @else  src="/category_images/df_img.jpg" @endif class="img-responsive"  id="img-chan2">
                                  
@@ -157,7 +157,7 @@ Category edit@parent
                                         </span>
                                         @endif
                                       </div>
-										    </div>
+                        </div>
                                     </div>
                             </div>  
                         </div>

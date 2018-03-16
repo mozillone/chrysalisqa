@@ -9,7 +9,7 @@
 	@section('content')
 	<div class="container">
 		<div class="row">
-	        <div class="col-md-12">
+	        <div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="login-register-main" id="loginModal">
 					<ul class="nav nav-tabs">
 	                    <li class="active"><a href="#login_tab" data-toggle="tab">Sign In</a></li>
@@ -84,14 +84,14 @@
 									</div>
 								</div>
 								<div class="row">
-				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    				<div class="col-xs-12 col-sm-6 col-md-6">
 				    					<div class="form-group">
 				    					<label>First Name </label>
 				                			<input type="text" name="first_name" id="first_name" class="form-control input-sm"   @if(!empty(Session::get('social_data'))) value="<?=explode(" ", Session::get('social_data')['name'])[0];?>" @endif>
 				                			<p class="error">{{ $errors->first('first_name') }}</p>
 										</div>
 									</div>
-				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    				<div class="col-xs-12 col-sm-6 col-md-6">
 				    					<div class="form-group">
 				    					<label>Last Name </label>
 				    						<input type="text" name="last_name" id="last_name" class="form-control input-sm"  @if(!empty(Session::get('social_data'))) value="<?=explode(" ", Session::get('social_data')['name'])[1];?>" @endif>
@@ -105,14 +105,14 @@
 		    						<p class="error">{{ $errors->first('email') }}</p>
 								</div>
 				    			<div class="row">
-				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    				<div class="col-xs-12 col-sm-6 col-md-6">
 				    					<div class="form-group">
 				    					<label>Create Password </label>
 											<input type="password" name="password" id="signup_password" class="form-control input-sm">
 											<p class="error">{{ $errors->first('password') }}</p>
 										</div>
 									</div>
-				    				<div class="col-xs-6 col-sm-6 col-md-6">
+				    				<div class="col-xs-12 col-sm-6 col-md-6">
 				    					<div class="form-group">
 				    						<label>Confirm Password </label>
 				    						<input type="password"  id="cpassword" name="cpassword" class="form-control input-sm">

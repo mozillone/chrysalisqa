@@ -359,14 +359,14 @@
 									<div class="form-group" >
 										<label for="inputEmail3" class="control-label">Condition <span class="req-field" >*</span></label>
 										<br>
-												<label class="radio-inline"><input type="radio"  name="costumecondition" id="good" class="conditon_check" value="good">&nbsp;
-											Good&nbsp;
+											<label class="radio-inline"><input type="radio"  name="costumecondition" id="good" class="conditon_check" value="good">
+											Good
 										</label>
-											<label class="radio-inline"><input type="radio"  name="costumecondition" id="likenew" class="conditon_check" value="like_new">&nbsp;
-											Like New&nbsp;
+											<label class="radio-inline"><input type="radio"  name="costumecondition" id="likenew" class="conditon_check" value="like_new">
+											Like New
 										</label>
-										<label class="radio-inline"><input type="radio"  name="costumecondition" id="brandnew" class="conditon_check" value="brand_new"> &nbsp;
-											Brand New&nbsp;
+										<label class="radio-inline"><input type="radio"  name="costumecondition" id="brandnew" class="conditon_check" value="brand_new">
+											Brand New
 										</label>
 									
 									
@@ -626,7 +626,7 @@
 <div class="col-md-12">
 <label for="inputEmail3" class="control-label">
 {{$packageditems->label}}
-<span class="req-field" ></span></label>
+<span class="req-field" > *</span></label>
 <div class="form-group has-feedback dmns_rigts" >
 <div class="row pnds ">
 <div class="col-md-6">
@@ -703,7 +703,7 @@ $dimensionvalue     = $heightattributes[1];
 				<p class="form-rms-rel111">
 					<div class="input-group">
 				         <span class="input-group-btn">
-				              <button type="button" class="btn btn-default btn-number donate_charity" disabled="disabled" data-type="minus" data-field="donate_charity">
+				              <button type="button" class="btn btn-default btn-number donate_charity"  data-type="minus" data-field="donate_charity">
 				                  <span class="glyphicon glyphicon-minus"></span>
 				              </button>
 				          </span>
@@ -741,20 +741,20 @@ $dimensionvalue     = $heightattributes[1];
 <h2 class="heading-agent">Upload Images</h2>
 <div class="row">
 <div class="threeblogs upload-photo-blogs">
-	<div class="col-md-3 col-sm-4 col-xs-12" id="front_view">
-		<h2 class="box-title col-md-12 heading-agent pro-imgs text-center">Front</h2>
-		<div class="main_upload_blogs clearfix">
-			<span class="remove_pic" id="drag_n_drop_1" style="display: none;">
-			<i class="fa fa-times-circle" aria-hidden="true"></i>				
-			</span>
-			<div class="up-blog">
-				<input type="file" accept="image/*" name="img_chan" id="file1" >
-				<input type="hidden" class="modalOpen1" name="Imagecrop1">
-				<!-- <img src="" class="result" > -->
-				<span class="text cam_icon"> <a href="#" class="button button-primary file_browse"></a></span>
-			</div>
-		</div>
-	</div>
+<div class="col-md-3 col-sm-4 col-xs-12" id="front_view">
+<h2 class="box-title col-md-12 heading-agent pro-imgs text-center">Front</h2>
+<div class="main_upload_blogs clearfix">
+<span class="remove_pic" id="drag_n_drop_1" style="display: none;">
+<i class="fa fa-times-circle" aria-hidden="true"></i>				
+</span>
+<div class="up-blog">
+<input type="file" accept="image/*" name="img_chan" id="file1" >
+<input type="hidden" class="modalOpen1" name="Imagecrop1">
+<!-- <img src="" class="result" > -->
+<span class="text cam_icon"> <a href="#" class="button button-primary file_browse"></a></span>
+</div>
+</div>
+</div>
 <div class="col-md-3 col-sm-4 col-xs-12" id="back_view">
 <h2 class="box-title col-md-12 heading-agent pro-imgs text-center">Back</h2>
 <div class="main_upload_blogs clearfix">
@@ -959,12 +959,12 @@ $(document).ready(function () {
         }
     });
 
-	if(parseInt($("#donate_charity").val())==10){
-		$("#donate_charity").val($("#donate_charity").val()+" %").css({"color":"#5fc5ac","font-weight":"bold"});
-	}
-
 	if(parseInt($("#donate_charity").val())<10){
 		$("#donate_charity").val($("#donate_charity").val()+" %").css({"color":"#000","font-weight":""});
+	}
+
+	if(parseInt($("#donate_charity").val()) ==10){
+		$("#donate_charity").val($("#donate_charity").val()+" %").css({"color":"#5fc5ac","font-weight":"bold"});
 	}
 
 	if(parseInt($("#donate_charity").val()) ==15){
@@ -1068,7 +1068,7 @@ $(document).ready(function () {
 
 	            if(currentVal < 10){
            			if(currentVal < max) {
-           				if(currentVal == 9){
+                   		if(currentVal == 9){
            					input.val((currentVal + 1)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
            				}else{
            					input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
@@ -1301,14 +1301,25 @@ autocomplete.setBounds(circle.getBounds());
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBD7L6zG6Z8ws4mRa1l2eAhVPDViUX6id0&libraries=places&callback=initAutocomplete"
 async defer></script>
 <script type="text/javascript">
-$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensions,#make_costume_time").on("keyup", function(){
-var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
-val = this.value;
-if(!valid){
-console.log("Invalid input!");
-this.value = val.substring(0, val.length - 1);
-}
-});
+	$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensions,#make_costume_time,#pounds").on("keypress", function(e){
+		/*var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
+		val = this.value;
+		if(!valid){
+			//console.log("Invalid input!");
+			this.value = val.substring(0, val.length - 1);
+		}*/
+		if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+			return false;
+		}
+	});
+	$("#price,#donate_charity").on("keypress", function(){
+		var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
+		val = this.value;
+		if(!valid){
+			//console.log("Invalid input!");
+			this.value = val.substring(0, val.length - 1);
+		}
+	});
 /*$("#price,#charity_amount").on("keyup", function(){
 var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
 val = this.value;

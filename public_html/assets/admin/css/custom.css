@@ -16,22 +16,20 @@ span.logo-lg {width: 57%;    margin: 0 auto;}
     background-color: #60c5ac;
     border-color: #60c5ac;
 }
-.c_edit_csmts .drop_uploader img {
-    background: #fff;
-}
-.col-md-12.profile_pic_admin span.btn.btn-default.btn-file {
-   margin-left: 25px !important;
+.c_edit_csmts .drop_uploader {
+    position: absolute;background: transparent;
+    top: 0;
 }
 #search_banner .fileupload.fileupload-new {
     position: relative;
     margin-bottom: 15px;
 }
-.c_edit_csmts .drop_uploader {
-    position: absolute;
-    top: 0;
-}
 .cropper-view-box{outline-color: #60c5ac !important;
     outline: 2px solid #60c5ac !important;}
+.upload-photo-blogs .up-blog img{    background-color: #fff;}
+.col-md-12.profile_pic_admin span.btn.btn-default.btn-file {
+    margin-left: 25px !important;
+}
 /*Jithu 24042017 *******/ 
 /*#dtTable tr>th:first-child{
 display: none;
@@ -42,9 +40,17 @@ display: none;
 */
 /*******************/
 
-/*Dec-15 changes*/
+/*Dec-15 Siva changes*/
 .threeblogs.edit_admin_cstume .edit_thumbs{width: 100% !important; max-height: 100%;    overflow: initial;}
 /*Dec-15 changes Done*/ 
+
+/*Oct-12 siva chnages*/
+#customer_edit1 .dmns_rigts, #customer_edit1 .pckg_right .has-feedback{position: relative;}
+#customer_edit1 .dmns_rigts span.error, #customer_edit1 .pckg_right .has-feedback .input-group + span.error{position: absolute; bottom:-5px;}
+#customer_edit1 .cosutme-fr, .create-admin_pagess{position: relative;}
+#customer_edit1 .cosutme-fr span.error, .create-admin_pagess span.error{top:100%; position:absolute; left:0; width:300px;}
+
+/*Oct-12 siva chnages done*/
 
 
 
@@ -489,7 +495,7 @@ input#event_image {
 }
 .edit_thumbs {
     width: inherit !important;/*clear: both;*/    max-height: 298px;
-    overflow: hidden;
+
 }
 .blog_status_right .ad_cate_btn {
     background: #60c5ac;
@@ -521,9 +527,7 @@ input#event_image {
     width: 100%; width: 198px;
     background-position: center top;
     background-size: cover;
-    background-repeat: no-repeat;
-    max-height: 298px;
-    overflow: hidden;
+    background-repeat: no-repeat;  max-height: 298px;overflow: hidden;
 }
 div#tracking_ids {
     text-align: left;
@@ -811,6 +815,11 @@ a.remove_product.btn.btn-danger {
     background-color: #60c5ac;
     border-color: #60c5ac;
 }
+/*span.remove_pic_banner {
+    position: absolute;
+    top: -7px;    color: red;
+    right: 0px;
+}*/
 span.remove_pic_banner {
     position: absolute;
     top: 0px;    color: red;
@@ -965,6 +974,7 @@ h3.box-title{width:100%; float:left;}
 #agent_edit_from .form-group{margin-right:0px; margin-left:0px;}
 #agent_edit_from input, #agent_edit_from select{border:1px solid #ccc;}
 #agent_edit_from p{margin:0;font-size:11px}
+/*span.remove_pic_cat {    position: absolute;    top: -7px;    color: red;    right: 0px;}*/
 span.remove_pic_cat {    position: absolute;    top: 0px;    color: red;    right: 5px; cursor: pointer;}
 .sidebar-menu .treeview-menu{padding-left: 25px !important;}
 .sidebar-collapse .sidebar-menu .treeview-menu{padding-left: 0px !important;}
@@ -1432,16 +1442,6 @@ body .loading img{width:10%;}
 .user-request-sec .form-control {
     width: 60%;
 }
-
-/*Oct-12 siva chnages*/
-#customer_edit1 .dmns_rigts, #customer_edit1 .pckg_right .has-feedback{position: relative;}
-#customer_edit1 .dmns_rigts span.error, #customer_edit1 .pckg_right .has-feedback .input-group + span.error{position: absolute; bottom:-5px;}
-#customer_edit1 .cosutme-fr, .create-admin_pagess{position: relative;}
-#customer_edit1 .cosutme-fr span.error, .create-admin_pagess span.error{top:100%; position:absolute; left:0; width:300px;}
-
-/*Oct-12 siva chnages done*/
-
-
 @media only screen and (min-width : 1300px) {
 
 	.row_pregt .radio {

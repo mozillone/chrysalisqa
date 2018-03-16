@@ -186,7 +186,7 @@ $(document).ready(function(){
                 messages:
                     {
                     jobcode:{
-                        required:"Enter Job Code.",
+                        required:"Enter Job Code",
                     },
                     jobtitle:{
                         required:"Enter Job Title",

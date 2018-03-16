@@ -37,3 +37,4 @@ npm-debug.log
 /public_html/press_images/original/*
 /public_html/uspslabel/*
 /public_html/costumers_images/ExLarge/*
+composer.lock

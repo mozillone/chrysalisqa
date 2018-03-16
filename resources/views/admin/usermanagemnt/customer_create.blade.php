@@ -138,11 +138,11 @@
 									<div class="fileupload fileupload-new" data-provides="fileupload"> 
 									<div class="photo_uploads rmvimg">
 										<img src="/img/default.png" class="img-pview img-responsive" id="img-chan" name="img-chan" >
-										<!-- MSN Added id rmvimg -->
+									
 										<!-- <span class="remove_pic">
 											<i class="fa fa-times-circle" aria-hidden="true"></i>
 										</span> -->
-									</div>
+											</div>
 										<span class="btn btn-default btn-file">
 											<span class="fileupload-new" style="float:right">Upload Photo</span>
 											<span class="fileupload-exists"></span>     

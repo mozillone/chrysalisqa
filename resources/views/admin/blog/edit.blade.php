@@ -18,11 +18,10 @@
     <script src="{{ asset('/assets/admin/js/fileinput.js') }}"></script>
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
     <style type="text/css">
-        .bootstrap-tagsinput .label-info{background-color: #5fc5ac !important;}
-        .form-group.has-feedback.blog-tags{position: relative;}
+         .bootstrap-tagsinput .label-info{background-color: #5fc5ac !important;}
+         .form-group.has-feedback.blog-tags{position: relative;}
         .form-group.has-feedback.blog-tags span.error{position: absolute; top:100%; left:0;}
         .fileupload.fileupload-new.rmvimg span.error{width:100%; float:left;}
-
     </style>
 
 @stop
@@ -108,24 +107,22 @@
                                             ?>
                                             <img  src="<?=$filesource?>" class="img-pview img-responsive" id="img-chan" name="img-chan">
                                             @if($fileExist)
-                                             <span class="remove_pic" id="removeImg">
+                                            <span class="remove_pic" id="removeImg">
                                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                                             </span>
                                             @endif
-                                           
 
                                             <span class="btn btn-default btn-file">
                                                 <span class="fileupload-new" style="float:right">Upload Photo</span>
                                                 <span class="fileupload-exists"></span>
+                                                
                                                 <input id="blog_image" name="blogImage" type="file" placeholder="Blog Image" class="form-control">
-
                                             </span>
-
 
                                             <p class="noteices-text">Note: The file should not exceed above 3MB and allowed .JPG, .JPEG, .PNG formats only.</p>
 
                                             <span class="fileupload-preview"></span>
-                                             <input id="imageExists" name="imageExists" value="<?php echo (!empty($imageExists) ? $imageExists : '')?>" type="hidden">
+                                            <input name="imageExists" value="<? echo (!empty($imageExists) ? $imageExists : '')?>" type="hidden">
                                             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
                                         </div>
                                         <p class="error">{{ $errors->first('blogImage') }}</p>
@@ -133,7 +130,7 @@
 
                                     <div class="form-group has-feedback blog-tags" >
                                         <label for="blog-tags" class="control-label">Blog Tags<span class="req-field" >*</span></label>
-                                        <input type="text" name="blogTags" class="form-control" id="blog-tags" value="{{ $blogPost->tags }}"/>
+                                        <input type="text" name="blogTags" class="form-control" id="blog-tags" value="{{ $blogPost->tags }}" data-role="tagsinput"/>
                                         <input id="dummyBlogTags" name="dummyBlogTags" type="hidden" value="{{ $blogPost->tags }}" />
                                         <p class="error">{{ $errors->first('blogTags') }}</p>
                                         <span id="page_desc_error" style="color:red"></span>
@@ -182,7 +179,7 @@
 
                     <div class="box-footer">
                         <div class="pull-right">
-                            <a href="/blog-posts" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
+                             <a href="/blog-posts" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
                             <button type="submit" class="btn btn-info pull-right save-page">Update</button>
                         </div>
                     </div>
