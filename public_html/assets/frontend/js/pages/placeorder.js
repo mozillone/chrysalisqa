@@ -715,7 +715,6 @@ if(str_price){var str=str_price;}else{var str="0";}
 			var type=$(this).attr('data-type');
 			var shipping_days=$(this).attr('data-shipping-days');
 			var costume_id=$(this).attr('data-costume-id').split(',');	
-			console.log(costume_id);
 			$('.shi_date_right_'+seller_no).html("");
 
 			$.ajax({
@@ -723,7 +722,6 @@ if(str_price){var str=str_price;}else{var str="0";}
 				url: '/getestimationdate/'+costume_id+'/'+shipping_days,
 				async: false,
 				success: function(response){
-					console.log(response);
 					if(type=="free"){
 						for (var i = 0; i<costume_id.length; i++) {
 							$('.shi_date_right_'+costume_id[i]).html(response[i]);
