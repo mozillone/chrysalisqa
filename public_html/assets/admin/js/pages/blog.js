@@ -22,10 +22,11 @@ $(function(){
                 required: true
             },
             post_desc:{
-                required: function() 
-                {
-                    CKEDITOR.instances.post_desc.updateElement();
-                },
+                         required: function() 
+                        {
+                         CKEDITOR.instances.post_desc.updateElement();
+                        },
+
             },
            
         },
@@ -115,7 +116,7 @@ $(function(){
             $(element).closest('.form-control').addClass('error');
         },
         errorPlacement: function(error, element) {
-            if(element.attr("name") == 'blogTags'){
+           if(element.attr("name") == 'blogTags'){
                 error.insertAfter(".selectize-control");
             }else if(element.attr("name") == 'category'){
                 error.insertAfter(".blog-categories");
@@ -218,7 +219,6 @@ $(function(){
 
                             $('#img-chan').attr('src',e.target.result);
                             $('input[name="imageExists"]').val("1");
-
                         }
                         image_holder.show();
                         reader.readAsDataURL($(this)[0].files[i]);

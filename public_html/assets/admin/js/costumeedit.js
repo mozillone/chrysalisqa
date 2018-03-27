@@ -3,7 +3,7 @@
 $(".remove").click(function(){
     $(this).parent(".pip").remove();
 });
-/*$('#donate_charity').change(function(){
+$('#donate_charity').change(function(){
     if ($(this).val() == "none") {
         $('input[name=charity_name]').prop('checked', false);
     }
@@ -13,7 +13,7 @@ $('#another_charity').change(function(){
     if ($(this).prop("checked") == true) {
         $('input[name=charity_name]').prop('checked', false);
     }
-});*/
+});
 
 $('input[name=file1]').change(function(){
     $('#drag_n_drop_1').css('display','block');
@@ -131,11 +131,14 @@ $(document).on("change", "#file1", function() {
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+
                     $(document).on("change", "#zoom-level", function() {
                         $image.cropper('zoomTo', 0.1);
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+
+
                     $(document).on("click", "#crop", function() {
                         if($image.cropper('getCroppedCanvas')==null){
                             imgdata = reader.readAsDataURL(file);
@@ -236,6 +239,7 @@ $(document).on("change", "#file2", function() {
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+
                     $(document).on("change", "#zoom-level2", function() {
                         $image.cropper('zoomTo', 0.1);
                         var current_zoom = $(this).val();
@@ -341,11 +345,13 @@ $(document).on("change", "#file3", function() {
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+
                     $(document).on("change", "#zoom-level3", function() {
                         $image.cropper('zoomTo', 0.1);
                         var current_zoom = $(this).val();
                         $image.cropper('zoom', current_zoom);
                     });
+
                     $(document).on("click", "#crop3", function() {
                         if($image.cropper('getCroppedCanvas')==null){
                             imgdata = reader.readAsDataURL(file);
@@ -407,7 +413,7 @@ $(document).on('slid.bs.carousel', '.carousel', function () {
     var active_item_index = getActiveItemIndex(items);
     activeCropperObjIndex = active_item_index;
     slider.val(zooms[active_item_index]);
-    if(activeCropperObjIndex >0)
+     if(activeCropperObjIndex >0)
         {
             slider.val(2);
         }
@@ -435,7 +441,6 @@ $("#cancelMultiple").on("click",function(){
     $("#dvPreviewMultiple").html('');
     resetCropperValues();
 });
-
 //multiple file uploading code
 
 $("#upload-file-selector").on("change",function () {
@@ -536,6 +541,7 @@ $(document).on("input", ".slider", function () {
     zooms[activeCropperObjIndex] = current_zoom;
     $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
 });
+
 $(document).on("change", ".slider", function () {
     $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
     var current_zoom = $(this).val();

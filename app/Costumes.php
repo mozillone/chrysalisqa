@@ -124,6 +124,7 @@ class Costumes extends Authenticatable
     }
     /************* Costume URL Create start here **************/
     protected function urlRewrites($costume_id,$type){
+        Log::info('urlRewrites');
         if($type=="update"){
               $cond=array('type'=>'product',
                     'url_offset'=>$costume_id);

@@ -19,16 +19,7 @@ class HomePageController extends Controller {
 	public function index()
 	{
 		$insta = array();
-		/*$activation_link=URL::to('/').'/password/change/';
-				 		$data['name']="hai";
-						$data['activation_link']=$activation_link;
-						$email= "";
-						$sent=Mail::send('emails.registration',array("email"=>$data), function ($m) use($email){
-							$m->to("mohan@dotcomweavers.com", "Mruduramai");
-						    $m->subject('Forgot Password');
-
-						});*/
-		Meta::set('title', "Chrysalis: The Costume Enthusiast's Marketplace");
+		Meta::set('title', "Chrysalis - The Costume Enthusiast's Marketplace");
         Meta::set('description', 'Affordable, Environment Friendly Costumes. Buy and Sell Costumes online.');
 		$featured_costumes = DB::table('costumes')
 		->leftJoin('costume_description','costumes.costume_id','costume_description.costume_id')
