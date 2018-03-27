@@ -24,9 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('clean:cache')->everyMinute();
+        $schedule->command('clean:cache')->weekly()->sundays()->at('3:00');
         
-        $schedule->exec('composer dump-autoload')->everyMinute();
+        $schedule->exec('composer dump-autoload')->weekly()->sundays()->at('3:00');
     }
 
     /**
