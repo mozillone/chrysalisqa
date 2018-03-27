@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('clean:cache')->everyMinute();
         
-        $schedule->exec(base_path().'composer dump-autoload')->everyMinute();
+        $schedule->exec('composer dump-autoload')->everyMinute();
     }
 
     /**
