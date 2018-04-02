@@ -40,7 +40,8 @@ class CategoriesController extends Controller
    }
    public function categoriesData(Request $request)
    {
-        $categories = DB::select('SELECT cat.category_id,cat.name,cat.parent_id,if(cat.parent_id=0,cat.name,cat1.name)  as main_cat,cat.sort_order  FROM `cc_category`  as cat INNER JOIN cc_category as cat1 on  cat.parent_id=cat1.category_id  or cat.parent_id="0" GROUP by cat.category_id order by (case when cat.parent_id > 0 then cat1.sort_order end) asc,(case WHEN cat1.parent_id=0 then cat.sort_order end) asc');
+        $categories = DB::select('SELECT cat.category_id,cat.name,cat.parent_id,if(cat.parent_id=0,cat.name,cat1.name)  as main_cat,cat.sort_order  FROM `cc_category`  as cat INNER JOIN cc_category as cat1 on  cat.parent_id=cat1.category_id  or cat.parent_id="0"
+                                  GROUP by cat.category_id order by parent_id,category_id asc');
         return response()->success(compact('categories'));
    }
    public function getCostumesList(){
@@ -89,9 +90,7 @@ class CategoriesController extends Controller
    }
    public function editCategories(Request $request,$cat_id=null)
    {
-
          $req=$request->all();
-
          if(count($req))
          {
          //dd($req);
@@ -114,14 +113,13 @@ class CategoriesController extends Controller
                   }
                   $cat_info=Category::getUrlCategoryId($key_url);
                   if(!count($cat_info) || $cat_info[0]->url_offset==$req['category_id']){
-                    $cat_info=Category::getUrlCategoryId($key_url);
-                    
-                    Category::updateCategory($req);
-                    Session::flash('success', 'Category is updated successfully');
-                    return Redirect::to('categories');
+                  $cat_info=Category::getUrlCategoryId($key_url);
+                  Category::updateCategory($req);
+                  Session::flash('success', 'Category is updated successfully');
+                  return Redirect::to('categories');
                   }else{
-                     Session::flash('error', 'This Category is already exits');
-                     return Redirect::to("/categories"); 
+                   Session::flash('error', 'This Category is already exits');
+                   return Redirect::to("/categories"); 
                   }
               }
          }
@@ -129,7 +127,6 @@ class CategoriesController extends Controller
          {
             $cond=array('category_id'=>$cat_id);
             $cat_data=Site_model::fetch_data('category','*',$cond);
-
             $parent_cats=Category::getParentCategories();
             $costumes_list=Costumes::getCostumesList();
             $cat_costumes=Category::getCatCostumesList($cat_id);
@@ -157,7 +154,6 @@ class CategoriesController extends Controller
     }
    public function createAttributesValue(Request $request)
    {
-
          $req=$request->all();
          if(count($req))
          {
@@ -227,23 +223,5 @@ class CategoriesController extends Controller
             $string = preg_replace(array('/[^a-z0-9]/i', '/[-]+/') , '-', $string);
             return strtolower(trim($string, '-'));
     }
-    public static function deleteCategoryCostume($product_id, $category_id)
-    {
-      $is_deleted = DB::table('costume_to_category')
-                      ->where('costume_id',$product_id)
-                      ->where('category_id', $category_id)
-                      ->delete();
-                      
-      $costume_update = DB::table('costumes')
-                    ->where('costume_id',$product_id)
-                    ->update(['cat_id'=>0]);
 
-      if($is_deleted){
-        Session::flash('success', 'Costume Deleted successfully');
-        return redirect()->back();
-      }else{
-        Session::flash('error', 'Costume not Deleted, Try Again');
-        return redirect()->back();
-      }
-    }
 }

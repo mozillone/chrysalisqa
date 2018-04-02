@@ -156,8 +156,6 @@ class CostumeController extends Controller
 		->where('attribute_id','=','31')->get();
 
 		$cosplaySubCategories=Site_model::Fetch_data('category','*', array('parent_id'=>66,'status'=>1));
-		/*	$cos_data = DB::table('costume_description')->where('costume_id',$id)->first();*/
-
 
 		$uniqueFashionSubCategories=Site_model::Fetch_data('category','*', array('parent_id'=>143,'status'=>1 ));
 
@@ -165,10 +163,11 @@ class CostumeController extends Controller
 
 		//print_r($charities);exit;
 		/****Array push code ends here***/
-		 return view('admin.costumes.costume_create',compact('title','customers','categories','bd_height',
-		 'bd_height_in','bd_weight','bd_chest','bd_waist','cosplay_one','cosplay_one_value','cosplay_two','cosplay_two_value','cosplay_three','cosplay_three_value',
-		 'cosplay_four','cosplay_four_value','cosplay_five','cosplay_five_value','descriptions','shippingoptions','packageditems','packageditems_value','dimensions','dimensions_values','type','type_value','service','service_value','handling','returnpolicy','handling_value','returnpolicy_value','charities','handwashed',
-		 'description','description_value','funfacts','funfacts_value','faq','faq_value','cosplaySubCategories','uniqueFashionSubCategories','filmTheatreSubCategories'));
+	 return view('admin.costumes.costume_create',compact('title','customers','categories','bd_height',
+	 'bd_height_in','bd_weight','bd_chest','bd_waist','cosplay_one','cosplay_one_value','cosplay_two','cosplay_two_value','cosplay_three','cosplay_three_value',
+	 'cosplay_four','cosplay_four_value','cosplay_five','cosplay_five_value','descriptions','shippingoptions','packageditems','packageditems_value'
+	 ,'dimensions','dimensions_values','type','type_value','service','service_value','handling','returnpolicy','handling_value','returnpolicy_value','charities','handwashed',
+	 'description','description_value','funfacts','funfacts_value','faq','faq_value','cosplaySubCategories','uniqueFashionSubCategories','filmTheatreSubCategories'));
 	}
 	/*
 	Method Name : insertCostume()
@@ -179,15 +178,11 @@ class CostumeController extends Controller
 
 	  	$response=array();
 		$req=$request->all();
-
+		//echo "<pre>"; print_r($req); exit;
+		//dd($final_keywords);
 		$userid = Auth::user()->id;
 		$customer_name=$req['customer_name'];
 		$costume_name=$req['costume_name'];
-		if($customer_name == 1){
-			$customer_group = "admin";
-		}else{
-			$customer_group = "user";
-		}
 		$costume_cost=$req['costume_cost'];
 		$gender=$req['gender'];
 		$category=$req['category'];
@@ -197,12 +192,7 @@ class CostumeController extends Controller
 		$makecostume=$req['make_costume'];
 		$filmquality=$req['fimquality'];
 		$description=$req['costume_desc'];
-		if(isset($req['cleaned']) && !empty($req['cleaned'])){
-			$cleaned = $req['cleaned'];		
-		}else{
-			$cleaned = "";	
-		}
-		
+		$cleaned = $req['cleaned'];	
 
 		$faq=$req['faq'];
 		$price=$req['price'];
@@ -211,13 +201,7 @@ class CostumeController extends Controller
 		$charity_name=$req['charity_name'];
 
 		$weight_pounds = $req['pounds'];
-
-		if(isset($req['ounces'])){
-			$weight_ounces = $req['ounces'];
-		}else{
-			$weight_ounces = 0;
-		}
-		//$weight_ounces = $req['ounces'];
+		$weight_ounces = $req['ounces'];
 
 		if($request->has('dimensionsdimensionsLength')){
 			$length = $req['dimensionsdimensionsLength'];	
@@ -234,11 +218,10 @@ class CostumeController extends Controller
 		$frontview = $req['img_chan'];
 		
 		$customerid = $customer_name;
-		//$customer_group = "admin";
-		$get_cat_id = DB::table('category')->where('category_id',$category)->first();
+		$customer_group = "admin";
 		$costume = array(
 			'weight_pounds'=>$req['pounds'],
-			'weight_ounces'=>$weight_ounces,
+			'weight_ounces'=>$req['ounces'],
 			'gender'=>$gender,
 			'condition'=>$costume_condition,
 			'created_user_group'=>$customer_group,
@@ -247,12 +230,10 @@ class CostumeController extends Controller
 			'condition_type' => $cleaned,
 			'created_by'=>$customerid,
 			'created_at'=>date('y-m-d H:i:s'),
-			'cat_id'=>$get_cat_id->parent_id
 		);
        
 		$costume_id = DB::table('costumes')->insertGetId($costume);
 		$insert_costume = $costume_id;
-		DB::update("UPDATE `cc_costumes` SET `unq_costume_code` = ENCRYPT(costume_id , CONCAT('$6$', SHA2(RANDOM_BYTES(64), '256'))) WHERE unq_costume_code IS NULL");
 		if($insert_costume){
 			if (isset($request['Imagecrop1']) && !empty($request['Imagecrop1'])) {
 				$Imagecrop1 = $request->Imagecrop1;
@@ -267,28 +248,23 @@ class CostumeController extends Controller
 
 				$Mediumresizeimg = Image::make($originalPath);
 				//$Mrand = str_random(10) . '.png';
-				$Mediumresizeimg->resize(260, 434);
+				$Mediumresizeimg->resize(260, 356);
 
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 
 
 				$Smallresizeimg = Image::make($originalPath);
 				//$Srand = str_random(10) . '.png';
-				$Smallresizeimg->resize(140, 233);
+				$Smallresizeimg->resize(140, 190);
 
 				$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 
 
 				$Largeresizeimg = Image::make($originalPath);
 				//$Lrand = str_random(10) . '.png';
-				$Largeresizeimg->resize(475, 792);
+				$Largeresizeimg->resize(475, 650);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
-
-				$ExLargeresizeimg = Image::make($originalPath);
-			    $ExLargeresizeimg->resize(889, 1482);
-			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
-			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
 
 				if($OriginalImage)
@@ -314,26 +290,21 @@ class CostumeController extends Controller
 
 				$Mediumresizeimg = Image::make($originalPath1);
 				//$Mrand = str_random(10) . '.png';
-				$Mediumresizeimg->resize(260, 434);
+				$Mediumresizeimg->resize(260, 356);
 
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 
 				$Smallresizeimg = Image::make($originalPath1);
 				//$Srand = str_random(10) . '.png';
-				$Smallresizeimg->resize(140, 233);
+				$Smallresizeimg->resize(140, 190);
 
 				$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 
 				$Largeresizeimg = Image::make($originalPath1);
 				//$Lrand = str_random(10) . '.png';
-				$Largeresizeimg->resize(475, 792);
+				$Largeresizeimg->resize(475, 650);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
-
-				$ExLargeresizeimg = Image::make($originalPath1);
-			    $ExLargeresizeimg->resize(889, 1482);
-			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
-			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
 				//$file2 = Imageresize::CreateCostumeFrontend2($request->file2);
 
@@ -362,23 +333,18 @@ class CostumeController extends Controller
 				$OriginalImage2 = file_put_contents($originalPath2, $data2);
 				$Mediumresizeimg = Image::make($originalPath2);
 				//$Mrand = str_random(10) . '.png';
-				$Mediumresizeimg->resize(260, 434);
+				$Mediumresizeimg->resize(260, 356);
 
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 				$Smallresizeimg = Image::make($originalPath2);
 				//$Srand = str_random(10) . '.png';
-				$Smallresizeimg->resize(140, 233);
+				$Smallresizeimg->resize(140, 190);
 				$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 				$Largeresizeimg = Image::make($originalPath2);
 				//$Lrand = str_random(10) . '.png';
-				$Largeresizeimg->resize(475, 792);
+				$Largeresizeimg->resize(475, 650);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
-
-				$ExLargeresizeimg = Image::make($originalPath2);
-			    $ExLargeresizeimg->resize(889, 1482);
-			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
-			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
 				//$file3 = Imageresize::CreateCostumeFrontend3($request->file3);
 
@@ -406,28 +372,23 @@ class CostumeController extends Controller
 
 					$Mediumresizeimg = Image::make($originalPath);
 					//$Mrand = str_random(10) . '.png';
-					$Mediumresizeimg->resize(260, 434);
+					$Mediumresizeimg->resize(260, 356);
 
 					$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Multiplerand);
 
 
 					$Smallresizeimg = Image::make($originalPath);
 					//$Srand = str_random(10) . '.png';
-					$Smallresizeimg->resize(140, 233);
+					$Smallresizeimg->resize(140, 190);
 
 					$Smallresizeimg->save(public_path('costumers_images/Small/').$Multiplerand);
 
 
 					$Largeresizeimg = Image::make($originalPath);
 					//$Lrand = str_random(10) . '.png';
-					$Largeresizeimg->resize(475, 792);
+					$Largeresizeimg->resize(475, 650);
 
 					$Largeresizeimg->save(public_path('costumers_images/Large/').$Multiplerand);
-
-					$ExLargeresizeimg = Image::make($originalPath);
-				    $ExLargeresizeimg->resize(889, 1482);
-				    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Multiplerand);
-				    chmod(public_path('costumers_images/ExLarge/').$Multiplerand, 0777);
 
 					$file_db_array4 = array('costume_id'=>$costume_id,
 						'image'=>$multidata,
@@ -445,40 +406,46 @@ class CostumeController extends Controller
 		 |@name varchar
 		 |@description text
 		 */
- 
+		/*if (isset($request->keyword) && !empty($request->keyword)) {
+		 	$keywords=$request->keyword;
 
-		    $final_keywords = array();
-			if(!empty($request->keyword_10)){
+		 	$final_keywords = implode(", ", $keywords);
+		}else{
+		 	$final_keywords= "";
+		}*/
+
+		   $final_keywords = array();
+			if($request->has('keyword_10')){
 				$final_keywords[1] = $request->keyword_10;
 			}
-			if(!empty($request->keyword_9)){
+			if($request->has('keyword_9')){
 				$final_keywords[2] = $request->keyword_9;
 			}
-			if(!empty($request->keyword_8)){
+			if($request->has('keyword_8')){
 				$final_keywords[3] = $request->keyword_8;
 			}
-			if(!empty($request->keyword_7)){
+			if($request->has('keyword_7')){
 				$final_keywords[4] = $request->keyword_7;
 			}
-			if(!empty($request->keyword_6)){
+			if($request->has('keyword_6')){
 				$final_keywords[5] = $request->keyword_6;
 			}
-			if(!empty($request->keyword_5)){
+			if($request->has('keyword_5')){
 				$final_keywords[6] = $request->keyword_5;
 			}
-			if(!empty($request->keyword_4)){
+			if($request->has('keyword_4')){
 				$final_keywords[7] = $request->keyword_4;
 			}
-			if(!empty($request->keyword_3)){
+			if($request->has('keyword_3')){
 				$final_keywords[8] = $request->keyword_3;
 			}
-			if(!empty($request->keyword_2)){
+			if($request->has('keyword_2')){
 				$final_keywords[9] = $request->keyword_2;
 			}
-			if(!empty($request->keyword_1)){
+			if($request->has('keyword_1')){
 				$final_keywords[10] = $request->keyword_1;
 			}
-			$final_keywords = implode(",", $final_keywords);
+          $final_keywords = implode(",", $final_keywords);
 
 		$costume_description = array('costume_id'=>$costume_id,
 									'language_id'=>"1",
@@ -918,14 +885,14 @@ class CostumeController extends Controller
 					$where.=' AND report.name LIKE "%'.$req['search']['user_name'].'%"';
 			}
 		}
-		$costume_reports = DB::select('SELECT cst.costume_id,cst.sku_no,dsc.name as cst_name ,report.name as user_name,report.phn_no,report.email,report.reason,DATE_FORMAT(report.created_at,"%m/%d/%Y %h:%i %p") as date FROM `cc_reported_costumes` as report LEFT JOIN cc_costumes as cst on cst.costume_id=report.costume_id LEFT JOIN cc_costume_description as dsc on dsc.costume_id=cst.costume_id '.$where.' order by report.id desc');
+		$costume_reports = DB::select('SELECT cst.costume_id,cst.sku_no,dsc.name as cst_name ,report.name as user_name,report.phn_no,report.email,report.reason,DATE_FORMAT(report.created_at,"%m/%d/%Y %h:%i %p") as date FROM `cc_reported_costumes` as report LEFT JOIN cc_costumes as cst on cst.costume_id=report.costume_id LEFT JOIN cc_costume_description as dsc on dsc.costume_id=cst.costume_id '.$where.'');
 		return response()->success(compact('costume_reports'));
 	}
 
 	
 	public function post_upload(Request $request){
 
-		$image = $request->file('file');
+		        $image = $request->file('file');
 				
 
         $imageName = time().$image->getClientOriginalName();
@@ -954,8 +921,8 @@ class CostumeController extends Controller
             ->groupby('costumeid')
 		->get();
 
-		//echo "<pre>";print_r($costumes);die;	
-		return Datatables::of($costumes)
+	//echo "<pre>";print_r($costumes);die;	
+	return Datatables::of($costumes)
         ->addColumn('actions', function ($costumes) {
                 return '<a href="/custome-listing/'.$costumes->costumeid.'" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i></a>
                 <a href="javascript:void(0);" onclick="deletecostume('.$costumes->costumeid.')" class="btn btn-xs btn-danger delete_user"><i class="fa fa-trash-o"></i></a>';
@@ -1070,23 +1037,13 @@ class CostumeController extends Controller
 		$this->data['bd_height']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',16)->first();
 		$this->data['bd_height_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',16)->first();
 		$this->data['bd_height_in']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',17)->first();
-		
 		$this->data['bd_height_in_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',17)->first();
-		
         $this->data['bd_weight']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',18)->first();
-        
 		$this->data['bd_weight_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',18)->first();
-		
-		
-		
 		$this->data['bd_chest']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',19)->first();
-		
 		$this->data['bd_chest_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',19)->first();
-		
 		$this->data['bd_waist']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',20)->first();
-		
 		$this->data['bd_waist_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',20)->first();
-		
 		/******Costume Faq code starts here*****/
 		$this->data['cosplay_one']=DB::table('attributes')->select('attribute_id','code','label','type')->where('attribute_id','=',2)->first();
 		$this->data['cosplay_one_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',2)->get();
@@ -1109,10 +1066,6 @@ class CostumeController extends Controller
 		$this->data['activity_yes_opt'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','28')->first();
 		$this->data['make_costume_time'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','29')->first();
 		$this->data['film_name'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id','30')->first();
-
-		$this->data['cos_data'] = DB::table('costume_description')->where('costume_id',$id)->first();
-
-
 		/****Description,funfacts and faq code starts here***/
 		$this->data['descriptions']=DB::table('attributes')
 		->leftJoin('attribute_options','attribute_options.attribute_id','=','attributes.attribute_id')
@@ -1158,7 +1111,11 @@ class CostumeController extends Controller
 		$this->data['faq_value']=DB::table('attribute_options')->select('option_id','option_value','attribute_id')->where('attribute_id','=',8)->get();
 		$this->data['faq_value_value'] = DB::table('costume_attribute_options')->where('costume_id',$id)->where('attribute_id',8)->first();
 		$this->data['sub_cat'] = DB::table('costume_to_category')->where('costume_id',$id)->first();
-	 
+		/*if ($this->data['costumes_data']->cos_charity_id == 0) {
+			# code...
+			$charity_id =DB::table('charities')->where('costume_id',$id)->first();
+			$this->data['costumes_data']->cos_charity_id = $charity_id->id;
+		}*/
 
 
 		$this->data['handling_costume'] = DB::table('costumes as c')
@@ -1184,8 +1141,8 @@ class CostumeController extends Controller
 		$this->data['uniqueFashionSubCategories'] = $uniqueFashionSubCategories;
 		$this->data['filmTheatreSubCategories'] = $filmTheatreSubCategories;
 
-		// echo "<pre>";print_r($this->data);die;
-		return view('admin.costumes.costume_edit')->with($this->data);
+	// echo "<pre>";print_r($this->data);die;
+		 return view('admin.costumes.costume_edit')->with($this->data);
 	}
 
 	public function changeCostumeStatus(Request $request) {
@@ -1247,19 +1204,15 @@ class CostumeController extends Controller
 
 
     public function updateCostume(Request $request){
- 
-         
-        
+
+
+
 		$delete_costume_attributes = DB::table('costume_attribute_options')->where('costume_id',$request->costume_id)->delete();
-   	  $response=array();
+	 // echo "<pre>";print_r($request->all());die;
+   	$response=array();
 	  $req=$request->all();
 	  $userid=Auth::user()->id;
 	  $customer_name=$req['customer_name'];
-	  if($customer_name == 1){
-			$customer_group = "admin";
-		}else{
-			$customer_group = "user";
-		}
 	  $costume_name=$req['costume_name'];
 	  $costume_cost=$req['costume_cost'];
 	  $gender=$req['gender'];
@@ -1293,19 +1246,10 @@ class CostumeController extends Controller
 	  //$backview=$req['img_chan1'];
 	  //$details_accessories=$req['img_chan2'];
 	  $weight_pounds = $req['pounds'];
-	  	if(isset($req['ounces'])){
-			$weight_ounces = $req['ounces'];
-		}else{
-			$weight_ounces = 0;
-		}
-	  //$weight_ounces = $req['ounces'];
+	  $weight_ounces = $req['ounces'];
 
-	  //$cleaned = $req['cleaned'];
-	  if(isset($req['cleaned']) && !empty($req['cleaned'])){
-			$cleaned = $req['cleaned'];		
-		}else{
-			$cleaned = "";	
-		}
+	  $cleaned = $req['cleaned'];
+
 
 	 // $multiplefiles=$req['files'];
 	  //Generating sku number for a costume code starts here code format should be (CS(five zeros)incrementing the number form 0 Ex:CS0000012)*****/
@@ -1325,11 +1269,11 @@ class CostumeController extends Controller
 		//Check whether the costume inserted by admin or not if the user is selected insert the user id else insert the admin as costumer
 		
 		$customerid=$customer_name;
-		//$customer_group="admin";
-		$get_cat_id = DB::table('category')->where('category_id',$category)->first();
+		$customer_group="admin";
+		
        $costume=array(
 			'weight_pounds'=>$req['pounds'],
-			'weight_ounces'=>$weight_ounces,
+			'weight_ounces'=>$req['ounces'],
 			'gender'=>$gender,
 			'condition'=>$costume_condition,
 			'created_user_group'=>$customer_group,
@@ -1338,7 +1282,6 @@ class CostumeController extends Controller
 			'condition_type' =>$cleaned,
 			'created_by'=>$customerid,
 			'created_at'=>date('y-m-d H:i:s'),
-			'cat_id'=>$get_cat_id->parent_id
 			);
        //print_r($costume); exit;
 
@@ -1358,19 +1301,14 @@ class CostumeController extends Controller
 				$data1 = $Orand;
 				$OriginalImage = file_put_contents($originalPath, $data);
 				$Mediumresizeimg = Image::make($originalPath);
-				$Mediumresizeimg->resize(260, 434);
+				$Mediumresizeimg->resize(260, 356);
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/') . $Orand);
 				$Smallresizeimg = Image::make($originalPath);
-				$Smallresizeimg->resize(140, 233);
+				$Smallresizeimg->resize(140, 190);
 				$Smallresizeimg->save(public_path('costumers_images/Small/') . $Orand);
 				$Largeresizeimg = Image::make($originalPath);
-				$Largeresizeimg->resize(475, 792);
+				$Largeresizeimg->resize(475, 650);
 				$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
-
-				$ExLargeresizeimg = Image::make($originalPath);
-			    $ExLargeresizeimg->resize(889, 1482);
-			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
-			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 				if ($OriginalImage) {
 					$file_db_array1 = array('costume_id' => $costume_id,
 						'image' => $data1,
@@ -1391,18 +1329,14 @@ class CostumeController extends Controller
 				$data2 = $Orand;
 				$OriginalImage2 = file_put_contents($originalPath1, $data1);
 				$Mediumresizeimg = Image::make($originalPath1);
-				$Mediumresizeimg->resize(260, 434);
+				$Mediumresizeimg->resize(260, 356);
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/') . $Orand);
 				$Smallresizeimg = Image::make($originalPath1);
-				$Smallresizeimg->resize(140, 233);
+				$Smallresizeimg->resize(140, 190);
 				$Smallresizeimg->save(public_path('costumers_images/Small/') . $Orand);
 				$Largeresizeimg = Image::make($originalPath1);
-				$Largeresizeimg->resize(475, 792);
+				$Largeresizeimg->resize(475, 650);
 				$Largeresizeimg->save(public_path('costumers_images/Large/') . $Orand);
-				$ExLargeresizeimg = Image::make($originalPath1);
-			    $ExLargeresizeimg->resize(889, 1482);
-			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
-			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 				if ($OriginalImage2) {
 					$file_db_array2 = array('costume_id' => $costume_id,
 						'image' => $data2,
@@ -1426,23 +1360,18 @@ class CostumeController extends Controller
 				$OriginalImage2 = file_put_contents($originalPath2, $data2);
 				$Mediumresizeimg = Image::make($originalPath2);
 				//$Mrand = str_random(10) . '.png';
-				$Mediumresizeimg->resize(260, 434);
+				$Mediumresizeimg->resize(260, 356);
 
 				$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Orand);
 				$Smallresizeimg = Image::make($originalPath2);
 				//$Srand = str_random(10) . '.png';
-				$Smallresizeimg->resize(140, 233);
+				$Smallresizeimg->resize(140, 190);
 				$Smallresizeimg->save(public_path('costumers_images/Small/').$Orand);
 				$Largeresizeimg = Image::make($originalPath2);
 				//$Lrand = str_random(10) . '.png';
-				$Largeresizeimg->resize(475, 792);
+				$Largeresizeimg->resize(475, 650);
 
 				$Largeresizeimg->save(public_path('costumers_images/Large/').$Orand);
-
-				$ExLargeresizeimg = Image::make($originalPath2);
-			    $ExLargeresizeimg->resize(889, 1482);
-			    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Orand);
-			    chmod(public_path('costumers_images/ExLarge/').$Orand, 0777);
 
 				//$file3 = Imageresize::CreateCostumeFrontend3($request->file3);
 
@@ -1477,28 +1406,23 @@ class CostumeController extends Controller
 
 					$Mediumresizeimg = Image::make($originalPath);
 					//$Mrand = str_random(10) . '.png';
-					$Mediumresizeimg->resize(260, 434);
+					$Mediumresizeimg->resize(260, 356);
 
 					$Mediumresizeimg->save(public_path('costumers_images/Medium/').$Multiplerand);
 
 
 					$Smallresizeimg = Image::make($originalPath);
 					//$Srand = str_random(10) . '.png';
-					$Smallresizeimg->resize(140, 233);
+					$Smallresizeimg->resize(140, 190);
 
 					$Smallresizeimg->save(public_path('costumers_images/Small/').$Multiplerand);
 
 
 					$Largeresizeimg = Image::make($originalPath);
 					//$Lrand = str_random(10) . '.png';
-					$Largeresizeimg->resize(475, 792);
+					$Largeresizeimg->resize(475, 650);
 
 					$Largeresizeimg->save(public_path('costumers_images/Large/').$Multiplerand);
-
-					$ExLargeresizeimg = Image::make($originalPath);
-				    $ExLargeresizeimg->resize(889, 1482);
-				    $ExLargeresizeimg->save(public_path('costumers_images/ExLarge/').$Multiplerand);
-				    chmod(public_path('costumers_images/ExLarge/').$Multiplerand, 0777);
 
 					$file_db_array4 = array('costume_id'=>$costume_id,
 						'image'=>$multidata,
@@ -1527,38 +1451,38 @@ class CostumeController extends Controller
 	 }*/
 
 
-	   $final_keywords = array();
-			if(!empty($request->keyword_10)){
+	 $final_keywords = array();
+			if($request->has('keyword_10')){
 				$final_keywords[1] = $request->keyword_10;
 			}
-			if(!empty($request->keyword_9)){
+			if($request->has('keyword_9')){
 				$final_keywords[2] = $request->keyword_9;
 			}
-			if(!empty($request->keyword_8)){
+			if($request->has('keyword_8')){
 				$final_keywords[3] = $request->keyword_8;
 			}
-			if(!empty($request->keyword_7)){
+			if($request->has('keyword_7')){
 				$final_keywords[4] = $request->keyword_7;
 			}
-			if(!empty($request->keyword_6)){
+			if($request->has('keyword_6')){
 				$final_keywords[5] = $request->keyword_6;
 			}
-			if(!empty($request->keyword_5)){
+			if($request->has('keyword_5')){
 				$final_keywords[6] = $request->keyword_5;
 			}
-			if(!empty($request->keyword_4)){
+			if($request->has('keyword_4')){
 				$final_keywords[7] = $request->keyword_4;
 			}
-			if(!empty($request->keyword_3)){
+			if($request->has('keyword_3')){
 				$final_keywords[8] = $request->keyword_3;
 			}
-			if(!empty($request->keyword_2)){
+			if($request->has('keyword_2')){
 				$final_keywords[9] = $request->keyword_2;
 			}
-			if(!empty($request->keyword_1)){
+			if($request->has('keyword_1')){
 				$final_keywords[10] = $request->keyword_1;
 			}
-			$final_keywords = implode(",", $final_keywords);
+          $final_keywords = implode(",", $final_keywords);
           
 
 		$costume_description=array(
@@ -1572,20 +1496,9 @@ class CostumeController extends Controller
 	|@costume_id int
 	|@category_id int
 	*/
-		/*$costume_category=array(
+		$costume_category=array(
 		'category_id'=>$category,'sort_no'=>'1');
-		$insert_costume_category=DB::table('costume_to_category')->where('costume_id',$request->costume_id)->update($costume_category);*/
-		$category_costume_check = DB::table('costume_to_category')->where('costume_id',$request->costume_id)->first();
-		if(empty($category_costume_check)){
-			$costume_category = array('costume_id'=>$costume_id,
-							  'category_id'=>$category,
-							  'sort_no'=>'1'
-							);
-			$insert_costume_category = DB::table('costume_to_category')->insert($costume_category);
-		}else{
-			$costume_category=array('category_id'=>$category,'sort_no'=>'1');
-			$insert_costume_category=DB::table('costume_to_category')->where('costume_id',$request->costume_id)->update($costume_category);	
-		}
+		$insert_costume_category=DB::table('costume_to_category')->where('costume_id',$request->costume_id)->update($costume_category);
 		
 		/**** Url create start here ***/
 			Costumes::urlRewrites($costume_id,'insert');
@@ -1690,7 +1603,6 @@ class CostumeController extends Controller
 		|@attribute_option_value_id
 		|@attribute_option_value
 		*/
-		if($size == 'custom'){
 			$height_ft=array('costume_id'=>$insert_costume,
 			'attribute_id'=>'16',
 			'attribute_option_value_id'=>'0',
@@ -1725,17 +1637,7 @@ class CostumeController extends Controller
 			'attribute_option_value'=>$waistlbs,
 			);
 			$waist_lbs_insert=DB::table('costume_attribute_options')->insert($waist_lbs);
-		}
-		else{
-			DB::table('costume_attribute_options')
-				->where('costume_id', $insert_costume)
-				->where('attribute_id','16')
-				->orWhere('attribute_id','17')
-				->orWhere('attribute_id','18')
-				->orWhere('attribute_id','19')
-				->orWhere('attribute_id','20')
-				->delete();
-		}
+
 
 			/*
 			|Table:costume_attribute_options
