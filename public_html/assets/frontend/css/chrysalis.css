@@ -3151,3 +3151,11 @@ and (orientation:portrait){
 .box-list3 li#middle-xxs,
 .box-list3 li#middle-m,
 .box-list3 li#middle-xxl{margin:5px 5%;}
+
+
+/*Mar-29 siva chnages*/
+
+#preferences_div .prog-txt + .charity_rigt .donate_div{border-top:0px !important;} 
+#preferences_div .prog-head + .col-md-12.col-sm-12.col-xs-12 > .charity_rigt > .donate_div{border-top:0px !important;} 
+#preferences_div .prog-head + .col-md-12.col-sm-12.col-xs-12 .prog-txt + .form-rms + .form-rms + .charity_rigt .donate_div{border-top:2px solid #e1e1e1 !important;}
+/*Mar-29 siva chnages Done*/

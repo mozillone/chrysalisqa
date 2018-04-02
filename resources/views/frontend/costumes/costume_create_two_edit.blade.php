@@ -1106,40 +1106,45 @@ top: 0;
 											<h2 class="prog-head">Review Your Preferences</h2>
 											<div class="col-md-12 col-sm-12 col-xs-12">
 												<p class="prog-txt hidden-md hidden-lg hidden-sm ">You're almost done! Just a few more questions.</p>
-												<div class="form-rms">
-													<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-														<p class="form-rms-que">Handling Time *<i class="fa fa-info-circle fa-info-rm" aria-hidden="true"></i></p>
+												<!-- @if(!$costume_details->is_app) -->
+													<div class="form-rms">
+														<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
+															<p class="form-rms-que">Handling Time *<i class="fa fa-info-circle fa-info-rm" aria-hidden="true"></i></p>
+														</div>
+														<div class="col-md-8 col-sm-8 col-xs-12">
+															<p class="form-rms-input">
+																<select name="handlingtime" id="handlingtime" class="form-control">
+																	<option value="">Select Handling Time</option>
+																	@foreach($handlingtime as $index=>$handlingtime)
+																	<option <?php if($db_handlingtime->attribute_option_value_id == $handlingtime->optionid) { ?> selected="selected" <?php } ?> value="{{$handlingtime->optionid}}">{{$handlingtime->value}}</option>
+																	@endforeach
+																</select>
+															</p>
+															<span id="handlingtimeerror" style="color:red"></span>
+														</div>
 													</div>
-													<div class="col-md-8 col-sm-8 col-xs-12">
-														<p class="form-rms-input">
-															<select name="handlingtime" id="handlingtime" class="form-control">
-																<option value="">Select Handling Time</option>
-																@foreach($handlingtime as $index=>$handlingtime)
-																<option <?php if($db_handlingtime->attribute_option_value_id == $handlingtime->optionid) { ?> selected="selected" <?php } ?> value="{{$handlingtime->optionid}}">{{$handlingtime->value}}</option>
+													<div class="form-rms">
+														<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
+															<p class="form-rms-que">Return Policy *</p>
+														</div>
+														<div class="col-md-8 col-sm-8 col-xs-12 return_divs">
+															<p class="form-rms-input">
+																@if(isset($db_return) && !empty($db_return))
+																@foreach($returnpolicy as $index=>$returnpolicy)
+																<div class="col-md-4  col-sm-6 pdlft0">
+																	<input id="{{$returnpolicy->optionid}}" class="radio-custom" name="returnpolicy" <?php if($db_return->attribute_option_value_id == $returnpolicy->optionid) { ?> checked="checked" <?php } ?>  type="radio" value="{{$returnpolicy->optionid}}">
+																	<label for="{{$returnpolicy->optionid}}" class="radio-custom-label">{{$returnpolicy->value}}</label>
+																</div>
 																@endforeach
-															</select>
-														</p>
-														<span id="handlingtimeerror" style="color:red"></span>
+																@endif
+															</p>
+															<span id="returnpolicyerror" style="color:red"></span>
+														</div>
 													</div>
-												</div>
-												<div class="form-rms">
-													<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
-														<p class="form-rms-que">Return Policy *</p>
-													</div>
-													<div class="col-md-8 col-sm-8 col-xs-12 return_divs">
-														<p class="form-rms-input">
-															@if(isset($db_return) && !empty($db_return))
-															@foreach($returnpolicy as $index=>$returnpolicy)
-															<div class="col-md-4  col-sm-6 pdlft0">
-																<input id="{{$returnpolicy->optionid}}" class="radio-custom" name="returnpolicy" <?php if($db_return->attribute_option_value_id == $returnpolicy->optionid) { ?> checked="checked" <?php } ?>  type="radio" value="{{$returnpolicy->optionid}}">
-																<label for="{{$returnpolicy->optionid}}" class="radio-custom-label">{{$returnpolicy->value}}</label>
-															</div>
-															@endforeach
-															@endif
-														</p>
-														<span id="returnpolicyerror" style="color:red"></span>
-													</div>
-												</div>
+												<!-- @else
+													<input type="hidden" name="handlingtime" id="handlingtime" value="{{$db_handlingtime->attribute_option_value_id}}">
+													<input type="hidden" name="returnpolicy" value="{{$db_return->attribute_option_value_id}}">
+												@endif -->
 												<?php //echo $costume_details->dynamic_percent; die;?>
 												<div class=" charity_rigt">
 													<div class="form-rms lst-stp donate_div">

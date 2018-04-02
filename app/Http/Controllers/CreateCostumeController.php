@@ -42,7 +42,7 @@ class CreateCostumeController  extends Controller {
             else{
                  return $next($request);
             }
-        }, ['except' => ['requestaBag','Postrequestabag','Successrequestbag', 'redirectToCharity','GenerateExLarge']]);
+        }, ['except' => ['requestaBag','Postrequestabag','Successrequestbag', 'redirectToCharity','GenerateExLarge','redirectToCategory']]);
 	}
 	public function costumeListings($sub_cat_id,$parent_cat_name)
 	{
@@ -132,9 +132,6 @@ class CreateCostumeController  extends Controller {
 	    	 $results = DB::table('category')->where('parent_id', '=',$id)->where('status', '=',1)->orderby('sort_order','asc')->get(['category_id as subcategoryid','name as subcategoryname']);
 			return $results;
 	    }
-
-		
-		
 	}
 	
 	/****Sell a costume code starts here***/
@@ -197,9 +194,9 @@ class CreateCostumeController  extends Controller {
 			);
 
 			$insert_costume=DB::table('costumes')->insertGetId($costume);
-			 Session::put('session_costume_id', $insert_costume);
-			 $costume_id = $insert_costume;
-			 DB::update("UPDATE `cc_costumes` SET `unq_costume_code` = ENCRYPT(costume_id , CONCAT('$6$', SHA2(RANDOM_BYTES(64), '256'))) WHERE unq_costume_code IS NULL");
+			Session::put('session_costume_id', $insert_costume);
+			$costume_id = $insert_costume;
+			//DB::update("UPDATE `cc_costumes` SET `unq_costume_code` = ENCRYPT(costume_id , CONCAT('$6$', SHA2(RANDOM_BYTES(64), '256'))) WHERE unq_costume_code IS NULL");
 		 
 		 	//image croppind code for Front View
 
@@ -1277,7 +1274,7 @@ class CreateCostumeController  extends Controller {
 
 	public function EditCostumeAdd(Request $request){
  
-	    $start = microtime(true);
+	  $start = microtime(true);
 
 		$userid=Auth::user()->id;
 		$delete_costume_attributes = DB::table('costume_attribute_options')->where('costume_id',$request->costume_id)->delete();
@@ -1334,6 +1331,7 @@ class CreateCostumeController  extends Controller {
 			'dynamic_percent'=>$request->dynamic_percent_amount,
 			'created_by'=>$userid,
 			'updated_at'=>date('y-m-d H:i:s'),
+			'is_app'=>'0'
 			);
 
 			$insert_costume=DB::table('costumes')->where('costume_id',$request->costume_id)->update($costume);
@@ -2002,7 +2000,29 @@ class CreateCostumeController  extends Controller {
 		$costume_info = DB::table('costumes')->where('unq_costume_code', base64_decode($id))->first();
 		$user = User::where('id',$costume_info->created_by)->first();
 		Auth::login($user, true);
+		DB::table('costumes')->where('costume_id', $costume_info->costume_id)->update(['is_app'=>'1']);
 		return Redirect::to('/costume/edit/'.$costume_info->costume_id.'/charity');
+	}
+
+	/**
+	 * Written by Gayatri
+	 * While clicking on a view browser from mobile redirect the user to desktop version of costume category page
+	 * @param  [string] $encode_costume_id []
+	 * @return [array] redirect to charity page
+	 */
+	public function redirectToCategory($id)
+	{
+		$user = User::where('id',base64_decode($id))->first();
+		if(!Auth::check()){
+			Auth::login($user, true);
+		}
+		$costume_info = DB::table('costumes')->join('category', 'costumes.cat_id','=','category.category_id')->where('costumes.created_by', base64_decode($id))->orderby('costumes.costume_id','desc')->first();
+		$string = preg_replace('/&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig|quot|rsquo);/i', '\\1', $costume_info->name );
+        $string =str_replace(array('\'', '"'), '', $string); 
+        $string = preg_replace(array('/[^a-z0-9]/i', '/[-]+/') , '-', $string);
+        $cat_name = strtolower(trim($string, '-'));
+		
+		return Redirect::to('/category/'.$cat_name);
 	}
 
 	public function GenerateExLarge()
