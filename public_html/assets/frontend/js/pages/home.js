@@ -14,6 +14,6 @@ navigation:true,
 		itemsDesktopSmall : [979,3],
 		itemsTablet: [768,3],
 		itemsMobile: [480,2]
-});
 
-		});
+});
+});

@@ -64,7 +64,7 @@
                                         <span id="block_title_error" style="color:red"></span>
                                     </div>
                                     <div class="form-group has-feedback" >
-                                        <label for="pages" class="control-label">Pages<span class="req-field" >*</span></label>
+                                        <label for="pages" class="control-label">Pages<span class="req-field" ></span></label>
                                         <select class="form-control" name="slug" id="pages">
                                             @foreach($pagesData as $slug => $pageName)
                                                 <option value="{{ $slug }}">{{ $pageName }}</option>
@@ -76,7 +76,7 @@
 									  </div>
 									  <div class="col-md-12">
                                     <div class="form-group has-feedback">
-                                        <label for="description" class="control-label">Block Description<span class="req-field" >*</span></label>
+                                        <label for="description" class="control-label">Page Description<span class="req-field" >*</span></label>
                                         <textarea id="description" class="form-control" name="description"></textarea>
                                         <p class="error">{{ $errors->first('description') }}</p>
                                         <span id="page_desc_error" style="color:red"></span>

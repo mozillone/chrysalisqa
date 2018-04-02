@@ -19,6 +19,7 @@ use App\Helpers\StripeApp;
 use Exception;
 use Redirect;
 use Mail;
+use Log;
 
 class Order extends Authenticatable
 {
@@ -31,6 +32,7 @@ class Order extends Authenticatable
     $this->stripe=new StripeApp();
   }
     protected function placeOrder($req){
+
          $api_customer_id=Auth::user()->api_customer_id;
          $total=0;
          try {
@@ -46,7 +48,7 @@ class Order extends Authenticatable
           $res=Promotions::verifyCoupanCode($coupan_code);
           $data=Cart::getCartProductswithCoupan($coupan_code, $res[0]->coupon_id);
         }
-        foreach($data['basic'] as $cart){
+         foreach($data['basic'] as $cart){
          if(array_key_exists($cart->created_by,$req['shipping_type'])){
             $costumer_costumes[$cart->created_by][]=$cart;
             $total=$cart->total;
@@ -81,9 +83,9 @@ class Order extends Authenticatable
               $cart_id=$costumer[0]->cart_id;
               $store_credits=$costumer[0]->store_credits;
              
-            
+              Log::info($req['shipping_type'][$key]);
               $shipping=explode("_",$req['shipping_type'][$key]);
-
+              Log::info($shipping);
                $cart_info=Cart::cartMetaInfo($cart_id);
                if(!empty($cart_info[0]->shipping_address_2)){
                    $shipping_address=$cart_info;
@@ -159,10 +161,10 @@ class Order extends Authenticatable
                  $subtotal=0;
                  $coupon_amount="0.00";
                //  echo "********************************************<br>";
-                $j = 0;
+               $j = 0;
                  foreach($costumer as $cart){
-                   $user_type=$cart->created_user_group;
-                   if($user_type=="admin"){
+                 $user_type=$cart->created_user_group;
+                 if($user_type=="admin"){
                      // echo $cart->price."/100"."*".$cart->discount;
                        $discount=($cart->price/100*$cart->qty)*$cart->discount;
                        $coupon_amount+=$discount;
@@ -191,6 +193,9 @@ class Order extends Authenticatable
                                  'weight'=> $cart->weight, 
                                  'image'=>$cart->image
                         );
+
+                      /* Added by Gayatri */
+                      Log::info(json_encode($shipping[2]));
                       $shiping_est = explode(',', $shipping[2]);
                       if(count($shiping_est)>0){
                         for ($i=0; $i < count($shiping_est); $i++) { 
@@ -199,13 +204,15 @@ class Order extends Authenticatable
                       }else{
                         $mail_costumes['shipping']=$shipping[2];
                       }
+
+                      /* END */
                        Site_model::insert_get_id('order_items',$costume_info);
                        DB::Update('update `cc_costumes` SET quantity=quantity-'.$cart->qty.' WHERE costume_id='.$cart->costume_id.'');
                       $subtotal+=$cart->price*$cart->qty;
 
                      $mail_order[$order_id]['items'][]= $mail_costumes;
-
                      $j++;
+                     
                  }
                  // echo "********************************************";    
                       $total_shiping=$shipping[0];
@@ -236,20 +243,19 @@ class Order extends Authenticatable
                               'value'=>$subtotal,
                               'sort_order'=>"0",
                       );
-                $order_data=['amount' => number_format($amount,1),
+                $order_data=['amount' => number_format($amount,2),
                       'paymentMethodNonce' => "fake-valid-nonce",
                       'customerId' =>  $api_customer_id,
                       'options' => [
                         'submitForSettlement' => False
                       ]];
               //  $order_info=$this->braintreeApi->transactionCreate($order_data);
-                 $api_amount=number_format($amount,2);
+                 $api_amount=number_format($amount,1);
                  $api_currency="usd";
                  $api_card_id=$token;
                  $api_desc="This transaction is uncaptured";
                  $capture=false;
                 $order_info=$this->stripe->charge_capture($api_amount,$api_currency,$api_customer_id,$api_card_id,$api_desc,$capture);
-                //echo "<pre>"; print_r($order_info); exit;
                 $this->insertTransaction($order_info,$order_id,$cart->cc_id);
                 Site_model::insert_get_id('order_total',$order_subtotal);
                 $this->sellerPayout($api_amount,$order_id,$key);
@@ -318,7 +324,6 @@ class Order extends Authenticatable
                      $order_data['seller_name']=$seller_info[0]->first_name." ".$seller_info[0]->last_name;
                      $order_data['items']=$mail_order[$order_id]['items'];
                      $order_data['order_id'] = $order_id;
-                     
                      $sent=Mail::send('emails.order_seller',array("order_info"=>$order_data), function ($m) use($seller_info) {
                      $m->to($seller_info[0]->email,$seller_info[0]->first_name." ".$seller_info[0]->last_name);
                     $m->subject("Congratulations! Your Costume Sold!");
@@ -335,23 +340,17 @@ class Order extends Authenticatable
              DB::Update('update `cc_users` SET credits=credits-'.$store_credits.' WHERE id='.Auth::user()->id.'');
 
              $sent=Mail::send('emails.order_buyer',array("mail_order"=>$mail_order), function ($m) {
-                
                 $admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
-                
                 $m->to(Auth::user()->email, Auth::user()->first_name." ".Auth::user()->last_name);
                     $m->subject('Order Details');
                 });
 
               $admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
-              
-              $sent=Mail::send('emails.order_admin',array("mail_order"=>$mail_order), function ($m) {
-              
-                $admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
-                
-                $m->to($admin_settings[0]->email, $admin_settings[0]->first_name." ".$admin_settings[0]->last_name);
-                
-                $m->subject("Congratulations! Your Costume Sold!");
-              });
+                    $sent=Mail::send('emails.order_admin',array("mail_order"=>$mail_order), function ($m) {
+                    $admin_settings=Site_model::Fetch_data('users','*',array("role_id"=>"1"));
+                    $m->to($admin_settings[0]->email, $admin_settings[0]->first_name." ".$admin_settings[0]->last_name);
+                        $m->subject("Congratulations! Your Costume Sold!");
+                    });
              $this->orderHistory($order_id,Config::get('constants.Processing'),"1","Order Created");
              $result=array('result'=>1,'message'=>$orders);
 
@@ -368,7 +367,7 @@ class Order extends Authenticatable
        return true;
     }
     private function converstionTheard($order_id,$seller_id){
-      /*Message To Seller From Admin Start Here*/
+       /*Message To Seller From Admin Start Here*/
       $converstion_array = array('type'=>'order','user_one'=>'1',
         'user_two'=>$seller_id,
         'subject' =>'Your Costume has been ordered.',
@@ -384,25 +383,7 @@ class Order extends Authenticatable
         'user_name'=> \App\User::find(1)->pluck("display_name")->first(),
         'conversation_id'=>$converstion_id,'created_at'=>date('Y-m-d h:i:s'));
       $converstion_id = Site_model::insert_get_id('messages',$message_array);
-      /*Message To Seller From Admin Start Here*/
-
-      /*Message To Buyer From Admin Start Here*/
-      /*$converstion_array = array('type'=>'order','user_one'=>'1',
-        'user_two'=>Auth::user()->id,
-        'subject' =>'Your Order has been placed.',
-        'type_id' => $order_id,
-        'status'=>'1',
-        'created_at'=>date('Y-m-d h:i:s'));
-      $converstion_id = Site_model::insert_get_id('conversations',$converstion_array);
-      $message_array  = array('message'=>'Your Order is under process.',
-        'is_seen'=>'0',
-        'deleted_from_sender'=>'0',
-        'deleted_from_receiver'=>'0',
-        'user_id'=>'1',
-        'user_name'=>\App\User::find(1)->pluck("display_name")->first(),
-        'conversation_id'=>$converstion_id,'created_at'=>date('Y-m-d h:i:s'));
-      $converstion_id = Site_model::insert_get_id('messages',$message_array);*/
-      /*Message To Buyer From Admin End Here*/
+      /*Message To Seller From Admin Ends Here*/
 
       return true;
     }
@@ -673,13 +654,13 @@ protected function orderHistory($order_id,$order_status_id,$notify,$comment){
 }
 private function sellerPayout($amount,$order_id,$key){
     $amt=($amount * (99.25/100)) - 0.20;
-    $seller_payout=array('type'=>"order",
-                   'type_id'=>$order_id,
-                   'user_id'=>$key,
-                   'amount'=>$amt,
-                   'status'=>"not_paid",
-                   'created_at'=>date('Y-m-d h:i:s')
-                      );
+    $seller_payout = array('type'=>"order",
+                    'type_id'=>$order_id,
+                    'user_id'=>$key,
+                    'amount'=>$amt,
+                    'status'=>"not_paid",
+                    'created_at'=>date('Y-m-d h:i:s')
+                    );
     Site_model::insert_get_id('paypal_payouts',$seller_payout);
 }
 }

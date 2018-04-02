@@ -1,6 +1,6 @@
 app.controller('CharitiesController', function($scope,DTOptionsBuilder, DTColumnBuilder, $compile,Charities,Exports) 
 {
-	var vm = this;
+  var vm = this;
     $scope.dtOptions = DTOptionsBuilder.newOptions()
       .withOption('ajax', {
         url: '/charities-list',

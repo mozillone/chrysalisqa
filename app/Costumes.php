@@ -10,7 +10,6 @@ use App\Helpers\Site_model;
 use Auth;
 use App\Helpers\SiteHelper;
 use Log;
-
 class Costumes extends Authenticatable
 {
     use Notifiable;
@@ -29,7 +28,7 @@ class Costumes extends Authenticatable
         
     }
     protected function getParentCategories($parent_cat_id){
-        $data=DB::Select('SELECT *  FROM `cc_category` WHERE parent_id="'.$parent_cat_id.' order by sort_order asc"');
+        $data=DB::Select('SELECT *  FROM `cc_category` WHERE status="1" and parent_id="'.$parent_cat_id.'" order by sort_order asc');
         return $data;
         
     }
@@ -49,7 +48,7 @@ class Costumes extends Authenticatable
         return array('count'=>$result[0]->count,'is_user_like'=>$result[0]->is_user_like);
     }
      protected function costumeFavourite($costume_id,$user_id){
-        $res = DB::Select('SELECT count(id) as count FROM `cc_customer_wishlist` where user_id='.$user_id.' and costume_id='.$costume_id.'');
+        $res=DB::Select('SELECT count(id) as count FROM `cc_customer_wishlist` where user_id='.$user_id.' and costume_id='.$costume_id.'');
         if($res[0]->count=="0"){
             $data=array('user_id'=>$user_id,
                         'costume_id'=>$costume_id,
@@ -63,29 +62,21 @@ class Costumes extends Authenticatable
         $result=DB::Select('select count(id) as is_user_fav from cc_customer_wishlist where user_id='.$user_id.' and costume_id='.$costume_id.'');
         //$fav_count=DB::Select('select count(id) as fav_count from cc_customer_wishlist where user_id='.$user_id.'')[0]->fav_count;
         $fav_count= Wishlist::getMyWishlistCount(Auth::user()->id)[0]->count;
-
         return array('is_user_fav'=>$result[0]->is_user_fav,'fav_count'=>$fav_count);
     }
     protected function getCostumesList(){
         $costumes_list=DB::Select('SELECT cst.costume_id,dsr.name as cst_name,concat(cst.sku_no,"-",dsr.name) as name,cst.sku_no,cst.price FROM `cc_costumes` as cst LEFT JOIN  cc_costume_description as dsr on dsr.costume_id=cst.costume_id ORDER BY `name` ASC');
         return $costumes_list;
     }
-    protected function getCostumeDetails($costume_id,$key_url){
+    protected function getCostumeDetails($costume_id){
         if(Auth::check()){
         $is_login=',if((select count(*) from cc_costumes_like as likes where likes.user_id='.Auth::user()->id.' and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id='.Auth::user()->id.'  and  wsh_lst.costume_id=cst.costume_id )>=1,true,false) as is_fav';
         }else{
             //$is_login=',if((select count(*) from cc_costumes_like as likes where likes.user_id=cst.created_by and  likes.costume_id=cst.costume_id )>=1,true,false) as is_like,if((select count(*) from cc_customer_wishlist as wsh_lst where wsh_lst.user_id=cst.created_by and  wsh_lst.    costume_id=cst.costume_id )>=1,true,false) as is_fav';
-            $is_login='';
+          $is_login = '';
         }
-
-        $data=DB::Select('SELECT cats.category_id,cats.parent_id,cats.name as cat_name,cats.description,cst.costume_id,cst.weight_pounds,cst.weight_ounces,dsr.name,dsr.description,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,cst.created_user_group,cst.deleted_status,cst.status as cos_act_status '.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,prom.status as discount_status,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer,(select a.name from cc_url_rewrites, cc_category as a where url_key="'.$key_url.'" and type="category" and a.category_id = cc_url_rewrites.url_offset group by url_key) as main_cat_name  
-            FROM `cc_costume_to_category` as cat 
-            JOIN cc_costumes as cst on cst.costume_id=cat.costume_id 
-            JOIN cc_category  as cats on cats.category_id=cat.category_id 
-            LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id 
-            LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id  
-            LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id 
-            where cat.costume_id='.$costume_id.' group by cat.costume_id');
+        //dd('SELECT *  FROM `cc_costume_attribute_options` WHERE `costume_id` ='.$costume_id.' AND `attribute_id` = '.Config::get('constants.FAQ_ID').' AND `attribute_option_value_id` = '.Config::get('constants.FAQ_OPTION_VALUE').'');
+        $data=DB::Select('SELECT cats.category_id,cats.parent_id,cats.name as cat_name,cats.description,cst.costume_id,cst.weight_pounds,cst.weight_ounces,dsr.name,dsr.description,cst.sku_no,cst.quantity,cst.price,cst.gender,cst.condition,cst.size,cst.created_by,cst.created_user_group,cst.deleted_status,cst.status as cos_act_status '.$is_login.',(SELECT count(*) FROM `cc_costumes_like` where costume_id=cst.costume_id) as like_count,prom.status as discount_status,prom.discount,prom.type,prom.date_start,prom.date_end,prom.uses_total,prom.uses_customer FROM `cc_costume_to_category` as cat JOIN cc_costumes as cst on cst.costume_id=cat.costume_id JOIN cc_category  as cats on cats.category_id=cat.category_id LEFT JOIN cc_coupon_costumes as cst_cupn on cst_cupn.costume_id=cst.costume_id LEFT JOIN  cc_promotion_coupon as prom on prom.coupon_id=cst_cupn.coupon_id  LEFT JOIN cc_costume_description as dsr on dsr.costume_id=cst.costume_id where cat.costume_id='.$costume_id.' group by cat.costume_id');
 
         /* Added by Gayatri*/
         $data['est_time'] = DB::table('costume_attribute_options')
@@ -94,6 +85,7 @@ class Costumes extends Authenticatable
                                 ->select('attribute_option_value')
                                 ->first();
         /* End */
+        
         $data['faq']=DB::Select('SELECT *  FROM `cc_costume_attribute_options` WHERE `costume_id` ='.$costume_id.' AND `attribute_id` = '.Config::get('constants.FAQ_ID').' AND `attribute_option_value_id` = '.Config::get('constants.FAQ_OPTION_VALUE').'');
         $data['returns']=DB::Select('SELECT *  FROM `cc_costume_attribute_options` WHERE `costume_id` ='.$costume_id.' AND `attribute_id` = '.Config::get('constants.IS_Returns').'');
         return $data;
@@ -132,6 +124,7 @@ class Costumes extends Authenticatable
     }
     /************* Costume URL Create start here **************/
     protected function urlRewrites($costume_id,$type){
+        Log::info('urlRewrites');
         if($type=="update"){
               $cond=array('type'=>'product',
                     'url_offset'=>$costume_id);
@@ -141,6 +134,7 @@ class Costumes extends Authenticatable
         if(!$data){
             return true;
         }else{
+            Log::info('in else');
              $costume_name=$this->getCostumeInfo($costume_id);
              $costume_count = $this->getCostumeCount($costume_name);
              if($costume_count>1){
@@ -163,8 +157,8 @@ class Costumes extends Authenticatable
         $data=array('type'=>'product',
                     'url_offset'=>$costume_id,
                     'url_key'=> $url_key);
-        Site_model::insert_data('url_rewrites',$data);
-        return true;
+       $url_id =  Site_model::insert_get_id('url_rewrites',$data);
+        return $url_id;
     }
     protected function getUrlLinks($id){
         $data=$this->getUrlCategoryInfo($id);
@@ -220,6 +214,7 @@ class Costumes extends Authenticatable
         return $costume_count;
     }
 
+
     /* Added by gayatri */
     public static function getCostumesCount($costume_name){
         $costume_count = DB::table('costume_description')
@@ -232,7 +227,17 @@ class Costumes extends Authenticatable
 
     /* Added by Gayatri */
     public static function facebookDebugger($url) {
-        Log::info($url);
+
+        /*$ch = curl_init();
+              curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v1.0/?id='. urlencode($url). '&scrape=1');
+              curl_setopt($ch,CURLOPT_HEADER, 0)
+              curl_setopt($ch, CURLOPT_POST, 1);
+              curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+              curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false)
+              curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $r = curl_exec($ch);
+        return $r;*/
+
         $auth_header = 'EAAcMdgezwNYBAB96ZBPVzNfQGk5lSlV9mVzIQ0COFpNWcSZC1QqxUsM6Jm5hKXfBRwMJ3dy9xkos9AJlBlLHyCetnX7fZAJvyVEdian6K6TmmyWBzqwHvGe5ItK9nrNuJPWjMFUH7zVZBNUI6h9btuWVUJYJ1zMZD';
         $ch = curl_init();
               curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v1.0/?scrape=true&id='. urlencode($url).'&access_token='.$auth_header);
@@ -243,18 +248,12 @@ class Costumes extends Authenticatable
               curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
               curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $r = curl_exec($ch);
-        
-        Log::info("Face Debugger Info");
-        Log::info($r);
-        //return $r;
-        
+
         $ch = curl_init("https://developers.facebook.com/tools/debug/sharing/?q=".$url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         $a = curl_exec($ch);
         curl_close($ch);
-        
-        Log::info($a);
-        
+//        dd($a);
         return $a;
     }
     /* End */
@@ -287,7 +286,7 @@ class Costumes extends Authenticatable
         $addres_insert = DB::table('address_master')->insertGetId($insert_address);
 
         $conversation_array = array('type'=>'request_a_bag',
-                                    'user_one'=>'1' ,
+                                    'user_one'=> '1',
                                     'subject'=>'Bag Request Successful',
                                     'user_two'=>$users,
                                     'status'=>'1',
@@ -333,7 +332,7 @@ class Costumes extends Authenticatable
         $req_subject        = "REQUEST A BAG";
         $req_data           = array('cus_name'=>$get_request_bags_info->cus_name,'bag_url'=>$bag_url_admin);
         $template           = 'emails.reqabag_requestfromuser';
-        $req_to             = 'gbhyri@dotcomweavers.com';//"support@chrysaliscostumes.com";
+        $req_to             = "support@chrysaliscostumes.com";
         $mail_status        = SiteHelper::sendmail($req_to,$req_subject,$template,$req_data);
 
         // send mail to user
@@ -344,5 +343,4 @@ class Costumes extends Authenticatable
         $mail_status        = SiteHelper::sendmail($req_to,$req_subject,$template,$req_data);
         
     }
-
 }

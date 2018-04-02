@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{{asset('assets/frontend/css/pages/drop_uploader.css')}}">
 <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.0.0/cropper.css" rel="stylesheet">
 <script src="{{ asset('/assets/admin/js/fileinput.js') }}"></script>
-<script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+<!-- <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script> -->
 <style>
 .plus_minus_div{
 	width: 28%;
@@ -121,7 +121,7 @@
 									</div>
 									<span id="gendererror" style="color:red"></span>
 								</div>
-								<?php //echo "<pre>";print_r($sub_cat);die; ?>
+								<?php //echo "<pre>";print_r($sub_cat->category_id);die; ?>
 								<div class="form-group has-feedback" >
 									<label for="inputEmail3" class="control-label">Catgeory<span class="req-field" >*</span></label>
 									@if(!empty($sub_cat))
@@ -179,7 +179,7 @@
 								</div>
 
 
-                                
+
 								<div class="row">
 								<div class="col-md-6">                                  
                                     <div class="form-group has-feedback hide" id="cleaned_select">
@@ -189,21 +189,21 @@
 									<option value="">Select</option>
 
 
-									<option <?php if ($cos_data->option_id == '129') { ?> selected='selected' <?php } ?> value="129" >Hand Washed</option>
+									<option <?php if ($cos_data->option_id == '136') { ?> selected='selected' <?php } ?> value="136" >Hand Washed</option>
 
-									<option <?php if ($cos_data->option_id == '130') { ?> selected='selected' <?php } ?> value="130">Machine Washed</option>
+									<option <?php if ($cos_data->option_id == '137') { ?> selected='selected' <?php } ?> value="137">Machine Washed</option>
 
-									<option <?php if ($cos_data->option_id == '131') { ?> selected='selected' <?php } ?> value="131">Professionally Cleaned</option>
+									<option <?php if ($cos_data->option_id == '138') { ?> selected='selected' <?php } ?> value="138">Professionally Cleaned</option>
 
  	
 									</select>
                                         </p>
-                                       <span id="cleanederror" style="color:red"></span>
+                                        <span id="cleanederror" style="color:red"></span>
                                     </div>
                                 </div>
                                 </div>
 
-
+	
 
 
 								<div class="row">
@@ -226,9 +226,10 @@
 										<span id="size_error" style="color:red"></span>
 										</div>
 										</div>
+
 								</div>
-								
-@if($costumes_data->cos_size == 'custom')								
+ 		 					
+@if($costumes_data->cos_size == "custom")	 						 
 <div class="dimessions hide">
 	<h4>Body & Dimensions <span class="req-field">*</span></h4></hr>
 	<div class="row" >
@@ -242,12 +243,17 @@
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field"></span></label>
 				<div class="input-group">
-					<input type="{{$bd_height->type}}" class="form-control"  value="@if(!empty($bd_height_value->attribute_option_value)){{$bd_height_value->attribute_option_value}} @else{{$bd_height_value->attribute_option_value}}@endif" name="{{$bd_height->code}}" id="{{$bd_height->code}}">
+				    @if(empty($bd_height_value->attribute_option_value))
+					<input type="{{$bd_height->type}}" class="form-control"  value="0" name="{{$bd_height->code}}" id="{{$bd_height->code}}">
+					@else
+					<input type="{{$bd_height->type}}" class="form-control"  value="{{$bd_height_value->attribute_option_value}}" name="{{$bd_height->code}}" id="{{$bd_height->code}}">
+					@endif
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
 				</div>
 				<span id="heightfterror" style="color:red"></span>
 			</div>
 		</div>
+	 
 		<div class="col-md-6 dimsn-bknd" >
 			<div class="form-group has-feedback" >
 				<?php
@@ -257,14 +263,20 @@
                     $attributevalue1   = $heightattributes1[1];
 				?>
 				<label for="inputEmail3" class="control-label"></label>
+				
 				<div class="input-group">
-					<input type="{{$bd_height_in->type}}"  class="form-control" value="@if(!empty($bd_height_in_value->attribute_option_value)){{$bd_height_in_value->attribute_option_value}} @else {{$bd_height_in_value->attribute_option_value}} @endif"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
+				    @if(empty($bd_height_in_value->attribute_option_value))
+					<input type="{{$bd_height_in->type}}"  class="form-control" value="0"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
+					@else
+					<input type="{{$bd_height_in->type}}"  class="form-control" value="{{$bd_height_in_value->attribute_option_value}}"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
+					@endif
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1;?></span>
 				</div>
 				<span id="heightinerror" style="color:red"></span>
 			</div>
 		</div>
 	</div>
+ 
 	<div class="row">
 		<div class="col-md-6" >
 			<div class="form-group has-feedback" >
@@ -276,7 +288,11 @@
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute2;?><span class="req-field" ></span></label>
 				<div class="input-group">
-					<input type="{{$bd_weight->type}}" value="@if(!empty($bd_weight_value->attribute_option_value)){{$bd_weight_value->attribute_option_value}} @else {{$bd_weight_value->attribute_option_value}} @endif" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
+				    @if(empty($bd_weight_value->attribute_option_value))
+					<input type="{{$bd_weight->type}}" value="0" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
+					@else
+					<input type="{{$bd_weight->type}}" value="{{$bd_weight_value->attribute_option_value}}" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
+					@endif
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue2;?></span>
 				</div>
 				<span id="weightlbserror" style="color:red"></span>
@@ -292,7 +308,11 @@
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute3;?><span class="req-field" ></span></label>
 				<div class="input-group">
-					<input type="{{$bd_chest->type}}" class="form-control" value="@if(!empty($bd_chest_value->attribute_option_value)){{$bd_chest_value->attribute_option_value}} @else {{$bd_chest_value->attribute_option_value}} @endif"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
+				    @if(empty($bd_chest_value->attribute_option_value))
+					<input type="{{$bd_chest->type}}" class="form-control" value="0"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
+					@else
+					<input type="{{$bd_chest->type}}" class="form-control" value="{{$bd_chest_value->attribute_option_value}}"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
+					@endif
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue3;?></span>
 				</div>
 				<span id="chestinerror" style="color:red"></span>
@@ -310,65 +330,73 @@
 					?>
 					<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field" ></span></label>
 					<div class="input-group">
-						<input type="{{$bd_waist->type}}" class="form-control" value="@if(!empty($bd_waist_value->attribute_option_value)){{$bd_waist_value->attribute_option_value}} @else {{$bd_waist_value->attribute_option_value}} @endif" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
+					    @if(empty($bd_waist_value->attribute_option_value))
+						<input type="{{$bd_waist->type}}" class="form-control" value="0" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
+						@else
+						<input type="{{$bd_waist->type}}" class="form-control" value="{{$bd_waist_value->attribute_option_value}}" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
+						@endif
 						<span class="input-group-addon" id="basic-addon2">in</span>
 					</div>
 					<span id="waistlbserror" style="color:red"></span>
 				</div>
 			</div>
 		</div>
-		
 	</div>
 	
-	@elseif($costumes_data->cos_size !='custom')
-	   <div class="dimessions hide">
-	<h4>Body & Dimensions<span class="req-field">*</span> </h4></hr>
+	@else
+	
+	<div class="dimessions hide">
+	<h4>Body & Dimensions <span class="req-field">*</span></h4></hr>
 	<div class="row" >
 		<div class="col-md-6" >
 			<div class="form-group has-feedback " >
 				<?php
-					$height           = $bd_height->label;
-					$heightattributes = explode('-', $height);
-					$attribute        = ucfirst($heightattributes[0]);
-					$attributevalue   = $heightattributes[1];
+                    $height           = $bd_height->label;
+                    $heightattributes = explode('-', $height);
+                    $attribute        = ucfirst($heightattributes[0]);
+                    $attributevalue   = $heightattributes[1];
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field"></span></label>
 				<div class="input-group">
-					<input type="{{$bd_height->type}}" class="form-control"   name="{{$bd_height->code}}" id="{{$bd_height->code}}">
+				    
+					<input type="{{$bd_height->type}}" class="form-control"  value="" name="{{$bd_height->code}}" id="{{$bd_height->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue;?></span>
 				</div>
 				<span id="heightfterror" style="color:red"></span>
 			</div>
 		</div>
+	 
 		<div class="col-md-6 dimsn-bknd" >
 			<div class="form-group has-feedback" >
 				<?php
-				$height1           = $bd_height_in->label;
-				$heightattributes1 = explode('-', $height1);
-				$attribute1        = ucfirst($heightattributes1[0]);
-				$attributevalue1   = $heightattributes1[1];
+                    $height1           = $bd_height_in->label;
+                    $heightattributes1 = explode('-', $height1);
+                    $attribute1        = ucfirst($heightattributes1[0]);
+                    $attributevalue1   = $heightattributes1[1];
 				?>
 				<label for="inputEmail3" class="control-label"></label>
+				
 				<div class="input-group">
-					<input type="{{$bd_height_in->type}}"  class="form-control"  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
+					<input type="{{$bd_height_in->type}}"  class="form-control" value=""  name="{{$bd_height_in->code}}" id="{{$bd_height_in->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue1;?></span>
 				</div>
 				<span id="heightinerror" style="color:red"></span>
 			</div>
 		</div>
 	</div>
+ 
 	<div class="row">
 		<div class="col-md-6" >
 			<div class="form-group has-feedback" >
 				<?php
-				$height2           = $bd_weight->label;
-				$heightattributes2 = explode('-', $height2);
-				$attribute2        = ucfirst($heightattributes2[0]);
-				$attributevalue2   = $heightattributes2[1];
+					$height2           = $bd_weight->label;
+					$heightattributes2 = explode('-', $height2);
+					$attribute2        = ucfirst($heightattributes2[0]);
+					$attributevalue2   = $heightattributes2[1];
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute2;?><span class="req-field" ></span></label>
 				<div class="input-group">
-					<input type="{{$bd_weight->type}}" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
+					<input type="{{$bd_weight->type}}" value="" class="form-control" name="{{$bd_weight->code}}" id="{{$bd_weight->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue2;?></span>
 				</div>
 				<span id="weightlbserror" style="color:red"></span>
@@ -377,46 +405,45 @@
 		<div class="col-md-6" >
 			<div class="form-group has-feedback" >
 				<?php
-				$height3           = $bd_chest->label;
-				$heightattributes3 = explode('-', $height3);
-				$attribute3        = ucfirst($heightattributes3[0]);
-				$attributevalue3   = $heightattributes3[1];
+					$height3           = $bd_chest->label;
+					$heightattributes3 = explode('-', $height3);
+					$attribute3        = ucfirst($heightattributes3[0]);
+					$attributevalue3   = $heightattributes3[1];
 				?>
 				<label for="inputEmail3" class="control-label"><?php echo $attribute3;?><span class="req-field" ></span></label>
 				<div class="input-group">
-					<input type="{{$bd_chest->type}}" class="form-control"  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
+					<input type="{{$bd_chest->type}}" class="form-control" value=""  name="{{$bd_chest->code}}" id="{{$bd_chest->code}}">
 					<span class="input-group-addon" id="basic-addon2"><?php echo $attributevalue3;?></span>
 				</div>
 				<span id="chestinerror" style="color:red"></span>
 			</div>
 		</div>
-	</div>
-	<div class="row1" >
-		<div class="col-md-6" >
-			<div class="form-group has-feedback" >
-				<?php
-				$height           = $bd_waist->label;
-				$heightattributes = explode('-', $height);
-				$attribute        = ucfirst($heightattributes[0]);
-				$attributevalue   = $heightattributes[1];
-				?>
-				<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field" ></span></label>
-				<div class="input-group">
-					<input type="{{$bd_waist->type}}" class="form-control" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
-					<span class="input-group-addon" id="basic-addon2">in</span>
+		</div>
+		<div class="row" >
+			<div class="col-md-6" >
+				<div class="form-group has-feedback" >
+					<?php
+						$height           = $bd_waist->label;
+						$heightattributes = explode('-', $height);
+						$attribute        = ucfirst($heightattributes[0]);
+						$attributevalue   = $heightattributes[1];
+					?>
+					<label for="inputEmail3" class="control-label"><?php echo $attribute;?><span class="req-field" ></span></label>
+					<div class="input-group">
+						<input type="{{$bd_waist->type}}" class="form-control" value="" name="{{$bd_waist->code}}" id="{{$bd_waist->code}}">
+						<span class="input-group-addon" id="basic-addon2">in</span>
+					</div>
+					<span id="waistlbserror" style="color:red"></span>
 				</div>
-				<span id="waistlbserror" style="color:red"></span>
 			</div>
 		</div>
 	</div>
-</div>	
-	@endif
 	
-
+	@endif
 							</div>
 						</div>
 
-	
+
 						<div class="col-md-6 crt_right_alng">
 							<h2 class="heading-agent">Costume FAQ</h2>
 							<div class="col-md-12">
@@ -447,13 +474,11 @@
 										@else
 											<p class="form-rms-small" id="film_text" style="display:none" >Which production was your featured? </p>
 											<p class="ct1-rms-rel form-rms-input" id="film_text_input" style="display:none">
-												<input type="text" name="film_name" id="film_name" value="" > <span><span>
+												<input type="text" name="film_name" id="film_name" value="" placeholder="Optional"> <span><span>
 											</p>
 										@endif
 									</div>
 								</div>
-								
-								
 								<div class="form-group has-feedback" >
 									<div class="form-group" >
 										<label for="inputEmail3" class="control-label">
@@ -472,20 +497,18 @@
 											@endforeach
 										@endif
 										@if($cosplay_four_value_value->attribute_option_value_id == 30)
-        										@if(count($make_costume_time)== 1)
-        										<p class="form-rms-small" id="mention_hours" @if(count($make_costume_time)!= 1) style="display: none;" @endif >If yes, how long did it take?</p>
-        										<p class="ct1-rms-rel" id="mention_hours_input" @if(count($make_costume_time)!= 1) style="display: none;" @endif><input type="text" name="make_costume_time" id="make_costume_time" value="{{$make_costume_time->attribute_option_value}}" class="input-rm100"> <span>hours<span>
-        										</p>
-        										@else
-        										<p class="form-rms-small" id="mention_hours" style="display: none;" >If yes, how long did it take?</p>
-        										<p class="ct1-rms-rel" id="mention_hours_input" style="display: none;"><input type="text" name="make_costume_time" id="make_costume_time" value="" class="input-rm100"> <span>hours<span>
-        										</p>
-        										@endif
-										@endif
+    										@if(count($make_costume_time)== 1)
+    										<p class="form-rms-small" id="mention_hours" @if(count($make_costume_time)!= 1) style="display: none;" @endif >If yes, how long did it take?</p>
+    										<p class="ct1-rms-rel" id="mention_hours_input" @if(count($make_costume_time)!= 1) style="display: none;" @endif><input type="text" name="make_costume_time" id="make_costume_time" value="{{$make_costume_time->attribute_option_value}}" class="input-rm100"> <span>hours<span>
+    										</p>
+    										@else
+    										<p class="form-rms-small" id="mention_hours" style="display: none;" >If yes, how long did it take?</p>
+    										<p class="ct1-rms-rel" id="mention_hours_input" style="display: none;"><input type="text" name="make_costume_time" id="make_costume_time" value="" class="input-rm100"> <span>hours<span>
+    										</p>
+    										@endif
+    									@endif	
                                         </div>
 										</div>
-										
-										
 										</div>
 										<div class="form-group has-feedback" >
 											<label for="inputEmail3" class="control-label kyword">Keywords</p><p> Please enter a maximum of 10 keywords to describe the categories in which your costume could belong to.</p>
@@ -494,7 +517,8 @@
 										<div class="input-group">
 											<input type="text" id="keywords_tag" class="form-control" name="keywords_tag">
 											<a href="javascript:void(0);" id="keywords_add" >ADD</a>
-											<div id="div" class="keywords_div">
+										
+										<div id="div" class="keywords_div">
 						 
 											@if(empty($cos_data->cos_keywords))	
 									 
@@ -528,7 +552,9 @@
 											@endif
 											</div>
 											<div id="count">@if(!empty($cos_data->cos_keywords)){{10 - count($explode)}} left @else 10 left @endif </div>
-													</div>
+									
+										
+										</div>
 													<span id="costume-desc-error" style="color:red"></span>
 												</div>
 												<div class="form-group has-feedback" >
@@ -590,8 +616,6 @@
 															</div>
 													</div>
 												</div> -->
-												
-											
 												<div class="col-md-6 pckg_right">
 													<h2 class="heading-agent">Pricing & Shipping</h2>
 													<div class="col-md-12">
@@ -633,7 +657,7 @@
 
 														<label for="inputEmail3" class="control-label">
 															{{$packageditems->label}}
-														<span class="req-field" ></span></label>
+														<span class="req-field" > *</span></label>
 														<div class="form-group has-feedback dmns_rigts" >
 															<div class="row  pnds ">
 																<div class="col-md-6 col-sm-6 col-xs-12">
@@ -676,13 +700,12 @@
 														</div>
 													</div>
 												</div>
-												
 												<div class="col-md-6">
 													<h2 class="heading-agent">Preferences</h2>
 													<div class="col-md-12">
 														<div class="form-group has-feedback" >
 															<label for="inputEmail3" class="control-label">{{$handling->label}}<span class="req-field" > *</span></label>
-															<select class="form-control"    name="{{$handling->code}}" id="{{$handling->code}}">
+															<select class="form-control" name="{{$handling->code}}" id="{{$handling->code}}">
 																<option value="">Select Handling Time</option>
 																@if(!empty($handling_value_value->attribute_option_value))
 																	@foreach($handling_value as $index=>$handlingval)
@@ -709,13 +732,11 @@
 																		<option value="{{$returnpolicyval->option_id}}">{{$returnpolicyval->option_value}}</option>
 																	@endforeach
 																@endif
-															</select>
+</select>
 															<p class="error">{{ $errors->first('name') }}</p>
 														</div>
 													</div>
 												</div>
-												
-												
 												<div class="col-md-6">
 													<h2 class="heading-agent">Donation Info</h2>
 													<div class="col-md-12">
@@ -779,7 +800,7 @@
 																			<i class="fa fa-times-circle" aria-hidden="true"></i>				
 																		</span>
 																		<div class=" up-blog">
-																			<input type="file" name="file1"  id="file1" value="1"  @if(isset($costume_image1->image)) style="display: none !important;" @endif>
+																			<input type="file" name="file1"  id="file1" value="1" @if(isset($costume_image1->image)) style="display: none !important;" @endif>
 																			<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){
 																			?>
 																			<span class="text"> <a href="#" class="button button-primary file_browse"></a></span>
@@ -894,7 +915,7 @@
 													<div class="box-footer">
 														<div class="pull-right">
 															<a href="/customes-list" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
-															<button type="submit" id="submit" name="submit"  class="btn btn-info pull-right">Submit</button>
+															<button type="submit" id="btnsubmit" name="btnsubmit"  class="btn btn-info pull-right">Submit</button>
 														</div>
 													</div>
 												</div>
@@ -924,7 +945,7 @@
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-success pull-right save" id="crop">Save</button>
-															<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancel1">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" data-dismiss="modal"  id="cancel1">Cancel</button>
 														</div>
 													</div>
 												</div>
@@ -1019,7 +1040,7 @@
 														</div>
 														<div class="modal-footer" style="display:none;">
 															<button type="button" class="btn btn-success pull-right saveMultiple" >Save</button>
-															<button type="button" class="btn btn-default img_clse" data-dismiss="modal" id="cancelMultiple">Cancel</button>
+															<button type="button" class="btn btn-default img_clse" id="cancelMultiple" data-dismiss="modal">Cancel</button>
 														</div>
 													</div><!-- /.modal-content -->
 												</div><!-- /.modal-dialog -->
@@ -1060,9 +1081,9 @@ $("#freqent").removeClass("hide");
 }
 
 if($("#size").val() == "custom"){
-	$(".dimessions").removeClass('hide');
+$(".dimessions").removeClass('hide');
 }
-	if($("#donate_charity").val() == 0){
+if($("#donate_charity").val() == 0){
 		$("#dynamic_percent_amounts").html("$0.00");
 		$("#donate_charity").val("0 %");
 	}
@@ -1071,24 +1092,28 @@ if($("#size").val() == "custom"){
 		$("#dynamic_percent_amounts").html("$0.00");
 		//$("#donate_charity").val($("#donate_charity").val()+" %");
 	}
-
-	if(parseInt($("#donate_charity").val())<=9){
+	if(parseInt($("#donate_charity").val())<10){
 		$("#donate_charity").css({"color":"#000","font-weight":""});
 	}
-	if(parseInt($("#donate_charity").val())==10){
-		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
-	}
+
+	if(parseInt($("#donate_charity").val()) ==10){
+		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
+	}	
+
 	if(parseInt($("#donate_charity").val()) ==15){
-		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
 	}
+
 	if(parseInt($("#donate_charity").val()) ==25){
-		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
 	}
-	if(parseInt($("#donate_charity").val()) == 50){
-		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+
+	if(parseInt($("#donate_charity").val()) ==50){
+		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
 	}
+
 	if(parseInt($("#donate_charity").val()) ==100){
-		$("#donate_charity").css({"color":"#5fc5ac","font-weight":"bold"});
+		$("#donate_charity").val($("#donate_charity").val()).css({"color":"#5fc5ac","font-weight":"bold"});
 	}
 
  	var total_val = "0.00";
@@ -1130,7 +1155,7 @@ if($("#size").val() == "custom"){
 	    var price = $('#price').val();                       
 	    var total = (price * present) / 100;  
 	    var amount = parseFloat(total).toFixed(2);
-	  
+	    console.log(amount);
        	$('#hidden_donation_amounts').val(amount);
        	$('#dynamic_percent_amounts').html("$"+amount);
 
@@ -1145,7 +1170,7 @@ if($("#size").val() == "custom"){
                    	}
                	}else if(currentVal == 15 ){
                		if(currentVal > min) {
-                   		input.val((currentVal - 5)+" %").css({"color":"#000","font-weight":""}).change();
+                   		input.val((currentVal - 5)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
                    	}
                    	if(parseInt(input.val()) == min) {
                    		$(this).attr('disabled', true);
@@ -1176,7 +1201,7 @@ if($("#size").val() == "custom"){
 
 	            if(currentVal < 10){
            			if(currentVal < max) {
-                   		if(currentVal == 9){
+           				if(currentVal == 9){
            					input.val((currentVal + 1)+" %").css({"color":"#5fc5ac","font-weight":"bold"}).change();
            				}else{
            					input.val((currentVal + 1)+" %").css({"color":"#000","font-weight":""}).change();
@@ -1262,19 +1287,18 @@ if($("#size").val() == "custom"){
 	    });
 
 
-		$("#size").change(function()
-		{
-			var val = $(this).val();
-			if(val == 'custom')
-			{
-				$(".dimessions").removeClass('hide');
-			}
-			else
-			{
-				$(".dimessions").addClass('hide');
-				
-			}
-		});
+												$(document).on("change","#size",function()
+												{
+													var val = $(this).val();
+													if(val == 'custom')
+													{
+														$(".dimessions").removeClass('hide');
+													}
+													else
+													{
+														$(".dimessions").addClass('hide');
+													}
+												});
 	$(".faq-checkbox").change(function(){
 			
 		if($("#make_costume").prop("checked") || $("#fimquality").prop("checked")){
@@ -1287,377 +1311,401 @@ if($("#size").val() == "custom"){
 		}
 	});
 	$(".faq-checkbox").trigger("change");
-	var Fimage = $("input[name=Imagecrop1]").attr('data-id');
-	var Bimage = $("input[name=Imagecrop2]").attr('data-id');
-	var Aimage = $("input[name=Imagecrop3]").attr('data-id');
+												var Fimage = $("input[name=Imagecrop1]").attr('data-id');
+												var Bimage = $("input[name=Imagecrop2]").attr('data-id');
+												var Aimage = $("input[name=Imagecrop3]").attr('data-id');
+												 
+                                                if(Fimage == '')
+                                                {
+                                                    $("#drag_n_drop_1").hide();
+                                                }
+												
+												if(Bimage == '')
+                                                {
+                                                    $("#drag_n_drop_2").hide();
+                                                }
+												if(Aimage == '')
+                                                {
+                                                    $("#drag_n_drop_3").hide();
+                                                }
+												
+												$("#btnsubmit").click(function(a) {                                                     
+                                                    if($("input[name=Imagecrop1]").attr('data-id') == "" && $("input[name=Imagecrop2]").attr('data-id') == ""){
+														$('#file1_error').html('Upload Front View');
+														$('#file2_error').html('Upload Back View');
+														return false;
+													}                                                   
+													if($("input[name=Imagecrop1]").attr('data-id') == "")
+													{
+														$('input[name=file1]').css('border', '1px solid red');
+														$('#file1_error').html('Upload Front View');
+														return false;                                          
+													}
+													if($("input[name=Imagecrop2]").attr('data-id') == "")
+													{
+														$('input[name=file2]').css('border', '1px solid red');
+														$('#file2_error').html('Upload Back View');
+														return false;                                          
+													}                                                   
 
-	if(Fimage == '')
-	{
-	$("#drag_n_drop_1").hide();
-	}
+                                                });
+																							
+												/*$(document).on("click",".img_clse",function()
+												{ 												
+												   $("#drag_n_drop_1").hide();
+												   $("#drag_n_drop_2").hide();
+												   $("#drag_n_drop_3").hide();
+												});*/
+												$("#cancel1").on("click",function(){
+													$("#drag_n_drop_1").hide();
+													$("#file1").val('');
+													$("#dvPreview").html('');
+													
+												});
+												$("#cancel2").on("click",function(){
+													$("#drag_n_drop_2").hide();
+													$("#file2").val('');
+													$("#dvPreview2").html('');
+													
+												});
+												$("#cancel3").on("click",function(){
+													$("#drag_n_drop_3").hide();
+													$("#file3").val('');
+													$("#dvPreview3").html('');
+													
+												});
+												 
+												//donate amount percentage calculation
+												/*$('#charity_amount').change(function(){
+													var donate_percent = $(this).val();
+													var price = $('#price').val();
+													var total = (price*donate_percent)/100;
+													if (donate_percent=="none") {
+														var total = 0.00;
+													}
+													$('#hidden_donation_amount').val(parseFloat(total).toFixed(2));
+													$('#dynamic_percent_amount').html("<i class='fa fa-usd' aria-hidden='true'></i> " +parseFloat(total).toFixed(2));
+												});*/
+												 
+												var hidden_file4 = $('#hidden_file4').val();
+												if (hidden_file4 == "") {
+													$('#drag_n_drop_3').css('display','none');
+												}
+												var hidden_file5 = $('#hidden_file5').val();
+												if (hidden_file5 == "") {
+													$('#drag_n_drop_2').css('display','none');
+												}
+												/*$('#drag_n_drop_1').click(function(){
+													var imageName = '<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){echo $costume_image1->image; }; ?>';
+													var imageType = 1;
+													if(imageName.length>0){
+														deleteCostumeImage(imageName,imageType);
+													}
+													$('#front_view').find('li').remove();
+													$('#drag_n_drop_1').css('display','none');													 
+													$("input[name=file1]").attr('style',''); 
+													$('input[name=file1]').val('');
+													$('input[name=file1]').attr('value','');
+												});*/
 
-	if(Bimage == '')
-	{
-	$("#drag_n_drop_2").hide();
-	}
-	if(Aimage == '')
-	{
-	$("#drag_n_drop_3").hide();
-	}
+												$('#drag_n_drop_1').click(function(){
+													var Fimage = $("input[name=Imagecrop1]").attr('data-id');
+													if(Fimage == "1" || Fimage == ""){
+														$('#front_image_id').remove();
+													    $('#front_view').find('ul').remove();
+													    $('#drag_n_drop_1').css('display','none');
+													    $('input[name=file1]').val('');
+													    $('input[name=hidden]').attr('value','');
+													    $(".Backview").attr('value','');
+													    $(".drop_uploader").addClass('Front1');
+													    $("#file1").css("display",'block');
+													    $(this).siblings().find('img').remove();
+													    $(this).siblings().find("input[type='hidden']").val('');
+													    $(this).siblings().find("input[type='hidden']").attr('data-id','');
+													}
+													else{
+														swal({
+														  title: "Are you sure?",
+														  text: "You will not be able to recover this Image!",
+														  type: "warning",
+														  showCancelButton: true,
+														  confirmButtonClass: "btn-danger",
+														  confirmButtonText: "Yes, delete",
+														  cancelButtonText: "No, cancel",
+														  closeOnConfirm: false,
+														  closeOnCancel: false
+														},
+														function(isConfirm) {
+														  if (isConfirm) {
+														  	var imageName = '<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){echo $costume_image1->image; }; ?>';
+														  	var imageType = 1;
+														  	if(imageName.length>0){
+														  		deleteCostumeImage(imageName,imageType);
+														  	}
+														  	$('#front_view').find('li').remove();
+														  	$('#drag_n_drop_1').css('display','none');													 
+														  	$("input[name=file1]").attr('style',''); 
+														  	$('input[name=file1]').val('');
+														  	$('input[name=file1]').attr('value','');
 
-	$("#submit").click(function(a) {  
-		if($("input[name=Imagecrop1]").attr('data-id') == "" && $("input[name=Imagecrop2]").attr('data-id') == ""){
-			$('#file1_error').html('Upload Front View');
-			$('#file2_error').html('Upload Back View');
-			return false;
-		}                                                   
-		if($("input[name=Imagecrop1]").attr('data-id') == "")
-		{
-			$('input[name=file1]').css('border', '1px solid red');
-			$('#file1_error').html('Upload Front View');
-			return false;                                          
-		}
-		if($("input[name=Imagecrop2]").attr('data-id') == "")
-		{
-			$('input[name=file2]').css('border', '1px solid red');
-			$('#file2_error').html('Upload Back View');
-			return false;                                          
-		}
-	});																							
-	/*$(document).on("click",".img_clse",function()
-	{ 												
-	   $("#drag_n_drop_1").hide();
-	   $("#drag_n_drop_2").hide();
-	   $("#drag_n_drop_3").hide();
-	});*/
-	$("#cancel1").on("click",function(){
-		$("#drag_n_drop_1").hide();
-		$("#file1").val('');
-		$("#dvPreview").html('');
-		
-	});
-	$("#cancel2").on("click",function(){
-		$("#drag_n_drop_2").hide();
-		$("#file2").val('');
-		$("#dvPreview2").html('');
-		
-	});
-	$("#cancel3").on("click",function(){
-		$("#drag_n_drop_3").hide();
-		$("#file3").val('');
-		$("#dvPreview3").html('');
-		
-	});
-	/*$("#cancelMultiple").on("click",function(){
-		$("#upload-file-selector").val('');
-		$("#dvPreviewMultiple").html('');
-		
-	});*/
-	var hidden_file4 = $('#hidden_file4').val();
-	if (hidden_file4 == "") {
-		$('#drag_n_drop_3').css('display','none');
-	}
-	var hidden_file5 = $('#hidden_file5').val();
-	if (hidden_file5 == "") {
-		$('#drag_n_drop_2').css('display','none');
-	}
-	$('#drag_n_drop_1').click(function(){
-		var Fimage = $("input[name=Imagecrop1]").attr('data-id');
-		// if(Fimage == "1" || Fimage == ""){
-		// 	$('#front_image_id').remove();
-		//     $('#front_view').find('ul').remove();
-		//     $('#drag_n_drop_1').css('display','none');
-		//     $('input[name=file1]').val('');
-		//     $('input[name=hidden]').attr('value','');
-		//     //$(".Backview").attr('value','');
-		//     $(".drop_uploader").addClass('Front1');
-		//     $("#file1").css("display",'block');
-		//     $(this).siblings().find('img').remove();
-		//     $(this).siblings().find("input[type='hidden']").val('');
-		//     $(this).siblings().find("input[type='hidden']").attr('data-id','');
-		// }
-		// else{
-		// 	swal({
-		// 	  title: "Are you sure?",
-		// 	  text: "You will not be able to recover this Image!",
-		// 	  type: "warning",
-		// 	  showCancelButton: true,
-		// 	  confirmButtonClass: "btn-danger",
-		// 	  confirmButtonText: "Yes, delete",
-		// 	  cancelButtonText: "No, cancel",
-		// 	  closeOnConfirm: false,
-		// 	  closeOnCancel: false
-		// 	},
-		// 	function(isConfirm) {
-		// 	  if (isConfirm) {
-		// 	  	// var imageName = '<?php if(isset($costume_image1->image) && !empty($costume_image1->image)){echo $costume_image1->image; }; ?>';
-		// 	  	// var imageType = 1;
-		// 	  	// if(imageName.length>0){
-		// 	  	// 	deleteCostumeImage(imageName,imageType);
-		// 	  	// }
-		// 	  	$('#front_view').find('li').remove();
-		// 	  	$('#drag_n_drop_1').css('display','none');	
-		// 	  	$("input[name=file1]").attr('style',''); 
-		// 	  	$('input[name=file1]').val('');
-		// 	  	$('input[name=file1]').attr('value','');
-
-		// 	  	/*Copied from costumedit.js*/
-		// 	  	$('#front_image_id').remove();
-		// 	    $('#front_view').find('ul').remove();
-		// 	    $('#drag_n_drop_1').css('display','none');
-		// 	    $('input[name=file1]').val('');
-		// 	    $('input[name=hidden]').attr('value','');
-		// 	    //$(".Backview").attr('value','');
-		// 	    $(".drop_uploader").addClass('Front1');
-		// 	    $("input[name=Imagecrop1]").attr('data-id',"");
-		// 	    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-		// 	  } else {
-		// 	    swal("Cancelled", "Your imaginary file is safe :)", "error");
-		// 	  }
-		// 	});
-		// }
-		$('#front_image_id').remove();
-	    $('#front_view').find('ul').remove();
-	    $('#drag_n_drop_1').css('display','none');
-	    $('input[name=file1]').val('');
-	    $('input[name=hidden]').attr('value','');
-	    //$(".Backview").attr('value','');
-	    $(".drop_uploader").addClass('Front1');
-	    $("#file1").css("display",'block');
-	    $(this).siblings().find('img').remove();
-	    $(this).siblings().find("input[type='hidden']").val('');
-	    $(this).siblings().find("input[type='hidden']").attr('data-id','');
+														  	/*Copied from costumedit.js*/
+														  	$('#front_image_id').remove();
+														    $('#front_view').find('ul').remove();
+														    $('#drag_n_drop_1').css('display','none');
+														    $('input[name=file1]').val('');
+														    $('input[name=hidden]').attr('value','');
+														    $(".Backview").attr('value','');
+														    $(".drop_uploader").addClass('Front1');
+														    $("input[name=Imagecrop1]").attr('data-id',"");
+														    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+														  } else {
+														    swal("Cancelled", "Your imaginary file is safe :)", "error");
+														  }
+														});
+													}
 
 
-	});
-	$('#drag_n_drop_2').click(function(){
-		var Bimage = $("input[name=Imagecrop2]").attr('data-id');
-		$('#back_view').find('li').remove();
-		$('#drag_n_drop_2').css('display','none');
-		$("input[name=file2]").attr('style',''); 
-		$('input[name=file2]').val('');
-		$('input[name=file2]').attr('value','');
+												});
+												
+												/*$('#drag_n_drop_2').click(function(){
+													var imageName = '<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){echo $costume_image2->image; }; ?>';
+													var imageType = 2;
+													if(imageName.length>0){
+														deleteCostumeImage(imageName,imageType);
+													}
+													$('#back_view').find('li').remove();
+													$('#drag_n_drop_2').css('display','none');
+													$("input[name=file2]").attr('style',''); 
+													$('input[name=file2]').val('');
+													$('input[name=file2]').attr('value','');
+												});*/
 
-		//Copied from costumeedit.js
-		$('#back_image_id').remove();
-	    $('#back_view').find('ul').remove();
-	    $('#drag_n_drop_2').css('display','none');
-	    $('input[name=file2]').val('');
-	    $('input[name=hidden]').attr('value','');
-	    $(".drop_uploader").addClass('Back1');
-	    $("input[name=Imagecrop2]").attr('data-id',"");
-		/*if(Bimage == "" || Bimage =="1"){
-			$('#back_image_id').remove();
-		    $('#back_view').find('ul').remove();
-		    $('#drag_n_drop_2').css('display','none');
-		    $('input[name=file2]').val('');
-		    $('input[name=hidden]').attr('value','');
-		    $(".drop_uploader").addClass('Back1');
-		    $("#file2").css("display",'block');
-		    $(this).siblings().find('img').remove();
-		    $(this).siblings().find("input[type='hidden']").val('');
-		    $(this).siblings().find("input[type='hidden']").attr('data-id','');
-		}
-		else{
-			swal({
-			  title: "Are you sure?",
-			  text: "You will not be able to recover this Image!",
-			  type: "warning",
-			  showCancelButton: true,
-			  confirmButtonClass: "btn-danger",
-			  confirmButtonText: "Yes, delete",
-			  cancelButtonText: "No, cancel",
-			  closeOnConfirm: false,
-			  closeOnCancel: false
-			},
-			function(isConfirm) {
-				if (isConfirm) {
-					var imageName = '<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){echo $costume_image2->image; }; ?>';
-					var imageType = 2;
-					if(imageName.length>0){
-						deleteCostumeImage(imageName,imageType);
-					}
-					$('#back_view').find('li').remove();
-					$('#drag_n_drop_2').css('display','none');
-					$("input[name=file2]").attr('style',''); 
-					$('input[name=file2]').val('');
-					$('input[name=file2]').attr('value','');
+												$('#drag_n_drop_2').click(function(){
+													var Bimage = $("input[name=Imagecrop2]").attr('data-id');
+													if(Bimage == "" || Bimage =="1"){
+														$('#back_image_id').remove();
+													    $('#back_view').find('ul').remove();
+													    $('#drag_n_drop_2').css('display','none');
+													    $('input[name=file2]').val('');
+													    $('input[name=hidden]').attr('value','');
+													    $(".drop_uploader").addClass('Back1');
+													    $("#file2").css("display",'block');
+													    $(this).siblings().find('img').remove();
+													    $(this).siblings().find("input[type='hidden']").val('');
+													    $(this).siblings().find("input[type='hidden']").attr('data-id','');
+													}
+													else{
+														swal({
+														  title: "Are you sure?",
+														  text: "You will not be able to recover this Image!",
+														  type: "warning",
+														  showCancelButton: true,
+														  confirmButtonClass: "btn-danger",
+														  confirmButtonText: "Yes, delete",
+														  cancelButtonText: "No, cancel",
+														  closeOnConfirm: false,
+														  closeOnCancel: false
+														},
+														function(isConfirm) {
+															if (isConfirm) {
+																var imageName = '<?php if(isset($costume_image2->image) && !empty($costume_image2->image)){echo $costume_image2->image; }; ?>';
+																var imageType = 2;
+																if(imageName.length>0){
+																	deleteCostumeImage(imageName,imageType);
+																}
+																$('#back_view').find('li').remove();
+																$('#drag_n_drop_2').css('display','none');
+																$("input[name=file2]").attr('style',''); 
+																$('input[name=file2]').val('');
+																$('input[name=file2]').attr('value','');
 
-					//Copied from costumeedit.js
-					$('#back_image_id').remove();
-				    $('#back_view').find('ul').remove();
-				    $('#drag_n_drop_2').css('display','none');
-				    $('input[name=file2]').val('');
-				    $('input[name=hidden]').attr('value','');
-				    $(".drop_uploader").addClass('Back1');
-				    $("input[name=Imagecrop2]").attr('data-id',"");
+																/*Copied from costumeedit.js*/
+																$('#back_image_id').remove();
+															    $('#back_view').find('ul').remove();
+															    $('#drag_n_drop_2').css('display','none');
+															    $('input[name=file2]').val('');
+															    $('input[name=hidden]').attr('value','');
+															    $(".drop_uploader").addClass('Back1');
+															    $("input[name=Imagecrop2]").attr('data-id',"");
 
-					swal("Deleted!", "Your imaginary file has been deleted.", "success");
-				}
-				else {
-					swal("Cancelled", "Your imaginary file is safe :)", "error");
-				}
-			});
-		}*/
-	});
-	$('#drag_n_drop_3').click(function(){
-		var Aimage = $("input[name=Imagecrop3]").attr('data-id');
-		$('#details_image_id').remove();
-	    $('#details_view').find('ul').remove();
-	    $('#drag_n_drop_3').css('display','none');
-	    $('input[name=file3]').val('');
-	    $('input[name=file3]').attr('value','');
-	    $(".drop_uploader").addClass('additional');
-	    $("#file3").css("display",'block');
-	    $(this).siblings().find('img').remove();
-	    $(this).siblings().find("input[type='hidden']").val('');
-	    $(this).siblings().find("input[type='hidden']").attr('data-id','');
-		/*if(Aimage == "" || Aimage == "1"){
-			$('#details_image_id').remove();
-		    $('#details_view').find('ul').remove();
-		    $('#drag_n_drop_3').css('display','none');
-		    $('input[name=file3]').val('');
-		    $('input[name=file3]').attr('value','');
-		    $(".drop_uploader").addClass('additional');
-		    $("#file3").css("display",'block');
-		    $(this).siblings().find('img').remove();
-		    $(this).siblings().find("input[type='hidden']").val('');
-		    $(this).siblings().find("input[type='hidden']").attr('data-id','');
-		}
-		else{
-			swal({
-			  title: "Are you sure?",
-			  text: "You will not be able to recover this Image!",
-			  type: "warning",
-			  showCancelButton: true,
-			  confirmButtonClass: "btn-danger",
-			  confirmButtonText: "Yes, delete",
-			  cancelButtonText: "No, cancel",
-			  closeOnConfirm: false,
-			  closeOnCancel: false
-			},
-			function(isConfirm) {
-				if (isConfirm) {
-					var imageName = '<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){echo $costume_image3->image; }; ?>';
-					var imageType = 3;
-					if(imageName.length>0){
-						deleteCostumeImage(imageName,imageType);  
-					}
-					$('#details_view').find('li').remove();
-					$('#drag_n_drop_3').css('display','none');
-					$("input[name=file3]").attr('style',''); 
-					$('input[name=file3]').val('');
-					$('input[name=file3]').attr('value','');
-					//Copied from costumedit.js
-					$('#details_image_id').remove();
-				    $('#details_view').find('ul').remove();
-				    $('#drag_n_drop_3').css('display','none');
-				    $('input[name=file3]').val('');
-				    $('input[name=file3]').attr('value','');
-				    $(".drop_uploader").addClass('additional');
-				    $("input[name=Imagecrop3]").attr('data-id',"");
+																swal("Deleted!", "Your imaginary file has been deleted.", "success");
+															}
+															else {
+																swal("Cancelled", "Your imaginary file is safe :)", "error");
+															}
+														});
+													}
+												});
+													$('#drag_n_drop_3').click(function(){
+														var Aimage = $("input[name=Imagecrop3]").attr('data-id');
+														if(Aimage == "" || Aimage == "1"){
+															$('#details_image_id').remove();
+														    $('#details_view').find('ul').remove();
+														    $('#drag_n_drop_3').css('display','none');
+														    $('input[name=file3]').val('');
+														    $('input[name=file3]').attr('value','');
+														    $(".drop_uploader").addClass('additional');
+														    $("#file3").css("display",'block');
+														    $(this).siblings().find('img').remove();
+														    $(this).siblings().find("input[type='hidden']").val('');
+														    $(this).siblings().find("input[type='hidden']").attr('data-id','');
+														}
+														else{
+															swal({
+															  title: "Are you sure?",
+															  text: "You will not be able to recover this Image!",
+															  type: "warning",
+															  showCancelButton: true,
+															  confirmButtonClass: "btn-danger",
+															  confirmButtonText: "Yes, delete",
+															  cancelButtonText: "No, cancel",
+															  closeOnConfirm: false,
+															  closeOnCancel: false
+															},
+															function(isConfirm) {
+																if (isConfirm) {
+																	var imageName = '<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){echo $costume_image3->image; }; ?>';
+																	var imageType = 3;
+																	if(imageName.length>0){
+																	deleteCostumeImage(imageName,imageType);                }
+																	$('#details_view').find('li').remove();
+																	$('#drag_n_drop_3').css('display','none');
+																	$("input[name=file3]").attr('style',''); 
+																	$('input[name=file3]').val('');
+																	$('input[name=file3]').attr('value','');
+																	/*Copied from costumedit.js*/
+																	$('#details_image_id').remove();
+																    $('#details_view').find('ul').remove();
+																    $('#drag_n_drop_3').css('display','none');
+																    $('input[name=file3]').val('');
+																    $('input[name=file3]').attr('value','');
+																    $(".drop_uploader").addClass('additional');
+																    $("input[name=Imagecrop3]").attr('data-id',"");
 
-					swal("Deleted!", "Your imaginary file has been deleted.", "success");
-				}
-				else {
-					swal("Cancelled", "Your imaginary file is safe :)", "error");
-				}
-			});
-		}*/
-	});
-	/*$(".remove").click(function(){
-		$(this).parent(".pip").remove();
-	});*/
-});
-function cosplay_yes(id){
-	if (id == 7) {
-		$('#cosplayplay_yes_div').css('display','block');
-		}else{
-		$('#cosplayplay_yes_div').css('display','none');
-		$('input[name=cosplayplay_yes_opt]').attr('checked',false);
-	}
-}
-function uniquefashion_yes(id){
-	if (id == 9) {
-		$('#uniquefashion_yes_div').css('display','block');
-		}else{
-		$('#uniquefashion_yes_div').css('display','none');
-		$('input[name=uniquefashion_yes_opt]').attr('checked',false);
-	}
-}
-function activity_yes(id){
-	if (id == 11) {
-		$('#activity_yes_div').css('display','block');
-		}else{
-		$('#activity_yes_div').css('display','none');
-		$('input[name=activity_yes_opt]').attr('checked',false);
-	}
-}
-function make_costume_yes(id){
-	if (id == 30) {
-		$('#mention_hours').css('display','block');
-		$('#mention_hours_input').css('display','block');
-		}else{
-		$('#mention_hours').css('display','none');
-		$('#mention_hours_input').css('display','none');
-		$('#mention_hours_input').val('');
-		$('#make_costume_time').attr('value','');
-	}
-}
-function film_name_yes(id){
-	if (id == 32) {
-		$('#film_text').css('display','block');
-		$('#film_text_input').css('display','block');
-		}else{
-		$('#film_text').css('display','none');
-		$('#film_text_input').css('display','none');
-		$('#film_text_input').val('');
-	}
-}
-function deleteCostumeImage(imageName,imageType){
-	$.ajax({
-		type: "POST",
-		url: '{!! url('delete-costume-image') !!}',
-		data: {'image_name':imageName,image_type:imageType},
-		dataType: 'JSON',
-		success: function(response) {
-		}
-	});
-}
-//delete multiple selected images code
-var allRemove = [];
-$(document).on("click",".remove_pic",function()
-{
-    var cur_val = $(this).attr('data-id');
-	var cur_rem_val = $(this).parents().attr('style');
-	var last_one = cur_rem_val.substr(cur_rem_val.length - 15);
-	var remove_org_val = last_one.slice(0,-1);
-	var MakeInput = '';
-	removeValue =  $("#"+cur_val).val();	
-	$("#"+cur_val).remove();
-	allRemove.push(remove_org_val);	
-	$.each( allRemove, function( key, value ) {
-		MakeInput =  '<input type="hidden" name="multiple[]" value="'+value+'">';
-	});
-	$(".deletedImages").append(MakeInput);
-});
-</script>
-<script type="text/javascript">
-$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensionsdimensionsWidth,#dimensionsdimensionsLength,#dimensionsdimensionsLength,#make_costume_time").on("keyup", function(){
-	var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
-	val = this.value;
-	if(!valid){
-		//console.log("Invalid input!");
-		this.value = val.substring(0, val.length - 1);
-	}
-});
-$("#price,#donate_charity").on("keyup", function(){
-	var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
-	val = this.value;
-	if(!valid){
-		//console.log("Invalid input!");
-		this.value = val.substring(0, val.length - 1);
-	}
-});
-</script>
-@stop									
+																	swal("Deleted!", "Your imaginary file has been deleted.", "success");
+																}
+																else {
+																	swal("Cancelled", "Your imaginary file is safe :)", "error");
+																}
+															});
+														}
+													});
+												/* Below code commitemnetd as per SAI's task  */
+
+												/*$('#drag_n_drop_3').click(function(){
+													var imageName = '<?php if(isset($costume_image3->image) && !empty($costume_image3->image)){echo $costume_image3->image; }; ?>';
+													var imageType = 3;
+													if(imageName.length>0){
+													deleteCostumeImage(imageName,imageType);                }
+													$('#details_view').find('li').remove();
+													$('#drag_n_drop_3').css('display','none');
+													$("input[name=file3]").attr('style',''); 
+													$('input[name=file3]').val('');
+													$('input[name=file3]').attr('value','');
+												});*/
+
+												/*$(".remove").click(function(){
+													$(this).parent(".pip").remove();
+												});*/
+											});
+											function cosplay_yes(id){
+												if (id == 7) {
+													$('#cosplayplay_yes_div').css('display','block');
+													}else{
+													$('#cosplayplay_yes_div').css('display','none');
+													$('input[name=cosplayplay_yes_opt]').attr('checked',false);
+												}
+											}
+											function uniquefashion_yes(id){
+												if (id == 9) {
+													$('#uniquefashion_yes_div').css('display','block');
+													}else{
+													$('#uniquefashion_yes_div').css('display','none');
+													$('input[name=uniquefashion_yes_opt]').attr('checked',false);
+												}
+											}
+											function activity_yes(id){
+												if (id == 11) {
+													$('#activity_yes_div').css('display','block');
+													}else{
+													$('#activity_yes_div').css('display','none');
+													$('input[name=activity_yes_opt]').attr('checked',false);
+												}
+											}
+											function make_costume_yes(id){
+												if (id == 30) {
+													$('#mention_hours').css('display','block');
+													$('#mention_hours_input').css('display','block');
+													}else{
+													$('#mention_hours').css('display','none');
+													$('#mention_hours_input').css('display','none');
+													$('#mention_hours_input').val('');
+													$('#make_costume_time').attr('value','');
+												}
+											}
+											function film_name_yes(id){
+												if (id == 32) {
+													$('#film_text').css('display','block');
+													$('#film_text_input').css('display','block');
+													}else{
+													$('#film_text').css('display','none');
+													$('#film_text_input').css('display','none');
+													$('#film_text_input').val('');
+												}
+											}
+											function deleteCostumeImage(imageName,imageType){
+												$.ajax({
+													type: "POST",
+													url: '{!! url('delete-costume-image') !!}',
+													data: {'image_name':imageName,image_type:imageType},
+													dataType: 'JSON',
+													success: function(response) {
+													}
+												});
+											}
+											//delete multiple selected images code
+											var allRemove = [];
+											$(document).on("click",".remove_pic",function()
+											{
+												
+											    var cur_val = $(this).attr('data-id');		 
+												var cur_rem_val = $(this).parents().attr('style');
+												var last_one = cur_rem_val.substr(cur_rem_val.length - 15);
+
+												var remove_org_val = last_one.slice(0,-1);
+
+												var MakeInput = '';
+												  removeValue =  $("#"+cur_val).val();
+												 	$("#"+cur_val).remove();
+												 //$(this).parents("div#"+cur_val).remove();
+												//$("#"+cur_val).parents().find("div.multi_div").remove();
+												allRemove.push(remove_org_val);
+												
+												$.each( allRemove, function( key, value ) {
+													MakeInput =  '<input type="hidden" name="multiple[]" value="'+value+'">';
+												});
+												$(".deletedImages").append(MakeInput);
+											});
+										</script>
+										<script type="text/javascript">
+											$("#heightft,#heightin,#weightlbs,#chestin,#waistlbs,#dimensionsdimensionsWidth,#dimensionsdimensionsLength,#dimensionsdimensionsHeight,#make_costume_time,#pounds").on("keypress", function(e){
+												/*var valid = /^\d{0,4}(\.\d{0,4})?$/.test(this.value),
+												val = this.value;
+												if(!valid){
+													//console.log("Invalid input!");
+													this.value = val.substring(0, val.length - 1);
+												}*/
+												if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+													return false;
+												}
+											});
+											$("#price,#donate_charity").on("keypress", function(){
+												var valid = /^\d{0,20}(\.\d{0,20})?$/.test(this.value),
+												val = this.value;
+												if(!valid){
+													//console.log("Invalid input!");
+													this.value = val.substring(0, val.length - 1);
+												}
+											});
+										</script>
+									@stop									

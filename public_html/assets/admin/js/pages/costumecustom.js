@@ -217,6 +217,7 @@ $(function(){
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+
                         $(document).on("change", "#zoom-level2", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
@@ -265,7 +266,7 @@ $(function(){
             if (typeof (FileReader) != "undefined") {
                 var dvPreview = $("#dvPreview3");
                 dvPreview.html("");
-               // $($(this)[0].files).each(function (index, element ) {
+                // $($(this)[0].files).each(function (index, element ) {
                     var file = this.files[0];
                     var reader = new FileReader();
                     reader.onload = function (e) {
@@ -314,11 +315,13 @@ $(function(){
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+
                         $(document).on("change", "#zoom-level3", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+
                         $(document).on("click", "#crop3", function() {
                             $("#details_view > div.main_upload_blogs > div.up-blog").find("img").remove();
                             if($image.cropper('getCroppedCanvas')==null){
@@ -366,20 +369,19 @@ $(function(){
     {
         $("#file2").val('');
         $("#dvPreview2").html('');
-        $("#drag_n_drop_2").hide();
+         $("#drag_n_drop_2").hide();
     });
     $(document).on("click","#cancel3",function()
     {
         $("#file3").val('');
         $("#dvPreview3").html('');
-        $("#drag_n_drop_3").hide();
+         $("#drag_n_drop_3").hide();
     });
     $(document).on("click","#multiCancel",function()
     {
         $("#upload-file-selector").val('');
         $("#dvPreviewMultiple").html('');
     });
-      
 
    /* $(document).on("click", "#closeModal1,.img_clse", function() {
         $(this).parents().find("#front_view").children("#drag_n_drop_1").addClass('hide');
@@ -408,7 +410,7 @@ $(function(){
         $.get("/costume/ajaxsubcategory", //This is the url defined in routes
             { categoryid: id },
             function(data) {
-               
+                console.log(data);
                 var model = $('#subcategory').html('Select Subcategory'); //keeping subcategory field empty before
                 model.empty();
                 model.append("<option value=''>Select Subcategory</option>");
@@ -435,7 +437,7 @@ $(function(){
         var active_item_index = getActiveItemIndex(items);
         activeCropperObjIndex = active_item_index;
         slider.val(zooms[active_item_index]);
-        if(activeCropperObjIndex >0)
+         if(activeCropperObjIndex >0)
         {
             slider.val(2);
         }
@@ -561,13 +563,13 @@ $(function(){
         zooms[activeCropperObjIndex] = current_zoom;
         $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
     });
+
     $(document).on("change", ".slider", function () {
         $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
         var current_zoom = $(this).val();
         zooms[activeCropperObjIndex] = current_zoom;
         $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
     });
-
 
     $(document).on("click", ".saveMultiple", function () {
         $cropper_objs.forEach(function($image, index){

@@ -36,7 +36,7 @@
                         <h3>{{strtoupper($category->name)}}</h3>
                     </div>
                     <?php } 
-                     if($categoryid=="78") { ?>
+                     if($categoryid=="66") { ?>
                     <div class="bg-liteblue">
                         <h3>{{strtoupper($category->name)}}</h3>
                     </div>
@@ -68,7 +68,7 @@
                     <h2>{{strtoupper($category->name)}}</h2>
                 </div>
                 <?php } 
-                 if($categoryid=="78") { ?>
+                 if($categoryid=="66") { ?>
 
                 <div class="progressbar_main liteblue-border request-bag">
                     <h2>{{strtoupper($category->name)}}</h2>
@@ -116,7 +116,8 @@
         <?php }   else { ?>
         <div class="col-md-12 text-center">No Results Found</div>
         <?php }  }?>
-          <?php  if($categoryid=="78") { ?>
+        
+          <?php  if($categoryid=="66") { ?>
           <div class="row">
              <?php $count=count($filmtheatrecategories);
             if($count > 0){ ?>
@@ -150,6 +151,7 @@
           <?php }   else { ?>
            <div class="col-md-12 text-center">No Results Found</div>
           <?php }  } ?>
+
           <?php  if($categoryid=="143") { ?>
           <div class="row">
              <?php $count=count($uniquefashion_categories);
@@ -209,31 +211,6 @@ $(document).ready(function()
 });
 } */
 </script>
-<script>
-	//$(document).ready(function(){
-  // Add smooth scrolling to all links
-  //$(".special-caterories a").on('click', function(event) {
 
-    // Make sure this.hash has a value before overriding default behavior
-    //if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      //event.preventDefault();
-
-      // Store hash
-     // var hash = this.hash;
-
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-     // $('html, body').animate({
-        //scrollTop: $(hash).offset().top
-     // }, 800, function(){
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-      //  window.location.hash = hash;
-      //});
-    //} // End if
-  //});
-//});
-</script>
 
 @stop

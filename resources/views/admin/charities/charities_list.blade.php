@@ -53,7 +53,7 @@ display: none;
                     </div>
                 </div>
                 <div class="box-body">
-			           <div class="table-responsive">
+                 <div class="table-responsive">
                  <table class="table table-striped table-bordered user-list-table">
                   <thead>
                     <th>Charity Name</th>
@@ -85,10 +85,10 @@ display: none;
                        </div>
                     </div>
                   </div>
-          					<table datatable dt-options="dtOptions" dt-columns="dtColumns"
-                           				class="table table-bordered table-hover table-striped" id="dtTable">
-          					</table>
-					       </div>
+                    <table datatable dt-options="dtOptions" dt-columns="dtColumns"
+                                  class="table table-bordered table-hover table-striped" id="dtTable">
+                    </table>
+                 </div>
                 </div>
             </div>
         </div>

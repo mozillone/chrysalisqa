@@ -1,5 +1,4 @@
-<?php
-
+﻿<?php
 return array(
     'Amenties_id' => '1',
 	'Style_id' => '2',
@@ -14,11 +13,27 @@ return array(
 	'Shipping'=>2,
 	'Currency'=>'usd',
 
-	'USPS'=>'475CHRYS6822',
+	'USPS'=>'518CHRYS8010',
+	'USPS_Password'=>'232IM84WE648',
 	'USPS_RATE_URL'=>'http://production.shippingapis.com/ShippingAPI.dll?API=RateV4',
 	'USPS_SHIPPING_URL'=>'https://secure.shippingapis.com/ShippingAPI.dll?API=DeliveryConfirmationV4',
 
 	
+
+	/* testing 
+	'FedEx_Ship_Url'=>'https://wsbeta.fedex.com:443/web-services/ship',
+	'FedEx_Key'=>'pWPjhX3ehXQYuCjO',
+	'FedEx_Password'=>'lhkPEqBBz6zU2UV99bnJhbILX',
+	'FedEx_AccountNumber'=>'510087100',
+	'FedEx_MeterNumber'=>'118828727',
+	
+
+	'FedEx_Key'=>'Ok50l4xFxVVHosR2',
+	'FedEx_Password'=>'vXRQpnIFtzW3okIComTl77rHO',
+	'FedEx_AccountNumber'=>'510087640',
+	'FedEx_MeterNumber'=>'100342598',
+	*/
+
 	/* testing */
 	'FedEx_Ship_Url'=>env('FEDEX_SHIP_URL'),
 	'FedEx_Key'=>env('FEDEX_KEY'),
@@ -26,20 +41,21 @@ return array(
 	'FedEx_AccountNumber'=>env('FEDEX_ACCOUNT_NUMBER'),
 	'FedEx_MeterNumber'=>env('FEDEX_METER_NUMBER'),
 
+
 	
 	/* live */
 
-	// 'FedEx_Ship_Url'=>' https://ws.fedex.com:443/web-services',
-	// 'FedEx_Key'=>'dnIjZmbyft2X8rmy',
-	// 'FedEx_Password'=>'0YeL33GGAqWhfZsG3c4nDFE49',
-	// 'FedEx_AccountNumber'=>'873082887',
-	// 'FedEx_MeterNumber'=>'111338298',
-	
+	/*'FedEx_Ship_Url'=>' https://ws.fedex.com:443/web-services',
+	'FedEx_Key'=>'dnIjZmbyft2X8rmy',
+	'FedEx_Password'=>'0YeL33GGAqWhfZsG3c4nDFE49',
+	'FedEx_AccountNumber'=>'873082887',
+	'FedEx_MeterNumber'=>'111338298',
+	*/
 	'FedEx_SmartPostKey'=>env('FEDEX_SMARTPOST_KEY'),
 	'FedEx_SmartPostPassword'=>env('FEDEX_SMARTPOST_PASSWORD'),
 	'FedEx_SmartPostAccountNumber'=>env('FEDEX_SMARTPOST_ACCOUNT_NUMBER'),
 	'FedEx_SmartPostMeterNumber'=>env('FEDEX_SMARTPOST_METER_NUMBER'),
-	'FedEx_SmartPostHubId'=>env('FEDEX_SMARTPOST_HUBID'), 
+	'FedEx_SmartPostHubId'=>env('FEDEX_SMARTPOST_HUBID'),
 
     'ENDICIA_REQUESTERID'=>env('ENDICIA_REQUESTER_ID'),
     'ENDICIA_ACCOUNTID'=>env('ENDICIA_ACCOUNT_ID'),
@@ -55,5 +71,4 @@ return array(
 
     'INSTAGRAM_ACCESS_TOKEN'=>env('INSTAGRAM_ACCESS_TOKEN'),
 	'INSTAGRAM_USERNAME'=>env('INSTAGRAM_USERNAME')
- 
 );

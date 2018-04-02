@@ -90,6 +90,7 @@
                                             <img src="../blog_images/preview_placeholder.png" class="img-pview img-responsive" id="img-chan" name="img-chan" >
 
                                             
+
                                             <span class="btn btn-default btn-file">
                                                 <span class="fileupload-new" style="float:right">Upload Photo</span>
                                                 <span class="fileupload-exists"></span>
@@ -131,9 +132,9 @@
                                         <div class="input-group blog-categories">
                                             @foreach($blogCategories as $category)
                                                 <div class="form-input" data-id="{{$category->id}}">
-                                                    <input type="radio" name="category" value="{{$category->id}}"><span> {{$category->name}} </span>
+                                                    <input type="radio" name="category" value="{{$category->id}}"> <span>{{$category->name}}</span>
                                                     <a href="javascript:void(0);" onclick="deleteCategory({{$category->id}})" class="btn btn-xs btn-danger "><i class="fa fa-trash-o"></i></a>
-                                                    <a href="javascript:void(0);" onclick="editCategory({{$category->id}},this)" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i></a>
+                                                    <a href="javascript:void(0);" onclick="editCategory({{$category->id}}, this)" class="btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i></a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -178,7 +179,7 @@
                     </div>
                     <div class="form-group category-name-container has-feedback">
                         <label for="blogCategory">Blog Category</label>
-                        <input type="text" class="form-control" id="blogCategory" name="name" placeholder="Enter Blog Category" data-edited="0" data-oldname="">
+                        <input type="text" class="form-control" id="blogCategory" name="name" placeholder="Enter Blog Category">
                         <p class="error">{{ $errors->first('blog_category') }}</p>
                         <span id="page_desc_error" style="color:red"></span>
                     </div>
@@ -207,6 +208,52 @@
                 $("#blogCategory").attr('data-edited',0);
                 $("#model_title").text('Add Blog Category');
             });
+
+            /*$('.save-category').on('click', function () {
+                var categoryName = $('#blogCategory').val();
+
+                $.ajax({
+                    type: "GET",
+                    url: '{!! url('blog-category-availability') !!}',
+                    data: {'name':categoryName},
+                    dataType: 'JSON',
+                    success: function(response) {
+                        if(response > 0){
+                            $('.category-alert').show();
+                            $('.category-alert').html('Category name already taken. Pls enter new one.');
+                            setTimeout(function() {
+                                $('.category-alert').fadeOut('fast');
+                            }, 4000);
+                        }else{
+                            $.ajax({
+                                type: "POST",
+                                url: '{!! url('add-blog-category') !!}',
+                                data: {'name':categoryName},
+                                dataType: 'JSON',
+                                success: function(response) {
+                                    if(response){
+                                        var categoryId = response.id;
+                                        var categoryName = response.name;
+                                        var categoryRadio = $("<input type='radio' name='category' value='"+categoryId+"'><span>"+categoryName+' '+"</span>");
+                                        var deleteRadio = $("<a href='javascript:void(0);' onclick='deleteCategory("+categoryId+")' class='btn btn-xs btn-danger'><i class='fa fa-trash-o'></i></a>");
+                                        var categoryDiv = $("<div class='form-input' data-id="+categoryId+"></div>").appendTo(".blog-categories");
+                                        categoryRadio.appendTo(categoryDiv);
+                                        deleteRadio.appendTo(categoryDiv);
+                                        $('.category-close').trigger('click');
+                                    }
+                                },
+                                error: function () {
+                                    $('.category-alert').show();
+                                    $('.category-alert').html('Category could not be saved. Pls try again.');
+                                    setTimeout(function() {
+                                        $('.category-alert').fadeOut('fast');
+                                    }, 4000);
+                                }
+                            });
+                        }
+                    }
+                });
+            });*/
 
             $('.save-category').on('click', function () {
                 var categoryName = $('#blogCategory').val();
@@ -283,7 +330,8 @@
                     $('.category-close').trigger('click');
                 }
             });
-            $("#blog-tags").tagsinput({maxChars: 50,maxTags: 10});
+
+             $("#blog-tags").tagsinput({maxChars: 50,maxTags: 10});
             /*$('#blog-tags').selectize({
                 delimiter: ',',
                 persist: false,

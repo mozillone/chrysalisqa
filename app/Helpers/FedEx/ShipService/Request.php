@@ -12,10 +12,6 @@ use App\Helpers\FedEx\AbstractRequest;
  */
 class Request extends AbstractRequest
 {
-
-    // const PRODUCTION_URL = 'https://ws.fedex.com:443/web-services/ship';
-    // const TESTING_URL = 'https://wsbeta.fedex.com:443/web-services/ship';
-    // protected static $wsdlFileName = 'ShipService_v12.wsdl';
     /**
      * WSDL Path
      *
@@ -42,6 +38,7 @@ class Request extends AbstractRequest
         } else {
             $this->_wsdlPath = realpath(dirname(__FILE__) . '/../_wsdl/ShipService_v12.wsdl');
         }
+
         $this->_soapClient = new \SoapClient($this->_wsdlPath, array('trace' => true));
     }
 
@@ -83,10 +80,7 @@ class Request extends AbstractRequest
      */
     public function getProcessShipmentReply(ComplexType\ProcessShipmentRequest $processShipmentRequest)
     {
-     //   dd($this->_soapClient->processShipment($processShipmentRequest->toArray()));
-        //return 
-        //dd($processShipmentRequest->toArray());
-        return $this->getSoapClient()->processShipment($processShipmentRequest->toArray());
+        return $this->_soapClient->processShipment($processShipmentRequest->toArray());
     }
        /**
      * Sends the CancelPendingShipmentRequest and returns the response

@@ -66,7 +66,7 @@
     });
 
   	FB.init({
-        	appId      : '1984025911869654',
+        	appId      : '1458951657516313',
           status     : true,
         	scrape     : true,
         	version    : 'v2.10',

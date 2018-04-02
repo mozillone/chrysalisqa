@@ -179,7 +179,7 @@
 									</div>
                                
 
-                             <div class="col-md-6" id="ordersShipping">
+                             <div class="col-md-6">
                                     <div class="rencemt_order_table table-responsive ship_info_rsp">
                                         <h2>Shipping Information</h2>
 
@@ -320,11 +320,5 @@
 @section('footer_scripts')
 <script src="{{ asset('/js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('/assets/admin/js/pages/order_process.js') }}"></script>
-<script type="text/javascript">
 
-    if(window.location.href.indexOf('#') != -1){
-        $('html,body').animate({scrollTop: $('#ordersShipping').offset().top}, 800);
-    }
-
-</script>
 @stop
