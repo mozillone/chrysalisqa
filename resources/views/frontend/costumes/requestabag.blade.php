@@ -21,7 +21,6 @@
 		print_r($all_details['get_details']);
 	die;*/
 ?>
-
 <form enctype="multipart/form-data" role="form" class="validation" novalidate="novalidate"  name="request_a_bag_form" id="request_a_bag_form" method="post">
 	<section class="request_bag_page">
 		<div class="container" id="process_bar_hide">
@@ -497,7 +496,6 @@
 										<p class="form-rms-input"><input type="text" name="full_name" id="full_name" value="<?php if (isset($all_details['get_details']->display_name) && !empty($all_details['get_details']->display_name)) { echo $all_details['get_details']->display_name; } ?>" tab-index="1" ></p>
 										<span id="fullname_error" style="color:red"></span>
 									</div>
-
 									<div class="form-rms costume-error">
 										<p class="form-rms-que">Address 1<span style="color: red">*</span></p>
 										<input type="hidden" class="field form-control" id="country" name="country">
@@ -562,7 +560,7 @@
 									<h4>Have you registered yet? Add your email!</h4>
 									<!-- <form> -->
 									<div class="form-rms" style="margin-bottom: 18px">
-										<p class="form-rms-que">Email Address<span style="color: red">*</span></p>
+										<p class="form-rms-que">Email Address</p>
 										<p class="form-rms-input"><input type="text" name="email_address" id="email_address" value="<?php if (isset($all_details['get_details']->email) && !empty($all_details['get_details']->email)) { echo $all_details['get_details']->email; } ?>" <?php if (isset($all_details['get_details']->email) && !empty($all_details['get_details']->email)) {  ?> readonly <?php } ?> tab-index="1" ></p>
 										<span id="email_address_error" style="color:red"></span>
 										<!-- </form> -->
@@ -638,9 +636,9 @@
 			<div class="modal fade" id="request_bag_registration" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog request_login" role="document">
 					<div class="modal-content">
-					<div class=" modal-header indi_close_icons">
-						<!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
-					</div>
+						<div class=" modal-header indi_close_icons">
+							<!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+						</div>
 					 	<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="report_item_pupup " id="loginModal">
@@ -753,7 +751,6 @@
 			function fillInAddress() {
 				// Get the place details from the autocomplete object.
 				var place = autocomplete.getPlace();
-
 				for (var component in componentForm) {
 					document.getElementById(component).value = '';
 					document.getElementById(component).disabled = false;
@@ -1013,83 +1010,83 @@
 					return str;
 				});
 				$(function() {
-    $("#phone_number").on("keyup paste", function() {
-      // Remove invalid chars from the input
-      var input = this.value.replace(/[^0-9\(\)\s\-]/g, "");
-      var inputlen = input.length;
-      // Get just the numbers in the input
-      var numbers = this.value.replace(/\D/g,'');
-      var numberslen = numbers.length;
-      // Value to store the masked input
-      var newval = "";
+				    $("#phone_number").on("keyup paste", function() {
+				      // Remove invalid chars from the input
+				      var input = this.value.replace(/[^0-9\(\)\s\-]/g, "");
+				      var inputlen = input.length;
+				      // Get just the numbers in the input
+				      var numbers = this.value.replace(/\D/g,'');
+				      var numberslen = numbers.length;
+				      // Value to store the masked input
+				      var newval = "";
 
-      // Loop through the existing numbers and apply the mask
-      for(var i=0;i<numberslen;i++){
-          if(i==0) newval="("+numbers[i];
-          else if(i==3) newval+=") "+numbers[i];
-          else if(i==6) newval+="-"+numbers[i];
-          else newval+=numbers[i];
-      }
+				      // Loop through the existing numbers and apply the mask
+				      for(var i=0;i<numberslen;i++){
+				          if(i==0) newval="("+numbers[i];
+				          else if(i==3) newval+=") "+numbers[i];
+				          else if(i==6) newval+="-"+numbers[i];
+				          else newval+=numbers[i];
+				      }
 
-      // Re-add the non-digit characters to the end of the input that the user entered and that match the mask.
-      if(inputlen>=1&&numberslen==0&&input[0]=="(") newval="(";
-      else if(inputlen>=6&&numberslen==3&&input[4]==")"&&input[5]==" ") newval+=") ";
-      else if(inputlen>=5&&numberslen==3&&input[4]==")") newval+=")";
-      else if(inputlen>=6&&numberslen==3&&input[5]==" ") newval+=" ";
-      else if(inputlen>=10&&numberslen==6&&input[9]=="-") newval+="-";
+				      // Re-add the non-digit characters to the end of the input that the user entered and that match the mask.
+				      if(inputlen>=1&&numberslen==0&&input[0]=="(") newval="(";
+				      else if(inputlen>=6&&numberslen==3&&input[4]==")"&&input[5]==" ") newval+=") ";
+				      else if(inputlen>=5&&numberslen==3&&input[4]==")") newval+=")";
+				      else if(inputlen>=6&&numberslen==3&&input[5]==" ") newval+=" ";
+				      else if(inputlen>=10&&numberslen==6&&input[9]=="-") newval+="-";
 
-      $(this).val(newval.substring(0,14));
-   });
-});
-	$('#request_a_bag_login').click(function(){
-		var loginpopup_email = $('#loginpopup_email').val();
-		var loginopup_password = $('#loginopup_password').val();
-		if($('input[name=is_payout]:checked').length<=0){
-			var is_payout = "0";		
-			}else{
-			var is_payout = "1";
-		}
-		if($('input[name=is_return]:checked').length<=0){
-			var is_return = "0";		
-			}else{
-			var is_return = "1";
-		}
-		if($('input[name=is_recycle]:checked').length<=0){
-			var is_recycle = "0";		
-			}else{
-			var is_recycle = "1";
-		}
-		var full_name = $('#full_name').val();
-		var address1  = $('#route').val();
-		var address2  = $('#address2').val();
-		var city      = $('#locality').val();
-		var state     = $('#administrative_area_level_1').val();
-		var  zipcode  = $('#postal_code').val();
-		var phone_number = $('#phone_number').val();
-		var email_address = $('#email_address').val(); 
-		var total_data    = {email: loginpopup_email,password:loginopup_password,is_payout: is_payout,full_name: full_name,address1: address1,address2:address2,city: city,state: state,zipcode: zipcode,phone_number: phone_number,is_return: is_return,is_recycle: is_recycle,email_address: email_address}
-		if (loginpopup_email != "" && loginopup_password !="") {
-			$.ajax({
-				url: "{{URL::to('/postrequestabaglogin')}}",
-				type: "POST",
-				data: total_data,
-				success: function(data){
-					if (data == "login_sucess") {
-						$('#ajax_loader').remove();
-						$('#send_my_bag_next').html("Next");
-						$('#modal-backdrop').remove();
-						$('#request_bag_signup_popup').css('display','none');
+				      $(this).val(newval.substring(0,14));
+				   });
+				});
+				$('#request_a_bag_login').click(function(){
+					var loginpopup_email = $('#loginpopup_email').val();
+					var loginopup_password = $('#loginopup_password').val();
+					if($('input[name=is_payout]:checked').length<=0){
+						var is_payout = "0";		
+						}else{
+						var is_payout = "1";
 					}
-					else if (data == "success") {
-						window.location.href = "{{URL::to('costume/successrequestbag')}}";
+					if($('input[name=is_return]:checked').length<=0){
+						var is_return = "0";		
+						}else{
+						var is_return = "1";
 					}
-					else{
-						window.location.href = "{{URL::to('/login')}}";
+					if($('input[name=is_recycle]:checked').length<=0){
+						var is_recycle = "0";		
+						}else{
+						var is_recycle = "1";
 					}
-				}
-			}); 
-		}
-	});
+					var full_name = $('#full_name').val();
+					var address1  = $('#route').val();
+					var address2  = $('#address2').val();
+					var city      = $('#locality').val();
+					var state     = $('#administrative_area_level_1').val();
+					var  zipcode  = $('#postal_code').val();
+					var phone_number = $('#phone_number').val();
+					var email_address = $('#email_address').val(); 
+					var total_data    = {email: loginpopup_email,password:loginopup_password,is_payout: is_payout,full_name: full_name,address1: address1,address2:address2,city: city,state: state,zipcode: zipcode,phone_number: phone_number,is_return: is_return,is_recycle: is_recycle,email_address: email_address}
+					if (loginpopup_email != "" && loginopup_password !="") {
+						$.ajax({
+							url: "{{URL::to('/postrequestabaglogin')}}",
+							type: "POST",
+							data: total_data,
+							success: function(data){
+								if (data == "login_sucess") {
+									$('#ajax_loader').remove();
+									$('#send_my_bag_next').html("Next");
+									$('#modal-backdrop').remove();
+									$('#request_bag_signup_popup').css('display','none');
+								}
+								else if (data == "success") {
+									window.location.href = "{{URL::to('costume/successrequestbag')}}";
+								}
+								else{
+									window.location.href = "{{URL::to('/login')}}";
+								}
+							}
+						}); 
+					}
+				});
 				//numeric condition
 				$("#postal_code").on("keyup", function(){
 					var valid = /^\d{0,10}(\.\d{0,10})?$/.test(this.value),

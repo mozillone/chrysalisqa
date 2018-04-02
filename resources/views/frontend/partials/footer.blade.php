@@ -17,10 +17,10 @@
 						</div>
 						<div class="col-md-8 col-sm-12 col-xs-12 social-img">
 							<div class="social-icons">
-								<a target="_blank" href="https://www.facebook.com/Chrysalis-Costumes-1571674966183606/"><img class="img-responsive" src="{{asset('/assets/frontend/img/fb-icon.png')}}"></a>
-								<a target="_blank" href="https://twitter.com/MaxGarweg"><img class="img-responsive" src="{{asset('/assets/frontend/img/twit-icon.png')}}"></a>
-								<a target="_blank" href="https://www.instagram.com/chrysaliscostumes/?hl=en/"><img class="img-responsive" src="{{asset('/assets/frontend/img/insta-icon.png')}}"></a>
-								<a target="_blank" href=""><img class="img-responsive" src="{{asset('/assets/frontend/img/youtube-icon.png')}}"></a>
+								<a href="https://www.facebook.com/Chrysalis-Costumes-1571674966183606/" target="_blank"><img class="img-responsive" src="{{asset('/assets/frontend/img/fb-icon.png')}}"></a>
+								<a href="https://twitter.com/MaxGarweg" target="_blank"><img class="img-responsive" src="{{asset('/assets/frontend/img/twit-icon.png')}}"></a>
+								<a href="https://www.instagram.com/chrysaliscostumes/?hl=en/" target="_blank"><img class="img-responsive" src="{{asset('/assets/frontend/img/insta-icon.png')}}"></a>
+								<a href="https://www.youtube.com/channel/UCZgeZrAV1UCoCXSWd75DNsw" target="_blank"><img class="img-responsive" src="{{asset('/assets/frontend/img/youtube-icon.png')}}"></a>
 							</div>
 						</div>
 					</div>
@@ -32,11 +32,15 @@
 		<div class="container">
 			<div class="row">
 				<div class="footer_links" id="footer-middle">
-					<div class="col-md-4 col-sm-12 co-xs-12 ft-logo">
+					<div class="col-md-4 col-sm-12 co-xs-12 ft-logo ">
 						<div class="footer_head ">
 							<img class="img-responsive" src="{{asset('/assets/frontend/img/brand.png')}}">
 							<h5>OUR MISSION <i class="fa fa-plus pull-right hidden-lg  hidden-md"></i></h5>
-							<p style="display: none;">Revolutionize the costume industry, by giving people access to more affordable, environmentally friendly costumes. More on our mission <a style="border-bottom: 1px solid #ccc" href="/pages/about-us">here</a>.</p>
+							
+							<ul class="logo_ul">
+							<p>Revolutionize the costume industry, by giving people access to more affordable, environmentally friendly costumes. More on our mission <a style="border-bottom: 1px solid #ccc" href="/pages/about-us">here</a>.</p>
+							</ul>
+						
 						</div>
 					</div>
 					<div class="col-md-4 co-sm-12 co-xs-12 quick_links">
@@ -60,19 +64,21 @@
 						<div class="footer_head ">
 							<h5><span class="hidden-lg hidden-md">THE CHRYSALIS APP</span> <i class="fa fa-plus pull-right hidden-lg  hidden-md"></i></h5>
 							<div class="row ftr-app">
+							<ul class="logo_ul">
 								<div class="col-md-6 col-xs-6 col-sm-3 col-lg-6">
 									<img class="img-responsive" src="{{asset('/assets/frontend/img/footer-mobile.png')}}">		
 								</div>
 								<div class="col-md-6 col-xs-6 col-sm-3 col-lg-6">
 									<h5>THE CHRYSALIS APP</h5>
 									<p>Browse on the Go!</p>
-									<a href="https://itunes.apple.com/in/app/the-chrysalis-app/id1270915543?mt=8" data-toggle="modal" data-target="#coming_soon">
+									<a href="https://itunes.apple.com/in/app/the-chrysalis-app/id1270915543?mt=8">
 										<img class="img-responsive" src="{{asset('/assets/frontend/img/appstore.png')}}">
 									</a>
-									<a href="#">
+										<a href="https://play.google.com/store/apps/details?id=com.chrysalis&hl=en&rdid=com.chrysalis">
 										<img class="img-responsive" src="{{asset('/assets/frontend/img/google-play.png')}}">
 									</a>
 								</div>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -436,5 +442,5 @@
 	
 
 	<script type="text/javascript">
-		
+
 	</script>	

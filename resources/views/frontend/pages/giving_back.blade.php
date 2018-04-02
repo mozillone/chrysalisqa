@@ -47,7 +47,7 @@
                                         </div>
                                         <span class="text-muted">{{ date('d F Y', strtotime($event->from_date)) }}</span>
                                         <h3 class="event-title">{{ $event->event_name }}</h3>
-                                        <p class="event-description">{{ $event->event_desc }}</p>
+                                        <p class="event-description">{!! $event->event_desc !!}</p>
                                     </div>
                                 </div>
                             </div>

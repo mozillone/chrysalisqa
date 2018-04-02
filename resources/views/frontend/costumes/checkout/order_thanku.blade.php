@@ -94,11 +94,8 @@
             margin-bottom: 0;
         }
 
-/*        .range-slider .currency-bar li {
+        .range-slider .currency-bar li {
                padding: 0 6.7%;
-        }*/
-                .range-slider .currency-bar li {
-               padding: 0 5.3%;
         }
 
         .range-slider .currency-bar li:first-child {
@@ -118,7 +115,7 @@
             min-height: 50px;
             display: block;
         }
-.range-slider span.error.crt-amount, .range-slider span.error.charity_err {
+.range-slider span.error.crt-amount {
  font-family: Proxima-Nova-semibold;
 }
         .contribution-label li:last-child {
@@ -192,16 +189,9 @@
 					<p class="thankyou-text">In the meantime, <br/>
 					<span class="thankyou-bold">Share Your Purchase!</span></p>
 					<ul class="thankyou-socio">
-    					<li><a href="javascript:void(0)" class="icon-fb" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title={{implode(',',$order_id)}} orders review&&u={{URL::to('/')}}')" title="Facebook Share"><img src="{{asset('assets/frontend/img/thnk-fb.png')}}" alt="thnk-fb" /></a></li>
-
-    					<li><a href="javascript:void(0)" class="icon-tw" onclick="genericSocialShare('http://twitter.com/share?&amp;url={{URL::to('/')}}')" title="Twitter Share"><img src="{{asset('assets/frontend/img/thnk-tw.png')}}" alt="thnk-tw" /></a></li>
-    					
-                        <!-- <li>
-                            <a class="icon-tw" href="https://plus.google.com/share?url={{url('/')}}" onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" title="Google+ Share">
-                                <img src="{{asset('assets/frontend/img/google-plus-icon.png')}}" alt="thnk-yt" />
-                            </a>
-                        </li> -->
+					<li><a href="javascript:void(0)" class="icon-fb" onclick="genericSocialShare('http://www.facebook.com/sharer.php?title={{implode(',',$order_id)}} orders review&&u={{URL::to('/')}}')" title="Facebook Share"><img src="{{asset('assets/frontend/img/thnk-fb.png')}}" alt="thnk-fb" /></a></li>
+					<li><a href="javascript:void(0)" class="icon-tw" onclick="genericSocialShare('http://twitter.com/share?&amp;url={{URL::to('/')}}')" title="Twitter Share"><img src="{{asset('assets/frontend/img/thnk-tw.png')}}" alt="thnk-tw" /></a></li>
+					<li><img src="{{asset('assets/frontend/img/thnk-yt.png')}}" alt="thnk-yt" /></li>
 					</ul>
 
 				</div>
@@ -216,7 +206,7 @@
 
 					<ul class="ct3-list">
 					@foreach($charities_list as $charities)
-                    <!-- image logic -->
+					<!-- image logic -->
                         <?php
                         if(isset($charities->image) && !empty($charities->image)){
                             $path = '/charities_images/'.$charities->image;
@@ -230,11 +220,10 @@
                         }
                         ?>
                         <!-- end image logic -->
-					<li>
-                        <img src="{{URL::asset($listingImage)}}" alt="cst3" /><p class="crt-name">{{ $charities->name }}</p><input type="radio" name="charity" id="charity1" value="{{$charities->id}}"/>
-                    </li>
+    					<li>
+                            <img src="{{URL::asset($listingImage)}}" alt="cst3" /><p class="crt-name">{{ $charities->name }}</p><input type="radio" name="charity" id="charity" value="{{$charities->id}}"/>
+                        </li>
 					@endforeach
-
 					</ul>
                     <span class="error charity_err"></span>
 					<!--  @if(!$order_donations)<p class="cst2-rms-chck"><input type="checkbox"  id="suggest_charity"  checked="checked"> I would like to suggest another charity organization</p>
@@ -244,9 +233,9 @@
 					<p class="thankyou-rms-head thankyou-text"><span>Please Specify:</span>
 					<input type="text" placeholder="Organization Name" name="suggest_charity" / ></p>
 					</div>
-                     @endif
- -->
-                    <div class="thankyou-rms">
+                     @endif -->
+
+                     <div class="thankyou-rms">
                         <p class="thankyou-rms-head thankyou-text">
                             <p>Want to suggest a favorite charity organization? <br> we will do our best to include it in the future!</p>
                             <input type="text" class="form-control" placeholder="Organization Name" name="suggested_charity" / >
@@ -308,11 +297,10 @@
                          
 				            </table>
 				        </div>
-				        @if(!$order_donations)
-                            <div style="text-align: center; margin-bottom: 50px">
-                                <span class="error crt-amount"></span>
-                                <input type="submit" value="Submit" class="thankyou-btn"/>
-				            </div>
+				        @if(!$order_donations)<div style="text-align: center; margin-bottom: 50px">
+                         <span class="error crt-amount"></span>
+                          <input type="submit" value="Submit" class="thankyou-btn"/>
+				        </div>
                        @endif
 
 				    </div>

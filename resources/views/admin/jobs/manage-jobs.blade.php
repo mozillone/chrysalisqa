@@ -143,7 +143,7 @@ var table = '';
            "type": "GET",
          },
       "searching": false,
-      "pageLength": 15,
+      "pageLength": 50,
       "bLengthChange": false,
       "order": [ 2, 'DESC'],
 
@@ -179,7 +179,7 @@ var table = '';
              "data": {jobcode:jobcode,jobtitle:jobtitle,fromdate:fromdate,todate:todate,status:status}
            },
         "searching": false,
-        "pageLength": 15,
+        "pageLength": 50,
         "bLengthChange": false,
         "order": [ 2, 'DESC'],
         "columns": [

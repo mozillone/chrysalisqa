@@ -89,6 +89,16 @@
                                     <textarea id="postDesc" name="postDesc"></textarea>
                                     <p class="error">{{ $errors->first('postDesc') }}</p> 
                                 </div>
+
+
+                                
+
+                                
+                                
+                          
+                             
+                        
+                        
                 </div>   
                 
                 
@@ -137,7 +147,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-            $("#job-create").validate(
+             $("#job-create").validate(
             {
                 ignore: [],
                 debug: false,

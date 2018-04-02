@@ -30,7 +30,7 @@
 										<div class="well">
 										 	<div class="shipping_date">
 											  @if(!empty($cart->zip_code))
-											   <span>Selling from {{$cart->city}}, <b>{{$cart->state}}</b></span>
+											   <span>Shipping from {{$cart->city}}, <b>{{$cart->state}}</b></span>
 											  @else
 											  <span>No seller address found</span>
 										   	  @endif	
@@ -49,7 +49,7 @@
 															<p><b>Item Condition:</b> {{ucwords(str_replace('_', ' ',$cart->condition))}}</p>
 															<p><b>Size:</b> {{ucfirst($cart->size)}}</p>
 															<p class="upload_id"><b>Uploaded by</b><span> {{$cart->user_name}}</p>
-															
+														
 															</div>
 														</div>
 													</div>
@@ -150,7 +150,7 @@
 <script src="{{ asset('/vendors/sweetalert/dist/sweetalert.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        if($('.cart_page_vew>. ').length >=6){
+        if($('.cart_page_vew>.well').length >=6){
             $(".cart_page_right").addClass('affix').attr('data-spy','affix');
         }else{
             $(".cart_page_right").removeClass('affix').removeAttr('data-spy','affix');

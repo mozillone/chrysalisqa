@@ -61,7 +61,7 @@
                           <option value="inactive">Inactive</option>
                         </select>
                       </td>
-                      <td><input type="text" class="form-control" datepicker ng-model="search.from_date" placeholder="Created From"></td>
+                        <td><input type="text" class="form-control" datepicker ng-model="search.from_date" placeholder="Created From"></td>
                       <td><input type="text" class="form-control" datepicker ng-model="search.date_end" placeholder="Created To"></td>
              
                       <td><button class="btn btn-primary user-list-search order-filter-btn" ng-click="seachCostumes(search)">Search</button></td>

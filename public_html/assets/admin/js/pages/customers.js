@@ -392,7 +392,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 				var cleaned = $("#cleaned").val();
 				if($('#charity_name').val() != "" && parseInt($("#donate_charity").val()) == 0 )
         		{
-        			$("#don_err").text('Select Donation Amount');
+        			$("#don_err").text('Select Donation Amount.');
         			flag = 0;
         			//return true;
         		}else{
@@ -441,6 +441,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 			return true;
 		}
 	});*/
+
 	$("#customer_edit2").validate({
         	//onfocusout: function(element) { $(element).valid(); },
 			rules: {
@@ -522,6 +523,8 @@ $('#dynamic_percent_amounts').html("$"+amount);
 				donate_charity:{
 				  	required: {
 		                depends: function(element) {
+		           //      	$("#cleanederror").text('');
+       						// $("#don_err").text('');
 		                	// if($('#charity_name').val() != "")
 	                		// {
 	                		// 	//$("#don_err").html('This field is required.');
@@ -534,6 +537,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 				charity_name:{
 				  	required: {
 		                depends: function(element) {
+		                	$("#don_err").text('');
 		                    return parseInt($('#donate_charity').val()) != 0
 		                }
 		            }
@@ -543,18 +547,23 @@ $('#dynamic_percent_amounts').html("$"+amount);
 				  	required: {
 		                depends: function(element) {
 		                    var cleaned = $("#cleaned").val();
-		                    var condition_val =  $('input[name=condition]:checked').val();
-							if(condition_val == 'good' || condition_val == 'like_new')
+		                    var condition_val =  $('input[name=costumecondition]:checked').val();
+							if(condition_val === "good" || condition_val === "like_new")
 							{
-								if(cleaned == "")
+								if(cleaned === "" || cleaned === null)
 								{
-									return $('#cleaned').val() != '';								 
+									//return $('#cleaned').val() != '';					
+									$("#cleanederror").text('This field is required.');	
+									flag = 0;
+									return;	 
 								}
+							}else{
+								$("#cleanederror").text('');
 							}
 		                }
 		            }
-				},*/
-
+				},
+*/
  
 				cosplay:{
 					required: true,
@@ -621,8 +630,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 		                    return $("input[name='make_costume']:checked").val() == 30
 		                }
 		            }
-				},
-				
+				}
 			},
 			highlight: function(element) {
           	 $(element).closest('.form-control').addClass('error');
@@ -672,53 +680,47 @@ $('#dynamic_percent_amounts').html("$"+amount);
 			errorElement: 'span',
        		errorClass: 'error',
        		submitHandler: function(form) {
-			     //form.submit();
-			     var flag = 1; 
+       				var flag = 1; 
+       			 $("#cleanederror").text('');
+       			// $("#don_err").text('');
+			     
 				if(sub_cos_counter == 0){
 					sub_cos_counter = 1;
 					flag = 1;
-					//form.submit();
 				}
 			     var condition_val =  $('input[name=costumecondition]:checked').val();
 			  
 			     var cleaned = $("#cleaned").val();
-
-			    if($('#charity_name').val() != "" && parseInt($("#donate_charity").val()) == 0 )
+				/*if(condition_val === 'good' || condition_val === 'like_new')
         		{
-        			$("#don_err").text('Donation amount cannot be 0.');
-        			return;
-        			flag = 0;
-        		}else{
-			     	$("#don_err").text('');
-			     	flag = 1;
-				}
-
-				/*if(condition_val != 'good' || condition_val != 'like_new')
-        		{
-        			 if(cleaned == "")
+        			 if(cleaned === "" || cleaned === null)
         			 {
         			 	$("#cleanederror").text('This field is required.');
         				flag = 0;
         			 }
-        		}else{
-			     	$("#cleanederror").text('');
-			     	flag = 1;
-			     	//form.submit();
-				}
+        		}*/
+        		
 
-				if(condition_val == 'brand_new')
+				/*if(condition_val === 'brand_new')
 				{
-					if(cleaned == "")
+					if(cleaned === "")
 					{
 						$("#cleanederror").text('');
 			     		flag = 1;
 					}
 				}*/
-
-
-
+				
+				if($('#charity_name').val() != "" && parseInt($("#donate_charity").val()) == 0 )
+        		{
+        			$("#don_err").text('TDonation amount cannot be 0.');
+        		    //return false;
+        			flag = 0;
+        		}
+        		//console.log(flag); return false;
 				if(flag == 1){
 					form.submit();
+				}else{
+					return false;
 				}
         	}
 		});
@@ -771,10 +773,8 @@ $('#dynamic_percent_amounts').html("$"+amount);
 		var imgPath = $(this)[0].value;
 		var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
 		var image_holder = $("#img-chan");
-		//MSN
 		//image_holder.empty();
 		$(".rmvimg").append('<span class="remove_pic" id="removeImg"><i class="fa fa-times-circle" aria-hidden="true"></i></span>');
-		//MSN
 		var size = parseFloat($("#profile_logo")[0].files[0].size / 1024).toFixed(2);
 		if (extn == "jpg" || extn == "jpeg" || extn == "png") {
 			if(size<10000)
@@ -954,8 +954,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 		$('input[type="file"]').val('');
 		$('input[name="is_removed"]').val("1");
 	  });
-	/*MSN*/
-	$(".remove_pic").on("click",function(){
+	  $(".remove_pic").on("click",function(){
         $('#img-chan').attr('src',"/img/default.png");
 		$('input[type="file"]').val('');
 		$('input[name="is_removed"]').val("1");
@@ -967,7 +966,6 @@ $('#dynamic_percent_amounts').html("$"+amount);
 		$('input[name="is_removed"]').val("1");
         $("#removeImg").remove();
     });
-    /*MSN*/
 
 });
 
@@ -993,7 +991,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
     {
         var val = $('#keywords_tag').val();
         if(val != ""){
-            var div_cont= $('#count').html().split(' ');              
+            var div_cont= $('#count').html().split(' ');
             var total =10-$(".keywords_p").length;
             if (total > 0) {
                 if (val.indexOf(',') !== -1) {
@@ -1002,42 +1000,100 @@ $('#dynamic_percent_amounts').html("$"+amount);
                     $('#count').html(total-count+ " left");
                     if (total == 1) {
                         var hashtag = '#'+segments[0];
-                        //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
-                        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p> ');
-                        $('#keywords_tag').prop('value','');    
+                        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                        $('#keywords_tag').prop('value','');
                         $('#input_'+total+'').val(hashtag);
                         $('#count').html(total-1+ " left");
                     }else{
                         $.each(segments,function(i){
                             var hashtag = '#'+segments[i];
-                            //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
-                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span></p>');                                                         
-                            $('#input_'+total+'').val(hashtag);       
+                            $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+                            $('#input_'+total+'').val(hashtag);
                             $('#keywords_tag').prop('value','');
                             total--;
                         });
                     }
                 }else{
                     var hashtag = '#'+val;
-                    //$(".extrakeywords").append('<input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
-                    $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p><input id="input_'+total+'" name="keyword_'+total+'" value="'+hashtag+'" type="hidden">');
+                    $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
                     $('#keywords_tag').prop('value','');
                     $('#input_'+total+'').val(hashtag);
-                    $('#count').html(total-1+ " left"); 
+                    $('#count').html(total-1+ " left");
                 }
             }else{
                 $('#keywords_add').hide();
-            } 
+            }
         }
     }
     
 
 
+
+
+/*$("#keywords_add").click(function(){
+
+  var val = $('#keywords_tag').val();
+	if (val != "") {
+  var div_cont= $('#count').html().split(' ');
+  var total =div_cont[0];
+  if (total > 0) {
+    if (val.indexOf(',') !== -1) { 
+      var segments = val.split(',');
+      var count=segments.length;
+      $('#count').html(total-count+ " left");
+      if (total == 1) {
+        var hashtag = '#'+segments[0];
+        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+        $('<input>').attr({
+          id:'input_'+total+'',
+            type: 'hidden',
+            name: 'keyword[]',
+            value:''+hashtag+''
+        }).appendTo('#div');
+        $('#keywords_tag').prop('value','');
+        $('#count').html(total-1+ " left");
+      }else{
+        $.each(segments,function(i){
+        var hashtag = '#'+segments[i];
+        $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+        $('<input>').attr({
+          id:'input_'+total+'',
+            type: 'hidden',
+            name: 'keyword[]',
+            value:''+hashtag+''
+        }).appendTo('#div');
+        $('#keywords_tag').prop('value','');
+        total--;
+        });
+      }
+    }else{
+      var hashtag = '#'+val;
+      $('#div').append('<p class="keywords_p p_'+total+'">'+hashtag+' <span id="remove_'+total+'">X</span> </p>');
+      $('<input>').attr({
+        id:'input_'+total+'',
+          type: 'hidden',
+          name: 'keyword[]',
+          value:''+hashtag+''
+      }).appendTo('#div');
+      $('#keywords_tag').prop('value','');
+      $('#count').html(total-1+ " left");
+    }
+  }else{
+    $('#keywords_add').hide();
+  }
+	}
+  });*/
+
+
+
+
+
   $(document).on('click', '[id^="remove_"]', function(e){
-  	e.preventDefault();
+    e.preventDefault();
     var this_id = $(this).attr('id');
     var split   = this_id.split('_');
     var target = $(e.target).closest( ".p_"+split[1]+"" ).remove();
+
     var target = $("#input_"+split[1]+"").remove();
     var div_cont= $('#count').html().split(' ');
     var total = div_cont[0];
@@ -1046,5 +1102,3 @@ $('#dynamic_percent_amounts').html("$"+amount);
       $('#keywords_add').show();
     }
   });
-
- 

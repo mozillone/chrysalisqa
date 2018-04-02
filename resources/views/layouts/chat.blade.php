@@ -4,6 +4,15 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		{!! Meta::tag('title') !!}
+        {!! Meta::tag('description') !!}
+        <!-- Added by Gayatri -->
+        {!! Meta::tag('url') !!}
+        {!! Meta::tag('image') !!}
+		<meta property="og:image:width" content="100">
+		<meta property="og:image:height" content="100">
+		<link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+		<!-- End  -->
 		<link rel="stylesheet" href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/frontend/css/chrysalis.css')}}">
 		<link href="{{asset('assets/frontend/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -39,7 +48,7 @@
 				<div class="col-md-10 col-xs-12">
 					<div class="chat conversation-chat">
 						<div class="chat-header clearfix">
-							<?php //echo"<pre>"; print_r($get_con); exit; ?>
+							<?php //echo $user;die; ?>
 							<div class="chat-about">
 								<h4>{{@$get_con->subject}}</h4>
 								@if(isset($user))
@@ -111,9 +120,9 @@
             alert(data.sender.name + " - '" + data.message + "'");
 		}
         var msgshow = function(data) {
-            var html = '<hr><li id="message-' + data.id + '">' +
+            var html = '<li id="message-' + data.id + '">' +
 			'<div class="message-data row">' +
-			'<div class="col-md-3 col-sm-4 col-xs-12">' +
+			'<div class="col-md-3 col-sm-3 col-xs-12">' +
 			'<span class="message-data-name" >' +
 			'@if(!empty('+ Auth::user()->user_img +')) '+
 			'<img src="{{asset("profile_img/resize")}}<?php echo "/".'+ Auth::user()->user_img +' ?>"> ' +
@@ -122,7 +131,7 @@
 			'</span>' +
 			'<span class="message-data-name user-name1111" >'+ data.sender.display_name +'</span>' +
 			'</div>' +
-			'<div class="col-md-7 col-sm-6 col-xs-12">' +
+			'<div class="col-md-7 col-sm-7 col-xs-12">' +
 			'<div class="message other-message">' +
 			'' + data.message +'' +
 			'</div>' +
@@ -131,7 +140,7 @@
 			'<span class="message-data-time" >1 Second ago</span> &nbsp; &nbsp;' +
 			'</div>' +
 			'</div> ' +       
-			'</li><hr>';
+			'</li>';
             $('#talkMessages').append(html);
 		}
         $('#sent_sidebar').click(function(){

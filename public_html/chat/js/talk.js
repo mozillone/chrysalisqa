@@ -15,7 +15,7 @@ $(document).ready(function () {
             $('textarea#message-data').css('border','');    
             var url, request, tag, data;
             $('#talkSendMessage').append('<div class="modal-backdrop fade in"></div>');
-            
+
             tag = $(this);
             url = __baseUrl + '/ajax/message/send';
             data = tag.serialize();
@@ -34,12 +34,10 @@ $(document).ready(function () {
                     //location.reload();
                 }
             });
-        }
-        else{
+        }else{
             $('textarea#message-data').css('border','1px solid red');
             str=false;
         }
-
     });
 
 

@@ -1,6 +1,6 @@
 $(function(){
 
-    $(document).on('change','#price', function(){
+   $(document).on('change','#price', function(){
         var number = $('#price').val(); 
         if(number.indexOf('.') == "-1"){
             $(this).val($(this).val()+".00");
@@ -42,6 +42,11 @@ $(function(){
             $('#file2_error').html('Upload Back');
             str = false;
         }
+        /*if(file3==''){
+         $('input[name=file3]').css('border','1px solid red');
+         $('#file3_error').html('Upload Detail/Accessories');
+         str=false;
+         }*/
         if (str == true) {
             $('#step2').addClass('active');
             $('#upload_div').css('display', 'none');
@@ -83,6 +88,7 @@ $(function(){
         //$('input[name=file1_name]').val('');
         //$('input[name=Imagecrop1]').val('');
     });
+
 
     $('#shipping').change(function() {
         if ($(this).val() == 16) {
@@ -184,23 +190,24 @@ $(function(){
     $('#30').click(function() {
         $('#mention_hours').css('display', 'block');
         $('#mention_hours_input').css('display', 'block');
+        //$("#freqently").show();
     });
     $('#33').click(function() {
         $('#film_text').css('display', 'none');
         $('#film_text_input').css('display', 'none');
         $('#film_text_input').val('');
-
+         //$("#freqently").hide();
     });
     $('#32').click(function() {
         $('#film_text').css('display', 'block');
         $('#film_text_input').css('display', 'block');
-
+        //$("#freqently").show();
     });
     $('#31').click(function() {
         $('#mention_hours').css('display', 'none');
         $('#mention_hours_input').css('display', 'none');
         $('#mention_hours_input').val('');
-
+         //$("#freqently").hide();
     });
 
     $('#another_charity').click(function() {
@@ -230,7 +237,7 @@ $(function(){
         }
     });
 
-    $(".freqently").hide();
+   
 
     $('#costume_description_next').click(function(a) {
 
@@ -274,6 +281,10 @@ $(function(){
                  str = false;
             }           
         }*/
+       
+
+        //var activity = "";
+        //var cosplay = "";
         var uniquefashion = "";
         if(size == 'custom'){
             if(heightft == ""){
@@ -286,22 +297,27 @@ $(function(){
                 $('#heighterror').html('This field is required.');
                 str = false;
             }
+
             if(weightlbs == ""){
                 $('#weight-lbs').css('border', '1px solid red');
                 $('#weighterror').html('This field is required.');
                 str = false;
             }
+
             if(chestin == ""){
                 $('#chest-in').css('border', '1px solid red');
                 $('#chesterror').html('This field is required.');
                 str = false;
             }
+
             if(waistlbs == ""){
                 $('#waist-lbs').css('border', '1px solid red');
                 $('#waisterror').html('This field is required.');
                 str = false;
             }
         }
+        
+      
        /* if(category == 68){
             if($('input[name="fimquality"]:checked').next().html() == 'No'){
                 $('#qualityerror').html('The Film Production category is limited to costumes that have been used on Film and Television sets.');
@@ -325,24 +341,30 @@ $(function(){
             $('#categoryerror').html('This field is required.');
             str = false;
         }
+
         if ($('input[name=gender]:checked').length <= 0) {
             $('#gendererror').html('This field is required.');
             str = false;
+
         }
+
         if ($('input[name=gender]:checked').val() == null || $('input[name=gender]:checked').val() == '') {
             $('#gendererror').html('This field is required.');
             str = false;
+
         }        
         if (size == '') {
             $('#size').css('border', '1px solid red');
             $('#sizeerror').html('This field is required.');
             str = false;
-        }
+        } 
+        
         if (description == "") {
             $('#description').css('border', '1px solid red');
             $('#descriptionerror').html('This field is required.');
             str = false;
         }
+ 
         if ($('input[name=condition]:checked').length <= 0) {
             $('#costumeconditionerror').html('This field is required.');
             str = false;
@@ -356,7 +378,9 @@ $(function(){
         if ($('input[name=make_costume]:checked').length <= 0) {
             $('#usercostumeerror').html('This field is required.');
             str = false;
+
         }
+
         /*if ($('input[name=fimquality]:checked').val() == 32) {
             if ($('input[name=film_name]').val() == "") {
                 $('#qualityerror').html('This field is required.');
@@ -364,13 +388,14 @@ $(function(){
                 str = false;
             }
         }*/
+
         if ($('input[name=make_costume]:checked').val() == 30) {
             if ($('input[name=make_costume_time1]').val() == "") {
-                $('#usercostumeerror').html('This field is required.');
-                $(".freqently").show();
+                $('#usercostumeerror').html('This field is required.');                 
                 str = false;
             }
-        }     
+        }
+     
         if (str == true) {
             $('#step3').addClass('active');
             $('#upload_div').css('display', 'none');
@@ -384,6 +409,9 @@ $(function(){
         $(window).scrollTop(scrollPos);
         return str;
     });
+
+   
+    
     $('#costume_description_back').click(function() {
         $('#step2').removeClass('active');
         $('#upload_div').css('display', 'block');
@@ -391,6 +419,7 @@ $(function(){
         $('#pricing_div').css('display', 'none');
         $('#preferences_div').css('display', 'none');
     });
+
     //front view image adding code here
     $(document).on("change", "#file1", function() {
 
@@ -403,14 +432,12 @@ $(function(){
             if (typeof (FileReader) != "undefined") {
                 var dvPreview = $("#dvPreview");
                 dvPreview.html("");
-                //alert(this.files.length);
-                //$($(this)[0].files).each(function (index, element ) {
+                 //$($(this)[0].files).each(function (index, element ) {
                     
                     
                     var file = this.files[0];
                     var reader = new FileReader();
                     reader.onload = function (e) {
-                        //$("#dvPreview div.item").cropper("destroy");
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
@@ -420,7 +447,6 @@ $(function(){
                         var $image = $('#dvPreview div.item img');
                         var total = $image.length;
                         $('#dvPreview div.item:first-child').addClass('active');
-                        //$image.cropper();
                         setTimeout(function(){
                             $image.cropper({
                                 movable: true,
@@ -453,22 +479,23 @@ $(function(){
                                 imageSmoothingEnabled: false,
                                 imageSmoothingQuality: 'high',
                             });
-
                         }, 1000);
+
                         $("img").mousedown(function(){
                             return false;
                         });
-   
                         $(document).on("input", "#zoom-level", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+
                         $(document).on("change", "#zoom-level", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+
                         $(document).on("click", "#crop", function() {
                             
                             $("#front_view > .up-blog").find("img").remove();
@@ -491,6 +518,7 @@ $(function(){
                             $(this).parents().find("#front_view").children("#drag_n_drop_1").removeClass('hide');
                             
                         });
+
                     }
                     reader.readAsDataURL(file);
                 //});
@@ -504,7 +532,7 @@ $(function(){
 
     //second file image code starts here
     $(document).on("change", "#file2", function() {
-         $("#zoom-level2").val('');
+        $("#zoom-level2").val('');
         $(".modal-footer").show();
         var imgVal = $(this).val();
         if (imgVal != "") {
@@ -512,15 +540,13 @@ $(function(){
             if (typeof (FileReader) != "undefined") {
                 var dvPreview = $("#dvPreview2");
                 dvPreview.html("");
-                //$($(this)[0].files).each(function (index, element ) {
+                 //$($(this)[0].files).each(function (index, element ) {
                     var file = this.files[0];
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         var carouselItems = $("<div class='item'></div>");
                         var img = $("<img />");
                         //multiple images code start here
-                        //var image = img.attr("src", e.target.result);
-                        
                         var image = img.attr("src", e.target.result);
                         carouselItems.append(image);
                         dvPreview.append(carouselItems);
@@ -565,6 +591,7 @@ $(function(){
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+
                         $(document).on("change", "#zoom-level2", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
@@ -604,7 +631,7 @@ $(function(){
     //additional file uoploading functionality
 
     $(document).on("change", "#file3", function() {
-         $("#zoom-level3").val('');
+         $("#zoom-level3").val(''); 
         $(".modal-footer").show();
         var imgVal = $(this).val();
         if (imgVal != "") {
@@ -663,11 +690,13 @@ $(function(){
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+
                         $(document).on("change", "#zoom-level3", function() {
                             $image.cropper('zoomTo', 0.1);
                             var current_zoom = $(this).val();
                             $image.cropper('zoom', current_zoom);
                         });
+
                         $(document).on("click", "#crop3", function() {
                             $("#details_view > .up-blog").find("img").remove();
                             if($image.cropper('getCroppedCanvas')==null){
@@ -726,6 +755,7 @@ $(function(){
         $("#upload-file-selector").val('');
         $("#dvPreviewMultiple").html('');
     });
+
 
     //category code
 
@@ -851,7 +881,29 @@ $(function(){
             str = false;
         }
        
-         
+        /*if (donate_charity != "" && donate_charity != 0) {
+            $('#charity_nameerror').html('Please select any Charity.');
+            str = false;
+            if (charity_name == true) {
+                $('#charity_nameerror').html('');
+                str = true;
+            };
+        }
+
+        if (charity_name == true) {
+            if (donate_charity == "" || donate_charity == 0) {
+                //$('#donate_charity').css('border', '1px solid red');
+                $('#donate_charityerror').html('Select Donate Amount');
+                $('#charity_nameerror').html('');
+                str = false;
+            }
+        }*/
+        /*if($('input[name=charity_name]:checked').length<=0){
+         $('#charity_name').css('border','1px solid red');
+         $('#charity_nameerror').html('Select Donate to');
+         str=false;
+
+         }*/
         if (atLeastOneIsChecked == true) {
             $('#organzation_name').css('border', '1px solid red');
             $('#organzation_nameerror').html('This field is required.');
@@ -869,9 +921,7 @@ $(function(){
         if (str == true) {
             loading = true;
             $('#preferences_finished').html("Submitting");
-
             $('#ajax_loader').css('display', 'block');
-          
             $.ajax({
                 url: "/costume/costumecreate",
                 type: "POST",
@@ -881,7 +931,7 @@ $(function(){
                 processData: false,
                 dataType: 'json',
                 success: function(response) {
-          
+                    //console.log(response.cat_url);
                     if (response.msg == "success") {
                         $('#ajax_loader').remove();
                         $("#costume_view_my_listing").attr("href", response.cat_url);
@@ -900,7 +950,7 @@ $(function(){
                         if(response.amount == 0.00){
                             $("#amount_charity").css({'visibility':'hidden'});  
                         }else{
-                            $("#amount").text('$'+response.amount);
+                            $("#amount").text(response.amount+"%");
                             $("#charity_center").text(response.charity_center);  
                             
                         }
@@ -1046,7 +1096,7 @@ $(function(){
     //multiple file uploading code
 
     $("#upload-file-selector").on("change",function () {
-        slider.val('');
+
         var imgVal = $(this).val();
         if (imgVal != "") {
             $('#lightbox').modal('show');
@@ -1060,7 +1110,6 @@ $(function(){
                     $(".modal-footer").show();
                 }
                 $($(this)[0].files).each(function (index, element) {
-
                     var file = $(this);
                     var reader = new FileReader();
                     reader.onload = function (e) {
@@ -1127,10 +1176,9 @@ $(function(){
                                 fillColor: '#fff',
                                 imageSmoothingEnabled: false,
                                 imageSmoothingQuality: 'high',
-                                 minWidth: 220,
-                                 minHeight: 298,
+                                minWidth: 220,
+                                minHeight: 298,
                             });
-
                             $cropper_objs.push($image);
                             zooms.push(-100);
                         }, 1000);
@@ -1152,6 +1200,7 @@ $(function(){
         zooms[activeCropperObjIndex] = current_zoom;
         $cropper_objs[activeCropperObjIndex].cropper('zoom', current_zoom);
     });
+
     $(document).on("change", ".slider", function () {
         $cropper_objs[activeCropperObjIndex].cropper('zoomTo', 0.1);
         var current_zoom = $(this).val();
@@ -1197,13 +1246,13 @@ $(function(){
         activeCropperObjIndex = 0;
         $(".modal-footer").hide();
     }
-    
     $(document).on("click",".img_clse",function()
     {
        $(this).parents().find('#dvPreview').children('.item.active').remove(); 
        $("#"+$(this).attr("file-id")).val("");
 
     });
-    
+
+
 });
- 
+
