@@ -1544,7 +1544,7 @@
 											<h2 class="prog-head">Review Your Preferences</h2>
 											<div class="col-md-12 col-sm-12 col-xs-12">
 												<p class="prog-txt hidden-md hidden-lg hidden-sm ">You're almost done! Just a few more questions.</p>
-												<!-- @if(!$costume_details->is_app) -->
+												@if(!$is_app)
 													<div class="form-rms">
 														<div class="col-md-4 col-sm-4 col-xs-12 pdlft0">
 															<p class="form-rms-que">Handling Time *<i class="fa fa-info-circle fa-info-rm" aria-hidden="true"></i></p>
@@ -1579,10 +1579,10 @@
 															<span id="returnpolicyerror" style="color:red"></span>
 														</div>
 													</div>
-												<!-- @else
+												@else
 													<input type="hidden" name="handlingtime" id="handlingtime" value="{{$db_handlingtime->attribute_option_value_id}}">
 													<input type="hidden" name="returnpolicy" value="{{$db_return->attribute_option_value_id}}">
-												@endif -->
+												@endif
 												<?php //echo $costume_details->dynamic_percent; die;?>
 												<div class=" charity_rigt">
 													<div class="form-rms lst-stp donate_div">
@@ -2084,4 +2084,4 @@
 									<style>
 								#dynamic_percent_amounts {    margin-top: 17px;    margin-left: 16px !important;    background-color: white;    display: inline-block;}
 									</style>
-									@stop																																																		
+									@stop																																																	

@@ -44,11 +44,8 @@ class DashboardController extends Controller {
 			$this->data['default_shipping_address'] = DB::table('address_master')->where('user_id',Auth::user()->id)->where('address_type','shipping')->get();
 			$this->data['states']   = Site_model::Fetch_all_data('states', '*');
     $this->data['countries']   = Site_model::Fetch_all_data('countries', '*');
-    
-    $this->data['recent_orders'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status, ost.track_no as label,ost.carrier_type as carrier_type, (select count(ostt.order_id) from cc_order_ship_track as ostt where ostt.order_id = ord.order_id) as order_cnt FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id  LEFT JOIN cc_order_ship_track as ost on ord.order_id=ost.order_id where ord.buyer_id='.Auth::user()->id.' group by ord.order_id ORDER BY `order_id` DESC LIMIt 0,5');
-    
-    $this->data['costumes_sold'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status, ost.track_no as label,ost.carrier_type as carrier_type, (select count(ostt.order_id) from cc_order_ship_track as ostt where ostt.order_id = ord.order_id) as order_cnt FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id LEFT JOIN cc_order_ship_track as ost on ord.order_id=ost.order_id where ord.seller_id='.Auth::user()->id.' group by ord.order_id ORDER BY ord.order_id DESC LIMIt 0,5');
-
+    $this->data['recent_orders'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(seller.first_name," ",seller.last_name) as seller_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as seller on seller.id=ord.seller_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id   where ord.buyer_id='.Auth::user()->id.' ORDER BY `order_id` DESC LIMIt 0,5');
+    $this->data['costumes_sold'] = DB::Select('SELECT ord.created_at as date,ord.order_id,concat(buyer.first_name," ",buyer.last_name) as buyer_name,sts.name as status FROM `cc_order` as ord LEFT JOIN cc_users as buyer on buyer.id=ord.buyer_id LEFT JOIN cc_status as sts on sts.status_id=ord.order_status_id where ord.seller_id='.Auth::user()->id.' ORDER BY ord.order_id DESC LIMIt 0,5');
     $this->data['creditcard_list'] = DB::table('creditcard')->where('user_id',Auth::user()->id)->get();
     $this->data['my_costumes'] = DB::table('costumes')->where('created_by',Auth::user()->id)
     ->leftJoin('costume_description','costumes.costume_id','costume_description.costume_id')
@@ -70,7 +67,9 @@ class DashboardController extends Controller {
 	public function  EditProfile(Request $request)
   {
 	
-       $req=$request->all();
+    $req=$request->all();
+  
+//echo "<pre>";print_r($req);die;
         if(count($req)){
         $name = User::find(Auth::user()->id);
         if(isset($req['avatar'])){
@@ -142,9 +141,8 @@ return Redirect::back();
 
 }
 public function creditcradAdd(Request $req){
-    
   $result=Creditcard::addCreditCardDashboard($req,Auth::user()->id);
- 
+  //echo "<pre>";print_r($result);die;
   if ($result['result'] == 0) {
     Session::flash('error', $result['message']);
   }else{

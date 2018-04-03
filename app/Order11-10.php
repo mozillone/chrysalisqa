@@ -19,7 +19,6 @@ use App\Helpers\StripeApp;
 use Exception;
 use Redirect;
 use Mail;
-use Log;
 
 class Order extends Authenticatable
 {
@@ -45,8 +44,7 @@ class Order extends Authenticatable
         if(!$coupan_code){
           $data=Cart::getCartProducts();
         }else{
-          $res=Promotions::verifyCoupanCode($coupan_code);
-          $data=Cart::getCartProductswithCoupan($coupan_code, $res[0]->coupon_id);
+          $data=Cart::getCartProductswithCoupan($coupan_code);
         }
          foreach($data['basic'] as $cart){
          if(array_key_exists($cart->created_by,$req['shipping_type'])){
@@ -83,9 +81,9 @@ class Order extends Authenticatable
               $cart_id=$costumer[0]->cart_id;
               $store_credits=$costumer[0]->store_credits;
              
-              Log::info($req['shipping_type'][$key]);
+            
               $shipping=explode("_",$req['shipping_type'][$key]);
-              Log::info($shipping);
+
                $cart_info=Cart::cartMetaInfo($cart_id);
                if(!empty($cart_info[0]->shipping_address_2)){
                    $shipping_address=$cart_info;
@@ -154,14 +152,13 @@ class Order extends Authenticatable
                                  'created_at'=>date('Y-m-d h:i:s'),
                                 );
                  $order_id=Site_model::insert_get_id('order',$order_info);
-                 //$this->converstionTheard($order_id,$key);
+                 $this->converstionTheard($order_id,$key);
                  $this->orderStatusInserted($order_id,Config::get('constants.Processing'));
                  $price=0;
                  $total_shiping=0;
                  $subtotal=0;
                  $coupon_amount="0.00";
                //  echo "********************************************<br>";
-               $j = 0;
                  foreach($costumer as $cart){
                  $user_type=$cart->created_user_group;
                  if($user_type=="admin"){
@@ -191,27 +188,15 @@ class Order extends Authenticatable
                                  'order_id'=> $order_id, 
                                  'qty'=> $cart->qty, 
                                  'weight'=> $cart->weight, 
-                                 'image'=>$cart->image
+                                 'image'=>$cart->image,
+                                 'shipping'=>$shipping[2]
                         );
-
-                      /* Added by Gayatri */
-                      Log::info(json_encode($shipping[2]));
-                      $shiping_est = explode(',', $shipping[2]);
-                      if(count($shiping_est)>0){
-                        for ($i=0; $i < count($shiping_est); $i++) { 
-                          $mail_costumes['shipping'] = $shiping_est[$j];
-                        }  
-                      }else{
-                        $mail_costumes['shipping']=$shipping[2];
-                      }
-
-                      /* END */
                        Site_model::insert_get_id('order_items',$costume_info);
                        DB::Update('update `cc_costumes` SET quantity=quantity-'.$cart->qty.' WHERE costume_id='.$cart->costume_id.'');
                       $subtotal+=$cart->price*$cart->qty;
 
                      $mail_order[$order_id]['items'][]= $mail_costumes;
-                     $j++;
+
                      
                  }
                  // echo "********************************************";    
@@ -243,7 +228,7 @@ class Order extends Authenticatable
                               'value'=>$subtotal,
                               'sort_order'=>"0",
                       );
-                $order_data=['amount' => number_format($amount,2),
+                $order_data=['amount' => number_format($amount,1),
                       'paymentMethodNonce' => "fake-valid-nonce",
                       'customerId' =>  $api_customer_id,
                       'options' => [
@@ -258,7 +243,7 @@ class Order extends Authenticatable
                 $order_info=$this->stripe->charge_capture($api_amount,$api_currency,$api_customer_id,$api_card_id,$api_desc,$capture);
                 $this->insertTransaction($order_info,$order_id,$cart->cc_id);
                 Site_model::insert_get_id('order_total',$order_subtotal);
-                $this->sellerPayout($api_amount,$order_id,$key);
+                $this->sellerPayout($api_amount,$order_id);
 
                 if($store_credits!="0.00"){
                 $order_storecredits=array('order_id'=>$order_id,
@@ -273,7 +258,7 @@ class Order extends Authenticatable
                 if($coupon_amount!="0.00"){
                 $order_coupon=array('order_id'=>$order_id,
                               'code'=>"sub",
-                              'title'=>"Discount Amount",
+                              'title'=>"Coupon code",
                               'value'=>$coupon_amount,
                               'sort_order'=>"3",
                       );
@@ -367,23 +352,19 @@ class Order extends Authenticatable
        return true;
     }
     private function converstionTheard($order_id,$seller_id){
-       /*Message To Seller From Admin Start Here*/
-      $converstion_array = array('type'=>'order','user_one'=>'1',
+      $converstion_array = array('type'=>'order','user_one'=>Auth::user()->id,
         'user_two'=>$seller_id,
-        'subject' =>'Your Costume has been ordered.',
-        'type_id' => $order_id,
         'status'=>'1',
         'created_at'=>date('Y-m-d h:i:s'));
       $converstion_id = Site_model::insert_get_id('conversations',$converstion_array);
-      $message_array  = array('message'=>'We have received an order for your costume.',
+      $message_array  = array('message'=>'Hi',
         'is_seen'=>'0',
         'deleted_from_sender'=>'0',
         'deleted_from_receiver'=>'0',
-        'user_id'=> "1",
-        'user_name'=> \App\User::find(1)->pluck("display_name")->first(),
-        'conversation_id'=>$converstion_id,'created_at'=>date('Y-m-d h:i:s'));
+        'user_id'=>Auth::user()->id,
+        'user_name'=>Auth::user()->display_name,
+        'conversation_id'=>$converstion_id);
       $converstion_id = Site_model::insert_get_id('messages',$message_array);
-      /*Message To Seller From Admin Ends Here*/
 
       return true;
     }
@@ -396,28 +377,27 @@ class Order extends Authenticatable
       }
     }
     protected function getCharitiesList(){
-       $charities_list=DB::Select('SELECT * FROM cc_charities where status = "1" order by id desc LIMIT 0,5');
+       $charities_list=DB::Select('SELECT * FROM cc_charities order by id desc LIMIT 0,5');
        return $charities_list;
     }
     protected function orderCharityFund($req){
-     if(isset($req['suggested_charity']) && !empty($req['suggested_charity'])){
-         $result = array('name'=>$req['suggested_charity'],
+     if(isset($req['suggest_charity']) && !isset($req['charity'])){
+         $result=array('name'=>$req['suggest_charity'],
                         'suggested_by'=>Auth::user()->id,
-                        'status'=>'0',
                         'created_at'=>date('Y-m-d h:i:s')
                         );
-         $charity_id = Site_model::insert_get_id('charities',$result);
+         $charity_id=Site_model::insert_get_id('charities',$result);
       }else{
-        $charity_id = $req['charity'];
+       $charity_id=$req['charity'];
       }
-      $result = array('order_id' => $req['order_id'],
-                    'user_id' => Auth::user()->id,
-                    'charity_id' => $req['charity'],
-                    'amount' => $req['amount'],
-                    'created_at' => date('Y-m-d h:i:s')
+      $result=array('order_id'=>$req['order_id'],
+                    'user_id'=>Auth::user()->id,
+                    'charity_id'=>$charity_id,
+                    'amount'=>$req['amount'],
+                    'created_at'=>date('Y-m-d h:i:s')
                       );
        Site_model::insert_get_id('order_charity',$result);
-       $carity_info = Charities::getCharityInfo($req['charity']);
+       $carity_info=Charities::getCharityInfo($charity_id);
        return  $carity_info;
     }
     private function  insertTransaction($data,$order_id,$cc_id){
@@ -652,15 +632,15 @@ protected function orderHistory($order_id,$order_status_id,$notify,$comment){
                       );
       Site_model::insert_get_id('order_history',$history);
 }
-private function sellerPayout($amount,$order_id,$key){
+private function sellerPayout($amount,$order_id){
     $amt=($amount * (99.25/100)) - 0.20;
-    $seller_payout = array('type'=>"order",
-                    'type_id'=>$order_id,
-                    'user_id'=>$key,
-                    'amount'=>$amt,
-                    'status'=>"not_paid",
-                    'created_at'=>date('Y-m-d h:i:s')
-                    );
+    $seller_payout=array('type'=>"order",
+                   'type_id'=>$order_id,
+                   'user_id'=>Auth::user()->id,
+                   'amount'=>$amt,
+                   'status'=>"not_paid",
+                   'created_at'=>date('Y-m-d h:i:s')
+                      );
     Site_model::insert_get_id('paypal_payouts',$seller_payout);
 }
 }

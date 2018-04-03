@@ -1,5 +1,5 @@
 <?php
-
+//dd( Auth::user() );
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,10 +11,6 @@
 |
 */
 //Auth::routes();
-//Route::get('costume/redirect/{id}','');
-Route::get("/no-access",function(){
-	return view("errors.404");
-});
 Route::any('costume/redirect/{id}', 'CreateCostumeController@redirectToCharity');
 
 Route::get('sitemap',['as' => 'sitemaps.posts','uses'=> 'SitemapsController@index']);
@@ -56,15 +52,13 @@ Route::get('/test', ['as' => '','uses'=>'DashboardController@Test']);
 Route::post('/test', ['as' => 'test','uses'=>'DashboardController@PostTest']);
 
 /** Products list page start here **/
-Route::get('/category/{slug1}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');
-Route::post('/category/{slug1}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');
-Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesController@costumeListings'))->where('name', '[A-Za-z]+');
-
-Route::any('/Filterscategory/{slug1}','CostumesController@searchFilters');
-
+Route::get('/category/{slug1}', array('as' => '','uses' => 'CostumesController@categoryCostumeListings'))->where('name', '[A-Za-z]+');;
+Route::get('/category/{slug1}/{slug2}', array('as' => '','uses' => 'CostumesController@costumeListings'))->where('name', '[A-Za-z]+');;
 Route::any('/product/{slug1?}/{slug2?}/{slug3?}', array('as' => '','uses' => 'CostumesController@costumeSingleView'));
 Route::any('/getCostumesData', array('as' => '','uses' => 'CostumesController@getCostumesData'));
 Route::any('inquire-costume', array('as' => 'inquire-costume','uses' => 'CostumesController@inquireCostume'));
+Route::any('/Filterscategory/{slug1}','CostumesController@searchFilters');
+
 /** Products list page end here **/
 
 Route::any('/costume-report', array('as' => 'report.post','uses' => 'CostumesController@costumeReport'));
@@ -105,9 +99,8 @@ Route::any('/get/billing-adress', array('as' => 'billing_address.post','uses' =>
 
 
 /** Costume Like page start here **/
-/*Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));*/
+//Route::any('/costume/like', array('as' => '','uses' => 'CostumesController@costumeLike'));
 Route::get('/costume/like/{id}', 'CostumesController@costumeLike');
-
 /** Costume Like page end here **/
 /****costume create page 2 routes starts here***/
 Route::any('/costume/sell-a-costume', array('as' => '','uses' => 'CmsController@viewSellACostume'));
@@ -134,11 +127,8 @@ Route::post('/postrequestabaglogin', ['as' => 'requestabaglogin.post','uses'=>'A
 
 /** Costume Like page start here **/
 //Route::any('/costume/favourite', array('as' => '','uses' => 'CostumesController@costumeFavourite'));
-/** Costume Like page end here **/
-
-
 Route::get('/costume/favourite/{id}', 'CostumesController@costumeFavourite');
-
+/** Costume Like page end here **/
 
 Route::get('/wishlist', ['as' => 'wishlist','uses'=>'WishlistCostumesController@myWishlistList']);
 Route::get('/remove/wishlist/{costume_id}', ['as' => '','uses'=>'WishlistCostumesController@removeWishlistCostume']);
@@ -165,7 +155,6 @@ Route::any('/myorder-shippings/{order_id}', ['as' => '','uses'=>'OrdersControlle
 
 /**************** User Orders routes end here ******************/
 
-
 Route::any('/getAddressInfo/{address_id}', ['as' => '','uses'=>'DashboardController@getAddressData']);
 
 Route::any('/search/q', ['as' => '','uses'=>'SearchController@search']);
@@ -174,7 +163,6 @@ Route::any('/getSearchCostumesData', ['as' => '','uses'=>'SearchController@getSe
 /************************************************** Costume URL Rewrites ******************************************************/
 Route::any('/generate-url-rewrites', ['as' => 'generate-url-rewrites','uses'=>'UrlRewritesController@generateUrlRewrites']);
 Route::any('/del-rewrites', ['as' => 'del-rewrites','uses'=>'UrlRewritesController@deleteUrlRewrites']);
-Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 /******************************************************************************************************************************/
 
 
@@ -253,8 +241,6 @@ Route::get('/getpayoutstatus', 'Admin\ReportsController@getStatusChange');
 	    Route::any('/categories-list', ['as' => '','uses'=>'CategoriesController@categoriesData']);
 	    Route::any('/getCostumesList', ['as' => '','uses'=>'CategoriesController@getCostumesList']);
 	    Route::get('/delete/categorycostume/{pid}/{cid}', 'CategoriesController@deleteCategoryCostume');
-	    //Route::get('/abc', 'CategoriesController@deleteCategoryCostume');
-	    
 		/****************Categories Management Ends Here***********************/
 
 		/****************Promotions Management Starts Here*********************/
@@ -635,14 +621,15 @@ Route::any('faq-search', [
 /****************Messaging Starts Here*********************/
 
 Route::any('message/{id}', 'MessageController@chatHistory')->name('message.read');
-Route::get('conversations', ["as" => "conversations", "uses" => 'MessageController@converstationsofUser']);
-Route::get('sendbox', ["as" => "sendbox","uses" => 'MessageController@converstationsofUser']);
+Route::get('conversations', 'MessageController@converstationsofUser');
 Route::post('conversation/delete', 'MessageController@converstationsDelete');
 
 Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
    Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
    Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete');
 });
+Route::get('conversations', ["as" => "conversations", "uses" => 'MessageController@converstationsofUser']);
+Route::get('sendbox', ["as" => "sendbox","uses" => 'MessageController@converstationsofUser']);
 /****************Messaging Ends Here***********************/
 /****************Ticket Routes Code Starts Here**************/
 Route::any('contact-support', [
@@ -997,11 +984,5 @@ Route::any('getpaypal', [
     'as' => 'getpaypal',
     'uses' => 'Admin\ReportsController@getallPaypal'
 ]);
-
-Route::get('500', function()
-{
-    abort(404);
-});
-
 Route::get("GenerateExLarge",'CreateCostumeController@GenerateExLarge');
 Route::get("ReGenerateImages",'CreateCostumeController@ReGenerateImages');

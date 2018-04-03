@@ -5,7 +5,9 @@ use Sitemap;
 use App\Helpers\Site_model;
 use URL;
 use App\Helpers\StripeApp;
+use App\User;
 use DB;
+
 
 class SitemapsController extends Controller
 {
@@ -98,6 +100,8 @@ class SitemapsController extends Controller
             $currentTrack->appendChild($domtree->createElement('changefreq','daily'));
             $currentTrack->appendChild($domtree->createElement('priority','0.7'));   
         }
+
+        
 
         $domtree->save("sitemap.xml");
 

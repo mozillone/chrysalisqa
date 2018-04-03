@@ -151,21 +151,13 @@ class EventsController extends Controller
 
     public function searchByZip(Request $request){
         $zipCode = $_GET['zip'];
-        /*$eventsByZip = DB::table('events')
+        $eventsByZip = DB::table('events')
             ->leftjoin('address_master', 'events.address_id', '=', 'address_master.address_id')
             ->leftjoin('users', 'events.created_by', '=', 'users.id')
             ->where(array('events.approved'=>1,'address_master.zip_code'=>$zipCode))
             ->select('events.event_name', 'users.display_name','events.from_time', 'events.to_time','events.from_date','events.to_date','events.user_img','address_master.location_name','events.event_url','events.event_desc','events.created_at')
             ->orderBy('events.created_at', 'desc')
-            ->get();*/
-            
-             
-            $eventsByZip = DB::select('select `cc_events`.`event_name`, `cc_users`.`display_name`, `cc_events`.`from_time`, `cc_events`.`to_time`, `cc_events`.`from_date`, `cc_events`.`to_date`, `cc_events`.`user_img`, `cc_address_master`.`location_name`, `cc_events`.`event_url`, `cc_events`.`event_desc`, `cc_events`.`created_at` from `cc_events` 
-                left join `cc_address_master` on `cc_events`.`address_id` = `cc_address_master`.`address_id` 
-                left join `cc_users` on `cc_events`.`created_by` = `cc_users`.`id` 
-                where `cc_events`.`approved` = 1 and `cc_address_master`.`zip_code` in (SELECT zips.zipcode FROM (select z1.zipcode, acos( ( sin(z1.latitude * 0.017453293)*sin(z2.latitude * 0.017453293) ) + ( cos(z1.latitude * 0.017453293) * cos(z2.latitude * 0.017453293) * cos((z2.longitude*0.017453293)-(z1.longitude*0.017453293)) ) ) * 3956 as distance from cc_zipcodes z1, cc_zipcodes z2 where z2.zipcode = "'.$zipCode.'" HAVING distance < 250) as zips) 
-                order by `cc_events`.`created_at` desc');
-            //echo "<pre>";print_r($eventsByZip); exit;
+            ->get();
         return view('frontend.events.search_by_zip')->with('eventsByZip',$eventsByZip);
     }
 }

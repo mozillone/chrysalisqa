@@ -191,7 +191,8 @@ return [
         //Skovmand\Mailchimp\MailchimpServiceProvider::class,
         Eusonlito\LaravelMeta\MetaServiceProvider::class,
         //Watson\Sitemap\SitemapServiceProvider::class
-        Jenssegers\Agent\AgentServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+
        
     ],
 
@@ -252,8 +253,9 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Meta'    => Eusonlito\LaravelMeta\Facade::class,
         'Sitemap' => Watson\Sitemap\Facades\Sitemap::class,
-        'Image' => Intervention\Image\Facades\Image::class,
-        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'Image' => Intervention\Image\Facades\Image::class
+
+        
 
    ],
     /*

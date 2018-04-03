@@ -525,9 +525,9 @@ $('#handlingtime,#returnpolicy,#donate_charity,#charity_name,#organzation_name')
 $('#handlingtimeerror,#returnpolicyerror,#donate_charityerror,#charity_nameerror,#organzation_nameerror').html('');
 var handlingtime  = $('#handlingtime').val();
 var returnpolicy  = $('input[name=returnpolicy]:checked').val();
-/*if(returnpolicy == undefined){
+if(returnpolicy == undefined){
     returnpolicy = $('input[name=returnpolicy]').val();
-}*/
+}
 var donate_charity = $('#donate_charity').val();
 var atLeastOneIsChecked = $('input[name="another_charity"]:checked').length > 0;
 var charity_name = $('input[name="charity_name"]:checked').length > 0;

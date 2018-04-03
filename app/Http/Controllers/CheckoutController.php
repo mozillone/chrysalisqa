@@ -20,7 +20,7 @@ use Meta;
 use URL;
 use App\Promotions;
 use DB;
-
+use Log;
 class CheckoutController extends Controller {
 
   protected $auth;
@@ -42,7 +42,7 @@ class CheckoutController extends Controller {
     Meta::set('robots', 'index,follow');
 	}
   public function checkout(){
-    $coupan_code=Cart::verifyCoupanCode();
+     $coupan_code=Cart::verifyCoupanCode();
     if(!$coupan_code){
       $data['basic']=Cart::getCartProducts();
     }else{
@@ -60,8 +60,8 @@ class CheckoutController extends Controller {
          $costumer_costumes[$cart->user_name]['products'][]=$cart;
          $costumer_costumes[$cart->user_name]['address']=Address::getUserSellerAddress($cart->created_by); 
         
-    }
-      //echo "<pre>"; print_r($costumer_costumes); exit;
+     }
+   //  dd($costumer_costumes);
     $states   = Site_model::Fetch_all_data('states', '*');
     $countries   = Site_model::Fetch_all_data('countries', '*');
     if(count($data['basic']['basic'])){
@@ -86,14 +86,14 @@ class CheckoutController extends Controller {
     }else{
        return Redirect::to('/');
    }
-   //dd($costumer_costumes);
+//dd($costumer_costumes);
    Meta::set('title', 'Checkout');
   return view('frontend.costumes.checkout.checkout',compact('data',$data))->with('countries',$countries)->with('states',$states)->with('costumer_costumes',$costumer_costumes);
   }
   public function placeOrder(Request $request){
     //echo "string"; exit;
      $req=$request->all();
-     //dd($req);
+   //  dd($req);
      if(!isset($req['shipping_type'])){
        Session::flash('error','Shipping methods are not found');
        return Redirect::back();
@@ -273,37 +273,39 @@ class CheckoutController extends Controller {
 
     public function getEstimationDeliveryDate($costume_id, $mail_service_days)
     {
-      //$costume_id = '('.$costume_id.')';
-     // $costume_id = ['562','579'];
-      //$mail_service_days = 1;
       $costume_id = explode(',', $costume_id);
       $est_delivery_date = array();
-      $costume_handling_time = DB::table('costume_attribute_options')
+      $costume_handling_time = array();
+      for ($i=0; $i < count($costume_id); $i++) { 
+        $costume_handling_time[$i] = DB::table('costume_attribute_options')
                                 ->where('costume_attribute_options.attribute_id', '=', 14)
-                                ->whereIn('costume_attribute_options.costume_id', $costume_id)
-                                ->select('attribute_option_value')
-                                ->get();
-                                //echo "<pre>"; print_r($costume_handling_time);exit;
-      for ($i=0; $i < count($costume_handling_time) ; $i++) {
-        if($costume_handling_time[$i]->attribute_option_value == '1-2 Business Days'){
+                                ->where('costume_attribute_options.costume_id', $costume_id[$i])
+                                ->select('attribute_option_value','costume_id')
+                                ->first();
+                                
+      }
+      $i = 0; 
+        foreach ($costume_handling_time as $key => $value) {
+        if($value->attribute_option_value == '1-2 Business Days'){
           $est_date = date('D . M .d',strtotime('+2 days'));
           $add = 2;
-        }else if($costume_handling_time[$i]->attribute_option_value == '3-4 Business Days'){
+        }else if($value->attribute_option_value == '3-4 Business Days'){
           $est_date = date('D . M .d',strtotime('+4 days'));
           $add = 4;
-        }else if($costume_handling_time[$i]->attribute_option_value == '5-6 Business Days'){
+        }else if($value->attribute_option_value == '5-6 Business Days'){
           $est_date = date('D . M .d',strtotime('+6 days'));
           $add = 6;
-        }else if($costume_handling_time[$i]->attribute_option_value == '7 Business Days'){
+        }else if($value->attribute_option_value == '7 Business Days'){
           $est_date = date('D . M .d',strtotime('+7 days'));
           $add = 7;
         }else{
           $est_date = date('D . M .d');
           $add = 0;
         }
-        $est_delivery_date[$i] = 'Est. between '.$est_date.' and '.date('D . M .d',strtotime('+'.($mail_service_days+$add).' days')); 
-      }                                
-             
-      return $est_delivery_date;                        
+        $est_delivery_date['est'][$i] = 'Est. between '.$est_date.' and '.date('D . M .d',strtotime('+'.($mail_service_days+$add).' days')); 
+        $est_delivery_date['costume_id'][$i] = $costume_handling_time[$i]->costume_id;
+        $i++;
+      }  
+      return Response::JSON($est_delivery_date); 
     }
 }
