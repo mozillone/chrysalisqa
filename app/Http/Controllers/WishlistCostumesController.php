@@ -36,7 +36,8 @@ class WishlistCostumesController extends Controller {
         Meta::set('title', 'Favorites');
         Meta::set('description', 'Favorites - Chrysalis');
 
-		$data=Wishlist::myWishlistList(Auth::user()->id);
+		$data = Wishlist::myWishlistList(Auth::user()->id);
+		
 		/*foreach ($data as $key => $value) {
 			$url = url('/').'/product'.$value->url_key;
 			Costumes::facebookDebugger($url);

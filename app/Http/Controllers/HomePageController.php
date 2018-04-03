@@ -19,6 +19,7 @@ class HomePageController extends Controller {
 	public function index()
 	{
 		$insta = array();
+		
 		Meta::set('title', "Chrysalis - The Costume Enthusiast's Marketplace");
         Meta::set('description', 'Affordable, Environment Friendly Costumes. Buy and Sell Costumes online.');
 		$featured_costumes = DB::table('costumes')
@@ -38,10 +39,8 @@ class HomePageController extends Controller {
 		->groupBy('costumes.costume_id')
 		->orderBy('costumes.is_featured_date',"DESC")
 		->take(20)->get();
-		//echo "<pre>";print_r($featured_costumes);die;
-        $pageData = DB::table('cms_blocks')->where(array('cms_blocks.slug'=>'home','cms_blocks.status'=>1))->first();
 
-        /* Added by Gayatri -> Instagram feed Code */
+        $pageData = DB::table('cms_blocks')->where(array('cms_blocks.slug'=>'home','cms_blocks.status'=>1))->first();
 
         $access_token = Config::get('constants.INSTAGRAM_ACCESS_TOKEN');
 		$username = Config::get('constants.INSTAGRAM_USERNAME');
@@ -52,7 +51,7 @@ class HomePageController extends Controller {
 			$return = self::instagramApiCurlConnect("https://api.instagram.com/v1/users/" . $user_id . "/media/recent?access_token=" . $access_token);
 
 			/* Accesing Images & Links from instagram */
-			$i=0; $insta = array();
+			$i=0;
 			foreach ($return->data as $post) {
 				if($i == 0){
 					$insta[$i]['image'] = $post->images->standard_resolution->url;
@@ -73,14 +72,11 @@ class HomePageController extends Controller {
 			Log::info($e->getMessage());
 		}
 		
-		/* End */
-
         if (!empty($pageData)){
             return view('frontend.index')->with(array('featured_costumes'=>$featured_costumes,'pageData'=>$pageData, 'insta'=>$insta, 'insta_cnt' =>$insta_cnt));
         }else{
             return view('frontend.index')->with(array('featured_costumes'=>$featured_costumes));
         }
-
 	}
 
 	/**
@@ -97,5 +93,4 @@ class HomePageController extends Controller {
 		curl_close( $connection_c ); // close connection
 		return json_decode( $json_return ); // decode and return
 	}	
-	
 }

@@ -60,7 +60,6 @@ class CartController extends Controller {
                 if($cart_id){
                   $qty=Cart::verifyCostumeCartQuantity($costume_id,$cookie_id);
                   $res=Cart::verifyCostumeQuantity($costume_id,$qty);
-                  /* Added by Gayatri */
                   if((integer)$qty == (integer)$res[0]->quantity){
                     return response('out of stock');
                   }else{
@@ -69,7 +68,6 @@ class CartController extends Controller {
                     $count=Cart::getCartCount($cookie_id);
                     return response($count)->cookie($res);
                   }
-                  /* End */
                   /*if(count($res)){
                     Cart::updateCartDetails($costume_id,$cart_id,$qty+1);
                     $res=$this->updateCartDetails($costume_id,$qty+1);

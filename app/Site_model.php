@@ -36,8 +36,7 @@ use Authenticatable, CanResetPassword;
    }
    protected function insert_get_id($table,$data){
     $data_info = DB::table($table)->insertGetId($data);
-    Log::info($data_info);
-    return $data_info;
+        return $data_info;
    }
    protected function update_data($table,$data,$cond){
     $data_info = DB::table($table)->where($cond)->update($data);

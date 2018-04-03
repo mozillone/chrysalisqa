@@ -12,7 +12,7 @@
 */
 //Auth::routes();
 Route::any('costume/redirect/{id}', 'CreateCostumeController@redirectToCharity');
-
+Route::get('costume/view/{id}', 'CreateCostumeController@redirectToCategory');
 Route::get('sitemap',['as' => 'sitemaps.posts','uses'=> 'SitemapsController@index']);
 Route::get('stripeuserupdate/{email}', ['as' => 'stripe.userupdate','uses'=> 'SitemapsController@stripeUsersUpdate']);
 Route::get('update/subcategories/attributes', ['as' => 'update.subcategories.attributes','uses'=> 'SitemapsController@updateAttributesForSubcategories']);
@@ -154,6 +154,7 @@ Route::any('/myorder-transactions/{order_id}', ['as' => '','uses'=>'OrdersContro
 Route::any('/myorder-shippings/{order_id}', ['as' => '','uses'=>'OrdersController@orderShippingData']);
 
 /**************** User Orders routes end here ******************/
+
 
 Route::any('/getAddressInfo/{address_id}', ['as' => '','uses'=>'DashboardController@getAddressData']);
 

@@ -14,7 +14,7 @@ use Session;
 use DB;
 use URL;
 use Meta;
-use App\Helpers\SiteHelper; 
+use App\Helpers\SiteHelper;
 
 class MessageController extends Controller
 {
@@ -39,7 +39,7 @@ class MessageController extends Controller
       public function callPartials()
     {
          Talk::setAuthUserId(Auth::user()->id);
-
+//echo "string"; exit;
         View::composer('partials.peoplelist', function($view) {
             $threads = Talk::threads();
 
@@ -48,9 +48,7 @@ class MessageController extends Controller
     }
 
     public function chatHistory($id)
-    {   
-        Meta::set('title', 'Messages');
-        Meta::set('description', 'Messages - Chrysalis');
+    {  
         $this->callPartials();
         $conversations = Talk::getConversationsById($id);
         $user = '';
@@ -100,19 +98,19 @@ class MessageController extends Controller
     public function sendMessageByUserId($receiverId, $message)
     {
          //echo "<pre>";print_r($message);die;
+        $comments = $message['message-data'];
         $conversationId = $message['_id'];
-        $message = $message['message-data'];
+        $user_message = $message['message-data'];
         $message = array(
-            'message' => $message,
+            'message' => $user_message,
             'conversation_id' => $conversationId,
             'user_id' => Auth::user()->id,
             'user_name' => Auth::user()->display_name,
             'is_seen' => 0,
             'created_at'=>date('y-m-d H:i:s'),
         );
-
         $message = DB::table('messages')->insertGetId($message);
-         $get_details =  DB::table('messages')->where('id',$message)->first();  
+        $get_details =  DB::table('messages')->where('id',$message)->first();  
 
         return $get_details;
     }
@@ -134,7 +132,7 @@ class MessageController extends Controller
         dd(Talk::channel());
     }
 
-     public function converstationsofUser(){
+    public function converstationsofUser(){
         Meta::set('title', 'Messages');
         Meta::set('description', 'Messages - Chrysalis');
 

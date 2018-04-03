@@ -30,7 +30,7 @@ class SpecialityThemeController extends Controller {
         Meta::set('description', 'Speciality Themes');
 		$cosplaycategories=DB::table('category')
 		->select('category_id as categoryid','name as name','thumb_image as image','updated_at')
-		->wherein('category_id',array('147','66','143'))
+		->wherein('category_id',array('147','78','143'))
 		->orderBy('speciality_theme','ASC')
 		->orderBy('updated_at','DESC')
 		->get();
@@ -41,7 +41,7 @@ class SpecialityThemeController extends Controller {
 		$uniquefashion=DB::table('category')->select('category_id as categoryid','name as name','thumb_image as image')->where('category_id',143)->first();
 
 		$film_theatre=DB::table('category')
-		->select('category_id as categoryid','name as name','thumb_image as image')->where('category_id',66)->first();
+		->select('category_id as categoryid','name as name','thumb_image as image')->where('category_id',78)->first();
 
 		$cosplay_subcategories = DB::table('category')
 		->select('category.category_id as categoryid','category.name as name','category.thumb_image as image','url.type as type','url.url_offset as urloffest','url.url_key as urlkey')
@@ -65,7 +65,7 @@ class SpecialityThemeController extends Controller {
 		$filmtheatrecategories=DB::table('category')
 		->select('category.category_id as categoryid','category.name as name','category.thumb_image as image','url.type as type','url.url_offset as urloffest','url.url_key as urlkey')
 		->leftJOin('url_rewrites as url','url.url_offset','category.category_id')
-		->where('parent_id',66)
+		->where('parent_id',78)
 		->where('url.type',"=","category")
 		->where('url.id', DB::Raw('(select max(id) from cc_url_rewrites where url_offset=`cc_url`.`url_offset`)'))
 		->orderBy('sort_order','asc')
