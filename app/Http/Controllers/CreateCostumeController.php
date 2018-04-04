@@ -2059,12 +2059,15 @@ class CreateCostumeController  extends Controller {
             }
         }
 		$costume_info = DB::table('costumes')->join('category', 'costumes.cat_id','=','category.category_id')->where('costumes.created_by', base64_decode($id))->orderby('costumes.costume_id','desc')->first();
-		$string = preg_replace('/&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig|quot|rsquo);/i', '\\1', $costume_info->name );
+
+		$new_url = DB::table('url_rewrites')->where('url_offset',$costume_info->costume_id)->orderby('id', 'desc')->pluck('url_key');
+
+		/*$string = preg_replace('/&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig|quot|rsquo);/i', '\\1', $costume_info->name );
         $string =str_replace(array('\'', '"'), '', $string); 
         $string = preg_replace(array('/[^a-z0-9]/i', '/[-]+/') , '-', $string);
-        $cat_name = strtolower(trim($string, '-'));
+        $cat_name = strtolower(trim($string, '-'));*/
 		
-		return Redirect::to('/category/'.$cat_name);
+		return Redirect::to('/product'.$new_url[0]);
 	}
 
 	public function GenerateExLarge()
