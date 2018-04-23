@@ -373,7 +373,7 @@ class AuthController extends Controller {
     		else
     		{
     			Session::flush();
-				Auth::logout();
+					Auth::logout();
     			return Redirect::to('/admin');
     		}
     	}
@@ -391,33 +391,33 @@ class AuthController extends Controller {
 
 	    $validator = Validator::make($req,$rule);
 	    if ($validator->fails()) {
-			return Redirect::back()
-			->withErrors($validator)
-			->withInput()->send();
-		}
-	   if (!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) === false) {
-		  $field='email';
-		} else {
-		   Session::flash('Invalid Email address'); 
-		}
-	 	$request->merge([$field => $request->input('email')]);
- 		$credentials = $request->only($field,'password');
-		$user=User::where("email","=", $request->input('email'))->where('role_id','=',"1")->orwhere('role_id','=',"2")->count();
-		if($user){
-			if ($this->auth->attempt($credentials, $request->has('remember')))
-			{
-				return Redirect::to('admin/dashboard');
+				return Redirect::back()
+				->withErrors($validator)
+				->withInput()->send();
 			}
-			else 
-			{ 
-				Session::flash('error', 'Invalid Email or Password'); 
-				return Redirect::back();	
+	    if (!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) === false) {
+		  	$field='email';
+			} else {
+			   Session::flash('Invalid Email address'); 
 			}
-		}
-		else{
-			Session::flash('error', 'Invalid Email or Password');
-			return Redirect::back();
-		}
+	 		$request->merge([$field => $request->input('email')]);
+ 			$credentials = $request->only($field,'password');
+			$user=User::where("email","=", $request->input('email'))->where('role_id','=',"1")->orwhere('role_id','=',"2")->count();
+			if($user){
+				if ($this->auth->attempt($credentials, $request->has('remember')))
+				{
+					return Redirect::to('admin/dashboard');
+				}
+				else 
+				{ 
+					Session::flash('error', 'Invalid Email or Password'); 
+					return Redirect::back();	
+				}
+			}
+			else{
+				Session::flash('error', 'Invalid Email or Password');
+				return Redirect::back();
+			}
     }
     public function verification($verification)
     {

@@ -582,69 +582,69 @@ str=false;
             //console.log('4');
         }
         //console.log('str='+str); return false;
-if (atLeastOneIsChecked == true) {
-$('#organzation_name').css('border','1px solid red');
-$('#organzation_nameerror').html('This field is required.');
-str=false;
-if (organzation_name != '') {
-$('#organzation_name').css('border','');
-$('#organzation_nameerror').html('');
-str = true;
-}
-}
-if (str == true) {
-$('#preferences_finished').html("Submitting");
-
- 
-$('#ajax_loader').css('display','block');
-$.ajax({
-url: "/costume/costumeeditadd",
-type: "POST",
-data: new FormData($('#costume_total_form')[0]),
-contentType:false,
-cache: false,
-processData: false,
-    success: function(response) {
-        if (response.msg == "success") {
-   
-            $('#ajax_loader').hide();
-            $("#progressbar_maintitle").hide();
-            $('#success_page').css('display','block');
-            $('#upload_div').css('display','none');
-            $('#costume_description').css('display','none');
-            $('#pricing_div').css('display','none');
-            $('#preferences_div').css('display','none');
-             /* Added by Gayatri*/
-            $("#image_selected").attr('src',response.first_pic);
-            $("#costumename").attr('href',response.share_url);
-            $("#costumename").text(response.costume_name);
-            $("html, body").animate({ scrollTop: 0 });
-            if(response.amount == 0.00){
-                $("#amount_charity").css({'visibility':'hidden'});
-            }else{
-                $("#amount").text(response.amount+"%");    
-                $("#charity_center").text(response.charity_center);
-            }
-            
-            $('#twiter_url').attr('data-url', response.share_url);
-            $('#twiter_url').attr('data-title', response.quote);
-            
-            $('#pin_url').attr('data-url', response.share_url);
-            $('#pin_url').attr('data-title', response.quote);
-            $('#pin_url').attr('data-image', response.first_pic);
-
-            //var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.share_url)+"&caption="+encodeURIComponent(response.quote)+"&canonicalUrl=http%3A%2F%2Fchrysalisqa.local.dotcomweavers.net%2Fcostume%2Fcreate&shareSource=tumblr_share_button";
-
-            var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.first_pic)+"&caption="+encodeURIComponent(response.quote+" "+response.share_url)+"&canonicalUrl="+encodeURIComponent(response.first_pic)+"&shareSource=tumblr_share_button";
-            
-            $('#tumblr_url').val(tumb_url);
-            
-            $('#url_fb').val(response.share_url);
-            $('#quote_fb').val(response.quote);
-            
-            /* End */
+        if (atLeastOneIsChecked == true) {
+        $('#organzation_name').css('border','1px solid red');
+        $('#organzation_nameerror').html('This field is required.');
+        str=false;
+        if (organzation_name != '') {
+        $('#organzation_name').css('border','');
+        $('#organzation_nameerror').html('');
+        str = true;
         }
-    }
+        }
+        if (str == true) {
+        $('#preferences_finished').html("Submitting");
+
+        console.log(new FormData($('#costume_total_form')[0]));
+        $('#ajax_loader').css('display','block');
+        $.ajax({
+        url: "/costume/costumeeditadd",
+        type: "POST",
+        data: new FormData($('#costume_total_form')[0]),
+        contentType:false,
+        cache: false,
+        processData: false,
+        success: function(response) {
+            if (response.msg == "success") {
+       
+                $('#ajax_loader').hide();
+                $("#progressbar_maintitle").hide();
+                $('#success_page').css('display','block');
+                $('#upload_div').css('display','none');
+                $('#costume_description').css('display','none');
+                $('#pricing_div').css('display','none');
+                $('#preferences_div').css('display','none');
+                 /* Added by Gayatri*/
+                $("#image_selected").attr('src',response.first_pic);
+                $("#costumename").attr('href',response.share_url);
+                $("#costumename").text(response.costume_name);
+                $("html, body").animate({ scrollTop: 0 });
+                if(response.amount == 0.00){
+                    $("#amount_charity").css({'visibility':'hidden'});
+                }else{
+                    $("#amount").text(response.amount+"%");    
+                    $("#charity_center").text(response.charity_center);
+                }
+                
+                $('#twiter_url').attr('data-url', response.share_url);
+                $('#twiter_url').attr('data-title', response.quote);
+                
+                $('#pin_url').attr('data-url', response.share_url);
+                $('#pin_url').attr('data-title', response.quote);
+                $('#pin_url').attr('data-image', response.first_pic);
+
+                //var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.share_url)+"&caption="+encodeURIComponent(response.quote)+"&canonicalUrl=http%3A%2F%2Fchrysalisqa.local.dotcomweavers.net%2Fcostume%2Fcreate&shareSource=tumblr_share_button";
+
+                var tumb_url = "https://www.tumblr.com/widgets/share/tool?content="+encodeURIComponent(response.first_pic)+"&caption="+encodeURIComponent(response.quote+" "+response.share_url)+"&canonicalUrl="+encodeURIComponent(response.first_pic)+"&shareSource=tumblr_share_button";
+                
+                $('#tumblr_url').val(tumb_url);
+                
+                $('#url_fb').val(response.share_url);
+                $('#quote_fb').val(response.quote);
+                
+                /* End */
+            }
+        }
 });
 }
 return str;

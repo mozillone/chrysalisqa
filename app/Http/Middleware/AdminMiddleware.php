@@ -19,16 +19,14 @@ class AdminMiddleware
     {  
         if(!empty($request->user()->id))
         {
-             
-               $roles=User::where('id','=',$request->user()->id)->get()->toArray();
-                if (($roles[0]['role_id'] != 1) && ($roles[0]['role_id'] != 2))
-                {   
-                    Session::flash('error', 'No permission for access this page');
-                    return Redirect::to("/");  
-                }else{
-
-                    return $next($request);
-                }
+            $roles=User::where('id','=',$request->user()->id)->get()->toArray();
+            if (($roles[0]['role_id'] != 1) && ($roles[0]['role_id'] != 2) && ($roles[0]['role_id'] != 3))
+            {   
+                Session::flash('error', 'No permission for access this page');
+                return Redirect::to("/");  
+            }else{
+                return $next($request);
+            }
         }
         else
         {

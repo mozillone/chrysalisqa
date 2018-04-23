@@ -1294,7 +1294,7 @@ class CreateCostumeController  extends Controller {
 	 
 		$delete_costume_attributes = DB::table('costume_to_category')->where('costume_id',$request->costume_id)->delete();
 			$req=$request->all();
-		
+			\Log::info(print_r($req));
 			$costume_name=$req['costume_name'];
 		  	$categoryname=$req['categoryname'];
 		  	$costume_condition=$req['condition'];

@@ -7,7 +7,7 @@
   <section class="sidebar">
     <ul class="sidebar-menu">
       <li {{ (Request::is('dashboard') ? 'class=active' : '') }}>
-        <a href='/dashboard'>
+        <a href='/admin/dashboard'>
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
@@ -212,12 +212,11 @@
       </li>
 
       <li {{ Request::is('cms-pages') ? 'class=active' : '' }}
-      {{ Request::is('edit-page/*') ? 'class=active' : '' }}
-       {{ Request::is('add-cms-page') ? 'class=active' : '' }}
-         {{ Request::is('cms-blocks') ? 'class=active' : '' }}
-         {{ Request::is('add-cms-block') ? 'class=active' : '' }}
-          {{ Request::is('edit-block/*') ? 'class=active' : '' }}
-         >
+        {{ Request::is('edit-page/*') ? 'class=active' : '' }}
+        {{ Request::is('add-cms-page') ? 'class=active' : '' }}
+        {{ Request::is('cms-blocks') ? 'class=active' : '' }}
+        {{ Request::is('add-cms-block') ? 'class=active' : '' }}
+        {{ Request::is('edit-block/*') ? 'class=active' : '' }}>
         <a href="javascript:void(0)">
           <i class="fa fa-desktop" aria-hidden="true"></i>
           <span>CMS</span><i class="fa fa-angle-left pull-right"></i>
@@ -485,7 +484,6 @@
       </li>
       
         <?php } ?>
-
     </ul>
   </section>
 </aside>

@@ -62,6 +62,7 @@
 											<select name="role" required class="form-control">
 												<option value="1">Admin</option>
 												<option value="2">Support</option>
+												<option value="3">Sub-admin</option>
 												<option value="4" selected="">Regular User</option>
 											</select>
 										</div>
