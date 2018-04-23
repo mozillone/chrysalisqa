@@ -125,7 +125,15 @@
 									</div>
 									<div class="single_view_details col-xs-12">
 										<p class="iCondition-rm"><span class="iBold-rm">Item Condition:</span><small>  @if($data[0]->condition=="brand_new") Brand New @elseif($data[0]->condition=="like_new") Like New @else {{ucfirst($data[0]->condition)}} @endif </small></p>
-										<p class="iCondition-rm"><span class="iBold-rm">Size:</span><small> {{ucfirst($data[0]->gender)}} @if($data[0]->size=="s") small @elseif($data[0]->size=="m") medium @elseif($data[0]->size=="l") large @else {{strtoupper($data[0]->size)}} @endif</small> 
+										<p class="iCondition-rm"><span class="iBold-rm">Size:</span><small> 
+										@if($data[0]->gender == 'male')
+											Men's
+										@elseif($data[0]->gender == 'female')
+											Women's
+										@else
+											{{ucfirst($data[0]->gender)}} 
+										@endif
+											@if($data[0]->size=="s") small @elseif($data[0]->size=="m") medium @elseif($data[0]->size=="l") large @else {{strtoupper($data[0]->size)}} @endif</small> 
 											<a href="#" class="size_chrtcls" id="szchart" data-toggle="modal" data-target="#size-chart" >Size Chart</a>	
 										</p>
 										<div class="clearfix"></div>
