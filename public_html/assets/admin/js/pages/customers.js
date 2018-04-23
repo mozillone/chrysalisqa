@@ -1,3 +1,7 @@
+jQuery.validator.addMethod('greaterThan', function (value, element) {
+		if(value <= 70)
+        return true;
+	}, 'The package weight cannot exceed 70 pounds' );
 $(function(){
 	$(document).on('change','#price', function(){
         var number = $('#price').val();
@@ -201,6 +205,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 				},
 				pounds:{
 					required: true,
+					greaterThan: 70,
 				},
 				ounces:{
 					required: true,
@@ -467,6 +472,7 @@ $('#dynamic_percent_amounts').html("$"+amount);
 				}, 
 				pounds:{
 					required: true,
+					greaterThan: 70,
 				},
 				ounces:{
 					required: true,

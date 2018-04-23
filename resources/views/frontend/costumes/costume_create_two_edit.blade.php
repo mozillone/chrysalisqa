@@ -974,7 +974,7 @@
 												<input type="text" name="film_name" id="film_name" placeholder="Optional">  <span><span>
 												</p>
 												@endif
-												<!-- <span id="qualityerror" style="color:red"></span> -->
+												<span id="qualityerror" style="color:red"></span>
 												</div>	
 								</div>
 

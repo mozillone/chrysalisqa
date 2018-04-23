@@ -485,6 +485,11 @@ str=false;
       $('#poundserror').html('This field is required.');
       str=false;
     }
+    if (pounds > 70 ) {
+        $('#pounds').css('border', '1px solid red');
+        $('#poundserror').html('The package weight cannot exceed 70 pounds');
+        str = false;
+    }
     /*if (ounces == "") {
       $('#ounces').css('border','1px solid red');
       $('#ounceserror').html('This field is required.');

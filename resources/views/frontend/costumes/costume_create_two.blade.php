@@ -898,14 +898,14 @@ i.fa.fa-percent {
 												<input type="text" name="film_name" id="film_name" placeholder="Optional"> <span><span>
 												</p>
 												</div>
-												<!-- <span id="qualityerror" style="color:red"></span> -->
+												<span id="qualityerror" style="color:red"></span>
 												</div>
 											</div>
 
 
 									<div class="form-rms costume-error scrool_top makeke_costume">
 												<div class="col-md-4 col-sm-4 pdlft0">
-													<p class="form-rms-que">{{$cosplayfour->label}}</p>
+													<p class="form-rms-que">{{$cosplayfour->label}} </p>
 												</div>
 												<div class="col-md-8 col-sm-8 pdlft0 how_lng_tme">
 													<p class="form-rms-input">
