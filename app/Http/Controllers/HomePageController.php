@@ -40,7 +40,7 @@ class HomePageController extends Controller {
 		->orderBy('costumes.is_featured_date',"DESC")
 		->take(20)->get();
 
-//        $pageData = DB::table('cms_blocks')->where(array('cms_blocks.slug'=>'home','cms_blocks.status'=>1))->first();
+        $pageData = DB::table('cms_blocks')->where(array('cms_blocks.slug'=>'home','cms_blocks.status'=>1))->first();
 
         $access_token = Config::get('constants.INSTAGRAM_ACCESS_TOKEN');
 		$username = Config::get('constants.INSTAGRAM_USERNAME');
