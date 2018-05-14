@@ -38,9 +38,9 @@ class HomePageController extends Controller {
 		->select('costume_description.name as cos_name','costumes.created_user_group','costumes.price as cos_price','costume_image.image as cos_image','url_rewrites.url_key as url','costumes.created_by as created_by','cao.attribute_option_value_id as film_qlty')
 		->groupBy('costumes.costume_id')
 		->orderBy('costumes.is_featured_date',"DESC")
-		->take(20)
+		->take(20)->get();
 
-        $pageData = DB::table('cms_blocks')->where(array('cms_blocks.slug'=>'home','cms_blocks.status'=>1))->first();
+//        $pageData = DB::table('cms_blocks')->where(array('cms_blocks.slug'=>'home','cms_blocks.status'=>1))->first();
 
         $access_token = Config::get('constants.INSTAGRAM_ACCESS_TOKEN');
 		$username = Config::get('constants.INSTAGRAM_USERNAME');
