@@ -18,7 +18,7 @@ class HomePageController extends Controller {
 	}
 	public function index()
 	{
-		$insta = array();
+		$insta = array()
 		
 		Meta::set('title', "Chrysalis - The Costume Enthusiast's Marketplace");
         Meta::set('description', 'Affordable, Environment Friendly Costumes. Buy and Sell Costumes online.');
